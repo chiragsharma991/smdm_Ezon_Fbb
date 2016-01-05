@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/drawerSettingsToolbar"
+            android:background="#000000"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtActionBarTitle"
+                android:textSize="18sp"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:text="Vendor TNA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <View
+            android:layout_height="3dp"
+            android:layout_width="3dp"  />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:focusableInTouchMode="true">
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textSize="17sp"
+                android:hint="Username"
+                android:inputType="textEmailAddress"
+                android:id="@+id/user_name"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/user_password"
+                android:singleLine="true"
+                android:layout_gravity="center_horizontal"   />
+
+            <View
+                android:layout_height="3dp"
+                android:layout_width="3dp"     />
+
+            <EditText
+                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textSize="17sp"
+                android:hint="Password"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:password="true"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/user_password"        />
+
+
+            <View
+                android:layout_height="3dp"
+                android:layout_width="3dp"     />
+
+
+            <CheckBox
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Remain Logged In"
+                android:textSize="15sp"
+                android:buttonTint="#000000"
+                android:id="@+id/chk_logged_in" />
+
+            <View
+                android:layout_height="10dp"
+                android:layout_width="15dp"  />
+
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:textSize="17sp"
+                android:text="Login"
+                android:textColor="#ffffff"
+                android:textAllCaps="false"
+                android:id="@+id/btn_login"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+

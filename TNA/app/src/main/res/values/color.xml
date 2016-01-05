@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blue">#66CCFF</color>
+    <color name="gold">#e6b121</color>
+    <color name="pink">#FF0080</color>
+    <color name="deepblue">#004080</color>
+    <color name="darkblue">#007BB6</color>
+    <color name="darkbluestatus">#00567F</color>
+
+    <color name="lightdarkblue">#80BDDA</color>
+
+    <color name="lightblue">#66B0D3</color>
+    <color name="vlightblue">#B2D7E9</color>
+    <color name="green">#006600</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="orange">#F66C38</color>
+    <color name="gray">#4D4D4D</color>
+    <color name="vlightgray">#d3d3d3</color>
+    <color name="vvlightgray">#727272</color>
+
+
+    <color name="lightgray">#999999</color>
+    <color name="vvlightblue">#CCD9E6</color>
+    <color name="trans">#80FFFFFF</color>
+
+    <color name="push">#AAAAAA</color>
+    <color name="focus">#CCCCCC</color>
+    <color name="color">#E0E0E0</color>
+
+
+</resources>
