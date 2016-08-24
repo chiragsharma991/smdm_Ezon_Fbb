@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="apsupportapp.aperotechnologies.com.designapp">
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <Protected-broadcast android:name="android.location.BOOT_COMPLETED" />
+    <Protected-broadcast android:name="android.location.USER_PRESENT" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".LoginActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity
+            android:name=".DashBoardActivity"
+            android:label="@string/title_activity_dash_board"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            </activity>
+        <activity android:name=".StyleActivity" >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+            </activity>
+        <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" -->
+        <!-- android:screenOrientation="portrait" -->
+        <activity
+            android:name=".SwitchingTabActivity"
+            android:label="@string/title_activity_switching_tab"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".KeyProductActivity"
+            android:label="@string/title_activity_switching_tab"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".ScannerActivity"></activity>
+        <activity android:name=".ScannerActivity1"></activity>
+        <activity android:name=".ContinuousCaptureActivity"></activity>
+        <activity android:name=".CustomScannerActivity"></activity>
+
+        <activity android:name=".AnyOrientationCaptureActivity"></activity>
+
+
+    </application>
+
+</manifest>

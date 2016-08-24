@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtStoreCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:gravity="left"
+            android:text="Store Code"
+            android:textColor="#920609"
+            android:textSize="10sp" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:hint="storecode"
+            android:textColor="#920609"
+            android:textSize="10sp"/>
+        <TextView
+            android:id="@+id/txtStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Store Name"
+            android:textColor="#920609"
+            android:textSize="10sp" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:hint="storename"
+            android:textColor="#920609"
+            android:textSize="10sp"/>
+        <Button
+            android:id="@+id/imageBtnFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+
+            android:text="filter"
+            android:gravity="center"
+            android:background="#920609"
+            android:textColor="#ffffff"/>
+
+
+    </LinearLayout>
+<RelativeLayout
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/linearLayout"></RelativeLayout>
+
+</RelativeLayout>
