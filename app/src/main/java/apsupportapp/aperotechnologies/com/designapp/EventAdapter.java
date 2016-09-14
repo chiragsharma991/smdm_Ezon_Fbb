@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
+import com.bumptech.glide.Glide;
+import apsupportapp.aperotechnologies.com.designapp.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by ifattehkhan on 05/08/16.
@@ -15,20 +18,21 @@ import android.widget.LinearLayout;
 public class EventAdapter extends BaseAdapter{
     DashBoardActivity dashBoardActivity;
     Integer[] listItem;
-    public EventAdapter(DashBoardActivity dashBoardActivity, Integer[] listItem) {
+    ArrayList<String> eventUrlList;
+    public EventAdapter(DashBoardActivity dashBoardActivity, ArrayList<String> eventUrlList) {
         this.dashBoardActivity=dashBoardActivity;
-        this.listItem=listItem;
+        this.eventUrlList=eventUrlList;
 
     }
 
     @Override
     public int getCount() {
-        return listItem.length;
+        return eventUrlList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listItem[position];
+        return eventUrlList.get(position);
     }
 
     @Override
@@ -50,7 +54,13 @@ public class EventAdapter extends BaseAdapter{
             participentView = inflater.inflate(R.layout.list_row, null);
 
             view.imgView = (ImageView) participentView.findViewById(R.id.imageview);
-            view.imgView.setImageResource(listItem[position]);
+           // String url="\""+eventUrlList.get(position)+"\""
+            //Log.e("url",""+"\""+eventUrlList.get(position)+"\"");
+
+            Log.e("url"," "+eventUrlList.get(position));
+            Glide.with(dashBoardActivity)
+                    .load(eventUrlList.get(position))
+                    .into(view.imgView);
 
             participentView.setTag(view);
 

@@ -30,17 +30,17 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
               //  Coordinates_Fragment tab2 = new Coordinates_Fragment();
                 Log.e("2","tab2");
                 return tab2;
-            case 2:
-                Coordinate_Fragment tab3 = new Coordinate_Fragment();
-                Log.e("3","tab3");
-                return tab3;
+//            case 2:
+//                Coordinate_Fragment tab3 = new Coordinate_Fragment();
+//                Log.e("3","tab3");
+//                return tab3;
             default:
                 return null;
         }
     }
 
     @Override
-    public int getCount() {
+    public int getCount()  {
         return mNumOfTabs;
     }
 }

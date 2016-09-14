@@ -2,62 +2,112 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="apsupportapp.aperotechnologies.com.designapp">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <Protected-broadcast android:name="android.location.BOOT_COMPLETED" />
     <Protected-broadcast android:name="android.location.USER_PRESENT" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
         <activity
-            android:name=".DashBoardActivity"
-            android:label="@string/title_activity_dash_board"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:name="apsupportapp.aperotechnologies.com.designapp.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>
-        <activity android:name=".StyleActivity" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        </activity>
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-            </activity>
-        <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" -->
-        <!-- android:screenOrientation="portrait" -->
         <activity
-            android:name=".SwitchingTabActivity"
-            android:label="@string/title_activity_switching_tab"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name="apsupportapp.aperotechnologies.com.designapp.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
         <activity
-            android:name=".KeyProductActivity"
-            android:label="@string/title_activity_switching_tab"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name="apsupportapp.aperotechnologies.com.designapp.DashBoardActivity"
+            android:label="@string/title_activity_dash_board"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
 
-        <activity android:name=".SearchActivity"></activity>
-        <activity android:name=".ScannerActivity"></activity>
-        <activity android:name=".ScannerActivity1"></activity>
-        <activity android:name=".ContinuousCaptureActivity"></activity>
-        <activity android:name=".CustomScannerActivity"></activity>
+        </activity>
 
-        <activity android:name=".AnyOrientationCaptureActivity"></activity>
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.AboutUsActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+            </activity>
+
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.StyleActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.SwitchingTabActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.KeyProductActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
 
 
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.Prod_FilterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.SearchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.ScannerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.ScannerActivity1"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.ContinuousCaptureActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.CustomScannerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="apsupportapp.aperotechnologies.com.designapp.AnyOrientationCaptureActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name="apsupportapp.aperotechnologies.com.designapp.SearchActivity1"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ffdd609785d2fe5506254706299413b2c3ea9898" />
     </application>
 
 </manifest>

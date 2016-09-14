@@ -1,35 +1,17 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Cache;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Network;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonArrayRequest;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.bumptech.glide.Glide;
+import apsupportapp.aperotechnologies.com.designapp.R;
 
 
 public class Details_Fragment extends Fragment
@@ -37,9 +19,11 @@ public class Details_Fragment extends Fragment
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     StyleDetailsBean styleDetailsBean;
+    String articleOption;
     TextView txtProductName,txtCollcetion,txtFabric,txtFit,txtFinish,txtSeason,txtfirstReceiteDate,txtlastReceiteDate,
             txtFwdWeekCover,txtTwSalesUnit,txtLwSalesUnit,txtYtdSalesUnit,txtSOH,txtGIT,txtBaseStock,txtPrice,txtsalesThruUnit,
-            txtROS,txtBenefit;
+            txtROS,txtBenefit,txtArticleOption;
+    ImageView imgPromo,imgKeyProduct,imgProfile;
 
 
 
@@ -54,7 +38,10 @@ public class Details_Fragment extends Fragment
         super.onCreate(savedInstanceState);
         Intent i = getActivity().getIntent();
         styleDetailsBean = (StyleDetailsBean)i.getSerializableExtra("styleDetailsBean");
-        Log.e("styleDetailsBean",styleDetailsBean.getStkOnhandQty()+"   "+styleDetailsBean.getStkGitQty());
+        Bundle bundle=getActivity().getIntent().getExtras();
+        articleOption=bundle.getString("articleOption");
+        Log.d("userId","  "+articleOption);
+      //  Log.e("styleDetailsBean",styleDetailsBean.getStkOnhandQty()+"   "+styleDetailsBean.getStkGitQty());
 
     }
 
@@ -63,6 +50,8 @@ public class Details_Fragment extends Fragment
     {
 
         View view=inflater.inflate(R.layout.details_fragment, container, false);
+        txtArticleOption=(TextView)view.findViewById(R.id.txtArticle);
+        txtArticleOption.setText(articleOption);
         txtProductName=(TextView)view.findViewById(R.id.txtProductName);
         txtCollcetion=(TextView)view.findViewById(R.id.txtCollcetion);
         txtFabric=(TextView)view.findViewById(R.id.txtFabric);
@@ -88,6 +77,36 @@ public class Details_Fragment extends Fragment
         txtROS=(TextView)view.findViewById(R.id.txtROS);
 
         txtBenefit=(TextView)view.findViewById(R.id.txtBenefit);
+        imgPromo=(ImageView)view.findViewById(R.id.imgPromo);
+        imgKeyProduct=(ImageView)view.findViewById(R.id.imgKeyProduct);
+        imgProfile=(ImageView)view.findViewById(R.id.imgProfile);
+
+          Log.e("productImageURL",styleDetailsBean.getProductImageURL());
+          Glide.with(getActivity())
+                //.load("\""+eventUrlList.get(position)+"\"")
+                // .load("https://sm-dm.s3.amazonaws.com/Pojo2.jpg")
+                .load(styleDetailsBean.getProductImageURL())
+                .into(imgProfile);
+
+       if (styleDetailsBean.getPromoFlag().equals("N")||styleDetailsBean.getPromoFlag().equals(""))
+       {
+           imgPromo.setImageResource(R.mipmap.option_detail_indicator_red);
+
+       }else if(styleDetailsBean.getPromoFlag().equals("Y"))
+       {
+           imgPromo.setImageResource(R.mipmap.option_detail_indicator_green);
+       }
+
+        if(styleDetailsBean.getKeyProductFlg().equals("N")||styleDetailsBean.getKeyProductFlg().equals(""))
+        {
+            imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_red);
+
+        }else if(styleDetailsBean.getKeyProductFlg().equals("Y"))
+         {
+             imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_green);
+
+         }
+
 
         txtProductName.setText(styleDetailsBean.getProductName());
         txtCollcetion.setText(styleDetailsBean.getCollectionName());
@@ -96,10 +115,22 @@ public class Details_Fragment extends Fragment
         txtFinish.setText(styleDetailsBean.getProductFinishDesc());
         txtSeason.setText(styleDetailsBean.getSeasonName());
 
-        txtfirstReceiteDate.setText(styleDetailsBean.getFirstReceiptDate());
-        txtlastReceiteDate.setText(styleDetailsBean.getLastReceiptDate());
-        txtFwdWeekCover.setText(""+styleDetailsBean.getFwdWeekCover());
+        if(styleDetailsBean.getFirstReceiptDate().equals(""))
+        {
+            txtfirstReceiteDate.setText("NA");
+        } else {
+            txtfirstReceiteDate.setText(styleDetailsBean.getFirstReceiptDate());
+        }
 
+        if(styleDetailsBean.getLastReceiptDate().equals(""))
+        {
+            txtlastReceiteDate.setText("NA");
+        } else {
+            txtlastReceiteDate.setText(styleDetailsBean.getLastReceiptDate());
+        }
+
+        txtFwdWeekCover.setText(""+String.format("%.1f",styleDetailsBean.getFwdWeekCover()));
+       // String.format("%.1f", val);
 
         txtTwSalesUnit.setText(""+styleDetailsBean.getTwSaleTotQty());
         txtLwSalesUnit.setText(""+styleDetailsBean.getLwSaleTotQty());
@@ -111,11 +142,18 @@ public class Details_Fragment extends Fragment
         txtGIT.setText(""+styleDetailsBean.getStkGitQty());
         txtBaseStock.setText(""+styleDetailsBean.getTargetStock());
 
-        txtPrice.setText(""+styleDetailsBean.getUnitGrossPrice());
-        txtsalesThruUnit.setText(""+styleDetailsBean.getSellThruUnitsRcpt());
-        txtROS.setText(""+styleDetailsBean.getRos());
+        txtPrice.setText("Rs."+styleDetailsBean.getUnitGrossPrice());
+        txtsalesThruUnit.setText(""+String.format("%.1f",styleDetailsBean.getSellThruUnitsRcpt())+"%");
+        txtROS.setText(""+String.format("%.1f",styleDetailsBean.getRos()));
+//
+//        if(styleDetailsBean.getUsp().equals(""))
+//        {
+//            txtBenefit.setText("NA");
+//        } else {
+//            txtBenefit.setText(""+styleDetailsBean.getUsp());
+//        }
 
-        txtBenefit.setText(""+styleDetailsBean.getUsp());
+
         return  view;
     }
 

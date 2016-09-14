@@ -18,6 +18,10 @@ public class MySingleton {
     private ImageLoader mImageLoader;
     private static Context mCtx;
 
+
+
+    public String userId;
+
     private MySingleton(Context context) {
         mCtx = context;
         mRequestQueue = getRequestQueue();

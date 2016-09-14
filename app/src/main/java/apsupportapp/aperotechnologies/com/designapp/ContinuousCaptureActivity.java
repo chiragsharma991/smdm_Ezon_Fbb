@@ -11,6 +11,7 @@ import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.CompoundBarcodeView;
+import apsupportapp.aperotechnologies.com.designapp.R;
 
 import java.util.List;
 

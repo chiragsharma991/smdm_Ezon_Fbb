@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import apsupportapp.aperotechnologies.com.designapp.R;
+
 import amobile.android.barcodesdk.api.IWrapperCallBack;
 import amobile.android.barcodesdk.api.Wrapper;
 
@@ -42,9 +44,9 @@ public class ScannerActivity extends AppCompatActivity implements IWrapperCallBa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scanner);
+       // setContentView(R.layout.activity_scanner);
 
-        m_text = (TextView) findViewById(R.id.txtText1);
+       // m_text = (TextView) findViewById(R.id.txtText1);
 
        /* m_toggle = (Button) findViewById(R.id.btnToggleFlyButton);
         m_toggle.setOnClickListener(this);
@@ -64,11 +66,11 @@ public class ScannerActivity extends AppCompatActivity implements IWrapperCallBa
         m_serviceExit = (Button) findViewById(R.id.btnServiceExit);
         m_serviceExit.setOnClickListener(this);*/
 
-        m_scan = (Button) findViewById(R.id.btnScan);
-        m_scan.setOnClickListener(this);
-
-        m_exit = (Button) findViewById(R.id.btnExit);
-        m_exit.setOnClickListener(this);
+//        m_scan = (Button) findViewById(R.id.btnScan);
+//        m_scan.setOnClickListener(this);
+//
+//        m_exit = (Button) findViewById(R.id.btnExit);
+//        m_exit.setOnClickListener(this);
 
         m_wrapper = new Wrapper(this);
 
@@ -77,6 +79,10 @@ public class ScannerActivity extends AppCompatActivity implements IWrapperCallBa
 
         IntentFilter filter = new IntentFilter("BROADCAST_BARCODE");
         registerReceiver(m_brc, filter);
+        if (m_wrapper != null && m_wrapper.IsOpen()) {
+            m_wrapper.Stop();
+            m_wrapper.Scan();
+        }
     }
 
     @Override
@@ -86,7 +92,7 @@ public class ScannerActivity extends AppCompatActivity implements IWrapperCallBa
         if (m_wrapper != null) {
             if (m_wrapper.Open()) {
                 m_wrapper.SetDispathBarCode(false);
-                m_wrapper.SetLightMode2D(amobile.android.barcodesdk.api.Wrapper.LightMode2D.mix);
+                m_wrapper.SetLightMode2D(Wrapper.LightMode2D.mix);
                 m_wrapper.SetTimeOut(10);
             } else {
                 m_wrapper = null;
@@ -166,6 +172,7 @@ public class ScannerActivity extends AppCompatActivity implements IWrapperCallBa
                 String s = intent.getStringExtra("BROADCAST_BARCODE_STRING");
                 if (s != null) {
                     m_text.setText(s);
+                    //Toast.makeText(ScannerActivity.this,"barcode:"+s,Toast.LENGTH_LONG).show();
                 }
             }
         }

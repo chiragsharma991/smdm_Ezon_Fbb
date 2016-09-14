@@ -15,7 +15,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 
-
 /**
  * Created by pamrutkar on 22/08/16.
  */
@@ -30,10 +29,10 @@ public class ScannerActivity1  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scanner1);
-        layout = (LinearLayout) findViewById(R.id.main_layout);
-        formatTxt = (TextView) findViewById(R.id.scan_format);
-        contentTxt = (TextView) findViewById(R.id.scan_content);
+       // setContentView(R.layout.activity_scanner1);
+//        layout = (LinearLayout) findViewById(R.id.main_layout);
+//        formatTxt = (TextView) findViewById(R.id.scan_format);
+//        contentTxt = (TextView) findViewById(R.id.scan_content);
         //locationText = (Button) findViewById(R.id.location_text);
         //showLast();
 
@@ -92,8 +91,8 @@ public class ScannerActivity1  extends AppCompatActivity {
                 String scanContent = result.getContents();
                 String scanFormat = result.getFormatName();
 
-                formatTxt.setText("FORMAT: " + scanFormat);
-                contentTxt.setText("CONTENT: " + scanContent);
+//                formatTxt.setText("FORMAT: " + scanFormat);
+//                contentTxt.setText("CONTENT: " + scanContent);
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
             }
         } else {

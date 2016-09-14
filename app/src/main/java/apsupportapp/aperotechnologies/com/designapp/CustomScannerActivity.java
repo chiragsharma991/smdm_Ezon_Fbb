@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.CompoundBarcodeView;
+import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
  * Custom Scannner Activity extending from Activity to display a custom layout form scanner view.

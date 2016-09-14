@@ -7,10 +7,46 @@ import java.io.Serializable;
  */
 public class StyleDetailsBean implements Serializable
 {
-    String productName,collectionName,productFabricDesc,productFitDesc,productFinishDesc,seasonName,
-            firstReceiptDate,lastReceiptDate;
-  int fwdWeekCover,stkOnhandQty,stkGitQty,targetStock,twSaleTotQty,lwSaleTotQty,ytdSaleTotQty,unitGrossPrice,ros,usp;
+    String productName;
+    String collectionName;
+    String productFabricDesc;
+    String productFitDesc;
+    String productFinishDesc;
+    String seasonName;
+    String firstReceiptDate;
+    String lastReceiptDate;
+    String promoFlag,productImageURL;
+    String usp;
+    double fwdWeekCover,ros;
+
+    public String getProductImageURL() {
+        return productImageURL;
+    }
+
+    public void setProductImageURL(String productImageURL) {
+        this.productImageURL = productImageURL;
+    }
+
+    public String getKeyProductFlg() {
+        return keyProductFlg;
+    }
+
+    public void setKeyProductFlg(String keyProductFlg) {
+        this.keyProductFlg = keyProductFlg;
+    }
+
+    public String getPromoFlag() {
+        return promoFlag;
+    }
+
+    public void setPromoFlag(String promoFlag) {
+        this.promoFlag = promoFlag;
+    }
+
+    String keyProductFlg;
+    int stkOnhandQty,stkGitQty,targetStock,twSaleTotQty,lwSaleTotQty,ytdSaleTotQty,unitGrossPrice;
     double sellThruUnitsRcpt;
+
     public String getProductName() {
         return productName;
     }
@@ -75,11 +111,11 @@ public class StyleDetailsBean implements Serializable
         this.lastReceiptDate = lastReceiptDate;
     }
 
-    public int getFwdWeekCover() {
+    public double getFwdWeekCover() {
         return fwdWeekCover;
     }
 
-    public void setFwdWeekCover(int fwdWeekCover) {
+    public void setFwdWeekCover(double fwdWeekCover) {
         this.fwdWeekCover = fwdWeekCover;
     }
 
@@ -147,19 +183,19 @@ public class StyleDetailsBean implements Serializable
         this.sellThruUnitsRcpt = sellThruUnitsRcpt;
     }
 
-    public int getRos() {
+    public double getRos() {
         return ros;
     }
 
-    public void setRos(int ros) {
+    public void setRos(double ros) {
         this.ros = ros;
     }
 
-    public int getUsp() {
+    public String getUsp() {
         return usp;
     }
 
-    public void setUsp(int usp) {
+    public void setUsp(String usp) {
         this.usp = usp;
     }
 }

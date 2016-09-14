@@ -2,6 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp;
 
 import com.journeyapps.barcodescanner.CaptureActivity;
 import com.journeyapps.barcodescanner.CompoundBarcodeView;
+import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
  * This activity has a margin.
