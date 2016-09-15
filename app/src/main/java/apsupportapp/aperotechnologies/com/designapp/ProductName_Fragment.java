@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -131,7 +132,7 @@ public class ProductName_Fragment extends Fragment {
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relativeLayout.setBackgroundColor(Color.WHITE);
         relProd_Frag.setVisibility(View.VISIBLE);
-       // btnProdFilter=(Button)view.findViewById(R.id.imageBtnFilter);
+        btnProdFilter=(Button)view.findViewById(R.id.imageBtnFilter);
         txt_subdepName = (TextView)view.findViewById(R.id.txtSubDeptName);
 
         Log.e("parent"," "+ KeyProductActivity.viewPager.getParent());
@@ -207,15 +208,14 @@ public class ProductName_Fragment extends Fragment {
         addComponentToMainLayout();
         int headerCellsWidth[] = new int[headers.length];
 
-//        btnProdFilter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.e("Button clicked -----", "");
-//                Intent intent = new Intent(context, Prod_FilterActivity.class);
-//                startActivity(intent);
-//                getActivity().finish();
-//            }
-//        });
+        btnProdFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Prod_FilterActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
         return view;
     }

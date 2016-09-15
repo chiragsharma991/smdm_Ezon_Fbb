@@ -56,40 +56,31 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp">
 
-            <!--<Spinner-->
-            <!--android:id="@+id/spinnerCollection"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"></Spinner>-->
+
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:layout_width="match_parent"
                 android:id="@+id/searchablespinnerlibrary"
                 android:layout_height="50dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="#C7C4C4"></LinearLayout>
-            <!--<Spinner-->
-            <!--android:id="@+id/spinnerStyleType"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="25dp"></Spinner>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="#C7C4C4"></LinearLayout>-->
 
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:layout_width="match_parent"
-
                 android:id="@+id/searchablespinnerlibrary1"
                 android:layout_height="50dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="#C7C4C4">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="#C7C4C4">-->
 
-            </LinearLayout>
+
             <!--<TextView-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->

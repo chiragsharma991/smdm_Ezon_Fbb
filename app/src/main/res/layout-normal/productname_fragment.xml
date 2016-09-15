@@ -11,14 +11,14 @@
 
         <RelativeLayout
             android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp" >
 
             <RelativeLayout
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="60dp"
+                android:layout_marginRight="65dp"
                 android:id="@+id/innerrellay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -73,14 +73,14 @@
 
                 </RelativeLayout>
 
-            <!--<Button-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:id="@+id/imageBtnFilter"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:background="@mipmap/key_product_filter" />-->
+            <Button
+                android:layout_alignParentRight="true"
+                android:id="@+id/imageBtnFilter"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/key_product_filter" />
 
 
 

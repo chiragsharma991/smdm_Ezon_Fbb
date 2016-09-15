@@ -279,12 +279,15 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 //        }
 //        m_wrapper.Close();
         byte[] bytes = strData.getBytes();
-        Log.e("hello from barcode","");
-      //  Toast.makeText(StyleActivity.this,"Barcode Scan:"+strData,Toast.LENGTH_SHORT).show();
         if(strData == null)
         {
             Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
-        } else
+        }
+        else if (strData.equalsIgnoreCase("Unknown command : setLightMode2D"))
+        {
+            Log.e("Do nothing","");
+        }
+        else
         {
             Toast.makeText(this, "Barcode Scanned: " + strData, Toast.LENGTH_LONG).show();
             if (Reusable_Functions.chkStatus(context)) {

@@ -57,7 +57,8 @@ public class SplashActivity extends AppCompatActivity
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
 // return 0.75 if it's LDPI
 // return 1.0 if it's MDPI
