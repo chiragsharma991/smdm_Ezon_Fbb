@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.DashBoardActivity"
+    tools:showIn="@layout/app_bar_dash_board">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:weightSum="4">
+
+                <ImageButton
+                    android:id="@+id/imageBtnStyle"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#ffffff"
+                    android:src="@mipmap/dashboard_size_finder_icon"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:id="@+id/imageBtnKeyProducts"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#ffffff"
+                    android:src="@mipmap/dashboard_flash_hourly_icon"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#ffffff"
+                    android:src="@mipmap/dashboard_mpm_icon"
+                    android:layout_weight="1"/>
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#ffffff"
+                    android:src="@mipmap/dashboard_key_products_icon"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Product Info"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:text="Hourly Analysis"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="MPM"
+                    android:paddingLeft="22sp"
+                    android:textSize="13sp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cut Size"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:weightSum="4">
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#ffffff"
+                    android:src="@mipmap/dashboard_shoot_style_icon"
+                    android:layout_weight="1"/>
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#ffffff"
+                    android:src="@mipmap/dashboard_cut_size_icon"
+                    android:layout_weight="1"/>
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#ffffff"
+                    android:src="@mipmap/dashboard_cross_selling_icon"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#ffffff"
+                    android:src="@mipmap/dashboard_other_icon"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Shoot Style"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Search"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cross Selling"
+                    android:gravity="center"
+                    android:layout_marginLeft="3dp"
+                    android:textSize="13sp"
+                    android:layout_weight="1.2"/>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Sales"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Marketing Events"
+                android:textSize="20sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"/>
+
+
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:id="@+id/cardview"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="140dp"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:layout_marginTop="145dp"-->
+                <!--android:clickable="true"-->
+                <!--android:foreground="?android:attr/selectableItemBackground"-->
+                <!--app:cardCornerRadius="4dp">-->
+
+                <!--<android.support.v4.view.ViewPager-->
+                    <!--android:id="@+id/vpagerevents_image"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_marginTop="5dp" />-->
+
+            <!--</android.support.v7.widget.CardView>-->
+
+            <!--<com.viewpagerindicator.CirclePageIndicator-->
+                <!--android:id="@+id/indicator"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_below="@+id/cardview"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--app:centered="true"-->
+                <!--app:fillColor="#3b5998"-->
+                <!--app:pageColor="#3b5998"-->
+                <!--app:snap="false" >-->
+            <!--</com.viewpagerindicator.CirclePageIndicator>-->
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp" />
+
+            <LinearLayout
+                android:id="@+id/lill"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+
+            <!--<apsupportapp.aperotechnologies.com.designapp.ExpandableHeightGridView-->
+                <!--android:id="@+id/spotsView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:layout_marginLeft="5dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:horizontalSpacing="10dp"-->
+                <!--android:isScrollContainer="false"-->
+                <!--android:numColumns="1"-->
+                <!--android:stretchMode="columnWidth"-->
+                <!--android:verticalSpacing="10dp" />-->
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

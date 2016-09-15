@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+
+    tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="@dimen/toolbar_header_height"
+        android:layout_width="match_parent"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_marginLeft="10dp"
+                android:id="@+id/imageBtnBack"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:background="@mipmap/common_back_icon"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Option"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageBtnBack"
+                android:layout_marginLeft="20dp"
+                android:textColor="#ffffff"
+                android:id="@+id/toolbar_title" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="match_parent"
+                android:id="@+id/searchablespinnerlibrary"
+                android:layout_height="50dp" />
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="#C7C4C4"></LinearLayout>-->
+
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="match_parent"
+                android:id="@+id/searchablespinnerlibrary1"
+                android:layout_height="50dp" />
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="#C7C4C4">-->
+
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Search"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:textSize="20dp"-->
+            />
+            <!--<EditText-->
+            <!--android:id="@+id/edtSearch"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="Enter Option"-->
+            <!--android:cursorVisible="false"-->
+            <!--android:layout_marginTop="10dp"/>-->
+            <!--<Button android:id="@+id/btnSearch"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Search"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:background="#B73020"-->
+            <!--/>-->
+            <!--<LinearLayout-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!---->
+            <!--<LinearLayout-->
+            <!--android:layout_width="120dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="#566573"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--&gt;</LinearLayout>-->
+
+            <!--<ImageView-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@mipmap/search_or"/>-->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="#566573"-->
+            <!--android:layout_marginTop="30dp" >-->
+            <!---->
+            <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+
+            <Button android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="Submit"
+                android:layout_marginTop="30dp"
+                android:textColor="#ffffff"
+                android:background="#B73020" />
+
+
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_toLeftOf="@+id/imgor"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="1dp"
+                    android:background="#566573"
+                    android:layout_marginTop="30dp">
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/imgor"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/search_or"/>
+
+                <RelativeLayout
+                    android:layout_toRightOf="@+id/imgor"
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="1dp"
+                    android:background="#566573"
+                    android:layout_marginTop="30dp">
+
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+
+            <Button android:id="@+id/btnBarcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="Scan Barcode"
+                android:layout_marginTop="30dp"
+                android:textColor="#ffffff"
+                android:background="#B73020"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

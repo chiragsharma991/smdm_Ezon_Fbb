@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="@dimen/toolbar_header_height"
+        android:layout_width="match_parent"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_marginLeft="10dp"
+                android:id="@+id/imageBtnBack"
+                android:layout_width="20dp"
+                android:padding="10dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:background="@mipmap/common_back_icon"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hourly Analysis"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageBtnBack"
+                android:layout_marginLeft="20dp"
+                android:textColor="#ffffff"
+                android:id="@+id/toolbar_title" />
+
+            <Button
+                android:id="@+id/imageBtnSearch"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:background="@mipmap/key_product_search_icon1"
+                android:textColor="#ffffff"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="?attr/colorPrimary"
+        android:elevation="6dp"
+        style="@style/MyCustomTabLayout"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <apsupportapp.aperotechnologies.com.designapp.CustomViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tab_layout"/>
+    <!--<LinearLayout
+        android:id="@+id/linearlayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ccc"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <fragment android:name="apsupportapp.aperotechnologies.com.designapp.ProductName_Fragment"
+            android:id="@+id/frag_1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearlayout02"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#eee"
+        android:orientation="vertical">
+        <fragment android:name="apsupportapp.aperotechnologies.com.designapp.Option_Fragment"
+            android:id="@+id/frag_2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>-->
+</LinearLayout>
