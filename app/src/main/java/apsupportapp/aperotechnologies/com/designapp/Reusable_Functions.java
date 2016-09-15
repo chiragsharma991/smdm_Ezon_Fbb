@@ -41,7 +41,7 @@ public class Reusable_Functions {
 
     public static void sDialog(Context cont, String message){
         if(progressDialog == null) {
-            progressDialog = new ProgressDialog(cont);
+            progressDialog = new ProgressDialog(cont,R.style.AppCompatAlertDialogStyle);
             progressDialog.setMessage(message);
             progressDialog.setCancelable(false);
             if (!progressDialog.isShowing()) {

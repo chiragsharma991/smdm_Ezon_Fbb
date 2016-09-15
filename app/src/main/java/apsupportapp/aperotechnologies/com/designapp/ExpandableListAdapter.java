@@ -59,12 +59,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
 
-
         final String childText = (String) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+
             convertView = infalInflater.inflate(R.layout.pfilter_list_item, null);
         }
 
