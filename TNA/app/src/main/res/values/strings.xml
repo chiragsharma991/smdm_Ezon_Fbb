@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">TNA</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="groupPos">groupPos</string>
-    <string name="childPos">childPos</string>
-</resources>
