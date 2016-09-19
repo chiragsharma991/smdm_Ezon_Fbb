@@ -24,54 +24,54 @@
                 android:layout_height="wrap_content">
 
 
-            <TextView
-                android:id="@+id/tstoreCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Store : "
-                android:textColor="#920609"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tstoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store : "
+                    android:textColor="#920609"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/txtStoreCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tstoreCode"
-                android:hint="storecode"
-                android:textColor="#000000"
-                android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/txtStoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tstoreCode"
+                    android:hint="storecode"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
 
-            <TextView
-                android:id="@+id/txtStoreName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/txtStoreCode"
-                android:hint="storename"
-                android:layout_marginRight="20dp"
-                android:textColor="#000000"
-                android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/txtStoreName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/txtStoreCode"
+                    android:hint="storename"
+                    android:layout_marginRight="20dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
 
 
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/txtSubDeptName"
-                android:layout_marginTop="5dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/txtStoreName"
-                android:layout_width="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#000000"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/txtSubDeptName"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/txtStoreName"
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:layout_height="wrap_content" />
 
-            <TextView
+                <TextView
 
-                android:layout_marginTop="10dp"
-                android:text="* All numbers in units"
-                android:layout_below="@+id/txtSubDeptName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                    android:layout_marginTop="10dp"
+                    android:text="* All numbers in units"
+                    android:layout_below="@+id/txtSubDeptName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                </RelativeLayout>
+            </RelativeLayout>
 
             <Button
                 android:layout_alignParentRight="true"

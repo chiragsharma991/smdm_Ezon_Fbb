@@ -44,7 +44,7 @@ import java.util.Map;
 public class Prod_FilterActivity extends Activity {
 
 
-    Button btnP_Filterback;
+    RelativeLayout btnP_Filterback;
     ExpandableListAdapter listAdapter;
     public static ExpandableListView pfilter_list;
     ArrayList<String> listDataHeader;
@@ -74,9 +74,11 @@ public class Prod_FilterActivity extends Activity {
         queue.start();
         pf_prodName = " ";
         subdept = new ArrayList<String>();
-        btnP_Filterback = (Button) findViewById(R.id.imageBtnBack);
+        btnP_Filterback = (RelativeLayout) findViewById(R.id.imageBtnBack);
 
         pfilter_list = (ExpandableListView) findViewById(R.id.expandableListView_subdept);
+        pfilter_list.setDivider(getResources().getDrawable(R.color.grey));
+        pfilter_list.setDividerHeight(2);
         prepareListData();
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild, pfilter_list);

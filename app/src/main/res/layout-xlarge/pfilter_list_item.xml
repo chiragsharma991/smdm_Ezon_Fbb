@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="55dip"
+    android:layout_height="70dp"
     android:orientation="vertical" >
 
     <TextView
         android:clickable="false"
+        android:layout_toLeftOf="@+id/itemCheckBox"
         android:id="@+id/txtsubdeptname"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -26,5 +27,14 @@
         android:id="@+id/itemCheckBox"
         android:textColor="@android:color/holo_red_light"
         android:paddingTop="5dp"/>
+
+    <View
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        />
 
 </RelativeLayout>

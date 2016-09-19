@@ -20,9 +20,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
+import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 public class SearchableListDialog extends DialogFragment implements
@@ -30,7 +32,7 @@ public class SearchableListDialog extends DialogFragment implements
 
     private static final String ITEMS = "items";
 
-    private ListAdapter listAdapter;
+    public static  ListAdapter listAdapter;
 
     private ListView _listViewItems;
 
@@ -46,10 +48,13 @@ public class SearchableListDialog extends DialogFragment implements
     private DialogInterface.OnClickListener _onClickListener;
 
     public SearchableListDialog() {
-
+        Log.e("SearchableListDialog "," blank constructor");
     }
 
     public static SearchableListDialog newInstance(List items) {
+
+        Log.e("SearchableListDialog ","  newInstance");
+
         SearchableListDialog multiSelectExpandableFragment = new
                 SearchableListDialog();
 
@@ -63,6 +68,8 @@ public class SearchableListDialog extends DialogFragment implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.e("SearchableListDialog ","  onCreate");
+
         super.onCreate(savedInstanceState);
 
     }
@@ -70,6 +77,8 @@ public class SearchableListDialog extends DialogFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e("SearchableListDialog ","  onCreateView");
+
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams
                 .SOFT_INPUT_STATE_HIDDEN);
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -77,6 +86,8 @@ public class SearchableListDialog extends DialogFragment implements
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        Log.e("SearchableListDialog ","  onCreateDialog");
 
         // Getting the layout inflater to inflate the view in an alert dialog.
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -91,7 +102,7 @@ public class SearchableListDialog extends DialogFragment implements
         // Change End
 
         View rootView = inflater.inflate(R.layout.searchable_list_dialog, null);
-        setData(rootView);
+        setData(rootView, _strTitle);
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setView(rootView);
@@ -109,6 +120,8 @@ public class SearchableListDialog extends DialogFragment implements
         });
 
         String strTitle = _strTitle == null ? "Select Item" : _strTitle;
+
+        Log.e("strTitle"," "+strTitle);
         alertDialog.setTitle(strTitle);
 
         final AlertDialog dialog = alertDialog.create();
@@ -125,25 +138,33 @@ public class SearchableListDialog extends DialogFragment implements
     // Description: Saving the instance of searchable item instance.
     @Override
     public void onSaveInstanceState(Bundle outState) {
+
+        Log.e("SearchableListDialog ","  onSaveInstanceState");
+
         outState.putSerializable("item", _searchableItem);
         super.onSaveInstanceState(outState);
     }
     // Change End
 
     public void setTitle(String strTitle) {
+        Log.e("SearchableListDialog ","  setTitle");
+
         _strTitle = strTitle;
     }
 
 
 
     public void setOnSearchableItemClickListener(SearchableItem searchableItem) {
+
+        Log.e("SearchableListDialog ","  setOnSearchableItemClickListener");
         this._searchableItem = searchableItem;
     }
 
 
-    private void setData(View rootView) {
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context
-                .SEARCH_SERVICE);
+    private void setData(View rootView, String _strTitle) {
+//        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context
+//                .SEARCH_SERVICE);
+        Log.e("SearchableListDialog ","  setData"+" "+_strTitle);
 
         _searchView = (EditText) rootView.findViewById(R.id.search);
 
@@ -158,11 +179,8 @@ public class SearchableListDialog extends DialogFragment implements
 
         _listViewItems = (ListView) rootView.findViewById(R.id.listItems);
 
-        listAdapter = new ListAdapter(items, getActivity());
 
-//        for(int i=0; i <items.size();i++){
-//            Log.e("items "," "+items.get(i));
-//        }
+        listAdapter = new ListAdapter(items, getActivity());
 
         //attach the adapter to the list
         _listViewItems.setAdapter(listAdapter);
@@ -172,6 +190,8 @@ public class SearchableListDialog extends DialogFragment implements
         _listViewItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Log.e("here "," "+listAdapter.getItem(position));
                 _searchableItem.onSearchableItemClicked(listAdapter.getItem(position), position);
                 getDialog().dismiss();
             }
@@ -224,12 +244,6 @@ public class SearchableListDialog extends DialogFragment implements
     public interface SearchableItem<T> extends Serializable {
         void onSearchableItemClicked(T item, int position);
     }
-
-    public interface OnSearchTextChanged {
-        void onSearchTextChanged(String strText);
-    }
-
-
 
 
 }

@@ -9,9 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Cache;
@@ -20,16 +17,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-import apsupportapp.aperotechnologies.com.designapp.R;
 
 import java.util.ArrayList;
 
 /**
  * Created by pamrutkar on 23/08/16.
  */
-public class KeyProductActivity extends AppCompatActivity implements View.OnClickListener, OnRowPressListener {
-    RelativeLayout btnBack;
-    RelativeLayout btnSearch;
+public class KeyProductActivity1 extends AppCompatActivity implements View.OnClickListener, OnRowPressListener {
+    Button btnBack, btnSearch;
     public static String prodName = "";
     private final String LOG_TAG = "MainActivity";
     KeyProductAdapter adapter;
@@ -83,15 +78,15 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
 
                 viewPager.setCurrentItem(tab.getPosition());
 
-                Log.e("currentItem "," "+viewPager.getCurrentItem() +" "+ KeyProductActivity.prodName+" "+(viewPager.getCurrentItem() == 0 && !KeyProductActivity.prodName.equals("")));
+                Log.e("currentItem "," "+viewPager.getCurrentItem() +" "+ KeyProductActivity1.prodName+" "+(viewPager.getCurrentItem() == 0 && !KeyProductActivity1.prodName.equals("")));
 
 
-                if(viewPager.getCurrentItem() == 1 && KeyProductActivity.prodName.equals(""))
+                if(viewPager.getCurrentItem() == 1 && KeyProductActivity1.prodName.equals(""))
                 {
                     Toast.makeText(context, "Please select product to view options", Toast.LENGTH_LONG).show();
                 }
 
-                if(viewPager.getCurrentItem() == 0 && !KeyProductActivity.prodName.equals(""))
+                if(viewPager.getCurrentItem() == 0 && !KeyProductActivity1.prodName.equals(""))
                 {
 
                     ProductName_Fragment.relProd_Frag.setVisibility(View.VISIBLE);
@@ -100,7 +95,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
                     Option_Fragment.tableCOpt_Frag.removeAllViews();
                     Option_Fragment.tableDOpt_Frag.removeAllViews();
                     Option_Fragment.view.removeView(Option_Fragment.rel);
-                    KeyProductActivity.prodName = "";
+                    KeyProductActivity1.prodName = "";
 
                 }
 
@@ -117,9 +112,9 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
+        btnBack = (Button) findViewById(R.id.imageBtnBack);
         btnBack.setOnClickListener(this);
-        btnSearch = (RelativeLayout) findViewById(R.id.imageBtnSearch);
+        btnSearch = (Button) findViewById(R.id.imageBtnSearch);
         btnSearch.setOnClickListener(this);
 
     }
@@ -135,12 +130,12 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
             case R.id.imageBtnBack:
                 Reusable_Functions.hDialog();
                 SearchActivity1.searchSubDept = ""; SearchActivity1.searchProductName = "";  SearchActivity1.searchArticleOption = "";
-                Intent intent = new Intent(KeyProductActivity.this, DashBoardActivity.class);
+                Intent intent = new Intent(KeyProductActivity1.this, DashBoardActivity.class);
                 startActivity(intent);
                 finish();
                 break;
             case R.id.imageBtnSearch:
-                Intent intent1 = new Intent(KeyProductActivity.this, SearchActivity1.class);
+                Intent intent1 = new Intent(KeyProductActivity1.this, SearchActivity1.class);
                 startActivity(intent1);
                 finish();
                 break;
@@ -153,7 +148,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         Log.e("product ==== ", " " + productName);
         Log.e("adapter.getFragment(1) ", " " + adapter);
 
-        KeyProductActivity.prodName = productName;
+        KeyProductActivity1.prodName = productName;
 
 
         Option_Fragment fragment = (Option_Fragment) adapter.getFragment(1);
@@ -202,7 +197,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
 //        {
             Reusable_Functions.hDialog();
             SearchActivity1.searchSubDept = ""; SearchActivity1.searchProductName = "";  SearchActivity1.searchArticleOption = "";
-            Intent intent = new Intent(KeyProductActivity.this, DashBoardActivity.class);
+            Intent intent = new Intent(KeyProductActivity1.this, DashBoardActivity.class);
             startActivity(intent);
             finish();
             //super.onBackPressed();

@@ -1,35 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-
     tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_height="@dimen/toolbar_header_height"
+
+    <RelativeLayout
+        android:background="#ffffff"
+        android:id="@+id/stylemainlayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:elevation="6dp"
-        android:minHeight="?attr/actionBarSize"
-        android:background="@color/colorPrimary" >
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_header_height"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button
-                android:layout_marginLeft="10dp"
+            <RelativeLayout
+                android:layout_marginLeft="0dp"
                 android:id="@+id/imageBtnBack"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:padding="10dp"
-                android:layout_centerVertical="true"
+                android:background="@drawable/button_red_effect"
+                android:layout_width="@dimen/header_clickable_width"
+                android:layout_height="@dimen/header_clickable_height"
                 android:layout_alignParentLeft="true"
-                android:background="@mipmap/common_back_icon"
-                android:textColor="#ffffff"/>
+                android:layout_centerVertical="true">
+
+                <Button
+                    android:clickable="false"
+                    android:background="@mipmap/common_back_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,8 +67,10 @@
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,28 +80,39 @@
             android:layout_marginLeft="20dp">
 
 
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:layout_width="match_parent"
+
+            <TextView
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:background="@android:color/white"
+                android:drawableRight="@mipmap/search_option_dropdown_arrow"
                 android:id="@+id/searchablespinnerlibrary"
-                android:layout_height="50dp" />
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:background="#C7C4C4"></LinearLayout>-->
-
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:layout_width="match_parent"
-                android:id="@+id/searchablespinnerlibrary1"
                 android:layout_height="50dp" />
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:background="#C7C4C4">-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="0dp"
+                android:background="#C7C4C4"></View>
+
+
+            <TextView
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:background="@android:color/white"
+                android:drawableBottom="@color/darker_grey"
+                android:drawableRight="@mipmap/search_option_dropdown_arrow"
+                android:id="@+id/searchablespinnerlibrary1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="0dp"
+                android:background="#C7C4C4"/>
+
 
 
             <!--<TextView-->
@@ -87,7 +121,7 @@
             <!--android:text="Search"-->
             <!--android:layout_marginTop="20dp"-->
             <!--android:textSize="20dp"-->
-            />
+
             <!--<EditText-->
             <!--android:id="@+id/edtSearch"-->
             <!--android:layout_width="match_parent"-->
@@ -196,4 +230,124 @@
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:background="#80000000"
+        android:id="@+id/collectionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp">
+
+            <TextView
+                android:text="Select Collection"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <!--<SearchView-->
+        <!--android:id="@+id/search"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:iconifiedByDefault="false"/>-->
+
+        <EditText
+            android:drawableTint="#000000"
+            android:textColor="#666666"
+            android:textCursorDrawable="@null"
+            android:background="@android:color/transparent"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@mipmap/key_product_search_icon"
+            android:singleLine="true"
+            android:hint="Search"
+            android:imeOptions="actionSearch"
+            android:id="@+id/searchCollection"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <View
+            android:background="#666666"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <ListView
+            android:id="@+id/listCollection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:background="#80000000"
+        android:id="@+id/optionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp">
+
+            <TextView
+                android:text="Select Option"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        <EditText
+            android:drawableTint="@color/darker_grey"
+            android:textColor="#666666"
+            android:textCursorDrawable="@null"
+            android:background="@android:color/transparent"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@mipmap/key_product_search_icon"
+            android:singleLine="true"
+            android:hint="Search"
+            android:imeOptions="actionSearch"
+            android:id="@+id/searchOption"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <View
+            android:background="#666666"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <ListView
+            android:id="@+id/listOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
+

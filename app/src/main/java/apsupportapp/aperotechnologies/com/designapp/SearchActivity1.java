@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +53,8 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  * Created by pamrutkar on 23/08/16.
  */
 public class SearchActivity1  extends AppCompatActivity implements View.OnClickListener,RadioGroup.OnCheckedChangeListener {
-    Button btnSubDept, btnMc, btnProductName, btnArticle, btnBack;
+    Button btnSubDept, btnMc, btnProductName, btnArticle;
+    RelativeLayout btnBack;
     EditText editSearch;
     ImageButton btnSearch;
     MySingleton m_config;
@@ -125,7 +127,7 @@ public class SearchActivity1  extends AppCompatActivity implements View.OnClickL
         // btnProductName.setOnClickListener(this);
         // btnArticle = (Button) findViewById(R.id.btnArticle);
         // btnArticle.setOnClickListener(this);
-        btnBack = (Button) findViewById(R.id.imageBtnBack);
+        btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         btnBack.setOnClickListener(this);
         btnSearch=(ImageButton) findViewById(R.id.btnSeatchList);
         btnSearch.setOnClickListener(this);

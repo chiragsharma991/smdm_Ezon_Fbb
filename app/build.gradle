@@ -27,8 +27,8 @@ android {
         applicationId "apsupportapp.aperotechnologies.com.designapp"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 21
-        versionName "1.21"
+        versionCode 22
+        versionName "1.22"
     }
     buildTypes {
         release {
@@ -62,4 +62,5 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.2@aar') {
         transitive = true;
     }
+    //compile 'me.sudar:zxing-orient:2.1.1@aar'
 }

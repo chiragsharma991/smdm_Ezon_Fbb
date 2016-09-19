@@ -36,9 +36,12 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
     String title;
 
     public SearchableSpinner(Context context) {
+
+
         super(context);
         this._context = context;
         init();
+        Log.e("SearchableSpinner "," a");
     }
 
     public SearchableSpinner(Context context, AttributeSet attrs) {
@@ -54,15 +57,19 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
         }
         a.recycle();
         init();
+        Log.e("SearchableSpinner "," b");
     }
 
     public SearchableSpinner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this._context = context;
         init();
+        Log.e("SearchableSpinner "," c");
     }
 
     private void init() {
+
+        Log.e("SearchableSpinner "," init");
 
         _items = new ArrayList();
         _searchableListDialog = SearchableListDialog.newInstance
@@ -83,7 +90,7 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
 
-            Log.e("onTouch "," Listener "+title);
+            Log.e("SearchableSpinner "," onTouch "+title);
 
             if (null != _arrayAdapter) {
 
@@ -93,15 +100,15 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
                 // spinner every time it is loaded with items in the adapter.
                 _items.clear();
 
-                Log.e("_items after clear "," "+_items.size());
+                //Log.e("_items after clear "," "+_items.size());
 
                 if(title.equals("Select Collection"))
                 {
-                    Log.e("_in "," Select Collection");
+                    //Log.e("_in "," Select Collection");
 
                     if(DashBoardActivity._collectionitems.size() == 0)
                     {
-                        Log.e("_in "," _collectionitems size zero");
+                        //Log.e("_in "," _collectionitems size zero");
 
                         for (int i = 0; i < _arrayAdapter.getCount(); i++) {
                             _items.add(_arrayAdapter.getItem(i));
@@ -112,11 +119,13 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
                     else
                     {
 
-                        Log.e("_in "," _collectionitems size not equal to zero");
+                        //Log.e("_in "," _collectionitems size not equal to zero");
                         _items.addAll(DashBoardActivity._collectionitems);
+                        SearchableListDialog.listAdapter.notifyDataSetChanged();
+
                     }
                 }else {
-                    Log.e("_in "," Select Option");
+                    //Log.e("_in "," Select Option");
 
                     for (int i = 0; i < _arrayAdapter.getCount(); i++) {
                         _items.add(_arrayAdapter.getItem(i));
@@ -124,9 +133,9 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
                     }
                 }
 
-                for(int i=0; i <_items.size();i++){
-                    Log.e("items ====>"," "+_items.get(i));
-                }
+//                for(int i=0; i <_items.size();i++){
+//                    Log.e("items ====>"," "+_items.get(i));
+//                }
 
                 // Change end.
                 _searchableListDialog.show(scanForActivity(_context).getFragmentManager(), "TAG");
@@ -138,6 +147,8 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
     @Override
     public void setAdapter(SpinnerAdapter adapter) {
 
+        Log.e("SearchableSpinner "," setAdapter");
+
         if (!_isFromInit) {
             _arrayAdapter = (ArrayAdapter) adapter;
             if (!TextUtils.isEmpty(_strHintText) && !_isDirty) {
@@ -145,6 +156,7 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
                         .simple_list_item_1, new String[]{_strHintText});
                 super.setAdapter(arrayAdapter);
                 Log.e("arrayadapter","====="+arrayAdapter);
+                arrayAdapter.notifyDataSetChanged();
             } else {
                 super.setAdapter(adapter);
                 Log.e("adapter","====="+adapter);
@@ -158,7 +170,10 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
 
     @Override
     public void onSearchableItemClicked(Object item, int position) {
+        Log.e("SearchableSpinner "," onSearchableItemClicked " + item);
+
         setSelection(_items.indexOf(item));
+
 
         if (!_isDirty) {
             _isDirty = true;
@@ -168,6 +183,8 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
     }
 
     public void setTitle(String strTitle) {
+        Log.e("SearchableSpinner "," setTitle");
+
         title = strTitle;
         _searchableListDialog.setTitle(strTitle);
     }
@@ -175,6 +192,9 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
 
 
     private Activity scanForActivity(Context cont) {
+
+        Log.e("SearchableSpinner "," scanForActivity");
+
         if (cont == null)
             return null;
         else if (cont instanceof Activity)
@@ -187,6 +207,8 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
 
     @Override
     public int getSelectedItemPosition() {
+        Log.e("SearchableSpinner "," getSelectedItemPosition");
+
         if (!TextUtils.isEmpty(_strHintText) && !_isDirty) {
             return NO_ITEM_SELECTED;
         } else {
@@ -196,6 +218,8 @@ public class SearchableSpinner extends Spinner implements View.OnTouchListener,
 
     @Override
     public Object getSelectedItem() {
+        Log.e("SearchableSpinner "," getSelectedItem");
+
         if (!TextUtils.isEmpty(_strHintText) && !_isDirty) {
             return null;
         } else {

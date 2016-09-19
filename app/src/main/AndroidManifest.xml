@@ -70,44 +70,18 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.SearchActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.ScannerActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.ScannerActivity1"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.ContinuousCaptureActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.CustomScannerActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.AnyOrientationCaptureActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
         <activity android:name="apsupportapp.aperotechnologies.com.designapp.SearchActivity1"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
         </activity>
 
+        <activity android:name=".AnyOrientationCaptureActivity"
+            android:screenOrientation="portrait"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ffdd609785d2fe5506254706299413b2c3ea9898" />
     </application>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
 </manifest>
