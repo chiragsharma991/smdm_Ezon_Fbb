@@ -30,6 +30,7 @@ public class AboutUsActivity extends AppCompatActivity {
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         txtversioncode = (TextView) findViewById(R.id.versioncode);
         context = this;
+        Log.e("About us ","");
 
 
         PackageInfo pInfo = null;
