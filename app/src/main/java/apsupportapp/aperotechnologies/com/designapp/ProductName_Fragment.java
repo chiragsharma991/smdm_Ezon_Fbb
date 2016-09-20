@@ -131,6 +131,10 @@ public class ProductName_Fragment extends Fragment {
         relProd_Frag = (RelativeLayout) view.findViewById(R.id.rel);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relativeLayout.setBackgroundColor(Color.WHITE);
+
+
+
+
         relProd_Frag.setVisibility(View.VISIBLE);
         btnProdFilter=(Button)view.findViewById(R.id.imageBtnFilter);
         txt_subdepName = (TextView)view.findViewById(R.id.txtSubDeptName);

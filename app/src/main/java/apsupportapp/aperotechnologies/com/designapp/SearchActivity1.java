@@ -93,6 +93,7 @@ public class SearchActivity1  extends AppCompatActivity implements View.OnClickL
         queue = new RequestQueue(cache, network);
         queue.start();
 
+
         context = this;
         searchSubDept = "";
         searchProductName = "";
@@ -130,24 +131,6 @@ public class SearchActivity1  extends AppCompatActivity implements View.OnClickL
         btnSearch=(ImageButton) findViewById(R.id.btnSeatchList);
         btnSearch.setOnClickListener(this);
         editSearch = (EditText) findViewById(R.id.editSearch);
-
-
-//        editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                searchData = editSearch.getText().toString();
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    Log.e("searchData", searchData);
-//                    editSearch.clearFocus();
-//                    InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
-//                    adapter.getFilter().filter(searchData);
-//
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
 
 
         editSearch.addTextChangedListener(new TextWatcher() {

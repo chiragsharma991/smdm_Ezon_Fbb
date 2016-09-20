@@ -104,7 +104,6 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
 
     private class ValueFilter extends Filter {
 
-
         //Invoked in a worker thread to filter the data according to the constraint.
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -124,7 +123,6 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
                     }
                 }
 
-
                 results.count = filterList.size();
 
                 results.values = filterList;
@@ -143,6 +141,7 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
 
         //Invoked in the UI thread to publish the filtering results in the user interface.
         @SuppressWarnings("unchecked")
+
         @Override
         protected void publishResults(CharSequence constraint,
                                       FilterResults results) {
@@ -150,7 +149,6 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
             mStringList = (ArrayList<String>) results.values;
 
             notifyDataSetChanged();
-
 
         }
 

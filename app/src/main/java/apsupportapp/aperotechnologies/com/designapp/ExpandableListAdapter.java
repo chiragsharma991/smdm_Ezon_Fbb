@@ -73,6 +73,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     // Hashmap for keeping track of our checkbox check states
     private HashMap<Integer, boolean[]> mChildCheckStates;
+    private HashMap<Integer, boolean[]> mProductChildCheckStates;
 
     // Our getChildView & getGroupView use the viewholder patter
     // Here are the viewholders defined, the inner classes are
@@ -103,6 +104,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         // Initialize our hashmap containing our check states here
         mChildCheckStates = new HashMap<Integer, boolean[]>();
+        mProductChildCheckStates = new HashMap<Integer, boolean[]>();
     }
 
     public int getNumberOfCheckedItemsInGroup(int mGroupPosition)
@@ -249,6 +251,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         convertView.setOnClickListener(null);
 
         if (mChildCheckStates.containsKey(mGroupPosition)) {
+
+
 			/*
 			 * if the hashmap mChildCheckStates<Integer, Boolean[]> contains
 			 * the value of the parent view (group) of this child (aka, the key),
@@ -259,7 +263,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             // set the check state of this position's checkbox based on the
             // boolean value of getChecked[position]
 
-            //Log.e("----"," "+getChecked.length+" "+mChildPosition);
+
 
             if(mChildPosition >= getChildrenCount(mGroupPosition))
             {
@@ -268,7 +272,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             {
                 try
                 {
-                    childViewHolder.mCheckBox.setChecked(getChecked[mChildPosition]);
+                    if(mGroupPosition == 1)
+                    {
+                        childViewHolder.mCheckBox.setChecked(false);
+                    }
+                    else {
+                        childViewHolder.mCheckBox.setChecked(getChecked[mChildPosition]);
+                    }
+
                 }
                 catch (Exception e)
                 {
@@ -280,7 +291,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
         } else {
-
+            Log.e("does not contains grpPos "," "+mGroupPosition);
 			/*
 			 * if the hashmap mChildCheckStates<Integer, Boolean[]> does not
 			 * contain the value of the parent view (group) of this child (aka, the key),
@@ -299,7 +310,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
 
-
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -308,11 +318,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 CheckBox cb = (CheckBox) rel.getChildAt(1);
                 TextView txtView = (TextView) rel.getChildAt(0);
                 String txtSubdept = txtView.getText().toString();//getChild(0,mChildPosition);
-                //Log.e("txtSubDept"," "+txtSubdept);
+                ////Log.e("txtSubDept"," "+txtSubdept);
 //
                 if(mGroupPosition == 1)
                 {
-
+                    Log.e("mChildCheckStates for Group Product"," "+mChildCheckStates.get(1).length);
+                    cb.setChecked(true);
                     Prod_FilterActivity.pfilter_list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
                     Intent intent = new Intent(mContext, KeyProductActivity.class);
                     intent.putExtra("filterproductname", txtSubdept);
@@ -324,12 +335,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
                 if (cb.isChecked() == false) {
 
-                    //Log.e("checkbox is not selected", "");
+                    ////Log.e("checkbox is not selected", "");
 
                     if (Reusable_Functions.chkStatus(mContext))
                     {
 
-                        Log.e("mChildCheckStates"," "+mChildCheckStates.get(0).length);
+                        //Log.e("mChildCheckStates"," "+mChildCheckStates.get(0).length);
+
+
+
                         Prod_FilterActivity.pfilter_list.collapseGroup(1);
                         Reusable_Functions.sDialog(mContext, "Loading  data...");
                         offsetvalue = 0;
@@ -337,7 +351,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                         limit = 100;
                         productList = new ArrayList<String>();
 
-                        Log.e("text value "," "+txtSubdept);
+                        //Log.e("text value "," "+txtSubdept);
                         requestFilterProductAPI(offsetvalue, limit, txtSubdept);
                         boolean getChecked[] = mChildCheckStates.get(mGroupPosition);
                         getChecked[mChildPosition] = true;
@@ -351,8 +365,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
                 } else {
-                    //Log.e("checkbox is  selected", "");
-                    //Log.e("selected text value "," "+txtSubdept);
+                    ////Log.e("checkbox is  selected", "");
+                    ////Log.e("selected text value "," "+txtSubdept);
 
                     for (int i = 0; i < arrfilter.size(); i++) {
                         if (arrfilter.get(i).getSubdept().equals(txtSubdept)) {
@@ -439,7 +453,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     ProductName = productName1.getString("productName");
-                                    Log.e("Product Name:", ProductName);
+                                    //Log.e("Product Name:", ProductName);
 
                                     productList.add(ProductName);
                                     productnamelist.add(ProductName);
@@ -452,7 +466,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     ProductName = productName1.getString("productName");
-                                    Log.e("Product Name:", ProductName);
+                                    //Log.e("Product Name:", ProductName);
 
                                     productList.add(ProductName);
                                     productnamelist.add(ProductName);
@@ -466,31 +480,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                 filterArray.setprodArray((ArrayList) productList);
                                 arrfilter.add(filterArray);
                                 Prod_FilterActivity.pfilter_list.expandGroup(1);
-
-                                //Log.e("--- ", " " + arrfilter.size());
-
-//                                int subdeptsize = getChildrenCount(0) + 2;
-//                                for(int i=0; i< productnamelist.size(); i++)
-//                                {
-//
-//                                    Log.e("val "," "+expandableListView.getChildAt(1));
-//
-//                                    RelativeLayout rel = (RelativeLayout) expandableListView.getChildAt(subdeptsize);
-//                                    CheckBox cb = (CheckBox) rel.getChildAt(1);
-//                                    TextView txt = (TextView) rel.getChildAt(0);
-//
-//                                    Log.e("txt"," "+txt.getText().toString());
-//                                    cb.setVisibility(View.INVISIBLE);
-//                                    subdeptsize++;
-//
-//                                }
                                 Reusable_Functions.hDialog();
 
 
                             }
 
-                        } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
+                        } catch (Exception e)
+                        {
                             e.printStackTrace();
                         }
                     }
@@ -499,7 +495,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }

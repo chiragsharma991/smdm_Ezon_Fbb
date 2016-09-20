@@ -16,15 +16,5 @@
         android:paddingBottom="5dp"
         android:paddingLeft="20dp" />
 
-    <CheckBox
-        android:clickable="false"
-        android:focusable="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:buttonTint="@color/colorPrimary"
-        android:id="@+id/itemCheckBox"
-        android:textColor="@android:color/holo_red_light"
-        android:paddingTop="5dp"/>
 
 </RelativeLayout>

@@ -68,19 +68,6 @@ Button btnLogin;
         edtUserName=(EditText)findViewById(R.id.edtUserName);
         edtPassword=(EditText)findViewById(R.id.edtPassword);
 
-
-
-//
-//        if(!sharedPreferences.getString("username","").equals(""))
-//        {
-//            edtUserName.setText(sharedPreferences.getString("username",""));
-//            edtPassword.setText(sharedPreferences.getString("password",""));
-//        }
-
-
-
-
-
         // edtUserName.setRawInputType(InputType.TYPE_CLASS_TEXT);
         chkKeepMeLogin=(CheckBox) findViewById(R.id.chkKeepMeLogin);
 
@@ -144,107 +131,6 @@ Button btnLogin;
     private void requestLoginAPI()
     {
         String url = ConstsCore.web_url+"/v1/login"; //ConstsCore.web_url+ + "/v1/login/userId";
-
-//        JSONObject jsonobj = new JSONObject();
-//        try {
-//              jsonobj.put("loginName", uname);//"User_4974_DM1");
-//              jsonobj.put("password", password);//"123456");
-//            } catch (JSONException e)
-//              {
-//                e.printStackTrace();
-//              }
-//
-//        Log.e("json"," "+jsonobj.toString());
-
-
-//        final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonobj.toString(),
-//                new Response.Listener<JSONObject>()
-//                {
-//                    @Override
-//                    public void onResponse(JSONObject response)
-//                    {
-//                        Log.i("Login   Response   ", response.toString());
-//                        try
-//                        {
-//
-//                            if(response == null || response.equals(null))
-//                            {
-//                                Reusable_Functions.hDialog();
-//
-//                            }
-//                           // JSONObject mainObject = new JSONObject(response);
-//                            String username = response.getString("loginName");
-//                            String password = response.getString("password");
-//                            String userId = response.getString("userId");
-//
-////                            editor.putString("userId", m_config.userId);
-////                            editor.apply();
-//                            SharedPreferences.Editor editor = sharedPreferences.edit();
-//                            editor.putString("username", username);
-//                            editor.putString("password", password);
-//                            editor.putString("userId",userId);
-//                            editor.apply();
-//
-//                            //Log.e("log_flag"," "+log_flag);
-//
-//                            if (log_flag)
-//                            {
-//                                editor.putBoolean("log_flag", true);
-//                                editor.apply();
-//
-//                            }
-//
-////                            String userId=response.getString("userId");
-////                            Log.e(" id  url",""+userId+"     "+username+"    " +password);
-//
-//                            Reusable_Functions.hDialog();
-//
-//                            Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
-//                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                            //intent.putExtra("userId",userId);
-//                            startActivity(intent);
-//
-//
-//                        }
-//                        catch(Exception e)
-//                        {
-//                            Log.e("Exception e",e.toString() +"");
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener()
-//                {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error)
-//                    {
-//                        Reusable_Functions.hDialog();
-//                        Toast.makeText(LoginActivity.this,"Invalid user",Toast.LENGTH_LONG).show();
-//                        error.printStackTrace();
-//                    }
-//                }
-//
-//        ){
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError
-//            {
-//                String auth_code = "Basic " + Base64.encodeToString((uname+":"+password).getBytes(), Base64.NO_WRAP); //Base64.NO_WRAP flag
-//                Log.i("Auth Code", auth_code);
-//                Map<String, String> params = new HashMap<>();
-//                params.put("Authorization", auth_code);
-//                return params;
-//
-//
-//            }
-//        };
-//        int socketTimeout = 60000;//5 seconds
-//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-//        postRequest.setRetryPolicy(policy);
-//        queue.add(postRequest);
-
-
 
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>()
