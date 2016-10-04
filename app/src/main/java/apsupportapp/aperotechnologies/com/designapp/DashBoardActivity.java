@@ -38,6 +38,8 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
+import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,7 +55,7 @@ import java.util.TimerTask;
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ImageButton imageBtnStyle, imageBtnKeyProducts;
+    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment;
     //ExpandableHeightGridView style_grid;
     EventAdapter eventAdapter;
     RequestQueue queue;
@@ -132,10 +134,7 @@ public class DashBoardActivity extends AppCompatActivity
 //        navigationView.setNavigationItemSelectedListener(this);
 
 
-
         initializeUI();
-
-
 
         //Marketing events API
         if (Reusable_Functions.chkStatus(context)) {
@@ -155,7 +154,10 @@ public class DashBoardActivity extends AppCompatActivity
 //                requestArticleOptionsAPI();
                 Intent intent = new Intent(DashBoardActivity.this, StyleActivity.class);
                 startActivity(intent);
-                timer.cancel();
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
                 finish();
 
             }
@@ -166,13 +168,43 @@ public class DashBoardActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(DashBoardActivity.this,KeyProductActivity.class);
                 startActivity(intent);
-                timer.cancel();
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
                 finish();
 
             }
 
         });
 
+
+        imgBtnSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,SalesAnalysisActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+
+        imgBtnVisualAssortment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,VisualAssortmentActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
 
     }
 
@@ -252,7 +284,8 @@ public class DashBoardActivity extends AppCompatActivity
     private void initializeUI() {
         imageBtnStyle=(ImageButton)findViewById(R.id.imageBtnStyle);
         imageBtnKeyProducts=(ImageButton)findViewById(R.id.imageBtnKeyProducts);
-
+        imgBtnSales = (ImageButton) findViewById(R.id.btnSales);
+        imgBtnVisualAssortment = (ImageButton) findViewById(R.id.btnVisualAssortment);
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 
@@ -275,10 +308,6 @@ public class DashBoardActivity extends AppCompatActivity
 
 
     }
-
-
-
-
 
 
     private Boolean exit = false;

@@ -27,146 +27,231 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="0dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:weightSum="4">
 
-                <ImageButton
-                    android:id="@+id/imageBtnStyle"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="#ffffff"
-                    android:src="@mipmap/dashboard_size_finder_icon"
-                    android:layout_weight="1"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:id="@+id/imageBtnKeyProducts"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="#ffffff"
-                    android:src="@mipmap/dashboard_flash_hourly_icon"
-                    android:layout_weight="1"/>
 
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="#ffffff"
-                    android:src="@mipmap/dashboard_mpm_icon"
-                    android:layout_weight="1"/>
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="#ffffff"
-                    android:src="@mipmap/dashboard_key_products_icon"
-                    android:layout_weight="1"/>
+                    <ImageButton
+                        android:id="@+id/imageBtnStyle"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/dashboard_size_finder_icon"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Product Info"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textSize="13sp"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageButton
+                        android:id="@+id/imageBtnKeyProducts"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/dashboard_flash_hourly_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hourly Analysis"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageButton
+                        android:id="@+id/btnVisualAssortment"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/dashboard_visual_assortment_icon"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Visual Assortment"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/btnCutSize"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/dashboard_key_products_icon"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cut Size"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textSize="13sp"/>
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:weightSum="4">
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Product Info"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:text="Hourly Analysis"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="MPM"
-                    android:paddingLeft="22sp"
-                    android:textSize="13sp"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Cut Size"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:weightSum="4">
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="#ffffff"
-                    android:src="@mipmap/dashboard_shoot_style_icon"
-                    android:layout_weight="1"/>
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="#ffffff"
-                    android:src="@mipmap/dashboard_cut_size_icon"
-                    android:layout_weight="1"/>
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="#ffffff"
-                    android:src="@mipmap/dashboard_cross_selling_icon"
-                    android:layout_weight="1"/>
-
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="#ffffff"
-                    android:src="@mipmap/dashboard_other_icon"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:weightSum="4">
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Shoot Style"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Search"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Cross Selling"
-                    android:gravity="center"
-                    android:layout_marginLeft="3dp"
-                    android:textSize="13sp"
-                    android:layout_weight="1.2"/>
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Sales"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/btnShootStyle"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/dashboard_shoot_style_icon" />
+
+
+                    <TextView
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shoot Style"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/btnSearch"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/dashboard_cut_size_icon"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Search"
+                        android:layout_gravity="center"
+                        android:textSize="13sp"
+                        android:gravity="center" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/btnCrossSelling"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/dashboard_cross_selling_icon"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cross Selling"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/btnSales"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/dashboard_other_icon"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sales"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
+
+
+
 
             </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -222,6 +307,11 @@
                 android:layout_height="30dp"
                 android:orientation="horizontal">
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
 
 
             <!--<apsupportapp.aperotechnologies.com.designapp.ExpandableHeightGridView-->

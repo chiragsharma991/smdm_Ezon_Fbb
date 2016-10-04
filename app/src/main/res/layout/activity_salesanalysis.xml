@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_header_height"
+                android:layout_alignParentTop="true"
+                android:background="?attr/colorPrimary"
+                android:contentInsetStart="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetEnd="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_marginLeft="0dp"
+                        android:id="@+id/imageBtnBack"
+                        android:background="@drawable/button_red_effect"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:clickable="false"
+                            android:background="@mipmap/common_back_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sales Analysis"
+                        android:textSize="20sp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/imageBtnBack"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#ffffff"
+                        android:id="@+id/toolbar_title" />
+
+                    <RelativeLayout
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/header_clickable_width"
+                        android:layout_toLeftOf="@+id/imgfilter"
+                        android:id="@+id/imgrank"
+                        android:background="@drawable/button_red_effect"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:clickable="false"
+                            android:background="@mipmap/common_back_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="0dp"
+                        android:id="@+id/imgfilter"
+                        android:background="@drawable/button_red_effect"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:clickable="false"
+                            android:background="@mipmap/common_back_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+
+
+                    <!--<RelativeLayout-->
+                    <!--android:id="@+id/imageBtnSearch"-->
+                    <!--android:background="@drawable/button_red_effect"-->
+                    <!--android:layout_width="@dimen/header_clickable_width"-->
+                    <!--android:layout_height="@dimen/header_clickable_height"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true">-->
+
+                    <!--<Button-->
+                    <!--android:clickable="false"-->
+                    <!--android:background="@mipmap/key_product_search_icon1"-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_centerInParent="true"/>-->
+
+                    <!--</RelativeLayout>-->
+
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/tstoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store : "
+                    android:textColor="#920609"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_marginLeft="3dp"
+                    android:id="@+id/txtStoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tstoreCode"
+                    android:hint="3215"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/txtStoreCode"
+                    android:id="@+id/txtStoreName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="FAL CDC-New Delhi"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/segmentedGrp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:weightSum="4"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="5dp"
+            segmentedgroup:sc_tint_color="#B73020">
+
+            <RadioButton
+                android:id="@+id/btnWTD"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="WTD"
+                android:layout_weight="1"
+                android:backgroundTint="#B73020"
+                style="@style/RadioButton" />
+
+            <RadioButton
+                android:id="@+id/btnLW"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="LW"
+                style="@style/RadioButton" />
+
+            <RadioButton
+                android:id="@+id/btnL4W"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="L4W"
+                android:layout_weight="1"
+                android:backgroundTint="#B73020"
+                style="@style/RadioButton" />
+
+            <RadioButton
+                android:id="@+id/btnYTD"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="YTD"
+                android:layout_weight="1"
+                android:backgroundTint="#B73020"
+                style="@style/RadioButton" />
+
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+        <LinearLayout
+            android:id="@+id/llayoutSalesAnalysis"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="240dp">
+            </android.support.v4.view.ViewPager>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/lldots"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/relTablelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/lldots">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:id="@+id/llheader"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+
+                        <RelativeLayout
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="180dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp">
+
+
+                            <RelativeLayout
+                                android:id="@+id/prevplanclass"
+                                android:layout_alignParentLeft="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp">
+
+                                <ImageView
+                                    android:clickable="false"
+                                    android:background="@color/bel_red_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/headerplanclass"
+                                android:gravity="center"
+                                android:layout_alignParentRight="true"
+                                android:text="Plan Class"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/black"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                            <RelativeLayout
+
+                                android:id="@+id/nextplanclass"
+                                android:layout_alignParentRight="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp">
+
+                                <ImageView
+                                    android:clickable="false"
+                                    android:background="@color/bel_red_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                        <TextView
+                            android:gravity="center_vertical|center"
+                            android:layout_marginRight="10dp"
+                            android:layout_alignParentRight="true"
+                            android:text="PvA Sales %"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+
+                        <EditText
+                            android:layout_centerVertical="true"
+                            android:background="@android:color/white"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="140dp"
+                            android:gravity="center_vertical"
+                            android:layout_alignParentLeft="true"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp" />
+
+                        <EditText
+                            android:layout_centerVertical="true"
+                            android:background="@android:color/white"
+                            android:layout_marginRight="10dp"
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/txtVal"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:layout_width="120dp"
+                            android:layout_height="30dp" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+                <ListView
+                    android:smoothScrollbar="true"
+                    android:layout_marginTop="50dp"
+                    android:id="@+id/listView_SalesAnalysis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </ListView>
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="#80000000"
+        android:id="@+id/rankLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relrankLayout"
+        android:layout_width="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/relpopuplayout"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/border"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:id="@+id/relimgclose"
+                android:gravity="right"
+                android:layout_alignParentRight="true"
+                android:layout_width="60dp"
+                android:layout_height="60dp">
+
+
+                <ImageView
+                    android:clickable="false"
+                    android:background="@mipmap/images"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginTop="40dp"
+                android:text="Rank"
+                android:gravity="center"
+                android:textColor="@color/darker_grey"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rank"/>
+
+
+            <View
+                android:layout_margin="5dp"
+                android:id="@+id/div1"
+                android:layout_below="@+id/rank"
+                android:background="@color/text_grey"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+
+            <TextView
+                android:id="@+id/txtsales"
+                android:layout_below="@+id/div1"
+                android:layout_margin="5dp"
+                android:text="Selected filter sales / Total Store fashion Sales"
+                android:gravity="center"
+                android:textColor="@color/darker_grey"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/div2"
+                android:layout_below="@+id/txtsales"
+                android:background="@color/text_grey"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+
+            <LinearLayout
+                android:id="@+id/zonalnational"
+                android:orientation="horizontal"
+                android:layout_below="@+id/div2"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_below="@+id/div1"
+                    android:layout_marginTop="20dp"
+                    android:text=""
+                    android:gravity="center"
+                    android:textColor="@color/darker_grey"
+                    android:textSize="14sp"
+                    android:padding="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_below="@+id/div1"
+                    android:layout_marginTop="20dp"
+                    android:text="Zonal Rank"
+                    android:gravity="center"
+                    android:textColor="@color/darker_grey"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_below="@+id/div1"
+                    android:layout_marginTop="20dp"
+                    android:text="National Rank"
+                    android:gravity="center"
+                    android:textColor="@color/darker_grey"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/sales"
+                android:orientation="horizontal"
+                android:layout_below="@+id/zonalnational"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Sales"
+                    android:textColor="@color/darker_grey"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtZonalSales"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/div1"
+                    android:text="4"
+                    android:gravity="center"
+                    android:textColor="@color/darker_grey"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtNationalSales"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/div1"
+                    android:text="10"
+                    android:gravity="center"
+                    android:textColor="@color/darker_grey"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/YOY"
+                android:orientation="horizontal"
+                android:layout_below="@+id/sales"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_below="@+id/div1"
+                    android:text="YOY Growth%"
+                    android:gravity="left"
+                    android:textColor="@color/darker_grey"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtZonalYOY"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/div1"
+                    android:text="4"
+                    android:gravity="center"
+                    android:textColor="@color/darker_grey"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtNationalYOY"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/div1"
+                    android:text="10"
+                    android:gravity="center"
+                    android:textColor="@color/darker_grey"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_below="@+id/YOY"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+            
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_marginTop="120dp"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/black"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+    </RelativeLayout>
+
+        </LinearLayout>
+
+</RelativeLayout>

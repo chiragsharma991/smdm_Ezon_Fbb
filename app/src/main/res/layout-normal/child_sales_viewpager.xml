@@ -1,0 +1,334 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/netsales"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+
+            <TextView
+                android:id="@+id/txtNetSalesVal"
+                android:text="12,15,14,566"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/txtNetSales"
+                android:text="Net Sales"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+            <TextView
+                android:gravity="right"
+                android:background="@color/colorPrimary"
+                android:id="@+id/txtNetSalesPerc"
+                android:text="20%"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/plansales"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+
+
+            <TextView
+                android:id="@+id/txtPlanSalesVal"
+                android:text="15,15,00,000"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/txtPlanSales"
+                android:text="Plan Sales"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+            <TextView
+                android:gravity="right"
+                android:background="@color/colorPrimary"
+                android:id="@+id/txtPlanSalesPerc"
+                android:text="20%"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true" />
+
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/netsalesu"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+
+            <TextView
+                android:id="@+id/txtNetSalesUVal"
+                android:text="12,15,14,566"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/txtNetSalesU"
+                android:text="Net Sales(U)"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+            <TextView
+                android:gravity="right"
+                android:background="@color/colorPrimary"
+                android:id="@+id/txtNetSalesUPerc"
+                android:text="20%"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/sohu"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+
+            <TextView
+                android:id="@+id/txtSoHUVal"
+                android:text="15,15,00,000"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/txtSoHU"
+                android:text="S O H(U)"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+            <!--<TextView-->
+            <!--android:gravity="right"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:id="@+id/txtSOHUPerc"-->
+            <!--android:text="20%"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true" />-->
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/ros"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+
+            <TextView
+                android:id="@+id/txtRosVal0"
+                android:text="12,15,14,566"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/txtRos0"
+                android:text="ROS"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+            <!--<TextView-->
+            <!--android:gravity="right"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:id="@+id/txtRosPerc"-->
+            <!--android:text="20%"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true" />-->
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/fwdwkcover0"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+
+
+            <TextView
+                android:id="@+id/txtFwdWkCoverVal0"
+                android:text="15,15,00,000"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/txtFwdWkCover0"
+                android:text="Fwd Wk Cover"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+            <!--<TextView-->
+            <!--android:gravity="right"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:id="@+id/txtSOHUPerc"-->
+            <!--android:text="20%"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true" />-->
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
