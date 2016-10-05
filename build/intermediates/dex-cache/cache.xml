@@ -1,2 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.0.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="39ae02ce40c3ac828abbf780ce0ff5d7a28b7d6a">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-23.0.1_6644ea80e68d0c5f7526c95b8036de8443bde8b5/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.4.0_caa2f340cd14dc75b51a83b038d4a944c789c5ca/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.journeyapps/zxing-android-embedded/3.2.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d4ce6303165f20650850673bd5891fbcca80caae">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.journeyapps-zxing-android-embedded-3.2.0_96ce100b6ce3a8b34bc3774ff2ebdcea601728fd/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.6.2/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="a637ea73d78e58f13decdc721b01817d39941f10">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.crashlytics.sdk.android-crashlytics-2.6.2_b184c9a4e5fe2b6593abd5633ba7f0ba3f6a0ead/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/beta/1.2.2/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="b42cf2134829f715edfa2adaf0ee246631322dba">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.crashlytics.sdk.android-beta-1.2.2_8ba0b6e8bf5e4247539261a8e6c1a04c61841dad/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_89df3d87406773f58cab2ece8963c3835dfbb55f/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_7d8e6191f2fe7849ac680f5077ee871a47620318/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_27bd29ad6f4cbd6899c6472b095260b110b7fe30/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_94392d1f5c52d404568093e365f32050dbd683ee/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.5.2/ecf534dba3a8446ce84cbb797d314763be212a68/glide-3.5.2.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/glide-3.5.2_8ec4ab2c02483d4adfe8afd252fc8a0dab82a2ea/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-1.0.19_cc7bfbaa6d167fddd4b75cdd19788bf729f62244/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.thefinestartist/ytpa/1.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="0a2518381d8ba5b2e77eae672bfd1388ddefbe52">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.thefinestartist-ytpa-1.2.1_2632b713e9ca7bf431d9abdb88bd5a3596b2c048/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.daprlabs.aaron/cardstack/0.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="15267709d4f97b6d8b9b4f042f7bc1a1fac03865">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.daprlabs.aaron-cardstack-0.3.0_346a5e512729398eff5b1d8c312920f2891e551f/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.3.9/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="e3376f705dc1863a8782faf275e56f188b8129eb">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.crashlytics.sdk.android-answers-1.3.9_2d2dab975fd4a18adda9953d02c6a6eb6d62a2ab/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/.gradle/caches/modules-2/files-2.1/com.google.zxing/core/3.2.1/2287494d4f5f9f3a9a2bb6980e3f32053721b315/core-3.2.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/core-3.2.1_50ee2e2934d409886818d774e68007a0bf5689df/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.4.0_f4ef8ab22b5649e811d6eb484bed4ee159125db7/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_7a8c5072dd0a6c5cf265eb67b030050104ceedd1/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6d04a093532634c0143e37bf8650d6295deeeb74">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_4d5c0bad167b696f2ecb2335603f96c98649b220/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics-core/2.3.11/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="e3e366ad917b1fd4de5f1a0626d4e9af903dba52">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.crashlytics.sdk.android-crashlytics-core-2.3.11_3b9c90981106f0da2032cced2aa96919f42428ea/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/libs/picasso-2.5.2.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/2/picasso-2.5.2_4eafc9582158d0704c97ffc70919ebeeae748b77/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/libs/gson-2.3.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/2/gson-2.3.1_f38fd2eca2ebb3cca36f0dfa7cb6e8481a001082/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.thefinestartist/ytpa/1.2.1/jars/libs/YouTubeAndroidPlayerApi.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="78b8f6e37921559ed21c1fae1f30f9f713494db8">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/YouTubeAndroidPlayerApi_9438fdd10e379c807433278a9f1d95a74b1d4b28/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_2dae671ab88e0f111e0b4e1f1131d8218d3b9484/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.13/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="23e3acde10f4cf52778f8dc88107fb96459f2392">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/io.fabric.sdk.android-fabric-1.3.13_19ee43e2321a936b84dbf5448d74c75733b227c0/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/libs/BarcodeScanWrapper.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2765a4e1d77011ef4c17eb63d1cdc40ecc30b776">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/2/BarcodeScanWrapper_1da9c3f74d63346f978b9063f1d26d6bf077f63b/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5fc5ad16aee34eacbc3b6b7cdd698eac3ade069c">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_c70f299c93e9f79a370fc09cd6de034a165d6384/classes.dex" />
+    </item>
+    <item
+        jar="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/exploded-aar/info.hoang8f/android-segmented/1.0.6/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="692a913dff3246e0cc5369c2508f5970ecfeca01">
+        <dex dex="/Users/pamrutkar/Documents/repositories/SMDM_1/SMDM/app/build/intermediates/transforms/dex/debug/folders/1000/10/info.hoang8f-android-segmented-1.0.6_2c6aed7149d7d7d2c1d39d8cd764ef2992c3d290/classes.dex" />
+    </item>
+
+</items>
