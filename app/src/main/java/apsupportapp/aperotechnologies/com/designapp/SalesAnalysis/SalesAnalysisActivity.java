@@ -66,6 +66,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     SharedPreferences sharedPreferences;
     String userId,bearertoken;
     ArrayList<ProductNameBean> arrayList;
+    RelativeLayout btnBack;
     public static String selectedsegValue = "WTD";
     String prodName = "KNIT CHURIDAR";
 
@@ -91,6 +92,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken","");
 
+        btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         segmentedGroupSales= (SegmentedGroup) findViewById(R.id.segmentedGrp);
         segmentedGroupSales.setOnCheckedChangeListener(this);
 
@@ -112,6 +114,13 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         relpopuplayout.setOnClickListener(null);
 
         RelativeLayout relrankLayout = (RelativeLayout) findViewById(R.id.relrankLayout);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         relrankLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -791,7 +800,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 pageradapter.notifyDataSetChanged();
 
 
-                                salesadapter = new SalesAnalysisAdapter(arrayList, context, "");
+                                salesadapter = new SalesAnalysisAdapter(arrayList, context, "PVA Sales");
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
 
@@ -847,10 +856,19 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
     @Override
     public void onBackPressed() {
-        SalesPagerAdapter.currentPage = 0;
-        Intent i = new Intent(SalesAnalysisActivity.this, DashBoardActivity.class);
-        startActivity(i);
-        finish();
+
+        if(rankLayout.getVisibility() == View.VISIBLE)
+        {
+            rankLayout.setVisibility(View.GONE);
+        }
+        else
+        {
+            SalesPagerAdapter.currentPage = 0;
+            Intent i = new Intent(SalesAnalysisActivity.this, DashBoardActivity.class);
+            startActivity(i);
+            finish();
+        }
+
     }
 
 
