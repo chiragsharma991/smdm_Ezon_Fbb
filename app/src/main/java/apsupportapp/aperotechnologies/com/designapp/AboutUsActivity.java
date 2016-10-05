@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -17,7 +18,7 @@ import android.widget.TextView;
 public class AboutUsActivity extends AppCompatActivity {
 
 
-    Button btnBack;
+    RelativeLayout btnBack;
     TextView txtversioncode;
     Context context;
 
@@ -26,7 +27,7 @@ public class AboutUsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.about_us);
-        btnBack = (Button) findViewById(R.id.imageBtnBack);
+        btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         txtversioncode = (TextView) findViewById(R.id.versioncode);
         context = this;
 

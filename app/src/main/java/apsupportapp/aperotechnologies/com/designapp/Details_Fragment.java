@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
@@ -82,11 +84,29 @@ public class Details_Fragment extends Fragment
         imgProfile=(ImageView)view.findViewById(R.id.imgProfile);
 
           Log.e("productImageURL",styleDetailsBean.getProductImageURL());
-          Glide.with(getActivity())
-                //.load("\""+eventUrlList.get(position)+"\"")
-                // .load("https://sm-dm.s3.amazonaws.com/Pojo2.jpg")
-                .load(styleDetailsBean.getProductImageURL())
-                .into(imgProfile);
+
+//        Glide.with(getActivity())
+//                .load(styleDetailsBean.getProductImageURL())
+//                .placeholder(R.drawable.placeholder)
+//                .error(R.drawable.placeholder)
+//                .into(imgProfile);
+
+
+        if(!styleDetailsBean.getProductImageURL().equals(""))
+        {
+
+            Picasso.with(getActivity()).load(styleDetailsBean.getProductImageURL()).centerInside().fit()
+                    .error(R.drawable.placeholder)
+                    .into(imgProfile);
+        }
+        else
+        {
+            Picasso.with(getActivity()).load(R.drawable.placeholder)
+                    .resize(110,150)
+                    .into(imgProfile);
+
+        }
+
 
        if (styleDetailsBean.getPromoFlag().equals("N")||styleDetailsBean.getPromoFlag().equals(""))
        {

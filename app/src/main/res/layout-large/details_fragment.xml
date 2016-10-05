@@ -37,11 +37,9 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:background="@drawable/placeholder"
                     android:id="@+id/imgProfile"
                     android:layout_width="110dp"
                     android:layout_height="150dp" />
-
 
             </LinearLayout>
 

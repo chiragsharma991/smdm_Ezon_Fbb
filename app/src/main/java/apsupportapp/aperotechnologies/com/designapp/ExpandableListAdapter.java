@@ -341,9 +341,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     {
 
                         //Log.e("mChildCheckStates"," "+mChildCheckStates.get(0).length);
-
-
-
                         Prod_FilterActivity.pfilter_list.collapseGroup(1);
                         Reusable_Functions.sDialog(mContext, "Loading  data...");
                         offsetvalue = 0;
