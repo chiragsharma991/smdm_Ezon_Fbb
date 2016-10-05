@@ -57,15 +57,7 @@ public class SplashActivity extends AppCompatActivity
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-// return 0.75 if it's LDPI
-// return 1.0 if it's MDPI
-// return 1.5 if it's HDPI
-// return 2.0 if it's XHDPI
-// return 3.0 if it's XXHDPI
-// return 4.0 if it's XXXHDPI
+       Log.e("---"," "+ getResources().getDisplayMetrics().density);
 
 
         if(sharedPreferences.getBoolean("log_flag",false) == true) {
@@ -97,7 +89,13 @@ public class SplashActivity extends AppCompatActivity
                     if(sharedPreferences.getBoolean("log_flag",false) == true)
                     {
 
-                        requestLoginAPI();
+                        if (Reusable_Functions.chkStatus(context))
+                        {
+                            requestLoginAPI();
+                        }
+                        else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                        }
 
                     }
                     else if(sharedPreferences.getBoolean("log_flag",false) == false)

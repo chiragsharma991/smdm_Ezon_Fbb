@@ -34,7 +34,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -51,8 +51,9 @@ import amobile.android.barcodesdk.api.Wrapper;
 //import com.google.zxing.integration.android.IntentIntegrator;
 //import com.google.zxing.integration.android.IntentResult;
 
-public class StyleActivity1 extends AppCompatActivity implements IWrapperCallBack //implements IWrapperCallBack {
-{   Button  btnSearch,btnBarcode;
+public class StyleActivity1 extends AppCompatActivity{
+    {
+    /*Button  btnSearch,btnBarcode;
     private Wrapper m_wrapper = null;
     Button imageBtnBack;
     // Spinner style;
@@ -1097,5 +1098,6 @@ public class StyleActivity1 extends AppCompatActivity implements IWrapperCallBac
         startActivity(intent);
         finish();
 
+    }*/
     }
 }

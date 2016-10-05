@@ -1,8 +1,11 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -146,12 +149,17 @@ Button btnLogin;
                                 Reusable_Functions.hDialog();
 
                             }
+
+
+                            Long notificationTime = System.currentTimeMillis() + 1500000;
+
+                            setLocalnotification(context, notificationTime);
                             String username = response.getString("loginName");
                             String password = response.getString("password");
                             String userId = response.getString("userId");
                             String bearerToken = response.getString("bearerToken");
 
-//
+
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("username", username);
                             editor.putString("password", password);
@@ -228,5 +236,22 @@ Button btnLogin;
     @Override
     public void onBackPressed() {
         finish();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void setLocalnotification(Context cont, Long notificationTime)
+    {
+        AlarmManager alarmManager = (AlarmManager) cont.getSystemService(Context.ALARM_SERVICE);
+        Intent notificationIntent = new Intent(cont, LocalNotificationReceiver.class);
+
+        PendingIntent broadcast = PendingIntent.getBroadcast(cont, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (Build.VERSION.SDK_INT >= 19)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, notificationTime, broadcast);
+        else if (Build.VERSION.SDK_INT >= 15)
+            alarmManager.set(AlarmManager.RTC_WAKEUP, notificationTime, broadcast);
     }
 }

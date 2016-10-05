@@ -59,6 +59,7 @@ public class ProductName_Fragment extends Fragment {
     TableLayout tableBProd_Frag;
     TableLayout tableCProd_Frag;
     TableLayout tableDProd_Frag;
+
     Button btnProdFilter;
     ViewGroup view;
     HorizontalScrollView horizontalScrollViewB;
@@ -210,7 +211,7 @@ public class ProductName_Fragment extends Fragment {
         horizontalScrollViewD.addView(tableDProd_Frag);
 
         addComponentToMainLayout();
-        int headerCellsWidth[] = new int[headers.length];
+        //int headerCellsWidth[] = new int[headers.length];
 
         btnProdFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +228,7 @@ public class ProductName_Fragment extends Fragment {
 
     private void requestFilterProductName(int offsetvalue1, int limit1) {
 
-        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?productName=" + f_productName.replace(" ", "%20") + "&offset" + offsetvalue + "&limit" + limit;
+        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?productName=" + f_productName.replaceAll(" ", "%20").replaceAll("&","%26") + "&offset" + offsetvalue + "&limit" + limit;
         Log.i(" Filter Prod URL----------   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

@@ -1,0 +1,433 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="top"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/pvasales"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/fixval1"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Store"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Zonal"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="National"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/fixval1"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtStoreVal_PvASales"
+                    android:layout_weight="1"
+                    android:text="40%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/txtZonalVal_PvASales"
+                    android:layout_weight="1"
+                    android:text="50%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtNationalVal_PvASales"
+                    android:layout_weight="1"
+                    android:text="60%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txtPvASales"
+                android:text="PvA Sales%"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/yoysales"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/fixval2"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Store"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Zonal"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="National"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/fixval2"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtStoreVal_YOYSales"
+                    android:layout_weight="1"
+                    android:text="40%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"/>
+
+
+                <TextView
+                    android:id="@+id/txtZonalVal_YOYSales"
+                    android:layout_weight="1"
+                    android:text="50%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"/>
+
+                <TextView
+                    android:id="@+id/txtNationalVal_YOYSales"
+                    android:layout_weight="1"
+                    android:text="60%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"/>
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/txtYoySales"
+                android:text="YOY Sales Grw %"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/sellthroughu"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/fixval3"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Store"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Zonal"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"/>
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="National"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/fixval3"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtStoreVal_SellThro"
+                    android:layout_weight="1"
+                    android:text="40%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/txtZonalVal_SellThro"
+                    android:layout_weight="1"
+                    android:text="50%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtNationalVal_SellThro"
+                    android:layout_weight="1"
+                    android:text="60%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/txtSellThro"
+                android:text="Sell Thro (U) %"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:background="@android:color/holo_blue_bright"
+            android:id="@+id/mixsales"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp">
+
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/fixval4"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Store"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Zonal"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="National"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/fixval4"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtStoreVal_MixSales"
+                    android:layout_weight="1"
+                    android:text="40%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/txtZonalVal_MixSales"
+                    android:layout_weight="1"
+                    android:text="50%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtNationalVal_MixSales"
+                    android:layout_weight="1"
+                    android:text="60%"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txtMixSales"
+                android:text="Mix(Sales)"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
