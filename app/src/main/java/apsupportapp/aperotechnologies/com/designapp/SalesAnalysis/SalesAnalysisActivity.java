@@ -172,8 +172,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         if (lldots != null) {
                             lldots.removeAllViews();
                         }
-
-
                         prodName = "GRAPHIC TEES";
                         arrayList = new ArrayList<ProductNameBean>();
                         llayoutSalesAnalysis.setVisibility(View.GONE);
@@ -290,8 +288,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         if (lldots != null) {
                             lldots.removeAllViews();
                         }
-
-
                         prodName = "NEON POLO";
                         arrayList = new ArrayList<ProductNameBean>();
                         llayoutSalesAnalysis.setVisibility(View.GONE);
@@ -307,7 +303,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                         }
-
                         break;
 
                     case "Category":

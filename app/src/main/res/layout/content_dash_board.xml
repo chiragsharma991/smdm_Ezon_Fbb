@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:id="@+id/btnCutSize"
+                        android:id="@+id/btnSalesPvA"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
@@ -127,7 +127,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cut Size"
+                        android:text="Sales PvA"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:textSize="13sp"/>

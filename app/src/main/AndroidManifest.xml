@@ -84,6 +84,17 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
         </activity>
+        <activity android:name="apsupportapp.aperotechnologies.com.designapp.SalesPvAAnalysis.SalesPvAActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
+        <activity android:name="apsupportapp.aperotechnologies.com.designapp.SalesPvAAnalysis.SalesFilterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
+
 
         <activity android:name=".TransparentActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
             android:screenOrientation="portrait"

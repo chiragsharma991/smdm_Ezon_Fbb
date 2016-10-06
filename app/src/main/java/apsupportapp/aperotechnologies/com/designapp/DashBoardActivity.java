@@ -39,6 +39,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
+import apsupportapp.aperotechnologies.com.designapp.SalesPvAAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 
 import org.json.JSONArray;
@@ -55,7 +56,7 @@ import java.util.TimerTask;
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment;
+    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment,imgBtnSalesPvA;
     //ExpandableHeightGridView style_grid;
     EventAdapter eventAdapter;
     RequestQueue queue;
@@ -205,6 +206,19 @@ public class DashBoardActivity extends AppCompatActivity
                 finish();
             }
         });
+        imgBtnSalesPvA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,SalesPvAActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
 
     }
 
@@ -286,6 +300,8 @@ public class DashBoardActivity extends AppCompatActivity
         imageBtnKeyProducts=(ImageButton)findViewById(R.id.imageBtnKeyProducts);
         imgBtnSales = (ImageButton) findViewById(R.id.btnSales);
         imgBtnVisualAssortment = (ImageButton) findViewById(R.id.btnVisualAssortment);
+        imgBtnSalesPvA=(ImageButton)findViewById(R.id.btnSalesPvA);
+
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 

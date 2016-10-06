@@ -1034,17 +1034,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
 
-
-
-
-
-    }
-
-
-
-
-
-
+   }
 
     private void requestArticleOptionsAPI(final String collectionNM,int offsetvalue1, final int limit1)
     {

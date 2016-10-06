@@ -222,20 +222,34 @@
                 android:layout_height="wrap_content">
 
 
-                <apsupportapp.aperotechnologies.com.designapp.VisualAssortment.EditTextPopUpFixed
+                <!--<apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed-->
+                    <!--android:imeOptions="actionDone"-->
+                    <!--android:maxLines="4"-->
+                    <!--android:minHeight="100dp"-->
+                    <!--android:background="@drawable/edittext"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:layout_toLeftOf="@+id/btnCommentDone"-->
+                    <!--android:id="@+id/edtTextComment"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:hint = "Comments"-->
+                    <!--android:textCursorDrawable="@null"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
+                    android:id="@+id/edtTextComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/btnCommentDone"
+                    android:background="@drawable/edittext"
+                    android:hint="Comments"
                     android:imeOptions="actionDone"
                     android:maxLines="4"
                     android:minHeight="100dp"
-                    android:background="@drawable/edittext"
                     android:padding="5dp"
-                    android:layout_toLeftOf="@+id/btnCommentDone"
-                    android:id="@+id/edtTextComment"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentTop="true"
-                    android:hint = "Comments"
-                    android:textCursorDrawable="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textCursorDrawable="@null" />
 
                 <Button
                     android:background="@android:color/white"
@@ -367,7 +381,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <apsupportapp.aperotechnologies.com.designapp.VisualAssortment.EditTextPopUpFixed
+                <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
                     android:background="@drawable/edittext"
                     android:imeOptions="actionDone"
                     android:singleLine="true"

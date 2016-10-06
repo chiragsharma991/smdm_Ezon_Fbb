@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_header_height"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:contentInsetStart="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_marginLeft="0dp"
+                android:id="@+id/imageBtnSFilterBack"
+                android:background="@drawable/button_red_effect"
+                android:layout_width="@dimen/header_clickable_width"
+                android:layout_height="@dimen/header_clickable_height"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true">
+
+                <Button
+                    android:clickable="false"
+                    android:background="@mipmap/common_back_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filter"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageBtnSFilterBack"
+                android:layout_marginLeft="20dp"
+                android:textColor="#ffffff"
+                android:id="@+id/toolbar_title" />
+
+
+
+            <RelativeLayout
+                android:id="@+id/imageBtnSalesFilterDone"
+                android:background="@drawable/button_red_effect"
+                android:layout_width="@dimen/header_clickable_width"
+                android:layout_height="@dimen/header_clickable_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+                <Button
+                    android:clickable="false"
+                    android:background="@mipmap/key_product_search_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <ExpandableListView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expandableListView_subdept" />
+    </RelativeLayout>
+
+</RelativeLayout>
