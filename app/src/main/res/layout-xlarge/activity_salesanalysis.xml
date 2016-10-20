@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -80,8 +81,8 @@
 
                         <Button
                             android:clickable="false"
-                            android:background="@mipmap/common_back_icon"
-                            android:layout_width="20dp"
+                            android:background="@mipmap/rank_icon_nav"
+                            android:layout_width="22dp"
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"/>
 
@@ -98,9 +99,9 @@
 
                         <Button
                             android:clickable="false"
-                            android:background="@mipmap/common_back_icon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:background="@mipmap/filter_icon_nav"
+                            android:layout_width="19dp"
+                            android:layout_height="19dp"
                             android:layout_centerInParent="true"/>
 
                     </RelativeLayout>
@@ -179,7 +180,7 @@
             android:weightSum="4"
             android:orientation="horizontal"
             segmentedgroup:sc_border_width="1dp"
-            segmentedgroup:sc_corner_radius="5dp"
+            segmentedgroup:sc_corner_radius="14dp"
             segmentedgroup:sc_tint_color="#B73020">
 
             <RadioButton
@@ -254,16 +255,15 @@
 
                     <RelativeLayout
                         android:id="@+id/llheader"
-                        android:background="@android:color/darker_gray"
+                        android:background="@color/bg_salescard"
                         android:layout_width="match_parent"
                         android:layout_height="40dp">
 
 
                         <RelativeLayout
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="180dp"
                             android:layout_alignParentLeft="true"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="40dp">
 
 
@@ -274,35 +274,35 @@
                                 android:layout_height="40dp">
 
                                 <ImageView
+                                    android:layout_centerInParent="true"
                                     android:clickable="false"
-                                    android:background="@color/bel_red_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:background="@mipmap/arrow_left_icon"
+                                    android:layout_width="5dp"
+                                    android:layout_height="11dp" />
 
                             </RelativeLayout>
 
                             <TextView
+                                android:layout_toRightOf="@+id/prevplanclass"
                                 android:id="@+id/headerplanclass"
                                 android:gravity="center"
-                                android:layout_alignParentRight="true"
                                 android:text="Plan Class"
                                 android:textSize="16sp"
                                 android:textColor="@android:color/black"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent" />
 
                             <RelativeLayout
-
-                                android:id="@+id/nextplanclass"
-                                android:layout_alignParentRight="true"
+                                android:layout_toRightOf="@+id/headerplanclass"                                android:id="@+id/nextplanclass"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp">
 
                                 <ImageView
+                                    android:layout_centerInParent="true"
                                     android:clickable="false"
-                                    android:background="@color/bel_red_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:background="@mipmap/arrow_right_icon"
+                                    android:layout_width="5dp"
+                                    android:layout_height="11dp" />
 
                             </RelativeLayout>
 
@@ -322,14 +322,14 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:background="@android:color/darker_gray"
+                        android:background="@color/bg_salescard"
                         android:layout_width="match_parent"
                         android:layout_height="40dp">
 
 
                         <EditText
                             android:layout_centerVertical="true"
-                            android:background="@android:color/white"
+                            android:background="@drawable/border"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="140dp"
                             android:gravity="center_vertical"
@@ -341,7 +341,7 @@
 
                         <EditText
                             android:layout_centerVertical="true"
-                            android:background="@android:color/white"
+                            android:background="@drawable/border"
                             android:layout_marginRight="10dp"
                             android:layout_alignParentRight="true"
                             android:id="@+id/txtVal"
@@ -349,16 +349,14 @@
                             android:textColor="@android:color/black"
                             android:layout_width="120dp"
                             android:layout_height="30dp" />
-
-
                     </RelativeLayout>
-
                 </LinearLayout>
 
-
                 <ListView
+                    android:dividerHeight="0dp"
+                    android:divider="@null"
                     android:smoothScrollbar="true"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="45dp"
                     android:id="@+id/listView_SalesAnalysis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -394,7 +392,7 @@
         <RelativeLayout
             android:id="@+id/relpopuplayout"
             android:layout_marginTop="150dp"
-            android:background="@drawable/border"
+            android:background="@drawable/popup_border"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -409,10 +407,12 @@
 
 
                 <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
                     android:clickable="false"
-                    android:background="@mipmap/images"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp" />
+                    android:background="@mipmap/pop_up_close_icon"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
 
             </RelativeLayout>
 
@@ -420,7 +420,7 @@
                 android:layout_marginTop="40dp"
                 android:text="Rank"
                 android:gravity="center"
-                android:textColor="@color/darker_grey"
+                android:textColor="@color/text_sales"
                 android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -442,7 +442,7 @@
                 android:layout_margin="5dp"
                 android:text="Selected filter sales / Total Store fashion Sales"
                 android:gravity="center"
-                android:textColor="@color/darker_grey"
+                android:textColor="@color/text_sales"
                 android:textSize="14sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -482,7 +482,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Zonal Rank"
                     android:gravity="center"
-                    android:textColor="@color/darker_grey"
+                    android:textColor="@color/text_sales"
                     android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -493,7 +493,7 @@
                     android:layout_marginTop="20dp"
                     android:text="National Rank"
                     android:gravity="center"
-                    android:textColor="@color/darker_grey"
+                    android:textColor="@color/text_sales"
                     android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -513,7 +513,7 @@
                 <TextView
                     android:layout_weight="1"
                     android:text="Sales"
-                    android:textColor="@color/darker_grey"
+                    android:textColor="@color/text_sales"
                     android:textSize="14sp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
@@ -525,7 +525,7 @@
                     android:layout_below="@+id/div1"
                     android:text="4"
                     android:gravity="center"
-                    android:textColor="@color/darker_grey"
+                    android:textColor="@color/text_sales"
                     android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -536,7 +536,7 @@
                     android:layout_below="@+id/div1"
                     android:text="10"
                     android:gravity="center"
-                    android:textColor="@color/darker_grey"
+                    android:textColor="@color/text_sales"
                     android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -558,7 +558,7 @@
                     android:layout_below="@+id/div1"
                     android:text="YOY Growth%"
                     android:gravity="left"
-                    android:textColor="@color/darker_grey"
+                    android:textColor="@color/text_sales"
                     android:textSize="14sp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
@@ -570,7 +570,7 @@
                     android:layout_below="@+id/div1"
                     android:text="4"
                     android:gravity="center"
-                    android:textColor="@color/darker_grey"
+                    android:textColor="@color/text_sales"
                     android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -581,7 +581,7 @@
                     android:layout_below="@+id/div1"
                     android:text="10"
                     android:gravity="center"
-                    android:textColor="@color/darker_grey"
+                    android:textColor="@color/text_sales"
                     android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -600,9 +600,9 @@
         <ImageView
             android:layout_marginTop="120dp"
             android:layout_centerHorizontal="true"
-            android:background="@android:color/black"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:background="@mipmap/pop_up_icon"
+            android:layout_width="59dp"
+            android:layout_height="59dp" />
 
     </RelativeLayout>
 

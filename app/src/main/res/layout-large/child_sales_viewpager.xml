@@ -12,7 +12,7 @@
         android:layout_height="80dp">
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
+            android:background="@drawable/salescard"
             android:id="@+id/netsales"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -30,39 +30,93 @@
                 android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            
+            <!--<TextView-->
+                <!--android:layout_above="@+id/div1"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/divider_salescard"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/div1"-->
+                <!--android:layout_above="@+id/txtNetSales"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@android:color/white"-->
+                <!--/>-->
+
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="31dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
 
 
             <TextView
                 android:id="@+id/txtNetSales"
                 android:text="Net Sales"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"/>
 
-
-            <TextView
-                android:gravity="right"
-                android:background="@color/colorPrimary"
-                android:id="@+id/txtNetSalesPerc"
-                android:text="20%"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/txtNetSales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:background="@drawable/border"
+                    android:id="@+id/txtNetSalesPerc"
+                    android:text="20%"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginRight="8dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+
 
 
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
+
+            android:background="@drawable/salescard"
             android:id="@+id/plansales"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
@@ -82,11 +136,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="31dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
+
 
             <TextView
                 android:id="@+id/txtPlanSales"
                 android:text="Plan Sales"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
                 android:layout_width="wrap_content"
@@ -94,20 +168,30 @@
                 android:layout_alignParentBottom="true"/>
 
 
-            <TextView
-                android:gravity="right"
-                android:background="@color/colorPrimary"
-                android:id="@+id/txtPlanSalesPerc"
-                android:text="20%"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/txtPlanSales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:background="@drawable/border"
+                    android:id="@+id/txtPlanSalesPerc"
+                    android:text="20%"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginRight="8dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
 
 
 
@@ -122,7 +206,8 @@
         android:layout_height="80dp">
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
+
+            android:background="@drawable/salescard"
             android:id="@+id/netsalesu"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -143,9 +228,29 @@
 
 
             <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="31dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
+
+            <TextView
                 android:id="@+id/txtNetSalesU"
                 android:text="Net Sales(U)"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
                 android:layout_width="wrap_content"
@@ -153,25 +258,38 @@
                 android:layout_alignParentBottom="true"/>
 
 
-            <TextView
-                android:gravity="right"
-                android:background="@color/colorPrimary"
-                android:id="@+id/txtNetSalesUPerc"
-                android:text="20%"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/txtNetSalesU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:background="@drawable/border"
+                    android:id="@+id/txtNetSalesUPerc"
+                    android:text="20%"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginRight="8dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
+
+            android:background="@drawable/salescard"
             android:id="@+id/sohu"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
@@ -192,9 +310,30 @@
 
 
             <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="31dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
+
+
+            <TextView
                 android:id="@+id/txtSoHU"
                 android:text="S O H(U)"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
                 android:layout_width="wrap_content"
@@ -229,7 +368,8 @@
         android:layout_height="80dp">
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
+
+            android:background="@drawable/salescard"
             android:id="@+id/ros"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -244,17 +384,36 @@
                 android:text="12,15,14,566"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="31dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
 
             <TextView
                 android:id="@+id/txtRos0"
                 android:text="ROS"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"/>
@@ -279,8 +438,9 @@
 
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
-            android:id="@+id/fwdwkcover"
+
+            android:background="@drawable/salescard"
+            android:id="@+id/fwdwkcover0"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="5dp"
@@ -295,17 +455,38 @@
                 android:text="15,15,00,000"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
 
             <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="31dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
+
+
+            <TextView
                 android:id="@+id/txtFwdWkCover0"
                 android:text="Fwd Wk Cover"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"/>

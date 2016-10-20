@@ -34,9 +34,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     LayoutInflater inflater;
     public static int currentPage = 0;
 
-
-
-
     // ViewPager 0
     TextView txtNetSalesVal, txtNetSales, txtNetSalesPerc;
     TextView txtPlanSalesVal, txtPlanSales, txtPlanSalesPerc;
@@ -84,8 +81,8 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     public Object instantiateItem(final ViewGroup container, final int position) {
 
         // Declare Variables
-
         Log.e("in sales adapter", " 0");
+
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = null;
 
@@ -182,6 +179,70 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 //            txtRosVal0.setText("");
 //            txtFwdWkCoverVal0.setText("");
 
+
+            LinearLayout layout = (LinearLayout) itemView;
+            LinearLayout layout1 = (LinearLayout) layout.getChildAt(0);
+            RelativeLayout relnetsales = (RelativeLayout) layout1.getChildAt(0);
+            RelativeLayout relplansales = (RelativeLayout) layout1.getChildAt(1);
+
+            relnetsales.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Net Sales","----");
+                    updatelistview("Net Sales");
+                }
+            });
+
+            relplansales.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Plan Sales","----");
+                    updatelistview("Plan Sales");
+                }
+            });
+
+            LinearLayout layout2 = (LinearLayout) layout.getChildAt(1);
+            RelativeLayout relnetsalesu = (RelativeLayout) layout2.getChildAt(0);
+            RelativeLayout relplansohu = (RelativeLayout) layout2.getChildAt(1);
+
+            relnetsalesu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Net Sales U","----");
+                    updatelistview("Net Sales U");
+                }
+            });
+
+            relplansohu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("SOH U","----");
+                    updatelistview("SOH U");
+                }
+            });
+
+            LinearLayout layout3 = (LinearLayout) layout.getChildAt(2);
+            RelativeLayout relros = (RelativeLayout) layout3.getChildAt(0);
+            RelativeLayout relfwdwkcover0 = (RelativeLayout) layout3.getChildAt(1);
+
+            relros.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("ROS ","----");
+                    updatelistview("ROS");
+                }
+            });
+
+            relfwdwkcover0.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Fwd Wk Cover 0","----");
+                    updatelistview("Fwd Wk Cover 0");
+                }
+            });
+
+
+
         }
         else if(position == 1)
         {
@@ -201,6 +262,48 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 //            txtZonalVal_MixSales.setText("");
 //            txtNationalVal_MixSales.setText("");
 
+            LinearLayout layout = (LinearLayout) itemView;
+            LinearLayout layout1 = (LinearLayout) layout.getChildAt(0);
+            RelativeLayout relpvasales = (RelativeLayout) layout1.getChildAt(0);
+            RelativeLayout relyoysales = (RelativeLayout) layout1.getChildAt(1);
+
+            relpvasales.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("PVA Sales","----");
+                    updatelistview("PVA Sales");
+                }
+            });
+
+            relyoysales.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("YOY Sales","----");
+                    updatelistview("YOY Sales");
+                }
+            });
+
+            LinearLayout layout2 = (LinearLayout) layout.getChildAt(1);
+            RelativeLayout relsellthrou = (RelativeLayout) layout2.getChildAt(0);
+            RelativeLayout relmixsales = (RelativeLayout) layout2.getChildAt(1);
+
+            relsellthrou.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Sell Thro U","----");
+                    updatelistview("Sell Thro U");
+                }
+            });
+
+            relmixsales.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Mix Sales","----");
+                    updatelistview("Mix Sales");
+                }
+            });
+
+
         }
         else if(position == 2)
         {
@@ -208,6 +311,48 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 //            txtGITVal.setText("");
 //            txtROSVal2.setText("");
 //            txtFwdWkCoverVal2.setText("");
+
+            LinearLayout layout = (LinearLayout) itemView;
+            LinearLayout layout1 = (LinearLayout) layout.getChildAt(0);
+            RelativeLayout relsoh2 = (RelativeLayout) layout1.getChildAt(0);
+            RelativeLayout relgit = (RelativeLayout) layout1.getChildAt(1);
+
+            relsoh2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("SOH 2","----");
+                    updatelistview("SOH 2");
+                }
+            });
+
+            relgit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("GIT","----");
+                    updatelistview("GIT");
+                }
+            });
+
+            LinearLayout layout2 = (LinearLayout) layout.getChildAt(1);
+            RelativeLayout relros2 = (RelativeLayout) layout2.getChildAt(0);
+            RelativeLayout relfwdwkcover2 = (RelativeLayout) layout2.getChildAt(1);
+
+            relros2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("ROS 2","----");
+                    updatelistview("ROS 2");
+                }
+            });
+
+            relfwdwkcover2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Fwd Wk Cover 2","----");
+                    updatelistview("Fwd Wk Cover 2");
+                }
+            });
+
 
         }
 
@@ -279,5 +424,13 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
     public int getItemPosition(Object object) {
         return POSITION_NONE;
+    }
+
+
+    public void updatelistview(String fromwhere)
+    {
+        salesadapter = new SalesAnalysisAdapter(arrayList, context, fromwhere);
+        listView_SalesAnalysis.setAdapter(salesadapter);
+        salesadapter.notifyDataSetChanged();
     }
 }

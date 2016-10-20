@@ -53,7 +53,8 @@ import apsupportapp.aperotechnologies.com.designapp.model.VisualAssortComment;
 
 public class VisualAssortmentActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "VisualAssortmentActivity";
+    RelativeLayout reloverlay;
     private SwipeDeck cardStack;
     private Context context = this;
     ArrayList<VisualAssort> visualassortmentlist;
@@ -76,8 +77,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     static TextView txtSize;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +88,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken","");
 
-
+        reloverlay = (RelativeLayout) findViewById(R.id.reloverlay);
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         cardStack.setHardwareAccelerationEnabled(true);
 
@@ -102,6 +101,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
         if (Reusable_Functions.chkStatus(context)) {
 
+            reloverlay.setVisibility(View.VISIBLE);
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;
@@ -113,6 +113,13 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
+
+        reloverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reloverlay.setVisibility(View.GONE);
+            }
+        });
 
 
         imgBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
@@ -376,6 +383,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     visualAssort = gson.fromJson(response.get(i).toString(), VisualAssort.class);
+
                                     visualassortmentlist.add(visualAssort);
                                 }
                                 offsetvalue = (limit * count) + limit;
@@ -466,9 +474,11 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
-
-
-        if(VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE)
+        if(reloverlay.getVisibility() == View.VISIBLE)
+        {
+            reloverlay.setVisibility(View.GONE);
+        }
+        else if(VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE)
         {
             VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
         }

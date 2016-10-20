@@ -6,4 +6,13 @@
     <color name="grey">#f0f0f0</color>
     <color name="darker_grey">#666666</color>
     <color name="text_grey">#CFD2D1</color>
+    <color name="white">#ffffff</color>
+
+
+    <color name="bg_salescard">#F7F5F6</color>
+    <color name="divider_salescard">#d9d7d8</color>
+    <color name="pink">#FE0000</color>
+    <color name="green">#05c706</color>
+    <color name="text_sales">#969495</color>
+
 </resources>

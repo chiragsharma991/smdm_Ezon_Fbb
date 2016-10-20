@@ -12,7 +12,7 @@
         android:layout_height="80dp">
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
+            android:background="@drawable/salescard"
             android:id="@+id/pvasales"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -23,7 +23,7 @@
 
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/fixval1"
                 android:weightSum="3"
@@ -34,7 +34,7 @@
                     android:layout_weight="1"
                     android:text="Store"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -43,7 +43,7 @@
                     android:layout_weight="1"
                     android:text="Zonal"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -51,7 +51,7 @@
                     android:layout_weight="1"
                     android:text="National"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -96,13 +96,32 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="27dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
 
             <TextView
                 android:id="@+id/txtPvASales"
                 android:text="PvA Sales%"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
-                android:layout_margin="10dp"
+                android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"/>
@@ -114,7 +133,7 @@
 
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
+            android:background="@drawable/salescard"
             android:id="@+id/yoysales"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
@@ -125,7 +144,7 @@
 
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/fixval2"
                 android:weightSum="3"
@@ -136,7 +155,7 @@
                     android:layout_weight="1"
                     android:text="Store"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -145,7 +164,7 @@
                     android:layout_weight="1"
                     android:text="Zonal"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -153,7 +172,7 @@
                     android:layout_weight="1"
                     android:text="National"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -201,14 +220,32 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="27dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
 
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
 
             <TextView
                 android:id="@+id/txtYoySales"
                 android:text="YOY Sales Grw %"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"/>
@@ -228,7 +265,8 @@
         android:layout_height="80dp">
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
+
+            android:background="@drawable/salescard"
             android:id="@+id/sellthroughu"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -239,7 +277,7 @@
 
             <LinearLayout
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:id="@+id/fixval3"
                 android:weightSum="3"
                 android:layout_width="match_parent"
@@ -249,7 +287,7 @@
                     android:layout_weight="1"
                     android:text="Store"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -258,7 +296,7 @@
                     android:layout_weight="1"
                     android:text="Zonal"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"/>
@@ -267,7 +305,7 @@
                     android:layout_weight="1"
                     android:text="National"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"/>
@@ -313,14 +351,32 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="27dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
 
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
 
             <TextView
                 android:id="@+id/txtSellThro"
                 android:text="Sell Thro (U) %"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"/>
@@ -330,7 +386,7 @@
 
 
         <RelativeLayout
-            android:background="@android:color/holo_blue_bright"
+            android:background="@drawable/salescard"
             android:id="@+id/mixsales"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
@@ -341,7 +397,7 @@
 
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/fixval4"
                 android:weightSum="3"
@@ -352,7 +408,7 @@
                     android:layout_weight="1"
                     android:text="Store"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -361,7 +417,7 @@
                     android:layout_weight="1"
                     android:text="Zonal"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -369,7 +425,7 @@
                     android:layout_weight="1"
                     android:text="National"
                     android:textSize="10sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -414,13 +470,33 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="27dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                />
+
 
             <TextView
                 android:id="@+id/txtMixSales"
                 android:text="Mix(Sales)"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"/>

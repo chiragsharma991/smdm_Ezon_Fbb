@@ -39,6 +39,7 @@
 
 
                     <ImageButton
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/imageBtnStyle"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -47,11 +48,11 @@
                         />
 
                     <TextView
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Product Info"
-                        android:gravity="center"
-                        android:layout_gravity="center"
                         android:textSize="13sp"
                         />
 
@@ -66,6 +67,7 @@
 
 
                     <ImageButton
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/imageBtnKeyProducts"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -73,11 +75,11 @@
                         android:src="@mipmap/dashboard_flash_hourly_icon" />
 
                     <TextView
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hourly Analysis"
-                        android:gravity="center"
-                        android:layout_gravity="center"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -90,6 +92,7 @@
 
 
                     <ImageButton
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/btnVisualAssortment"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -98,11 +101,11 @@
                         />
 
                     <TextView
+                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
                         android:text="Visual Assortment"
-                        android:layout_gravity="center"
-                        android:gravity="center"
                         android:textSize="13sp"
                         />
 
@@ -116,6 +119,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/btnCutSize"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -125,11 +129,11 @@
 
 
                     <TextView
+                        android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Cut Size"
-                        android:gravity="center"
-                        android:layout_gravity="center"
+                        android:layout_gravity="center_horizontal"
                         android:textSize="13sp"/>
 
                 </LinearLayout>
@@ -155,6 +159,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/btnShootStyle"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -167,8 +173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Shoot Style"
-                        android:gravity="center"
-                        android:layout_gravity="center"
+                        android:layout_gravity="center_horizontal"
                         />
                 </LinearLayout>
 
@@ -179,6 +184,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/btnSearch"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -190,9 +197,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Search"
-                        android:layout_gravity="center"
-                        android:textSize="13sp"
-                        android:gravity="center" />
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="13sp" />
 
 
                 </LinearLayout>
@@ -204,6 +210,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/btnCrossSelling"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -213,12 +220,13 @@
 
 
                     <TextView
+                        android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Cross Selling"
                         android:textSize="13sp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                       
                         />
                 </LinearLayout>
 
@@ -229,6 +237,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/btnSales"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -238,11 +247,11 @@
 
 
                     <TextView
+                        android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sales"
-                        android:gravity="center"
-                        android:layout_gravity="center"
+                        android:layout_gravity="center_horizontal"
                         android:textSize="13sp"
                         />
                 </LinearLayout>
@@ -311,7 +320,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"/>
-
 
             <!--<apsupportapp.aperotechnologies.com.designapp.ExpandableHeightGridView-->
                 <!--android:id="@+id/spotsView"-->

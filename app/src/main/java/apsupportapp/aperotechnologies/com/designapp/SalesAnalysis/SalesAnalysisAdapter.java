@@ -30,17 +30,17 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
     private LayoutInflater mInflater;
     Context context;
-    String s;
+    String fromwhere;
 
     //private ValueFilter valueFilter;
 
-    public SalesAnalysisAdapter(ArrayList<ProductNameBean> arrayList, Context context, String s) {
+    public SalesAnalysisAdapter(ArrayList<ProductNameBean> arrayList, Context context, String fromwhere) {
 
         Log.e("in sales analysis adapter"," ");
 
         this.arrayList = arrayList;
         this.context = context;
-        this.s = s;
+        this.fromwhere = fromwhere;
         mInflater = LayoutInflater.from(context);
 
         //getFilter();
@@ -80,7 +80,10 @@ public class SalesAnalysisAdapter extends BaseAdapter{
             convertView = mInflater.inflate(R.layout.child_sales_listview, null);
             viewHolder.nameTv = (TextView) convertView.findViewById(R.id.txtVal);
             viewHolder.rel = (RelativeLayout) convertView.findViewById(R.id.rel);
+            viewHolder.innerrel = (RelativeLayout) convertView.findViewById(R.id.innerrellay);
+            viewHolder.relValue = (RelativeLayout) convertView.findViewById(R.id.relValue);
             viewHolder.txtPlan = (TextView) convertView.findViewById(R.id.txtPlan);
+            viewHolder.txtValue = (TextView) convertView.findViewById(R.id.txtValue);
             viewHolder.txtAchieve = (TextView) convertView.findViewById(R.id.txtAchieve);
 
             convertView.setTag(viewHolder);
@@ -96,7 +99,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
         Log.e("--- ", " "+viewHolder.rel.getMeasuredWidth() + " "+ (200/100));
 
-        if(s.equals("")) {
+        if(fromwhere.equals("PVA Sales")) {
 
             double singlePercVal = 0.5;//50/100;// width divide by 100 perc
 
@@ -133,8 +136,22 @@ public class SalesAnalysisAdapter extends BaseAdapter{
             } else {
                 viewHolder.txtPlan.setBackgroundColor(Color.GREEN);
             }
-        }else {
-            viewHolder.txtPlan.setText(productNameBean.getArticleOption().toLowerCase());
+        }
+        else if(fromwhere.equals("Net Sales"))
+        {
+
+            viewHolder.innerrel.setVisibility(View.GONE);
+            viewHolder.relValue.setVisibility(View.VISIBLE);
+            viewHolder.txtValue.setText(productNameBean.getArticleOption().toLowerCase());
+
+        }
+        else if(fromwhere.equals("Plan Sales"))
+        {
+
+            viewHolder.innerrel.setVisibility(View.GONE);
+            viewHolder.relValue.setVisibility(View.VISIBLE);
+            viewHolder.txtValue.setText(productNameBean.getStoreCode());
+
         }
 
         return convertView;
@@ -144,7 +161,8 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
         TextView nameTv;
         RelativeLayout rel;
-        TextView txtPlan;
+        RelativeLayout innerrel, relValue;
+        TextView txtPlan, txtValue;
         TextView txtAchieve;
     }
 
