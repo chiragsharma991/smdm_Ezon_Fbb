@@ -51,7 +51,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/imageBtnBack"
-                android:text="Sales PvA"
+                android:text="@string/sales_pva"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 
@@ -68,7 +68,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/key_product_search_icon"
+                    android:background="@mipmap/filter_icon_nav"
                     android:clickable="false" />
 
             </RelativeLayout>
@@ -131,7 +131,7 @@
         android:orientation="horizontal"
         android:weightSum="2"
         segmentedgroup:sc_border_width="1dp"
-        segmentedgroup:sc_corner_radius="5dp"
+        segmentedgroup:sc_corner_radius="18dp"
         segmentedgroup:sc_tint_color="#B73020">
 
         <RadioButton
@@ -187,26 +187,26 @@
                     android:id="@+id/llheader"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@android:color/darker_gray">
+                    android:background="@color/bg_salescard">
 
 
 
                     <RelativeLayout
                         android:id="@+id/btnSalesBack"
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
+                        android:layout_width="20dp"
+                        android:layout_height="50dp"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/button_red_effect">
+                        android:background="@drawable/button_gray_effect">
 
 
                         <Button
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="5dp"
+                            android:layout_height="11dp"
                             android:layout_centerInParent="true"
-                            android:background="@mipmap/common_back_icon"
+                            android:background="@mipmap/arrow_left_icon"
                             android:clickable="false" />
 
                     </RelativeLayout>
@@ -216,7 +216,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_toLeftOf="@+id/btnSalesNext"
                         android:gravity="center_vertical|center"
                         android:text="Department"
@@ -229,19 +229,19 @@
 
                     <RelativeLayout
                         android:id="@+id/btnSalesNext"
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
+                        android:layout_width="20dp"
+                        android:layout_height="50dp"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/txtPlanSales"
-                        android:background="@drawable/button_red_effect"
+                        android:background="@drawable/button_gray_effect"
                         android:focusableInTouchMode="true">
 
                         <Button
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="5dp"
+                            android:layout_height="11dp"
                             android:layout_centerInParent="true"
-                            android:background="@mipmap/key_product_search_icon"
+                            android:background="@mipmap/arrow_right_icon"
                             android:clickable="false" />
                     </RelativeLayout>
 
@@ -291,11 +291,10 @@
 
                 </RelativeLayout>
 
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:background="@android:color/darker_gray">
+                    android:background="@color/bg_salescard">
 
                     <EditText
                         android:padding="2dp"
@@ -309,7 +308,6 @@
                         android:gravity="center_vertical"
                         android:textColor="@android:color/black" />
 
-
                     <EditText
                         android:paddingRight="2dp"
                         android:id="@+id/edt_plansales"
@@ -322,9 +320,7 @@
                         android:background="@drawable/rounded_edittext"
                         android:gravity="center_vertical" />
 
-
                     <EditText
-
                         android:id="@+id/edt_netsales"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
@@ -346,12 +342,13 @@
 
 
                 </RelativeLayout>
-
             </LinearLayout>
 
 
             <ListView
                 android:id="@+id/list"
+                android:dividerHeight="0dp"
+                android:divider="@null"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"

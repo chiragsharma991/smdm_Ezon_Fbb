@@ -27,31 +27,26 @@ public class Coordinate_Fragment extends Fragment {
         // Required empty public constructor
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.coordinate_fragment,container,false);
-        context=getActivity();
-        arrayList=new ArrayList();
-        for (int i=0;i<10;i++)
+        View v = inflater.inflate(R.layout.coordinate_fragment, container, false);
+        context = getActivity();
+        arrayList = new ArrayList();
+        for (int i = 0; i < 10; i++)
             arrayList.add(i++);
-        Log.e("list size",""+arrayList.size());
-        gridView=(GridView)v.findViewById(R.id.gridview);
-        GridAdapter gridAdapter=new GridAdapter(getActivity(),R.layout.coordinate_gridview,arrayList);
+        Log.e("list size", "" + arrayList.size());
+        gridView = (GridView) v.findViewById(R.id.gridview);
+        GridAdapter gridAdapter = new GridAdapter(getActivity(), R.layout.coordinate_gridview, arrayList);
         gridView.setAdapter(gridAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getActivity(),Details_Fragment.class);
+                Intent intent = new Intent(getActivity(), Details_Fragment.class);
                 startActivity(intent);
             }
         });
         return v;
     }
-
-
-
 }

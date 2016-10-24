@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -16,11 +17,12 @@
         android:background="@android:color/transparent"
         android:drawablePadding="5dp"
         android:drawableLeft="@mipmap/key_product_search_icon"
-        android:singleLine="true"
-        android:hint="Search"
+        android:maxLines="1"
+        android:hint="@string/search"
         android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        tools:targetApi="m" />
 
     <View
         android:background="#666666"

@@ -2,9 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.model;
 
 import java.util.List;
 
-/**
- * Created by pamrutkar on 03/10/16.
- */
+
 public class ListCategory {
 
 

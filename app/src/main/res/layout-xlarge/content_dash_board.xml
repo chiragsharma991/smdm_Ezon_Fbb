@@ -44,12 +44,12 @@
                         android:layout_height="80dp"
                         android:background="#ffffff"
                         android:src="@mipmap/dashboard_size_finder_icon"
-                        />
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Product Info"
+                        android:text="@string/product_info"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:textSize="13sp"
@@ -70,12 +70,13 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
-                        android:src="@mipmap/dashboard_flash_hourly_icon" />
+                        android:src="@mipmap/dashboard_flash_hourly_icon"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hourly Analysis"
+                        android:text="@string/hourly_analysis"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:textSize="13sp" />
@@ -95,12 +96,12 @@
                         android:layout_height="80dp"
                         android:background="#ffffff"
                         android:src="@mipmap/dashboard_visual_assortment_icon"
-                        />
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Visual Assortment"
+                        android:text="@string/visual_assortment"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="13sp"
@@ -121,13 +122,13 @@
                         android:layout_height="80dp"
                         android:background="#ffffff"
                         android:src="@mipmap/dashboard_key_products_icon"
-                        />
+                        tools:ignore="ContentDescription" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sales PvA"
+                        android:text="@string/sales_pva"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:textSize="13sp"/>
@@ -159,7 +160,8 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
-                        android:src="@mipmap/dashboard_shoot_style_icon" />
+                        android:src="@mipmap/dashboard_shoot_style_icon"
+                        tools:ignore="ContentDescription" />
 
 
                     <TextView
@@ -184,7 +186,7 @@
                         android:layout_height="80dp"
                         android:background="#ffffff"
                         android:src="@mipmap/dashboard_cut_size_icon"
-                        />
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -209,7 +211,7 @@
                         android:layout_height="80dp"
                         android:background="#ffffff"
                         android:src="@mipmap/dashboard_cross_selling_icon"
-                        />
+                        tools:ignore="ContentDescription" />
 
 
                     <TextView
@@ -234,7 +236,7 @@
                         android:layout_height="80dp"
                         android:background="#ffffff"
                         android:src="@mipmap/dashboard_other_icon"
-                        />
+                        tools:ignore="ContentDescription" />
 
 
                     <TextView

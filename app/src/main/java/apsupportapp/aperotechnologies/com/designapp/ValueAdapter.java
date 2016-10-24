@@ -9,38 +9,25 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import apsupportapp.aperotechnologies.com.designapp.R;
-
 import java.util.ArrayList;
 
-/**
- * Created by pamrutkar on 31/08/16.
- */
+
 public class ValueAdapter extends BaseAdapter implements Filterable {
 
     private ArrayList<String> mStringList;
-
     private ArrayList<String> mStringFilterList;
-
     private LayoutInflater mInflater;
-
     private ValueFilter valueFilter;
 
     public ValueAdapter(ArrayList<String> mStringList, Context context) {
-
         this.mStringList = mStringList;
-
         this.mStringFilterList = mStringList;
-
         mInflater = LayoutInflater.from(context);
-
         getFilter();
     }
 
-    //How many items are in the data set represented by this Adapter.
     @Override
     public int getCount() {
-
         return mStringList.size();
     }
 
@@ -67,20 +54,13 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
         if (convertView == null) {
 
             viewHolder = new Holder();
-
             convertView = mInflater.inflate(R.layout.activity_subdept_listview, null);
-
             viewHolder.nameTv = (TextView) convertView.findViewById(R.id.textView);
-
             convertView.setTag(viewHolder);
-
         } else {
-
             viewHolder = (Holder) convertView.getTag();
         }
-
         viewHolder.nameTv.setText(mStringList.get(position).toString());
-
         return convertView;
     }
 
@@ -94,13 +74,10 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
     public Filter getFilter() {
 
         if (valueFilter == null) {
-
             valueFilter = new ValueFilter();
         }
-
         return valueFilter;
     }
-
 
     private class ValueFilter extends Filter {
 
@@ -109,35 +86,21 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
 
             FilterResults results = new FilterResults();
-
             if (constraint != null && constraint.length() > 0) {
-
                 ArrayList<String> filterList = new ArrayList<String>();
-
                 for (int i = 0; i < mStringFilterList.size(); i++) {
-
                     if (mStringFilterList.get(i).toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
-
                         filterList.add(mStringFilterList.get(i));
-
                     }
                 }
-
                 results.count = filterList.size();
-
                 results.values = filterList;
-
             } else {
-
                 results.count = mStringFilterList.size();
-
                 results.values = mStringFilterList;
-
             }
-
             return results;
         }
-
 
         //Invoked in the UI thread to publish the filtering results in the user interface.
         @SuppressWarnings("unchecked")
@@ -147,10 +110,7 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
                                       FilterResults results) {
 
             mStringList = (ArrayList<String>) results.values;
-
             notifyDataSetChanged();
-
         }
-
     }
 }

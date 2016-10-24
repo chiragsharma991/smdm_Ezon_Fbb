@@ -6,13 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.util.SparseBooleanArray;
+
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -41,6 +37,7 @@ import java.util.Map;
 /**
  * Created by pamrutkar on 07/09/16.
  */
+@SuppressWarnings("ALL")
 public class Prod_FilterActivity extends Activity {
 
 
@@ -50,7 +47,7 @@ public class Prod_FilterActivity extends Activity {
     ArrayList<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     int offsetvalue = 0, limit = 100, count = 0;
-    String userId,subdeptName, bearertoken;
+    String userId, bearertoken;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
     List<String> subdept;
@@ -63,11 +60,9 @@ public class Prod_FilterActivity extends Activity {
         setContentView(R.layout.activity_prod_filter);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         filterActivity = this;
-
-        Log.e("came here","");
-
+        Log.e("came here", "");
         userId = sharedPreferences.getString("userId", "");
-        bearertoken = sharedPreferences.getString("bearerToken","");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -77,6 +72,7 @@ public class Prod_FilterActivity extends Activity {
         btnP_Filterback = (RelativeLayout) findViewById(R.id.imageBtnBack);
 
         pfilter_list = (ExpandableListView) findViewById(R.id.expandableListView_subdept);
+        //noinspection deprecation,deprecation
         pfilter_list.setDivider(getResources().getDrawable(R.color.grey));
         pfilter_list.setDividerHeight(2);
         prepareListData();
@@ -88,14 +84,12 @@ public class Prod_FilterActivity extends Activity {
         pfilter_list.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
 
-
         // Listview Group click listener
         pfilter_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
-
                 return false;
             }
         });
@@ -108,33 +102,7 @@ public class Prod_FilterActivity extends Activity {
                 finish();
             }
         });
-
-
-
-        // Listview Group expanded listener
-        pfilter_list.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-
-            }
-
-
-
-        });
-
-        // Listview Group collasped listener
-        pfilter_list.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                //pfilter_list.collapseGroup(groupPosition);
-            }
-        });
-
-
-        }
-
+    }
 
     /*
      * Preparing the list data
@@ -158,11 +126,9 @@ public class Prod_FilterActivity extends Activity {
 
             Toast.makeText(Prod_FilterActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
-
     }
 
-    public  void requestSubDeptAPI(int offsetvalue1, int limit1) {
+    public void requestSubDeptAPI(int offsetvalue1, int limit1) {
 
         String url = ConstsCore.web_url + "/v1/display/hourlyfilterproducts/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1;
 
@@ -199,7 +165,7 @@ public class Prod_FilterActivity extends Activity {
                                     String prodLevel3Code = productName1.getString("prodLevel3Code");
                                     String prodLevel3Desc = productName1.getString("prodLevel3Desc");
                                     subdept.add(prodLevel3Desc);
-                                    // Log.e("ArrayList", "" + productsubdeptList.size());
+
                                 }
 
                                 Collections.sort(subdept);
@@ -207,7 +173,6 @@ public class Prod_FilterActivity extends Activity {
                                 Reusable_Functions.hDialog();
 
                             }
-
 
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -228,7 +193,7 @@ public class Prod_FilterActivity extends Activity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization","Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };
@@ -244,6 +209,4 @@ public class Prod_FilterActivity extends Activity {
         startActivity(i);
         finish();
     }
-
-
 }

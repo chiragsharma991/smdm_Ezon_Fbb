@@ -2,14 +2,12 @@ package apsupportapp.aperotechnologies.com.designapp;
 
 import java.io.Serializable;
 
-/**
- * Created by pamrutkar on 24/08/16.
- */
+
 public class ProductNameBean implements Serializable {
     String productName;
-     int l2hrsNetSales,dayNetSales,wtdNetSales,soh,git;
-     double dayNetSalesPercent;
-     double wtdNetSalesPercent;
+    int l2hrsNetSales, dayNetSales, wtdNetSales, soh, git;
+    double dayNetSalesPercent;
+    double wtdNetSalesPercent;
 
     public String getArticleName() {
         return articleName;
@@ -83,7 +81,6 @@ public class ProductNameBean implements Serializable {
     }
 
 
-
     public String getStoreDesc() {
         return storeDesc;
     }
@@ -140,7 +137,7 @@ public class ProductNameBean implements Serializable {
         return wtdNetSalesPercent;
     }
 
-    public void setWtdNetSalesPercent( double wtdNetSalesPercent) {
+    public void setWtdNetSalesPercent(double wtdNetSalesPercent) {
         this.wtdNetSalesPercent = wtdNetSalesPercent;
 
     }
@@ -170,7 +167,5 @@ public class ProductNameBean implements Serializable {
     public void setArticleOption(String articleOption) {
         this.articleOption = articleOption;
     }
-
-
 
 }

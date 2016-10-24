@@ -253,10 +253,6 @@ public class DashBoardActivity extends AppCompatActivity
                                 //eventAdapter = new EventAdapter(DashBoardActivity.this, eventUrlList);
                                 //style_grid.setAdapter(eventAdapter);
                                 EventScroller();
-
-
-
-
                             }
 
                         } catch (Exception e) {
@@ -516,7 +512,6 @@ public class DashBoardActivity extends AppCompatActivity
 
         @Override
         public void run() {
-
             // As the TimerTask run on a seprate thread from UI thread we have
             // to call runOnUiThread to do work on UI thread.
             runOnUiThread(new Runnable() {

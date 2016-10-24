@@ -37,13 +37,10 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-/**
- * Created by pamrutkar on 22/09/16.
- */
-public class SalesFilterActivity extends Activity{
 
+public class SalesFilterActivity extends Activity {
 
-    RelativeLayout btnS_Filterback,btnS_Done;
+    RelativeLayout btnS_Filterback, btnS_Done;
     ExpandableList listAdapter;
     public static ExpandableListView pfilter_list;
     ArrayList<String> listDataHeader;
@@ -53,16 +50,15 @@ public class SalesFilterActivity extends Activity{
     SharedPreferences sharedPreferences;
     RequestQueue queue;
     List<String> subdept;
-    String pf_prodName = " ",subdeptName;
+    String pf_prodName = " ", subdeptName;
     public static Activity filterActivity;
     public static List<Integer> groupImages;
     List<String> productList, articleList;
     ArrayList productnamelist, articleOptionList;
-    String ProductName, ArticleOption;
+    String ProductName;
     ArrayList<FilterArray> arrfilter;
 
-
-
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +66,10 @@ public class SalesFilterActivity extends Activity{
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         filterActivity = this;
 
-        Log.e("came here","");
+        Log.e("came here", "");
 
         userId = sharedPreferences.getString("userId", "");
-        bearertoken = sharedPreferences.getString("bearerToken","");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -82,33 +78,22 @@ public class SalesFilterActivity extends Activity{
         articleList = new ArrayList<String>();
         articleOptionList = new ArrayList();
         subdept = new ArrayList<String>();
-        arrfilter= new  ArrayList<FilterArray>();
+        arrfilter = new ArrayList<FilterArray>();
         btnS_Filterback = (RelativeLayout) findViewById(R.id.imageBtnSFilterBack);
-        btnS_Done=(RelativeLayout)findViewById(R.id.imageBtnSalesFilterDone);
+        btnS_Done = (RelativeLayout) findViewById(R.id.imageBtnSalesFilterDone);
 
         pfilter_list = (ExpandableListView) findViewById(R.id.expandableListView_subdept);
+        //noinspection deprecation,deprecation
         pfilter_list.setDivider(getResources().getDrawable(R.color.grey));
         pfilter_list.setDividerHeight(2);
         prepareListData();
 
-        listAdapter = new ExpandableList(this, listDataHeader, listDataChild, pfilter_list , listAdapter);
+        listAdapter = new ExpandableList(this, listDataHeader, listDataChild, pfilter_list, listAdapter);
 
         pfilter_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
         // setting list adapter
         pfilter_list.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
-
-
-        // Listview Group click listener
-        pfilter_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-
-                return false;
-            }
-        });
 
         btnS_Filterback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,19 +104,12 @@ public class SalesFilterActivity extends Activity{
             }
         });
 
-
-
-
-        // Listview Group expanded listener
         pfilter_list.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
             @Override
             public void onGroupExpand(int groupPosition) {
 
             }
-
-
-
         });
 
         // Listview Group collasped listener
@@ -157,20 +135,27 @@ public class SalesFilterActivity extends Activity{
                                 listDataHeader.get(groupPosition)).get(
                                 childPosition), Toast.LENGTH_SHORT)
                         .show();
-                subdeptName =  listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
-                Log.e("subDeptName"," "+subdeptName);
-
-
-
-
+                subdeptName = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+                Log.e("subDeptName", " " + subdeptName);
                 return false;
-//
+
             }
         });
 
     }
 
+    public int GetPixelFromDips(float pixels) {
+        // Get the screen's density scale
+        final float scale = getResources().getDisplayMetrics().density;
+        // Convert the dps to pixels, based on density scale
+        return (int) (pixels * scale + 0.5f);
+    }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        pfilter_list.setIndicatorBounds(pfilter_list.getRight() - 40, pfilter_list.getWidth());
+    }
 
     /*
      * Preparing the list data
@@ -180,12 +165,12 @@ public class SalesFilterActivity extends Activity{
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-        groupImages= new ArrayList<Integer>();
-        groupImages.add(R.mipmap.ic_launcher);
-        groupImages.add(R.mipmap.ic_launcher);
-        groupImages.add(R.mipmap.ic_launcher);
-        groupImages.add(R.mipmap.ic_launcher);
-        groupImages.add(R.mipmap.ic_launcher);
+        groupImages = new ArrayList<Integer>();
+        groupImages.add(R.mipmap.filter_department_icon);
+        groupImages.add(R.mipmap.filter_category_icon);
+        groupImages.add(R.mipmap.filter_planclass_icon);
+        groupImages.add(R.mipmap.filter_brand_icon);
+        groupImages.add(R.mipmap.filter_brandplanclass_icon);
         // Adding group name data
         listDataHeader.add("Department");
         listDataHeader.add("Category");
@@ -204,38 +189,7 @@ public class SalesFilterActivity extends Activity{
             Toast.makeText(SalesFilterActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
 
         }
-//         List<String> department = new ArrayList<String>();
-//        department.add("The Shawshank Redemption");
-//        department.add("The Godfather");
-//        department.add("The Godfather: Part II");
-//        department.add("Pulp Fiction");
-//        department.add("The Good, the Bad and the Ugly");
-//        department.add("The Dark Knight");
-//        department.add("12 Angry Men");
-//
-//        List<String> category = new ArrayList<String>();
-//        category.add("The Conjuring");
-//        category.add("Despicable Me 2");
-//        category.add("Turbo");
-//        category.add("Grown Ups 2");
-//        category.add("Red 2");
-//        category.add("The Wolverine");
-//
-//        List<String> planclass = new ArrayList<String>();
-//        planclass.add("2 Guns");
-//        planclass.add("The Smurfs 2");
-//        planclass.add("The Spectacular Now");
-//        planclass.add("The Canyons");
-//        planclass.add("Europa Report");
-
-//        listDataChild.put(listDataHeader.get(0), department); // Header, Child data
-//        listDataChild.put(listDataHeader.get(1), category);
-//        listDataChild.put(listDataHeader.get(2), planclass);
     }
-
-
-
-
 
     public void requestFilterProductAPI(int offsetvalue1, int limit1, final String subdeptName) {
 
@@ -282,7 +236,7 @@ public class SalesFilterActivity extends Activity{
                                     productnamelist.add(ProductName);
                                 }
                                 Collections.sort(productnamelist);
-                               listDataChild.put(listDataHeader.get(1), productnamelist);
+                                listDataChild.put(listDataHeader.get(1), productnamelist);
                                 FilterArray filterArray = new FilterArray();
                                 filterArray.setSubdept(subdeptName);
                                 filterArray.setprodArray((ArrayList) productList);
@@ -322,7 +276,7 @@ public class SalesFilterActivity extends Activity{
     }
 
 
-    public  void requestSubDeptAPI(int offsetvalue1, int limit1) {
+    public void requestSubDeptAPI(int offsetvalue1, int limit1) {
 
         String url = ConstsCore.web_url + "/v1/display/hourlyfilterproducts/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1;
 
@@ -343,9 +297,9 @@ public class SalesFilterActivity extends Activity{
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
 
-                                    String prodLevel3Code = productName1.getString("prodLevel3Code");
+                                    //String prodLevel3Code = productName1.getString("prodLevel3Code");
                                     String prodLevel3Desc = productName1.getString("prodLevel3Desc");
-//
+
                                     subdept.add(prodLevel3Desc);
                                 }
                                 offsetvalue = (limit * count) + limit;
@@ -354,7 +308,7 @@ public class SalesFilterActivity extends Activity{
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
-                                    String prodLevel3Code = productName1.getString("prodLevel3Code");
+                                    //String prodLevel3Code = productName1.getString("prodLevel3Code");
                                     String prodLevel3Desc = productName1.getString("prodLevel3Desc");
                                     subdept.add(prodLevel3Desc);
                                     // Log.e("ArrayList", "" + productsubdeptList.size());
@@ -382,7 +336,7 @@ public class SalesFilterActivity extends Activity{
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization","Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };

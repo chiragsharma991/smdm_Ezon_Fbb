@@ -12,9 +12,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by ifattehkhan on 05/08/16.
- */
+
 public class EventAdapter extends BaseAdapter{
     DashBoardActivity dashBoardActivity;
     Integer[] listItem;

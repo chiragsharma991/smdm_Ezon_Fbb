@@ -49,9 +49,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-/**
- * Created by hasai on 19/09/16.
- */
+
 public class SalesAnalysisActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
     SegmentedGroup segmentedGroupSales;
@@ -64,23 +62,20 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     Context context;
     SalesPagerAdapter pageradapter;
     SharedPreferences sharedPreferences;
-    String userId,bearertoken;
+    String userId, bearertoken;
     ArrayList<ProductNameBean> arrayList;
     RelativeLayout btnBack;
     public static String selectedsegValue = "WTD";
     String prodName = "KNIT CHURIDAR";
 
-    int offsetvalue=0,limit=100;
-    int count=0;
+    int offsetvalue = 0, limit = 100;
+    int count = 0;
     RequestQueue queue;
     int focusposition = 0;
-
-
     LinearLayout rankLayout;
     RelativeLayout relimgrank, relimgfilter;
     RelativeLayout relprevbtn, relnextbtn, relimgclose;
     TextView txtheaderplanclass;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,11 +84,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         getSupportActionBar().hide();
         context = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        userId = sharedPreferences.getString("userId","");
-        bearertoken = sharedPreferences.getString("bearerToken","");
+        userId = sharedPreferences.getString("userId", "");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
 
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
-        segmentedGroupSales= (SegmentedGroup) findViewById(R.id.segmentedGrp);
+        segmentedGroupSales = (SegmentedGroup) findViewById(R.id.segmentedGrp);
         segmentedGroupSales.setOnCheckedChangeListener(this);
 
         RadioButton btnWTD = (RadioButton) findViewById(R.id.btnWTD);
@@ -138,14 +133,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
         relimgrank.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if(rankLayout.getVisibility() == View.VISIBLE)
-                {
+            public void onClick(View v) {
+                if (rankLayout.getVisibility() == View.VISIBLE) {
                     rankLayout.setVisibility(View.GONE);
-                }
-                else if(rankLayout.getVisibility() == View.GONE)
-                {
+                } else if (rankLayout.getVisibility() == View.GONE) {
                     rankLayout.setVisibility(View.VISIBLE);
                 }
             }
@@ -161,8 +152,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         relprevbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 switch (txtheaderplanclass.getText().toString()) {
 
                     case "Brand Class":
@@ -208,15 +197,12 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             limit = 100;
                             count = 0;
                             requestProductAPI(context);
-                            //llayoutSalesAnalysis.setVisibility(View.VISIBLE);
 
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                         }
                         Log.e("---2---", " ");
-
                         break;
-
 
                     case "Plan Class":
                         txtheaderplanclass.setText("Category");
@@ -323,7 +309,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             limit = 100;
                             count = 0;
                             requestProductAPI(context);
-                            //llayoutSalesAnalysis.setVisibility(View.VISIBLE);
 
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -456,12 +441,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
         listView_SalesAnalysis.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState)
-            {
-                if(arrayList.size() != 0)
-                {
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (arrayList.size() != 0) {
 
-                    if(view.getFirstVisiblePosition() <= arrayList.size() - 1) {
+                    if (view.getFirstVisiblePosition() <= arrayList.size() - 1) {
                         //listView_SalesAnalysis.smoothScrollToPosition(firstVisibleItem);
                         focusposition = view.getFirstVisiblePosition();
                         listView_SalesAnalysis.setSelection(view.getFirstVisiblePosition());
@@ -471,8 +454,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         pageradapter.notifyDataSetChanged();
                         vwpagersales.setCurrentItem(SalesPagerAdapter.currentPage);
 
-                    }else
-                    {
+                    } else {
                         //listView_SalesAnalysis.setSelection(arrayList.size() - 1);
                         focusposition = arrayList.size() - 1;
                         listView_SalesAnalysis.setSelection(arrayList.size() - 1);
@@ -482,9 +464,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         vwpagersales.setCurrentItem(SalesPagerAdapter.currentPage);
 
                     }
-
-
-
                 }
             }
 
@@ -510,15 +489,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 //                    }
 
 //                }
-
             }
         });
-
-
-
-
-
-
     }
 
 //    private void initialiseUIElements(Context context)
@@ -546,21 +518,16 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 //
 //    }
 
-
-
-
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
 
             case R.id.btnWTD:
-                if(selectedsegValue.equals("WTD"))
+                if (selectedsegValue.equals("WTD"))
                     break;
-
                 selectedsegValue = "WTD";
                 SalesPagerAdapter.currentPage = 0;
-                if(lldots != null)
-                {
+                if (lldots != null) {
                     lldots.removeAllViews();
                 }
 
@@ -579,17 +546,16 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
-                Log.e("---1---"," ");
+                Log.e("---1---", " ");
 
                 break;
 
             case R.id.btnLW:
-                if(selectedsegValue.equals("LW"))
+                if (selectedsegValue.equals("LW"))
                     break;
                 selectedsegValue = "LW";
                 SalesPagerAdapter.currentPage = 0;
-                if(lldots != null)
-                {
+                if (lldots != null) {
                     lldots.removeAllViews();
                 }
                 prodName = "DEAL JEANS";
@@ -615,17 +581,16 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
-                Log.e("---2---"," ");
+                Log.e("---2---", " ");
 
                 break;
 
             case R.id.btnL4W:
-                if(selectedsegValue.equals("L4W"))
+                if (selectedsegValue.equals("L4W"))
                     break;
                 selectedsegValue = "L4W";
                 SalesPagerAdapter.currentPage = 0;
-                if(lldots != null)
-                {
+                if (lldots != null) {
                     lldots.removeAllViews();
                 }
                 prodName = "DJ&C CR CHINOS";
@@ -644,17 +609,16 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
-                Log.e("---3---"," ");
+                Log.e("---3---", " ");
 
                 break;
 
             case R.id.btnYTD:
-                if(selectedsegValue.equals("YTD"))
+                if (selectedsegValue.equals("YTD"))
                     break;
                 selectedsegValue = "YTD";
                 SalesPagerAdapter.currentPage = 0;
-                if(lldots != null)
-                {
+                if (lldots != null) {
                     lldots.removeAllViews();
                 }
                 prodName = "BUFFALO SHIRTS";
@@ -672,7 +636,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
-                Log.e("---4---"," ");
+                Log.e("---4---", " ");
 
                 break;
             default:
@@ -680,12 +644,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         }
     }
 
-
-
-    private void requestProductAPI(final Context context)
-    {
-        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/"+userId+"?view=articleOption&productName=" + prodName.replaceAll(" ", "%20").replaceAll("&","%26")+"&offset="+offsetvalue+"&limit="+limit;//ConstsCore.web_url + "/v1/display/hourlytransproducts/"+userId+"?offset="+offsetvalue+"&limit="+ limit;
-        Log.i("URL   ", url + " "+bearertoken);
+    private void requestProductAPI(final Context context) {
+        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?view=articleOption&productName=" + prodName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;//ConstsCore.web_url + "/v1/display/hourlytransproducts/"+userId+"?offset="+offsetvalue+"&limit="+ limit;
+        Log.i("URL   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -693,15 +654,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     public void onResponse(JSONArray response) {
 
                         try {
-                            if (response.equals(null) || response == null|| response.length()==0 && count==0)
-                            {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SalesAnalysisActivity.this.context, "no product data found", Toast.LENGTH_LONG).show();
-                            }
-                            else if(response.length()==limit)
-                            {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() == limit) {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
                                     //Log.e("Product Name:", ProductName);
@@ -733,11 +690,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestProductAPI(context);
-                            }
-                            else if(response.length()< limit)
-                            {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
                                     //Log.e("Product Name:", ProductName);
@@ -769,12 +723,12 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 Collections.sort(arrayList, new Comparator<ProductNameBean>() {
                                     public int compare(ProductNameBean one, ProductNameBean other) {
-                                        return  new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
+                                        return new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
                                     }
                                 });
                                 Collections.reverse(arrayList);
 
-                                Log.e("arrayList"," "+arrayList.size());
+                                Log.e("arrayList", " " + arrayList.size());
 
                                 for (int i = 0; i < 3; i++) {
 
@@ -784,7 +738,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                     imgdot.setLayoutParams(layoutParams);
                                     imgdot.setImageResource(R.mipmap.dots_unselected);
                                     lldots.addView(imgdot);
-                                    ImageView img = (ImageView)  lldots.getChildAt(0);
+                                    ImageView img = (ImageView) lldots.getChildAt(0);
                                     img.setImageResource(R.mipmap.dots_selected);
 
 
@@ -814,8 +768,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                             }
 
-                        }
-                        catch (Exception e) {
+                        } catch (Exception e) {
                             //Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
@@ -835,9 +788,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
 
-                Log.e("params "," "+params);
+                Log.e("params ", " " + params);
                 return params;
             }
         };
@@ -852,12 +805,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     @Override
     public void onBackPressed() {
 
-        if(rankLayout.getVisibility() == View.VISIBLE)
-        {
+        if (rankLayout.getVisibility() == View.VISIBLE) {
             rankLayout.setVisibility(View.GONE);
-        }
-        else
-        {
+        } else {
             SalesPagerAdapter.currentPage = 0;
             Intent i = new Intent(SalesAnalysisActivity.this, DashBoardActivity.class);
             startActivity(i);
@@ -865,7 +815,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         }
 
     }
-
 
 
 }

@@ -6,4 +6,5 @@
     <color name="grey">#f0f0f0</color>
     <color name="darker_grey">#666666</color>
     <color name="text_grey">#CFD2D1</color>
+    <color name="bg_salescard">#F7F5F6</color>
 </resources>

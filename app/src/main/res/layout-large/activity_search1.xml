@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Search"
+                android:text="@string/search"
                 android:textSize="20sp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageBtnBack"
@@ -133,7 +133,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Product Name"
+            android:text="@string/product_name"
             style="@style/RadioButton" />
 
         <!--<RadioButton-->
@@ -157,13 +157,13 @@
         <EditText
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:hint="Enter text"
+            android:hint="@string/product_search_enter_text"
             android:layout_marginLeft="10dp"
             android:imeOptions="actionSearch"
             android:inputType="text"
             style="@style/myEditText"
             android:textCursorDrawable="@drawable/color_cursor"
-            android:singleLine="true"
+            android:maxLines="1"
             android:layout_weight="9"
             android:id="@+id/editSearch" />
 
@@ -177,7 +177,8 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:layout_marginLeft="110dp"
-            android:id="@+id/btnSeatchList" />
+            android:id="@+id/btnSeatchList"
+            tools:ignore="ContentDescription" />
 
 
     </LinearLayout>

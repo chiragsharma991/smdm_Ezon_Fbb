@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/txtNetSalesVal"
-                android:text="12,15,14,566"
+                android:text="@string/s_net_sales_value"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="8dp"
@@ -34,7 +34,7 @@
 
             <TextView
                 android:id="@+id/txtNetSales"
-                android:text="Net Sales"
+                android:text="@string/s_net_sales"
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
@@ -47,7 +47,7 @@
                 android:gravity="right"
                 android:background="@color/colorPrimary"
                 android:id="@+id/txtNetSalesPerc"
-                android:text="20%"
+                android:text="@string/s_net_sales_perc"
                 android:textSize="16sp"
                 android:textColor="@android:color/white"
                 android:layout_marginRight="10dp"
@@ -75,7 +75,7 @@
 
             <TextView
                 android:id="@+id/txtPlanSalesVal"
-                android:text="15,15,00,000"
+                android:text="@string/s_plan_sales_value"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="8dp"
@@ -85,7 +85,7 @@
 
             <TextView
                 android:id="@+id/txtPlanSales"
-                android:text="Plan Sales"
+                android:text="@string/s_plan_sales"
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
@@ -98,7 +98,7 @@
                 android:gravity="right"
                 android:background="@color/colorPrimary"
                 android:id="@+id/txtPlanSalesPerc"
-                android:text="20%"
+                android:text="@string/s_plan_sales_perc"
                 android:textSize="16sp"
                 android:textColor="@android:color/white"
                 android:layout_marginRight="10dp"
@@ -134,7 +134,7 @@
 
             <TextView
                 android:id="@+id/txtNetSalesUVal"
-                android:text="12,15,14,566"
+                android:text="@string/s_netsales_u_value"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="8dp"
@@ -144,7 +144,7 @@
 
             <TextView
                 android:id="@+id/txtNetSalesU"
-                android:text="Net Sales(U)"
+                android:text="@string/s_netsales_u"
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
@@ -157,7 +157,7 @@
                 android:gravity="right"
                 android:background="@color/colorPrimary"
                 android:id="@+id/txtNetSalesUPerc"
-                android:text="20%"
+                android:text="@string/s_netsales_u_perc"
                 android:textSize="16sp"
                 android:textColor="@android:color/white"
                 android:layout_marginRight="10dp"
@@ -183,7 +183,7 @@
 
             <TextView
                 android:id="@+id/txtSoHUVal"
-                android:text="15,15,00,000"
+                android:text="@string/s_soh_u_value"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="8dp"
@@ -193,7 +193,7 @@
 
             <TextView
                 android:id="@+id/txtSoHU"
-                android:text="S O H(U)"
+                android:text="@string/s_soh_u"
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
@@ -241,7 +241,7 @@
 
             <TextView
                 android:id="@+id/txtRosVal0"
-                android:text="12,15,14,566"
+                android:text="@string/s_ros_value"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="10dp"
@@ -251,7 +251,7 @@
 
             <TextView
                 android:id="@+id/txtRos0"
-                android:text="ROS"
+                android:text="@string/s_ros"
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="10dp"
@@ -292,7 +292,7 @@
 
             <TextView
                 android:id="@+id/txtFwdWkCoverVal0"
-                android:text="15,15,00,000"
+                android:text="@string/s_fwd_wk_value"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="10dp"
@@ -302,7 +302,7 @@
 
             <TextView
                 android:id="@+id/txtFwdWkCover0"
-                android:text="Fwd Wk Cover"
+                android:text="@string/s_fwd_wk_cover"
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="10dp"

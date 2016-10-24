@@ -1,8 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.model;
 
-/**
- * Created by hasai on 28/09/16.
- */
+
 public class VisualAssortCombo {
 
 

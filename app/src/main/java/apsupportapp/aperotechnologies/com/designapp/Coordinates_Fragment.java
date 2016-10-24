@@ -1,20 +1,16 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
-/**
- * Created by ifattehkhan on 22/08/16.
- */
+
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-
-import apsupportapp.aperotechnologies.com.designapp.R;
 
 import java.util.ArrayList;
 
@@ -26,7 +22,7 @@ public class Coordinates_Fragment extends Fragment {
     ArrayList arrayList;
     Context context;
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.coordinate_fragment,container,false);
         context=getActivity();
         arrayList=new ArrayList();

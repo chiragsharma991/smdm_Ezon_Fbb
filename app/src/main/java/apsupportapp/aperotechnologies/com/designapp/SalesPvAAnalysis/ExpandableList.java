@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.SalesPvAAnalysis;
 
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -45,13 +46,12 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.ListCategory;
 import apsupportapp.aperotechnologies.com.designapp.model.ListPlanClass;
 
-// Eclipse wanted me to use a sparse array instead of my hashmaps, I just suppressed that suggestion
-@SuppressLint("UseSparseArrays")
+
 public class ExpandableList extends BaseExpandableListAdapter {
 
     // Define activity context
     private Context mContext;
-    ArrayList<FilterArray> arrfilter;
+
     int offsetvalue = 0, limit = 100, count = 0;
     ArrayList productnamelist, articleOptionList;
     String ProductName, ArticleOption;
@@ -64,16 +64,10 @@ public class ExpandableList extends BaseExpandableListAdapter {
     List<ListCategory> brandclassArray;
     List tempcategorylist;
     List tempplanclass;
-
-
     private HashMap<String, List<String>> mListDataChild;
-
     private ArrayList<String> mListDataGroup;
-
-
     private ChildViewHolder childViewHolder;
     private GroupViewHolder groupViewHolder;
-
     private String groupText;
     private String childText;
     ExpandableList listAdapter;
@@ -84,11 +78,11 @@ public class ExpandableList extends BaseExpandableListAdapter {
         mListDataGroup = listDataGroup;
         mListDataChild = listDataChild;
         productnamelist = new ArrayList();
-        arrfilter = new ArrayList<FilterArray>();
+
         this.expandableListView = expandableListView;
         this.listAdapter = listAdapter;
         articleOptionList = new ArrayList();
-        salesList= new ArrayList<>();
+        salesList = new ArrayList<>();
         categoryArray = new ArrayList();
         planclassArray = new ArrayList();
 
@@ -128,6 +122,8 @@ public class ExpandableList extends BaseExpandableListAdapter {
             groupViewHolder.mImage = (ImageView) convertView.findViewById(R.id.groupImage);
             int imageId = SalesFilterActivity.groupImages.get(groupPosition);
             groupViewHolder.mImage.setImageResource(imageId);
+            groupViewHolder.updownIndicator = (ImageView) convertView.findViewById(R.id.updownIndicator);
+
             convertView.setTag(groupViewHolder);
         } else {
 
@@ -137,6 +133,7 @@ public class ExpandableList extends BaseExpandableListAdapter {
         groupViewHolder.mGroupText.setText(groupText);
         return convertView;
     }
+
     @Override
     public int getChildrenCount(int groupPosition) {
 
@@ -146,9 +143,9 @@ public class ExpandableList extends BaseExpandableListAdapter {
             return 0;
         }
     }
+
     @Override
-    public String getChild(int groupPosition, int childPosition)
-    {
+    public String getChild(int groupPosition, int childPosition) {
         try {
             return mListDataChild.get(mListDataGroup.get(groupPosition)).get(childPosition);
         } catch (Exception e) {
@@ -170,8 +167,7 @@ public class ExpandableList extends BaseExpandableListAdapter {
 
         childText = getChild(mGroupPosition, mChildPosition);
 
-        if (convertView == null)
-        {
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.sfilter_list_item, null);
@@ -181,37 +177,17 @@ public class ExpandableList extends BaseExpandableListAdapter {
             childViewHolder.mCheckBox = (CheckBox) convertView
                     .findViewById(R.id.itemCheckBox);
             convertView.setTag(R.layout.sfilter_list_item, childViewHolder);
-            //childViewHolder.mCheckBox.setTag(childPosition);
 
-        }
-        else
-        {
+        } else {
             childViewHolder = (ChildViewHolder) convertView
                     .getTag(R.layout.sfilter_list_item);
         }
 
         childViewHolder.mChildText.setText(childText);
-//        for (int i = 0; i < salesList.size(); i++)
-//        {
-//            Log.e("saleslist"," "+salesList.get(i).getValue() +" "+childText);
-//
-//            if (salesList.get(i).getValue().contains(childText))
-//            {
-//                childViewHolder.mCheckBox.setChecked(salesList.get(i).getCheck());
-//            }
-//            else
-//            {
-//                childViewHolder.mCheckBox.setChecked(false);
-//            }
-//
-//        }
 
-        if (salesList.contains(childText))
-        {
+        if (salesList.contains(childText)) {
             childViewHolder.mCheckBox.setChecked(true);
-        }
-        else
-        {
+        } else {
             childViewHolder.mCheckBox.setChecked(false);
         }
 
@@ -221,30 +197,24 @@ public class ExpandableList extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
 
-                RelativeLayout rel = (RelativeLayout)v;
+                RelativeLayout rel = (RelativeLayout) v;
                 CheckBox cb = (CheckBox) rel.getChildAt(1);
                 TextView txtView = (TextView) rel.getChildAt(0);
                 String txtClickedVal = txtView.getText().toString();
 
-
-                if (cb.isChecked() == false)
-                {
+                if (cb.isChecked() == false) {
                     ////Log.e("checkbox is not selected", "");
-                    if (Reusable_Functions.chkStatus(mContext))
-                    {
+                    if (Reusable_Functions.chkStatus(mContext)) {
 
                         Reusable_Functions.sDialog(mContext, "Loading  data...");
                         offsetvalue = 0;
                         count = 0;
                         limit = 100;
-                        if(groupPosition == 0)
-                        {
+                        if (groupPosition == 0) {
                             tempcategorylist = new ArrayList();
                             SalesFilterActivity.pfilter_list.collapseGroup(1);
                             requestFilterProductAPI(offsetvalue, limit, txtClickedVal);
-                        }
-                        else if(groupPosition == 1)
-                        {
+                        } else if (groupPosition == 1) {
                             tempplanclass = new ArrayList();
                             SalesFilterActivity.pfilter_list.collapseGroup(2);
                             requestProductArticleAPI(offsetvalue, limit, txtClickedVal);
@@ -252,27 +222,14 @@ public class ExpandableList extends BaseExpandableListAdapter {
 
                         salesList.add(txtClickedVal);
                         cb.setChecked(true);
-
-
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(mContext, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
+                } else {
+                    Log.e("groupPosition ", " " + groupPosition);
 
-
-                }
-                else
-                {
-
-                    Log.e("groupPosition "," "+groupPosition);
-
-                    if(groupPosition == 0)
-                    {
-                        Log.e("here ", " "+planclassArray.size());
-
-
-//
+                    if (groupPosition == 0) {
+                        Log.e("here ", " " + planclassArray.size());
                         for (int i = 0; i < categoryArray.size(); i++) {
                             if (categoryArray.get(i).getSubdept().equals(txtClickedVal)) {
                                 SalesFilterActivity.pfilter_list.collapseGroup(1);
@@ -281,37 +238,24 @@ public class ExpandableList extends BaseExpandableListAdapter {
                                 categoryArray.remove(i);
                                 cb.setChecked(false);
                                 SalesFilterActivity.pfilter_list.expandGroup(1);
-
-
                             }
                         }
-
-                        for (int k = 0; k < planclassArray.size(); k++)
-                        {
-                            Log.e("sub ", " "+planclassArray.get(k).getSubdept()+" "+planclassArray.get(k).getSubdept().equals(txtClickedVal));
-                            if (planclassArray.get(k).getSubdept().equals(txtClickedVal))
-                            {
+                        for (int k = 0; k < planclassArray.size(); k++) {
+                            Log.e("sub ", " " + planclassArray.get(k).getSubdept() + " " + planclassArray.get(k).getSubdept().equals(txtClickedVal));
+                            if (planclassArray.get(k).getSubdept().equals(txtClickedVal)) {
                                 SalesFilterActivity.pfilter_list.collapseGroup(2);
-                                Log.e("plan list"," === "+planclassArray.get(k).getPlanclass() +" "+planclassArray.get(k).getCategory());
+                                Log.e("plan list", " === " + planclassArray.get(k).getPlanclass() + " " + planclassArray.get(k).getCategory());
                                 articleOptionList.removeAll(planclassArray.get(k).getPlanclass());
                                 salesList.remove(planclassArray.get(k).getCategory());
                                 planclassArray.remove(planclassArray.get(k).getSubdept());
                                 cb.setChecked(false);
                                 SalesFilterActivity.pfilter_list.expandGroup(2);
-
-
                             }
 
                         }
-//
-
-                        Log.e("planclassArray size "," "+planclassArray.size());
-                    }
-
-                    else if(groupPosition == 1)
-                    {
-                        for (int j = 0; j < planclassArray.size(); j++)
-                        {
+                        Log.e("planclassArray size ", " " + planclassArray.size());
+                    } else if (groupPosition == 1) {
+                        for (int j = 0; j < planclassArray.size(); j++) {
                             if (planclassArray.get(j).getCategory().equals(txtClickedVal)) {
                                 SalesFilterActivity.pfilter_list.collapseGroup(2);
                                 articleOptionList.removeAll(planclassArray.get(j).getPlanclass());
@@ -320,40 +264,31 @@ public class ExpandableList extends BaseExpandableListAdapter {
                                 cb.setChecked(false);
                                 SalesFilterActivity.pfilter_list.expandGroup(2);
                             }
-
                         }
-
-
                     }
-
-
-
                 }
-
-
             }
         });
         return convertView;
     }
 
     @Override
-    public boolean isChildSelectable ( int groupPosition, int childPosition){
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
     }
 
     @Override
-    public boolean hasStableIds () {
+    public boolean hasStableIds() {
         return false;
     }
 
     public final class GroupViewHolder {
 
         TextView mGroupText;
-        ImageView mImage;
+        ImageView mImage, updownIndicator;
     }
 
     public final class ChildViewHolder {
-
         TextView mChildText;
         CheckBox mCheckBox;
     }
@@ -385,7 +320,6 @@ public class ExpandableList extends BaseExpandableListAdapter {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     ProductName = productName1.getString("productName");
-                                    //Log.e("Product Name:", ProductName);
 
                                     productnamelist.add(ProductName);
                                     tempcategorylist.add(ProductName);
@@ -394,14 +328,11 @@ public class ExpandableList extends BaseExpandableListAdapter {
                                 count++;
                                 requestFilterProductAPI(offsetvalue, limit, subdeptName);
 
-
                             } else {
                                 if (response.length() < limit) {
                                     for (int i = 0; i < response.length(); i++) {
                                         JSONObject productName1 = response.getJSONObject(i);
                                         ProductName = productName1.getString("productName");
-                                        //Log.e("Product Name:", ProductName);
-
                                         productnamelist.add(ProductName);
                                         tempcategorylist.add(ProductName);
 
@@ -412,8 +343,6 @@ public class ExpandableList extends BaseExpandableListAdapter {
                                     category.setSubdept(subdeptName);
                                     category.setCategory(tempcategorylist);
                                     categoryArray.add(category);
-
-
                                     SalesFilterActivity.pfilter_list.expandGroup(1);
                                     Reusable_Functions.hDialog();
                                 }
@@ -449,6 +378,7 @@ public class ExpandableList extends BaseExpandableListAdapter {
 
     }
 
+    @SuppressLint("LongLogTag")
     public void requestProductArticleAPI(int offsetvalue1, int limit1, final String prodName) {
 
         final String[] prodLevel3Desc = {""};
@@ -464,10 +394,11 @@ public class ExpandableList extends BaseExpandableListAdapter {
         Log.e("requestProductArticleAPI URL   ", url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
+                    @SuppressLint("LongLogTag")
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Log.e("articleOptionList"," "+articleOptionList.size());
+                        Log.e("articleOptionList", " " + articleOptionList.size());
 
                         try {
 
@@ -475,11 +406,10 @@ public class ExpandableList extends BaseExpandableListAdapter {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(mContext, "no article data found", Toast.LENGTH_LONG).show();
                             } else {
-                                if (response.length() == limit)
-                                {
+                                if (response.length() == limit) {
                                     for (int i = 0; i < response.length(); i++) {
                                         JSONObject productName1 = response.getJSONObject(i);
-                                        //Log.e("Product Name:", ProductName);
+
                                         prodLevel3Desc[0] = productName1.getString("prodLevel3Desc");
                                         ArticleOption = productName1.getString("articleOption");
                                         tempplanclass.add(ArticleOption);
@@ -488,18 +418,15 @@ public class ExpandableList extends BaseExpandableListAdapter {
                                     offsetvalue = (limit * count) + limit;
                                     count++;
                                     requestProductArticleAPI(offsetvalue, limit, prodName);
-                                }
-                                else if (response.length() < limit)
-                                {
-                                    for (int i = 0; i < response.length(); i++)
-                                    {
+                                } else if (response.length() < limit) {
+                                    for (int i = 0; i < response.length(); i++) {
                                         JSONObject productName1 = response.getJSONObject(i);
                                         prodLevel3Desc[0] = productName1.getString("prodLevel3Desc");
                                         ArticleOption = productName1.getString("articleOption");
                                         tempplanclass.add(ArticleOption);
                                         articleOptionList.add(ArticleOption);
                                     }
-                                    //Collections.sort(articleOptionList);
+
                                     mListDataChild.put(mListDataGroup.get(2), articleOptionList);
 
                                     ListPlanClass planclass = new ListPlanClass();
@@ -511,17 +438,13 @@ public class ExpandableList extends BaseExpandableListAdapter {
                                     SalesFilterActivity.pfilter_list.expandGroup(2);
                                     SalesFilterActivity.pfilter_list.expandGroup(1);
                                     Reusable_Functions.hDialog();
+                                    Log.e("planClass size", " " + planclassArray.size());
 
-
-                                    Log.e("planClass size"," "+planclassArray.size());
-
-
-                                    for(int i = 0; i < planclassArray.size(); i++)
-                                    {
-                                        Log.e("---getSubdept---"," "+planclassArray.get(i).getSubdept()+" ");
-                                        Log.e("---getCategory---"," "+planclassArray.get(i).getCategory()+" ");
-                                        Log.e("---getPlanClassList ---"," "+planclassArray.get(i).getPlanclass()+" ");
-                                        Log.e("---getPlanClassListSize ---"," "+planclassArray.get(i).getPlanclass().size()+" ");
+                                    for (int i = 0; i < planclassArray.size(); i++) {
+                                        Log.e("---getSubdept---", " " + planclassArray.get(i).getSubdept() + " ");
+                                        Log.e("---getCategory---", " " + planclassArray.get(i).getCategory() + " ");
+                                        Log.e("---getPlanClassList ---", " " + planclassArray.get(i).getPlanclass() + " ");
+                                        Log.e("---getPlanClassListSize ---", " " + planclassArray.get(i).getPlanclass().size() + " ");
                                     }
 
                                 }

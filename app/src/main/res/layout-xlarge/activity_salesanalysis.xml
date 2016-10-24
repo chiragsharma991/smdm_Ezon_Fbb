@@ -60,7 +60,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sales Analysis"
+                        android:text="@string/sales_analysis"
                         android:textSize="20sp"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/imageBtnBack"
@@ -277,7 +277,8 @@
                                     android:clickable="false"
                                     android:background="@color/bel_red_text"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    tools:ignore="ContentDescription" />
 
                             </RelativeLayout>
 
@@ -302,7 +303,8 @@
                                     android:clickable="false"
                                     android:background="@color/bel_red_text"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    tools:ignore="ContentDescription" />
 
                             </RelativeLayout>
 
@@ -412,7 +414,8 @@
                     android:clickable="false"
                     android:background="@mipmap/images"
                     android:layout_width="40dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    tools:ignore="ContentDescription" />
 
             </RelativeLayout>
 
@@ -602,7 +605,8 @@
             android:layout_centerHorizontal="true"
             android:background="@android:color/black"
             android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 

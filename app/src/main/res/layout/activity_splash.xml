@@ -10,7 +10,8 @@
         android:src="@mipmap/signin_logo_future"
         android:layout_marginTop="150dp"
         android:layout_width="match_parent"
-        android:layout_height="70dp" />
+        android:layout_height="70dp"
+        android:contentDescription="Future group logo" />
 
     <ProgressBar
         android:progressDrawable="@drawable/progress_bar"

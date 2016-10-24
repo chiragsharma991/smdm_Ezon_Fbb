@@ -3,14 +3,8 @@ package apsupportapp.aperotechnologies.com.designapp;
 import android.app.Application;
 
 
-/**
- * Created by hasai on 28/06/16.
- */
-public class MyApplication extends Application
-{
 
-
-
+public class MyApplication extends Application {
     @Override
     public void onCreate() {
         // Simply add the handler, and that's it! No need to add any code
@@ -20,5 +14,4 @@ public class MyApplication extends Application
         registerActivityLifecycleCallbacks(new BaseLifeCycleCallbacks());
 
     }
-
 }

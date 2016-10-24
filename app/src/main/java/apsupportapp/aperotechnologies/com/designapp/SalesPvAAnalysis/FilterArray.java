@@ -2,9 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.SalesPvAAnalysis;
 
 import java.util.ArrayList;
 
-/**
- * Created by pamrutkar on 09/09/16.
- */
+
 public class FilterArray {
 
     String subdept = "";
@@ -22,9 +20,7 @@ public class FilterArray {
     }
 
 
-
-    public void setSubdept(String subdept)
-    {
+    public void setSubdept(String subdept) {
         this.subdept = subdept;
     }
 
@@ -33,8 +29,7 @@ public class FilterArray {
     }
 
 
-    public void setprodname(String prodname)
-    {
+    public void setprodname(String prodname) {
         this.prodname = prodname;
     }
 
@@ -43,8 +38,7 @@ public class FilterArray {
     }
 
 
-    public void setprodArray(ArrayList prodarray)
-    {
+    public void setprodArray(ArrayList prodarray) {
         this.prodarray = prodarray;
     }
 
@@ -53,12 +47,11 @@ public class FilterArray {
     }
 
 
-    public boolean getSelected()
-    {
+    public boolean getSelected() {
         return Checked;
     }
-    public void setSelected(boolean Checked)
-    {
+
+    public void setSelected(boolean Checked) {
         this.Checked = Checked;
     }
 }

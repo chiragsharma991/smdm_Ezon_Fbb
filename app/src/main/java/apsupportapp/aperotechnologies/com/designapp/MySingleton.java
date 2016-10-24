@@ -9,23 +9,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-/**
- * Created by ifattehkhan on 22/08/16.
- */
+
 public class MySingleton {
     private static MySingleton mInstance;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     private static Context mCtx;
-
-
-
     public String userId;
 
     private MySingleton(Context context) {
         mCtx = context;
         mRequestQueue = getRequestQueue();
-
         mImageLoader = new ImageLoader(mRequestQueue,
                 new ImageLoader.ImageCache() {
                     private final LruCache<String, Bitmap>

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,8 +20,8 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 /**
  * Created by hasai on 20/09/16.
  */
+@SuppressWarnings("ALL")
 public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
-
 
     Context context;
     ArrayList<ProductNameBean> arrayList;
@@ -33,9 +32,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     ListView listView_SalesAnalysis;
     LayoutInflater inflater;
     public static int currentPage = 0;
-
-
-
 
     // ViewPager 0
     TextView txtNetSalesVal, txtNetSales, txtNetSalesPerc;
@@ -77,7 +73,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((LinearLayout) object);
+        return view == object;
     }
 
     @Override
@@ -89,8 +85,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = null;
 
-        if(position == 0)
-        {
+        if (position == 0) {
             itemView = inflater.inflate(R.layout.child_sales_viewpager, container,
                     false);
             txtNetSalesVal = (TextView) itemView.findViewById(R.id.txtNetSalesVal);
@@ -109,17 +104,14 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             txtFwdWkCoverVal0 = (TextView) itemView.findViewById(R.id.txtFwdWkCoverVal0);
             txtFwdWkCover0 = (TextView) itemView.findViewById(R.id.txtFwdWkCover0);
 
-            if(SalesAnalysisActivity.selectedsegValue.equals("WTD") || SalesAnalysisActivity.selectedsegValue.equals("LW"))
-            {
+            if (SalesAnalysisActivity.selectedsegValue.equals("WTD") || SalesAnalysisActivity.selectedsegValue.equals("LW")) {
                 txtNetSales.setText("Net Sales");
                 txtPlanSales.setText("Plan Sales");
                 txtNetSalesU.setText("Net Sales(U)");
                 txtSohU.setText("S O H(U)");
                 txtRos0.setText("ROS");
                 txtFwdWkCover0.setText("Fwd Wk Cover");
-            }
-            else if(SalesAnalysisActivity.selectedsegValue.equals("L4W") || SalesAnalysisActivity.selectedsegValue.equals("YTD"))
-            {
+            } else if (SalesAnalysisActivity.selectedsegValue.equals("L4W") || SalesAnalysisActivity.selectedsegValue.equals("YTD")) {
                 txtNetSales.setText("Avg Wkly Sales");
                 txtPlanSales.setText("Plan Sales");
                 txtNetSalesU.setText("Avg Wkly Sales(U)");
@@ -128,9 +120,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 txtFwdWkCover0.setText("Velocity");
             }
 
-        }
-        else if(position == 1)
-        {
+        } else if (position == 1) {
             itemView = inflater.inflate(R.layout.child_sales_viewpager1, container,
                     false);
 
@@ -147,9 +137,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             txtZonalVal_MixSales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
             txtNationalVal_MixSales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
 
-        }
-        else if(position == 2)
-        {
+        } else if (position == 2) {
             itemView = inflater.inflate(R.layout.child_sales_viewpager2, container,
                     false);
 
@@ -161,17 +149,12 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             txtROS2 = (TextView) itemView.findViewById(R.id.txtROS2);
             txtFwdWkCoverVal2 = (TextView) itemView.findViewById(R.id.txtFwdWkCoverVal2);
             txtFwdWkCover2 = (TextView) itemView.findViewById(R.id.txtFwdWkCover2);
-
         }
 
-
-
         ProductNameBean productNameBean = arrayList.get(focusposition);
-        Log.e("in sales pager adapter","");
+        Log.e("in sales pager adapter", "");
 
-
-        if(position == 0)
-        {
+        if (position == 0) {
             txtNetSalesVal.setText(productNameBean.getArticleOption().toLowerCase());
 //            txtNetSalesPerc.setText(productNameBean.getProductName());
 //            txtPlanSalesVal.setText(productNameBean.getArtileCode());
@@ -181,10 +164,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 //            txtSohUVal.setText("");
 //            txtRosVal0.setText("");
 //            txtFwdWkCoverVal0.setText("");
-
-        }
-        else if(position == 1)
-        {
+        } else if (position == 1) {
 //            txtStoreVal_PvASales.setText("");
 //            txtZonalVal_PvASales.setText("");
 //            txtNationalVal_PvASales.setText("");
@@ -201,9 +181,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 //            txtZonalVal_MixSales.setText("");
 //            txtNationalVal_MixSales.setText("");
 
-        }
-        else if(position == 2)
-        {
+        } else if (position == 2) {
 //            txtSOHVal2.setText(productNameBean.getArticleOption() + "2");
 //            txtGITVal.setText("");
 //            txtROSVal2.setText("");
@@ -235,9 +213,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 //                {
 //                    Log.e("currentItem==","2");
 //                }
-//
-//
-//
 //            }
 //        });
 
@@ -256,13 +231,11 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
 
-        ImageView img = (ImageView)  lldots.getChildAt(currentPage);
+        ImageView img = (ImageView) lldots.getChildAt(currentPage);
         img.setImageResource(R.mipmap.dots_unselected);
         currentPage = position;
-        ImageView img1 = (ImageView)  lldots.getChildAt(currentPage);
+        ImageView img1 = (ImageView) lldots.getChildAt(currentPage);
         img1.setImageResource(R.mipmap.dots_selected);
-
-
     }
 
     @Override
@@ -273,8 +246,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         // Remove viewpager_item.xml from ViewPager
-        ((ViewPager) container).removeView((LinearLayout) object);
-
+        container.removeView((LinearLayout) object);
     }
 
     public int getItemPosition(Object object) {

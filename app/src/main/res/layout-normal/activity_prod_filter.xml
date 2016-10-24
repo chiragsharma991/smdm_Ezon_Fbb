@@ -54,7 +54,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/imageBtnBack"
                 android:gravity="left"
-                android:text="Filter"
+                android:text="@string/prod_filter"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 

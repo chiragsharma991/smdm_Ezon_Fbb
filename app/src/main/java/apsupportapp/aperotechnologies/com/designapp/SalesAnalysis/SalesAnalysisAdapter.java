@@ -1,8 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 
-/**
- * Created by hasai on 12/09/16.
- */
+
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,28 +21,21 @@ import apsupportapp.aperotechnologies.com.designapp.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
-public class SalesAnalysisAdapter extends BaseAdapter{
+public class SalesAnalysisAdapter extends BaseAdapter {
 
     private List arrayList;
-
-    //private List mStringFilterList;
-
     private LayoutInflater mInflater;
     Context context;
     String s;
 
-    //private ValueFilter valueFilter;
-
     public SalesAnalysisAdapter(ArrayList<ProductNameBean> arrayList, Context context, String s) {
 
-        Log.e("in sales analysis adapter"," ");
+        Log.e("in sales analysis adapter", " ");
 
         this.arrayList = arrayList;
         this.context = context;
         this.s = s;
         mInflater = LayoutInflater.from(context);
-
-        //getFilter();
     }
 
     //How many items are in the data set represented by this Adapter.
@@ -71,7 +63,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Log.e("in ","getview");
+        Log.e("in ", "getview");
         Holder viewHolder;
 
         if (convertView == null) {
@@ -92,11 +84,9 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
         ProductNameBean productNameBean = (ProductNameBean) arrayList.get(position);
         viewHolder.nameTv.setText(productNameBean.getArticleOption().toLowerCase());
+        Log.e("--- ", " " + viewHolder.rel.getMeasuredWidth() + " " + (200 / 100));
 
-
-        Log.e("--- ", " "+viewHolder.rel.getMeasuredWidth() + " "+ (200/100));
-
-        if(s.equals("")) {
+        if (s.equals("")) {
 
             double singlePercVal = 0.5;//50/100;// width divide by 100 perc
 
@@ -116,7 +106,6 @@ public class SalesAnalysisAdapter extends BaseAdapter{
             int finalCalachieveVal = (int) (density * achievevalueinpx); //converting value from px to dp
             Log.e("", "==finalCalachieveVal= " + finalCalachieveVal);
 
-
             viewHolder.txtPlan.setWidth(finalCalplanVal);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(2, 24);
             params.setMargins(finalCalachieveVal, 0, 0, 0);
@@ -133,9 +122,16 @@ public class SalesAnalysisAdapter extends BaseAdapter{
             } else {
                 viewHolder.txtPlan.setBackgroundColor(Color.GREEN);
             }
-        }else {
+        } else {
             viewHolder.txtPlan.setText(productNameBean.getArticleOption().toLowerCase());
         }
+
+        viewHolder.nameTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"Cilcked",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }
@@ -153,6 +149,4 @@ public class SalesAnalysisAdapter extends BaseAdapter{
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, (float) sp, context.getResources().getDisplayMetrics());
         return px;
     }
-
-
 }

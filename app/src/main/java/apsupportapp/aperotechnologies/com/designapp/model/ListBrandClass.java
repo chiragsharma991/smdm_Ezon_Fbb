@@ -2,9 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.model;
 
 import java.util.List;
 
-/**
- * Created by hasai on 04/10/16.
- */
+
 public class ListBrandClass {
 
     String subdept;

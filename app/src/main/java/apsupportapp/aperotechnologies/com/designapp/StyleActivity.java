@@ -43,8 +43,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -57,38 +55,33 @@ import java.util.Map;
 import amobile.android.barcodesdk.api.IWrapperCallBack;
 import amobile.android.barcodesdk.api.Wrapper;
 
-//import com.google.zxing.integration.android.IntentIntegrator;
-//import com.google.zxing.integration.android.IntentResult;
-
 public class StyleActivity extends AppCompatActivity implements IWrapperCallBack //implements IWrapperCallBack {
-{   Button  btnSearch,btnBarcode;
+{
+    Button btnBarcode;
     private Wrapper m_wrapper = null;
     RelativeLayout imageBtnBack;
-    // Spinner style;
-    //SearchableSpinner collection,style;
-    TextView collection,style;
+    TextView collection, style;
     EditText edtSearch;
-    ArrayAdapter<String> adapter1,adapter2;
-    List<String> collectionList,StyleList,list;
-    ArrayList<String> arrayList,articleOptionList;
+    ArrayAdapter<String> adapter1, adapter2;
+    List<String> collectionList, list;
+    ArrayList<String> arrayList, articleOptionList;
     String userId, bearertoken;
     View view;
-    String collectionNM,optionName;
+    String collectionNM, optionName;
     RequestQueue queue;
     Context context;
-    boolean flag=true;
+    boolean flag = true;
     ArrayList<StyleDetailsBean> styleDetailsBeenList;
     StyleDetailsBean styleDetailsBean;
     MySingleton m_config;
-    int offsetvalue=0,limit=100;
-    int count=0;
-    int collectionoffset=0, collectionlimit=100,collectioncount=0;
+    int offsetvalue = 0, limit = 100;
+    int count = 0;
+    int collectionoffset = 0, collectionlimit = 100, collectioncount = 0;
     SharedPreferences sharedPreferences;
     Button btnSubmit;
     EditText edtsearchCollection, edtsearchOption;
 
-
-    public static String selcollectionName = null , seloptionName = null;
+    public static String selcollectionName = null, seloptionName = null;
 
     RelativeLayout stylemainlayout;
     LinearLayout collectionLayout, optionLayout;
@@ -99,7 +92,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+
         getSupportActionBar().hide();
         setContentView(R.layout.activity_style);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -107,8 +100,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-
-
         if (isAMobileModel()) {
             Log.e("amobile device", "");
             m_wrapper = new Wrapper(StyleActivity.this);
@@ -116,7 +107,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             IntentFilter filter = new IntentFilter("BROADCAST_BARCODE");
             registerReceiver(m_brc, filter);
         }
-
 
         context = this;
         m_config = MySingleton.getInstance(context);
@@ -127,7 +117,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         queue = new RequestQueue(cache, network);
         queue.start();
 
-
         collectionList = new ArrayList<String>();
         arrayList = new ArrayList<String>();
         list = new ArrayList<>();
@@ -136,11 +125,10 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading collection data...");
-
             requestCollectionAPI(collectionoffset, collectionlimit);
 
         } else {
-            // Reusable_Functions.hDialog();
+
             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
@@ -151,21 +139,16 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         edtsearchCollection = (EditText) findViewById(R.id.searchCollection);
         edtsearchOption = (EditText) findViewById(R.id.searchOption);
 
-
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         btnBarcode = (Button) findViewById(R.id.btnBarcode);
         imageBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
 
-        if(getIntent().getExtras() != null)
-        {
-            selcollectionName =  getIntent().getExtras().getString("selCollectionname");
-            seloptionName =  getIntent().getExtras().getString("selOptionName");
+        if (getIntent().getExtras() != null) {
+            selcollectionName = getIntent().getExtras().getString("selCollectionname");
+            seloptionName = getIntent().getExtras().getString("selOptionName");
         }
 
-        Log.e("selcollectionName"," "+selcollectionName+" "+seloptionName);
-
-//        collection = (SearchableSpinner)findViewById(R.id.searchablespinnerlibrary);
-//        collection.setTitle("Select Collection");
+        Log.e("selcollectionName", " " + selcollectionName + " " + seloptionName);
 
         collection = (TextView) findViewById(R.id.searchablespinnerlibrary);
         collection.setText("Select Collection");
@@ -176,7 +159,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         listCollection.setTextFilterEnabled(true);
         collectionAdapter.notifyDataSetChanged();
 
-
         style = (TextView) findViewById(R.id.searchablespinnerlibrary1);
         style.setText("Select Option");
         style.setEnabled(false);
@@ -186,21 +168,14 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         listOption.setTextFilterEnabled(true);
         optionAdapter.notifyDataSetChanged();
 
-//
-
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(collection.getText().toString().trim().equals("Select Collection"))
-                {
-                    Toast.makeText(StyleActivity.this,"Please select Collection",Toast.LENGTH_LONG).show();
-                }
-                else if(style.getText().toString().trim().equals("Select Option"))
-                {
-                    Toast.makeText(StyleActivity.this,"Please select Option",Toast.LENGTH_LONG).show();
-                }
-                else
-                {
+                if (collection.getText().toString().trim().equals("Select Collection")) {
+                    Toast.makeText(StyleActivity.this, "Please select Collection", Toast.LENGTH_LONG).show();
+                } else if (style.getText().toString().trim().equals("Select Option")) {
+                    Toast.makeText(StyleActivity.this, "Please select Option", Toast.LENGTH_LONG).show();
+                } else {
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading  data...");
@@ -208,7 +183,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                         requestStyleDetailsAPI(optionName, "optionname");
 
                     } else {
-                        // Reusable_Functions.hDialog();
+
                         Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -218,22 +193,16 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
         btnBarcode.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                Log.e("scan clicked","");
-                if(isAMobileModel())
+            public void onClick(View v) {
+                Log.e("scan clicked", "");
+                if (isAMobileModel())
 
                 {
-                    if (m_wrapper != null && m_wrapper.IsOpen())
-                    {
+                    if (m_wrapper != null && m_wrapper.IsOpen()) {
                         m_wrapper.Scan();
                     }
-//                    Intent intent = new Intent(StyleActivity.this,ScannerActivity.class);
-//                    startActivity(intent);
-                }
-                else if(!isAMobileModel())
-                {
-                    Log.e("regular device","");
+                } else if (!isAMobileModel()) {
+                    Log.e("regular device", "");
                     scanBarcode(view);
 
                 }
@@ -242,9 +211,10 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         imageBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selcollectionName = null ; seloptionName = null;
+                selcollectionName = null;
+                seloptionName = null;
                 DashBoardActivity._collectionitems = new ArrayList();
-                Intent intent=new Intent(StyleActivity.this,DashBoardActivity.class);
+                Intent intent = new Intent(StyleActivity.this, DashBoardActivity.class);
                 startActivity(intent);
                 finish();
 
@@ -273,18 +243,14 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_GO)) {
                     InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if(inputManager != null){
+                    if (inputManager != null) {
                         inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     }
-
-
                 }
                 return false;
             }
 
         });
-
-
 
         edtsearchOption.addTextChangedListener(new TextWatcher() {
             @Override
@@ -310,7 +276,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_GO)) {
                     InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if(inputManager != null){
+                    if (inputManager != null) {
                         inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     }
 
@@ -325,7 +291,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             @Override
             public void onClick(View v) {
                 edtsearchOption.setText("");
-                //stylemainlayout.setVisibility(View.GONE);
                 collectionLayout.setVisibility(View.GONE);
                 optionLayout.setVisibility(View.VISIBLE);
             }
@@ -336,27 +301,22 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e(" "," "+parent +" "+position+" "+view);
+                Log.e(" ", " " + parent + " " + position + " " + view);
 
                 optionName = (String) optionAdapter.getItem(position);
                 style.setText(optionName.trim());
-                Log.e("optionName "," "+optionName);
+                Log.e("optionName ", " " + optionName);
 
                 stylemainlayout.setVisibility(View.VISIBLE);
                 collectionLayout.setVisibility(View.GONE);
                 optionLayout.setVisibility(View.GONE);
 
                 InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if(inputManager != null){
+                if (inputManager != null) {
                     inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
         });
-
-
-
-
-
     }
 
     @Override
@@ -376,7 +336,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
     @Override
     protected void onDestroy() {
-        if(isAMobileModel()) {
+        if (isAMobileModel()) {
             unregisterReceiver(m_brc);
         }
 
@@ -390,43 +350,27 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
     @Override
     public void onDataReady(String strData) {
-//        if (m_wrapper != null && m_wrapper.Open()) {
-//            m_wrapper.Stop();
-//            m_wrapper.Scan();
-//        }
-//        m_wrapper.Close();
         byte[] bytes = strData.getBytes();
-        if(strData == null)
-        {
+        if (strData == null) {
             Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
-        }
-        else if (strData.equalsIgnoreCase("Unknown command : setLightMode2D"))
-        {
-            Log.e("Do nothing","");
-        }
-        else if(strData.equalsIgnoreCase("Time Out"))
-        {
+        } else if (strData.equalsIgnoreCase("Unknown command : setLightMode2D")) {
+            Log.e("Do nothing", "");
+        } else if (strData.equalsIgnoreCase("Time Out")) {
 
-        }
-        else
-        {
+        } else {
 
             Toast.makeText(this, "Barcode Scanned: " + strData, Toast.LENGTH_LONG).show();
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Loading  data...");
-                //requestStyleDetailsBarcodeAPI( strData);
+
                 requestStyleDetailsAPI(strData, "barcode");
 
-            } else
-            {
-                // Reusable_Functions.hDialog();
+            } else {
                 Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
             }
-
-
         }
-        //m_text.setText(strData);
+
     }
 
     private BroadcastReceiver m_brc = new BroadcastReceiver() {
@@ -436,7 +380,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                 String s = intent.getStringExtra("BROADCAST_BARCODE_STRING");
                 if (s != null) {
                     // m_text.setText(s);
-                    Log.e("printing string s=",s);
+                    Log.e("printing string s=", s);
                 }
             }
         }
@@ -455,10 +399,10 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     }
 
 
-    private boolean isAMobileModel()  {
-        Log.e("checking model","");
+    private boolean isAMobileModel() {
+        Log.e("checking model", "");
         getDeviceInfo();
-        Log.e("model is ",""+Build.MODEL);
+        Log.e("model is ", "" + Build.MODEL);
 
         return Build.MODEL.contains("G0550");
     }
@@ -472,42 +416,31 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         integrator.setOrientationLocked(true);
         integrator.setBeepEnabled(false);
         integrator.initiateScan();
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-        if(result != null) {
-            if(result.getContents() == null)
-            {
+        if (result != null) {
+            if (result.getContents() == null) {
                 Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
-            } else
-            {
+            } else {
                 Toast.makeText(this, "Barcode Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
-                    //requestStyleDetailsBarcodeAPI( result.getContents());
                     requestStyleDetailsAPI(result.getContents(), "barcode");
 
-                } else
-                {
-                    // Reusable_Functions.hDialog();
+                } else {
                     Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
-
-
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-
-
 
 //
 //    @Override
@@ -680,6 +613,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             return capitalize(manufacturer) + " " + model;
         }
     }
+
     private String capitalize(String s) {
         if (s == null || s.length() == 0) {
             return "";
@@ -693,44 +627,32 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     }
 
 
-    private void requestStyleDetailsAPI(String content, String check)
-    {
+    private void requestStyleDetailsAPI(String content, String check) {
         String url = "";
-        if(check.equals("optionname"))
-        {
-            url = ConstsCore.web_url + "/v1/display/productdetails/"+userId+"?articleOption="+content.replaceAll(" ", "%20").replaceAll("&","%26");
-        }
-        else if(check.equals("barcode"))
-        {
-            url = ConstsCore.web_url + "/v1/display/productdetails/"+userId+"?eanNumber="+content;
+        if (check.equals("optionname")) {
+            url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + content.replaceAll(" ", "%20").replaceAll("&", "%26");
+        } else if (check.equals("barcode")) {
+            url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?eanNumber=" + content;
         }
 
-        Log.i("URL style  ", ""+url);
+        Log.i("URL style  ", "" + url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.i("Style details :   ", response.toString());
-                        try
-                        {
+                        try {
 
-                            if (response.equals(null) || response ==null||response.length()==0)
-                            {
+                            if (response.equals(null) || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(StyleActivity.this,"No data found",Toast.LENGTH_LONG).show();
+                                Toast.makeText(StyleActivity.this, "No data found", Toast.LENGTH_LONG).show();
 
-                            }else {
+                            } else {
 
                                 Reusable_Functions.hDialog();
-
-                                // JSONObject mainObject = new JSONObject(response);
-
                                 JSONObject styleDetails = response.getJSONObject(0);
-
-                                String articleOption=styleDetails.getString("articleOption");
+                                String articleOption = styleDetails.getString("articleOption");
                                 String productName = styleDetails.getString("productName");
                                 String collectionName = styleDetails.getString("collectionName");
                                 String productFabricDesc = styleDetails.getString("productFabricDesc");
@@ -758,10 +680,9 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 double sellThruUnitsRcpt = styleDetails.getDouble("sellThruUnitsRcpt");
                                 double ros = styleDetails.getDouble("ros");
 
-                                String articleCode=styleDetails.getString("articleCode");
-                                String productImageURL=styleDetails.getString("productImageURL");
+                                String articleCode = styleDetails.getString("articleCode");
+                                String productImageURL = styleDetails.getString("productImageURL");
                                 Log.e("row4:===", productImageURL);
-                                //   int usp = styleDetails.getInt("usp");
 
                                 styleDetailsBean = new StyleDetailsBean();
                                 styleDetailsBean.setProductName(productName);
@@ -793,46 +714,38 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
 
                                 Intent intent = new Intent(StyleActivity.this, SwitchingTabActivity.class);
-                                intent.putExtra("articleCode",articleCode);
-                                intent.putExtra("articleOption",articleOption);
+                                intent.putExtra("articleCode", articleCode);
+                                intent.putExtra("articleOption", articleOption);
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
 
                                 intent.putExtra("selCollectionname", collectionNM);
                                 intent.putExtra("selOptionName", optionName);
-                                //intent.putExtra("userId",m_config.userId);
+
                                 startActivity(intent);
                                 finish();
-
-
-
                             }
-                        }
-                        catch(Exception e)
-                        {
-                            Log.e("Exception e",e.toString() +"");
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
+                    public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e("",""+error.networkResponse+"");
-                        Toast.makeText(StyleActivity.this,"Network connectivity fail",Toast.LENGTH_LONG).show();
+                        Log.e("", "" + error.networkResponse + "");
+                        Toast.makeText(StyleActivity.this, "Network connectivity fail", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
 
-        ){
+        ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };
@@ -841,35 +754,26 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
 
-
-
-
     }
 
 
-    private void requestCollectionAPI(int offsetvalue1, final int limit1)
-    {
-        String url= ConstsCore.web_url + "/v1/display/collections/"+userId+"?offset="+collectionoffset +"&limit="+ collectionlimit;
-        // String url="https://ra.manthan.com/v1/display/collections/270389";
+    private void requestCollectionAPI(int offsetvalue1, final int limit1) {
+        String url = ConstsCore.web_url + "/v1/display/collections/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
+
         Log.i("URL   ", url);
-        //   arrayList.clear();
+
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.i("Collection Response   ", response.toString());
-                        try
-                        {
-                            if (response.equals(null) || response == null|| response.length()==0 && collectioncount==0)
-                            {
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && collectioncount == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No collection data found", Toast.LENGTH_LONG).show();
-                            } else if(response.length()==collectionlimit)
-                            {
+                            } else if (response.length() == collectionlimit) {
 
-                                Log.i("limit eq resp length", ""+response.length());
+                                Log.i("limit eq resp length", "" + response.length());
                                 Log.e("offsetvalue", "" + collectionoffset);
                                 Log.e("limit", "" + collectionlimit);
                                 Log.e("count", "" + collectioncount);
@@ -883,28 +787,23 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
                                 }
 
-                                collectionoffset = (collectionlimit * collectioncount) + collectionlimit ;
+                                collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
                                 collectioncount++;
                                 requestCollectionAPI(collectionoffset, collectionlimit);
 
-                            }
-                            else if(response.length()< collectionlimit) {
+                            } else if (response.length() < collectionlimit) {
                                 Reusable_Functions.hDialog();
 
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
-                                    //Log.e("collectionName  :", collectionName.getString("collectionName"));
+
                                     arrayList.add(collectionName.getString("collectionName"));
                                     Log.e("size  :", "" + arrayList.size());
-
                                 }
-
                                 Collections.sort(arrayList);
                                 arrayList.add(0, "Select Collection");
-
-                                Log.e("selcollectionName","==== "+selcollectionName);
-
+                                Log.e("selcollectionName", "==== " + selcollectionName);
 
                                 if (selcollectionName == null || selcollectionName.equals(null)) {
                                     collection.setText("Select Collection");
@@ -922,20 +821,15 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
                                 }
 
-
                                 collection.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         edtsearchCollection.setText("");
-                                        //stylemainlayout.setVisibility(View.GONE);
+
                                         collectionLayout.setVisibility(View.VISIBLE);
                                         optionLayout.setVisibility(View.GONE);
-
-//
                                     }
                                 });
-
-
                                 listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                                     @Override
@@ -944,88 +838,63 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                         collectionNM = (String) collectionAdapter.getItem(position);
                                         collection.setText(collectionNM.trim());
 
-                                        if(selcollectionName == null || selcollectionName.equals(null))
-                                        {
+                                        if (selcollectionName == null || selcollectionName.equals(null)) {
 
-                                        }
-                                        else
-                                        {
-                                            //articleOptionList = new ArrayList<String>();
+                                        } else {
                                             selcollectionName = null;
                                             seloptionName = null;
                                         }
 
-                                        Log.e("collectionNM"," "+collectionNM);
-
-                                        //stylemainlayout.setVisibility(View.VISIBLE);
+                                        Log.e("collectionNM", " " + collectionNM);
                                         collectionLayout.setVisibility(View.GONE);
                                         optionLayout.setVisibility(View.GONE);
 
                                         InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                        if(inputManager != null){
+                                        if (inputManager != null) {
                                             inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                                         }
 
-                                        if(collectionNM.equalsIgnoreCase("Select Collection"))
-                                        {
+                                        if (collectionNM.equalsIgnoreCase("Select Collection")) {
                                             //Toast.makeText(StyleActivity.this,"Please select Collection",Toast.LENGTH_LONG).show();
-                                        }else
-                                        {
+                                        } else {
 
-                                            if (Reusable_Functions.chkStatus(context))
-                                            {
-                                                // int i=1,j=20;
-                                                //Reusable_Functions.hDialog();
+                                            if (Reusable_Functions.chkStatus(context)) {
                                                 Reusable_Functions.sDialog(context, "Loading options data...");
-                                                //collectionNM = (String) parent.getItemAtPosition(position);
-                                                Log.e("select item",collectionNM);
-                                                offsetvalue=0;
-                                                limit=100;
-                                                count=0;
+                                                Log.e("select item", collectionNM);
+                                                offsetvalue = 0;
+                                                limit = 100;
+                                                count = 0;
                                                 articleOptionList.clear();
-                                                Log.e("articleOptionList---", " "+articleOptionList.size());
-                                                requestArticleOptionsAPI(collectionNM,offsetvalue,limit);
+                                                Log.e("articleOptionList---", " " + articleOptionList.size());
+                                                requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
 
+                                            } else {
 
-                                            } else
-                                            {
-                                                // Reusable_Functions.hDialog();
                                                 Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                             }
-
                                         }
-
                                     }
                                 });
-
-
                             }
-                        }
-                        catch(Exception e)
-                        {
-                            Log.e("Exception e",e.toString() +"");
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
+                    public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
-
-        ){
+        ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };
@@ -1034,40 +903,26 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
 
-   }
+    }
 
-    private void requestArticleOptionsAPI(final String collectionNM,int offsetvalue1, final int limit1)
-    {
+    private void requestArticleOptionsAPI(final String collectionNM, int offsetvalue1, final int limit1) {
         String url;
 
-        url = ConstsCore.web_url + "/v1/display/collectionoptions/" +userId + "?collectionName=" + collectionNM.replaceAll(" ", "%20").replaceAll("&","%26")+"&offset="+offsetvalue +"&limit="+ limit;
+        url = ConstsCore.web_url + "/v1/display/collectionoptions/" + userId + "?collectionName=" + collectionNM.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.i("URL article   ", url);
 
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>()
-                {
-
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
-                        Log.i("ArticleOption Response ", response.toString() +" "+articleOptionList.size());
-                        try
-                        {
-                            if (response.equals(null) || response == null|| response.length()==0 && count==0)
-                            {
-
-                                articleOptionList.add(0,"Select Option");
+                    public void onResponse(JSONArray response) {
+                        Log.i("ArticleOption Response ", response.toString() + " " + articleOptionList.size());
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                articleOptionList.add(0, "Select Option");
                                 style.setEnabled(false);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No options data found", Toast.LENGTH_LONG).show();
-                            }
-                            else if(response.length()==limit)
-                            {
-//                                Log.i(" Response length", ""+response.length());
-//                                Log.e("offsetvalue", "" + offsetvalue);
-//                                Log.e("limit", "" + limit);
-//                                Log.e("count", "" + count);
+                            } else if (response.length() == limit) {
 
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonResponse = response.getJSONObject(i);
@@ -1075,13 +930,12 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                     articleOptionList.add(articleOptions);
                                 }
 
-                                offsetvalue = (limit * count) + limit ;
+                                offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
 
-                            }else if(response.length()<limit)
-                            {
-                                Log.i(" Response length", ""+response.length());
+                            } else if (response.length() < limit) {
+                                Log.i(" Response length", "" + response.length());
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String articleOptions = jsonResponse.getString("articleOptions");
@@ -1094,138 +948,77 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 Log.e("articleOptionList", articleOptionList.size() + "");
 
                                 Collections.sort(articleOptionList);
-                                articleOptionList.add(0,"Select Option");
+                                articleOptionList.add(0, "Select Option");
                                 style.setEnabled(true);
                                 DashBoardActivity._collectionitems = new ArrayList();
                                 DashBoardActivity._collectionitems.addAll(articleOptionList);
-
-
-
-                                if(seloptionName == null || seloptionName.equals(null))
-                                {
+                                if (seloptionName == null || seloptionName.equals(null)) {
                                     style.setText("Select Option");
-                                }
-                                else
-                                {
+                                } else {
                                 }
 
                                 optionAdapter.notifyDataSetChanged();
 
-//                                style.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View v) {
-//
-//                                        stylemainlayout.setVisibility(View.GONE);
-//                                        collectionLayout.setVisibility(View.GONE);
-//                                        optionLayout.setVisibility(View.VISIBLE);
-//                                    }
-//
-//                                });
-//
-//                                listOption.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//                                    @Override
-//                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                                        Log.e(" "," "+parent +" "+position+" "+view);
-//
-//                                        optionName = (String) optionAdapter.getItem(position);
-//                                        style.setText(optionName.trim());
-//                                        Log.e("optionName "," "+optionName);
-//
-//                                        stylemainlayout.setVisibility(View.VISIBLE);
-//                                        collectionLayout.setVisibility(View.GONE);
-//                                        optionLayout.setVisibility(View.GONE);
-//
-//                                        InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                                        if(inputManager != null){
-//                                            inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-//                                        }
-//                                    }
-//                                });
-
-
-
                             }
-
-
-                        }
-                        catch(Exception e)
-                        {
-                            Log.e("Exception e",e.toString() +"");
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
+                    public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
-
-        ){
+        ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
-                // String auth_code = "Basic " + Base64.encodeToString((uname+":"+password).getBytes(), Base64.NO_WRAP); //Base64.NO_WRAP flag
-                // Log.i("Auth Code", auth_code);
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
-
-
             }
         };
         int socketTimeout = 60000;//5 seconds
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
-
     }
 
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
 
-        if(optionLayout.getVisibility() == View.VISIBLE)
-        {
+        if (optionLayout.getVisibility() == View.VISIBLE) {
             optionLayout.setVisibility(View.GONE);
             collectionLayout.setVisibility(View.GONE);
             stylemainlayout.setVisibility(View.VISIBLE);
 
             InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            if(inputManager != null){
+            if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
 
-        }
-        else  if(collectionLayout.getVisibility() == View.VISIBLE)
-        {
+        } else if (collectionLayout.getVisibility() == View.VISIBLE) {
             optionLayout.setVisibility(View.GONE);
             collectionLayout.setVisibility(View.GONE);
             stylemainlayout.setVisibility(View.VISIBLE);
 
             InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            if(inputManager != null){
+            if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
 
-        }
-        else
-        {
-            selcollectionName = null ; seloptionName = null;
+        } else {
+            selcollectionName = null;
+            seloptionName = null;
             DashBoardActivity._collectionitems = new ArrayList();
-            Intent intent=new Intent(StyleActivity.this,DashBoardActivity.class);
+            Intent intent = new Intent(StyleActivity.this, DashBoardActivity.class);
             startActivity(intent);
             finish();
         }
-
-
-
     }
 }

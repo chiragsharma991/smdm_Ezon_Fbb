@@ -8,15 +8,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by hasai on 12/09/16.
- */
-public class AboutUsActivity extends AppCompatActivity {
 
+public class AboutUsActivity extends AppCompatActivity {
 
     RelativeLayout btnBack;
     TextView txtversioncode;
@@ -31,7 +27,6 @@ public class AboutUsActivity extends AppCompatActivity {
         txtversioncode = (TextView) findViewById(R.id.versioncode);
         context = this;
         Log.e("About us ","");
-
 
         PackageInfo pInfo = null;
         try {
@@ -55,7 +50,6 @@ public class AboutUsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
 
         Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity.class);
         startActivity(intent);

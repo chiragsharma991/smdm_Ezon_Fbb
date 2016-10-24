@@ -17,26 +17,19 @@ import java.util.ArrayList;
 import apsupportapp.aperotechnologies.com.designapp.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.SalesPvAAnalysis.SalesPvAActivity;
-/**
- * Created by pamrutkar on 21/09/16.
- */
-public class
 
 
-
-SalesPvAAdapter extends BaseAdapter {
+public class SalesPvAAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<ProductNameBean> productNameBeanArrayList;
-SalesPvAActivity mainActivity;
-
+    SalesPvAActivity mainActivity;
 
     public SalesPvAAdapter(ArrayList<ProductNameBean> productNameBeanArrayList, Context context) {
         this.context = context;
         this.productNameBeanArrayList = productNameBeanArrayList;
     }
-
 
     @Override
     public int getCount() {
@@ -53,13 +46,10 @@ SalesPvAActivity mainActivity;
         return position;
     }
 
-
     static class ViewHolderItem {
         TextView txtPlanClass, txtPlanSales, txtNetSales, txtPvASales, txtPlan, txtAchieve;
         RelativeLayout rel;
-
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -73,24 +63,18 @@ SalesPvAActivity mainActivity;
             viewHolder.txtPlanClass = (TextView) convertView.findViewById(R.id.txtPlanClass);
             viewHolder.txtPlanSales = (TextView) convertView.findViewById(R.id.txtPlanSales);
             viewHolder.txtNetSales = (TextView) convertView.findViewById(R.id.txtNetSales);
-            // viewHolder.txtPvASales = (TextView) convertView.findViewById(R.id.txtPvASales);
+
             viewHolder.rel = (RelativeLayout) convertView.findViewById(R.id.rel);
             viewHolder.txtPlan = (TextView) convertView.findViewById(R.id.txtPlan);
             viewHolder.txtAchieve = (TextView) convertView.findViewById(R.id.txtAchieve);
-
-
             convertView.setTag(viewHolder);
             convertView.setTag(R.id.txtPlanClass, viewHolder.txtPlanClass);
             convertView.setTag(R.id.txtPlanSales, viewHolder.txtPlanSales);
             convertView.setTag(R.id.txtNetSales, viewHolder.txtNetSales);
-            // convertView.setTag(R.id.txtPvASales,viewHolder.txtPvASales);
+
         } else {
             viewHolder = (ViewHolderItem) convertView.getTag();
         }
-
-
-
-
 
         viewHolder.rel.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         Log.e("--- ", " " + viewHolder.rel.getMeasuredWidth() + " " + (200 / 100));
@@ -125,44 +109,37 @@ SalesPvAActivity mainActivity;
         viewHolder.txtPlanClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SalesPvAActivity.salesPvA_SegmentClick=" ";
-                Toast.makeText(context,"name click"+viewHolder.txtPlanClass.getText().toString(),Toast.LENGTH_SHORT).show();
-                Log.e("segmented click",""+ SalesPvAActivity.salesPvA_SegmentClick);
-                switch(SalesPvAActivity.salesPvA_SegmentClick)
-                {
+
+                Toast.makeText(context, "name click" + viewHolder.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
+                Log.e("segmented click", "" + SalesPvAActivity.salesPvA_SegmentClick);
+                switch (SalesPvAActivity.salesPvA_SegmentClick) {
                     case "WTD":
-                        if(SalesPvAActivity.txtPlanClass.getText().toString().equals("Department")){
-                            Toast.makeText(context,"on adapter click 1"+viewHolder.txtPlanClass.getText().toString()+""+SalesPvAActivity.txtPlanClass.getText().toString(),Toast.LENGTH_SHORT).show();
+                        if (SalesPvAActivity.txtPlanClass.getText().toString().equals("Department")) {
+                            Toast.makeText(context, "on adapter click 1" + viewHolder.txtPlanClass.getText().toString() + "" + SalesPvAActivity.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
                             SalesPvAActivity.txtPlanClass.setText("Category");
-                        }
-                        else if(SalesPvAActivity.txtPlanClass.getText().toString().equals("Category")){
-                        Toast.makeText(context,"on adapter click 2"+viewHolder.txtPlanClass.getText().toString()+""+SalesPvAActivity.txtPlanClass.getText().toString(),Toast.LENGTH_SHORT).show();
-                        SalesPvAActivity.txtPlanClass.setText("Plan Class");
-                    }
-                        else if(SalesPvAActivity.txtPlanClass.getText().toString().equals("Plan Class")){
-                            Toast.makeText(context,"on adapter click 3"+viewHolder.txtPlanClass.getText().toString()+""+SalesPvAActivity.txtPlanClass.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else if (SalesPvAActivity.txtPlanClass.getText().toString().equals("Category")) {
+                            Toast.makeText(context, "on adapter click 2" + viewHolder.txtPlanClass.getText().toString() + "" + SalesPvAActivity.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
+                            SalesPvAActivity.txtPlanClass.setText("Plan Class");
+                        } else if (SalesPvAActivity.txtPlanClass.getText().toString().equals("Plan Class")) {
+                            Toast.makeText(context, "on adapter click 3" + viewHolder.txtPlanClass.getText().toString() + "" + SalesPvAActivity.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
                             SalesPvAActivity.txtPlanClass.setText("Brand");
-                        }
-                        else if(SalesPvAActivity.txtPlanClass.getText().toString().equals("Brand")){
-                            Toast.makeText(context,"on adapter click 4"+viewHolder.txtPlanClass.getText().toString()+""+SalesPvAActivity.txtPlanClass.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else if (SalesPvAActivity.txtPlanClass.getText().toString().equals("Brand")) {
+                            Toast.makeText(context, "on adapter click 4" + viewHolder.txtPlanClass.getText().toString() + "" + SalesPvAActivity.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
                             SalesPvAActivity.txtPlanClass.setText("Brand Plan Class");
                         }
                         break;
                     case "LW":
-                        if(SalesPvAActivity.txtPlanClass.getText().toString().equals("Department")){
-                            Toast.makeText(context,"on adapter click 1 -"+viewHolder.txtPlanClass.getText().toString()+""+SalesPvAActivity.txtPlanClass.getText().toString(),Toast.LENGTH_SHORT).show();
+                        if (SalesPvAActivity.txtPlanClass.getText().toString().equals("Department")) {
+                            Toast.makeText(context, "on adapter click 1 -" + viewHolder.txtPlanClass.getText().toString() + "" + SalesPvAActivity.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
                             SalesPvAActivity.txtPlanClass.setText("Category");
-                        }
-                        else if(SalesPvAActivity.txtPlanClass.getText().toString().equals("Category")){
-                            Toast.makeText(context,"on adapter click 2-"+viewHolder.txtPlanClass.getText().toString()+""+SalesPvAActivity.txtPlanClass.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else if (SalesPvAActivity.txtPlanClass.getText().toString().equals("Category")) {
+                            Toast.makeText(context, "on adapter click 2-" + viewHolder.txtPlanClass.getText().toString() + "" + SalesPvAActivity.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
                             SalesPvAActivity.txtPlanClass.setText("Plan Class");
-                        }
-                        else if(SalesPvAActivity.txtPlanClass.getText().toString().equals("Plan Class")){
-                            Toast.makeText(context,"on adapter click 3-"+viewHolder.txtPlanClass.getText().toString()+""+SalesPvAActivity.txtPlanClass.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else if (SalesPvAActivity.txtPlanClass.getText().toString().equals("Plan Class")) {
+                            Toast.makeText(context, "on adapter click 3-" + viewHolder.txtPlanClass.getText().toString() + "" + SalesPvAActivity.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
                             SalesPvAActivity.txtPlanClass.setText("Brand");
-                        }
-                        else if(SalesPvAActivity.txtPlanClass.getText().toString().equals("Brand")){
-                            Toast.makeText(context,"on adapter click 4-"+viewHolder.txtPlanClass.getText().toString()+""+SalesPvAActivity.txtPlanClass.getText().toString(),Toast.LENGTH_SHORT).show();
+                        } else if (SalesPvAActivity.txtPlanClass.getText().toString().equals("Brand")) {
+                            Toast.makeText(context, "on adapter click 4-" + viewHolder.txtPlanClass.getText().toString() + "" + SalesPvAActivity.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
                             SalesPvAActivity.txtPlanClass.setText("Brand Plan Class");
                         }
                 }
