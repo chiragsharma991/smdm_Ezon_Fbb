@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 
 public class AboutUsActivity extends AppCompatActivity {
-
+//
     RelativeLayout btnBack;
     TextView txtversioncode;
     Context context;
