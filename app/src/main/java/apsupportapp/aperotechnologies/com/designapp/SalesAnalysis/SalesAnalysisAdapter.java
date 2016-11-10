@@ -27,6 +27,7 @@ public class SalesAnalysisAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     Context context;
     String s;
+    //
 
     public SalesAnalysisAdapter(ArrayList<ProductNameBean> arrayList, Context context, String s) {
 
