@@ -10,6 +10,7 @@
     <Protected-broadcast android:name="android.location.USER_PRESENT" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
@@ -29,8 +30,7 @@
         <activity
             android:name="apsupportapp.aperotechnologies.com.designapp.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <activity
             android:name="apsupportapp.aperotechnologies.com.designapp.DashBoardActivity"
@@ -45,8 +45,7 @@
             android:name="apsupportapp.aperotechnologies.com.designapp.AboutUsActivity"
             android:label=""
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-            </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <activity
             android:name="apsupportapp.aperotechnologies.com.designapp.StyleActivity"
@@ -64,50 +63,56 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-
         <activity
             android:name="apsupportapp.aperotechnologies.com.designapp.Prod_FilterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.SearchActivity"
+            android:name="apsupportapp.aperotechnologies.com.designapp.SearchActivity1"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.ScannerActivity"
+            android:name="apsupportapp.aperotechnologies.com.designapp.SalesAnalysisOld.SalesAnalysisActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.ScannerActivity1"
+            android:name="apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.ContinuousCaptureActivity"
+            android:name=".TransparentActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.CustomScannerActivity"
+            android:name=".AnyOrientationCaptureActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.AnyOrientationCaptureActivity"
+            android:name=".PvaSalesAnalysis.SalesPvAActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity android:name="apsupportapp.aperotechnologies.com.designapp.SearchActivity1"
+            android:windowSoftInputMode="stateHidden"></activity>Ò
+        <activity
+            android:name=".SalesAnalysis.SalesAnalysisActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".SalesAnalysis.SalesFilterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <!-- Local Notification receiver-->
+        <receiver android:name=".LocalNotificationReceiver"></receiver>
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ffdd609785d2fe5506254706299413b2c3ea9898" />
     </application>
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

@@ -27,8 +27,8 @@ android {
         applicationId "apsupportapp.aperotechnologies.com.designapp"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 21
-        versionName "1.21"
+        versionCode 26
+        versionName "1.26"
     }
     buildTypes {
         release {
@@ -62,4 +62,9 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.2@aar') {
         transitive = true;
     }
+    //compile 'me.sudar:zxing-orient:2.1.1@aar'
+    compile files('libs/gson-2.3.1.jar')
+    compile 'com.daprlabs.aaron:cardstack:0.3.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.0.9'
+
 }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:background="@android:color/white"
+        android:visibility="visible"
+        android:id="@+id/layoutComment"
+        android:orientation="vertical"
+        android:layout_marginBottom="76dp"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="150dp">
+
+        <View
+            android:background="@color/text_grey"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/txtComment"
+            android:layout_margin="10dp"
+            android:gravity="top"
+            android:text = "Comment"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <View
+            android:background="#E9EDED"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <apsupportapp.aperotechnologies.com.designapp.VisualAssortment.EditTextPopUpFixed
+                android:imeOptions="actionDone"
+                android:maxLines="4"
+                android:minHeight="100dp"
+                android:layout_toLeftOf="@+id/btnCommentDone"
+                android:id="@+id/edtTextComment"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:hint = "Comments"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:background="@android:color/transparent"
+                android:id="@+id/btnCommentDone"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:text="Done"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+</FrameLayout>
+

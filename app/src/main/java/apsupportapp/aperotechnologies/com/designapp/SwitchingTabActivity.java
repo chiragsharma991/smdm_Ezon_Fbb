@@ -10,12 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 public class SwitchingTabActivity extends AppCompatActivity {
 
-    Button backButton,imageBtnHomePage;
+    RelativeLayout backButton,imageBtnHomePage;
     public static  Activity switchingTabActivity;
     public static ViewPager viewPager;
     public static TabLayout tabLayout;
@@ -30,8 +31,8 @@ public class SwitchingTabActivity extends AppCompatActivity {
 
         switchingTabActivity = this;
 
-        backButton=(Button)findViewById(R.id.imageBtnBack1);
-        imageBtnHomePage=(Button)findViewById(R.id.imageBtnHomePage);
+        backButton = (RelativeLayout)findViewById(R.id.imageBtnBack1);
+        imageBtnHomePage=(RelativeLayout)findViewById(R.id.imageBtnHomePage);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

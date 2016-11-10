@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Cache;
@@ -25,7 +28,8 @@ import java.util.ArrayList;
  * Created by pamrutkar on 23/08/16.
  */
 public class KeyProductActivity extends AppCompatActivity implements View.OnClickListener, OnRowPressListener {
-    Button btnBack, btnSearch;
+    RelativeLayout btnBack;
+    RelativeLayout btnSearch;
     public static String prodName = "";
     private final String LOG_TAG = "MainActivity";
     KeyProductAdapter adapter;
@@ -113,9 +117,9 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        btnBack = (Button) findViewById(R.id.imageBtnBack);
+        btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         btnBack.setOnClickListener(this);
-        btnSearch = (Button) findViewById(R.id.imageBtnSearch);
+        btnSearch = (RelativeLayout) findViewById(R.id.imageBtnSearch);
         btnSearch.setOnClickListener(this);
 
     }

@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ public class ProductName_Fragment extends Fragment {
     TableLayout tableBProd_Frag;
     TableLayout tableCProd_Frag;
     TableLayout tableDProd_Frag;
+
     Button btnProdFilter;
     ViewGroup view;
     HorizontalScrollView horizontalScrollViewB;
@@ -131,7 +133,7 @@ public class ProductName_Fragment extends Fragment {
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relativeLayout.setBackgroundColor(Color.WHITE);
         relProd_Frag.setVisibility(View.VISIBLE);
-       // btnProdFilter=(Button)view.findViewById(R.id.imageBtnFilter);
+        btnProdFilter=(Button)view.findViewById(R.id.imageBtnFilter);
         txt_subdepName = (TextView)view.findViewById(R.id.txtSubDeptName);
 
         Log.e("parent"," "+ KeyProductActivity.viewPager.getParent());
@@ -205,17 +207,16 @@ public class ProductName_Fragment extends Fragment {
         horizontalScrollViewD.addView(tableDProd_Frag);
 
         addComponentToMainLayout();
-        int headerCellsWidth[] = new int[headers.length];
+        //int headerCellsWidth[] = new int[headers.length];
 
-//        btnProdFilter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.e("Button clicked -----", "");
-//                Intent intent = new Intent(context, Prod_FilterActivity.class);
-//                startActivity(intent);
-//                getActivity().finish();
-//            }
-//        });
+        btnProdFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Prod_FilterActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
         return view;
     }
@@ -223,7 +224,7 @@ public class ProductName_Fragment extends Fragment {
 
     private void requestFilterProductName(int offsetvalue1, int limit1) {
 
-        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?productName=" + f_productName.replace(" ", "%20") + "&offset" + offsetvalue + "&limit" + limit;
+        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?productName=" + f_productName.replaceAll(" ", "%20").replaceAll("&","%26") + "&offset" + offsetvalue + "&limit" + limit;
         Log.i(" Filter Prod URL----------   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

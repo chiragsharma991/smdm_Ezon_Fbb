@@ -10,14 +10,21 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -35,8 +42,8 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import apsupportapp.aperotechnologies.com.designapp.R;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,12 +57,16 @@ import java.util.Map;
 import amobile.android.barcodesdk.api.IWrapperCallBack;
 import amobile.android.barcodesdk.api.Wrapper;
 
+//import com.google.zxing.integration.android.IntentIntegrator;
+//import com.google.zxing.integration.android.IntentResult;
+
 public class StyleActivity extends AppCompatActivity implements IWrapperCallBack //implements IWrapperCallBack {
 {   Button  btnSearch,btnBarcode;
     private Wrapper m_wrapper = null;
-    Button imageBtnBack;
-   // Spinner style;
-    SearchableSpinner collection,style;
+    RelativeLayout imageBtnBack;
+    // Spinner style;
+    //SearchableSpinner collection,style;
+    TextView collection,style;
     EditText edtSearch;
     ArrayAdapter<String> adapter1,adapter2;
     List<String> collectionList,StyleList,list;
@@ -74,10 +85,16 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     int collectionoffset=0, collectionlimit=100,collectioncount=0;
     SharedPreferences sharedPreferences;
     Button btnSubmit;
+    EditText edtsearchCollection, edtsearchOption;
 
 
     public static String selcollectionName = null , seloptionName = null;
-    String tempselcollectionName = "";
+
+    RelativeLayout stylemainlayout;
+    LinearLayout collectionLayout, optionLayout;
+    private ListView listCollection, listOption;
+    ListAdapter collectionAdapter;
+    ListAdapter1 optionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +131,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         collectionList = new ArrayList<String>();
         arrayList = new ArrayList<String>();
         list = new ArrayList<>();
-
         articleOptionList = new ArrayList<>();
 
         if (Reusable_Functions.chkStatus(context)) {
@@ -128,9 +144,17 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
+        stylemainlayout = (RelativeLayout) findViewById(R.id.stylemainlayout);
+        stylemainlayout.setVisibility(View.VISIBLE);
+        collectionLayout = (LinearLayout) findViewById(R.id.collectionLayout);
+        optionLayout = (LinearLayout) findViewById(R.id.optionLayout);
+        edtsearchCollection = (EditText) findViewById(R.id.searchCollection);
+        edtsearchOption = (EditText) findViewById(R.id.searchOption);
+
+
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         btnBarcode = (Button) findViewById(R.id.btnBarcode);
-        imageBtnBack = (Button) findViewById(R.id.imageBtnBack);
+        imageBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
 
         if(getIntent().getExtras() != null)
         {
@@ -140,51 +164,38 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
         Log.e("selcollectionName"," "+selcollectionName+" "+seloptionName);
 
-        collection = (SearchableSpinner)findViewById(R.id.searchablespinnerlibrary);
-        collection.setTitle("Select Collection");
+//        collection = (SearchableSpinner)findViewById(R.id.searchablespinnerlibrary);
+//        collection.setTitle("Select Collection");
+
+        collection = (TextView) findViewById(R.id.searchablespinnerlibrary);
+        collection.setText("Select Collection");
+        listCollection = (ListView) findViewById(R.id.listCollection);
+        collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
+        //attach the adapter to the list
+        listCollection.setAdapter(collectionAdapter);
+        listCollection.setTextFilterEnabled(true);
+        collectionAdapter.notifyDataSetChanged();
 
 
-        style = (SearchableSpinner) findViewById(R.id.searchablespinnerlibrary1);
-        list.add("Select Option");
+        style = (TextView) findViewById(R.id.searchablespinnerlibrary1);
+        style.setText("Select Option");
         style.setEnabled(false);
+        listOption = (ListView) findViewById(R.id.listOption);
+        optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
+        listOption.setAdapter(optionAdapter);
+        listOption.setTextFilterEnabled(true);
+        optionAdapter.notifyDataSetChanged();
 
-
-        style.setTitle("Select Option");
-        adapter2 = new ArrayAdapter<String>(StyleActivity.this, android.R.layout.simple_spinner_item, list);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        style.setAdapter(adapter2);
-
-        style.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                optionName = parent.getSelectedItem().toString().trim();
-                Log.e("optionName "," "+optionName);
-
-                InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if(inputManager != null){
-                    inputManager.hideSoftInputFromWindow(style.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                }
-
-
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                View view = getCurrentFocus();
-                if (view != null) {
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                }
-            }
-        });
+//
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(collection.getSelectedItem().toString().trim().equals("Select Collection"))
+                if(collection.getText().toString().trim().equals("Select Collection"))
                 {
                     Toast.makeText(StyleActivity.this,"Please select Collection",Toast.LENGTH_LONG).show();
                 }
-                else if(style.getSelectedItem().toString().trim().equals("Select Option"))
+                else if(style.getText().toString().trim().equals("Select Option"))
                 {
                     Toast.makeText(StyleActivity.this,"Please select Option",Toast.LENGTH_LONG).show();
                 }
@@ -232,12 +243,118 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             @Override
             public void onClick(View v) {
                 selcollectionName = null ; seloptionName = null;
+                DashBoardActivity._collectionitems = new ArrayList();
                 Intent intent=new Intent(StyleActivity.this,DashBoardActivity.class);
                 startActivity(intent);
                 finish();
 
             }
         });
+
+        edtsearchCollection.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                collectionAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                collectionAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                collectionAdapter.getFilter().filter(s);
+            }
+        });
+
+        edtsearchCollection.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_GO)) {
+                    InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if(inputManager != null){
+                        inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+
+
+                }
+                return false;
+            }
+
+        });
+
+
+
+        edtsearchOption.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                optionAdapter.getFilter().filter(s);
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                optionAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                optionAdapter.getFilter().filter(s);
+            }
+        });
+
+
+        edtsearchOption.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_GO)) {
+                    InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if(inputManager != null){
+                        inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+
+
+                }
+                return false;
+            }
+
+        });
+
+        style.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtsearchOption.setText("");
+                //stylemainlayout.setVisibility(View.GONE);
+                collectionLayout.setVisibility(View.GONE);
+                optionLayout.setVisibility(View.VISIBLE);
+            }
+
+        });
+
+        listOption.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e(" "," "+parent +" "+position+" "+view);
+
+                optionName = (String) optionAdapter.getItem(position);
+                style.setText(optionName.trim());
+                Log.e("optionName "," "+optionName);
+
+                stylemainlayout.setVisibility(View.VISIBLE);
+                collectionLayout.setVisibility(View.GONE);
+                optionLayout.setVisibility(View.GONE);
+
+                InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if(inputManager != null){
+                    inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        });
+
+
+
 
 
     }
@@ -250,7 +367,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             if (m_wrapper.Open()) {
                 m_wrapper.SetDispathBarCode(false);
                 m_wrapper.SetLightMode2D(Wrapper.LightMode2D.mix);
-                m_wrapper.SetTimeOut(15);
+                m_wrapper.SetTimeOut(30);
             } else {
                 m_wrapper = null;
             }
@@ -279,13 +396,21 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 //        }
 //        m_wrapper.Close();
         byte[] bytes = strData.getBytes();
-        Log.e("hello from barcode","");
-      //  Toast.makeText(StyleActivity.this,"Barcode Scan:"+strData,Toast.LENGTH_SHORT).show();
         if(strData == null)
         {
             Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
-        } else
+        }
+        else if (strData.equalsIgnoreCase("Unknown command : setLightMode2D"))
         {
+            Log.e("Do nothing","");
+        }
+        else if(strData.equalsIgnoreCase("Time Out"))
+        {
+
+        }
+        else
+        {
+
             Toast.makeText(this, "Barcode Scanned: " + strData, Toast.LENGTH_LONG).show();
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.hDialog();
@@ -340,9 +465,14 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
     public void scanBarcode(View view) {
 
-        new IntentIntegrator(this).initiateScan();
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setCaptureActivity(AnyOrientationCaptureActivity.class);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+        integrator.setPrompt("Place a barcode inside the viewfinder rectangle to scan it");
+        integrator.setOrientationLocked(true);
+        integrator.setBeepEnabled(false);
+        integrator.initiateScan();
 
-//        Toast.makeText(StyleActivity.this,"Barcode :")
     }
 
     @Override
@@ -594,78 +724,79 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
                             }else {
 
-                                    Reusable_Functions.hDialog();
+                                Reusable_Functions.hDialog();
 
                                 // JSONObject mainObject = new JSONObject(response);
 
-                                    JSONObject styleDetails = response.getJSONObject(0);
+                                JSONObject styleDetails = response.getJSONObject(0);
 
-                                    String articleOption=styleDetails.getString("articleOption");
-                                    String productName = styleDetails.getString("productName");
-                                    String collectionName = styleDetails.getString("collectionName");
-                                    String productFabricDesc = styleDetails.getString("productFabricDesc");
-                                    String productFitDesc = styleDetails.getString("productFitDesc");
-                                    String productFinishDesc = styleDetails.getString("productFinishDesc");
-                                    String seasonName = styleDetails.getString("seasonName");
+                                String articleOption=styleDetails.getString("articleOption");
+                                String productName = styleDetails.getString("productName");
+                                String collectionName = styleDetails.getString("collectionName");
+                                String productFabricDesc = styleDetails.getString("productFabricDesc");
+                                String productFitDesc = styleDetails.getString("productFitDesc");
+                                String productFinishDesc = styleDetails.getString("productFinishDesc");
+                                String seasonName = styleDetails.getString("seasonName");
 
-                                    String promoFlg = styleDetails.getString("promoFlg");
-                                    String keyProductFlg = styleDetails.getString("keyProductFlg");
+                                String promoFlg = styleDetails.getString("promoFlg");
+                                String keyProductFlg = styleDetails.getString("keyProductFlg");
 
 
-                                    String firstReceiptDate = styleDetails.getString("firstReceiptDate");
-                                    String lastReceiptDate = styleDetails.getString("lastReceiptDate");
-                                    double fwdWeekCover = styleDetails.getDouble("fwdWeekCover");
+                                String firstReceiptDate = styleDetails.getString("firstReceiptDate");
+                                String lastReceiptDate = styleDetails.getString("lastReceiptDate");
+                                double fwdWeekCover = styleDetails.getDouble("fwdWeekCover");
 
-                                    int twSaleTotQty = styleDetails.getInt("twSaleTotQty");
-                                    int lwSaleTotQty = styleDetails.getInt("lwSaleTotQty");
-                                    int ytdSaleTotQty = styleDetails.getInt("ytdSaleTotQty");
+                                int twSaleTotQty = styleDetails.getInt("twSaleTotQty");
+                                int lwSaleTotQty = styleDetails.getInt("lwSaleTotQty");
+                                int ytdSaleTotQty = styleDetails.getInt("ytdSaleTotQty");
 
-                                    int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
-                                    int stkGitQty = styleDetails.getInt("stkGitQty");
-                                    int targetStock = styleDetails.getInt("targetStock");
+                                int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
+                                int stkGitQty = styleDetails.getInt("stkGitQty");
+                                int targetStock = styleDetails.getInt("targetStock");
 
-                                    int unitGrossPrice = styleDetails.getInt("unitGrossPrice");
-                                    double sellThruUnitsRcpt = styleDetails.getDouble("sellThruUnitsRcpt");
-                                    double ros = styleDetails.getDouble("ros");
+                                int unitGrossPrice = styleDetails.getInt("unitGrossPrice");
+                                double sellThruUnitsRcpt = styleDetails.getDouble("sellThruUnitsRcpt");
+                                double ros = styleDetails.getDouble("ros");
 
-                                    String articleCode=styleDetails.getString("articleCode");
-                                    String productImageURL=styleDetails.getString("productImageURL");
-                                    Log.e("row4:===", productImageURL);
-                                 //   int usp = styleDetails.getInt("usp");
+                                String articleCode=styleDetails.getString("articleCode");
+                                String productImageURL=styleDetails.getString("productImageURL");
+                                Log.e("row4:===", productImageURL);
+                                //   int usp = styleDetails.getInt("usp");
 
-                                    styleDetailsBean = new StyleDetailsBean();
-                                    styleDetailsBean.setProductName(productName);
-                                    styleDetailsBean.setCollectionName(collectionName);
-                                    styleDetailsBean.setProductFabricDesc(productFabricDesc);
-                                    styleDetailsBean.setProductFitDesc(productFitDesc);
-                                    styleDetailsBean.setProductFinishDesc(productFinishDesc);
-                                    styleDetailsBean.setSeasonName(seasonName);
+                                styleDetailsBean = new StyleDetailsBean();
+                                styleDetailsBean.setProductName(productName);
+                                styleDetailsBean.setCollectionName(collectionName);
+                                styleDetailsBean.setProductFabricDesc(productFabricDesc);
+                                styleDetailsBean.setProductFitDesc(productFitDesc);
+                                styleDetailsBean.setProductFinishDesc(productFinishDesc);
+                                styleDetailsBean.setSeasonName(seasonName);
 
-                                    styleDetailsBean.setFirstReceiptDate(firstReceiptDate);
-                                    styleDetailsBean.setLastReceiptDate(lastReceiptDate);
-                                    styleDetailsBean.setFwdWeekCover(fwdWeekCover);
+                                styleDetailsBean.setFirstReceiptDate(firstReceiptDate);
+                                styleDetailsBean.setLastReceiptDate(lastReceiptDate);
+                                styleDetailsBean.setFwdWeekCover(fwdWeekCover);
 
-                                    styleDetailsBean.setTwSaleTotQty(twSaleTotQty);
-                                    styleDetailsBean.setLwSaleTotQty(lwSaleTotQty);
-                                    styleDetailsBean.setYtdSaleTotQty(ytdSaleTotQty);
+                                styleDetailsBean.setTwSaleTotQty(twSaleTotQty);
+                                styleDetailsBean.setLwSaleTotQty(lwSaleTotQty);
+                                styleDetailsBean.setYtdSaleTotQty(ytdSaleTotQty);
 
-                                    styleDetailsBean.setStkOnhandQty(stkOnhandQty);
-                                    styleDetailsBean.setStkGitQty(stkGitQty);
-                                    styleDetailsBean.setTargetStock(targetStock);
+                                styleDetailsBean.setStkOnhandQty(stkOnhandQty);
+                                styleDetailsBean.setStkGitQty(stkGitQty);
+                                styleDetailsBean.setTargetStock(targetStock);
 
-                                    styleDetailsBean.setUnitGrossPrice(unitGrossPrice);
-                                    styleDetailsBean.setSellThruUnitsRcpt(sellThruUnitsRcpt);
-                                    styleDetailsBean.setRos(ros);
+                                styleDetailsBean.setUnitGrossPrice(unitGrossPrice);
+                                styleDetailsBean.setSellThruUnitsRcpt(sellThruUnitsRcpt);
+                                styleDetailsBean.setRos(ros);
 
-                                    styleDetailsBean.setPromoFlag(promoFlg);
-                                    styleDetailsBean.setKeyProductFlg(keyProductFlg);
-                                    styleDetailsBean.setProductImageURL(productImageURL);
+                                styleDetailsBean.setPromoFlag(promoFlg);
+                                styleDetailsBean.setKeyProductFlg(keyProductFlg);
+                                styleDetailsBean.setProductImageURL(productImageURL);
 
 
                                 Intent intent = new Intent(StyleActivity.this, SwitchingTabActivity.class);
                                 intent.putExtra("articleCode",articleCode);
                                 intent.putExtra("articleOption",articleOption);
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
+
                                 intent.putExtra("selCollectionname", collectionNM);
                                 intent.putExtra("selOptionName", optionName);
                                 //intent.putExtra("userId",m_config.userId);
@@ -719,9 +850,9 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     private void requestCollectionAPI(int offsetvalue1, final int limit1)
     {
         String url= ConstsCore.web_url + "/v1/display/collections/"+userId+"?offset="+collectionoffset +"&limit="+ collectionlimit;
-       // String url="https://ra.manthan.com/v1/display/collections/270389";
+        // String url="https://ra.manthan.com/v1/display/collections/270389";
         Log.i("URL   ", url);
-      //   arrayList.clear();
+        //   arrayList.clear();
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
@@ -739,7 +870,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                             {
 
                                 Log.i("limit eq resp length", ""+response.length());
-                              Log.e("offsetvalue", "" + collectionoffset);
+                                Log.e("offsetvalue", "" + collectionoffset);
                                 Log.e("limit", "" + collectionlimit);
                                 Log.e("count", "" + collectioncount);
 
@@ -757,14 +888,12 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 requestCollectionAPI(collectionoffset, collectionlimit);
 
                             }
-                            else if(response.length()< collectionlimit)
-                            {
+                            else if(response.length()< collectionlimit) {
                                 Reusable_Functions.hDialog();
 
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
-                                    collectionNM=collectionName.getString("collectionName");
+                                    collectionNM = collectionName.getString("collectionName");
                                     //Log.e("collectionName  :", collectionName.getString("collectionName"));
                                     arrayList.add(collectionName.getString("collectionName"));
                                     Log.e("size  :", "" + arrayList.size());
@@ -772,58 +901,69 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 }
 
                                 Collections.sort(arrayList);
-                                arrayList.add(0,"Select Collection");
-                                adapter1 = new ArrayAdapter<String>(StyleActivity.this, android.R.layout.simple_spinner_item, arrayList);
-                                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                collection.setAdapter(adapter1);
+                                arrayList.add(0, "Select Collection");
 
-                                if(selcollectionName == null || selcollectionName.equals(null))
-                                {
-                                    collection.setSelection(0);
-                                }
-                                else
-                                {
-                                    if(arrayList.contains(selcollectionName))
-                                    {
-                                        collection.setSelection(arrayList.indexOf(selcollectionName));
+                                Log.e("selcollectionName","==== "+selcollectionName);
+
+
+                                if (selcollectionName == null || selcollectionName.equals(null)) {
+                                    collection.setText("Select Collection");
+                                } else {
+                                    if (arrayList.contains(selcollectionName)) {
+                                        collectionNM = selcollectionName;
+                                        optionName = seloptionName;
+                                        collection.setText(selcollectionName);
+                                        style.setText(seloptionName);
+                                        style.setEnabled(true);
+                                        articleOptionList.addAll(DashBoardActivity._collectionitems);
+                                    } else {
+                                        collection.setText("Select Collection");
                                     }
-                                    else
-                                    {
-                                        collection.setSelection(0);
-                                    }
 
                                 }
 
 
-                                collection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-                                {
-                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-                                    {
+                                collection.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        edtsearchCollection.setText("");
+                                        //stylemainlayout.setVisibility(View.GONE);
+                                        collectionLayout.setVisibility(View.VISIBLE);
+                                        optionLayout.setVisibility(View.GONE);
 
-                                        collectionNM = parent.getSelectedItem().toString().trim();
+//
+                                    }
+                                });
 
-                                        //Log.e("---- "," "+collectionNM+" "+collectionNM.equals(tempselcollectionName));
 
-                                        if(collectionNM.equals(tempselcollectionName))
-                                        {
-                                            selcollectionName = null;
-                                            seloptionName = null;
-                                        }
+                                listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        //Log.e(" ------- "," "+parent +" "+position+" "+view);
+                                        collectionNM = (String) collectionAdapter.getItem(position);
+                                        collection.setText(collectionNM.trim());
+
                                         if(selcollectionName == null || selcollectionName.equals(null))
                                         {
 
                                         }
                                         else
                                         {
-                                            tempselcollectionName = selcollectionName;
+                                            //articleOptionList = new ArrayList<String>();
+                                            selcollectionName = null;
+                                            seloptionName = null;
                                         }
 
+                                        Log.e("collectionNM"," "+collectionNM);
 
-
+                                        //stylemainlayout.setVisibility(View.VISIBLE);
+                                        collectionLayout.setVisibility(View.GONE);
+                                        optionLayout.setVisibility(View.GONE);
 
                                         InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                         if(inputManager != null){
-                                            inputManager.hideSoftInputFromWindow(collection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                                            inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                                         }
 
                                         if(collectionNM.equalsIgnoreCase("Select Collection"))
@@ -832,19 +972,20 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                         }else
                                         {
 
-                                            Log.e("---999999---"," ");
                                             if (Reusable_Functions.chkStatus(context))
                                             {
-                                               // int i=1,j=20;
+                                                // int i=1,j=20;
                                                 //Reusable_Functions.hDialog();
                                                 Reusable_Functions.sDialog(context, "Loading options data...");
-                                                collectionNM= (String) parent.getItemAtPosition(position);
+                                                //collectionNM = (String) parent.getItemAtPosition(position);
                                                 Log.e("select item",collectionNM);
                                                 offsetvalue=0;
                                                 limit=100;
-                                                 count=0;
+                                                count=0;
                                                 articleOptionList.clear();
+                                                Log.e("articleOptionList---", " "+articleOptionList.size());
                                                 requestArticleOptionsAPI(collectionNM,offsetvalue,limit);
+
 
                                             } else
                                             {
@@ -853,12 +994,11 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                             }
 
                                         }
-                                    } // to close the onItemSelected
-                                    public void onNothingSelected(AdapterView<?> parent)
-                                    {
 
                                     }
                                 });
+
+
                             }
                         }
                         catch(Exception e)
@@ -903,46 +1043,41 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
 
 
+
+
+
     private void requestArticleOptionsAPI(final String collectionNM,int offsetvalue1, final int limit1)
     {
         String url;
 
-       // url = "https://ra.manthan.com/v1/display/collectionoptions/270389?collectionName=" + collectionNM.replace(" ", "%20")+"&offset="+offsetvalue +"&limit="+ limit;
         url = ConstsCore.web_url + "/v1/display/collectionoptions/" +userId + "?collectionName=" + collectionNM.replaceAll(" ", "%20").replaceAll("&","%26")+"&offset="+offsetvalue +"&limit="+ limit;
-       // url = "https://ra.manthan.com/v1/display/collectionoptions/" + m_config.userId + "?collectionName=" + collectionNM.replace(" ", "%20")+"&offset=1&limit=20";
         Log.i("URL article   ", url);
-        final int[] optPos = {0};
 
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
 
-
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.i("ArticleOption Response ", response.toString());
+                        Log.i("ArticleOption Response ", response.toString() +" "+articleOptionList.size());
                         try
                         {
                             if (response.equals(null) || response == null|| response.length()==0 && count==0)
                             {
 
-                                ArrayList list = new ArrayList();
-                                list.add("Select Option");
+                                articleOptionList.add(0,"Select Option");
                                 style.setEnabled(false);
-                                adapter2 = new ArrayAdapter<String>(StyleActivity.this, android.R.layout.simple_spinner_item, list);
-                                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                style.setAdapter(adapter2);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No options data found", Toast.LENGTH_LONG).show();
                             }
                             else if(response.length()==limit)
                             {
-                                Log.i(" Response length", ""+response.length());
-                                Log.e("offsetvalue", "" + offsetvalue);
-                                Log.e("limit", "" + limit);
-                                Log.e("count", "" + count);
+//                                Log.i(" Response length", ""+response.length());
+//                                Log.e("offsetvalue", "" + offsetvalue);
+//                                Log.e("limit", "" + limit);
+//                                Log.e("count", "" + count);
 
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonResponse = response.getJSONObject(i);
@@ -971,76 +1106,57 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 Collections.sort(articleOptionList);
                                 articleOptionList.add(0,"Select Option");
                                 style.setEnabled(true);
-                                adapter2 = new ArrayAdapter<String>(StyleActivity.this, android.R.layout.simple_spinner_item, articleOptionList);
-                                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                style.setAdapter(adapter2);
+                                DashBoardActivity._collectionitems = new ArrayList();
+                                DashBoardActivity._collectionitems.addAll(articleOptionList);
+
+
 
                                 if(seloptionName == null || seloptionName.equals(null))
                                 {
-                                 style.setSelection(0);
+                                    style.setText("Select Option");
                                 }
                                 else
                                 {
-                                    if(articleOptionList.contains(seloptionName))
-                                    {
-                                        style.setSelection(articleOptionList.indexOf(seloptionName));
-                                        return;
-                                    }
-                                    else
-                                    {
-                                        style.setSelection(0);
-
-                                    }
-
                                 }
 
+                                optionAdapter.notifyDataSetChanged();
 
-//                                style.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                                        optionName = parent.getSelectedItem().toString().trim();
+//                                style.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//
+//                                        stylemainlayout.setVisibility(View.GONE);
+//                                        collectionLayout.setVisibility(View.GONE);
+//                                        optionLayout.setVisibility(View.VISIBLE);
+//                                    }
+//
+//                                });
+//
+//                                listOption.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//                                    @Override
+//                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                                        Log.e(" "," "+parent +" "+position+" "+view);
+//
+//                                        optionName = (String) optionAdapter.getItem(position);
+//                                        style.setText(optionName.trim());
 //                                        Log.e("optionName "," "+optionName);
+//
+//                                        stylemainlayout.setVisibility(View.VISIBLE);
+//                                        collectionLayout.setVisibility(View.GONE);
+//                                        optionLayout.setVisibility(View.GONE);
 //
 //                                        InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 //                                        if(inputManager != null){
-//                                            inputManager.hideSoftInputFromWindow(style.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-//                                        }
-//
-//
-//                                        if (optionName.equalsIgnoreCase("Select option")) {
-//                                            //Toast.makeText(StyleActivity.this,"Please select Collection",Toast.LENGTH_LONG).show();
-//                                        } else {
-//                                            if (Reusable_Functions.chkStatus(context)) {
-//                                                Reusable_Functions.hDialog();
-//                                                Reusable_Functions.sDialog(context, "Loading  data...");
-//                                                optionName = (String) parent.getItemAtPosition(position);
-//                                                Log.e("select item", optionName);
-//
-//                                                requestStyleDetailsAPI(optionName, "optionname");
-//
-//                                            } else {
-//                                                // Reusable_Functions.hDialog();
-//                                                Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
-//                                            }
-//
-//                                        }
-//                                    } // to close the onItemSelected
-//
-//                                    public void onNothingSelected(AdapterView<?> parent) {
-//
-//                                        View view = getCurrentFocus();
-//                                        if (view != null) {
-//                                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//                                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//                                            inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 //                                        }
 //                                    }
 //                                });
 
+
+
                             }
 
-
-
-
-                           // }
 
                         }
                         catch(Exception e)
@@ -1056,7 +1172,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                     public void onErrorResponse(VolleyError error)
                     {
                         Reusable_Functions.hDialog();
-                        // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
@@ -1083,16 +1198,44 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
     }
 
-
-
-
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        selcollectionName = null ; seloptionName = null;
-        Intent intent=new Intent(StyleActivity.this,DashBoardActivity.class);
-        startActivity(intent);
-        finish();
+        //super.onBackPressed();
+
+        if(optionLayout.getVisibility() == View.VISIBLE)
+        {
+            optionLayout.setVisibility(View.GONE);
+            collectionLayout.setVisibility(View.GONE);
+            stylemainlayout.setVisibility(View.VISIBLE);
+
+            InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if(inputManager != null){
+                inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+
+        }
+        else  if(collectionLayout.getVisibility() == View.VISIBLE)
+        {
+            optionLayout.setVisibility(View.GONE);
+            collectionLayout.setVisibility(View.GONE);
+            stylemainlayout.setVisibility(View.VISIBLE);
+
+            InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if(inputManager != null){
+                inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+
+        }
+        else
+        {
+            selcollectionName = null ; seloptionName = null;
+            DashBoardActivity._collectionitems = new ArrayList();
+            Intent intent=new Intent(StyleActivity.this,DashBoardActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
 
     }
 }
