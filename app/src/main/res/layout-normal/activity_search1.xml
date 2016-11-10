@@ -52,13 +52,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search"
+                android:text="Search"
                 android:textSize="20sp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageBtnBack"
                 android:layout_marginLeft="20dp"
                 android:textColor="#ffffff"
                 android:id="@+id/toolbar_title" />
+
+
+
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
@@ -113,7 +116,7 @@
         android:weightSum="2"
         android:orientation="horizontal"
         segmentedgroup:sc_border_width="1dp"
-        segmentedgroup:sc_corner_radius="5dp"
+        segmentedgroup:sc_corner_radius="18dp"
         segmentedgroup:sc_tint_color="#B73020">
 
         <RadioButton
@@ -130,7 +133,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="@string/product_name"
+            android:text="Product Name"
             style="@style/RadioButton" />
 
         <!--<RadioButton-->
@@ -144,41 +147,39 @@
     </info.hoang8f.android.segmented.SegmentedGroup>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="10"
         android:layout_marginTop="15dp">
 
 
         <EditText
+            android:layout_marginRight="60dp"
+            android:background="@android:color/transparent"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:hint="@string/product_search_enter_text"
+            android:hint="Enter text"
             android:layout_marginLeft="10dp"
             android:imeOptions="actionSearch"
             android:inputType="text"
             style="@style/myEditText"
             android:textCursorDrawable="@drawable/color_cursor"
-            android:maxLines="1"
+            android:singleLine="true"
             android:layout_weight="9"
             android:id="@+id/editSearch" />
 
         <ImageButton
+            android:background="@android:color/transparent"
+            android:layout_alignParentRight="true"
             android:src="@drawable/ic_arrow_forward_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tint="#B73020"
-            android:background="#ffffff"
-            android:padding="5dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="110dp"
-            android:id="@+id/btnSeatchList"
-            tools:ignore="ContentDescription" />
+            android:id="@+id/btnSeatchList" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"

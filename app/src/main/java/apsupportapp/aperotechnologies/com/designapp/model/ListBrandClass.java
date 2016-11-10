@@ -43,7 +43,6 @@ public class ListBrandClass {
         return Brand;
     }
 
-
     public void setBrandClass(List brandClass) {
         BrandClass = brandClass;
     }

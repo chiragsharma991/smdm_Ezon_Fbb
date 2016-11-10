@@ -37,9 +37,9 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import apsupportapp.aperotechnologies.com.designapp.R;
+
+import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
-import apsupportapp.aperotechnologies.com.designapp.SalesPvAAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 
 import org.json.JSONArray;
@@ -56,7 +56,7 @@ import java.util.TimerTask;
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment,imgBtnSalesPvA;
+    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment , imgBtnPvaAnalysis;
     //ExpandableHeightGridView style_grid;
     EventAdapter eventAdapter;
     RequestQueue queue;
@@ -67,7 +67,7 @@ public class DashBoardActivity extends AppCompatActivity
     Context context;
     MySingleton m_config;
 
-    ProductNameBean productNameBean;
+
     ArrayList<ProductNameBean> productNameBeanArrayList;
     SharedPreferences sharedPreferences;
 
@@ -193,23 +193,23 @@ public class DashBoardActivity extends AppCompatActivity
             }
         });
 
+       imgBtnPvaAnalysis.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(DashBoardActivity.this,SalesPvAActivity.class);
+               startActivity(intent);
+               if(timer != null)
+               {
+                   timer.cancel();
+               }
+               finish();
+           }
+       });
+
         imgBtnVisualAssortment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashBoardActivity.this,VisualAssortmentActivity.class);
-                startActivity(intent);
-                if(timer != null)
-                {
-                    timer.cancel();
-                }
-
-                finish();
-            }
-        });
-        imgBtnSalesPvA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashBoardActivity.this,SalesPvAActivity.class);
                 startActivity(intent);
                 if(timer != null)
                 {
@@ -253,6 +253,10 @@ public class DashBoardActivity extends AppCompatActivity
                                 //eventAdapter = new EventAdapter(DashBoardActivity.this, eventUrlList);
                                 //style_grid.setAdapter(eventAdapter);
                                 EventScroller();
+
+
+
+
                             }
 
                         } catch (Exception e) {
@@ -296,8 +300,7 @@ public class DashBoardActivity extends AppCompatActivity
         imageBtnKeyProducts=(ImageButton)findViewById(R.id.imageBtnKeyProducts);
         imgBtnSales = (ImageButton) findViewById(R.id.btnSales);
         imgBtnVisualAssortment = (ImageButton) findViewById(R.id.btnVisualAssortment);
-        imgBtnSalesPvA=(ImageButton)findViewById(R.id.btnSalesPvA);
-
+        imgBtnPvaAnalysis = (ImageButton) findViewById(R.id.btnPVA);
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 
@@ -512,6 +515,7 @@ public class DashBoardActivity extends AppCompatActivity
 
         @Override
         public void run() {
+
             // As the TimerTask run on a seprate thread from UI thread we have
             // to call runOnUiThread to do work on UI thread.
             runOnUiThread(new Runnable() {

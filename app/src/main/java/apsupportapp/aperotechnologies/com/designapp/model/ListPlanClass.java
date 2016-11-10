@@ -5,16 +5,16 @@ import java.util.List;
 
 public class ListPlanClass {
 
-    String subdept;
+    String dept;
     String category;
     List planclass;
 
     public void setSubdept(String subdept) {
-        this.subdept = subdept;
+        this.dept = subdept;
     }
 
     public String getSubdept() {
-        return subdept;
+        return dept;
     }
 
     public void setCategory(String category) {
