@@ -16,13 +16,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_height="wrap_content">
+
+            
+            <TextView
+                android:id="@+id/headersmdm"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="SM-DM"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
 
             <LinearLayout
+                android:id="@+id/lin1"
+                android:layout_below="@+id/headersmdm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -30,33 +41,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:weightSum="4">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-
-                    <ImageButton
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/imageBtnStyle"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/dashboard_size_finder_icon"
-                        />
-
-                    <TextView
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Product Info"
-                        android:textSize="13sp"
-                        />
-
-                </LinearLayout>
 
 
                 <LinearLayout
@@ -72,7 +56,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
-                        android:src="@mipmap/dashboard_flash_hourly_icon" />
+                        android:src="@mipmap/hourly_analysis" />
 
                     <TextView
                         android:gravity="center_horizontal"
@@ -93,11 +77,41 @@
 
                     <ImageButton
                         android:layout_gravity="center_horizontal"
+                        android:id="@+id/imageBtnStyle"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/product_info"
+                        />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Product Info"
+                        android:textSize="13sp"
+                        />
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageButton
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/btnVisualAssortment"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
-                        android:src="@mipmap/dashboard_visual_assortment_icon"
+                        android:src="@mipmap/visual_assortment"
                         />
 
                     <TextView
@@ -120,11 +134,9 @@
 
                     <ImageButton
                         android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnCutSize"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
-                        android:src="@mipmap/dashboard_key_products_icon"
                         />
 
 
@@ -132,7 +144,6 @@
                         android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cut Size"
                         android:layout_gravity="center_horizontal"
                         android:textSize="13sp"/>
 
@@ -142,7 +153,20 @@
 
             </LinearLayout>
 
+
+            <TextView
+                android:layout_below="@+id/lin2"
+                android:id="@+id/headerpromo"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Promo Analysis"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
             <LinearLayout
+                android:layout_below="@+id/headerpromo"
+                android:id="@+id/lin3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -159,22 +183,49 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:gravity="center_horizontal"
                         android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnShootStyle"
+                        android:id="@+id/btnRunningpromo"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
-                        android:src="@mipmap/dashboard_shoot_style_icon" />
+                        android:src="@mipmap/running_promo"
+                        />
 
 
                     <TextView
+                        android:gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Running Promo"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/btnUpcomingpromo"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/upcoming_promo" />
+
+
+                    <TextView
+                        android:layout_gravity="center_horizontal"
                         android:textSize="13sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Shoot Style"
-                        android:layout_gravity="center_horizontal"
-                        />
+                        android:gravity="center_horizontal"
+                        android:text="Upcoming Promo" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -186,18 +237,19 @@
                     <ImageButton
                         android:gravity="center_horizontal"
                         android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnSearch"
+                        android:id="@+id/btnExpiringpromo"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
-                        android:src="@mipmap/dashboard_cut_size_icon"
+                        android:src="@mipmap/expiring_promo"
                         />
 
                     <TextView
+                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Search"
-                        android:layout_gravity="center_horizontal"
+                        android:text="Expiring Promo"
+                        android:gravity="center_horizontal"
                         android:textSize="13sp" />
 
 
@@ -211,11 +263,11 @@
 
                     <ImageButton
                         android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnCrossSelling"
+                        android:id="@+id/btnBestWorstpromo"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
-                        android:src="@mipmap/dashboard_cross_selling_icon"
+                        android:src="@mipmap/best_worst_promo"
                         />
 
 
@@ -223,12 +275,41 @@
                         android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cross Selling"
+                        android:text="Best/Worst Promo"
                         android:textSize="13sp"
                         android:layout_gravity="center_horizontal"
-                       
-                        />
+                        android:id="@+id/textView4" />
                 </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_below="@+id/lin1"
+                android:id="@+id/headersales"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Sales"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <LinearLayout
+                android:layout_below="@+id/headersales"
+                android:id="@+id/lin2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="4">
+
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -242,7 +323,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="#ffffff"
-                        android:src="@mipmap/dashboard_other_icon"
+                        android:src="@mipmap/sales_analysis"
                         />
 
 
@@ -257,12 +338,183 @@
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
 
+                    <ImageButton
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/btnPVA"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="#ffffff"
+                        android:src="@mipmap/sales_pva" />
+
+
+                    <TextView
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PvA"
+                        android:layout_gravity="center_horizontal"
+                        />
+                </LinearLayout>
 
             </LinearLayout>
 
 
             <TextView
+                android:layout_below="@+id/lin3"
+                android:id="@+id/headerinvent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Inventory"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <LinearLayout
+                android:layout_below="@+id/headerinvent"
+                android:id="@+id/lin4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="4">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:weightSum="4">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnFeshnessindex"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/feshness_index"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Feshness Index"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnOptionEfficiency"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/option_efficiency" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Option Efficiency" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnCutSize"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/cut_size_report"
+                            />
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cut-Size Report"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnSkewedSize"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/skewed_size"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+
+
+
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/headermarketing"
+                android:layout_below="@+id/lin4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Marketing Events"
@@ -271,42 +523,13 @@
                 android:layout_marginLeft="30dp"/>
 
 
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:id="@+id/cardview"-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="140dp"-->
-                <!--android:layout_margin="10dp"-->
-                <!--android:layout_marginTop="145dp"-->
-                <!--android:clickable="true"-->
-                <!--android:foreground="?android:attr/selectableItemBackground"-->
-                <!--app:cardCornerRadius="4dp">-->
 
-                <!--<android.support.v4.view.ViewPager-->
-                    <!--android:id="@+id/vpagerevents_image"-->
-                    <!--android:layout_width="fill_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:layout_marginTop="5dp" />-->
-
-            <!--</android.support.v7.widget.CardView>-->
-
-            <!--<com.viewpagerindicator.CirclePageIndicator-->
-                <!--android:id="@+id/indicator"-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_below="@+id/cardview"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--app:centered="true"-->
-                <!--app:fillColor="#3b5998"-->
-                <!--app:pageColor="#3b5998"-->
-                <!--app:snap="false" >-->
-            <!--</com.viewpagerindicator.CirclePageIndicator>-->
 
             <android.support.v4.view.ViewPager
+                android:layout_below="@+id/headermarketing"
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:layout_alignParentTop="true"
                 android:layout_marginTop="5dp" />
 
             <LinearLayout
@@ -336,6 +559,6 @@
                 <!--android:verticalSpacing="10dp" />-->
 
 
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 </LinearLayout>

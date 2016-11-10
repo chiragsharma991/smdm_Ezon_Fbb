@@ -53,7 +53,7 @@
 
             <TextView
                 android:id="@+id/txtSOH2"
-                android:text="S O H"
+                android:text="SOH(U)"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
@@ -124,7 +124,7 @@
 
             <TextView
                 android:id="@+id/txtGIT"
-                android:text="G I T"
+                android:text="GIT(U)"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
@@ -202,7 +202,7 @@
 
             <TextView
                 android:id="@+id/txtROS2"
-                android:text="R O S"
+                android:text="ROS"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"

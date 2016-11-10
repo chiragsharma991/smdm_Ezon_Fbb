@@ -12,6 +12,7 @@
         android:layout_height="80dp">
 
         <RelativeLayout
+            android:orientation="horizontal"
             android:background="@drawable/salescard"
             android:id="@+id/pvasales"
             android:layout_marginLeft="10dp"
@@ -21,80 +22,100 @@
             android:layout_width="0dp"
             android:layout_height="70dp">
 
-
             <LinearLayout
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/fixval1"
-                android:weightSum="3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="Store"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="Zonal"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="National"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@id/fixval1"
                 android:weightSum="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txtStoreVal_PvASales"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:text="40%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Store"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
 
-                <TextView
-                    android:id="@+id/txtZonalVal_PvASales"
-                    android:layout_weight="1"
-                    android:text="50%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtStoreVal_PvASales"
+                        android:text="40%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/txtNationalVal_PvASales"
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:text="60%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Zonal"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtZonalVal_PvASales"
+                        android:text="50%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="National"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtNationalVal_PvASales"
+                        android:text="50%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
+
 
             <TextView
                 android:layout_alignParentBottom="true"
@@ -146,77 +167,94 @@
             <LinearLayout
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/fixval2"
-                android:weightSum="3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="Store"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="Zonal"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="National"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@id/fixval2"
                 android:weightSum="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txtStoreVal_YOYSales"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:text="40%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Store"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
 
-                <TextView
-                    android:id="@+id/txtZonalVal_YOYSales"
-                    android:layout_weight="1"
-                    android:text="50%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"/>
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtStoreVal_YOYSales"
+                        android:text="40%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/txtNationalVal_YOYSales"
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:text="60%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Zonal"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtZonalVal_YOYSales"
+                        android:text="50%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="National"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtNationalVal_YOYSales"
+                        android:text="50%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -242,7 +280,7 @@
 
             <TextView
                 android:id="@+id/txtYoySales"
-                android:text="YOY Sales Grw %"
+                android:text="YOY Sales Grw%"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="6dp"
@@ -276,78 +314,96 @@
             android:layout_height="70dp">
 
             <LinearLayout
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="6dp"
-                android:id="@+id/fixval3"
-                android:weightSum="3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="Store"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="Zonal"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"/>
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="National"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="2dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@id/fixval3"
                 android:weightSum="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txtStoreVal_SellThro"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:text="40%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Store"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
 
-                <TextView
-                    android:id="@+id/txtZonalVal_SellThro"
-                    android:layout_weight="1"
-                    android:text="50%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtStoreVal_SellThro"
+                        android:text="40%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/txtNationalVal_SellThro"
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:text="60%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Zonal"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtZonalVal_SellThro"
+                        android:text="50%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="National"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtNationalVal_SellThro"
+                        android:text="50%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -373,7 +429,7 @@
 
             <TextView
                 android:id="@+id/txtSellThro"
-                android:text="Sell Thro (U) %"
+                android:text="Sell Thru(U)%"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="6dp"
@@ -399,74 +455,94 @@
             <LinearLayout
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/fixval4"
-                android:weightSum="3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="Store"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="Zonal"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="National"
-                    android:textSize="10sp"
-                    android:textColor="@color/text_sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@id/fixval4"
                 android:weightSum="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txtStoreVal_MixSales"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:text="40%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Store"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
 
-                <TextView
-                    android:id="@+id/txtZonalVal_MixSales"
-                    android:layout_weight="1"
-                    android:text="50%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtStoreVal_MixSales"
+                        android:text="40%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/txtNationalVal_MixSales"
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:text="60%"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Zonal"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtZonalVal_MixSales"
+                        android:text="50%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="National"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:singleLine="true"
+                        android:id="@+id/txtNationalVal_MixSales"
+                        android:text="50%"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 

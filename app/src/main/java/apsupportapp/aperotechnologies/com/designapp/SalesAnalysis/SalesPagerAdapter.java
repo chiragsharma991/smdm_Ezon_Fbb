@@ -15,8 +15,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
+import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
+
 
 /**
  * Created by hasai on 20/09/16.
@@ -25,14 +27,18 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
 
     Context context;
-    ArrayList<ProductNameBean> arrayList;
+    SalesAnalysisListDisplay analysisClass;
+    ArrayList<SalesAnalysisViewPagerValue> arrayList;
+    ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList;
     int focusposition;
+    SalesAnalysisViewPagerValue salesAnalysis;
     ViewPager vwpagersales;
     LinearLayout lldots;
     SalesAnalysisAdapter salesadapter;
     ListView listView_SalesAnalysis;
     LayoutInflater inflater;
     public static int currentPage = 0;
+
 
     // ViewPager 0
     TextView txtNetSalesVal, txtNetSales, txtNetSalesPerc;
@@ -54,17 +60,26 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     TextView txtROSVal2, txtROS2;
     TextView txtFwdWkCoverVal2, txtFwdWkCover2;
 
-
-    public SalesPagerAdapter(Context context, ArrayList<ProductNameBean> arrayList, int focusposition, ViewPager vwpagersales, LinearLayout lldots, SalesAnalysisAdapter salesadapter, ListView listView_SalesAnalysis) {
+    public SalesPagerAdapter(Context context, ArrayList<SalesAnalysisViewPagerValue> arrayList, int focusposition, ViewPager vwpagersales, LinearLayout lldots, SalesAnalysisAdapter salesadapter, ListView listView_SalesAnalysis) {
 
         Log.e("in sales adapter", " ---");
         this.context = context;
         this.arrayList = arrayList;
+        Log.i("size",""+arrayList.size());
         this.focusposition = focusposition;
         this.vwpagersales = vwpagersales;
         this.lldots = lldots;
+
+
+//       Log.i("size",""+arrayList.size());
+
         this.salesadapter = salesadapter;
         this.listView_SalesAnalysis = listView_SalesAnalysis;
+        if(arrayList.size() != 0)
+        {
+            salesAnalysis = arrayList.get(0);
+        }
+
     }
 
     @Override
@@ -81,13 +96,13 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     public Object instantiateItem(final ViewGroup container, final int position) {
 
         // Declare Variables
-        Log.e("in sales adapter", " 0");
+       // Log.e("in sales adapter", " 0");
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = null;
 
-        if(position == 0)
-        {
+
+        if (position == 0) {
             itemView = inflater.inflate(R.layout.child_sales_viewpager, container,
                     false);
             txtNetSalesVal = (TextView) itemView.findViewById(R.id.txtNetSalesVal);
@@ -105,48 +120,47 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             txtRos0 = (TextView) itemView.findViewById(R.id.txtRos0);
             txtFwdWkCoverVal0 = (TextView) itemView.findViewById(R.id.txtFwdWkCoverVal0);
             txtFwdWkCover0 = (TextView) itemView.findViewById(R.id.txtFwdWkCover0);
+            txtNetSalesPerc = (TextView)itemView.findViewById(R.id.txtNetSalesPerc);
+            txtPlanSalesPerc = (TextView)itemView.findViewById(R.id.txtPlanSalesPerc);
+            txtNetSalesUPerc = (TextView)itemView.findViewById(R.id.txtNetSalesUPerc);
 
-            if(SalesAnalysisActivity.selectedsegValue.equals("WTD") || SalesAnalysisActivity.selectedsegValue.equals("LW"))
-            {
+            if (SalesAnalysisActivity.selectedsegValue.equals("WTD") || SalesAnalysisActivity.selectedsegValue.equals("LW")) {
+
                 txtNetSales.setText("Net Sales");
                 txtPlanSales.setText("Plan Sales");
                 txtNetSalesU.setText("Net Sales(U)");
-                txtSohU.setText("S O H(U)");
+                txtSohU.setText("SOH(U)");
                 txtRos0.setText("ROS");
                 txtFwdWkCover0.setText("Fwd Wk Cover");
-            }
-            else if(SalesAnalysisActivity.selectedsegValue.equals("L4W") || SalesAnalysisActivity.selectedsegValue.equals("YTD"))
-            {
-                txtNetSales.setText("Avg Wkly Sales");
+
+            } else if (SalesAnalysisActivity.selectedsegValue.equals("L4W") || SalesAnalysisActivity.selectedsegValue.equals("YTD")) {
+
+                txtNetSales.setText("Net Sales");
                 txtPlanSales.setText("Plan Sales");
-                txtNetSalesU.setText("Avg Wkly Sales(U)");
-                txtSohU.setText("S O H(U)");
+                txtNetSalesU.setText("Net Sales(U)");
+                txtSohU.setText("SOH(U)");
                 txtRos0.setText("Inv Turn");
                 txtFwdWkCover0.setText("Velocity");
             }
 
-        }
-        else if(position == 1)
-        {
+        } else if (position == 1) {
             itemView = inflater.inflate(R.layout.child_sales_viewpager1, container,
                     false);
 
-            txtStoreVal_PvASales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtZonalVal_PvASales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtNationalVal_PvASales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtStoreVal_YOYSales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtZonalVal_YOYSales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtNationalVal_YOYSales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtStoreVal_SellThro = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtZonalVal_SellThro = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtNationalVal_SellThro = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtStoreVal_MixSales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtZonalVal_MixSales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
-            txtNationalVal_MixSales = (TextView) itemView.findViewById(R.id.txtSOHVal2);
+            txtStoreVal_PvASales = (TextView) itemView.findViewById(R.id.txtStoreVal_PvASales);
+            txtZonalVal_PvASales = (TextView) itemView.findViewById(R.id.txtZonalVal_PvASales);
+            txtNationalVal_PvASales = (TextView) itemView.findViewById(R.id.txtNationalVal_PvASales);
+            txtStoreVal_YOYSales = (TextView) itemView.findViewById(R.id.txtStoreVal_YOYSales);
+            txtZonalVal_YOYSales = (TextView) itemView.findViewById(R.id.txtZonalVal_YOYSales);
+            txtNationalVal_YOYSales = (TextView) itemView.findViewById(R.id.txtNationalVal_YOYSales);
+            txtStoreVal_SellThro = (TextView) itemView.findViewById(R.id.txtStoreVal_SellThro);
+            txtZonalVal_SellThro = (TextView) itemView.findViewById(R.id.txtZonalVal_SellThro);
+            txtNationalVal_SellThro = (TextView) itemView.findViewById(R.id.txtNationalVal_SellThro);
+            txtStoreVal_MixSales = (TextView) itemView.findViewById(R.id.txtStoreVal_MixSales);
+            txtZonalVal_MixSales = (TextView) itemView.findViewById(R.id.txtZonalVal_MixSales);
+            txtNationalVal_MixSales = (TextView) itemView.findViewById(R.id.txtNationalVal_MixSales);
 
-        }
-        else if(position == 2)
-        {
+        } else if (position == 2) {
             itemView = inflater.inflate(R.layout.child_sales_viewpager2, container,
                     false);
 
@@ -162,25 +176,55 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
         }
 
 
+//        analysisClass = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition());
+//        Log.i("salesAnalysis value",""+salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()));
+//        salesAnalysis=arrayList.get(focusposition);
+//        Log.e("in sales pager adapter",""+salesAnalysis);
 
-        ProductNameBean productNameBean = arrayList.get(focusposition);
-        Log.e("in sales pager adapter","");
+
+//        Log.e("in sales pager adapter","");
 
 
-        if(position == 0)
-        {
-            txtNetSalesVal.setText(productNameBean.getArticleOption().toLowerCase());
-//            txtNetSalesPerc.setText(productNameBean.getProductName());
-//            txtPlanSalesVal.setText(productNameBean.getArtileCode());
-//            txtPlanSalesPerc.setText(productNameBean.getColor());
-//            txtNetSalesUVal.setText(productNameBean.getColor());
-//            txtNetSalesUPerc.setText("");
-//            txtSohUVal.setText("");
-//            txtRosVal0.setText("");
-//            txtFwdWkCoverVal0.setText("");
 
+        if (position == 0) {
+            if (SalesAnalysisActivity.selectedsegValue.equals("WTD") || SalesAnalysisActivity.selectedsegValue.equals("LW")) {
+
+                if(salesAnalysis != null)
+                {
+                    txtNetSalesVal.setText("" + salesAnalysis.getSaleNetVal());
+                    txtPlanSalesVal.setText("" + salesAnalysis.getPlanSaleNetVal());
+                    txtNetSalesUVal.setText("" + salesAnalysis.getSaleTotQty());
+                    txtSohUVal.setText("" + salesAnalysis.getStkOnhandQty());
+                    txtRosVal0.setText("" + salesAnalysis.getRos());
+                    txtFwdWkCoverVal0.setText("" + salesAnalysis.getFwdWeekCover());
+                    txtNetSalesPerc.setText(""+salesAnalysis.getWowNetSalesGrowthPct()+"%");
+                    txtPlanSalesPerc.setText(""+salesAnalysis.getPvaAchieved()+"%");
+                    txtNetSalesUPerc.setText(""+salesAnalysis.getWowNetSalesUnitsGrowthPct()+"%");
+                }
+
+
+            } else if (SalesAnalysisActivity.selectedsegValue.equals("L4W") || SalesAnalysisActivity.selectedsegValue.equals("YTD")) {
+
+                if(salesAnalysis != null) {
+
+                    txtNetSalesVal.setText(" " + salesAnalysis.getSaleNetVal());
+                    txtPlanSalesVal.setText(" " + salesAnalysis.getPlanSaleNetVal());
+                    txtNetSalesUVal.setText(" " + salesAnalysis.getSaleTotQty());
+                    txtSohUVal.setText(" " + salesAnalysis.getStkOnhandQty());
+                    txtRosVal0.setText(" " + salesAnalysis.getInvTurns());
+                    txtFwdWkCoverVal0.setText(" " + salesAnalysis.getVelocity());
+                    txtNetSalesPerc.setText(""+salesAnalysis.getWowNetSalesGrowthPct()+"%");
+                    txtPlanSalesPerc.setText(""+salesAnalysis.getPvaAchieved()+"%");
+                    txtNetSalesUPerc.setText(""+salesAnalysis.getWowNetSalesUnitsGrowthPct()+"%");
+
+                    Log.i("saleNetVal IN L4W", "" + salesAnalysis.getSaleNetVal());
+                }
+                //           txtNetSalesPerc.setText(salesAnalysis.);
+
+            }
 
             LinearLayout layout = (LinearLayout) itemView;
+
             LinearLayout layout1 = (LinearLayout) layout.getChildAt(0);
             RelativeLayout relnetsales = (RelativeLayout) layout1.getChildAt(0);
             RelativeLayout relplansales = (RelativeLayout) layout1.getChildAt(1);
@@ -188,35 +232,35 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relnetsales.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("Net Sales","----");
-                    updatelistview("Net Sales");
+                    Log.e("Net Sales", "----");
+                    //updatelistview();
                 }
             });
 
-            relplansales.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("Plan Sales","----");
-                    updatelistview("Plan Sales");
-                }
-            });
+//            relplansales.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Log.e("Plan Sales", "----");
+//                    updatelistview("Plan Sales");
+//                }
+//            });
 
             LinearLayout layout2 = (LinearLayout) layout.getChildAt(1);
             RelativeLayout relnetsalesu = (RelativeLayout) layout2.getChildAt(0);
             RelativeLayout relplansohu = (RelativeLayout) layout2.getChildAt(1);
 
-            relnetsalesu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("Net Sales U","----");
-                    updatelistview("Net Sales U");
-                }
-            });
+//            relnetsalesu.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Log.e("Net Sales U", "----");
+//                    updatelistview("Net Sales U");
+//                }
+//            });
 
-            relplansohu.setOnClickListener(new View.OnClickListener() {
+            /*relplansohu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("SOH U","----");
+                    Log.e("SOH U", "----");
                     updatelistview("SOH U");
                 }
             });
@@ -228,7 +272,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relros.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("ROS ","----");
+                    Log.e("ROS ", "----");
                     updatelistview("ROS");
                 }
             });
@@ -236,32 +280,33 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relfwdwkcover0.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("Fwd Wk Cover 0","----");
+                    Log.e("Fwd Wk Cover 0", "----");
                     updatelistview("Fwd Wk Cover 0");
                 }
             });
+*/
 
+        } else if (position == 1) {
+            if(salesAnalysis != null) {
 
+                txtStoreVal_PvASales.setText("" + salesAnalysis.getPvaAchieved());
+                txtZonalVal_PvASales.setText(" " + salesAnalysis.getPvaAchievedZonal());
+                txtNationalVal_PvASales.setText(" " + salesAnalysis.getPvaAchievedNational());
 
-        }
-        else if(position == 1)
-        {
-//            txtStoreVal_PvASales.setText("");
-//            txtZonalVal_PvASales.setText("");
-//            txtNationalVal_PvASales.setText("");
-//
-//            txtStoreVal_YOYSales.setText("");
-//            txtZonalVal_YOYSales.setText("");
-//            txtNationalVal_YOYSales.setText("");
-//
-//            txtStoreVal_SellThro.setText("");
-//            txtZonalVal_SellThro.setText("");
-//            txtNationalVal_SellThro.setText("");
-//
-//            txtStoreVal_MixSales.setText("");
-//            txtZonalVal_MixSales.setText("");
-//            txtNationalVal_MixSales.setText("");
+                txtStoreVal_YOYSales.setText(" " + salesAnalysis.getYoyNetSalesGrowthPct());
+                txtZonalVal_YOYSales.setText(" " + salesAnalysis.getYoyNetSalesGrowthPctZonal());
+                txtNationalVal_YOYSales.setText(" " + salesAnalysis.getYoyNetSalesGrowthPctNational());
 
+                txtStoreVal_SellThro.setText(" " + salesAnalysis.getSellThruUnits());
+                txtZonalVal_SellThro.setText(" " + salesAnalysis.getSellThruUnitsZonal());
+                txtNationalVal_SellThro.setText(" " + salesAnalysis.getSellThruUnitsNational());
+
+                txtStoreVal_MixSales.setText(" " + salesAnalysis.getMixSales());
+                txtZonalVal_MixSales.setText(" " + salesAnalysis.getMixSalesZonal());
+                txtNationalVal_MixSales.setText(" " + salesAnalysis.getMixsalesNational());
+            }
+
+            /*
             LinearLayout layout = (LinearLayout) itemView;
             LinearLayout layout1 = (LinearLayout) layout.getChildAt(0);
             RelativeLayout relpvasales = (RelativeLayout) layout1.getChildAt(0);
@@ -270,7 +315,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relpvasales.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("PVA Sales","----");
+                    Log.e("PVA Sales", "----");
                     updatelistview("PVA Sales");
                 }
             });
@@ -278,7 +323,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relyoysales.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("YOY Sales","----");
+                    Log.e("YOY Sales", "----");
                     updatelistview("YOY Sales");
                 }
             });
@@ -290,7 +335,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relsellthrou.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("Sell Thro U","----");
+                    Log.e("Sell Thro U", "----");
                     updatelistview("Sell Thro U");
                 }
             });
@@ -298,21 +343,23 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relmixsales.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("Mix Sales","----");
+                    Log.e("Mix Sales", "----");
                     updatelistview("Mix Sales");
                 }
             });
+            */
 
 
-        }
-        else if(position == 2)
-        {
-//            txtSOHVal2.setText(productNameBean.getArticleOption() + "2");
-//            txtGITVal.setText("");
-//            txtROSVal2.setText("");
-//            txtFwdWkCoverVal2.setText("");
+        } else if (position == 2) {
+            if(salesAnalysis != null) {
 
-            LinearLayout layout = (LinearLayout) itemView;
+                txtSOHVal2.setText(" " + salesAnalysis.getStkOnhandQty());
+                txtGITVal.setText(" " + salesAnalysis.getStkGitQty());
+                txtROSVal2.setText(" " + salesAnalysis.getRos());
+                txtFwdWkCoverVal2.setText(" " + salesAnalysis.getFwdWeekCover());
+            }
+
+            /*LinearLayout layout = (LinearLayout) itemView;
             LinearLayout layout1 = (LinearLayout) layout.getChildAt(0);
             RelativeLayout relsoh2 = (RelativeLayout) layout1.getChildAt(0);
             RelativeLayout relgit = (RelativeLayout) layout1.getChildAt(1);
@@ -320,7 +367,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relsoh2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("SOH 2","----");
+                    Log.e("SOH 2", "----");
                     updatelistview("SOH 2");
                 }
             });
@@ -328,7 +375,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relgit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("GIT","----");
+                    Log.e("GIT", "----");
                     updatelistview("GIT");
                 }
             });
@@ -340,7 +387,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relros2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("ROS 2","----");
+                    Log.e("ROS 2", "----");
                     updatelistview("ROS 2");
                 }
             });
@@ -348,10 +395,10 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             relfwdwkcover2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("Fwd Wk Cover 2","----");
+                    Log.e("Fwd Wk Cover 2", "----");
                     updatelistview("Fwd Wk Cover 2");
                 }
-            });
+            });*/
 
 
         }
@@ -401,10 +448,10 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
 
-        ImageView img = (ImageView)  lldots.getChildAt(currentPage);
+        ImageView img = (ImageView) lldots.getChildAt(currentPage);
         img.setImageResource(R.mipmap.dots_unselected);
         currentPage = position;
-        ImageView img1 = (ImageView)  lldots.getChildAt(currentPage);
+        ImageView img1 = (ImageView) lldots.getChildAt(currentPage);
         img1.setImageResource(R.mipmap.dots_selected);
 
 
@@ -427,9 +474,9 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     }
 
 
-    public void updatelistview(String fromwhere)
-    {
-        salesadapter = new SalesAnalysisAdapter(arrayList, context, fromwhere);
+    public void updatelistview() {
+        //salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, SalesAnalysisActivity.fromWhere);
         listView_SalesAnalysis.setAdapter(salesadapter);
         salesadapter.notifyDataSetChanged();
     }
