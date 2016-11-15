@@ -13,6 +13,6 @@
     <color name="divider_salescard">#d9d7d8</color>
     <color name="pink">#FE0000</color>
     <color name="green">#05c706</color>
-    <color name="text_sales">#969495</color>
+    <color name="text_sales">#000000</color>
 
 </resources>

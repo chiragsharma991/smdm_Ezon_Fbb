@@ -191,15 +191,44 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                 if(salesAnalysis != null)
                 {
-                    txtNetSalesVal.setText("" + salesAnalysis.getSaleNetVal());
-                    txtPlanSalesVal.setText("" + salesAnalysis.getPlanSaleNetVal());
-                    txtNetSalesUVal.setText("" + salesAnalysis.getSaleTotQty());
-                    txtSohUVal.setText("" + salesAnalysis.getStkOnhandQty());
-                    txtRosVal0.setText("" + salesAnalysis.getRos());
-                    txtFwdWkCoverVal0.setText("" + salesAnalysis.getFwdWeekCover());
-                    txtNetSalesPerc.setText(""+salesAnalysis.getWowNetSalesGrowthPct()+"%");
-                    txtPlanSalesPerc.setText(""+salesAnalysis.getPvaAchieved()+"%");
-                    txtNetSalesUPerc.setText(""+salesAnalysis.getWowNetSalesUnitsGrowthPct()+"%");
+                    txtNetSalesVal.setText(""+(int) salesAnalysis.getSaleNetVal());
+                    txtPlanSalesVal.setText(""+(int)salesAnalysis.getPlanSaleNetVal());
+                    txtNetSalesUVal.setText("" +(int) salesAnalysis.getSaleTotQty());
+                    txtSohUVal.setText("" + (int)salesAnalysis.getStkOnhandQty());
+                    txtRosVal0.setText("" + String.format("%.1f",salesAnalysis.getRos()));
+                    txtFwdWkCoverVal0.setText("" + String.format("%.1f",salesAnalysis.getFwdWeekCover()));
+                    txtNetSalesPerc.setText(""+(int)salesAnalysis.getWowNetSalesGrowthPct()+"%");
+
+                    if((int)salesAnalysis.getWowNetSalesGrowthPct() >= 0)
+                    {
+                        txtNetSalesPerc.setBackgroundResource(R.drawable.border2);
+                    }
+                    else if((int)salesAnalysis.getWowNetSalesGrowthPct() < -1)
+                    {
+                        txtNetSalesPerc.setBackgroundResource(R.drawable.border1);
+                    }
+
+                    txtPlanSalesPerc.setText(""+(int)salesAnalysis.getPvaAchieved()+"%");
+
+                    if((int)salesAnalysis.getPvaAchieved() >= 0)
+                    {
+                        txtPlanSalesPerc.setBackgroundResource(R.drawable.border2);
+                    }
+                    else if((int)salesAnalysis.getPvaAchieved() < -1)
+                    {
+                        txtPlanSalesPerc.setBackgroundResource(R.drawable.border1);
+                    }
+
+                    txtNetSalesUPerc.setText(""+(int)salesAnalysis.getWowNetSalesUnitsGrowthPct()+"%");
+
+                    if((int)salesAnalysis.getWowNetSalesUnitsGrowthPct() >= 0)
+                    {
+                        txtNetSalesUPerc.setBackgroundResource(R.drawable.border2);
+                    }
+                    else if((int)salesAnalysis.getWowNetSalesUnitsGrowthPct() < -1)
+                    {
+                        txtNetSalesUPerc.setBackgroundResource(R.drawable.border1);
+                    }
                 }
 
 
@@ -207,15 +236,47 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                 if(salesAnalysis != null) {
 
-                    txtNetSalesVal.setText(" " + salesAnalysis.getSaleNetVal());
-                    txtPlanSalesVal.setText(" " + salesAnalysis.getPlanSaleNetVal());
-                    txtNetSalesUVal.setText(" " + salesAnalysis.getSaleTotQty());
-                    txtSohUVal.setText(" " + salesAnalysis.getStkOnhandQty());
-                    txtRosVal0.setText(" " + salesAnalysis.getInvTurns());
-                    txtFwdWkCoverVal0.setText(" " + salesAnalysis.getVelocity());
-                    txtNetSalesPerc.setText(""+salesAnalysis.getWowNetSalesGrowthPct()+"%");
-                    txtPlanSalesPerc.setText(""+salesAnalysis.getPvaAchieved()+"%");
-                    txtNetSalesUPerc.setText(""+salesAnalysis.getWowNetSalesUnitsGrowthPct()+"%");
+                    txtNetSalesVal.setText(" " + (int)salesAnalysis.getSaleNetVal());
+                    txtPlanSalesVal.setText(" " + (int)salesAnalysis.getPlanSaleNetVal());
+                    txtNetSalesUVal.setText(" " + (int) salesAnalysis.getSaleTotQty());
+                    txtSohUVal.setText(" " +(int) salesAnalysis.getStkOnhandQty());
+                    txtRosVal0.setText(" " + String.format("%.1f",salesAnalysis.getInvTurns()));
+                    txtFwdWkCoverVal0.setText(" " +String.format("%.1f", salesAnalysis.getVelocity()));
+
+
+                    txtNetSalesPerc.setText(""+(int)salesAnalysis.getWowNetSalesGrowthPct()+"%");
+
+                    if((int)salesAnalysis.getWowNetSalesGrowthPct() >= 0)
+                    {
+                        txtNetSalesPerc.setBackgroundResource(R.drawable.border2);
+                    }
+                    else if((int)salesAnalysis.getWowNetSalesGrowthPct() < -1)
+                    {
+                        txtNetSalesPerc.setBackgroundResource(R.drawable.border1);
+                    }
+
+                    txtPlanSalesPerc.setText(""+(int)salesAnalysis.getPvaAchieved()+"%");
+
+                    if((int)salesAnalysis.getPvaAchieved() >= 0)
+                    {
+                        txtPlanSalesPerc.setBackgroundResource(R.drawable.border2);
+                    }
+                    else if((int)salesAnalysis.getPvaAchieved() < -1)
+                    {
+                        txtPlanSalesPerc.setBackgroundResource(R.drawable.border1);
+                    }
+
+                    txtNetSalesUPerc.setText(""+(int)salesAnalysis.getWowNetSalesUnitsGrowthPct()+"%");
+
+                    if((int)salesAnalysis.getWowNetSalesUnitsGrowthPct() >= 0)
+                    {
+                        txtNetSalesUPerc.setBackgroundResource(R.drawable.border2);
+                    }
+                    else if((int)salesAnalysis.getWowNetSalesUnitsGrowthPct() < -1)
+                    {
+                        txtNetSalesUPerc.setBackgroundResource(R.drawable.border1);
+                    }
+
 
                     Log.i("saleNetVal IN L4W", "" + salesAnalysis.getSaleNetVal());
                 }
@@ -289,21 +350,21 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
         } else if (position == 1) {
             if(salesAnalysis != null) {
 
-                txtStoreVal_PvASales.setText("" + salesAnalysis.getPvaAchieved());
-                txtZonalVal_PvASales.setText(" " + salesAnalysis.getPvaAchievedZonal());
-                txtNationalVal_PvASales.setText(" " + salesAnalysis.getPvaAchievedNational());
+                txtStoreVal_PvASales.setText("" +(int) salesAnalysis.getPvaAchieved());
+                txtZonalVal_PvASales.setText(" " +(int) salesAnalysis.getPvaAchievedZonal());
+                txtNationalVal_PvASales.setText(" " +(int) salesAnalysis.getPvaAchievedNational());
 
-                txtStoreVal_YOYSales.setText(" " + salesAnalysis.getYoyNetSalesGrowthPct());
-                txtZonalVal_YOYSales.setText(" " + salesAnalysis.getYoyNetSalesGrowthPctZonal());
-                txtNationalVal_YOYSales.setText(" " + salesAnalysis.getYoyNetSalesGrowthPctNational());
+                txtStoreVal_YOYSales.setText(" " +(int) salesAnalysis.getYoyNetSalesGrowthPct());
+                txtZonalVal_YOYSales.setText(" " +(int) salesAnalysis.getYoyNetSalesGrowthPctZonal());
+                txtNationalVal_YOYSales.setText(" " + (int) salesAnalysis.getYoyNetSalesGrowthPctNational());
 
-                txtStoreVal_SellThro.setText(" " + salesAnalysis.getSellThruUnits());
-                txtZonalVal_SellThro.setText(" " + salesAnalysis.getSellThruUnitsZonal());
-                txtNationalVal_SellThro.setText(" " + salesAnalysis.getSellThruUnitsNational());
+                txtStoreVal_SellThro.setText(" " + (int)salesAnalysis.getSellThruUnits());
+                txtZonalVal_SellThro.setText(" " +(int) salesAnalysis.getSellThruUnitsZonal());
+                txtNationalVal_SellThro.setText(" " +(int) salesAnalysis.getSellThruUnitsNational());
 
-                txtStoreVal_MixSales.setText(" " + salesAnalysis.getMixSales());
-                txtZonalVal_MixSales.setText(" " + salesAnalysis.getMixSalesZonal());
-                txtNationalVal_MixSales.setText(" " + salesAnalysis.getMixsalesNational());
+                txtStoreVal_MixSales.setText(" " +(int) salesAnalysis.getMixSales());
+                txtZonalVal_MixSales.setText(" " +(int) salesAnalysis.getMixSalesZonal());
+                txtNationalVal_MixSales.setText(" " + (int) salesAnalysis.getMixsalesNational());
             }
 
             /*
@@ -353,10 +414,10 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
         } else if (position == 2) {
             if(salesAnalysis != null) {
 
-                txtSOHVal2.setText(" " + salesAnalysis.getStkOnhandQty());
-                txtGITVal.setText(" " + salesAnalysis.getStkGitQty());
-                txtROSVal2.setText(" " + salesAnalysis.getRos());
-                txtFwdWkCoverVal2.setText(" " + salesAnalysis.getFwdWeekCover());
+                txtSOHVal2.setText(" " +(int) salesAnalysis.getStkOnhandQty());
+                txtGITVal.setText(" " +(int) salesAnalysis.getStkGitQty());
+                txtROSVal2.setText(" " + String.format("%.1f", salesAnalysis.getRos()));
+                txtFwdWkCoverVal2.setText(" " + String.format("%.1f",salesAnalysis.getFwdWeekCover()));
             }
 
             /*LinearLayout layout = (LinearLayout) itemView;

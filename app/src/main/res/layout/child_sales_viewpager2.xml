@@ -25,6 +25,7 @@
             <TextView
                 android:id="@+id/txtSOHVal2"
                 android:text="12,15,14,566"
+                android:textStyle="bold"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="8dp"
@@ -95,6 +96,7 @@
             <TextView
                 android:id="@+id/txtGITVal"
                 android:text="15,15,00,000"
+                android:textStyle="bold"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="8dp"
@@ -174,6 +176,7 @@
             <TextView
                 android:id="@+id/txtROSVal2"
                 android:text="12,15,14,566"
+                android:textStyle="bold"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="8dp"
@@ -202,7 +205,7 @@
 
             <TextView
                 android:id="@+id/txtROS2"
-                android:text="ROS"
+                android:text="ROS(U)"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
@@ -244,6 +247,7 @@
             <TextView
                 android:id="@+id/txtFwdWkCoverVal2"
                 android:text="15,15,00,000"
+                android:textStyle="bold"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:layout_margin="8dp"

@@ -21,368 +21,833 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            
+
             <TextView
-                android:id="@+id/headersmdm"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="SM-DM"
-                android:textSize="16sp"
+                android:layout_below="@+id/headersmdm"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+
+            <!--one row starting-->
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/lin1"
+                android:orientation="vertical"
                 android:layout_below="@+id/headersmdm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:weightSum="4">
+                >
 
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
 
 
-                    <ImageButton
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/imageBtnKeyProducts"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/hourly_analysis" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hourly Analysis"
-                        android:textSize="13sp" />
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/imageBtnKeyProducts"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/hourly_analysis"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hourly Analysis"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal8"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/option_efficiency" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Option Efficiency" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal9"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/cut_size_report"
+                            />
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cut-Size Report"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal10"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/skewed_size"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+
+
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-
-                    <ImageButton
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/imageBtnStyle"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/product_info"
-                        />
-
-                    <TextView
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Product Info"
-                        android:textSize="13sp"
-                        />
-
-                </LinearLayout>
+                <TextView
+                    android:layout_below="@+id/headersmdm"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_salescard"
+                    />
 
 
 
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-
-                    <ImageButton
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnVisualAssortment"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/visual_assortment"
-                        />
-
-                    <TextView
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="Visual Assortment"
-                        android:textSize="13sp"
-                        />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                    <ImageButton
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        />
-
-
-                    <TextView
-                        android:gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:textSize="13sp"/>
-
-                </LinearLayout>
 
 
 
             </LinearLayout>
 
+            <!--one row-->
+
+
+
+
+
+
+            <!--second-->
 
             <TextView
-                android:layout_below="@+id/lin2"
-                android:id="@+id/headerpromo"
+                android:id="@+id/productinfo"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:text="Promo Analysis"
+                android:paddingRight="10dp"
+                android:textColor="?attr/colorPrimary"
+                android:layout_below="@+id/lin1"
+                android:text="Product info"
+                android:layout_marginTop="5dp"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
+
+            <TextView
+                android:layout_below="@+id/productinfo"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+
+
+            <LinearLayout
+                android:id="@+id/lineartwo"
+                android:visibility="gone"
+                android:layout_below="@+id/productinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/imageBtnStyle"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/product_info"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Product Info"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal4"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/option_efficiency" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Option Efficiency" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal5"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/cut_size_report"
+                            />
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cut-Size Report"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal6"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/skewed_size"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/divider_salescard"
+                    />
+
+
+            </LinearLayout>
+
+
+
+            <!--second ending-->
+
+
+
+
+
+            <!--third starting-->
+
+            <TextView
+                android:id="@+id/visualAssort"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="?attr/colorPrimary"
+                android:layout_below="@+id/lineartwo"
+                android:text="Visual Assort"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:layout_below="@+id/visualAssort"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
+
+
+
+            <LinearLayout
+                android:id="@+id/linearthree"
+                android:visibility="gone"
+                android:layout_below="@+id/visualAssort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnVisualAssortment"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/visual_assortment"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Visual Assortment"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal1"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/option_efficiency" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Option Efficiency" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal2"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/cut_size_report"
+                            />
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cut-Size Report"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal3"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/skewed_size"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/divider_salescard"
+                    />
+
+
+
+
+            </LinearLayout>
+
+            <!--thirld ending-->
+
+
+            <TextView
+                android:layout_below="@+id/headerpromo"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                android:id="@+id/textView5" />
 
             <LinearLayout
                 android:layout_below="@+id/headerpromo"
                 android:id="@+id/lin3"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:weightSum="4">
-
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                    <ImageButton
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnRunningpromo"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/running_promo"
-                        />
-
-
-                    <TextView
-                        android:gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Running Promo"
-                        android:layout_gravity="center_horizontal"
-                        android:textSize="13sp"
-                        />
-                </LinearLayout>
-
+                android:weightSum="4"
+                >
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
 
-                    <ImageButton
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnUpcomingpromo"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/upcoming_promo" />
+                    >
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnRunningpromo"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/running_promo"
+                            />
 
 
-                    <TextView
-                        android:layout_gravity="center_horizontal"
-                        android:textSize="13sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="Upcoming Promo" />
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Running Promo"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnUpcomingpromo"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/upcoming_promo" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Upcoming Promo" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnExpiringpromo"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/expiring_promo"
+                            />
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Expiring Promo"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnBestWorstpromo"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/best_worst_promo"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Best/Worst Promo"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/textView4" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                    <ImageButton
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnExpiringpromo"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/expiring_promo"
-                        />
-
-                    <TextView
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expiring Promo"
-                        android:gravity="center_horizontal"
-                        android:textSize="13sp" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                    <ImageButton
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnBestWorstpromo"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/best_worst_promo"
-                        />
-
-
-                    <TextView
-                        android:gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Best/Worst Promo"
-                        android:textSize="13sp"
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/textView4" />
-                </LinearLayout>
-
-
-
-
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/lin3to3"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/divider_salescard"
+                    />
 
             </LinearLayout>
 
 
+
+
+
+            <!---->
+
+
             <TextView
-                android:layout_below="@+id/lin1"
-                android:id="@+id/headersales"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="Sales"
-                android:textSize="16sp"
+                android:layout_below="@+id/headersales"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
 
             <LinearLayout
                 android:layout_below="@+id/headersales"
                 android:id="@+id/lin2"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:weightSum="4">
-
-
+                >
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
 
-                    <ImageButton
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnSales"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/sales_analysis"
-                        />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnSales"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/sales_analysis"
+                            />
 
 
-                    <TextView
-                        android:gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sales"
-                        android:layout_gravity="center_horizontal"
-                        android:textSize="13sp"
-                        />
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sales"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="visible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnPVA"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/sales_pva" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="PvA" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal12"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/cut_size_report"
+                            />
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cut-Size Report"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal13"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/skewed_size"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+
+
+
                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                    <ImageButton
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/btnPVA"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="#ffffff"
-                        android:src="@mipmap/sales_pva" />
 
 
-                    <TextView
-                        android:textSize="13sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PvA"
-                        android:layout_gravity="center_horizontal"
-                        />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/divider_salescard"
+                    />
 
             </LinearLayout>
 
 
             <TextView
-                android:layout_below="@+id/lin3"
-                android:id="@+id/headerinvent"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="Inventory"
-                android:textSize="16sp"
+                android:layout_below="@+id/headerinvent"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                />
 
             <LinearLayout
                 android:layout_below="@+id/headerinvent"
                 android:id="@+id/lin4"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:weightSum="4">
@@ -392,9 +857,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:weightSum="4">
 
 
@@ -504,23 +966,36 @@
 
 
 
-
-
-
                 </LinearLayout>
 
+                <TextView
+                    android:layout_below="@+id/lin4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/divider_salescard"
+                    />
+
+
             </LinearLayout>
+
+
+            <!---->
 
 
             <TextView
                 android:id="@+id/headermarketing"
                 android:layout_below="@+id/lin4"
+                android:visibility="visible"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
+                android:paddingLeft="10dp"
+                android:textColor="?attr/colorPrimary"
                 android:layout_height="wrap_content"
                 android:text="Marketing Events"
                 android:textSize="20sp"
                 android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"/>
+                />
 
 
 
@@ -544,19 +1019,81 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"/>
 
+            <TextView
+
+                android:id="@+id/headerpromo"
+                android:gravity="center_vertical"
+                android:visibility="visible"
+                android:textColor="?attr/colorPrimary"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Promo Analysis"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/lin2"
+                android:layout_toEndOf="@+id/lill" />
+
+            <TextView
+
+                android:id="@+id/headersmdm"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Hourly Flash"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/headersales"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Sales"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold"
+                android:visibility="visible"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/linearthree"
+                android:layout_toEndOf="@+id/lill" />
+
+            <TextView
+                android:id="@+id/headerinvent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textStyle="bold"
+                android:text="Inventory"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/lin3"
+                android:layout_alignParentStart="true" />
+
             <!--<apsupportapp.aperotechnologies.com.designapp.ExpandableHeightGridView-->
-                <!--android:id="@+id/spotsView"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:layout_marginBottom="5dp"-->
-                <!--android:layout_marginLeft="5dp"-->
-                <!--android:layout_marginRight="5dp"-->
-                <!--android:horizontalSpacing="10dp"-->
-                <!--android:isScrollContainer="false"-->
-                <!--android:numColumns="1"-->
-                <!--android:stretchMode="columnWidth"-->
-                <!--android:verticalSpacing="10dp" />-->
+            <!--android:id="@+id/spotsView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:horizontalSpacing="10dp"-->
+            <!--android:isScrollContainer="false"-->
+            <!--android:numColumns="1"-->
+            <!--android:stretchMode="columnWidth"-->
+            <!--android:verticalSpacing="10dp" />-->
 
 
         </RelativeLayout>

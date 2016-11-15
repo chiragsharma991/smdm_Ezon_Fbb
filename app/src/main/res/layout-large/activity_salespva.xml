@@ -332,7 +332,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:gravity="center_vertical|center"
-                            android:text="PvA Sales %"
+                            android:text="PvA Sales%"
                             android:textColor="@android:color/black"
                             android:textSize="12sp"
                             android:textStyle="bold"/>

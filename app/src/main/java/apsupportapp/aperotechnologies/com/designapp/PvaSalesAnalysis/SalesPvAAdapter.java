@@ -28,6 +28,13 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.CombinedData;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -49,12 +56,13 @@ public class SalesPvAAdapter extends BaseAdapter {
     String fromWhere;
     int level ;
     int offsetvalue = 0, count = 0, limit = 100;
-    private ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList;
+    ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList;
     SalesAnalysisListDisplay salesAnalysisListDisplay;
     SalesPvAAdapter salesPvAAdapter;
     ListView listViewSalesPvA;
     Gson gson ;
-    static String planDept,planCategory,planClass,planBrandName;
+    CombinedData pvaData;
+    static String planDept,planCategory,planClass;
 
     public SalesPvAAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList, Context context, String fromWhere, ListView listViewSalesPvA) {
         this.context = context;
@@ -145,8 +153,8 @@ public class SalesPvAAdapter extends BaseAdapter {
         if(fromWhere.equals("Department")) {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanDept());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText(" " +(int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText(" " +(int) productNameBean.getSaleNetVal());
 
 
         }
@@ -154,8 +162,8 @@ public class SalesPvAAdapter extends BaseAdapter {
         {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanCategory());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText(" " + (int)productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText(" " + (int)productNameBean.getSaleNetVal());
 
 //
 //            viewHolder.txtValue.setText(productNameBean.getPlanCategory().toLowerCase());
@@ -165,8 +173,8 @@ public class SalesPvAAdapter extends BaseAdapter {
         {
 
            viewHolder.txtPlanClass.setText(productNameBean.getPlanClass());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText(" " + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText(" " + (int) productNameBean.getSaleNetVal());
 
             //viewHolder.txtValue.setText(productNameBean.getPlanClass().toLowerCase());
 
@@ -176,8 +184,8 @@ public class SalesPvAAdapter extends BaseAdapter {
         {
 
            viewHolder.txtPlanClass.setText(productNameBean.getBrandName());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText(" " +(int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText(" " +(int) productNameBean.getSaleNetVal());
 
             //viewHolder.txtValue.setText(productNameBean.getBrandName().toLowerCase());
 
@@ -187,13 +195,13 @@ public class SalesPvAAdapter extends BaseAdapter {
         {
 
             viewHolder.txtPlanClass.setText(productNameBean.getBrandplanClass());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText(" " +(int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText(" " + (int) productNameBean.getSaleNetVal());
 
             //viewHolder.txtValue.setText(productNameBean.getBrandplanClass().toLowerCase());
         }
 
-        double singlePercVal = 1;//50/100;// width divide by 100 perc
+        double singlePercVal = 0.5;//50/100;// width divide by 100 perc
 
         int planVal = 100; // planned value from API
         double achieveVal = productNameBean.getPvaAchieved();// Achieved value from API
@@ -201,20 +209,22 @@ public class SalesPvAAdapter extends BaseAdapter {
         double calplanVal = planVal * singlePercVal; // planned value multiplied by single perc value
         double calachieveVal = achieveVal * singlePercVal; // Achieved value multiplied by single perc value
 
-        //int planvalueinpx = convertSpToPixels(calplanVal, context); //converting value from sp to px
-        //int achievevalueinpx = convertSpToPixels(calachieveVal, context); //converting value from sp to px
+        int planvalueinpx = convertSpToPixels(calplanVal, context); //converting value from sp to px
+        int achievevalueinpx = convertSpToPixels(calachieveVal, context); //converting value from sp to px
 
         float density = context.getResources().getDisplayMetrics().density;
 
-        int finalCalplanVal = (int) (calplanVal); //converting value from px to dp
-        int finalCalachieveVal = (int) (calachieveVal); //converting value from px to dp
+        int finalCalplanVal = (int) (density * planvalueinpx); //converting value from px to dp
+        Log.e("", "==finalCalplanVal= " + finalCalplanVal);
+        int finalCalachieveVal = (int) (density * achievevalueinpx); //converting value from px to dp
+        Log.e("", "==finalCalachieveVal= " + finalCalachieveVal);
 
-
-        viewHolder.txtPlan.setWidth((int) calplanVal);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(2, 24);
-        params.setMargins((int) calachieveVal, 0, 0, 0);
-        viewHolder.txtAchieve.setLayoutParams(params);
-
+        RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(3, 24);
+        params1.setMargins(finalCalplanVal, 0, 0, 0);
+        viewHolder.txtAchieve.setLayoutParams(params1);
+        //RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, 24);
+        //params.setMargins(finalCalachieveVal, 0, 0, 0);
+        viewHolder.txtPlan.setWidth(finalCalachieveVal);
 
         if (achieveVal == planVal || achieveVal > planVal)
         {
@@ -277,6 +287,7 @@ public class SalesPvAAdapter extends BaseAdapter {
                             count = 0;
                             salesAnalysisListDisplayArrayList = new ArrayList<SalesAnalysisListDisplay>();
                             Log.i("category next","-----");
+                            Log.i("come","----"+planDept);
                             requestSalesPvAPlanClassListAPI(planDept,txtPvAClickedValue);
                             planCategory = txtPvAClickedValue;
                             Log.e("planCategory--",""+planCategory);
@@ -337,10 +348,91 @@ public class SalesPvAAdapter extends BaseAdapter {
         return convertView;
     }
 
+
+    private ArrayList<String> pvaxais() {
+
+        ArrayList<String> xAxis = new ArrayList<>();
+        for (int j = 0; j < salesAnalysisListDisplayArrayList.size(); j++) {
+
+            if(SalesPvAActivity.txtheaderplanclass.getText().toString().equals("Department")) {
+                xAxis.add(String.valueOf(salesAnalysisListDisplayArrayList.get(j).getPlanDept()));
+            }
+            else if(SalesPvAActivity.txtheaderplanclass.getText().toString().equals("Category"))
+            {
+                xAxis.add(String.valueOf(salesAnalysisListDisplayArrayList.get(j).getPlanCategory()));
+            }
+            else if(SalesPvAActivity.txtheaderplanclass.getText().toString().equals("Plan Class"))
+            {
+                xAxis.add(String.valueOf(salesAnalysisListDisplayArrayList.get(j).getPlanClass()));
+            }
+            else if(SalesPvAActivity.txtheaderplanclass.getText().toString().equals("Brand"))
+            {
+                xAxis.add(String.valueOf(salesAnalysisListDisplayArrayList.get(j).getBrandName()));
+            }
+            else if(SalesPvAActivity.txtheaderplanclass.getText().toString().equals("Brand Plan Class"))
+            {
+                xAxis.add(String.valueOf(salesAnalysisListDisplayArrayList.get(j).getBrandplanClass()));
+            }
+
+            //Log.e("xaxis size", "" + xAxis.add(String.valueOf(j)));
+        }
+        return xAxis;
+    }
+    public LineDataSet pvaLineDataSet()
+    {
+        ArrayList<Entry> entry = new ArrayList<>();
+        for (int i = 0; i < salesAnalysisListDisplayArrayList.size(); i++) {
+            //Log.e("line data", "" + salesAnalysisListDisplayArrayList.get(i).getPvaAchieved());
+            int value = (int) salesAnalysisListDisplayArrayList.get(i).getPvaAchieved();
+            Entry lineValues = new Entry(value, i);
+            entry.add(lineValues);
+
+        }
+        LineDataSet linedataSet = new LineDataSet(entry,"PvAAchieved");
+        linedataSet.setDrawValues(false);
+        linedataSet.setColor(Color.parseColor("#ed5752"));
+        return linedataSet;
+    }
        public static int convertSpToPixels(double sp, Context context) {
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, (float) sp, context.getResources().getDisplayMetrics());
         return px;
     }
+
+    public ArrayList<BarDataSet> pvaBarDataSet() {
+
+        ArrayList<BarDataSet> dataSets = null;
+        ArrayList<BarEntry> group1 = new ArrayList<>();
+
+        for (int i = 0; i < salesAnalysisListDisplayArrayList.size(); i++) {
+            //Log.e("getSaleNetVal--", "" + salesAnalysisListDisplayArrayList.get(i).getSaleNetVal());
+            int value = (int) salesAnalysisListDisplayArrayList.get(i).getSaleNetVal();
+            BarEntry barchartValues1 = new BarEntry(value, i);
+            group1.add(barchartValues1);
+        }
+
+        ArrayList<BarEntry> group2 = new ArrayList();
+        for (int i = 0; i < salesAnalysisListDisplayArrayList.size(); i++)
+
+        {
+            //Log.e("getPlanSaleNetVal--", "" + salesAnalysisListDisplayArrayList.get(i).getPlanSaleNetVal());
+            int value2 = (int) salesAnalysisListDisplayArrayList.get(i).getPlanSaleNetVal();
+            BarEntry barchartValues2 = new BarEntry(value2, i);
+            group2.add(barchartValues2);
+        }
+
+        BarDataSet barDataSet = new BarDataSet(group1, "Net Sales");
+        barDataSet.setColor(Color.BLUE);
+        barDataSet.setDrawValues(false);
+        BarDataSet barDataSet1 = new BarDataSet(group2, "Plan Sales");
+        barDataSet1.setDrawValues(false);
+        barDataSet1.setColor(Color.parseColor("#a45df1"));
+
+        dataSets = new ArrayList<>();
+        dataSets.add(barDataSet);
+        dataSets.add(barDataSet1);
+        return dataSets;
+    }
+
 
     private void requestSalesPvACategoryList(final String deptName) {
 
@@ -384,10 +476,17 @@ public class SalesPvAAdapter extends BaseAdapter {
                                 }
 
                                 salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
-                                listViewSalesPvA.setAdapter(SalesPvAActivity.salesPvAAdapter);
+                                listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 SalesPvAActivity.txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
                                 SalesPvAActivity.txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
-                                SalesPvAActivity.llayoutSalesPvA.setVisibility(View.VISIBLE);
+                                pvaData = new CombinedData(pvaxais());
+                                BarData pvabardata = new BarData(pvaxais(), pvaBarDataSet());
+                                pvaData.setData(pvabardata);
+                                LineData pvalineData = new LineData(pvaxais(),pvaLineDataSet());
+                                pvaData.setData(pvalineData);
+                                SalesPvAActivity.combinedChart.animateXY(2000, 2000);
+                                SalesPvAActivity.combinedChart.setData(pvaData);
+                                SalesPvAActivity.combinedChart.setDescription("");                                SalesPvAActivity.llayoutSalesPvA.setVisibility(View.VISIBLE);
 
                                 Reusable_Functions.hDialog();
                             }
@@ -467,9 +566,17 @@ public class SalesPvAAdapter extends BaseAdapter {
                                 }
 
                                 salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
-                                listViewSalesPvA.setAdapter(SalesPvAActivity.salesPvAAdapter);
+                                listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 SalesPvAActivity.txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
                                 SalesPvAActivity.txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
+                                pvaData = new CombinedData(pvaxais());
+                                BarData pvabardata = new BarData(pvaxais(), pvaBarDataSet());
+                                pvaData.setData(pvabardata);
+                                LineData pvalineData = new LineData(pvaxais(),pvaLineDataSet());
+                                pvaData.setData(pvalineData);
+                                SalesPvAActivity.combinedChart.animateXY(2000, 2000);
+                                SalesPvAActivity.combinedChart.setData(pvaData);
+                                SalesPvAActivity.combinedChart.setDescription("");
                                 SalesPvAActivity.llayoutSalesPvA.setVisibility(View.VISIBLE);
 
                                 Reusable_Functions.hDialog();
@@ -549,9 +656,17 @@ public class SalesPvAAdapter extends BaseAdapter {
                                 }
 
                                 salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
-                                listViewSalesPvA.setAdapter(SalesPvAActivity.salesPvAAdapter);
+                                listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 SalesPvAActivity.txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
                                 SalesPvAActivity.txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
+                                pvaData = new CombinedData(pvaxais());
+                                BarData pvabardata = new BarData(pvaxais(), pvaBarDataSet());
+                                pvaData.setData(pvabardata);
+                                LineData pvalineData = new LineData(pvaxais(),pvaLineDataSet());
+                                pvaData.setData(pvalineData);
+                                SalesPvAActivity.combinedChart.animateXY(2000, 2000);
+                                SalesPvAActivity.combinedChart.setData(pvaData);
+                                SalesPvAActivity.combinedChart.setDescription("");
                                 SalesPvAActivity.llayoutSalesPvA.setVisibility(View.VISIBLE);
 
                                 Reusable_Functions.hDialog();
@@ -633,9 +748,17 @@ public class SalesPvAAdapter extends BaseAdapter {
                                 }
 
                                 salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
-                                listViewSalesPvA.setAdapter(SalesPvAActivity.salesPvAAdapter);
+                                listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 SalesPvAActivity.txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
                                 SalesPvAActivity.txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
+                                pvaData = new CombinedData(pvaxais());
+                                BarData pvabardata = new BarData(pvaxais(), pvaBarDataSet());
+                                pvaData.setData(pvabardata);
+                                LineData pvalineData = new LineData(pvaxais(),pvaLineDataSet());
+                                pvaData.setData(pvalineData);
+                                SalesPvAActivity.combinedChart.animateXY(2000, 2000);
+                                SalesPvAActivity.combinedChart.setData(pvaData);
+                                SalesPvAActivity.combinedChart.setDescription("");
                                 SalesPvAActivity.llayoutSalesPvA.setVisibility(View.VISIBLE);
 
                                 Reusable_Functions.hDialog();

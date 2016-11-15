@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -33,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -51,13 +49,9 @@ public class SalesFilterActivity extends Activity {
     RequestQueue queue;
     List<String> subdept;
     public static String plandeptName;
-    String pf_prodName = " ", subdeptName;
-    public static Activity filterActivity;
+
+
     public static List<Integer> groupImages;
-    List<String> productList, articleList;
-    ArrayList productnamelist, articleOptionList;
-
-
 
     @SuppressWarnings("deprecation")
     @Override
@@ -65,9 +59,7 @@ public class SalesFilterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salespva_filter);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        filterActivity = this;
-
-        Log.e("came here", "");
+         Log.e("came here", "");
 
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -75,10 +67,8 @@ public class SalesFilterActivity extends Activity {
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        pf_prodName = " ";
 
-        articleList = new ArrayList<String>();
-        articleOptionList = new ArrayList();
+
         subdept = new ArrayList<String>();
 
         btnS_Filterback = (RelativeLayout) findViewById(R.id.imageBtnSFilterBack);
@@ -109,7 +99,7 @@ public class SalesFilterActivity extends Activity {
                 }
                 else if(getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
                 {
-//                    Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
+//                    Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity1.class);
 //                    startActivity(intent);
                     finish();
                 }
@@ -256,7 +246,7 @@ public class SalesFilterActivity extends Activity {
         }
         else if(getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
         {
-//            Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
+//            Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity1.class);
 //            startActivity(intent);
             finish();
         }

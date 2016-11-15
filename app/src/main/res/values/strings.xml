@@ -50,7 +50,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="permission_camera_rationale">This App needs to access Camera to present you with the Demo.</string>
 
-    <string name="name">Name</string>
+
 
 
 </resources>
