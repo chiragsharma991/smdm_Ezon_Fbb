@@ -43,7 +43,6 @@
 
         <activity
             android:name="apsupportapp.aperotechnologies.com.designapp.AboutUsActivity"
-            android:label=""
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
 
@@ -70,11 +69,6 @@
 
         <activity
             android:name="apsupportapp.aperotechnologies.com.designapp.SearchActivity1"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
-
-        <activity
-            android:name="apsupportapp.aperotechnologies.com.designapp.SalesAnalysisOld.SalesAnalysisActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
 
@@ -106,6 +100,31 @@
             android:name=".SalesAnalysis.SalesFilterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".PromoAnalysis.RunningPromoActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".PromoAnalysis.RunningPromoDetail"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".PromoAnalysis.VM"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".PromoAnalysis.VmPreview"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ExpiringPromo.ExpiringPromoActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".UpcomingPromo.UpcomingPromo"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".BestPerformersPromo.BestPerformerActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+
         <!-- Local Notification receiver-->
         <receiver android:name=".LocalNotificationReceiver"></receiver>
 

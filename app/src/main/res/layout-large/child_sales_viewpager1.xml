@@ -9,7 +9,7 @@
         android:orientation="horizontal"
         android:weightSum="2"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="90dp">
 
         <RelativeLayout
             android:orientation="horizontal"
@@ -20,15 +20,27 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="70dp">
+            android:layout_height="80dp">
+
+            <TextView
+                android:gravity="top"
+                android:id="@+id/txtPvASales"
+                android:textSize="14sp"
+                android:text="abc"
+                android:layout_margin="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
 
             <LinearLayout
+                android:layout_below="@+id/txtPvASales"
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:weightSum="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -38,8 +50,7 @@
 
                     <TextView
                         android:text="Store"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -49,9 +60,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtStoreVal_PvASales"
                         android:text="40%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -68,8 +78,7 @@
 
                     <TextView
                         android:text="Zonal"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -79,9 +88,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtZonalVal_PvASales"
                         android:text="50%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -97,8 +105,7 @@
 
                     <TextView
                         android:text="National"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -108,9 +115,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtNationalVal_PvASales"
                         android:text="50%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -120,35 +126,25 @@
             </LinearLayout>
 
 
-            <TextView
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="27dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_salescard"
-                />
+            <!--<TextView-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="27dp"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginRight="6dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/divider_salescard"-->
+                <!--/>-->
 
-            <TextView
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="26dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/white"
-                />
-
-            <TextView
-                android:id="@+id/txtPvASales"
-                android:text="PvA Sales%"
-                android:textSize="12sp"
-                android:textColor="@color/colorPrimary"
-                android:layout_margin="6dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"/>
+            <!--<TextView-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="26dp"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginRight="6dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@android:color/white"-->
+                <!--/>-->
 
 
 
@@ -164,10 +160,11 @@
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="70dp">
+            android:layout_height="80dp">
 
 
             <LinearLayout
+                android:layout_below="@+id/txtYoySales"
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -183,8 +180,7 @@
 
                     <TextView
                         android:text="Store"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -194,9 +190,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtStoreVal_YOYSales"
                         android:text="40%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -213,8 +208,7 @@
 
                     <TextView
                         android:text="Zonal"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -224,9 +218,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtZonalVal_YOYSales"
                         android:text="50%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -242,8 +235,7 @@
 
                     <TextView
                         android:text="National"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -253,9 +245,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtNationalVal_YOYSales"
                         android:text="50%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -264,38 +255,35 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="27dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_salescard"
-                />
+            <!--<TextView-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="27dp"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginRight="6dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/divider_salescard"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="26dp"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginRight="6dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@android:color/white"-->
+                <!--/>-->
 
             <TextView
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="26dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/white"
-                />
-
-            <TextView
+                android:gravity="top"
                 android:id="@+id/txtYoySales"
-                android:text="YOY Sales Grw%"
-                android:textSize="12sp"
-                android:textColor="@color/colorPrimary"
+                android:text="abc"
+                android:textSize="14sp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"/>
-
-
-
+                />
 
 
         </RelativeLayout>
@@ -306,10 +294,9 @@
         android:orientation="horizontal"
         android:weightSum="2"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="90dp">
 
         <RelativeLayout
-
             android:background="@drawable/salescard"
             android:id="@+id/sellthroughu"
             android:layout_marginLeft="10dp"
@@ -317,9 +304,10 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="70dp">
+            android:layout_height="80dp">
 
             <LinearLayout
+                android:layout_below="@+id/txtSellThro"
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -335,8 +323,7 @@
 
                     <TextView
                         android:text="Store"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -346,9 +333,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtStoreVal_SellThro"
                         android:text="40%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -365,8 +351,7 @@
 
                     <TextView
                         android:text="Zonal"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -376,9 +361,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtZonalVal_SellThro"
                         android:text="50%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -394,8 +378,7 @@
 
                     <TextView
                         android:text="National"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -405,9 +388,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtNationalVal_SellThro"
                         android:text="50%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -416,36 +398,36 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="27dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_salescard"
-                />
+            <!--<TextView-->
+
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="27dp"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginRight="6dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/divider_salescard"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="26dp"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginRight="6dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@android:color/white"-->
+                <!--/>-->
 
             <TextView
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="26dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/white"
-                />
-
-            <TextView
+                android:gravity="top"
                 android:id="@+id/txtSellThro"
-                android:text="Sell Thru(U)%"
-                android:textSize="12sp"
-                android:textColor="@color/colorPrimary"
+                android:text="abc"
+                android:textSize="14sp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"/>
-
+                />
 
         </RelativeLayout>
 
@@ -458,10 +440,11 @@
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="70dp">
+            android:layout_height="80dp">
 
 
             <LinearLayout
+                android:layout_below="@+id/txtMixSales"
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -477,8 +460,7 @@
 
                     <TextView
                         android:text="Store"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -488,9 +470,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtStoreVal_MixSales"
                         android:text="40%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -507,8 +488,7 @@
 
                     <TextView
                         android:text="Zonal"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -518,9 +498,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtZonalVal_MixSales"
                         android:text="50%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -536,8 +515,7 @@
 
                     <TextView
                         android:text="National"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -547,9 +525,8 @@
                         android:singleLine="true"
                         android:id="@+id/txtNationalVal_MixSales"
                         android:text="50%"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_sales"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -558,36 +535,35 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="27dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_salescard"
-                />
+            <!--<TextView-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="27dp"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginRight="6dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/divider_salescard"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="26dp"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginRight="6dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@android:color/white"-->
+                <!--/>-->
+
 
             <TextView
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="26dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/white"
-                />
-
-
-            <TextView
+                android:gravity="top"
                 android:id="@+id/txtMixSales"
-                android:text="Mix(Sales)"
-                android:textSize="12sp"
-                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"/>
+              />
 
 
         </RelativeLayout>

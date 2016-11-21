@@ -14,5 +14,6 @@
     <color name="pink">#FE0000</color>
     <color name="green">#05c706</color>
     <color name="text_sales">#000000</color>
+    <color name="edit_border_color">#e3e2e3</color>
 
 </resources>
