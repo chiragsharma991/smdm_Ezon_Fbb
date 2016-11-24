@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 
 public class VM extends AppCompatActivity {
     public static ArrayList<String>list;
@@ -39,7 +41,18 @@ public class VM extends AppCompatActivity {
 
         VmAdapter vmAdapter=new VmAdapter(this,R.layout.activity_vm,list);
         gridView.setAdapter(vmAdapter);
+
+
+
+
+
+
+
     }
+
+
+
+
 
     private void intialize()
     {
@@ -50,19 +63,49 @@ public class VM extends AppCompatActivity {
          ImageBtnBack.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 Intent intent= new Intent(VM.this,RunningPromoActivity.class);
-                 startActivity(intent);
-                 finish();
+
+                 if(data.getString("FROM").equals("RunningPromo")) {
+                     Intent intent = new Intent(VM.this, RunningPromoActivity.class);
+                     startActivity(intent);
+                     finish();
+                 }
+                 else if(data.getString("FROM").equals("ExpirePromo"))
+                 {
+                     Intent intent = new Intent(VM.this, ExpiringPromoActivity.class);
+                     startActivity(intent);
+                     finish();
+                 }
+                 else {
+                     Intent intent = new Intent(VM.this, UpcomingPromo.class);
+                     startActivity(intent);
+                     finish();
+                 }
 
              }
          });
 
     }
 
+
     @Override
     public void onBackPressed() {
-        Intent intent= new Intent(VM.this,RunningPromoActivity.class);
-        startActivity(intent);
-        finish();
+        super.onBackPressed();
+        if(data.getString("FROM").equals("RunningPromo")) {
+            Intent intent = new Intent(VM.this, RunningPromoActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(data.getString("FROM").equals("ExpirePromo"))
+        {
+            Intent intent = new Intent(VM.this, ExpiringPromoActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        else {
+            Intent intent = new Intent(VM.this, UpcomingPromo.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

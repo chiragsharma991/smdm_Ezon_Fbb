@@ -42,11 +42,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
 import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.RunningPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
+import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -62,7 +64,7 @@ import java.util.TimerTask;
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
-    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment , imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo;
+    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment , imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnFeshnessindex,BtnOnlyWorstpromo;
     LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory;
     TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt;
 
@@ -161,6 +163,21 @@ public class DashBoardActivity extends AppCompatActivity
             // Reusable_Functions.hDialog();
             Toast.makeText(DashBoardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
+
+        BtnOnlyWorstpromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this, WorstPerformerActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+
+
 
 
         BtnBestWorstpromo.setOnClickListener(new View.OnClickListener() {
@@ -291,6 +308,20 @@ public class DashBoardActivity extends AppCompatActivity
                 finish();
             }
         });
+        btnFeshnessindex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,FreshnessIndexActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
+
 
     }
 
@@ -409,6 +440,8 @@ public class DashBoardActivity extends AppCompatActivity
         BtnUpcomingpromo=(ImageButton)findViewById(R.id.btnUpcomingpromo);
         BtnExpiringpromo=(ImageButton)findViewById(R.id.btnExpiringpromo);
         BtnBestWorstpromo=(ImageButton)findViewById(R.id.btnBestWorstpromo);
+        BtnOnlyWorstpromo=(ImageButton)findViewById(R.id.btnOnlyWorstpromo);
+        btnFeshnessindex=(ImageButton)findViewById(R.id.btnFeshnessindex);
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 

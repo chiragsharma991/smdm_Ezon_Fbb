@@ -6,10 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,12 +36,12 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.RunningPromoAdapter;
-import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.RunningPromoDetail;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
@@ -47,8 +49,8 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 
 public class BestPerformerActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextView Bst_storecode, Bst_txtStoreName;
-    RelativeLayout Bst_imageBtnBack, Bst_sort,Bst_imgfilter;
+    TextView Bst_storecode, Bst_txtStoreName,PopPromo,PopPromoU,PopSort;
+    RelativeLayout Bst_imageBtnBack, Bst_sort,Bst_imgfilter,BestPromo_footer,SortPopup,BaseLayout;
     RunningPromoListDisplay BestPromoListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
@@ -56,12 +58,23 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
+    private int top = 10;
+    private int popPromo=0;
+    int orderbycol=1;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
     ListView BestPerformanceListView;
     ArrayList<RunningPromoListDisplay> BestpromoList;
     private int focusposition = 0;
+    private boolean userScrolled;
+    private BestPromoAdapter bestPromoAdapter;
+    private View footer;
+    int index = 0;
+    int iterations = 0;
+    private CheckBox CheckBstSale,CheckBstSaleU;
+    private String lazyScroll="OFF";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +82,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_best_performer);
         getSupportActionBar().hide();
         initalise();
-        //BestPerformanceListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
+        SortPopup.setVisibility(View.GONE);
         gson = new Gson();
         BestpromoList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -80,15 +93,26 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+
         requestRunningPromoApi();
         Reusable_Functions.sDialog(this, "Loading.......");
+       // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
+        footer = getLayoutInflater().inflate(R.layout.bestpromo_footer,null);
+
+        BestPerformanceListView.addFooterView(footer);
+       // footer.setVisibility(View.GONE);
+       // BestPerformanceListView.setAdapter(bestPromoAdapter);
+
+
+
+
     }
 
     private void requestRunningPromoApi() {
 
         //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
-        String url = ConstsCore.web_url + "/v1/display/bestworstpromodetails/" +userId + "?offset=" +offsetvalue + "&limit=" +limit+"&top=" +"10"+"&orderby=" +"DESC"+"&orderbycol=" +"1";
-      //  https://smdm.manthan.com/v1/display/bestworstpromodetails/4813?offset=0&limit=10&top=2&orderby=DESC&ord erbycol=1        Log.e(TAG, "Url" + "" + url);
+        String url = ConstsCore.web_url + "/v1/display/bestworstpromodetails/" +userId + "?offset=" +offsetvalue + "&limit=" +limit+"&top=" +top+"&orderby=" +"DESC"+"&orderbycol=" +orderbycol;
+        //  https://smdm.manthan.com/v1/display/bestworstpromodetails/4813?offset=0&limit=10&top=2&orderby=DESC&ord erbycol=1        Log.e(TAG, "Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -100,7 +124,13 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                footer.setVisibility(View.GONE);
+
                             } else if (response.length() == limit) {
+
+
+                                //BestPerformanceListView.removeFooterView(footer);
+                                //bestPromoAdapter.notifyDataSetChanged();
                                 Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -108,29 +138,51 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                     BestpromoList.add(BestPromoListDisplay);
 
                                 }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
+                                offsetvalue =offsetvalue+10;
+                                top =top+10;
+                                //  count++;
 
-                               // requestRunningPromoApi();
+                                // requestRunningPromoApi();
 
                             }
-                       /*     else if (response.length() < limit) {
+
+                            else if (response.length() < limit) {
                                 Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
 
-                                    runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    promoList.add(runningPromoListDisplay);
+                                    BestPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                    BestpromoList.add(BestPromoListDisplay);
+                                    offsetvalue =offsetvalue+response.length();
+                                    top =top+response.length();
 
                                 }
-                                Log.e(TAG, "promolistSize" + promoList.size());
-                            }*/
+                            }
 
 
-                            BestPromoAdapter bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
-                            BestPerformanceListView.setAdapter(bestPromoAdapter);
+
+                            footer.setVisibility(View.GONE);
+                            if(popPromo==10)
+                            {
+                                bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
+                                BestPerformanceListView.setAdapter(bestPromoAdapter);
+                                popPromo=0;
+
+                            }
+                            else if(lazyScroll.equals("ON")){
+                                bestPromoAdapter.notifyDataSetChanged();
+                            }else
+                            {
+                                bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
+                                BestPerformanceListView.setAdapter(bestPromoAdapter);
+
+
+                            }
+                            // BestPromo_footer.setVisibility(View.GONE);
+
                             Reusable_Functions.hDialog();
-                          //  Bst_storecode.setText(BestpromoList.get(0).getStoreCode());
-                           // Bst_txtStoreName.setText(BestpromoList.get(0).getStoreDesc());
+
+                            //  Bst_storecode.setText(BestpromoList.get(0).getStoreCode());
+                            // Bst_txtStoreName.setText(BestpromoList.get(0).getStoreDesc());
                             Log.v(TAG,"set text on");
 
 
@@ -138,6 +190,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
+                            footer.setVisibility(View.GONE);
                             Toast.makeText(context, "no data found in catch"+e.toString(), Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" +e.toString());
@@ -171,13 +224,32 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
 
 //---------------seton Click list listener------------------//
 
-        BestPerformanceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.v(TAG,"set on item click  ");
+        BestPerformanceListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            public int VisibleItemCount,TotalItemCount,FirstVisibleItem;
 
-               // Bst_storecode.setText(BestpromoList.get(position).getStoreCode());
-               // Bst_txtStoreName.setText(BestpromoList.get(position).getStoreDesc());
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                if ( FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState==SCROLL_STATE_IDLE) {
+
+
+                    footer.setVisibility(View.VISIBLE);
+
+                    lazyScroll="ON";
+                    requestRunningPromoApi();
+                }
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+                this.FirstVisibleItem=firstVisibleItem;
+                this.VisibleItemCount=visibleItemCount;
+                this.TotalItemCount=totalItemCount;
+
+
+
 
             }
         });
@@ -194,12 +266,29 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     private void initalise() {
         Bst_storecode = (TextView) findViewById(R.id.bst_txtStoreCode);
         Bst_txtStoreName = (TextView) findViewById(R.id.bst_txtStoreName);
+        PopPromo = (TextView) findViewById(R.id.popPromo);
+        PopPromoU = (TextView) findViewById(R.id.popPromoU);
+        PopSort = (TextView) findViewById(R.id.popSort);
         Bst_imageBtnBack = (RelativeLayout) findViewById(R.id.bst_imageBtnBack);
         Bst_sort = (RelativeLayout) findViewById(R.id.bst_sort);
+        BaseLayout = (RelativeLayout) findViewById(R.id.baseLayout);
         Bst_imgfilter = (RelativeLayout) findViewById(R.id.bst_imgfilter);
         BestPerformanceListView = (ListView) findViewById(R.id.bestPerformanceListView);
+        SortPopup=(RelativeLayout)findViewById(R.id.sortPopup);
+        CheckBstSale=(CheckBox)findViewById(R.id.checkPromoSale);
+        CheckBstSaleU=(CheckBox)findViewById(R.id.checkPromoSaleU);
+
 
         Bst_imageBtnBack.setOnClickListener(this);
+        Bst_sort.setOnClickListener(this);
+        Bst_imgfilter.setOnClickListener(this);
+        BaseLayout.setOnClickListener(this);
+        PopPromo.setOnClickListener(this);
+        PopPromoU.setOnClickListener(this);
+        PopSort.setOnClickListener(this);
+        CheckBstSale.setOnClickListener(this);
+        CheckBstSaleU.setOnClickListener(this);
+
 
 
     }
@@ -213,8 +302,92 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
             case R.id.bst_imageBtnBack:
                 onBackPressed();
                 break;
+            case R.id.bst_sort:
+                sortFunction();
+                break;
+            case R.id.baseLayout:
+                SortPopup.setVisibility(View.GONE);
+                break;
+            case R.id.popPromo:
+               // popupPromo();
+                //SortPopup.setVisibility(View.GONE);
+                break;
+            case R.id.popPromoU:
+                //popupPromoU();
+                //SortPopup.setVisibility(View.GONE);
+                break;
+            case R.id.bst_imgfilter:
+                Intent intent=new Intent(this, FilterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.checkPromoSale:
+                 if(CheckBstSale.isChecked())
+                 {
+                     popupPromo();
+                     CheckBstSaleU.setChecked(false);
+                     SortPopup.setVisibility(View.GONE);
+
+
+                 }
+                 else
+                 {
+
+                     Toast.makeText(this,"Uncheck",Toast.LENGTH_SHORT).show();
+
+                 }
+
+                break;
+            case R.id.checkPromoSaleU:
+                if(CheckBstSaleU.isChecked())
+                {
+                    popupPromoU();
+                    CheckBstSale.setChecked(false);
+                    SortPopup.setVisibility(View.GONE);
+
+
+                }
+                else
+                {
+                    Toast.makeText(this,"Uncheck",Toast.LENGTH_SHORT).show();
+
+                }
+                break;
 
         }
+    }
+
+    private void popupPromo()
+    {
+        BestpromoList.clear();
+        Log.e(TAG,"bestPromolist size"+BestpromoList.size());
+        Reusable_Functions.sDialog(this, "Loading.......");
+        popPromo=10;
+        limit = 10;
+        offsetvalue = 0;
+        top = 10;
+        orderbycol=1;
+        requestRunningPromoApi();
+
+    }
+    private void popupPromoU()
+    {
+        BestpromoList.clear();
+        Log.e(TAG,"bestPromolist size"+BestpromoList.size());
+        Reusable_Functions.sDialog(this, "Loading.......");
+        popPromo=10;
+        limit = 10;
+        offsetvalue = 0;
+        top = 10;
+        orderbycol=2;
+        requestRunningPromoApi();
+
+
+    }
+
+    private void sortFunction()
+    {
+        SortPopup.setVisibility(View.VISIBLE);
+
     }
 
     @Override

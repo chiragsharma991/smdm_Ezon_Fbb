@@ -67,10 +67,10 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
     @Override
     public void onPageSelected(int position) {
 
-        ImageView img = (ImageView) lldots.getChildAt(currentPage);
+        ImageView img = (ImageView) lldots.getChildAt(position);
         img.setImageResource(R.mipmap.dots_unselected);
-        currentPage = position;
-        ImageView img1 = (ImageView) lldots.getChildAt(currentPage);
+        //currentPage = position;
+        ImageView img1 = (ImageView) lldots.getChildAt(position);
         img1.setImageResource(R.mipmap.dots_selected);
 
 

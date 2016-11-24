@@ -464,8 +464,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 {
                     txtStoreVal_PvASales.setTextColor(Color.GREEN);
 
-
-
                 }
                 else if ((int) salesAnalysis.getPvaAchievedZonal() > (int) salesAnalysis.getPvaAchieved() && (int) salesAnalysis.getPvaAchievedZonal() > (int) salesAnalysis.getPvaAchievedNational())
                 {

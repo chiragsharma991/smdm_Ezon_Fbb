@@ -238,67 +238,70 @@
                 android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
+                android:orientation="horizontal"
                 android:id="@+id/llhierarchy"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
                 <TextView
+                    android:layout_margin="10dp"
                     android:id="@+id/txthDeptName"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/txthDeptNameNext"
-                    android:layout_width="5dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+                <!--<TextView-->
+                   <!---->
+                    <!--android:id="@+id/txthDeptNameNext"-->
+                    <!--android:layout_width="5dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
 
-                <TextView
-                    android:id="@+id/txthCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+                <!--<TextView-->
+                    <!--android:text="dsjghsdhghsghsdghhsdghsdhghsdghshdghjskdgh"-->
+                    <!--android:id="@+id/txthCategory"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
 
-                <TextView
-                    android:id="@+id/txthCategoryNext"
-                    android:layout_width="5dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+                <!--<TextView-->
+                    <!--android:text="dsjghsdhghsghsdghhsdghsdhghsdghshdghjskdgh"-->
+                    <!--android:id="@+id/txthCategoryNext"-->
+                    <!--android:layout_width="5dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
 
-                <TextView
-                    android:id="@+id/txthPlanClass"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/txthPlanClass"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
 
-                <TextView
-                    android:id="@+id/txthPlanClassNext"
-                    android:layout_width="5dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/txthPlanClassNext"-->
+                    <!--android:layout_width="5dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
 
-                <TextView
-                    android:id="@+id/txthBrand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/txthBrand"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
 
                 <!--<TextView-->
                     <!--android:layout_width="10dp"-->
@@ -467,7 +470,7 @@
         android:layout_height="match_parent"
         android:background="#80000000"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <RelativeLayout
             android:id="@+id/relrankLayout"
@@ -606,7 +609,7 @@
                         android:layout_weight="1"
                         android:text="Sales"
                         android:textColor="@color/text_sales"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/txtZonalSales"
@@ -651,7 +654,7 @@
                         android:gravity="left"
                         android:text="YOY Growth%"
                         android:textColor="@color/text_sales"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/txtZonalYOY"

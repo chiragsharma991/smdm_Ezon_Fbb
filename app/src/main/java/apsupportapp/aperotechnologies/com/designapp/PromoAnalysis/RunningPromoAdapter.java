@@ -157,6 +157,7 @@ public class RunningPromoAdapter extends BaseAdapter   {
             public void onClick(View v) {
                 Intent intent=new Intent(context,VM.class);
                 intent.putExtra("VM",arrayList.get(position).getPromoDesc());
+                intent.putExtra("FROM","RunningPromo");
                 context.startActivity(intent);
             }
         });

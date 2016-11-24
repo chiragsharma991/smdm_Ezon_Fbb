@@ -29,7 +29,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Net Sales"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:gravity="right"
@@ -41,7 +41,7 @@
                 android:layout_marginTop="8dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_alignBottom="@+id/txtNetSales"
                 android:layout_toEndOf="@+id/txtNetSales" />
 
@@ -73,7 +73,7 @@
                     android:layout_alignParentBottom="true"
                     android:text="20%"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_toLeftOf="@+id/txtNetSalesPerc"
@@ -84,7 +84,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:textSize="14sp" />
+                    android:textSize="11sp" />
 
             </RelativeLayout>
         </RelativeLayout>
@@ -107,7 +107,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Net Sales"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:gravity="right"
@@ -119,7 +119,7 @@
                 android:layout_marginTop="8dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_alignBottom="@+id/txtPlanSales"
                 android:layout_toEndOf="@+id/txtPlanSales" />
 
@@ -150,17 +150,18 @@
                     android:layout_alignParentBottom="true"
                     android:text="20%"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_toLeftOf="@+id/txtPlanSalesPerc"
                     android:id="@+id/txtPlanSalesName"
                     android:layout_width="wrap_content"
+                    android:text="dfdgfg"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:textSize="14sp" />
+                    android:textSize="11sp" />
 
             </RelativeLayout>
         </RelativeLayout>
@@ -189,7 +190,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Net Sales(U)"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:gravity="right"
@@ -201,7 +202,7 @@
                 android:layout_marginTop="8dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_alignBottom="@+id/txtNetSalesU"
                 android:layout_toEndOf="@+id/txtNetSalesU" />
 
@@ -231,7 +232,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="20%"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_toLeftOf="@+id/txtNetSalesUPerc"
@@ -242,7 +243,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:textSize="14sp" />
+                    android:textSize="11sp" />
 
             </RelativeLayout>
         </RelativeLayout>
@@ -265,7 +266,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="SOH"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:gravity="right"
@@ -277,7 +278,7 @@
                 android:layout_marginTop="8dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_alignBottom="@+id/txtSoHU"
                 android:layout_toEndOf="@+id/txtSoHU" />
 

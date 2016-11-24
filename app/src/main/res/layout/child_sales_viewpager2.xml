@@ -29,7 +29,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="SOH(U)"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:gravity="right"
@@ -41,7 +41,7 @@
                 android:layout_marginTop="8dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_alignBottom="@+id/txtSoHU"
                 android:layout_toEndOf="@+id/txtSoHU" />
 
@@ -108,7 +108,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="GIT(U)"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:gravity="right"
@@ -120,7 +120,7 @@
                 android:layout_marginTop="8dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_alignBottom="@+id/txtGIT"
                 android:layout_toEndOf="@+id/txtGIT" />
 
@@ -194,7 +194,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="ROS(U)"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:gravity="right"
@@ -206,7 +206,7 @@
                 android:layout_marginTop="8dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_alignBottom="@+id/txtROS2"
                 android:layout_toEndOf="@+id/txtROS2" />
 
@@ -273,7 +273,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Fwd Wk Cover"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:gravity="right"
@@ -285,7 +285,7 @@
                 android:layout_marginTop="8dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_alignBottom="@+id/txtFwdWkCover2"
                 android:layout_toEndOf="@+id/txtFwdWkCover2" />
 

@@ -91,7 +91,7 @@
         <activity
             android:name=".PvaSalesAnalysis.SalesPvAActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>Ò
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".SalesAnalysis.SalesAnalysisActivity"
             android:screenOrientation="portrait"
@@ -102,27 +102,46 @@
             android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".PromoAnalysis.RunningPromoActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".PromoAnalysis.RunningPromoDetail"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".PromoAnalysis.VM"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".PromoAnalysis.VmPreview"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".ExpiringPromo.ExpiringPromoActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".UpcomingPromo.UpcomingPromo"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".BestPerformersPromo.BestPerformerActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
 
         </activity>
+        <activity
+            android:name=".WorstPerformersPromo.WorstPerformerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".FreshnessIndex.FreshnessIndexActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".BestPerformersPromo.FilterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
 
 
         <!-- Local Notification receiver-->

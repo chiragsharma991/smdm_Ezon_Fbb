@@ -192,19 +192,19 @@ public class SalesAnalysisAdapter extends BaseAdapter{
         double calplanVal = planVal * singlePercVal; // planned value multiplied by single perc value
         double calachieveVal = achieveVal * singlePercVal; // Achieved value multiplied by single perc value
 
-        int planvalueinpx = convertSpToPixels(calplanVal, context); //converting value from sp to px
-        int achievevalueinpx = convertSpToPixels(calachieveVal, context); //converting value from sp to px
+//        int planvalueinpx = convertSpToPixels(calplanVal, context); //converting value from sp to px
+//        int achievevalueinpx = convertSpToPixels(calachieveVal, context); //converting value from sp to px
 
         float density = context.getResources().getDisplayMetrics().density;
 
-        int finalCalplanVal = (int) (density * planvalueinpx); //converting value from px to dp
+        int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
         //Log.e("", "==finalCalplanVal= " + finalCalplanVal);
-        int finalCalachieveVal = (int) (density * achievevalueinpx); //converting value from px to dp
+        int finalCalachieveVal = (int) (density * calachieveVal); //converting value from px to dp
         // Log.e("", "==finalCalachieveVal= " + finalCalachieveVal);
 
 
         viewHolder.txtPlan.setWidth(finalCalachieveVal);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, RelativeLayout.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3,24);
         params.setMargins(finalCalplanVal, 0, 0, 0);
         viewHolder.txtAchieve.setLayoutParams(params);
 

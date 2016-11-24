@@ -8,239 +8,7 @@
     tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
 
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:background="#80000000"
-        android:id="@+id/rankLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/relrankLayout"
-            android:layout_width="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_height="match_parent">
-
-
-            <RelativeLayout
-                android:id="@+id/relpopuplayout"
-                android:layout_marginTop="150dp"
-                android:background="@drawable/popup_border"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-                <RelativeLayout
-                    android:id="@+id/relimgclose"
-                    android:gravity="right"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp">
-
-
-                    <ImageView
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
-                        android:clickable="false"
-                        android:background="@mipmap/pop_up_close_icon"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_marginTop="40dp"
-                    android:text="Rank"
-                    android:gravity="center"
-                    android:textColor="@color/text_sales"
-                    android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rank"/>
-
-
-                <View
-                    android:layout_margin="5dp"
-                    android:id="@+id/div1"
-                    android:layout_below="@+id/rank"
-                    android:background="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
-
-
-                <TextView
-                    android:id="@+id/txtsales"
-                    android:layout_below="@+id/div1"
-                    android:layout_margin="5dp"
-                    android:text="Selected filter sales / Total Store fashion Sales"
-                    android:gravity="center"
-                    android:textColor="@color/text_sales"
-                    android:textSize="14sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <View
-                    android:id="@+id/div2"
-                    android:layout_below="@+id/txtsales"
-                    android:background="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
-
-
-                <LinearLayout
-                    android:id="@+id/zonalnational"
-                    android:orientation="horizontal"
-                    android:layout_below="@+id/div2"
-                    android:weightSum="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:layout_marginTop="20dp"
-                        android:text=""
-                        android:gravity="center"
-                        android:textColor="@color/darker_grey"
-                        android:textSize="14sp"
-                        android:padding="3dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:layout_marginTop="20dp"
-                        android:text="Zonal Rank"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:layout_marginTop="20dp"
-                        android:text="National Rank"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/sales"
-                    android:orientation="horizontal"
-                    android:layout_below="@+id/zonalnational"
-                    android:weightSum="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:text="Sales"
-                        android:textColor="@color/text_sales"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtZonalSales"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="4"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtNationalSales"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="10"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/YOY"
-                    android:orientation="horizontal"
-                    android:layout_below="@+id/sales"
-                    android:weightSum="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="YOY Growth%"
-                        android:gravity="left"
-                        android:textColor="@color/text_sales"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtZonalYOY"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="4"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtNationalYOY"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="10"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_below="@+id/YOY"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
-
-
-            </RelativeLayout>
-
-
-            <ImageView
-                android:layout_marginTop="120dp"
-                android:layout_centerHorizontal="true"
-                android:background="@mipmap/pop_up_icon"
-                android:layout_width="59dp"
-                android:layout_height="59dp" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:background="@android:color/white"
@@ -296,13 +64,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Best Performers"
+                        android:text="Best Promotions"
                         android:textSize="20sp"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/bst_imageBtnBack"
                         android:layout_marginLeft="20dp"
                         android:textColor="#ffffff"
                         android:id="@+id/toolbar_title" />
+
+
 
 
                     <RelativeLayout
@@ -325,7 +95,7 @@
                     <RelativeLayout
                         android:layout_toLeftOf="@+id/bst_imgfilter"
                         android:layout_marginRight="0dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:id="@+id/bst_sort"
                         android:background="@drawable/button_red_effect"
                         android:layout_width="@dimen/header_clickable_width"
@@ -334,7 +104,7 @@
 
                         <Button
                             android:clickable="false"
-                            android:background="@mipmap/filter_icon_nav"
+                            android:background="@mipmap/sort_icon"
                             android:layout_width="19dp"
                             android:layout_height="19dp"
                             android:layout_centerInParent="true"/>
@@ -387,18 +157,41 @@
 
 
 
-        </LinearLayout>
 
-        <ListView
+        </LinearLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/bestPerformanceListView"
-            android:layout_marginTop="15dp"
-            android:divider="@null"
+            android:layout_height="wrap_content"
 
             >
 
-        </ListView>
+
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/bestPerformanceListView"
+                android:layout_marginTop="10dp"
+                android:dividerHeight="1dp"
+
+                >
+
+            </ListView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_salescard"
+                android:layout_marginTop="10dp"
+                >
+
+            </View>
+
+
+
+
+        </RelativeLayout>
+
+
 
 
 
@@ -409,6 +202,19 @@
 
 
     </LinearLayout>
+
+
+
+
+
+<!--pop up menu-->
+
+
+    <include layout="@layout/popup_menu"
+      >
+
+    </include>
+
 
 </RelativeLayout>
 

@@ -1,11 +1,14 @@
 package apsupportapp.aperotechnologies.com.designapp.model;
 
 /**
- * Created by pamrutkar on 16/11/16.
+ * Created by csuthar on 11/11/16.
  */
+
 public class RunningPromoListDisplay {
+
+
     String storeCode;
-    String storeDesc;
+    String storeDescription;
     String alphanumericPromoCode;
     String promoCode;
     String promoDesc;
@@ -19,6 +22,10 @@ public class RunningPromoListDisplay {
 
     String prodLevel6Desc;
     int stkOnhandQty;
+
+
+
+
 
     public int getStkOnhandQty() {
         return stkOnhandQty;
@@ -117,11 +124,11 @@ public class RunningPromoListDisplay {
     }
 
     public String getStoreDesc() {
-        return storeDesc;
+        return storeDescription;
     }
 
     public void setStoreDesc(String storeDesc) {
-        this.storeDesc = storeDesc;
+        this.storeDescription = storeDesc;
     }
 
     public String getStoreCode() {
@@ -131,6 +138,8 @@ public class RunningPromoListDisplay {
     public void setStoreCode(String storeCode) {
         this.storeCode = storeCode;
     }
+
+
 
 
 

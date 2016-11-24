@@ -76,8 +76,8 @@ public class RunningPromoDetail extends AppCompatActivity {
     ViewGroup view;
     HorizontalScrollView horizontalScrollViewB;
     HorizontalScrollView horizontalScrollViewD;
-
-
+    ArrayList<ProductNameBean> productNameBeanArrayList;
+    TableRow tableRowC;
     ScrollView scrollViewC;
     ScrollView scrollViewD;
     RequestQueue queue;
@@ -88,22 +88,30 @@ public class RunningPromoDetail extends AppCompatActivity {
     public static RelativeLayout relProd_Frag;
     // set the header titles
     String headers[] = {
-            "                  MC               ",
-            "     Promo Sales    ",
-            "     Promo Sales(U)   ",
-            "     SOH(U)   ",
+            "        \tMC\t        ",
+            "Promo Sales\n",
+            "Promo\n  Sales(U) ",
+            "SOH(U)\n",
 
 
     };
 
     int headerCellsWidth[] = new int[headers.length];
+    ProductNameBean productNameBean;
     TextView txtStoreCode, txtStoreDesc;
     String userId, bearertoken;
+    String storeDesc, storeCode;
     MySingleton m_config;
     int offsetvalue = 0, limit = 100;
     int count = 0;
-
+    PopupWindow popupWindow;
+    OnRowPressListener rowPressListener;
+    Spinner subDeptList;
     SharedPreferences sharedPreferences;
+    private String NetPercent;
+    String productSubDeptItem;
+    String f_productName;
+    TextView txt_subdepName;
     String TAG = "RunningPromoDetail";
 
 
@@ -270,10 +278,13 @@ public class RunningPromoDetail extends AppCompatActivity {
     // generate table row of table A
     TableRow componentATableRow() {
         TableRow componentATableRow = new TableRow(this.context);
+
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT, 70);
+
         params.setMargins(2, 0, 0, 0);
         TextView textView = this.headerTextView(headers[0]);
+       // textView.setGravity(Gravity.CENTER);
         textView.setBackgroundColor(Color.parseColor("#B73020"));
         textView.setTextColor(Color.parseColor("#ffffff"));
         componentATableRow.addView(textView);
@@ -284,6 +295,7 @@ public class RunningPromoDetail extends AppCompatActivity {
     TableRow componentBTableRow() {
 
         TableRow componentBTableRow = new TableRow(this.context);
+
 
         int headerFieldCount = headers.length;
 
@@ -296,6 +308,7 @@ public class RunningPromoDetail extends AppCompatActivity {
             textView.setBackgroundColor(Color.parseColor("#B73020"));
             textView.setTextColor(Color.parseColor("#ffffff"));
             textView.setLayoutParams(params);
+           // textView.setGravity(Gravity.CENTER);
             componentBTableRow.addView(textView);
         }
         return componentBTableRow;
@@ -371,6 +384,53 @@ public class RunningPromoDetail extends AppCompatActivity {
             params.setMargins(2, 2, 0, 0);
             TextView textViewB = this.bodyTextView(String.valueOf(info[x]));
 
+
+//            if(tableRowForTableDProd_Frag.getChildAt(three) != null)
+//            {
+//                TextView txtDayNetSalesPercent = (TextView) tableRowForTableDProd_Frag.getChildAt(three);
+//
+//                if(productDetails.getDayNetSalesPercent() >= Double.parseDouble("70") && productDetails.getDayNetSalesPercent() <= Double.parseDouble("80"))
+//                {
+//                    txtDayNetSalesPercent.setTextColor(Color.parseColor("#FFBF00"));
+//
+//                }
+//                else if(productDetails.getDayNetSalesPercent() > Double.parseDouble("80"))
+//                {
+//                    txtDayNetSalesPercent.setTextColor(Color.GREEN);
+//
+//                }
+//                else if(productDetails.getDayNetSalesPercent() < Double.parseDouble("70"))
+//                {
+//                    txtDayNetSalesPercent.setTextColor(Color.RED);
+//
+//                }
+//
+//            }
+//
+//
+//            if(tableRowForTableDProd_Frag.getChildAt(4) != null)
+//            {
+//                TextView txtWtdNetSalesPercent = (TextView) tableRowForTableDProd_Frag.getChildAt(4);
+//
+//                if(productDetails.getWtdNetSalesPercent() >= Double.parseDouble("70") && productDetails.getWtdNetSalesPercent() <= Double.parseDouble("80"))
+//                {
+//                    txtWtdNetSalesPercent.setTextColor(Color.parseColor("#FFBF00"));
+//
+//                }
+//                else if(productDetails.getWtdNetSalesPercent() > Double.parseDouble("80"))
+//                {
+//                    txtWtdNetSalesPercent.setTextColor(Color.GREEN);
+//
+//                }
+//                else if(productDetails.getWtdNetSalesPercent() < Double.parseDouble("70"))
+//                {
+//                    txtWtdNetSalesPercent.setTextColor(Color.RED);
+//
+//                }
+//
+//            }
+
+
             tableRowForTableDProd_Frag.addView(textViewB, params);
         }
         return tableRowForTableDProd_Frag;
@@ -406,8 +466,23 @@ public class RunningPromoDetail extends AppCompatActivity {
         TableRow productInfoTableRow = (TableRow) this.tableBProd_Frag.getChildAt(0);
         int rowAHeight = this.viewHeight(productNameHeaderTableRow);
         int rowBHeight = this.viewHeight(productInfoTableRow);
-        TableRow tableRow = rowAHeight < rowBHeight ? productNameHeaderTableRow : productInfoTableRow;
-        int finalHeight = rowAHeight > rowBHeight ? rowAHeight : rowBHeight;
+        //TableRow tableRow = rowAHeight < rowBHeight ? productNameHeaderTableRow : productInfoTableRow;
+        TableRow tableRow =  productInfoTableRow;
+        //int finalHeight = rowAHeight > rowBHeight ? rowAHeight : rowBHeight;
+        int finalHeight = 120;
+        Log.e("final height",String.valueOf(finalHeight));
+        this.matchLayoutHeight(tableRow, finalHeight);
+    }
+    void resizeHeaderAHeight() {
+        TableRow productNameHeaderTableRow = (TableRow) this.tableAProd_Frag.getChildAt(0);
+        TableRow productInfoTableRow = (TableRow) this.tableBProd_Frag.getChildAt(0);
+        int rowAHeight = this.viewHeight(productNameHeaderTableRow);
+        int rowBHeight = this.viewHeight(productInfoTableRow);
+        //TableRow tableRow = rowAHeight < rowBHeight ? productNameHeaderTableRow : productInfoTableRow;
+        TableRow tableRow =  productNameHeaderTableRow;
+        //int finalHeight = rowAHeight > rowBHeight ? rowAHeight : rowBHeight;
+        int finalHeight = 120;
+        Log.e("final height",String.valueOf(finalHeight));
         this.matchLayoutHeight(tableRow, finalHeight);
     }
 
@@ -440,6 +515,7 @@ public class RunningPromoDetail extends AppCompatActivity {
 
             TableRow tableRow = rowAHeight < rowBHeight ? productNameHeaderTableRow : productInfoTableRow;
             int finalHeight = rowAHeight > rowBHeight ? rowAHeight : rowBHeight;
+
 
             this.matchLayoutHeight(tableRow, finalHeight);
         }
@@ -585,9 +661,24 @@ public class RunningPromoDetail extends AppCompatActivity {
 
                                 txtHeader.setText(data.getString("VM"));
 
-                               addTableRowToTableA();
+//                                Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
+//                                    public int compare(ProductNameBean one, ProductNameBean other) {
+//                                        return  new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
+//                                    }
+//                                });
+//                                Collections.reverse(productNameBeanArrayList);
+
+
+
+
+                               // txtStoreCode.setText(promoList.get(0).getStoreCode());
+                                //txtStoreDesc.setText(promoList.get(0).getStoreDesc());
+
+
+                                addTableRowToTableA();
                                 addTableRowToTableB();
                                 resizeHeaderHeight();
+                                resizeHeaderAHeight();
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
@@ -630,11 +721,7 @@ public class RunningPromoDetail extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(RunningPromoDetail.this,RunningPromoActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
+
 }
 

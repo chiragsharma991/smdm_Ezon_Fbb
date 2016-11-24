@@ -125,18 +125,20 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                                     ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                     ExpireList.add(ExpiringPromoListDisplay);
 
+
                                 }
                                 Log.e(TAG, "promolistSize" + ExpireList.size());
+                                promoval1.setText("\u20B9"+(int)ExpireList.get(0).getDurSaleNetVal());
+                                promoval2.setText(""+ExpireList.get(0).getDurSaleTotQty());
+                                storecode.setText(ExpireList.get(0).getStoreCode());
+                                storedesc.setText(ExpireList.get(0).getStoreDesc());
                             }
 
 
                             ExpiringPromoAdapter runningPromoAdapter = new ExpiringPromoAdapter(ExpireList,context);
                             ExpireListView.setAdapter(runningPromoAdapter);
                             Reusable_Functions.hDialog();
-                            promoval1.setText("\u20B9"+(int)ExpireList.get(0).getDurSaleNetVal());
-                            promoval2.setText("\u20B9"+ExpireList.get(0).getDurSaleTotQty());
-                            storecode.setText(ExpireList.get(0).getStoreCode());
-                            storedesc.setText(ExpireList.get(0).getStoreDesc());
+
                             // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
 
 
@@ -256,6 +258,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                 break;
 
         }
+
     }
 
     @Override

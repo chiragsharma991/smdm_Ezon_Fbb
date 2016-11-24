@@ -120,18 +120,19 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
                                 }
                                 Log.e(TAG, "promolistSize" + promoList.size());
+                                promoval1.setText("\u20B9"+(int)promoList.get(0).getDurSaleNetVal());
+                                promoval2.setText(""+promoList.get(0).getDurSaleTotQty());
+                                storecode.setText(promoList.get(0).getStoreCode());
+                                storedesc.setText(promoList.get(0).getStoreDesc());
                             }
 
 
                             RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
                             PromoListView.setAdapter(runningPromoAdapter);
-                            promoval1.setText("\u20B9"+(int)promoList.get(0).getDurSaleNetVal());
-                            promoval2.setText(""+promoList.get(0).getDurSaleTotQty());
-                            //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                            //promoval2.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleTotQty()));
-                            //storecode.setText((promoList.get(focusposition).getStoreCode()));
-                            //storedesc.setText(promoList.get(focusposition).getStoreDesc());
                             Reusable_Functions.hDialog();
+
+                           // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
+
 
 
                         } catch (Exception e) {
@@ -245,10 +246,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         switch (v.getId())
         {
             case R.id.rp_imageBtnBack:
-                Log.e(TAG,"back press on");
-                Intent intent=new Intent(context, DashBoardActivity.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
                 break;
 
         }
@@ -256,6 +254,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         Intent intent=new Intent(context, DashBoardActivity.class);
         startActivity(intent);
         finish();

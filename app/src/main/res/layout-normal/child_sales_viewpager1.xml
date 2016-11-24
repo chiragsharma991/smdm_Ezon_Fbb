@@ -25,7 +25,7 @@
             <TextView
                 android:gravity="top"
                 android:id="@+id/txtPvASales"
-                android:textSize="14sp"
+                android:textSize="11sp"
                 android:text="abc"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
 
                     <TextView
                         android:text="Store"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -60,7 +60,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtStoreVal_PvASales"
                         android:text="40%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -78,7 +78,7 @@
 
                     <TextView
                         android:text="Zonal"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -88,7 +88,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtZonalVal_PvASales"
                         android:text="50%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -105,7 +105,7 @@
 
                     <TextView
                         android:text="National"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -115,7 +115,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtNationalVal_PvASales"
                         android:text="50%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -180,7 +180,7 @@
 
                     <TextView
                         android:text="Store"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -190,7 +190,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtStoreVal_YOYSales"
                         android:text="40%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -208,7 +208,7 @@
 
                     <TextView
                         android:text="Zonal"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -218,7 +218,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtZonalVal_YOYSales"
                         android:text="50%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -235,7 +235,7 @@
 
                     <TextView
                         android:text="National"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -245,7 +245,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtNationalVal_YOYSales"
                         android:text="50%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -279,7 +279,7 @@
                 android:gravity="top"
                 android:id="@+id/txtYoySales"
                 android:text="abc"
-                android:textSize="14sp"
+                android:textSize="11sp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -323,7 +323,7 @@
 
                     <TextView
                         android:text="Store"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -333,7 +333,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtStoreVal_SellThro"
                         android:text="40%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -351,7 +351,7 @@
 
                     <TextView
                         android:text="Zonal"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -361,7 +361,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtZonalVal_SellThro"
                         android:text="50%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -378,7 +378,7 @@
 
                     <TextView
                         android:text="National"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -388,7 +388,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtNationalVal_SellThro"
                         android:text="50%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -423,7 +423,7 @@
                 android:gravity="top"
                 android:id="@+id/txtSellThro"
                 android:text="abc"
-                android:textSize="14sp"
+                android:textSize="11sp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -460,7 +460,7 @@
 
                     <TextView
                         android:text="Store"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -470,7 +470,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtStoreVal_MixSales"
                         android:text="40%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -488,7 +488,7 @@
 
                     <TextView
                         android:text="Zonal"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -498,7 +498,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtZonalVal_MixSales"
                         android:text="50%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -515,7 +515,7 @@
 
                     <TextView
                         android:text="National"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -525,7 +525,7 @@
                         android:singleLine="true"
                         android:id="@+id/txtNationalVal_MixSales"
                         android:text="50%"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -558,8 +558,9 @@
 
             <TextView
                 android:gravity="top"
+                android:text="abc"
                 android:id="@+id/txtMixSales"
-                android:textSize="14sp"
+                android:textSize="11sp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
