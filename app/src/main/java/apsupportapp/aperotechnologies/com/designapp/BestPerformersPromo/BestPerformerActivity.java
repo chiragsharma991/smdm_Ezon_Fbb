@@ -82,6 +82,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_best_performer);
         getSupportActionBar().hide();
         initalise();
+        CheckBstSale.setChecked(true);
         SortPopup.setVisibility(View.GONE);
         gson = new Gson();
         BestpromoList = new ArrayList<RunningPromoListDisplay>();
@@ -264,8 +265,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
 
 
     private void initalise() {
-        Bst_storecode = (TextView) findViewById(R.id.bst_txtStoreCode);
-        Bst_txtStoreName = (TextView) findViewById(R.id.bst_txtStoreName);
+        Bst_storecode = (TextView) findViewById(R.id.txtStoreCode);
+        Bst_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
         PopPromo = (TextView) findViewById(R.id.popPromo);
         PopPromoU = (TextView) findViewById(R.id.popPromoU);
         PopSort = (TextView) findViewById(R.id.popSort);
@@ -318,6 +319,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.bst_imgfilter:
                 Intent intent=new Intent(this, FilterActivity.class);
+                intent.putExtra("from","bestPromo");
                 startActivity(intent);
                 break;
             case R.id.checkPromoSale:

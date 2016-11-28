@@ -101,19 +101,19 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity
-            android:name=".PromoAnalysis.RunningPromoActivity"
+            android:name=".RunningPromo.RunningPromoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity
-            android:name=".PromoAnalysis.RunningPromoDetail"
+            android:name=".RunningPromo.RunningPromoDetail"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity
-            android:name=".PromoAnalysis.VM"
+            android:name=".RunningPromo.VM"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity
-            android:name=".PromoAnalysis.VmPreview"
+            android:name=".RunningPromo.VmPreview"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity

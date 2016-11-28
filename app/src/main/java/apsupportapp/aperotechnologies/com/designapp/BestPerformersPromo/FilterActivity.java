@@ -1,16 +1,28 @@
 package apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
+import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
+import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;
 
 public class FilterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,6 +33,10 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
     String MC="OFF";
     private ListView McListView;
     private ArrayList<String> McList;
+    private static TextView EdtPromoEndDate;
+    private static TextView EdtPromoStartDate;
+    private RelativeLayout Filter_imageBtnBack;
+    private RelativeLayout FilterOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +45,9 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().hide();
         intialize();
         main();
+
+
+
     }
 
     private void main()
@@ -50,7 +69,9 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
 
     private void intialize()
     {
-        //promostartDate,promoEndDate,mc
+        EdtPromoEndDate=(TextView)findViewById(R.id.edtPromoEndDate);
+        EdtPromoStartDate=(TextView)findViewById(R.id.edtPromoStartDate);
+
         PromostartDate=(TextView)findViewById(R.id.promostartDate);
         PromoEndDate=(TextView)findViewById(R.id.promoEndDate);
         Mc=(TextView)findViewById(R.id.mc);
@@ -58,12 +79,19 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         linear_PromostartDate=(LinearLayout)findViewById(R.id.linear_PromostartDate);
         linear_PromoEndDate=(LinearLayout)findViewById(R.id.linear_PromoEndDate);
         linear_Mc=(LinearLayout)findViewById(R.id.linear_Mc);
-        
+
+        Filter_imageBtnBack=(RelativeLayout)findViewById(R.id.filter_imageBtnBack);
+        FilterOk=(RelativeLayout)findViewById(R.id.filterOk);
+
         McListView=(ListView)findViewById(R.id.mcList);
 
         PromostartDate.setOnClickListener(this);
         PromoEndDate.setOnClickListener(this);
+        Filter_imageBtnBack.setOnClickListener(this);
+        FilterOk.setOnClickListener(this);
         Mc.setOnClickListener(this);
+        EdtPromoStartDate.setOnClickListener(this);
+        EdtPromoEndDate.setOnClickListener(this);
 
 
     }
@@ -82,16 +110,79 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.mc:
                 MC();
                 break;
+            case R.id.edtPromoStartDate:
+                StartDatePicker(v);
+                break;
+            case R.id.edtPromoEndDate:
+                EndDatePicker(v);
+                break;
+
+            case R.id.filter_imageBtnBack:
+                filterBack();
+                break;
+            case R.id.filterOk:
+                Toast.makeText(this,"Activity is still in process",Toast.LENGTH_LONG).show();
+                break;
+
+
+
+
         }
 
+
+    }
+
+    private void filterBack() {
+
+        if(getIntent().getStringExtra("from").equals("bestPromo"))
+        {
+            Intent intent=new Intent(this, BestPerformerActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("from").equals("worstPromo"))
+        {
+            Intent intent=new Intent(this, WorstPerformerActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
+        else if(getIntent().getStringExtra("from").equals("upComingPromo"))
+        {
+            Intent intent=new Intent(this, UpcomingPromo.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("from").equals("runningPromo"))
+        {
+            Intent intent=new Intent(this, RunningPromoActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("from").equals("expiringPromo"))
+        {
+            Intent intent=new Intent(this, ExpiringPromoActivity.class);
+            startActivity(intent);
+            finish();
+        }
+   }
+
+    private void EndDatePicker(View v) {
+        DialogFragment diaogFragment=new EndDatePickerFragment();
+        diaogFragment.show(getSupportFragmentManager(),"DatePicker");
+    }
+
+    private void StartDatePicker(View v) {
+        DialogFragment diaogFragment=new StartDatePickerFragment();
+        diaogFragment.show(getSupportFragmentManager(),"DatePicker");
 
     }
 
     private void StartDate() {
 
         if(Start.equals("OFF")){
-        linear_PromostartDate.setVisibility(View.VISIBLE);
-        PromostartDate.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+            linear_PromostartDate.setVisibility(View.VISIBLE);
+            PromostartDate.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
             Start="ON";
         }else
         {
@@ -128,5 +219,58 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             Mc.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
             MC="OFF";
         }
+    }
+
+    public static class StartDatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
+    {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            EdtPromoStartDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+        }
+    }
+
+    public static class EndDatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
+    {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            EdtPromoEndDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        filterBack();
     }
 }

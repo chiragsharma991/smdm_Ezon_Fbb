@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.PromoAnalysis;
+package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
 /**
  * Created by csuthar on 11/11/16.

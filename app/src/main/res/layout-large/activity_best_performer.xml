@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:text="Store : "
                     android:layout_marginLeft="5dp"
-                    android:textColor="#000000"
+                    android:textColor="#920609"
                     android:textSize="14sp" />
 
                 <TextView
@@ -139,6 +139,7 @@
                     android:id="@+id/bst_txtStoreCode"
                     android:layout_width="wrap_content"
                     android:hint="Not"
+                    android:textColor="#000000"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/bst_storecode"
                     android:textSize="14sp"/>
@@ -181,7 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/divider_salescard"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="9dp"
                 >
 
             </View>
@@ -207,11 +208,11 @@
 
 
 
-<!--pop up menu-->
+    <!--pop up menu-->
 
 
     <include layout="@layout/popup_menu"
-      >
+        >
 
     </include>
 

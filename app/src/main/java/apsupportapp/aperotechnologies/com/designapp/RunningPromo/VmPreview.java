@@ -1,13 +1,9 @@
-package apsupportapp.aperotechnologies.com.designapp.PromoAnalysis;
+package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
-import android.app.Activity;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 

@@ -64,7 +64,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/imageBtnBack"
-                        android:text="Sales Analysis"
+                        android:text="Sales"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
 
@@ -123,7 +123,6 @@
 
                     <!--</RelativeLayout>-->
 
-
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
@@ -149,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
-                    android:hint="3215"
+                    android:hint=""
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
@@ -159,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
-                    android:hint="FAL CDC-New Delhi"
+                    android:hint=""
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
@@ -470,7 +469,7 @@
         android:layout_height="match_parent"
         android:background="#80000000"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/relrankLayout"

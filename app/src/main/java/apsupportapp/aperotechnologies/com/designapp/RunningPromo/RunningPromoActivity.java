@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.PromoAnalysis;
+package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -199,7 +200,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                         PromoListView.setSelection(view.getFirstVisiblePosition());
                         Log.e(TAG, "firstVisibleItem" + " " + focusposition);
                         //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                        promoval1.setText("\u20B9"+(int)promoList.get(focusposition).getDurSaleNetVal());
+                        promoval1.setText("\u20B9\t"+(int)promoList.get(focusposition).getDurSaleNetVal());
                         promoval2.setText(""+promoList.get(focusposition).getDurSaleTotQty());
                         storecode.setText(promoList.get(focusposition).getStoreCode());
                         storedesc.setText(promoList.get(focusposition).getStoreDesc());
@@ -226,8 +227,8 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
 
     private void initalise() {
-        storecode = (TextView) findViewById(R.id.rp_txtStoreCode);
-        storedesc = (TextView) findViewById(R.id.rp_txtStoreName);
+        storecode = (TextView) findViewById(R.id.txtStoreCode);
+        storedesc = (TextView) findViewById(R.id.txtStoreName);
         promoval1 = (TextView) findViewById(R.id.txtPromoVal1);
         promoval2 = (TextView) findViewById(R.id.txtPromoVal2);
         imageback = (RelativeLayout) findViewById(R.id.rp_imageBtnBack);
@@ -235,6 +236,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         PromoListView = (ListView) findViewById(R.id.promoListview);
 
         imageback.setOnClickListener(this);
+        imagefilter.setOnClickListener(this);
 
 
     }
@@ -247,6 +249,12 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         {
             case R.id.rp_imageBtnBack:
                 onBackPressed();
+                break;
+            case R.id.rp_imgfilter:
+                Intent intent = new Intent(context, FilterActivity.class);
+                intent.putExtra("from","runningPromo");
+                startActivity(intent);
+                finish();
                 break;
 
         }

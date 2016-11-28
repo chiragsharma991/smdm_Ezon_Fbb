@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.VM;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.VM;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 

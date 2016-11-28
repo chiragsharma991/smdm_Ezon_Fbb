@@ -5,7 +5,6 @@ package apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo;
  */
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.VM;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
@@ -88,8 +86,8 @@ public class BestPromoAdapter extends BaseAdapter {
 
         }
         holder.PromotionName.setText(arrayList.get(position).getPromoDesc());
-        holder.Bst_PromoValues_child.setText("₹"+arrayList.get(position).getDurSaleNetVal());
-        holder.Bst_PromoValuesU_child.setText(""+arrayList.get(position).getDurSaleTotQty());
+        holder.Bst_PromoValues_child.setText("₹\t"+(int)arrayList.get(position).getDurSaleNetVal());
+        holder.Bst_PromoValuesU_child.setText(""+(int)arrayList.get(position).getDurSaleTotQty());
 
 
         // ---------------------click listener -------------------------

@@ -136,15 +136,15 @@ public class SalesPvAAdapter extends BaseAdapter {
         if (fromWhere.equals("Department")) {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanDept());
-            viewHolder.txtPlanSales.setText("\u20B9" + (int) productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText("\u20B9" + (int) productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
 
 
         } else if (fromWhere.equals("Category")) {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanCategory());
-            viewHolder.txtPlanSales.setText("\u20B9" + (int) productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText("\u20B9" + (int) productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
 
 //
 //            viewHolder.txtValue.setText(productNameBean.getPlanCategory().toLowerCase());
@@ -152,16 +152,16 @@ public class SalesPvAAdapter extends BaseAdapter {
         } else if (fromWhere.equals("Plan Class")) {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanClass());
-            viewHolder.txtPlanSales.setText("\u20B9" + (int) productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText("\u20B9" + (int) productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
         } else if (fromWhere.equals("Brand")) {
             viewHolder.txtPlanClass.setText(productNameBean.getBrandName());
-            viewHolder.txtPlanSales.setText("\u20B9" + (int) productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText("\u20B9" + (int) productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
         } else if (fromWhere.equals("Brand Plan Class")) {
             viewHolder.txtPlanClass.setText(productNameBean.getBrandplanClass());
-            viewHolder.txtPlanSales.setText("\u20B9" + (int) productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText("\u20B9" + (int) productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
         }
 
         // update listview
@@ -281,8 +281,6 @@ public class SalesPvAAdapter extends BaseAdapter {
         } else {
             viewHolder.txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
         }
-
-
         return convertView;
     }
 

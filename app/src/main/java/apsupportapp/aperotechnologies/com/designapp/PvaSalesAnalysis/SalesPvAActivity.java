@@ -734,11 +734,12 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         Log.i("response length", "" + response.length());
 
                         try {
+                            int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for ( i = 0; i < response.length(); i++) {
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
@@ -747,7 +748,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 requestSalesListDisplayAPI();
 
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for ( i = 0; i < response.length(); i++) {
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
@@ -772,8 +773,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                 salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
-                                txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
 //                                data = new CombinedData(getXAxisValues());
                                 bar_Data = new BarData(getXAxisValues(),  getDataSet());
 
@@ -1130,8 +1131,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                 salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
-                                txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 pvaVal = " ";
                                 pvaVal = deptName;
                                 txtpvahDeptName.setText(pvaVal);
@@ -1216,8 +1217,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                 salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
-                                txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
 
                                 pvaVal += " > "+ category;
                                 txtpvahDeptName.setText(pvaVal);
@@ -1302,8 +1303,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                 salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
-                                txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
 //                                txtpvahDeptName.setText(planDept);
 //                                txtpvahDeptNameNext.setText(">");
 //                                txtpvahCategory.setText(planCategory);
@@ -1394,8 +1395,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                 salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
-                                txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
 //                                txtpvahDeptName.setText(planDept);
 //                                txtpvahDeptNameNext.setText(">");
 //                                txtpvahCategory.setText(planCategory);

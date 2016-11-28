@@ -327,42 +327,41 @@
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
-
             <RelativeLayout
-                android:layout_marginTop="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="8dp">
 
 
                 <TextView
-                    android:id="@+id/up_storecode"
+                    android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store : "
-                    android:layout_marginLeft="5dp"
+                    android:textColor="#920609"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtStoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@+id/tstoreCode"
+                    android:hint=""
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:layout_marginLeft="3dp"
-                    android:id="@+id/up_txtStoreCode"
+                    android:id="@+id/txtStoreName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/up_storecode"
-                    android:hint=""
-                    android:textSize="14sp"/>
-
-                <TextView
                     android:layout_marginLeft="3dp"
-                    android:layout_toRightOf="@id/up_txtStoreCode"
-                    android:id="@+id/up_txtStoreName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
                     android:textColor="#000000"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </RelativeLayout>
 

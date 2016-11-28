@@ -125,6 +125,7 @@ public class FreshnessIndexAdapter extends BaseAdapter {
 
 
         } else if (fromWhere.equals("Plan Class")) {
+
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getPlanClass());
             viewHolder.txtfindexSOH.setText(""+freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+freshnessIndexDetails.getStkOnhandQtyCount());

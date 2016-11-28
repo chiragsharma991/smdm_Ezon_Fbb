@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.PromoAnalysis;
+package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
 import android.content.Context;
 import android.content.Intent;

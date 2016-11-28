@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,10 +36,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.RunningPromoAdapter;
-import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.RunningPromoDetail;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
@@ -230,11 +228,11 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
         imageback = (RelativeLayout) findViewById(R.id.up_imageBtnBack);
         imagefilter = (RelativeLayout) findViewById(R.id.up_imgfilter);
         UP_PromoListView = (ListView) findViewById(R.id.up_promoListview);
-        Up_storecode = (TextView) findViewById(R.id.up_txtStoreCode);
-        Up_storedesc = (TextView) findViewById(R.id.up_txtStoreName);
+        Up_storecode = (TextView) findViewById(R.id.txtStoreCode);
+        Up_storedesc = (TextView) findViewById(R.id.txtStoreName);
 
         imageback.setOnClickListener(this);
-
+        imagefilter.setOnClickListener(this);
 
     }
 
@@ -247,6 +245,12 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
             case R.id.up_imageBtnBack:
                 Intent intent=new Intent(context, DashBoardActivity.class);
                 startActivity(intent);
+                finish();
+                break;
+            case R.id.up_imgfilter:
+                Intent intent1= new Intent(context, FilterActivity.class);
+                intent1.putExtra("from","upComingPromo");
+                startActivity(intent1);
                 finish();
                 break;
 

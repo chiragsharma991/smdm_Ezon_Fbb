@@ -3,20 +3,16 @@ package apsupportapp.aperotechnologies.com.designapp.ExpiringPromo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.RunningPromoAdapter;
-import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.RunningPromoDetail;
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,7 +41,6 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
@@ -234,8 +229,8 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
 
 
     private void initalise() {
-        storecode = (TextView) findViewById(R.id.exp_txtStoreCode);
-        storedesc = (TextView) findViewById(R.id.exp_txtStoreName);
+        storecode = (TextView) findViewById(R.id.txtStoreCode);
+        storedesc = (TextView) findViewById(R.id.txtStoreName);
         promoval1 = (TextView) findViewById(R.id.txt_exp_PromoVal1);
         promoval2 = (TextView) findViewById(R.id.txt_exp_PromoVal2);
         imageback = (RelativeLayout) findViewById(R.id.exp_imageBtnBack);
@@ -243,7 +238,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
         ExpireListView = (ListView) findViewById(R.id.expireListview);
 
         imageback.setOnClickListener(this);
-
+        imagefilter.setOnClickListener(this);
 
     }
 
@@ -256,6 +251,11 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
             case R.id.exp_imageBtnBack:
                 onBackPressed();
                 break;
+            case R.id.exp_imgfilter:
+                Intent intent = new Intent(ExpiringPromoActivity.this, FilterActivity.class);
+                intent.putExtra("from","expiringPromo");
+                startActivity(intent);
+                finish();
 
         }
 

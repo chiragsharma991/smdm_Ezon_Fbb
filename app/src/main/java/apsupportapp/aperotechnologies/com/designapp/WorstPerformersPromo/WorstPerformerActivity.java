@@ -82,6 +82,7 @@ public class WorstPerformerActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_worst_performer);
         getSupportActionBar().hide();
         initalise();
+        CheckWstSale.setChecked(true);
         SortPopup.setVisibility(View.GONE);
 
         gson = new Gson();
@@ -259,19 +260,12 @@ public class WorstPerformerActivity extends AppCompatActivity implements View.On
 
             }
         });
-
-
-
-
-
-
-
     }
 
 
     private void initalise() {
-        Wst_txtStoreCode = (TextView) findViewById(R.id.wst_txtStoreCode);
-        Wst_txtStoreName = (TextView) findViewById(R.id.wst_txtStoreName);
+        Wst_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
+        Wst_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
         Wst_imageBtnBack = (RelativeLayout) findViewById(R.id.wst_imageBtnBack);
         Wst_sort = (RelativeLayout) findViewById(R.id.wst_sort);
         Wst_imgfilter = (RelativeLayout) findViewById(R.id.wst_imgfilter);
@@ -345,7 +339,7 @@ public class WorstPerformerActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.wst_imgfilter:
                Intent intent = new Intent(WorstPerformerActivity.this, FilterActivity.class);
-
+               intent.putExtra("from","worstPromo");
                 startActivity(intent);
 
 

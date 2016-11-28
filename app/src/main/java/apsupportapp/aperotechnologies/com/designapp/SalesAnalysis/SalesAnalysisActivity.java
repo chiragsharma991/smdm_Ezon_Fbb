@@ -272,7 +272,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
-                            Log.e("Brand Class Prev-- ", "  ");
+                            Log.e("txt Prev-- ", "  ");
                             requestSalesListDisplayAPI();
                             Log.e("prev 1", "" + salesAnalysisClass.getBrandName());
 
@@ -838,11 +838,12 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         Log.i("response length", "" + response.length());
 
                         try {
+                            int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for ( i = 0; i < response.length(); i++) {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
                                 }
@@ -851,7 +852,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 requestSalesListDisplayAPI();
 
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for ( i = 0; i < response.length(); i++) {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
                                 }
@@ -883,12 +884,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 }
 
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
-
-
                                 salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
-                                txtStoreCode.setText(salesAnalysisClass.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClass.getStoreDesc());
+                                txtStoreCode.setText(""+salesAnalysisClassArrayList.get(i).getStoreCode());
+                                Log.e("storecode","------"+salesAnalysisClassArrayList.get(1).getStoreCode());
+                                txtStoreDesc.setText(""+salesAnalysisClassArrayList.get(i).getStoreDesc());
                                 llayoutSalesAnalysis.setVisibility(View.VISIBLE);
                                 offsetvalue = 0;
                                 limit = 100;
@@ -1181,8 +1181,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
-                                txtStoreCode.setText(salesAnalysisClass.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClass.getStoreDesc());
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 val = "";
                                 val = deptName;
                                 txthDeptName.setText(val);
@@ -1278,8 +1278,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
-                                txtStoreCode.setText(salesAnalysisClass.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClass.getStoreDesc());
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 //txthDeptName.setText(planDept);
                                 //txthDeptNameNext.setText(">");
                                  val += " > "+ category;
@@ -1376,8 +1376,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
-                                txtStoreCode.setText(salesAnalysisClass.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClass.getStoreDesc());
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
 //                                txthDeptName.setText(planDept);
 //                                txthDeptNameNext.setText(">");
 //                                txthCategory.setText(planCategory);
@@ -1486,8 +1486,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
-                                txtStoreCode.setText(salesAnalysisClass.getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClass.getStoreDesc());
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
 //                                txthDeptName.setText(planDept);
 //                                txthDeptNameNext.setText(">");
 //                                txthCategory.setText(planCategory);

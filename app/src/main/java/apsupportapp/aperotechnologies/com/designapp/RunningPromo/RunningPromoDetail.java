@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.PromoAnalysis;
+package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

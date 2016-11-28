@@ -45,7 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoA
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
-import apsupportapp.aperotechnologies.com.designapp.PromoAnalysis.RunningPromoActivity;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;

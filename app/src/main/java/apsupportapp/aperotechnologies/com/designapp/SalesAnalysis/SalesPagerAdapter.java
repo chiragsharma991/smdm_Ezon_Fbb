@@ -145,9 +145,9 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 txtSohU.setText("SOH(U)");
 //                txtRos0.setText("ROS");
 //                txtFwdWkCover0.setText("Fwd Wk Cover");
-                txtNetSalesName.setText("Growth%");
+                txtNetSalesName.setText("WOW Gr%");
                 txtPlanSalesName.setText("PvA%");
-                txtNetSalesUName.setText("Growth%");
+                txtNetSalesUName.setText("WOW Gr%");
 
 
             } else if (SalesAnalysisActivity.selectedsegValue.equals("L4W") || SalesAnalysisActivity.selectedsegValue.equals("YTD")) {
@@ -158,9 +158,9 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 txtSohU.setText("SOH(U)");
 //                txtRos0.setText("Inv Turn");
 //                txtFwdWkCover0.setText("Velocity");
-                txtNetSalesName.setText("Growth%");
+                txtNetSalesName.setText("YOY Gr%");
                 txtPlanSalesName.setText("PvA%");
-                txtNetSalesUName.setText("Growth%");
+                txtNetSalesUName.setText("YOY Gr%");
 
             }
 
@@ -221,8 +221,8 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             if (SalesAnalysisActivity.selectedsegValue.equals("WTD") || SalesAnalysisActivity.selectedsegValue.equals("LW")) {
 
                 if (salesAnalysis != null) {
-                    txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
-                    txtPlanSalesVal.setText("\u20B9 " + (int) salesAnalysis.getPlanSaleNetVal());
+                    txtNetSalesVal.setText("\u20B9\t"+(int) salesAnalysis.getSaleNetVal());
+                    txtPlanSalesVal.setText("\u20B9\t" + (int) salesAnalysis.getPlanSaleNetVal());
                     txtNetSalesUVal.setText("" + (int) salesAnalysis.getSaleTotQty());
                     txtSohUVal.setText("" + (int) salesAnalysis.getStkOnhandQty());
 //                    txtRosVal0.setText("" + String.format("%.1f",salesAnalysis.getRos()));
@@ -264,8 +264,8 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                 if (salesAnalysis != null) {
 
-                    txtNetSalesVal.setText("\u20B9" + (int) salesAnalysis.getSaleNetVal());
-                    txtPlanSalesVal.setText("\u20B9" + (int) salesAnalysis.getPlanSaleNetVal());
+                    txtNetSalesVal.setText("\u20B9\t" + (int) salesAnalysis.getSaleNetVal());
+                    txtPlanSalesVal.setText("\u20B9\t" + (int) salesAnalysis.getPlanSaleNetVal());
                     txtNetSalesUVal.setText(" " + (int) salesAnalysis.getSaleTotQty());
                     txtSohUVal.setText(" " + (int) salesAnalysis.getStkOnhandQty());
 //                    txtRosVal0.setText(" " + String.format("%.1f",salesAnalysis.getInvTurns()));
