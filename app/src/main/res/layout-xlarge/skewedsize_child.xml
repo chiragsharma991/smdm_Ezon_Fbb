@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/bst_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:id="@+id/bst_Rel_image_child"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            >
+
+            <ImageView
+                android:id="@+id/skewed_image_child"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/placeholder"
+
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativeTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/bst_Rel_image_child"
+            android:gravity="center_horizontal">
+
+            <!--Buy one-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+                    <!---->
+
+                    <TextView
+                        android:id="@+id/skewed_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:text="Buy One Get One"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+
+
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/top_fav"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+
+                        >
+
+
+
+
+                        <ToggleButton
+                            android:id="@+id/toggle_skewed_fav"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/toggleswitch"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:textOff=""
+                            android:textOn=""
+
+                            />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/bst_lineOne_child"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignStart="@+id/bst_head_child"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/divider_salescard" />
+
+
+                <!--Promo sales-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:singleLine="true"
+                        android:text="SOH(U)"
+                        android:textSize="9sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textSize="9sp" />
+
+                    <TextView
+                        android:id="@+id/skewed_SOHU"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text="100"
+                        android:textSize="9sp" />
+
+                </LinearLayout>
+
+
+                <!--Promo Sales(U)-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:singleLine="true"
+                        android:text="FWC"
+                        android:textSize="9sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textSize="9sp" />
+
+                    <TextView
+                        android:id="@+id/skewed_fwc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text="100"
+                        android:textSize="9sp" />
+
+                </LinearLayout>
+
+                <!--ROS(U)-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:singleLine="true"
+                        android:text="Sizes"
+                        android:textSize="9sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:visibility="invisible"
+                        android:textSize="9sp" />
+
+                    <TextView
+                        android:id="@+id/skewed_RosU"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text="5"
+                        android:visibility="invisible"
+                        android:textSize="9sp" />
+
+                </LinearLayout>
+
+                <!--Table layout-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+
+                    >
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/skewed_tableSize"
+
+                        >
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <TextView
+                                android:text="S"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                android:layout_weight="1"
+                                />
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="M"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                />
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="L"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                />
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="XL"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                />
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="XXL"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                />
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="XXXL"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:textColor="#ffffffff"
+                                android:background="@drawable/cell_shape_mark"
+                                android:textSize="9sp"
+                                />
+
+
+
+                        </TableRow>
+
+
+
+
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <TextView
+                                android:text="10"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                android:layout_weight="1"
+                                />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="15"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                android:id="@+id/textView6" />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="24"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                />
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="10"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                />
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="5"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:background="@drawable/cell_shape"
+                                android:textSize="9sp"
+                                />
+                            <TextView
+                                android:layout_weight="1"
+                                android:text="50"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:textColor="#ffffffff"
+                                android:background="@drawable/cell_shape_mark"                                android:textSize="9sp"
+                                />
+
+
+
+                        </TableRow>
+
+
+
+
+                    </TableLayout>
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -329,7 +329,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                      CheckBstSaleU.setChecked(false);
                      SortPopup.setVisibility(View.GONE);
 
-
                  }
                  else
                  {
@@ -346,12 +345,10 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                     CheckBstSale.setChecked(false);
                     SortPopup.setVisibility(View.GONE);
 
-
                 }
                 else
                 {
                     Toast.makeText(this,"Uncheck",Toast.LENGTH_SHORT).show();
-
                 }
                 break;
 

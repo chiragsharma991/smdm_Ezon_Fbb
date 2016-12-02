@@ -17,7 +17,7 @@
             android:layout_marginTop="10dp" >
 
             <RelativeLayout
-                android:layout_marginLeft="10dp"
+
                 android:layout_marginRight="65dp"
                 android:id="@+id/innerrellay"
                 android:layout_width="match_parent"
@@ -47,7 +47,6 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint="storename"
-                    android:layout_marginRight="20dp"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
 

@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -93,14 +95,14 @@ public class SalesFilterActivity extends Activity {
 
                 if(getIntent().getStringExtra("checkfrom").equals("SalesAnalysis"))
                 {
-//                    Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
+                    startActivity(intent);
                     finish();
                 }
                 else if(getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
                 {
-//                    Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity1.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -141,12 +143,12 @@ public class SalesFilterActivity extends Activity {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-        groupImages = new ArrayList<Integer>();
-        groupImages.add(R.mipmap.filter_department_icon);
-        groupImages.add(R.mipmap.filter_category_icon);
-        groupImages.add(R.mipmap.filter_planclass_icon);
-        groupImages.add(R.mipmap.filter_brand_icon);
-        groupImages.add(R.mipmap.filter_brandplanclass_icon);
+//        groupImages = new ArrayList<Integer>();
+//        groupImages.add(R.mipmap.filter_department_icon);
+//        groupImages.add(R.mipmap.filter_category_icon);
+//        groupImages.add(R.mipmap.filter_planclass_icon);
+//        groupImages.add(R.mipmap.filter_brand_icon);
+//        groupImages.add(R.mipmap.filter_brandplanclass_icon);
 
         // Adding group name data
         listDataHeader.add("Department");
@@ -240,14 +242,14 @@ public class SalesFilterActivity extends Activity {
     public void onBackPressed() {
         if(getIntent().getStringExtra("checkfrom").equals("SalesAnalysis"))
         {
-//            Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
+            startActivity(intent);
             finish();
         }
         else if(getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
         {
-//            Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity1.class);
-//            startActivity(intent);
+            Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
+            startActivity(intent);
             finish();
         }
 

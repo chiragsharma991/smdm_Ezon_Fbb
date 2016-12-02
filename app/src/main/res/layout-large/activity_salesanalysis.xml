@@ -347,8 +347,8 @@
                                 android:layout_alignParentLeft="true">
 
                                 <ImageView
-                                    android:layout_width="5dp"
-                                    android:layout_height="11dp"
+                                    android:layout_width="8dp"
+                                    android:layout_height="17dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/arrow_left_icon"
                                     android:clickable="false" />
@@ -373,14 +373,12 @@
                                 android:layout_toRightOf="@+id/headerplanclass">
 
                                 <ImageView
-                                    android:layout_width="5dp"
-                                    android:layout_height="11dp"
+                                    android:layout_width="8dp"
+                                    android:layout_height="17dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/arrow_right_icon"
                                     android:clickable="false" />
-
                             </RelativeLayout>
-
                         </RelativeLayout>
 
                         <TextView
@@ -400,8 +398,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@color/bg_salescard">
-
-
                         <EditText
                             android:id="@+id/etListText"
                             android:layout_width="250dp"
@@ -453,7 +449,6 @@
                     android:divider="@null"
                     android:dividerHeight="0dp"
                     android:smoothScrollbar="true"></ListView>
-
 
             </RelativeLayout>
 

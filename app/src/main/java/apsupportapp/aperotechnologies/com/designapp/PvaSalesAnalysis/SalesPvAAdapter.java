@@ -39,8 +39,10 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -132,12 +134,15 @@ public class SalesPvAAdapter extends BaseAdapter {
         viewHolder.txtPlanClass.setTag(position);
         viewHolder.txtPlanSales.setTag(position);
         viewHolder.txtNetSales.setTag(position);
+        int planSaleVal = (int)productNameBean.getPlanSaleNetVal();
+        int netSaleVal = (int)productNameBean.getSaleNetVal();
 
         if (fromWhere.equals("Department")) {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanDept());
-            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
+
+            viewHolder.txtPlanSales.setText("\u20B9\t" + NumberFormat.getNumberInstance().format(planSaleVal));
+            viewHolder.txtNetSales.setText("\u20B9\t" + NumberFormat.getNumberInstance().format(netSaleVal));
 
 
         } else if (fromWhere.equals("Category")) {

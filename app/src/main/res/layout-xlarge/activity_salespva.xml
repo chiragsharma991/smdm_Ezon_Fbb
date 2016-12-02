@@ -325,8 +325,8 @@
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="5dp"
-                                    android:layout_height="11dp"
+                                    android:layout_width="8dp"
+                                    android:layout_height="17dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/arrow_left_icon"
                                     android:clickable="false" />
@@ -353,8 +353,8 @@
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="5dp"
-                                    android:layout_height="11dp"
+                                    android:layout_width="8dp"
+                                    android:layout_height="17dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/arrow_right_icon"
                                     android:clickable="false" />

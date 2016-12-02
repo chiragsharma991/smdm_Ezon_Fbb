@@ -46,7 +46,7 @@ public class FreshnessIndexAdapter extends BaseAdapter {
         this.freshnessIndexDetailsArrayList = freshnessIndexDetailsArrayList;
         this.fromWhere = fromWhere;
         this.listViewFIndex = listViewFIndex;
-        level = 1;
+
         gson = new Gson();
     }
 
@@ -92,10 +92,10 @@ public class FreshnessIndexAdapter extends BaseAdapter {
 
 
             convertView.setTag(viewHolder);
-            convertView.setTag(R.id.txtfindexClass, viewHolder.txtfindexClass);
-            convertView.setTag(R.id.txtfindexSOH, viewHolder.txtfindexSOH);
-            convertView.setTag(R.id.txtfindexSOH_U, viewHolder.txtfindexSOH_U);
-            convertView.setTag(R.id.txtfindexGIT, viewHolder.txtfindexGIT);
+//            convertView.setTag(R.id.txtfindexClass, viewHolder.txtfindexClass);
+//            convertView.setTag(R.id.txtfindexSOH, viewHolder.txtfindexSOH);
+//            convertView.setTag(R.id.txtfindexSOH_U, viewHolder.txtfindexSOH_U);
+//            convertView.setTag(R.id.txtfindexGIT, viewHolder.txtfindexGIT);
 
         } else {
             viewHolder = (FreshnessIndexAdapter.ViewHolderItem) convertView.getTag();
@@ -103,10 +103,10 @@ public class FreshnessIndexAdapter extends BaseAdapter {
 
         FreshnessIndexDetails freshnessIndexDetails = (FreshnessIndexDetails) freshnessIndexDetailsArrayList.get(position);
 
-        viewHolder.txtfindexClass.setTag(position);
-        viewHolder.txtfindexSOH.setTag(position);
-        viewHolder.txtfindexSOH_U.setTag(position);
-        viewHolder.txtfindexGIT.setTag(position);
+//        viewHolder.txtfindexClass.setTag(position);
+//        viewHolder.txtfindexSOH.setTag(position);
+//        viewHolder.txtfindexSOH_U.setTag(position);
+//        viewHolder.txtfindexGIT.setTag(position);
 
         if (fromWhere.equals("Department")) {
 

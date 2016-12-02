@@ -372,7 +372,7 @@ public class RunningPromoDetail extends AppCompatActivity {
         int loopCount = ((TableRow) this.tableBProd_Frag.getChildAt(0)).getChildCount();
         //NetPercent=String.valueOf(runningdetail.getDayNetSalesPercent()).concat("%");
         String info[] = {
-                String.valueOf("\u20B9"+(int)runningdetail.getDurSaleNetVal()),
+                String.valueOf("\u20B9\t"+(int)runningdetail.getDurSaleNetVal()),
                 String.valueOf(""+(int)runningdetail.getDurSaleTotQty()),
                 String.valueOf(""+(int)runningdetail.getStkOnhandQty()),
 

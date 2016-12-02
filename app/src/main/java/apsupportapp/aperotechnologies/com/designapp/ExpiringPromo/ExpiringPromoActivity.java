@@ -123,7 +123,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
 
                                 }
                                 Log.e(TAG, "promolistSize" + ExpireList.size());
-                                promoval1.setText("\u20B9"+(int)ExpireList.get(0).getDurSaleNetVal());
+                                promoval1.setText("\u20B9\t"+(int)ExpireList.get(0).getDurSaleNetVal());
                                 promoval2.setText(""+ExpireList.get(0).getDurSaleTotQty());
                                 storecode.setText(ExpireList.get(0).getStoreCode());
                                 storedesc.setText(ExpireList.get(0).getStoreDesc());
@@ -202,8 +202,8 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                         ExpireListView.setSelection(view.getFirstVisiblePosition());
                         Log.e(TAG, "firstVisibleItem" + " " + focusposition);
                         //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                        promoval1.setText("\u20B9"+(int)ExpireList.get(focusposition).getDurSaleNetVal());
-                        promoval2.setText("\u20B9"+ExpireList.get(focusposition).getDurSaleTotQty());
+                        promoval1.setText("\u20B9\t"+(int)ExpireList.get(focusposition).getDurSaleNetVal());
+                        promoval2.setText("\u20B9\t"+ExpireList.get(focusposition).getDurSaleTotQty());
                         storecode.setText(ExpireList.get(focusposition).getStoreCode());
                         storedesc.setText(ExpireList.get(focusposition).getStoreDesc());
 

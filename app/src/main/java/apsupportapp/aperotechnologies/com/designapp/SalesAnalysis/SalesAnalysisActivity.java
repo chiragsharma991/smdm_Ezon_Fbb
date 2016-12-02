@@ -555,9 +555,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         focusposition = salesAnalysisClassArrayList.size() - 1;
                         listView_SalesAnalysis.setSelection(salesAnalysisClassArrayList.size() - 1);
 
-//                        if (lldots != null) {
-//                            lldots.removeAllViews();
-//                        }
+                        if (lldots != null) {
+                            lldots.removeAllViews();
+                        }
                         selFirstPositionValue = focusposition;
                     }
                 }
@@ -1488,13 +1488,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
-//                                txthDeptName.setText(planDept);
-//                                txthDeptNameNext.setText(">");
-//                                txthCategory.setText(planCategory);
-//                                txthCategoryNext.setText(">");
-//                                txthPlanClass.setText(planClass);
-//                                txthPlanClassNext.setText(">");
-//                                txthBrand.setText("\n"+brandnm);
+
                                 val += " > "+ brandnm;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);

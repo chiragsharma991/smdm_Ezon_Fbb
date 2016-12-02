@@ -19,13 +19,74 @@ public class RunningPromoListDisplay {
     int    promoDays;
     int durSaleTotQty;
     String promoImage;
+    String prodImageURL;
+    String option;
 
+    String prodAttribute4;
     String prodLevel6Desc;
+
+    public void setProdAttribute4(String prodAttribute4) {
+        this.prodAttribute4 = prodAttribute4;
+    }
+
+    public void setFwdWeekCover(int fwdWeekCover) {
+        this.fwdWeekCover = fwdWeekCover;
+    }
+
+    public String getProdAttribute4() {
+        return prodAttribute4;
+    }
+
+    public int getFwdWeekCover() {
+        return fwdWeekCover;
+    }
+
     int stkOnhandQty;
+    int targetStock;
+    int fwdWeekCover;
+    int ros;
 
 
 
+    public String getStoreDescription() {
+        return storeDescription;
+    }
 
+    public void setStoreDescription(String storeDescription) {
+        this.storeDescription = storeDescription;
+    }
+
+    public int getTargetStock() {
+        return targetStock;
+    }
+
+    public void setTargetStock(int targetStock) {
+        this.targetStock = targetStock;
+    }
+
+    public int getRos() {
+        return ros;
+    }
+
+    public void setRos(int ros) {
+        this.ros = ros;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
+
+    public String getProdImageURL() {
+        return prodImageURL;
+    }
+
+    public void setProdImageURL(String prodImageURL) {
+        this.prodImageURL = prodImageURL;
+    }
 
     public int getStkOnhandQty() {
         return stkOnhandQty;

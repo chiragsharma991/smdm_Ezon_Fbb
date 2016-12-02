@@ -121,7 +121,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
                                 }
                                 Log.e(TAG, "promolistSize" + promoList.size());
-                                promoval1.setText("\u20B9"+(int)promoList.get(0).getDurSaleNetVal());
+                                promoval1.setText("\u20B9\t"+(int)promoList.get(0).getDurSaleNetVal());
                                 promoval2.setText(""+promoList.get(0).getDurSaleTotQty());
                                 storecode.setText(promoList.get(0).getStoreCode());
                                 storedesc.setText(promoList.get(0).getStoreDesc());

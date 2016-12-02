@@ -43,9 +43,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
+import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
+import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
+import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;
@@ -64,7 +67,9 @@ import java.util.TimerTask;
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
-    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment , imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnFeshnessindex,BtnOnlyWorstpromo;
+    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment;
+    ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo;
+    ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,btnSkewedSize,btnCutSize;
     LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory;
     TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt;
 
@@ -177,7 +182,30 @@ public class DashBoardActivity extends AppCompatActivity
             }
         });
 
-
+        btnSkewedSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this, SkewedSizesActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+        btnCutSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this, TopFullCut.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
 
 
         BtnBestWorstpromo.setOnClickListener(new View.OnClickListener() {
@@ -321,6 +349,19 @@ public class DashBoardActivity extends AppCompatActivity
                 finish();
             }
         });
+        btnOptionEfficiency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,OptionEfficiencyActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
 
 
     }
@@ -442,6 +483,9 @@ public class DashBoardActivity extends AppCompatActivity
         BtnBestWorstpromo=(ImageButton)findViewById(R.id.btnBestWorstpromo);
         BtnOnlyWorstpromo=(ImageButton)findViewById(R.id.btnOnlyWorstpromo);
         btnFeshnessindex=(ImageButton)findViewById(R.id.btnFeshnessindex);
+        btnOptionEfficiency = (ImageButton)findViewById(R.id.btnOptionEfficiency);
+        btnCutSize = (ImageButton)findViewById(R.id.btnCutSize);
+        btnSkewedSize =(ImageButton)findViewById(R.id.btnSkewedSize);
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 

@@ -122,9 +122,9 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             groupViewHolder = new GroupViewHolder();
 
             groupViewHolder.mGroupText = (TextView) convertView.findViewById(R.id.lblListHeader);
-            groupViewHolder.mImage = (ImageView) convertView.findViewById(R.id.groupImage);
-            int imageId = SalesFilterActivity.groupImages.get(groupPosition);
-            groupViewHolder.mImage.setImageResource(imageId);
+//            groupViewHolder.mImage = (ImageView) convertView.findViewById(R.id.groupImage);
+//            int imageId = SalesFilterActivity.groupImages.get(groupPosition);
+//            groupViewHolder.mImage.setImageResource(imageId);
             convertView.setTag(groupViewHolder);
             planDepartmentName = " ";
         } else {
@@ -439,7 +439,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?level=PCA&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset" + offsetvalue + "&limit" + limit;
+        String category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?level=PCA&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
         Log.i("URL   ", category_url);
 
@@ -538,7 +538,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-         String planclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level=PCL&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset" + offsetvalue + "&limit" + limit;
+         String planclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level=PCL&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
         Log.e("requestPlanClassAPI URL   ", planclass_url);
 
@@ -637,7 +637,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level=BRN&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset" + offsetvalue + "&limit" + limit;
+        String brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level=BRN&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
         Log.e("requestPlanClassAPI URL   ", brand_url);
 
@@ -734,7 +734,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String brandplanclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level=BPC&dept="+ planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClassName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand="+brand.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset" + offsetvalue + "&limit" + limit;
+        String brandplanclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level=BPC&dept="+ planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClassName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand="+brand.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("requestPlanClassAPI URL   ", brandplanclass_url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, brandplanclass_url,
