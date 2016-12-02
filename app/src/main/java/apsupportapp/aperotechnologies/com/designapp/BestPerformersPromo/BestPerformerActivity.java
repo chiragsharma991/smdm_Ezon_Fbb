@@ -104,9 +104,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
        // footer.setVisibility(View.GONE);
        // BestPerformanceListView.setAdapter(bestPromoAdapter);
 
-
-
-
     }
 
     private void requestRunningPromoApi() {
@@ -158,9 +155,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
 
                                 }
                             }
-
-
-
                             footer.setVisibility(View.GONE);
                             if(popPromo==10)
                             {
@@ -175,20 +169,12 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                             {
                                 bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
                                 BestPerformanceListView.setAdapter(bestPromoAdapter);
-
-
                             }
                             // BestPromo_footer.setVisibility(View.GONE);
-
                             Reusable_Functions.hDialog();
-
                             //  Bst_storecode.setText(BestpromoList.get(0).getStoreCode());
                             // Bst_txtStoreName.setText(BestpromoList.get(0).getStoreDesc());
                             Log.v(TAG,"set text on");
-
-
-
-
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             footer.setVisibility(View.GONE);
@@ -232,14 +218,10 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
                 if ( FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState==SCROLL_STATE_IDLE) {
-
-
                     footer.setVisibility(View.VISIBLE);
-
                     lazyScroll="ON";
                     requestRunningPromoApi();
                 }
-
             }
 
             @Override
@@ -248,22 +230,9 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                 this.FirstVisibleItem=firstVisibleItem;
                 this.VisibleItemCount=visibleItemCount;
                 this.TotalItemCount=totalItemCount;
-
-
-
-
             }
         });
-
-
-
-
-
-
-
     }
-
-
     private void initalise() {
         Bst_storecode = (TextView) findViewById(R.id.txtStoreCode);
         Bst_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
@@ -278,8 +247,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         SortPopup=(RelativeLayout)findViewById(R.id.sortPopup);
         CheckBstSale=(CheckBox)findViewById(R.id.checkPromoSale);
         CheckBstSaleU=(CheckBox)findViewById(R.id.checkPromoSaleU);
-
-
         Bst_imageBtnBack.setOnClickListener(this);
         Bst_sort.setOnClickListener(this);
         Bst_imgfilter.setOnClickListener(this);
@@ -289,12 +256,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         PopSort.setOnClickListener(this);
         CheckBstSale.setOnClickListener(this);
         CheckBstSaleU.setOnClickListener(this);
-
-
-
     }
-
-
     @Override
     public void onClick(View v) {
 

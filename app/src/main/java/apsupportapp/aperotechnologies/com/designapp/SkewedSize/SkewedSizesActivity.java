@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -55,9 +56,10 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class SkewedSizesActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     TextView Skewed_txtStoreCode,Skewed_txtStoreName;
-    RelativeLayout Skewed_BtnBack,sk_imgfilter;
+    RelativeLayout Skewed_BtnBack,sk_imgfilter,sk_quickFilter,quickFilterPopup, quickFilter_baseLayout,qfDoneLayout;
     RunningPromoListDisplay SkewedSizeListDisplay;
     private SharedPreferences sharedPreferences;
+    CheckBox checkCurrent,checkPrevious,checkOld,checkUpcoming;
     String userId, bearertoken;
     String TAG = "SkewedSizesActivity";
     private int count = 0;
@@ -74,7 +76,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private boolean userScrolled;
     private SkewedSizeAdapter SkewedSizeAdapter;
     private View footer;
-    private String lazyScroll="OFF";
+    private String lazyScroll="OFF",seasonGroup = "All";
     private SegmentedGroup Skewed_segmented;
     private RadioButton Skewed_core,Skewed_fashion;
     private ToggleButton Toggle_skewed_fav;
@@ -88,6 +90,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_skewed_sizes);
         getSupportActionBar().hide();
         initalise();
+        seasonGroup = "All";
         gson = new Gson();
         SkewedSizeList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -115,7 +118,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
     private void requestRunningPromoApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/skewedsizes/" +userId + "?offset=" +offsetvalue + "&limit=" +limit+"&top=" +top+"&corefashion=" +corefashion;
+        String url = ConstsCore.web_url + "/v1/display/skewedsizes/" +userId + "?offset=" +offsetvalue + "&limit=" +limit+"&top=" +top+"&corefashion=" +corefashion +"&seasongroup="+seasonGroup;
 
         Log.e(TAG,"URL"+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -252,43 +255,43 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 this.FirstVisibleItem=firstVisibleItem;
                 this.VisibleItemCount=visibleItemCount;
                 this.TotalItemCount=totalItemCount;
-
-
-
-
             }
         });
-
-
-
-
-
-
-
     }
 
 
     private void initalise() {
-        Skewed_txtStoreCode = (TextView) findViewById(R.id.skewed_txtStoreCode);
-        Skewed_txtStoreName = (TextView) findViewById(R.id.skewed_txtStoreName);
+        Skewed_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
+        Skewed_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
 
         Skewed_BtnBack = (RelativeLayout) findViewById(R.id.skewed_BtnBack);
         sk_imgfilter = (RelativeLayout)findViewById(R.id.sk_imgfilter);
         SkewedSizeListview = (ListView) findViewById(R.id.skewedListView);
         Skewed_segmented=(SegmentedGroup)findViewById(R.id.skewed_segmented);
-        Skewed_quickFilter=(ImageView)findViewById(R.id.skewed_quickFilter);
-
+        sk_quickFilter=(RelativeLayout) findViewById(R.id.sk_quickFilter);
         Skewed_core=(RadioButton)findViewById(R.id.skewed_core);
         Skewed_core.toggle();
-
         Skewed_fashion=(RadioButton)findViewById(R.id.skewed_fashion);
-
+        quickFilterPopup= (RelativeLayout)findViewById(R.id.quickFilterPopup);
+        quickFilter_baseLayout = (RelativeLayout)findViewById(R.id.quickFilter_baseLayout);
+        qfDoneLayout =(RelativeLayout)findViewById(R.id.qfDoneLayout);
+        quickFilterPopup.setVisibility(View.GONE);
         Toggle_skewed_fav=(ToggleButton)findViewById(R.id.toggle_skewed_fav);
-
+        checkCurrent =(CheckBox)findViewById(R.id.checkCurrent);
+        checkPrevious = (CheckBox)findViewById(R.id.checkPrevious);
+        checkOld = (CheckBox)findViewById(R.id.checkOld);
+        checkUpcoming = (CheckBox)findViewById(R.id.checkUpcoming);
 
         Skewed_segmented.setOnCheckedChangeListener(this);
         Skewed_BtnBack.setOnClickListener(this);
         sk_imgfilter.setOnClickListener(this);
+        sk_quickFilter.setOnClickListener(this);
+        quickFilter_baseLayout.setOnClickListener(this);
+        qfDoneLayout.setOnClickListener(this);
+        checkCurrent.setOnClickListener(this);
+        checkPrevious.setOnClickListener(this);
+        checkOld.setOnClickListener(this);
+        checkUpcoming.setOnClickListener(this);
     }
 
 
@@ -316,10 +319,142 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intent);
                 finish();
                 break;
+            case R.id.sk_quickFilter :
+                filterFunction();
+                break;
+            case R.id.quickFilter_baseLayout :
+                quickFilterPopup.setVisibility(View.GONE);
+                break;
+            case R.id.qfDoneLayout:
+                if (checkCurrent.isChecked()) {
+                    popupCurrent();
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else if (checkPrevious.isChecked()) {
+                    popupPrevious();
+                    checkCurrent.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else if (checkOld.isChecked()) {
+                    popupOld();
+                    checkPrevious.setChecked(false);
+                    checkCurrent.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else if (checkUpcoming.isChecked()) {
+                    popupUpcoming();
+                    checkCurrent.setChecked(false);
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else {
+                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+            case R.id.checkCurrent:
+                checkCurrent.setChecked(true);
+                checkPrevious.setChecked(false);
+                checkOld.setChecked(false);
+                checkUpcoming.setChecked(false);
+                break;
+            case R.id.checkPrevious:
+                checkPrevious.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkOld.setChecked(false);
+                checkUpcoming.setChecked(false);
+                break;
+            case R.id.checkOld:
+                checkOld.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkPrevious.setChecked(false);
+                checkUpcoming.setChecked(false);
+                break;
+            case R.id.checkUpcoming:
+                checkUpcoming.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkOld.setChecked(false);
+                checkPrevious.setChecked(false);
+                break;
         }
     }
 
-   @Override
+    private void popupCurrent() {
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            corefashion="Core";
+            seasonGroup = "Current";
+            SkewedSizeList.clear();
+            Reusable_Functions.sDialog(this, "Loading.......");
+            requestRunningPromoApi();
+
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void popupPrevious() {
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            corefashion="Core";
+            seasonGroup = "Previous";
+            SkewedSizeList.clear();
+            Reusable_Functions.sDialog(this, "Loading.......");
+            requestRunningPromoApi();
+
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void popupOld() {
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            corefashion="Core";
+            seasonGroup = "Old";
+            SkewedSizeList.clear();
+            Reusable_Functions.sDialog(this, "Loading.......");
+            requestRunningPromoApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void popupUpcoming() {
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            corefashion="Core";
+            SkewedSizeList.clear();
+            Reusable_Functions.sDialog(this, "Loading.......");
+            requestRunningPromoApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void filterFunction() {
+        quickFilterPopup.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent=new Intent(context, DashBoardActivity.class);
@@ -355,8 +490,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                     Reusable_Functions.sDialog(this, "Loading.......");
                     requestRunningPromoApi();
                 }
-
-
                 break;
 
 

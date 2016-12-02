@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -69,18 +70,18 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 /**
  * Created by pamrutkar on 29/11/16.
  */
-public class OptionEfficiencyActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class OptionEfficiencyActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
     RadioButton oe_btnCore;
     public String OEfficiency_SegmentClick;
-    ArrayList<OptionEfficiencyDetails> optionEfficiencyDetailsArrayList,optionArrayList;
+    ArrayList<OptionEfficiencyDetails> optionEfficiencyDetailsArrayList, optionArrayList;
     TextView txtStoreCode, txtStoreDesc, oe_txtHeaderClass, oe_txtDeptName;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
     int offsetvalue = 0, limit = 100;
     int count = 0;
     RequestQueue queue;
-    String OptionefficiencyValue;
+    String OptionefficiencyValue, seasonGroup;
     Context context;
     String fromWhere, oe_FirstVisibleItem, oe_ClickedVal, oe_PlanDept, oe_Category, oe_PlanClass;
     PieChart oe_pieChart;
@@ -91,13 +92,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     int level;
     OptionEfficiencyDetails optionEfficiencyDetails;
     OptionEfficiencyAdapter oe_Adapter;
-    RelativeLayout optionEfficiency_imageBtnBack, optionEfficiency_imgfilter, oe_quickFilter,quickFilterPopup,quickFilter_baseLayout;
-    RelativeLayout oe_btnPrev, oe_btnNext;
+    RelativeLayout optionEfficiency_imageBtnBack, optionEfficiency_imgfilter, oe_quickFilter, quickFilterPopup, quickFilter_baseLayout;
+    RelativeLayout oe_btnPrev, oe_btnNext, qfDoneLayout;
     Gson gson;
     PieData pieData;
     float fullSizeCount = 0.0f, fullCutCount = 0.0f, partCutCount = 0.0f;
     PieDataSet dataset;
     ArrayList<PieEntry> entries;
+    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,6 +113,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         context = this;
         level = 1;
         OptionefficiencyValue = "";
+        seasonGroup = "All";
         focusposition = 0;
         oe_FirstPositionValue = 0;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -130,6 +133,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             limit = 100;
             count = 0;
             level = 1;
+            seasonGroup = "All";
             oe_llayouthierarchy.setVisibility(View.GONE);
             requestOptionEfficiencyDetails();
 
@@ -149,7 +153,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OptionEfficiencyActivity.this, InventoryFilterActivity.class);
-                intent.putExtra("checkfrom","optionEfficiency");
+                intent.putExtra("checkfrom", "optionEfficiency");
                 startActivity(intent);
                 finish();
             }
@@ -192,6 +196,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             count = 0;
                             Log.e("Brand Plan Class Prev-- ", "  ");
                             requestOptionEfficiencyDetails();
+
                             Log.e("prev 1", "" + optionEfficiencyDetails.getBrandName());
 
                         } else {
@@ -241,6 +246,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            seasonGroup = "All";
                             Log.e("Plan class prev", "");
                             requestOptionEfficiencyDetails();
                         } else {
@@ -264,6 +270,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            seasonGroup = "All";
                             Log.e("Category prev", "");
                             requestOptionEfficiencyDetails();
                             Log.e("prev 4", "" + optionEfficiencyDetails.getPlanDept());
@@ -385,50 +392,50 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 //                if (scrollState == SCROLL_STATE_IDLE) {
 
-                    if (optionEfficiencyDetailsArrayList.size() != 0) {
-                        //listView_SalesAnalysis.smoothScrollToPosition(firstVisibleItem);
-                        if (view.getFirstVisiblePosition() <= optionEfficiencyDetailsArrayList.size() - 1) {
-                            focusposition = view.getFirstVisiblePosition();
-                            oe_listView.setSelection(view.getFirstVisiblePosition());
+                if (optionEfficiencyDetailsArrayList.size() != 0) {
+                    //listView_SalesAnalysis.smoothScrollToPosition(firstVisibleItem);
+                    if (view.getFirstVisiblePosition() <= optionEfficiencyDetailsArrayList.size() - 1) {
+                        focusposition = view.getFirstVisiblePosition();
+                        oe_listView.setSelection(view.getFirstVisiblePosition());
 
-                            if (oe_txtHeaderClass.getText().toString().equals("Department")) {
-                                level = 1;
-                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanDept().toString();
-                            } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
-                                level = 2;
-                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanCategory().toString();
-                            } else if (oe_txtHeaderClass.getText().toString().equals("Plan Class")) {
-                                level = 3;
-                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanClass().toString();
-                            } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
-                                level = 4;
-                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getBrandName().toString();
-                            } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class")) {
-                                level = 5;
-                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getBrandplanClass().toString();
-                            }
-                             if(focusposition != oe_FirstPositionValue) {
-                                 if (Reusable_Functions.chkStatus(context)) {
-                                     Reusable_Functions.hDialog();
-                                     Reusable_Functions.sDialog(context, "Loading data...");
-                                     offsetvalue = 0;
-                                     limit = 100;
-                                     count = 0;
-                                     requestOEPieChart();
-                                 } else {
-                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                 }
-
-                             }
-                            oe_FirstPositionValue = focusposition;
-
-                        } else {
-                            focusposition = optionEfficiencyDetailsArrayList.size() - 1;
-                            oe_listView.setSelection(optionEfficiencyDetailsArrayList.size() - 1);
-
-                            oe_FirstPositionValue = focusposition;
+                        if (oe_txtHeaderClass.getText().toString().equals("Department")) {
+                            level = 1;
+                            oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanDept().toString();
+                        } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
+                            level = 2;
+                            oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanCategory().toString();
+                        } else if (oe_txtHeaderClass.getText().toString().equals("Plan Class")) {
+                            level = 3;
+                            oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanClass().toString();
+                        } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
+                            level = 4;
+                            oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getBrandName().toString();
+                        } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class")) {
+                            level = 5;
+                            oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getBrandplanClass().toString();
                         }
+                        if (focusposition != oe_FirstPositionValue) {
+                            if (Reusable_Functions.chkStatus(context)) {
+                                Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestOEPieChart();
+                            } else {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                        oe_FirstPositionValue = focusposition;
+
+                    } else {
+                        focusposition = optionEfficiencyDetailsArrayList.size() - 1;
+                        oe_listView.setSelection(optionEfficiencyDetailsArrayList.size() - 1);
+
+                        oe_FirstPositionValue = focusposition;
                     }
+                }
 
 //                }
             }
@@ -450,6 +457,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanDept();
                         Log.e("txtClicked department--", "" + oe_ClickedVal);
                         oe_llayouthierarchy.setVisibility(View.GONE);
+                        llayoutOEfficiency.setVisibility(View.GONE);
                         fromWhere = "Category";
                         level = 2;
                         if (Reusable_Functions.chkStatus(context)) {
@@ -459,10 +467,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             limit = 100;
                             count = 0;
                             optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                            Log.e("Size Before","----"+optionEfficiencyDetailsArrayList.size());
+                            Log.e("Size Before", "----" + optionEfficiencyDetailsArrayList.size());
                             Log.i("dept next", "-----");
                             request_OE_CategoryList(oe_ClickedVal);
-                            Log.e("Size After","----"+optionEfficiencyDetailsArrayList.size());
+                            Log.e("Size After", "----" + optionEfficiencyDetailsArrayList.size());
                             oe_PlanDept = oe_ClickedVal;
 
                         } else {
@@ -472,82 +480,109 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         break;
 
                     case "Category":
-                        oe_txtHeaderClass.setText("Plan Class");
-                        oe_llayouthierarchy.setVisibility(View.GONE);
-                        oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanCategory();
-                        Log.e("txtClicked category --", "" + oe_ClickedVal);
-                        fromWhere = "Plan Class";
-                        level = 3;
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                            Log.i("category next", "-----");
-                            Log.i("come", "----" + oe_PlanDept);
-                            request_OE_PlanClassList(oe_PlanDept, oe_ClickedVal);
-                            oe_Category = oe_ClickedVal;
-                            Log.e("fIndexCategory--", "" + oe_Category);
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        Log.e("in oe category", "-----" + oe_PlanDept);
+                        try {
+                            if (oe_PlanDept != null) {
+                                oe_txtHeaderClass.setText("Plan Class");
+                                oe_llayouthierarchy.setVisibility(View.GONE);
+                                llayoutOEfficiency.setVisibility(View.GONE);
+                                oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanCategory();
+                                Log.e("txtClicked category --", "" + oe_ClickedVal);
+                                fromWhere = "Plan Class";
+                                level = 3;
+                                if (Reusable_Functions.chkStatus(context)) {
+                                    Reusable_Functions.hDialog();
+                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+                                    Log.i("category next", "-----");
+                                    Log.i("come", "----" + oe_PlanDept);
+
+                                    request_OE_PlanClassList(oe_PlanDept, oe_ClickedVal);
+
+
+                                    oe_Category = oe_ClickedVal;
+                                    Log.e("fIndexCategory--", "" + oe_Category);
+                                } else {
+                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
                         }
+
                         break;
                     case "Plan Class":
-                        oe_txtHeaderClass.setText("Brand");
-                        oe_llayouthierarchy.setVisibility(View.GONE);
-                        oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanClass();
-                        Log.e("txtClicked plan class---", "" + oe_ClickedVal);
-                        fromWhere = "Brand";
-                        level = 4;
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            optionEfficiencyDetailsArrayList =  new ArrayList<OptionEfficiencyDetails>();
-                            Log.i("Plan Class next", "-----");
-                            request_OE_BrandList(oe_PlanDept, oe_Category, oe_ClickedVal);
-                            oe_PlanClass = oe_ClickedVal;
-                            Log.e("fIndexPlanClass---", "" + oe_PlanClass);
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        Log.e("in oe plan class", "-----" + oe_PlanDept);
+                        try {
+                            if (oe_PlanDept != null) {
+                                oe_txtHeaderClass.setText("Brand");
+                                oe_llayouthierarchy.setVisibility(View.GONE);
+                                llayoutOEfficiency.setVisibility(View.GONE);
+                                oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanClass();
+                                Log.e("txtClicked plan class---", "" + oe_ClickedVal);
+                                fromWhere = "Brand";
+                                level = 4;
+                                if (Reusable_Functions.chkStatus(context)) {
+                                    Reusable_Functions.hDialog();
+                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+                                    Log.i("Plan Class next", "-----");
+                                    request_OE_BrandList(oe_PlanDept, oe_Category, oe_ClickedVal);
+                                    oe_PlanClass = oe_ClickedVal;
+                                    Log.e("fIndexPlanClass---", "" + oe_PlanClass);
+                                } else {
+                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
                         }
 
                         break;
 
                     case "Brand":
-                        oe_txtHeaderClass.setText("Brand Plan Class");
-                        oe_llayouthierarchy.setVisibility(View.GONE);
-                        oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getBrandName();
-                        Log.e("txtSalesClickedValue3---", "" + oe_ClickedVal);
-                        fromWhere = "Brand Plan Class";
-                        level = 5;
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                            Log.i("brand next", "-----");
-                            request_OE_BrandPlanList(oe_PlanDept, oe_Category, oe_PlanClass, oe_ClickedVal);
+                        Log.e("in oe brand", "-----" + oe_PlanDept);
+                        try {
+                            if (oe_PlanDept != null) {
+                                oe_txtHeaderClass.setText("Brand Plan Class");
+                                oe_llayouthierarchy.setVisibility(View.GONE);
+                                llayoutOEfficiency.setVisibility(View.GONE);
+                                oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getBrandName();
+                                Log.e("txtSalesClickedValue3---", "" + oe_ClickedVal);
+                                fromWhere = "Brand Plan Class";
+                                level = 5;
+                                if (Reusable_Functions.chkStatus(context)) {
+                                    Reusable_Functions.hDialog();
+                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+                                    Log.i("brand next", "-----");
+                                    request_OE_BrandPlanList(oe_PlanDept, oe_Category, oe_PlanClass, oe_ClickedVal);
 
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
                         }
                         break;
-                    default:
-                        break;
+
                 }
 
             }
 
         });
 
-   }
+    }
 
 
     private void initializeUI() {
@@ -558,8 +593,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         optionEfficiency_imageBtnBack = (RelativeLayout) findViewById(R.id.optionEfficiency_imageBtnBack);
         optionEfficiency_imgfilter = (RelativeLayout) findViewById(R.id.optionEfficiency_imgfilter);
         oe_quickFilter = (RelativeLayout) findViewById(R.id.oe_quickFilter);
-        quickFilterPopup = (RelativeLayout)findViewById(R.id.quickFilterPopup);
-        quickFilter_baseLayout= (RelativeLayout)findViewById(R.id.quickFilter_baseLayout);
+        quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
+        quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
         quickFilterPopup.setVisibility(View.GONE);
         oe_pieChart = (PieChart) findViewById(R.id.oe_pieChart);
         oe_listView = (ListView) findViewById(R.id.oe_list);
@@ -568,20 +603,172 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oe_llayouthierarchy = (LinearLayout) findViewById(R.id.oe_llayouthierarchy);
         oe_btnPrev = (RelativeLayout) findViewById(R.id.oe_btnPrev);
         oe_btnNext = (RelativeLayout) findViewById(R.id.oe_btnNext);
+        qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
         optionEfficiency_segmentedGrp = (SegmentedGroup) findViewById(R.id.optionEfficiency_segmentedGrp);
         optionEfficiency_segmentedGrp.setOnCheckedChangeListener(OptionEfficiencyActivity.this);
         oe_btnCore = (RadioButton) findViewById(R.id.oe_btnCore);
         oe_btnCore.toggle();
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
         optionArrayList = new ArrayList<OptionEfficiencyDetails>();
+        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
+        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
+        checkOld = (CheckBox) findViewById(R.id.checkOld);
+        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
+        checkCurrent.setOnClickListener(this);
+        checkPrevious.setOnClickListener(this);
+        checkOld.setOnClickListener(this);
+        checkUpcoming.setOnClickListener(this);
+        qfDoneLayout.setOnClickListener(this);
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.qfDoneLayout:
+                if (checkCurrent.isChecked()) {
+                    popupCurrent();
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else if (checkPrevious.isChecked()) {
+                    popupPrevious();
+                    checkCurrent.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else if (checkOld.isChecked()) {
+                    popupOld();
+                    checkPrevious.setChecked(false);
+                    checkCurrent.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else if (checkUpcoming.isChecked()) {
+                    popupUpcoming();
+                    checkCurrent.setChecked(false);
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else {
+                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+
+                }
+            case R.id.checkCurrent:
+                checkCurrent.setChecked(true);
+                checkPrevious.setChecked(false);
+                checkOld.setChecked(false);
+                checkUpcoming.setChecked(false);
+                break;
+            case R.id.checkPrevious:
+                checkPrevious.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkOld.setChecked(false);
+                checkUpcoming.setChecked(false);
+                break;
+            case R.id.checkOld:
+                checkOld.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkPrevious.setChecked(false);
+                checkUpcoming.setChecked(false);
+                break;
+            case R.id.checkUpcoming:
+                checkUpcoming.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkOld.setChecked(false);
+                checkPrevious.setChecked(false);
+                break;
+            default:
+                break;
+        }
+    }
 
     private void filterFunction() {
         quickFilterPopup.setVisibility(View.VISIBLE);
     }
 
+    private void popupCurrent() {
+        oe_llayouthierarchy.setVisibility(View.GONE);
+        llayoutOEfficiency.setVisibility(View.GONE);
+        optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
+            level = 1;
+            seasonGroup = "Current";
+            requestOptionEfficiencyDetails();
+
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+    private void popupPrevious() {
+        oe_llayouthierarchy.setVisibility(View.GONE);
+        llayoutOEfficiency.setVisibility(View.GONE);
+        optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
+            level = 1;
+            seasonGroup = "Previous";
+            requestOptionEfficiencyDetails();
+
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void popupOld() {
+        oe_llayouthierarchy.setVisibility(View.GONE);
+        llayoutOEfficiency.setVisibility(View.GONE);
+        optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
+            level = 1;
+            seasonGroup = "Old";
+            requestOptionEfficiencyDetails();
+
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void popupUpcoming() {
+        oe_llayouthierarchy.setVisibility(View.GONE);
+        llayoutOEfficiency.setVisibility(View.GONE);
+        optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
+            level = 1;
+            seasonGroup = "Upcoming";
+            requestOptionEfficiencyDetails();
+
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -642,7 +829,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     // API 1.33
     private void requestOptionEfficiencyDetails() {
 
-        String fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
+        String fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + fIdetails);
 
 
@@ -755,7 +942,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     // For Category List on click of Dept Value
     private void request_OE_CategoryList(final String deptName) {
 
-        String oe_category_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" +  OEfficiency_SegmentClick+ "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        String oe_category_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + oe_category_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_category_listurl,
@@ -1010,7 +1197,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         String oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + oe_PlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + oe_brandplan_listurl);
 
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET,oe_brandplan_listurl,
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -1052,7 +1239,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
-                                level = 5 ;
+                                level = 5;
                                 requestOEPieChart();
 
                             }
@@ -1259,6 +1446,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         queue.add(postRequest);
 
     }
+
 
     public class MyValueFormatter implements IValueFormatter {
 
