@@ -562,6 +562,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     Reusable_Functions.sDialog(context, "Loading data...");
                                     offsetvalue = 0;
                                     limit = 100;
+
+
                                     count = 0;
                                     optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                                     Log.i("brand next", "-----");
