@@ -1,8 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
-/**
- * Created by pamrutkar on 17/08/16.
- */
+
 public class SampleObject {
     String header1;
     String header2;
@@ -28,10 +26,7 @@ public class SampleObject {
         this.header7 = header7;
         this.header8 = header8;
         this.header9 = header9;
-
     }
-
-
     public SampleObject(String s, String s1, String s2, String s3, String s4)
     {
         this.s1=s1;

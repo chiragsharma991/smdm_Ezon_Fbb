@@ -6,6 +6,15 @@ package apsupportapp.aperotechnologies.com.designapp.model;
 
 public class SalesAnalysisListDisplay {
 
+    public String getAll() {
+        return All;
+    }
+
+    public void setAll(String all) {
+        All = all;
+    }
+
+    String All;
     String storeCode;
     String storeDesc;
      String planDept;

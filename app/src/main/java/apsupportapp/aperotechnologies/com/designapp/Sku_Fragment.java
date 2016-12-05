@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -32,7 +31,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-import apsupportapp.aperotechnologies.com.designapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,9 +41,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by pamrutkar on 23/08/16.
- */
+
 public class Sku_Fragment extends Fragment {
 
 
@@ -75,65 +71,49 @@ public class Sku_Fragment extends Fragment {
             "     GIT    ",
 
     };
-    // List<SampleObject> sampleObjects = sampleObjects();
+
     int headerCellsWidth[] = new int[headers.length];
     ProductNameBean productNameBean;
     TextView txtStoreCode, txtStoreDesc;
     MySingleton m_config;
-    String storeDesc, storeCode,articleOption,productName1;
-    int offsetvalue=0,limit=100;
-    int count=0;
+    String articleOption, productName1;
+    int offsetvalue = 0, limit = 100;
+    int count = 0;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
     TextView txt_articleOption;
 
-    //public static RelativeLayout skurel;
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         m_config = MySingleton.getInstance(getActivity());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
-        userId = sharedPreferences.getString("userId","");
-        bearertoken = sharedPreferences.getString("bearerToken","");
-        //userId=getActivity().getIntent().getStringExtra("userId");
-        Bundle bundle = getActivity().getIntent().getExtras();
+        userId = sharedPreferences.getString("userId", "");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = (ViewGroup) inflater.inflate(R.layout.sku_fragment, container, false);
-
         txtStoreCode = (TextView) view.findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) view.findViewById(R.id.txtStoreName);
-        //txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         rel = (RelativeLayout) view.findViewById(R.id.rel);
         relativeLayout.setBackgroundColor(Color.WHITE);
-
-        //skurel = (RelativeLayout) view.findViewById(R.id.rel);
-
         txt_articleOption = (TextView) view.findViewById(R.id.txt_Sku_article_Option_Name);
-
         Cache cache = new DiskBasedCache(getActivity().getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        productNameBeanArrayList=new ArrayList<ProductNameBean>();
-        Log.e("onCreateView SKU_Fragment"," ");
-
-
-
+        productNameBeanArrayList = new ArrayList<ProductNameBean>();
         initComponents();
         setComponentsId();
         setScrollViewAndHorizontalScrollViewTag();
-        // no need to assemble component A, since it is just a table
         horizontalScrollViewB.addView(tableB);
         scrollViewC.addView(tableC);
         scrollViewD.addView(horizontalScrollViewD);
         horizontalScrollViewD.addView(tableD);
-        // add the components to be part of the main layout
         addComponentToMainLayout();
         int headerCellsWidth[] = new int[headers.length];
         return view;
@@ -149,27 +129,25 @@ public class Sku_Fragment extends Fragment {
                     + " must implement IFragmentToActivity");
         }
     }
-    public void fragmentCommunication1(String productName,String articlOption) {
 
-        //Log.e("productname ====>> "," "+productName);
-        //Log.e("articleOption ====>> "," "+articlOption);
-        // view.addView(relativeLayout);
-        productName1=productName;
+    public void fragmentCommunication1(String productName, String articlOption) {
+
+
+        productName1 = productName;
         articleOption = articlOption;
         if (Reusable_Functions.chkStatus(context)) {
 
             Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context,"Loading data...");
-            offsetvalue=0;
-            limit=100;
-            count=0;
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
 
             txt_articleOption.setText(articleOption);
-            requestProductArticleSkuAPI(offsetvalue,limit);
+            requestProductArticleSkuAPI(offsetvalue, limit);
         } else {
             Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
 
 
     }
@@ -179,7 +157,7 @@ public class Sku_Fragment extends Fragment {
         String pname = "";
 
 
-        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/"+userId+"?view=productDesc&articleOption="+articleOption.replaceAll(" ","%20").replaceAll("&","%26")+"&offset="+offsetvalue+"&limit="+limit+"&productName="+productName1.replaceAll(" ","%20").replaceAll("&","%26");
+        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?view=productDesc&articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&productName=" + productName1.replaceAll(" ", "%20").replaceAll("&", "%26");
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -189,23 +167,19 @@ public class Sku_Fragment extends Fragment {
                         Log.i("ProdArticleSku Response", response.toString());
                         try {
 
-                            if (response.equals(null) || response == null || response.length()==0 && count==0) {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(getContext(), "no sku data found", Toast.LENGTH_LONG).show();
-                            } else if(response.length()==limit) {
-
-                                //Reusable_Functions.hDialog();
-
-                                for (int  i = 0; i < response.length(); i++) {
+                            } else if (response.length() == limit) {
+                                for (int i = 0; i < response.length(); i++) {
 
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
-                                    //
-                                    // //Log.e("Product Name:", ProductName);
+
                                     String articleOption = productName1.getString("articleOption");
                                     String articleCode = productName1.getString("articleCode");
                                     String productDesc = productName1.getString("productDesc");
-                                    String Size= productName1.getString("size");
+                                    String Size = productName1.getString("size");
                                     int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
                                     int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
@@ -217,10 +191,10 @@ public class Sku_Fragment extends Fragment {
                                     int GIT = productName1.getInt("stkGitQty");
                                     String Storecode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
-                                    //String option = productName.getString("articleOption");
+
                                     productNameBean = new ProductNameBean();
                                     productNameBean.setProductName(ProductName);
-                                    // //Log.e("Product Name:", ProductName);
+
                                     productNameBean.setArticleOption(articleOption);
                                     productNameBean.setArtileCode(articleCode);
                                     productNameBean.setProdDesc(productDesc);
@@ -234,11 +208,8 @@ public class Sku_Fragment extends Fragment {
                                     productNameBean.setGit(GIT);
                                     productNameBean.setStoreCode(Storecode);
 
-                                    ////Log.e("StoreCode", productNameBean.getStoreCode());
-                                    productNameBean.setStoreDesc(storeDesc);
-                                    //productNameBean.setArticleOption(option);
-                                    //Log.e("Response Lenght", "" + response.length());
 
+                                    productNameBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(productNameBean);
                                     txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                     txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
@@ -247,16 +218,15 @@ public class Sku_Fragment extends Fragment {
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestProductArticleSkuAPI(offsetvalue, limit);
-                            }
-                            else if(response.length()< limit) {
+                            } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
-                                    ////Log.e("Product Name:", ProductName);
+
                                     String articleOption = productName1.getString("articleOption");
                                     String articleCode = productName1.getString("articleCode");
                                     String productDesc = productName1.getString("productDesc");
-                                    String Size= productName1.getString("size");
+                                    String Size = productName1.getString("size");
                                     int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
                                     int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
@@ -268,10 +238,10 @@ public class Sku_Fragment extends Fragment {
                                     int GIT = productName1.getInt("stkGitQty");
                                     String Storecode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
-                                    //String option = productName.getString("articleOption");
+
                                     productNameBean = new ProductNameBean();
                                     productNameBean.setProductName(ProductName);
-                                    ////Log.e("Product Name:", ProductName);
+
                                     productNameBean.setArticleOption(articleOption);
                                     productNameBean.setArtileCode(articleCode);
                                     productNameBean.setProdDesc(productDesc);
@@ -284,10 +254,9 @@ public class Sku_Fragment extends Fragment {
                                     productNameBean.setSoh(SOH);
                                     productNameBean.setGit(GIT);
                                     productNameBean.setStoreCode(Storecode);
-                                    ////Log.e("StoreCode", productNameBean.getStoreCode());
+
                                     productNameBean.setStoreDesc(storeDesc);
-                                    //productNameBean.setArticleOption(option);
-                                    //Log.e("Response Lenght", "" + response.length());
+
                                     productNameBeanArrayList.add(productNameBean);
                                     txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                     txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
@@ -295,7 +264,7 @@ public class Sku_Fragment extends Fragment {
 
                                 Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
                                     public int compare(ProductNameBean one, ProductNameBean other) {
-                                        return  new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
+                                        return new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
                                     }
                                 });
                                 Collections.reverse(productNameBeanArrayList);
@@ -306,11 +275,10 @@ public class Sku_Fragment extends Fragment {
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
-                                //Reusable_Functions.hDialog();
+
                             }
 
                         } catch (Exception e) {
-                            //Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -328,7 +296,7 @@ public class Sku_Fragment extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };
@@ -337,6 +305,7 @@ public class Sku_Fragment extends Fragment {
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+
     // initalized components
     private void initComponents() {
         tableA = new TableLayout(this.context);
@@ -352,6 +321,7 @@ public class Sku_Fragment extends Fragment {
     }
 
     // set essential component IDs
+    @SuppressWarnings("ResourceType")
     private void setComponentsId() {
         tableA.setId(1);
         horizontalScrollViewB.setId(2);
@@ -391,9 +361,11 @@ public class Sku_Fragment extends Fragment {
         relativeLayout.addView(scrollViewD, componentD_Params);
 
     }
+
     private void addTableRowToTableA() {
         tableA.addView(this.componentATableRow());
     }
+
     private void addTableRowToTableB() {
         tableB.addView(this.componentBTableRow());
     }
@@ -442,7 +414,7 @@ public class Sku_Fragment extends Fragment {
 
         for (int k = 0; k < productNameBeanArrayList.size(); k++) {
             TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getSize());
-            //Log.e("Size",""+productNameBeanArrayList.get(k).getSize());
+
             TableRow taleRowForTableD = this.taleRowForTableD(productNameBeanArrayList.get(k));
             tableRowForTableC.setBackgroundColor(Color.WHITE);
             taleRowForTableD.setBackgroundColor(Color.LTGRAY);
@@ -451,11 +423,12 @@ public class Sku_Fragment extends Fragment {
         }
         Reusable_Functions.hDialog();
     }
+
     TableRow tableRowForTableC(String productNameDetails) {
         TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
         params.setMargins(0, 2, 0, 0);
         TableRow tableRowForTableC = new TableRow(this.context);
-        //        TextView textView = this.bodyTextView(sampleObject.header1);
+
         TextView textView = this.bodyTextView(productNameDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         tableRowForTableC.addView(textView, params);
@@ -472,7 +445,7 @@ public class Sku_Fragment extends Fragment {
                 String.valueOf(productDetails.getWtdNetSales()),
                 String.valueOf(productDetails.getSoh()),
                 String.valueOf(productDetails.getGit())
-                //productDetails.getArticleOption()
+
 
         };
 
@@ -527,7 +500,6 @@ public class Sku_Fragment extends Fragment {
 
         int tableAChildCount = ((TableRow) this.tableA.getChildAt(0)).getChildCount();
         int tableBChildCount = ((TableRow) this.tableB.getChildAt(0)).getChildCount();
-        ;
 
         for (int x = 0; x < (tableAChildCount + tableBChildCount); x++) {
 
@@ -558,15 +530,12 @@ public class Sku_Fragment extends Fragment {
 
             this.matchLayoutHeight(tableRow, finalHeight);
         }
-
     }
 
     // match all height in a table row
     // to make a standard TableRow height
     private void matchLayoutHeight(TableRow tableRow, int height) {
-
         int tableRowChildCount = tableRow.getChildCount();
-
         // if a TableRow has only 1 child
         if (tableRow.getChildCount() == 1) {
 
@@ -667,8 +636,6 @@ public class Sku_Fragment extends Fragment {
             }
         }
     }
-
-
 }
 
 

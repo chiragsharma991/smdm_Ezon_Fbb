@@ -2,11 +2,8 @@ package apsupportapp.aperotechnologies.com.designapp;
 
 import java.io.Serializable;
 
-/**
- * Created by ifattehkhan on 24/08/16.
- */
-public class StyleDetailsBean implements Serializable
-{
+
+public class StyleDetailsBean implements Serializable {
     String productName;
     String collectionName;
     String productFabricDesc;
@@ -15,9 +12,9 @@ public class StyleDetailsBean implements Serializable
     String seasonName;
     String firstReceiptDate;
     String lastReceiptDate;
-    String promoFlag,productImageURL;
+    String promoFlag, productImageURL;
     String usp;
-    double fwdWeekCover,ros;
+    double fwdWeekCover, ros;
 
     public String getProductImageURL() {
         return productImageURL;
@@ -44,7 +41,7 @@ public class StyleDetailsBean implements Serializable
     }
 
     String keyProductFlg;
-    int stkOnhandQty,stkGitQty,targetStock,twSaleTotQty,lwSaleTotQty,ytdSaleTotQty,unitGrossPrice;
+    int stkOnhandQty, stkGitQty, targetStock, twSaleTotQty, lwSaleTotQty, ytdSaleTotQty, unitGrossPrice;
     double sellThruUnitsRcpt;
 
     public String getProductName() {

@@ -57,6 +57,25 @@
                 android:textColor="#ffffff"
                 android:id="@+id/toolbar_title" />
 
+            <RelativeLayout
+                android:id="@+id/imageBtnSalesFilterReset"
+                android:background="@drawable/button_red_effect"
+                android:layout_width="80dp"
+                android:layout_height="@dimen/header_clickable_height"
+                android:layout_toLeftOf="@id/imageBtnSalesFilterDone"
+                android:layout_centerVertical="true">
+
+                <Button
+                    android:clickable="false"
+                    android:text="Clear"
+                    android:textSize="12sp"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+
 
 
             <RelativeLayout

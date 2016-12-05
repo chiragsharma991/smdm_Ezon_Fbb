@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
+
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -34,7 +34,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-import apsupportapp.aperotechnologies.com.designapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,14 +55,14 @@ public class Option_Fragment extends Fragment {
     HorizontalScrollView horizontalScrollViewD;
     ArrayList<ProductNameBean> productNameBeanArrayList;
 
-    String userId,productName, bearertoken;
+    String userId, productName, bearertoken;
     ScrollView scrollViewC;
     ScrollView scrollViewD;
     RequestQueue queue;
     OnRowPressListener rowPressListener;
     Context context;
     RelativeLayout relativeLayout;
-    public static  RelativeLayout rel;
+    public static RelativeLayout rel;
     // set the header titles
     String headers[] = {
             "                  Option                  ",
@@ -79,27 +78,23 @@ public class Option_Fragment extends Fragment {
     ProductNameBean productNameBean;
     TextView txtStoreCode, txtStoreDesc;
     MySingleton m_config;
-    String storeDesc, storeCode,prodName;
-    int offsetvalue=0,limit=100;
-    int count=0;
+    String prodName;
+    int offsetvalue = 0, limit = 100;
+    int count = 0;
 
     SharedPreferences sharedPreferences;
     TextView txtOptionName;
 
-    //public static RelativeLayout relopt;
-
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         m_config = MySingleton.getInstance(getActivity());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
-        userId = sharedPreferences.getString("userId","");
-        bearertoken = sharedPreferences.getString("bearerToken","");
+        userId = sharedPreferences.getString("userId", "");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
 
         Log.e("onCreate ", "Opt Fragment");
-      }
-
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -107,8 +102,8 @@ public class Option_Fragment extends Fragment {
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relativeLayout.setBackgroundColor(Color.WHITE);
-        txtOptionName=(TextView)view.findViewById(R.id.txtArticleName) ;
-        //relopt = (RelativeLayout) view.findViewById(R.id.rel);
+        txtOptionName = (TextView) view.findViewById(R.id.txtArticleName);
+
         txtnounits = (TextView) view.findViewById(R.id.txtnounits);
         txtStoreCode = (TextView) view.findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) view.findViewById(R.id.txtStoreName);
@@ -117,105 +112,59 @@ public class Option_Fragment extends Fragment {
         queue = new RequestQueue(cache, network);
         queue.start();
         rel = (RelativeLayout) view.findViewById(R.id.rel);
-
-        Log.e("onCreateView Option_Fragment"," ");
-
         initComponents();
         setComponentsId();
         setScrollViewAndHorizontalScrollViewTag();
-        // no need to assemble component A, since it is just a table
+
         horizontalScrollViewB.addView(tableBOpt_Frag);
         scrollViewC.addView(tableCOpt_Frag);
         scrollViewD.addView(horizontalScrollViewD);
         horizontalScrollViewD.addView(tableDOpt_Frag);
         // add the components to be part of the main layout
         addComponentToMainLayout();
-        int headerCellsWidth[] = new int[headers.length];
-
-
+        //int headerCellsWidth[] = new int[headers.length];
         // option tab click
-        if(KeyProductActivity.viewPager.getCurrentItem() == 1 && KeyProductActivity.prodName.equals(""))
-        {
+        if (KeyProductActivity.viewPager.getCurrentItem() == 1 && KeyProductActivity.prodName.equals("")) {
             Toast.makeText(getContext(), "Please select product to view options", Toast.LENGTH_LONG).show();
-
-//            if (Reusable_Functions.chkStatus(context))
-//            {
-//
-//                RelativeLayout relativeLayout = (RelativeLayout) rel.getChildAt(1);
-//                Log.e("relativeLayout count "," "+relativeLayout.getChildCount());
-//
-//
-//                Reusable_Functions.sDialog(context, "Loading data...");
-//                offsetvalue = 0;
-//                limit = 100;
-//                count = 0;
-//                //Log.e("KeyProductActivity.prodName", " " + KeyProductActivity.prodName);
-//                productNameBeanArrayList = new ArrayList<>();
-//                txtnounits.setVisibility(View.GONE);
-//                requestProductArticleAllAPI(offsetvalue, limit);
-//                KeyProductActivity.prodName = "";
-//            }
-//            else
-//            {
-//                Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
-//            }
         }
 
         return view;
     }
 
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-          rowPressListener = (OnRowPressListener) context;
+            rowPressListener = (OnRowPressListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement IFragmentToActivity");
         }
     }
+
     public void fragmentCommunication(String productName) {
 
-        Log.e("productName ====>> "," "+productName);
-        prodName=productName;
+        Log.e("productName ====>> ", " " + productName);
+        prodName = productName;
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context,"Loading data...");
+            Reusable_Functions.sDialog(context, "Loading data...");
 
-//            RelativeLayout relativeLayout = (RelativeLayout) rel.getChildAt(1);
-//            ScrollView scr = (ScrollView) relativeLayout.getChildAt(2);
-//            TableLayout table = (TableLayout) scr.getChildAt(0);
-//            Log.e("relativeLayout count "," "+relativeLayout.getChildAt(2)+" "+table.getChildCount());
-//
-            offsetvalue=0;
-            limit=100;
-            count=0;
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
             txtOptionName.setText(productName);
 
             productNameBeanArrayList = new ArrayList<>();
-//            ProductName_Fragment.relProd_Frag.setVisibility(View.GONE);
-//            tableAOpt_Frag.removeAllViews();
-//            tableBOpt_Frag.removeAllViews();
-//            tableCOpt_Frag.removeAllViews();
-//            tableDOpt_Frag.removeAllViews();
-//            view.removeView(rel);
-            if(!KeyProductActivity.prodName.equals("")){
-                requestProductArticleAPI(offsetvalue,limit);
+
+            if (!KeyProductActivity.prodName.equals("")) {
+                requestProductArticleAPI(offsetvalue, limit);
             }
-
-
-
         } else {
             Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
-
-        //txtStoreCode.setText("Hello from Tab Fragment 1");
     }
-
 
     // initalized components
     private void initComponents() {
@@ -237,6 +186,7 @@ public class Option_Fragment extends Fragment {
     }
 
     // set essential component IDs
+    @SuppressWarnings("ResourceType")
     private void setComponentsId() {
         tableAOpt_Frag.setId(1);
         horizontalScrollViewB.setId(2);
@@ -260,10 +210,10 @@ public class Option_Fragment extends Fragment {
         // RelativeLayout params were very useful here
         // the addRule method is the key to arrange the components properly
         RelativeLayout.LayoutParams componentB_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        componentB_Params.addRule(RelativeLayout.RIGHT_OF, this.tableAOpt_Frag.getId());
+        componentB_Params.addRule(RelativeLayout.RIGHT_OF, tableAOpt_Frag.getId());
 
         RelativeLayout.LayoutParams componentC_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        componentC_Params.addRule(RelativeLayout.BELOW, this.tableAOpt_Frag.getId());
+        componentC_Params.addRule(RelativeLayout.BELOW, tableAOpt_Frag.getId());
 
         RelativeLayout.LayoutParams componentD_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         componentD_Params.addRule(RelativeLayout.RIGHT_OF, scrollViewC.getId());
@@ -277,9 +227,11 @@ public class Option_Fragment extends Fragment {
         relativeLayout.addView(scrollViewD, componentD_Params);
 
     }
+
     private void addTableRowToTableA() {
         tableAOpt_Frag.addView(this.componentATableRow());
     }
+
     private void addTableRowToTableB() {
         tableBOpt_Frag.addView(this.componentBTableRow());
     }
@@ -324,8 +276,6 @@ public class Option_Fragment extends Fragment {
 
     private void generateTableC_AndTable_B() {
 
-        Log.e("productNameBeanArrayList size "," "+productNameBeanArrayList.size());
-
         // just seeing some header cell width
         for (int x = 0; x < this.headerCellsWidth.length; x++) {
             Log.v("Product Data", this.headerCellsWidth[x] + "");
@@ -333,21 +283,15 @@ public class Option_Fragment extends Fragment {
 
         for (int k = 0; k < productNameBeanArrayList.size(); k++) {
 
-
             final TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getArticleOption());
             final TableRow taleRowForTableD = this.taleRowForTableD(productNameBeanArrayList.get(k));
             tableRowForTableC.setBackgroundColor(Color.WHITE);
             taleRowForTableD.setBackgroundColor(Color.LTGRAY);
-
-
-            final int i=k;
-
+            final int i = k;
             tableRowForTableC.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    //Toast.makeText(getContext(),"Data :"+productNameBeanArrayList.get(i).getArticleOption(),Toast.LENGTH_SHORT).show();
-
                     tableAOpt_Frag.removeAllViews();
                     tableBOpt_Frag.removeAllViews();
                     tableRowForTableC.removeAllViews();
@@ -356,19 +300,17 @@ public class Option_Fragment extends Fragment {
                     tableDOpt_Frag.removeAllViews();
                     view.removeView(rel);
 
-                    //ViewPager viewPager = (ViewPager) view.getParent();
                     LinearLayout layout = (LinearLayout) KeyProductActivity.viewPager.getParent();
-                    TabLayout tab = (TabLayout)layout.getChildAt(1);
+                    TabLayout tab = (TabLayout) layout.getChildAt(1);
                     tab.addTab(tab.newTab().setText("SKU"));
                     tab.getTabAt(2).select();
-
-                    rowPressListener.communicateToFragment(productNameBeanArrayList.get(i).getProductName(),productNameBeanArrayList.get(i).getArticleOption());
+                    rowPressListener.communicateToFragment(productNameBeanArrayList.get(i).getProductName(), productNameBeanArrayList.get(i).getArticleOption());
                     KeyProductActivity.prodName = "";
                 }
             });
 
-            this.tableCOpt_Frag.addView(tableRowForTableC);
-            this.tableDOpt_Frag.addView(taleRowForTableD);
+            tableCOpt_Frag.addView(tableRowForTableC);
+            tableDOpt_Frag.addView(taleRowForTableD);
         }
         Reusable_Functions.hDialog();
 
@@ -380,9 +322,8 @@ public class Option_Fragment extends Fragment {
         TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
         params.setMargins(0, 2, 0, 0);
 
-
         TableRow tableRowForTableC = new TableRow(this.context);
-//        TextView textView = this.bodyTextView(sampleObject.header1);
+
         TextView textView = this.bodyTextView(productNameDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         tableRowForTableC.addView(textView, params);
@@ -391,14 +332,11 @@ public class Option_Fragment extends Fragment {
 
     }
 
-
-
-
     TableRow taleRowForTableD(ProductNameBean productDetails) {
 
         TableRow taleRowForTableD = new TableRow(this.context);
 
-        int loopCount = ((TableRow) this.tableBOpt_Frag.getChildAt(0)).getChildCount();
+        int loopCount = ((TableRow) tableBOpt_Frag.getChildAt(0)).getChildCount();
         String info[] = {
 
                 String.valueOf(productDetails.getL2hrsNetSales()),
@@ -406,9 +344,6 @@ public class Option_Fragment extends Fragment {
                 String.valueOf(productDetails.getWtdNetSales()),
                 String.valueOf(productDetails.getSoh()),
                 String.valueOf(productDetails.getGit())
-
-                //productDetails.getArticleOption()
-
         };
 
         for (int x = 0; x < loopCount; x++) {
@@ -450,8 +385,8 @@ public class Option_Fragment extends Fragment {
     // resizing TableRow height starts here
     void resizeHeaderHeight() {
 
-        TableRow productNameHeaderTableRow = (TableRow) this.tableAOpt_Frag.getChildAt(0);
-        TableRow productInfoTableRow = (TableRow) this.tableBOpt_Frag.getChildAt(0);
+        TableRow productNameHeaderTableRow = (TableRow) tableAOpt_Frag.getChildAt(0);
+        TableRow productInfoTableRow = (TableRow) tableBOpt_Frag.getChildAt(0);
 
         int rowAHeight = this.viewHeight(productNameHeaderTableRow);
         int rowBHeight = this.viewHeight(productInfoTableRow);
@@ -464,16 +399,15 @@ public class Option_Fragment extends Fragment {
 
     void getTableRowHeaderCellWidth() {
 
-        int tableAChildCount = ((TableRow) this.tableAOpt_Frag.getChildAt(0)).getChildCount();
-        int tableBChildCount = ((TableRow) this.tableBOpt_Frag.getChildAt(0)).getChildCount();
-        ;
+        int tableAChildCount = ((TableRow) tableAOpt_Frag.getChildAt(0)).getChildCount();
+        int tableBChildCount = ((TableRow) tableBOpt_Frag.getChildAt(0)).getChildCount();
 
         for (int x = 0; x < (tableAChildCount + tableBChildCount); x++) {
 
             if (x == 0) {
-                this.headerCellsWidth[x] = this.viewWidth(((TableRow) this.tableAOpt_Frag.getChildAt(0)).getChildAt(x));
+                this.headerCellsWidth[x] = this.viewWidth(((TableRow) tableAOpt_Frag.getChildAt(0)).getChildAt(x));
             } else {
-                this.headerCellsWidth[x] = this.viewWidth(((TableRow) this.tableBOpt_Frag.getChildAt(0)).getChildAt(x - 1));
+                this.headerCellsWidth[x] = this.viewWidth(((TableRow) tableBOpt_Frag.getChildAt(0)).getChildAt(x - 1));
             }
 
         }
@@ -482,12 +416,12 @@ public class Option_Fragment extends Fragment {
     // resize body table row height
     void resizeBodyTableRowHeight() {
 
-        int tableC_ChildCount = this.tableCOpt_Frag.getChildCount();
+        int tableC_ChildCount = tableCOpt_Frag.getChildCount();
 
         for (int x = 0; x < tableC_ChildCount; x++) {
 
-            TableRow productNameHeaderTableRow = (TableRow) this.tableCOpt_Frag.getChildAt(x);
-            TableRow productInfoTableRow = (TableRow) this.tableDOpt_Frag.getChildAt(x);
+            TableRow productNameHeaderTableRow = (TableRow) tableCOpt_Frag.getChildAt(x);
+            TableRow productInfoTableRow = (TableRow) tableDOpt_Frag.getChildAt(x);
 
             int rowAHeight = this.viewHeight(productNameHeaderTableRow);
             int rowBHeight = this.viewHeight(productInfoTableRow);
@@ -563,8 +497,6 @@ public class Option_Fragment extends Fragment {
         return view.getMeasuredWidth();
     }
 
-
-
     // horizontal scroll view custom class
     class MyHorizontalScrollView extends HorizontalScrollView {
 
@@ -602,312 +534,130 @@ public class Option_Fragment extends Fragment {
             }
         }
     }
+
     public void requestProductArticleAPI(int offsetvalue1, int limit1) {
 
-        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/"+userId+"?view=articleOption&productName=" + prodName.replaceAll(" ", "%20").replaceAll("&","%26")+"&offset="+offsetvalue+"&limit="+limit;
-        Log.e("requestProductArticleAPI URL   ", url);
+        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?view=articleOption&productName=" + prodName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("requestProductArticleAPI Response", response.toString());
                         try {
 
-                           if (response.equals(null) || response == null|| response.length()==0 && count==0) {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(getContext(), "no article data found", Toast.LENGTH_LONG).show();
                             } else {
-                               if (response.length() == limit) {
+                                if (response.length() == limit) {
 
-                                   //Reusable_Functions.hDialog();
-                                   for (int i = 0; i < response.length(); i++) {
-                                       JSONObject productName1 = response.getJSONObject(i);
-                                       String ProductName = productName1.getString("productName");
-                                       //Log.e("Product Name:", ProductName);
-                                       String articleOption = productName1.getString("articleOption");
-                                       String articleCode = productName1.getString("articleCode");
-                                       int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
-                                       int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
-                                       int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
-                                       double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
-                                       double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
-                                       int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
-                                       int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
-                                       int SOH = productName1.getInt("stkOnhandQty");
-                                       int GIT = productName1.getInt("stkGitQty");
-                                       String Storecode = productName1.getString("storeCode");
-                                       String storeDesc = productName1.getString("storeDesc");
-                                       //String option = productName.getString("articleOption");
-                                       productNameBean = new ProductNameBean();
-                                       productNameBean.setProductName(ProductName);
-                                       //Log.e("Product Name:", ProductName);
-                                       productNameBean.setArticleOption(articleOption);
-                                       productNameBean.setArtileCode(articleCode);
-                                       productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
-                                       productNameBean.setDayNetSales(Day_Net_Sales);
-                                       productNameBean.setWtdNetSales(WTD_Net_Sales);
-                                       productNameBean.setDayNetSalesPercent(Day_Net_Sales_Percent);
-                                       productNameBean.setWtdNetSalesPercent(WTD_Net_Sales_Percent);
-                                       productNameBean.setSoh(SOH);
-                                       productNameBean.setGit(GIT);
-                                       productNameBean.setStoreCode(Storecode);
-                                       //Log.e("StoreCode", productNameBean.getStoreCode());
-                                       productNameBean.setStoreDesc(storeDesc);
-                                       //productNameBean.setArticleOption(option);
-                                       Log.e("Response Lenght", "" + response.length());
-                                       productNameBeanArrayList.add(productNameBean);
-                                       txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
-                                       txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
-                                       //Reusable_Functions.progressDialog.cancel();
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject productName1 = response.getJSONObject(i);
+                                        String ProductName = productName1.getString("productName");
 
-                                   }
-                                   offsetvalue = (limit * count) + limit;
-                                   count++;
-                                   requestProductArticleAPI(offsetvalue, limit);
-                               } else if (response.length() < limit)
-                               {
-                                   for (int i = 0; i < response.length(); i++) {
-                                       JSONObject productName1 = response.getJSONObject(i);
-                                       String ProductName = productName1.getString("productName");
-                                       //Log.e("Product Name:", ProductName);
-                                       String articleOption = productName1.getString("articleOption");
-                                       String articleCode = productName1.getString("articleCode");
-                                       int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
-                                       int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
-                                       int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
-                                       double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
-                                       double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
-                                       int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
-                                       int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
-                                       int SOH = productName1.getInt("stkOnhandQty");
-                                       int GIT = productName1.getInt("stkGitQty");
-                                       String Storecode = productName1.getString("storeCode");
-                                       String storeDesc = productName1.getString("storeDesc");
-                                       //String option = productName.getString("articleOption");
-                                       productNameBean = new ProductNameBean();
-                                       productNameBean.setProductName(ProductName);
-                                       //Log.e("Product Name:", ProductName);
-                                       productNameBean.setArticleOption(articleOption);
-                                       productNameBean.setArtileCode(articleCode);
-                                       productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
-                                       productNameBean.setDayNetSales(Day_Net_Sales);
-                                       productNameBean.setWtdNetSales(WTD_Net_Sales);
-                                       productNameBean.setDayNetSalesPercent(Day_Net_Sales_Percent);
-                                       productNameBean.setWtdNetSalesPercent(WTD_Net_Sales_Percent);
-                                       productNameBean.setSoh(SOH);
-                                       productNameBean.setGit(GIT);
-                                       productNameBean.setStoreCode(Storecode);
-                                       //Log.e("StoreCode", productNameBean.getStoreCode());
-                                       productNameBean.setStoreDesc(storeDesc);
-                                       //productNameBean.setArticleOption(option);
-                                       Log.e("Response Lenght-------", "" + response.length());
-                                       productNameBeanArrayList.add(productNameBean);
+                                        String articleOption = productName1.getString("articleOption");
+                                        String articleCode = productName1.getString("articleCode");
+                                        int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
+                                        int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
+                                        int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
+                                        double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
+                                        double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
+                                        //int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
+                                        //int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
+                                        int SOH = productName1.getInt("stkOnhandQty");
+                                        int GIT = productName1.getInt("stkGitQty");
+                                        String Storecode = productName1.getString("storeCode");
+                                        String storeDesc = productName1.getString("storeDesc");
 
+                                        productNameBean = new ProductNameBean();
+                                        productNameBean.setProductName(ProductName);
 
+                                        productNameBean.setArticleOption(articleOption);
+                                        productNameBean.setArtileCode(articleCode);
+                                        productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
+                                        productNameBean.setDayNetSales(Day_Net_Sales);
+                                        productNameBean.setWtdNetSales(WTD_Net_Sales);
+                                        productNameBean.setDayNetSalesPercent(Day_Net_Sales_Percent);
+                                        productNameBean.setWtdNetSalesPercent(WTD_Net_Sales_Percent);
+                                        productNameBean.setSoh(SOH);
+                                        productNameBean.setGit(GIT);
+                                        productNameBean.setStoreCode(Storecode);
 
-                                       txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
-                                       txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
-                                       //Reusable_Functions.progressDialog.cancel();
+                                        productNameBean.setStoreDesc(storeDesc);
 
-                                   }
-                                   ////Log.e("Code",productNameBeanArrayList.get(0).getStoreCode());
-
-                                   Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
-                                       public int compare(ProductNameBean one, ProductNameBean other) {
-                                           return  new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
-                                       }
-                                   });
-                                   Collections.reverse(productNameBeanArrayList);
-
-                                   addTableRowToTableA();
-                                   addTableRowToTableB();
-                                   resizeHeaderHeight();
-                                   getTableRowHeaderCellWidth();
-                                   Log.e("view childcount"," "+view.getChildCount());
-                                   if(view.getChildCount() == 1)
-                                   {
-                                       scrollViewC.scrollTo(0,0);
-                                       scrollViewD.scrollTo(0,0);
-                                       view.addView(rel);
-                                   }
-                                   generateTableC_AndTable_B();
-                                   resizeBodyTableRowHeight();
-                                   //Reusable_Functions.hDialog();
-                               }
-                           }
-
-
-                        } catch (Exception e) {
-                            //Log.e("Exception e", e.toString() + "");
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
-
-
-
-
-    public void requestProductArticleAllAPI(int offsetvalue1, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/"+userId+"?view=articleOption&offset="+offsetvalue+"&limit="+limit;
-        Log.i("URL   ", url);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i("ProdArticle Response", response.toString());
-                        try {
-                            if (response.equals(null) || response == null|| response.length()==0 && count==0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(getContext(), "no data found", Toast.LENGTH_LONG).show();
-                            } else if(response.length()==limit)
-                            {
-                                //Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++)
-                                {
-                                    JSONObject productName1 = response.getJSONObject(i);
-                                    String ProductName = productName1.getString("productName");
-                                    //Log.e("Product Name:", ProductName);
-                                    String articleOption=productName1.getString("articleOption");
-                                    String articleCode=productName1.getString("articleCode");
-                                    int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
-                                    int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
-                                    int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
-                                    double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
-                                    double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
-                                    int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
-                                    int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
-                                    int SOH = productName1.getInt("stkOnhandQty");
-                                    int GIT = productName1.getInt("stkGitQty");
-                                    String Storecode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
-                                    //String option = productName.getString("articleOption");
-                                    productNameBean = new ProductNameBean();
-                                    productNameBean.setProductName(ProductName);
-                                    //Log.e("Product Name:", ProductName);
-                                    productNameBean.setArticleOption(articleOption);
-                                    productNameBean.setArtileCode(articleCode);
-                                    productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
-                                    productNameBean.setDayNetSales(Day_Net_Sales);
-                                    productNameBean.setWtdNetSales(WTD_Net_Sales);
-                                    productNameBean.setDayNetSalesPercent(Day_Net_Sales_Percent);
-                                    productNameBean.setWtdNetSalesPercent(WTD_Net_Sales_Percent);
-                                    productNameBean.setSoh(SOH);
-                                    productNameBean.setGit(GIT);
-                                    productNameBean.setStoreCode(Storecode);
-                                    //Log.e("StoreCode", productNameBean.getStoreCode());
-                                    productNameBean.setStoreDesc(storeDesc);
-                                    //productNameBean.setArticleOption(option);
-                                    //Log.e("Response Lenght", "" + response.length());
-                                    productNameBeanArrayList.add(productNameBean);
-                                    //Reusable_Functions.progressDialog.cancel();
-
-                                    txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
-
-
-//                                    Log.e("Store Code "," "+txtStoreCode.getText().toString());
-//                                    Log.e("Store Desc "," "+txtStoreDesc.getText().toString());
-
-                                }
-                                offsetvalue = (limit * count) + limit ;
-                                count++;
-                                requestProductArticleAllAPI(offsetvalue,limit);
-
-                            }
-                            else if(response.length()< limit) {
-                                for (int i = 0; i < response.length(); i++)
-                                {
-                                    JSONObject productName1 = response.getJSONObject(i);
-                                    String ProductName = productName1.getString("productName");
-                                    //Log.e("Product Name:", ProductName);
-                                    String articleOption=productName1.getString("articleOption");
-                                    String articleCode=productName1.getString("articleCode");
-                                    int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
-                                    int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
-                                    int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
-                                    double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
-                                    double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
-                                    int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
-                                    int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
-                                    int SOH = productName1.getInt("stkOnhandQty");
-                                    int GIT = productName1.getInt("stkGitQty");
-                                    String Storecode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
-                                    //String option = productName.getString("articleOption");
-                                    productNameBean = new ProductNameBean();
-                                    productNameBean.setProductName(ProductName);
-                                    //Log.e("Product Name:", ProductName);
-                                    productNameBean.setArticleOption(articleOption);
-                                    productNameBean.setArtileCode(articleCode);
-                                    productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
-                                    productNameBean.setDayNetSales(Day_Net_Sales);
-                                    productNameBean.setWtdNetSales(WTD_Net_Sales);
-                                    productNameBean.setDayNetSalesPercent(Day_Net_Sales_Percent);
-                                    productNameBean.setWtdNetSalesPercent(WTD_Net_Sales_Percent);
-                                    productNameBean.setSoh(SOH);
-                                    productNameBean.setGit(GIT);
-                                    productNameBean.setStoreCode(Storecode);
-                                    //Log.e("StoreCode", productNameBean.getStoreCode());
-                                    productNameBean.setStoreDesc(storeDesc);
-                                    //productNameBean.setArticleOption(option);
-                                    //Log.e("Response Lenght-------", "" + response.length());
-                                    productNameBeanArrayList.add(productNameBean);
-                                   // Reusable_Functions.progressDialog.cancel();
-                                    ////Log.e("Code",productNameBeanArrayList.get(0).getStoreCode());
-                                    txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
-
-//                                    Log.e("Store Code "," "+txtStoreCode.getText().toString());
-//                                    Log.e("Store Desc "," "+txtStoreDesc.getText().toString());
-
-                                }
-
-                                Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
-                                    public int compare(ProductNameBean one, ProductNameBean other) {
-                                        return  new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
+                                        Log.e("Response Lenght", "" + response.length());
+                                        productNameBeanArrayList.add(productNameBean);
+                                        txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
+                                        txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
                                     }
-                                });
-                                Collections.reverse(productNameBeanArrayList);
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+                                    requestProductArticleAPI(offsetvalue, limit);
+                                } else if (response.length() < limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject productName1 = response.getJSONObject(i);
+                                        String ProductName = productName1.getString("productName");
 
+                                        String articleOption = productName1.getString("articleOption");
+                                        String articleCode = productName1.getString("articleCode");
+                                        int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
+                                        int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
+                                        int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
+                                        double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
+                                        double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
+                                        //int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
+                                        //int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
+                                        int SOH = productName1.getInt("stkOnhandQty");
+                                        int GIT = productName1.getInt("stkGitQty");
+                                        String Storecode = productName1.getString("storeCode");
+                                        String storeDesc = productName1.getString("storeDesc");
 
-                                addTableRowToTableA();
-                                addTableRowToTableB();
-                                resizeHeaderHeight();
-                                getTableRowHeaderCellWidth();
-                                generateTableC_AndTable_B();
-                                resizeBodyTableRowHeight();
-                                //Reusable_Functions.hDialog();
+                                        productNameBean = new ProductNameBean();
+                                        productNameBean.setProductName(ProductName);
 
+                                        productNameBean.setArticleOption(articleOption);
+                                        productNameBean.setArtileCode(articleCode);
+                                        productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
+                                        productNameBean.setDayNetSales(Day_Net_Sales);
+                                        productNameBean.setWtdNetSales(WTD_Net_Sales);
+                                        productNameBean.setDayNetSalesPercent(Day_Net_Sales_Percent);
+                                        productNameBean.setWtdNetSalesPercent(WTD_Net_Sales_Percent);
+                                        productNameBean.setSoh(SOH);
+                                        productNameBean.setGit(GIT);
+                                        productNameBean.setStoreCode(Storecode);
+
+                                        productNameBean.setStoreDesc(storeDesc);
+
+                                        Log.e("Response Lenght-------", "" + response.length());
+                                        productNameBeanArrayList.add(productNameBean);
+
+                                        txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
+                                        txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
+                                    }
+                                    Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
+                                        public int compare(ProductNameBean one, ProductNameBean other) {
+                                            return new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
+                                        }
+                                    });
+                                    Collections.reverse(productNameBeanArrayList);
+
+                                    addTableRowToTableA();
+                                    addTableRowToTableB();
+                                    resizeHeaderHeight();
+                                    getTableRowHeaderCellWidth();
+                                    Log.e("view childcount", " " + view.getChildCount());
+                                    if (view.getChildCount() == 1) {
+                                        scrollViewC.scrollTo(0, 0);
+                                        scrollViewD.scrollTo(0, 0);
+                                        view.addView(rel);
+                                    }
+                                    generateTableC_AndTable_B();
+                                    resizeBodyTableRowHeight();
+
+                                }
                             }
+                        } catch (Exception e) {
 
-
-                        }
-                        catch (Exception e) {
-                            //Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -925,7 +675,7 @@ public class Option_Fragment extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };

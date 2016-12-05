@@ -33,7 +33,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-import apsupportapp.aperotechnologies.com.designapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,15 +43,12 @@ import java.util.List;
 import java.util.Map;
 
 
-/**
- * Created by pamrutkar on 23/08/16.
- */
 public class Style_Fragment extends Fragment {
     TableLayout tableA;
     TableLayout tableB;
     TableLayout tableC;
     TableLayout tableD;
-    TextView txtSales,txtGit,txtFwdWeekCover,txtSalesUnit,txtSalesThruUnit,txtRos,txtSOh,txtarticleOption;
+    TextView txtSales, txtGit, txtFwdWeekCover, txtSalesUnit, txtSalesThruUnit, txtRos, txtSOh, txtarticleOption;
     View view;
     String userId, bearertoken;
     HorizontalScrollView horizontalScrollViewB;
@@ -62,19 +58,19 @@ public class Style_Fragment extends Fragment {
     ScrollView scrollViewD;
     RequestQueue queue;
     SharedPreferences sharedPreferences;
-   static int  salesUnitTotal=0,sohTotal=0;
-    double fwdweekTotal=0;
-   // ArrayList<StyleDetailsBean> styleDetailsBeenList;
+    static int salesUnitTotal = 0, sohTotal = 0;
+    double fwdweekTotal = 0;
+
     ArrayList<StyleColorBean> styleColorBeanList;
     StyleDetailsBean styleDetailsBean;
     StyleColorBean styleColorBean;
     Context context;
     MySingleton m_config;
-    static  int cnt=0;
+    static int cnt = 0;
     RelativeLayout relativeLayout;
-    String articleCode,articleOption;
-    int offsetvalue=0,limit=100;
-    int count=0;
+    String articleCode, articleOption;
+    int offsetvalue = 0, limit = 100;
+    int count = 0;
     // set the header titles
     String headers[] = {
             "             Color            ",
@@ -88,69 +84,52 @@ public class Style_Fragment extends Fragment {
     List<SampleObject> sampleObjects = sampleObjects();
     int headerCellsWidth[] = new int[headers.length];
 
-
-
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
-        userId = sharedPreferences.getString("userId","");
-        bearertoken = sharedPreferences.getString("bearerToken","");
-        Bundle bundle=getActivity().getIntent().getExtras();
-        articleCode=bundle.getString("articleCode");
-        articleOption=bundle.getString("articleOption");
+        userId = sharedPreferences.getString("userId", "");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
+        Bundle bundle = getActivity().getIntent().getExtras();
+        articleCode = bundle.getString("articleCode");
+        articleOption = bundle.getString("articleOption");
 
-        context=getContext();
-        styleColorBeanList=new ArrayList<>();
-        m_config= MySingleton.getInstance(context);
+        context = getContext();
+        styleColorBeanList = new ArrayList<>();
+        m_config = MySingleton.getInstance(context);
 
         Cache cache = new DiskBasedCache(getActivity().getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
 
-        if (Reusable_Functions.chkStatus(context))
-        {
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context,"Loading data...");
+            Reusable_Functions.sDialog(context, "Loading data...");
             requestStyleSizeDetailsAPI();
             requestStyleColorDetailsAPI(offsetvalue, limit);
-        } else
-        {
-            // Reusable_Functions.hDialog();
+        } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
     }
 
-    private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1)
-    {
+    private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
 
-
-        String url= ConstsCore.web_url + "/v1/display/sizes/"+userId+"?articleOption="+articleOption.replaceAll(" ","%20").replaceAll("&","%26")+"&offset="+offsetvalue +"&limit="+ limit;
-
+        String url = ConstsCore.web_url + "/v1/display/sizes/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.i("URL   ", url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.e("Stylecolor details :   ", response.toString());
                         Log.e("Response lenght ", String.valueOf(response.length()));
-                        try
-                        {
-
-                            if (response.equals(null) || response ==null || response.length()==0)
-                            {
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context,"No size data found",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "No size data found", Toast.LENGTH_LONG).show();
 
-                            }else if(response.length()==limit) {
+                            } else if (response.length() == limit) {
 
-                                //JSONObject mainObject = new JSONObject(response);
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
                                     String color = styleDetails.getString("color");
@@ -160,11 +139,6 @@ public class Style_Fragment extends Fragment {
                                     int twSaleTotQty = styleDetails.getInt("twSaleTotQty");
                                     int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
                                     double fwdWeekCover = styleDetails.getDouble("fwdWeekCover");
-                                    //  String seasonName = styleDetails.getString("seasonName");
-
-//                                    salesUnitTotal=salesUnitTotal+twSaleTotQty;
-//                                    sohTotal=sohTotal+stkOnhandQty;
-//                                    fwdweekTotal=fwdweekTotal+fwdWeekCover;
 
                                     styleColorBean = new StyleColorBean();
 
@@ -174,27 +148,18 @@ public class Style_Fragment extends Fragment {
                                     styleColorBean.setFwdWeekCover(fwdWeekCover);
                                     styleColorBean.setStkOnhandQty(stkOnhandQty);
 
-                                    //harshda
                                     styleColorBean.setArticleCode(articleCode);
                                     styleColorBean.setArticleOption(articleOption);
 
                                     styleColorBeanList.add(styleColorBean);
-
-
                                 }
 
-                                offsetvalue = (limit * count) + limit ;
+                                offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestStyleColorDetailsAPI(offsetvalue, limit);
+                                Log.e("styleColorBeanList", styleColorBeanList.size() + "");
 
-                                Log.e("styleColorBeanList",styleColorBeanList.size()+"");
-
-
-//                                Intent intent = new Intent(context, SwitchingTabActivity.class);
-//                                intent.putExtra("styleDetailsBean", styleDetailsBean);
-//                                startActivity(intent);
-
-                            } else if(response.length()< limit) {
+                            } else if (response.length() < limit) {
 
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
@@ -205,11 +170,6 @@ public class Style_Fragment extends Fragment {
                                     int twSaleTotQty = styleDetails.getInt("twSaleTotQty");
                                     int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
                                     double fwdWeekCover = styleDetails.getDouble("fwdWeekCover");
-                                    //  String seasonName = styleDetails.getString("seasonName");
-
-//                                    salesUnitTotal=salesUnitTotal+twSaleTotQty;
-//                                    sohTotal=sohTotal+stkOnhandQty;
-//                                    fwdweekTotal=fwdweekTotal+fwdWeekCover;
 
                                     styleColorBean = new StyleColorBean();
 
@@ -218,12 +178,10 @@ public class Style_Fragment extends Fragment {
                                     styleColorBean.setTwSaleTotQty(twSaleTotQty);
                                     styleColorBean.setFwdWeekCover(fwdWeekCover);
                                     styleColorBean.setStkOnhandQty(stkOnhandQty);
-
-                                    //harshda
                                     styleColorBean.setArticleCode(articleCode);
                                     styleColorBean.setArticleOption(articleOption);
 
-                                    Log.e("style bean",color +size);
+                                    Log.e("style bean", color + size);
 
                                     styleColorBeanList.add(styleColorBean);
 
@@ -235,40 +193,32 @@ public class Style_Fragment extends Fragment {
                                 addTableRowToTableA();
                                 addTableRowToTableB();
                                 resizeHeaderHeight();
-
                                 getTableRowHeaderCellWidth();
-
                                 generateTableC_AndTable_B();
-
                                 resizeBodyTableRowHeight();
                                 Reusable_Functions.hDialog();
                             }
-                        }
-                        catch(Exception e)
-                        {
-                            Log.e("Exception e",e.toString() +"");
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
+                    public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
 
-        ){
+        ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };
@@ -276,38 +226,25 @@ public class Style_Fragment extends Fragment {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
-
-
-
     }
 
-    private void requestStyleSizeDetailsAPI()
-    {
+    private void requestStyleSizeDetailsAPI() {
 
-        String url= ConstsCore.web_url + "/v1/display/styles/"+userId+"?articleOption="+articleOption.replaceAll(" ","%20").replaceAll("&","%26");
+        String url = ConstsCore.web_url + "/v1/display/styles/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26");
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.i("Style Size details :   ", response.toString());
-                        try
-                        {
-
-                            if (response.equals(null) || response ==null)
-                            {
+                        try {
+                            if (response.equals(null) || response == null) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context,"No data Found",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "No data Found", Toast.LENGTH_LONG).show();
 
-                            }else {
-
+                            } else {
                                 Reusable_Functions.hDialog();
-
-                                // JSONObject mainObject = new JSONObject(response);
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
                                     int Sales = styleDetails.getInt("twSaleNetVal");
@@ -319,84 +256,38 @@ public class Style_Fragment extends Fragment {
                                     double ros = styleDetails.getDouble("ros");
 
                                     int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
-                                    //Log.e("sales :",Sales+"");
-                                    txtSales.setText(": Rs."+Sales);
-                                    txtSalesUnit.setText(": "+twSaleTotQty);
-                                    txtFwdWeekCover.setText(": "+String.format("%.1f",fwdWeekCover));
-                                    txtGit.setText(": "+stkGitQty);
 
-                                    txtSalesThruUnit.setText(": "+String.format("%.1f",sellThruUnitsRcpt)+"%");
-                                    txtRos.setText(": "+String.format("%.1f",ros));
-                                    txtSOh.setText(": "+stkOnhandQty);
-                                    txtarticleOption.setText(""+articleOption);
-
-
-
-//                                    styleDetailsBean = new StyleDetailsBean();
-//
-//                                    styleDetailsBean.setProductName(productName);
-//                                    styleDetailsBean.setCollectionName(collectionName);
-//                                    styleDetailsBean.setProductFabricDesc(productFabricDesc);
-//                                    styleDetailsBean.setProductFitDesc(productFitDesc);
-//                                    styleDetailsBean.setProductFinishDesc(productFinishDesc);
-//                                    styleDetailsBean.setSeasonName(seasonName);
-//
-////                                    styleDetailsBean.setFirstReceiptDate(firstReceiptDate);
-////                                    styleDetailsBean.setLastReceiptDate(lastReceiptDate);
-//                                    styleDetailsBean.setFwdWeekCover(fwdWeekCover);
-//
-//                                    styleDetailsBean.setTwSaleTotQty(twSaleTotQty);
-//                                    styleDetailsBean.setLwSaleTotQty(lwSaleTotQty);
-//                                    styleDetailsBean.setYtdSaleTotQty(ytdSaleTotQty);
-//
-//                                    styleDetailsBean.setUnitGrossPrice(unitGrossPrice);
-//                                    styleDetailsBean.setSellThruUnitsRcpt(sellThruUnitsRcpt);
-//                                    styleDetailsBean.setRos(ros);
-//
-//                                    styleDetailsBean.setUsp(usp);
-//
-//
-//                                    Log.e("Style details:", productName + "   " + collectionName + "  " + productFabricDesc + "  " + productFitDesc + "  " + productFinishDesc + "  " + seasonName);
-//                                    // Log.e("row 1:", firstReceiptDate + "   " + lastReceiptDate + "  " + fwdWeekCover);
-//                                    Log.e("row 2:", twSaleTotQty + "   " + lwSaleTotQty + "  " + ytdSaleTotQty);
-//                                    Log.e("row 3:", stkOnhandQty + "   " + stkGitQty + "  " + targetStock);
-//                                    Log.e("row4:", unitGrossPrice + "   " + sellThruUnitsRcpt + "  " + ros);
-//                                    Log.e("benefit :", "" + usp);
-//
+                                    txtSales.setText(": Rs." + Sales);
+                                    txtSalesUnit.setText(": " + twSaleTotQty);
+                                    txtFwdWeekCover.setText(": " + String.format("%.1f", fwdWeekCover));
+                                    txtGit.setText(": " + stkGitQty);
+                                    txtSalesThruUnit.setText(": " + String.format("%.1f", sellThruUnitsRcpt) + "%");
+                                    txtRos.setText(": " + String.format("%.1f", ros));
+                                    txtSOh.setText(": " + stkOnhandQty);
+                                    txtarticleOption.setText("" + articleOption);
                                 }
-//
-
-//                                Intent intent = new Intent(context, SwitchingTabActivity.class);
-//                                intent.putExtra("styleDetailsBean", styleDetailsBean);
-//                                startActivity(intent);
-
                             }
-                        }
-                        catch(Exception e)
-                        {
-                            Log.e("Exception e",e.toString() +"");
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
+                    public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
 
-        ){
+        ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };
@@ -404,31 +295,22 @@ public class Style_Fragment extends Fragment {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
-
-
-
     }
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.style_fragment, container, false);
         context = view.getContext();
-        relativeLayout = (RelativeLayout)view.findViewById(R.id.relativeLayout);
-        txtarticleOption =(TextView)view.findViewById(R.id.txtarticleOption);
+        relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
+        txtarticleOption = (TextView) view.findViewById(R.id.txtarticleOption);
         //style size text
-        txtSales =(TextView)view.findViewById(R.id.txtSales);
-        txtSalesUnit =(TextView)view.findViewById(R.id.txtSalesUnit);
-        txtFwdWeekCover =(TextView)view.findViewById(R.id.txtFwdCover);
-        txtGit =(TextView)view.findViewById(R.id.txtGit);
-        txtSalesThruUnit =(TextView)view.findViewById(R.id.txtSalesThruUnit);
-        txtRos =(TextView)view.findViewById(R.id.txtRos);
-        txtSOh =(TextView)view.findViewById(R.id.txtSOh);
-
-
-
-        //view = relativeLayout;
+        txtSales = (TextView) view.findViewById(R.id.txtSales);
+        txtSalesUnit = (TextView) view.findViewById(R.id.txtSalesUnit);
+        txtFwdWeekCover = (TextView) view.findViewById(R.id.txtFwdCover);
+        txtGit = (TextView) view.findViewById(R.id.txtGit);
+        txtSalesThruUnit = (TextView) view.findViewById(R.id.txtSalesThruUnit);
+        txtRos = (TextView) view.findViewById(R.id.txtRos);
+        txtSOh = (TextView) view.findViewById(R.id.txtSOh);
 
         initComponents();
         setComponentsId();
@@ -447,21 +329,7 @@ public class Style_Fragment extends Fragment {
         addComponentToMainLayout();
         relativeLayout.setBackgroundColor(Color.WHITE);
 
-
-        /// add some table rows
-//        addTableRowToTableA();
-//        addTableRowToTableB();
-//        resizeHeaderHeight();W
-//
-//       getTableRowHeaderCellWidth();
-//
-//       generateTableC_AndTable_B();
-//
-//       resizeBodyTableRowHeight();
-
-
         int headerCellsWidth[] = new int[headers.length];
-
 
         return view;
     }
@@ -471,13 +339,8 @@ public class Style_Fragment extends Fragment {
         List<SampleObject> sampleObjects = new ArrayList<SampleObject>();
         for (int x = 1; x <= 20; x++) {
 
-//            SampleObject sampleObject = new SampleObject(
-//                    " " + styleDetailsBean.getProductName(),  " " + styleDetailsBean.getCollectionName(), " " +
-//                    styleDetailsBean.getProductFabricDesc(), " " + styleDetailsBean.getProductFitDesc()
-//                    , " " + styleDetailsBean.getProductFinishDesc()
-//            );
             SampleObject sampleObject = new SampleObject(
-                    "1 " ,  "2 " , "3 " , "4 ",
+                    "1 ", "2 ", "3 ", "4 ",
                     " 5"
             );
 
@@ -509,6 +372,7 @@ public class Style_Fragment extends Fragment {
     }
 
     // set essential component IDs
+    @SuppressWarnings("ResourceType")
     private void setComponentsId() {
         tableA.setId(1);
         horizontalScrollViewB.setId(2);
@@ -600,273 +464,254 @@ public class Style_Fragment extends Fragment {
     private void generateTableC_AndTable_B() {
 
 
-      //  int cnt=0;
+        //  int cnt=0;
         // just seeing some header cell width
         for (int x = 0; x < this.headerCellsWidth.length; x++) {
             Log.v("Product Data", this.headerCellsWidth[x] + "");
         }
-         int size=styleColorBeanList.size()-2;
-      //  int size1=styleColorBeanList.size()-1;
+        int size = styleColorBeanList.size() - 2;
+        //  int size1=styleColorBeanList.size()-1;
 
 
-        for (int k=0;k<styleColorBeanList.size();k++)
-        {
-               if (k==0 && styleColorBeanList.size()==1) {
-                   TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                   tableRowForTableC.setBackgroundColor(Color.WHITE);
-                   this.tableC.addView(tableRowForTableC);
+        for (int k = 0; k < styleColorBeanList.size(); k++) {
+            if (k == 0 && styleColorBeanList.size() == 1) {
+                TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
+                tableRowForTableC.setBackgroundColor(Color.WHITE);
+                this.tableC.addView(tableRowForTableC);
 
-                   final int finalK = k;
-                   tableRowForTableC.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
+                final int finalK = k;
+                tableRowForTableC.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                           String articleOption1 = styleColorBeanList.get(finalK).getArticleOption();
+                        String articleOption1 = styleColorBeanList.get(finalK).getArticleOption();
 
-                           if(articleOption1.equals(articleOption))
-                           {
-                               SwitchingTabActivity.viewPager.setCurrentItem(0);
-                               SwitchingTabActivity.tabLayout.getTabAt(0).select();
+                        if (articleOption1.equals(articleOption)) {
+                            SwitchingTabActivity.viewPager.setCurrentItem(0);
+                            SwitchingTabActivity.tabLayout.getTabAt(0).select();
 
-                           }else
-                           {
-                               Reusable_Functions.sDialog(context, "Loading data...");
-                               requestStyleDetailsAPI(context, articleOption1);
-                           }
+                        } else {
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            requestStyleDetailsAPI(context, articleOption1);
+                        }
 
-
 
-                       }
-                   });
-
-                   salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
-                   sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
-                   fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
-
-                   TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
-                   taleRowForTableD.setBackgroundColor(Color.LTGRAY);
-                   this.tableD.addView(taleRowForTableD);
-
-                   TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-                   tableRowForTableC1.setBackgroundColor(Color.WHITE);
-                   this.tableC.addView(tableRowForTableC1);
-
-                   TableRow taleRowForTableD1 = this.taleRowForTableDtotal();
-                   taleRowForTableD1.setBackgroundColor(Color.parseColor("#B73020"));
-                   this.tableD.addView(taleRowForTableD1);
-
-                   salesUnitTotal=0;
-                   sohTotal=0;
-                   fwdweekTotal=0;
-
-
-               }else if (k==0 && styleColorBeanList.size()>1)
-               {
-                   TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                   tableRowForTableC.setBackgroundColor(Color.WHITE);
-                   this.tableC.addView(tableRowForTableC);
-
-
-                   final int finalK = k;
-                   tableRowForTableC.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
+                    }
+                });
 
-                           String articleOption1 = styleColorBeanList.get(finalK).getArticleOption();
+                salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
+                sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
+                fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
 
-                           if(articleOption1.equals(articleOption))
-                           {
-                               SwitchingTabActivity.viewPager.setCurrentItem(0);
-                               SwitchingTabActivity.tabLayout.getTabAt(0).select();
+                TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
+                taleRowForTableD.setBackgroundColor(Color.LTGRAY);
+                this.tableD.addView(taleRowForTableD);
 
-                           }else
-                           {
-                               Reusable_Functions.sDialog(context, "Loading data...");
-                               requestStyleDetailsAPI(context, articleOption1);
-                           }
+                TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
+                tableRowForTableC1.setBackgroundColor(Color.WHITE);
+                this.tableC.addView(tableRowForTableC1);
 
+                TableRow taleRowForTableD1 = this.taleRowForTableDtotal();
+                taleRowForTableD1.setBackgroundColor(Color.parseColor("#B73020"));
+                this.tableD.addView(taleRowForTableD1);
 
-                       }
-                   });
+                salesUnitTotal = 0;
+                sohTotal = 0;
+                fwdweekTotal = 0;
 
-                   TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
-                   taleRowForTableD.setBackgroundColor(Color.LTGRAY);
-                   this.tableD.addView(taleRowForTableD);
 
-                   salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
-                   sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
-                   fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
-
-               }else if (k>=1)
-               {    //If current color equal to previous color & last entry in array, then add the row & total row
-                   if(styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k-1).getColor().trim()) && k==styleColorBeanList.size()-1)
-                   {
-                       Log.e("same color k=",k+"size"+styleColorBeanList.size());
-                       //TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                        TableRow tableRowForTableC = this.tableRowForTableC("");
-                        tableRowForTableC.setBackgroundColor(Color.WHITE);
-                        this.tableC.addView(tableRowForTableC);
-
-                       TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
-                       taleRowForTableD.setBackgroundColor(Color.LTGRAY);
-                       this.tableD.addView(taleRowForTableD);
-
-                       salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
-                       sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
-                       fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
-
-
-                       TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-                       tableRowForTableC1.setBackgroundColor(Color.WHITE);
-                       this.tableC.addView(tableRowForTableC1);
-
-                       TableRow taleRowForTableD2 = this.taleRowForTableDtotal();
-                       taleRowForTableD2.setBackgroundColor(Color.parseColor("#B73020"));
-                       this.tableD.addView(taleRowForTableD2);
-
-                       salesUnitTotal=0;
-                       sohTotal=0;
-                       fwdweekTotal=0;
-                   }
-                   //If current color not equal to previous color & last entry in array, then add total for previous, current row & total for current row
-                   else if(!styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k-1).getColor().trim()) && k==styleColorBeanList.size()-1)
-                   {
-                       TableRow tableRowForTableC = this.tableRowForTableCSpace();
-                       tableRowForTableC.setBackgroundColor(Color.WHITE);
-                       this.tableC.addView(tableRowForTableC);
-
-                       TableRow tableRowForTableD = this.taleRowForTableDtotal();
-                       tableRowForTableD.setBackgroundColor(Color.parseColor("#B73020"));
-                       this.tableD.addView(tableRowForTableD);
-
-                       salesUnitTotal=0;
-                       sohTotal=0;
-                       fwdweekTotal=0;
-
-                       TableRow tableRowForTableC1 = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                       //TableRow tableRowForTableC = this.tableRowForTableC("");
-                       tableRowForTableC1.setBackgroundColor(Color.WHITE);
-                       this.tableC.addView(tableRowForTableC1);
-
-                       final int finalK = k;
-                       tableRowForTableC1.setOnClickListener(new View.OnClickListener() {
-                           @Override
-                           public void onClick(View v) {
-
-                               String articleOption1 = styleColorBeanList.get(finalK).getArticleOption();
-
-                               if(articleOption1.equals(articleOption))
-                               {
-                                   SwitchingTabActivity.viewPager.setCurrentItem(0);
-                                   SwitchingTabActivity.tabLayout.getTabAt(0).select();
-
-                               }else
-                               {
-                                   Reusable_Functions.sDialog(context, "Loading data...");
-                                   requestStyleDetailsAPI(context, articleOption1);
-                               }
-
-
-                           }
-                       });
-
-                       TableRow tableRowForTableD1 = this.taleRowForTableD(styleColorBeanList.get(k));
-                       tableRowForTableD1.setBackgroundColor(Color.LTGRAY);
-                       this.tableD.addView(tableRowForTableD1);
-
-                       salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
-                       sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
-                       fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
-
-
-                       TableRow tableRowForTableC2 = this.tableRowForTableCSpace();
-                       tableRowForTableC2.setBackgroundColor(Color.WHITE);
-                       this.tableC.addView(tableRowForTableC2);
-
-                       TableRow tableRowForTableD2 = this.taleRowForTableDtotal();
-                       tableRowForTableD2.setBackgroundColor(Color.parseColor("#B73020"));
-                       this.tableD.addView(tableRowForTableD2);
-
-                       salesUnitTotal=0;
-                       sohTotal=0;
-                       fwdweekTotal=0;
-                   }
-                   //If current color equal to previous color & last entry in array, then add the row
-                   else if (styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k-1).getColor().trim()))
-                   {
-                       Log.e("same color k less than size k=",k+"size"+styleColorBeanList.size());
-                       //TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                       TableRow tableRowForTableC = this.tableRowForTableC("");
-                       tableRowForTableC.setBackgroundColor(Color.WHITE);
-                       this.tableC.addView(tableRowForTableC);
-
-                       TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
-                       taleRowForTableD.setBackgroundColor(Color.LTGRAY);
-                       this.tableD.addView(taleRowForTableD);
-
-                       salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
-                       sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
-                       fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
-
-
-                   }
-                   //If current color not equal to previous color, then add total row & current row
-                   else if (!styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k-1).getColor().trim()))
-                   {
-                       Log.e("else loop add to table k=",k+"size"+styleColorBeanList.size());
-
-                       TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-                       tableRowForTableC1.setBackgroundColor(Color.WHITE);
-                       this.tableC.addView(tableRowForTableC1);
-
-
-                       TableRow taleRowForTableD = this.taleRowForTableDtotal();
-                       taleRowForTableD.setBackgroundColor(Color.parseColor("#B73020"));
-                       this.tableD.addView(taleRowForTableD);
-
-                       salesUnitTotal=0;
-                       sohTotal=0;
-                       fwdweekTotal=0;
-
-                       TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                       //TableRow tableRowForTableC = this.tableRowForTableC("");
-                       tableRowForTableC.setBackgroundColor(Color.WHITE);
-                       this.tableC.addView(tableRowForTableC);
-
-
-                       final int finalK = k;
-                       tableRowForTableC.setOnClickListener(new View.OnClickListener() {
-                           @Override
-                           public void onClick(View v) {
-
-                               String articleOption1 = styleColorBeanList.get(finalK).getArticleOption();
-
-                               if(articleOption1.equals(articleOption))
-                               {
-                                   SwitchingTabActivity.viewPager.setCurrentItem(0);
-                                   SwitchingTabActivity.tabLayout.getTabAt(0).select();
-
-                               }else
-                               {
-                                   Reusable_Functions.sDialog(context, "Loading data...");
-                                   requestStyleDetailsAPI(context, articleOption1);
-                               }
-
-
-                           }
-                       });
-
-                       TableRow tableRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
-                       tableRowForTableD.setBackgroundColor(Color.LTGRAY);
-                       this.tableD.addView(tableRowForTableD);
-
-                       salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
-                       sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
-                       fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
-                   }
-               }
-
- //           if(styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k+1).getColor().trim()))
+            } else if (k == 0 && styleColorBeanList.size() > 1) {
+                TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
+                tableRowForTableC.setBackgroundColor(Color.WHITE);
+                this.tableC.addView(tableRowForTableC);
+
+
+                final int finalK = k;
+                tableRowForTableC.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String articleOption1 = styleColorBeanList.get(finalK).getArticleOption();
+
+                        if (articleOption1.equals(articleOption)) {
+                            SwitchingTabActivity.viewPager.setCurrentItem(0);
+                            SwitchingTabActivity.tabLayout.getTabAt(0).select();
+
+                        } else {
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            requestStyleDetailsAPI(context, articleOption1);
+                        }
+
+                    }
+                });
+
+                TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
+                taleRowForTableD.setBackgroundColor(Color.LTGRAY);
+                this.tableD.addView(taleRowForTableD);
+
+                salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
+                sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
+                fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
+
+            } else if (k >= 1) {    //If current color equal to previous color & last entry in array, then add the row & total row
+                if (styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim()) && k == styleColorBeanList.size() - 1) {
+                    Log.e("same color k=", k + "size" + styleColorBeanList.size());
+
+                    TableRow tableRowForTableC = this.tableRowForTableC("");
+                    tableRowForTableC.setBackgroundColor(Color.WHITE);
+                    this.tableC.addView(tableRowForTableC);
+
+                    TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
+                    taleRowForTableD.setBackgroundColor(Color.LTGRAY);
+                    this.tableD.addView(taleRowForTableD);
+
+                    salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
+                    sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
+                    fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
+
+
+                    TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
+                    tableRowForTableC1.setBackgroundColor(Color.WHITE);
+                    this.tableC.addView(tableRowForTableC1);
+
+                    TableRow taleRowForTableD2 = this.taleRowForTableDtotal();
+                    taleRowForTableD2.setBackgroundColor(Color.parseColor("#B73020"));
+                    this.tableD.addView(taleRowForTableD2);
+
+                    salesUnitTotal = 0;
+                    sohTotal = 0;
+                    fwdweekTotal = 0;
+                }
+                //If current color not equal to previous color & last entry in array, then add total for previous, current row & total for current row
+                else if (!styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim()) && k == styleColorBeanList.size() - 1) {
+                    TableRow tableRowForTableC = this.tableRowForTableCSpace();
+                    tableRowForTableC.setBackgroundColor(Color.WHITE);
+                    this.tableC.addView(tableRowForTableC);
+
+                    TableRow tableRowForTableD = this.taleRowForTableDtotal();
+                    tableRowForTableD.setBackgroundColor(Color.parseColor("#B73020"));
+                    this.tableD.addView(tableRowForTableD);
+
+                    salesUnitTotal = 0;
+                    sohTotal = 0;
+                    fwdweekTotal = 0;
+
+                    TableRow tableRowForTableC1 = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
+                    //TableRow tableRowForTableC = this.tableRowForTableC("");
+                    tableRowForTableC1.setBackgroundColor(Color.WHITE);
+                    this.tableC.addView(tableRowForTableC1);
+
+                    final int finalK = k;
+                    tableRowForTableC1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            String articleOption1 = styleColorBeanList.get(finalK).getArticleOption();
+
+                            if (articleOption1.equals(articleOption)) {
+                                SwitchingTabActivity.viewPager.setCurrentItem(0);
+                                SwitchingTabActivity.tabLayout.getTabAt(0).select();
+
+                            } else {
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                requestStyleDetailsAPI(context, articleOption1);
+                            }
+
+
+                        }
+                    });
+
+                    TableRow tableRowForTableD1 = this.taleRowForTableD(styleColorBeanList.get(k));
+                    tableRowForTableD1.setBackgroundColor(Color.LTGRAY);
+                    this.tableD.addView(tableRowForTableD1);
+
+                    salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
+                    sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
+                    fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
+
+
+                    TableRow tableRowForTableC2 = this.tableRowForTableCSpace();
+                    tableRowForTableC2.setBackgroundColor(Color.WHITE);
+                    this.tableC.addView(tableRowForTableC2);
+
+                    TableRow tableRowForTableD2 = this.taleRowForTableDtotal();
+                    tableRowForTableD2.setBackgroundColor(Color.parseColor("#B73020"));
+                    this.tableD.addView(tableRowForTableD2);
+
+                    salesUnitTotal = 0;
+                    sohTotal = 0;
+                    fwdweekTotal = 0;
+                }
+                //If current color equal to previous color & last entry in array, then add the row
+                else if (styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim())) {
+                    Log.e("same color k less than size k=", k + "size" + styleColorBeanList.size());
+                    //TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
+                    TableRow tableRowForTableC = this.tableRowForTableC("");
+                    tableRowForTableC.setBackgroundColor(Color.WHITE);
+                    this.tableC.addView(tableRowForTableC);
+
+                    TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
+                    taleRowForTableD.setBackgroundColor(Color.LTGRAY);
+                    this.tableD.addView(taleRowForTableD);
+
+                    salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
+                    sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
+                    fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
+
+
+                }
+                //If current color not equal to previous color, then add total row & current row
+                else if (!styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim())) {
+                    Log.e("else loop add to table k=", k + "size" + styleColorBeanList.size());
+
+                    TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
+                    tableRowForTableC1.setBackgroundColor(Color.WHITE);
+                    this.tableC.addView(tableRowForTableC1);
+
+
+                    TableRow taleRowForTableD = this.taleRowForTableDtotal();
+                    taleRowForTableD.setBackgroundColor(Color.parseColor("#B73020"));
+                    this.tableD.addView(taleRowForTableD);
+
+                    salesUnitTotal = 0;
+                    sohTotal = 0;
+                    fwdweekTotal = 0;
+
+                    TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
+                    //TableRow tableRowForTableC = this.tableRowForTableC("");
+                    tableRowForTableC.setBackgroundColor(Color.WHITE);
+                    this.tableC.addView(tableRowForTableC);
+
+
+                    final int finalK = k;
+                    tableRowForTableC.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            String articleOption1 = styleColorBeanList.get(finalK).getArticleOption();
+
+                            if (articleOption1.equals(articleOption)) {
+                                SwitchingTabActivity.viewPager.setCurrentItem(0);
+                                SwitchingTabActivity.tabLayout.getTabAt(0).select();
+
+                            } else {
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                requestStyleDetailsAPI(context, articleOption1);
+                            }
+                        }
+                    });
+
+                    TableRow tableRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
+                    tableRowForTableD.setBackgroundColor(Color.LTGRAY);
+                    this.tableD.addView(tableRowForTableD);
+
+                    salesUnitTotal = salesUnitTotal + styleColorBeanList.get(k).getTwSaleTotQty();
+                    sohTotal = sohTotal + styleColorBeanList.get(k).getStkOnhandQty();
+                    fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
+                }
+            }
+
+            //           if(styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k+1).getColor().trim()))
 //            {
 //                TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
 //                tableRowForTableC.setBackgroundColor(Color.WHITE);
@@ -915,8 +760,7 @@ public class Style_Fragment extends Fragment {
 
     }
 
-    private TableRow tableRowForTableCSpace()
-    {
+    private TableRow tableRowForTableCSpace() {
         TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
         params.setMargins(0, 2, 0, 0);
 
@@ -929,13 +773,11 @@ public class Style_Fragment extends Fragment {
         return tableRowForTableC;
     }
 
-
     TableRow tableRowForTableC(String styleDetails) {
-
         TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
         params.setMargins(0, 2, 0, 0);
 
-     Log.e("style color ",styleDetails);
+        Log.e("style color ", styleDetails);
         TableRow tableRowForTableC = new TableRow(this.context);
 //        TextView textView = this.bodyTextView(sampleObject.header1);
         TextView textView = this.bodyTextView(styleDetails);
@@ -944,7 +786,6 @@ public class Style_Fragment extends Fragment {
         return tableRowForTableC;
 
     }
-
 
 
 //    TableRow tableRowForTableC(SampleObject sampleObject) {
@@ -989,15 +830,13 @@ public class Style_Fragment extends Fragment {
 //    }
 
 
-
-
     TableRow taleRowForTableDtotal() {
 
         TableRow taleRowForTableD = new TableRow(this.context);
 
         int loopCount = ((TableRow) this.tableB.getChildAt(0)).getChildCount();
-       // String info[] = { "   Total   ", String.valueOf(salesUnitTotal), String.valueOf(sohTotal), String.valueOf(fwdweekTotal)};
-        String info[] = { "   Total   ", String.valueOf(salesUnitTotal), String.valueOf(sohTotal), "-"};
+        // String info[] = { "   Total   ", String.valueOf(salesUnitTotal), String.valueOf(sohTotal), String.valueOf(fwdweekTotal)};
+        String info[] = {"   Total   ", String.valueOf(salesUnitTotal), String.valueOf(sohTotal), "-"};
         for (int x = 0; x < loopCount; x++) {
             TableRow.LayoutParams params = new TableRow.LayoutParams(headerCellsWidth[x + 1], TableRow.LayoutParams.MATCH_PARENT);
             params.setMargins(2, 2, 0, 0);
@@ -1006,14 +845,15 @@ public class Style_Fragment extends Fragment {
             textViewB.setBackgroundColor(Color.parseColor("#B73020"));
             taleRowForTableD.addView(textViewB, params);
             textViewB.setTextColor(Color.parseColor("#ffffff"));
-            salesUnitTotal=0;sohTotal=0;fwdweekTotal=0;
+            salesUnitTotal = 0;
+            sohTotal = 0;
+            fwdweekTotal = 0;
 
         }
 
         return taleRowForTableD;
 
     }
-
 
 
     TableRow taleRowForTableD(StyleColorBean styleColor) {
@@ -1025,7 +865,7 @@ public class Style_Fragment extends Fragment {
                 styleColor.getSize(),
                 String.valueOf(styleColor.getTwSaleTotQty()),
                 String.valueOf(styleColor.getStkOnhandQty()),
-                String.valueOf(String.format("%.1f",styleColor.getFwdWeekCover()))
+                String.valueOf(String.format("%.1f", styleColor.getFwdWeekCover()))
 
         };
 
@@ -1040,6 +880,7 @@ public class Style_Fragment extends Fragment {
         return taleRowForTableD;
 
     }
+
     // table cell standard TextView
     TextView bodyTextView(String label) {
 
@@ -1085,7 +926,6 @@ public class Style_Fragment extends Fragment {
 
         int tableAChildCount = ((TableRow) this.tableA.getChildAt(0)).getChildCount();
         int tableBChildCount = ((TableRow) this.tableB.getChildAt(0)).getChildCount();
-        ;
 
         for (int x = 0; x < (tableAChildCount + tableBChildCount); x++) {
 
@@ -1223,34 +1063,26 @@ public class Style_Fragment extends Fragment {
     }
 
 
-    private void requestStyleDetailsAPI(final Context context, String articleOption)
-    {
-        String url = ConstsCore.web_url + "/v1/display/productdetails/"+userId+"?articleOption="+articleOption.replaceAll(" ", "%20").replaceAll("&","%26");
+    private void requestStyleDetailsAPI(final Context context, String articleOption) {
+        String url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26");
 
 
-        Log.i("URL style  ", ""+url);
+        Log.i("URL style  ", "" + url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.i("Style details :   ", response.toString());
-                        try
-                        {
+                        try {
 
-                            if (response.equals(null) || response ==null||response.length()==0)
-                            {
+                            if (response.equals(null) || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context,"No data found",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
 
-                            }else {
+                            } else {
 
                                 Reusable_Functions.hDialog();
-
-                                // JSONObject mainObject = new JSONObject(response);
-
                                 JSONObject styleDetails = response.getJSONObject(0);
 
                                 String articleOption = styleDetails.getString("articleOption");
@@ -1316,41 +1148,36 @@ public class Style_Fragment extends Fragment {
 
                                 Intent i = getActivity().getIntent();
                                 Intent intent = new Intent(context, SwitchingTabActivity.class);
-                                intent.putExtra("articleCode",articleCode);
-                                intent.putExtra("articleOption",articleOption);
+                                intent.putExtra("articleCode", articleCode);
+                                intent.putExtra("articleOption", articleOption);
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 intent.putExtra("selCollectionname", i.getExtras().getString("selCollectionname"));
                                 intent.putExtra("selOptionName", i.getExtras().getString("selOptionName"));
                                 startActivity(intent);
                                 SwitchingTabActivity.switchingTabActivity.finish();
                             }
-                        }
-                        catch(Exception e)
-                        {
-                            Log.e("Exception e",e.toString() +"");
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
+                    public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e("",""+error.networkResponse+"");
-                        Toast.makeText(context,"Network connectivity fail",Toast.LENGTH_LONG).show();
+                        Log.e("", "" + error.networkResponse + "");
+                        Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
 
-        ){
+        ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer "+bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };
@@ -1358,8 +1185,6 @@ public class Style_Fragment extends Fragment {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
-
 
     }
 }

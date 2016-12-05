@@ -211,11 +211,87 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp">
 
-                <com.github.mikephil.charting.charts.CombinedChart
+                <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/barline_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp" />
+                    android:layout_height="200dp" />
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llpvahierarchy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtpvahDeptName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+
+                <!--<TextView-->
+                    <!--android:id="@+id/txtpvahDeptNameNext"-->
+                    <!--android:layout_width="5dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/txtpvahCategory"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/txtpvahCategoryNext"-->
+                    <!--android:layout_width="5dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/txtpvahPlanClass"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/txtpvahPlanClassNext"-->
+                    <!--android:layout_width="5dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/txtpvahBrand"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="12sp" />-->
+
+                <!--<TextView-->
+                <!--android:layout_width="10dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:text=">"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="12sp" />-->
+
+
+            </LinearLayout>
+
+
 
             <RelativeLayout
                 android:id="@+id/relTablelayout"
@@ -235,7 +311,6 @@
                         android:background="@color/bg_salescard">
 
 
-
                         <RelativeLayout
                             android:layout_toLeftOf="@+id/txtPlanSales"
                             android:layout_marginRight="10dp"
@@ -250,15 +325,12 @@
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="5dp"
-                                    android:layout_height="11dp"
+                                    android:layout_width="8dp"
+                                    android:layout_height="17dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/arrow_left_icon"
                                     android:clickable="false" />
                             </RelativeLayout>
-
-
-
 
 
                             <TextView
@@ -281,8 +353,8 @@
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="5dp"
-                                    android:layout_height="11dp"
+                                    android:layout_width="8dp"
+                                    android:layout_height="17dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/arrow_right_icon"
                                     android:clickable="false" />
@@ -290,19 +362,15 @@
 
                         </RelativeLayout>
 
-
-
-
-
                         <TextView
                             android:textStyle="bold"
                             android:id="@+id/txtPlanSales"
-                            android:layout_width="60dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginRight="170dp"
+                            android:layout_marginRight="190dp"
                             android:layout_toLeftOf="@+id/txtNetSales"
                             android:gravity="center_vertical|center"
                             android:text="Plan Sales"
@@ -312,11 +380,11 @@
 
                         <TextView
                             android:id="@+id/txtNetSales"
-                            android:layout_width="60dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="95dp"
+                            android:layout_marginRight="120dp"
                             android:layout_toLeftOf="@+id/rel"
                             android:gravity="center_vertical|center"
                             android:text="Net Sales"
@@ -327,12 +395,12 @@
 
                         <TextView
                             android:id="@+id/rel"
-                            android:layout_width="95dp"
+                            android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:gravity="center_vertical|center"
-                            android:text="PvA Sales %"
+                            android:text="PvA Sales%"
                             android:textColor="@android:color/black"
                             android:textSize="12sp"
                             android:textStyle="bold"/>
@@ -346,12 +414,13 @@
                         android:background="@color/bg_salescard">
 
                         <EditText
+                            android:editable="false"
                             android:padding="2dp"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="245dp"
+                            android:layout_marginRight="260dp"
                             android:layout_toLeftOf="@+id/edt_plansales"
                             android:background="@drawable/border"
                             android:gravity="center_vertical"
@@ -359,33 +428,35 @@
 
 
                         <EditText
+                            android:editable="false"
                             android:paddingRight="2dp"
                             android:id="@+id/edt_plansales"
-                            android:layout_width="80dp"
+                            android:layout_width="70dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="163dp"
+                            android:layout_marginRight="190dp"
                             android:layout_toLeftOf="@+id/edt_netsales"
                             android:background="@drawable/border"
                             android:gravity="center_vertical" />
 
 
                         <EditText
-
+                            android:editable="false"
                             android:id="@+id/edt_netsales"
-                            android:layout_width="80dp"
+                            android:layout_width="70dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="82dp"
+                            android:layout_marginRight="120dp"
                             android:layout_toLeftOf="@+id/edt_pvaSales"
                             android:background="@drawable/border"
                             android:textColor="@android:color/black" />
 
                         <EditText
+                            android:editable="false"
                             android:id="@+id/edt_pvaSales"
-                            android:layout_width="80dp"
+                            android:layout_width="120dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"

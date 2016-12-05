@@ -1,16 +1,12 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
-/**
- * Created by ifattehkhan on 27/08/16.
- */
-public class StyleColorBean
-{
-    String color,size;
-    int twSaleTotQty,stkOnhandQty;
+
+ class StyleColorBean {
+    String color, size;
+    int twSaleTotQty, stkOnhandQty;
     double fwdWeekCover;
 
-    //harshada
-    String articleCode,articleOption;
+    String articleCode, articleOption;
 
     public String getSize() {
         return size;
@@ -52,16 +48,19 @@ public class StyleColorBean
         this.color = color;
     }
 
-    public String getArticleCode(){ return articleCode;}
+    public String getArticleCode() {
+        return articleCode;
+    }
 
-    public void setArticleCode(String articleCode)
-    {
+    public void setArticleCode(String articleCode) {
         this.articleCode = articleCode;
     }
 
-    public String getArticleOption(){return articleOption;}
+    public String getArticleOption() {
+        return articleOption;
+    }
 
-    public void setArticleOption(String articleOption){
+    public void setArticleOption(String articleOption) {
         this.articleOption = articleOption;
     }
 

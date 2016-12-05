@@ -1,17 +1,11 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
-/**
- * Created by hasai on 17/11/15.
- */
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-/**
- * ScrollViewの中のGridViewでも高さを可変にする<br>
- * http://stackoverflow.com/questions/8481844/gridview-height-gets-cut
- */
 
 public class ExpandableHeightGridView extends GridView {
 

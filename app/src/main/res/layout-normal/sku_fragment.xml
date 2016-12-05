@@ -23,7 +23,7 @@
                 android:id="@+id/tstoreCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Store : "
+                android:text="@string/store"
                 android:textColor="#920609"
                 android:textSize="14sp" />
 
@@ -66,7 +66,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_Sku_article_Option_Name"
                 android:layout_marginTop="10dp"
-                android:text="* All numbers in units" />
+                android:text="@string/number_in_units" />
+
 
 
         </RelativeLayout>

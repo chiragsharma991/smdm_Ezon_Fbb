@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint="storename"
-                    android:layout_marginRight="20dp"
+
                     android:textColor="#000000"
                     android:textSize="14sp"/>
 
@@ -69,7 +69,7 @@
                 <TextView
                     android:id="@+id/txtnounits"
                     android:layout_marginTop="7dp"
-                    android:text="* All numbers in units"
+                    android:text="@string/number_in_units"
                     android:layout_below="@+id/txtArticleName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

@@ -2,9 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.model;
 
 import org.json.JSONObject;
 
-/**
- * Created by hasai on 27/09/16.
- */
+
 public class VisualAssortComment extends JSONObject {
 
     private String articleOption;
@@ -14,8 +12,7 @@ public class VisualAssortComment extends JSONObject {
     private String userId;
     private String modifiedDate;
 
-    public void setArticleOption(String articleOption)
-    {
+    public void setArticleOption(String articleOption) {
         this.articleOption = articleOption;
     }
 

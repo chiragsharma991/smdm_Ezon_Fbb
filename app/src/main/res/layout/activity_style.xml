@@ -173,7 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:layout_marginTop="30dp"
                 android:textColor="#ffffff"
                 android:background="#B73020" />
@@ -201,7 +201,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/search_or"/>
+                    android:src="@mipmap/search_or"
+                    tools:ignore="ContentDescription" />
 
                 <RelativeLayout
                     android:layout_toRightOf="@+id/imgor"
@@ -222,7 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:text="Scan Barcode"
+                android:text="@string/scan_barcode"
                 android:layout_marginTop="30dp"
                 android:textColor="#ffffff"
                 android:background="#B73020"
@@ -269,7 +270,7 @@
             android:background="@android:color/transparent"
             android:drawablePadding="5dp"
             android:drawableLeft="@mipmap/key_product_search_icon"
-            android:singleLine="true"
+            android:maxLines="1"
             android:hint="Search"
             android:imeOptions="actionSearch"
             android:id="@+id/searchCollection"
@@ -323,7 +324,7 @@
             android:background="@android:color/transparent"
             android:drawablePadding="5dp"
             android:drawableLeft="@mipmap/key_product_search_icon"
-            android:singleLine="true"
+            android:maxLines="1"
             android:hint="Search"
             android:imeOptions="actionSearch"
             android:id="@+id/searchOption"

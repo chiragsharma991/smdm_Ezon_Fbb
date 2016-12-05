@@ -1,0 +1,179 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <!--Name-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:padding="2dp"
+            android:id="@+id/relative1"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="255dp"
+            android:layout_marginLeft="3dp"
+            android:layout_toLeftOf="@+id/relative2"
+            android:gravity="center_vertical|start"
+
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="name"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:id="@+id/txtPromoExpName"
+
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+
+        <!--startDate-->
+
+        <RelativeLayout
+            android:paddingRight="2dp"
+            android:id="@+id/relative2"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="178dp"
+            android:layout_toLeftOf="@+id/relative3"
+            android:gravity="center_vertical"
+
+
+
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:gravity="center"
+                android:text="02/09/93"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:id="@+id/txtstartExpDate"
+
+                />
+
+
+
+        </RelativeLayout>
+
+
+
+
+        <!--EndDate-->
+
+        <RelativeLayout
+            android:id="@+id/relative3"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="102dp"
+            android:layout_toLeftOf="@+id/relative4"
+            android:gravity="center_vertical"
+
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="02/09/93"
+                android:id="@+id/txtEndExpDate"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+        <!--Days-->
+
+        <RelativeLayout
+            android:id="@+id/relative4"
+            android:layout_width="48dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="52dp"
+            android:layout_toLeftOf="@+id/relative5"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="02"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:id="@+id/txtExpDays"
+                android:textSize="12sp"
+                />
+
+
+
+
+        </RelativeLayout>
+
+        <!--VM-->
+
+        <RelativeLayout
+            android:id="@+id/relative5"
+            android:layout_width="48dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="3dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/imgExpVm"
+                android:src="@mipmap/filter_planclass_icon"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
+
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

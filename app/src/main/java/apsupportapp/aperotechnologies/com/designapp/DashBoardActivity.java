@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -38,9 +39,20 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
+import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
+import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
+import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
+import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
+import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
+import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -54,11 +66,22 @@ import java.util.TimerTask;
 
 
 public class DashBoardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
-    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment , imgBtnPvaAnalysis;
+    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment;
+    ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo;
+    ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,btnSkewedSize,btnCutSize,BtnBestInventory;
+    LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory;
+    TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt;
+
     //ExpandableHeightGridView style_grid;
     EventAdapter eventAdapter;
+    String hrflash="NO";
+    String pdInfo="NO";
+    String vsAssort="NO";
+    String sAles="NO";
+    String pmAnalysis="NO";
+    String inVENtory="NO";
     RequestQueue queue;
     boolean flag=true;
     String userId, bearertoken;
@@ -147,6 +170,114 @@ public class DashBoardActivity extends AppCompatActivity
             Toast.makeText(DashBoardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
+        BtnOnlyWorstpromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this, WorstPerformerActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+
+        BtnBestInventory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this, BestPerformerInventory.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+
+        btnSkewedSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this, SkewedSizesActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+        btnCutSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this, TopFullCut.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+
+
+        BtnBestWorstpromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DashBoardActivity.this, BestPerformerActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+
+        BtnExpiringpromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DashBoardActivity.this, ExpiringPromoActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+
+        BtnUpcomingpromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DashBoardActivity.this, UpcomingPromo.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+
+
+        imgBtnRunningPromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DashBoardActivity.this, RunningPromoActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+
+
+
+
 
         imageBtnStyle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,18 +324,18 @@ public class DashBoardActivity extends AppCompatActivity
             }
         });
 
-       imgBtnPvaAnalysis.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(DashBoardActivity.this,SalesPvAActivity.class);
-               startActivity(intent);
-               if(timer != null)
-               {
-                   timer.cancel();
-               }
-               finish();
-           }
-       });
+        imgBtnPvaAnalysis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,SalesPvAActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
 
         imgBtnVisualAssortment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,6 +350,33 @@ public class DashBoardActivity extends AppCompatActivity
                 finish();
             }
         });
+        btnFeshnessindex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,FreshnessIndexActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
+        btnOptionEfficiency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,OptionEfficiencyActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
+
 
     }
 
@@ -245,7 +403,7 @@ public class DashBoardActivity extends AppCompatActivity
                                 {
                                     JSONObject jsonOject = response.getJSONObject(i);
                                     String imageURL = jsonOject.getString("imageName");
-                                   // Log.e("imageURL", "\"+""+imageURL+""+\"");
+                                    // Log.e("imageURL", "\"+""+imageURL+""+\"");
                                     eventUrlList.add(imageURL);
 
                                 }
@@ -292,15 +450,57 @@ public class DashBoardActivity extends AppCompatActivity
 
 
 
-}
+    }
 
 
     private void initializeUI() {
+
+
+        hourlyFlashTxt=(TextView)findViewById(R.id.headersmdm);
+        productInfoTxt=(TextView)findViewById(R.id.productinfo);
+        visualAssortTxt=(TextView)findViewById(R.id.visualAssort);
+        salesTxt=(TextView)findViewById(R.id.headersales);
+        promoAnalysisTxt=(TextView)findViewById(R.id.headerpromo);
+        inventoryTxt=(TextView)findViewById(R.id.headerinvent);
+
+        hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+        productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+        visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+        salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+        promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+        inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+
+        hourlyFlashTxt.setOnClickListener(this);
+        productInfoTxt.setOnClickListener(this);
+        visualAssortTxt.setOnClickListener(this);
+        salesTxt.setOnClickListener(this);
+        promoAnalysisTxt.setOnClickListener(this);
+        inventoryTxt.setOnClickListener(this);
+
+
+
+        hourlyFlash=(LinearLayout)findViewById(R.id.lin1);
+        productInfo=(LinearLayout)findViewById(R.id.lineartwo);
+        visualAssort=(LinearLayout)findViewById(R.id.linearthree);
+        sales=(LinearLayout)findViewById(R.id.lin2);
+        promoAnalysis=(LinearLayout)findViewById(R.id.lin3);
+        inventory=(LinearLayout)findViewById(R.id.lin4);
+
         imageBtnStyle=(ImageButton)findViewById(R.id.imageBtnStyle);
         imageBtnKeyProducts=(ImageButton)findViewById(R.id.imageBtnKeyProducts);
         imgBtnSales = (ImageButton) findViewById(R.id.btnSales);
         imgBtnVisualAssortment = (ImageButton) findViewById(R.id.btnVisualAssortment);
         imgBtnPvaAnalysis = (ImageButton) findViewById(R.id.btnPVA);
+        imgBtnRunningPromo=(ImageButton)findViewById(R.id.btnRunningpromo);
+        BtnUpcomingpromo=(ImageButton)findViewById(R.id.btnUpcomingpromo);
+        BtnExpiringpromo=(ImageButton)findViewById(R.id.btnExpiringpromo);
+        BtnBestWorstpromo=(ImageButton)findViewById(R.id.btnBestWorstpromo);
+        BtnOnlyWorstpromo=(ImageButton)findViewById(R.id.btnOnlyWorstpromo);
+        btnFeshnessindex=(ImageButton)findViewById(R.id.btnFeshnessindex);
+        btnOptionEfficiency = (ImageButton)findViewById(R.id.btnOptionEfficiency);
+        btnCutSize = (ImageButton)findViewById(R.id.btnCutSize);
+        btnSkewedSize =(ImageButton)findViewById(R.id.btnSkewedSize);
+        BtnBestInventory =(ImageButton)findViewById(R.id.btnBestInventory);
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 
@@ -507,6 +707,120 @@ public class DashBoardActivity extends AppCompatActivity
     public void pageSwitcher(int seconds) {
         timer = new Timer(); // At this line a new Thread will be created
         timer.scheduleAtFixedRate(new RemindTask(), 0, seconds * 1000); // delay
+
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        Log.e("on click on ","log");
+
+        switch (v.getId())
+        {
+          /*  hourlyFlash=(LinearLayout)findViewById(R.id.lin1);
+            productInfo=(LinearLayout)findViewById(R.id.lineartwo);
+            visualAssort=(LinearLayout)findViewById(R.id.linearthree);
+            sales=(LinearLayout)findViewById(R.id.lin2);
+            promoAnalysis=(LinearLayout)findViewById(R.id.lin3);
+            inventory=(LinearLayout)findViewById(R.id.lin4);*/
+
+          /*  hourlyFlashTxt=(TextView)findViewById(R.id.headersmdm);
+            productInfoTxt=(TextView)findViewById(R.id.productinfo);
+            visualAssortTxt=(TextView)findViewById(R.id.visualAssort);
+            salesTxt=(TextView)findViewById(R.id.headersales);
+            promoAnalysisTxt=(TextView)findViewById(R.id.headerpromo);
+            inventoryTxt=(TextView)findViewById(R.id.headerinvent);
+*/
+
+            case R.id.headersmdm:
+                if(hrflash.equals("NO")){
+                    hourlyFlash.setVisibility(View.VISIBLE);
+                    hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+
+
+                    hrflash="YES";
+                }else
+                {
+                    hourlyFlash.setVisibility(View.GONE);
+                    hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+
+                    hrflash="NO";
+
+                }
+                break;
+
+            case R.id.productinfo:
+                if(pdInfo.equals("NO")){
+                    productInfo.setVisibility(View.VISIBLE);
+                    productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+
+                    pdInfo="YES";
+
+                }else
+                {
+                    productInfo.setVisibility(View.GONE);
+                    productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    pdInfo="NO";
+
+
+                }
+                break;
+
+            case R.id.visualAssort:
+                if(vsAssort.equals("NO")){
+                    visualAssort.setVisibility(View.VISIBLE);
+                    visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                    vsAssort="YES";
+
+                }else
+                {
+                    visualAssort.setVisibility(View.GONE);
+                    visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    vsAssort="NO";
+
+                } break;
+
+            case R.id.headersales:
+                if(sAles.equals("NO")){
+                    sales.setVisibility(View.VISIBLE);
+                    salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                    sAles="YES";
+                }else
+                {
+                    sales.setVisibility(View.GONE);
+                    salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    sAles="NO";
+
+                } break;
+
+            case R.id.headerpromo:
+                if(pmAnalysis.equals("NO")){
+                    promoAnalysis.setVisibility(View.VISIBLE);
+                    promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                    pmAnalysis="YES";
+                }else
+                {
+                    promoAnalysis.setVisibility(View.GONE);
+                    promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    pmAnalysis="NO";
+
+                } break;
+
+            case R.id.headerinvent:
+                if(inVENtory.equals("NO")){
+                    inventory.setVisibility(View.VISIBLE);
+                    inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                    inVENtory="YES";
+                }else
+                {
+                    inventory.setVisibility(View.GONE);
+                    inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    inVENtory="NO";
+
+
+                } break;
+        }
+
 
     }
 

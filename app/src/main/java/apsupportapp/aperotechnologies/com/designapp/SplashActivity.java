@@ -3,11 +3,11 @@ package apsupportapp.aperotechnologies.com.designapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -28,24 +28,23 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import apsupportapp.aperotechnologies.com.designapp.R;
 
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SplashActivity extends AppCompatActivity
-{
+public class SplashActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     ProgressBar progressbar;
     Context context;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
 
@@ -57,153 +56,107 @@ public class SplashActivity extends AppCompatActivity
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-       Log.e("---"," "+ getResources().getDisplayMetrics().density);
+        Log.e("---", " " + getResources().getDisplayMetrics().density);
 
-
-        if(sharedPreferences.getBoolean("log_flag",false) == true) {
-            if (Reusable_Functions.chkStatus(context))
-            {
+        if (sharedPreferences.getBoolean("log_flag", false) == true) {
+            if (Reusable_Functions.chkStatus(context)) {
                 if (progressbar != null) {
                     progressbar.setVisibility(View.VISIBLE);
                     progressbar.setIndeterminate(true);
                     progressbar.getIndeterminateDrawable().setColorFilter(0xFFFFFFFF, android.graphics.PorterDuff.Mode.MULTIPLY);
                 }
-            }
-            else
-            {
+            } else {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
             }
-
         }
-
-        Thread background = new Thread()
-        {
-            public void run()
-            {
-                try
-                {
+        Thread background = new Thread() {
+            public void run() {
+                try {
                     // Thread will sleep for 5 seconds
-                    sleep(3*1000);
-
-                    Log.e("chk"," "+(sharedPreferences.getBoolean("log_flag",false) == true));
-                    if(sharedPreferences.getBoolean("log_flag",false) == true)
-                    {
-
-                        if (Reusable_Functions.chkStatus(context))
-                        {
+                    sleep(3 * 1000);
+                    Log.e("chk", " " + (sharedPreferences.getBoolean("log_flag", false) == true));
+                    if (sharedPreferences.getBoolean("log_flag", false) == true) {
+                        if (Reusable_Functions.chkStatus(context)) {
                             requestLoginAPI();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                         }
-
-                    }
-                    else if(sharedPreferences.getBoolean("log_flag",false) == false)
-                    {
-                        Intent i = new Intent(SplashActivity.this,LoginActivity.class);
+                    } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
+                        Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(i);
-                        //progressbar.setVisibility(View.GONE);
                         finish();
                     }
-
-
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                 }
             }
         };
         // start thread
         background.start();
-
-
     }
 
-    private void requestLoginAPI()
-    {
+    private void requestLoginAPI() {
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = ConstsCore.web_url+"/v1/login";
-        final String username = sharedPreferences.getString("username","");
-        final String password = sharedPreferences.getString("password","");
-        final String auth_code = sharedPreferences.getString("authcode","");
+        String url = ConstsCore.web_url + "/v1/login";
+        final String username = sharedPreferences.getString("username", "");
+        final String password = sharedPreferences.getString("password", "");
+        final String auth_code = sharedPreferences.getString("authcode", "");
 
-        Log.e("auth---code "," --- "+username+" "+password+" "+auth_code);
+        Log.e("auth---code ", " --- " + username + " " + password + " " + auth_code);
 
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.i("Login   Response   ", response.toString());
-                        try
-                        {
-                            if(response == null || response.equals(null))
-                            {
+                        try {
+                            if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();
-
                             }
-
                             String bearerToken = response.getString("bearerToken");
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("bearerToken",bearerToken);
+                            editor.putString("bearerToken", bearerToken);
                             editor.apply();
                             Log.i("bearerToken   ", bearerToken);
-
-                            Intent i = new Intent(SplashActivity.this,DashBoardActivity.class);
-                            i.putExtra("from","splash");
+                            Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
+                            i.putExtra("from", "splash");
                             startActivity(i);
                             progressbar.setVisibility(View.GONE);
                             finish();
-
-
-
-                        }
-                        catch(Exception e)
-                        {
-                            Log.e("Exception e",e.toString() +"");
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                             Reusable_Functions.hDialog();
                         }
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
+                    public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
-
-        ){
+        ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
-                //String auth_code = "Basic " + Base64.encodeToString((uname+":"+password).getBytes(), Base64.NO_WRAP); //Base64.NO_WRAP flag
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Log.i("Auth Code", auth_code);
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", auth_code);
                 return params;
-
-
             }
         };
         int socketTimeout = 60000;//5 seconds
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
     }
 }

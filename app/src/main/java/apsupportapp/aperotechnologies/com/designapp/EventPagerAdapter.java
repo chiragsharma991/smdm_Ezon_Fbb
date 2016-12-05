@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by hasai on 15/03/16.
  */
+@SuppressWarnings("ALL")
 public class EventPagerAdapter extends PagerAdapter {
     // Declare Variables
     Context context;
@@ -93,9 +93,7 @@ public class EventPagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         // Remove viewpager_item.xml from ViewPager
         ((ViewPager) container).removeView((RelativeLayout) object);
-
     }
-
 
 
     private class PageListener extends ViewPager.SimpleOnPageChangeListener {

@@ -28,18 +28,29 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.CombinedData;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
+import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 
 
 public class SalesPvAAdapter extends BaseAdapter {
@@ -47,14 +58,16 @@ public class SalesPvAAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     String fromWhere;
-    int level ;
+    int level;
     int offsetvalue = 0, count = 0, limit = 100;
-    private ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList;
+    ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList;
     SalesAnalysisListDisplay salesAnalysisListDisplay;
+    SalesAnalysisViewPagerValue salesAnalysisViewPagerValue;
     SalesPvAAdapter salesPvAAdapter;
     ListView listViewSalesPvA;
-    Gson gson ;
-    static String planDept,planCategory,planClass,planBrandName;
+    Gson gson;
+    CombinedData pvaData;
+
 
     public SalesPvAAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList, Context context, String fromWhere, ListView listViewSalesPvA) {
         this.context = context;
@@ -84,6 +97,7 @@ public class SalesPvAAdapter extends BaseAdapter {
 
         return position;
     }
+
     static class ViewHolderItem {
         TextView txtPlanClass, txtPlanSales, txtNetSales, txtPvASales, txtPlan, txtAchieve;
         RelativeLayout rel;
@@ -117,83 +131,130 @@ public class SalesPvAAdapter extends BaseAdapter {
 
         SalesAnalysisListDisplay productNameBean = (SalesAnalysisListDisplay) salesAnalysisListDisplayArrayList.get(position);
 
-//        viewHolder.rel.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-//        Log.e("--- ", " " + viewHolder.rel.getMeasuredWidth() + " " + (200 / 100));
-//
-//        int singlePercVal = 200 / 100;//rel.getMeasuredWidth()/100;
-//
-//        int planVal = 100;//30
-//        //int achieveVal = salesAnalysisListDisplayArrayList.get(position).getDayNetSales();
-//
-//        int calplanVal = planVal * singlePercVal;
-//        //int calachieveVal = achieveVal * singlePercVal;
-//
-//        viewHolder.txtPlan.setWidth(calplanVal);
-//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(2, 18);
-//        //params.setMargins(calachieveVal, 0, 0, 0);
-//        viewHolder.txtAchieve.setLayoutParams(params);
-//
-////        if (planVal < achieveVal) {
-////            viewHolder.txtPlan.setBackgroundColor(Color.RED);
-////        } else {
-////            viewHolder.txtPlan.setBackgroundColor(Color.GREEN);
-////        }
         viewHolder.txtPlanClass.setTag(position);
         viewHolder.txtPlanSales.setTag(position);
         viewHolder.txtNetSales.setTag(position);
+        int planSaleVal = (int)productNameBean.getPlanSaleNetVal();
+        int netSaleVal = (int)productNameBean.getSaleNetVal();
 
-        if(fromWhere.equals("Department")) {
+        if (fromWhere.equals("Department")) {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanDept());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
+
+            viewHolder.txtPlanSales.setText("\u20B9\t" + NumberFormat.getNumberInstance().format(planSaleVal));
+            viewHolder.txtNetSales.setText("\u20B9\t" + NumberFormat.getNumberInstance().format(netSaleVal));
 
 
-        }
-        else if(fromWhere.equals("Category"))
-        {
+        } else if (fromWhere.equals("Category")) {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanCategory());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
+            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
 
 //
 //            viewHolder.txtValue.setText(productNameBean.getPlanCategory().toLowerCase());
 
-        }
-        else if(fromWhere.equals("Plan Class"))
-        {
+        } else if (fromWhere.equals("Plan Class")) {
 
-           viewHolder.txtPlanClass.setText(productNameBean.getPlanClass());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
-
-            //viewHolder.txtValue.setText(productNameBean.getPlanClass().toLowerCase());
-
-        }
-
-        else if(fromWhere.equals("Brand"))
-        {
-
-           viewHolder.txtPlanClass.setText(productNameBean.getBrandName());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
-
-            //viewHolder.txtValue.setText(productNameBean.getBrandName().toLowerCase());
-
-        }
-
-        else if(fromWhere.equals("Brand Plan Class"))
-        {
-
+            viewHolder.txtPlanClass.setText(productNameBean.getPlanClass());
+            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
+        } else if (fromWhere.equals("Brand")) {
+            viewHolder.txtPlanClass.setText(productNameBean.getBrandName());
+            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
+        } else if (fromWhere.equals("Brand Plan Class")) {
             viewHolder.txtPlanClass.setText(productNameBean.getBrandplanClass());
-            viewHolder.txtPlanSales.setText(" " + productNameBean.getPlanSaleNetVal());
-            viewHolder.txtNetSales.setText(" " + productNameBean.getSaleNetVal());
-
-            //viewHolder.txtValue.setText(productNameBean.getBrandplanClass().toLowerCase());
+            viewHolder.txtPlanSales.setText("\u20B9\t" + (int) productNameBean.getPlanSaleNetVal());
+            viewHolder.txtNetSales.setText("\u20B9\t" + (int) productNameBean.getSaleNetVal());
         }
 
-        double singlePercVal = 1;//50/100;// width divide by 100 perc
+        // update listview
+
+        SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisListDisplayArrayList.get(0);
+        Log.e("listv", "" + listViewSalesPvA.getFirstVisiblePosition());
+
+//        if (listViewSalesPvA.getFirstVisiblePosition() == 0) {
+//
+//            if (salesAnalysisClass.getPlanDept() != null) {
+//                if (salesAnalysisClass.getPlanDept().equals("All")) {
+//                    Log.e("-----", "All");
+//                    salesAnalysisClass.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
+//                    salesAnalysisClass.setPlanSaleNetVal((int) salesAnalysisViewPagerValue.getPlanSaleNetVal());
+//                    salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+//                    salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
+//                    salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
+//                    listViewSalesPvA.setAdapter(salesPvAAdapter);
+//                    salesPvAAdapter.notifyDataSetChanged();
+//
+//                }
+//
+//            }
+//
+//            if (salesAnalysisClass.getPlanCategory() != null) {
+//                if (salesAnalysisClass.getPlanCategory().equals("All")) {
+//                    Log.e("-----", "All");
+//                    salesAnalysisClass.setPvaAchieved(productNameBean.getPvaAchieved());
+//                    salesAnalysisClass.setPlanSaleNetVal((int) productNameBean.getPlanSaleNetVal());
+//                    salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+//                    salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
+//                    salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
+//                    listViewSalesPvA.setAdapter(salesPvAAdapter);
+//                    salesPvAAdapter.notifyDataSetChanged();
+//
+//
+//                }
+//
+//                if (salesAnalysisClass.getPlanClass() != null) {
+//                    if (salesAnalysisClass.getPlanClass().equals("All")) {
+//                        Log.e("-----", "All");
+//                        salesAnalysisClass.setPvaAchieved(productNameBean.getPvaAchieved());
+//                        salesAnalysisClass.setPlanSaleNetVal((int) productNameBean.getPlanSaleNetVal());
+//                        salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+//                        salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
+//                        salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
+//                        listViewSalesPvA.setAdapter(salesPvAAdapter);
+//                        salesPvAAdapter.notifyDataSetChanged();
+//
+//                    }
+//
+//                }
+//
+//                if (salesAnalysisClass.getBrandName() != null) {
+//                    if (salesAnalysisClass.getBrandName().equals("All")) {
+//                        Log.e("-----", "All");
+//                        salesAnalysisClass.setPvaAchieved(productNameBean.getPvaAchieved());
+//                        salesAnalysisClass.setPlanSaleNetVal((int) productNameBean.getPlanSaleNetVal());
+//                        salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+//                        salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
+//                        salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
+//                        listViewSalesPvA.setAdapter(salesPvAAdapter);
+//                        salesPvAAdapter.notifyDataSetChanged();
+//
+//                    }
+//
+//                }
+//
+//                if (salesAnalysisClass.getBrandplanClass() != null) {
+//                    if (salesAnalysisClass.getBrandplanClass().equals("All")) {
+//                        Log.e("-----", "All");
+//                        salesAnalysisClass.setPvaAchieved(productNameBean.getPvaAchieved());
+//                        salesAnalysisClass.setPlanSaleNetVal((int) productNameBean.getPlanSaleNetVal());
+//                        salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+//                        salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
+//                        salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
+//                        listViewSalesPvA.setAdapter(salesPvAAdapter);
+//                        salesPvAAdapter.notifyDataSetChanged();
+//
+//                    }
+//
+//                }
+//
+//            }
+//        }
+
+
+        double singlePercVal = 0.5;//50/100;// width divide by 100 perc
 
         int planVal = 100; // planned value from API
         double achieveVal = productNameBean.getPvaAchieved();// Achieved value from API
@@ -201,477 +262,39 @@ public class SalesPvAAdapter extends BaseAdapter {
         double calplanVal = planVal * singlePercVal; // planned value multiplied by single perc value
         double calachieveVal = achieveVal * singlePercVal; // Achieved value multiplied by single perc value
 
-        //int planvalueinpx = convertSpToPixels(calplanVal, context); //converting value from sp to px
-        //int achievevalueinpx = convertSpToPixels(calachieveVal, context); //converting value from sp to px
+//        int planvalueinpx = convertSpToPixels((int)calplanVal, context); //converting value from sp to px
+//        int achievevalueinpx = convertSpToPixels((int)calachieveVal, context); //converting value from sp to px
 
         float density = context.getResources().getDisplayMetrics().density;
 
-        int finalCalplanVal = (int) (calplanVal); //converting value from px to dp
-        int finalCalachieveVal = (int) (calachieveVal); //converting value from px to dp
+        int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
+        //Log.e("", "==finalCalplanVal= " + finalCalplanVal);
+        int finalCalachieveVal = (int) (density * calachieveVal); //converting value from px to dp
+        // Log.e("", "==finalCalachieveVal= " + finalCalachieveVal);
 
 
-        viewHolder.txtPlan.setWidth((int) calplanVal);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(2, 24);
-        params.setMargins((int) calachieveVal, 0, 0, 0);
+        viewHolder.txtPlan.setWidth(finalCalachieveVal);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, 24);
+        params.setMargins(finalCalplanVal, 0, 0, 0);
         viewHolder.txtAchieve.setLayoutParams(params);
 
 
-        if (achieveVal == planVal || achieveVal > planVal)
-        {
-            viewHolder.txtPlan.setBackgroundColor(Color.GREEN);
-        }
-        else if(achieveVal >= 80 && achieveVal < planVal)
-        {
-            viewHolder.txtPlan.setBackgroundColor(Color.parseColor("#ffff00"));//yellow
-        }
-        else if(achieveVal < 80) {
+        if (achieveVal < 70) {
             viewHolder.txtPlan.setBackgroundColor(Color.RED);
-
+        } else if (achieveVal > 90) {
+            viewHolder.txtPlan.setBackgroundColor(Color.GREEN);//yellow
+        } else {
+            viewHolder.txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
         }
-
-        viewHolder.txtPlanClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //Toast.makeText(context, "name click" + viewHolder.txtPlanClass.getText().toString(), Toast.LENGTH_SHORT).show();
-                Log.e("segmented click", "" + SalesPvAActivity.salesPvA_SegmentClick);
-                String txtPvAClickedValue = viewHolder.txtPlanClass.getText().toString();
-                Log.e("txtPvAClickedValue---",""+txtPvAClickedValue);
-                switch (SalesPvAActivity.txtheaderplanclass.getText().toString()) {
-
-                    case "Department" :
-                        SalesPvAActivity.txtheaderplanclass.setText("Category");
-                        SalesPvAActivity.llayoutSalesPvA.setVisibility(View.GONE);
-
-                        fromWhere = "Category";
-                        level = 2;
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            salesAnalysisListDisplayArrayList = new ArrayList<SalesAnalysisListDisplay>();
-
-                            Log.i("dept next","-----");
-                            requestSalesPvACategoryList(txtPvAClickedValue);
-                            planDept = txtPvAClickedValue;
-
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-
-                    case "Category" :
-
-                        SalesPvAActivity.txtheaderplanclass.setText("Plan Class");
-                        SalesPvAActivity.llayoutSalesPvA.setVisibility(View.GONE);
-                        Log.e("txtPvAClickedValue1---",""+txtPvAClickedValue);
-                        fromWhere = "Plan Class";
-                        level = 3;
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            salesAnalysisListDisplayArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                            Log.i("category next","-----");
-                            requestSalesPvAPlanClassListAPI(planDept,txtPvAClickedValue);
-                            planCategory = txtPvAClickedValue;
-                            Log.e("planCategory--",""+planCategory);
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-                    case "Plan Class" :
-
-                        SalesPvAActivity.txtheaderplanclass.setText("Brand");
-                        SalesPvAActivity.llayoutSalesPvA.setVisibility(View.GONE);
-                        Log.e("txtPvAClickedValue2---",""+txtPvAClickedValue);
-                        fromWhere = "Brand";
-                        level = 4;
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            salesAnalysisListDisplayArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                            Log.i("Plan Class next","-----");
-                            requestSalesPvABrandListAPI(planDept,planCategory,txtPvAClickedValue);
-                            planClass = txtPvAClickedValue;
-                            Log.e("planClass---",""+planClass);
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-                    case "Brand" :
-                        SalesPvAActivity.txtheaderplanclass.setText("Brand Plan Class");
-
-                        SalesPvAActivity.llayoutSalesPvA.setVisibility(View.GONE);
-                        Log.e("txtPvAClickedValue3---",""+txtPvAClickedValue);
-                        fromWhere = "Brand Plan Class";
-                        level = 5;
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            salesAnalysisListDisplayArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                            Log.i("brand next","-----");
-                            requestSalesPvABrandPlanListAPI(planDept,planCategory,planClass,txtPvAClickedValue);
-
-                           } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-       });
         return convertView;
     }
 
-       public static int convertSpToPixels(double sp, Context context) {
+
+    public static int convertSpToPixels(double sp, Context context) {
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, (float) sp, context.getResources().getDisplayMetrics());
         return px;
     }
 
-    private void requestSalesPvACategoryList(final String deptName) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
-
-        String salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + SalesPvAActivity.salesPvA_SegmentClick  + "&level=" + level + "&department="+deptName.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("url", " " + salespvacategory_listurl);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, salespvacategory_listurl,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i("Sales PvA Category List: ", " " + response);
-                        Log.i("Sales PvA Category List response length", "" + response.length());
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
-                            } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
-                                    salesAnalysisListDisplayArrayList.add(salesAnalysisListDisplay);
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-                                requestSalesPvACategoryList(deptName);
-
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
-                                    salesAnalysisListDisplayArrayList.add(salesAnalysisListDisplay);
-                                }
-
-                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
-                                listViewSalesPvA.setAdapter(SalesPvAActivity.salesPvAAdapter);
-                                SalesPvAActivity.txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
-                                SalesPvAActivity.txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
-                                SalesPvAActivity.llayoutSalesPvA.setVisibility(View.VISIBLE);
-
-                                Reusable_Functions.hDialog();
-                            }
-
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-
-    }
-
-    private void requestSalesPvAPlanClassListAPI(final String deptName,final String category) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
-
-        String salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + SalesPvAActivity.salesPvA_SegmentClick  + "&level=" + level + "&department="+planDept.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+category.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("url", " " + salespva_planclass_listurl);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i("Sales Pva Plan Class List : ", " " + response);
-                        Log.i("Sales Pva Plan Class List response length", "" + response.length());
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no plan class data found", Toast.LENGTH_SHORT).show();
-                            } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
-                                    salesAnalysisListDisplayArrayList.add(salesAnalysisListDisplay);
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-                                requestSalesPvAPlanClassListAPI(deptName,category);
-
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
-                                    salesAnalysisListDisplayArrayList.add(salesAnalysisListDisplay);
-                                }
-
-                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
-                                listViewSalesPvA.setAdapter(SalesPvAActivity.salesPvAAdapter);
-                                SalesPvAActivity.txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
-                                SalesPvAActivity.txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
-                                SalesPvAActivity.llayoutSalesPvA.setVisibility(View.VISIBLE);
-
-                                Reusable_Functions.hDialog();
-                            }
-
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no plan class data found", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no  plan class data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
-
-    private void requestSalesPvABrandListAPI( String deptName, String category, final String planclass) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
-
-        String salespva_brand_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + SalesPvAActivity.salesPvA_SegmentClick  + "&level=" + level + "&department="+planDept.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+planCategory.replaceAll(" ", "%20").replaceAll("&", "%26")+"&class="+planclass.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("url", " " + salespva_brand_listurl);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brand_listurl,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i("Sales Pva brand List : ", " " + response);
-                        Log.i("Sales Pva brand List response length", "" + response.length());
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no brand name data found", Toast.LENGTH_SHORT).show();
-                            } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
-                                    salesAnalysisListDisplayArrayList.add(salesAnalysisListDisplay);
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-                                requestSalesPvABrandListAPI(planDept,planCategory,planclass);
-
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
-                                    salesAnalysisListDisplayArrayList.add(salesAnalysisListDisplay);
-                                }
-
-                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
-                                listViewSalesPvA.setAdapter(SalesPvAActivity.salesPvAAdapter);
-                                SalesPvAActivity.txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
-                                SalesPvAActivity.txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
-                                SalesPvAActivity.llayoutSalesPvA.setVisibility(View.VISIBLE);
-
-                                Reusable_Functions.hDialog();
-                            }
-
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no brand name data found", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no brand name data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
-
-    private void requestSalesPvABrandPlanListAPI(String deptName, String category, String plan_class, final String brandnm) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
-
-        String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + SalesPvAActivity.salesPvA_SegmentClick  + "&level=" + level + "&department="+planDept.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+planCategory.replaceAll(" ", "%20").replaceAll("&", "%26")+ "&class=" + planClass.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand=" +brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("url", " " + salespva_brandplan_listurl);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i("Sales Pva Brand Plan Class List : ", " " + response);
-                        Log.i("Sales Pva Brand Plan Class List response length", "" + response.length());
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
-
-                            } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
-                                    salesAnalysisListDisplayArrayList.add(salesAnalysisListDisplay);
-
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-                                requestSalesPvABrandPlanListAPI(planDept,planCategory,planClass,brandnm);
-
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
-                                    salesAnalysisListDisplayArrayList.add(salesAnalysisListDisplay);
-                                }
-
-                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
-                                listViewSalesPvA.setAdapter(SalesPvAActivity.salesPvAAdapter);
-                                SalesPvAActivity.txtStoreCode.setText(salesAnalysisListDisplay.getStoreCode());
-                                SalesPvAActivity.txtStoreDesc.setText(salesAnalysisListDisplay.getStoreDesc());
-                                SalesPvAActivity.llayoutSalesPvA.setVisibility(View.VISIBLE);
-
-                                Reusable_Functions.hDialog();
-                            }
-
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
 
 }
 

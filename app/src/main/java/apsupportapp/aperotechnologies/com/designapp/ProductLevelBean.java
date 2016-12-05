@@ -2,15 +2,14 @@ package apsupportapp.aperotechnologies.com.designapp;
 
 import java.io.Serializable;
 
-/**
- * Created by pamrutkar on 30/08/16.
- */
+
 public class ProductLevelBean implements Serializable {
+
     String productLevel3Code;
     String productLevel3Desc;
     String productName;
-    String prodLevel6Code,prodLevel6Desc;
-    String articleCode,articleDesc;
+    String prodLevel6Code, prodLevel6Desc;
+    String articleCode, articleDesc;
 
     public String getArticleCode() {
         return articleCode;
@@ -29,7 +28,6 @@ public class ProductLevelBean implements Serializable {
     }
 
 
-
     public String getProductName() {
         return productName;
     }
@@ -37,7 +35,6 @@ public class ProductLevelBean implements Serializable {
     public void setProductName(String productName) {
         this.productName = productName;
     }
-
 
 
     public String getProdLevel6Code() {
@@ -55,8 +52,6 @@ public class ProductLevelBean implements Serializable {
     public void setProdLevel6Desc(String prodLevel6Desc) {
         this.prodLevel6Desc = prodLevel6Desc;
     }
-
-
 
 
     public String getProductLevel3Code() {
