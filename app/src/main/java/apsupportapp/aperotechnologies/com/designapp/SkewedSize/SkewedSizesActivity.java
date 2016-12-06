@@ -392,7 +392,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            corefashion="Core";
             seasonGroup = "Current";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
@@ -409,7 +408,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            corefashion="Core";
             seasonGroup = "Previous";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
@@ -489,6 +487,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                     SkewedSizeList.clear();
                     Reusable_Functions.sDialog(this, "Loading.......");
                     requestRunningPromoApi();
+
                 }
                 break;
 

@@ -145,6 +145,25 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_toLeftOf="@+id/bestInvent_imgfilter"
+                    android:layout_marginRight="0dp"
+                    android:visibility="visible"
+                    android:id="@+id/bst_sortInventory"
+                    android:background="@drawable/button_red_effect"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/sort_icon"
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
 
 
             </RelativeLayout>
@@ -208,7 +227,8 @@
 
 
     </LinearLayout>
-    <include layout="@layout/quick_filter_menu"/>
+    <include layout="@layout/activity_inventory_quickfilter_child"/>
+    <include layout="@layout/activity_popup_inventory"></include>
 
 
 </RelativeLayout>

@@ -76,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
-
+                        android:gravity="center"
                         >
 
 
@@ -86,8 +86,6 @@
                             android:id="@+id/toggle_top_fav"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_centerInParent="true"
-                            android:layout_margin="10dp"
                             android:background="@drawable/toggleswitch"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
@@ -108,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_alignStart="@+id/bst_head_child"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/divider_salescard" />
 
 

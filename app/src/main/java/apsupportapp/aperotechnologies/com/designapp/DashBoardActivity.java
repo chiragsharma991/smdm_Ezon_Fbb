@@ -112,6 +112,8 @@ public class DashBoardActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
+        initializeUI();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         _collectionitems = new ArrayList();
@@ -158,7 +160,6 @@ public class DashBoardActivity extends AppCompatActivity
 //        navigationView.setNavigationItemSelectedListener(this);
 
 
-        initializeUI();
 
         //Marketing events API
         if (Reusable_Functions.chkStatus(context)) {
