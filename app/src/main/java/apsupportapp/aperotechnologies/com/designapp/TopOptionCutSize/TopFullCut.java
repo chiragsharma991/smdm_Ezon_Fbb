@@ -184,13 +184,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                             Top_txtStoreName.setText(TopOptionList.get(0).getStoreDesc());
 
                             Reusable_Functions.hDialog();
-
-
-
-
-
-
-                        } catch (Exception e) {
+                       } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             footer.setVisibility(View.GONE);
                             Toast.makeText(context, "no data found in catch"+e.toString(), Toast.LENGTH_SHORT).show();
@@ -250,18 +244,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 this.VisibleItemCount=visibleItemCount;
                 this.TotalItemCount=totalItemCount;
 
-
-
-
             }
         });
-
-
-
-
-
-
-
     }
 
 

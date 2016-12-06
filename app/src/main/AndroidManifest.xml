@@ -158,7 +158,10 @@
             android:name=".FreshnessIndex.InventoryFilterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
-
+        <activity
+            android:name=".StockAgeing.StockAgeingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <!-- Local Notification receiver-->
         <receiver android:name=".LocalNotificationReceiver"></receiver>

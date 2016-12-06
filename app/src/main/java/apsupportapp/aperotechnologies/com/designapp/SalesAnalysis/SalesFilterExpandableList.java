@@ -206,7 +206,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 
                 if(groupPosition == 4)
                 {
-                    cb.setChecked(false);
+                    cb.setChecked(true);
                     return;
                 }
 

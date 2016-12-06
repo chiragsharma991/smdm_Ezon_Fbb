@@ -24,6 +24,21 @@ public class RunningPromoListDisplay {
 
     String prodAttribute4;
     String prodLevel6Desc;
+    int stkOnhandQty;
+    int targetStock;
+    int fwdWeekCover;
+    int ros;
+
+    public String getStockageBandDesc() {
+        return stockageBandDesc;
+    }
+
+    public void setStockageBandDesc(String stockageBandDesc) {
+        this.stockageBandDesc = stockageBandDesc;
+    }
+
+    String stockageBandDesc;
+
 
     public void setProdAttribute4(String prodAttribute4) {
         this.prodAttribute4 = prodAttribute4;
@@ -41,10 +56,6 @@ public class RunningPromoListDisplay {
         return fwdWeekCover;
     }
 
-    int stkOnhandQty;
-    int targetStock;
-    int fwdWeekCover;
-    int ros;
 
 
 

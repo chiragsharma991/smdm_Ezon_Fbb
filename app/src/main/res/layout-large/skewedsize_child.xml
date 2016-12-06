@@ -54,22 +54,36 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:orientation="horizontal"
                     android:weightSum="1">
                     <!---->
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="5dp"
+
+                        >
+
+
 
                     <TextView
                         android:id="@+id/skewed_option"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
+                        android:layout_gravity="bottom"
                         android:text="Buy One Get One"
+                        android:paddingLeft="10dp"
                         android:textColor="#000000"
-                        android:textSize="11sp"
+                        android:textSize="12sp"
 
 
                         />
+                    </RelativeLayout>
+
+
 
                     <RelativeLayout
                         android:id="@+id/top_fav"
@@ -78,9 +92,6 @@
                         android:layout_weight="0.8"
 
                         >
-
-
-
 
                         <ToggleButton
                             android:id="@+id/toggle_skewed_fav"
@@ -98,6 +109,7 @@
 
 
                     </RelativeLayout>
+
 
 
                 </LinearLayout>
@@ -127,10 +139,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="SOH(U)"
-                        android:textSize="9sp" />
+                        android:textSize="11sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -138,17 +150,17 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="9sp" />
+                        android:textSize="11sp" />
 
                     <TextView
                         android:id="@+id/skewed_SOHU"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.7"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="9sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -166,10 +178,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="FWC"
-                        android:textSize="9sp" />
+                        android:textSize="11sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -177,17 +189,17 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="9sp" />
+                        android:textSize="11sp" />
 
                     <TextView
                         android:id="@+id/skewed_fwc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.7"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="9sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -204,10 +216,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="Sizes"
-                        android:textSize="9sp" />
+                        android:textSize="11sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -216,23 +228,24 @@
                         android:layout_weight="0.1"
                         android:text=":"
                         android:visibility="invisible"
-                        android:textSize="9sp" />
+                        android:textSize="11sp" />
 
                     <TextView
                         android:id="@+id/skewed_RosU"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.7"
                         android:singleLine="true"
                         android:text="5"
                         android:visibility="invisible"
-                        android:textSize="9sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
                 <!--Table layout-->
                 <LinearLayout
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -245,74 +258,71 @@
                         android:id="@+id/skewed_tableSize"
 
                         >
-
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             >
+                            <!--   <TextView
+                                   android:text="S"
+                                   android:gravity="center"
+                                   android:padding="2dp"
+                                   android:background="@drawable/cell_shape"
+                                   android:textSize="9sp"
+                                   android:layout_weight="1"
+                                   />
+                               <TextView
+                                   android:layout_weight="1"
+                                   android:text="M"
+                                   android:gravity="center"
+                                   android:padding="2dp"
+                                   android:background="@drawable/cell_shape"
+                                   android:textSize="9sp"
+                                   />
+                               <TextView
+                                   android:layout_weight="1"
+                                   android:text="L"
+                                   android:gravity="center"
+                                   android:padding="2dp"
+                                   android:background="@drawable/cell_shape"
+                                   android:textSize="9sp"
+                                   />
+                               <TextView
+                                   android:layout_weight="1"
+                                   android:text="XL"
+                                   android:gravity="center"
+                                   android:padding="2dp"
+                                   android:background="@drawable/cell_shape"
+                                   android:textSize="9sp"
+                                   />
+                               <TextView
+                                   android:layout_weight="1"
+                                   android:text="XXL"
+                                   android:gravity="center"
+                                   android:padding="2dp"
+                                   android:background="@drawable/cell_shape"
+                                   android:textSize="9sp"
+                                   />-->
                             <TextView
-                                android:text="S"
-                                android:gravity="center"
-                                android:padding="2dp"
-                                android:background="@drawable/cell_shape"
-                                android:textSize="9sp"
-                                android:layout_weight="1"
-                                />
-                            <TextView
-                                android:layout_weight="1"
-                                android:text="M"
-                                android:gravity="center"
-                                android:padding="2dp"
-                                android:background="@drawable/cell_shape"
-                                android:textSize="9sp"
-                                />
-                            <TextView
-                                android:layout_weight="1"
-                                android:text="L"
-                                android:gravity="center"
-                                android:padding="2dp"
-                                android:background="@drawable/cell_shape"
-                                android:textSize="9sp"
-                                />
-                            <TextView
-                                android:layout_weight="1"
-                                android:text="XL"
-                                android:gravity="center"
-                                android:padding="2dp"
-                                android:background="@drawable/cell_shape"
-                                android:textSize="9sp"
-                                />
-                            <TextView
-                                android:layout_weight="1"
-                                android:text="XXL"
-                                android:gravity="center"
-                                android:padding="2dp"
-                                android:background="@drawable/cell_shape"
-                                android:textSize="9sp"
-                                />
-                            <TextView
-                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_width="50dp"
+                                android:id="@+id/skewed_ProdAttribute"
                                 android:text="XXXL"
                                 android:gravity="center"
                                 android:padding="2dp"
                                 android:textColor="#ffffffff"
                                 android:background="@drawable/cell_shape_mark"
-                                android:textSize="9sp"
+                                android:textSize="11sp"
                                 />
 
 
 
                         </TableRow>
 
-
-
-
-
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             >
-                            <TextView
+                            <!--<TextView
                                 android:text="10"
                                 android:gravity="center"
                                 android:padding="2dp"
@@ -353,30 +363,33 @@
                                 android:padding="2dp"
                                 android:background="@drawable/cell_shape"
                                 android:textSize="9sp"
-                                />
+                                />-->
+                            <!--<TextView-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_width="50dp"-->
+                            <!--android:id="@+id/skewed_SOH"-->
+                            <!--android:text="50"-->
+                            <!--android:gravity="center"-->
+                            <!--android:padding="2dp"-->
+                            <!--android:textColor="#ffffffff"-->
+                            <!--android:background="@drawable/cell_shape_mark"                                android:textSize="9sp"-->
+                            <!--/>-->
                             <TextView
-                                android:layout_weight="1"
-                                android:text="50"
+                                android:layout_height="wrap_content"
+                                android:layout_width="50dp"
+                                android:id="@+id/skewed_SOH"
+                                android:text="5"
+                                android:textColor="#ffffff"
                                 android:gravity="center"
                                 android:padding="2dp"
-                                android:textColor="#ffffffff"
-                                android:background="@drawable/cell_shape_mark"                                android:textSize="9sp"
-                                />
-
-
-
+                                android:background="@drawable/cell_shape_mark"
+                                android:textSize="11sp"
+                                />-->
                         </TableRow>
-
-
-
 
                     </TableLayout>
 
                 </LinearLayout>
-
-
-
-
 
 
             </LinearLayout>

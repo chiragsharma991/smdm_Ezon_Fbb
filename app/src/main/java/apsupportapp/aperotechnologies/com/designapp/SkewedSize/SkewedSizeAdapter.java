@@ -77,54 +77,46 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
         //Log.e("in ","getview");
 
-        Position=position;
+        Position = position;
         final Holder holder;
         if (convertView == null) {
-            holder=new Holder();
+            holder = new Holder();
             convertView = mInflater.inflate(R.layout.skewedsize_child, null);
             holder.skewed_SOHU = (TextView) convertView.findViewById(R.id.skewed_SOHU);
             holder.skewed_fwc = (TextView) convertView.findViewById(R.id.skewed_fwc);
+            holder.Skewed_ProdAttribute = (TextView) convertView.findViewById(R.id.skewed_ProdAttribute);
+            holder.Skewed_SOH = (TextView) convertView.findViewById(R.id.skewed_SOH);
             holder.skewed_option = (TextView) convertView.findViewById(R.id.skewed_option);
             holder.skewed_image_child = (ImageView) convertView.findViewById(R.id.skewed_image_child);
             holder.toggle_skewed_fav = (ToggleButton) convertView.findViewById(R.id.toggle_skewed_fav);
 
 
-
             convertView.setTag(holder);
 
         } else {
-            holder=(Holder)convertView.getTag();
+            holder = (Holder) convertView.getTag();
 
         }
         holder.skewed_option.setText(arrayList.get(position).getOption());
-        holder.skewed_SOHU.setText(""+(int)arrayList.get(position).getStkOnhandQty());
-        holder.skewed_fwc.setText(""+(int)arrayList.get(position).getFwdWeekCover());
+        holder.skewed_SOHU.setText("" + (int) arrayList.get(position).getStkOnhandQty());
+        holder.skewed_fwc.setText("" + (int) arrayList.get(position).getFwdWeekCover());
+        holder.Skewed_ProdAttribute.setText(arrayList.get(position).getProdAttribute4());
+        holder.Skewed_SOH.setText("" + (int) arrayList.get(position).getStkOnhandQty());
 
 
         // ---------------------click listener -------------------------
-
-
-
-
 
 
         return convertView;
     }
 
 
-
     private class Holder {
 
-        TextView skewed_SOHU,skewed_fwc,skewed_option;
+        TextView skewed_SOHU, skewed_fwc, skewed_option, Skewed_ProdAttribute, Skewed_SOH;
         ImageView skewed_image_child;
         ToggleButton toggle_skewed_fav;
 
 
-
-
     }
-
-
-
-
 }

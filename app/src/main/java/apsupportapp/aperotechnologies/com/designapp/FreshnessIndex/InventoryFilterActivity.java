@@ -37,6 +37,7 @@ import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEffic
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
+import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 
 
@@ -106,6 +107,11 @@ public class InventoryFilterActivity extends Activity {
                     finish();
                 } else if (getIntent().getStringExtra("checkfrom").equals("skewedSize")) {
                     Intent intent = new Intent(InventoryFilterActivity.this, SkewedSizesActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing")) {
+                    Intent intent = new Intent(InventoryFilterActivity.this, StockAgeingActivity.class);
                     startActivity(intent);
                     finish();
                 }
