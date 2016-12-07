@@ -185,7 +185,7 @@ public class WorstPerformerInventory extends AppCompatActivity implements View.O
                                     BestInventList.add(BestInventSizeListDisplay);
                                     offsetvalue =offsetvalue+response.length();
                                     top =top+response.length();
-
+//
                                 }
                             }
 

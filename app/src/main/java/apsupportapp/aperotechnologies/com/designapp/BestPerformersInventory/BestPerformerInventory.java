@@ -494,7 +494,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
             case R.id.bestQfDoneLayout:
 
-                //Time>>>
+                //Time >>>
 
                 if (CheckWTD.isChecked()) {
                     checkTimeValueIs = "CheckWTD";
