@@ -60,6 +60,7 @@ import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEffic
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndexDetails;
+import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 /**
@@ -68,7 +69,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class FreshnessIndexActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
-    RadioButton radioButton;
+    RadioButton btnCore,btnFashion;
     public String FIndex_SegmentClick;
     ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList, fIndexArrayList;
     TextView txtStoreCode, txtStoreDesc, txtFIndexClass, txtfIndexDeptName;
@@ -94,6 +95,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     PieData pieData;
     float upcoming = 0.0f, oldgroup = 0.0f, previousgroup = 0.0f, currentgroup = 0.0f;
     PieDataSet dataSet;
+    boolean flag = false;
+    private String TAG = "FreshnessIndexActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,7 +105,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         getSupportActionBar().hide();
 
         fromWhere = "Department";
-        FIndex_SegmentClick = "Core";
+        FIndex_SegmentClick = "Fashion";
         fIndexFirstVisibleItem = "";
         freshnessIndex_ClickedVal = "";
         FreshnessIndexValue = "";
@@ -110,6 +113,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         level = 1;
         focusposition = 0;
         selFirstPositionValue = 0;
+        fIndexPlanDept = " ";
+        fIndexCategory = "";
+        fIndexPlanClass = " ";
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -161,6 +167,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Brand");
                         fromWhere = "Brand";
                         level = 4;
+                        flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         llfIndexhierarchy.setVisibility(View.GONE);
                         llfreshnessIndex.setVisibility(View.GONE);
@@ -171,6 +178,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            fIndexPlanDept = " ";
+                            fIndexCategory = " ";
+                            fIndexPlanClass = " ";
+                            fIndexBrand = " ";
                             Log.e("Brand Plan Class Prev-- ", "  ");
                             requestFreshnessIndexDetails();
                             Log.e("prev 1", "" + freshnessIndexDetails.getBrandName());
@@ -185,6 +196,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Plan Class");
                         fromWhere = "Plan Class";
                         level = 3;
+                        flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         llfIndexhierarchy.setVisibility(View.GONE);
                         llfreshnessIndex.setVisibility(View.GONE);
@@ -196,6 +208,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            fIndexPlanDept = " ";
+                            fIndexCategory = " ";
+                            fIndexPlanClass = " ";
+                            fIndexBrand = " ";
                             Log.e("Brand name prev", "--");
                             requestFreshnessIndexDetails();
                             Log.e("prev 2", "" + freshnessIndexDetails.getPlanClass());
@@ -212,6 +228,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Category");
                         fromWhere = "Category";
                         level = 2;
+                        flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         llfIndexhierarchy.setVisibility(View.GONE);
                         llfreshnessIndex.setVisibility(View.GONE);
@@ -222,6 +239,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            fIndexPlanDept = " ";
+                            fIndexCategory = " ";
+                            fIndexPlanClass = " ";
+                            fIndexBrand = " ";
                             Log.e("Plan class prev", "");
                             requestFreshnessIndexDetails();
                         } else {
@@ -235,6 +256,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Department");
                         fromWhere = "Department";
                         level = 1;
+                        flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         llfIndexhierarchy.setVisibility(View.GONE);
                         llfreshnessIndex.setVisibility(View.GONE);
@@ -245,6 +267,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            fIndexPlanDept = " ";
+                            fIndexCategory = " ";
+                            fIndexPlanClass = " ";
+                            fIndexBrand = " ";
                             Log.e("Category prev", "");
                             requestFreshnessIndexDetails();
                             Log.e("prev 4", "" + freshnessIndexDetails.getPlanDept());
@@ -271,6 +297,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Category");
                         fromWhere = "Category";
                         level = 2;
+                        flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         llfIndexhierarchy.setVisibility(View.GONE);
                         llfreshnessIndex.setVisibility(View.GONE);
@@ -281,6 +308,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            fIndexPlanDept = " ";
+                            fIndexCategory = " ";
+                            fIndexPlanClass = " ";
+                            fIndexBrand = " ";
                             Log.i("dept next", "-----");
                             requestFreshnessIndexDetails();
                         } else {
@@ -292,6 +323,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         fromWhere = "Plan Class";
                         txtFIndexClass.setText("Plan Class");
                         level = 3;
+                        flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         llfIndexhierarchy.setVisibility(View.GONE);
                         llfreshnessIndex.setVisibility(View.GONE);
@@ -301,6 +333,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            fIndexPlanDept = " ";
+                            fIndexCategory = " ";
+                            fIndexPlanClass = " ";
+                            fIndexBrand = " ";
                             Log.e("category next --", "");
                             requestFreshnessIndexDetails();
                             Log.e("next 2", "" + freshnessIndexDetails.getPlanClass());
@@ -315,6 +351,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Brand");
                         fromWhere = "Brand";
                         level = 4;
+                        flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         llfIndexhierarchy.setVisibility(View.GONE);
                         llfreshnessIndex.setVisibility(View.GONE);
@@ -326,6 +363,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            fIndexPlanDept = " ";
+                            fIndexCategory = " ";
+                            fIndexPlanClass = " ";
+                            fIndexBrand = " ";
                             requestFreshnessIndexDetails();
 
                         } else {
@@ -337,7 +378,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                     case "Brand":
                         txtFIndexClass.setText("Brand Plan Class");
-
+                        flag = false;
                         fromWhere = "Brand Plan Class";
                         level = 5;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
@@ -349,6 +390,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
+                            fIndexPlanDept = " ";
+                            fIndexCategory = " ";
+                            fIndexPlanClass = " ";
+                            fIndexBrand = " ";
                             requestFreshnessIndexDetails();
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -384,109 +429,110 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             freshnessIndexDetailsArrayList.clear();
                             Log.i("dept next", "-----");
                             request_FreshnessIndex_CategoryList(freshnessIndex_ClickedVal);
+
                             fIndexPlanDept = freshnessIndex_ClickedVal;
 
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
+
                         break;
 
                     case "Category":
                         Log.e("in category", "---" + fIndexPlanDept);
-                        try {
-                            if (fIndexPlanDept != null) {
-                                txtFIndexClass.setText("Plan Class");
-                                llfIndexhierarchy.setVisibility(View.GONE);
-                                llfreshnessIndex.setVisibility(View.GONE);
-                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanCategory();
-                                Log.e("txtClicked category --", "" + freshnessIndex_ClickedVal);
-                                fromWhere = "Plan Class";
-                                level = 3;
-                                if (Reusable_Functions.chkStatus(context)) {
-                                    Reusable_Functions.hDialog();
-                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    freshnessIndexDetailsArrayList.clear();
-                                    Log.i("category next", "-----");
-                                    Log.i("come", "----" + fIndexPlanDept);
-                                    request_FreshnessIndex_PlanClassList(fIndexPlanDept, freshnessIndex_ClickedVal);
-                                    fIndexCategory = freshnessIndex_ClickedVal;
-                                    Log.e("fIndexCategory--", "" + fIndexCategory);
-                                } else {
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
+                        if (flag == true) {
+                            txtFIndexClass.setText("Plan Class");
+                            llfIndexhierarchy.setVisibility(View.GONE);
+                            llfreshnessIndex.setVisibility(View.GONE);
+                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanCategory();
+                            Log.e("txtClicked category --", "" + freshnessIndex_ClickedVal);
+                            fromWhere = "Plan Class";
+                            level = 3;
+                            if (Reusable_Functions.chkStatus(context)) {
+                                Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                freshnessIndexDetailsArrayList.clear();
+                                Log.i("category next", "-----");
+                                Log.i("come", "----" + fIndexPlanDept);
+                                fIndexCategory = freshnessIndex_ClickedVal;
+                                request_FreshnessIndex_PlanClassList(fIndexPlanDept, fIndexCategory);
+
+
+                                Log.e("fIndexCategory--", "" + fIndexCategory);
+                            } else {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             }
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
+                        } else {
+                            Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
                         }
+
+
                         break;
                     case "Plan Class":
                         Log.e("In plan class", "-------" + fIndexPlanDept);
-                        try {
-                            if (fIndexPlanDept != null) {
+                        if (flag == true) {
+                            Log.e("fIndexPlanDept in ELSE ", fIndexPlanDept);
+                            txtFIndexClass.setText("Brand");
+                            llfIndexhierarchy.setVisibility(View.GONE);
+                            llfreshnessIndex.setVisibility(View.GONE);
+                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanClass();
+                            Log.e("txtClicked plan class---", "" + freshnessIndex_ClickedVal);
+                            fromWhere = "Brand";
+                            level = 4;
+                            if (Reusable_Functions.chkStatus(context)) {
+                                Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                freshnessIndexDetailsArrayList.clear();
+                                Log.i("Plan Class next", "-----");
+                                fIndexPlanClass = freshnessIndex_ClickedVal;
+                                request_FreshnessIndex_BrandList(fIndexPlanDept, fIndexCategory, fIndexPlanClass);
 
 
-                                txtFIndexClass.setText("Brand");
-                                llfIndexhierarchy.setVisibility(View.GONE);
-                                llfreshnessIndex.setVisibility(View.GONE);
-                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanClass();
-                                Log.e("txtClicked plan class---", "" + freshnessIndex_ClickedVal);
-                                fromWhere = "Brand";
-                                level = 4;
-                                if (Reusable_Functions.chkStatus(context)) {
-                                    Reusable_Functions.hDialog();
-                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    freshnessIndexDetailsArrayList.clear();
-                                    Log.i("Plan Class next", "-----");
-                                    request_FreshnessIndex_BrandList(fIndexPlanDept, fIndexCategory, freshnessIndex_ClickedVal);
-                                    fIndexPlanClass = freshnessIndex_ClickedVal;
-                                    Log.e("fIndexPlanClass---", "" + fIndexPlanClass);
-                                } else {
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
-
+                                Log.e("fIndexPlanClass---", "" + fIndexPlanClass);
+                            } else {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             }
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
+                        } else {
+                            Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
                         }
 
                         break;
 
                     case "Brand":
-                        Log.e("in brand", "----" + fIndexPlanDept);
-                        try {
-                            if (fIndexPlanDept != null) {
+                        if (flag == true) {
+                            Log.e("in brand", "----" + fIndexPlanDept);
+                            txtFIndexClass.setText("Brand Plan Class");
+                            llfIndexhierarchy.setVisibility(View.GONE);
+                            llfreshnessIndex.setVisibility(View.GONE);
+                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getBrandName();
+                            Log.e("txtSalesClickedValue3---", "" + freshnessIndex_ClickedVal);
+                            fromWhere = "Brand Plan Class";
+                            level = 5;
+                            if (Reusable_Functions.chkStatus(context)) {
+                                Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                freshnessIndexDetailsArrayList.clear();
+                                Log.i("brand next", "-----");
+                                fIndexBrand = freshnessIndex_ClickedVal;
 
+                                request_FreshnessIndex_BrandPlanList(fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand);
 
-                                txtFIndexClass.setText("Brand Plan Class");
-                                llfIndexhierarchy.setVisibility(View.GONE);
-                                llfreshnessIndex.setVisibility(View.GONE);
-                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getBrandName();
-                                Log.e("txtSalesClickedValue3---", "" + freshnessIndex_ClickedVal);
-                                fromWhere = "Brand Plan Class";
-                                level = 5;
-                                if (Reusable_Functions.chkStatus(context)) {
-                                    Reusable_Functions.hDialog();
-                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    freshnessIndexDetailsArrayList.clear();
-                                    Log.i("brand next", "-----");
-                                    request_FreshnessIndex_BrandPlanList(fIndexPlanDept, fIndexCategory, fIndexPlanClass, freshnessIndex_ClickedVal);
-
-                                } else {
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
+                            } else {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             }
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
+                        } else {
+                            Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
                         }
+
                         break;
 
                 }
@@ -575,8 +621,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         btnFIndexNext = (RelativeLayout) findViewById(R.id.btnFIndexNext);
         segmented3 = (SegmentedGroup) findViewById(R.id.freshnessIndex_segmentedGrp);
         segmented3.setOnCheckedChangeListener(FreshnessIndexActivity.this);
-        radioButton = (RadioButton) findViewById(R.id.btnCore);
-        radioButton.toggle();
+        btnCore = (RadioButton) findViewById(R.id.btnCore);
+        btnFashion = (RadioButton)findViewById(R.id.btnFashion);
+        btnFashion.toggle();
         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
     }
@@ -791,6 +838,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                                 fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 listViewFIndex.setAdapter(fIndexAdapter);
+                                flag = true;
                                 fIndexAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
@@ -878,6 +926,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                                 fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 listViewFIndex.setAdapter(fIndexAdapter);
+                                flag = true;
                                 fIndexAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
@@ -960,6 +1009,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                                 fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 listViewFIndex.setAdapter(fIndexAdapter);
+                                flag = true;
                                 fIndexAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
@@ -1156,7 +1206,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     // Pie Chart val changed on Scroll of list view
     private void requestFIndexPieChart() {
         Log.e("Department onsroll api", "" + fIndexFirstVisibleItem);
-        Log.e("Brand", txtFIndexClass.getText().toString());
+        Log.e("Header Class", txtFIndexClass.getText().toString());
         String url = "";
 
         if (txtFIndexClass.getText().toString().equals("Department")) {

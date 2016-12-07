@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/quickFilterPopup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:visibility="gone">
+
+    <!--base layout for click anywhere-->
+
+    <RelativeLayout
+        android:id="@+id/quickFilter_baseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_marginTop="68dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:visibility="visible">
+
+                <RelativeLayout
+                    android:id="@+id/relLayoutFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/img_quickFilter"
+                        android:layout_width="16dp"
+                        android:layout_height="29dp"
+                        android:layout_alignParentStart="true"
+                        android:background="@mipmap/quick_filter" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/qfilterLabelLayout"
+                        android:layout_width="200dp"
+                        android:layout_height="29dp"
+                        android:layout_toRightOf="@+id/img_quickFilter"
+                        android:background="@color/colorPrimary"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:id="@+id/txtQuickFilterLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:text="Quick Filter"
+                            android:textColor="#ffffff"
+                            android:textSize="17sp" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <!--main pop up border-->
+
+                <LinearLayout
+                    android:layout_below="@+id/relLayoutFilter"
+                    android:id="@+id/qfilter_seasonGpLayout"
+                    android:layout_width="185dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/popupmenu"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtSeasonGrp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Season Group"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/bst_lineOne_child"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/divider_salescard" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtpopCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+
+                            <CheckBox
+                                android:id="@+id/checkCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/black"
+                                android:focusable="true" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!--Previous-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtpopPrevious"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Previous"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+
+                            <CheckBox
+                                android:id="@+id/checkPrevious"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/black"
+                                android:focusable="true" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtpopOld"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Old"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+
+                            <CheckBox
+                                android:id="@+id/checkOld"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/black"
+                                android:focusable="true" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!--Upcoming  -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtpopUpcoming"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Upcoming"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+
+                            <CheckBox
+                                android:id="@+id/checkUpcoming"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:buttonTint="@android:color/black"
+                                android:focusable="true" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!--<View-->
+                        <!--android:id="@+id/bst_lineTwo_child"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="2dp"-->
+                        <!--android:background="@color/divider_salescard" />-->
+
+                </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/qfilter_seasonGpLayout"
+                android:id="@+id/qfilter_Ageing"
+                android:layout_width="185dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/popupmenu"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtAgeing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Ageing"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/bst_lineOne_child1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/divider_salescard" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtpopAgeing1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100 - 200 Days"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+
+                        <CheckBox
+                            android:id="@+id/checkAgeing1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@android:color/black"
+                            android:focusable="true" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--Previous-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtpopAgeing2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="150 - 250 Days"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+
+                        <CheckBox
+                            android:id="@+id/checkAgeing2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@android:color/black"
+                            android:focusable="true" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtAgeing3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="250 - 350 Days"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+
+                        <CheckBox
+                            android:id="@+id/checkAgeing3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@android:color/black"
+                            android:focusable="true" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--&lt;!&ndash;Upcoming  &ndash;&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:weightSum="10">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="3"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/txtpopUpcoming"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Upcoming"-->
+                            <!--android:textSize="14sp" />-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="7"-->
+                        <!--android:gravity="end"-->
+                        <!--android:orientation="vertical">-->
+
+
+                        <!--<CheckBox-->
+                            <!--android:id="@+id/checkUpcoming"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="5"-->
+                            <!--android:buttonTint="@android:color/black"-->
+                            <!--android:focusable="true" />-->
+
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <View
+                    android:id="@+id/bst_lineTwo_child2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/divider_salescard" />
+
+            </LinearLayout>
+                <RelativeLayout
+                    android:layout_below="@+id/qfilter_Ageing"
+                    android:id="@+id/qfDoneLayout"
+                    android:layout_width="184dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="25dp"
+                    android:background="@color/colorPrimary"
+                    android:visibility="visible">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@color/colorPrimary"
+                        android:clickable="false"
+                        android:text="Done"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

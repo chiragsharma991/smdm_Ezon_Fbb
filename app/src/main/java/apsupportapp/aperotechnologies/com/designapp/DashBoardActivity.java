@@ -49,9 +49,11 @@ import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAAct
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
+import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
 import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
+import apsupportapp.aperotechnologies.com.designapp.WorstPerformersInventory.WorstPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;
 
 import org.json.JSONArray;
@@ -69,8 +71,9 @@ public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
     ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment;
-    ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo;
-    ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,btnSkewedSize,btnCutSize,BtnBestInventory;
+    ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnBestPerformersInv;
+    ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,
+            btnSkewedSize,btnCutSize,btnStockAgeing,BtnWorstPerformers;
     LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory;
     TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt;
 
@@ -112,8 +115,6 @@ public class DashBoardActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-        initializeUI();
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         _collectionitems = new ArrayList();
@@ -160,6 +161,7 @@ public class DashBoardActivity extends AppCompatActivity
 //        navigationView.setNavigationItemSelectedListener(this);
 
 
+        initializeUI();
 
         //Marketing events API
         if (Reusable_Functions.chkStatus(context)) {
@@ -184,10 +186,10 @@ public class DashBoardActivity extends AppCompatActivity
             }
         });
 
-        BtnBestInventory.setOnClickListener(new View.OnClickListener() {
+        btnSkewedSize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashBoardActivity.this, BestPerformerInventory.class);
+                Intent intent = new Intent(DashBoardActivity.this, SkewedSizesActivity.class);
                 startActivity(intent);
                 if(timer != null)
                 {
@@ -196,11 +198,10 @@ public class DashBoardActivity extends AppCompatActivity
                 finish();
             }
         });
-
-        btnSkewedSize.setOnClickListener(new View.OnClickListener() {
+        BtnWorstPerformers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashBoardActivity.this, SkewedSizesActivity.class);
+                Intent intent = new Intent(DashBoardActivity.this, WorstPerformerInventory.class);
                 startActivity(intent);
                 if(timer != null)
                 {
@@ -377,6 +378,32 @@ public class DashBoardActivity extends AppCompatActivity
                 finish();
             }
         });
+        btnStockAgeing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,StockAgeingActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
+        btnBestPerformersInv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,BestPerformerInventory.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
 
 
     }
@@ -497,11 +524,13 @@ public class DashBoardActivity extends AppCompatActivity
         BtnExpiringpromo=(ImageButton)findViewById(R.id.btnExpiringpromo);
         BtnBestWorstpromo=(ImageButton)findViewById(R.id.btnBestWorstpromo);
         BtnOnlyWorstpromo=(ImageButton)findViewById(R.id.btnOnlyWorstpromo);
+        BtnWorstPerformers=(ImageButton)findViewById(R.id.btnWorstPerformers);
         btnFeshnessindex=(ImageButton)findViewById(R.id.btnFeshnessindex);
         btnOptionEfficiency = (ImageButton)findViewById(R.id.btnOptionEfficiency);
         btnCutSize = (ImageButton)findViewById(R.id.btnCutSize);
         btnSkewedSize =(ImageButton)findViewById(R.id.btnSkewedSize);
-        BtnBestInventory =(ImageButton)findViewById(R.id.btnBestInventory);
+        btnStockAgeing = (ImageButton)findViewById(R.id.btnStockAgeing);
+        btnBestPerformersInv = (ImageButton)findViewById(R.id.btnBestPerformers);
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 

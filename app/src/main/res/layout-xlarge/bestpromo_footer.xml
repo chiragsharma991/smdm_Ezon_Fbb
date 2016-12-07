@@ -14,9 +14,7 @@
         android:background="#0000"
         android:keepScreenOn="true"
         android:theme="@style/ProgressBar"
-
-
-        >
+       >
 
 
 

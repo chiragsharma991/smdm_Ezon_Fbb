@@ -260,7 +260,7 @@
                                 android:text="Department"
                                 android:textStyle="bold"
                                 android:textColor="@android:color/black"
-                                android:textSize="11sp" />
+                                android:textSize="12sp" />
 
 
                             <RelativeLayout
@@ -294,7 +294,7 @@
                             android:gravity="center_vertical|center"
                             android:text="Option"
                             android:textColor="@android:color/black"
-                            android:textSize="11sp" />
+                            android:textSize="12sp" />
 
 
                         <TextView
@@ -309,7 +309,7 @@
                             android:gravity="center_vertical|center"
                             android:text="Option %"
                             android:textColor="@android:color/black"
-                            android:textSize="11sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"/>
 
 
@@ -324,7 +324,7 @@
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)"
                             android:textColor="@android:color/black"
-                            android:textSize="11sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -336,7 +336,7 @@
                             android:gravity="center_vertical|center"
                             android:text="SOH(U) %"
                             android:textColor="@android:color/black"
-                            android:textSize="11sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"/>
 
 

@@ -148,7 +148,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="#B73020"
-                    android:text="Core" />
+                    android:text="All" />
 
                 <RadioButton
                     android:id="@+id/btnFashion"

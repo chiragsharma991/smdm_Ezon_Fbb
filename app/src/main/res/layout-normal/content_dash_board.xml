@@ -784,13 +784,6 @@
 
                 </LinearLayout>
 
-
-
-
-
-
-
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -966,14 +959,14 @@
             <LinearLayout
                 android:layout_below="@+id/headerinvent"
                 android:id="@+id/lin4"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:weightSum="4">
+                >
 
 
                 <LinearLayout
@@ -1055,7 +1048,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cut-Size Report"
+                            android:text="Top Options by Full Cut"
                             android:gravity="center_horizontal"
                             android:textSize="13sp" />
 
@@ -1082,15 +1075,39 @@
                             android:gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="SkewedSize"
+                            android:text="Skewed Sizes"
                             android:textSize="13sp"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
 
+                    <!--<LinearLayout-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<ImageButton-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/btnStockAgeing"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:src="@mipmap/skewed_size"-->
+                    <!--/>-->
+
+
+                    <!--<TextView-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Stock Ageing Excep"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:layout_gravity="center_horizontal" />-->
+                    <!--</LinearLayout>-->
+
 
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1106,11 +1123,11 @@
 
                         <ImageButton
                             android:layout_gravity="center_horizontal"
-                            android:id="@+id/btnBestInventory"
+                            android:id="@+id/btnBestPerformers"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="#ffffff"
-                            android:src="@mipmap/feshness_index"
+                            android:src="@mipmap/best_promo"
                             />
 
 
@@ -1134,10 +1151,11 @@
                         <ImageButton
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnWorstPerformers"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="#ffffff"
-                            android:src="@mipmap/option_efficiency" />
+                            android:src="@mipmap/worst_promo" />
 
 
                         <TextView
@@ -1146,7 +1164,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="Option Efficiency" />
+                            android:text="Worst Performers" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -1158,17 +1176,18 @@
                         <ImageButton
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnStockAgeing"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="#ffffff"
-                            android:src="@mipmap/cut_size_report"
+                            android:src="@mipmap/stock_ageing_excep_icon"
                             />
 
                         <TextView
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cut-Size Report"
+                            android:text="Stock Aging Exceptions"
                             android:gravity="center_horizontal"
                             android:textSize="13sp" />
 
@@ -1183,10 +1202,11 @@
 
                         <ImageButton
                             android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnFloorAvailability"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="#ffffff"
-                            android:src="@mipmap/skewed_size"
+                            android:src="@mipmap/floor_availability_icon"
                             />
 
 
@@ -1194,16 +1214,178 @@
                             android:gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="SkewedSize"
+                            android:text="Floor Availability"
                             android:textSize="13sp"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
 
+                    <!--<LinearLayout-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<ImageButton-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/btnStockAgeing"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:src="@mipmap/skewed_size"-->
+                    <!--/>-->
+
+
+                    <!--<TextView-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Stock Ageing Excep"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:layout_gravity="center_horizontal" />-->
+                    <!--</LinearLayout>-->
+
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
 
 
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnTargetStockExcep"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/target_stock_exceptions_icon"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Target Stock Exceptions"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnSellThruExcep"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/sell_thru_exceptions_icon" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Sell Thru Exceptions" />
+                    </LinearLayout>
+
+                    <!--<LinearLayout-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<ImageButton-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/btnCutSize"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:src="@mipmap/cut_size_report"-->
+                    <!--/>-->
+
+                    <!--<TextView-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Cut-Size Report"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:textSize="13sp" />-->
+
+
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<ImageButton-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/btnSkewedSize"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:src="@mipmap/skewed_size"-->
+                    <!--/>-->
+
+
+                    <!--<TextView-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="SkewedSize"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:layout_gravity="center_horizontal" />-->
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<ImageButton-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/btnStockAgeing"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:src="@mipmap/skewed_size"-->
+                    <!--/>-->
+
+
+                    <!--<TextView-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Stock Ageing Excep"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:layout_gravity="center_horizontal" />-->
+                    <!--</LinearLayout>-->
+
+
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_below="@+id/lin4"

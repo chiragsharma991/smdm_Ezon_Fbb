@@ -24,7 +24,9 @@ import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPager
 /**
  * Created by hasai on 20/09/16.
  */
-public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
+public class
+
+SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
 
 
     Context context;

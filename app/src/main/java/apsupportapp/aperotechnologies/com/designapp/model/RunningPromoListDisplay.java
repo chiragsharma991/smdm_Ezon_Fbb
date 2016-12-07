@@ -7,6 +7,7 @@ package apsupportapp.aperotechnologies.com.designapp.model;
 public class RunningPromoListDisplay {
 
 
+
     String storeCode;
     String storeDescription;
     String alphanumericPromoCode;
@@ -24,15 +25,6 @@ public class RunningPromoListDisplay {
 
     String prodAttribute4;
     String prodLevel6Desc;
-    String articleDesc;
-    String prodAttribute2;
-    double stkOnhandQty;
-    int targetStock;
-    int saleTotQty;
-    int stkGitQty;
-    double sellThruUnits;
-    double fwdWeekCover;
-    int ros;
 
     public String getArticleDesc() {
         return articleDesc;
@@ -40,30 +32,6 @@ public class RunningPromoListDisplay {
 
     public void setArticleDesc(String articleDesc) {
         this.articleDesc = articleDesc;
-    }
-
-    public double getSellThruUnits() {
-        return sellThruUnits;
-    }
-
-    public void setSellThruUnits(double sellThruUnits) {
-        this.sellThruUnits = sellThruUnits;
-    }
-
-    public int getStkGitQty() {
-        return stkGitQty;
-    }
-
-    public void setStkGitQty(int stkGitQty) {
-        this.stkGitQty = stkGitQty;
-    }
-
-    public int getSaleTotQty() {
-        return saleTotQty;
-    }
-
-    public void setSaleTotQty(int saleTotQty) {
-        this.saleTotQty = saleTotQty;
     }
 
     public String getProdAttribute2() {
@@ -74,12 +42,64 @@ public class RunningPromoListDisplay {
         this.prodAttribute2 = prodAttribute2;
     }
 
+    public void setStkOnhandQty(double stkOnhandQty) {
+        this.stkOnhandQty = stkOnhandQty;
+    }
+
+    public int getSaleTotQty() {
+        return saleTotQty;
+    }
+
+    public void setSaleTotQty(int saleTotQty) {
+        this.saleTotQty = saleTotQty;
+    }
+
+    public int getStkGitQty() {
+        return stkGitQty;
+    }
+
+    public void setStkGitQty(int stkGitQty) {
+        this.stkGitQty = stkGitQty;
+    }
+
+    public double getSellThruUnits() {
+        return sellThruUnits;
+    }
+
+    public void setSellThruUnits(double sellThruUnits) {
+        this.sellThruUnits = sellThruUnits;
+    }
+
+    public void setFwdWeekCover(double fwdWeekCover) {
+        this.fwdWeekCover = fwdWeekCover;
+    }
+
+    String articleDesc;
+    String prodAttribute2;
+    double stkOnhandQty;
+    int targetStock;
+    int saleTotQty;
+    int stkGitQty;
+    double sellThruUnits;
+    double fwdWeekCover;
+    double ros;
+
+    public String getStockageBandDesc() {
+        return stockageBandDesc;
+    }
+
+    public void setStockageBandDesc(String stockageBandDesc) {
+        this.stockageBandDesc = stockageBandDesc;
+    }
+
+    String stockageBandDesc;
+
 
     public void setProdAttribute4(String prodAttribute4) {
         this.prodAttribute4 = prodAttribute4;
     }
 
-    public void setFwdWeekCover(double fwdWeekCover) {
+    public void setFwdWeekCover(int fwdWeekCover) {
         this.fwdWeekCover = fwdWeekCover;
     }
 
@@ -90,7 +110,6 @@ public class RunningPromoListDisplay {
     public double getFwdWeekCover() {
         return fwdWeekCover;
     }
-
 
 
 
@@ -111,11 +130,11 @@ public class RunningPromoListDisplay {
         this.targetStock = targetStock;
     }
 
-    public int getRos() {
+    public double getRos() {
         return ros;
     }
 
-    public void setRos(int ros) {
+    public void setRos(double ros) {
         this.ros = ros;
     }
 
@@ -139,7 +158,7 @@ public class RunningPromoListDisplay {
         return stkOnhandQty;
     }
 
-    public void setStkOnhandQty(double stkOnhandQty) {
+    public void setStkOnhandQty(int stkOnhandQty) {
         this.stkOnhandQty = stkOnhandQty;
     }
 

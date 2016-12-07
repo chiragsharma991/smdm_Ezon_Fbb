@@ -122,7 +122,7 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
 
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.sfilter_list_group, null);
+            convertView = inflater.inflate(R.layout.inv_filter_list_group, null);
 
             groupViewHolder = new GroupViewHolder();
 
@@ -178,17 +178,17 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.sfilter_list_item, null);
+            convertView = inflater.inflate(R.layout.inv_filter_list_item, null);
             childViewHolder = new ChildViewHolder();
             childViewHolder.mChildText = (TextView) convertView
                     .findViewById(R.id.txtdeptname);
             childViewHolder.mCheckBox = (CheckBox) convertView
                     .findViewById(R.id.itemCheckBox);
-            convertView.setTag(R.layout.sfilter_list_item, childViewHolder);
+            convertView.setTag(R.layout.inv_filter_list_item, childViewHolder);
 
         } else {
             childViewHolder = (ChildViewHolder) convertView
-                    .getTag(R.layout.sfilter_list_item);
+                    .getTag(R.layout.inv_filter_list_item);
         }
 
         childViewHolder.mChildText.setText(childText);
@@ -209,10 +209,10 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
                 CheckBox cb = (CheckBox) rel.getChildAt(1);
                 TextView txtView = (TextView) rel.getChildAt(0);
                 String txtClickedVal = txtView.getText().toString();
-
+//
                 if(groupPosition == 5)
                 {
-                    cb.setChecked(false);
+                    cb.setChecked(true);
                     return;
                 }
 

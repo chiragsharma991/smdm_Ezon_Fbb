@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -88,8 +90,8 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
             holder.BestInvent_RosU = (TextView) convertView.findViewById(R.id.bestInvent_RosU);
             holder.BestInvent_GIT = (TextView) convertView.findViewById(R.id.bestInvent_GIT);
             holder.BestInvent_Sale = (TextView) convertView.findViewById(R.id.bestInvent_Sale);
-            holder.BestInventTable_SOH = (TextView) convertView.findViewById(R.id.bestInventTable_SOH);
-            holder.BestInventTable_ProdAttribute = (TextView) convertView.findViewById(R.id.bestInventTable_ProdAttribute);
+           // holder.BestInventTable_SOH = (TextView) convertView.findViewById(R.id.bestInventTable_SOH);
+          //  holder.BestInventTable_ProdAttribute = (TextView) convertView.findViewById(R.id.bestInventTable_ProdAttribute);
             holder.BestInvent_image_child = (ImageView) convertView.findViewById(R.id.bestInvent_image_child);
 
 
@@ -108,8 +110,16 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         holder.BestInvent_RosU.setText(""+(int)arrayList.get(position).getRos());
         holder.BestInvent_GIT.setText(""+(int)arrayList.get(position).getStkGitQty());
         holder.BestInvent_Sale.setText(""+(int)arrayList.get(position).getSaleTotQty());
-        holder.BestInventTable_SOH.setText(""+(int)arrayList.get(position).getStkOnhandQty());
-        holder.BestInventTable_ProdAttribute.setText(arrayList.get(position).getProdAttribute2());
+        //holder.BestInventTable_SOH.setText(""+(int)arrayList.get(position).getStkOnhandQty());
+       // holder.BestInventTable_ProdAttribute.setText(arrayList.get(position).getProdAttribute2());
+        BestPerformerInventory.BestInvent_txtStoreCode.setText(arrayList.get(position).getStoreCode());
+        BestPerformerInventory.BestInvent_txtStoreName.setText(arrayList.get(position).getStoreDesc());
+
+        if(!arrayList.get(position).getProdImageURL().equals("")) {
+            Picasso.with(this.context).load(arrayList.get(position).getProdImageURL()).into(holder.BestInvent_image_child);
+        }else {
+            Picasso.with(this.context).load(R.mipmap.placeholder).into(holder.BestInvent_image_child);
+        }
 
 
 
@@ -127,7 +137,9 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
 
     private class Holder {
 
-        TextView BestInvent_SOH,BestInvent_option,BestInvent_sellThru,BestInvent_FWC,BestInvent_RosU,BestInvent_GIT,BestInvent_Sale,BestInventTable_SOH,BestInventTable_ProdAttribute;
+        TextView BestInvent_SOH,BestInvent_option,BestInvent_sellThru,BestInvent_FWC,
+                BestInvent_RosU,BestInvent_GIT,BestInvent_Sale,BestInventTable_SOH,
+                BestInventTable_ProdAttribute;
         ImageView BestInvent_image_child;
 
 

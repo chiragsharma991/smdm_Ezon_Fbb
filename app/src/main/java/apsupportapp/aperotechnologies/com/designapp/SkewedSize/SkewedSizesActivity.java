@@ -82,6 +82,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private ToggleButton Toggle_skewed_fav;
     private String corefashion="Core";
     private ImageView Skewed_quickFilter;
+    private String qfButton="OFF";
 
 
     @Override
@@ -323,9 +324,17 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 filterFunction();
                 break;
             case R.id.quickFilter_baseLayout :
-                quickFilterPopup.setVisibility(View.GONE);
+                if(qfButton.equals("OFF")) {
+                    checkCurrent.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkPrevious.setChecked(false);
+                }
+                    quickFilterPopup.setVisibility(View.GONE);
+
                 break;
             case R.id.qfDoneLayout:
+                qfButton="ON";
                 if (checkCurrent.isChecked()) {
                     popupCurrent();
                     checkPrevious.setChecked(false);
@@ -423,7 +432,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            corefashion="Core";
             seasonGroup = "Old";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
@@ -439,7 +447,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            corefashion="Core";
+           seasonGroup = "Upcoming";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
             requestRunningPromoApi();
