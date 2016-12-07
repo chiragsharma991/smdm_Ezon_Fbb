@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -112,6 +113,11 @@ public class InventoryFilterActivity extends Activity {
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing")) {
                     Intent intent = new Intent(InventoryFilterActivity.this, StockAgeingActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
+                    Intent intent = new Intent(InventoryFilterActivity.this, BestPerformerInventory.class);
                     startActivity(intent);
                     finish();
                 }

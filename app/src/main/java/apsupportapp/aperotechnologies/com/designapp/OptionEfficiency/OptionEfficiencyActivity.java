@@ -72,7 +72,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  */
 public class OptionEfficiencyActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
-    RadioButton oe_btnCore,oe_btnFashion;
+    RadioButton oe_btnCore, oe_btnFashion;
     public String OEfficiency_SegmentClick;
     ArrayList<OptionEfficiencyDetails> optionEfficiencyDetailsArrayList, optionArrayList;
     TextView txtStoreCode, txtStoreDesc, oe_txtHeaderClass, oe_txtDeptName;
@@ -100,7 +100,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     PieDataSet dataset;
     ArrayList<PieEntry> entries;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
-    private String qfButton = "OFF";
+    private String checkSeasonGpVal = null;
     boolean flag = false;
 
 
@@ -172,12 +172,49 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         quickFilter_baseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (qfButton.equals("OFF")) {
+
+                if (checkSeasonGpVal == null ) {
                     checkCurrent.setChecked(false);
-                    checkUpcoming.setChecked(false);
-                    checkOld.setChecked(false);
                     checkPrevious.setChecked(false);
-                }
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+
+
+                } else {
+                    switch (checkSeasonGpVal.toString()) {
+                        case "Current":
+                            checkCurrent.setChecked(true);
+                            checkPrevious.setChecked(false);
+                            checkOld.setChecked(false);
+                            checkUpcoming.setChecked(false);
+
+                            Log.e("Current checked", "" + checkCurrent.isChecked());
+                            break;
+
+                        case "Previous":
+                            checkPrevious.setChecked(true);
+                            checkCurrent.setChecked(false);
+                            checkOld.setChecked(false);
+                            checkUpcoming.setChecked(false);
+                            Log.e("Previous checked", "" + checkPrevious.isChecked());
+                            break;
+                        case "Old":
+                            checkOld.setChecked(true);
+                            checkCurrent.setChecked(false);
+                            checkPrevious.setChecked(false);
+                            checkUpcoming.setChecked(false);
+                            Log.e("Old checked", "" + checkOld.isChecked());
+                            break;
+                        case "Upcoming":
+                            checkUpcoming.setChecked(true);
+                            checkCurrent.setChecked(false);
+                            checkOld.setChecked(false);
+                            checkPrevious.setChecked(false);
+                            Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
+                            break;
+                    }
+
+                 }
                 quickFilterPopup.setVisibility(View.GONE);
             }
         });
@@ -219,7 +256,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         oe_txtHeaderClass.setText("Plan Class");
                         fromWhere = "Plan Class";
                         level = 3;
-                        flag =false;
+                        flag = false;
                         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                         oe_llayouthierarchy.setVisibility(View.GONE);
                         llayoutOEfficiency.setVisibility(View.GONE);
@@ -599,8 +636,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
 
-    private void initializeUI()
-    {
+    private void initializeUI() {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         oe_txtHeaderClass = (TextView) findViewById(R.id.oe_txtHeaderClass);
@@ -622,7 +658,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         optionEfficiency_segmentedGrp = (SegmentedGroup) findViewById(R.id.optionEfficiency_segmentedGrp);
         optionEfficiency_segmentedGrp.setOnCheckedChangeListener(OptionEfficiencyActivity.this);
         oe_btnCore = (RadioButton) findViewById(R.id.oe_btnCore);
-        oe_btnFashion = (RadioButton)findViewById(R.id.oe_btnFashion);
+        oe_btnFashion = (RadioButton) findViewById(R.id.oe_btnFashion);
         oe_btnFashion.toggle();
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
         optionArrayList = new ArrayList<OptionEfficiencyDetails>();
@@ -641,35 +677,30 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.qfDoneLayout:
-                qfButton = "ON";
+
                 if (checkCurrent.isChecked()) {
                     popupCurrent();
-                    checkPrevious.setChecked(false);
-                    checkOld.setChecked(false);
-                    checkUpcoming.setChecked(false);
+                    checkSeasonGpVal = "Current";
+
                     quickFilterPopup.setVisibility(View.GONE);
 
                 } else if (checkPrevious.isChecked()) {
                     popupPrevious();
-                    checkCurrent.setChecked(false);
-                    checkOld.setChecked(false);
-                    checkUpcoming.setChecked(false);
+                    checkSeasonGpVal = "Previous";
+
                     quickFilterPopup.setVisibility(View.GONE);
 
                 } else if (checkOld.isChecked()) {
                     popupOld();
-                    checkPrevious.setChecked(false);
-                    checkCurrent.setChecked(false);
-                    checkUpcoming.setChecked(false);
+                    checkSeasonGpVal = "Old";
+
                     quickFilterPopup.setVisibility(View.GONE);
 
                 } else if (checkUpcoming.isChecked()) {
                     popupUpcoming();
-                    checkCurrent.setChecked(false);
-                    checkPrevious.setChecked(false);
-                    checkOld.setChecked(false);
-                    quickFilterPopup.setVisibility(View.GONE);
+                    checkSeasonGpVal = "Upcoming";
 
+                    quickFilterPopup.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
 
@@ -707,8 +738,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         quickFilterPopup.setVisibility(View.VISIBLE);
     }
 
-    private void popupCurrent()
-    {
+    private void popupCurrent() {
         oe_llayouthierarchy.setVisibility(View.GONE);
         llayoutOEfficiency.setVisibility(View.GONE);
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
@@ -727,8 +757,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         }
     }
 
-    private void popupPrevious()
-    {
+    private void popupPrevious() {
         oe_llayouthierarchy.setVisibility(View.GONE);
         llayoutOEfficiency.setVisibility(View.GONE);
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
@@ -767,8 +796,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         }
     }
 
-    private void popupUpcoming()
-    {
+    private void popupUpcoming() {
         oe_llayouthierarchy.setVisibility(View.GONE);
         llayoutOEfficiency.setVisibility(View.GONE);
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();

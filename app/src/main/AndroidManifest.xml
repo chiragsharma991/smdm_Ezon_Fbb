@@ -162,6 +162,11 @@
             android:name=".StockAgeing.StockAgeingActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".BestPerformersInventory.BestPerformerInventory"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
+
 
         <!-- Local Notification receiver-->
         <receiver android:name=".LocalNotificationReceiver"></receiver>

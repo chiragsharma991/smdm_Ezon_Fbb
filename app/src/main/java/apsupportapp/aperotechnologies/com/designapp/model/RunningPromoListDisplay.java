@@ -7,6 +7,7 @@ package apsupportapp.aperotechnologies.com.designapp.model;
 public class RunningPromoListDisplay {
 
 
+
     String storeCode;
     String storeDescription;
     String alphanumericPromoCode;
@@ -24,9 +25,63 @@ public class RunningPromoListDisplay {
 
     String prodAttribute4;
     String prodLevel6Desc;
-    int stkOnhandQty;
+
+    public String getArticleDesc() {
+        return articleDesc;
+    }
+
+    public void setArticleDesc(String articleDesc) {
+        this.articleDesc = articleDesc;
+    }
+
+    public String getProdAttribute2() {
+        return prodAttribute2;
+    }
+
+    public void setProdAttribute2(String prodAttribute2) {
+        this.prodAttribute2 = prodAttribute2;
+    }
+
+    public void setStkOnhandQty(double stkOnhandQty) {
+        this.stkOnhandQty = stkOnhandQty;
+    }
+
+    public int getSaleTotQty() {
+        return saleTotQty;
+    }
+
+    public void setSaleTotQty(int saleTotQty) {
+        this.saleTotQty = saleTotQty;
+    }
+
+    public int getStkGitQty() {
+        return stkGitQty;
+    }
+
+    public void setStkGitQty(int stkGitQty) {
+        this.stkGitQty = stkGitQty;
+    }
+
+    public double getSellThruUnits() {
+        return sellThruUnits;
+    }
+
+    public void setSellThruUnits(double sellThruUnits) {
+        this.sellThruUnits = sellThruUnits;
+    }
+
+    public void setFwdWeekCover(double fwdWeekCover) {
+        this.fwdWeekCover = fwdWeekCover;
+    }
+
+    String articleDesc;
+    String prodAttribute2;
+    double stkOnhandQty;
     int targetStock;
-    int fwdWeekCover;
+    int saleTotQty;
+    int stkGitQty;
+    double sellThruUnits;
+    double fwdWeekCover;
     int ros;
 
     public String getStockageBandDesc() {
@@ -52,7 +107,7 @@ public class RunningPromoListDisplay {
         return prodAttribute4;
     }
 
-    public int getFwdWeekCover() {
+    public double getFwdWeekCover() {
         return fwdWeekCover;
     }
 
@@ -99,7 +154,7 @@ public class RunningPromoListDisplay {
         this.prodImageURL = prodImageURL;
     }
 
-    public int getStkOnhandQty() {
+    public double getStkOnhandQty() {
         return stkOnhandQty;
     }
 

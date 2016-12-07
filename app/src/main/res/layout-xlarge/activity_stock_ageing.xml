@@ -59,7 +59,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/stockAgeing_imageBtnBack"
-                    android:text="Stock Ageing Excepetions"
+                    android:text="Stock Aging Excepetions"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
 

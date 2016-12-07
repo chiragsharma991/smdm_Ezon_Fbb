@@ -395,8 +395,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
             quickFilterPopup.setVisibility(View.GONE);
         }
+        else {
+            Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
 
-
+        }
             if (checkAgeing1.isChecked()) {
             //popupUpcoming();
             checkAgeingVal = "CheckAgeing1";

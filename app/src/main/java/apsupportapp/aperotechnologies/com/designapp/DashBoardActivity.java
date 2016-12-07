@@ -40,6 +40,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
@@ -69,7 +70,7 @@ public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
     ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment;
-    ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo;
+    ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnBestPerformersInv;
     ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,btnSkewedSize,btnCutSize,btnStockAgeing;
     LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory;
     TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt;
@@ -376,6 +377,19 @@ public class DashBoardActivity extends AppCompatActivity
                 finish();
             }
         });
+        btnBestPerformersInv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,BestPerformerInventory.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
 
 
     }
@@ -501,6 +515,7 @@ public class DashBoardActivity extends AppCompatActivity
         btnCutSize = (ImageButton)findViewById(R.id.btnCutSize);
         btnSkewedSize =(ImageButton)findViewById(R.id.btnSkewedSize);
         btnStockAgeing = (ImageButton)findViewById(R.id.btnStockAgeing);
+        btnBestPerformersInv = (ImageButton)findViewById(R.id.btnBestPerformers);
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 

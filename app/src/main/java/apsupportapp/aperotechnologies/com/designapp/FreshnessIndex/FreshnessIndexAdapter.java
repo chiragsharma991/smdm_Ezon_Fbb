@@ -111,14 +111,14 @@ public class FreshnessIndexAdapter extends BaseAdapter {
         if (fromWhere.equals("Department")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getPlanDept());
-            viewHolder.txtfindexSOH.setText(""+freshnessIndexDetails.getStkOnhandQty());
+            viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
             viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
 
         } else if (fromWhere.equals("Category")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getPlanCategory());
-            viewHolder.txtfindexSOH.setText(""+freshnessIndexDetails.getStkOnhandQty());
+            viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
             viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
 
@@ -127,7 +127,7 @@ public class FreshnessIndexAdapter extends BaseAdapter {
         } else if (fromWhere.equals("Plan Class")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getPlanClass());
-            viewHolder.txtfindexSOH.setText(""+freshnessIndexDetails.getStkOnhandQty());
+            viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
             viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
 
@@ -136,14 +136,14 @@ public class FreshnessIndexAdapter extends BaseAdapter {
         } else if (fromWhere.equals("Brand")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getBrandName());
-            viewHolder.txtfindexSOH.setText(""+freshnessIndexDetails.getStkOnhandQty());
+            viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
             viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
 
         } else if (fromWhere.equals("Brand Plan Class")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getBrandplanClass());
-            viewHolder.txtfindexSOH.setText(""+freshnessIndexDetails.getStkOnhandQty());
+            viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
             viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
 
