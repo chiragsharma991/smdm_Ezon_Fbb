@@ -17,9 +17,10 @@
         <RelativeLayout
             android:id="@+id/stock_Rel_image_child"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            >
+
+
 
             <ImageView
                 android:id="@+id/stock_image_child"
@@ -128,7 +129,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:singleLine="true"
-                        android:text="Ageing"
+                        android:text="Aging"
                         android:textSize="12sp" />
 
                     <TextView

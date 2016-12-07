@@ -76,6 +76,11 @@ public class RunningPromoListDisplay {
 
     String articleDesc;
     String prodAttribute2;
+
+    public double getStkOnhandQty() {
+        return stkOnhandQty;
+    }
+
     double stkOnhandQty;
     int targetStock;
     int saleTotQty;
@@ -154,13 +159,6 @@ public class RunningPromoListDisplay {
         this.prodImageURL = prodImageURL;
     }
 
-    public double getStkOnhandQty() {
-        return stkOnhandQty;
-    }
-
-    public void setStkOnhandQty(int stkOnhandQty) {
-        this.stkOnhandQty = stkOnhandQty;
-    }
 
     public String getProdLevel6Desc() {
         return prodLevel6Desc;

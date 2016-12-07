@@ -93,7 +93,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     OptionEfficiencyDetails optionEfficiencyDetails;
     OptionEfficiencyAdapter oe_Adapter;
     RelativeLayout optionEfficiency_imageBtnBack, optionEfficiency_imgfilter, oe_quickFilter, quickFilterPopup, quickFilter_baseLayout;
-    RelativeLayout oe_btnPrev, oe_btnNext, qfDoneLayout;
+    RelativeLayout oe_btnPrev, oe_btnNext, qfDoneLayout,quickFilter_BorderLayout;
     Gson gson;
     PieData pieData;
     float fullSizeCount = 0.0f, fullCutCount = 0.0f, partCutCount = 0.0f;
@@ -660,6 +660,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oe_btnCore = (RadioButton) findViewById(R.id.oe_btnCore);
         oe_btnFashion = (RadioButton) findViewById(R.id.oe_btnFashion);
         oe_btnFashion.toggle();
+        quickFilter_BorderLayout=(RelativeLayout)findViewById(R.id.quickFilter_BorderLayout);
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
         optionArrayList = new ArrayList<OptionEfficiencyDetails>();
         checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
@@ -671,6 +672,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
         qfDoneLayout.setOnClickListener(this);
+        quickFilter_BorderLayout.setOnClickListener(this);
     }
 
     @Override

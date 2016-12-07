@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true">
 
         <RelativeLayout
+            android:id="@+id/quickFilter_BorderLayout"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

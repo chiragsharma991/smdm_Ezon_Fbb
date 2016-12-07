@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.StockAgeing;
+package apsupportapp.aperotechnologies.com.designapp.FloorAvailability;
 
 import android.content.Context;
 import android.content.Intent;
@@ -44,53 +44,54 @@ import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
-import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopOptionAdapter;
-import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
+import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
+import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingAdapter;
+import apsupportapp.aperotechnologies.com.designapp.model.FloorAvailabilityDetails;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 /**
- * Created by pamrutkar on 05/12/16.
+ * Created by pamrutkar on 07/12/16.
  */
 
-public class StockAgeingActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class FloorAvailabilityActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    TextView stock_txtStoreCode, stock_txtStoreName;
-    RelativeLayout stock_BtnBack, stock_BtnFilter, stock_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
-    RunningPromoListDisplay StockAgeingListDisplay;
+    TextView floor_txtStoreCode, floor_txtStoreName;
+    RelativeLayout floor_BtnBack, floor_BtnFilter, floor_quickFilter, quickFilterPopup;
+    RelativeLayout quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
+    FloorAvailabilityDetails floorAvailabilityDetails;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken, seasongroup = "All";
-    String TAG = "StockAgeingActivity";
+    String TAG = "FloorAvailabilty";
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming, checkAgeing1, checkAgeing2, checkAgeing3;
+    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
-    ListView StockAgListView;
-    ArrayList<RunningPromoListDisplay> StockAgeingList;
+    ListView floorListView;
+    ArrayList<FloorAvailabilityDetails> FloorList;
     private int focusposition = 0;
     private boolean userScrolled;
-    StockAgeingAdapter stockAgeingAdapter;
+    FloorAvailabilityAdapter floorAvailabilityAdapter;
     private View footer;
     private String lazyScroll = "OFF";
-    private SegmentedGroup stock_segmented;
-    private RadioButton stock_fashion, stock_core;
-    private ToggleButton Toggle_stock_fav;
+    private SegmentedGroup floor_segmented;
+    private RadioButton floor_fashion, floor_core;
+    private ToggleButton Toggle_floor_fav;
     private String corefashion = "Fashion";
-    String checkSeasonGpVal = null, checkAgeingVal = null;
+    String floorcheckSeasonGpVal = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stock_ageing);
+        setContentView(R.layout.activity_floor_availability);
         getSupportActionBar().hide();
         initalise();
         gson = new Gson();
-        StockAgeingList = new ArrayList<RunningPromoListDisplay>();
+        FloorList = new ArrayList<FloorAvailabilityDetails>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -106,44 +107,46 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             limit = 10;
             count = 0;
             top = 10;
-            requestStockAgeingApi();
+            requestFloorAvailabilityApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
-        StockAgListView.addFooterView(footer);
+        floorListView.addFooterView(footer);
 
     }
 
-    private void requestStockAgeingApi() {
+    private void requestFloorAvailabilityApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+        String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
 
         Log.e(TAG, "URL" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Stock Aging : " + " " + response);
-                        Log.i(TAG, "response" + "" + response.length());
-                        StockAgListView.setVisibility(View.VISIBLE);
+                        Log.e(TAG, "Floor Availability: " + " " + response);
+                        Log.e(TAG, "response" + "" + response.length());
+                        floorListView.setVisibility(View.VISIBLE);
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 footer.setVisibility(View.GONE);
-                                if (StockAgeingList.size() == 0) {
-                                    StockAgListView.setVisibility(View.GONE);
+                                if (FloorList.size() == 0) {
+                                    floorListView.setVisibility(View.GONE);
+
                                 }
 
                             } else if (response.length() == limit) {
                                 Log.e(TAG, "Top eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
-                                    StockAgeingListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    StockAgeingList.add(StockAgeingListDisplay);
+                                    floorAvailabilityDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
+                                    FloorList.add(floorAvailabilityDetails);
 
                                 }
                                 offsetvalue = offsetvalue + 10;
@@ -156,8 +159,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                                 Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
 
-                                    StockAgeingListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    StockAgeingList.add(StockAgeingListDisplay);
+                                    floorAvailabilityDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
+                                    FloorList.add(floorAvailabilityDetails);
 
                                     offsetvalue = offsetvalue + response.length();
                                     top = top + response.length();
@@ -176,13 +179,13 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             }*/
 
                             if (lazyScroll.equals("ON")) {
-                                stockAgeingAdapter.notifyDataSetChanged();
+                                floorAvailabilityAdapter.notifyDataSetChanged();
                                 lazyScroll = "OFF";
                             } else {
-                                stockAgeingAdapter = new StockAgeingAdapter(StockAgeingList, context);
-                                StockAgListView.setAdapter(stockAgeingAdapter);
-                                stock_txtStoreCode.setText(StockAgeingList.get(0).getStoreCode());
-                                stock_txtStoreName.setText(StockAgeingList.get(0).getStoreDescription());
+                                floorAvailabilityAdapter = new FloorAvailabilityAdapter(FloorList, context);
+                                floorListView.setAdapter(floorAvailabilityAdapter);
+                                floor_txtStoreCode.setText(FloorList.get(0).getStoreCode());
+                                floor_txtStoreName.setText(FloorList.get(0).getStoreDescription());
 
                             }
 
@@ -190,13 +193,12 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {
 
-
-                            StockAgeingList.clear();
-                            stockAgeingAdapter.notifyDataSetChanged();
-                            StockAgListView.setVisibility(View.GONE);
+                            FloorList.clear();
+                            floorAvailabilityAdapter.notifyDataSetChanged();
+                            floorListView.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
                             footer.setVisibility(View.GONE);
-                            // Toast.makeText(context, "no data found in catch" + e.toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "no data found in catch" + e.toString(), Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -229,7 +231,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
 //---------------seton Click list listener------------------//
 
-        StockAgListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+        floorListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
 
             @Override
@@ -238,7 +240,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
                     footer.setVisibility(View.VISIBLE);
                     lazyScroll = "ON";
-                    requestStockAgeingApi();
+                    requestFloorAvailabilityApi();
                     //Reusable_Functions.sDialog(context, "Loading data...");
                 }
             }
@@ -256,43 +258,39 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
 
     private void initalise() {
-        stock_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
-        stock_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
-        stock_BtnBack = (RelativeLayout) findViewById(R.id.stockAgeing_imageBtnBack);
-        stock_BtnFilter = (RelativeLayout) findViewById(R.id.stockAgeing_imgfilter);
-        stock_quickFilter = (RelativeLayout) findViewById(R.id.sa_quickFilter);
+        floor_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
+        floor_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+        floor_BtnBack = (RelativeLayout) findViewById(R.id.fa_imageBtnBack);
+        floor_BtnFilter = (RelativeLayout) findViewById(R.id.fa_imgfilter);
+        floor_quickFilter = (RelativeLayout) findViewById(R.id.floor_quickFilter);
         quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
         quickFilterPopup.setVisibility(View.GONE);
         quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
         qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
         quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
-        StockAgListView = (ListView) findViewById(R.id.stockListView);
-        stock_segmented = (SegmentedGroup) findViewById(R.id.stock_segmented);
-        stock_core = (RadioButton) findViewById(R.id.stock_core);
-        stock_fashion = (RadioButton) findViewById(R.id.stock_fashion);
-        stock_fashion.toggle();
-        Toggle_stock_fav = (ToggleButton) findViewById(R.id.toggle_top_fav);
+        floorListView = (ListView) findViewById(R.id.floorListView);
+        floor_segmented = (SegmentedGroup) findViewById(R.id.floor_segmented);
+        floor_core = (RadioButton) findViewById(R.id.floor_core);
+        floor_fashion = (RadioButton) findViewById(R.id.floor_fashion);
+        floor_fashion.toggle();
+        Toggle_floor_fav = (ToggleButton) findViewById(R.id.toggle_floor_fav);
         checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
         checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
         checkOld = (CheckBox) findViewById(R.id.checkOld);
+
         checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
-        checkAgeing1 = (CheckBox) findViewById(R.id.checkAgeing1);
-        checkAgeing2 = (CheckBox) findViewById(R.id.checkAgeing2);
-        checkAgeing3 = (CheckBox) findViewById(R.id.checkAgeing3);
+
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
-        checkAgeing3.setOnClickListener(this);
-        checkAgeing2.setOnClickListener(this);
-        checkAgeing1.setOnClickListener(this);
 
 
         qfDoneLayout.setOnClickListener(this);
-        stock_segmented.setOnCheckedChangeListener(StockAgeingActivity.this);
-        stock_BtnBack.setOnClickListener(StockAgeingActivity.this);
-        stock_BtnFilter.setOnClickListener(this);
-        stock_quickFilter.setOnClickListener(this);
+        floor_segmented.setOnCheckedChangeListener(this);
+        floor_BtnBack.setOnClickListener(this);
+        floor_BtnFilter.setOnClickListener(this);
+        floor_quickFilter.setOnClickListener(this);
         quickFilter_baseLayout.setOnClickListener(this);
         quickFilter_BorderLayout.setOnClickListener(this);
     }
@@ -302,40 +300,39 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.stockAgeing_imageBtnBack:
-                Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.toggle_stock_fav:
-                if (Toggle_stock_fav.isChecked()) {
-                    Toggle_stock_fav.setChecked(true);
-                } else {
-                    Toggle_stock_fav.setChecked(false);
-                }
-
-                break;
-            case R.id.stockAgeing_imgfilter:
-                Intent intent1 = new Intent(StockAgeingActivity.this, InventoryFilterActivity.class);
-                intent1.putExtra("checkfrom", "stockAgeing");
+            case R.id.fa_imageBtnBack:
+                Intent intent1 = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
                 startActivity(intent1);
                 finish();
                 break;
-            case R.id.sa_quickFilter:
+            case R.id.toggle_stock_fav:
+                if (Toggle_floor_fav.isChecked()) {
+                    Toggle_floor_fav.setChecked(true);
+                } else {
+                    Toggle_floor_fav.setChecked(false);
+                }
+
+                break;
+            case R.id.fa_imgfilter:
+                Intent intent = new Intent(FloorAvailabilityActivity.this, InventoryFilterActivity.class);
+                intent.putExtra("checkfrom", "floorAvailability");
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.floor_quickFilter:
+
                 quickFilterPopup.setVisibility(View.VISIBLE);
                 break;
             case R.id.quickFilter_baseLayout:
-                if (checkSeasonGpVal == null && checkAgeingVal == null) {
+                if (floorcheckSeasonGpVal == null) {
                     checkCurrent.setChecked(false);
                     checkPrevious.setChecked(false);
                     checkOld.setChecked(false);
                     checkUpcoming.setChecked(false);
-                    checkAgeing1.setChecked(false);
-                    checkAgeing2.setChecked(false);
-                    checkAgeing3.setChecked(false);
+
 
                 } else {
-                    switch (checkSeasonGpVal.toString()) {
+                    switch (floorcheckSeasonGpVal.toString()) {
                         case "Current":
                             checkCurrent.setChecked(true);
                             checkPrevious.setChecked(false);
@@ -368,73 +365,36 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             break;
                     }
 
-                    switch (checkAgeingVal.toString()) {
-                        case "CheckAgeing1":
-                            checkAgeing1.setChecked(true);
-                            checkAgeing2.setChecked(false);
-                            checkAgeing3.setChecked(false);
-                            break;
-                        case "CheckAgeing2":
-                            checkAgeing2.setChecked(true);
-                            checkAgeing1.setChecked(false);
-                            checkAgeing3.setChecked(false);
-                            break;
-                        case "CheckAgeing3":
-                            checkAgeing3.setChecked(true);
-                            checkAgeing2.setChecked(false);
-                            checkAgeing1.setChecked(false);
-                            break;
-                    }
+
                 }
                 quickFilterPopup.setVisibility(View.GONE);
                 break;
             case R.id.qfDoneLayout:
                 if (checkCurrent.isChecked()) {
                     popupCurrent();
-                    checkSeasonGpVal = "Current";
+                    floorcheckSeasonGpVal = "Current";
 
                     quickFilterPopup.setVisibility(View.GONE);
 
                 } else if (checkPrevious.isChecked()) {
                     popupPrevious();
-                    checkSeasonGpVal = "Previous";
+                    floorcheckSeasonGpVal = "Previous";
 
                     quickFilterPopup.setVisibility(View.GONE);
 
                 } else if (checkOld.isChecked()) {
                     popupOld();
-                    checkSeasonGpVal = "Old";
+                    floorcheckSeasonGpVal = "Old";
 
                     quickFilterPopup.setVisibility(View.GONE);
 
                 } else if (checkUpcoming.isChecked()) {
                     popupUpcoming();
-                    checkSeasonGpVal = "Upcoming";
+                    floorcheckSeasonGpVal = "Upcoming";
 
                     quickFilterPopup.setVisibility(View.GONE);
                 } else {
-                    Log.e("Uncheck1","----"+checkSeasonGpVal);
-                    //Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
-
-                }
-                if (checkAgeing1.isChecked()) {
-                    //popupUpcoming();
-                    checkAgeingVal = "CheckAgeing1";
-
-                    quickFilterPopup.setVisibility(View.GONE);
-                } else if (checkAgeing2.isChecked()) {
-                    //popupUpcoming();
-                    checkAgeingVal = "CheckAgeing2";
-
-                    quickFilterPopup.setVisibility(View.GONE);
-                } else if (checkAgeing3.isChecked()) {
-                    //popupUpcoming();
-                    checkAgeingVal = "CheckAgeing3";
-                    quickFilterPopup.setVisibility(View.GONE);
-                } else {
-                    Log.e("Uncheck2","----"+checkAgeingVal);
-
-                    //Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -470,38 +430,24 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 checkPrevious.setChecked(false);
 
                 break;
-            case R.id.checkAgeing1:
 
-                checkAgeing1.setChecked(true);
-                checkAgeing2.setChecked(false);
-                checkAgeing3.setChecked(false);
-                break;
-            case R.id.checkAgeing2:
-
-                checkAgeing2.setChecked(true);
-                checkAgeing1.setChecked(false);
-                checkAgeing3.setChecked(false);
-                break;
-            case R.id.checkAgeing3:
-
-                checkAgeing3.setChecked(true);
-                checkAgeing1.setChecked(false);
-                checkAgeing2.setChecked(false);
-                break;
         }
 
     }
 
     private void popupCurrent() {
+
+
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
-            limit = 10;
             offsetvalue = 0;
+            limit = 10;
+            count = 0;
             top = 10;
             seasongroup = "Current";
-            StockAgeingList.clear();
-            requestStockAgeingApi();
+            FloorList.clear();
+            requestFloorAvailabilityApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -511,42 +457,47 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
-            limit = 10;
             offsetvalue = 0;
+            limit = 10;
+            count = 0;
             top = 10;
             seasongroup = "Previous";
-            StockAgeingList.clear();
-            requestStockAgeingApi();
+            FloorList.clear();
+            requestFloorAvailabilityApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void popupOld() {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
-            limit = 10;
             offsetvalue = 0;
+            limit = 10;
+            count = 0;
             top = 10;
             seasongroup = "Old";
-            StockAgeingList.clear();
-            requestStockAgeingApi();
+            FloorList.clear();
+            requestFloorAvailabilityApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void popupUpcoming() {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
-            limit = 10;
             offsetvalue = 0;
+            limit = 10;
+            count = 0;
             top = 10;
             seasongroup = "Upcoming";
-            StockAgeingList.clear();
-            requestStockAgeingApi();
+            FloorList.clear();
+            requestFloorAvailabilityApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -557,8 +508,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         switch (checkedId) {
-            case R.id.stock_core:
-                if (stock_core.isChecked()) {
+            case R.id.floor_core:
+                if (floor_core.isChecked()) {
+
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading data...");
@@ -566,17 +518,17 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Core";
-                        StockAgeingList.clear();
-                        stockAgeingAdapter.notifyDataSetChanged();
-                        StockAgListView.setVisibility(View.GONE);
-                        requestStockAgeingApi();
+                        FloorList.clear();
+                        floorAvailabilityAdapter.notifyDataSetChanged();
+                        floorListView.setVisibility(View.GONE);
+                        requestFloorAvailabilityApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
-            case R.id.stock_fashion:
-                if (stock_fashion.isChecked()) {
+            case R.id.floor_fashion:
+                if (floor_fashion.isChecked()) {
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading data...");
@@ -584,10 +536,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Fashion";
-                        StockAgeingList.clear();
-                        stockAgeingAdapter.notifyDataSetChanged();
-                        StockAgListView.setVisibility(View.GONE);
-                        requestStockAgeingApi();
+                        FloorList.clear();
+                        floorAvailabilityAdapter.notifyDataSetChanged();
+                        floorListView.setVisibility(View.GONE);
+                        requestFloorAvailabilityApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
@@ -600,9 +552,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
+        Intent intent = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
         startActivity(intent);
         finish();
     }
+
 
 }

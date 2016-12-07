@@ -7,22 +7,23 @@
 
 
     <RelativeLayout
-        android:id="@+id/stock_cardView"
+        android:id="@+id/floor_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:padding="5dp"
         android:layout_alignParentTop="true"
-        android:padding="5dp">
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
-            android:id="@+id/stock_Rel_image_child"
+            android:id="@+id/floor_Rel_image_child"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            >
+
+
 
             <ImageView
-                android:id="@+id/stock_image_child"
+                android:id="@+id/floor_image_child"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
@@ -37,9 +38,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/stock_Rel_image_child"
+            android:layout_alignTop="@+id/floor_Rel_image_child"
             android:layout_marginTop="0dp"
-            android:layout_toRightOf="@+id/stock_Rel_image_child"
+            android:layout_toRightOf="@+id/floor_Rel_image_child"
             android:gravity="center_horizontal">
 
             <!--Buy one-->
@@ -60,7 +61,7 @@
                     <!---->
 
                     <TextView
-                        android:id="@+id/stock_option"
+                        android:id="@+id/floor_option"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
@@ -72,7 +73,7 @@
                         />
 
                     <RelativeLayout
-                        android:id="@+id/stock_fav"
+                        android:id="@+id/floor_fav"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
@@ -83,7 +84,7 @@
 
 
                         <ToggleButton
-                            android:id="@+id/toggle_stock_fav"
+                            android:id="@+id/toggle_floor_fav"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
@@ -107,74 +108,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_alignStart="@+id/bst_head_child"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/divider_salescard" />
 
 
-                <!--Promo sales-->
+                <!--SOH-->
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     android:weightSum="1">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:singleLine="true"
-                        android:text="Aging"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.1"
-                        android:text=":"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/stock_ageing"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:singleLine="true"
-                        android:text="100"
-                        android:textSize="12sp" />
-                    <!--<TextView-->
-                        <!--android:id="@+id/stock_ageing_days"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_weight="0.55"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:text="Days"-->
-                        <!--android:textSize="12sp" />-->
-
-                </LinearLayout>
-
-
-                <!--Promo Sales(U)-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
+                        android:layout_weight="0.3"
                         android:singleLine="true"
                         android:text="SOH(U)"
                         android:textSize="12sp" />
@@ -182,16 +134,51 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/stock_SOH_U"
+                        android:id="@+id/floor_SOH_U"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text="100"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+
+                <!--No of days-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="No of Days Passed"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:singleLine="true"
+                        android:text=":"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/floor_NoofDays"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="100"
@@ -199,43 +186,39 @@
 
                 </LinearLayout>
 
-                <!--ROS(U)-->
+                <!--First Receipt Date-->
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:orientation="horizontal"-->
-                    <!--android:weightSum="1">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
-                    <!--<TextView-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_weight="0.3"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:text="ROS(U)"-->
-                        <!--android:textSize="11sp" />-->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="First Receipt Date"
+                        android:textSize="12sp" />
 
-                    <!--<TextView-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_weight="0.1"-->
-                        <!--android:text=":"-->
-                        <!--android:textSize="11sp" />-->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textSize="12sp" />
 
-                    <!--<TextView-->
-                        <!--android:id="@+id/top_RosU"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_weight="0.6"-->
-                        <!--android:singleLine="true"-->
-                        <!--android:text="5"-->
-                        <!--android:textSize="11sp" />-->
+                    <TextView
+                        android:id="@+id/floor_ReceiptDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text="5"
+                        android:textSize="12sp" />
 
-                <!--</LinearLayout>-->
+                </LinearLayout>
 
 
             </LinearLayout>

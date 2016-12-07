@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.StockAgeing;
+package apsupportapp.aperotechnologies.com.designapp.FloorAvailability;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,23 +10,21 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopOptionAdapter;
+import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingAdapter;
+import apsupportapp.aperotechnologies.com.designapp.model.FloorAvailabilityDetails;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
 /**
- * Created by pamrutkar on 05/12/16.
+ * Created by pamrutkar on 07/12/16.
  */
-public class StockAgeingAdapter extends BaseAdapter{
+public class FloorAvailabilityAdapter extends BaseAdapter {
 
-    private ArrayList<RunningPromoListDisplay> arrayList;
+    private ArrayList<FloorAvailabilityDetails> arrayList;
 
     //private List mStringFilterList;
 
@@ -37,7 +35,7 @@ public class StockAgeingAdapter extends BaseAdapter{
 
     //private ValueFilter valueFiAlter;
 
-    public StockAgeingAdapter(ArrayList<RunningPromoListDisplay> arrayList, Context context) {
+    public FloorAvailabilityAdapter(ArrayList<FloorAvailabilityDetails> arrayList, Context context) {
 
         // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
@@ -77,47 +75,52 @@ public class StockAgeingAdapter extends BaseAdapter{
 
         Position=position;
 
-        final StockAgeingAdapter.Holder holder;
+        final FloorAvailabilityAdapter.Holder holder;
         if (convertView == null) {
-            holder=new StockAgeingAdapter.Holder();
-            convertView = mInflater.inflate(R.layout.activity_stock_ageing_child, null);
-            holder.stock_ageing = (TextView) convertView.findViewById(R.id.stock_ageing);
-            holder.stock_SOH_U = (TextView) convertView.findViewById(R.id.stock_SOH_U);
-            holder.stock_option = (TextView) convertView.findViewById(R.id.stock_option);
+            holder=new FloorAvailabilityAdapter.Holder();
+            convertView = mInflater.inflate(R.layout.activity_floor_availability_child, null);
+            holder.floor_option = (TextView) convertView.findViewById(R.id.floor_option);
+            holder.floor_SOH_U=(TextView)convertView.findViewById(R.id.floor_SOH_U);
+            holder.floor_NoofDays = (TextView) convertView.findViewById(R.id.floor_NoofDays);
+            holder.floor_ReceiptDate = (TextView) convertView.findViewById(R.id.floor_ReceiptDate);
 //
-            holder.stock_image_child = (ImageView) convertView.findViewById(R.id.stock_image_child);
-            holder.stock_fav = (RelativeLayout) convertView.findViewById(R.id.stock_fav);
+            holder.floor_image_child = (ImageView) convertView.findViewById(R.id.floor_image_child);
+            holder.floor_fav = (RelativeLayout) convertView.findViewById(R.id.floor_fav);
             convertView.setTag(holder);
 
         } else {
 
-            holder=(StockAgeingAdapter.Holder)convertView.getTag();
+            holder=(FloorAvailabilityAdapter.Holder)convertView.getTag();
 
         }
-        holder.stock_option.setText(arrayList.get(position).getOption());
-        holder.stock_ageing.setText(arrayList.get(position).getStockageBandDesc()+" Days" );
-        holder.stock_SOH_U.setText(""+(int)arrayList.get(position).getStkOnhandQty());
+
+        holder.floor_option.setText(arrayList.get(position).getOption());
+        holder.floor_SOH_U.setText(""+(int)arrayList.get(position).getStkOnhandQty());
+        holder.floor_NoofDays.setText(arrayList.get(position).getNoDaysPassed());
+        holder.floor_ReceiptDate.setText(arrayList.get(position).getFirstReceiptDate());
 //        StockAgeingActivity.stock_txtStoreCode.setText(arrayList.get(position).getStoreCode());
 //        StockAgeingActivity.stock_txtStoreName.setText(arrayList.get(position).getStoreDescription());
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
-            Picasso.with(this.context).load(arrayList.get(position).getProdImageURL()).into(holder.stock_image_child);
+            Picasso.with(this.context).load(arrayList.get(position).getProdImageURL()).into(holder.floor_image_child);
         }else {
-            Picasso.with(this.context).load(R.mipmap.placeholder).into(holder.stock_image_child);
+            Picasso.with(this.context).load(R.mipmap.placeholder).into(holder.floor_image_child);
         }
 
-       // ---------------------click listener -------------------------
+        // ---------------------click listener -------------------------
         return convertView;
     }
 
+
+
     private class Holder {
 
-        TextView stock_ageing,stock_SOH_U,stock_option;
-        ImageView stock_image_child;
-        RelativeLayout stock_fav;
+        TextView floor_option, floor_NoofDays, floor_ReceiptDate, floor_SOH_U;
+        ImageView floor_image_child;
+        RelativeLayout floor_fav;
         ProgressBar loader;
-
     }
 
 
-}
+    }
+
