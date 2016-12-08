@@ -89,6 +89,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_stock_ageing);
         getSupportActionBar().hide();
         initalise();
+
         gson = new Gson();
         StockAgeingList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -99,6 +100,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        StockAgListView.setVisibility(View.VISIBLE);
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");

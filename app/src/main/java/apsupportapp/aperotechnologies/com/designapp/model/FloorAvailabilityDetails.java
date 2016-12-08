@@ -11,9 +11,72 @@ public class FloorAvailabilityDetails {
     String storeDescription;
     String option;
     String prodImageURL;
-    double stkOnhandQty ;
+
     String noDaysPassed;
     String firstReceiptDate;
+    double ros;
+    double availabilityPct;
+    String planDept;
+    double stkOnhandQty;
+    double targetROS;
+
+    public String getPlanCategory() {
+        return planCategory;
+    }
+
+    public void setPlanCategory(String planCategory) {
+        this.planCategory = planCategory;
+    }
+
+    public String getPlanClass() {
+        return planClass;
+    }
+
+    public void setPlanClass(String planClass) {
+        this.planClass = planClass;
+    }
+
+    String planCategory;
+    String planClass;
+
+    public String getPlanDept() {
+        return planDept;
+    }
+
+    public void setPlanDept(String planDept) {
+        this.planDept = planDept;
+    }
+
+
+
+    public double getTargetROS() {
+        return targetROS;
+    }
+
+    public void setTargetROS(double targetROS) {
+        this.targetROS = targetROS;
+    }
+
+
+
+    public double getRos() {
+        return ros;
+    }
+
+    public void setRos(double ros) {
+        this.ros = ros;
+    }
+
+    public double getAvailabilityPct() {
+        return availabilityPct;
+    }
+
+    public void setAvailabilityPct(double availabilityPct) {
+        this.availabilityPct = availabilityPct;
+    }
+
+
+
 
     public String getStoreCode() {
         return storeCode;

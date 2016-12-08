@@ -167,20 +167,28 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
 
-        </activity><activity
+        </activity>
+        <activity
             android:name=".WorstPerformersInventory.WorstPerformerInventory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
 
-    </activity>
-            android:windowSoftInputMode="stateHidden"></activity>
+        </activity>
+
         <activity
             android:name=".FloorAvailability.FloorAvailabilityActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
 
+        <activity
+            android:name=".TargetStockExceptions.TargetStockExceptionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
 
-
+        <activity
+            android:name=".SellThruExceptions.SaleThruInventory"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <!-- Local Notification receiver-->
         <receiver android:name=".LocalNotificationReceiver"></receiver>
 

@@ -402,7 +402,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.bestInvent_imgfilter:
                 Intent intent = new Intent(this, InventoryFilterActivity.class);
-                intent.putExtra("checkfrom", "bestPerformers");
+                intent.putExtra("checkfrom", "sellThruExceptions");
                 startActivity(intent);
                 finish();
                 break;

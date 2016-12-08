@@ -100,6 +100,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        floorListView.setVisibility(View.VISIBLE);
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");

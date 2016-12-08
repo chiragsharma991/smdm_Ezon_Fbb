@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/tstoreCode"
-                android:hint="3215"
+                android:hint=""
                 android:textColor="#000000"
                 android:textSize="13sp" />
 
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@id/txtStoreCode"
-                android:hint="FAL CDC-New Delhi"
+                android:hint=""
                 android:textColor="#000000"
                 android:textSize="13sp" />
 

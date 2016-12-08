@@ -21,41 +21,19 @@
 
 
     <RelativeLayout
+        android:id="@+id/target_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bst_cardView"
-        android:padding="5dp"
-        >
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bst_Rel_image_child"
-
-            >
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="0dp"
-                android:src="@mipmap/placeholder"
-                android:scaleType="fitXY"
-                android:id="@+id/bst_image_child"
-
-                />
-
-        </RelativeLayout>
-
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="5dp">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-            android:visibility="invisible"
-            android:gravity="center_horizontal"
-            android:layout_toRightOf="@+id/bst_Rel_image_child"
-            android:layout_alignBottom="@+id/bst_Rel_image_child"
-            >
+            android:gravity="center_horizontal">
 
             <!--Buy one-->
 
@@ -64,115 +42,230 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity=""
-                android:padding="10dp"
-                >
+                android:paddingLeft="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/bst_head_child"
-                    android:text="Buy One Get One "
-                    android:textColor="#000000"
-                    android:textSize="11sp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+                    <!---->
+
+                    <TextView
+                        android:id="@+id/target_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:text=""
+                        android:textColor="#000000"
+                        android:textSize="13sp"
 
 
-                    />
+                        />
 
+                    <!--<RelativeLayout-->
+                        <!--android:id="@+id/target_fav"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="0.8"-->
+
+                        <!--&gt;-->
+
+
+
+
+                        <!--<ToggleButton-->
+                            <!--android:id="@+id/toggle_target_fav"-->
+                            <!--android:layout_width="20dp"-->
+                            <!--android:layout_height="20dp"-->
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:background="@drawable/toggleswitch"-->
+                            <!--android:focusable="false"-->
+                            <!--android:focusableInTouchMode="false"-->
+                            <!--android:textOff=""-->
+                            <!--android:textOn=""-->
+
+                            <!--/>-->
+
+
+                    <!--</RelativeLayout>-->
+
+
+                </LinearLayout>
 
 
                 <TextView
+                    android:id="@+id/bst_lineOne_child"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:id="@+id/bst_lineOne_child"
-                    android:background="@color/divider_salescard"
+                    android:visibility="gone"
                     android:layout_alignStart="@+id/bst_head_child"
                     android:layout_marginTop="10dp"
-                    />
+                    android:background="@color/divider_salescard" />
 
 
-                <!--Promo sales-->
+                <!--SOH (U)-->
 
 
                 <LinearLayout
-                    android:weightSum="1"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
                     <TextView
-                        android:layout_weight="0.5"
-                        android:text="Promo Sales"
-                        android:layout_gravity="center"
-                        android:singleLine="true"
-                        android:textSize="11sp"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12sp" />
 
                     <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="0.1"
-                        android:text=":"
-                        android:layout_gravity="center"
-                        android:layout_width="0dp"
-                        android:textSize="12dp"
-                        android:layout_height="wrap_content" />
+                        android:text=""
+                        android:textSize="12sp" />
 
                     <TextView
-                        android:layout_weight="0.4"
-                        android:id="@+id/bst_PromoValues_child"
-                        android:text="Promo Sales"
-                        android:layout_gravity="center"
-                        android:singleLine="true"
+                        android:id="@+id/target_SOH_U"
                         android:layout_width="0dp"
-                        android:textSize="13sp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
 
-
-                <!--Promo Sales(U)-->
+                <!--Target ROS-->
 
                 <LinearLayout
-                    android:weightSum="1"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
                     <TextView
-                        android:layout_weight="0.5"
-                        android:text="Promo Sales(U)"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_weight="0.3"
                         android:singleLine="true"
-                        android:textSize="11sp"
-                        android:layout_height="wrap_content" />
+                        android:text=""
+                        android:textSize="12sp" />
 
                     <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="0.1"
-                        android:text=":"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="wrap_content" />
+                        android:text=""
+                        android:textSize="12sp" />
 
                     <TextView
-                        android:layout_weight="0.4"
-                        android:id="@+id/bst_PromoValuesU_child"
-                        android:text="Promo Sales"
-                        android:textSize="13sp"
-                        android:singleLine="true"
-                        android:layout_gravity="center"
+                        android:id="@+id/target_ROS_U"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12sp" />
 
                 </LinearLayout>
+
+                <!--ROS(U)-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"
+                        android:text=""
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/target_ROS"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <!--Availability-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"
+                        android:text=""
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/target_Availability"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
             </LinearLayout>
 
 
-
-
         </RelativeLayout>
+
 
     </RelativeLayout>
 

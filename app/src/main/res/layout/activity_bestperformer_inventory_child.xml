@@ -66,7 +66,7 @@
                         android:layout_weight="0.2"
                         android:text="Buy One Get One"
                         android:textColor="#000000"
-                        android:textSize="11sp"
+                        android:textSize="13sp"
 
 
                         />
@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     android:weightSum="1">
 
@@ -129,7 +129,7 @@
                         android:layout_weight="0.35"
                         android:singleLine="true"
                         android:text="Sales(U)"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -137,7 +137,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/bestInvent_Sale"
@@ -147,7 +147,7 @@
                         android:layout_weight="0.45"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -168,7 +168,7 @@
                         android:layout_weight="0.35"
                         android:singleLine="true"
                         android:text="SOH(U)"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -176,7 +176,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/bestInvent_SOH"
@@ -186,7 +186,7 @@
                         android:layout_weight="0.45"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -206,7 +206,7 @@
                         android:layout_weight="0.35"
                         android:singleLine="true"
                         android:text="GIT(U)"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -214,7 +214,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/bestInvent_GIT"
@@ -224,7 +224,7 @@
                         android:layout_weight="0.45"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -244,7 +244,7 @@
                         android:layout_weight="0.35"
                         android:singleLine="true"
                         android:text="Sell Thru% (U)"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -252,7 +252,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/bestInvent_sellThru"
@@ -262,7 +262,7 @@
                         android:layout_weight="0.45"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -283,7 +283,7 @@
                         android:layout_weight="0.35"
                         android:singleLine="true"
                         android:text="FWC"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -291,7 +291,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/bestInvent_FWC"
@@ -301,7 +301,7 @@
                         android:layout_weight="0.45"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -321,7 +321,7 @@
                         android:layout_weight="0.35"
                         android:singleLine="true"
                         android:text="ROS(U)"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -329,7 +329,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/bestInvent_RosU"
@@ -339,7 +339,7 @@
                         android:layout_weight="0.45"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="9sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 

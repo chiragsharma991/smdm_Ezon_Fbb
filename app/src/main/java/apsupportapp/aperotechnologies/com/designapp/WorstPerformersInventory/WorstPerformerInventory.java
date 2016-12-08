@@ -423,7 +423,7 @@ public class WorstPerformerInventory extends AppCompatActivity implements View.O
                 break;
             case R.id.bestInvent_imgfilter:
                 Intent intent = new Intent(this, InventoryFilterActivity.class);
-                intent.putExtra("checkfrom","bestPerformers");
+                intent.putExtra("checkfrom","worstPerformers");
                 startActivity(intent);
                 finish();
                 break;

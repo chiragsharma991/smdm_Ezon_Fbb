@@ -2,13 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/bestQuickFilterPopup1"
+    android:id="@+id/bestQuickFilterPopup"
     android:visibility="gone">
 
     <!--base layout for click anywhere-->
 
     <RelativeLayout
-        android:id="@+id/bestQuickFilterPopup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"

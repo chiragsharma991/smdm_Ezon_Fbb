@@ -89,6 +89,16 @@ public class RunningPromoListDisplay {
     double fwdWeekCover;
     double ros;
 
+    public double getSellthruUnitsZonal() {
+        return sellthruUnitsZonal;
+    }
+
+    public void setSellthruUnitsZonal(double sellthruUnitsZonal) {
+        this.sellthruUnitsZonal = sellthruUnitsZonal;
+    }
+
+    double sellthruUnitsZonal;
+
     public String getStockageBandDesc() {
         return stockageBandDesc;
     }

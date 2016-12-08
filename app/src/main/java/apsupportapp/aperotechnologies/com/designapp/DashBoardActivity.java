@@ -49,8 +49,10 @@ import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEffic
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
+import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
+import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.TargetStockExceptionActivity;
 import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
@@ -72,7 +74,7 @@ public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
     ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment;
-    ImageButton btnFloorAvailability;
+    ImageButton btnFloorAvailability,btnTargetStockExcep,btnSellThruExcep;
     ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnBestPerformersInv;
     ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,
             btnSkewedSize,btnCutSize,btnStockAgeing,BtnWorstPerformers;
@@ -419,6 +421,32 @@ public class DashBoardActivity extends AppCompatActivity
                 finish();
             }
         });
+        btnTargetStockExcep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,TargetStockExceptionActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
+        btnSellThruExcep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,SaleThruInventory.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+
+                finish();
+            }
+        });
 
     }
 
@@ -546,6 +574,8 @@ public class DashBoardActivity extends AppCompatActivity
         btnStockAgeing = (ImageButton)findViewById(R.id.btnStockAgeing);
         btnBestPerformersInv = (ImageButton)findViewById(R.id.btnBestPerformers);
         btnFloorAvailability =(ImageButton)findViewById(R.id.btnFloorAvailability);
+        btnTargetStockExcep = (ImageButton)findViewById(R.id.btnTargetStockExcep);
+        btnSellThruExcep = (ImageButton)findViewById(R.id.btnSellThruExcep);
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 
