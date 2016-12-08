@@ -108,9 +108,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
 
     private void requestRunningPromoApi() {
 
-        //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
         String url = ConstsCore.web_url + "/v1/display/bestworstpromodetails/" +userId + "?offset=" +offsetvalue + "&limit=" +limit+"&top=" +top+"&orderby=" +"DESC"+"&orderbycol=" +orderbycol;
-        //  https://smdm.manthan.com/v1/display/bestworstpromodetails/4813?offset=0&limit=10&top=2&orderby=DESC&ord erbycol=1        Log.e(TAG, "Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

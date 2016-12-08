@@ -23,6 +23,14 @@
         segmentedgroup:sc_tint_color="#B73020">
 
         <RadioButton
+            style="@style/RadioButton"
+            android:id="@+id/bestInvent_fashion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Fashion" />
+
+        <RadioButton
             android:id="@+id/bestInvent_core"
             style="@style/RadioButton"
             android:layout_width="0dp"
@@ -31,13 +39,6 @@
             android:backgroundTint="#B73020"
             android:text="Core" />
 
-        <RadioButton
-            style="@style/RadioButton"
-            android:id="@+id/bestInvent_fashion"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Fashion" />
 
 
     </info.hoang8f.android.segmented.SegmentedGroup>
@@ -191,7 +192,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/bestInvent_storeCode"
-                android:hint="3215"
                 android:textColor="#000000"
                 android:textSize="13sp" />
 
@@ -201,7 +201,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@id/bestInvent_txtStoreCode"
-                android:hint="FAL CDC-New Delhi"
                 android:textColor="#000000"
                 android:textSize="13sp" />
 

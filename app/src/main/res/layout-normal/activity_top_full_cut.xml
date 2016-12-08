@@ -5,7 +5,7 @@
     android:id="@+id/activity_top_full_cut"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="apsupportapp.aperotechnologies.com.designapp.TopOption.TopFullCut">
+    tools:context="apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut">
 
     <LinearLayout
         android:orientation="vertical"

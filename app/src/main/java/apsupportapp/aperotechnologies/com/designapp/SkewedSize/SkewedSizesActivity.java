@@ -495,6 +495,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                     SkewedSizeList.clear();
                     Reusable_Functions.sDialog(this, "Loading.......");
                     requestRunningPromoApi();
+
                 }
                 break;
 

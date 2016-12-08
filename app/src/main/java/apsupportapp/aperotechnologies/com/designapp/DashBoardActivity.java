@@ -54,6 +54,7 @@ import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActiv
 import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
+import apsupportapp.aperotechnologies.com.designapp.WorstPerformersInventory.WorstPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;
 
 import org.json.JSONArray;
@@ -73,7 +74,8 @@ public class DashBoardActivity extends AppCompatActivity
     ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment;
     ImageButton btnFloorAvailability;
     ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnBestPerformersInv;
-    ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,btnSkewedSize,btnCutSize,btnStockAgeing;
+    ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,
+            btnSkewedSize,btnCutSize,btnStockAgeing,BtnWorstPerformers;
     LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory;
     TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt;
 
@@ -190,6 +192,18 @@ public class DashBoardActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashBoardActivity.this, SkewedSizesActivity.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                finish();
+            }
+        });
+        BtnWorstPerformers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this, WorstPerformerInventory.class);
                 startActivity(intent);
                 if(timer != null)
                 {
@@ -524,6 +538,7 @@ public class DashBoardActivity extends AppCompatActivity
         BtnExpiringpromo=(ImageButton)findViewById(R.id.btnExpiringpromo);
         BtnBestWorstpromo=(ImageButton)findViewById(R.id.btnBestWorstpromo);
         BtnOnlyWorstpromo=(ImageButton)findViewById(R.id.btnOnlyWorstpromo);
+        BtnWorstPerformers=(ImageButton)findViewById(R.id.btnWorstPerformers);
         btnFeshnessindex=(ImageButton)findViewById(R.id.btnFeshnessindex);
         btnOptionEfficiency = (ImageButton)findViewById(R.id.btnOptionEfficiency);
         btnCutSize = (ImageButton)findViewById(R.id.btnCutSize);

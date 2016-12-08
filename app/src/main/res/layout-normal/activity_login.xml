@@ -61,7 +61,8 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/loggedin"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            />
         <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:textColor="#ffffff"-->

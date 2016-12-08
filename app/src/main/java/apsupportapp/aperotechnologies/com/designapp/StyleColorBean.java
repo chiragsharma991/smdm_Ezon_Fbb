@@ -1,7 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
 
-public class StyleColorBean {
+ class StyleColorBean {
     String color, size;
     int twSaleTotQty, stkOnhandQty;
     double fwdWeekCover;

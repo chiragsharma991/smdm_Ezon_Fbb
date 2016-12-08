@@ -87,7 +87,7 @@ public class RunningPromoListDisplay {
     int stkGitQty;
     double sellThruUnits;
     double fwdWeekCover;
-    int ros;
+    double ros;
 
     public String getStockageBandDesc() {
         return stockageBandDesc;
@@ -135,11 +135,11 @@ public class RunningPromoListDisplay {
         this.targetStock = targetStock;
     }
 
-    public int getRos() {
+    public double getRos() {
         return ros;
     }
 
-    public void setRos(int ros) {
+    public void setRos(double ros) {
         this.ros = ros;
     }
 
