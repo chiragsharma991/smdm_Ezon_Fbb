@@ -163,13 +163,7 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_below="@+id/headersmdm"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_height="1dp"
-                    android:background="@color/divider_salescard"
-                    />
+
 
 
 
@@ -343,12 +337,7 @@
 
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/divider_salescard"
-                    />
+
 
 
             </LinearLayout>
@@ -518,12 +507,7 @@
 
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/divider_salescard"
-                    />
+
 
 
 
@@ -784,13 +768,7 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:id="@+id/lin3to3"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard"
-                    />
+
 
             </LinearLayout>
 
@@ -837,7 +815,8 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="#ffffff"
-                            android:src="@mipmap/sales_analysis"/>
+                            android:src="@mipmap/sales_analysis"
+                            />
 
 
                         <TextView
@@ -891,7 +870,8 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="#ffffff"
-                            android:src="@mipmap/cut_size_report"/>
+                            android:src="@mipmap/cut_size_report"
+                            />
 
                         <TextView
                             android:layout_gravity="center_horizontal"
@@ -900,6 +880,8 @@
                             android:text="Cut-Size Report"
                             android:gravity="center_horizontal"
                             android:textSize="13sp" />
+
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -927,18 +909,24 @@
                             android:textSize="13sp"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
+
+
+
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/divider_salescard"/>
+
+
+
+
+
             </LinearLayout>
+
+
             <TextView
                 android:layout_below="@+id/headerinvent"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_salescard"/>
+                android:background="@color/divider_salescard"
+                />
 
             <LinearLayout
                 android:layout_below="@+id/headerinvent"
@@ -949,13 +937,17 @@
                 android:orientation="vertical"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                >
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="4">
+
+
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_weight="1"
@@ -1061,28 +1053,28 @@
                     </LinearLayout>
 
                     <!--<LinearLayout-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content">-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                        <!--<ImageButton-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:id="@+id/btnStockAgeing"-->
-                            <!--android:layout_width="80dp"-->
-                            <!--android:layout_height="80dp"-->
-                            <!--android:background="#ffffff"-->
-                            <!--android:src="@mipmap/skewed_size"-->
-                            <!--/>-->
+                    <!--<ImageButton-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/btnStockAgeing"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:src="@mipmap/skewed_size"-->
+                    <!--/>-->
 
 
-                        <!--<TextView-->
-                            <!--android:gravity="center_horizontal"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="Stock Ageing Excep"-->
-                            <!--android:textSize="13sp"-->
-                            <!--android:layout_gravity="center_horizontal" />-->
+                    <!--<TextView-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Stock Ageing Excep"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:layout_gravity="center_horizontal" />-->
                     <!--</LinearLayout>-->
 
 
@@ -1287,55 +1279,55 @@
                     </LinearLayout>
 
                     <!--<LinearLayout-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content">-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                        <!--<ImageButton-->
-                            <!--android:gravity="center_horizontal"-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:id="@+id/btnCutSize"-->
-                            <!--android:layout_width="80dp"-->
-                            <!--android:layout_height="80dp"-->
-                            <!--android:background="#ffffff"-->
-                            <!--android:src="@mipmap/cut_size_report"-->
-                            <!--/>-->
+                    <!--<ImageButton-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/btnCutSize"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:src="@mipmap/cut_size_report"-->
+                    <!--/>-->
 
-                        <!--<TextView-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="Cut-Size Report"-->
-                            <!--android:gravity="center_horizontal"-->
-                            <!--android:textSize="13sp" />-->
+                    <!--<TextView-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Cut-Size Report"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:textSize="13sp" />-->
 
 
                     <!--</LinearLayout>-->
 
                     <!--<LinearLayout-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content">-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                        <!--<ImageButton-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:id="@+id/btnSkewedSize"-->
-                            <!--android:layout_width="80dp"-->
-                            <!--android:layout_height="80dp"-->
-                            <!--android:background="#ffffff"-->
-                            <!--android:src="@mipmap/skewed_size"-->
-                            <!--/>-->
+                    <!--<ImageButton-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/btnSkewedSize"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:src="@mipmap/skewed_size"-->
+                    <!--/>-->
 
 
-                        <!--<TextView-->
-                            <!--android:gravity="center_horizontal"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="SkewedSize"-->
-                            <!--android:textSize="13sp"-->
-                            <!--android:layout_gravity="center_horizontal" />-->
+                    <!--<TextView-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="SkewedSize"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:layout_gravity="center_horizontal" />-->
                     <!--</LinearLayout>-->
 
                     <!--<LinearLayout-->
@@ -1367,13 +1359,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_below="@+id/lin4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard"
-                    />
 
 
             </LinearLayout>
@@ -1473,8 +1458,8 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:textStyle="bold"
-                android:text="Inventory"
                 android:layout_marginTop="5dp"
+                android:text="Inventory"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="16sp"
                 android:layout_width="match_parent"

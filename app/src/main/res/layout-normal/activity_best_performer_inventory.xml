@@ -130,7 +130,7 @@
 
                 <RelativeLayout
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="0dp"
                     android:id="@+id/bestInvent_imgfilter"
                     android:background="@drawable/button_red_effect"
                     android:layout_width="@dimen/header_clickable_width"
@@ -206,8 +206,9 @@
 
             <RelativeLayout
                 android:id="@+id/bestInvent_quickFilter"
-                android:layout_width="35dp"
+                android:layout_width="50dp"
                 android:layout_height="30dp"
+                android:gravity="end"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="0dp"
