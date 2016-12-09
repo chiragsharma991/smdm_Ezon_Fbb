@@ -69,18 +69,18 @@
 
 
 
-                    <TextView
-                        android:id="@+id/skewed_option"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:text="Buy One Get One"
-                        android:paddingLeft="10dp"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
+                        <TextView
+                            android:id="@+id/skewed_option"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:text="Buy One Get One"
+                            android:paddingLeft="10dp"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
 
 
-                        />
+                            />
                     </RelativeLayout>
 
 
@@ -142,7 +142,7 @@
                         android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="SOH(U)"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -150,7 +150,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/skewed_SOHU"
@@ -160,7 +160,7 @@
                         android:layout_weight="0.7"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -181,7 +181,7 @@
                         android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="FWC"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -189,7 +189,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/skewed_fwc"
@@ -199,7 +199,7 @@
                         android:layout_weight="0.7"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -219,7 +219,7 @@
                         android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="Sizes"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -228,7 +228,7 @@
                         android:layout_weight="0.1"
                         android:text=":"
                         android:visibility="invisible"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/skewed_RosU"
@@ -239,7 +239,7 @@
                         android:singleLine="true"
                         android:text="5"
                         android:visibility="invisible"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -311,7 +311,7 @@
                                 android:padding="2dp"
                                 android:textColor="#ffffffff"
                                 android:background="@drawable/cell_shape_mark"
-                                android:textSize="11sp"
+                                android:textSize="12sp"
                                 />
 
 
@@ -383,8 +383,8 @@
                                 android:gravity="center"
                                 android:padding="2dp"
                                 android:background="@drawable/cell_shape_mark"
-                                android:textSize="11sp"
-                                />-->
+                                android:textSize="12sp"
+                                />
                         </TableRow>
 
                     </TableLayout>

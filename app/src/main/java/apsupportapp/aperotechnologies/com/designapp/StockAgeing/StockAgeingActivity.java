@@ -57,7 +57,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class StockAgeingActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     TextView stock_txtStoreCode, stock_txtStoreName;
-    RelativeLayout stock_BtnBack, stock_BtnFilter, stock_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout;
+    RelativeLayout stock_BtnBack, stock_BtnFilter, stock_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
     RunningPromoListDisplay StockAgeingListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken, seasongroup = "All";
@@ -89,6 +89,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_stock_ageing);
         getSupportActionBar().hide();
         initalise();
+
         gson = new Gson();
         StockAgeingList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -99,9 +100,18 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
-        requestStockAgeingApi();
-        Reusable_Functions.sDialog(this, "Loading.......");
+        StockAgListView.setVisibility(View.VISIBLE);
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 10;
+            count = 0;
+            top = 10;
+            requestStockAgeingApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
@@ -118,18 +128,19 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Top Option : " + " " + response);
+                        Log.i(TAG, "Stock Aging : " + " " + response);
                         Log.i(TAG, "response" + "" + response.length());
-
+                        StockAgListView.setVisibility(View.VISIBLE);
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 footer.setVisibility(View.GONE);
+                                if (StockAgeingList.size() == 0) {
+                                    StockAgListView.setVisibility(View.GONE);
+                                }
 
                             } else if (response.length() == limit) {
-
-
                                 Log.e(TAG, "Top eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -172,16 +183,22 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             } else {
                                 stockAgeingAdapter = new StockAgeingAdapter(StockAgeingList, context);
                                 StockAgListView.setAdapter(stockAgeingAdapter);
+                                stock_txtStoreCode.setText(StockAgeingList.get(0).getStoreCode());
+                                stock_txtStoreName.setText(StockAgeingList.get(0).getStoreDescription());
+
                             }
 
-                            stock_txtStoreCode.setText(StockAgeingList.get(0).getStoreCode());
-                            stock_txtStoreName.setText(StockAgeingList.get(0).getStoreDescription());
 
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {
+
+
+                            StockAgeingList.clear();
+                            stockAgeingAdapter.notifyDataSetChanged();
+                            StockAgListView.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
                             footer.setVisibility(View.GONE);
-                            Toast.makeText(context, "no data found in catch" + e.toString(), Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(context, "no data found in catch" + e.toString(), Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -224,7 +241,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     footer.setVisibility(View.VISIBLE);
                     lazyScroll = "ON";
                     requestStockAgeingApi();
-                    Reusable_Functions.sDialog(context, "Loading data...");
+                    //Reusable_Functions.sDialog(context, "Loading data...");
                 }
             }
 
@@ -250,6 +267,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         quickFilterPopup.setVisibility(View.GONE);
         quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
         qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
+        quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
         StockAgListView = (ListView) findViewById(R.id.stockListView);
         stock_segmented = (SegmentedGroup) findViewById(R.id.stock_segmented);
         stock_core = (RadioButton) findViewById(R.id.stock_core);
@@ -278,6 +296,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         stock_BtnFilter.setOnClickListener(this);
         stock_quickFilter.setOnClickListener(this);
         quickFilter_baseLayout.setOnClickListener(this);
+        quickFilter_BorderLayout.setOnClickListener(this);
     }
 
 
@@ -286,7 +305,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
         switch (v.getId()) {
             case R.id.stockAgeing_imageBtnBack:
-                onBackPressed();
+                Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.toggle_stock_fav:
                 if (Toggle_stock_fav.isChecked()) {
@@ -297,13 +318,12 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                 break;
             case R.id.stockAgeing_imgfilter:
-                Intent intent = new Intent(StockAgeingActivity.this, InventoryFilterActivity.class);
-                intent.putExtra("checkfrom", "stockAgeing");
-                startActivity(intent);
+                Intent intent1 = new Intent(StockAgeingActivity.this, InventoryFilterActivity.class);
+                intent1.putExtra("checkfrom", "stockAgeing");
+                startActivity(intent1);
                 finish();
                 break;
             case R.id.sa_quickFilter:
-
                 quickFilterPopup.setVisibility(View.VISIBLE);
                 break;
             case R.id.quickFilter_baseLayout:
@@ -368,153 +388,170 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             break;
                     }
                 }
-        quickFilterPopup.setVisibility(View.GONE);
-        break;
-        case R.id.qfDoneLayout:
-        if (checkCurrent.isChecked()) {
-            popupCurrent();
-            checkSeasonGpVal = "Current";
+                quickFilterPopup.setVisibility(View.GONE);
+                break;
+            case R.id.qfDoneLayout:
+                if (checkCurrent.isChecked()) {
+                    popupCurrent();
+                    checkSeasonGpVal = "Current";
 
-            quickFilterPopup.setVisibility(View.GONE);
+                    quickFilterPopup.setVisibility(View.GONE);
 
-        } else if (checkPrevious.isChecked()) {
-            popupPrevious();
-            checkSeasonGpVal = "Previous";
+                } else if (checkPrevious.isChecked()) {
+                    popupPrevious();
+                    checkSeasonGpVal = "Previous";
 
-            quickFilterPopup.setVisibility(View.GONE);
+                    quickFilterPopup.setVisibility(View.GONE);
 
-        } else if (checkOld.isChecked()) {
-            popupOld();
-            checkSeasonGpVal = "Old";
+                } else if (checkOld.isChecked()) {
+                    popupOld();
+                    checkSeasonGpVal = "Old";
 
-            quickFilterPopup.setVisibility(View.GONE);
+                    quickFilterPopup.setVisibility(View.GONE);
 
-        } else if (checkUpcoming.isChecked()) {
-            popupUpcoming();
-            checkSeasonGpVal = "Upcoming";
+                } else if (checkUpcoming.isChecked()) {
+                    popupUpcoming();
+                    checkSeasonGpVal = "Upcoming";
 
-            quickFilterPopup.setVisibility(View.GONE);
+                    quickFilterPopup.setVisibility(View.GONE);
+                } else {
+                    Log.e("Uncheck1","----"+checkSeasonGpVal);
+                    //Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+
+                }
+                if (checkAgeing1.isChecked()) {
+                    //popupUpcoming();
+                    checkAgeingVal = "CheckAgeing1";
+
+                    quickFilterPopup.setVisibility(View.GONE);
+                } else if (checkAgeing2.isChecked()) {
+                    //popupUpcoming();
+                    checkAgeingVal = "CheckAgeing2";
+
+                    quickFilterPopup.setVisibility(View.GONE);
+                } else if (checkAgeing3.isChecked()) {
+                    //popupUpcoming();
+                    checkAgeingVal = "CheckAgeing3";
+                    quickFilterPopup.setVisibility(View.GONE);
+                } else {
+                    Log.e("Uncheck2","----"+checkAgeingVal);
+
+                    //Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+
+                }
+
+                break;
+            case R.id.checkCurrent:
+                checkCurrent.setChecked(true);
+                checkPrevious.setChecked(false);
+                checkOld.setChecked(false);
+                checkUpcoming.setChecked(false);
+
+                break;
+            case R.id.checkPrevious:
+
+                checkPrevious.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkOld.setChecked(false);
+                checkUpcoming.setChecked(false);
+
+                break;
+            case R.id.checkOld:
+
+                checkOld.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkPrevious.setChecked(false);
+                checkUpcoming.setChecked(false);
+
+                break;
+            case R.id.checkUpcoming:
+
+                checkUpcoming.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkOld.setChecked(false);
+                checkPrevious.setChecked(false);
+
+                break;
+            case R.id.checkAgeing1:
+
+                checkAgeing1.setChecked(true);
+                checkAgeing2.setChecked(false);
+                checkAgeing3.setChecked(false);
+                break;
+            case R.id.checkAgeing2:
+
+                checkAgeing2.setChecked(true);
+                checkAgeing1.setChecked(false);
+                checkAgeing3.setChecked(false);
+                break;
+            case R.id.checkAgeing3:
+
+                checkAgeing3.setChecked(true);
+                checkAgeing1.setChecked(false);
+                checkAgeing2.setChecked(false);
+                break;
         }
-        else {
-            Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
 
-        }
-            if (checkAgeing1.isChecked()) {
-            //popupUpcoming();
-            checkAgeingVal = "CheckAgeing1";
-
-            quickFilterPopup.setVisibility(View.GONE);
-        } else if (checkAgeing2.isChecked()) {
-            //popupUpcoming();
-            checkAgeingVal = "CheckAgeing2";
-
-            quickFilterPopup.setVisibility(View.GONE);
-        } else if (checkAgeing3.isChecked()) {
-            //popupUpcoming();
-            checkAgeingVal = "CheckAgeing3";
-            quickFilterPopup.setVisibility(View.GONE);
-        } else {
-            Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
-
-        }
-
-        break;
-        case R.id.checkCurrent:
-        checkCurrent.setChecked(true);
-        checkPrevious.setChecked(false);
-        checkOld.setChecked(false);
-        checkUpcoming.setChecked(false);
-
-        break;
-        case R.id.checkPrevious:
-
-        checkPrevious.setChecked(true);
-        checkCurrent.setChecked(false);
-        checkOld.setChecked(false);
-        checkUpcoming.setChecked(false);
-
-        break;
-        case R.id.checkOld:
-
-        checkOld.setChecked(true);
-        checkCurrent.setChecked(false);
-        checkPrevious.setChecked(false);
-        checkUpcoming.setChecked(false);
-
-        break;
-        case R.id.checkUpcoming:
-
-        checkUpcoming.setChecked(true);
-        checkCurrent.setChecked(false);
-        checkOld.setChecked(false);
-        checkPrevious.setChecked(false);
-
-        break;
-        case R.id.checkAgeing1:
-
-        checkAgeing1.setChecked(true);
-        checkAgeing2.setChecked(false);
-        checkAgeing3.setChecked(false);
-        break;
-        case R.id.checkAgeing2:
-
-        checkAgeing2.setChecked(true);
-        checkAgeing1.setChecked(false);
-        checkAgeing3.setChecked(false);
-        break;
-        case R.id.checkAgeing3:
-
-        checkAgeing3.setChecked(true);
-        checkAgeing1.setChecked(false);
-        checkAgeing2.setChecked(false);
-        break;
     }
 
-}
-
     private void popupCurrent() {
-
-        limit = 10;
-        offsetvalue = 0;
-        top = 10;
-        seasongroup = "Current";
-        StockAgeingList.clear();
-        Reusable_Functions.sDialog(this, "Loading.......");
-        requestStockAgeingApi();
-
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            seasongroup = "Current";
+            StockAgeingList.clear();
+            requestStockAgeingApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void popupPrevious() {
-        limit = 10;
-        offsetvalue = 0;
-        top = 10;
-        seasongroup = "Previous";
-        StockAgeingList.clear();
-        Reusable_Functions.sDialog(this, "Loading.......");
-        requestStockAgeingApi();
-
-
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            seasongroup = "Previous";
+            StockAgeingList.clear();
+            requestStockAgeingApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void popupOld() {
-        limit = 10;
-        offsetvalue = 0;
-        top = 10;
-        seasongroup = "Old";
-        StockAgeingList.clear();
-        Reusable_Functions.sDialog(this, "Loading.......");
-        requestStockAgeingApi();
-
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            seasongroup = "Old";
+            StockAgeingList.clear();
+            requestStockAgeingApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void popupUpcoming() {
-        limit = 10;
-        offsetvalue = 0;
-        top = 10;
-        seasongroup = "Upcoming";
-        StockAgeingList.clear();
-        Reusable_Functions.sDialog(this, "Loading.......");
-        requestStockAgeingApi();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            seasongroup = "Upcoming";
+            StockAgeingList.clear();
+            requestStockAgeingApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -524,24 +561,38 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         switch (checkedId) {
             case R.id.stock_core:
                 if (stock_core.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Core";
-                    StockAgeingList.clear();
-                    Reusable_Functions.sDialog(this, "Loading.......");
-                    requestStockAgeingApi();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Core";
+                        StockAgeingList.clear();
+                        stockAgeingAdapter.notifyDataSetChanged();
+                        StockAgListView.setVisibility(View.GONE);
+                        requestStockAgeingApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
             case R.id.stock_fashion:
                 if (stock_fashion.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Fashion";
-                    StockAgeingList.clear();
-                    Reusable_Functions.sDialog(this, "Loading.......");
-                    requestStockAgeingApi();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Fashion";
+                        StockAgeingList.clear();
+                        stockAgeingAdapter.notifyDataSetChanged();
+                        StockAgListView.setVisibility(View.GONE);
+                        requestStockAgeingApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
 
@@ -551,7 +602,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(context, DashBoardActivity.class);
+        Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
         startActivity(intent);
         finish();
     }

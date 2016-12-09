@@ -76,6 +76,11 @@ public class RunningPromoListDisplay {
 
     String articleDesc;
     String prodAttribute2;
+
+    public double getStkOnhandQty() {
+        return stkOnhandQty;
+    }
+
     double stkOnhandQty;
     int targetStock;
     int saleTotQty;
@@ -83,6 +88,16 @@ public class RunningPromoListDisplay {
     double sellThruUnits;
     double fwdWeekCover;
     double ros;
+
+    public double getSellthruUnitsZonal() {
+        return sellthruUnitsZonal;
+    }
+
+    public void setSellthruUnitsZonal(double sellthruUnitsZonal) {
+        this.sellthruUnitsZonal = sellthruUnitsZonal;
+    }
+
+    double sellthruUnitsZonal;
 
     public String getStockageBandDesc() {
         return stockageBandDesc;
@@ -154,13 +169,6 @@ public class RunningPromoListDisplay {
         this.prodImageURL = prodImageURL;
     }
 
-    public double getStkOnhandQty() {
-        return stkOnhandQty;
-    }
-
-    public void setStkOnhandQty(int stkOnhandQty) {
-        this.stkOnhandQty = stkOnhandQty;
-    }
 
     public String getProdLevel6Desc() {
         return prodLevel6Desc;

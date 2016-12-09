@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
-                    android:hint="3215"
+                    android:hint=""
                     android:textColor="#000000"
                     android:textSize="13sp" />
 
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
-                    android:hint="FAL CDC-New Delhi"
+                    android:hint=""
                     android:textColor="#000000"
                     android:textSize="13sp" />
 
@@ -159,6 +159,15 @@
                 segmentedgroup:sc_tint_color="#B73020">
 
                 <RadioButton
+                    android:id="@+id/oe_btnFashion"
+                    style="@style/RadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Fashion" />
+
+
+                <RadioButton
                     android:id="@+id/oe_btnCore"
                     style="@style/RadioButton"
                     android:layout_width="0dp"
@@ -167,13 +176,6 @@
                     android:backgroundTint="#B73020"
                     android:text="Core" />
 
-                <RadioButton
-                    android:id="@+id/oe_btnFashion"
-                    style="@style/RadioButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Fashion" />
 
 
             </info.hoang8f.android.segmented.SegmentedGroup>

@@ -17,9 +17,9 @@
         <RelativeLayout
             android:id="@+id/stock_Rel_image_child"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            >
+
 
             <ImageView
                 android:id="@+id/stock_image_child"
@@ -66,7 +66,7 @@
                         android:layout_weight="0.2"
                         android:text="Buy One Get One"
                         android:textColor="#000000"
-                        android:textSize="12sp"
+                        android:textSize="13sp"
 
 
                         />
@@ -128,8 +128,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:singleLine="true"
-                        android:text="Ageing"
-                        android:textSize="11sp" />
+                        android:text="Aging"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -137,7 +137,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/stock_ageing"
@@ -147,7 +147,7 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
                     <!--<TextView-->
                         <!--android:id="@+id/stock_ageing_days"-->
                         <!--android:layout_width="0dp"-->
@@ -177,7 +177,7 @@
                         android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="SOH(U)"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -185,7 +185,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/stock_SOH_U"
@@ -195,7 +195,7 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="11sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 

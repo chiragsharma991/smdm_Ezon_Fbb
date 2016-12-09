@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/floor_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/floor_Rel_image_child"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+
+            <ImageView
+                android:id="@+id/floor_image_child"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/placeholder"
+
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/floor_Rel_image_child"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/floor_Rel_image_child"
+            android:gravity="center_horizontal">
+
+            <!--Buy one-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+                    <!---->
+
+                    <TextView
+                        android:id="@+id/floor_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:text="Buy One Get One"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+
+
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/floor_fav"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+
+                        >
+
+
+
+
+                        <ToggleButton
+                            android:id="@+id/toggle_floor_fav"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/toggleswitch"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:textOff=""
+                            android:textOn=""
+
+                            />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/bst_lineOne_child"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignStart="@+id/bst_head_child"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/divider_salescard" />
+
+
+                <!--SOH-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:singleLine="true"
+                        android:text="SOH(U)"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/floor_SOH_U"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text="100"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+
+                <!--No of days-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="No of Days Passed"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:singleLine="true"
+                        android:text=":"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/floor_NoofDays"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text="100"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <!--First Receipt Date-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="First Receipt Date"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/floor_ReceiptDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:singleLine="true"
+                        android:text="5"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

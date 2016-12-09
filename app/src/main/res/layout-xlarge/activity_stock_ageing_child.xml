@@ -128,7 +128,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:singleLine="true"
-                        android:text="Ageing"
+                        android:text="Aging"
                         android:textSize="12sp" />
 
                     <TextView

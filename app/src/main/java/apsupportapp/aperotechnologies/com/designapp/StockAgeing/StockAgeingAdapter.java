@@ -6,12 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopOptionAdapter;
@@ -29,6 +33,7 @@ public class StockAgeingAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     Context context;
     int Position;
+    ProgressBar progressView = null;
 
     //private ValueFilter valueFiAlter;
 
@@ -71,6 +76,7 @@ public class StockAgeingAdapter extends BaseAdapter{
         //Log.e("in ","getview");
 
         Position=position;
+
         final StockAgeingAdapter.Holder holder;
         if (convertView == null) {
             holder=new StockAgeingAdapter.Holder();
@@ -78,7 +84,7 @@ public class StockAgeingAdapter extends BaseAdapter{
             holder.stock_ageing = (TextView) convertView.findViewById(R.id.stock_ageing);
             holder.stock_SOH_U = (TextView) convertView.findViewById(R.id.stock_SOH_U);
             holder.stock_option = (TextView) convertView.findViewById(R.id.stock_option);
-
+//
             holder.stock_image_child = (ImageView) convertView.findViewById(R.id.stock_image_child);
             holder.stock_fav = (RelativeLayout) convertView.findViewById(R.id.stock_fav);
             convertView.setTag(holder);
@@ -90,7 +96,10 @@ public class StockAgeingAdapter extends BaseAdapter{
         }
         holder.stock_option.setText(arrayList.get(position).getOption());
         holder.stock_ageing.setText(arrayList.get(position).getStockageBandDesc()+" Days" );
-        holder.stock_SOH_U.setText(""+arrayList.get(position).getStkOnhandQty());
+        holder.stock_SOH_U.setText(""+(int)arrayList.get(position).getStkOnhandQty());
+//        StockAgeingActivity.stock_txtStoreCode.setText(arrayList.get(position).getStoreCode());
+//        StockAgeingActivity.stock_txtStoreName.setText(arrayList.get(position).getStoreDescription());
+
         if(!arrayList.get(position).getProdImageURL().equals("")) {
             Picasso.with(this.context).load(arrayList.get(position).getProdImageURL()).into(holder.stock_image_child);
         }else {
@@ -101,16 +110,14 @@ public class StockAgeingAdapter extends BaseAdapter{
         return convertView;
     }
 
-
-
     private class Holder {
 
         TextView stock_ageing,stock_SOH_U,stock_option;
         ImageView stock_image_child;
         RelativeLayout stock_fav;
-
-
+        ProgressBar loader;
 
     }
+
 
 }
