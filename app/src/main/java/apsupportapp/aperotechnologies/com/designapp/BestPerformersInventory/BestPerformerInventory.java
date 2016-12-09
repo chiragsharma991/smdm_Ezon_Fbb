@@ -811,8 +811,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(context, DashBoardActivity.class);
-        startActivity(intent);
+/*        Intent intent = new Intent(context, DashBoardActivity.class);
+        intent.putExtra("BACKTO","inventory");
+        startActivity(intent);*/
         finish();
     }
 

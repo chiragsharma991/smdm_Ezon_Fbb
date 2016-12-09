@@ -85,6 +85,7 @@ public class DashBoardActivity extends AppCompatActivity
     EventAdapter eventAdapter;
     String hrflash="NO";
     String pdInfo="NO";
+    String TAG="DashBoardActivity";
     String vsAssort="NO";
     String sAles="NO";
     String pmAnalysis="NO";
@@ -113,6 +114,12 @@ public class DashBoardActivity extends AppCompatActivity
 
     //variable for storing collection list in style activity in searchable spinner
     public static List _collectionitems;
+    private boolean Promo=false;
+    private boolean HourlyFlash=false;
+    private boolean ProductInfo=false;
+    private boolean VisualAssort=false;
+    private boolean Sales=false;
+    private boolean Inventory=false;
 
 
     @Override
@@ -142,6 +149,9 @@ public class DashBoardActivity extends AppCompatActivity
         arrayList = new ArrayList<>();
         eventUrlList = new ArrayList<>();
         productNameBeanArrayList=new ArrayList<>();
+        Bundle data=getIntent().getExtras();
+
+
 
 
         //to call Collection API
@@ -167,6 +177,12 @@ public class DashBoardActivity extends AppCompatActivity
 
         initializeUI();
 
+
+
+
+
+
+
         //Marketing events API
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -186,7 +202,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+               // finish();
             }
         });
 
@@ -199,7 +215,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+               // finish();
             }
         });
         BtnWorstPerformers.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +227,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+              //  finish();
             }
         });
         btnCutSize.setOnClickListener(new View.OnClickListener() {
@@ -223,7 +239,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+               // finish();
             }
         });
 
@@ -233,11 +249,13 @@ public class DashBoardActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent=new Intent(DashBoardActivity.this, BestPerformerActivity.class);
                 startActivity(intent);
+                Log.e(TAG, "btn best: log " );
+
                 if(timer != null)
                 {
                     timer.cancel();
                 }
-                finish();
+               // finish();
             }
         });
 
@@ -250,7 +268,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+               // finish();
             }
         });
 
@@ -263,7 +281,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+               // finish();
             }
         });
 
@@ -277,7 +295,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+              //  finish();
             }
         });
 
@@ -296,7 +314,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+             //   finish();
 
             }
         });
@@ -310,7 +328,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+              //  finish();
 
             }
 
@@ -326,7 +344,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+              //  finish();
             }
         });
 
@@ -339,7 +357,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                finish();
+             //   finish();
             }
         });
 
@@ -353,7 +371,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-                finish();
+              //  finish();
             }
         });
         btnFeshnessindex.setOnClickListener(new View.OnClickListener() {
@@ -366,7 +384,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-                finish();
+             //   finish();
             }
         });
         btnOptionEfficiency.setOnClickListener(new View.OnClickListener() {
@@ -379,7 +397,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-                finish();
+             //   finish();
             }
         });
         btnStockAgeing.setOnClickListener(new View.OnClickListener() {
@@ -392,7 +410,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-                finish();
+             //   finish();
             }
         });
         btnBestPerformersInv.setOnClickListener(new View.OnClickListener() {
@@ -405,7 +423,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-                finish();
+            //    finish();
             }
         });
         btnFloorAvailability.setOnClickListener(new View.OnClickListener() {
@@ -418,7 +436,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-                finish();
+              //  finish();
             }
         });
         btnTargetStockExcep.setOnClickListener(new View.OnClickListener() {
@@ -431,7 +449,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-                finish();
+             //   finish();
             }
         });
         btnSellThruExcep.setOnClickListener(new View.OnClickListener() {
@@ -444,9 +462,75 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-                finish();
+            //    finish();
             }
         });
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(Promo)
+        {
+            promoAnalysis.setVisibility(View.VISIBLE);
+
+        }else
+        {
+            promoAnalysis.setVisibility(View.GONE);
+
+        }
+        if(HourlyFlash)
+        {
+            hourlyFlash.setVisibility(View.VISIBLE);
+
+        }else
+        {
+            hourlyFlash.setVisibility(View.GONE);
+
+        }
+        if(ProductInfo)
+        {
+            productInfo.setVisibility(View.VISIBLE);
+
+        }else
+        {
+            productInfo.setVisibility(View.GONE);
+
+        }
+         if(VisualAssort)
+        {
+            visualAssort.setVisibility(View.VISIBLE);
+
+        }else
+        {
+            visualAssort.setVisibility(View.GONE);
+
+        }
+        if(Sales)
+        {
+            sales.setVisibility(View.VISIBLE);
+
+        }else
+        {
+            sales.setVisibility(View.GONE);
+
+        }
+        if(Inventory)
+        {
+            inventory.setVisibility(View.VISIBLE);
+
+        }else
+        {
+            inventory.setVisibility(View.GONE);
+
+        }
+
+
+
+
+
 
     }
 
@@ -788,7 +872,7 @@ public class DashBoardActivity extends AppCompatActivity
     @Override
     public void onClick(View v)
     {
-        Log.e("on click on ","log");
+        Log.e(TAG,"on click on log");
 
         switch (v.getId())
         {
@@ -810,32 +894,81 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.headersmdm:
                 if(hrflash.equals("NO")){
                     hourlyFlash.setVisibility(View.VISIBLE);
+                    productInfo.setVisibility(View.GONE);
+                    visualAssort.setVisibility(View.GONE);
+                    sales.setVisibility(View.GONE);
+                    promoAnalysis.setVisibility(View.GONE);
+                    inventory.setVisibility(View.GONE);
+                    Log.e(TAG, "onClick:  headersmdm" );
+
                     hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                    productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
 
+                     hrflash="YES";
+                     pdInfo="NO";
+                     vsAssort="NO";
+                     sAles="NO";
+                     pmAnalysis="NO";
+                     inVENtory="NO";
+                    HourlyFlash=true;
+                    Promo=false;
+                    ProductInfo=false;
+                    VisualAssort=false;
+                    Sales=false;
+                    Inventory=false;
 
-                    hrflash="YES";
                 }else
                 {
                     hourlyFlash.setVisibility(View.GONE);
                     hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
 
                     hrflash="NO";
+                    HourlyFlash=false;
 
                 }
                 break;
 
             case R.id.productinfo:
                 if(pdInfo.equals("NO")){
+                    hourlyFlash.setVisibility(View.GONE);
                     productInfo.setVisibility(View.VISIBLE);
+                    visualAssort.setVisibility(View.GONE);
+                    sales.setVisibility(View.GONE);
+                    promoAnalysis.setVisibility(View.GONE);
+                    inventory.setVisibility(View.GONE);
+
+                    hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                    visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    Log.e(TAG, "onClick:  productinfo" );
+
 
                     pdInfo="YES";
+                    hrflash="NO";
+                    vsAssort="NO";
+                    sAles="NO";
+                    pmAnalysis="NO";
+                    inVENtory="NO";
+                    ProductInfo=true;
+                    HourlyFlash=false;
+                    Promo=false;
+                    VisualAssort=false;
+                    Sales=false;
+                    Inventory=false;
 
                 }else
                 {
                     productInfo.setVisibility(View.GONE);
                     productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     pdInfo="NO";
+                    ProductInfo=false;
 
 
                 }
@@ -843,54 +976,158 @@ public class DashBoardActivity extends AppCompatActivity
 
             case R.id.visualAssort:
                 if(vsAssort.equals("NO")){
+                    hourlyFlash.setVisibility(View.GONE);
+                    productInfo.setVisibility(View.GONE);
                     visualAssort.setVisibility(View.VISIBLE);
+                    sales.setVisibility(View.GONE);
+                    promoAnalysis.setVisibility(View.GONE);
+                    inventory.setVisibility(View.GONE);
+                    Log.e(TAG, "onClick:  visualAssort" );
+
+
+                    hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                    salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     vsAssort="YES";
+                    hrflash="NO";
+                    pdInfo="NO";
+                    sAles="NO";
+                    pmAnalysis="NO";
+                    inVENtory="NO";
+                    VisualAssort=true;
+                    HourlyFlash=false;
+                    Promo=false;
+                    ProductInfo=false;
+                    Sales=false;
+                    Inventory=false;
+
+
 
                 }else
                 {
                     visualAssort.setVisibility(View.GONE);
                     visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     vsAssort="NO";
+                    VisualAssort=false;
 
                 } break;
 
             case R.id.headersales:
                 if(sAles.equals("NO")){
+                    hourlyFlash.setVisibility(View.GONE);
+                    productInfo.setVisibility(View.GONE);
+                    visualAssort.setVisibility(View.GONE);
                     sales.setVisibility(View.VISIBLE);
+                    promoAnalysis.setVisibility(View.GONE);
+                    inventory.setVisibility(View.GONE);
+                    Log.e(TAG, "onClick:  headersales" );
+
+
+                    hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                    promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     sAles="YES";
+                    hrflash="NO";
+                    pdInfo="NO";
+                    vsAssort="NO";
+                    pmAnalysis="NO";
+                    inVENtory="NO";
+                    Sales=true;
+                    HourlyFlash=false;
+                    Promo=false;
+                    ProductInfo=false;
+                    VisualAssort=false;
+                    Inventory=false;
+
                 }else
                 {
                     sales.setVisibility(View.GONE);
                     salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     sAles="NO";
+                    Sales=false;
 
                 } break;
 
             case R.id.headerpromo:
                 if(pmAnalysis.equals("NO")){
+                    hourlyFlash.setVisibility(View.GONE);
+                    productInfo.setVisibility(View.GONE);
+                    visualAssort.setVisibility(View.GONE);
+                    sales.setVisibility(View.GONE);
                     promoAnalysis.setVisibility(View.VISIBLE);
+                    inventory.setVisibility(View.GONE);
+
+                    hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                    inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     pmAnalysis="YES";
+                    hrflash="NO";
+                    pdInfo="NO";
+                    vsAssort="NO";
+                    sAles="NO";
+                    inVENtory="NO";
+                    HourlyFlash=false;
+                    Promo=true;
+                    ProductInfo=false;
+                    VisualAssort=false;
+                    Sales=false;
+                    Inventory=false;
+                    Log.e(TAG, "onClick:  headerpromo" );
+
                 }else
                 {
                     promoAnalysis.setVisibility(View.GONE);
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     pmAnalysis="NO";
+                    Promo=false;
+
 
                 } break;
 
             case R.id.headerinvent:
                 if(inVENtory.equals("NO")){
+                    hourlyFlash.setVisibility(View.GONE);
+                    productInfo.setVisibility(View.GONE);
+                    visualAssort.setVisibility(View.GONE);
+                    sales.setVisibility(View.GONE);
+                    promoAnalysis.setVisibility(View.GONE);
                     inventory.setVisibility(View.VISIBLE);
+
+                    hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
                     inVENtory="YES";
+                    hrflash="NO";
+                    pdInfo="NO";
+                    vsAssort="NO";
+                    sAles="NO";
+                    pmAnalysis="NO";
+                    HourlyFlash=false;
+                    Promo=false;
+                    ProductInfo=false;
+                    VisualAssort=false;
+                    Sales=false;
+                    Inventory=true;
+                    Log.e(TAG, "onClick:  headerinvent" );
+
                 }else
                 {
                     inventory.setVisibility(View.GONE);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inVENtory="NO";
+                    Inventory=false;
 
 
                 } break;

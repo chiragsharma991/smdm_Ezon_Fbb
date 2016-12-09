@@ -352,8 +352,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(context, DashBoardActivity.class);
-        startActivity(intent);
+        //Intent intent=new Intent(context, DashBoardActivity.class);
+        //startActivity(intent);
         finish();
     }
 }

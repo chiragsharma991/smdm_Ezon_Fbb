@@ -165,8 +165,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             @Override
             public void onClick(View v) {
                 onBackPressed();
-                Intent i = new Intent(SalesAnalysisActivity.this, DashBoardActivity.class);
-                startActivity(i);
+               /* Intent i = new Intent(SalesAnalysisActivity.this, DashBoardActivity.class);
+                startActivity(i);*/
+                finish();
             }
         });
 
@@ -1562,8 +1563,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             rankLayout.setVisibility(View.GONE);
         } else {
             SalesPagerAdapter.currentPage = 0;
-            Intent i = new Intent(SalesAnalysisActivity.this, DashBoardActivity.class);
-            startActivity(i);
+            /*Intent i = new Intent(SalesAnalysisActivity.this, DashBoardActivity.class);
+            startActivity(i);*/
             finish();
         }
 

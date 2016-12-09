@@ -128,8 +128,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         freshnessIndex_imageBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FreshnessIndexActivity.this, DashBoardActivity.class);
-                startActivity(intent);
+              /*  Intent intent = new Intent(FreshnessIndexActivity.this, DashBoardActivity.class);
+                intent.putExtra("BACKTO","inventory");
+                startActivity(intent);*/
                 finish();
             }
         });
@@ -1404,8 +1405,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(FreshnessIndexActivity.this, DashBoardActivity.class);
-        startActivity(intent);
+ /*       Intent intent = new Intent(FreshnessIndexActivity.this, DashBoardActivity.class);
+        intent.putExtra("BACKTO","inventory");
+        startActivity(intent);*/
         finish();
     }
 }

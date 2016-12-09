@@ -613,8 +613,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SalesPvAActivity.this, DashBoardActivity.class);
-                startActivity(intent);
+               /* Intent intent = new Intent(SalesPvAActivity.this, DashBoardActivity.class);
+                startActivity(intent);*/
                 finish();
             }
         });
@@ -1466,8 +1466,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(SalesPvAActivity.this, DashBoardActivity.class);
-        startActivity(intent);
+     /*   Intent intent = new Intent(SalesPvAActivity.this, DashBoardActivity.class);
+        startActivity(intent);*/
         finish();
     }
 }

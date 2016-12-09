@@ -463,8 +463,9 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(context, DashBoardActivity.class);
-        startActivity(intent);
+      /*  Intent intent=new Intent(context, DashBoardActivity.class);
+        intent.putExtra("BACKTO","inventory");
+        startActivity(intent);*/
         finish();
     }
 

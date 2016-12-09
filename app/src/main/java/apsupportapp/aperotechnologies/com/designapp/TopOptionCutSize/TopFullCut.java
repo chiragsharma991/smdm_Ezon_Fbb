@@ -309,8 +309,9 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(context, DashBoardActivity.class);
-        startActivity(intent);
+       /* Intent intent=new Intent(context, DashBoardActivity.class);
+        intent.putExtra("BACKTO","inventory");
+        startActivity(intent);*/
         finish();
     }
 

@@ -163,13 +163,7 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_below="@+id/headersmdm"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_height="1dp"
-                    android:background="@color/divider_salescard"
-                    />
+
 
 
 
@@ -343,12 +337,7 @@
 
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/divider_salescard"
-                    />
+
 
 
             </LinearLayout>
@@ -518,12 +507,7 @@
 
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/divider_salescard"
-                    />
+
 
 
 
@@ -784,13 +768,7 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:id="@+id/lin3to3"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard"
-                    />
+
 
             </LinearLayout>
 
@@ -939,12 +917,6 @@
 
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/divider_salescard"
-                    />
 
             </LinearLayout>
 
@@ -959,7 +931,7 @@
             <LinearLayout
                 android:layout_below="@+id/headerinvent"
                 android:id="@+id/lin4"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -1387,13 +1359,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_below="@+id/lin4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard"
-                    />
 
 
             </LinearLayout>
