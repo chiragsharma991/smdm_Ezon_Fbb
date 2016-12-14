@@ -305,8 +305,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
         switch (v.getId()) {
             case R.id.stockAgeing_imageBtnBack:
-                Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
-                startActivity(intent);
+            /*    Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
+                intent.putExtra("BACKTO","inventory");
+                startActivity(intent);*/
                 finish();
                 break;
             case R.id.toggle_stock_fav:
@@ -602,8 +603,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
-        startActivity(intent);
+       /* Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
+        intent.putExtra("BACKTO","inventory");
+        startActivity(intent);*/
         finish();
     }
 

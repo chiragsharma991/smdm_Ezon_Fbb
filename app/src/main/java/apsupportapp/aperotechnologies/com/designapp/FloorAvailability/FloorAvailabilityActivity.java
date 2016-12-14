@@ -302,8 +302,9 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
         switch (v.getId()) {
             case R.id.fa_imageBtnBack:
-                Intent intent1 = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
-                startActivity(intent1);
+             /*   Intent intent1 = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
+                intent1.putExtra("BACKTO","inventory");
+                startActivity(intent1);*/
                 finish();
                 break;
             case R.id.toggle_stock_fav:
@@ -553,8 +554,9 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
-        startActivity(intent);
+       /* Intent intent = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
+        intent.putExtra("BACKTO","inventory");
+        startActivity(intent);*/
         finish();
     }
 

@@ -809,8 +809,9 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(context, DashBoardActivity.class);
-        startActivity(intent);
+       /* Intent intent = new Intent(context, DashBoardActivity.class);
+        intent.putExtra("BACKTO","inventory");
+        startActivity(intent);*/
         finish();
     }
 

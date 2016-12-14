@@ -214,8 +214,8 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                 selcollectionName = null;
                 seloptionName = null;
                 DashBoardActivity._collectionitems = new ArrayList();
-                Intent intent = new Intent(StyleActivity.this, DashBoardActivity.class);
-                startActivity(intent);
+               /* Intent intent = new Intent(StyleActivity.this, DashBoardActivity.class);
+                startActivity(intent);*/
                 finish();
 
             }
@@ -1016,8 +1016,8 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             selcollectionName = null;
             seloptionName = null;
             DashBoardActivity._collectionitems = new ArrayList();
-            Intent intent = new Intent(StyleActivity.this, DashBoardActivity.class);
-            startActivity(intent);
+         /*   Intent intent = new Intent(StyleActivity.this, DashBoardActivity.class);
+            startActivity(intent);*/
             finish();
         }
     }

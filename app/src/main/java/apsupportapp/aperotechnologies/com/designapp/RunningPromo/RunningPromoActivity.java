@@ -263,8 +263,8 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(context, DashBoardActivity.class);
-        startActivity(intent);
+       /* Intent intent=new Intent(context, DashBoardActivity.class);
+        startActivity(intent);*/
         finish();
     }
 }

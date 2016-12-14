@@ -488,8 +488,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         }
         else
         {
-            Intent i = new Intent(VisualAssortmentActivity.this, DashBoardActivity.class);
-            startActivity(i);
+           /* Intent i = new Intent(VisualAssortmentActivity.this, DashBoardActivity.class);
+            startActivity(i);*/
             finish();
         }
     }

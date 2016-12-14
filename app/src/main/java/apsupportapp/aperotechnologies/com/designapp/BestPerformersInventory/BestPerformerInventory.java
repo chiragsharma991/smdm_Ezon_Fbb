@@ -101,7 +101,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_best_performer_inventory);
-        getSupportActionBar().hide();
+        getSupportActionBar().hide();//
         initalise();
         BstInventory_salesU_chk.setChecked(true);
         BaseLayoutInventory.setVisibility(View.GONE);
@@ -811,8 +811,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(context, DashBoardActivity.class);
-        startActivity(intent);
+/*        Intent intent = new Intent(context, DashBoardActivity.class);
+        intent.putExtra("BACKTO","inventory");
+        startActivity(intent);*/
         finish();
     }
 

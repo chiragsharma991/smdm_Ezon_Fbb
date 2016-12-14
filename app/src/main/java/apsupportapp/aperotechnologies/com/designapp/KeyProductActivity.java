@@ -118,8 +118,8 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
                 SearchActivity1.searchSubDept = "";
                 SearchActivity1.searchProductName = "";
                 SearchActivity1.searchArticleOption = "";
-                Intent intent = new Intent(KeyProductActivity.this, DashBoardActivity.class);
-                startActivity(intent);
+             /*   Intent intent = new Intent(KeyProductActivity.this, DashBoardActivity.class);
+                startActivity(intent);*/
                 finish();
                 break;
             case R.id.imageBtnSearch:
@@ -167,8 +167,8 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         SearchActivity1.searchSubDept = "";
         SearchActivity1.searchProductName = "";
         SearchActivity1.searchArticleOption = "";
-        Intent intent = new Intent(KeyProductActivity.this, DashBoardActivity.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(KeyProductActivity.this, DashBoardActivity.class);
+        startActivity(intent);*/
         finish();
     }
 }

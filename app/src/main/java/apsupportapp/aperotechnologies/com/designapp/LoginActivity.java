@@ -150,6 +150,7 @@ public class LoginActivity extends AppCompatActivity {
                             Reusable_Functions.hDialog();
                             Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
                             intent.putExtra("from", "login");
+                            intent.putExtra("BACKTO", "login");
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

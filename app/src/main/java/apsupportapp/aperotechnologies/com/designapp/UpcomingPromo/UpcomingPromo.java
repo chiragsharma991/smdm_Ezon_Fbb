@@ -243,8 +243,8 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.up_imageBtnBack:
-                Intent intent=new Intent(context, DashBoardActivity.class);
-                startActivity(intent);
+             /*   Intent intent=new Intent(context, DashBoardActivity.class);
+                startActivity(intent);*/
                 finish();
                 break;
             case R.id.up_imgfilter:
@@ -260,8 +260,8 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(context, DashBoardActivity.class);
-        startActivity(intent);
+      /*  Intent intent=new Intent(context, DashBoardActivity.class);
+        startActivity(intent);*/
         finish();
     }
 }

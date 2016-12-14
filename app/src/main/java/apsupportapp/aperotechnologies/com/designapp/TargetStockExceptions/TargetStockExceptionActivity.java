@@ -339,8 +339,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
         switch (v.getId()) {
             case R.id.target_imageBtnBack:
-                Intent intent = new Intent(TargetStockExceptionActivity.this, DashBoardActivity.class);
-                startActivity(intent);
+               /* Intent intent = new Intent(TargetStockExceptionActivity.this, DashBoardActivity.class);
+                intent.putExtra("BACKTO","inventory");
+                startActivity(intent);*/
                 finish();
                 break;
             case R.id.toggle_target_fav:
@@ -1032,8 +1033,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(TargetStockExceptionActivity.this, DashBoardActivity.class);
-        startActivity(intent);
+   /*     Intent intent = new Intent(TargetStockExceptionActivity.this, DashBoardActivity.class);
+        intent.putExtra("BACKTO","inventory");
+        startActivity(intent);*/
         finish();
     }
 }
