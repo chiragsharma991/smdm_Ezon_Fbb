@@ -176,7 +176,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.e(TAG,"listview position"+position);
-                Intent i =  new Intent(context,RunningPromoDetail.class);
+                Intent i =  new Intent(context,RunningPromoDetails.class);
                 i.putExtra("VM",promoList.get(position).getPromoDesc());
                 context.startActivity(i);
 
