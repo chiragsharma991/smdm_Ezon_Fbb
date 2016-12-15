@@ -109,6 +109,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
+                                //
 
                                 requestRunningPromoApi();
 
