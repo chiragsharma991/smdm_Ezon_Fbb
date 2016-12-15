@@ -66,5 +66,5 @@ dependencies {
     compile 'com.daprlabs.aaron:cardstack:0.3.0'
 
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 }

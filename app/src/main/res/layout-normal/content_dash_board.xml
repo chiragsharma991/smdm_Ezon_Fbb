@@ -26,7 +26,9 @@
                 android:layout_below="@+id/headersmdm"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_salescard"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/divider_Black"
                 />
 
 
@@ -73,6 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Hourly Analysis"
+                            android:textColor="@color/light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             />
@@ -186,7 +189,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/dark_Black"
                 android:layout_below="@+id/lin1"
                 android:text="Product Information"
                 android:layout_marginTop="5dp"
@@ -199,7 +202,9 @@
                 android:layout_below="@+id/productinfo"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_salescard"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/divider_Black"
                 />
 
 
@@ -244,6 +249,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Product Info"
+                            android:textColor="@color/light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             />
@@ -357,7 +363,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/dark_Black"
                 android:layout_below="@+id/lineartwo"
                 android:text="Visual Assortment"
                 android:textSize="16sp"
@@ -370,6 +376,8 @@
                 android:layout_below="@+id/visualAssort"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:background="@color/divider_salescard"
                 />
 
@@ -414,6 +422,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Visual Assortment"
+                            android:textColor="@color/light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             />
@@ -521,7 +530,9 @@
                 android:layout_below="@+id/headerpromo"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_salescard"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/divider_Black"
                 android:id="@+id/textView5" />
 
             <LinearLayout
@@ -565,6 +576,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Running Promo"
+                            android:textColor="@color/light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             />
@@ -590,6 +602,7 @@
                         <TextView
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
+                            android:textColor="@color/light_Black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
@@ -617,6 +630,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Expiring Promo"
+                            android:textColor="@color/light_Black"
                             android:gravity="center_horizontal"
                             android:textSize="13sp" />
 
@@ -645,6 +659,7 @@
                             android:layout_height="wrap_content"
                             android:text="Best Promo"
                             android:textSize="13sp"
+                            android:textColor="@color/light_Black"
                             android:layout_gravity="center_horizontal"
                             android:id="@+id/textView4" />
                     </LinearLayout>
@@ -680,6 +695,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Worst Promo"
+                            android:textColor="@color/light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             />
@@ -783,7 +799,9 @@
                 android:layout_below="@+id/headersales"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_salescard"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/divider_Black"
                 />
 
             <LinearLayout
@@ -824,6 +842,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Sales"
+                            android:textColor="@color/light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             />
@@ -851,6 +870,7 @@
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             android:layout_width="wrap_content"
+                            android:textColor="@color/light_Black"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:text="PvA" />
@@ -925,7 +945,9 @@
                 android:layout_below="@+id/headerinvent"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_salescard"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/divider_Black"
                 />
 
             <LinearLayout
@@ -969,6 +991,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Freshness Index"
+                            android:textColor="@color/light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             />
@@ -995,6 +1018,7 @@
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             android:layout_width="wrap_content"
+                            android:textColor="@color/light_Black"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:text="Option Efficiency" />
@@ -1021,6 +1045,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Top Options by Full Cut"
+                            android:textColor="@color/light_Black"
                             android:gravity="center_horizontal"
                             android:textSize="13sp" />
 
@@ -1048,6 +1073,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Skewed Sizes"
+                            android:textColor="@color/light_Black"
                             android:textSize="13sp"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
@@ -1108,6 +1134,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Best Performers"
+                            android:textColor="@color/light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             />
@@ -1135,6 +1162,7 @@
                             android:textSize="13sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/light_Black"
                             android:gravity="center_horizontal"
                             android:text="Worst Performers" />
                     </LinearLayout>
@@ -1160,6 +1188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Stock Aging Exceptions"
+                            android:textColor="@color/light_Black"
                             android:gravity="center_horizontal"
                             android:textSize="13sp" />
 
@@ -1187,6 +1216,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Floor Availability"
+                            android:textColor="@color/light_Black"
                             android:textSize="13sp"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
@@ -1374,7 +1404,7 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:paddingLeft="10dp"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/dark_Black"
                 android:layout_height="wrap_content"
                 android:text="Marketing Events"
                 android:textSize="20sp"
@@ -1408,7 +1438,7 @@
                 android:id="@+id/headerpromo"
                 android:gravity="center_vertical"
                 android:visibility="visible"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/dark_Black"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="Promo Analysis"
@@ -1427,7 +1457,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="Hourly Flash"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/dark_Black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
@@ -1443,7 +1473,7 @@
                 android:paddingRight="10dp"
                 android:text="Sales"
                 android:layout_marginTop="5dp"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/dark_Black"
                 android:textStyle="bold"
                 android:visibility="visible"
                 android:textSize="16sp"
@@ -1460,7 +1490,7 @@
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:text="Inventory"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/dark_Black"
                 android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

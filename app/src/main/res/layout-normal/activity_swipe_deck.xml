@@ -269,13 +269,13 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_height="200dp">
+            android:layout_height="wrap_content">
 
-            <View
-                android:background="#CFD2D1"
-                android:layout_marginTop="60dp"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"/>
+            <!--<View-->
+                <!--android:background="#CFD2D1"-->
+                <!--android:layout_marginTop="60dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="2dp"/>-->
 
             <RelativeLayout
                 android:layout_width="match_parent"

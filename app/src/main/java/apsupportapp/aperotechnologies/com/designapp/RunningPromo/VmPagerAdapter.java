@@ -3,6 +3,7 @@ package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,15 +23,19 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
 
     private final ArrayList<String> list;
     private final LinearLayout lldots;
+    private final ViewPager mViewPager;
     Context mContext;
     LayoutInflater mLayoutInflater;
     private int currentPage=0;
+    String TAG="VmPagerAdapter";
 
-    public VmPagerAdapter(Context context, ArrayList<String> list, LinearLayout lldots) {
+    public VmPagerAdapter(Context context, ArrayList<String> list, LinearLayout lldots, ViewPager mViewPager) {
         mContext = context;
         this.list=list;
         this.lldots=lldots;
+        this.mViewPager=mViewPager;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
     }
 
     @Override
@@ -45,6 +50,9 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        Log.e(TAG, "instantiateItem: "+position);
+        mViewPager.setOnPageChangeListener(this);
+
         View itemView = mLayoutInflater.inflate(R.layout.activity_vm_pageritem, container, false);
 
         ImageView imageView = (ImageView) itemView.findViewById(R.id.pagerImageView);
@@ -67,9 +75,11 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
     @Override
     public void onPageSelected(int position) {
 
-        ImageView img = (ImageView) lldots.getChildAt(position);
-        img.setImageResource(R.mipmap.dots_unselected);
-        //currentPage = position;
+        Log.e(TAG, "onPageSelected: "+position);
+        for (int i = 0; i <list.size() ; i++) {
+            ImageView img = (ImageView) lldots.getChildAt(i);
+            img.setImageResource(R.mipmap.dots_unselected);
+        }
         ImageView img1 = (ImageView) lldots.getChildAt(position);
         img1.setImageResource(R.mipmap.dots_selected);
 

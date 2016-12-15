@@ -62,6 +62,7 @@
     <item name="colorAccent">#000000</item>
     <item name="android:textColorPrimary">#ffffff</item>
     <item name="android:background">#666666</item>
+        <item name="android:colorBackground">@color/cardview_light_background</item>
     </style>
     <style name="ProgressBar" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">#c5c5c5</item>

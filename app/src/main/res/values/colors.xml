@@ -16,4 +16,15 @@
     <color name="text_sales">#000000</color>
     <color name="edit_border_color">#e3e2e3</color>
 
+
+
+    <color name="light_Black">#252525</color>
+    <color name="dark_Black">#454545</color>
+    <color name="divider_Black">#e7e7e7</color>
+    <color name="background">#f8f6f6</color>
+    <color name="greyinbox">#ffffff</color>
+    <color name="border">#e7e7e7</color>
+    <color name="DepartmentBox">#f3f2f2</color>
+    <color name="actionbar">#b5301f</color>
+
 </resources>
