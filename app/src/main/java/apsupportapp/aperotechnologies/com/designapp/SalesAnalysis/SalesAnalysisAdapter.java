@@ -152,34 +152,34 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 //                viewHolder.txtPvAValue.setText(""+(int)analysisArrayList.get(position).getPvaAchieved());
 //            }
 
-            viewHolder.nameTv.setText(productNameBean.getPlanDept());
+            viewHolder.nameTv.setText(productNameBean.getPlanDept().toLowerCase());
             viewHolder.txtPvAValue.setText(" " + (int) productNameBean.getPvaAchieved() + "%");
 
 
 
         } else if (fromwhere.equals("Category")) {
 
-            viewHolder.nameTv.setText(productNameBean.getPlanCategory());
+            viewHolder.nameTv.setText(productNameBean.getPlanCategory().toLowerCase());
             viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
 
 
         } else if (fromwhere.equals("Plan Class")) {
 
 
-            viewHolder.nameTv.setText(productNameBean.getPlanClass());
+            viewHolder.nameTv.setText(productNameBean.getPlanClass().toLowerCase());
             viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
             //viewHolder.txtValue.setText(productNameBean.getPlanClass().toLowerCase());
 
         } else if (fromwhere.equals("Brand")) {
 
 
-            viewHolder.nameTv.setText(productNameBean.getBrandName());
+            viewHolder.nameTv.setText(productNameBean.getBrandName().toLowerCase());
             viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
 
         } else if (fromwhere.equals("Brand Plan Class")) {
 
 
-            viewHolder.nameTv.setText(productNameBean.getBrandplanClass());
+            viewHolder.nameTv.setText(productNameBean.getBrandplanClass().toLowerCase());
             viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
 
         }

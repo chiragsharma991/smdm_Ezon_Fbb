@@ -193,18 +193,18 @@ public class DashBoardActivity extends AppCompatActivity
             Toast.makeText(DashBoardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
-        BtnOnlyWorstpromo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashBoardActivity.this, WorstPerformerActivity.class);
-                startActivity(intent);
-                if(timer != null)
-                {
-                    timer.cancel();
-                }
-               // finish();
-            }
-        });
+//        BtnOnlyWorstpromo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(DashBoardActivity.this, WorstPerformerActivity.class);
+//                startActivity(intent);
+//                if(timer != null)
+//                {
+//                    timer.cancel();
+//                }
+//               // finish();
+//            }
+//        });
 
         btnSkewedSize.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -649,7 +649,7 @@ public class DashBoardActivity extends AppCompatActivity
         BtnUpcomingpromo=(ImageButton)findViewById(R.id.btnUpcomingpromo);
         BtnExpiringpromo=(ImageButton)findViewById(R.id.btnExpiringpromo);
         BtnBestWorstpromo=(ImageButton)findViewById(R.id.btnBestWorstpromo);
-        BtnOnlyWorstpromo=(ImageButton)findViewById(R.id.btnOnlyWorstpromo);
+        //BtnOnlyWorstpromo=(ImageButton)findViewById(R.id.btnOnlyWorstpromo);
         BtnWorstPerformers=(ImageButton)findViewById(R.id.btnWorstPerformers);
         btnFeshnessindex=(ImageButton)findViewById(R.id.btnFeshnessindex);
         btnOptionEfficiency = (ImageButton)findViewById(R.id.btnOptionEfficiency);

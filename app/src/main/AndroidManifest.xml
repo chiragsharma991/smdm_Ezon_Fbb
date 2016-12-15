@@ -130,10 +130,10 @@
             android:windowSoftInputMode="stateHidden">
 
         </activity>
-        <activity
-            android:name=".WorstPerformersPromo.WorstPerformerActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+        <!--<activity-->
+            <!--android:name=".WorstPerformersPromo.WorstPerformerActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="stateHidden"></activity>-->
         <activity
             android:name=".FreshnessIndex.FreshnessIndexActivity"
             android:screenOrientation="portrait"
