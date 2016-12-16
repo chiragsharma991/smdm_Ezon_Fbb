@@ -590,7 +590,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     case "Department":
                         txtheaderplanclass.setText("Category");
                         llayoutSalesAnalysis.setVisibility(View.GONE);
-                        txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept().toLowerCase();
+                        //String plandept= salesAnalysisClassArrayList.get(position).getPlanDept().substring(0,1).toUpperCase()+salesAnalysisClassArrayList.get(position).getPlanDept().substring(1).toLowerCase();
+                        txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
                         Log.e("txtClicked department--", "" + txtSalesClickedValue);
                         fromWhere = "Category";
                         //SalesPagerAdapter.currentPage = 0;
@@ -622,7 +623,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 txtheaderplanclass.setText("Plan Class");
                                 llayoutSalesAnalysis.setVisibility(View.GONE);
-                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory().toLowerCase();
+                                //String planCategry= salesAnalysisClassArrayList.get(position).getPlanCategory().substring(0,1).toUpperCase()+salesAnalysisClassArrayList.get(position).getPlanCategory().substring(1).toLowerCase();
+                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
                                 Log.e("txtClicked category --", "" + txtSalesClickedValue);
                                 fromWhere = "Plan Class";
                                 //SalesPagerAdapter.currentPage = 0;
@@ -659,7 +661,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 txtheaderplanclass.setText("Brand");
                                 llayoutSalesAnalysis.setVisibility(View.GONE);
-                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass().toLowerCase();
+                                //String planCls= salesAnalysisClassArrayList.get(position).getPlanClass().substring(0,1).toUpperCase()+salesAnalysisClassArrayList.get(position).getPlanClass().substring(1).toLowerCase();
+                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
                                 Log.e("txtClicked plan class---", "" + txtSalesClickedValue);
                                 fromWhere = "Brand";
                                 //SalesPagerAdapter.currentPage = 0;
@@ -698,7 +701,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 txtheaderplanclass.setText("Brand Plan Class");
 
                                 llayoutSalesAnalysis.setVisibility(View.GONE);
-                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getBrandName().toLowerCase();
+                                //String brnd = salesAnalysisClassArrayList.get(position).getBrandName().substring(0,1).toUpperCase()+salesAnalysisClassArrayList.get(position).getBrandName().substring(1).toLowerCase();
+                                txtSalesClickedValue =salesAnalysisClassArrayList.get(position).getBrandName();
                                 Log.e("txtSalesClickedValue3---", "" + txtSalesClickedValue);
                                 fromWhere = "Brand Plan Class";
                                 //SalesPagerAdapter.currentPage = 0;
@@ -1243,7 +1247,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 val = "";
-                                val = deptName;
+                                val = deptName.substring(0,1).toUpperCase()+deptName.substring(1).toLowerCase();
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
                                // llayoutSalesAnalysis.setVisibility(View.VISIBLE);
@@ -1344,7 +1348,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 salesadapter.notifyDataSetChanged();
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
-                                val += " > " + category;
+                                 String categry = category.substring(0,1).toUpperCase()+category.substring(1).toLowerCase();
+                                val += " > " + categry;
                                 txthDeptName.setText(val);
                                 //txthCategory.setText(category);
                                 llhierarchy.setVisibility(View.VISIBLE);
@@ -1445,8 +1450,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 flag = true;
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
-
-                                val += " > " + planclass;
+                                String plnCls = planclass.substring(0,1).toUpperCase()+planclass.substring(1).toLowerCase();
+                                val += " > " + plnCls;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
 //                                llayoutSalesAnalysis.setVisibility(View.VISIBLE);
@@ -1554,8 +1559,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
-
-                                val += " > " + brandnm;
+                                 String brnd = brandnm.substring(0,1).toUpperCase()+brandnm.substring(1).toLowerCase();
+                                val += " > " + brnd;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
                                // llayoutSalesAnalysis.setVisibility(View.VISIBLE);

@@ -116,7 +116,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         context = this;
         level = 1;
         OptionefficiencyValue = "";
-        seasonGroup = "All";
+        seasonGroup = "Current";
         focusposition = 0;
         oe_FirstPositionValue = 0;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -128,6 +128,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         queue.start();
         gson = new Gson();
         initializeUI();
+        checkCurrent.setChecked(true);
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -136,7 +137,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             limit = 100;
             count = 0;
             level = 1;
-            seasonGroup = "All";
+            seasonGroup = "Current";
             oe_llayouthierarchy.setVisibility(View.GONE);
             requestOptionEfficiencyDetails();
 

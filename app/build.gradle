@@ -27,8 +27,8 @@ android {
         applicationId "apsupportapp.aperotechnologies.com.designapp"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 46
-        versionName "1.46"
+        versionCode 49
+        versionName "1.49"
     }
     buildTypes {
         release {
@@ -66,5 +66,5 @@ dependencies {
     compile 'com.daprlabs.aaron:cardstack:0.3.0'
 
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+
 }

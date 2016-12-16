@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/tools"
+    android:background="@color/bg_screen_color"
     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
 
 
     <LinearLayout
-        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store : "
-                    android:textColor="#920609"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
                 <TextView
@@ -146,7 +146,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
-                    android:textColor="#000000"
+                    android:textColor="@color/bg_store_code_text"
                     android:textSize="14sp" />
 
                 <TextView
@@ -156,7 +156,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
-                    android:textColor="#000000"
+                    android:textColor="@color/bg_store_code_text"
                     android:textSize="14sp" />
 
             </RelativeLayout>
@@ -174,7 +174,7 @@
             android:orientation="horizontal"
             segmentedgroup:sc_border_width="1dp"
             segmentedgroup:sc_corner_radius="14dp"
-            segmentedgroup:sc_tint_color="#B73020">
+            segmentedgroup:sc_tint_color="@color/colorPrimary">
 
             <RadioButton
                 android:id="@+id/btn_wtd"
@@ -182,7 +182,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#B73020"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="WTD" />
 
             <RadioButton
@@ -321,7 +321,7 @@
                             <RelativeLayout
                                 android:layout_centerVertical="true"
                                 android:id="@+id/btnSalesBack"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp">
 
                                 <Button
@@ -349,7 +349,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_toRightOf="@+id/txtPlanClass"
                                 android:id="@+id/btnSalesNext"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp">
 
                                 <Button

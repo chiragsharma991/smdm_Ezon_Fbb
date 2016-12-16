@@ -225,12 +225,12 @@
                             <RelativeLayout
                                 android:layout_centerVertical="true"
                                 android:id="@+id/btnFIndexPrev"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="27dp"
-                                    android:layout_height="27dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/back_arrow"
                                     android:clickable="false" />
@@ -253,12 +253,12 @@
                                 android:layout_centerVertical="true"
                                 android:layout_toRightOf="@+id/txtFIndexClass"
                                 android:id="@+id/btnFIndexNext"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="27dp"
-                                    android:layout_height="27dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/next_arrow"
                                     android:clickable="false" />

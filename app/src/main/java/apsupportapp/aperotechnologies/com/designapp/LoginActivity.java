@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +37,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -126,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                             Long notificationTime = System.currentTimeMillis() + 1500000;
+                            Log.e("notification Time", " "+notificationTime +""+new Date(notificationTime));
 
                             setLocalnotification(context, notificationTime);
                             String username = response.getString("loginName");
@@ -185,7 +188,8 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(postRequest);
 
     }
-
+//    NotificationManager notifManager= (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//    notifManager.cancelAll();
     @Override
     public void onBackPressed() {
         finish();

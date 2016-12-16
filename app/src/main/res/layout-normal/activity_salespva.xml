@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
-                    android:hint="3215"
+                    android:hint=""
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
@@ -155,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
-                    android:hint="FAL CDC-New Delhi"
+                    android:hint=""
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
@@ -232,61 +232,6 @@
                     android:textColor="@android:color/black"
                     android:textSize="11sp" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahDeptNameNext"-->
-                    <!--android:layout_width="5dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahCategory"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahCategoryNext"-->
-                    <!--android:layout_width="5dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahPlanClass"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahPlanClassNext"-->
-                    <!--android:layout_width="5dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahBrand"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="10dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:text=">"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="12sp" />-->
 
 
             </LinearLayout>
@@ -321,12 +266,12 @@
                             <RelativeLayout
                                 android:layout_centerVertical="true"
                                 android:id="@+id/btnSalesBack"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="27dp"
-                                    android:layout_height="27dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/back_arrow"
                                     android:clickable="false" />
@@ -349,12 +294,12 @@
                                 android:layout_centerVertical="true"
                                 android:layout_toRightOf="@+id/txtPlanClass"
                                 android:id="@+id/btnSalesNext"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="27dp"
-                                    android:layout_height="27dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/next_arrow"
                                     android:clickable="false" />

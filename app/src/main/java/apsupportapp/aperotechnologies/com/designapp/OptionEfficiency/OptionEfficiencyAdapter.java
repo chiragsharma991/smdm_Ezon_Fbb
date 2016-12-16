@@ -110,7 +110,7 @@ public class OptionEfficiencyAdapter extends BaseAdapter {
             viewHolder.oe_txtSOH_U.setText(""+(int)optionEfficiencyDetails.getStkOnhandQty());
             viewHolder.oe_txtSOH_Prec.setText(" "+(int)optionEfficiencyDetails.getStkOnhandQtyCount());
             viewHolder.oe_txtOption.setText(""+(int)optionEfficiencyDetails.getOptionCount());
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getOptionCountByStore()));
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
 
         } else if (fromWhere.equals("Category")) {
 
@@ -119,7 +119,7 @@ public class OptionEfficiencyAdapter extends BaseAdapter {
             viewHolder.oe_txtSOH_U.setText(""+(int)optionEfficiencyDetails.getStkOnhandQty());
             viewHolder.oe_txtSOH_Prec.setText(" "+(int)optionEfficiencyDetails.getStkOnhandQtyCount());
             viewHolder.oe_txtOption.setText(""+(int)optionEfficiencyDetails.getOptionCount());
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getOptionCountByStore()));
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
 
         } else if (fromWhere.equals("Plan Class")) {
 
@@ -127,7 +127,7 @@ public class OptionEfficiencyAdapter extends BaseAdapter {
             viewHolder.oe_txtSOH_U.setText(""+(int)optionEfficiencyDetails.getStkOnhandQty());
             viewHolder.oe_txtSOH_Prec.setText(" "+(int)optionEfficiencyDetails.getStkOnhandQtyCount());
             viewHolder.oe_txtOption.setText(""+(int)optionEfficiencyDetails.getOptionCount());
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getOptionCountByStore()));
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
 
 
         } else if (fromWhere.equals("Brand")) {
@@ -137,7 +137,7 @@ public class OptionEfficiencyAdapter extends BaseAdapter {
             viewHolder.oe_txtSOH_U.setText(""+(int)optionEfficiencyDetails.getStkOnhandQty());
             viewHolder.oe_txtSOH_Prec.setText(" "+(int)optionEfficiencyDetails.getStkOnhandQtyCount());
             viewHolder.oe_txtOption.setText(""+(int)optionEfficiencyDetails.getOptionCount());
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getOptionCountByStore()));
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
 
         } else if (fromWhere.equals("Brand Plan Class")) {
 
@@ -146,7 +146,7 @@ public class OptionEfficiencyAdapter extends BaseAdapter {
             viewHolder.oe_txtSOH_U.setText(""+(int)optionEfficiencyDetails.getStkOnhandQty());
             viewHolder.oe_txtSOH_Prec.setText(" "+(int)optionEfficiencyDetails.getStkOnhandQtyCount());
             viewHolder.oe_txtOption.setText(""+(int)optionEfficiencyDetails.getOptionCount());
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getOptionCountByStore()));
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
 
         }
 

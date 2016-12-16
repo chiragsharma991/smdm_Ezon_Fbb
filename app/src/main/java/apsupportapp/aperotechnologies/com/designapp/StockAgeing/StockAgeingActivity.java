@@ -570,7 +570,6 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                         top = 10;
                         corefashion = "Core";
                         StockAgeingList.clear();
-                        stockAgeingAdapter.notifyDataSetChanged();
                         StockAgListView.setVisibility(View.GONE);
                         requestStockAgeingApi();
                     } else {
@@ -579,7 +578,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 }
                 break;
             case R.id.stock_fashion:
-                if (stock_fashion.isChecked()) {
+                if (stock_fashion.isChecked())
+                {
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading data...");
@@ -588,10 +588,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                         top = 10;
                         corefashion = "Fashion";
                         StockAgeingList.clear();
-                        stockAgeingAdapter.notifyDataSetChanged();
                         StockAgListView.setVisibility(View.GONE);
                         requestStockAgeingApi();
-                    } else {
+                    } else
+                    {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
                 }

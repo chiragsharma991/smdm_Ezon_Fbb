@@ -19,7 +19,7 @@
                 android:id="@+id/sznchildRelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <RelativeLayout
                     android:id="@+id/storesales"
@@ -45,10 +45,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_below="@+id/txtPvASales"
-                        android:background="@color/edit_border_color"
+                        android:background="@color/bg_header"
                         android:gravity="center"
                         android:text="40%"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/txt_color"
                         android:textSize="18sp" />
 
 
@@ -86,10 +86,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_below="@+id/txtZonalSales"
-                        android:background="@color/edit_border_color"
+                        android:background="@color/bg_header"
                         android:gravity="center"
                         android:text="40%"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/txt_color"
                         android:textSize="18sp" />
 
 
@@ -126,10 +126,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_below="@+id/txtNationalSales"
-                        android:background="@color/edit_border_color"
+                        android:background="@color/bg_header"
                         android:gravity="center"
                         android:text="40%"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/txt_color"
                         android:textSize="18sp" />
 
 
@@ -148,7 +148,7 @@
                 android:id="@+id/rankRelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <RelativeLayout
@@ -195,7 +195,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_below="@+id/znLayout"
-                        android:background="@color/edit_border_color"
+                        android:background="@color/bg_header"
                         android:orientation="horizontal"
                         android:weightSum="3">
 
@@ -210,7 +210,7 @@
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:text="1"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/txt_color"
                                 android:textSize="18sp" />
 
                         </LinearLayout>
@@ -240,7 +240,7 @@
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:text="11"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/txt_color"
                                 android:textSize="18sp" />
 
                         </LinearLayout>
@@ -305,7 +305,7 @@
                         android:layout_height="50dp"
                         android:weightSum="3"
                         android:layout_below="@+id/yoyznLayout"
-                        android:background="@color/edit_border_color"
+                        android:background="@color/bg_header"
                         android:orientation="horizontal">
 
                        <LinearLayout
@@ -318,7 +318,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="11"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/txt_color"
                             android:textSize="18sp" />
 
                         </LinearLayout>
@@ -349,7 +349,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="11"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/txt_color"
                             android:textSize="18sp" />
 
                         </LinearLayout>
@@ -376,67 +376,67 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/sznRelLayout"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/relPvASales"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="PvA Sales%"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:text="PvA%"
+                android:textColor="@color/txt_color"
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/relYoYSales"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/relPvASales"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="YoY Sales%"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:text="YoY%"
+                android:textColor="@color/txt_color"
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/relSellThru"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/relYoYSales"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
                 android:text="Sell Thru(U)%"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:textColor="@color/txt_color"
+                android:textSize="11sp" />
 
 
             <TextView
                 android:id="@+id/relMixSales"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/relSellThru"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="Mix(Sales%)"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:text="MixSales%"
+                android:textColor="@color/txt_color"
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/relRank"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_below="@+id/relPvASales"
-                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/relMixSales"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
                 android:text="Rank"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:textColor="@color/txt_color"
+                android:textSize="11sp" />
         </RelativeLayout>
 
     </RelativeLayout>

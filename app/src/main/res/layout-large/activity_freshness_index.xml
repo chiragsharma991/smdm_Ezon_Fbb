@@ -226,7 +226,7 @@
                             <RelativeLayout
                                 android:layout_centerVertical="true"
                                 android:id="@+id/btnFIndexPrev"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp">
 
                                 <Button
@@ -254,7 +254,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_toRightOf="@+id/txtFIndexClass"
                                 android:id="@+id/btnFIndexNext"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp">
 
                                 <Button

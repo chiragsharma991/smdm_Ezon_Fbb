@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -726,6 +727,8 @@ public class DashBoardActivity extends AppCompatActivity
             Intent intent = new Intent(DashBoardActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
+            NotificationManager notifManager= (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            notifManager.cancelAll();
             return true;
         }
         else if(id == R.id.aboutus)

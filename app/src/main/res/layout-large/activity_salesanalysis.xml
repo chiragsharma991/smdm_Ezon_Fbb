@@ -446,8 +446,8 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="5dp"></android.support.v4.view.ViewPager>
+                android:layout_height="190dp"
+                android:layout_marginTop="10dp"></android.support.v4.view.ViewPager>
 
             <LinearLayout
                 android:id="@+id/lldots"
@@ -512,7 +512,7 @@
 
                             <RelativeLayout
                                 android:id="@+id/prevplanclass"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp"
                                 android:layout_alignParentLeft="true">
 
@@ -537,7 +537,7 @@
 
                             <RelativeLayout
                                 android:id="@+id/nextplanclass"
-                                android:layout_width="40dp"
+                                android:layout_width="20dp"
                                 android:layout_height="40dp"
                                 android:layout_toRightOf="@+id/headerplanclass">
 

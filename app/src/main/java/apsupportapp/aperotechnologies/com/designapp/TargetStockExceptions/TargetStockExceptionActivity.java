@@ -1000,7 +1000,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         top = 10;
                         corefashion = "Core";
                         targetStockList.clear();
-                        targetAgeingAdapter.notifyDataSetChanged();
                         targetListView.setVisibility(View.GONE);
                         requestTargetStockExcepApi();
                     } else {
@@ -1018,7 +1017,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         top = 10;
                         corefashion = "Fashion";
                         targetStockList.clear();
-                        targetAgeingAdapter.notifyDataSetChanged();
                         targetListView.setVisibility(View.GONE);
                         requestTargetStockExcepApi();
                     } else {

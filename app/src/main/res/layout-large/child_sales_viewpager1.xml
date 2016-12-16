@@ -376,67 +376,67 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/sznRelLayout"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/relPvASales"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="PvA Sales%"
+                android:text="PvA%"
                 android:textColor="@color/txt_color"
-                android:textSize="12sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/relYoYSales"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/relPvASales"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="YoY Sales%"
+                android:text="YoY%"
                 android:textColor="@color/txt_color"
-                android:textSize="12sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/relSellThru"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/relYoYSales"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
                 android:text="Sell Thru(U)%"
                 android:textColor="@color/txt_color"
-                android:textSize="12sp" />
+                android:textSize="11sp" />
 
 
             <TextView
                 android:id="@+id/relMixSales"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/relSellThru"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="Mix(Sales%)"
+                android:text="MixSales%"
                 android:textColor="@color/txt_color"
-                android:textSize="12sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/relRank"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_below="@+id/relPvASales"
-                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/relMixSales"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
                 android:text="Rank"
                 android:textColor="@color/txt_color"
-                android:textSize="12sp" />
+                android:textSize="11sp" />
         </RelativeLayout>
 
     </RelativeLayout>

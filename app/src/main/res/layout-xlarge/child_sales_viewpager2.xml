@@ -14,182 +14,77 @@
         <RelativeLayout
             android:id="@+id/soh"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:background="@drawable/salescard">
+            android:background="@drawable/rounded_edittext3">
 
 
 
             <TextView
                 android:id="@+id/txtSOH2"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="5dp"
-                android:gravity="top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:gravity="left"
+                android:layout_marginLeft="8dp"
                 android:text="SOH(U)"
                 android:textSize="13sp" />
 
-
-            <ImageView
-                android:id="@+id/txtSOHImage"
-                android:layout_width="19dp"
-                android:layout_height="16dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/txtSOHUVal2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/txtSOHImage"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="15dp"
-                android:gravity="right"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="35dp"
                 android:text="12,15,1215"
-                android:textColor="@android:color/black"
+                android:textColor="@color/txt_color"
                 android:textSize="17sp" />
 
 
-            <!--<RelativeLayout-->
 
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_below="@+id/txtNetSalesU">-->
-
-            <!--<ImageView-->
-            <!--android:background="@android:color/holo_green_dark"-->
-            <!--android:layout_width="20dp"-->
-            <!--android:layout_height="20dp"-->
-            <!--android:layout_marginBottom="15dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:id="@+id/txtNetSalesUImage" />-->
-
-            <!--<TextView-->
-            <!--android:layout_toLeftOf="@+id/txtNetSalesUImage"-->
-            <!--android:gravity="right"-->
-            <!--android:id="@+id/txtNetSalesUPerc"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:text="20%"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="12sp" />-->
-
-            <!--<TextView-->
-            <!--android:layout_toLeftOf="@+id/txtNetSalesUImage"-->
-            <!--android:gravity="right"-->
-            <!--android:id="@+id/txtNetSalesUName"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:text="WOW"-->
-            <!--android:textSize="12sp" />-->
-
-            <!--</RelativeLayout>-->
         </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/git"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:background="@drawable/salescard">
+            android:background="@drawable/rounded_edittext3">
 
 
             <TextView
                 android:id="@+id/txtGIT"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:gravity="top"
-                android:layout_marginLeft="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:gravity="left"
+                android:layout_marginLeft="8dp"
                 android:text="GIT(U)"
                 android:textSize="13sp" />
 
-            <ImageView
-                android:id="@+id/txtGITImage"
-                android:layout_width="19dp"
-                android:layout_height="16dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"/>
 
 
             <TextView
-                android:gravity="right"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/txtGITImage"
                 android:id="@+id/txtGITVal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="35dp"
                 android:text="12,15,1215"
-                android:textColor="@android:color/black"
+                android:textColor="@color/txt_color"
                 android:textSize="17sp"
                 />
 
-            <!--<RelativeLayout-->
-
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_below="@+id/txtNetSalesU">-->
-
-            <!--<ImageView-->
-            <!--android:background="@android:color/holo_green_dark"-->
-            <!--android:layout_width="20dp"-->
-            <!--android:layout_height="20dp"-->
-            <!--android:layout_marginBottom="15dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:id="@+id/txtNetSalesUImage" />-->
-
-            <!--<TextView-->
-            <!--android:layout_toLeftOf="@+id/txtNetSalesUImage"-->
-            <!--android:gravity="right"-->
-            <!--android:id="@+id/txtNetSalesUPerc"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:text="20%"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="12sp" />-->
-
-            <!--<TextView-->
-            <!--android:layout_toLeftOf="@+id/txtNetSalesUImage"-->
-            <!--android:gravity="right"-->
-            <!--android:id="@+id/txtNetSalesUName"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:text="WOW"-->
-            <!--android:textSize="12sp" />-->
-
-            <!--</RelativeLayout>-->
         </RelativeLayout>
 
     </LinearLayout>
@@ -197,188 +92,85 @@
     <LinearLayout
         android:orientation="horizontal"
         android:weightSum="2"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="90dp">
 
         <RelativeLayout
             android:id="@+id/ROS"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:background="@drawable/salescard">
+            android:background="@drawable/rounded_edittext3">
 
 
             <TextView
                 android:id="@+id/txtROS2"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:gravity="top"
-                android:layout_marginLeft="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:gravity="left"
+                android:layout_marginLeft="8dp"
                 android:text="ROS(U)"
                 android:textSize="13sp" />
 
-            <ImageView
-                android:id="@+id/txtROS2Image"
-                android:layout_width="19dp"
-                android:layout_height="16dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"/>
+
 
 
             <TextView
-                android:layout_below="@+id/txtROS2Image"
-                android:gravity="right"
-                android:layout_alignParentRight="true"
                 android:id="@+id/txtROSVal2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="35dp"
                 android:text="12,15,1215"
-                android:textColor="@android:color/black"
+                android:textColor="@color/txt_color"
                 android:textSize="17sp"
                 />
 
-            <!--<RelativeLayout-->
 
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_below="@+id/txtNetSalesU">-->
-
-            <!--<ImageView-->
-            <!--android:background="@android:color/holo_green_dark"-->
-            <!--android:layout_width="20dp"-->
-            <!--android:layout_height="20dp"-->
-            <!--android:layout_marginBottom="15dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:id="@+id/txtNetSalesUImage" />-->
-
-            <!--<TextView-->
-            <!--android:layout_toLeftOf="@+id/txtNetSalesUImage"-->
-            <!--android:gravity="right"-->
-            <!--android:id="@+id/txtNetSalesUPerc"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:text="20%"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="12sp" />-->
-
-            <!--<TextView-->
-            <!--android:layout_toLeftOf="@+id/txtNetSalesUImage"-->
-            <!--android:gravity="right"-->
-            <!--android:id="@+id/txtNetSalesUName"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:text="WOW"-->
-            <!--android:textSize="12sp" />-->
-
-            <!--</RelativeLayout>-->
         </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/fwdwkcover"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:background="@drawable/salescard">
+            android:background="@drawable/rounded_edittext3">
 
 
             <TextView
                 android:id="@+id/txtFwdWkCover2"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:gravity="top"
-                android:layout_marginLeft="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:gravity="left"
+                android:layout_marginLeft="8dp"
                 android:text="Fwd Wk Cover"
                 android:textSize="13sp" />
 
 
-            <ImageView
-                android:id="@+id/txtFwdWkCover2Image"
-                android:layout_width="19dp"
-                android:layout_height="16dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"/>
-
-
-
             <TextView
-                android:layout_below="@+id/txtFwdWkCover2Image"
-                android:gravity="right"
-                android:layout_alignParentRight="true"
                 android:id="@+id/txtFwdWkCoverVal2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="35dp"
                 android:text="12,15,1215"
-                android:textColor="@android:color/black"
+                android:textColor="@color/txt_color"
                 android:textSize="17sp"
                 />
 
-            <!--<RelativeLayout-->
 
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_below="@+id/txtNetSalesU">-->
-
-            <!--<ImageView-->
-            <!--android:background="@android:color/holo_green_dark"-->
-            <!--android:layout_width="20dp"-->
-            <!--android:layout_height="20dp"-->
-            <!--android:layout_marginBottom="15dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:id="@+id/txtNetSalesUImage" />-->
-
-            <!--<TextView-->
-            <!--android:layout_toLeftOf="@+id/txtNetSalesUImage"-->
-            <!--android:gravity="right"-->
-            <!--android:id="@+id/txtNetSalesUPerc"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:text="20%"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="12sp" />-->
-
-            <!--<TextView-->
-            <!--android:layout_toLeftOf="@+id/txtNetSalesUImage"-->
-            <!--android:gravity="right"-->
-            <!--android:id="@+id/txtNetSalesUName"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:text="WOW"-->
-            <!--android:textSize="12sp" />-->
-
-            <!--</RelativeLayout>-->
         </RelativeLayout>
     </LinearLayout>
 

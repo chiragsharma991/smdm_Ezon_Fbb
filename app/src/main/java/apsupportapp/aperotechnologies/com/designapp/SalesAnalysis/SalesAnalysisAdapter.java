@@ -151,35 +151,36 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 //            {
 //                viewHolder.txtPvAValue.setText(""+(int)analysisArrayList.get(position).getPvaAchieved());
 //            }
-
-            viewHolder.nameTv.setText(productNameBean.getPlanDept().toLowerCase());
+            String planDept = productNameBean.getPlanDept().substring(0,1).toUpperCase()+productNameBean.getPlanDept().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(planDept);
             viewHolder.txtPvAValue.setText(" " + (int) productNameBean.getPvaAchieved() + "%");
 
 
 
         } else if (fromwhere.equals("Category")) {
 
-            viewHolder.nameTv.setText(productNameBean.getPlanCategory().toLowerCase());
+            String planCat=productNameBean.getPlanCategory().substring(0,1).toUpperCase()+productNameBean.getPlanCategory().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(planCat);
             viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
 
 
         } else if (fromwhere.equals("Plan Class")) {
 
-
-            viewHolder.nameTv.setText(productNameBean.getPlanClass().toLowerCase());
+            String planCls = productNameBean.getPlanClass().substring(0,1).toUpperCase()+productNameBean.getPlanClass().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(planCls);
             viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
             //viewHolder.txtValue.setText(productNameBean.getPlanClass().toLowerCase());
 
         } else if (fromwhere.equals("Brand")) {
 
-
-            viewHolder.nameTv.setText(productNameBean.getBrandName().toLowerCase());
+            String brnd= productNameBean.getBrandName().substring(0,1).toUpperCase()+productNameBean.getBrandName().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(brnd);
             viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
 
         } else if (fromwhere.equals("Brand Plan Class")) {
 
-
-            viewHolder.nameTv.setText(productNameBean.getBrandplanClass().toLowerCase());
+            String brndPlnCls= productNameBean.getBrandplanClass().substring(0,1).toUpperCase()+productNameBean.getBrandplanClass().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(brndPlnCls);
             viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
 
         }
