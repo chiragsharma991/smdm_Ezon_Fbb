@@ -43,12 +43,37 @@
 
     </info.hoang8f.android.segmented.SegmentedGroup>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bestInvent_segmented"
-        android:layout_marginTop="20dp"
+        android:id="@+id/switchRelay"
+        android:padding="10dp"
+
+
         >
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bestNworstswitch"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/border3"
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/switchRelay"
+        >
+
+
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -130,7 +155,7 @@
 
                 <RelativeLayout
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="0dp"
+                    android:layout_marginRight="10dp"
                     android:id="@+id/bestInvent_imgfilter"
                     android:background="@drawable/button_red_effect"
                     android:layout_width="@dimen/header_clickable_width"
@@ -207,11 +232,12 @@
             <RelativeLayout
                 android:id="@+id/bestInvent_quickFilter"
                 android:layout_width="50dp"
-                android:layout_height="30dp"
                 android:gravity="end"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="0dp"
+
                 >
 
                 <Button
