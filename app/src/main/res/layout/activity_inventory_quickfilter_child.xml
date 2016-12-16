@@ -124,11 +124,12 @@
                         android:orientation="vertical">
 
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/bestCheckCurrent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:buttonTint="@android:color/black"
+                            android:checked="true"
                             android:focusable="true" />
 
                     </LinearLayout>
@@ -166,7 +167,7 @@
                         android:orientation="vertical">
 
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/bestCheckPrevious"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -206,7 +207,7 @@
                         android:orientation="vertical">
 
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/bestCheckOld"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -247,7 +248,7 @@
                         android:orientation="vertical">
 
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/bestCheckUpcoming"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -313,7 +314,7 @@
                         android:orientation="vertical">
 
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/checkWTD"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -364,7 +365,7 @@
                         android:orientation="vertical">
 
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/checkL4W"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -407,12 +408,14 @@
                         android:orientation="vertical">
 
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/checkSTD"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:buttonTint="@android:color/black"
-                            android:focusable="true" />
+                            android:focusable="true"
+                            android:checked="true"
+                            />
 
                     </LinearLayout>
 

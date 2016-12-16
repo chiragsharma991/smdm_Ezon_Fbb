@@ -3,7 +3,7 @@
     android:id="@+id/sortPopup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <!--base layout for click anywhere-->
 
@@ -104,7 +104,7 @@
                                 android:orientation="vertical">
 
 
-                                <CheckBox
+                                <RadioButton
                                     android:focusable="true"
                                     android:id="@+id/checkPromoSale"
                                     android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
                                 android:gravity="end"
                                 android:orientation="vertical">
 
-                                <CheckBox
+                                <RadioButton
                                     android:id="@+id/checkPromoSaleU"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"

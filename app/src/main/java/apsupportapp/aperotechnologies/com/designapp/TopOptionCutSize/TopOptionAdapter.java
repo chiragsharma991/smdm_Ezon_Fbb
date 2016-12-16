@@ -6,8 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -77,6 +81,8 @@ public class TopOptionAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.activity_topfullcut_child, null);
             holder.Top_SOHU = (TextView) convertView.findViewById(R.id.top_SOHU);
             holder.Top_bstStockU = (TextView) convertView.findViewById(R.id.top_bstStockU);
+            holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.Top_option = (TextView) convertView.findViewById(R.id.bst_option);
             holder.Top_RosU = (TextView) convertView.findViewById(R.id.top_RosU);
             holder.Top_image_child = (ImageView) convertView.findViewById(R.id.top_image_child);
@@ -88,12 +94,39 @@ public class TopOptionAdapter extends BaseAdapter {
 
         } else {
             holder=(Holder)convertView.getTag();
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
+
 
         }
         holder.Top_option.setText(arrayList.get(position).getOption());
         holder.Top_SOHU.setText(""+(int)arrayList.get(position).getStkOnhandQty());
         holder.Top_bstStockU.setText(""+(int)arrayList.get(position).getTargetStock());
         holder.Top_RosU.setText(""+(int)arrayList.get(position).getRos());
+
+        if(!arrayList.get(position).getProdImageURL().equals("")) {
+            Picasso.with(this.context).
+
+                    load(arrayList.get(position).getProdImageURL()).
+                    into(holder.Top_image_child, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+
+                        }
+                    });
+        }else {
+            holder.ProgressPicaso.setVisibility(View.GONE);
+
+            Picasso.with(this.context).
+                    load(R.mipmap.placeholder).
+                    into(holder.Top_image_child);
+
+        }
 
 
         // ---------------------click listener -------------------------
@@ -115,7 +148,7 @@ public class TopOptionAdapter extends BaseAdapter {
         RelativeLayout Top_fav;
 
 
-
+        public ProgressBar ProgressPicaso;
     }
 
 

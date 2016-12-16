@@ -138,7 +138,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#B73020"
-            android:text="Core" />
+            android:text="Fashion" />
 
         <RadioButton
             style="@style/RadioButton"
@@ -146,7 +146,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Fashion" />
+            android:text="Core" />
 
 
     </info.hoang8f.android.segmented.SegmentedGroup>

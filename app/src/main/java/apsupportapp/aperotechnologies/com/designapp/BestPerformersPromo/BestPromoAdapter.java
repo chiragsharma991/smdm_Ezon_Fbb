@@ -10,7 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -75,6 +79,10 @@ public class BestPromoAdapter extends BaseAdapter {
             holder.PromotionName = (TextView) convertView.findViewById(R.id.bst_head_child);
             holder.Bst_PromoValues_child = (TextView) convertView.findViewById(R.id.bst_PromoValues_child);
             holder.Bst_PromoValuesU_child = (TextView) convertView.findViewById(R.id.bst_PromoValuesU_child);
+            holder.Bst_txtStoreCode = (TextView)convertView.findViewById(R.id.bst_txtStoreCode);
+            holder.Bst_txtStoreName = (TextView)convertView.findViewById(R.id.bst_txtStoreName);
+            holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
+           // holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.Bst_image_child = (ImageView) convertView.findViewById(R.id.bst_image_child);
 
 
@@ -83,64 +91,42 @@ public class BestPromoAdapter extends BaseAdapter {
 
         } else {
             holder=(Holder)convertView.getTag();
+            //holder.ProgressPicaso.setVisibility(View.VISIBLE);
+
 
         }
         holder.PromotionName.setText(arrayList.get(position).getPromoDesc());
+        //holder.Bst_txtStoreCode.setText(arrayList.get(position).getStoreCode());
+        //holder.Bst_txtStoreName.setText(arrayList.get(position).getStoreDesc());
         holder.Bst_PromoValues_child.setText("₹\t"+(int)arrayList.get(position).getDurSaleNetVal());
         holder.Bst_PromoValuesU_child.setText(""+(int)arrayList.get(position).getDurSaleTotQty());
 
 
-        // ---------------------click listener -------------------------
+     /*   if(!arrayList.get(position).getProdImageURL().equals("")) {
+            Picasso.with(this.context).
 
+                    load(arrayList.get(position).getProdImageURL()).
+                    into(holder.Bst_image_child, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+                        }
 
+                        @Override
+                        public void onError() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
 
-     /*   holder.PromotionName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(context,RunningPromoDetail.class);
+                        }
+                    });
+        }else {
+            holder.ProgressPicaso.setVisibility(View.GONE);
 
-                context.startActivity(i);
+            Picasso.with(this.context).
+                    load(R.mipmap.placeholder).
+                    into(holder.Bst_image_child);
+                    }
+                    */
 
-            }
-        });*/
-
-
-   /*     holder.StartDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(context,RunningPromoDetail.class);
-                context.startActivity(i);
-
-            }
-        });
-
-        holder.EndDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(context,RunningPromoDetail.class);
-                context.startActivity(i);
-
-            }
-        });
-
-        holder.Days.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(context,RunningPromoDetail.class);
-                context.startActivity(i);
-
-            }
-        });
-
-
-
-        holder.Vm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context,VM.class);
-                context.startActivity(intent);
-            }
-        });*/
 
 
 
@@ -159,9 +145,10 @@ public class BestPromoAdapter extends BaseAdapter {
 
     private class Holder {
 
-        TextView PromotionName,Bst_PromoValues_child,Bst_PromoValuesU_child;
+        TextView PromotionName,Bst_PromoValues_child,Bst_PromoValuesU_child,Bst_txtStoreCode,Bst_txtStoreName;
         ImageView Bst_image_child;
 
+        public ProgressBar ProgressPicaso;
     }
 
 

@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -22,6 +23,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -65,8 +67,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             quickFilter_baseLayout, BestQfDoneLayout, BestQuickFilterBorder;
     RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
-    CheckBox BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming, CheckWTD, CheckL4W, CheckSTD;
+    RadioButton BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming, CheckWTD, CheckL4W, CheckSTD;
     String userId, bearertoken;
+    private TextView Toolbar_title;
     String TAG = "WorstPerformerInventory";
     private int count = 0;
     private int limit = 10;
@@ -82,19 +85,21 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private boolean userScrolled;
     private BestPerformerInventoryAdapter bestPerformerInventoryAdapter;
     private View footer;
-    private String lazyScroll = "OFF", seasonGroup = "All";
+    private String lazyScroll = "OFF", seasonGroup = "Current";
     private SegmentedGroup BestInvent_segmented;
     private RadioButton BestInvent_core, BestInvent_fashion;
     private ToggleButton Toggle_bestInvent_fav;
     private String corefashion = "Fashion";
     private ImageView Skewed_quickFilter;
-    private int orderbycol = 1;
+    private int orderbycol = 2;
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU, BstInventory_salesThru, BstInventory_Fwd, BstInventory_coverNsell;
-    private CheckBox BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
+    private RadioButton BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
     private RelativeLayout BaseLayoutInventory;
     private String checkValueIs = null, checkTimeValueIs = null;
-    private String view = "All";
+    private String view = "STD";
+    private Switch BestAndWorst;
+    private String orderby="DESC";
 
 
     @Override
@@ -103,7 +108,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_best_performer_inventory);
         getSupportActionBar().hide();//
         initalise();
-        BstInventory_salesU_chk.setChecked(true);
+        BstInventory_salesThru_chk.setChecked(true);
         BaseLayoutInventory.setVisibility(View.GONE);
         BestInventListview.setVisibility(View.VISIBLE);
 
@@ -135,7 +140,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            String url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" + "DESC" + "&orderbycol=" + orderbycol + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+            String url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" +orderby + "&orderbycol=" + orderbycol + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
 
             Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -297,12 +302,15 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private void initalise() {
         BestInvent_txtStoreCode = (TextView) findViewById(R.id.bestInvent_txtStoreCode);
         BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
+        Toolbar_title = (TextView) findViewById(R.id.toolbar_title);
 
         BestInvent_BtnBack = (RelativeLayout) findViewById(R.id.bestInvent_BtnBack);
         BestInvent_imgfilter = (RelativeLayout) findViewById(R.id.bestInvent_imgfilter);
         BestQuickFilterBorder = (RelativeLayout) findViewById(R.id.bestQuickFilterBorder);
 
         BestInventListview = (ListView) findViewById(R.id.bestInvent_ListView);
+
+        BestAndWorst=(Switch)findViewById(R.id.bestNworstswitch);
 
         BestInvent_segmented = (SegmentedGroup) findViewById(R.id.bestInvent_segmented);
         BestInvent_quickFilter = (RelativeLayout) findViewById(R.id.bestInvent_quickFilter);
@@ -317,10 +325,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BstInventory_Fwd = (LinearLayout) findViewById(R.id.bstInventory_Fwd);
         BstInventory_coverNsell = (LinearLayout) findViewById(R.id.bstInventory_coverNsell);
 
-        BstInventory_salesU_chk = (CheckBox) findViewById(R.id.bstInventory_salesUchk);
-        BstInventory_salesThru_chk = (CheckBox) findViewById(R.id.bstInventory_salesThruchk);
-        BstInventory_Fwd_chk = (CheckBox) findViewById(R.id.bstInventory_Fwdchk);
-        BstInventory_coverNsell_chk = (CheckBox) findViewById(R.id.bstInventory_coverNsellchk);
+        BstInventory_salesU_chk = (RadioButton) findViewById(R.id.bstInventory_salesUchk);
+        BstInventory_salesThru_chk = (RadioButton) findViewById(R.id.bstInventory_salesThruchk);
+        BstInventory_Fwd_chk = (RadioButton) findViewById(R.id.bstInventory_Fwdchk);
+        BstInventory_coverNsell_chk = (RadioButton) findViewById(R.id.bstInventory_coverNsellchk);
 
 
         quickFilterPopup = (RelativeLayout) findViewById(R.id.bestQuickFilterPopup);
@@ -329,13 +337,13 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         quickFilterPopup.setVisibility(View.GONE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
 
-        BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
-        BestCheckPrevious = (CheckBox) findViewById(R.id.bestCheckPrevious);
-        BestCheckOld = (CheckBox) findViewById(R.id.bestCheckOld);
-        BestCheckUpcoming = (CheckBox) findViewById(R.id.bestCheckUpcoming);
-        CheckWTD = (CheckBox) findViewById(R.id.checkWTD);
-        CheckL4W = (CheckBox) findViewById(R.id.checkL4W);
-        CheckSTD = (CheckBox) findViewById(R.id.checkSTD);
+        BestCheckCurrent = (RadioButton) findViewById(R.id.bestCheckCurrent);
+        BestCheckPrevious = (RadioButton) findViewById(R.id.bestCheckPrevious);
+        BestCheckOld = (RadioButton) findViewById(R.id.bestCheckOld);
+        BestCheckUpcoming = (RadioButton) findViewById(R.id.bestCheckUpcoming);
+        CheckWTD = (RadioButton) findViewById(R.id.checkWTD);
+        CheckL4W = (RadioButton) findViewById(R.id.checkL4W);
+        CheckSTD = (RadioButton) findViewById(R.id.checkSTD);
 
         BestInvent_segmented.setOnCheckedChangeListener(this);
         BestInvent_BtnBack.setOnClickListener(this);
@@ -354,6 +362,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         CheckWTD.setOnClickListener(this);
         CheckL4W.setOnClickListener(this);
         CheckSTD.setOnClickListener(this);
+        BestAndWorst.setOnClickListener(this);
 
         BstInventory_salesU.setOnClickListener(this);
         BstInventory_salesThru.setOnClickListener(this);
@@ -369,6 +378,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         switch (v.getId()) {
             case R.id.bestInvent_BtnBack:
                 onBackPressed();
+                break;
+
+            case R.id.bestNworstswitch:
+                BestAndWorstToggle();
                 break;
 
 
@@ -513,7 +526,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                 } else if (CheckSTD.isChecked()) {
                     checkTimeValueIs = "CheckSTD";
-                    view = "YTD";
+                    view = "STD";
              /*       BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);*/
@@ -607,6 +620,40 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             //Quick filter<<<<<<<
 
         }
+    }
+
+    private void BestAndWorstToggle()
+    {
+        if(BestAndWorst.isChecked()) {
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            orderby = "ASC";
+            Toolbar_title.setText("Worst Performers");
+            Log.e(TAG, "BestAndWorstToggle:is checked log");
+            BestInventList.clear();
+            bestPerformerInventoryAdapter.notifyDataSetChanged();
+            BestInventListview.setVisibility(View.GONE);
+            Reusable_Functions.sDialog(this, "Loading.......");
+            requestRunningPromoApi();
+        }
+        else
+        {
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            orderby = "DESC";
+            Toolbar_title.setText("Best Performers");
+            Log.e(TAG, "BestAndWorstToggle:is unchecked log");
+            BestInventList.clear();
+            bestPerformerInventoryAdapter.notifyDataSetChanged();
+            BestInventListview.setVisibility(View.GONE);
+            Reusable_Functions.sDialog(this, "Loading.......");
+            requestRunningPromoApi();
+
+        }
+
+
     }
 
     private void FwdPopUp() {

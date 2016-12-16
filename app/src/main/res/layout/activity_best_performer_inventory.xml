@@ -8,12 +8,72 @@
     tools:context=".TopOptionCutSize.TopFullCut">
 
 
+    <info.hoang8f.android.segmented.SegmentedGroup
+        android:id="@+id/bestInvent_segmented"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/linearToolbar"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="1dp"
+        segmentedgroup:sc_corner_radius="14dp"
+        segmentedgroup:sc_tint_color="#B73020">
+
+        <RadioButton
+            style="@style/RadioButton"
+            android:id="@+id/bestInvent_fashion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Fashion" />
+
+        <RadioButton
+            android:id="@+id/bestInvent_core"
+            style="@style/RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#B73020"
+            android:text="Core" />
+
+
+
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bestInvent_segmented"
-        android:layout_marginTop="20dp"
+        android:id="@+id/switchRelay"
+        android:padding="10dp"
+
+
         >
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bestNworstswitch"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/border3"
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/switchRelay"
+        >
+
+
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -171,11 +231,13 @@
 
             <RelativeLayout
                 android:id="@+id/bestInvent_quickFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:gravity="end"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="0dp"
+
                 >
 
                 <Button
@@ -193,42 +255,6 @@
     </LinearLayout>
     <include layout="@layout/activity_inventory_quickfilter_child"/>
     <include layout="@layout/activity_popup_inventory"></include>
-
-    <info.hoang8f.android.segmented.SegmentedGroup
-        android:id="@+id/bestInvent_segmented"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        segmentedgroup:sc_border_width="1dp"
-        segmentedgroup:sc_corner_radius="14dp"
-        segmentedgroup:sc_tint_color="#B73020"
-        android:layout_below="@+id/linearToolbar"
-        android:layout_centerHorizontal="true">
-
-        <RadioButton
-            style="@style/RadioButton"
-            android:id="@+id/bestInvent_fashion"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Fashion" />
-
-        <RadioButton
-            android:id="@+id/bestInvent_core"
-            style="@style/RadioButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="#B73020"
-            android:text="Core" />
-
-
-
-    </info.hoang8f.android.segmented.SegmentedGroup>
 
 
 </RelativeLayout>

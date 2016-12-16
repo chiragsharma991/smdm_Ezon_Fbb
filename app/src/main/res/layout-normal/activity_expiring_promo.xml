@@ -247,7 +247,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/rankLayout"
         android:layout_alignParentStart="true">
 
 
@@ -412,7 +412,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="Promo Sales"
+                        android:text="Promo\nSales"
                         android:textSize="14sp" />
 
                     <TextView
@@ -450,7 +450,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="Promo Sales (U)"
+                        android:text="Promo\nSales(U)"
                         android:textSize="14sp" />
 
                     <TextView

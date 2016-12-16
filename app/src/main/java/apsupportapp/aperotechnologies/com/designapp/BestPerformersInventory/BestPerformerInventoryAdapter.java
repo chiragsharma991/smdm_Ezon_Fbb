@@ -89,7 +89,9 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.activity_bestperformer_inventory_child, null);
             holder.BestInvent_SOH = (TextView) convertView.findViewById(R.id.bestInvent_SOH);
             holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
-           // holder.ProgressPicaso.getIndeterminateDrawable().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
+
+            // holder.ProgressPicaso.getIndeterminateDrawable().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
 
             holder.BestInvent_option = (TextView) convertView.findViewById(R.id.bestInvent_option);
             holder.BestInvent_sellThru = (TextView) convertView.findViewById(R.id.bestInvent_sellThru);

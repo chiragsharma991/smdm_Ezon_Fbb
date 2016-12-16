@@ -20,15 +20,18 @@
             android:id="@+id/bst_Rel_image_child"
 
             >
+
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
-                android:src="@mipmap/placeholder"
                 android:scaleType="fitXY"
+                android:src="@mipmap/placeholder"
                 android:id="@+id/bst_image_child"
 
                 />
+
+
 
         </RelativeLayout>
 
@@ -72,7 +75,7 @@
                     android:id="@+id/bst_lineOne_child"
                     android:background="@color/divider_salescard"
                     android:layout_alignStart="@+id/bst_head_child"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     />
 
 
@@ -80,14 +83,14 @@
 
 
                 <LinearLayout
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:weightSum="1"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.5"
                         android:text="Promo Sales"
                         android:layout_gravity="center"
                         android:singleLine="true"
@@ -104,7 +107,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.4"
                         android:id="@+id/bst_PromoValues_child"
                         android:text="Promo Sales"
                         android:layout_gravity="center"
@@ -115,6 +118,8 @@
 
                 </LinearLayout>
 
+
+
                 <!--Promo Sales(U)-->
 
                 <LinearLayout
@@ -124,7 +129,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.5"
                         android:text="Promo Sales(U)"
                         android:layout_width="0dp"
                         android:layout_gravity="center"
@@ -141,7 +146,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.4"
                         android:id="@+id/bst_PromoValuesU_child"
                         android:text="Promo Sales"
                         android:textSize="12sp"
@@ -155,6 +160,14 @@
             </LinearLayout>
 
         </RelativeLayout>
+
+
+
+
+
+
+
+
 
     </RelativeLayout>
 

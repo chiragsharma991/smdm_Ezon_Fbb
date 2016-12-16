@@ -24,13 +24,13 @@
 
 
 
-    <color name="light_Black">#252525</color>
-    <color name="dark_Black">#454545</color>
-    <color name="divider_Black">#e7e7e7</color>
-    <color name="background">#f8f6f6</color>
-    <color name="greyinbox">#ffffff</color>
-    <color name="border">#e7e7e7</color>
-    <color name="DepartmentBox">#f3f2f2</color>
-    <color name="actionbar">#b5301f</color>
+    <color name="smdm_dark_Black">#252525</color>
+    <color name="smdm_light_Black">#404040</color>
+    <color name="smdm_divider_Black">#e7e7e7</color>
+    <color name="smdm_background">#f8f6f6</color>
+    <color name="smdm_greyinbox">#ffffff</color>
+    <color name="smdm_border">#e7e7e7</color>
+    <color name="smdm_DepartmentBox">#f3f2f2</color>
+    <color name="smdm_actionbar">#b5301f</color>
 
 </resources>

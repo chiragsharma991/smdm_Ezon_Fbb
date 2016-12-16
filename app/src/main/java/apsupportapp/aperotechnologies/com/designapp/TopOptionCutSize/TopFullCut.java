@@ -76,7 +76,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     private SegmentedGroup Top_segmented;
     private RadioButton Top_fashion,Top_core;
     private ToggleButton Toggle_top_fav;
-    private String corefashion="Core";
+    private String corefashion="Fashion";
 
 
     @Override
@@ -86,6 +86,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         getSupportActionBar().hide();
         initalise();
         gson = new Gson();
+        TopOptionListView.setVisibility(View.VISIBLE);
         TopOptionList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -121,13 +122,19 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                     public void onResponse(JSONArray response) {
                         Log.i(TAG, "Top Option : " + " " + response);
                         Log.i(TAG, "response" + "" + response.length());
+                        TopOptionListView.setVisibility(View.VISIBLE);
+
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 footer.setVisibility(View.GONE);
+                                if(TopOptionList.size()==0)
+                                {
+                                    TopOptionListView.setVisibility(View.GONE);
 
+                                }
                             } else if (response.length() == limit) {
 
 
@@ -187,7 +194,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                        } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             footer.setVisibility(View.GONE);
-                            Toast.makeText(context, "no data found in catch"+e.toString(), Toast.LENGTH_SHORT).show();
+                            TopOptionListView.setVisibility(View.GONE);
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" +e.toString());
                         }
@@ -328,6 +335,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                     top = 10;
                     corefashion="Core";
                     TopOptionList.clear();
+                    topOptionAdapter.notifyDataSetChanged();
+                    TopOptionListView.setVisibility(View.GONE);
                     Reusable_Functions.sDialog(this, "Loading.......");
                     requestRunningPromoApi();
                 }
@@ -340,6 +349,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                     top = 10;
                     corefashion="Fashion";
                     TopOptionList.clear();
+                    topOptionAdapter.notifyDataSetChanged();
+                    TopOptionListView.setVisibility(View.GONE);
                     Reusable_Functions.sDialog(this, "Loading.......");
                     requestRunningPromoApi();
                 }

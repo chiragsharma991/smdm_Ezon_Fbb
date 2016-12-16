@@ -52,7 +52,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class BestPerformerActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener{
 
-    TextView Bst_storecode, Bst_txtStoreName,PopPromo,PopPromoU,PopSort;
+    TextView Bst_storecode, Bst_txtStoreName,PopPromo,PopPromoU,PopSort,Bst_txtStoreCode;
     RelativeLayout Bst_imageBtnBack, Bst_sort,Bst_imgfilter,BestPromo_footer,SortPopup,BaseLayout;
     RunningPromoListDisplay BestPromoListDisplay;
     private SharedPreferences sharedPreferences;
@@ -75,7 +75,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     private View footer;
     int index = 0;
     int iterations = 0;
-    private CheckBox CheckBstSale,CheckBstSaleU;
+    private RadioButton CheckBstSale,CheckBstSaleU;
     private String lazyScroll="OFF";
     private SegmentedGroup segmentedGroup;
     private RadioButton bestRadio,worstRadio;
@@ -88,6 +88,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_best_performer);
         getSupportActionBar().hide();
         initalise();
+        Bst_txtStoreCode.setText("Not");
+        Bst_txtStoreName.setText("Applicable");
         CheckBstSale.setChecked(true);
         SortPopup.setVisibility(View.GONE);
         BestPerformanceListView.setVisibility(View.VISIBLE);
@@ -247,9 +249,11 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     }
     private void initalise() {
         Bst_storecode = (TextView) findViewById(R.id.txtStoreCode);
-        Bst_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
         PopPromo = (TextView) findViewById(R.id.popPromo);
         PopPromoU = (TextView) findViewById(R.id.popPromoU);
+        Bst_txtStoreCode = (TextView)findViewById(R.id.bst_txtStoreCode);
+        Bst_txtStoreName = (TextView)findViewById(R.id.bst_txtStoreName);
+
         PopSort = (TextView) findViewById(R.id.popSort);
         segmentedGroup=(SegmentedGroup)findViewById(R.id.bestPromo_segmented);
         bestRadio=(RadioButton)findViewById(R.id.bestPromo);
@@ -264,8 +268,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         BestPerformanceListView = (ListView) findViewById(R.id.bestPerformanceListView);
         SortPopup=(RelativeLayout)findViewById(R.id.sortPopup);
 
-        CheckBstSale=(CheckBox)findViewById(R.id.checkPromoSale);
-        CheckBstSaleU=(CheckBox)findViewById(R.id.checkPromoSaleU);
+        CheckBstSale=(RadioButton)findViewById(R.id.checkPromoSale);
+        CheckBstSaleU=(RadioButton)findViewById(R.id.checkPromoSaleU);
         Bst_imageBtnBack.setOnClickListener(this);
         Bst_sort.setOnClickListener(this);
         Bst_imgfilter.setOnClickListener(this);

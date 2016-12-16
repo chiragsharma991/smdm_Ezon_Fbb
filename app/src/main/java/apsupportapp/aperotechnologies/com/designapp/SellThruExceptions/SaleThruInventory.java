@@ -83,7 +83,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private int orderbycol = 1;
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU, BstInventory_salesThru, BstInventory_Fwd, BstInventory_coverNsell;
-    private CheckBox BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
+    private RadioButton BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
     private RelativeLayout BaseLayoutInventory;
     private String checkValueIs = null, checkTimeValueIs = null;
     private String view = "All";
@@ -315,10 +315,10 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         BstInventory_Fwd = (LinearLayout) findViewById(R.id.bstInventory_Fwd);
         BstInventory_coverNsell = (LinearLayout) findViewById(R.id.bstInventory_coverNsell);
 
-        BstInventory_salesU_chk = (CheckBox) findViewById(R.id.bstInventory_salesUchk);
-        BstInventory_salesThru_chk = (CheckBox) findViewById(R.id.bstInventory_salesThruchk);
-        BstInventory_Fwd_chk = (CheckBox) findViewById(R.id.bstInventory_Fwdchk);
-        BstInventory_coverNsell_chk = (CheckBox) findViewById(R.id.bstInventory_coverNsellchk);
+        BstInventory_salesU_chk = (RadioButton) findViewById(R.id.bstInventory_salesUchk);
+        BstInventory_salesThru_chk = (RadioButton) findViewById(R.id.bstInventory_salesThruchk);
+        BstInventory_Fwd_chk = (RadioButton) findViewById(R.id.bstInventory_Fwdchk);
+        BstInventory_coverNsell_chk = (RadioButton) findViewById(R.id.bstInventory_coverNsellchk);
 
 
         quickFilterPopup = (RelativeLayout) findViewById(R.id.bestQuickFilterPopup);

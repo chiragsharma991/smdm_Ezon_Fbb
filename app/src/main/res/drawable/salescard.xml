@@ -3,7 +3,7 @@
     <item >
         <shape
             android:shape="rectangle">
-            <solid android:color="@color/divider_salescard" />
+            <solid android:color="@color/smdm_border" />
             <corners
                 android:radius="4dp"   >
             </corners>
@@ -12,7 +12,7 @@
     <item android:right="1dp" android:left="1dp" android:bottom="1dp" android:top="1dp">
         <shape
             android:shape="rectangle">
-            <solid android:color="#ffffff"/>
+            <solid android:color="@color/smdm_greyinbox"/>
             <corners
                 android:radius="4dp"   >
             </corners>

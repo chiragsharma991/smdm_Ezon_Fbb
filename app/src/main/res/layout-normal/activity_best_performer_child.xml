@@ -20,15 +20,19 @@
             android:id="@+id/bst_Rel_image_child"
 
             >
+
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="5dp"
-                android:src="@mipmap/placeholder"
+                android:layout_marginTop="0dp"
                 android:scaleType="fitXY"
+                android:src="@mipmap/placeholder"
                 android:id="@+id/bst_image_child"
 
                 />
+
+
+
 
         </RelativeLayout>
 
