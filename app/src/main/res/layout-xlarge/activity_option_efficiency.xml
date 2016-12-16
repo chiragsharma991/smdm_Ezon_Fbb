@@ -242,14 +242,14 @@
                             <RelativeLayout
                                 android:layout_centerVertical="true"
                                 android:id="@+id/oe_btnPrev"
-                                android:layout_width="20dp"
+                                android:layout_width="40dp"
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="8dp"
-                                    android:layout_height="17dp"
+                                    android:layout_width="27dp"
+                                    android:layout_height="27dp"
                                     android:layout_centerInParent="true"
-                                    android:background="@mipmap/arrow_left_icon"
+                                    android:background="@mipmap/back_arrow"
                                     android:clickable="false" />
                             </RelativeLayout>
 
@@ -270,14 +270,14 @@
                                 android:layout_centerVertical="true"
                                 android:layout_toRightOf="@+id/oe_txtHeaderClass"
                                 android:id="@+id/oe_btnNext"
-                                android:layout_width="20dp"
+                                android:layout_width="40dp"
                                 android:layout_height="40dp">
 
                                 <Button
-                                    android:layout_width="8dp"
-                                    android:layout_height="17dp"
+                                    android:layout_width="27dp"
+                                    android:layout_height="27dp"
                                     android:layout_centerInParent="true"
-                                    android:background="@mipmap/arrow_right_icon"
+                                    android:background="@mipmap/next_arrow"
                                     android:clickable="false" />
                             </RelativeLayout>
 

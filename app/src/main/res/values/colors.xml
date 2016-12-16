@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#B73020</color>
+    <color name="colorPrimary">#b5301f</color>
     <color name="colorPrimaryDark">#510305</color>
     <color name="colorAccent">#920609</color>
     <color name="grey">#f0f0f0</color>
@@ -11,10 +11,16 @@
 
     <color name="bg_salescard">#F7F5F6</color>
     <color name="divider_salescard">#d9d7d8</color>
+    <color name="divider_salescard1">#ffffff</color>
     <color name="pink">#FE0000</color>
     <color name="green">#05c706</color>
     <color name="text_sales">#000000</color>
     <color name="edit_border_color">#e3e2e3</color>
+    <color name="bg_screen_color">#f8f6f6</color>
+    <color name="bg_header">#f3f2f2</color>
+    <color name="border_round_edittext">#e7e7e7</color>
+    <color name="bg_store_code_text">#404040</color>
+    <color name="txt_color">#252525</color>
 
 
 

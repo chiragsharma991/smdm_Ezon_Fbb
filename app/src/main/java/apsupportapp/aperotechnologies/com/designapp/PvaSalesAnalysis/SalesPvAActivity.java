@@ -420,7 +420,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
-                            salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                            salesAnalysisClassArrayList.clear();
                             Log.i("dept next", "-----");
                             requestSalesPvACategoryList(txtPvAClickedValue);
                             planDept = txtPvAClickedValue;
@@ -447,7 +447,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
-                                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                                    salesAnalysisClassArrayList.clear();
                                     Log.i("category next", "-----");
                                     Log.i("come", "----" + planDept);
                                     requestSalesPvAPlanClassListAPI(planDept, txtPvAClickedValue);
@@ -479,7 +479,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
-                                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                                    salesAnalysisClassArrayList.clear();
                                     Log.i("Plan Class next", "-----");
                                     requestSalesPvABrandListAPI(planDept, planCategory, txtPvAClickedValue);
                                     planClass = txtPvAClickedValue;
@@ -511,7 +511,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
-                                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                                    salesAnalysisClassArrayList .clear();
                                     Log.i("brand next", "-----");
                                     requestSalesPvABrandPlanListAPI(planDept, planCategory, planClass, txtPvAClickedValue);
 
