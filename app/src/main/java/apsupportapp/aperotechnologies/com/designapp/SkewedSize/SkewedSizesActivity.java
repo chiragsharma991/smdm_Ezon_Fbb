@@ -59,7 +59,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     RelativeLayout Skewed_BtnBack,sk_imgfilter,sk_quickFilter,quickFilterPopup, quickFilter_baseLayout,qfDoneLayout;
     RunningPromoListDisplay SkewedSizeListDisplay;
     private SharedPreferences sharedPreferences;
-    CheckBox checkCurrent,checkPrevious,checkOld,checkUpcoming;
+    RadioButton checkCurrent,checkPrevious,checkOld,checkUpcoming;
     String userId, bearertoken;
     String TAG = "SkewedSizesActivity";
     private int count = 0;
@@ -76,11 +76,11 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private boolean userScrolled;
     private SkewedSizeAdapter SkewedSizeAdapter;
     private View footer;
-    private String lazyScroll="OFF",seasonGroup = "All";
+    private String lazyScroll="OFF",seasonGroup = "Current";
     private SegmentedGroup Skewed_segmented;
     private RadioButton Skewed_core,Skewed_fashion;
     private ToggleButton Toggle_skewed_fav;
-    private String corefashion="Core";
+    private String corefashion="Fashion";
     private ImageView Skewed_quickFilter;
     private String qfButton="OFF";
 
@@ -91,8 +91,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_skewed_sizes);
         getSupportActionBar().hide();
         initalise();
-        seasonGroup = "All";
         gson = new Gson();
+        SkewedSizeListview.setVisibility(View.VISIBLE);
         SkewedSizeList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -128,12 +128,18 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                     public void onResponse(JSONArray response) {
                         Log.i(TAG, "Skewed Option : " + " " + response);
                         Log.i(TAG, "response" + "" + response.length());
+                        SkewedSizeListview.setVisibility(View.VISIBLE);
+
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 footer.setVisibility(View.GONE);
+                                if (SkewedSizeList.size() == 0) {
+                                    SkewedSizeListview.setVisibility(View.GONE);
+
+                                }
 
                             } else if (response.length() == limit) {
 
@@ -200,7 +206,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             footer.setVisibility(View.GONE);
-                            Toast.makeText(context, "no data found in catch"+e.toString(), Toast.LENGTH_SHORT).show();
+                            SkewedSizeListview.setVisibility(View.GONE);
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" +e.toString());
                         }
@@ -278,10 +284,10 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         qfDoneLayout =(RelativeLayout)findViewById(R.id.qfDoneLayout);
         quickFilterPopup.setVisibility(View.GONE);
         Toggle_skewed_fav=(ToggleButton)findViewById(R.id.toggle_skewed_fav);
-        checkCurrent =(CheckBox)findViewById(R.id.checkCurrent);
-        checkPrevious = (CheckBox)findViewById(R.id.checkPrevious);
-        checkOld = (CheckBox)findViewById(R.id.checkOld);
-        checkUpcoming = (CheckBox)findViewById(R.id.checkUpcoming);
+        checkCurrent =(RadioButton)findViewById(R.id.checkCurrent);
+        checkPrevious = (RadioButton)findViewById(R.id.checkPrevious);
+        checkOld = (RadioButton)findViewById(R.id.checkOld);
+        checkUpcoming = (RadioButton)findViewById(R.id.checkUpcoming);
 
         Skewed_segmented.setOnCheckedChangeListener(this);
         Skewed_BtnBack.setOnClickListener(this);
@@ -482,6 +488,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                     top = 10;
                     corefashion="Core";
                     SkewedSizeList.clear();
+                    SkewedSizeAdapter.notifyDataSetChanged();
+                    SkewedSizeListview.setVisibility(View.GONE);
                     Reusable_Functions.sDialog(this, "Loading.......");
                     requestRunningPromoApi();
                 }
@@ -494,6 +502,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                     top = 10;
                     corefashion="Fashion";
                     SkewedSizeList.clear();
+                    SkewedSizeAdapter.notifyDataSetChanged();
+                    SkewedSizeListview.setVisibility(View.GONE);
                     Reusable_Functions.sDialog(this, "Loading.......");
                     requestRunningPromoApi();
 

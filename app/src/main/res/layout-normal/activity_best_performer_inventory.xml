@@ -43,12 +43,37 @@
 
     </info.hoang8f.android.segmented.SegmentedGroup>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bestInvent_segmented"
-        android:layout_marginTop="20dp"
+        android:id="@+id/switchRelay"
+        android:padding="10dp"
+
+
         >
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bestNworstswitch"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/border3"
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/switchRelay"
+        >
+
+
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

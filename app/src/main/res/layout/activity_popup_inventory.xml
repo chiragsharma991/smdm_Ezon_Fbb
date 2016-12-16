@@ -117,7 +117,7 @@
                                 android:orientation="vertical">
 
 
-                                <CheckBox
+                                <RadioButton
                                     android:focusable="true"
                                     android:clickable="false"
                                     android:id="@+id/bstInventory_salesUchk"
@@ -177,7 +177,7 @@
                                 android:gravity="end"
                                 android:orientation="vertical">
 
-                                <CheckBox
+                                <RadioButton
                                     android:clickable="false"
                                     android:id="@+id/bstInventory_salesThruchk"
                                     android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
                                 android:gravity="end"
                                 android:orientation="vertical">
 
-                                <CheckBox
+                                <RadioButton
                                     android:id="@+id/bstInventory_Fwdchk"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -297,7 +297,7 @@
                                 android:gravity="end"
                                 android:orientation="vertical">
 
-                                <CheckBox
+                                <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/bstInventory_coverNsellchk"

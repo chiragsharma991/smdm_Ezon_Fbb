@@ -5,14 +5,18 @@ package apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory;
  */
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -84,6 +88,11 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
             holder=new Holder();
             convertView = mInflater.inflate(R.layout.activity_bestperformer_inventory_child, null);
             holder.BestInvent_SOH = (TextView) convertView.findViewById(R.id.bestInvent_SOH);
+            holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
+
+            // holder.ProgressPicaso.getIndeterminateDrawable().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
+
             holder.BestInvent_option = (TextView) convertView.findViewById(R.id.bestInvent_option);
             holder.BestInvent_sellThru = (TextView) convertView.findViewById(R.id.bestInvent_sellThru);
             holder.BestInvent_FWC = (TextView) convertView.findViewById(R.id.bestInvent_FWC);
@@ -101,6 +110,8 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
 
         } else {
             holder=(Holder)convertView.getTag();
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
+
 
         }
         holder.BestInvent_SOH.setText(""+(int)arrayList.get(position).getStkOnhandQty());
@@ -116,9 +127,28 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         BestPerformerInventory.BestInvent_txtStoreName.setText(arrayList.get(position).getStoreDesc());
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
-            Picasso.with(this.context).load(arrayList.get(position).getProdImageURL()).into(holder.BestInvent_image_child);
+            Picasso.with(this.context).
+
+                    load(arrayList.get(position).getProdImageURL()).
+                    into(holder.BestInvent_image_child, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+
+                        }
+                    });
         }else {
-            Picasso.with(this.context).load(R.mipmap.placeholder).into(holder.BestInvent_image_child);
+            holder.ProgressPicaso.setVisibility(View.GONE);
+
+            Picasso.with(this.context).
+                    load(R.mipmap.placeholder).
+                    into(holder.BestInvent_image_child);
+
         }
 
 
@@ -141,6 +171,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
                 BestInvent_RosU,BestInvent_GIT,BestInvent_Sale,BestInventTable_SOH,
                 BestInventTable_ProdAttribute;
         ImageView BestInvent_image_child;
+        ProgressBar ProgressPicaso;
 
 
 

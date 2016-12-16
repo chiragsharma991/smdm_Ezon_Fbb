@@ -881,6 +881,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
     @Override
     public void onPageSelected(int position) {
 
+
         ImageView img = (ImageView) lldots.getChildAt(currentPage);
         img.setImageResource(R.mipmap.dots_unselected);
         currentPage = position;

@@ -10,9 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -83,6 +87,8 @@ public class SkewedSizeAdapter extends BaseAdapter {
             holder = new Holder();
             convertView = mInflater.inflate(R.layout.skewedsize_child, null);
             holder.skewed_SOHU = (TextView) convertView.findViewById(R.id.skewed_SOHU);
+            holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.skewed_fwc = (TextView) convertView.findViewById(R.id.skewed_fwc);
             holder.Skewed_ProdAttribute = (TextView) convertView.findViewById(R.id.skewed_ProdAttribute);
             holder.Skewed_SOH = (TextView) convertView.findViewById(R.id.skewed_SOH);
@@ -95,6 +101,8 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
         } else {
             holder = (Holder) convertView.getTag();
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
+
 
         }
         holder.skewed_option.setText(arrayList.get(position).getOption());
@@ -102,6 +110,31 @@ public class SkewedSizeAdapter extends BaseAdapter {
         holder.skewed_fwc.setText("" + (int) arrayList.get(position).getFwdWeekCover());
         holder.Skewed_ProdAttribute.setText(arrayList.get(position).getProdAttribute4());
         holder.Skewed_SOH.setText("" + (int) arrayList.get(position).getStkOnhandQty());
+
+        if(!arrayList.get(position).getProdImageURL().equals("")) {
+            Picasso.with(this.context).
+
+                    load(arrayList.get(position).getProdImageURL()).
+                    into(holder.skewed_image_child, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+
+                        }
+                    });
+        }else {
+            holder.ProgressPicaso.setVisibility(View.GONE);
+
+            Picasso.with(this.context).
+                    load(R.mipmap.placeholder).
+                    into(holder.skewed_image_child);
+
+        }
 
 
         // ---------------------click listener -------------------------
@@ -118,5 +151,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
         ToggleButton toggle_skewed_fav;
 
 
+        public ProgressBar ProgressPicaso;
     }
 }

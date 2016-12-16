@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -84,6 +86,8 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.activity_salethru_inventory_child, null);
             holder.BestInvent_SOH = (TextView) convertView.findViewById(R.id.bestInvent_SOH);
             holder.BestInvent_sellThru = (TextView) convertView.findViewById(R.id.bestInvent_sellThru);
+            holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.BestInvent_Sale = (TextView) convertView.findViewById(R.id.bestInvent_Sale);
             holder.bestInvent_zonalSell = (TextView) convertView.findViewById(R.id.bestInvent_zonalSell);
             holder.bestInvent_wks = (TextView) convertView.findViewById(R.id.bestInvent_wks);
@@ -99,6 +103,8 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
 
         } else {
             holder=(Holder)convertView.getTag();
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
+
 
         }
         holder.BestInvent_SOH.setText(""+(int)arrayList.get(position).getStkOnhandQty());
@@ -113,9 +119,28 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
         SaleThruInventory.BestInvent_txtStoreName.setText(arrayList.get(position).getStoreDesc());
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
-            Picasso.with(this.context).load(arrayList.get(position).getProdImageURL()).into(holder.BestInvent_image_child);
+            Picasso.with(this.context).
+
+                    load(arrayList.get(position).getProdImageURL()).
+                    into(holder.BestInvent_image_child, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+
+                        }
+                    });
         }else {
-            Picasso.with(this.context).load(R.mipmap.placeholder).into(holder.BestInvent_image_child);
+            holder.ProgressPicaso.setVisibility(View.GONE);
+
+            Picasso.with(this.context).
+                    load(R.mipmap.placeholder).
+                    into(holder.BestInvent_image_child);
+
         }
 
 
@@ -140,11 +165,7 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
         ImageView BestInvent_image_child;
 
 
-
-
-
-
-
+        public ProgressBar ProgressPicaso;
     }
 
 
