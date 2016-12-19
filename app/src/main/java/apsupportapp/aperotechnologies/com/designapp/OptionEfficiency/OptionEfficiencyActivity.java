@@ -128,7 +128,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         queue.start();
         gson = new Gson();
         initializeUI();
-        checkCurrent.setChecked(true);
+       // checkCurrent.setChecked(true);
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -164,61 +164,61 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         });
 
         //quick Filter
-        oe_quickFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterFunction();
-            }
-        });
-        quickFilter_baseLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (checkSeasonGpVal == null ) {
-                    checkCurrent.setChecked(false);
-                    checkPrevious.setChecked(false);
-                    checkOld.setChecked(false);
-                    checkUpcoming.setChecked(false);
-
-
-                } else {
-                    switch (checkSeasonGpVal.toString()) {
-                        case "Current":
-                            checkCurrent.setChecked(true);
-                            checkPrevious.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkUpcoming.setChecked(false);
-
-                            Log.e("Current checked", "" + checkCurrent.isChecked());
-                            break;
-
-                        case "Previous":
-                            checkPrevious.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkUpcoming.setChecked(false);
-                            Log.e("Previous checked", "" + checkPrevious.isChecked());
-                            break;
-                        case "Old":
-                            checkOld.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkPrevious.setChecked(false);
-                            checkUpcoming.setChecked(false);
-                            Log.e("Old checked", "" + checkOld.isChecked());
-                            break;
-                        case "Upcoming":
-                            checkUpcoming.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkPrevious.setChecked(false);
-                            Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
-                            break;
-                    }
-
-                 }
-                quickFilterPopup.setVisibility(View.GONE);
-            }
-        });
+//        oe_quickFilter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                filterFunction();
+//            }
+//        });
+//        quickFilter_baseLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (checkSeasonGpVal == null ) {
+//                    checkCurrent.setChecked(false);
+//                    checkPrevious.setChecked(false);
+//                    checkOld.setChecked(false);
+//                    checkUpcoming.setChecked(false);
+//
+//
+//                } else {
+//                    switch (checkSeasonGpVal.toString()) {
+//                        case "Current":
+//                            checkCurrent.setChecked(true);
+//                            checkPrevious.setChecked(false);
+//                            checkOld.setChecked(false);
+//                            checkUpcoming.setChecked(false);
+//
+//                            Log.e("Current checked", "" + checkCurrent.isChecked());
+//                            break;
+//
+//                        case "Previous":
+//                            checkPrevious.setChecked(true);
+//                            checkCurrent.setChecked(false);
+//                            checkOld.setChecked(false);
+//                            checkUpcoming.setChecked(false);
+//                            Log.e("Previous checked", "" + checkPrevious.isChecked());
+//                            break;
+//                        case "Old":
+//                            checkOld.setChecked(true);
+//                            checkCurrent.setChecked(false);
+//                            checkPrevious.setChecked(false);
+//                            checkUpcoming.setChecked(false);
+//                            Log.e("Old checked", "" + checkOld.isChecked());
+//                            break;
+//                        case "Upcoming":
+//                            checkUpcoming.setChecked(true);
+//                            checkCurrent.setChecked(false);
+//                            checkOld.setChecked(false);
+//                            checkPrevious.setChecked(false);
+//                            Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
+//                            break;
+//                    }
+//
+//                 }
+//                quickFilterPopup.setVisibility(View.GONE);
+//            }
+//        });
 
         // previous
         oe_btnPrev.setOnClickListener(new View.OnClickListener() {
@@ -644,10 +644,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oe_txtDeptName = (TextView) findViewById(R.id.oe_txtDeptName);
         optionEfficiency_imageBtnBack = (RelativeLayout) findViewById(R.id.optionEfficiency_imageBtnBack);
         optionEfficiency_imgfilter = (RelativeLayout) findViewById(R.id.optionEfficiency_imgfilter);
-        oe_quickFilter = (RelativeLayout) findViewById(R.id.oe_quickFilter);
-        quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
-        quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
-        quickFilterPopup.setVisibility(View.GONE);
+        //oe_quickFilter = (RelativeLayout) findViewById(R.id.oe_quickFilter);
+        //quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
+        //quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
+        //quickFilterPopup.setVisibility(View.GONE);
         oe_pieChart = (PieChart) findViewById(R.id.oe_pieChart);
         oe_listView = (ListView) findViewById(R.id.oe_list);
         oe_listView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
@@ -655,86 +655,85 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oe_llayouthierarchy = (LinearLayout) findViewById(R.id.oe_llayouthierarchy);
         oe_btnPrev = (RelativeLayout) findViewById(R.id.oe_btnPrev);
         oe_btnNext = (RelativeLayout) findViewById(R.id.oe_btnNext);
-        qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
+        //qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
         optionEfficiency_segmentedGrp = (SegmentedGroup) findViewById(R.id.optionEfficiency_segmentedGrp);
         optionEfficiency_segmentedGrp.setOnCheckedChangeListener(OptionEfficiencyActivity.this);
         oe_btnCore = (RadioButton) findViewById(R.id.oe_btnCore);
         oe_btnFashion = (RadioButton) findViewById(R.id.oe_btnFashion);
         oe_btnFashion.toggle();
-        quickFilter_BorderLayout=(RelativeLayout)findViewById(R.id.quickFilter_BorderLayout);
+ //       quickFilter_BorderLayout=(RelativeLayout)findViewById(R.id.quickFilter_BorderLayout);
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
         optionArrayList = new ArrayList<OptionEfficiencyDetails>();
-        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
-        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
-        checkOld = (CheckBox) findViewById(R.id.checkOld);
-        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
-        checkCurrent.setOnClickListener(this);
-        checkPrevious.setOnClickListener(this);
-        checkOld.setOnClickListener(this);
-        checkUpcoming.setOnClickListener(this);
-        qfDoneLayout.setOnClickListener(this);
-        quickFilter_BorderLayout.setOnClickListener(this);
+//        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
+//        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
+//        checkOld = (CheckBox) findViewById(R.id.checkOld);
+//        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
+//        checkCurrent.setOnClickListener(this);
+//        checkPrevious.setOnClickListener(this);
+//        checkOld.setOnClickListener(this);
+//        checkUpcoming.setOnClickListener(this);
+//        qfDoneLayout.setOnClickListener(this);
+//        quickFilter_BorderLayout.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.qfDoneLayout:
-
-                if (checkCurrent.isChecked()) {
-                    popupCurrent();
-                    checkSeasonGpVal = "Current";
-
-                    quickFilterPopup.setVisibility(View.GONE);
-
-                } else if (checkPrevious.isChecked()) {
-                    popupPrevious();
-                    checkSeasonGpVal = "Previous";
-
-                    quickFilterPopup.setVisibility(View.GONE);
-
-                } else if (checkOld.isChecked()) {
-                    popupOld();
-                    checkSeasonGpVal = "Old";
-
-                    quickFilterPopup.setVisibility(View.GONE);
-
-                } else if (checkUpcoming.isChecked()) {
-                    popupUpcoming();
-                    checkSeasonGpVal = "Upcoming";
-
-                    quickFilterPopup.setVisibility(View.GONE);
-                } else {
-                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
-
-                }
-                break;
-            case R.id.checkCurrent:
-                checkCurrent.setChecked(true);
-                checkPrevious.setChecked(false);
-                checkOld.setChecked(false);
-                checkUpcoming.setChecked(false);
-                break;
-            case R.id.checkPrevious:
-                checkPrevious.setChecked(true);
-                checkCurrent.setChecked(false);
-                checkOld.setChecked(false);
-                checkUpcoming.setChecked(false);
-                break;
-            case R.id.checkOld:
-                checkOld.setChecked(true);
-                checkCurrent.setChecked(false);
-                checkPrevious.setChecked(false);
-                checkUpcoming.setChecked(false);
-                break;
-            case R.id.checkUpcoming:
-                checkUpcoming.setChecked(true);
-                checkCurrent.setChecked(false);
-                checkOld.setChecked(false);
-                checkPrevious.setChecked(false);
-                break;
-
-        }
+//            case R.id.qfDoneLayout:
+//
+//                if (checkCurrent.isChecked()) {
+//                    popupCurrent();
+//                    checkSeasonGpVal = "Current";
+//
+//                    quickFilterPopup.setVisibility(View.GONE);
+//
+//                } else if (checkPrevious.isChecked()) {
+//                    popupPrevious();
+//                    checkSeasonGpVal = "Previous";
+//
+//                    quickFilterPopup.setVisibility(View.GONE);
+//
+//                } else if (checkOld.isChecked()) {
+//                    popupOld();
+//                    checkSeasonGpVal = "Old";
+//
+//                    quickFilterPopup.setVisibility(View.GONE);
+//
+//                } else if (checkUpcoming.isChecked()) {
+//                    popupUpcoming();
+//                    checkSeasonGpVal = "Upcoming";
+//
+//                    quickFilterPopup.setVisibility(View.GONE);
+//                } else {
+//                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+//
+//                }
+//                break;
+//            case R.id.checkCurrent:
+//                checkCurrent.setChecked(true);
+//                checkPrevious.setChecked(false);
+//                checkOld.setChecked(false);
+//                checkUpcoming.setChecked(false);
+//                break;
+//            case R.id.checkPrevious:
+//                checkPrevious.setChecked(true);
+//                checkCurrent.setChecked(false);
+//                checkOld.setChecked(false);
+//                checkUpcoming.setChecked(false);
+//                break;
+//            case R.id.checkOld:
+//                checkOld.setChecked(true);
+//                checkCurrent.setChecked(false);
+//                checkPrevious.setChecked(false);
+//                checkUpcoming.setChecked(false);
+//                break;
+//            case R.id.checkUpcoming:
+//                checkUpcoming.setChecked(true);
+//                checkCurrent.setChecked(false);
+//                checkOld.setChecked(false);
+//                checkPrevious.setChecked(false);
+//                break;
+}
     }
 
     private void filterFunction() {

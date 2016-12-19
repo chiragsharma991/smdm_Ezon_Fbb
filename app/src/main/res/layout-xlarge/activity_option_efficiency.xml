@@ -430,9 +430,9 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/quick_filter_menu">
+    <!--<include layout="@layout/quick_filter_menu">-->
 
-    </include>
+    <!--</include>-->
 
 
 </RelativeLayout>
