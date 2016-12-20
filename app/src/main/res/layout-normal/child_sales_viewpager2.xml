@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/soh"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -54,7 +54,7 @@
         <RelativeLayout
             android:id="@+id/git"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -100,7 +100,7 @@
         <RelativeLayout
             android:id="@+id/ROS"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -135,7 +135,7 @@
         <RelativeLayout
             android:id="@+id/fwdwkcover"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"

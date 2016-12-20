@@ -145,33 +145,33 @@ public class SalesPvAAdapter extends BaseAdapter {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanDept());
 
-            viewHolder.txtPlanSales.setText("\u20B9 " +formatter.format((int)productNameBean.getPlanSaleNetVal()));
-            viewHolder.txtNetSales.setText("\u20B9 " +formatter.format((int)productNameBean.getSaleNetVal()));
+            viewHolder.txtPlanSales.setText("\u20B9 " +formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+            viewHolder.txtNetSales.setText("\u20B9 " +formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
 
         } else if (fromWhere.equals("Category")) {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanCategory());
-            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format((int)productNameBean.getPlanSaleNetVal()));
-            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format((int)productNameBean.getSaleNetVal()));
+            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
 //
 //            viewHolder.txtValue.setText(productNameBean.getPlanCategory().toLowerCase());
 
         } else if (fromWhere.equals("Plan Class")) {
             viewHolder.txtPlanClass.setText(productNameBean.getPlanClass());
-            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format((int)productNameBean.getPlanSaleNetVal()));
-            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format((int)productNameBean.getSaleNetVal()));
+            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
         } else if (fromWhere.equals("Brand"))
         {
             viewHolder.txtPlanClass.setText(productNameBean.getBrandName());
-            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format((int)productNameBean.getPlanSaleNetVal()));
-            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format((int)productNameBean.getSaleNetVal()));
+            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
         } else if (fromWhere.equals("Brand Plan Class"))
         {
             viewHolder.txtPlanClass.setText(productNameBean.getBrandplanClass());
-            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format((int)productNameBean.getPlanSaleNetVal()));
-            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format((int)productNameBean.getSaleNetVal()));
+            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
         }
 
         // update listview

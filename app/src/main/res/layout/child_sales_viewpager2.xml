@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/soh"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -54,7 +54,7 @@
         <RelativeLayout
             android:id="@+id/git"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -85,9 +85,9 @@
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                />
+                 />
 
-        </RelativeLayout>
+          </RelativeLayout>
 
     </LinearLayout>
 
@@ -100,7 +100,7 @@
         <RelativeLayout
             android:id="@+id/ROS"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -128,14 +128,14 @@
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                />
-        </RelativeLayout>
+               />
+         </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/fwdwkcover"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -154,14 +154,14 @@
                 android:textSize="12sp" />
 
 
-            <TextView
+             <TextView
                 android:id="@+id/txtFwdWkCoverVal2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentLeft="true"
+                 android:layout_marginLeft="8dp"
+                 android:layout_marginTop="35dp"
+                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 />

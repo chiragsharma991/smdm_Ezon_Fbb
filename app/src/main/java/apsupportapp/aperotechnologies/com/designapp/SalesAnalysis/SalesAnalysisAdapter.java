@@ -151,37 +151,37 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 //            {
 //                viewHolder.txtPvAValue.setText(""+(int)analysisArrayList.get(position).getPvaAchieved());
 //            }
-            String planDept = productNameBean.getPlanDept().substring(0,1).toUpperCase()+productNameBean.getPlanDept().substring(1).toLowerCase();
-            viewHolder.nameTv.setText(planDept);
-            viewHolder.txtPvAValue.setText(" " + (int) productNameBean.getPvaAchieved() + "%");
+    //        String planDept = productNameBean.getPlanDept().substring(0,1).toUpperCase()+productNameBean.getPlanDept().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(productNameBean.getPlanDept());
+            viewHolder.txtPvAValue.setText(" " + Math.round( productNameBean.getPvaAchieved()) + "%");
 
 
 
         } else if (fromwhere.equals("Category")) {
 
-            String planCat=productNameBean.getPlanCategory().substring(0,1).toUpperCase()+productNameBean.getPlanCategory().substring(1).toLowerCase();
-            viewHolder.nameTv.setText(planCat);
-            viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
+      //      String planCat=productNameBean.getPlanCategory().substring(0,1).toUpperCase()+productNameBean.getPlanCategory().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(productNameBean.getPlanCategory());
+            viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
 
         } else if (fromwhere.equals("Plan Class")) {
 
-            String planCls = productNameBean.getPlanClass().substring(0,1).toUpperCase()+productNameBean.getPlanClass().substring(1).toLowerCase();
-            viewHolder.nameTv.setText(planCls);
-            viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
+           // String planCls = productNameBean.getPlanClass().substring(0,1).toUpperCase()+productNameBean.getPlanClass().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(productNameBean.getPlanClass());
+            viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
             //viewHolder.txtValue.setText(productNameBean.getPlanClass().toLowerCase());
 
         } else if (fromwhere.equals("Brand")) {
 
-            String brnd= productNameBean.getBrandName().substring(0,1).toUpperCase()+productNameBean.getBrandName().substring(1).toLowerCase();
-            viewHolder.nameTv.setText(brnd);
-            viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
+            //String brnd= productNameBean.getBrandName().substring(0,1).toUpperCase()+productNameBean.getBrandName().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(productNameBean.getBrandName());
+            viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
         } else if (fromwhere.equals("Brand Plan Class")) {
 
-            String brndPlnCls= productNameBean.getBrandplanClass().substring(0,1).toUpperCase()+productNameBean.getBrandplanClass().substring(1).toLowerCase();
-            viewHolder.nameTv.setText(brndPlnCls);
-            viewHolder.txtPvAValue.setText(""+(int)productNameBean.getPvaAchieved()+"%");
+        //    String brndPlnCls= productNameBean.getBrandplanClass().substring(0,1).toUpperCase()+productNameBean.getBrandplanClass().substring(1).toLowerCase();
+            viewHolder.nameTv.setText(productNameBean.getBrandplanClass());
+            viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
         }
 

@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -247,7 +248,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 switch (txtheaderplanclass.getText().toString()) {
 
                     case "Brand Plan Class":
-                        //relnextbtn.setVisibility(View.VISIBLE);
+                        relnextbtn.setVisibility(View.GONE);
                         //SalesPagerAdapter.currentPage = 0;
                         if (lldots != null) {
                             lldots.removeAllViews();
@@ -342,9 +343,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         break;
 
                     case "Category":
-
-                        //relprevbtn.setVisibility(View.GONE);
-                        //relnextbtn.setVisibility(View.VISIBLE);
+//                        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                        params.setMargins(20,0,0,0);
+//                        txtheaderplanclass.setLayoutParams(params);
+                        relprevbtn.setVisibility(View.GONE);
+                        relnextbtn.setVisibility(View.VISIBLE);
                         //SalesPagerAdapter.currentPage = 0;
                         if (lldots != null) {
                             lldots.removeAllViews();
@@ -387,7 +390,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 switch (txtheaderplanclass.getText().toString()) {
 
                     case "Department":
-                        //relprevbtn.setVisibility(View.VISIBLE);
+
+                        relprevbtn.setVisibility(View.VISIBLE);
 
                         txtheaderplanclass.setText("Category");
                         //SalesPagerAdapter.currentPage = 0;
@@ -480,8 +484,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                     case "Brand":
                         txtheaderplanclass.setText("Brand Plan Class");
-                        //relprevbtn.setVisibility(View.VISIBLE);
-                        //relnextbtn.setVisibility(View.GONE);
+                        relprevbtn.setVisibility(View.VISIBLE);
+                        relnextbtn.setVisibility(View.GONE);
                         //SalesPagerAdapter.currentPage = 0;
                         if (lldots != null) {
                             lldots.removeAllViews();
@@ -1247,7 +1251,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 val = "";
-                                val = deptName.substring(0,1).toUpperCase()+deptName.substring(1).toLowerCase();
+                                val = deptName;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
                                // llayoutSalesAnalysis.setVisibility(View.VISIBLE);
@@ -1348,8 +1352,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 salesadapter.notifyDataSetChanged();
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
-                                 String categry = category.substring(0,1).toUpperCase()+category.substring(1).toLowerCase();
-                                val += " > " + categry;
+                                // String categry = category.substring(0,1).toUpperCase()+category.substring(1).toLowerCase();
+                                val += " > " + category;
                                 txthDeptName.setText(val);
                                 //txthCategory.setText(category);
                                 llhierarchy.setVisibility(View.VISIBLE);
@@ -1450,8 +1454,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 flag = true;
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
-                                String plnCls = planclass.substring(0,1).toUpperCase()+planclass.substring(1).toLowerCase();
-                                val += " > " + plnCls;
+                               // String plnCls = planclass.substring(0,1).toUpperCase()+planclass.substring(1).toLowerCase();
+                                val += " > " + planclass;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
 //                                llayoutSalesAnalysis.setVisibility(View.VISIBLE);
@@ -1560,7 +1564,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                  String brnd = brandnm.substring(0,1).toUpperCase()+brandnm.substring(1).toLowerCase();
-                                val += " > " + brnd;
+                                val += " > " + brandnm;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
                                // llayoutSalesAnalysis.setVisibility(View.VISIBLE);

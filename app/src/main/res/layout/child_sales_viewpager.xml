@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/netsales"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -28,8 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:gravity="left"
                 android:layout_marginLeft="8dp"
+                android:gravity="left"
                 android:text="Net Sales"
                 android:textSize="12sp" />
 
@@ -92,7 +92,7 @@
         <RelativeLayout
             android:id="@+id/plansales"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -177,7 +177,7 @@
         <RelativeLayout
             android:id="@+id/netsalesu"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -258,7 +258,7 @@
         <RelativeLayout
             android:id="@+id/sohu"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
