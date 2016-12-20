@@ -285,7 +285,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
                                 android:text="Department"
-                                android:textStyle="bold"
+                                android:textStyle="normal"
                                 android:textColor="@android:color/black"
                                 android:textSize="11sp" />
 
@@ -308,7 +308,7 @@
                         </RelativeLayout>
 
                         <TextView
-                            android:textStyle="bold"
+                            android:textStyle="normal"
                             android:id="@+id/txtPlanSales"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
@@ -335,7 +335,7 @@
                             android:text="Net Sales"
                             android:textColor="@android:color/black"
                             android:textSize="11sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="normal"/>
 
 
                         <TextView
@@ -348,7 +348,7 @@
                             android:text="PvA Sales%"
                             android:textColor="@android:color/black"
                             android:textSize="11sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="normal"/>
 
 
                     </RelativeLayout>

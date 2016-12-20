@@ -43,7 +43,7 @@
                 android:layout_marginTop="35dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/txtNetSalesImage"
@@ -72,6 +72,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
+                    android:textColor="@color/smdm_blue"
                     android:text="djshjd"
                     android:textSize="11sp" />
 
@@ -83,7 +84,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/txtNetSalesName"
                     android:text="20%"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/smdm_blue"
                     android:textSize="11sp" />
 
             </RelativeLayout>
@@ -120,7 +121,7 @@
                 android:layout_marginTop="35dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/txtPlanSalesImage"
@@ -141,6 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@+id/txtPlanSalesVal">
+
                 <TextView
                     android:id="@+id/txtPlanSalesName"
                     android:layout_width="wrap_content"
@@ -148,6 +150,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
+                    android:textColor="@color/smdm_blue"
                     android:text="djshjd"
                     android:textSize="11sp" />
 
@@ -159,7 +162,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/txtPlanSalesName"
                     android:text="20%"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/smdm_blue"
                     android:textSize="11sp" />
 
 
@@ -204,7 +207,7 @@
                 android:layout_marginTop="35dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
 
 
@@ -237,6 +240,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
+                    android:textColor="@color/smdm_blue"
                     android:text="djshjd"
                     android:textSize="11sp" />
 
@@ -248,7 +252,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/txtNetSalesUName"
                     android:text="20%"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/smdm_blue"
                     android:textSize="11sp"  />
 
 
@@ -285,7 +289,7 @@
                 android:layout_marginTop="35dp"
                 android:text="12,15,1215"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
 
         </RelativeLayout>

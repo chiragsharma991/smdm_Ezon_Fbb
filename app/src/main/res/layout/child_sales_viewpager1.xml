@@ -196,13 +196,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_below="@+id/znLayout"
-                        android:background="@color/edit_border_color"
+
                         android:orientation="horizontal"
                         android:weightSum="3">
 
                         <LinearLayout
                             android:id="@+id/linPvAZonalRank"
-                            android:layout_width="78dp"
+                            android:layout_width="79dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
@@ -218,13 +218,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="4dp"
+                            android:layout_width="2dip"
                             android:layout_height="50dp"
                             android:layout_weight="1">
 
                             <View
                                 android:id="@+id/txtPvAView"
-                                android:layout_width="1dip"
+                                android:layout_width="2dip"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="0dp"
                                 android:background="@color/colorPrimary" />
@@ -233,11 +233,12 @@
 
                         <LinearLayout
                             android:id="@+id/linPvANationalRank"
-                            android:layout_width="78dp"
+                            android:layout_width="79dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
                             <TextView
+
                                 android:id="@+id/txtPvANationalRankVal"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -306,12 +307,11 @@
                         android:layout_height="50dp"
                         android:weightSum="3"
                         android:layout_below="@+id/yoyznLayout"
-                        android:background="@color/edit_border_color"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:id="@+id/linYoYZonalRank"
-                            android:layout_width="78dp"
+                            android:layout_width="79dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <TextView
@@ -326,13 +326,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="4dp"
+                            android:layout_width="2dip"
                             android:layout_height="50dp"
                             android:layout_weight="1">
 
                             <View
                                 android:id="@+id/txtYoYView"
-                                android:layout_width="1dip"
+                                android:layout_width="2dip"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="0dp"
                                 android:background="@color/colorPrimary" />
@@ -341,7 +341,7 @@
 
                         <LinearLayout
                             android:id="@+id/linYoYNationalRank"
-                            android:layout_width="78dp"
+                            android:layout_width="79dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
@@ -367,7 +367,7 @@
                         android:layout_margin="2dp"
                         android:gravity="center"
                         android:text="YOY Sales Grw %"
-                        android:textColor="#ffffff" />
+                        android:textColor="@color/bg_store_code_text" />
                 </RelativeLayout>
 
             </RelativeLayout>

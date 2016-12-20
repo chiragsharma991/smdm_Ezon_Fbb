@@ -183,6 +183,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         }
 
         btnSalesPrev = (RelativeLayout) findViewById(R.id.btnSalesBack);
+        btnSalesPrev.setVisibility(View.INVISIBLE);
         btnSalesPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,6 +191,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 switch (txtheaderplanclass.getText().toString()) {
 
                     case "Brand Plan Class":
+                        btnSalesNext.setVisibility(View.VISIBLE);
                         txtheaderplanclass.setText("Brand");
                         fromWhere = "Brand";
                         flag = false;
@@ -270,6 +272,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         break;
 
                     case "Category":
+                        btnSalesPrev.setVisibility(View.INVISIBLE);
                         txtheaderplanclass.setText("Department");
                         fromWhere = "Department";
                         level = 1;
@@ -308,6 +311,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 switch (txtheaderplanclass.getText().toString()) {
 
                     case "Department":
+                        btnSalesPrev.setVisibility(View.VISIBLE);
                         txtheaderplanclass.setText("Category");
                         fromWhere = "Category";
                         level = 2;
@@ -376,6 +380,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         break;
 
                     case "Brand":
+                        btnSalesNext.setVisibility(View.INVISIBLE);
+
                         txtheaderplanclass.setText("Brand Plan Class");
                         fromWhere = "Brand Plan Class";
                         flag = false;

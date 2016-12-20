@@ -129,6 +129,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         relimgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
         relimgrank = (RelativeLayout) findViewById(R.id.imgrank);
         relprevbtn = (RelativeLayout) findViewById(R.id.prevplanclass);
+        relprevbtn.setVisibility(View.INVISIBLE);
         relnextbtn = (RelativeLayout) findViewById(R.id.nextplanclass);
         txtheaderplanclass = (TextView) findViewById(R.id.headerplanclass);
 
@@ -248,7 +249,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 switch (txtheaderplanclass.getText().toString()) {
 
                     case "Brand Plan Class":
-                        relnextbtn.setVisibility(View.GONE);
+
+                        relnextbtn.setVisibility(View.VISIBLE);
                         //SalesPagerAdapter.currentPage = 0;
                         if (lldots != null) {
                             lldots.removeAllViews();
@@ -343,11 +345,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         break;
 
                     case "Category":
-//                        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//                        params.setMargins(20,0,0,0);
-//                        txtheaderplanclass.setLayoutParams(params);
-                        relprevbtn.setVisibility(View.GONE);
-                        relnextbtn.setVisibility(View.VISIBLE);
+//
+                        relprevbtn.setVisibility(View.INVISIBLE);
+                        //relnextbtn.setVisibility(View.VISIBLE);
+//                        relprevbtn.setBackgroundResource(R.color.bg_header);
                         //SalesPagerAdapter.currentPage = 0;
                         if (lldots != null) {
                             lldots.removeAllViews();
@@ -484,8 +485,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                     case "Brand":
                         txtheaderplanclass.setText("Brand Plan Class");
-                        relprevbtn.setVisibility(View.VISIBLE);
-                        relnextbtn.setVisibility(View.GONE);
+
+                        //relprevbtn.setVisibility(View.VISIBLE);
+                        relnextbtn.setVisibility(View.INVISIBLE);
                         //SalesPagerAdapter.currentPage = 0;
                         if (lldots != null) {
                             lldots.removeAllViews();
