@@ -52,6 +52,7 @@
         android:padding="10dp"
 
 
+
         >
 
         <Switch
@@ -60,6 +61,18 @@
             android:id="@+id/bestNworstswitch"
             android:layout_alignParentRight="true"
             android:background="@drawable/border3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:text="Best/Worst"
+            android:textColor="@color/smdm_light_Black"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/bestNworstswitch"
+            android:layout_alignBaseline="@id/bestNworstswitch"
+
             />
 
 

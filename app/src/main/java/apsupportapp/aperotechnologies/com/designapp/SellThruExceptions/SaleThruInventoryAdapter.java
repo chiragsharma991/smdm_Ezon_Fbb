@@ -107,9 +107,9 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
 
 
         }
-        holder.BestInvent_SOH.setText(""+(int)arrayList.get(position).getStkOnhandQty());
-        holder.BestInvent_sellThru.setText(""+(int)arrayList.get(position).getSellThruUnits());
-        holder.bestInvent_zonalSell.setText(""+(int)arrayList.get(position).getSellthruUnitsZonal());
+        holder.BestInvent_SOH.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
+        holder.BestInvent_sellThru.setText(""+Math.round(arrayList.get(position).getSellThruUnits()));
+        holder.bestInvent_zonalSell.setText(""+Math.round(arrayList.get(position).getSellthruUnitsZonal()));
         holder.BestInvent_Sale.setText(""+(int)arrayList.get(position).getSaleTotQty());
        // holder.bestInvent_wks.setText(""+(int)arrayList.get(position).getFwdWeekCover());
         holder.BestInvent_option.setText(arrayList.get(position).getOption());

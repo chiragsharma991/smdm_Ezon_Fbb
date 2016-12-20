@@ -2,6 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,6 +24,8 @@ public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCall
 
         this.activity = activity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        Log.e("onActivityCreated", "onRestart: ");
+
     }
 
     @Override
@@ -35,7 +38,19 @@ public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCall
     @Override
     public void onActivityResumed(Activity activity) {
 
+        Log.e("onActivityResumed", "onRestart: ");
+        if (LocalNotificationReceiver.logoutAlarm) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.commit();
+            activity.finish();
+            Intent i = new Intent(activity, LoginActivity.class);
+            // set the new task and clear flags
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            activity.startActivity(i);
+        }
     }
+
 
     @Override
     public void onActivityPaused(Activity activity) {
@@ -44,6 +59,8 @@ public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCall
     @Override
     public void onActivityStopped(Activity activity) {
         //map Activity unique class name with 0 on foreground
+        Log.e("onActivityStopped", "onStop: ");
+
         activities.put(activity.getLocalClassName(), 0);
         applicationStatus();
     }
@@ -75,7 +92,7 @@ public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCall
     public static boolean applicationStatus() {
 
 
-        Log.d("ApplicationStatus", "Is application background " + isBackGround());
+        Log.e("ApplicationStatus", "Is application background " + isBackGround());
         return !isBackGround();
     }
 }

@@ -91,7 +91,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private ToggleButton Toggle_bestInvent_fav;
     private String corefashion = "Fashion";
     private ImageView Skewed_quickFilter;
-    private int orderbycol = 2;
+    private int orderbycol = 9;
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU, BstInventory_salesThru, BstInventory_Fwd, BstInventory_coverNsell;
     private RadioButton BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
@@ -153,6 +153,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
 
                             try {
+
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -320,6 +321,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BestInvent_fashion.toggle();
         Bst_sortInventory = (RelativeLayout) findViewById(R.id.bst_sortInventory);
         BaseLayoutInventory = (RelativeLayout) findViewById(R.id.baseLayoutInventory);
+
         BstInventory_salesU = (LinearLayout) findViewById(R.id.bstInventory_salesU);
         BstInventory_salesThru = (LinearLayout) findViewById(R.id.bstInventory_salesThru);
         BstInventory_Fwd = (LinearLayout) findViewById(R.id.bstInventory_Fwd);
@@ -331,7 +333,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BstInventory_coverNsell_chk = (RadioButton) findViewById(R.id.bstInventory_coverNsellchk);
 
 
-        quickFilterPopup = (RelativeLayout) findViewById(R.id.bestQuickFilterPopup);
+        quickFilterPopup = (RelativeLayout) findViewById(R.id.baseQuickFilterPopup);
         //quickFilter_baseLayout = (RelativeLayout)findViewById(R.id.bestQuickFilterPopup);
         BestQfDoneLayout = (RelativeLayout) findViewById(R.id.bestQfDoneLayout);
         quickFilterPopup.setVisibility(View.GONE);
@@ -428,15 +430,18 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             case R.id.bestInvent_quickFilter:
                 filterFunction();
                 break;
-            case R.id.bestQuickFilterPopup:
+
+            // base layout>>>>>>
+
+            case R.id.baseQuickFilterPopup:
                 if (checkTimeValueIs == null && checkValueIs == null) {
-                    BestCheckCurrent.setChecked(false);
+                    BestCheckCurrent.setChecked(true);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);
                     BestCheckUpcoming.setChecked(false);
                     CheckWTD.setChecked(false);
                     CheckL4W.setChecked(false);
-                    CheckSTD.setChecked(false);
+                    CheckSTD.setChecked(true);
 
 
                 } else {
@@ -669,7 +674,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             BstInventory_salesThru_chk.setChecked(false);
             BstInventory_Fwd_chk.setChecked(true);
             BstInventory_coverNsell_chk.setChecked(false);
-            orderbycol = 3;
+            orderbycol =10;
             BestInventList.clear();
             Log.e(TAG, "FWD pop up else");
             Reusable_Functions.sDialog(this, "Loading.......");
@@ -698,7 +703,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             BstInventory_salesThru_chk.setChecked(false);
             BstInventory_Fwd_chk.setChecked(false);
             BstInventory_coverNsell_chk.setChecked(true);
-            orderbycol = 4;
+            orderbycol =10;
             BestInventList.clear();
             Log.e(TAG, "coverNsell pop up else");
             Reusable_Functions.sDialog(this, "Loading.......");
@@ -725,7 +730,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             BstInventory_salesThru_chk.setChecked(true);
             BstInventory_Fwd_chk.setChecked(false);
             BstInventory_coverNsell_chk.setChecked(false);
-            orderbycol = 2;
+            orderbycol = 9;
             BestInventList.clear();
             Log.e(TAG, "salesThru pop up else");
             Reusable_Functions.sDialog(this, "Loading.......");
@@ -751,7 +756,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             BstInventory_salesThru_chk.setChecked(false);
             BstInventory_Fwd_chk.setChecked(false);
             BstInventory_coverNsell_chk.setChecked(false);
-            orderbycol = 1;
+            orderbycol =6;
             BestInventList.clear();
             Log.e(TAG, "salesUpopUp pop up else");
             Reusable_Functions.sDialog(this, "Loading.......");

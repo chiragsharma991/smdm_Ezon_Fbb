@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
 import android.app.AlarmManager;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -37,7 +38,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     MySingleton m_config;
     Boolean log_flag = false;
     SharedPreferences sharedPreferences;
+    private LinearLayout LinearLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,10 @@ public class LoginActivity extends AppCompatActivity {
         edtUserName = (EditText) findViewById(R.id.edtUserName);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         chkKeepMeLogin = (CheckBox) findViewById(R.id.chkKeepMeLogin);
+        LinearLogin = (LinearLayout) findViewById(R.id.linearLogin);
+
+        checkToken();
+
 
         chkKeepMeLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +119,24 @@ public class LoginActivity extends AppCompatActivity {
         });
     }//onCreate
 
+    private void checkToken()
+    {
+        Log.e("TAG", "checkToken: ");
+        if(LocalNotificationReceiver.logoutAlarm)
+        {
+            View view=findViewById(android.R.id.content);
+            Snackbar snackbar=Snackbar.make(view,"Session has been Log out Please Retry",Snackbar.LENGTH_LONG).setAction("Retry", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            snackbar.setActionTextColor(getResources().getColor(R.color.smdm_actionbar));
+            snackbar.show();
+            LocalNotificationReceiver.logoutAlarm=false;
+        }
+    }
+
     private void requestLoginAPI() {
         String url = ConstsCore.web_url + "/v1/login"; //ConstsCore.web_url+ + "/v1/login/userId";
 
@@ -127,9 +150,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Reusable_Functions.hDialog();
 
                             }
-                            Long notificationTime = System.currentTimeMillis() + 1500000;
-                            Log.e("notification Time", " "+notificationTime +""+new Date(notificationTime));
-
+                            Long notificationTime = System.currentTimeMillis() +1500000;
+                            Log.e("notificationTime", "onResponse: "+notificationTime );
                             setLocalnotification(context, notificationTime);
                             String username = response.getString("loginName");
                             String password = response.getString("password");
@@ -188,8 +210,7 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(postRequest);
 
     }
-//    NotificationManager notifManager= (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-//    notifManager.cancelAll();
+
     @Override
     public void onBackPressed() {
         finish();

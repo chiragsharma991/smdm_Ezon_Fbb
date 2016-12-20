@@ -1,6 +1,8 @@
 package apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -44,16 +46,20 @@ import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestProm
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
+import apsupportapp.aperotechnologies.com.designapp.LocalNotificationReceiver;
+import apsupportapp.aperotechnologies.com.designapp.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.TransparentActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
 public class TopFullCut extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    TextView Top_txtStoreCode,Top_txtStoreName;
-    RelativeLayout TopBest_BtnBack;
+    TextView Top_txtStoreCode, Top_txtStoreName;
+    RelativeLayout TopBest_BtnBack,TopOption_imgfilter;
     RunningPromoListDisplay TopOptionListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
@@ -62,7 +68,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    private int popPromo=0;
+    private int popPromo = 0;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
@@ -72,11 +78,11 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     private boolean userScrolled;
     private TopOptionAdapter topOptionAdapter;
     private View footer;
-    private String lazyScroll="OFF";
+    private String lazyScroll = "OFF";
     private SegmentedGroup Top_segmented;
-    private RadioButton Top_fashion,Top_core;
+    private RadioButton Top_fashion, Top_core;
     private ToggleButton Toggle_top_fav;
-    private String corefashion="Fashion";
+    private String corefashion = "Fashion";
 
 
     @Override
@@ -100,22 +106,20 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         requestRunningPromoApi();
         Reusable_Functions.sDialog(this, "Loading.......");
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
-        footer = getLayoutInflater().inflate(R.layout.bestpromo_footer,null);
+        footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
         TopOptionListView.addFooterView(footer);
         // footer.setVisibility(View.GONE);
         // BestPerformanceListView.setAdapter(bestPromoAdapter);
 
 
-
-
     }
 
     private void requestRunningPromoApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" +userId + "?offset=" +offsetvalue + "&limit=" +limit+"&top=" +top+"&corefashion=" +corefashion;
+        String url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
 
-        Log.e(TAG,"URL"+url);
+        Log.e(TAG, "URL" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -130,8 +134,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 footer.setVisibility(View.GONE);
-                                if(TopOptionList.size()==0)
-                                {
+                                if (TopOptionList.size() == 0) {
                                     TopOptionListView.setVisibility(View.GONE);
 
                                 }
@@ -145,26 +148,23 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                     TopOptionList.add(TopOptionListDisplay);
 
                                 }
-                                offsetvalue =offsetvalue+10;
-                                top =top+10;
+                                offsetvalue = offsetvalue + 10;
+                                top = top + 10;
                                 //  count++;
 
                                 // requestRunningPromoApi();
 
-                            }
-
-                            else if (response.length() < limit) {
+                            } else if (response.length() < limit) {
                                 Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
 
                                     TopOptionListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                     TopOptionList.add(TopOptionListDisplay);
-                                    offsetvalue =offsetvalue+response.length();
-                                    top =top+response.length();
+                                    offsetvalue = offsetvalue + response.length();
+                                    top = top + response.length();
 
                                 }
                             }
-
 
 
                             footer.setVisibility(View.GONE);
@@ -176,12 +176,11 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
                             }*/
 
-                            if(lazyScroll.equals("ON")){
+                            if (lazyScroll.equals("ON")) {
                                 topOptionAdapter.notifyDataSetChanged();
-                                lazyScroll="OFF";
-                            }else
-                            {
-                                topOptionAdapter = new TopOptionAdapter(TopOptionList,context);
+                                lazyScroll = "OFF";
+                            } else {
+                                topOptionAdapter = new TopOptionAdapter(TopOptionList, context);
                                 TopOptionListView.setAdapter(topOptionAdapter);
 
 
@@ -191,12 +190,12 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                             Top_txtStoreName.setText(TopOptionList.get(0).getStoreDesc());
 
                             Reusable_Functions.hDialog();
-                       } catch (Exception e) {
+                        } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             footer.setVisibility(View.GONE);
                             TopOptionListView.setVisibility(View.GONE);
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" +e.toString());
+                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },
@@ -228,17 +227,17 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 //---------------seton Click list listener------------------//
 
         TopOptionListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            public int VisibleItemCount,TotalItemCount,FirstVisibleItem;
+            public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                if ( FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState==SCROLL_STATE_IDLE) {
+                if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
 
 
                     footer.setVisibility(View.VISIBLE);
 
-                    lazyScroll="ON";
+                    lazyScroll = "ON";
                     requestRunningPromoApi();
                 }
 
@@ -247,9 +246,9 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                this.FirstVisibleItem=firstVisibleItem;
-                this.VisibleItemCount=visibleItemCount;
-                this.TotalItemCount=totalItemCount;
+                this.FirstVisibleItem = firstVisibleItem;
+                this.VisibleItemCount = visibleItemCount;
+                this.TotalItemCount = totalItemCount;
 
             }
         });
@@ -261,26 +260,22 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         Top_txtStoreName = (TextView) findViewById(R.id.top_txtStoreName);
 
         TopBest_BtnBack = (RelativeLayout) findViewById(R.id.topBest_BtnBack);
-        TopOptionListView = (ListView) findViewById(R.id.topOptionListView);
-        Top_segmented=(SegmentedGroup)findViewById(R.id.top_segmented);
+        TopOption_imgfilter = (RelativeLayout) findViewById(R.id.topOption_imgfilter);
 
-        Top_core=(RadioButton)findViewById(R.id.top_core);
+        TopOptionListView = (ListView) findViewById(R.id.topOptionListView);
+        Top_segmented = (SegmentedGroup) findViewById(R.id.top_segmented);
+
+        Top_core = (RadioButton) findViewById(R.id.top_core);
         Top_core.toggle();
 
-        Top_fashion=(RadioButton)findViewById(R.id.top_fashion);
+        Top_fashion = (RadioButton) findViewById(R.id.top_fashion);
 
-        Toggle_top_fav=(ToggleButton)findViewById(R.id.toggle_top_fav);
+        Toggle_top_fav = (ToggleButton) findViewById(R.id.toggle_top_fav);
 
 
         Top_segmented.setOnCheckedChangeListener(TopFullCut.this);
         TopBest_BtnBack.setOnClickListener(TopFullCut.this);
-
-
-
-
-
-
-
+        TopOption_imgfilter.setOnClickListener(TopFullCut.this);
 
 
     }
@@ -289,28 +284,28 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
 
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.topBest_BtnBack:
                 onBackPressed();
                 break;
+            case R.id.topOption_imgfilter:
+                Intent intent = new Intent(this, InventoryFilterActivity.class);
+                intent.putExtra("checkfrom", "TopFullCut");
+                startActivity(intent);
+                finish();
+                break;
             case R.id.toggle_top_fav:
-                if(Toggle_top_fav.isChecked())
-                {
+                if (Toggle_top_fav.isChecked()) {
                     Toggle_top_fav.setChecked(true);
-                }else
-                {
+                } else {
                     Toggle_top_fav.setChecked(false);
                 }
 
                 break;
 
 
-
-
         }
     }
-
 
 
     @Override
@@ -325,15 +320,13 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        switch(checkedId)
-        {
+        switch (checkedId) {
             case R.id.top_core:
-                if(Top_core.isChecked())
-                {
+                if (Top_core.isChecked()) {
                     limit = 10;
                     offsetvalue = 0;
                     top = 10;
-                    corefashion="Core";
+                    corefashion = "Core";
                     TopOptionList.clear();
                     topOptionAdapter.notifyDataSetChanged();
                     TopOptionListView.setVisibility(View.GONE);
@@ -342,12 +335,11 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 }
                 break;
             case R.id.top_fashion:
-                if(Top_fashion.isChecked())
-                {
+                if (Top_fashion.isChecked()) {
                     limit = 10;
                     offsetvalue = 0;
                     top = 10;
-                    corefashion="Fashion";
+                    corefashion = "Fashion";
                     TopOptionList.clear();
                     topOptionAdapter.notifyDataSetChanged();
                     TopOptionListView.setVisibility(View.GONE);
@@ -359,8 +351,26 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 break;
 
 
-
         }
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e(TAG, "onRestart: ");
+        if (LocalNotificationReceiver.logoutAlarm) {
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.commit();
+            finish();
+            Intent i = new Intent(context, LoginActivity.class);
+            // set the new task and clear flags
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        }
+
 
     }
 }

@@ -509,7 +509,7 @@ public class DashBoardActivity extends AppCompatActivity
             visualAssort.setVisibility(View.GONE);
 
         }
-        if(Sales)
+        if(!Sales)
         {
             sales.setVisibility(View.VISIBLE);
 
@@ -615,6 +615,7 @@ public class DashBoardActivity extends AppCompatActivity
         productInfoTxt=(TextView)findViewById(R.id.productinfo);
         visualAssortTxt=(TextView)findViewById(R.id.visualAssort);
         salesTxt=(TextView)findViewById(R.id.headersales);
+
         promoAnalysisTxt=(TextView)findViewById(R.id.headerpromo);
         inventoryTxt=(TextView)findViewById(R.id.headerinvent);
 
@@ -914,14 +915,14 @@ public class DashBoardActivity extends AppCompatActivity
                      hrflash="YES";
                      pdInfo="NO";
                      vsAssort="NO";
-                     sAles="NO";
+                     sAles="YES";
                      pmAnalysis="NO";
                      inVENtory="NO";
                     HourlyFlash=true;
                     Promo=false;
                     ProductInfo=false;
                     VisualAssort=false;
-                    Sales=false;
+                    Sales=true;
                     Inventory=false;
 
                 }else
@@ -956,14 +957,14 @@ public class DashBoardActivity extends AppCompatActivity
                     pdInfo="YES";
                     hrflash="NO";
                     vsAssort="NO";
-                    sAles="NO";
+                    sAles="YES";
                     pmAnalysis="NO";
                     inVENtory="NO";
                     ProductInfo=true;
                     HourlyFlash=false;
                     Promo=false;
                     VisualAssort=false;
-                    Sales=false;
+                    Sales=true;
                     Inventory=false;
 
                 }else
@@ -997,14 +998,14 @@ public class DashBoardActivity extends AppCompatActivity
                     vsAssort="YES";
                     hrflash="NO";
                     pdInfo="NO";
-                    sAles="NO";
+                    sAles="YES";
                     pmAnalysis="NO";
                     inVENtory="NO";
                     VisualAssort=true;
                     HourlyFlash=false;
                     Promo=false;
                     ProductInfo=false;
-                    Sales=false;
+                    Sales=true;
                     Inventory=false;
 
 
@@ -1019,7 +1020,7 @@ public class DashBoardActivity extends AppCompatActivity
                 } break;
 
             case R.id.headersales:
-                if(sAles.equals("NO")){
+                if(!sAles.equals("NO")){
                     hourlyFlash.setVisibility(View.GONE);
                     productInfo.setVisibility(View.GONE);
                     visualAssort.setVisibility(View.GONE);
@@ -1035,13 +1036,13 @@ public class DashBoardActivity extends AppCompatActivity
                     salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
-                    sAles="YES";
+                    sAles="NO";
                     hrflash="NO";
                     pdInfo="NO";
                     vsAssort="NO";
                     pmAnalysis="NO";
                     inVENtory="NO";
-                    Sales=true;
+                    Sales=false;
                     HourlyFlash=false;
                     Promo=false;
                     ProductInfo=false;
@@ -1052,8 +1053,8 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     sales.setVisibility(View.GONE);
                     salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
-                    sAles="NO";
-                    Sales=false;
+                    sAles="YES";
+                    Sales=true;
 
                 } break;
 
@@ -1076,13 +1077,13 @@ public class DashBoardActivity extends AppCompatActivity
                     hrflash="NO";
                     pdInfo="NO";
                     vsAssort="NO";
-                    sAles="NO";
+                    sAles="YES";
                     inVENtory="NO";
                     HourlyFlash=false;
                     Promo=true;
                     ProductInfo=false;
                     VisualAssort=false;
-                    Sales=false;
+                    Sales=true;
                     Inventory=false;
                     Log.e(TAG, "onClick:  headerpromo" );
 
@@ -1115,13 +1116,13 @@ public class DashBoardActivity extends AppCompatActivity
                     hrflash="NO";
                     pdInfo="NO";
                     vsAssort="NO";
-                    sAles="NO";
+                    sAles="YES";
                     pmAnalysis="NO";
                     HourlyFlash=false;
                     Promo=false;
                     ProductInfo=false;
                     VisualAssort=false;
-                    Sales=false;
+                    Sales=true;
                     Inventory=true;
                     Log.e(TAG, "onClick:  headerinvent" );
 

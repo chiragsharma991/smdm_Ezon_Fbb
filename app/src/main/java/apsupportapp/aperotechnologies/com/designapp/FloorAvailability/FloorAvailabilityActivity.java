@@ -67,7 +67,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
+    RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
@@ -275,11 +275,11 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         floor_fashion = (RadioButton) findViewById(R.id.floor_fashion);
         floor_fashion.toggle();
         Toggle_floor_fav = (ToggleButton) findViewById(R.id.toggle_floor_fav);
-        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
-        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
-        checkOld = (CheckBox) findViewById(R.id.checkOld);
+        checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
+        checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
+        checkOld = (RadioButton) findViewById(R.id.checkOld);
 
-        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
+        checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
 
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
@@ -327,7 +327,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 break;
             case R.id.quickFilter_baseLayout:
                 if (floorcheckSeasonGpVal == null) {
-                    checkCurrent.setChecked(false);
+                    checkCurrent.setChecked(true);
                     checkPrevious.setChecked(false);
                     checkOld.setChecked(false);
                     checkUpcoming.setChecked(false);

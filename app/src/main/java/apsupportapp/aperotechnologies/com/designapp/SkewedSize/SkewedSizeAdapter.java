@@ -106,10 +106,10 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
         }
         holder.skewed_option.setText(arrayList.get(position).getOption());
-        holder.skewed_SOHU.setText("" + (int) arrayList.get(position).getStkOnhandQty());
-        holder.skewed_fwc.setText("" + (int) arrayList.get(position).getFwdWeekCover());
+        holder.skewed_SOHU.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
+        holder.skewed_fwc.setText("" +Math.round(arrayList.get(position).getFwdWeekCover()));
         holder.Skewed_ProdAttribute.setText(arrayList.get(position).getProdAttribute4());
-        holder.Skewed_SOH.setText("" + (int) arrayList.get(position).getStkOnhandQty());
+        holder.Skewed_SOH.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
             Picasso.with(this.context).
