@@ -96,7 +96,7 @@ public class StockAgeingAdapter extends BaseAdapter{
         }
         holder.stock_option.setText(arrayList.get(position).getOption());
         holder.stock_ageing.setText(arrayList.get(position).getStockageBandDesc()+" Days" );
-        holder.stock_SOH_U.setText(""+(int)arrayList.get(position).getStkOnhandQty());
+        holder.stock_SOH_U.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
 //        StockAgeingActivity.stock_txtStoreCode.setText(arrayList.get(position).getStoreCode());
 //        StockAgeingActivity.stock_txtStoreName.setText(arrayList.get(position).getStoreDescription());
 

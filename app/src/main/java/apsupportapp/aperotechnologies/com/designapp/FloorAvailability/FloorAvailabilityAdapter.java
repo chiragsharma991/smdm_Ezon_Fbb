@@ -95,7 +95,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
         }
 
         holder.floor_option.setText(arrayList.get(position).getOption());
-        holder.floor_SOH_U.setText(""+(int)arrayList.get(position).getStkOnhandQty());
+        holder.floor_SOH_U.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
         holder.floor_NoofDays.setText(arrayList.get(position).getNoDaysPassed());
         holder.floor_ReceiptDate.setText(arrayList.get(position).getFirstReceiptDate());
 //        StockAgeingActivity.stock_txtStoreCode.setText(arrayList.get(position).getStoreCode());

@@ -331,7 +331,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.quickFilter_baseLayout :
                 if(qfButton.equals("OFF")) {
-                    checkCurrent.setChecked(false);
+                    checkCurrent.setChecked(true);
                     checkUpcoming.setChecked(false);
                     checkOld.setChecked(false);
                     checkPrevious.setChecked(false);

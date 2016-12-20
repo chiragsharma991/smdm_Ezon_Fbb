@@ -99,7 +99,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     float fullSizeCount = 0.0f, fullCutCount = 0.0f, partCutCount = 0.0f;
     PieDataSet dataset;
     ArrayList<PieEntry> entries;
-    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
+    RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
     private String checkSeasonGpVal = null;
     boolean flag = false;
 
@@ -663,10 +663,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         quickFilter_BorderLayout=(RelativeLayout)findViewById(R.id.quickFilter_BorderLayout);
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
         optionArrayList = new ArrayList<OptionEfficiencyDetails>();
-        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
-        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
-        checkOld = (CheckBox) findViewById(R.id.checkOld);
-        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
+        checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
+        checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
+        checkOld = (RadioButton) findViewById(R.id.checkOld);
+        checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);

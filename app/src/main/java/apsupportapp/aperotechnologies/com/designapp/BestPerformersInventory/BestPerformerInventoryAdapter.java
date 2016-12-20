@@ -114,11 +114,11 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
 
 
         }
-        holder.BestInvent_SOH.setText(""+(int)arrayList.get(position).getStkOnhandQty());
+        holder.BestInvent_SOH.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
         holder.BestInvent_option.setText(arrayList.get(position).getArticleDesc());
-        holder.BestInvent_sellThru.setText(""+(int)arrayList.get(position).getSellThruUnits());
-        holder.BestInvent_FWC.setText(""+(int)arrayList.get(position).getFwdWeekCover());
-        holder.BestInvent_RosU.setText(""+(int)arrayList.get(position).getRos());
+        holder.BestInvent_sellThru.setText(""+Math.round(arrayList.get(position).getSellThruUnits()));
+        holder.BestInvent_FWC.setText(""+Math.round(arrayList.get(position).getFwdWeekCover()));
+        holder.BestInvent_RosU.setText(""+Math.round(arrayList.get(position).getRos()));
         holder.BestInvent_GIT.setText(""+(int)arrayList.get(position).getStkGitQty());
         holder.BestInvent_Sale.setText(""+(int)arrayList.get(position).getSaleTotQty());
         //holder.BestInventTable_SOH.setText(""+(int)arrayList.get(position).getStkOnhandQty());

@@ -95,24 +95,24 @@ public class TargetStockExcepAdapter extends BaseAdapter{
         }
         if(TargetStockExceptionActivity.level == 1) {
             holder.target_option.setText(arrayList.get(position).getPlanDept());
-            holder.target_SOH_U.setText("" + (int) arrayList.get(position).getStkOnhandQty());
+            holder.target_SOH_U.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
             holder.target_ROS_U.setText("" + String.format("%.1f", arrayList.get(position).getTargetROS()));
             holder.target_ROS.setText("" + String.format("%.1f", arrayList.get(position).getRos()));
-            holder.target_Availability.setText("" + (int) arrayList.get(position).getAvailabilityPct() + "%");
+            holder.target_Availability.setText("" +Math.round(arrayList.get(position).getAvailabilityPct())+ "%");
         }
         else if(TargetStockExceptionActivity.level == 2) {
             holder.target_option.setText(arrayList.get(position).getPlanCategory());
-            holder.target_SOH_U.setText("" + (int) arrayList.get(position).getStkOnhandQty());
+            holder.target_SOH_U.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
             holder.target_ROS_U.setText("" + String.format("%.1f", arrayList.get(position).getTargetROS()));
             holder.target_ROS.setText("" + String.format("%.1f", arrayList.get(position).getRos()));
-            holder.target_Availability.setText("" + (int) arrayList.get(position).getAvailabilityPct() + "%");
+            holder.target_Availability.setText("" +Math.round(arrayList.get(position).getAvailabilityPct()) + "%");
 
         } else if(TargetStockExceptionActivity.level == 3) {
             holder.target_option.setText(arrayList.get(position).getPlanClass());
-            holder.target_SOH_U.setText("" + (int) arrayList.get(position).getStkOnhandQty());
+            holder.target_SOH_U.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
             holder.target_ROS_U.setText("" + String.format("%.1f", arrayList.get(position).getTargetROS()));
             holder.target_ROS.setText("" + String.format("%.1f", arrayList.get(position).getRos()));
-            holder.target_Availability.setText("" + (int) arrayList.get(position).getAvailabilityPct() + "%");
+            holder.target_Availability.setText("" +Math.round(arrayList.get(position).getAvailabilityPct())+ "%");
         }
 
         // ---------------------click listener -------------------------

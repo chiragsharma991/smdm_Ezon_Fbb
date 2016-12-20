@@ -42,6 +42,7 @@ import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruI
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
 import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.TargetStockExceptionActivity;
+import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
 import apsupportapp.aperotechnologies.com.designapp.WorstPerformersInventory.WorstPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 
@@ -142,6 +143,12 @@ public class InventoryFilterActivity extends Activity {
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("sellThruExceptions")) {
                     Intent intent = new Intent(InventoryFilterActivity.this, SaleThruInventory.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                else if (getIntent().getStringExtra("checkfrom").equals("TopFullCut")) {
+                    Intent intent = new Intent(InventoryFilterActivity.this, TopFullCut.class);
                     startActivity(intent);
                     finish();
                 }
@@ -296,6 +303,10 @@ public class InventoryFilterActivity extends Activity {
         }
         else if (getIntent().getStringExtra("checkfrom").equals("sellThruExceptions")) {
             Intent intent = new Intent(InventoryFilterActivity.this, SaleThruInventory.class);
+            startActivity(intent);
+            finish();
+        } else if (getIntent().getStringExtra("checkfrom").equals("TopFullCut")) {
+            Intent intent = new Intent(InventoryFilterActivity.this, TopFullCut.class);
             startActivity(intent);
             finish();
         }

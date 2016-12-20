@@ -99,9 +99,9 @@ public class TopOptionAdapter extends BaseAdapter {
 
         }
         holder.Top_option.setText(arrayList.get(position).getOption());
-        holder.Top_SOHU.setText(""+(int)arrayList.get(position).getStkOnhandQty());
+        holder.Top_SOHU.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
         holder.Top_bstStockU.setText(""+(int)arrayList.get(position).getTargetStock());
-        holder.Top_RosU.setText(""+(int)arrayList.get(position).getRos());
+        holder.Top_RosU.setText(""+Math.round(arrayList.get(position).getRos()));
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
             Picasso.with(this.context).

@@ -58,7 +58,7 @@ public class WorstPerformerInventory extends AppCompatActivity implements View.O
                    quickFilter_baseLayout,BestQfDoneLayout,BestQuickFilterBorder;
     RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
-    CheckBox BestCheckCurrent,BestCheckPrevious,BestCheckOld,BestCheckUpcoming,CheckWTD,CheckL4W,CheckSTD;
+    RadioButton BestCheckCurrent,BestCheckPrevious,BestCheckOld,BestCheckUpcoming,CheckWTD,CheckL4W,CheckSTD;
     String userId, bearertoken;
     String TAG = "WorstPerformerInventory";
     private int count = 0;
@@ -85,7 +85,7 @@ public class WorstPerformerInventory extends AppCompatActivity implements View.O
     private int orderbycol=1;
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU,BstInventory_salesThru,BstInventory_Fwd,BstInventory_coverNsell;
-    private CheckBox BstInventory_salesU_chk,BstInventory_salesThru_chk,BstInventory_Fwd_chk,BstInventory_coverNsell_chk;
+    private RadioButton BstInventory_salesU_chk,BstInventory_salesThru_chk,BstInventory_Fwd_chk,BstInventory_coverNsell_chk;
     private RelativeLayout BaseLayoutInventory;
     private String checkValueIs=null,checkTimeValueIs=null;
     private String view="All";
@@ -332,26 +332,26 @@ public class WorstPerformerInventory extends AppCompatActivity implements View.O
         BstInventory_Fwd=(LinearLayout)findViewById(R.id.bstInventory_Fwd);
         BstInventory_coverNsell=(LinearLayout)findViewById(R.id.bstInventory_coverNsell);
 
-        BstInventory_salesU_chk=(CheckBox)findViewById(R.id.bstInventory_salesUchk);
-        BstInventory_salesThru_chk=(CheckBox)findViewById(R.id.bstInventory_salesThruchk);
-        BstInventory_Fwd_chk=(CheckBox)findViewById(R.id.bstInventory_Fwdchk);
-        BstInventory_coverNsell_chk=(CheckBox)findViewById(R.id.bstInventory_coverNsellchk);
+        BstInventory_salesU_chk=(RadioButton)findViewById(R.id.bstInventory_salesUchk);
+        BstInventory_salesThru_chk=(RadioButton)findViewById(R.id.bstInventory_salesThruchk);
+        BstInventory_Fwd_chk=(RadioButton)findViewById(R.id.bstInventory_Fwdchk);
+        BstInventory_coverNsell_chk=(RadioButton)findViewById(R.id.bstInventory_coverNsellchk);
 
 
 
-        quickFilterPopup= (RelativeLayout)findViewById(R.id.bestQuickFilterPopup);
+        quickFilterPopup= (RelativeLayout)findViewById(R.id.baseQuickFilterPopup);
         //quickFilter_baseLayout = (RelativeLayout)findViewById(R.id.bestQuickFilterPopup);
         BestQfDoneLayout =(RelativeLayout)findViewById(R.id.bestQfDoneLayout);
         quickFilterPopup.setVisibility(View.GONE);
         Toggle_bestInvent_fav=(ToggleButton)findViewById(R.id.toggle_bestInvent_fav);
 
-        BestCheckCurrent =(CheckBox)findViewById(R.id.bestCheckCurrent);
-        BestCheckPrevious = (CheckBox)findViewById(R.id.bestCheckPrevious);
-        BestCheckOld = (CheckBox)findViewById(R.id.bestCheckOld);
-        BestCheckUpcoming = (CheckBox)findViewById(R.id.bestCheckUpcoming);
-        CheckWTD = (CheckBox)findViewById(R.id.checkWTD);
-        CheckL4W = (CheckBox)findViewById(R.id.checkL4W);
-        CheckSTD = (CheckBox)findViewById(R.id.checkSTD);
+        BestCheckCurrent =(RadioButton)findViewById(R.id.bestCheckCurrent);
+        BestCheckPrevious = (RadioButton)findViewById(R.id.bestCheckPrevious);
+        BestCheckOld = (RadioButton)findViewById(R.id.bestCheckOld);
+        BestCheckUpcoming = (RadioButton)findViewById(R.id.bestCheckUpcoming);
+        CheckWTD = (RadioButton)findViewById(R.id.checkWTD);
+        CheckL4W = (RadioButton)findViewById(R.id.checkL4W);
+        CheckSTD = (RadioButton)findViewById(R.id.checkSTD);
 
         BestInvent_segmented.setOnCheckedChangeListener(this);
         BestInvent_BtnBack.setOnClickListener(this);
@@ -438,7 +438,7 @@ public class WorstPerformerInventory extends AppCompatActivity implements View.O
 
             //base layout click listner
 
-            case R.id.bestQuickFilterPopup :
+            case R.id.baseQuickFilterPopup :
                 if(checkTimeValueIs==null&&checkValueIs==null)
                 {
                     BestCheckCurrent.setChecked(false);

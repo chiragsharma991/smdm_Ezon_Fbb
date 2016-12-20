@@ -98,7 +98,7 @@ public class BestPromoAdapter extends BaseAdapter {
         holder.PromotionName.setText(arrayList.get(position).getPromoDesc());
         //holder.Bst_txtStoreCode.setText(arrayList.get(position).getStoreCode());
         //holder.Bst_txtStoreName.setText(arrayList.get(position).getStoreDesc());
-        holder.Bst_PromoValues_child.setText("₹\t"+(int)arrayList.get(position).getDurSaleNetVal());
+        holder.Bst_PromoValues_child.setText("₹\t"+Math.round(arrayList.get(position).getDurSaleNetVal()));
         holder.Bst_PromoValuesU_child.setText(""+(int)arrayList.get(position).getDurSaleTotQty());
 
 

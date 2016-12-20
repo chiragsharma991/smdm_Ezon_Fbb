@@ -272,9 +272,9 @@ public class RunningPromoDetails extends AppCompatActivity {
             TextView ProdSaleU=(TextView)view.findViewById(R.id.prodSaleU);
             TextView SoH=(TextView)view.findViewById(R.id.soH);
             Mc.setText(promoList.get(i).getProdLevel6Desc());
-            Prodsale.setText("\u20B9\t"+(int)promoList.get(i).getDurSaleNetVal());
+            Prodsale.setText("\u20B9\t"+Math.round(promoList.get(i).getDurSaleNetVal()));
             ProdSaleU.setText(""+(int)promoList.get(i).getDurSaleTotQty());
-            SoH.setText(""+(int)promoList.get(i).getStkOnhandQty());
+            SoH.setText(""+Math.round(promoList.get(i).getStkOnhandQty()));
             Reusable_Functions.hDialog();
             linearLayout.addView(view);
 
