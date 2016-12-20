@@ -378,8 +378,8 @@
                 android:layout_height="1dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@color/divider_salescard"
-                />
+                android:background="@color/smdm_divider_Black"
+                android:id="@+id/textView9" />
 
 
 
@@ -667,128 +667,11 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-
-                    >
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        >
-
-                        <ImageButton
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:id="@+id/btnOnlyWorstpromo"
-                            android:background="#ffffff"
-                            android:src="@mipmap/worst_promo"
-                            />
-
-
-                        <TextView
-                            android:gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Worst Promo"
-                            android:textColor="@color/smdm_light_Black"
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="13sp"
-                            />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:visibility="invisible"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageButton
-                            android:gravity="center_horizontal"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="#ffffff"
-                            android:src="@mipmap/upcoming_promo" />
-
-
-                        <TextView
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="13sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Upcoming Promo" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:visibility="invisible"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageButton
-                            android:gravity="center_horizontal"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="#ffffff"
-                            android:src="@mipmap/expiring_promo"
-                            />
-
-                        <TextView
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Expiring Promo"
-                            android:gravity="center_horizontal"
-                            android:textSize="13sp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:visibility="invisible"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageButton
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="#ffffff"
-                            android:src="@mipmap/best_worst_promo"
-                            />
-
-
-                        <TextView
-                            android:gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Best/Worst Promo"
-                            android:textSize="13sp"
-                            android:layout_gravity="center_horizontal"
-
-                            />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
 
             </LinearLayout>
+
+
+
 
 
 
@@ -804,7 +687,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:background="@color/smdm_divider_Black"
-                />
+                android:id="@+id/textView8" />
 
             <LinearLayout
                 android:layout_below="@+id/headersales"
@@ -1224,6 +1107,33 @@
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnTargetStockExcep"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="#ffffff"
+                            android:src="@mipmap/target_stock_exceptions_icon"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Target Stock Exceptions"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
                     <!--<LinearLayout-->
                     <!--android:orientation="vertical"-->
                     <!--android:layout_weight="1"-->
@@ -1259,31 +1169,6 @@
                     android:weightSum="4">
 
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-
-                        <ImageButton
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/btnTargetStockExcep"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="#ffffff"
-                            android:src="@mipmap/target_stock_exceptions_icon"
-                            />
-
-
-                        <TextView
-                            android:gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Target Stock Exceptions"
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="13sp"
-                            />
-                    </LinearLayout>
 
 
                     <LinearLayout
@@ -1311,82 +1196,7 @@
                             android:text="Sell Thru Exceptions" />
                     </LinearLayout>
 
-                    <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content">-->
 
-                    <!--<ImageButton-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:id="@+id/btnCutSize"-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:background="#ffffff"-->
-                    <!--android:src="@mipmap/cut_size_report"-->
-                    <!--/>-->
-
-                    <!--<TextView-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Cut-Size Report"-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:textSize="13sp" />-->
-
-
-                    <!--</LinearLayout>-->
-
-                    <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content">-->
-
-                    <!--<ImageButton-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:id="@+id/btnSkewedSize"-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:background="#ffffff"-->
-                    <!--android:src="@mipmap/skewed_size"-->
-                    <!--/>-->
-
-
-                    <!--<TextView-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="SkewedSize"-->
-                    <!--android:textSize="13sp"-->
-                    <!--android:layout_gravity="center_horizontal" />-->
-                    <!--</LinearLayout>-->
-
-                    <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content">-->
-
-                    <!--<ImageButton-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:id="@+id/btnStockAgeing"-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:background="#ffffff"-->
-                    <!--android:src="@mipmap/skewed_size"-->
-                    <!--/>-->
-
-
-                    <!--<TextView-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Stock Ageing Excep"-->
-                    <!--android:textSize="13sp"-->
-                    <!--android:layout_gravity="center_horizontal" />-->
-                    <!--</LinearLayout>-->
 
 
 
@@ -1415,43 +1225,50 @@
                 />
 
 
+            <!--starting view pager and dots layout-->
 
-
-            <android.support.v4.view.ViewPager
-                android:layout_below="@+id/headermarketing"
-                android:id="@+id/viewpager"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginTop="5dp" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/headermarketing"
+                >
 
-            <LinearLayout
-                android:id="@+id/lill"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:orientation="horizontal">
-            </LinearLayout>
+
+                <android.support.v4.view.ViewPager
+
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginTop="5dp" >
+
+
+
+                </android.support.v4.view.ViewPager>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/lill"
+                    >
+
+
+
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"/>
-
-            <TextView
-
-                android:id="@+id/headerpromo"
-                android:gravity="center_vertical"
-                android:visibility="visible"
-                android:textColor="@color/smdm_dark_Black"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Promo Analysis"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@+id/lin2"
-                android:layout_toEndOf="@+id/lill" />
 
             <TextView
 
@@ -1470,22 +1287,6 @@
                 android:layout_alignParentStart="true" />
 
             <TextView
-                android:id="@+id/headersales"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Sales"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/smdm_dark_Black"
-                android:textStyle="bold"
-                android:visibility="visible"
-                android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@+id/linearthree"
-                android:layout_toEndOf="@+id/lill" />
-
-            <TextView
                 android:id="@+id/headerinvent"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
@@ -1498,6 +1299,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_below="@+id/lin3"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+
+                android:id="@+id/headerpromo"
+                android:gravity="center_vertical"
+                android:visibility="visible"
+                android:textColor="@color/smdm_dark_Black"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Promo Analysis"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/lin2"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/headersales"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Sales"
+                android:textColor="@color/smdm_dark_Black"
+                android:textStyle="bold"
+                android:visibility="visible"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/linearthree"
                 android:layout_alignParentStart="true" />
 
             <!--<apsupportapp.aperotechnologies.com.designapp.ExpandableHeightGridView-->
