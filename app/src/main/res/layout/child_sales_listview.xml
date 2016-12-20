@@ -16,7 +16,7 @@
             android:padding="5dp"
             android:singleLine="true"
             android:textSize="11sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/txt_color"
             android:layout_width="200dp"
             android:layout_height="wrap_content" />
 
@@ -30,7 +30,7 @@
             android:padding="5dp"
             android:singleLine="true"
             android:textSize="11sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/txt_color"
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
 
@@ -55,7 +55,7 @@
 
                 <TextView
                     android:id= "@+id/txtAchieve"
-                    android:background="@android:color/black"
+                    android:background="@color/txt_color"
                     android:layout_width="5dp"
                     android:layout_height="29dp" />
             </RelativeLayout>
@@ -74,7 +74,7 @@
                     android:singleLine="true"
                     android:layout_marginLeft="10dp"
                     android:id= "@+id/txtValue"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/txt_color"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" />
 

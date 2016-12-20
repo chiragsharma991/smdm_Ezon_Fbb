@@ -594,6 +594,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 switch (txtheaderplanclass.getText().toString()) {
 
                     case "Department":
+                        relprevbtn.setVisibility(View.VISIBLE);
                         txtheaderplanclass.setText("Category");
                         llayoutSalesAnalysis.setVisibility(View.GONE);
                         //String plandept= salesAnalysisClassArrayList.get(position).getPlanDept().substring(0,1).toUpperCase()+salesAnalysisClassArrayList.get(position).getPlanDept().substring(1).toLowerCase();
@@ -703,7 +704,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         Log.e("in sales analysis brand", "-----" + planDept);
 
                             if (flag == true) {
-
+                                relnextbtn.setVisibility(View.INVISIBLE);
                                 txtheaderplanclass.setText("Brand Plan Class");
 
                                 llayoutSalesAnalysis.setVisibility(View.GONE);

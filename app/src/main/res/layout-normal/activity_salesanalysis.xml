@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
     tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
 
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
         android:orientation="vertical">
 
 
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store : "
-                    android:textColor="#920609"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="13sp" />
 
                 <TextView
@@ -150,7 +150,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
-                    android:textColor="#000000"
+                    android:textColor="@color/bg_store_code_text"
                     android:textSize="13sp" />
 
                 <TextView
@@ -160,7 +160,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
-                    android:textColor="#000000"
+                    android:textColor="@color/bg_store_code_text"
                     android:textSize="13sp" />
 
             </RelativeLayout>
@@ -178,7 +178,7 @@
             android:weightSum="4"
             segmentedgroup:sc_border_width="1dp"
             segmentedgroup:sc_corner_radius="14dp"
-            segmentedgroup:sc_tint_color="#B73020">
+            segmentedgroup:sc_tint_color="@color/colorPrimary">
 
             <RadioButton
                 android:id="@+id/btnWTD"
@@ -186,7 +186,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#B73020"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="WTD" />
 
             <RadioButton
@@ -195,6 +195,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="LW" />
 
             <RadioButton
@@ -203,7 +204,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#B73020"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="L4W" />
 
             <RadioButton
@@ -212,7 +213,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#B73020"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="YTD" />
 
         </info.hoang8f.android.segmented.SegmentedGroup>
@@ -249,7 +250,7 @@
                     android:id="@+id/txthDeptName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/txt_color"
                     android:textSize="11sp" />
 
                 <!--<TextView-->
@@ -321,8 +322,15 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/llhierarchy"
                 android:layout_marginTop="8dp">
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />
 
                 <LinearLayout
+                    android:layout_below="@+id/view1"
+                    android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:orientation="vertical">
@@ -331,7 +339,7 @@
                         android:id="@+id/llheader"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard">
+                        android:background="@color/bg_header">
 
 
                         <RelativeLayout
@@ -363,7 +371,7 @@
                                 android:layout_toRightOf="@+id/prevplanclass"
                                 android:gravity="center"
                                 android:text="Department"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/bg_store_code_text"
                                 android:textSize="11sp"
                                 android:textStyle="normal" />
 
@@ -390,7 +398,7 @@
                             android:layout_alignParentRight="true"
                             android:gravity="center_vertical|center"
                             android:text="PvA Sales%"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/bg_store_code_text"
                             android:textSize="11sp"
                             android:textStyle="normal" />
 
@@ -441,6 +449,12 @@
 
                     </RelativeLayout>
                 </LinearLayout>
+                <View
+                    android:layout_below="@+id/linear"
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />
 
                 <ListView
                     android:id="@+id/listView_SalesAnalysis"

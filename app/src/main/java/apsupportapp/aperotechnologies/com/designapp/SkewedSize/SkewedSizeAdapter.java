@@ -149,8 +149,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
         TextView skewed_SOHU, skewed_fwc, skewed_option, Skewed_ProdAttribute, Skewed_SOH;
         ImageView skewed_image_child;
         ToggleButton toggle_skewed_fav;
-
-
         public ProgressBar ProgressPicaso;
     }
 }

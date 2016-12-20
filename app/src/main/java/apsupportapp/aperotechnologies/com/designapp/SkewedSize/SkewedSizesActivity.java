@@ -330,13 +330,13 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 filterFunction();
                 break;
             case R.id.quickFilter_baseLayout :
-                if(qfButton.equals("OFF")) {
+                               if(qfButton.equals("OFF")) {
                     checkCurrent.setChecked(true);
                     checkUpcoming.setChecked(false);
                     checkOld.setChecked(false);
                     checkPrevious.setChecked(false);
                 }
-                    quickFilterPopup.setVisibility(View.GONE);
+                quickFilterPopup.setVisibility(View.GONE);
 
                 break;
             case R.id.qfDoneLayout:

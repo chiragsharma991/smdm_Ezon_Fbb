@@ -189,6 +189,7 @@
                 android:id="@+id/btn_lw"
                 style="@style/RadioButton"
                 android:layout_width="0dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="LW" />
@@ -229,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/txt_color"
                     android:textSize="12sp" />
 
                 <!--<TextView-->
@@ -298,8 +299,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp">
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />
+
 
                 <LinearLayout
+                    android:layout_below="@+id/view1"
+                    android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:orientation="vertical">
@@ -308,7 +317,7 @@
                         android:id="@+id/llheader"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard">
+                        android:background="@color/bg_header">
 
 
                         <RelativeLayout
@@ -341,7 +350,7 @@
                                 android:layout_centerInParent="true"
                                 android:text="Department"
                                 android:textStyle="normal"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/bg_store_code_text"
                                 android:textSize="12sp" />
 
 
@@ -374,7 +383,7 @@
                             android:layout_toLeftOf="@+id/txtNetSales"
                             android:gravity="center_vertical|center"
                             android:text="Plan Sales"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/bg_store_code_text"
                             android:textSize="12sp" />
 
 
@@ -388,7 +397,7 @@
                             android:layout_toLeftOf="@+id/rel"
                             android:gravity="center_vertical|center"
                             android:text="Net Sales"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/bg_store_code_text"
                             android:textSize="12sp"
                             android:textStyle="normal"/>
 
@@ -401,7 +410,7 @@
                             android:layout_centerVertical="true"
                             android:gravity="center_vertical|center"
                             android:text="PvA Sales%"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/bg_store_code_text"
                             android:textSize="12sp"
                             android:textStyle="normal"/>
 
@@ -411,7 +420,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard">
+                        android:background="@color/bg_header">
 
                         <EditText
                             android:editable="false"
@@ -467,7 +476,12 @@
                     </RelativeLayout>
 
                 </LinearLayout>
-
+                <View
+                    android:layout_below="@+id/linear"
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />
 
                 <ListView
                     android:id="@+id/list"

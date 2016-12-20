@@ -414,6 +414,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 switch (txtheaderplanclass.getText().toString()) {
 
                     case "Department":
+                        btnSalesPrev.setVisibility(View.VISIBLE);
                         txtheaderplanclass.setText("Category");
                         txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
                         Log.e("txtClicked department--", "" + txtPvAClickedValue);
@@ -504,7 +505,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         Log.e("in sales pva brand ", "-----" + planDept);
 
                             if (flag == true) {
-
+                                btnSalesNext.setVisibility(View.INVISIBLE);
                                 txtheaderplanclass.setText("Brand Plan Class");
                                 llayoutSalesPvA.setVisibility(View.GONE);
                                 txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
