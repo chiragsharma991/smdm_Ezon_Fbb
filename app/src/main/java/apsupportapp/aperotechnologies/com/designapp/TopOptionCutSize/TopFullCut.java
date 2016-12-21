@@ -102,9 +102,20 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        TopOptionListView.setTag("FOOTER");
 
-        requestRunningPromoApi();
-        Reusable_Functions.sDialog(this, "Loading.......");
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 10;
+            count = 0;
+            top = 10;
+            requestRunningPromoApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
@@ -129,13 +140,16 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                         TopOptionListView.setVisibility(View.VISIBLE);
 
 
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                footer.setVisibility(View.GONE);
+
+                                // footer.setVisibility(View.GONE);
                                 if (TopOptionList.size() == 0) {
                                     TopOptionListView.setVisibility(View.GONE);
+
 
                                 }
                             } else if (response.length() == limit) {
@@ -203,7 +217,10 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Network problem has been found", Toast.LENGTH_SHORT).show();
+                        //topOptionAdapter.notifyDataSetChanged();
+                        TopOptionListView.removeFooterView(footer);
+                        TopOptionListView.setTag("FOOTER_REMOVE");
                         error.printStackTrace();
                     }
                 }
@@ -235,6 +252,12 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
 
 
+                    if(TopOptionListView.getTag().equals("FOOTER_REMOVE"))
+                    {
+                        TopOptionListView.addFooterView(footer);
+                        TopOptionListView.setTag("FOOTER_ADDED");
+
+                    }
                     footer.setVisibility(View.VISIBLE);
 
                     lazyScroll = "ON";
@@ -292,7 +315,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 Intent intent = new Intent(this, InventoryFilterActivity.class);
                 intent.putExtra("checkfrom", "TopFullCut");
                 startActivity(intent);
-                finish();
                 break;
             case R.id.toggle_top_fav:
                 if (Toggle_top_fav.isChecked()) {
@@ -323,28 +345,41 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         switch (checkedId) {
             case R.id.top_core:
                 if (Top_core.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Core";
-                    TopOptionList.clear();
-                    topOptionAdapter.notifyDataSetChanged();
-                    TopOptionListView.setVisibility(View.GONE);
-                    Reusable_Functions.sDialog(this, "Loading.......");
-                    requestRunningPromoApi();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Core";
+                        TopOptionList.clear();
+                        TopOptionListView.setVisibility(View.GONE);
+                        requestRunningPromoApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        TopOptionListView.setVisibility(View.GONE);
+
+                    }
                 }
                 break;
             case R.id.top_fashion:
                 if (Top_fashion.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Fashion";
-                    TopOptionList.clear();
-                    topOptionAdapter.notifyDataSetChanged();
-                    TopOptionListView.setVisibility(View.GONE);
-                    Reusable_Functions.sDialog(this, "Loading.......");
-                    requestRunningPromoApi();
+                    if (Reusable_Functions.chkStatus(context)) {
+
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Fashion";
+                        TopOptionList.clear();
+                        TopOptionListView.setVisibility(View.GONE);
+                        Reusable_Functions.sDialog(this, "Loading.......");
+                        requestRunningPromoApi();
+                    }
+                    else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        TopOptionListView.setVisibility(View.GONE);
+
+                    }
                 }
 
 

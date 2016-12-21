@@ -15,4 +15,21 @@
     <dimen name="header_clickable_width">40dp</dimen>
     <dimen name="header_clickable_height">60dp</dimen>
 
+
+
+    <dimen name="smdm_header_title_large">20sp</dimen>
+    <dimen name="smdm_store_title_large">14sp</dimen>
+    <dimen name="smdm_inflator_title_large">13sp</dimen>
+    <dimen name="smdm_inflator_subtitle_large">13sp</dimen>
+
+    <dimen name="smdm_divider">1sp</dimen>
+
+
+    <dimen name="smdm_header_title_normal">20sp</dimen>
+    <dimen name="smdm_store_title_normal">13sp</dimen>
+    <dimen name="smdm_inflator_title_normal">11sp</dimen>
+    <dimen name="smdm_inflator_subtitle_normal">11sp</dimen>
+
+
+
 </resources>

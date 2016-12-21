@@ -5,7 +5,7 @@
     android:id="@+id/activity_top_full_cut"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="apsupportapp.aperotechnologies.com.designapp.TopOption.TopFullCut">
+    tools:context="apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut">
 
     <LinearLayout
         android:orientation="vertical"
@@ -59,7 +59,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/topBest_BtnBack"
                     android:layout_marginLeft="20dp"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/divider_salescard1"
                     android:id="@+id/toolbar_title" />
 
                 <RelativeLayout
@@ -83,6 +83,8 @@
 
 
             </RelativeLayout>
+
+
         </android.support.v7.widget.Toolbar>
 
 
@@ -101,17 +103,19 @@
                 android:layout_height="wrap_content"
                 android:text="Store : "
                 android:layout_marginLeft="5dp"
-                android:textColor="#920609"
-                android:textSize="14sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/smdm_store_title_large"
+                />
 
             <TextView
                 android:layout_marginLeft="3dp"
                 android:id="@+id/top_txtStoreCode"
                 android:layout_width="wrap_content"
-                android:textColor="#000000"
+                android:textColor="@color/bg_store_code_text"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/top_storecode"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/smdm_store_title_large"
+                />
 
             <TextView
                 android:layout_marginLeft="3dp"
@@ -119,8 +123,9 @@
                 android:id="@+id/top_txtStoreName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="14sp"/>
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/smdm_store_title_large"
+                />
 
         </RelativeLayout>
 
@@ -147,7 +152,7 @@
         android:orientation="horizontal"
         segmentedgroup:sc_border_width="1dp"
         segmentedgroup:sc_corner_radius="14dp"
-        segmentedgroup:sc_tint_color="#B73020">
+        segmentedgroup:sc_tint_color="@color/colorPrimary">
 
         <RadioButton
             android:id="@+id/top_core"
@@ -155,8 +160,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#B73020"
-            android:text="Core" />
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Fashion" />
 
         <RadioButton
             style="@style/RadioButton"
@@ -164,7 +169,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Fashion" />
+            android:text="Core"
+            android:backgroundTint="@color/colorPrimary"
+            />
 
 
     </info.hoang8f.android.segmented.SegmentedGroup>
@@ -187,7 +194,7 @@
         </ListView>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/smdm_divider"
             android:background="@color/divider_salescard"
             android:layout_marginTop="9dp"
             >
