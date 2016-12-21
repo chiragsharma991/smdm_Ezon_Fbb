@@ -229,6 +229,7 @@ public class InventoryFilterActivity extends Activity {
                                 }
 
                                 listDataChild.put(listDataHeader.get(0), subdept);
+                                pfilter_list.expandGroup(0);
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {

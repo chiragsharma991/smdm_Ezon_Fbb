@@ -99,7 +99,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     float fullSizeCount = 0.0f, fullCutCount = 0.0f, partCutCount = 0.0f;
     PieDataSet dataset;
     ArrayList<PieEntry> entries;
-   // RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
+    RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
     private String checkSeasonGpVal = null;
     boolean flag = false;
     private String qfButton="OFF";
@@ -109,8 +109,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_option_efficiency);
         getSupportActionBar().hide();
+
+
         fromWhere = "Department";
-        OEfficiency_SegmentClick = "Core";
+        OEfficiency_SegmentClick = "Fashion";
         oe_FirstVisibleItem = "";
         oe_ClickedVal = "";
         context = this;
@@ -136,7 +138,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             limit = 100;
             count = 0;
             level = 1;
-            seasonGroup = "All";
+            seasonGroup = "Current";
             oe_llayouthierarchy.setVisibility(View.GONE);
             requestOptionEfficiencyDetails();
 
@@ -162,16 +164,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             }
         });
 
-        //quick Filter
-//        oe_quickFilter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                filterFunction();
-//            }
-//        });
-//        quickFilter_baseLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+      //  quick Filter
+        oe_quickFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterFunction();
+            }
+        });
+        quickFilter_baseLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 //                if (checkSeasonGpVal == null ) {
 //                    checkCurrent.setChecked(false);
@@ -192,10 +194,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 //                            break;
 //
 //                        case "Previous":
+//                            checkUpcoming.setChecked(false);
 //                            checkPrevious.setChecked(true);
 //                            checkCurrent.setChecked(false);
 //                            checkOld.setChecked(false);
-//                            checkUpcoming.setChecked(false);
 //                            Log.e("Previous checked", "" + checkPrevious.isChecked());
 //                            break;
 //                        case "Old":
@@ -216,16 +218,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 //
 //                }
 //                quickFilterPopup.setVisibility(View.GONE);
-//                if(qfButton.equals("OFF")) {
-//                    checkCurrent.setChecked(true);
-//                    checkUpcoming.setChecked(false);
-//                    checkOld.setChecked(false);
-//                    checkPrevious.setChecked(false);
-//                }
-//                quickFilterPopup.setVisibility(View.GONE);
-//
-//            }
-//        });
+                if(qfButton.equals("OFF")) {
+                    checkCurrent.setChecked(true);
+                    checkUpcoming.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkPrevious.setChecked(false);
+                }
+                quickFilterPopup.setVisibility(View.GONE);
+
+            }
+        });
 
         // previous
         oe_btnPrev.setOnClickListener(new View.OnClickListener() {
@@ -235,6 +237,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 switch (oe_txtHeaderClass.getText().toString()) {
 
                     case "Brand Plan Class":
+                        oe_btnNext.setVisibility(View.VISIBLE);
                         oe_txtHeaderClass.setText("Brand");
                         fromWhere = "Brand";
                         level = 4;
@@ -303,7 +306,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
-                            seasonGroup = "All";
+                            seasonGroup = "Current";
                             Log.e("Plan class prev", "");
                             requestOptionEfficiencyDetails();
                         } else {
@@ -314,6 +317,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         break;
 
                     case "Category":
+                        oe_btnPrev.setVisibility(View.INVISIBLE);
                         oe_txtHeaderClass.setText("Department");
                         fromWhere = "Department";
                         level = 1;
@@ -328,7 +332,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
-                            seasonGroup = "All";
+                            seasonGroup = "Current";
                             Log.e("Category prev", "");
                             requestOptionEfficiencyDetails();
                             Log.e("prev 4", "" + optionEfficiencyDetails.getPlanDept());
@@ -352,7 +356,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 switch (oe_txtHeaderClass.getText().toString()) {
 
                     case "Department":
-
+                        oe_btnPrev.setVisibility(View.VISIBLE);
                         oe_txtHeaderClass.setText("Category");
                         fromWhere = "Category";
                         level = 2;
@@ -377,8 +381,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         break;
 
                     case "Category":
-
-
                         fromWhere = "Plan Class";
                         oe_txtHeaderClass.setText("Plan Class");
                         level = 3;
@@ -428,6 +430,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         break;
 
                     case "Brand":
+                       oe_btnNext.setVisibility(View.INVISIBLE);
                         oe_txtHeaderClass.setText("Brand Plan Class");
 
                         fromWhere = "Brand Plan Class";
@@ -520,6 +523,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 switch (oe_txtHeaderClass.getText().toString()) {
 
                     case "Department":
+                       oe_btnPrev.setVisibility(View.VISIBLE);
+
                         oe_txtHeaderClass.setText("Category");
                         oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanDept();
                         Log.e("txtClicked department--", "" + oe_ClickedVal);
@@ -549,6 +554,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     case "Category":
                         Log.e("in oe category", "-----" + oe_PlanDept);
                         if (flag == true) {
+
                             oe_txtHeaderClass.setText("Plan Class");
                             oe_llayouthierarchy.setVisibility(View.GONE);
                             llayoutOEfficiency.setVisibility(View.GONE);
@@ -611,6 +617,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     case "Brand":
                         Log.e("in oe brand", "-----" + oe_PlanDept);
                         if (flag == true) {
+                            oe_btnNext.setVisibility(View.INVISIBLE);
                             oe_txtHeaderClass.setText("Brand Plan Class");
                             oe_llayouthierarchy.setVisibility(View.GONE);
                             llayoutOEfficiency.setVisibility(View.GONE);
@@ -662,32 +669,33 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         llayoutOEfficiency = (LinearLayout) findViewById(R.id.llayoutOEfficiency);
         oe_llayouthierarchy = (LinearLayout) findViewById(R.id.oe_llayouthierarchy);
         oe_btnPrev = (RelativeLayout) findViewById(R.id.oe_btnPrev);
+        oe_btnPrev.setVisibility(View.INVISIBLE);
         oe_btnNext = (RelativeLayout) findViewById(R.id.oe_btnNext);
 
         optionEfficiency_segmentedGrp = (SegmentedGroup) findViewById(R.id.optionEfficiency_segmentedGrp);
-        optionEfficiency_segmentedGrp.setOnCheckedChangeListener(OptionEfficiencyActivity.this);
+        optionEfficiency_segmentedGrp.setOnCheckedChangeListener(this);
         oe_btnCore = (RadioButton) findViewById(R.id.oe_btnCore);
         oe_btnFashion = (RadioButton) findViewById(R.id.oe_btnFashion);
         oe_btnFashion.toggle();
-//        quickFilter_BorderLayout=(RelativeLayout)findViewById(R.id.quickFilter_BorderLayout);
+        quickFilter_BorderLayout=(RelativeLayout)findViewById(R.id.quickFilter_BorderLayout);
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
         optionArrayList = new ArrayList<OptionEfficiencyDetails>();
-//        checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
-//        checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
-//        checkOld = (RadioButton) findViewById(R.id.checkOld);
-//        checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
-//        checkCurrent.setOnClickListener(OptionEfficiencyActivity.this);
-//        checkPrevious.setOnClickListener(this);
-//        checkOld.setOnClickListener(this);
-//        checkUpcoming.setOnClickListener(this);
-//        qfDoneLayout.setOnClickListener(this);
-//        quickFilter_BorderLayout.setOnClickListener(this);
+        checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
+        checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
+        checkOld = (RadioButton) findViewById(R.id.checkOld);
+        checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
+        checkCurrent.setOnClickListener(this);
+        checkPrevious.setOnClickListener(this);
+        checkOld.setOnClickListener(this);
+        checkUpcoming.setOnClickListener(this);
+        qfDoneLayout.setOnClickListener(this);
+        quickFilter_BorderLayout.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-      //      case R.id.qfDoneLayout:
+           case R.id.qfDoneLayout:
 
 //                if (checkCurrent.isChecked()) {
 //                    popupCurrent();
@@ -716,64 +724,64 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 //                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
 //
 //                }
-//                qfButton="ON";
-//                if (checkCurrent.isChecked()) {
-//                    popupCurrent();
-//                    checkPrevious.setChecked(false);
-//                    checkOld.setChecked(false);
-//                    checkUpcoming.setChecked(false);
-//                    quickFilterPopup.setVisibility(View.GONE);
-//
-//                } else if (checkPrevious.isChecked()) {
-//                    popupPrevious();
-//                    checkCurrent.setChecked(false);
-//                    checkOld.setChecked(false);
-//                    checkUpcoming.setChecked(false);
-//                    quickFilterPopup.setVisibility(View.GONE);
-//
-//                } else if (checkOld.isChecked()) {
-//                    popupOld();
-//                    checkPrevious.setChecked(false);
-//                    checkCurrent.setChecked(false);
-//                    checkUpcoming.setChecked(false);
-//                    quickFilterPopup.setVisibility(View.GONE);
-//
-//                } else if (checkUpcoming.isChecked()) {
-//                    popupUpcoming();
-//                    checkCurrent.setChecked(false);
-//                    checkPrevious.setChecked(false);
-//                    checkOld.setChecked(false);
-//                    quickFilterPopup.setVisibility(View.GONE);
-//
-//                } else {
-//                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
-//
-//                }
-//                break;
-//            case R.id.checkCurrent:
-//                checkCurrent.setChecked(true);
-//                checkPrevious.setChecked(false);
-//                checkOld.setChecked(false);
-//                checkUpcoming.setChecked(false);
-//                break;
-//            case R.id.checkPrevious:
-//                checkPrevious.setChecked(true);
-//                checkCurrent.setChecked(false);
-//                checkOld.setChecked(false);
-//                checkUpcoming.setChecked(false);
-//                break;
-//            case R.id.checkOld:
-//                checkOld.setChecked(true);
-//                checkCurrent.setChecked(false);
-//                checkPrevious.setChecked(false);
-//                checkUpcoming.setChecked(false);
-//                break;
-//            case R.id.checkUpcoming:
-//                checkUpcoming.setChecked(true);
-//                checkCurrent.setChecked(false);
-//                checkOld.setChecked(false);
-//                checkPrevious.setChecked(false);
-//                break;
+                qfButton="ON";
+                if (checkCurrent.isChecked()) {
+                    popupCurrent();
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else if (checkPrevious.isChecked()) {
+                    popupPrevious();
+                    checkCurrent.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else if (checkOld.isChecked()) {
+                    popupOld();
+                    checkPrevious.setChecked(false);
+                    checkCurrent.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else if (checkUpcoming.isChecked()) {
+                    popupUpcoming();
+                    checkCurrent.setChecked(false);
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    quickFilterPopup.setVisibility(View.GONE);
+
+                } else {
+                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+            case R.id.checkCurrent:
+                checkCurrent.setChecked(true);
+                checkPrevious.setChecked(false);
+                checkOld.setChecked(false);
+                checkUpcoming.setChecked(false);
+                break;
+            case R.id.checkPrevious:
+                checkPrevious.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkOld.setChecked(false);
+                checkUpcoming.setChecked(false);
+                break;
+            case R.id.checkOld:
+                checkOld.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkPrevious.setChecked(false);
+                checkUpcoming.setChecked(false);
+                break;
+            case R.id.checkUpcoming:
+                checkUpcoming.setChecked(true);
+                checkCurrent.setChecked(false);
+                checkOld.setChecked(false);
+                checkPrevious.setChecked(false);
+                break;
 
         }
     }
@@ -864,9 +872,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         switch (checkedId) {
 
             case R.id.oe_btnCore:
-
-                if (OEfficiency_SegmentClick.equals("Core"))
-                    break;
+//
+//                if (OEfficiency_SegmentClick.equals("Core"))
+//                    break;
                 OEfficiency_SegmentClick = "Core";
                 oe_llayouthierarchy.setVisibility(View.GONE);
                 llayoutOEfficiency.setVisibility(View.GONE);
@@ -887,9 +895,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
             case R.id.oe_btnFashion:
 
-                if (OEfficiency_SegmentClick.equals("Fashion"))
-                    break;
-
+//                if (OEfficiency_SegmentClick.equals("Fashion"))
+//                    break;
                 OEfficiency_SegmentClick = "Fashion";
                 oe_llayouthierarchy.setVisibility(View.GONE);
                 llayoutOEfficiency.setVisibility(View.GONE);
@@ -952,15 +959,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 //                                freshnessIndexDetails = new FreshnessIndexDetails();
 //
 //                                if (txtFIndexClass.getText().toString().equals("Department")) {
-//                                    freshnessIndexDetails.setPlanDept("All");
+//                                    freshnessIndexDetails.setPlanDept("Current");
 //                                } else if (txtFIndexClass.getText().toString().equals("Category")) {
-//                                    freshnessIndexDetails.setPlanCategory("All");
+//                                    freshnessIndexDetails.setPlanCategory("Current");
 //                                } else if (txtFIndexClass.getText().toString().equals("Plan Class")) {
-//                                    freshnessIndexDetails.setPlanClass("All");
+//                                    freshnessIndexDetails.setPlanClass("Current");
 //                                } else if (txtFIndexClass.getText().toString().equals("Brand")) {
-//                                    freshnessIndexDetails.setBrandName("All");
+//                                    freshnessIndexDetails.setBrandName("Current");
 //                                } else if (txtFIndexClass.getText().toString().equals("Brand Plan Class")) {
-//                                    freshnessIndexDetails.setBrandplanClass("All");
+//                                    freshnessIndexDetails.setBrandplanClass("Current");
 //                                }
 //
 //                                freshnessIndexDetailsArrayList.add(0, freshnessIndexDetails);
@@ -1476,14 +1483,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                 dataset = new PieDataSet(entries, "");
                                 dataset.setColors(colors);
-                                dataset.setValueLineWidth(0.5f);
+                                dataset.setValueLineWidth(0.7f);
                                 dataset.setValueTextColor(Color.BLACK);
                                 pieData = new PieData(dataset);
                                 pieData.setValueFormatter(new MyValueFormatter());
-                                dataset.setValueLinePart1Length(1.5f);
+                                dataset.setValueLinePart1Length(1.2f);
                                 dataset.setValueLinePart2Length(1.8f);
                                 oe_pieChart.setDrawMarkers(false);
-                                pieData.setValueTextSize(8.5f);
+                                pieData.setValueTextSize(10f);
                                 dataset.setXValuePosition(null);
                                 dataset.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
                                 oe_pieChart.setEntryLabelColor(Color.BLACK);
@@ -1498,6 +1505,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 Legend l = oe_pieChart.getLegend();
                                 l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
                                 l.setEnabled(true);
+                                l.setFormSize(11f);
                                 llayoutOEfficiency.setVisibility(View.VISIBLE);
                                 Reusable_Functions.hDialog();
                             }

@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
     tools:context="apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity">
 
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/bg_screen_color"
         android:orientation="vertical">
 
         <LinearLayout
@@ -102,8 +103,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store : "
-                    android:textColor="#920609"
-                    android:textSize="13sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -112,8 +113,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
-                    android:textColor="#000000"
-                    android:textSize="13sp" />
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -122,8 +123,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
-                    android:textColor="#000000"
-                    android:textSize="13sp" />
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/normallayout_storesize" />
 
             </RelativeLayout>
 
@@ -139,12 +140,13 @@
                 android:weightSum="2"
                 segmentedgroup:sc_border_width="1dp"
                 segmentedgroup:sc_corner_radius="14dp"
-                segmentedgroup:sc_tint_color="#B73020">
+                segmentedgroup:sc_tint_color="@color/colorPrimary">
 
                 <RadioButton
                     android:id="@+id/btnFashion"
                     style="@style/RadioButton"
                     android:layout_width="0dp"
+                    android:backgroundTint="@color/colorPrimary"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Fashion" />
@@ -155,7 +157,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:backgroundTint="#B73020"
+                    android:backgroundTint="@color/colorPrimary"
                     android:text="All" />
 
 
@@ -179,7 +181,7 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/fIndex_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp" />
+                    android:layout_height="210dp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -194,8 +196,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="11sp" />
+                    android:textColor="@color/txt_color"
+                    android:textSize="@dimen/normallayout_textsize" />
 
             </LinearLayout>
 
@@ -204,8 +206,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp">
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />
 
                 <LinearLayout
+                    android:layout_below="@+id/view1"
+                    android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:orientation="vertical">
@@ -214,7 +223,7 @@
                         android:id="@+id/llFIndexheader"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard">
+                        android:background="@color/bg_header">
 
 
                         <RelativeLayout
@@ -245,9 +254,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
                                 android:text="Department"
-                                android:textStyle="bold"
-                                android:textColor="@android:color/black"
-                                android:textSize="11sp" />
+                                android:textStyle="normal"
+                                android:textColor="@color/bg_store_code_text"
+                                android:textSize="@dimen/normallayout_textsize" />
 
 
                             <RelativeLayout
@@ -268,7 +277,7 @@
                         </RelativeLayout>
 
                         <TextView
-                            android:textStyle="bold"
+                            android:textStyle="normal"
                             android:id="@+id/txtFIndexSOH"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
@@ -279,8 +288,8 @@
                             android:layout_toLeftOf="@+id/txtNetSales"
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)"
-                            android:textColor="@android:color/black"
-                            android:textSize="11sp" />
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/normallayout_textsize" />
 
 
                         <TextView
@@ -293,9 +302,9 @@
                             android:layout_toLeftOf="@+id/rel"
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)%"
-                            android:textColor="@android:color/black"
-                            android:textSize="11sp"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal"/>
 
 
                         <TextView
@@ -306,9 +315,9 @@
                             android:layout_centerVertical="true"
                             android:gravity="center_vertical|center"
                             android:text="GIT(U)"
-                            android:textColor="@android:color/black"
-                            android:textSize="11sp"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal"/>
 
 
                     </RelativeLayout>
@@ -316,7 +325,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard">
+                        android:background="@color/bg_header">
 
                         <EditText
                             android:editable="false"
@@ -373,12 +382,24 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+                <View
+                    android:layout_below="@+id/linear"
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />
 
 
                 <ListView
                     android:id="@+id/fIndex_list"
                     android:dividerHeight="0dp"
                     android:divider="@null"
+                    android:scrollbars="vertical"
+                    android:scrollbarSize="3dp"
+                    android:scrollIndicators="right"
+                    android:scrollbarThumbVertical="@android:color/darker_gray"
+                    android:scrollbarFadeDuration="0"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
@@ -390,5 +411,5 @@
 
 
         </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -14,5 +14,9 @@
 
     <dimen name="header_clickable_width">40dp</dimen>
     <dimen name="header_clickable_height">60dp</dimen>
+    <dimen name="largelayout_textsize">13sp</dimen>
+    <dimen name="normallayout_textsize">12sp</dimen>
+    <dimen name="largelayout_storesize">14sp</dimen>
+    <dimen name="normallayout_storesize">13sp</dimen>
 
 </resources>

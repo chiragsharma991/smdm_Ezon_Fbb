@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:text="Store : "
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -148,7 +148,7 @@
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -158,7 +158,7 @@
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/normallayout_storesize" />
 
             </RelativeLayout>
 
@@ -232,7 +232,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="@color/txt_color"
-                    android:textSize="11sp" />
+                    android:textSize="@dimen/normallayout_textsize" />
 
 
 
@@ -298,7 +298,7 @@
                                 android:text="Department"
                                 android:textStyle="normal"
                                 android:textColor="@color/bg_store_code_text"
-                                android:textSize="11sp" />
+                                android:textSize="@dimen/normallayout_textsize" />
 
 
                             <RelativeLayout
@@ -331,7 +331,7 @@
                             android:gravity="center_vertical|center"
                             android:text="Plan Sales"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="11sp" />
+                            android:textSize="@dimen/normallayout_textsize" />
 
 
                         <TextView
@@ -345,7 +345,7 @@
                             android:gravity="center_vertical|center"
                             android:text="Net Sales"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="11sp"
+                            android:textSize="@dimen/normallayout_textsize"
                             android:textStyle="normal"/>
 
 
@@ -358,7 +358,7 @@
                             android:gravity="center_vertical|center"
                             android:text="PvA Sales%"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="11sp"
+                            android:textSize="@dimen/normallayout_textsize"
                             android:textStyle="normal"/>
 
 

@@ -610,12 +610,14 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+
                 <View
                     android:layout_below="@+id/linear"
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:background="@color/border_round_edittext" />
+
                 <ListView
                     android:id="@+id/listView_SalesAnalysis"
                     android:layout_width="match_parent"
