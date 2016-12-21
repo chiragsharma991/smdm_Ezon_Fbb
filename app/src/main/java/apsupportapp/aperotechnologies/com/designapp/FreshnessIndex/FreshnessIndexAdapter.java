@@ -111,16 +111,16 @@ public class FreshnessIndexAdapter extends BaseAdapter {
         if (fromWhere.equals("Department")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getPlanDept());
-            viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
+            viewHolder.txtfindexSOH.setText(""+freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
-            viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
+            viewHolder.txtfindexGIT.setText(""+Math.round(freshnessIndexDetails.getStkGitQty()));
 
         } else if (fromWhere.equals("Category")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getPlanCategory());
             viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
-            viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
+            viewHolder.txtfindexGIT.setText(""+Math.round(freshnessIndexDetails.getStkGitQty()));
 
 
 
@@ -129,7 +129,7 @@ public class FreshnessIndexAdapter extends BaseAdapter {
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getPlanClass());
             viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
-            viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
+            viewHolder.txtfindexGIT.setText(""+Math.round(freshnessIndexDetails.getStkGitQty()));
 
 
 
@@ -138,14 +138,14 @@ public class FreshnessIndexAdapter extends BaseAdapter {
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getBrandName());
             viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
-            viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
+            viewHolder.txtfindexGIT.setText(""+Math.round(freshnessIndexDetails.getStkGitQty()));
 
         } else if (fromWhere.equals("Brand Plan Class")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getBrandplanClass());
             viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
-            viewHolder.txtfindexGIT.setText(""+(int)freshnessIndexDetails.getStkGitQty());
+            viewHolder.txtfindexGIT.setText(""+Math.round(freshnessIndexDetails.getStkGitQty()));
 
         }
 
