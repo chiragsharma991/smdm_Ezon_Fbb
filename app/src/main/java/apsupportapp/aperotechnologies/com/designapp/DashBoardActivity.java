@@ -1132,8 +1132,6 @@ public class DashBoardActivity extends AppCompatActivity
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inVENtory="NO";
                     Inventory=false;
-
-
                 } break;
         }
 

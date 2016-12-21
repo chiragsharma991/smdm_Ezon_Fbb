@@ -23,8 +23,9 @@
     <color name="txt_color">#252525</color>
     <color name="smdm_green">#70e503</color>
     <color name="smdm_amber">#ff7e00</color>
-    <color name="smdm_blue">#215187
-    </color>
+    <color name="smdm_blue">#215187</color>
+    <color name="smdm_pink">#ffe5e5</color>
+    <color name="smdm_firstVisible_item">#e8c0bb</color>
 
 
 

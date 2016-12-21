@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
     tools:context=".OptionEfficiency.OptionEfficiencyActivity">
 
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/bg_screen_color"
         android:orientation="vertical">
 
         <LinearLayout
@@ -67,7 +68,6 @@
                         android:textSize="20sp" />
 
 
-
                     <RelativeLayout
                         android:id="@+id/optionEfficiency_imgfilter"
                         android:layout_width="@dimen/header_clickable_width"
@@ -101,8 +101,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store : "
-                    android:textColor="#920609"
-                    android:textSize="13sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -111,8 +111,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
-                    android:textColor="#000000"
-                    android:textSize="13sp" />
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -121,25 +121,23 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
-                    android:textColor="#000000"
-                    android:textSize="13sp" />
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/normallayout_storesize" />
 
-            <RelativeLayout
-                android:id="@+id/oe_quickFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/oe_quickFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="0dp">
 
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="0dp"
-               >
-
-                <Button
-                    android:layout_width="16dp"
-                    android:layout_height="29dp"
-                    android:layout_centerInParent="true"
-                    android:background="@mipmap/quick_filter"
-                    android:clickable="false" />
+                    <Button
+                        android:layout_width="16dp"
+                        android:layout_height="29dp"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/quick_filter"
+                        android:clickable="false" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -156,7 +154,7 @@
                 android:weightSum="2"
                 segmentedgroup:sc_border_width="1dp"
                 segmentedgroup:sc_corner_radius="14dp"
-                segmentedgroup:sc_tint_color="#B73020">
+                segmentedgroup:sc_tint_color="@color/colorPrimary">
 
                 <RadioButton
                     android:id="@+id/oe_btnFashion"
@@ -164,8 +162,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimary"
                     android:text="Fashion" />
-
 
                 <RadioButton
                     android:id="@+id/oe_btnCore"
@@ -173,14 +171,14 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:backgroundTint="#B73020"
+                    android:backgroundTint="@color/colorPrimary"
                     android:text="Core" />
-
 
 
             </info.hoang8f.android.segmented.SegmentedGroup>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/llayoutOEfficiency"
             android:layout_width="match_parent"
@@ -196,7 +194,7 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/oe_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp" />
+                    android:layout_height="210dp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -211,8 +209,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="11sp" />
+                    android:textColor="@color/txt_color"
+                    android:textSize="@dimen/normallayout_textsize" />
 
             </LinearLayout>
 
@@ -222,28 +220,37 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp">
 
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />
                 <LinearLayout
+                    android:layout_below="@+id/view1"
+                    android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:orientation="vertical">
 
+                    
                     <RelativeLayout
                         android:id="@+id/llOEheader"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard">
+                        android:background="@color/bg_header">
 
 
                         <RelativeLayout
+                            android:layout_marginRight="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="50dp">
 
 
                             <RelativeLayout
-                                android:layout_centerVertical="true"
                                 android:id="@+id/oe_btnPrev"
                                 android:layout_width="20dp"
-                                android:layout_height="40dp">
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true">
 
                                 <Button
                                     android:layout_width="20dp"
@@ -255,23 +262,23 @@
 
 
                             <TextView
-                                android:layout_toRightOf="@+id/oe_btnPrev"
                                 android:id="@+id/oe_txtHeaderClass"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
+                                android:layout_toRightOf="@+id/oe_btnPrev"
                                 android:text="Department"
-                                android:textStyle="bold"
-                                android:textColor="@android:color/black"
-                                android:textSize="11sp" />
+                                android:textColor="@color/bg_store_code_text"
+                                android:textSize="@dimen/normallayout_textsize"
+                                android:textStyle="normal" />
 
 
                             <RelativeLayout
-                                android:layout_centerVertical="true"
-                                android:layout_toRightOf="@+id/oe_txtHeaderClass"
                                 android:id="@+id/oe_btnNext"
                                 android:layout_width="20dp"
-                                android:layout_height="40dp">
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/oe_txtHeaderClass">
 
                                 <Button
                                     android:layout_width="20dp"
@@ -284,26 +291,25 @@
                         </RelativeLayout>
 
                         <TextView
-                            android:textStyle="bold"
                             android:id="@+id/oe_txtOption"
                             android:layout_width="60dp"
-                            android:layout_marginLeft="5dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
                             android:layout_marginRight="180dp"
                             android:layout_toLeftOf="@+id/oe_txtOption_Perc"
                             android:gravity="center_vertical|center"
                             android:text="Option"
-                            android:textColor="@android:color/black"
-                            android:textSize="11sp" />
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal" />
 
 
                         <TextView
                             android:id="@+id/oe_txtOption_Perc"
                             android:layout_width="60dp"
-
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
@@ -311,9 +317,9 @@
                             android:layout_toLeftOf="@+id/oe_txtSOH_U"
                             android:gravity="center_vertical|center"
                             android:text="@string/fullSize"
-                            android:textColor="@android:color/black"
-                            android:textSize="11sp"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal" />
 
 
                         <TextView
@@ -322,13 +328,13 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/oe_txtSOH_U_Perc"
                             android:layout_marginRight="60dp"
+                            android:layout_toLeftOf="@+id/oe_txtSOH_U_Perc"
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)"
-                            android:textColor="@android:color/black"
-                            android:textSize="11sp"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/oe_txtSOH_U_Perc"
@@ -337,11 +343,10 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:gravity="center_vertical|center"
-                            android:text="SOH(U) %"
-                            android:textColor="@android:color/black"
-                            android:textSize="11sp"
-                            android:textStyle="bold"/>
-
+                            android:text="SOH(U)%"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal" />
 
 
                     </RelativeLayout>
@@ -349,11 +354,9 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard">
+                        android:background="@color/bg_header">
 
                         <EditText
-                            android:editable="false"
-                            android:padding="2dp"
                             android:id="@+id/edt_OEfficiency_Class"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
@@ -362,13 +365,13 @@
                             android:layout_marginRight="240dp"
                             android:layout_toLeftOf="@+id/edt_FIndex_SOH"
                             android:background="@drawable/border"
+                            android:editable="false"
                             android:gravity="center_vertical"
+                            android:padding="2dp"
                             android:textColor="@android:color/black" />
 
 
                         <EditText
-                            android:editable="false"
-                            android:paddingRight="2dp"
                             android:id="@+id/edt_OEfficiency_Option"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
@@ -377,11 +380,12 @@
                             android:layout_marginRight="180dp"
                             android:layout_toLeftOf="@+id/edt_OEfficiency_Option_Perc"
                             android:background="@drawable/border"
-                            android:gravity="center_vertical" />
+                            android:editable="false"
+                            android:gravity="center_vertical"
+                            android:paddingRight="2dp" />
 
 
                         <EditText
-                            android:editable="false"
                             android:id="@+id/edt_OEfficiency_Option_Perc"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
@@ -390,28 +394,29 @@
                             android:layout_marginRight="120dp"
                             android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_U"
                             android:background="@drawable/border"
+                            android:editable="false"
                             android:textColor="@android:color/black" />
 
                         <EditText
-                            android:editable="false"
                             android:id="@+id/edt_OEfficiency_SOH_U"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
-                            android:layout_marginRight="60dp"
-                            android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_Perc"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="60dp"
+                            android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_Perc"
                             android:background="@drawable/border"
+                            android:editable="false"
                             android:textColor="@android:color/black" />
 
                         <EditText
-                            android:editable="false"
                             android:id="@+id/edt_OEfficiency_SOH_Perc"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:background="@drawable/border"
+                            android:editable="false"
                             android:textColor="@android:color/black" />
 
 
@@ -419,21 +424,35 @@
 
                 </LinearLayout>
 
-               <ListView
+                <View
+                    android:layout_below="@+id/linear"
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />
+
+
+                <ListView
                     android:id="@+id/oe_list"
-                    android:dividerHeight="0dp"
-                    android:divider="@null"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:scrollIndicators="right"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:scrollbarFadeDuration="0"
+                    android:scrollbarSize="3dp"
+                    android:scrollbarThumbVertical="@android:color/darker_gray"
+                    android:scrollbars="vertical"
                     android:smoothScrollbar="true"></ListView>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <!--<include layout="@layout/quick_filter_menu">-->
+    <include layout="@layout/quick_filter_menu">
 
-    <!--</include>-->
+    </include>
 
 
 </RelativeLayout>

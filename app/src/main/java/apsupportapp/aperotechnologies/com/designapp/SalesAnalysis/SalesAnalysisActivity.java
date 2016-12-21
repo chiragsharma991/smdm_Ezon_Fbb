@@ -632,6 +632,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 llayoutSalesAnalysis.setVisibility(View.GONE);
                                 //String planCategry= salesAnalysisClassArrayList.get(position).getPlanCategory().substring(0,1).toUpperCase()+salesAnalysisClassArrayList.get(position).getPlanCategory().substring(1).toLowerCase();
                                 txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
+
                                 Log.e("txtClicked category --", "" + txtSalesClickedValue);
                                 fromWhere = "Plan Class";
                                 //SalesPagerAdapter.currentPage = 0;
