@@ -122,7 +122,7 @@
                 <TextView
                     android:id="@+id/bst_lineOne_child"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/smdm_divider"
+                    android:layout_height="@dimen/smdm_inflater_divider"
                     android:layout_alignStart="@+id/bst_head_child"
                     android:layout_marginTop="10dp"
                     android:background="@color/divider_salescard"

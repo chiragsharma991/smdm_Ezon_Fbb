@@ -145,8 +145,9 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                TopOptionListView.removeFooterView(footer);
+                                TopOptionListView.setTag("FOOTER_REMOVE");
 
-                                // footer.setVisibility(View.GONE);
                                 if (TopOptionList.size() == 0) {
                                     TopOptionListView.setVisibility(View.GONE);
 
@@ -181,7 +182,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                             }
 
 
-                            footer.setVisibility(View.GONE);
                            /* if(popPromo==10)
                             {
                                 topOptionAdapter = new TopOptionAdapter(TopOptionList,context);
@@ -193,6 +193,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                             if (lazyScroll.equals("ON")) {
                                 topOptionAdapter.notifyDataSetChanged();
                                 lazyScroll = "OFF";
+                                footer.setVisibility(View.GONE);
+
                             } else {
                                 topOptionAdapter = new TopOptionAdapter(TopOptionList, context);
                                 TopOptionListView.setAdapter(topOptionAdapter);
@@ -206,8 +208,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            footer.setVisibility(View.GONE);
-                            TopOptionListView.setVisibility(View.GONE);
+                            TopOptionListView.removeFooterView(footer);
+                            TopOptionListView.setTag("FOOTER_REMOVE");
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -352,6 +354,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Core";
+                        lazyScroll = "OFF";
                         TopOptionList.clear();
                         TopOptionListView.setVisibility(View.GONE);
                         requestRunningPromoApi();
@@ -370,6 +373,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Fashion";
+                        lazyScroll = "OFF";
                         TopOptionList.clear();
                         TopOptionListView.setVisibility(View.GONE);
                         Reusable_Functions.sDialog(this, "Loading.......");

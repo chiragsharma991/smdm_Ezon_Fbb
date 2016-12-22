@@ -61,7 +61,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     RelativeLayout quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
     FloorAvailabilityDetails floorAvailabilityDetails;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken, seasongroup = "All";
+    String userId, bearertoken, seasongroup = "Current";
     String TAG = "FloorAvailabilty";
     private int count = 0;
     private int limit = 10;
@@ -100,6 +100,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        floorListView.setTag("FOOTER");
         floorListView.setVisibility(View.VISIBLE);
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -121,7 +122,8 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
     private void requestFloorAvailabilityApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+        //String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+        String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
 
         Log.e(TAG, "URL" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -136,7 +138,8 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                footer.setVisibility(View.GONE);
+                                floorListView.removeFooterView(footer);
+                                floorListView.setTag("FOOTER_REMOVE");
                                 if (FloorList.size() == 0) {
                                     floorListView.setVisibility(View.GONE);
 
@@ -170,7 +173,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                             }
 
 
-                            footer.setVisibility(View.GONE);
                            /* if(popPromo==10)
                             {
                                 topOptionAdapter = new TopOptionAdapter(TopOptionList,context);
@@ -182,6 +184,8 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                             if (lazyScroll.equals("ON")) {
                                 floorAvailabilityAdapter.notifyDataSetChanged();
                                 lazyScroll = "OFF";
+                                footer.setVisibility(View.GONE);
+
                             } else {
                                 floorAvailabilityAdapter = new FloorAvailabilityAdapter(FloorList, context);
                                 floorListView.setAdapter(floorAvailabilityAdapter);
@@ -209,7 +213,9 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Network problem has been found", Toast.LENGTH_SHORT).show();
+                        floorListView.removeFooterView(footer);
+                        floorListView.setTag("FOOTER_REMOVE");
                         error.printStackTrace();
                     }
                 }
@@ -239,6 +245,15 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
                 if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
+
+                    if (floorListView.getTag().equals("FOOTER_REMOVE")) {
+                        floorListView.addFooterView(footer);
+                        floorListView.setTag("FOOTER_ADDED");
+
+                    }
+
+
+
                     footer.setVisibility(View.VISIBLE);
                     lazyScroll = "ON";
                     requestFloorAvailabilityApi();
@@ -319,7 +334,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 Intent intent = new Intent(FloorAvailabilityActivity.this, InventoryFilterActivity.class);
                 intent.putExtra("checkfrom", "floorAvailability");
                 startActivity(intent);
-                finish();
+               // finish();
                 break;
             case R.id.floor_quickFilter:
 
@@ -520,12 +535,14 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Core";
+                        lazyScroll = "OFF";
                         FloorList.clear();
-                        floorAvailabilityAdapter.notifyDataSetChanged();
                         floorListView.setVisibility(View.GONE);
                         requestFloorAvailabilityApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        floorListView.setVisibility(View.GONE);
+
                     }
                 }
                 break;
@@ -538,12 +555,14 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Fashion";
+                        lazyScroll = "OFF";
                         FloorList.clear();
-                        floorAvailabilityAdapter.notifyDataSetChanged();
                         floorListView.setVisibility(View.GONE);
                         requestFloorAvailabilityApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        floorListView.setVisibility(View.GONE);
+
                     }
                 }
                 break;

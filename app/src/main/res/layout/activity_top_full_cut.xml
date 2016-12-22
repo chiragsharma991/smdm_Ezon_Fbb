@@ -5,6 +5,7 @@
     android:id="@+id/activity_top_full_cut"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
     tools:context="apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut">
 
     <LinearLayout
@@ -55,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Top Option By Full Cut"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/smdm_header_title_normal"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/topBest_BtnBack"
                     android:layout_marginLeft="@dimen/smdm_header_title_normal"

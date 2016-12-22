@@ -4,6 +4,7 @@
     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_top_full_cut"
     android:layout_width="match_parent"
+    android:background="@color/bg_screen_color"
     android:layout_height="match_parent"
     tools:context=".TopOptionCutSize.TopFullCut">
 
@@ -20,7 +21,8 @@
         android:orientation="horizontal"
         segmentedgroup:sc_border_width="1dp"
         segmentedgroup:sc_corner_radius="14dp"
-        segmentedgroup:sc_tint_color="#B73020">
+        segmentedgroup:sc_tint_color="@color/colorPrimary"
+        >
 
         <RadioButton
             style="@style/RadioButton"
@@ -28,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Fashion" />
 
         <RadioButton
@@ -36,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#B73020"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Core" />
 
 
@@ -52,7 +55,6 @@
         android:padding="10dp"
 
 
-
         >
 
         <Switch
@@ -66,9 +68,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
+            android:textSize="@dimen/smdm_store_title_normal"
             android:text="Best/Worst"
-            android:textColor="@color/smdm_light_Black"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@id/bestNworstswitch"
             android:layout_alignBaseline="@id/bestNworstswitch"
@@ -99,7 +100,7 @@
         </ListView>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/smdm_divider"
             android:background="@color/divider_salescard"
             android:layout_marginTop="9dp"
             >
@@ -159,11 +160,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Best Performers"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/smdm_header_title_normal"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/bestInvent_BtnBack"
                     android:layout_marginLeft="20dp"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/divider_salescard1"
                     android:id="@+id/toolbar_title" />
 
                 <RelativeLayout
@@ -221,8 +222,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Store : "
-                android:textColor="#920609"
-                android:textSize="13sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/smdm_store_title_normal"
+                />
 
             <TextView
                 android:id="@+id/bestInvent_txtStoreCode"
@@ -230,8 +232,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/bestInvent_storeCode"
-                android:textColor="#000000"
-                android:textSize="13sp" />
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/smdm_store_title_normal"
+                />
 
             <TextView
                 android:id="@+id/bestInvent_txtStoreName"
@@ -239,8 +242,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@id/bestInvent_txtStoreCode"
-                android:textColor="#000000"
-                android:textSize="13sp" />
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/smdm_store_title_normal"
+                />
 
             <RelativeLayout
                 android:id="@+id/bestInvent_quickFilter"

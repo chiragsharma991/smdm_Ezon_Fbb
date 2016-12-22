@@ -55,8 +55,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Sort By"
-                                android:textColor="@android:color/black"
-                                android:textSize="16dp"
+                                android:textColor="@color/smdm_PopUptxt_color"
+                                android:textSize="@dimen/smdm_PopUp_title_large"
 
 
                                 />
@@ -69,7 +69,7 @@
                         <TextView
                             android:id="@+id/bst_lineOne_child"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="@dimen/smdm_popup_divider"
                             android:layout_alignStart="@+id/bst_head_child"
                             android:layout_marginTop="5dp"
                             android:background="@color/divider_salescard" />
@@ -98,8 +98,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Sales(U)"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="16dp"
+                                    android:textSize="@dimen/smdm_PopUp_title_large"
 
                                     />
 
@@ -161,8 +160,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Sell Thru%(U)"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="16dp"
+                                    android:textSize="@dimen/smdm_PopUp_title_large"
 
                                     />
 
@@ -183,6 +181,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="5"
+                                    android:checked="true"
                                     android:buttonTint="@android:color/black"
 
 
@@ -222,8 +221,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Fwd Week Cover"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="16dp"
+                                    android:textSize="@dimen/smdm_PopUp_title_large"
 
                                     />
 
@@ -281,8 +279,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Cover and sell Thru%(U) "
-                                    android:textColor="@android:color/black"
-                                    android:textSize="16dp"
+                                    android:textSize="@dimen/smdm_PopUp_title_large"
 
                                     />
 

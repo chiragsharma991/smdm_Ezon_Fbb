@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -83,7 +84,8 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
             holder.floor_SOH_U=(TextView)convertView.findViewById(R.id.floor_SOH_U);
             holder.floor_NoofDays = (TextView) convertView.findViewById(R.id.floor_NoofDays);
             holder.floor_ReceiptDate = (TextView) convertView.findViewById(R.id.floor_ReceiptDate);
-//
+            holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.imageLoader_floor);
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.floor_image_child = (ImageView) convertView.findViewById(R.id.floor_image_child);
             holder.floor_fav = (RelativeLayout) convertView.findViewById(R.id.floor_fav);
             convertView.setTag(holder);
@@ -91,6 +93,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
         } else {
 
             holder=(FloorAvailabilityAdapter.Holder)convertView.getTag();
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
 
         }
 
@@ -101,10 +104,30 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
 //        StockAgeingActivity.stock_txtStoreCode.setText(arrayList.get(position).getStoreCode());
 //        StockAgeingActivity.stock_txtStoreName.setText(arrayList.get(position).getStoreDescription());
 
-        if(!arrayList.get(position).getProdImageURL().equals("")) {
-            Picasso.with(this.context).load(arrayList.get(position).getProdImageURL()).into(holder.floor_image_child);
+        if(!arrayList.get(position).getProdImageURL().equals(""))
+        {
+            Picasso.with(this.context).
+
+                    load(arrayList.get(position).getProdImageURL()).
+                    into(holder.floor_image_child, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+
+                        }
+                    });
         }else {
-            Picasso.with(this.context).load(R.mipmap.placeholder).into(holder.floor_image_child);
+            holder.ProgressPicaso.setVisibility(View.GONE);
+
+            Picasso.with(this.context).
+                    load(R.mipmap.placeholder).
+                    into(holder.floor_image_child);
+
         }
 
         // ---------------------click listener -------------------------
@@ -118,7 +141,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
         TextView floor_option, floor_NoofDays, floor_ReceiptDate, floor_SOH_U;
         ImageView floor_image_child;
         RelativeLayout floor_fav;
-        ProgressBar loader;
+        ProgressBar ProgressPicaso;
     }
 
 
