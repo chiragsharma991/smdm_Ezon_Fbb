@@ -122,8 +122,8 @@ public class InventoryFilterActivity extends Activity {
                     finish();
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
-                    Intent intent = new Intent(InventoryFilterActivity.this, BestPerformerInventory.class);
-                    startActivity(intent);
+                   // Intent intent = new Intent(InventoryFilterActivity.this, BestPerformerInventory.class);
+                    //startActivity(intent);
                     finish();
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("floorAvailability")) {
@@ -148,8 +148,8 @@ public class InventoryFilterActivity extends Activity {
                 }
 
                 else if (getIntent().getStringExtra("checkfrom").equals("TopFullCut")) {
-                    Intent intent = new Intent(InventoryFilterActivity.this, TopFullCut.class);
-                    startActivity(intent);
+                   // Intent intent = new Intent(InventoryFilterActivity.this, TopFullCut.class);
+                  //  startActivity(intent);
                     finish();
                 }
             }
@@ -283,8 +283,8 @@ public class InventoryFilterActivity extends Activity {
             finish();
         }
         else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
-            Intent intent = new Intent(InventoryFilterActivity.this, BestPerformerInventory.class);
-            startActivity(intent);
+            //Intent intent = new Intent(InventoryFilterActivity.this, BestPerformerInventory.class);
+            //startActivity(intent);
             finish();
         }
         else if (getIntent().getStringExtra("checkfrom").equals("floorAvailability")) {
@@ -307,8 +307,8 @@ public class InventoryFilterActivity extends Activity {
             startActivity(intent);
             finish();
         } else if (getIntent().getStringExtra("checkfrom").equals("TopFullCut")) {
-            Intent intent = new Intent(InventoryFilterActivity.this, TopFullCut.class);
-            startActivity(intent);
+           // Intent intent = new Intent(InventoryFilterActivity.this, TopFullCut.class);
+           // startActivity(intent);
             finish();
         }
     }

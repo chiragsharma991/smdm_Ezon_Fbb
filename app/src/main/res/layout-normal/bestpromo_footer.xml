@@ -39,6 +39,7 @@
                 android:src="@mipmap/placeholder"
                 android:scaleType="fitXY"
                 android:id="@+id/bst_image_child"
+                android:visibility="invisible"
 
                 />
 
