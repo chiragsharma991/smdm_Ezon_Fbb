@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -51,16 +50,11 @@ import org.json.JSONArray;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndexDetails;
-import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 /**
@@ -1412,6 +1406,161 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         intent.putExtra("BACKTO","inventory");
         startActivity(intent);*/
         finish();
+    }
+
+    /**
+     * Created by pamrutkar on 22/11/16.
+     */
+
+    public static class FreshnessIndexDetails {
+
+        String storeCode;
+        String storeDescription;
+        String planDept;
+        int stkOnhandQty;
+        double stkOnhandQtyCount;
+        double stkGitQty;
+        double ros;
+        double fwdWeekCover;
+        double previousGroupCount;
+        double currentGroupCount;
+        double oldGroupCount;
+        double upcomingGroupCount;
+        String planCategory;
+        String planClass;
+        String brandName;
+        String brandplanClass;
+
+
+        public String getBrandName() {
+            return brandName;
+        }
+
+        public void setBrandName(String brandName) {
+            this.brandName = brandName;
+        }
+
+        public String getBrandplanClass() {
+            return brandplanClass;
+        }
+
+        public void setBrandplanClass(String brandplanClass) {
+            this.brandplanClass = brandplanClass;
+        }
+
+        public String getStoreCode() {
+            return storeCode;
+        }
+
+        public void setStoreCode(String storeCode) {
+            this.storeCode = storeCode;
+        }
+
+        public String getStoreDescription() {
+            return storeDescription;
+        }
+
+        public void setStoreDescription(String storeDescription) {
+            this.storeDescription = storeDescription;
+        }
+
+        public String getPlanDept() {
+            return planDept;
+        }
+
+        public void setPlanDept(String planDept) {
+            this.planDept = planDept;
+        }
+
+        public String getPlanClass() {
+            return planClass;
+        }
+
+        public void setPlanClass(String planClass) {
+            this.planClass = planClass;
+        }
+
+        public String getPlanCategory() {
+            return planCategory;
+        }
+
+        public void setPlanCategory(String planCategory) {
+            this.planCategory = planCategory;
+        }
+
+        public int getStkOnhandQty() {
+            return stkOnhandQty;
+        }
+
+        public void setStkOnhandQty(int stkOnhandQty) {
+            this.stkOnhandQty = stkOnhandQty;
+        }
+
+        public double getStkOnhandQtyCount() {
+            return stkOnhandQtyCount;
+        }
+
+        public void setStkOnhandQtyCount(double stkOnhandQtyCount) {
+            this.stkOnhandQtyCount = stkOnhandQtyCount;
+        }
+
+        public double getStkGitQty() {
+            return stkGitQty;
+        }
+
+        public void setStkGitQty(double stkGitQty) {
+            this.stkGitQty = stkGitQty;
+        }
+
+        public double getRos() {
+            return ros;
+        }
+
+        public void setRos(double ros) {
+            this.ros = ros;
+        }
+
+        public double getFwdWeekCover() {
+            return fwdWeekCover;
+        }
+
+        public void setFwdWeekCover(double fwdWeekCover) {
+            this.fwdWeekCover = fwdWeekCover;
+        }
+
+        public double getPreviousGroupCount() {
+            return previousGroupCount;
+        }
+
+        public void setPreviousGroupCount(double previousGroupCount) {
+            this.previousGroupCount = previousGroupCount;
+        }
+
+        public double getCurrentGroupCount() {
+            return currentGroupCount;
+        }
+
+        public void setCurrentGroupCount(double currentGroupCount) {
+            this.currentGroupCount = currentGroupCount;
+        }
+
+        public double getOldGroupCount() {
+            return oldGroupCount;
+        }
+
+        public void setOldGroupCount(double oldGroupCount) {
+            this.oldGroupCount = oldGroupCount;
+        }
+
+        public double getUpcomingGroupCount() {
+            return upcomingGroupCount;
+        }
+
+        public void setUpcomingGroupCount(double upcomingGroupCount) {
+            this.upcomingGroupCount = upcomingGroupCount;
+        }
+
+
     }
 }
 

@@ -201,7 +201,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                         PromoListView.setSelection(view.getFirstVisiblePosition());
                         Log.e(TAG, "firstVisibleItem" + " " + focusposition);
                         //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                        promoval1.setText("\u20B9\t"+(int)promoList.get(focusposition).getDurSaleNetVal());
+                        promoval1.setText("\u20B9\t"+Math.round(promoList.get(focusposition).getDurSaleNetVal()));
                         promoval2.setText(""+promoList.get(focusposition).getDurSaleTotQty());
                         storecode.setText(promoList.get(focusposition).getStoreCode());
                         storedesc.setText(promoList.get(focusposition).getStoreDesc());

@@ -56,7 +56,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     SegmentedGroup segmentedGroupSales;
     LinearLayout llayoutSalesAnalysis;
     SalesAnalysisListDisplay salesAnalysisClass;
-    SalesAnalysisViewPagerValue salesAnalysis;
+   public static SalesAnalysisViewPagerValue salesAnalysis;
     ArrayList<SalesAnalysisViewPagerValue> analysisArrayList, salesList;
     ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList;
     static ViewPager vwpagersales;
@@ -530,15 +530,15 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         //Log.e("firstVisibleItem", " " + view.getFirstVisiblePosition() + " " + arrayList.get(view.getFirstVisiblePosition()).getPlanDept());
 
                         if (txtheaderplanclass.getText().toString().equals("Department")) {
-                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()).getPlanDept().toString();
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
                         } else if (txtheaderplanclass.getText().toString().equals("Category")) {
-                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()).getPlanCategory().toString();
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory().toString();
                         } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
-                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()).getPlanClass().toString();
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass().toString();
                         } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
-                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()).getBrandName().toString();
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName().toString();
                         } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
-                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()).getBrandplanClass().toString();
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
                         }
                         //Log.e("analysisArrayList", " " + analysisArrayList.size());
 
@@ -1040,10 +1040,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                vwpagersales.setAdapter(pageradapter);
                                vwpagersales.setCurrentItem(currentVmPos);
                             pageradapter.notifyDataSetChanged();
-                            txtZonalSales.setText("" + salesAnalysis.getZonalSalesRank());
-                            txtNationalSales.setText("" + salesAnalysis.getNationalSalesRank());
-                            txtZonalYOY.setText("" + salesAnalysis.getZonalYOYGrowthRank());
-                            txtNationalYOY.setText("" + salesAnalysis.getNationalYOYGrowthRank());
+                            //txtZonalSales.setText("" + salesAnalysis.getZonalSalesRank());
+//                            txtNationalSales.setText("" + salesAnalysis.getNationalSalesRank());
+//                            txtZonalYOY.setText("" + salesAnalysis.getZonalYOYGrowthRank());
+//                            txtNationalYOY.setText("" + salesAnalysis.getNationalYOYGrowthRank());
 
                             // Log.i("Sales Zonal Rank",""+salesAnalysis.getZonalSalesRank());
 
@@ -1109,7 +1109,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         }
         else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class"))
         {
-            url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&brandclass=" + saleFirstVisibleItem.toUpperCase().replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+            url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&brandclass=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
         }
         Log.e("Url", "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -1263,7 +1263,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 limit = 100;
                                 count = 0;
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()).getPlanCategory();
+                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
                                 Log.e("saleFirstVisibleItem in category list", "-----" + saleFirstVisibleItem);
                                 requestSalesPagerOnScrollAPI();
                             }
@@ -1366,7 +1366,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 limit = 100;
                                 count = 0;
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()).getPlanClass();
+                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
                                 Log.e("saleFirstVisibleItem in plan class list", "-----" + saleFirstVisibleItem);
                                 requestSalesPagerOnScrollAPI();
                             }
@@ -1467,7 +1467,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 limit = 100;
                                 count = 0;
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()).getBrandName();
+                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
                                 Log.e("saleFirstVisibleItem in brand list", "-----" + saleFirstVisibleItem);
                                 requestSalesPagerOnScrollAPI();
                             }
@@ -1576,7 +1576,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 limit = 100;
                                 count = 0;
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()).getBrandplanClass();
+                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass();
                                 Log.e("saleFirstVisibleItem in brandplanclass list", "-----" + saleFirstVisibleItem);
                                 requestSalesPagerOnScrollAPI();
                             }

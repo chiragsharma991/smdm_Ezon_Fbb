@@ -2,15 +2,12 @@ package apsupportapp.aperotechnologies.com.designapp.FreshnessIndex;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.data.CombinedData;
@@ -18,11 +15,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndexDetails;
-import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
-import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 
 /**
  * Created by pamrutkar on 22/11/16.
@@ -34,14 +27,14 @@ public class FreshnessIndexAdapter extends BaseAdapter {
     String fromWhere;
     int level;
     int offsetvalue = 0, count = 0, limit = 100;
-    ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList;
+    ArrayList<FreshnessIndexActivity.FreshnessIndexDetails> freshnessIndexDetailsArrayList;
 
     ListView listViewFIndex;
     Gson gson;
     CombinedData pvaData;
 
 
-    public FreshnessIndexAdapter(ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, ListView listViewFIndex) {
+    public FreshnessIndexAdapter(ArrayList<FreshnessIndexActivity.FreshnessIndexDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, ListView listViewFIndex) {
         this.context = context;
         this.freshnessIndexDetailsArrayList = freshnessIndexDetailsArrayList;
         this.fromWhere = fromWhere;
@@ -101,7 +94,7 @@ public class FreshnessIndexAdapter extends BaseAdapter {
             viewHolder = (FreshnessIndexAdapter.ViewHolderItem) convertView.getTag();
         }
 
-        FreshnessIndexDetails freshnessIndexDetails = (FreshnessIndexDetails) freshnessIndexDetailsArrayList.get(position);
+        FreshnessIndexActivity.FreshnessIndexDetails freshnessIndexDetails = (FreshnessIndexActivity.FreshnessIndexDetails) freshnessIndexDetailsArrayList.get(position);
 
 //        viewHolder.txtfindexClass.setTag(position);
 //        viewHolder.txtfindexSOH.setTag(position);

@@ -10,14 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.data.CombinedData;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndexDetails;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 
 /**
