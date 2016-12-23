@@ -84,7 +84,8 @@ public class StockAgeingAdapter extends BaseAdapter{
             holder.stock_ageing = (TextView) convertView.findViewById(R.id.stock_ageing);
             holder.stock_SOH_U = (TextView) convertView.findViewById(R.id.stock_SOH_U);
             holder.stock_option = (TextView) convertView.findViewById(R.id.stock_option);
-//
+            holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.imgLoader_stockAge);
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.stock_image_child = (ImageView) convertView.findViewById(R.id.stock_image_child);
             holder.stock_fav = (RelativeLayout) convertView.findViewById(R.id.stock_fav);
             convertView.setTag(holder);
@@ -92,6 +93,7 @@ public class StockAgeingAdapter extends BaseAdapter{
         } else {
 
             holder=(StockAgeingAdapter.Holder)convertView.getTag();
+            holder.ProgressPicaso.setVisibility(View.VISIBLE);
 
         }
         holder.stock_option.setText(arrayList.get(position).getOption());
@@ -101,10 +103,32 @@ public class StockAgeingAdapter extends BaseAdapter{
 //        StockAgeingActivity.stock_txtStoreName.setText(arrayList.get(position).getStoreDescription());
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
-            Picasso.with(this.context).load(arrayList.get(position).getProdImageURL()).into(holder.stock_image_child);
+
+            Picasso.with(this.context).
+
+                    load(arrayList.get(position).getProdImageURL()).
+                    into(holder.stock_image_child, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+
+                        }
+                    });
         }else {
-            Picasso.with(this.context).load(R.mipmap.placeholder).into(holder.stock_image_child);
+            holder.ProgressPicaso.setVisibility(View.GONE);
+
+            Picasso.with(this.context).
+                    load(R.mipmap.placeholder).
+                    into(holder.stock_image_child);
+
         }
+
+
 
        // ---------------------click listener -------------------------
         return convertView;
@@ -115,7 +139,8 @@ public class StockAgeingAdapter extends BaseAdapter{
         TextView stock_ageing,stock_SOH_U,stock_option;
         ImageView stock_image_child;
         RelativeLayout stock_fav;
-        ProgressBar loader;
+        public ProgressBar ProgressPicaso;
+
 
     }
 

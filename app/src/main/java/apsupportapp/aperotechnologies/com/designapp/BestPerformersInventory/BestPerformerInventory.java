@@ -61,14 +61,14 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class BestPerformerInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener,CompoundButton.OnCheckedChangeListener  {
+public class BestPerformerInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
 
     static TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
     RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
             quickFilter_baseLayout, BestQfDoneLayout, BestQuickFilterBorder;
     RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
-    RadioButton BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming, CheckWTD, CheckL4W, CheckSTD;
+    RadioButton CheckWTD, CheckL4W, CheckSTD;
     String userId, bearertoken;
     private TextView Toolbar_title;
     String TAG = "WorstPerformerInventory";
@@ -92,7 +92,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private ToggleButton Toggle_bestInvent_fav;
     private String corefashion = "Fashion";
     private ImageView Skewed_quickFilter;
-    private int orderbycol = 9;
+    private String orderbycol = "9";
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU, BstInventory_salesThru, BstInventory_Fwd, BstInventory_coverNsell;
     private RadioButton BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
@@ -101,6 +101,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private String view = "STD";
     private Switch BestAndWorst;
     private String orderby = "DESC";
+    private CheckBox BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming;
 
 
     @Override
@@ -169,7 +170,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                    footer.setVisibility(View.GONE);
+                                    BestInventListview.removeFooterView(footer);
+                                    BestInventListview.setTag("FOOTER_REMOVE");
                                     if (BestInventList.size() == 0) {
                                         BestInventListview.setVisibility(View.GONE);
 
@@ -209,7 +211,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 }
 
 
-                                footer.setVisibility(View.GONE);
                            /* if(popPromo==10)
                             {
                                 topOptionAdapter = new TopOptionAdapter(TopOptionList,context);
@@ -222,14 +223,12 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                                 if (lazyScroll.equals("ON")) {
                                     bestPerformerInventoryAdapter.notifyDataSetChanged();
-                                    // BestInvent_fashion.setEnabled(true);
-                                    // BestInvent_core.setEnabled(true);
                                     lazyScroll = "OFF";
+                                    footer.setVisibility(View.GONE);
+
                                 } else {
                                     bestPerformerInventoryAdapter = new BestPerformerInventoryAdapter(BestInventList, context);
                                     BestInventListview.setAdapter(bestPerformerInventoryAdapter);
-                                    //   BestInvent_fashion.setEnabled(true);
-                                    //   BestInvent_core.setEnabled(true);
 
 
                                 }
@@ -245,7 +244,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 //    BestInvent_fashion.setEnabled(true);
                                 //   BestInvent_core.setEnabled(true);
                                 Reusable_Functions.hDialog();
-                                footer.setVisibility(View.GONE);
+                                BestInventListview.removeFooterView(footer);
+                                BestInventListview.setTag("FOOTER_REMOVE");
                                 e.printStackTrace();
                                 Log.e(TAG, "catch...Error" + e.toString());
                             }
@@ -256,7 +256,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Network problem has been found", Toast.LENGTH_SHORT).show();
-                            //topOptionAdapter.notifyDataSetChanged();
                             BestInventListview.removeFooterView(footer);
                             BestInventListview.setTag("FOOTER_REMOVE");
 
@@ -361,10 +360,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         quickFilterPopup.setVisibility(View.GONE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
 
-        BestCheckCurrent = (RadioButton) findViewById(R.id.bestCheckCurrent);
-        BestCheckPrevious = (RadioButton) findViewById(R.id.bestCheckPrevious);
-        BestCheckOld = (RadioButton) findViewById(R.id.bestCheckOld);
-        BestCheckUpcoming = (RadioButton) findViewById(R.id.bestCheckUpcoming);
+        BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
+        BestCheckPrevious = (CheckBox) findViewById(R.id.bestCheckPrevious);
+        BestCheckOld = (CheckBox) findViewById(R.id.bestCheckOld);
+        BestCheckUpcoming = (CheckBox) findViewById(R.id.bestCheckUpcoming);
         CheckWTD = (RadioButton) findViewById(R.id.checkWTD);
         CheckL4W = (RadioButton) findViewById(R.id.checkL4W);
         CheckSTD = (RadioButton) findViewById(R.id.checkSTD);
@@ -443,7 +442,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 Intent intent = new Intent(this, InventoryFilterActivity.class);
                 intent.putExtra("checkfrom", "bestPerformers");
                 startActivity(intent);
-             //   finish();
+                //   finish();
                 break;
 
 
@@ -453,7 +452,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 filterFunction();
                 break;
 
-            // base layout>>>>>>
+            // base layout and sorting fuction>>>>>>
 
             case R.id.baseQuickFilterPopup:
                 if (checkTimeValueIs == null && checkValueIs == null) {
@@ -535,73 +534,81 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             case R.id.bestQfDoneLayout:
 
                 //Time >>>
+                if (Reusable_Functions.chkStatus(context)) {
 
-                if (CheckWTD.isChecked()) {
-                    checkTimeValueIs = "CheckWTD";
-                    view = "WTD";
+
+                    if (CheckWTD.isChecked()) {
+                        checkTimeValueIs = "CheckWTD";
+                        view = "WTD";
              /*       BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);*/
 
-                } else if (CheckL4W.isChecked()) {
-                    checkTimeValueIs = "CheckL4W";
-                    view = "L4W";
+                    } else if (CheckL4W.isChecked()) {
+                        checkTimeValueIs = "CheckL4W";
+                        view = "L4W";
 
              /*       BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);*/
 
-                } else if (CheckSTD.isChecked()) {
-                    checkTimeValueIs = "CheckSTD";
-                    view = "STD";
+                    } else if (CheckSTD.isChecked()) {
+                        checkTimeValueIs = "CheckSTD";
+                        view = "STD";
              /*       BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);*/
 
-                }
+                    }
 
 
-                //season group
+                    //season group
 
-                if (BestCheckCurrent.isChecked()) {
-                    checkValueIs = "BestCheckCurrent";
-                    popupCurrent();
+                    if (BestCheckCurrent.isChecked()) {
+                        checkValueIs = "BestCheckCurrent";
+                        popupCurrent();
                     /*popupCurrent();
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);
                     BestCheckUpcoming.setChecked(false);*/
-                    quickFilterPopup.setVisibility(View.GONE);
+                        quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (BestCheckPrevious.isChecked()) {
-                    checkValueIs = "BestCheckPrevious";
-                    popupPrevious();
+                    } else if (BestCheckPrevious.isChecked()) {
+                        checkValueIs = "BestCheckPrevious";
+                        popupPrevious();
                    /* BestCheckOld.setChecked(false);
                     BestCheckUpcoming.setChecked(false);
                     BestCheckCurrent.setChecked(false);*/
-                    quickFilterPopup.setVisibility(View.GONE);
+                        quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (BestCheckOld.isChecked()) {
-                    checkValueIs = "BestCheckOld";
-                    popupOld();
+                    } else if (BestCheckOld.isChecked()) {
+                        checkValueIs = "BestCheckOld";
+                        popupOld();
                 /*    BestCheckUpcoming.setChecked(false);
                     BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);*/
-                    quickFilterPopup.setVisibility(View.GONE);
+                        quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (BestCheckUpcoming.isChecked()) {
-                    checkValueIs = "BestCheckUpcoming";
-                    popupUpcoming();
+                    } else if (BestCheckUpcoming.isChecked()) {
+                        checkValueIs = "BestCheckUpcoming";
+                        popupUpcoming();
              /*       BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);*/
-                    quickFilterPopup.setVisibility(View.GONE);
+                        quickFilterPopup.setVisibility(View.GONE);
 
+                    } else {
+
+                        CheckTimeDone();
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    }
                 } else {
-
-                    CheckTimeDone();
-                    quickFilterPopup.setVisibility(View.GONE);
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
                 }
+
+
                 break;
             case R.id.bestCheckCurrent:
                 BestCheckCurrent.setChecked(true);
@@ -647,6 +654,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             //Quick filter<<<<<<<
 
         }
+
     }
 
     private void BestAndWorstToggle() {
@@ -705,12 +713,12 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 Log.e(TAG, "FWD pop up if");
 
 
-            } else if(!BstInventory_Fwd_chk.isChecked()) {
+            } else if (!BstInventory_Fwd_chk.isChecked()) {
                 BstInventory_salesU_chk.setChecked(false);
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(true);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = 10;
+                orderbycol = "10";
                 BestInventList.clear();
                 Log.e(TAG, "FWD pop up else");
                 Reusable_Functions.sDialog(this, "Loading.......");
@@ -725,8 +733,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             }
 
 
-        }
-        else {
+        } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
     }
@@ -735,31 +742,30 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         if (Reusable_Functions.chkStatus(context)) {
 
             if (BstInventory_coverNsell_chk.isChecked()) {
-            BstInventory_coverNsell_chk.setChecked(false);
-            BaseLayoutInventory.setVisibility(View.GONE);
-            Log.e(TAG, "coverNsell pop up if");
+                BstInventory_coverNsell_chk.setChecked(false);
+                BaseLayoutInventory.setVisibility(View.GONE);
+                Log.e(TAG, "coverNsell pop up if");
 
 
-        } else if(!BstInventory_coverNsell_chk.isChecked()) {
-            BstInventory_salesU_chk.setChecked(false);
-            BstInventory_salesThru_chk.setChecked(false);
-            BstInventory_Fwd_chk.setChecked(false);
-            BstInventory_coverNsell_chk.setChecked(true);
-            orderbycol = 10;
-            BestInventList.clear();
-            Log.e(TAG, "coverNsell pop up else");
-            Reusable_Functions.sDialog(this, "Loading.......");
-            popPromo = 10;
-            limit = 10;
-            offsetvalue = 0;
-            top = 10;
-            requestRunningPromoApi();
-            BaseLayoutInventory.setVisibility(View.GONE);
+            } else if (!BstInventory_coverNsell_chk.isChecked()) {
+                BstInventory_salesU_chk.setChecked(false);
+                BstInventory_salesThru_chk.setChecked(false);
+                BstInventory_Fwd_chk.setChecked(false);
+                BstInventory_coverNsell_chk.setChecked(true);
+                orderbycol = "10,9";
+                BestInventList.clear();
+                Log.e(TAG, "coverNsell pop up else");
+                Reusable_Functions.sDialog(this, "Loading.......");
+                popPromo = 10;
+                limit = 10;
+                offsetvalue = 0;
+                top = 10;
+                requestRunningPromoApi();
+                BaseLayoutInventory.setVisibility(View.GONE);
 
-        }
+            }
 
-    }
-        else {
+        } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
     }
@@ -778,7 +784,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(true);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = 9;
+                orderbycol = "9";
                 BestInventList.clear();
                 Log.e(TAG, "salesThru pop up else");
                 Reusable_Functions.sDialog(this, "Loading.......");
@@ -810,7 +816,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = 6;
+                orderbycol = "6 ";
                 BestInventList.clear();
                 Log.e(TAG, "salesUpopUp pop up else");
                 Reusable_Functions.sDialog(this, "Loading.......");
@@ -822,8 +828,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BaseLayoutInventory.setVisibility(View.GONE);
 
             }
-        }
-        else {
+        } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
         }
@@ -940,6 +945,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Core";
+                        lazyScroll = "OFF";
                         BestInventList.clear();
                         BestInventListview.setVisibility(View.GONE);
                         requestRunningPromoApi();
@@ -958,6 +964,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Fashion";
+                        lazyScroll = "OFF";
                         BestInventList.clear();
                         BestInventListview.setVisibility(View.GONE);
                         Reusable_Functions.sDialog(this, "Loading.......");
@@ -972,10 +979,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 break;
 
 
-
-
-
-
         }
 
     }
@@ -984,8 +987,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        switch (buttonView.getId())
-        {
+        switch (buttonView.getId()) {
             case R.id.bestNworstswitch:
                 BestAndWorstToggle();
                 break;

@@ -5,12 +5,13 @@
     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
     tools:context=".StockAgeing.StockAgeingActivity">
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/bg_screen_color"
         android:orientation="vertical">
     <LinearLayout
         android:orientation="vertical"
@@ -64,8 +65,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/stockAgeing_imageBtnBack"
                     android:text="Stock Aging Exceptions"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
+                    android:textColor="@color/divider_salescard1"
+                    android:textSize="@dimen/smdm_header_title_large" />
 
 
 
@@ -103,8 +104,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Store : "
-                android:textColor="#920609"
-                android:textSize="13sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/smdm_store_title_large"
+                />
 
             <TextView
                 android:id="@+id/txtStoreCode"
@@ -113,8 +115,9 @@
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/tstoreCode"
                 android:hint=""
-                android:textColor="#000000"
-                android:textSize="13sp" />
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/smdm_store_title_large"
+                />
 
             <TextView
                 android:id="@+id/txtStoreName"
@@ -123,13 +126,14 @@
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@id/txtStoreCode"
                 android:hint=""
-                android:textColor="#000000"
-                android:textSize="13sp" />
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/smdm_store_title_large" />
 
             <RelativeLayout
                 android:id="@+id/sa_quickFilter"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
+                android:visibility="invisible"
                 android:gravity="end"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
@@ -160,7 +164,7 @@
         android:orientation="horizontal"
         segmentedgroup:sc_border_width="1dp"
         segmentedgroup:sc_corner_radius="14dp"
-        segmentedgroup:sc_tint_color="#B73020">
+        segmentedgroup:sc_tint_color="@color/colorPrimary">
 
         <RadioButton
             android:id="@+id/stock_fashion"
@@ -168,7 +172,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#B73020"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Fashion" />
 
         <RadioButton
@@ -177,6 +181,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Core" />
 
 
@@ -199,7 +204,7 @@
         </ListView>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/smdm_divider"
             android:background="@color/divider_salescard"
             android:layout_marginTop="9dp"
             >

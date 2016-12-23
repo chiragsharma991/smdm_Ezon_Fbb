@@ -117,8 +117,8 @@ public class InventoryFilterActivity extends Activity {
                     finish();
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing")) {
-                    Intent intent = new Intent(InventoryFilterActivity.this, StockAgeingActivity.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(InventoryFilterActivity.this, StockAgeingActivity.class);
+                    //startActivity(intent);
                     finish();
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
@@ -127,8 +127,8 @@ public class InventoryFilterActivity extends Activity {
                     finish();
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("floorAvailability")) {
-                    Intent intent = new Intent(InventoryFilterActivity.this, FloorAvailabilityActivity.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(InventoryFilterActivity.this, FloorAvailabilityActivity.class);
+                   // startActivity(intent);
                     finish();
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("worstPerformers")) {
@@ -278,8 +278,8 @@ public class InventoryFilterActivity extends Activity {
             finish();
         }
         else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing")) {
-            Intent intent = new Intent(InventoryFilterActivity.this, StockAgeingActivity.class);
-            startActivity(intent);
+           // Intent intent = new Intent(InventoryFilterActivity.this, StockAgeingActivity.class);
+           // startActivity(intent);
             finish();
         }
         else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
@@ -288,8 +288,8 @@ public class InventoryFilterActivity extends Activity {
             finish();
         }
         else if (getIntent().getStringExtra("checkfrom").equals("floorAvailability")) {
-            Intent intent = new Intent(InventoryFilterActivity.this, FloorAvailabilityActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(InventoryFilterActivity.this, FloorAvailabilityActivity.class);
+           // startActivity(intent);
             finish();
         }
         else if (getIntent().getStringExtra("checkfrom").equals("worstPerformers")) {
