@@ -27,14 +27,14 @@ public class FreshnessIndexAdapter extends BaseAdapter {
     String fromWhere;
     int level;
     int offsetvalue = 0, count = 0, limit = 100;
-    ArrayList<FreshnessIndexActivity.FreshnessIndexDetails> freshnessIndexDetailsArrayList;
+    ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList;
 
     ListView listViewFIndex;
     Gson gson;
     CombinedData pvaData;
 
 
-    public FreshnessIndexAdapter(ArrayList<FreshnessIndexActivity.FreshnessIndexDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, ListView listViewFIndex) {
+    public FreshnessIndexAdapter(ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, ListView listViewFIndex) {
         this.context = context;
         this.freshnessIndexDetailsArrayList = freshnessIndexDetailsArrayList;
         this.fromWhere = fromWhere;
@@ -94,7 +94,7 @@ public class FreshnessIndexAdapter extends BaseAdapter {
             viewHolder = (FreshnessIndexAdapter.ViewHolderItem) convertView.getTag();
         }
 
-        FreshnessIndexActivity.FreshnessIndexDetails freshnessIndexDetails = (FreshnessIndexActivity.FreshnessIndexDetails) freshnessIndexDetailsArrayList.get(position);
+        FreshnessIndexDetails freshnessIndexDetails = (FreshnessIndexDetails) freshnessIndexDetailsArrayList.get(position);
 
 //        viewHolder.txtfindexClass.setTag(position);
 //        viewHolder.txtfindexSOH.setTag(position);
