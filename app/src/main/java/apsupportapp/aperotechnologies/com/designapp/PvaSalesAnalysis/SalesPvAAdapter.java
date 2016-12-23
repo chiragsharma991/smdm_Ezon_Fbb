@@ -51,6 +51,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
@@ -72,7 +73,7 @@ public class SalesPvAAdapter extends BaseAdapter {
     CombinedData pvaData;
 
 
-    public SalesPvAAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList, Context context, String fromWhere, ListView listViewSalesPvA) {
+    public SalesPvAAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList,  Context context, String fromWhere, ListView listViewSalesPvA) {
         this.context = context;
         this.salesAnalysisListDisplayArrayList = salesAnalysisListDisplayArrayList;
         this.fromWhere = fromWhere;
@@ -145,48 +146,48 @@ public class SalesPvAAdapter extends BaseAdapter {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanDept());
 
-            viewHolder.txtPlanSales.setText("\u20B9 " +formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-            viewHolder.txtNetSales.setText("\u20B9 " +formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
 
         } else if (fromWhere.equals("Category")) {
 
             viewHolder.txtPlanClass.setText(productNameBean.getPlanCategory());
-            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
 //
 //            viewHolder.txtValue.setText(productNameBean.getPlanCategory().toLowerCase());
 
         } else if (fromWhere.equals("Plan Class")) {
             viewHolder.txtPlanClass.setText(productNameBean.getPlanClass());
-            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+
         } else if (fromWhere.equals("Brand"))
         {
             viewHolder.txtPlanClass.setText(productNameBean.getBrandName());
-            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+
         } else if (fromWhere.equals("Brand Plan Class"))
         {
             viewHolder.txtPlanClass.setText(productNameBean.getBrandplanClass());
-            viewHolder.txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-            viewHolder.txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+
         }
+
+        viewHolder.txtPlanSales.setText("\u20B9 " +formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+        viewHolder.txtNetSales.setText("\u20B9 " +formatter.format(Math.round(productNameBean.getSaleNetVal())));
+
 
         // update listview
 
-        SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisListDisplayArrayList.get(0);
-        Log.e("listv", "" + listViewSalesPvA.getFirstVisiblePosition());
+//        SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisListDisplayArrayList.get(0);
+//        Log.e("listv", "" + listViewSalesPvA.getFirstVisiblePosition());
+//        requestSalesDetails();
 
 //        if (listViewSalesPvA.getFirstVisiblePosition() == 0) {
 //
 //            if (salesAnalysisClass.getPlanDept() != null) {
 //                if (salesAnalysisClass.getPlanDept().equals("All")) {
 //                    Log.e("-----", "All");
-//                    salesAnalysisClass.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
-//                    salesAnalysisClass.setPlanSaleNetVal((int) salesAnalysisViewPagerValue.getPlanSaleNetVal());
-//                    salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+////                    salesAnalysisClass.setPvaAchieved(SalesAnalysisActivity.salesAnalysis.getPvaAchieved());
+//
+//                    salesAnalysisClass.setPlanSaleNetVal(Math.round(SalesAnalysisActivity.salesAnalysis .getPlanSaleNetVal()));
+//                    Log.e("ghdhfgd",""+SalesAnalysisActivity.salesAnalysis .getPlanSaleNetVal());
+//                    salesAnalysisClass.setSaleNetVal(Math.round(SalesAnalysisActivity.salesAnalysis.getSaleNetVal()));
 //                    salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
 //                    salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
 //                    listViewSalesPvA.setAdapter(salesPvAAdapter);
@@ -195,13 +196,13 @@ public class SalesPvAAdapter extends BaseAdapter {
 //                }
 //
 //            }
-//
+
 //            if (salesAnalysisClass.getPlanCategory() != null) {
 //                if (salesAnalysisClass.getPlanCategory().equals("All")) {
 //                    Log.e("-----", "All");
 //                    salesAnalysisClass.setPvaAchieved(productNameBean.getPvaAchieved());
-//                    salesAnalysisClass.setPlanSaleNetVal((int) productNameBean.getPlanSaleNetVal());
-//                    salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+//                    salesAnalysisClass.setPlanSaleNetVal(Math.round( productNameBean.getPlanSaleNetVal()));
+//                    salesAnalysisClass.setSaleNetVal(Math.round( productNameBean.getSaleNetVal()));
 //                    salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
 //                    salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
 //                    listViewSalesPvA.setAdapter(salesPvAAdapter);
@@ -214,8 +215,8 @@ public class SalesPvAAdapter extends BaseAdapter {
 //                    if (salesAnalysisClass.getPlanClass().equals("All")) {
 //                        Log.e("-----", "All");
 //                        salesAnalysisClass.setPvaAchieved(productNameBean.getPvaAchieved());
-//                        salesAnalysisClass.setPlanSaleNetVal((int) productNameBean.getPlanSaleNetVal());
-//                        salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+//                        salesAnalysisClass.setPlanSaleNetVal(Math.round( productNameBean.getPlanSaleNetVal()));
+//                        salesAnalysisClass.setSaleNetVal(Math.round( productNameBean.getSaleNetVal()));
 //                        salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
 //                        salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
 //                        listViewSalesPvA.setAdapter(salesPvAAdapter);
@@ -229,8 +230,8 @@ public class SalesPvAAdapter extends BaseAdapter {
 //                    if (salesAnalysisClass.getBrandName().equals("All")) {
 //                        Log.e("-----", "All");
 //                        salesAnalysisClass.setPvaAchieved(productNameBean.getPvaAchieved());
-//                        salesAnalysisClass.setPlanSaleNetVal((int) productNameBean.getPlanSaleNetVal());
-//                        salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+//                        salesAnalysisClass.setPlanSaleNetVal(Math.round( productNameBean.getPlanSaleNetVal()));
+//                        salesAnalysisClass.setSaleNetVal(Math.round( productNameBean.getSaleNetVal()));
 //                        salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
 //                        salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
 //                        listViewSalesPvA.setAdapter(salesPvAAdapter);
@@ -244,8 +245,8 @@ public class SalesPvAAdapter extends BaseAdapter {
 //                    if (salesAnalysisClass.getBrandplanClass().equals("All")) {
 //                        Log.e("-----", "All");
 //                        salesAnalysisClass.setPvaAchieved(productNameBean.getPvaAchieved());
-//                        salesAnalysisClass.setPlanSaleNetVal((int) productNameBean.getPlanSaleNetVal());
-//                        salesAnalysisClass.setSaleNetVal((int) productNameBean.getSaleNetVal());
+//                        salesAnalysisClass.setPlanSaleNetVal(Math.round( productNameBean.getPlanSaleNetVal()));
+//                        salesAnalysisClass.setSaleNetVal(Math.round( productNameBean.getSaleNetVal()));
 //                        salesAnalysisListDisplayArrayList.set(0, salesAnalysisClass);
 //                        salesPvAAdapter = new SalesPvAAdapter(salesAnalysisListDisplayArrayList, context, fromWhere, listViewSalesPvA);
 //                        listViewSalesPvA.setAdapter(salesPvAAdapter);
@@ -256,7 +257,7 @@ public class SalesPvAAdapter extends BaseAdapter {
 //                }
 //
 //            }
-//        }
+   //     }
 
 
         double singlePercVal = 0.5;//50/100;// width divide by 100 perc
@@ -292,6 +293,9 @@ public class SalesPvAAdapter extends BaseAdapter {
             viewHolder.txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
         }
         return convertView;
+    }
+
+    private void requestSalesDetails() {
     }
 
 

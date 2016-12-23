@@ -213,8 +213,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp">
 
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/barline_chart"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/linechart"
                     android:layout_width="match_parent"
                     android:layout_height="180dp" />
             </RelativeLayout>
