@@ -43,7 +43,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
-public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener{
+public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView storecode, storedesc, promoval1, promoval2;
     RelativeLayout imageback, imagefilter;
@@ -60,6 +60,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
     ListView PromoListView;
     ArrayList<RunningPromoListDisplay> promoList;
     private int focusposition = 0;
+    private int itemCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,152 +79,164 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        requestRunningPromoApi();
         Reusable_Functions.sDialog(this, "Loading.......");
+        requestRunningPromoApi();
+
     }
 
     private void requestRunningPromoApi() {
 
-        //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
-        String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+        if (Reusable_Functions.chkStatus(context)) {
 
-        Log.e(TAG, "Url" + "" + url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Running promo : " + " " + response);
-                        Log.i(TAG, "Sales View Pager response" + "" + response.length());
+            //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
+            String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
 
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+            Log.e(TAG, "Url" + "" + url);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.i(TAG, "Running promo : " + " " + response);
+                            Log.i(TAG, "Sales View Pager response" + "" + response.length());
+
+
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(RunningPromoActivity.this, "no data found", Toast.LENGTH_SHORT).show();
+                                } else if (response.length() == limit) {
+                                    Log.e(TAG, "promo eql limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        promoList.add(runningPromoListDisplay);
+
+                                    }
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+                                    //
+
+                                    requestRunningPromoApi();
+
+                                } else if (response.length() < limit) {
+                                    Log.e(TAG, "promo /= limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        promoList.add(runningPromoListDisplay);
+
+                                    }
+                                    Log.e(TAG, "promolistSize" + promoList.size());
+                                    itemCount = promoList.size() - 1;
+                                    promoval1.setText("\u20B9\t" + (int) promoList.get(0).getDurSaleNetVal());
+                                    promoval2.setText("" + promoList.get(0).getDurSaleTotQty());
+                                    storecode.setText(promoList.get(0).getStoreCode());
+                                    storedesc.setText(promoList.get(0).getStoreDesc());
+                                }
+
+
+                                RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
+                                PromoListView.setAdapter(runningPromoAdapter);
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(RunningPromoActivity.this, "no data found", Toast.LENGTH_SHORT).show();
-                            } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
-                                for (int i = 0; i < response.length(); i++) {
 
-                                    runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    promoList.add(runningPromoListDisplay);
+                                // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
 
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-                                //
 
-                                requestRunningPromoApi();
+                            } catch (Exception e) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
 
-                            } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    promoList.add(runningPromoListDisplay);
-
-                                }
-                                Log.e(TAG, "promolistSize" + promoList.size());
-                                promoval1.setText("\u20B9\t"+(int)promoList.get(0).getDurSaleNetVal());
-                                promoval2.setText(""+promoList.get(0).getDurSaleTotQty());
-                                storecode.setText(promoList.get(0).getStoreCode());
-                                storedesc.setText(promoList.get(0).getStoreDesc());
+                                e.printStackTrace();
+                                Log.e(TAG, "catch...Error" + e.toString());
                             }
-
-
-                            RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
-                            PromoListView.setAdapter(runningPromoAdapter);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-
-                           // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
-
-
-
-                        } catch (Exception e) {
+                            Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no data found in catch"+e.toString(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                            Log.e(TAG, "catch...Error" +e.toString());
+                            error.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
+                }
+            };
+            int socketTimeout = 60000;//5 seconds
+
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+
+
+            //-----------------------------ON CLICK LISTENER-----------------------------//
+
+
+            PromoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.e(TAG, "listview position" + position + "and list is" + itemCount);
+                    if (itemCount >= position) {
+                        Intent i = new Intent(context, RunningPromoDetails.class);
+                        i.putExtra("VM", promoList.get(position).getPromoDesc());
+                        context.startActivity(i);
                     }
+
+                }
+            });
+
+
+            PromoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+
+                    if (promoList.size() != 0) {
+
+                        if (view.getFirstVisiblePosition() <= promoList.size() - 1) {
+
+                            focusposition = view.getFirstVisiblePosition();
+
+                            PromoListView.setSelection(view.getFirstVisiblePosition());
+                            Log.e(TAG, "firstVisibleItem" + " " + focusposition);
+                            //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
+                            promoval1.setText("\u20B9\t" + Math.round(promoList.get(focusposition).getDurSaleNetVal()));
+                            promoval2.setText("" + promoList.get(focusposition).getDurSaleTotQty());
+                            storecode.setText(promoList.get(focusposition).getStoreCode());
+                            storedesc.setText(promoList.get(focusposition).getStoreDesc());
+
+
+                        } else {
+                            focusposition = promoList.size() - 1;
+                            PromoListView.setSelection(promoList.size() - 1);
+
+                        }
+                    }
+
+
                 }
 
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-
-
-        //-----------------------------ON CLICK LISTENER-----------------------------//
-
-
-        PromoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e(TAG,"listview position"+position);
-                Intent i =  new Intent(context,RunningPromoDetails.class);
-                i.putExtra("VM",promoList.get(position).getPromoDesc());
-                context.startActivity(i);
-
-            }
-        });
-
-
-
-
-        PromoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-
-                if (promoList.size() != 0) {
-
-                    if (view.getFirstVisiblePosition() <= promoList.size() - 1) {
-
-                        focusposition = view.getFirstVisiblePosition();
-
-                        PromoListView.setSelection(view.getFirstVisiblePosition());
-                        Log.e(TAG, "firstVisibleItem" + " " + focusposition);
-                        //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                        promoval1.setText("\u20B9\t"+Math.round(promoList.get(focusposition).getDurSaleNetVal()));
-                        promoval2.setText(""+promoList.get(focusposition).getDurSaleTotQty());
-                        storecode.setText(promoList.get(focusposition).getStoreCode());
-                        storedesc.setText(promoList.get(focusposition).getStoreDesc());
-
-
-                    }else
-                    {
-                        focusposition = promoList.size() - 1;
-                        PromoListView.setSelection(promoList.size() - 1);
-
-                    }
                 }
+            });
+
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            Reusable_Functions.hDialog();
 
 
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-            }
-        });
-
+        }
     }
 
 
@@ -246,16 +259,15 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
 
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.rp_imageBtnBack:
                 onBackPressed();
                 break;
             case R.id.rp_imgfilter:
                 Intent intent = new Intent(context, FilterActivity.class);
-                intent.putExtra("from","runningPromo");
+                intent.putExtra("from", "runningPromo");
                 startActivity(intent);
-                finish();
+                // finish();
                 break;
 
         }

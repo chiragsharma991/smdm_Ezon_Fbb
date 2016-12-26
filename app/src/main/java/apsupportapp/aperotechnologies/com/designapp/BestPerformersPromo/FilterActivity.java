@@ -136,33 +136,33 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
 
         if(getIntent().getStringExtra("from").equals("bestPromo"))
         {
-            Intent intent=new Intent(this, BestPerformerActivity.class);
-            startActivity(intent);
+            //Intent intent=new Intent(this, BestPerformerActivity.class);
+            //startActivity(intent);
             finish();
         }
         else if(getIntent().getStringExtra("from").equals("worstPromo"))
         {
-            Intent intent=new Intent(this, WorstPerformerActivity.class);
-            startActivity(intent);
+           // Intent intent=new Intent(this, WorstPerformerActivity.class);
+            //startActivity(intent);
             finish();
 
         }
         else if(getIntent().getStringExtra("from").equals("upComingPromo"))
         {
-            Intent intent=new Intent(this, UpcomingPromo.class);
-            startActivity(intent);
+          //  Intent intent=new Intent(this, UpcomingPromo.class);
+           // startActivity(intent);
             finish();
         }
         else if(getIntent().getStringExtra("from").equals("runningPromo"))
         {
-            Intent intent=new Intent(this, RunningPromoActivity.class);
-            startActivity(intent);
+            //Intent intent=new Intent(this, RunningPromoActivity.class);
+            //startActivity(intent);
             finish();
         }
         else if(getIntent().getStringExtra("from").equals("expiringPromo"))
         {
-            Intent intent=new Intent(this, ExpiringPromoActivity.class);
-            startActivity(intent);
+           // Intent intent=new Intent(this, ExpiringPromoActivity.class);
+           // startActivity(intent);
             finish();
         }
    }

@@ -24,11 +24,24 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
-                android:src="@mipmap/placeholder"
                 android:scaleType="fitXY"
                 android:id="@+id/bst_image_child"
+                android:src="@mipmap/placeholder"
 
                 />
+
+         <!--   <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/imgLoader_BstWorstPromo"
+                android:layout_centerInParent="true"
+                android:background="#0000"
+                android:keepScreenOn="true"
+                android:theme="@style/ProgressBar"
+                >
+
+            </ProgressBar>-->
 
         </RelativeLayout>
         <RelativeLayout
@@ -51,12 +64,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/bst_head_child"
                     android:text="Buy One Get One "
-                    android:textColor="#000000"
-                    android:textSize="13sp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_inflator_title_large"
                    />
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="@dimen/smdm_inflater_divider"
                     android:id="@+id/bst_lineOne_child"
                     android:background="@color/divider_salescard"
                     android:layout_alignStart="@+id/bst_head_child"
@@ -79,16 +92,17 @@
                         android:text="Promo Sales"
                         android:layout_gravity="center"
                         android:singleLine="true"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        />
 
                     <TextView
                         android:layout_weight="0.1"
                         android:text=":"
                         android:layout_gravity="center"
                         android:layout_width="0dp"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -98,7 +112,7 @@
                         android:layout_gravity="center"
                         android:singleLine="true"
                         android:layout_width="0dp"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -117,7 +131,7 @@
                         android:layout_width="0dp"
                         android:layout_gravity="center"
                         android:singleLine="true"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -125,14 +139,14 @@
                         android:text=":"
                         android:layout_width="0dp"
                         android:layout_gravity="center"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:layout_weight="0.6"
                         android:id="@+id/bst_PromoValuesU_child"
                         android:text="Promo Sales"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
                         android:singleLine="true"
                         android:layout_gravity="center"
                         android:layout_width="0dp"

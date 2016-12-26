@@ -27,8 +27,8 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="name"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 android:id="@+id/txt_up_PromoName"
 
                 />
@@ -63,8 +63,8 @@
                 android:singleLine="true"
                 android:gravity="center"
                 android:text="02/09/93"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 android:id="@+id/txt_up_startDate"
 
                 />
@@ -96,8 +96,8 @@
                 android:text="02/09/93"
                 android:id="@+id/txt_up_EndDate"
                 android:gravity="center"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 />
 
 

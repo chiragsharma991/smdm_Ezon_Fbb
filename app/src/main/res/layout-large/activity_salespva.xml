@@ -216,6 +216,17 @@
                     android:id="@+id/linechart"
                     android:layout_width="match_parent"
                     android:layout_height="250dp" />
+
+                <TextView
+                    android:layout_below="@+id/linechart"
+                    android:layout_width="match_parent"
+                    android:gravity="right"
+                    android:textSize="12sp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/txt_color"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/xaxis_label"
+                    android:layout_height="20dp" />
             </RelativeLayout>
 
             <LinearLayout

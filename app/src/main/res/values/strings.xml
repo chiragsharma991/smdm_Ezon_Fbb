@@ -48,6 +48,7 @@
     <string name="Rs">\u20B9</string>
     <string name="pvaSales">PvA Sales%</string>
     <string name="fullSize">Option%</string>
+    <string name="xaxis_label">X axis is in weeks</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

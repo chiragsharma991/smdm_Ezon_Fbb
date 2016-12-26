@@ -79,99 +79,103 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        requestRunningPromoApi();
         Reusable_Functions.sDialog(this, "Loading.......");
+        requestRunningPromoApi();
     }
 
     private void requestRunningPromoApi() {
 
-        //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
-        String url = ConstsCore.web_url + "/v1/display/expiringpromoheader/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+        if (Reusable_Functions.chkStatus(context)) {
 
-        Log.e(TAG, "Url" + "" + url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Expire promo : " + " " + response);
-                        Log.i(TAG, " response" + "" + response.length());
+            //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
+            String url = ConstsCore.web_url + "/v1/display/expiringpromoheader/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
 
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+            Log.e(TAG, "Url" + "" + url);
+
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.i(TAG, "Expire promo : " + " " + response);
+                            Log.i(TAG, " response" + "" + response.length());
+
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                } else if (response.length() == limit) {
+                                    Log.e(TAG, "promo eql limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        ExpireList.add(ExpiringPromoListDisplay);
+
+                                    }
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+
+                                    requestRunningPromoApi();
+
+                                } else if (response.length() < limit) {
+                                    Log.e(TAG, "promo /= limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        ExpireList.add(ExpiringPromoListDisplay);
+
+
+                                    }
+                                    Log.e(TAG, "promolistSize" + ExpireList.size());
+                                    promoval1.setText("\u20B9\t" + (int) ExpireList.get(0).getDurSaleNetVal());
+                                    promoval2.setText("" + ExpireList.get(0).getDurSaleTotQty());
+                                    storecode.setText(ExpireList.get(0).getStoreCode());
+                                    storedesc.setText(ExpireList.get(0).getStoreDesc());
+                                }
+
+
+                                ExpiringPromoAdapter runningPromoAdapter = new ExpiringPromoAdapter(ExpireList, context);
+                                ExpireListView.setAdapter(runningPromoAdapter);
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                            } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
-                                for (int i = 0; i < response.length(); i++) {
 
-                                    ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    ExpireList.add(ExpiringPromoListDisplay);
-
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-
-                                requestRunningPromoApi();
-
-                            } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    ExpireList.add(ExpiringPromoListDisplay);
+                                // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
 
 
-                                }
-                                Log.e(TAG, "promolistSize" + ExpireList.size());
-                                promoval1.setText("\u20B9\t"+(int)ExpireList.get(0).getDurSaleNetVal());
-                                promoval2.setText(""+ExpireList.get(0).getDurSaleTotQty());
-                                storecode.setText(ExpireList.get(0).getStoreCode());
-                                storedesc.setText(ExpireList.get(0).getStoreDesc());
+                            } catch (Exception e) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
+                                e.printStackTrace();
+                                Log.e(TAG, "catch...Error" + e.toString());
                             }
-
-
-                            ExpiringPromoAdapter runningPromoAdapter = new ExpiringPromoAdapter(ExpireList,context);
-                            ExpireListView.setAdapter(runningPromoAdapter);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-
-                            // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
-
-
-
-                        } catch (Exception e) {
+                            Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no data found in catch"+e.toString(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                            Log.e(TAG, "catch...Error" +e.toString());
+                            error.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
                 }
+            };
+            int socketTimeout = 60000;//5 seconds
 
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
 
 
-        //-----------------------------ON CLICK LISTENER-----------------------------//
+            //-----------------------------ON CLICK LISTENER-----------------------------//
 
 
        /* ExpireListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -187,44 +191,47 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
 */
 
 
-
-        ExpireListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-
-                if (ExpireList.size() != 0) {
-
-                    if (view.getFirstVisiblePosition() <= ExpireList.size() - 1) {
-
-                        focusposition = view.getFirstVisiblePosition();
-
-                        ExpireListView.setSelection(view.getFirstVisiblePosition());
-                        Log.e(TAG, "firstVisibleItem" + " " + focusposition);
-                        //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                        promoval1.setText("\u20B9\t"+(int)ExpireList.get(focusposition).getDurSaleNetVal());
-                        promoval2.setText("\u20B9\t"+ExpireList.get(focusposition).getDurSaleTotQty());
-                        storecode.setText(ExpireList.get(focusposition).getStoreCode());
-                        storedesc.setText(ExpireList.get(focusposition).getStoreDesc());
+            ExpireListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
 
 
-                    }else
-                    {
-                        focusposition = ExpireList.size() - 1;
-                        ExpireListView.setSelection(ExpireList.size() - 1);
+                    if (ExpireList.size() != 0) {
 
+                        if (view.getFirstVisiblePosition() <= ExpireList.size() - 1) {
+
+                            focusposition = view.getFirstVisiblePosition();
+
+                            ExpireListView.setSelection(view.getFirstVisiblePosition());
+                            Log.e(TAG, "firstVisibleItem" + " " + focusposition);
+                            //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
+                            promoval1.setText("\u20B9\t" + (int) ExpireList.get(focusposition).getDurSaleNetVal());
+                            promoval2.setText("" + ExpireList.get(focusposition).getDurSaleTotQty());
+                            storecode.setText(ExpireList.get(focusposition).getStoreCode());
+                            storedesc.setText(ExpireList.get(focusposition).getStoreDesc());
+
+
+                        } else {
+                            focusposition = ExpireList.size() - 1;
+                            ExpireListView.setSelection(ExpireList.size() - 1);
+
+                        }
                     }
+
+
                 }
 
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-            }
+                }
+            });
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        }
+        else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
-            }
-        });
-
+        }
     }
 
 
@@ -255,7 +262,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                 Intent intent = new Intent(ExpiringPromoActivity.this, FilterActivity.class);
                 intent.putExtra("from","expiringPromo");
                 startActivity(intent);
-                finish();
+                //finish();
 
         }
 

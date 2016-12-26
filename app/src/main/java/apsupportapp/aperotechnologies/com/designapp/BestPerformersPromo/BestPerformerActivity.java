@@ -50,10 +50,10 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class BestPerformerActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener{
+public class BestPerformerActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    TextView Bst_storecode, Bst_txtStoreName,PopPromo,PopPromoU,PopSort,Bst_txtStoreCode;
-    RelativeLayout Bst_imageBtnBack, Bst_sort,Bst_imgfilter,BestPromo_footer,SortPopup,BaseLayout;
+    TextView Bst_storecode, Bst_txtStoreName, PopPromo, PopPromoU, PopSort, Bst_txtStoreCode;
+    RelativeLayout Bst_imageBtnBack, Bst_sort, Bst_imgfilter, BestPromo_footer, SortPopup, BaseLayout;
     RunningPromoListDisplay BestPromoListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
@@ -62,8 +62,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    private int popPromo=0;
-    int orderbycol=1;
+    private int popPromo = 0;
+    int orderbycol = 1;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
@@ -75,11 +75,11 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     private View footer;
     int index = 0;
     int iterations = 0;
-    private RadioButton CheckBstSale,CheckBstSaleU;
-    private String lazyScroll="OFF";
+    private RadioButton CheckBstSale, CheckBstSaleU;
+    private String lazyScroll = "OFF";
     private SegmentedGroup segmentedGroup;
-    private RadioButton bestRadio,worstRadio;
-    private String orderby="DESC";
+    private RadioButton bestRadio, worstRadio;
+    private String orderby = "DESC";
 
 
     @Override
@@ -103,162 +103,169 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
-        requestRunningPromoApi();
         Reusable_Functions.sDialog(this, "Loading.......");
-       // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
-        footer = getLayoutInflater().inflate(R.layout.bestpromo_footer,null);
+        requestRunningPromoApi();
+        // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
+        footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
         BestPerformanceListView.addFooterView(footer);
-       // footer.setVisibility(View.GONE);
-       // BestPerformanceListView.setAdapter(bestPromoAdapter);
+        // footer.setVisibility(View.GONE);
+        // BestPerformanceListView.setAdapter(bestPromoAdapter);
 
     }
 
     private void requestRunningPromoApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/bestworstpromodetails/" +userId + "?offset=" +offsetvalue + "&limit=" +limit+"&top=" +top+"&orderby=" +orderby+"&orderbycol=" +orderbycol;
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Best promo : " + " " + response);
-                        Log.i(TAG, "response" + "" + response.length());
-                        BestPerformanceListView.setVisibility(View.VISIBLE);
+        if (Reusable_Functions.chkStatus(context)) {
 
 
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+            String url = ConstsCore.web_url + "/v1/display/bestworstpromodetails/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" + orderby + "&orderbycol=" + orderbycol;
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.i(TAG, "Best promo : " + " " + response);
+                            Log.i(TAG, "response" + "" + response.length());
+                            BestPerformanceListView.setVisibility(View.VISIBLE);
+
+
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    footer.setVisibility(View.GONE);
+                                    if (BestpromoList.size() == 0) {
+                                        BestPerformanceListView.setVisibility(View.GONE);
+
+                                    }
+
+                                } else if (response.length() == limit) {
+
+
+                                    //BestPerformanceListView.removeFooterView(footer);
+                                    //bestPromoAdapter.notifyDataSetChanged();
+                                    Log.e(TAG, "promo eql limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        BestPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        BestpromoList.add(BestPromoListDisplay);
+
+                                    }
+                                    offsetvalue = offsetvalue + 10;
+                                    top = top + 10;
+                                    //  count++;
+
+                                    // requestRunningPromoApi();
+
+                                } else if (response.length() < limit) {
+                                    Log.e(TAG, "promo /= limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        BestPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        BestpromoList.add(BestPromoListDisplay);
+                                        offsetvalue = offsetvalue + response.length();
+                                        top = top + response.length();
+
+                                    }
+                                }
                                 footer.setVisibility(View.GONE);
-                                if(BestpromoList.size()==0)
-                                {
-                                    BestPerformanceListView.setVisibility(View.GONE);
+                                if (popPromo == 10) {
+                                    bestPromoAdapter = new BestPromoAdapter(BestpromoList, context);
+                                    BestPerformanceListView.setAdapter(bestPromoAdapter);
+                                    popPromo = 0;
 
+                                } else if (lazyScroll.equals("ON")) {
+                                    bestPromoAdapter.notifyDataSetChanged();
+                                    lazyScroll = "OFF";
+
+                                } else {
+                                    bestPromoAdapter = new BestPromoAdapter(BestpromoList, context);
+                                    BestPerformanceListView.setAdapter(bestPromoAdapter);
                                 }
-
-                            } else if (response.length() == limit) {
-
-
-                                //BestPerformanceListView.removeFooterView(footer);
-                                //bestPromoAdapter.notifyDataSetChanged();
-                                Log.e(TAG, "promo eql limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    BestPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    BestpromoList.add(BestPromoListDisplay);
-
-                                }
-                                offsetvalue =offsetvalue+10;
-                                top =top+10;
-                                //  count++;
-
-                                // requestRunningPromoApi();
-
+                                // BestPromo_footer.setVisibility(View.GONE);
+                                Reusable_Functions.hDialog();
+                                //  Bst_storecode.setText(BestpromoList.get(0).getStoreCode());
+                                // Bst_txtStoreName.setText(BestpromoList.get(0).getStoreDesc());
+                                Log.v(TAG, "set text on");
+                            } catch (Exception e) {
+                                Reusable_Functions.hDialog();
+                                footer.setVisibility(View.GONE);
+                                BestPerformanceListView.setVisibility(View.GONE);
+                                Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
+                                e.printStackTrace();
+                                Log.e(TAG, "catch...Error" + e.toString());
                             }
-
-                            else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    BestPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    BestpromoList.add(BestPromoListDisplay);
-                                    offsetvalue =offsetvalue+response.length();
-                                    top =top+response.length();
-
-                                }
-                            }
-                            footer.setVisibility(View.GONE);
-                            if(popPromo==10)
-                            {
-                                bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
-                                BestPerformanceListView.setAdapter(bestPromoAdapter);
-                                popPromo=0;
-
-                            }
-                            else if(lazyScroll.equals("ON")){
-                                bestPromoAdapter.notifyDataSetChanged();
-                            }else
-                            {
-                                bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
-                                BestPerformanceListView.setAdapter(bestPromoAdapter);
-                            }
-                            // BestPromo_footer.setVisibility(View.GONE);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-                            //  Bst_storecode.setText(BestpromoList.get(0).getStoreCode());
-                            // Bst_txtStoreName.setText(BestpromoList.get(0).getStoreDesc());
-                            Log.v(TAG,"set text on");
-                        } catch (Exception e) {
+                            Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-                            footer.setVisibility(View.GONE);
-                            BestPerformanceListView.setVisibility(View.GONE);
-                            e.printStackTrace();
-                            Log.e(TAG, "catch...Error" +e.toString());
+                            error.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
                 }
+            };
+            int socketTimeout = 60000;//5 seconds
 
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
 
 
 //---------------seton Click list listener------------------//
 
-        BestPerformanceListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            public int VisibleItemCount,TotalItemCount,FirstVisibleItem;
+            BestPerformanceListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
 
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                if ( FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState==SCROLL_STATE_IDLE) {
-                    footer.setVisibility(View.VISIBLE);
-                    lazyScroll="ON";
-                    requestRunningPromoApi();
+                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
+                        footer.setVisibility(View.VISIBLE);
+                        lazyScroll = "ON";
+                        requestRunningPromoApi();
+                    }
                 }
-            }
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                this.FirstVisibleItem=firstVisibleItem;
-                this.VisibleItemCount=visibleItemCount;
-                this.TotalItemCount=totalItemCount;
-            }
-        });
+                    this.FirstVisibleItem = firstVisibleItem;
+                    this.VisibleItemCount = visibleItemCount;
+                    this.TotalItemCount = totalItemCount;
+                }
+            });
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            Reusable_Functions.hDialog();
+
+        }
     }
+
     private void initalise() {
         Bst_storecode = (TextView) findViewById(R.id.txtStoreCode);
         PopPromo = (TextView) findViewById(R.id.popPromo);
         PopPromoU = (TextView) findViewById(R.id.popPromoU);
-        Bst_txtStoreCode = (TextView)findViewById(R.id.bst_txtStoreCode);
-        Bst_txtStoreName = (TextView)findViewById(R.id.bst_txtStoreName);
+        Bst_txtStoreCode = (TextView) findViewById(R.id.bst_txtStoreCode);
+        Bst_txtStoreName = (TextView) findViewById(R.id.bst_txtStoreName);
 
         PopSort = (TextView) findViewById(R.id.popSort);
-        segmentedGroup=(SegmentedGroup)findViewById(R.id.bestPromo_segmented);
-        bestRadio=(RadioButton)findViewById(R.id.bestPromo);
-        worstRadio=(RadioButton)findViewById(R.id.worstPromo);
-        Log.e(TAG,"---"+bestRadio);
+        segmentedGroup = (SegmentedGroup) findViewById(R.id.bestPromo_segmented);
+        bestRadio = (RadioButton) findViewById(R.id.bestPromo);
+        worstRadio = (RadioButton) findViewById(R.id.worstPromo);
+        Log.e(TAG, "---" + bestRadio);
         bestRadio.toggle();
 
         Bst_imageBtnBack = (RelativeLayout) findViewById(R.id.bst_imageBtnBack);
@@ -266,10 +273,10 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         BaseLayout = (RelativeLayout) findViewById(R.id.baseLayout);
         Bst_imgfilter = (RelativeLayout) findViewById(R.id.bst_imgfilter);
         BestPerformanceListView = (ListView) findViewById(R.id.bestPerformanceListView);
-        SortPopup=(RelativeLayout)findViewById(R.id.sortPopup);
+        SortPopup = (RelativeLayout) findViewById(R.id.sortPopup);
 
-        CheckBstSale=(RadioButton)findViewById(R.id.checkPromoSale);
-        CheckBstSaleU=(RadioButton)findViewById(R.id.checkPromoSaleU);
+        CheckBstSale = (RadioButton) findViewById(R.id.checkPromoSale);
+        CheckBstSaleU = (RadioButton) findViewById(R.id.checkPromoSaleU);
         Bst_imageBtnBack.setOnClickListener(this);
         Bst_sort.setOnClickListener(this);
         Bst_imgfilter.setOnClickListener(this);
@@ -282,11 +289,11 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         segmentedGroup.setOnCheckedChangeListener(this);
 
     }
+
     @Override
     public void onClick(View v) {
 
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.bst_imageBtnBack:
                 onBackPressed();
                 break;
@@ -297,7 +304,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                 SortPopup.setVisibility(View.GONE);
                 break;
             case R.id.popPromo:
-               // popupPromo();
+                // popupPromo();
                 //SortPopup.setVisibility(View.GONE);
                 break;
             case R.id.popPromoU:
@@ -305,73 +312,78 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                 //SortPopup.setVisibility(View.GONE);
                 break;
             case R.id.bst_imgfilter:
-                Intent intent=new Intent(this, FilterActivity.class);
-                intent.putExtra("from","bestPromo");
+                Intent intent = new Intent(this, FilterActivity.class);
+                intent.putExtra("from", "bestPromo");
                 startActivity(intent);
                 break;
             case R.id.checkPromoSale:
-                 if(CheckBstSale.isChecked())
-                 {
-                     popupPromo();
-                     CheckBstSaleU.setChecked(false);
-                     SortPopup.setVisibility(View.GONE);
 
-                 }
-                 else
-                 {
+                if (CheckBstSale.isChecked()) {
+                    popupPromo();
+                    CheckBstSaleU.setChecked(false);
+                    SortPopup.setVisibility(View.GONE);
 
-                     Toast.makeText(this,"Uncheck",Toast.LENGTH_SHORT).show();
+                } else {
 
-                 }
+                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+
+                }
 
                 break;
             case R.id.checkPromoSaleU:
-                if(CheckBstSaleU.isChecked())
-                {
+
+                if (CheckBstSaleU.isChecked()) {
                     popupPromoU();
                     CheckBstSale.setChecked(false);
                     SortPopup.setVisibility(View.GONE);
 
+                } else {
+                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
-                    Toast.makeText(this,"Uncheck",Toast.LENGTH_SHORT).show();
-                }
+
                 break;
 
         }
+
     }
 
-    private void popupPromo()
-    {
+    private void popupPromo() {
         BestpromoList.clear();
-        Log.e(TAG,"bestPromolist size"+BestpromoList.size());
-        Reusable_Functions.sDialog(this, "Loading.......");
-        popPromo=10;
+        Log.e(TAG, "bestPromolist size" + BestpromoList.size());
+        popPromo = 10;
         limit = 10;
         offsetvalue = 0;
         top = 10;
-        orderbycol=1;
-        requestRunningPromoApi();
+        orderbycol = 1;
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.sDialog(this, "Loading.......");
+            requestRunningPromoApi();
+        } else {
+            Reusable_Functions.hDialog();
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
-    private void popupPromoU()
-    {
+
+    private void popupPromoU() {
         BestpromoList.clear();
-        Log.e(TAG,"bestPromolist size"+BestpromoList.size());
-        Reusable_Functions.sDialog(this, "Loading.......");
-        popPromo=10;
+        Log.e(TAG, "bestPromolist size" + BestpromoList.size());
+        popPromo = 10;
         limit = 10;
         offsetvalue = 0;
         top = 10;
-        orderbycol=2;
-        requestRunningPromoApi();
-
-
+        orderbycol = 2;
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.sDialog(this, "Loading.......");
+            requestRunningPromoApi();
+        } else {
+            Reusable_Functions.hDialog();
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void sortFunction()
-    {
+    private void sortFunction() {
         SortPopup.setVisibility(View.VISIBLE);
 
     }
@@ -385,9 +397,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId)
-    {
-        Log.e(TAG, "onCheckedChanged:" );
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        Log.e(TAG, "onCheckedChanged:");
 
         switch (checkedId) {
             case R.id.bestPromo:
@@ -395,26 +406,44 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                     limit = 10;
                     offsetvalue = 0;
                     top = 10;
-                    orderby="DESC";
+                    orderby = "DESC";
+                    lazyScroll = "OFF";
                     BestpromoList.clear();
-                    bestPromoAdapter.notifyDataSetChanged();
+                    // bestPromoAdapter.notifyDataSetChanged();
                     BestPerformanceListView.setVisibility(View.GONE);
                     Reusable_Functions.sDialog(this, "Loading.......");
-                    requestRunningPromoApi();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        requestRunningPromoApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        BestPerformanceListView.setVisibility(View.GONE);
+                    }
                 }
+
                 break;
             case R.id.worstPromo:
-                if (worstRadio.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    orderby="ASC";
-                    BestpromoList.clear();
-                    bestPromoAdapter.notifyDataSetChanged();
-                    BestPerformanceListView.setVisibility(View.GONE);
-                    Reusable_Functions.sDialog(this, "Loading.......");
-                    requestRunningPromoApi();
-                }
+                    if (worstRadio.isChecked()) {
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        orderby = "ASC";
+                        lazyScroll = "OFF";
+                        BestpromoList.clear();
+                        //bestPromoAdapter.notifyDataSetChanged();
+                        BestPerformanceListView.setVisibility(View.GONE);
+                        Reusable_Functions.sDialog(this, "Loading.......");
+                        if (Reusable_Functions.chkStatus(context)) {
+                            requestRunningPromoApi();
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            BestPerformanceListView.setVisibility(View.GONE);
+                        }
+                    }
+
+
+
                 break;
 
 

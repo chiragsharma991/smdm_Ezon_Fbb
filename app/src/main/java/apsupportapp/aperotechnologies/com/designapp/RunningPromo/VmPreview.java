@@ -3,6 +3,7 @@ package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ public class VmPreview extends AppCompatActivity {
     RelativeLayout vm_imageBtnBack;
     private LinearLayout lldots;
     Bundle data;
+    String TAG="VmPreview";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,9 @@ public class VmPreview extends AppCompatActivity {
         vm_imageBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e(TAG, "onClick: ");
 
-                onBackPressed();
+                finish();
             }
         });
 
@@ -80,6 +83,7 @@ public class VmPreview extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Log.e(TAG, "onBack: ");
 
         this.finish();
     }

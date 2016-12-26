@@ -64,7 +64,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/stockAgeing_imageBtnBack"
-                    android:text="Stock Aging Exceptions"
+                    android:text="Stock Ageing Exceptions"
                     android:textColor="@color/divider_salescard1"
                     android:textSize="@dimen/smdm_header_title_large" />
 
@@ -133,7 +133,7 @@
                 android:id="@+id/sa_quickFilter"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
-                android:visibility="invisible"
+                android:visibility="visible"
                 android:gravity="end"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"

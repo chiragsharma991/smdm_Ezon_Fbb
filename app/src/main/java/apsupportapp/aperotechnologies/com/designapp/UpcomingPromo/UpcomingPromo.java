@@ -78,96 +78,101 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        requestRunningPromoApi();
         Reusable_Functions.sDialog(this, "Loading.......");
+        requestRunningPromoApi();
     }
 
     private void requestRunningPromoApi() {
 
-        //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
-        String url = ConstsCore.web_url + "/v1/display/futurepromodetails/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+        if (Reusable_Functions.chkStatus(context)) {
 
-        Log.e(TAG, "Url" + "" + url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i(TAG, "UpcomingPromo  : " + " " + response);
-                        Log.i(TAG, "response" + "" + response.length());
+            //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
+            String url = ConstsCore.web_url + "/v1/display/futurepromodetails/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
 
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                            } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
-                                for (int i = 0; i < response.length(); i++) {
+            Log.e(TAG, "Url" + "" + url);
 
-                                    UpcomingPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    Up_promoList.add(UpcomingPromoListDisplay);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.i(TAG, "UpcomingPromo  : " + " " + response);
+                            Log.i(TAG, "response" + "" + response.length());
 
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                } else if (response.length() == limit) {
+                                    Log.e(TAG, "promo eql limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        UpcomingPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        Up_promoList.add(UpcomingPromoListDisplay);
+
+                                    }
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+
+                                    requestRunningPromoApi();
+
+                                } else if (response.length() < limit) {
+                                    Log.e(TAG, "promo /= limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        UpcomingPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        Up_promoList.add(UpcomingPromoListDisplay);
+
+                                    }
+                                    Log.e(TAG, "Up_promoListSize" + Up_promoList.size());
+                                    UpcomingPromoAdapter runningPromoAdapter = new UpcomingPromoAdapter(Up_promoList, context);
+                                    UP_PromoListView.setAdapter(runningPromoAdapter);
+                                    UP_PromoListView.getParent().requestDisallowInterceptTouchEvent(false);
+
+                                    //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
+                                    //promoval2.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleTotQty()));
+                                    //Log.e(TAG,"store code and desc"+Up_promoList.get(0).getStoreCode()+Up_promoList.get(0).getStoreDesc());
+
+                                    Reusable_Functions.hDialog();
+                                    Up_storecode.setText(Up_promoList.get(0).getStoreCode());
+                                    Up_storedesc.setText(Up_promoList.get(0).getStoreDesc());
                                 }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
 
-                                requestRunningPromoApi();
-
-                            } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    UpcomingPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    Up_promoList.add(UpcomingPromoListDisplay);
-
-                                }
-                                Log.e(TAG, "Up_promoListSize" + Up_promoList.size());
-                                UpcomingPromoAdapter runningPromoAdapter = new UpcomingPromoAdapter(Up_promoList,context);
-                                UP_PromoListView.setAdapter(runningPromoAdapter);
-                                UP_PromoListView.getParent().requestDisallowInterceptTouchEvent(false);
-
-                                //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                                //promoval2.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleTotQty()));
-                                //Log.e(TAG,"store code and desc"+Up_promoList.get(0).getStoreCode()+Up_promoList.get(0).getStoreDesc());
-
+                            } catch (Exception e) {
                                 Reusable_Functions.hDialog();
-                                Up_storecode.setText(Up_promoList.get(0).getStoreCode());
-                                Up_storedesc.setText(Up_promoList.get(0).getStoreDesc());
+                                Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
+                                e.printStackTrace();
+                                Log.e(TAG, "catch...Error" + e.toString());
                             }
-
-                        } catch (Exception e) {
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no data found in catch"+e.toString(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                            Log.e(TAG, "catch...Error" +e.toString());
+                            Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            error.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
                 }
+            };
+            int socketTimeout = 60000;//5 seconds
 
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
 
 
-        //-----------------------------ON CLICK LISTENER-----------------------------//
+            //-----------------------------ON CLICK LISTENER-----------------------------//
 
 /*
         UP_PromoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -182,44 +187,46 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
         });*/
 
 
+            UP_PromoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
 
 
-        UP_PromoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                    if (Up_promoList.size() != 0) {
+
+                        if (view.getFirstVisiblePosition() <= Up_promoList.size() - 1) {
+
+                            focusposition = view.getFirstVisiblePosition();
+
+                            UP_PromoListView.setSelection(view.getFirstVisiblePosition());
+                            Log.e(TAG, "firstVisibleItem" + " " + focusposition);
+                            //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
+
+                            Up_storecode.setText(Up_promoList.get(focusposition).getStoreCode());
+                            Up_storedesc.setText(Up_promoList.get(focusposition).getStoreDesc());
 
 
-                if (Up_promoList.size() != 0) {
+                        } else {
+                            focusposition = Up_promoList.size() - 1;
+                            UP_PromoListView.setSelection(Up_promoList.size() - 1);
 
-                    if (view.getFirstVisiblePosition() <= Up_promoList.size() - 1) {
-
-                        focusposition = view.getFirstVisiblePosition();
-
-                        UP_PromoListView.setSelection(view.getFirstVisiblePosition());
-                        Log.e(TAG, "firstVisibleItem" + " " + focusposition);
-                        //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-
-                        Up_storecode.setText(Up_promoList.get(focusposition).getStoreCode());
-                        Up_storedesc.setText(Up_promoList.get(focusposition).getStoreDesc());
-
-
-                    }else
-                    {
-                        focusposition = Up_promoList.size() - 1;
-                        UP_PromoListView.setSelection(Up_promoList.size() - 1);
-
+                        }
                     }
+
+
                 }
 
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-            }
+                }
+            });
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        }
+        else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
-            }
-        });
-
+        }
     }
 
 
@@ -251,7 +258,7 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
                 Intent intent1= new Intent(context, FilterActivity.class);
                 intent1.putExtra("from","upComingPromo");
                 startActivity(intent1);
-                finish();
+               // finish();
                 break;
 
         }

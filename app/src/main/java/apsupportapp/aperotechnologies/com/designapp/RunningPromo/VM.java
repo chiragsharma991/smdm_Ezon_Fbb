@@ -65,19 +65,19 @@ public class VM extends AppCompatActivity {
              public void onClick(View v) {
 
                  if(data.getString("FROM").equals("RunningPromo")) {
-                     Intent intent = new Intent(VM.this, RunningPromoActivity.class);
-                     startActivity(intent);
+                    // Intent intent = new Intent(VM.this, RunningPromoActivity.class);
+                   //  startActivity(intent);
                      finish();
                  }
                  else if(data.getString("FROM").equals("ExpirePromo"))
                  {
-                     Intent intent = new Intent(VM.this, ExpiringPromoActivity.class);
-                     startActivity(intent);
+                     //Intent intent = new Intent(VM.this, ExpiringPromoActivity.class);
+                     //startActivity(intent);
                      finish();
                  }
                  else {
-                     Intent intent = new Intent(VM.this, UpcomingPromo.class);
-                     startActivity(intent);
+                     //Intent intent = new Intent(VM.this, UpcomingPromo.class);
+                     //startActivity(intent);
                      finish();
                  }
 
@@ -91,20 +91,20 @@ public class VM extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if(data.getString("FROM").equals("RunningPromo")) {
-            Intent intent = new Intent(VM.this, RunningPromoActivity.class);
-            startActivity(intent);
+           // Intent intent = new Intent(VM.this, RunningPromoActivity.class);
+           // startActivity(intent);
             finish();
         }
         else if(data.getString("FROM").equals("ExpirePromo"))
         {
-            Intent intent = new Intent(VM.this, ExpiringPromoActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(VM.this, ExpiringPromoActivity.class);
+            //startActivity(intent);
             finish();
         }
 
         else {
-            Intent intent = new Intent(VM.this, UpcomingPromo.class);
-            startActivity(intent);
+            //Intent intent = new Intent(VM.this, UpcomingPromo.class);
+            //startActivity(intent);
             finish();
         }
     }
