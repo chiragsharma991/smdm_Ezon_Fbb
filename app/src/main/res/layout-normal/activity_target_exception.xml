@@ -1,216 +1,732 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/tools"
-    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/quickFilterPopup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TargetStockExceptions.TargetStockExceptionActivity">
+    android:visibility="gone">
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <!--base layout for click anywhere-->
+
+    <RelativeLayout
+        android:id="@+id/quickFilter_baseLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:orientation="vertical">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/quickFilter_BorderLayout"
+            android:layout_width="200dp"
+            android:layout_marginTop="68dp"
             android:layout_height="wrap_content"
-            android:id="@+id/linearToolbar"
-            >
+            android:layout_alignParentRight="true"
+            android:visibility="visible">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <RelativeLayout
+                android:id="@+id/relLayoutFilter"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_header_height"
-                android:layout_alignParentTop="true"
-                android:background="?attr/colorPrimary"
-                android:contentInsetEnd="0dp"
-                android:contentInsetLeft="0dp"
-                android:contentInsetRight="0dp"
-                android:contentInsetStart="0dp"
-                app:contentInsetEnd="0dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp">
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/img_quickFilter"
+                    android:layout_width="16dp"
+                    android:layout_height="29dp"
+                    android:layout_alignParentStart="true"
+                    android:background="@mipmap/quick_filter" />
+
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:id="@+id/qfilterLabelLayout"
+                    android:layout_width="200dp"
+                    android:layout_height="29dp"
+                    android:layout_toRightOf="@+id/img_quickFilter"
+                    android:background="@color/colorPrimary"
+                    android:visibility="visible">
 
-                    <RelativeLayout
-                        android:id="@+id/target_imageBtnBack"
-                        android:layout_width="@dimen/header_clickable_width"
-                        android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="0dp"
-                        android:background="@drawable/button_red_effect">
-
-                        <Button
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_centerInParent="true"
-                            android:background="@mipmap/common_back_icon"
-                            android:clickable="false" />
-
-                    </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/toolbar_title"
+                        android:id="@+id/txtQuickFilterLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        android:layout_toRightOf="@+id/target_imageBtnBack"
-                        android:text="Target Stock Exceptions"
+                        android:layout_marginLeft="10dp"
+                        android:text="Quick Filter"
                         android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_header_title_normal"
+                        android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                         />
-
-
-
-                    <RelativeLayout
-                        android:id="@+id/target_imgfilter"
-                        android:layout_width="@dimen/header_clickable_width"
-                        android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="0dp"
-                        android:background="@drawable/button_red_effect">
-
-                        <Button
-                            android:layout_width="19dp"
-                            android:layout_height="19dp"
-                            android:layout_centerInParent="true"
-                            android:background="@mipmap/filter_icon_nav"
-                            android:clickable="false" />
-
-                    </RelativeLayout>
-
-                </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp">
-
-
-                <TextView
-                    android:id="@+id/tstoreCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Store : "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/smdm_store_title_normal"
-                    />
-
-                <TextView
-                    android:id="@+id/txtStoreCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_toRightOf="@+id/tstoreCode"
-                    android:hint=""
-                    android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/smdm_store_title_normal"
-                    />
-
-                <TextView
-                    android:id="@+id/txtStoreName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_toRightOf="@id/txtStoreCode"
-                    android:hint=""
-                    android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/smdm_store_title_normal"
-                    />
-
-                <RelativeLayout
-                    android:id="@+id/target_quickFilter"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:gravity="end"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="0dp"
-                    >
-
-                    <Button
-                        android:layout_width="16dp"
-                        android:layout_height="29dp"
-                        android:layout_centerInParent="true"
-                        android:background="@mipmap/quick_filter"
-                        android:clickable="false" />
                 </RelativeLayout>
 
             </RelativeLayout>
+            <ScrollView
+                android:layout_below="@+id/relLayoutFilter"
+                android:layout_marginTop="29dp"
+                android:id="@+id/scrll_FilterLayout"
+                android:layout_width="185dp"
+                android:scrollbars="vertical"
+                android:fadeScrollbars="false"
+                android:scrollbarThumbVertical="@android:color/darker_gray"
+                android:scrollbarSize="3dp"
+                android:scrollIndicators="right"
+                android:scrollbarFadeDuration="0"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:layout_marginLeft="15dp"
+                android:layout_height="350dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
 
-        </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        <info.hoang8f.android.segmented.SegmentedGroup
-            android:id="@+id/target_segmented"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_below="@+id/linearToolbar"
-            android:layout_marginTop="18dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:weightSum="2"
-            android:orientation="horizontal"
-            segmentedgroup:sc_border_width="1dp"
-            segmentedgroup:sc_corner_radius="14dp"
-            segmentedgroup:sc_tint_color="@color/colorPrimary">
+                    <LinearLayout
+                        android:id="@+id/qfilter_seasonGpLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/popupmenu"
+                        android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/target_fashion"
-                style="@style/RadioButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Fashion" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:orientation="horizontal">
 
-            <RadioButton
-                style="@style/RadioButton"
-                android:id="@+id/target_core"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Core" />
+                            <TextView
+                                android:id="@+id/txtSeasonGrp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Season Group"
+                                android:textColor="@color/smdm_quickfiltertxt_color"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                />
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/bst_lineOne_child"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/smdm_quickfilter_divider"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/divider_salescard" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopCurrent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Current"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
 
 
-        </info.hoang8f.android.segmented.SegmentedGroup>
+                                <CheckBox
+                                    android:id="@+id/checkCurrent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true"
+                                    android:checked="true"
+                                    />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/target_segmented"
-            android:layout_marginTop="20dp"
-            >
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/targetListView"
-                android:layout_marginTop="10dp"
-                android:dividerHeight="1dp">
+                            </LinearLayout>
+                        </LinearLayout>
 
-            </ListView>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/smdm_divider"
-                android:background="@color/divider_salescard"
-                android:layout_marginTop="9dp"
-                >
+                        <!--Previous-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
 
-            </View>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopPrevious"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Previous"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <CheckBox
+                                    android:id="@+id/checkPrevious"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopOld"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Old"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <CheckBox
+                                    android:id="@+id/checkOld"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!--Upcoming  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopUpcoming"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Upcoming"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <CheckBox
+                                    android:id="@+id/checkUpcoming"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!--<View-->
+                        <!--android:id="@+id/bst_lineTwo_child"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="2dp"-->
+                        <!--android:background="@color/divider_salescard" />-->
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_below="@+id/qfilter_seasonGpLayout"
+                        android:id="@+id/qfilter_Time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/popupmenu"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/txtTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Time"
+                                android:textColor="@color/smdm_quickfiltertxt_color"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                />
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/bst_lineOne_child2"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/divider_salescard" />
+                        <!--WTD-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopWTD"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="WTD"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <RadioButton
+                                    android:id="@+id/checkWTD"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!--L4W-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopL4W"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="L4W"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <RadioButton
+                                    android:id="@+id/checkL4W"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                        <!--YTD-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtAgeing3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="STD"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <RadioButton
+                                    android:id="@+id/checkYTD"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true"
+                                    android:checked="true"
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Title-->
+                    <LinearLayout
+                        android:layout_below="@+id/qfilter_Time"
+                        android:id="@+id/qfilter_Title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/popupmenu"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/txtTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Title"
+                                android:textColor="@color/smdm_quickfiltertxt_color"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                />
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/bst_lineOne_child3"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/divider_salescard" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopDept"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Department"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <RadioButton
+                                    android:id="@+id/checkDept"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true"
+                                    android:checked="true"
+                                    />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!--Category-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopCategory"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Category"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <RadioButton
+                                    android:id="@+id/checkCategory"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopPlanClass"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Plan Class"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <RadioButton
+                                    android:id="@+id/checkPlanClass"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_below="@+id/qfilter_Title"
+                        android:id="@+id/qfilter_TargetROS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/popupmenu"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/txtTargetROS"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Target Cover Req"
+                                android:textColor="@color/smdm_quickfiltertxt_color"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                />
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/bst_lineOne_child4"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/divider_salescard" />
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="5dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:id="@+id/targetMin"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/smdm_quickfilter_title_large"
+                                android:text="2"
+                                android:layout_alignParentLeft="true"
+
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:id="@+id/targetMax"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/smdm_quickfilter_title_large"
+                                android:text="7"
+                                android:layout_alignParentRight="true"
+
+                                />
+                            <SeekBar
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/targetSeek"
+                                android:progressTint="@color/colorPrimary"
+                                android:thumbTint="@color/colorPrimary"
+                                android:progress="70"
+                                android:max="100"
+
+                                >
+
+
+                            </SeekBar>
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+            </ScrollView>
+
+
+            <RelativeLayout
+                android:layout_below="@+id/scrll_FilterLayout"
+                android:id="@+id/qfDoneLayout"
+                android:layout_width="184dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="25dp"
+                android:background="@color/colorPrimary"
+                android:visibility="visible">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@color/colorPrimary"
+                    android:clickable="false"
+                    android:text="Done"
+                    android:textColor="@color/divider_salescard1"
+                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                    />
+
+            </RelativeLayout>
+
+
         </RelativeLayout>
-    </LinearLayout>
-    <include layout="@layout/target_quick_filter_menu">
-    </include>
+    </RelativeLayout>
 </RelativeLayout>

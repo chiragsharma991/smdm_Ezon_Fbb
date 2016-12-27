@@ -651,382 +651,49 @@
                             android:layout_marginTop="5dp"
                             android:background="@color/divider_salescard" />
 
-                        <LinearLayout
+
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="horizontal"
-                            android:weightSum="10">
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="5dp"
+                            >
 
-                            <LinearLayout
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:id="@+id/targetMin"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/smdm_quickfilter_title_large"
+                                android:text="2"
+                                android:layout_alignParentLeft="true"
+
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:id="@+id/targetMax"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/smdm_quickfilter_title_large"
+                                android:text="7"
+                                android:layout_alignParentRight="true"
+
+                                />
+                            <SeekBar
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="3"
-                                android:orientation="vertical">
+                                android:id="@+id/targetSeek"
+                                android:progressTint="@color/colorPrimary"
+                                android:thumbTint="@color/colorPrimary"
+                                android:progress="70"
+                                android:max="100"
 
-                                <TextView
-                                    android:id="@+id/txtpoptwo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="2"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="7"
-                                android:gravity="end"
-                                android:orientation="vertical">
+                                >
 
 
-                                <CheckBox
-                                    android:id="@+id/checktwo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
+                            </SeekBar>
 
-                            </LinearLayout>
-                        </LinearLayout>
+                        </RelativeLayout>
 
-                        <!--three-->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="horizontal"
-                            android:weightSum="10">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="3"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtpopthree"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="3"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="7"
-                                android:gravity="end"
-                                android:orientation="vertical">
-
-
-                                <CheckBox
-                                    android:id="@+id/checkthree"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="horizontal"
-                            android:weightSum="10">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="3"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtfour"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="4"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="7"
-                                android:gravity="end"
-                                android:orientation="vertical">
-
-
-                                <CheckBox
-                                    android:id="@+id/checkfour"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <!--Five-->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="horizontal"
-                            android:weightSum="10">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="3"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtfive"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="5"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="7"
-                                android:gravity="end"
-                                android:orientation="vertical">
-
-
-                                <CheckBox
-                                    android:id="@+id/checkfive"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <!--six-->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="horizontal"
-                            android:weightSum="10">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="3"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtsix"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="6"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="7"
-                                android:gravity="end"
-                                android:orientation="vertical">
-
-
-                                <CheckBox
-                                    android:id="@+id/checksix"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <!--Seven-->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="horizontal"
-                            android:weightSum="10">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="3"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtseven"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="7"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="7"
-                                android:gravity="end"
-                                android:orientation="vertical">
-
-
-                                <CheckBox
-                                    android:id="@+id/checkseven"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:buttonTint="@android:color/black"
-                                    android:focusable="true"
-                                    android:checked="true"
-                                    />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <!--Eight-->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="horizontal"
-                            android:weightSum="10">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="3"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txteight"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="8"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="7"
-                                android:gravity="end"
-                                android:orientation="vertical">
-
-
-                                <CheckBox
-                                    android:id="@+id/checkeight"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <!--Nine-->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="horizontal"
-                            android:weightSum="10">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="3"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtnine"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="9"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="7"
-                                android:gravity="end"
-                                android:orientation="vertical">
-
-
-                                <CheckBox
-                                    android:id="@+id/checknine"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <!--Ten-->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="horizontal"
-                            android:weightSum="10">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="3"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtten"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="10"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="7"
-                                android:gravity="end"
-                                android:orientation="vertical">
-
-
-                                <CheckBox
-                                    android:id="@+id/checkten"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <View
-                            android:id="@+id/bst_lineTwo_child2"
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:background="@color/divider_salescard" />
 
                     </LinearLayout>
 

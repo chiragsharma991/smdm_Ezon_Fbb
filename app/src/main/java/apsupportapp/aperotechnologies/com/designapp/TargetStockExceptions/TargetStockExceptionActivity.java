@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -53,7 +54,8 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  * Created by pamrutkar on 08/12/16.
  */
 
-public class TargetStockExceptionActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class TargetStockExceptionActivity extends AppCompatActivity implements View.OnClickListener,
+        RadioGroup.OnCheckedChangeListener,SeekBar.OnSeekBarChangeListener {
 
     TextView target_txtStoreCode, target_txtStoreName;
     RelativeLayout target_BtnBack, target_BtnFilter, target_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
@@ -86,6 +88,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private String corefashion = "Fashion",view = "STD";
     String checkSeasonGpVal = null, checkTimeVal = null,checkTitleVal=null;
     int checkTargetROSVal=7;
+    private SeekBar TargetSeek;
+    private TextView targetMax;
+    private int setValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +148,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                 footer.setVisibility(View.GONE);
                                 if (targetStockList.size() == 0) {
                                     targetListView.setVisibility(View.GONE);
+                                    return;
                                 }
 
                             } else if (response.length() == limit) {
@@ -203,7 +209,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             targetListView.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
                             footer.setVisibility(View.GONE);
-                            // Toast.makeText(context, "no data found in catch" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -213,7 +219,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -292,8 +298,15 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         checkDept = (RadioButton) findViewById(R.id.checkDept);
         checkCategory = (RadioButton) findViewById(R.id.checkCategory);
         checkPlanClass = (RadioButton) findViewById(R.id.checkPlanClass);
+
+        //Seek Bar
+        TargetSeek = (SeekBar) findViewById(R.id.targetSeek);
+        targetMax = (TextView) findViewById(R.id.targetMax);
+
+
+
         //Target ROS
-        checktwo = (CheckBox) findViewById(R.id.checktwo);
+        /*checktwo = (CheckBox) findViewById(R.id.checktwo);
         checkthree = (CheckBox) findViewById(R.id.checkthree);
         checkfour = (CheckBox) findViewById(R.id.checkfour);
         checkfive = (CheckBox) findViewById(R.id.checkfive);
@@ -301,7 +314,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         checkseven = (CheckBox) findViewById(R.id.checkseven);
         checkeight = (CheckBox) findViewById(R.id.checkeight);
         checknine = (CheckBox) findViewById(R.id.checknine);
-        checkten = (CheckBox) findViewById(R.id.checkten);
+        checkten = (CheckBox) findViewById(R.id.checkten);*/
 
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
@@ -311,11 +324,12 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         checkWTD.setOnClickListener(this);
         checkL4W.setOnClickListener(this);
         checkYTD.setOnClickListener(this);
+        TargetSeek.setOnSeekBarChangeListener(this);
 
         checkDept.setOnClickListener(this);
         checkCategory.setOnClickListener(this);
         checkPlanClass.setOnClickListener(this);
-
+/*
         checktwo.setOnClickListener(this);
         checkthree.setOnClickListener(this);
         checkfour.setOnClickListener(this);
@@ -324,7 +338,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         checkseven.setOnClickListener(this);
         checkeight.setOnClickListener(this);
         checknine.setOnClickListener(this);
-        checkten.setOnClickListener(this);
+        checkten.setOnClickListener(this);*/
 
         qfDoneLayout.setOnClickListener(this);
         target_segmented.setOnCheckedChangeListener(TargetStockExceptionActivity.this);
@@ -378,7 +392,13 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     checkCategory.setChecked(false);
                     checkPlanClass.setChecked(false);
 
-                    checktwo.setChecked(false);
+
+                    TargetSeek.setProgress(70);
+
+
+
+
+                 /*   checktwo.setChecked(false);
                     checkthree.setChecked(false);
                     checkfour.setChecked(false);
                     checkfive.setChecked(false);
@@ -386,9 +406,10 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     checkseven.setChecked(true);
                     checkeight.setChecked(false);
                     checknine.setChecked(false);
-                    checkten.setChecked(false);
+                    checkten.setChecked(false);*/
 
                 } else {
+
                     switch (checkSeasonGpVal.toString()) {
                         case "Current":
                             checkCurrent.setChecked(true);
@@ -456,7 +477,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkCategory.setChecked(false);
                             break;
                     }
-                    switch (checkTargetROSVal) {
+                   /* switch (checkTargetROSVal) {
                         case 2:
                             checktwo.setChecked(true);
                             checkthree.setChecked(false);
@@ -559,13 +580,17 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checknine.setChecked(false);
                             checkten.setChecked(true);
                             break;
+*/
 
 
-                    }
                 }
                 quickFilterPopup.setVisibility(View.GONE);
                 break;
+
+
             case R.id.qfDoneLayout:
+
+                checkTargetROSVal=setValue;
                 //seasongroup
                 if (checkCurrent.isChecked()) {
                     popupCurrent();
@@ -624,10 +649,10 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 } else {
                     Log.e("Uncheck3","----"+checkTitleVal);
                 }
-
+                break;
 
                 //Targer ROS
-                if (checktwo.isChecked()) {
+            /*    if (checktwo.isChecked()) {
                     //popuptwo();
                     checkTargetROSVal = 2;
                     quickFilterPopup.setVisibility(View.GONE);
@@ -675,9 +700,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                 else {
                     Log.e("Uncheck4","----"+checkTargetROSVal);
-                }
+                }*/
 
-                break;
+
             case R.id.checkCurrent:
                 checkCurrent.setChecked(true);
                 checkPrevious.setChecked(false);
@@ -1032,6 +1057,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         }
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -1039,5 +1065,42 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         intent.putExtra("BACKTO","inventory");
         startActivity(intent);*/
         finish();
+    }
+
+    private void scalingValue(int progress)
+    {
+        int Result= progress/10;
+        if(2>=Result)
+        {
+            targetMax.setText("2");
+            setValue=2;
+        }else if(2<Result)
+        {
+            targetMax.setText(String.valueOf(Result));
+            setValue=Result;
+        }
+
+    }
+
+
+
+
+
+    //>>>>>>>Seek Bar for Quick filter
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        scalingValue(progress);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        Log.e(TAG, "onStopTrackingTouch: "+seekBar.getMax() );
+
     }
 }
