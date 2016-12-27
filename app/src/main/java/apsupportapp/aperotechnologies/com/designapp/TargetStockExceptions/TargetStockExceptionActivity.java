@@ -55,23 +55,23 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  */
 
 public class TargetStockExceptionActivity extends AppCompatActivity implements View.OnClickListener,
-        RadioGroup.OnCheckedChangeListener,SeekBar.OnSeekBarChangeListener {
+        RadioGroup.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener {
 
     TextView target_txtStoreCode, target_txtStoreName;
     RelativeLayout target_BtnBack, target_BtnFilter, target_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
-   FloorAvailabilityDetails targetStockDetails;
+    FloorAvailabilityDetails targetStockDetails;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken, seasongroup = "Current";
     String TAG = "TargetStockExceptionActivity";
-     int count = 0;
-     int limit = 10;
+    int count = 0;
+    int limit = 10;
     int offsetvalue = 0;
-   int top = 10;
+    int top = 10;
     static int level = 1;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
-    CheckBox checktwo,checkthree,checkfour,checkfive;
-    CheckBox checksix,checkseven,checkeight,checknine,checkten;
-    RadioButton checkDept,checkCategory,checkPlanClass,checkWTD,checkL4W,checkYTD;
+    CheckBox checktwo, checkthree, checkfour, checkfive;
+    CheckBox checksix, checkseven, checkeight, checknine, checkten;
+    RadioButton checkDept, checkCategory, checkPlanClass, checkWTD, checkL4W, checkYTD;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
@@ -79,15 +79,15 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     ArrayList<FloorAvailabilityDetails> targetStockList;
     private int focusposition = 0;
     private boolean userScrolled;
-   TargetStockExcepAdapter targetAgeingAdapter;
+    TargetStockExcepAdapter targetAgeingAdapter;
     private View footer;
     private String lazyScroll = "OFF";
     private SegmentedGroup target_segmented;
     private RadioButton target_fashion, target_core;
     private ToggleButton Toggle_target_fav;
-    private String corefashion = "Fashion",view = "STD";
-    String checkSeasonGpVal = null, checkTimeVal = null,checkTitleVal=null;
-    int checkTargetROSVal=7;
+    private String corefashion = "Fashion", view = "STD";
+    String checkSeasonGpVal = null, checkTimeVal = null, checkTitleVal = null;
+    int checkTargetROSVal = 7;
     private SeekBar TargetSeek;
     private TextView targetMax;
     private int setValue;
@@ -98,7 +98,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         setContentView(R.layout.activity_target_exception);
         getSupportActionBar().hide();
         initalise();
-        //testing git by chirag
         gson = new Gson();
         targetStockList = new ArrayList<FloorAvailabilityDetails>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -109,6 +108,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        targetListView.setTag("FOOTER");
         targetListView.setVisibility(View.VISIBLE);
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -132,7 +132,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void requestTargetStockExcepApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup +"&level="+level+"&view="+view+"&targetros="+checkTargetROSVal ;
+        String url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
 
         Log.e(TAG, "URL" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -146,7 +146,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                footer.setVisibility(View.GONE);
+                                targetListView.removeFooterView(footer);
+                                targetListView.setTag("FOOTER_REMOVE");
                                 if (targetStockList.size() == 0) {
                                     targetListView.setVisibility(View.GONE);
                                     return;
@@ -177,6 +178,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                     top = top + response.length();
 
                                 }
+                                targetListView.removeFooterView(footer);
+                                targetListView.setTag("FOOTER_REMOVE");
                             }
 
 
@@ -211,6 +214,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             Reusable_Functions.hDialog();
                             footer.setVisibility(View.GONE);
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                            targetListView.removeFooterView(footer);
+                            targetListView.setTag("FOOTER_REMOVE");
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -221,6 +226,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                        targetListView.removeFooterView(footer);
+                        targetListView.setTag("FOOTER_REMOVE");
                         error.printStackTrace();
                     }
                 }
@@ -249,7 +256,15 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
+                if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE&&lazyScroll.equals("OFF")) {
+                    if (targetListView.getTag().equals("FOOTER_REMOVE")) {
+                        targetListView.addFooterView(footer);
+                        targetListView.setTag("FOOTER_ADDED");
+
+                    }
+
+
+                    Log.e(TAG, "onScrollStateChanged:  log");
                     footer.setVisibility(View.VISIBLE);
                     lazyScroll = "ON";
                     requestTargetStockExcepApi();
@@ -303,7 +318,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         //Seek Bar
         TargetSeek = (SeekBar) findViewById(R.id.targetSeek);
         targetMax = (TextView) findViewById(R.id.targetMax);
-
 
 
         //Target ROS
@@ -591,68 +605,74 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
             case R.id.qfDoneLayout:
 
-                checkTargetROSVal=setValue;
-                //seasongroup
-                if (checkCurrent.isChecked()) {
-                    popupCurrent();
-                    checkSeasonGpVal = "Current";
+                if (Reusable_Functions.chkStatus(context)) {
 
-                    quickFilterPopup.setVisibility(View.GONE);
+                    checkTargetROSVal = setValue;
+                    //seasongroup
+                    if (checkCurrent.isChecked()) {
+                        popupCurrent();
+                        checkSeasonGpVal = "Current";
 
-                } else if (checkPrevious.isChecked()) {
-                    popupPrevious();
-                    checkSeasonGpVal = "Previous";
-                    quickFilterPopup.setVisibility(View.GONE);
+                        quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (checkOld.isChecked()) {
-                    popupOld();
-                    checkSeasonGpVal = "Old";
-                    quickFilterPopup.setVisibility(View.GONE);
+                    } else if (checkPrevious.isChecked()) {
+                        popupPrevious();
+                        checkSeasonGpVal = "Previous";
+                        quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (checkUpcoming.isChecked()) {
-                    popupUpcoming();
-                    checkSeasonGpVal = "Upcoming";
-                    quickFilterPopup.setVisibility(View.GONE);
+                    } else if (checkOld.isChecked()) {
+                        popupOld();
+                        checkSeasonGpVal = "Old";
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    } else if (checkUpcoming.isChecked()) {
+                        popupUpcoming();
+                        checkSeasonGpVal = "Upcoming";
+                        quickFilterPopup.setVisibility(View.GONE);
+                    } else {
+                        Log.e("Uncheck1", "----" + checkSeasonGpVal);
+                    }
+                    //Time
+                    if (checkWTD.isChecked()) {
+                        popupWTD();
+                        checkTimeVal = "CheckWTD";
+                        quickFilterPopup.setVisibility(View.GONE);
+                    } else if (checkL4W.isChecked()) {
+                        popupL4W();
+                        checkTimeVal = "CheckL4W";
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    } else if (checkYTD.isChecked()) {
+                        popupYTD();
+                        checkTimeVal = "CheckYTD";
+                        quickFilterPopup.setVisibility(View.GONE);
+                    } else {
+                        Log.e("Uncheck2", "----" + checkTimeVal);
+                    }
+                    //Title
+                    if (checkDept.isChecked()) {
+                        popupDept();
+                        checkTitleVal = "CheckDept";
+                        quickFilterPopup.setVisibility(View.GONE);
+                    } else if (checkCategory.isChecked()) {
+                        popupCategory();
+                        checkTitleVal = "CheckCategory";
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    } else if (checkPlanClass.isChecked()) {
+                        popupPlanClass();
+                        checkTimeVal = "CheckPlanClass";
+                        quickFilterPopup.setVisibility(View.GONE);
+                    } else {
+                        Log.e("Uncheck3", "----" + checkTitleVal);
+                    }
                 } else {
-                    Log.e("Uncheck1","----"+checkSeasonGpVal);
-                }
-                //Time
-                if (checkWTD.isChecked()) {
-                    popupWTD();
-                    checkTimeVal = "CheckWTD";
-                    quickFilterPopup.setVisibility(View.GONE);
-                } else if (checkL4W.isChecked()) {
-                    popupL4W();
-                    checkTimeVal = "CheckL4W";
-                    quickFilterPopup.setVisibility(View.GONE);
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
-                } else if (checkYTD.isChecked()) {
-                    popupYTD();
-                    checkTimeVal = "CheckYTD";
-                    quickFilterPopup.setVisibility(View.GONE);
-                } else {
-                    Log.e("Uncheck2","----"+checkTimeVal);
-               }
-               //Title
-                if (checkDept.isChecked()) {
-                    popupDept();
-                    checkTitleVal = "CheckDept";
-                    quickFilterPopup.setVisibility(View.GONE);
-                } else if (checkCategory.isChecked()) {
-                    popupCategory();
-                    checkTitleVal = "CheckCategory";
-                    quickFilterPopup.setVisibility(View.GONE);
-
-                } else if (checkPlanClass.isChecked()) {
-                    popupPlanClass();
-                    checkTimeVal = "CheckPlanClass";
-                    quickFilterPopup.setVisibility(View.GONE);
-                } else {
-                    Log.e("Uncheck3","----"+checkTitleVal);
                 }
                 break;
 
-                //Targer ROS
+            //Targer ROS
             /*    if (checktwo.isChecked()) {
                     //popuptwo();
                     checkTargetROSVal = 2;
@@ -734,7 +754,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checkL4W.setChecked(false);
                 checkYTD.setChecked(false);
                 break;
-            case R.id.checkL4W :
+            case R.id.checkL4W:
                 checkL4W.setChecked(true);
                 checkWTD.setChecked(false);
                 checkYTD.setChecked(false);
@@ -792,7 +812,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checknine.setChecked(false);
                 checkten.setChecked(false);
                 break;
-            case R.id.checkfive  :
+            case R.id.checkfive:
                 checktwo.setChecked(false);
                 checkthree.setChecked(false);
                 checkfour.setChecked(false);
@@ -803,7 +823,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checknine.setChecked(false);
                 checkten.setChecked(false);
                 break;
-            case R.id.checksix  :
+            case R.id.checksix:
                 checktwo.setChecked(false);
                 checkthree.setChecked(false);
                 checkfour.setChecked(false);
@@ -814,7 +834,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checknine.setChecked(false);
                 checkten.setChecked(false);
                 break;
-            case R.id.checkseven  :
+            case R.id.checkseven:
                 checktwo.setChecked(false);
                 checkthree.setChecked(false);
                 checkfour.setChecked(false);
@@ -825,7 +845,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checknine.setChecked(false);
                 checkten.setChecked(false);
                 break;
-            case R.id.checkeight  :
+            case R.id.checkeight:
                 checktwo.setChecked(false);
                 checkthree.setChecked(false);
                 checkfour.setChecked(false);
@@ -836,7 +856,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checknine.setChecked(false);
                 checkten.setChecked(false);
                 break;
-            case R.id.checknine :
+            case R.id.checknine:
                 checktwo.setChecked(false);
                 checkthree.setChecked(false);
                 checkfour.setChecked(false);
@@ -847,7 +867,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checknine.setChecked(true);
                 checkten.setChecked(false);
                 break;
-            case R.id.checkten  :
+            case R.id.checkten:
                 checktwo.setChecked(false);
                 checkthree.setChecked(false);
                 checkfour.setChecked(false);
@@ -922,6 +942,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         }
 
     }
+
     private void popupWTD() {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -929,7 +950,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            view ="WTD";
+            view = "WTD";
             targetStockList.clear();
             requestTargetStockExcepApi();
         } else {
@@ -945,7 +966,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            view ="L4W";
+            view = "L4W";
             targetStockList.clear();
             requestTargetStockExcepApi();
         } else {
@@ -969,6 +990,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         }
 
     }
+
     private void popupDept() {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -976,7 +998,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            level = 1 ;
+            level = 1;
             targetStockList.clear();
             requestTargetStockExcepApi();
         } else {
@@ -984,6 +1006,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         }
 
     }
+
     private void popupCategory() {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -991,7 +1014,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             limit = 10;
             offsetvalue = 0;
             top = 10;
-           level = 2;
+            level = 2;
             targetStockList.clear();
             requestTargetStockExcepApi();
         } else {
@@ -999,6 +1022,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         }
 
     }
+
     private void popupPlanClass() {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -1022,13 +1046,13 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         switch (checkedId) {
             case R.id.target_core:
                 if (target_core.isChecked()) {
+                    limit = 10;
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Core";
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading data...");
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Core";
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
                         requestTargetStockExcepApi();
@@ -1039,13 +1063,13 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 break;
             case R.id.target_fashion:
                 if (target_fashion.isChecked()) {
+                    limit = 10;
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Fashion";
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading data...");
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Fashion";
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
                         requestTargetStockExcepApi();
@@ -1068,23 +1092,17 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         finish();
     }
 
-    private void scalingValue(int progress)
-    {
-        int Result= progress/10;
-        if(2>=Result)
-        {
+    private void scalingValue(int progress) {
+        int Result = progress / 10;
+        if (2 >= Result) {
             targetMax.setText("2");
-            setValue=2;
-        }else if(2<Result)
-        {
+            setValue = 2;
+        } else if (2 < Result) {
             targetMax.setText(String.valueOf(Result));
-            setValue=Result;
+            setValue = Result;
         }
 
     }
-
-
-
 
 
     //>>>>>>>Seek Bar for Quick filter
@@ -1101,7 +1119,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        Log.e(TAG, "onStopTrackingTouch: "+seekBar.getMax() );
+        Log.e(TAG, "onStopTrackingTouch: " + seekBar.getMax());
 
     }
 }

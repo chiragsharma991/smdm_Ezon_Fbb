@@ -15,22 +15,22 @@
         android:padding="5dp">
 
         <!--<RelativeLayout-->
-            <!--android:id="@+id/stock_Rel_image_child"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content">-->
+        <!--android:id="@+id/stock_Rel_image_child"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
 
 
 
 
-            <!--<ImageView-->
-                <!--android:id="@+id/stock_image_child"-->
-                <!--android:layout_width="100dp"-->
-                <!--android:layout_height="100dp"-->
-                <!--android:layout_marginTop="0dp"-->
-                <!--android:scaleType="fitXY"-->
-                <!--android:src="@mipmap/placeholder"-->
+        <!--<ImageView-->
+        <!--android:id="@+id/stock_image_child"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_marginTop="0dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@mipmap/placeholder"-->
 
-                <!--/>-->
+        <!--/>-->
 
         <!--</RelativeLayout>-->
 
@@ -64,8 +64,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
                         android:text="Buy One Get One"
-                        android:textColor="#000000"
-                        android:textSize="13sp"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_inflator_title_normal"
 
 
                         />
@@ -102,12 +102,12 @@
 
 
                 <!--<TextView-->
-                    <!--android:id="@+id/bst_lineOne_child"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_alignStart="@+id/bst_head_child"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:background="@color/divider_salescard" />-->
+                <!--android:id="@+id/bst_lineOne_child"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_alignStart="@+id/bst_head_child"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="@color/divider_salescard" />-->
 
 
                 <!--SOH (U)-->
@@ -128,7 +128,8 @@
                         android:layout_weight="0.3"
                         android:singleLine="true"
                         android:text="SOH(U)"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
@@ -136,7 +137,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                     <TextView
                         android:id="@+id/target_SOH_U"
@@ -146,7 +148,8 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                 </LinearLayout>
 
@@ -167,7 +170,8 @@
                         android:layout_weight="0.3"
                         android:singleLine="true"
                         android:text="Target ROS(U)"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
@@ -175,7 +179,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                     <TextView
                         android:id="@+id/target_ROS_U"
@@ -185,11 +190,12 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                 </LinearLayout>
 
-              <!--ROS(U)-->
+                <!--ROS(U)-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -205,7 +211,8 @@
                         android:layout_weight="0.3"
                         android:singleLine="true"
                         android:text="ROS(U)"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
@@ -213,7 +220,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                     <TextView
                         android:id="@+id/target_ROS"
@@ -223,7 +231,8 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="5"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                 </LinearLayout>
 
@@ -243,7 +252,8 @@
                         android:layout_weight="0.3"
                         android:singleLine="true"
                         android:text="Availability%"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
@@ -251,7 +261,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                     <TextView
                         android:id="@+id/target_Availability"
@@ -261,7 +272,8 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="5"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
 
                 </LinearLayout>
 

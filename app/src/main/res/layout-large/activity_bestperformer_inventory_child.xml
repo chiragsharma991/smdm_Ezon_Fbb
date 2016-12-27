@@ -122,7 +122,8 @@
                     android:layout_height="@dimen/smdm_inflater_divider"
                     android:layout_alignStart="@+id/bst_head_child"
                     android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard" />
+                    android:background="@color/divider_salescard"
+                    />
 
 
                 <!--Promo sales-->

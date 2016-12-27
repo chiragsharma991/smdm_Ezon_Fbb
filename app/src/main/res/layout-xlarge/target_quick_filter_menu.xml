@@ -17,9 +17,9 @@
         <RelativeLayout
             android:id="@+id/quickFilter_BorderLayout"
             android:layout_width="200dp"
-            android:layout_marginTop="68dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="68dp"
             android:visibility="visible">
 
             <RelativeLayout
@@ -54,27 +54,27 @@
                         android:layout_marginLeft="10dp"
                         android:text="Quick Filter"
                         android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_quickfilter_title_large"
-                        />
+                        android:textSize="@dimen/smdm_quickfilter_title_large" />
                 </RelativeLayout>
 
             </RelativeLayout>
+
             <ScrollView
-                android:layout_below="@+id/relLayoutFilter"
-                android:layout_marginTop="29dp"
                 android:id="@+id/scrll_FilterLayout"
                 android:layout_width="185dp"
-                android:scrollbars="vertical"
-                android:fadeScrollbars="false"
-                android:scrollbarThumbVertical="@android:color/darker_gray"
-                android:scrollbarSize="3dp"
-                android:scrollIndicators="right"
-                android:scrollbarFadeDuration="0"
-                android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:layout_marginLeft="15dp"
                 android:layout_height="350dp"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true">
+                android:layout_below="@+id/relLayoutFilter"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="29dp"
+                android:fadeScrollbars="false"
+                android:scrollIndicators="right"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarFadeDuration="0"
+                android:scrollbarSize="3dp"
+                android:scrollbarThumbVertical="@android:color/darker_gray"
+                android:scrollbars="vertical">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -100,8 +100,7 @@
                                 android:layout_marginTop="5dp"
                                 android:text="Season Group"
                                 android:textColor="@color/smdm_quickfiltertxt_color"
-                                android:textSize="@dimen/smdm_quickfilter_title_large"
-                                />
+                                android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                         </LinearLayout>
 
@@ -131,8 +130,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Current"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -149,9 +147,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:buttonTint="@android:color/black"
-                                    android:focusable="true"
                                     android:checked="true"
-                                    />
+                                    android:focusable="true" />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -176,8 +173,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Previous"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -217,8 +213,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Old"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -259,8 +254,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Upcoming"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -290,11 +284,12 @@
                         <!--android:background="@color/divider_salescard" />-->
 
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_below="@+id/qfilter_seasonGpLayout"
                         android:id="@+id/qfilter_Time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/qfilter_seasonGpLayout"
                         android:background="@drawable/popupmenu"
                         android:orientation="vertical">
 
@@ -311,8 +306,7 @@
                                 android:layout_marginTop="5dp"
                                 android:text="Time"
                                 android:textColor="@color/smdm_quickfiltertxt_color"
-                                android:textSize="@dimen/smdm_quickfilter_title_large"
-                                />
+                                android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                         </LinearLayout>
 
@@ -342,8 +336,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="WTD"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -385,8 +378,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="L4W"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -429,8 +421,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="STD"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -447,9 +438,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:buttonTint="@android:color/black"
-                                    android:focusable="true"
                                     android:checked="true"
-                                    />
+                                    android:focusable="true" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -458,10 +448,10 @@
 
                     <!--Title-->
                     <LinearLayout
-                        android:layout_below="@+id/qfilter_Time"
                         android:id="@+id/qfilter_Title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/qfilter_Time"
                         android:background="@drawable/popupmenu"
                         android:orientation="vertical">
 
@@ -478,8 +468,7 @@
                                 android:layout_marginTop="5dp"
                                 android:text="Title"
                                 android:textColor="@color/smdm_quickfiltertxt_color"
-                                android:textSize="@dimen/smdm_quickfilter_title_large"
-                                />
+                                android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                         </LinearLayout>
 
@@ -509,8 +498,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Department"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -527,9 +515,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:buttonTint="@android:color/black"
-                                    android:focusable="true"
                                     android:checked="true"
-                                    />
+                                    android:focusable="true" />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -554,8 +541,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Category"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -595,8 +581,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Plan Class"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                                    />
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
 
@@ -619,10 +604,10 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_below="@+id/qfilter_Title"
                         android:id="@+id/qfilter_TargetROS"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/qfilter_Title"
                         android:background="@drawable/popupmenu"
                         android:orientation="vertical">
 
@@ -639,8 +624,7 @@
                                 android:layout_marginTop="5dp"
                                 android:text="Target Cover Req"
                                 android:textColor="@color/smdm_quickfiltertxt_color"
-                                android:textSize="@dimen/smdm_quickfilter_title_large"
-                                />
+                                android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                         </LinearLayout>
 
@@ -652,47 +636,90 @@
                             android:background="@color/divider_salescard" />
 
 
-
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
+                            android:orientation="horizontal"
                             android:layout_marginBottom="5dp"
+                            android:weightSum="5"
+                            android:gravity="center_horizontal"
                             >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:id="@+id/targetMin"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/smdm_quickfilter_title_large"
-                                android:text="2"
-                                android:layout_alignParentLeft="true"
-
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:id="@+id/targetMax"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/smdm_quickfilter_title_large"
-                                android:text="7"
-                                android:layout_alignParentRight="true"
-
-                                />
-                            <SeekBar
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/targetSeek"
-                                android:progressTint="@color/colorPrimary"
-                                android:thumbTint="@color/colorPrimary"
-                                android:progress="70"
-                                android:max="100"
+                                android:orientation="vertical"
+                                android:layout_weight="2.2"
+                                android:gravity="center"
+                                >
+                                <TextView
+                                    android:id="@+id/targetMin"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="2"
+                                    android:textSize="@dimen/smdm_quickfilter_title_large"
 
+                                    />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="0.6"
+                                android:gravity="center"
+                                >
+                                <SeekBar
+                                    android:id="@+id/targetSeek"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:max="100"
+                                    android:progress="70"
+                                    android:progressTint="@color/colorPrimary"
+                                    android:thumbTint="@color/colorPrimary"
+
+                                    >
+
+                                </SeekBar>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="2.2"
+                                android:gravity="center"
                                 >
 
+                                <TextView
+                                    android:id="@+id/targetMax"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="2dp"
+                                    android:text="7"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/smdm_quickfilter_title_large"
 
-                            </SeekBar>
+                                    />
 
-                        </RelativeLayout>
+
+                            </LinearLayout>
+
+
+
+
+
+
+
+
+
+                        </LinearLayout>
 
 
                     </LinearLayout>
@@ -705,11 +732,11 @@
 
 
             <RelativeLayout
-                android:layout_below="@+id/scrll_FilterLayout"
                 android:id="@+id/qfDoneLayout"
                 android:layout_width="184dp"
-                android:layout_marginLeft="15dp"
                 android:layout_height="25dp"
+                android:layout_below="@+id/scrll_FilterLayout"
+                android:layout_marginLeft="15dp"
                 android:background="@color/colorPrimary"
                 android:visibility="visible">
 
@@ -721,8 +748,7 @@
                     android:clickable="false"
                     android:text="Done"
                     android:textColor="@color/divider_salescard1"
-                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                    />
+                    android:textSize="@dimen/smdm_quickfilter_title_large" />
 
             </RelativeLayout>
 
