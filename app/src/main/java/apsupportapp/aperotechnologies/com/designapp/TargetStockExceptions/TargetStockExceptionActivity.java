@@ -59,16 +59,17 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     RelativeLayout target_BtnBack, target_BtnFilter, target_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
    FloorAvailabilityDetails targetStockDetails;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken, seasongroup = "All";
+    String userId, bearertoken, seasongroup = "Current";
     String TAG = "TargetStockExceptionActivity";
      int count = 0;
      int limit = 10;
     int offsetvalue = 0;
    int top = 10;
-   static int level = 1;
-    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming, checkWTD,checkL4W,checkYTD;
-    CheckBox checkDept,checkCategory,checkPlanClass,checktwo,checkthree,checkfour,checkfive;
+    static int level = 1;
+    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
+    CheckBox checktwo,checkthree,checkfour,checkfive;
     CheckBox checksix,checkseven,checkeight,checknine,checkten;
+    RadioButton checkDept,checkCategory,checkPlanClass,checkWTD,checkL4W,checkYTD;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
@@ -82,8 +83,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private SegmentedGroup target_segmented;
     private RadioButton target_fashion, target_core;
     private ToggleButton Toggle_target_fav;
-    private String corefashion = "Fashion",view = "WTD";
-    String checkSeasonGpVal = null, checkTimeVal = null,checkTitleVal=null,checkTargetROSVal=null;
+    private String corefashion = "Fashion",view = "STD";
+    String checkSeasonGpVal = null, checkTimeVal = null,checkTitleVal=null;
+    int checkTargetROSVal=7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +112,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             count = 0;
             top = 10;
             level = 1;
-            view = "WTD";
+            view = "STD";
             requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -124,7 +126,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void requestTargetStockExcepApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup +"&level="+level+"&view="+view ;
+        String url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup +"&level="+level+"&view="+view+"&targetros="+checkTargetROSVal ;
 
         Log.e(TAG, "URL" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -283,13 +285,13 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         checkOld = (CheckBox) findViewById(R.id.checkOld);
         checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
         //Time
-        checkWTD = (CheckBox) findViewById(R.id.checkWTD);
-        checkL4W = (CheckBox) findViewById(R.id.checkL4W);
-        checkYTD = (CheckBox) findViewById(R.id.checkYTD);
+        checkWTD = (RadioButton) findViewById(R.id.checkWTD);
+        checkL4W = (RadioButton) findViewById(R.id.checkL4W);
+        checkYTD = (RadioButton) findViewById(R.id.checkYTD);
         //Title
-        checkDept = (CheckBox) findViewById(R.id.checkDept);
-        checkCategory = (CheckBox) findViewById(R.id.checkCategory);
-        checkPlanClass = (CheckBox) findViewById(R.id.checkPlanClass);
+        checkDept = (RadioButton) findViewById(R.id.checkDept);
+        checkCategory = (RadioButton) findViewById(R.id.checkCategory);
+        checkPlanClass = (RadioButton) findViewById(R.id.checkPlanClass);
         //Target ROS
         checktwo = (CheckBox) findViewById(R.id.checktwo);
         checkthree = (CheckBox) findViewById(R.id.checkthree);
@@ -362,17 +364,17 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 quickFilterPopup.setVisibility(View.VISIBLE);
                 break;
             case R.id.quickFilter_baseLayout:
-                if (checkSeasonGpVal == null && checkTimeVal == null && checkTitleVal == null && checkTargetROSVal == null) {
-                    checkCurrent.setChecked(false);
+                if (checkSeasonGpVal == null && checkTimeVal == null && checkTitleVal == null) {
+                    checkCurrent.setChecked(true);
                     checkPrevious.setChecked(false);
                     checkOld.setChecked(false);
                     checkUpcoming.setChecked(false);
 
                     checkWTD.setChecked(false);
                     checkL4W.setChecked(false);
-                    checkYTD.setChecked(false);
+                    checkYTD.setChecked(true);
 
-                    checkDept.setChecked(false);
+                    checkDept.setChecked(true);
                     checkCategory.setChecked(false);
                     checkPlanClass.setChecked(false);
 
@@ -381,7 +383,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     checkfour.setChecked(false);
                     checkfive.setChecked(false);
                     checksix.setChecked(false);
-                    checkseven.setChecked(false);
+                    checkseven.setChecked(true);
                     checkeight.setChecked(false);
                     checknine.setChecked(false);
                     checkten.setChecked(false);
@@ -454,8 +456,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkCategory.setChecked(false);
                             break;
                     }
-                    switch (checkTargetROSVal.toString()) {
-                        case "Checktwo":
+                    switch (checkTargetROSVal) {
+                        case 2:
                             checktwo.setChecked(true);
                             checkthree.setChecked(false);
                             checkfour.setChecked(false);
@@ -467,7 +469,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkten.setChecked(false);
 
                             break;
-                        case "Checkthree":
+                        case 3:
                             checktwo.setChecked(false);
                             checkthree.setChecked(true);
                             checkfour.setChecked(false);
@@ -479,7 +481,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkten.setChecked(false);
 
                             break;
-                        case "Checkfour":
+                        case 4:
                             checktwo.setChecked(false);
                             checkthree.setChecked(false);
                             checkfour.setChecked(true);
@@ -491,7 +493,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkten.setChecked(false);
 
                             break;
-                        case "Checkfive":
+                        case 5:
                             checktwo.setChecked(false);
                             checkthree.setChecked(false);
                             checkfour.setChecked(false);
@@ -502,7 +504,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checknine.setChecked(false);
                             checkten.setChecked(false);
                             break;
-                        case "Checksix":
+                        case 6:
                             checktwo.setChecked(false);
                             checkthree.setChecked(false);
                             checkfour.setChecked(false);
@@ -513,7 +515,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checknine.setChecked(false);
                             checkten.setChecked(false);
                             break;
-                        case "Checkseven":
+                        case 7:
                             checktwo.setChecked(false);
                             checkthree.setChecked(false);
                             checkfour.setChecked(false);
@@ -524,7 +526,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checknine.setChecked(false);
                             checkten.setChecked(false);
                             break;
-                        case "Checkeight":
+                        case 8:
                             checktwo.setChecked(false);
                             checkthree.setChecked(false);
                             checkfour.setChecked(false);
@@ -535,7 +537,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checknine.setChecked(false);
                             checkten.setChecked(false);
                             break;
-                        case "Checknine":
+                        case 9:
                             checktwo.setChecked(false);
                             checkthree.setChecked(false);
                             checkfour.setChecked(false);
@@ -546,7 +548,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checknine.setChecked(true);
                             checkten.setChecked(false);
                             break;
-                        case "Checkten":
+                        case 10:
                             checktwo.setChecked(false);
                             checkthree.setChecked(false);
                             checkfour.setChecked(false);
@@ -622,49 +624,51 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 } else {
                     Log.e("Uncheck3","----"+checkTitleVal);
                 }
+
+
                 //Targer ROS
                 if (checktwo.isChecked()) {
                     //popuptwo();
-                    checkTargetROSVal = "Checktwo";
+                    checkTargetROSVal = 2;
                     quickFilterPopup.setVisibility(View.GONE);
                 } else if (checkthree.isChecked()) {
                     //popupthree();
-                     checkTargetROSVal = "Checkthree";
+                     checkTargetROSVal = 3;
                     quickFilterPopup.setVisibility(View.GONE);
 
                 } else if (checkfour.isChecked()) {
                     //popupfour();
-                    checkTargetROSVal = "Checkfour";
+                    checkTargetROSVal = 4;
                     quickFilterPopup.setVisibility(View.GONE);
                 }
                 else if (checkfive.isChecked()) {
                     //popupfive();
-                    checkTargetROSVal = "Checkfive";
+                    checkTargetROSVal = 5;
                     quickFilterPopup.setVisibility(View.GONE);
                 }
                 else if (checksix.isChecked()) {
                     //popupsix();
-                    checkTargetROSVal = "Checksix";
+                    checkTargetROSVal = 6;
                     quickFilterPopup.setVisibility(View.GONE);
                 }
                 else if (checkseven.isChecked()) {
                     //popupseven();
-                    checkTargetROSVal = "Checkseven";
+                    checkTargetROSVal =7;
                     quickFilterPopup.setVisibility(View.GONE);
                 }
                 else if (checkeight.isChecked()) {
                     //popupeight();
-                    checkTargetROSVal = "Checkeight";
+                    checkTargetROSVal = 8;
                     quickFilterPopup.setVisibility(View.GONE);
                 }
                 else if (checknine.isChecked()) {
                     //popupfour();
-                    checkTargetROSVal = "Checknine";
+                    checkTargetROSVal = 9;
                     quickFilterPopup.setVisibility(View.GONE);
                 }
                 else if (checkten.isChecked()) {
                     //popupfour();
-                    checkTargetROSVal = "Checkten";
+                    checkTargetROSVal = 10;
                     quickFilterPopup.setVisibility(View.GONE);
                 }
 
@@ -931,7 +935,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            view = "YTD";
+            view = "STD";
             targetStockList.clear();
             requestTargetStockExcepApi();
         } else {

@@ -65,8 +65,9 @@
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/target_imageBtnBack"
                         android:text="Target Stock Exceptions"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp" />
+                        android:textColor="@color/divider_salescard1"
+                        android:textSize="@dimen/smdm_header_title_large"
+                        />
 
 
 
@@ -104,8 +105,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store : "
-                    android:textColor="#920609"
-                    android:textSize="13sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/smdm_store_title_large"
+                    />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -114,8 +116,9 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
-                    android:textColor="#000000"
-                    android:textSize="13sp" />
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_large"
+                    />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -124,8 +127,9 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
-                    android:textColor="#000000"
-                    android:textSize="13sp" />
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_large"
+                    />
 
                 <RelativeLayout
                     android:id="@+id/target_quickFilter"
@@ -161,7 +165,7 @@
             android:orientation="horizontal"
             segmentedgroup:sc_border_width="1dp"
             segmentedgroup:sc_corner_radius="14dp"
-            segmentedgroup:sc_tint_color="#B73020">
+            segmentedgroup:sc_tint_color="@color/colorPrimary">
 
             <RadioButton
                 android:id="@+id/target_fashion"
@@ -169,7 +173,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#B73020"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="Fashion" />
 
             <RadioButton
@@ -194,30 +198,19 @@
                 android:layout_height="match_parent"
                 android:id="@+id/targetListView"
                 android:layout_marginTop="10dp"
-                android:dividerHeight="1dp"
-
-
-                >
+                android:dividerHeight="1dp">
 
             </ListView>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/smdm_divider"
                 android:background="@color/divider_salescard"
                 android:layout_marginTop="9dp"
                 >
 
             </View>
-
-
-
         </RelativeLayout>
-
-
-
     </LinearLayout>
-
     <include layout="@layout/target_quick_filter_menu">
-
     </include>
 </RelativeLayout>

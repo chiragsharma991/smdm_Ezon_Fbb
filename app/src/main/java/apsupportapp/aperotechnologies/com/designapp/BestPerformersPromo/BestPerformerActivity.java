@@ -88,6 +88,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_best_performer);
         getSupportActionBar().hide();
         initalise();
+        //test git 27dec
         Bst_txtStoreCode.setText("Not");
         Bst_txtStoreName.setText("Applicable");
         CheckBstSale.setChecked(true);
@@ -103,6 +104,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        BestPerformanceListView.setTag("FOOTER");
         Reusable_Functions.sDialog(this, "Loading.......");
         requestRunningPromoApi();
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
@@ -133,7 +135,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                    footer.setVisibility(View.GONE);
+                                    BestPerformanceListView.removeFooterView(footer);
+                                    BestPerformanceListView.setTag("FOOTER_REMOVE");
                                     if (BestpromoList.size() == 0) {
                                         BestPerformanceListView.setVisibility(View.GONE);
 
@@ -193,6 +196,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                 BestPerformanceListView.setVisibility(View.GONE);
                                 Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
+                                BestPerformanceListView.removeFooterView(footer);
+                                BestPerformanceListView.setTag("FOOTER_REMOVE");
                                 e.printStackTrace();
                                 Log.e(TAG, "catch...Error" + e.toString());
                             }
@@ -204,6 +209,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
+                            BestPerformanceListView.removeFooterView(footer);
+                            BestPerformanceListView.setTag("FOOTER_REMOVE");
                             error.printStackTrace();
                         }
                     }
@@ -233,6 +240,14 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
 
                     if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
+
+                        if (BestPerformanceListView.getTag().equals("FOOTER_REMOVE")) {
+                            BestPerformanceListView.addFooterView(footer);
+                            BestPerformanceListView.setTag("FOOTER_ADDED");
+
+                        }
+
+
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
                         requestRunningPromoApi();
@@ -250,6 +265,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             Reusable_Functions.hDialog();
+            BestPerformanceListView.removeFooterView(footer);
+            BestPerformanceListView.setTag("FOOTER_REMOVE");
 
         }
     }
@@ -317,7 +334,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                 startActivity(intent);
                 break;
             case R.id.checkPromoSale:
-
                 if (CheckBstSale.isChecked()) {
                     popupPromo();
                     CheckBstSaleU.setChecked(false);
@@ -326,7 +342,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                 } else {
 
                     Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
-
                 }
 
                 break;
@@ -348,7 +363,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     }
 
     private void popupPromo() {
-        BestpromoList.clear();
         Log.e(TAG, "bestPromolist size" + BestpromoList.size());
         popPromo = 10;
         limit = 10;
@@ -357,17 +371,17 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         orderbycol = 1;
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(this, "Loading.......");
+            BestpromoList.clear();
             requestRunningPromoApi();
         } else {
             Reusable_Functions.hDialog();
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            CheckBstSaleU.setChecked(false);
         }
-
 
     }
 
     private void popupPromoU() {
-        BestpromoList.clear();
         Log.e(TAG, "bestPromolist size" + BestpromoList.size());
         popPromo = 10;
         limit = 10;
@@ -376,6 +390,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         orderbycol = 2;
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(this, "Loading.......");
+            BestpromoList.clear();
             requestRunningPromoApi();
         } else {
             Reusable_Functions.hDialog();
@@ -411,8 +426,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                     BestpromoList.clear();
                     // bestPromoAdapter.notifyDataSetChanged();
                     BestPerformanceListView.setVisibility(View.GONE);
-                    Reusable_Functions.sDialog(this, "Loading.......");
                     if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.sDialog(this, "Loading.......");
                         requestRunningPromoApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -423,25 +438,24 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
 
                 break;
             case R.id.worstPromo:
-                    if (worstRadio.isChecked()) {
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        orderby = "ASC";
-                        lazyScroll = "OFF";
-                        BestpromoList.clear();
-                        //bestPromoAdapter.notifyDataSetChanged();
-                        BestPerformanceListView.setVisibility(View.GONE);
+                if (worstRadio.isChecked()) {
+                    limit = 10;
+                    offsetvalue = 0;
+                    top = 10;
+                    orderby = "ASC";
+                    lazyScroll = "OFF";
+                    BestpromoList.clear();
+                    //bestPromoAdapter.notifyDataSetChanged();
+                    BestPerformanceListView.setVisibility(View.GONE);
+                    if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(this, "Loading.......");
-                        if (Reusable_Functions.chkStatus(context)) {
-                            requestRunningPromoApi();
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
-                            BestPerformanceListView.setVisibility(View.GONE);
-                        }
+                        requestRunningPromoApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        BestPerformanceListView.setVisibility(View.GONE);
                     }
-
+                }
 
 
                 break;

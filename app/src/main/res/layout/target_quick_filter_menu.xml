@@ -53,8 +53,9 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:text="Quick Filter"
-                        android:textColor="#ffffff"
-                        android:textSize="17sp" />
+                        android:textColor="@color/divider_salescard1"
+                        android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                        />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -66,7 +67,7 @@
                 android:scrollbars="vertical"
                 android:fadeScrollbars="false"
                 android:scrollbarThumbVertical="@android:color/darker_gray"
-               android:scrollbarSize="3dp"
+                android:scrollbarSize="3dp"
                 android:scrollIndicators="right"
                 android:scrollbarFadeDuration="0"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
@@ -98,15 +99,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Season Group"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp" />
+                                android:textColor="@color/smdm_quickfiltertxt_color"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                />
 
                         </LinearLayout>
 
                         <View
                             android:id="@+id/bst_lineOne_child"
                             android:layout_width="match_parent"
-                            android:layout_height="2dp"
+                            android:layout_height="@dimen/smdm_quickfilter_divider"
                             android:layout_marginTop="5dp"
                             android:background="@color/divider_salescard" />
 
@@ -129,7 +131,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Current"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -146,7 +149,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
+                                    android:focusable="true"
+                                    android:checked="true"
+                                    />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -171,7 +176,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Previous"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -211,7 +217,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Old"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -252,7 +259,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Upcoming"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -302,8 +310,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Time"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp" />
+                                android:textColor="@color/smdm_quickfiltertxt_color"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                />
 
                         </LinearLayout>
 
@@ -313,7 +322,7 @@
                             android:layout_height="2dp"
                             android:layout_marginTop="5dp"
                             android:background="@color/divider_salescard" />
-                      <!--WTD-->
+                        <!--WTD-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -333,7 +342,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="WTD"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -345,7 +355,7 @@
                                 android:orientation="vertical">
 
 
-                                <CheckBox
+                                <RadioButton
                                     android:id="@+id/checkWTD"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -375,7 +385,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="L4W"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -387,7 +398,7 @@
                                 android:orientation="vertical">
 
 
-                                <CheckBox
+                                <RadioButton
                                     android:id="@+id/checkL4W"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -418,7 +429,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="STD"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -430,12 +442,14 @@
                                 android:orientation="vertical">
 
 
-                                <CheckBox
+                                <RadioButton
                                     android:id="@+id/checkYTD"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
+                                    android:focusable="true"
+                                    android:checked="true"
+                                    />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -463,8 +477,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Title"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp" />
+                                android:textColor="@color/smdm_quickfiltertxt_color"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                />
 
                         </LinearLayout>
 
@@ -494,7 +509,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Department"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -506,12 +522,14 @@
                                 android:orientation="vertical">
 
 
-                                <CheckBox
+                                <RadioButton
                                     android:id="@+id/checkDept"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
+                                    android:focusable="true"
+                                    android:checked="true"
+                                    />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -536,7 +554,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Category"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -548,7 +567,7 @@
                                 android:orientation="vertical">
 
 
-                                <CheckBox
+                                <RadioButton
                                     android:id="@+id/checkCategory"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -576,7 +595,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Plan Class"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -588,7 +608,7 @@
                                 android:orientation="vertical">
 
 
-                                <CheckBox
+                                <RadioButton
                                     android:id="@+id/checkPlanClass"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -617,9 +637,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="Target ROS"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp" />
+                                android:text="Target Cover Req"
+                                android:textColor="@color/smdm_quickfiltertxt_color"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                />
 
                         </LinearLayout>
 
@@ -649,7 +670,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="2"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -691,7 +713,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="3"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -730,7 +753,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="4"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -770,7 +794,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="5"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -810,7 +835,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="6"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -850,7 +876,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="7"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -867,7 +894,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:buttonTint="@android:color/black"
-                                    android:focusable="true" />
+                                    android:focusable="true"
+                                    android:checked="true"
+                                    />
                             </LinearLayout>
                         </LinearLayout>
                         <!--Eight-->
@@ -890,7 +919,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="8"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -930,7 +960,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="9"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -970,7 +1001,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="10"
-                                    android:textSize="14sp" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -1021,8 +1053,9 @@
                     android:background="@color/colorPrimary"
                     android:clickable="false"
                     android:text="Done"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp" />
+                    android:textColor="@color/divider_salescard1"
+                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                    />
 
             </RelativeLayout>
 

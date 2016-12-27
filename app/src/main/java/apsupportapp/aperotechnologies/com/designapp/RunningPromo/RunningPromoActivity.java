@@ -79,6 +79,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        //Running testing
         Reusable_Functions.sDialog(this, "Loading.......");
         requestRunningPromoApi();
 

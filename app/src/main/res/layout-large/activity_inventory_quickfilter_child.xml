@@ -53,7 +53,8 @@
                         android:layout_marginLeft="10dp"
                         android:text="Quick Filter"
                         android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_quickfilter_title_large" />
+                        android:textSize="@dimen/smdm_quickfilter_title_large"
+                        />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -453,7 +454,8 @@
                     android:clickable="false"
                     android:text="Done"
                     android:textColor="@color/divider_salescard1"
-                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                    android:textSize="@dimen/smdm_quickfilter_title_large"
+                    />
 
             </RelativeLayout>
         </RelativeLayout>
