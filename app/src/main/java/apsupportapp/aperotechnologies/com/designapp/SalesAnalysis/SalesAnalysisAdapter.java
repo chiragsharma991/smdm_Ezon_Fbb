@@ -74,7 +74,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
     //private ValueFilter valueFilter;
 
-    public SalesAnalysisAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, String fromwhere, ListView listView_SalesAnalysis) {
+    public SalesAnalysisAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, ListView listView_SalesAnalysis) {
 
         Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;

@@ -38,6 +38,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
     SalesAnalysisViewPagerValue salesAnalysis;
     ViewPager vwpagersales;
     LinearLayout lldots;
+    int currentIndex;
     SalesAnalysisAdapter salesadapter;
     ListView listView_SalesAnalysis;
     LayoutInflater inflater;
@@ -377,7 +378,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                         Log.e("-----", "All");
                         salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
                         salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                         listView_SalesAnalysis.setAdapter(salesadapter);
                         salesadapter.notifyDataSetChanged();
                     }
@@ -389,7 +390,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                         Log.e("-----", "All");
                         salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
                         salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                         listView_SalesAnalysis.setAdapter(salesadapter);
                         salesadapter.notifyDataSetChanged();
                     }
@@ -401,7 +402,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                         Log.e("-----", "All");
                         salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
                         salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                         listView_SalesAnalysis.setAdapter(salesadapter);
                         salesadapter.notifyDataSetChanged();
                     }
@@ -413,7 +414,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                         Log.e("-----", "All");
                         salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
                         salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                         listView_SalesAnalysis.setAdapter(salesadapter);
                         salesadapter.notifyDataSetChanged();
                     }
@@ -425,7 +426,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                         Log.e("-----", "All");
                         salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
                         salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                         listView_SalesAnalysis.setAdapter(salesadapter);
                         salesadapter.notifyDataSetChanged();
                     }

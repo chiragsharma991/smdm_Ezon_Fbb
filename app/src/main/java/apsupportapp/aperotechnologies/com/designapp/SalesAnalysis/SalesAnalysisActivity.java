@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -236,9 +235,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             limit = 100;
             count = 0;
             level = 1;
-            currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-            View v = listView_SalesAnalysis.getChildAt(0);
-            top = (v == null) ? 0 : (v.getTop() - listView_SalesAnalysis.getPaddingTop());
+            //currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
             requestSalesListDisplayAPI();
 
             Log.e("state on create",""+state);
@@ -955,17 +952,19 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 }
 
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
-                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
-
-                                listView_SalesAnalysis.setAdapter(salesadapter);
+                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context,currentIndex, fromWhere, listView_SalesAnalysis);
                                 Log.e(TAG,"focusPosition in API----"+currentIndex);
 
                                 listView_SalesAnalysis.setSelection(currentIndex);
                                 listView_SalesAnalysis.smoothScrollToPosition(currentIndex);
-
-
-                                Log.e("Current Index",""+currentIndex);
-
+                                if(listView_SalesAnalysis.getAdapter() == null)
+                                {
+                                    listView_SalesAnalysis.setAdapter(salesadapter);
+                                }
+                                else
+                                {
+                                    salesadapter.notifyDataSetChanged();
+                                }
                                 txtStoreCode.setText("" + salesAnalysisClassArrayList.get(i).getStoreCode());
                                // Log.e("storecode", "------" + salesAnalysisClassArrayList.get(1).getStoreCode());
                                 txtStoreDesc.setText("" + salesAnalysisClassArrayList.get(i).getStoreDesc());
@@ -1272,7 +1271,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
-                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 flag = true;
                                 salesadapter.notifyDataSetChanged();
@@ -1374,7 +1373,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
-                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 flag = true;
                                 salesadapter.notifyDataSetChanged();
@@ -1476,7 +1475,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
-                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
                                 flag = true;
@@ -1585,7 +1584,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
-                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
 
@@ -1656,7 +1655,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisClassArrayList.get(0);
         salesAnalysisClass.setPvaAchieved(pvaachieved);
         salesAnalysisClassArrayList.add(0, salesAnalysisClass);
-        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
         listView_SalesAnalysis.setAdapter(salesadapter);
 
 

@@ -73,7 +73,7 @@ public class SalesPvAAdapter extends BaseAdapter {
     CombinedData pvaData;
 
 
-    public SalesPvAAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList,  Context context, String fromWhere, ListView listViewSalesPvA) {
+    public SalesPvAAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList, Context context, int currentIndex, String fromWhere, ListView listViewSalesPvA) {
         this.context = context;
         this.salesAnalysisListDisplayArrayList = salesAnalysisListDisplayArrayList;
         this.fromWhere = fromWhere;

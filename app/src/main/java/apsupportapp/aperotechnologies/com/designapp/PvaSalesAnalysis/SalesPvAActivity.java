@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -40,16 +39,10 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 //import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.gson.Gson;
 
@@ -60,11 +53,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesPagerAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
@@ -94,7 +85,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     ListView listViewSalesPvA;
     int focusposition, selFirstPositionValue;
     //CombinedData data;
-    LineData lineData = new LineData();
     int level;
     SalesAnalysisListDisplay salesAnalysisListDisplay;
     SalesPvAAnalysisWeek salesPvAAnalysisWeek;
@@ -110,6 +100,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     static String planDept, planCategory, planClass;
     TextView txtpvahDeptName, txtpvahCategory, txtpvahPlanClass, txtpvahBrand;
     String pvaVal;
+    int currentIndex;
     boolean flag = false;
     View footer;
 
@@ -612,6 +603,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     if (view.getFirstVisiblePosition() <= salesAnalysisClassArrayList.size() - 1) {
                         focusposition = view.getFirstVisiblePosition();
                         listViewSalesPvA.setSelection(view.getFirstVisiblePosition());
+                        currentIndex = listViewSalesPvA.getFirstVisiblePosition();
+
                         //Log.e("focusposition", " " + firstVisibleItem + " " + productNameBeanArrayList.get(firstVisibleItem).getProductName());
                         if (txtheaderplanclass.getText().toString().equals("Department")) {
                             pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
@@ -750,6 +743,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 //          relChartLayout.setVisibility(View.GONE);
                 llpvahierarchy.setVisibility(View.GONE);
                 llayoutSalesPvA.setVisibility(View.GONE);
+                currentIndex = listViewSalesPvA.getFirstVisiblePosition();
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
@@ -775,6 +769,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 //        relChartLayout.setVisibility(View.GONE);
                 llpvahierarchy.setVisibility(View.GONE);
                 llayoutSalesPvA.setVisibility(View.GONE);
+                currentIndex = listViewSalesPvA.getFirstVisiblePosition();
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
@@ -943,10 +938,22 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 }
 
                                 salesAnalysisClassArrayList.add(0, salesAnalysisListDisplay);
+                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context,currentIndex, fromWhere, listViewSalesPvA);
+
+                                Log.e("","focusPosition in API----"+currentIndex);
+
+                                listViewSalesPvA.setSelection(currentIndex);
+                                listViewSalesPvA.smoothScrollToPosition(currentIndex);
+                                if(listViewSalesPvA.getAdapter() == null)
+                                {
+                                    listViewSalesPvA.setAdapter(salesPvAAdapter);
+                                }
+                                else
+                                {
+                                    salesPvAAdapter.notifyDataSetChanged();
+                                }
 
 
-                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
-                                listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
 
@@ -1343,7 +1350,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
 
-                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
+                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
                                 flag = true;
@@ -1431,7 +1438,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
 
-                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
+                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
                                 flag = true;
@@ -1519,7 +1526,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
 
-                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
+                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
                                 flag = true;
@@ -1609,7 +1616,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
 
-                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, fromWhere, listViewSalesPvA);
+                                salesPvAAdapter = new SalesPvAAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
