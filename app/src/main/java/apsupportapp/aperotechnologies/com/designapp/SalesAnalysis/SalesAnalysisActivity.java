@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -70,7 +71,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     SharedPreferences sharedPreferences;
     String userId, bearertoken;
     EditText etListText;
-    boolean value=true;
+
     RelativeLayout btnBack;
     RadioButton btnWTD;
     public static String selectedsegValue;
@@ -90,13 +91,14 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     TextView txtZonalSales, txtNationalSales;
     TextView txtZonalYOY, txtNationalYOY;
     TextView txthDeptName, txthCategory, txthPlanClass, txthBrand;
-    TextView txthDeptNameNext, txthCategoryNext, txthPlanClassNext, txthBrandNext;
+    View view;
     int selFirstPositionValue = 0;
     String txtSalesClickedValue;
     String val;
     boolean flag = false;
     int currentVmPos;
-    int currentIndex ,top,selectedIndex;
+    int currentIndex ,top;
+    Parcelable state;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -214,7 +216,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         lldots.setOrientation(LinearLayout.HORIZONTAL);
         llhierarchy = (LinearLayout) findViewById(R.id.llhierarchy);
         llhierarchy.setOrientation(LinearLayout.HORIZONTAL);
-
         relLayoutSales = (RelativeLayout) findViewById(R.id.relTablelayout);
 
         listView_SalesAnalysis = (ListView) findViewById(R.id.listView_SalesAnalysis);
@@ -235,7 +236,12 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             limit = 100;
             count = 0;
             level = 1;
+            currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
+            View v = listView_SalesAnalysis.getChildAt(0);
+            top = (v == null) ? 0 : (v.getTop() - listView_SalesAnalysis.getPaddingTop());
             requestSalesListDisplayAPI();
+
+            Log.e("state on create",""+state);
 
         } else {
 
@@ -527,21 +533,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                         focusposition = view.getFirstVisiblePosition();
 
-                        currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-                        View v = listView_SalesAnalysis.getChildAt(0);
-                        top = (v == null) ? 0 : (v.getTop() - listView_SalesAnalysis.getPaddingTop());
-                        Log.e("Top",""+top);
-// ...
-
-                       // restore index and position
-                        listView_SalesAnalysis.setSelectionFromTop(currentIndex, top);
-                        Log.e("Current Index",""+currentIndex);
-
-
                         listView_SalesAnalysis.setSelection(view.getFirstVisiblePosition());
+                        currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
                         //Log.e("firstVisibleItem", " " + view.getFirstVisiblePosition() + " " + arrayList.get(view.getFirstVisiblePosition()).getPlanDept());
-                        currentIndex = focusposition;
-                        Log.i(TAG,"focusPosition----"+focusposition);
+//                        currentIndex = focusposition;
+                        Log.e(TAG,"focusPosition----"+currentIndex);
                         if (txtheaderplanclass.getText().toString().equals("Department")) {
                             saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
                         } else if (txtheaderplanclass.getText().toString().equals("Category")) {
@@ -719,7 +715,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             if (flag == true) {
                                 relnextbtn.setVisibility(View.INVISIBLE);
                                 txtheaderplanclass.setText("Brand Plan Class");
-
                                 llayoutSalesAnalysis.setVisibility(View.GONE);
                                 //String brnd = salesAnalysisClassArrayList.get(position).getBrandName().substring(0,1).toUpperCase()+salesAnalysisClassArrayList.get(position).getBrandName().substring(1).toLowerCase();
                                 txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
@@ -754,8 +749,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 }
             }
         });
-
     }
+
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -764,7 +759,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             case R.id.btnWTD:
                 if (selectedsegValue.equals("WTD"))
                     break;
-
                 selectedsegValue = "WTD";
                 //SalesPagerAdapter.currentPage = 0;
                 if (lldots != null) {
@@ -772,8 +766,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 }
                 llhierarchy.setVisibility(View.GONE);
                 currentVmPos= vwpagersales.getCurrentItem();
-
                 Log.e(TAG, "currentVmPos: "+currentVmPos );
+                currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
+                Log.e(TAG," in WTD foucpos"+currentIndex);
+                // save position here, and set position on API call's onPostexecute that scroll pos will get on Scroll method??
                 saleFirstVisibleItem = " ";
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
@@ -785,12 +781,12 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     limit = 100;
                     count = 0;
                     requestSalesListDisplayAPI();
-
-                } else {
+                }
+                else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 Log.e("---1---", " ");
-
                 break;
 
             case R.id.btnLW:
@@ -801,29 +797,28 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
-
-                currentIndex = focusposition;
-                Log.e(TAG,"focuspos--"+focusposition);
                 currentVmPos= vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
+                currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
+                Log.e(TAG," in LW foucpos"+currentIndex);
                 saleFirstVisibleItem = " ";
+
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                 llayoutSalesAnalysis.setVisibility(View.GONE);
                 if (Reusable_Functions.chkStatus(context)) {
-
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading data...");
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
                     requestSalesListDisplayAPI();
-
-                } else {
+                }
+                else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 Log.e("---2---", " ");
-
                 break;
 
             case R.id.btnL4W:
@@ -834,17 +829,16 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
-                currentIndex = focusposition;
                 currentVmPos= vwpagersales.getCurrentItem();
-
                 llhierarchy.setVisibility(View.GONE);
+                currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
+                Log.e(TAG," in L4W foucpos"+currentIndex);
                 saleFirstVisibleItem = " ";
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                 llayoutSalesAnalysis.setVisibility(View.GONE);
-
-                if (Reusable_Functions.chkStatus(context)) {
-
+                if (Reusable_Functions.chkStatus(context))
+                {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading data...");
                     offsetvalue = 0;
@@ -852,7 +846,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     count = 0;
                     requestSalesListDisplayAPI();
 
-                } else {
+                } else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 Log.e("---3---", " ");
@@ -867,24 +862,25 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
-                currentIndex = focusposition;
-                Log.e("YTD",""+focusposition);
                 currentVmPos= vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
+                currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
+                Log.e(TAG," in YTD foucpos"+currentIndex);
                 saleFirstVisibleItem = " ";
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                 llayoutSalesAnalysis.setVisibility(View.GONE);
-                if (Reusable_Functions.chkStatus(context)) {
-
+                if (Reusable_Functions.chkStatus(context))
+                {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading data...");
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
                     requestSalesListDisplayAPI();
-
-                } else {
+                }
+                else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 Log.e("---4---", " ");
@@ -960,10 +956,18 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
                                 salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, fromWhere, listView_SalesAnalysis);
+
                                 listView_SalesAnalysis.setAdapter(salesadapter);
+                                Log.e(TAG,"focusPosition in API----"+currentIndex);
+
+                                listView_SalesAnalysis.setSelection(currentIndex);
+                                listView_SalesAnalysis.smoothScrollToPosition(currentIndex);
+
+
+                                Log.e("Current Index",""+currentIndex);
 
                                 txtStoreCode.setText("" + salesAnalysisClassArrayList.get(i).getStoreCode());
-                                Log.e("storecode", "------" + salesAnalysisClassArrayList.get(1).getStoreCode());
+                               // Log.e("storecode", "------" + salesAnalysisClassArrayList.get(1).getStoreCode());
                                 txtStoreDesc.setText("" + salesAnalysisClassArrayList.get(i).getStoreDesc());
                                 //llayoutSalesAnalysis.setVisibility(View.VISIBLE);
                                 offsetvalue = 0;
@@ -1657,6 +1661,4 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
 
     }
-
-
 }
