@@ -3,7 +3,7 @@
     android:id="@+id/quickFilterPopup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <!--base layout for click anywhere-->
 
@@ -109,21 +109,18 @@
                             android:layout_height="2dp"
                             android:layout_marginTop="5dp"
                             android:background="@color/divider_salescard" />
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:orientation="horizontal"
                             android:weightSum="10">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_weight="3"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:id="@+id/txtpopCurrent"
                                     android:layout_width="wrap_content"
@@ -132,15 +129,12 @@
                                     android:textSize="14sp" />
 
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="7"
                                 android:gravity="end"
                                 android:orientation="vertical">
-
-
                                 <CheckBox
                                     android:id="@+id/checkCurrent"
                                     android:layout_width="wrap_content"
@@ -262,8 +256,6 @@
                                 android:layout_weight="7"
                                 android:gravity="end"
                                 android:orientation="vertical">
-
-
                                 <CheckBox
                                     android:id="@+id/checkUpcoming"
                                     android:layout_width="wrap_content"
@@ -343,18 +335,14 @@
                                 android:layout_weight="7"
                                 android:gravity="end"
                                 android:orientation="vertical">
-
-
                                 <CheckBox
                                     android:id="@+id/checkWTD"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:buttonTint="@android:color/black"
                                     android:focusable="true" />
-
                             </LinearLayout>
                         </LinearLayout>
-
                         <!--L4W-->
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -362,7 +350,6 @@
                             android:layout_marginLeft="20dp"
                             android:orientation="horizontal"
                             android:weightSum="10">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -376,17 +363,13 @@
                                     android:layout_height="wrap_content"
                                     android:text="L4W"
                                     android:textSize="14sp" />
-
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="7"
                                 android:gravity="end"
                                 android:orientation="vertical">
-
-
                                 <CheckBox
                                     android:id="@+id/checkL4W"
                                     android:layout_width="wrap_content"
@@ -395,17 +378,13 @@
                                     android:focusable="true" />
                             </LinearLayout>
                         </LinearLayout>
-
-
                         <!--YTD-->
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:orientation="horizontal"
                             android:weightSum="10">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -428,8 +407,6 @@
                                 android:layout_weight="7"
                                 android:gravity="end"
                                 android:orientation="vertical">
-
-
                                 <CheckBox
                                     android:id="@+id/checkYTD"
                                     android:layout_width="wrap_content"
@@ -438,8 +415,6 @@
                                     android:focusable="true" />
                             </LinearLayout>
                         </LinearLayout>
-
-
                     </LinearLayout>
 
                     <!--Title-->
@@ -586,8 +561,6 @@
                                 android:layout_weight="7"
                                 android:gravity="end"
                                 android:orientation="vertical">
-
-
                                 <CheckBox
                                     android:id="@+id/checkPlanClass"
                                     android:layout_width="wrap_content"
@@ -652,15 +625,12 @@
                                     android:textSize="14sp" />
 
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="7"
                                 android:gravity="end"
                                 android:orientation="vertical">
-
-
                                 <CheckBox
                                     android:id="@+id/checktwo"
                                     android:layout_width="wrap_content"
@@ -844,7 +814,6 @@
                                 android:layout_gravity="center"
                                 android:layout_weight="3"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:id="@+id/txtseven"
                                     android:layout_width="wrap_content"
@@ -853,15 +822,12 @@
                                     android:textSize="14sp" />
 
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="7"
                                 android:gravity="end"
                                 android:orientation="vertical">
-
-
                                 <CheckBox
                                     android:id="@+id/checkseven"
                                     android:layout_width="wrap_content"
@@ -877,30 +843,25 @@
                             android:layout_marginLeft="20dp"
                             android:orientation="horizontal"
                             android:weightSum="10">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_weight="3"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:id="@+id/txteight"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="8"
                                     android:textSize="14sp" />
-
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="7"
                                 android:gravity="end"
                                 android:orientation="vertical">
-
 
                                 <CheckBox
                                     android:id="@+id/checkeight"
@@ -997,11 +958,7 @@
                             android:background="@color/divider_salescard" />
 
                     </LinearLayout>
-
-
                 </RelativeLayout>
-
-
             </ScrollView>
 
 

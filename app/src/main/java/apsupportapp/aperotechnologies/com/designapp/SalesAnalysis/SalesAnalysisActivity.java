@@ -96,7 +96,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     String val;
     boolean flag = false;
     int currentVmPos;
-    int currentIndex ,top;
+    int currentIndex ,top,selectedIndex;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -530,7 +530,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
                         View v = listView_SalesAnalysis.getChildAt(0);
                         top = (v == null) ? 0 : (v.getTop() - listView_SalesAnalysis.getPaddingTop());
-
+                        Log.e("Top",""+top);
 // ...
 
                        // restore index and position
@@ -540,7 +540,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                         listView_SalesAnalysis.setSelection(view.getFirstVisiblePosition());
                         //Log.e("firstVisibleItem", " " + view.getFirstVisiblePosition() + " " + arrayList.get(view.getFirstVisiblePosition()).getPlanDept());
-
+                        currentIndex = focusposition;
+                        Log.i(TAG,"focusPosition----"+focusposition);
                         if (txtheaderplanclass.getText().toString().equals("Department")) {
                             saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
                         } else if (txtheaderplanclass.getText().toString().equals("Category")) {
@@ -769,7 +770,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
-                listView_SalesAnalysis.setSelectionFromTop(currentIndex,top);
+                currentIndex = focusposition;
                 llhierarchy.setVisibility(View.GONE);
                 currentVmPos= vwpagersales.getCurrentItem();
                 Log.e(TAG, "currentVmPos: "+currentVmPos );
@@ -800,7 +801,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
-                listView_SalesAnalysis.setSelectionFromTop(currentIndex,top);
+
+                currentIndex = focusposition;
                 currentVmPos= vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
                 saleFirstVisibleItem = " ";
@@ -831,8 +833,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
-                listView_SalesAnalysis.setSelectionFromTop(currentIndex,top);
+                currentIndex = focusposition;
                 currentVmPos= vwpagersales.getCurrentItem();
+
                 llhierarchy.setVisibility(View.GONE);
                 saleFirstVisibleItem = " ";
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -863,8 +866,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
-                listView_SalesAnalysis.setSelection(currentIndex);
-                Log.e("YTD",""+currentIndex);
+                currentIndex = focusposition;
+                Log.e("YTD",""+focusposition);
                 currentVmPos= vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
                 saleFirstVisibleItem = " ";
