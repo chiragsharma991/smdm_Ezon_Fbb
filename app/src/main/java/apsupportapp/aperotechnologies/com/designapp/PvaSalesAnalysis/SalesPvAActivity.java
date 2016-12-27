@@ -111,6 +111,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     TextView txtpvahDeptName, txtpvahCategory, txtpvahPlanClass, txtpvahBrand;
     String pvaVal;
     boolean flag = false;
+    View footer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -200,8 +201,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         Log.e("text value", "" + txtheaderplanclass.getText().toString());
 
         listViewSalesPvA = (ListView) findViewById(R.id.list);
-        listViewSalesPvA.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
-
+        footer = getLayoutInflater().inflate(R.layout.list_footer, null);
+        listViewSalesPvA.addFooterView(footer);
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
@@ -463,134 +464,142 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         listViewSalesPvA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (txtheaderplanclass.getText().toString()) {
+                  if(position < salesAnalysisClassArrayList.size()){
+                    switch (txtheaderplanclass.getText().toString()) {
 
-                    case "Department":
-                        btnSalesPrev.setVisibility(View.VISIBLE);
-                        txtheaderplanclass.setText("Category");
-                        txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
+                        case "Department":
+
+                            btnSalesPrev.setVisibility(View.VISIBLE);
+                            txtheaderplanclass.setText("Category");
+                            txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
 //                        relChartLayout.setVisibility(View.GONE);
-                        Log.e("txtClicked department--", "" + txtPvAClickedValue);
-                        llayoutSalesPvA.setVisibility(View.GONE);
-                        fromWhere = "Category";
-                        level = 2;
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            salesAnalysisClassArrayList.clear();
-                            Log.i("dept next", "-----");
-                            requestSalesPvACategoryList(txtPvAClickedValue);
-                            planDept = txtPvAClickedValue;
+                            Log.e("txtClicked department--", "" + txtPvAClickedValue);
+                            footer.setVisibility(View.GONE);
+                            llayoutSalesPvA.setVisibility(View.GONE);
+                            fromWhere = "Category";
+                            level = 2;
+                            if (Reusable_Functions.chkStatus(context)) {
+                                Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                salesAnalysisClassArrayList.clear();
+                                Log.i("dept next", "-----");
+                                requestSalesPvACategoryList(txtPvAClickedValue);
+                                planDept = txtPvAClickedValue;
 
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
+                            } else {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
 
-                    case "Category":
-                        Log.e("in pva category", "-----" + planDept);
+                        case "Category":
+                            Log.e("in pva category", "-----" + planDept);
 
-                        if (flag == true) {
+                            if (flag == true) {
 
-                            txtheaderplanclass.setText("Plan Class");
+                                txtheaderplanclass.setText("Plan Class");
 //                            relChartLayout.setVisibility(View.GONE);
-                            llayoutSalesPvA.setVisibility(View.GONE);
-                            txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
-                            Log.e("txtClicked category --", "" + txtPvAClickedValue);
-                            fromWhere = "Plan Class";
-                            level = 3;
-                            if (Reusable_Functions.chkStatus(context)) {
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                salesAnalysisClassArrayList.clear();
-                                Log.i("category next", "-----");
-                                Log.i("come", "----" + planDept);
-                                requestSalesPvAPlanClassListAPI(planDept, txtPvAClickedValue);
-                                planCategory = txtPvAClickedValue;
-                                Log.e("planCategory--", "" + planCategory);
+                                llayoutSalesPvA.setVisibility(View.GONE);
+                                txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
+                                Log.e("txtClicked category --", "" + txtPvAClickedValue);
+                                fromWhere = "Plan Class";
+                                level = 3;
+                                if (Reusable_Functions.chkStatus(context)) {
+                                    Reusable_Functions.hDialog();
+                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    salesAnalysisClassArrayList.clear();
+                                    Log.i("category next", "-----");
+                                    Log.i("come", "----" + planDept);
+                                    requestSalesPvAPlanClassListAPI(planDept, txtPvAClickedValue);
+                                    planCategory = txtPvAClickedValue;
+                                    Log.e("planCategory--", "" + planCategory);
+                                } else {
+                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                Log.e("Please Select dept name", "------1");
                             }
-                        } else {
-                            Log.e("Please Select dept name", "------1");
-                        }
 
-                        break;
-                    case "Plan Class":
-                        Log.e("in sales pva plan class", "-----" + planDept);
+                            break;
+                        case "Plan Class":
+                            Log.e("in sales pva plan class", "-----" + planDept);
 
-                        if (flag == true) {
+                            if (flag == true) {
 
-                            txtheaderplanclass.setText("Brand");
-                            //                          relChartLayout.setVisibility(View.GONE);
-                            llayoutSalesPvA.setVisibility(View.GONE);
-                            txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
-                            Log.e("txtClicked plan class---", "" + txtPvAClickedValue);
-                            fromWhere = "Brand";
-                            level = 4;
-                            if (Reusable_Functions.chkStatus(context)) {
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                salesAnalysisClassArrayList.clear();
-                                Log.i("Plan Class next", "-----");
-                                requestSalesPvABrandListAPI(planDept, planCategory, txtPvAClickedValue);
-                                planClass = txtPvAClickedValue;
-                                Log.e("planClass---", "" + planClass);
+                                txtheaderplanclass.setText("Brand");
+                                //                          relChartLayout.setVisibility(View.GONE);
+                                llayoutSalesPvA.setVisibility(View.GONE);
+                                txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
+                                Log.e("txtClicked plan class---", "" + txtPvAClickedValue);
+                                fromWhere = "Brand";
+                                level = 4;
+                                if (Reusable_Functions.chkStatus(context)) {
+                                    Reusable_Functions.hDialog();
+                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    salesAnalysisClassArrayList.clear();
+                                    Log.i("Plan Class next", "-----");
+                                    requestSalesPvABrandListAPI(planDept, planCategory, txtPvAClickedValue);
+                                    planClass = txtPvAClickedValue;
+                                    Log.e("planClass---", "" + planClass);
+                                } else {
+                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                Log.e("Please select dept name", "------2");
                             }
-                        } else {
-                            Log.e("Please select dept name", "------2");
-                        }
 
 
-                        break;
-                    case "Brand":
-                        Log.e("in sales pva brand ", "-----" + planDept);
+                            break;
+                        case "Brand":
+                            Log.e("in sales pva brand ", "-----" + planDept);
 
-                        if (flag == true) {
-                            btnSalesNext.setVisibility(View.INVISIBLE);
-                            txtheaderplanclass.setText("Brand Plan Class");
-                            //                        relChartLayout.setVisibility(View.GONE);
-                            llayoutSalesPvA.setVisibility(View.GONE);
-                            txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
-                            Log.e("txtSalesClickedValue3---", "" + txtPvAClickedValue);
-                            fromWhere = "Brand Plan Class";
-                            level = 5;
-                            if (Reusable_Functions.chkStatus(context)) {
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                salesAnalysisClassArrayList.clear();
-                                Log.i("brand next", "-----");
-                                requestSalesPvABrandPlanListAPI(planDept, planCategory, planClass, txtPvAClickedValue);
+                            if (flag == true) {
+                                btnSalesNext.setVisibility(View.INVISIBLE);
+                                txtheaderplanclass.setText("Brand Plan Class");
+                                //                        relChartLayout.setVisibility(View.GONE);
+                                llayoutSalesPvA.setVisibility(View.GONE);
+                                txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
+                                Log.e("txtSalesClickedValue3---", "" + txtPvAClickedValue);
+                                fromWhere = "Brand Plan Class";
+                                level = 5;
+                                if (Reusable_Functions.chkStatus(context)) {
+                                    Reusable_Functions.hDialog();
+                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    salesAnalysisClassArrayList.clear();
+                                    Log.i("brand next", "-----");
+                                    requestSalesPvABrandPlanListAPI(planDept, planCategory, planClass, txtPvAClickedValue);
 
+                                } else {
+                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                Log.e("Please select dept name", "---------3");
                             }
-                        } else {
-                            Log.e("Please select dept name", "---------3");
-                        }
 
-                        break;
-                    default:
-                        break;
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
             }
 
         });
+
+
+
+
 
         // list view on Scroll
         listViewSalesPvA.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -1110,6 +1119,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                 Log.e("lineChartData", "" + lineChartdata.getDataSetCount());
                                 lineChart.setTouchEnabled(true);
+                                lineChart.setScaleYEnabled(true);
+                                lineChart.setScaleXEnabled(true);
                                 //lineChart.setDoubleTapToZoomEnabled(false);
 
 
@@ -1254,8 +1265,11 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 lineChart.getXAxis().setDrawGridLines(false);
                                 lineChart.setDescription(null);
                                 lineChart.setTouchEnabled(true);
+                                lineChart.setScaleYEnabled(true);
+                                lineChart.setScaleXEnabled(true);
+
                                 // lineChart.setDoubleTapToZoomEnabled(false);
-                                //        relChartLayout.setVisibility(View.VISIBLE);
+                                // relChartLayout.setVisibility(View.VISIBLE);
                                 llayoutSalesPvA.setVisibility(View.VISIBLE);
 
                                 Reusable_Functions.hDialog();
@@ -1294,7 +1308,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
 
     }
-
 
     // drill down level API
     private void requestSalesPvACategoryList(final String deptName) {
