@@ -98,6 +98,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         setContentView(R.layout.activity_target_exception);
         getSupportActionBar().hide();
         initalise();
+        //testing git by chirag
         gson = new Gson();
         targetStockList = new ArrayList<FloorAvailabilityDetails>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
