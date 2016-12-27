@@ -770,9 +770,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
-                currentIndex = focusposition;
                 llhierarchy.setVisibility(View.GONE);
                 currentVmPos= vwpagersales.getCurrentItem();
+
                 Log.e(TAG, "currentVmPos: "+currentVmPos );
                 saleFirstVisibleItem = " ";
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -803,6 +803,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 }
 
                 currentIndex = focusposition;
+                Log.e(TAG,"focuspos--"+focusposition);
                 currentVmPos= vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
                 saleFirstVisibleItem = " ";

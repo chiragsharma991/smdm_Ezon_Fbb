@@ -943,7 +943,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        Log.e("Scroll Pos",""+position);
+       // Log.e("Scroll Pos",""+position);
 
     }
 
