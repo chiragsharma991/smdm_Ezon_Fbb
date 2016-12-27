@@ -57,7 +57,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             quickFilter_baseLayout, BestQfDoneLayout, BestQuickFilterBorder,SwitchRelay;
     RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
-    RadioButton BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming, CheckWTD, CheckL4W, CheckSTD;
+    CheckBox BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming;
+    RadioButton CheckWTD, CheckL4W, CheckSTD;
     String userId, bearertoken;
     String TAG = "SaleThruInventory";
     private int count = 0;
@@ -330,10 +331,10 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         quickFilterPopup.setVisibility(View.GONE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
 
-        BestCheckCurrent = (RadioButton) findViewById(R.id.bestCheckCurrent);
-        BestCheckPrevious = (RadioButton) findViewById(R.id.bestCheckPrevious);
-        BestCheckOld = (RadioButton) findViewById(R.id.bestCheckOld);
-        BestCheckUpcoming = (RadioButton) findViewById(R.id.bestCheckUpcoming);
+        BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
+        BestCheckPrevious = (CheckBox) findViewById(R.id.bestCheckPrevious);
+        BestCheckOld = (CheckBox) findViewById(R.id.bestCheckOld);
+        BestCheckUpcoming = (CheckBox) findViewById(R.id.bestCheckUpcoming);
         CheckWTD = (RadioButton) findViewById(R.id.checkWTD);
         CheckL4W = (RadioButton) findViewById(R.id.checkL4W);
         CheckSTD = (RadioButton) findViewById(R.id.checkSTD);

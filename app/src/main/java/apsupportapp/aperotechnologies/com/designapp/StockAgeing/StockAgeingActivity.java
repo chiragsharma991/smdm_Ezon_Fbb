@@ -66,7 +66,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming, checkAgeing1, checkAgeing2, checkAgeing3;
+    CheckBox  checkAgeing1, checkAgeing2, checkAgeing3;
+    RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
@@ -122,8 +123,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
     private void requestStockAgeingApi() {
 
-        //String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
-        String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
+        String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+       // String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
 
         Log.e(TAG, "URL" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -179,13 +180,16 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             }*/
 
                             if (lazyScroll.equals("ON")) {
+                                Log.i(TAG, "Set Lazy scroll and notify are ON : ");
                                 stockAgeingAdapter.notifyDataSetChanged();
                                 lazyScroll = "OFF";
                                 footer.setVisibility(View.GONE);
 
+
                             } else {
                                 stockAgeingAdapter = new StockAgeingAdapter(StockAgeingList, context);
                                 StockAgListView.setAdapter(stockAgeingAdapter);
+                                Log.i(TAG, "Set Adapter calling: ");
                                 stock_txtStoreCode.setText(StockAgeingList.get(0).getStoreCode());
                                 stock_txtStoreName.setText(StockAgeingList.get(0).getStoreDescription());
 
@@ -212,9 +216,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "Network problem has been found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Server Time Out", Toast.LENGTH_SHORT).show();
                         StockAgListView.removeFooterView(footer);
                         StockAgListView.setTag("FOOTER_REMOVE");
+                        Log.e(TAG, "onErrorResponse: "+error.getMessage().toString() );
                         error.printStackTrace();
                     }
                 }
@@ -251,6 +256,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     }
                     footer.setVisibility(View.VISIBLE);
                     lazyScroll = "ON";
+                    Log.i(TAG, "calling Scroll api: "+FirstVisibleItem+" "+VisibleItemCount+" "+TotalItemCount);
                     requestStockAgeingApi();
                     //Reusable_Functions.sDialog(context, "Loading data...");
                 }
@@ -285,10 +291,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         stock_fashion = (RadioButton) findViewById(R.id.stock_fashion);
         stock_fashion.toggle();
         Toggle_stock_fav = (ToggleButton) findViewById(R.id.toggle_top_fav);
-        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
-        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
-        checkOld = (CheckBox) findViewById(R.id.checkOld);
-        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
+        checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
+        checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
+        checkOld = (RadioButton) findViewById(R.id.checkOld);
+        checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
         checkAgeing1 = (CheckBox) findViewById(R.id.checkAgeing1);
         checkAgeing2 = (CheckBox) findViewById(R.id.checkAgeing2);
         checkAgeing3 = (CheckBox) findViewById(R.id.checkAgeing3);
@@ -382,7 +388,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             break;
                     }
 
-                    switch (checkAgeingVal.toString()) {
+                 /*   switch (checkAgeingVal.toString()) {
                         case "CheckAgeing1":
                             checkAgeing1.setChecked(true);
                             checkAgeing2.setChecked(false);
@@ -398,7 +404,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             checkAgeing2.setChecked(false);
                             checkAgeing1.setChecked(false);
                             break;
-                    }
+                    }*/
                 }
                 quickFilterPopup.setVisibility(View.GONE);
                 break;

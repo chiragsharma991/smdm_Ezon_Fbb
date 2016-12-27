@@ -27,8 +27,8 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="name"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 android:id="@+id/txtPromoName"
 
                 />
@@ -63,8 +63,8 @@
                 android:singleLine="true"
                 android:gravity="center"
                 android:text="02/09/93"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 android:id="@+id/txtstartDate"
 
                 />
@@ -96,8 +96,8 @@
                 android:text="02/09/93"
                 android:id="@+id/txtEndDate"
                 android:gravity="center"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 />
 
 
@@ -126,10 +126,10 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="02"
-                android:textColor="@android:color/black"
                 android:gravity="center"
                 android:id="@+id/txtDays"
-                android:textSize="12sp"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 />
 
 

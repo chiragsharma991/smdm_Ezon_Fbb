@@ -9,241 +9,7 @@
 
 
     <LinearLayout
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:background="#80000000"
-        android:id="@+id/rankLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:id="@+id/relrankLayout"
-            android:layout_width="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_height="match_parent">
-
-
-            <RelativeLayout
-                android:id="@+id/relpopuplayout"
-                android:layout_marginTop="150dp"
-                android:background="@drawable/popup_border"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-                <RelativeLayout
-                    android:id="@+id/relimgclose"
-                    android:gravity="right"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp">
-
-
-                    <ImageView
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
-                        android:clickable="false"
-                        android:background="@mipmap/pop_up_close_icon"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_marginTop="40dp"
-                    android:text="Rank"
-                    android:gravity="center"
-                    android:textColor="@color/text_sales"
-                    android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rank"/>
-
-
-                <View
-                    android:layout_margin="5dp"
-                    android:id="@+id/div1"
-                    android:layout_below="@+id/rank"
-                    android:background="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
-
-
-                <TextView
-                    android:id="@+id/txtsales"
-                    android:layout_below="@+id/div1"
-                    android:layout_margin="5dp"
-                    android:text="Selected filter sales / Total Store fashion Sales"
-                    android:gravity="center"
-                    android:textColor="@color/text_sales"
-                    android:textSize="14sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <View
-                    android:id="@+id/div2"
-                    android:layout_below="@+id/txtsales"
-                    android:background="@color/text_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
-
-
-                <LinearLayout
-                    android:id="@+id/zonalnational"
-                    android:orientation="horizontal"
-                    android:layout_below="@+id/div2"
-                    android:weightSum="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:layout_marginTop="20dp"
-                        android:text=""
-                        android:gravity="center"
-                        android:textColor="@color/darker_grey"
-                        android:textSize="14sp"
-                        android:padding="3dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:layout_marginTop="20dp"
-                        android:text="Zonal Rank"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:layout_marginTop="20dp"
-                        android:text="National Rank"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/sales"
-                    android:orientation="horizontal"
-                    android:layout_below="@+id/zonalnational"
-                    android:weightSum="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:text="Sales"
-                        android:textColor="@color/text_sales"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtZonalSales"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="4"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtNationalSales"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="10"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/YOY"
-                    android:orientation="horizontal"
-                    android:layout_below="@+id/sales"
-                    android:weightSum="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="YOY Growth%"
-                        android:gravity="left"
-                        android:textColor="@color/text_sales"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtZonalYOY"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="4"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtNationalYOY"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/div1"
-                        android:text="10"
-                        android:gravity="center"
-                        android:textColor="@color/text_sales"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_below="@+id/YOY"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
-
-
-            </RelativeLayout>
-
-
-            <ImageView
-                android:layout_marginTop="120dp"
-                android:layout_centerHorizontal="true"
-                android:background="@mipmap/pop_up_icon"
-                android:layout_width="59dp"
-                android:layout_height="59dp" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:background="@android:color/white"
+        android:background="@color/bg_screen_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -297,11 +63,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Running Promo"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/smdm_header_title_normal"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/rp_imageBtnBack"
                         android:layout_marginLeft="20dp"
-                        android:textColor="#ffffff"
+                        android:textColor="@color/divider_salescard1"
                         android:id="@+id/toolbar_title" />
 
 
@@ -362,8 +128,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store : "
-                    android:textColor="#920609"
-                    android:textSize="14sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -372,8 +139,9 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -382,8 +150,9 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
 
             </RelativeLayout>
 
@@ -391,118 +160,106 @@
                 android:orientation="horizontal"
                 android:weightSum="2"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"
-                >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
 
                 <RelativeLayout
                     android:id="@+id/promoSalesRelative"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="85dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
+                    android:padding="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/salescard">
+                    android:background="@drawable/rounded_edittext3">
+
 
 
                     <TextView
                         android:id="@+id/promoSales"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="left"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
                         android:text="Promo Sales"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/smdm_cardValuesTitle_normal"
+                        />
+
+
+
 
                     <TextView
-                        android:gravity="right"
-                        android:layout_alignParentRight="true"
                         android:id="@+id/txtPromoVal1"
                         android:layout_width="match_parent"
-                        android:layout_alignBaseline="@+id/promoSales"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginTop="8dp"
-                        android:singleLine="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="35dp"
+                        android:maxLength="14"
                         android:textColor="@android:color/black"
-                        android:textSize="14sp"
-                        android:layout_alignBottom="@+id/promoSales"
-                        android:layout_toEndOf="@+id/promoSales" />
+                        android:textSize="@dimen/smdm_cardValuesSubtitle_normal"
+                        />
 
 
                 </RelativeLayout>
+
+
 
                 <RelativeLayout
                     android:id="@+id/promoSalesURelative"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="85dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
+                    android:padding="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/salescard">
+                    android:background="@drawable/rounded_edittext3">
+
 
 
                     <TextView
                         android:id="@+id/txtNetSales"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="left"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
                         android:text="Promo Sales(U)"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/smdm_cardValuesTitle_normal"
+                        />
+
+
+
 
                     <TextView
-                        android:gravity="right"
-                        android:layout_alignParentRight="true"
                         android:id="@+id/txtPromoVal2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/txtNetSales"
-                        android:singleLine="true"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="35dp"
+                        android:maxLength="14"
                         android:textColor="@android:color/black"
-                        android:textSize="14sp"
-                        android:layout_alignBottom="@+id/txtNetSales"
-                        android:layout_toEndOf="@+id/txtNetSales" />
+                        android:textSize="@dimen/smdm_cardValuesSubtitle_normal"
+                        />
+
 
                 </RelativeLayout>
-
-
-
-
-
-
 
 
 
             </LinearLayout>
 
-
-
-
-
-
-
-
-
-
         </LinearLayout>
-
-
-
         <LinearLayout
             android:id="@+id/llayoutSalesAnalysis"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-
-
-
 
             <!--bottom layout starting-->
 
@@ -521,11 +278,8 @@
                         android:id="@+id/llheader"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:background="@color/bg_salescard">
-
-
-
-
+                        android:background="@color/bg_header"
+                        >
 
                         <TextView
                             android:id="@+id/promotionName"
@@ -536,15 +290,11 @@
                             android:layout_marginRight="272dp"
                             android:gravity="center_vertical|center"
                             android:text="Promotion Name"
-                            android:textColor="@android:color/black"
-                            android:textSize="12sp"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
                             android:textStyle="bold"/>
 
                         <!--</RelativeLayout>-->
-
-
-
-
                         <TextView
                             android:id="@+id/startDate"
                             android:layout_width="60dp"
@@ -556,8 +306,8 @@
                             android:layout_toLeftOf="@+id/endDate"
                             android:gravity="center_vertical|center"
                             android:text="Start Date"
-                            android:textColor="@android:color/black"
-                            android:textSize="12sp"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
                             android:textStyle="bold"/>
 
 
@@ -571,8 +321,8 @@
                             android:layout_toLeftOf="@+id/days"
                             android:gravity="center_vertical|center"
                             android:text="End Date"
-                            android:textColor="@android:color/black"
-                            android:textSize="12sp"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
                             android:textStyle="bold"
 
                             />
@@ -588,8 +338,8 @@
                             android:layout_toLeftOf="@+id/vm"
                             android:gravity="center_vertical|center"
                             android:text="Days"
-                            android:textColor="@android:color/black"
-                            android:textSize="12sp"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
                             android:textStyle="bold"
 
                             />
@@ -605,8 +355,8 @@
                             android:layout_marginRight="17dp"
                             android:gravity="center_vertical|center"
                             android:text="VM"
-                            android:textColor="@android:color/black"
-                            android:textSize="12sp"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
                             android:textStyle="bold"
                             />
 
@@ -618,7 +368,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard"
+                        android:background="@color/bg_header"
                         >
 
                         <EditText

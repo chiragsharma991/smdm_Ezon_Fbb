@@ -102,6 +102,12 @@ public class BestPromoAdapter extends BaseAdapter {
         holder.Bst_PromoValuesU_child.setText(""+(int)arrayList.get(position).getDurSaleTotQty());
 
 
+
+
+
+
+
+
      /*   if(!arrayList.get(position).getProdImageURL().equals("")) {
             Picasso.with(this.context).
 

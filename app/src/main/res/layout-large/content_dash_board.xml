@@ -649,7 +649,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="#ffffff"
-                            android:src="@mipmap/best_promo"
+                            android:src="@mipmap/best_worst_promo"
                             />
 
 
@@ -657,7 +657,7 @@
                             android:gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Best Promo"
+                            android:text="Best/Worst Promo"
                             android:textSize="13sp"
                             android:textColor="@color/smdm_light_Black"
                             android:layout_gravity="center_horizontal"
@@ -1010,7 +1010,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="#ffffff"
-                            android:src="@mipmap/best_promo"
+                            android:src="@mipmap/best_worst_promo"
                             />
 
 
@@ -1018,7 +1018,7 @@
                             android:gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Best Performers"
+                            android:text="Best/Worst Performers"
                             android:textColor="@color/smdm_light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
@@ -1073,7 +1073,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Stock Aging Exceptions"
+                            android:text="Stock Ageing Exceptions"
                             android:textColor="@color/smdm_light_Black"
                             android:gravity="center_horizontal"
                             android:textSize="13sp" />

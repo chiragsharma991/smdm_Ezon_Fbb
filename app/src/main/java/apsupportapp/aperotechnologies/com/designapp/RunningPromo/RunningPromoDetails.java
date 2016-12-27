@@ -114,9 +114,9 @@ public class RunningPromoDetails extends AppCompatActivity {
 
 
         //relProd_Frag = (RelativeLayout) findViewById(R.id.rel);
-       // relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        // relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
         //  relativeLayout.setBackgroundColor(Color.WHITE);
-       // relProd_Frag.setVisibility(View.VISIBLE);
+        // relProd_Frag.setVisibility(View.VISIBLE);
 
 
         if (Reusable_Functions.chkStatus(context)) {
@@ -137,23 +137,17 @@ public class RunningPromoDetails extends AppCompatActivity {
         tableRow();
 
 
-
-
-
     }
 
     private void tableRow() {
 
 
-
-
     }
 
-    private void findview()
-    {
-        backButton=(RelativeLayout)findViewById(R.id.rpd_ImageBtnBack);
-        TextView textView=(TextView)findViewById(R.id.promoCat);
-        data=getIntent().getExtras().getString("VM");
+    private void findview() {
+        backButton = (RelativeLayout) findViewById(R.id.rpd_ImageBtnBack);
+        TextView textView = (TextView) findViewById(R.id.promoCat);
+        data = getIntent().getExtras().getString("VM");
         textView.setText(data);
         //tableLayout=(TableLayout)findViewById(R.id.tableRunningPromo);
 
@@ -166,122 +160,106 @@ public class RunningPromoDetails extends AppCompatActivity {
     }
 
 
-
     private void requestProductAPI(int offsetvalue1, int limit1) {
 
+        if (Reusable_Functions.chkStatus(context)) {
 
-        String url = ConstsCore.web_url + "/v1/display/runningpromodetails/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
-        Log.i(TAG,"URL   "+ url + " " + bearertoken);
+            String url = ConstsCore.web_url + "/v1/display/runningpromodetails/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+            Log.i(TAG, "URL   " + url + " " + bearertoken);
 
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Running promo : " + " " + response);
-                        Log.i(TAG, "Sales View Pager response" + "" + response.length());
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.i(TAG, "Running promo : " + " " + response);
+                            Log.i(TAG, "Sales View Pager response" + "" + response.length());
 
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(RunningPromoDetails.this, "no product data found", Toast.LENGTH_LONG).show();
+                                } else if (response.length() == limit) {
+                                    //Reusable_Functions.hDialog();
+                                    for (int i = 0; i < response.length(); i++) {
+                                        runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        promoList.add(runningPromoListDisplay);
+                                        Log.e(TAG, "Promolist in limit");
+
+                                    }
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+                                    requestProductAPI(offsetvalue, limit);
+                                } else if (response.length() < limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        promoList.add(runningPromoListDisplay);
+                                        Log.e(TAG, "Promolist size" + promoList.size());
+
+                                    }
+
+
+                                    addTexttoTable();
+
+                                }
+
+                            } catch (Exception e) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(RunningPromoDetails.this, "no product data found", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
-                                //Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++) {
-                                    runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    promoList.add(runningPromoListDisplay);
-                                    Log.e(TAG,"Promolist in limit");
-
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-                                requestProductAPI(offsetvalue, limit);
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
-                                    runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    promoList.add(runningPromoListDisplay);
-                                    Log.e(TAG,"Promolist size"+promoList.size());
-
-                                }
-
-                             //   txtHeader.setText(data.getString("VM"));
-
-//                                Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
-//                                    public int compare(ProductNameBean one, ProductNameBean other) {
-//                                        return  new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
-//                                    }
-//                                });
-//                                Collections.reverse(productNameBeanArrayList);
-
-
-
-
-                                // txtStoreCode.setText(promoList.get(0).getStoreCode());
-                                //txtStoreDesc.setText(promoList.get(0).getStoreDesc());
-
-
-
-
-                                addTexttoTable();
-
+                                e.printStackTrace();
+                                Toast.makeText(RunningPromoDetails.this,"Data failed...",Toast.LENGTH_LONG).show();
+                                Log.e(TAG, "catch...Error" + e.toString());
                             }
-
-                        } catch (Exception e) {
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-                            e.printStackTrace();
-                            Log.e(TAG, "catch...Error" +e.toString());
+                             Toast.makeText(RunningPromoDetails.this,"Server not found...",Toast.LENGTH_LONG).show();
+                            error.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
-                        error.printStackTrace();
-                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+
+                    Log.e("params ", " " + params);
+                    return params;
                 }
+            };
+            int socketTimeout = 60000;//5 seconds
 
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
-                Log.e("params ", " " + params);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
+        }
     }
 
-    private void addTexttoTable()
-    {
-       LinearLayout linearLayout=(LinearLayout)findViewById(R.id.linearTable);
-        for (int i = 0; i <promoList.size() ; i++) {
+    private void addTexttoTable() {
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearTable);
+        for (int i = 0; i < promoList.size(); i++) {
 
             layoutInflater = (LayoutInflater) getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
             view = (ViewGroup) layoutInflater.inflate(R.layout.activity_runningpromotable_child, null);
-            TextView Mc=(TextView)view.findViewById(R.id.mccc);
-            TextView Prodsale=(TextView)view.findViewById(R.id.prodSale);
-            TextView ProdSaleU=(TextView)view.findViewById(R.id.prodSaleU);
-            TextView SoH=(TextView)view.findViewById(R.id.soH);
+            TextView Mc = (TextView) view.findViewById(R.id.mccc);
+            TextView Prodsale = (TextView) view.findViewById(R.id.prodSale);
+            TextView ProdSaleU = (TextView) view.findViewById(R.id.prodSaleU);
+            TextView SoH = (TextView) view.findViewById(R.id.soH);
             Mc.setText(promoList.get(i).getProdLevel6Desc());
-            Prodsale.setText("\u20B9\t"+Math.round(promoList.get(i).getDurSaleNetVal()));
-            ProdSaleU.setText(""+(int)promoList.get(i).getDurSaleTotQty());
-            SoH.setText(""+Math.round(promoList.get(i).getStkOnhandQty()));
+            Prodsale.setText("\u20B9\t" + Math.round(promoList.get(i).getDurSaleNetVal()));
+            ProdSaleU.setText("" + (int) promoList.get(i).getDurSaleTotQty());
+            SoH.setText("" + Math.round(promoList.get(i).getStkOnhandQty()));
             Reusable_Functions.hDialog();
             linearLayout.addView(view);
 
         }
-
-
-
 
 
     }

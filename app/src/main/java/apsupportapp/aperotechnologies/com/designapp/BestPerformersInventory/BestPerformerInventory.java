@@ -657,10 +657,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     }
 
+
+    //Toggle switch>>>>>>>>
+
     private void BestAndWorstToggle() {
         if (BestAndWorst.isChecked()) {
-            if (Reusable_Functions.chkStatus(context)) {
-
                 limit = 10;
                 offsetvalue = 0;
                 top = 10;
@@ -669,6 +670,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 Log.e(TAG, "BestAndWorstToggle:is checked log");
                 BestInventList.clear();
                 BestInventListview.setVisibility(View.GONE);
+            if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.sDialog(this, "Loading.......");
                 requestRunningPromoApi();
             } else {
@@ -679,8 +681,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
             }
         } else {
-            if (Reusable_Functions.chkStatus(context)) {
-
                 limit = 10;
                 offsetvalue = 0;
                 top = 10;
@@ -689,9 +689,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 Log.e(TAG, "BestAndWorstToggle:is unchecked log");
                 BestInventList.clear();
                 BestInventListview.setVisibility(View.GONE);
+            if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.sDialog(this, "Loading.......");
                 requestRunningPromoApi();
-
             } else {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 BestInventListview.setVisibility(View.GONE);
@@ -938,16 +938,15 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         switch (checkedId) {
             case R.id.bestInvent_core:
                 if (BestInvent_core.isChecked()) {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
                         limit = 10;
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Core";
                         lazyScroll = "OFF";
                         BestInventList.clear();
-                        BestInventListview.setVisibility(View.GONE);
+                    BestInventListview.setVisibility(View.GONE);
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.sDialog(context, "Loading data...");
                         requestRunningPromoApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -958,15 +957,16 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 break;
             case R.id.bestInvent_fashion:
                 if (BestInvent_fashion.isChecked()) {
-                    if (Reusable_Functions.chkStatus(context)) {
-
                         limit = 10;
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Fashion";
                         lazyScroll = "OFF";
-                        BestInventList.clear();
-                        BestInventListview.setVisibility(View.GONE);
+                    BestInventListview.setVisibility(View.GONE);
+
+                    BestInventList.clear();
+
+                    if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(this, "Loading.......");
                         requestRunningPromoApi();
                     } else {

@@ -10,8 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:id="@+id/bestQuickFilterBorder"
@@ -53,7 +53,8 @@
                         android:layout_marginLeft="10dp"
                         android:text="Quick Filter"
                         android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_quickfilter_title_large" />
+                        android:textSize="@dimen/smdm_quickfilter_title_large"
+                        />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -453,7 +454,8 @@
                     android:clickable="false"
                     android:text="Done"
                     android:textColor="@color/divider_salescard1"
-                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                    android:textSize="@dimen/smdm_quickfilter_title_large"
+                    />
 
             </RelativeLayout>
         </RelativeLayout>
