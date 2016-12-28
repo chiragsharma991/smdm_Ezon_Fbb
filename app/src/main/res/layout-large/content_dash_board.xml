@@ -74,7 +74,7 @@
                             android:gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Hourly Analysis"
+                            android:text="KeyProduct Hrly Info"
                             android:textColor="@color/smdm_light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
@@ -1219,7 +1219,7 @@
                 android:paddingLeft="10dp"
                 android:textColor="@color/smdm_dark_Black"
                 android:layout_height="wrap_content"
-                android:text="Marketing Events"
+                android:text="Marketing Calender"
                 android:textSize="20sp"
                 android:layout_marginTop="30dp"
                 />

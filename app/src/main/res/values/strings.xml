@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SM-DM</string>
-    <string name="title_activity_dash_board">Dashboard</string>
+    <string name="title_activity_dash_board">Engage 24x7</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -31,7 +31,7 @@
     <string name="s_ros">ROS</string>
     <string name="s_fwd_wk_value">15,15,00,000</string>
     <string name="s_fwd_wk_cover">Fwd Wk Cover</string>
-    <string name="hourly_analysis">Hourly Analysis</string>
+    <string name="hourly_analysis">KeyProduct Hrly Info</string>
     <string name="visual_assortment">Visual Assortment</string>
     <string name="sales_analysis">Sales Analysis</string>
     <string name="prod_filter">Filter</string>
@@ -48,7 +48,7 @@
     <string name="Rs">\u20B9</string>
     <string name="pvaSales">PvA Sales%</string>
     <string name="fullSize">Option%</string>
-    <string name="xaxis_label">X axis is in weeks</string>
+    <string name="xaxis_label">Weeks --></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

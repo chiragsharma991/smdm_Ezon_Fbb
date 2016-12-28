@@ -45,11 +45,11 @@ public class SalesFilterActivity extends Activity {
     public static ExpandableListView pfilter_list;
     ArrayList<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-    int offsetvalue = 0, limit = 100, count = 0;
+    int offsetvalue = 0, limit = 100, count = 0,level = 1;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
-    List<String> subdept;
+    List<String> subdept,subCategory;
     public static String plandeptName;
 
 
@@ -61,7 +61,7 @@ public class SalesFilterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salespva_filter);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-         Log.e("came here", "");
+        Log.e("came here", "");
 
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -72,6 +72,7 @@ public class SalesFilterActivity extends Activity {
 
 
         subdept = new ArrayList<String>();
+        subCategory = new ArrayList<String>();
 
         btnS_Filterback = (RelativeLayout) findViewById(R.id.imageBtnSFilterBack);
         btnS_Done = (RelativeLayout) findViewById(R.id.imageBtnSalesFilterDone);
@@ -93,14 +94,11 @@ public class SalesFilterActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                if(getIntent().getStringExtra("checkfrom").equals("SalesAnalysis"))
-                {
+                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
                     Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
                     startActivity(intent);
                     finish();
-                }
-                else if(getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
-                {
+                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
                     Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
                     startActivity(intent);
                     finish();
@@ -162,15 +160,34 @@ public class SalesFilterActivity extends Activity {
             Reusable_Functions.sDialog(SalesFilterActivity.this, "Loading  data...");
             offsetvalue = 0;
             count = 0;
-            requestDeptAPI(offsetvalue, limit);
-        } else {
+            if (listDataHeader.get(0).equals("Department"))
+            {
+                level =1;
+                requestDeptAPI(offsetvalue, limit);
+            }
+            else if (listDataHeader.get(1).equals("Category"))
+            {
+                level = 2;
+                Log.e("In Category","");
 
-            Toast.makeText(SalesFilterActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                requestCategoryAPI(offsetvalue, limit);
+
+            }
+            else if (listDataHeader.get(2).equals("Plan Class"))
+            {
+              //  requestPlanClassAPI(offsetvalue, limit);
+
+            }
+            else
+            {
+                Toast.makeText(SalesFilterActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
-   public void requestDeptAPI(int offsetvalue1, int limit1) {
-         String url= ConstsCore.web_url+"/v1/display/salesanalysishierarchy/"+userId  + "?offset=" + offsetvalue1 + "&limit=" + limit1;
+
+    public void requestDeptAPI(int offsetvalue1, int limit1) {
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1+"&level="+level;
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -202,7 +219,7 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String planDept = productName1.getString("planDept");
-                                     subdept.add(planDept);
+                                    subdept.add(planDept);
 
                                 }
                                 //Collections.sort(subdept);
@@ -239,16 +256,85 @@ public class SalesFilterActivity extends Activity {
         queue.add(postRequest);
     }
 
+    public void requestCategoryAPI(int offsetvalue1, int limit1)
+    {
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1+"&level="+level;
+        Log.i("URL   ", url);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.i("Category Response", response.toString());
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                            } else if (response.length() == limit) {
+
+                                Reusable_Functions.hDialog();
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject productName1 = response.getJSONObject(i);
+
+                                    String planCategory = productName1.getString("planCategory");
+
+                                    subCategory.add(planCategory);
+                                }
+
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                requestCategoryAPI(offsetvalue, limit);
+
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject productName1 = response.getJSONObject(i);
+
+                                    String planCategory = productName1.getString("planCategory");
+                                    subCategory.add(planCategory);
+
+                                }
+                                //Collections.sort(subdept);
+                                listDataChild.put(listDataHeader.get(1), subCategory);
+                              //  pfilter_list.expandGroup(0);
+                                Reusable_Functions.hDialog();
+                            }
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+
     @Override
     public void onBackPressed() {
-        if(getIntent().getStringExtra("checkfrom").equals("SalesAnalysis"))
-        {
+        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
             Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
             startActivity(intent);
             finish();
-        }
-        else if(getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
-        {
+        } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
             Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
             startActivity(intent);
             finish();

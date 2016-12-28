@@ -210,197 +210,198 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                     return;
                 }
 
-                if (cb.isChecked() == false) {
-                    ////Log.e("checkbox is not selected", "");
-                    if (Reusable_Functions.chkStatus(mContext)) {
-
-                        Reusable_Functions.sDialog(mContext, "Loading  data...");
-                        offsetvalue = 0;
-                        count = 0;
-                        limit = 100;
-                        if (groupPosition == 0) {
-                            tempcategorylist = new ArrayList();
-                            SalesFilterActivity.pfilter_list.collapseGroup(1);
-                            planDepartmentName = txtClickedVal;
-                            Log.i("click dept value",""+planDepartmentName);
-                            String groupname = mListDataGroup.get(0);
-                            requestCategoryAPI(offsetvalue, limit, planDepartmentName, groupname, cb);
-
-                        }
-                        else if (groupPosition == 1)
-                        {
-
-                            tempplanclass = new ArrayList();
-                            SalesFilterActivity.pfilter_list.collapseGroup(2);
-                            planCategoryName = txtClickedVal;
-                            Log.i("click category value---",""+planCategoryName);
-                            String groupname = mListDataGroup.get(1);
-
-                            requestPlanClassAPI(offsetvalue, limit, planDepartmentName, txtClickedVal, groupname, cb);
-
-
-                        }
-                        else if (groupPosition == 2)
-                        {
-
-                            tempbrandname = new ArrayList();
-                            SalesFilterActivity.pfilter_list.collapseGroup(3);
-                            planClassName = txtClickedVal;
-                            Log.i("click brand name value --- ",""+planClassName);
-                            String groupname = mListDataGroup.get(2);
-                            requestBrandNameAPI(offsetvalue, limit,planDepartmentName, planCategoryName, txtClickedVal, groupname, cb);
-
-                        }
-                        else if(groupPosition == 3)
-                        {
-                            tempbrandplanclass = new ArrayList();
-                            SalesFilterActivity.pfilter_list.collapseGroup(4);
-                            String groupname = mListDataGroup.get(3);
-                            requestBrandClassNameAPI(offsetvalue, limit,planDepartmentName,planCategoryName,planClassName, txtClickedVal, groupname, cb);
-                        }
-
-//                        if(flag == true)
-//                        {
-//                            salesList.add(mListDataGroup.get(groupPosition)+"."+txtClickedVal);
-//                            cb.setChecked(true);
+//                if (cb.isChecked() == false) {
+//                    ////Log.e("checkbox is not selected", "");
+//                    if (Reusable_Functions.chkStatus(mContext)) {
+//
+//                        Reusable_Functions.sDialog(mContext, "Loading  data...");
+//                        offsetvalue = 0;
+//                        count = 0;
+//                        limit = 100;
+//                        if (groupPosition == 0) {
+//                            tempcategorylist = new ArrayList();
+//                            SalesFilterActivity.pfilter_list.collapseGroup(1);
+//                            planDepartmentName = txtClickedVal;
+//                            Log.i("click dept value",""+planDepartmentName);
+//                            String groupname = mListDataGroup.get(0);
+//                            requestCategoryAPI(offsetvalue, limit, planDepartmentName, groupname, cb);
+//
 //                        }
-
-
-                        } else {
-                            Toast.makeText(mContext, "Check your network connectivity", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Log.e("groupPosition ", " " + groupPosition);
-
-                        if (groupPosition == 0) {
-                            //Log.e("here ", " " + planclassArray.size());
-                            // category array
-                            for (int i = 0; i < categoryArray.size(); i++) {
-                                if (categoryArray.get(i).getSubdept().equals(txtClickedVal)) {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(1);
-                                    categorylist.removeAll(categoryArray.get(i).getCategory());
-                                    Log.e("salesList"," ---111--- "+salesList);
-                                    salesList.remove(mListDataGroup.get(0)+"."+categoryArray.get(i).getSubdept());
-                                    categoryArray.remove(i);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(1);
-
-                                }
-                            }
-
-                            for (int k = 0; k < planclassArray.size(); k++) {
-                                Log.e("sub ", " " + planclassArray.get(k).getSubdept() + " " + planclassArray.get(k).getSubdept().equals(txtClickedVal));
-                                if (planclassArray.get(k).getSubdept().equals(txtClickedVal)) {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(2);
-                                    Log.e("plan list", " === " + planclassArray.get(k).getPlanclass() + " " + planclassArray.get(k).getCategory());
-                                    planClassList.removeAll(planclassArray.get(k).getPlanclass());
-                                    salesList.remove(mListDataGroup.get(1)+"."+planclassArray.get(k).getCategory());
-                                    planclassArray.remove(k);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(2);
-                                }
-                            }
-                            for (int j = 0; j < brandArray.size(); j++) {
-                                   if (brandArray.get(j).getSubdept().equals(txtClickedVal)) {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(3);
-                                    brandNameList.removeAll(brandArray.get(j).getBrand());
-                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(j).getPlanclass());
-                                    brandArray.remove(j);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(3);
-                                }
-                            }
-                            for (int m = 0;  m < brandclassArray.size(); m++) {
-
-                                if (brandclassArray.get(m).getSubdept().equals(txtClickedVal)) {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(4);
-                                    brandplanclassList.removeAll(brandclassArray.get(m).getBrandClass());
-                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(m).getBrand());
-                                    brandclassArray.remove(m);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(4);
-                                }
-                            }
-                            Log.e("salesList"," ---222--- "+salesList);
-
-                        } else if (groupPosition == 1)
-                        {
-                            for (int j = 0; j < planclassArray.size(); j++)
-                            {
-                                if (planclassArray.get(j).getCategory().equals(txtClickedVal)) {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(2);
-                                    planClassList.removeAll(planclassArray.get(j).getPlanclass());
-                                    salesList.remove(mListDataGroup.get(1)+"."+planclassArray.get(j).getCategory());
-                                    planclassArray.remove(j);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(2);
-                                }
-                            }
-                            for (int k = 0; k < brandArray.size(); k++)
-                            {
-                                if (brandArray.get(k).getCategory().equals(txtClickedVal)) {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(3);
-                                    brandNameList.removeAll(brandArray.get(k).getBrand());
-                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(k).getPlanclass());
-                                    brandArray.remove(k);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(3);
-                                }
-                            }
-                            for (int l = 0; l < brandclassArray.size(); l++)
-                            {
-                                if (brandclassArray.get(l).getCategory().equals(planCategoryName)) {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(4);
-                                    brandplanclassList.removeAll(brandclassArray.get(l).getBrandClass());
-                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(l).getBrand());
-                                    brandclassArray.remove(l);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(4);
-                                }
-                            }
-                        }else if(groupPosition == 2)
-                        {
-                            for (int i = 0; i < brandArray.size(); i++)
-                            {
-                                if (brandArray.get(i).getPlanclass().equals(txtClickedVal)) {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(3);
-                                    brandNameList.removeAll(brandArray.get(i).getBrand());
-                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(i).getPlanclass());
-                                    brandArray.remove(i);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(3);
-                                }
-                            }
-                            for (int j = 0; j < brandclassArray.size(); j++)
-                            {
-                                if (brandclassArray.get(j).getPlanclass().equals(txtClickedVal)) {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(4);
-                                    brandplanclassList.removeAll(brandclassArray.get(j).getBrandClass());
-                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(j).getBrand());
-                                    brandclassArray.remove(j);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(4);
-                                }
-                            }
-
-                        } else if(groupPosition == 3)
-                        {
-                            for(int i = 0;i < brandclassArray.size(); i++)
-                            {
-                                if(brandclassArray.get(i).getBrand().equals(txtClickedVal))
-                                {
-                                    SalesFilterActivity.pfilter_list.collapseGroup(4);
-                                    brandplanclassList.removeAll(brandclassArray.get(i).getBrandClass());
-                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(i).getBrand());
-                                    brandclassArray.remove(i);
-                                    cb.setChecked(false);
-                                    SalesFilterActivity.pfilter_list.expandGroup(4);
-                                }
-                            }
-                        }
-
-
-                    }
+//                        else if (groupPosition == 1)
+//                        {
+//
+//                            tempplanclass = new ArrayList();
+//                            SalesFilterActivity.pfilter_list.collapseGroup(2);
+//                            planCategoryName = txtClickedVal;
+//                            Log.i("click category value---",""+planCategoryName);
+//                            String groupname = mListDataGroup.get(1);
+//
+//                            requestPlanClassAPI(offsetvalue, limit, planDepartmentName, txtClickedVal, groupname, cb);
+//
+//
+//                        }
+//                        else if (groupPosition == 2)
+//                        {
+//
+//                            tempbrandname = new ArrayList();
+//                            SalesFilterActivity.pfilter_list.collapseGroup(3);
+//                            planClassName = txtClickedVal;
+//                            Log.i("click brand name value --- ",""+planClassName);
+//                            String groupname = mListDataGroup.get(2);
+//                            requestBrandNameAPI(offsetvalue, limit,planDepartmentName, planCategoryName, txtClickedVal, groupname, cb);
+//
+//                        }
+//                        else if(groupPosition == 3)
+//                        {
+//                            tempbrandplanclass = new ArrayList();
+//                            SalesFilterActivity.pfilter_list.collapseGroup(4);
+//                            String groupname = mListDataGroup.get(3);
+//                            requestBrandClassNameAPI(offsetvalue, limit,planDepartmentName,planCategoryName,planClassName, txtClickedVal, groupname, cb);
+//                        }
+//
+////                        if(flag == true)
+////                        {
+////                            salesList.add(mListDataGroup.get(groupPosition)+"."+txtClickedVal);
+////                            cb.setChecked(true);
+////                        }
+//
+//
+//                        } else {
+//                            Toast.makeText(mContext, "Check your network connectivity", Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//            else {
+//                        Log.e("groupPosition ", " " + groupPosition);
+//
+//                        if (groupPosition == 0) {
+//                            //Log.e("here ", " " + planclassArray.size());
+//                            // category array
+//                            for (int i = 0; i < categoryArray.size(); i++) {
+//                                if (categoryArray.get(i).getSubdept().equals(txtClickedVal)) {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(1);
+//                                    categorylist.removeAll(categoryArray.get(i).getCategory());
+//                                    Log.e("salesList"," ---111--- "+salesList);
+//                                    salesList.remove(mListDataGroup.get(0)+"."+categoryArray.get(i).getSubdept());
+//                                    categoryArray.remove(i);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(1);
+//
+//                                }
+//                            }
+//
+//                            for (int k = 0; k < planclassArray.size(); k++) {
+//                                Log.e("sub ", " " + planclassArray.get(k).getSubdept() + " " + planclassArray.get(k).getSubdept().equals(txtClickedVal));
+//                                if (planclassArray.get(k).getSubdept().equals(txtClickedVal)) {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(2);
+//                                    Log.e("plan list", " === " + planclassArray.get(k).getPlanclass() + " " + planclassArray.get(k).getCategory());
+//                                    planClassList.removeAll(planclassArray.get(k).getPlanclass());
+//                                    salesList.remove(mListDataGroup.get(1)+"."+planclassArray.get(k).getCategory());
+//                                    planclassArray.remove(k);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(2);
+//                                }
+//                            }
+//                            for (int j = 0; j < brandArray.size(); j++) {
+//                                   if (brandArray.get(j).getSubdept().equals(txtClickedVal)) {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(3);
+//                                    brandNameList.removeAll(brandArray.get(j).getBrand());
+//                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(j).getPlanclass());
+//                                    brandArray.remove(j);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(3);
+//                                }
+//                            }
+//                            for (int m = 0;  m < brandclassArray.size(); m++) {
+//
+//                                if (brandclassArray.get(m).getSubdept().equals(txtClickedVal)) {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(4);
+//                                    brandplanclassList.removeAll(brandclassArray.get(m).getBrandClass());
+//                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(m).getBrand());
+//                                    brandclassArray.remove(m);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(4);
+//                                }
+//                            }
+//                            Log.e("salesList"," ---222--- "+salesList);
+//
+//                        } else if (groupPosition == 1)
+//                        {
+//                            for (int j = 0; j < planclassArray.size(); j++)
+//                            {
+//                                if (planclassArray.get(j).getCategory().equals(txtClickedVal)) {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(2);
+//                                    planClassList.removeAll(planclassArray.get(j).getPlanclass());
+//                                    salesList.remove(mListDataGroup.get(1)+"."+planclassArray.get(j).getCategory());
+//                                    planclassArray.remove(j);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(2);
+//                                }
+//                            }
+//                            for (int k = 0; k < brandArray.size(); k++)
+//                            {
+//                                if (brandArray.get(k).getCategory().equals(txtClickedVal)) {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(3);
+//                                    brandNameList.removeAll(brandArray.get(k).getBrand());
+//                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(k).getPlanclass());
+//                                    brandArray.remove(k);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(3);
+//                                }
+//                            }
+//                            for (int l = 0; l < brandclassArray.size(); l++)
+//                            {
+//                                if (brandclassArray.get(l).getCategory().equals(planCategoryName)) {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(4);
+//                                    brandplanclassList.removeAll(brandclassArray.get(l).getBrandClass());
+//                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(l).getBrand());
+//                                    brandclassArray.remove(l);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(4);
+//                                }
+//                            }
+//                        }else if(groupPosition == 2)
+//                        {
+//                            for (int i = 0; i < brandArray.size(); i++)
+//                            {
+//                                if (brandArray.get(i).getPlanclass().equals(txtClickedVal)) {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(3);
+//                                    brandNameList.removeAll(brandArray.get(i).getBrand());
+//                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(i).getPlanclass());
+//                                    brandArray.remove(i);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(3);
+//                                }
+//                            }
+//                            for (int j = 0; j < brandclassArray.size(); j++)
+//                            {
+//                                if (brandclassArray.get(j).getPlanclass().equals(txtClickedVal)) {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(4);
+//                                    brandplanclassList.removeAll(brandclassArray.get(j).getBrandClass());
+//                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(j).getBrand());
+//                                    brandclassArray.remove(j);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(4);
+//                                }
+//                            }
+//
+//                        } else if(groupPosition == 3)
+//                        {
+//                            for(int i = 0;i < brandclassArray.size(); i++)
+//                            {
+//                                if(brandclassArray.get(i).getBrand().equals(txtClickedVal))
+//                                {
+//                                    SalesFilterActivity.pfilter_list.collapseGroup(4);
+//                                    brandplanclassList.removeAll(brandclassArray.get(i).getBrandClass());
+//                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(i).getBrand());
+//                                    brandclassArray.remove(i);
+//                                    cb.setChecked(false);
+//                                    SalesFilterActivity.pfilter_list.expandGroup(4);
+//                                }
+//                            }
+//                        }
+//
+//
+//                    }
                 }
             }
 
