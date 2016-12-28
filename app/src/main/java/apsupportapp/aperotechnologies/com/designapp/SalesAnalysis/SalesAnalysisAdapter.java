@@ -40,6 +40,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -70,6 +71,8 @@ public class SalesAnalysisAdapter extends BaseAdapter{
     int level ;
     Gson gson;
 
+    public SalesAnalysisAdapter()
+    {}
 
 
     //private ValueFilter valueFilter;
@@ -111,6 +114,13 @@ public class SalesAnalysisAdapter extends BaseAdapter{
     public long getItemId(int position) {
 
         return position;
+    }
+    public ArrayList<SalesAnalysisListDisplay> getData() {
+        return arrayList;
+    }
+    public void swapItems(ArrayList<SalesAnalysisListDisplay> items) {
+        this.arrayList = items;
+        notifyDataSetChanged();
     }
 
     //Get a View that displays the data at the specified position in the data set.
