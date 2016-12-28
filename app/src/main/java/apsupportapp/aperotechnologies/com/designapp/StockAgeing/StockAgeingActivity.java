@@ -83,6 +83,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private ToggleButton Toggle_stock_fav;
     private String corefashion = "Fashion";
     String checkSeasonGpVal = null, checkAgeingVal = null;
+    private boolean coreSelection=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +124,19 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
     private void requestStockAgeingApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+        String url;
+        if (coreSelection) {
+
+            //core selection without season params
+
+            url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
+        } else {
+
+            // fashion select with season params
+
+            url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+        }
+
        // String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
 
         Log.e(TAG, "URL" + url);
@@ -587,16 +600,17 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         switch (checkedId) {
             case R.id.stock_core:
                 if (stock_core.isChecked()) {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
+                        //Reusable_Functions.hDialog();
                         limit = 10;
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Core";
                         lazyScroll = "OFF";
+                    if (Reusable_Functions.chkStatus(context)) {
                         StockAgeingList.clear();
+                        Reusable_Functions.sDialog(context, "Loading data...");
                         StockAgListView.setVisibility(View.GONE);
+                        coreSelection=true;
                         requestStockAgeingApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -607,16 +621,17 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.stock_fashion:
                 if (stock_fashion.isChecked()) {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
+                    //    Reusable_Functions.hDialog();
                         limit = 10;
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Fashion";
                         lazyScroll = "OFF";
+                    if (Reusable_Functions.chkStatus(context)) {
                         StockAgeingList.clear();
                         StockAgListView.setVisibility(View.GONE);
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        coreSelection=false;
                         requestStockAgeingApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();

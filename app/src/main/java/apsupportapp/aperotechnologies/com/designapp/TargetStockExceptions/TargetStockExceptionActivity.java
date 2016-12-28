@@ -91,6 +91,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private SeekBar TargetSeek;
     private TextView targetMax;
     private int setValue;
+    private boolean coreSelection=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +133,19 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void requestTargetStockExcepApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
+        String url;
+        if (coreSelection) {
+
+            //core selection without season params
+
+            url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
+        } else {
+
+            // fashion select with season params
+
+            url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
+        }
+
 
         Log.e(TAG, "URL" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -387,7 +400,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 Intent intent1 = new Intent(TargetStockExceptionActivity.this, InventoryFilterActivity.class);
                 intent1.putExtra("checkfrom", "targetStockException");
                 startActivity(intent1);
-                finish();
+                //finish();
                 break;
             case R.id.target_quickFilter:
                 quickFilterPopup.setVisibility(View.VISIBLE);
@@ -779,7 +792,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checkPlanClass.setChecked(true);
                 checkCategory.setChecked(false);
                 break;
-            case R.id.checktwo:
+     /*       case R.id.checktwo:
                 checktwo.setChecked(true);
                 checkthree.setChecked(false);
                 checkfour.setChecked(false);
@@ -877,7 +890,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checkeight.setChecked(false);
                 checknine.setChecked(false);
                 checkten.setChecked(true);
-                break;
+                break;*/
         }
 
     }
@@ -1055,6 +1068,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         Reusable_Functions.sDialog(context, "Loading data...");
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
+                        coreSelection=true;
                         requestTargetStockExcepApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1072,6 +1086,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         Reusable_Functions.sDialog(context, "Loading data...");
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
+                        coreSelection=false;
                         requestTargetStockExcepApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();

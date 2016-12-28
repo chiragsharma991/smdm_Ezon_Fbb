@@ -54,7 +54,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
     static TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
     RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
-            quickFilter_baseLayout, BestQfDoneLayout, BestQuickFilterBorder,SwitchRelay;
+            quickFilter_baseLayout, BestQfDoneLayout, BestQuickFilterBorder, SwitchRelay;
     RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
     CheckBox BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming;
@@ -75,7 +75,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private boolean userScrolled;
     private SaleThruInventoryAdapter bestPerformerInventoryAdapter;
     private View footer;
-    private String lazyScroll = "OFF", seasonGroup = "All";
+    private String lazyScroll = "OFF", seasonGroup = "Current";
     private SegmentedGroup BestInvent_segmented;
     private RadioButton BestInvent_core, BestInvent_fashion;
     private ToggleButton Toggle_bestInvent_fav;
@@ -87,8 +87,9 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private RadioButton BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
     private RelativeLayout BaseLayoutInventory;
     private String checkValueIs = null, checkTimeValueIs = null;
-    private String view = "All";
+    private String view = "STD";
     private TextView Toolbar_title;
+    private boolean coreSelection=false;
 
 
     @Override
@@ -112,9 +113,10 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        BestInventListview.setTag("FOOTER");
 
-        requestRunningPromoApi();
         Reusable_Functions.sDialog(this, "Loading.......");
+        requestRunningPromoApi();
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
@@ -130,7 +132,17 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            String url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top+ "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup;
+            String url;
+            if (coreSelection) {
+
+                //core selection without season params
+
+                url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+            } else {
+                // fashion select with season params
+
+                url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+            }
 
             Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -146,9 +158,11 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                    footer.setVisibility(View.GONE);
+                                    BestInventListview.removeFooterView(footer);
+                                    BestInventListview.setTag("FOOTER_REMOVE");
                                     if (BestInventList.size() == 0) {
                                         BestInventListview.setVisibility(View.GONE);
+                                        return;
 
                                     }
                                     //  BestInvent_fashion.setEnabled(true);
@@ -183,6 +197,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                                         top = top + response.length();
 
                                     }
+                                    BestInventListview.removeFooterView(footer);
+                                    BestInventListview.setTag("FOOTER_REMOVE");
                                 }
 
 
@@ -222,6 +238,9 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                                 //    BestInvent_fashion.setEnabled(true);
                                 //   BestInvent_core.setEnabled(true);
                                 Reusable_Functions.hDialog();
+                                Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                                BestInventListview.removeFooterView(footer);
+                                BestInventListview.setTag("FOOTER_REMOVE");
                                 footer.setVisibility(View.GONE);
                                 e.printStackTrace();
                                 Log.e(TAG, "catch...Error" + e.toString());
@@ -232,7 +251,9 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                            BestInventListview.removeFooterView(footer);
+                            BestInventListview.setTag("FOOTER_REMOVE");
                             error.printStackTrace();
                         }
                     }
@@ -246,7 +267,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                     return params;
                 }
             };
-            int socketTimeout = 60000;//5 seconds
+            int socketTimeout = 30000;//30 seconds
 
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             postRequest.setRetryPolicy(policy);
@@ -261,9 +282,13 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                 @Override
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
+                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE && lazyScroll.equals("OFF")) {
 
+                        if (BestInventListview.getTag().equals("FOOTER_REMOVE")) {
+                            BestInventListview.addFooterView(footer);
+                            BestInventListview.setTag("FOOTER_ADDED");
 
+                        }
                         footer.setVisibility(View.VISIBLE);
 
                         lazyScroll = "ON";
@@ -285,6 +310,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             });
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            Reusable_Functions.hDialog();
+
         }
     }
 
@@ -408,7 +435,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(this, InventoryFilterActivity.class);
                 intent.putExtra("checkfrom", "sellThruExceptions");
                 startActivity(intent);
-                finish();
+                //finish();
                 break;
 
 
@@ -417,6 +444,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             case R.id.bestInvent_quickFilter:
                 filterFunction();
                 break;
+
+            // Base layout>>>>
             case R.id.baseQuickFilterPopup:
                 if (checkTimeValueIs == null && checkValueIs == null) {
                     BestCheckCurrent.setChecked(true);
@@ -496,72 +525,78 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
             case R.id.bestQfDoneLayout:
 
-                //Time >>>
+                if (Reusable_Functions.chkStatus(context)) {
 
-                if (CheckWTD.isChecked()) {
-                    checkTimeValueIs = "CheckWTD";
-                    view = "WTD";
+                    //Time >>>
+
+                    if (CheckWTD.isChecked()) {
+                        checkTimeValueIs = "CheckWTD";
+                        view = "WTD";
              /*       BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);*/
 
-                } else if (CheckL4W.isChecked()) {
-                    checkTimeValueIs = "CheckL4W";
-                    view = "L4W";
+                    } else if (CheckL4W.isChecked()) {
+                        checkTimeValueIs = "CheckL4W";
+                        view = "L4W";
 
              /*       BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);*/
 
-                } else if (CheckSTD.isChecked()) {
-                    checkTimeValueIs = "CheckSTD";
-                    view = "YTD";
+                    } else if (CheckSTD.isChecked()) {
+                        checkTimeValueIs = "CheckSTD";
+                        view = "STD";
              /*       BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);*/
 
-                }
+                    }
 
 
-                //season group
+                    //season group
 
-                if (BestCheckCurrent.isChecked()) {
-                    checkValueIs = "BestCheckCurrent";
-                    popupCurrent();
+                    if (BestCheckCurrent.isChecked()) {
+                        checkValueIs = "BestCheckCurrent";
+                        popupCurrent();
                     /*popupCurrent();
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);
                     BestCheckUpcoming.setChecked(false);*/
-                    quickFilterPopup.setVisibility(View.GONE);
+                        quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (BestCheckPrevious.isChecked()) {
-                    checkValueIs = "BestCheckPrevious";
-                    popupPrevious();
+                    } else if (BestCheckPrevious.isChecked()) {
+                        checkValueIs = "BestCheckPrevious";
+                        popupPrevious();
                    /* BestCheckOld.setChecked(false);
                     BestCheckUpcoming.setChecked(false);
                     BestCheckCurrent.setChecked(false);*/
-                    quickFilterPopup.setVisibility(View.GONE);
+                        quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (BestCheckOld.isChecked()) {
-                    checkValueIs = "BestCheckOld";
-                    popupOld();
+                    } else if (BestCheckOld.isChecked()) {
+                        checkValueIs = "BestCheckOld";
+                        popupOld();
                 /*    BestCheckUpcoming.setChecked(false);
                     BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);*/
-                    quickFilterPopup.setVisibility(View.GONE);
+                        quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (BestCheckUpcoming.isChecked()) {
-                    checkValueIs = "BestCheckUpcoming";
-                    popupUpcoming();
+                    } else if (BestCheckUpcoming.isChecked()) {
+                        checkValueIs = "BestCheckUpcoming";
+                        popupUpcoming();
              /*       BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);*/
-                    quickFilterPopup.setVisibility(View.GONE);
+                        quickFilterPopup.setVisibility(View.GONE);
 
+                    } else {
+
+                        CheckTimeDone();
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    }
                 } else {
-
-                    CheckTimeDone();
-                    quickFilterPopup.setVisibility(View.GONE);
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
                 }
                 break;
@@ -772,8 +807,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private void CheckTimeDone()
-    {
+    private void CheckTimeDone() {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             limit = 10;
@@ -829,11 +863,16 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                     offsetvalue = 0;
                     top = 10;
                     corefashion = "Core";
-                    BestInventList.clear();
-                    bestPerformerInventoryAdapter.notifyDataSetChanged();
-                    BestInventListview.setVisibility(View.GONE);
-                    Reusable_Functions.sDialog(this, "Loading.......");
-                    requestRunningPromoApi();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        BestInventList.clear();
+                        //bestPerformerInventoryAdapter.notifyDataSetChanged();
+                        BestInventListview.setVisibility(View.GONE);
+                        Reusable_Functions.sDialog(this, "Loading.......");
+                        coreSelection = true;
+                        requestRunningPromoApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
             case R.id.bestInvent_fashion:
@@ -842,11 +881,18 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                     offsetvalue = 0;
                     top = 10;
                     corefashion = "Fashion";
-                    BestInventList.clear();
-                    bestPerformerInventoryAdapter.notifyDataSetChanged();
-                    BestInventListview.setVisibility(View.GONE);
-                    Reusable_Functions.sDialog(this, "Loading.......");
-                    requestRunningPromoApi();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        BestInventList.clear();
+                        //bestPerformerInventoryAdapter.notifyDataSetChanged();
+                        BestInventListview.setVisibility(View.GONE);
+                        Reusable_Functions.sDialog(this, "Loading.......");
+                        coreSelection = false;
+                        requestRunningPromoApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+
+                    }
+
                 }
                 break;
 

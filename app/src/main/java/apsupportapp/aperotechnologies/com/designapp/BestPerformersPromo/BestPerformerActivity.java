@@ -89,8 +89,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         getSupportActionBar().hide();
         initalise();
         //test git 27dec
-        Bst_txtStoreCode.setText("Not");
-        Bst_txtStoreName.setText("Applicable");
         CheckBstSale.setChecked(true);
         SortPopup.setVisibility(View.GONE);
         BestPerformanceListView.setVisibility(View.VISIBLE);
@@ -105,8 +103,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         queue = new RequestQueue(cache, network);
         queue.start();
         BestPerformanceListView.setTag("FOOTER");
-        Reusable_Functions.sDialog(this, "Loading.......");
-        requestRunningPromoApi();
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
@@ -114,6 +110,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         // footer.setVisibility(View.GONE);
         // BestPerformanceListView.setAdapter(bestPromoAdapter);
 
+        Reusable_Functions.sDialog(this, "Loading.......");
+        requestRunningPromoApi();
     }
 
     private void requestRunningPromoApi() {
@@ -122,6 +120,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
 
 
             String url = ConstsCore.web_url + "/v1/display/bestworstpromodetails/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" + orderby + "&orderbycol=" + orderbycol;
+            Log.e(TAG, "requestRunningPromoApi: "+url );
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -139,6 +138,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                     BestPerformanceListView.setTag("FOOTER_REMOVE");
                                     if (BestpromoList.size() == 0) {
                                         BestPerformanceListView.setVisibility(View.GONE);
+                                        return;
 
                                     }
 
@@ -170,6 +170,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                         top = top + response.length();
 
                                     }
+                                    BestPerformanceListView.removeFooterView(footer);
+                                    BestPerformanceListView.setTag("FOOTER_REMOVE");
                                 }
                                 footer.setVisibility(View.GONE);
                                 if (popPromo == 10) {
@@ -178,12 +180,17 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                     popPromo = 0;
 
                                 } else if (lazyScroll.equals("ON")) {
+                                    Log.i(TAG, "notifydatasetchanged" );
                                     bestPromoAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
 
                                 } else {
                                     bestPromoAdapter = new BestPromoAdapter(BestpromoList, context);
                                     BestPerformanceListView.setAdapter(bestPromoAdapter);
+                                    Bst_txtStoreCode.setText(BestpromoList.get(0).getStoreCode());
+                                    Bst_txtStoreName.setText(BestpromoList.get(0).getStoreDesc());
+                                    Log.i(TAG, "setAdapter" );
+
                                 }
                                 // BestPromo_footer.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
@@ -239,14 +246,14 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                 @Override
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
+                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE&&lazyScroll.equals("OFF")) {
 
                         if (BestPerformanceListView.getTag().equals("FOOTER_REMOVE")) {
                             BestPerformanceListView.addFooterView(footer);
                             BestPerformanceListView.setTag("FOOTER_ADDED");
+                            Log.e(TAG, "FOOTER_ADDED: ");
 
                         }
-
 
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
