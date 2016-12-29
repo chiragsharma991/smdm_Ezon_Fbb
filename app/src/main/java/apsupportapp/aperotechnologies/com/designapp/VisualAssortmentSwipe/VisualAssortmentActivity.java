@@ -432,6 +432,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        error.getMessage();
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
@@ -447,7 +448,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 return params;
             }
         };
-        int socketTimeout  = 1500000 ;
+        int socketTimeout  = 60000 ;
 
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);

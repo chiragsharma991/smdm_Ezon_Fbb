@@ -383,7 +383,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         } else {
             Reusable_Functions.hDialog();
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            CheckBstSaleU.setChecked(false);
+            CheckBstSale.setChecked(false);
+            CheckBstSaleU.setChecked(true);
         }
 
     }
@@ -402,6 +403,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         } else {
             Reusable_Functions.hDialog();
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            CheckBstSale.setChecked(true);
+            CheckBstSaleU.setChecked(false);
         }
     }
 
