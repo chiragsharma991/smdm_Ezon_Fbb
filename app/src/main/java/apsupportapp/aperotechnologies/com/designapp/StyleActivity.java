@@ -653,7 +653,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 Reusable_Functions.hDialog();
                                 JSONObject styleDetails = response.getJSONObject(0);
                                 String articleOption = styleDetails.getString("articleOption");
-                       //         String productName = styleDetails.getString("productName");
+                                String productName = styleDetails.getString("productName");
                                 String collectionName = styleDetails.getString("collectionName");
                                 String productFabricDesc = styleDetails.getString("productFabricDesc");
                                 String productFitDesc = styleDetails.getString("productFitDesc");
@@ -685,7 +685,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 Log.e("row4:===", productImageURL);
 
                                 styleDetailsBean = new StyleDetailsBean();
-                                styleDetailsBean.setProductName(collectionName);
+                                styleDetailsBean.setProductName(productName);
                                 styleDetailsBean.setCollectionName(collectionName);
                                 styleDetailsBean.setProductFabricDesc(productFabricDesc);
                                 styleDetailsBean.setProductFitDesc(productFitDesc);

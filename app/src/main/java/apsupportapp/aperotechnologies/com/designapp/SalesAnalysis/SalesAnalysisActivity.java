@@ -193,7 +193,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         relimgfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SalesAnalysisActivity.this, SalesFilterActivity.class);
+                Intent intent = new Intent(SalesAnalysisActivity.this, SalesFilter.class);
                 intent.putExtra("checkfrom", "SalesAnalysis");
                 startActivity(intent);
 
@@ -533,7 +533,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         listView_SalesAnalysis.setSelection(view.getFirstVisiblePosition());
                         currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
                         //Log.e("firstVisibleItem", " " + view.getFirstVisiblePosition() + " " + arrayList.get(view.getFirstVisiblePosition()).getPlanDept());
-//                        currentIndex = focusposition;
+
+                        currentIndex = focusposition;
                         Log.e(TAG,"focusPosition----"+currentIndex);
                         if (txtheaderplanclass.getText().toString().equals("Department")) {
                             saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
@@ -546,8 +547,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
                             saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
                         }
-                        //Log.e("analysisArrayList", " " + analysisArrayList.size());
 
+                        //Log.e("analysisArrayList", " " + analysisArrayList.size());
                         if (focusposition != selFirstPositionValue) {
                             if (Reusable_Functions.chkStatus(context)) {
                                 Reusable_Functions.hDialog();
@@ -978,10 +979,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 }
                                 else
                                 {
-                                    //listView_SalesAnalysis.setSelectionFromTop(currentIndex,view.getPaddingTop());
-                                    salesadapter.notifyDataSetChanged();
-//                                    salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList,context,currentIndex,fromWhere,listView_SalesAnalysis);
-  //                                  listView_SalesAnalysis.setAdapter(salesadapter);
+                                    listView_SalesAnalysis.destroyDrawingCache();
+                                    listView_SalesAnalysis.setVisibility(ListView.INVISIBLE);
+                                    listView_SalesAnalysis.setVisibility(ListView.VISIBLE);
+
+                                    listView_SalesAnalysis.scrollBy(0,currentIndex);
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;

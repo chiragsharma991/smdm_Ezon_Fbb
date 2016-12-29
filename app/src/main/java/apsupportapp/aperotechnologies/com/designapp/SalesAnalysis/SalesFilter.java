@@ -1,14 +1,26 @@
 package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 
-import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.ExpandableListView;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,38 +40,47 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SearchActivity1;
+import apsupportapp.aperotechnologies.com.designapp.ValueAdapter;
 
+/**
+ * Created by pamrutkar on 29/12/16.
+ */
 
-public class SalesFilterActivity extends Activity {
+public class SalesFilter extends AppCompatActivity implements View.OnClickListener {
 
-    RelativeLayout btnS_Filterback, btnS_Done;
-    SalesFilterExpandableList listAdapter;
-    public static ExpandableListView pfilter_list;
-    ArrayList<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
-    int offsetvalue = 0, limit = 100, count = 0, level = 1;
+    TextView txtdepartment, txtcategory, txtplanclass, txtbrand, txtbrandclass;
+    LinearLayout linear_dept, linear_category, linear_planclass, linear_brandnm, linear_brandclass;
+    String dept = "OFF", category = "OFF", planCls = "OFF", brand = "OFF", brandCls = "OFF";
+    ListView deptListView, catListView, planClsListView, brandListView, brandClsListView;
+    ArrayList<String> depmentList, catryList, planClsList, brndList, brndClsList;
+    RelativeLayout Filter_imageBtnBack;
+    RelativeLayout FilterOk;
     String userId, bearertoken;
+    Context context;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
-    List<String> subdept, subCategory, subPlanClass, subBrandnm, subBrandPlanClass;
-    public static String plandeptName;
+    SalesFilterAdapter salesFilterAdapter;
+    EditText editSearch;
+    ImageButton btnSearch;
+    String searchData;
+    int offsetvalue = 0, limit = 100, count = 0, level = 1;
 
 
-    public static List<Integer> groupImages;
-
-    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_salespva_filter);
+        setContentView(R.layout.activity_sales_filter);
+        getSupportActionBar().hide();
+        context = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         Log.e("came here", "");
 
@@ -70,149 +91,260 @@ public class SalesFilterActivity extends Activity {
         queue = new RequestQueue(cache, network);
         queue.start();
 
+        intialize();
+        main();
 
-        subdept = new ArrayList<String>();
-        subCategory = new ArrayList<String>();
-        subBrandnm = new ArrayList<String>();
-        subPlanClass = new ArrayList<String>();
-        subBrandPlanClass = new ArrayList<String>();
-
-        btnS_Filterback = (RelativeLayout) findViewById(R.id.imageBtnSFilterBack);
-        btnS_Done = (RelativeLayout) findViewById(R.id.imageBtnSalesFilterDone);
-
-        pfilter_list = (ExpandableListView) findViewById(R.id.expandableListView_subdept);
-        //noinspection deprecation,deprecation
-        pfilter_list.setDivider(getResources().getDrawable(R.color.grey));
-        pfilter_list.setDividerHeight(2);
-        prepareListData();
-
-        listAdapter = new SalesFilterExpandableList(this, listDataHeader, listDataChild, pfilter_list, listAdapter);
-
-        pfilter_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
-        // setting list adapter
-        pfilter_list.setAdapter(listAdapter);
-        listAdapter.notifyDataSetChanged();
-
-        btnS_Filterback.setOnClickListener(new View.OnClickListener() {
+        editSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                salesFilterAdapter.getFilter().filter(s);
+            }
 
-                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
-                    Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
-                    Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                salesFilterAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                salesFilterAdapter.getFilter().filter(s);
             }
         });
 
-        pfilter_list.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
-            @Override
-            public void onGroupExpand(int groupPosition) {
-
-//
-            }
-
-
-        });
-
-        // Listview Group collasped listener
-        pfilter_list.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                //pfilter_list.collapseGroup(groupPosition);
-            }
-        });
     }
 
-
-//    @Override
-//    public void onWindowFocusChanged(boolean hasFocus) {
-//        super.onWindowFocusChanged(hasFocus);
-//        pfilter_list.setIndicatorBounds(pfilter_list.getRight() - 40, pfilter_list.getWidth());
-//    }
-
-
-    /*
-     * Preparing the list data
-     */
-
-    private void prepareListData() {
-
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
-//        groupImages = new ArrayList<Integer>();
-//        groupImages.add(R.mipmap.filter_department_icon);
-//        groupImages.add(R.mipmap.filter_category_icon);
-//        groupImages.add(R.mipmap.filter_planclass_icon);
-//        groupImages.add(R.mipmap.filter_brand_icon);
-//        groupImages.add(R.mipmap.filter_brandplanclass_icon);
-
-        // Adding group name data
-        listDataHeader.add("Department");
-        listDataHeader.add("Category");
-        listDataHeader.add("Plan Class");
-        listDataHeader.add("Brand");
-        listDataHeader.add("Brand Plan Class");
-        if (Reusable_Functions.chkStatus(SalesFilterActivity.this)) {
+    private void main() {
+        depmentList = new ArrayList<String>();
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(SalesFilterActivity.this, "Loading data...");
-
-            if (listDataHeader.get(0).equals("Department")) {
-                offsetvalue = 0;
-                limit = 100;
-                count = 0;
-
-                level = 1;
-                requestDeptAPI(offsetvalue, limit);
-            }
-            if (listDataHeader.get(1).equals("Category")) {
-                offsetvalue = 0;
-                limit = 100;
-                count = 0;
-
-                level = 2;
-                requestCategoryAPI(offsetvalue, limit);
-            }
-            if (listDataHeader.get(2).equals("Plan Class")) {
-                offsetvalue = 0;
-                limit = 100;
-                count = 0;
-
-                level = 3;
-                requestPlanClassAPI(offsetvalue, limit);
-            }
-            if (listDataHeader.get(3).equals("Brand")) {
-                offsetvalue = 0;
-                limit = 100;
-                count = 0;
-
-                level = 4;
-                requestBrandNameAPI(offsetvalue, limit);
-            }
-            if (listDataHeader.get(4).equals("Brand Plan Class")) {
-                offsetvalue = 0;
-                limit = 100;
-                count = 0;
-
-                level = 5;
-                requestBrandPlanClassAPI(offsetvalue, limit);
-            }
+            Reusable_Functions.sDialog(context, "Loading  data...");
+            offsetvalue = 0;
+            count = 0;
+            limit = 100;
+            level = 1;
+            requestDeptAPI(offsetvalue, limit);
         } else {
-            Toast.makeText(SalesFilterActivity.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-        listDataChild.put(listDataHeader.get(0),subdept);
-        listDataChild.put(listDataHeader.get(1),subCategory);
-        listDataChild.put(listDataHeader.get(2),subPlanClass);
-        listDataChild.put(listDataHeader.get(3),subBrandnm);
-        listDataChild.put(listDataHeader.get(4),subBrandPlanClass);
+
+        catryList = new ArrayList<String>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading  data...");
+            offsetvalue = 0;
+            count = 0;
+            limit = 100;
+            level = 2;
+            requestCategoryAPI(offsetvalue, limit);
+        } else {
+
+            Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+        }
+
+        planClsList = new ArrayList<String>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading  data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
+            level = 3;
+            requestPlanClassAPI(offsetvalue, limit);
+        } else {
+
+            Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+        }
+        brndList = new ArrayList<String>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading  data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
+            level = 4;
+            requestBrandNameAPI(offsetvalue, limit);
+        } else {
+
+            Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+        }
+        brndClsList = new ArrayList<String>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading  data...");
+            offsetvalue = 0;
+            count = 0;
+            limit = 100;
+            level = 5;
+            requestBrandPlanClassAPI(offsetvalue, limit);
+        } else {
+
+            Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+        }
+
+
     }
+
+    private void intialize() {
+
+        txtdepartment = (TextView) findViewById(R.id.txtdepartment);
+        txtcategory = (TextView) findViewById(R.id.txtcategory);
+        txtplanclass = (TextView) findViewById(R.id.txtplanclass);
+        txtbrand = (TextView) findViewById(R.id.txtbrand);
+        txtbrandclass = (TextView) findViewById(R.id.txtbrandplanclass);
+
+        linear_dept = (LinearLayout) findViewById(R.id.linear_dept);
+        linear_category = (LinearLayout) findViewById(R.id.linear_category);
+        linear_planclass = (LinearLayout) findViewById(R.id.linear_planClass);
+        linear_brandnm = (LinearLayout) findViewById(R.id.linear_brand);
+        linear_brandclass = (LinearLayout) findViewById(R.id.linear_brandclass);
+
+        Filter_imageBtnBack = (RelativeLayout) findViewById(R.id.filter_imageBtnBack);
+        FilterOk = (RelativeLayout) findViewById(R.id.filterOk);
+
+        editSearch = (EditText) findViewById(R.id.editSearch);
+        btnSearch = (ImageButton) findViewById(R.id.btnSeatchList);
+
+        deptListView = (ListView) findViewById(R.id.deptList);
+        catListView = (ListView) findViewById(R.id.categoryList);
+        planClsListView = (ListView) findViewById(R.id.planClassList);
+        brandListView = (ListView) findViewById(R.id.brandList);
+        brandClsListView = (ListView) findViewById(R.id.brandclassList);
+
+        txtdepartment.setOnClickListener(this);
+        txtcategory.setOnClickListener(this);
+        txtplanclass.setOnClickListener(this);
+        txtbrand.setOnClickListener(this);
+        txtbrandclass.setOnClickListener(this);
+        Filter_imageBtnBack.setOnClickListener(this);
+        FilterOk.setOnClickListener(this);
+        btnSearch.setOnClickListener(this);
+
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.txtdepartment:
+                loadDepartmentData();
+                break;
+            case R.id.txtcategory:
+                loadCategoryData();
+                break;
+            case R.id.txtplanclass:
+                loadPlanClassData();
+                break;
+            case R.id.txtbrand:
+                loadBrandData();
+                break;
+            case R.id.txtbrandplanclass:
+                loadBrandClassData();
+                break;
+
+            case R.id.filter_imageBtnBack:
+                filterBack();
+                break;
+            case R.id.filterOk:
+                Toast.makeText(this, "Activity is still in process", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.btnSeatchList:
+                searchData = editSearch.getText().toString();
+
+                Log.e("list", searchData);
+                editSearch.clearFocus();
+                InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
+                salesFilterAdapter.getFilter().filter(searchData);
+                break;
+
+        }
+
+
+    }
+
+    private void filterBack() {
+        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+            // Intent intent = new Intent(context, SalesAnalysisActivity.class);
+            // startActivity(intent);
+            finish();
+        }
+//        else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+//            Intent intent = new Intent(lesFilterActivity.this, SalesPvAActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+
+    }
+
+
+    public void loadDepartmentData() {
+
+        if (dept.equals("OFF")) {
+            linear_dept.setVisibility(View.VISIBLE);
+            txtdepartment.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+            dept = "ON";
+        } else {
+            linear_dept.setVisibility(View.GONE);
+            txtdepartment.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+            dept = "OFF";
+        }
+    }
+
+    public void loadCategoryData() {
+
+        if (category.equals("OFF")) {
+            linear_category.setVisibility(View.VISIBLE);
+            txtcategory.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+            category = "ON";
+        } else {
+            linear_category.setVisibility(View.GONE);
+            txtcategory.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+            category = "OFF";
+        }
+    }
+
+    public void loadPlanClassData() {
+
+        if (planCls.equals("OFF")) {
+            linear_planclass.setVisibility(View.VISIBLE);
+            txtplanclass.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+            planCls = "ON";
+        } else {
+            linear_planclass.setVisibility(View.GONE);
+            txtplanclass.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+            planCls = "OFF";
+        }
+    }
+
+    public void loadBrandData() {
+
+        if (brand.equals("OFF")) {
+            linear_brandnm.setVisibility(View.VISIBLE);
+            txtbrand.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+            brand = "ON";
+        } else {
+            linear_brandnm.setVisibility(View.GONE);
+            txtbrand.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+            brand = "OFF";
+        }
+    }
+
+    public void loadBrandClassData() {
+
+        if (brandCls.equals("OFF")) {
+            linear_brandclass.setVisibility(View.VISIBLE);
+            txtbrandclass.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+            brandCls = "ON";
+        } else {
+            linear_brandclass.setVisibility(View.GONE);
+            txtbrandclass.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+            brandCls = "OFF";
+        }
+    }
+
 
     // Department List
     public void requestDeptAPI(int offsetvalue1, int limit1) {
@@ -227,7 +359,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilter.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -236,7 +368,7 @@ public class SalesFilterActivity extends Activity {
 
                                     String plandept = productName1.getString("planDept");
 
-                                    subdept.add(plandept);
+                                    depmentList.add(plandept);
                                 }
 
                                 offsetvalue = (limit * count) + limit;
@@ -248,14 +380,17 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String planDept = productName1.getString("planDept");
-                                    subdept.add(planDept);
+                                    depmentList.add(planDept);
 
                                 }
-                                //Collections.sort(subdept);
-                               // listDataChild.put(listDataHeader.get(0), subdept);
-                                // pfilter_list.expandGroup(0);
-                                Reusable_Functions.hDialog();
+
                             }
+                            salesFilterAdapter = new SalesFilterAdapter(depmentList, getApplicationContext());
+                            deptListView.setAdapter(salesFilterAdapter);
+                            deptListView.setTextFilterEnabled(true);
+//                                listView.setTextFilterEnabled(true);
+
+                            Reusable_Functions.hDialog();
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
@@ -285,6 +420,7 @@ public class SalesFilterActivity extends Activity {
         queue.add(postRequest);
     }
 
+
     //Category List
     public void requestCategoryAPI(int offsetvalue1, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
@@ -298,7 +434,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -307,7 +443,7 @@ public class SalesFilterActivity extends Activity {
 
                                     String planCategory = productName1.getString("planCategory");
 
-                                    subCategory.add(planCategory);
+                                    catryList.add(planCategory);
                                 }
 
                                 offsetvalue = (limit * count) + limit;
@@ -319,14 +455,19 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String planCategory = productName1.getString("planCategory");
-                                    subCategory.add(planCategory);
+                                    catryList.add(planCategory);
 
                                 }
-                                //Collections.sort(subdept);
-                              //  listDataChild.put(listDataHeader.get(1), subCategory);
-                                // pfilter_list.expandGroup(1);
-                                Reusable_Functions.hDialog();
+
                             }
+                            salesFilterAdapter = new SalesFilterAdapter(catryList, getApplicationContext());
+                            catListView.setAdapter(salesFilterAdapter);
+                            catListView.setTextFilterEnabled(true);
+
+                            //Collections.sort(subdept);
+                            //  listDataChild.put(listDataHeader.get(1), subCategory);
+                            // pfilter_list.expandGroup(1);
+                            Reusable_Functions.hDialog();
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
@@ -369,7 +510,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -378,7 +519,7 @@ public class SalesFilterActivity extends Activity {
 
                                     String planClass = productName1.getString("planClass");
 
-                                    subPlanClass.add(planClass);
+                                    planClsList.add(planClass);
                                 }
 
                                 offsetvalue = (limit * count) + limit;
@@ -390,14 +531,20 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String planClass = productName1.getString("planClass");
-                                    subPlanClass.add(planClass);
+                                    planClsList.add(planClass);
 
                                 }
-                                //Collections.sort(subdept);
-                              //  listDataChild.put(listDataHeader.get(2), subPlanClass);
-                                //  pfilter_list.expandGroup(2);
-                                Reusable_Functions.hDialog();
                             }
+                            salesFilterAdapter = new SalesFilterAdapter(planClsList, getApplicationContext());
+                            planClsListView.setAdapter(salesFilterAdapter);
+                            planClsListView.setTextFilterEnabled(true);
+
+
+                            //Collections.sort(subdept);
+                            //  listDataChild.put(listDataHeader.get(2), subPlanClass);
+                            //  pfilter_list.expandGroup(2);
+                            Reusable_Functions.hDialog();
+
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
@@ -441,7 +588,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -449,7 +596,7 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String brandName = productName1.getString("brandName");
-                                    subBrandnm.add(brandName);
+                                    brndList.add(brandName);
                                 }
 
                                 offsetvalue = (limit * count) + limit;
@@ -461,15 +608,20 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String brandName = productName1.getString("brandName");
-                                    subBrandnm.add(brandName);
+                                    brndList.add(brandName);
 
 
                                 }
-                                //Collections.sort(subdept);
-                               // listDataChild.put(listDataHeader.get(3), subBrandnm);
-                                // pfilter_list.expandGroup(3);
-                                Reusable_Functions.hDialog();
+
                             }
+                            salesFilterAdapter = new SalesFilterAdapter(brndList, getApplicationContext());
+                            brandListView.setAdapter(salesFilterAdapter);
+                            brandListView.setTextFilterEnabled(true);
+
+                            //Collections.sort(subdept);
+                            // listDataChild.put(listDataHeader.get(3), subBrandnm);
+                            // pfilter_list.expandGroup(3);
+                            Reusable_Functions.hDialog();
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
@@ -500,7 +652,7 @@ public class SalesFilterActivity extends Activity {
     }
 
 
-    //Brand Plan Class List
+    // Brand Plan Class List
     public void requestBrandPlanClassAPI(int offsetvalue1, int limit1) {
 
         String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
@@ -514,7 +666,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -522,7 +674,7 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String brandClass = productName1.getString("brandPlanClass");
-                                    subBrandPlanClass.add(brandClass);
+                                    brndClsList.add(brandClass);
                                 }
 
                                 offsetvalue = (limit * count) + limit;
@@ -534,13 +686,17 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String brandClass = productName1.getString("brandPlanClass");
-                                    subBrandPlanClass.add(brandClass);
+                                    brndClsList.add(brandClass);
                                 }
-                                //Collections.sort(subdept);
-                             //   listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
-                                //   pfilter_list.expandGroup(4);
-                                Reusable_Functions.hDialog();
+
                             }
+                            salesFilterAdapter = new SalesFilterAdapter(brndClsList, getApplicationContext());
+                            brandClsListView.setAdapter(salesFilterAdapter);
+                            brandClsListView.setTextFilterEnabled(true);
+                            //Collections.sort(subdept);
+                            //   listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
+                            //   pfilter_list.expandGroup(4);
+                            Reusable_Functions.hDialog();
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
@@ -573,15 +729,9 @@ public class SalesFilterActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
-            Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
-            Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
+        super.onBackPressed();
+        filterBack();
     }
+
+
 }

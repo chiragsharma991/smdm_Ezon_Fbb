@@ -52,7 +52,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     // Define activity context
     private Context mContext;
 
-    int offsetvalue = 0, limit = 100, count = 0;
+    int offsetvalue = 0, limit = 100, count = 0,level ;
     ArrayList categorylist, articleOptionList,planClassList,brandNameList,brandplanclassList;
 
     ExpandableListView expandableListView;
@@ -62,6 +62,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     List<ListBrand> brandArray;
     List<ListBrandClass> brandclassArray;
     List tempcategorylist,tempplanclass,tempbrandname,tempbrandplanclass;
+    List<String>  subCategory;
     private HashMap<String, List<String>> mListDataChild;
     private ArrayList<String> mListDataGroup;
     private ChildViewHolder childViewHolder;
@@ -89,6 +90,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         planclassArray = new ArrayList();
         brandArray = new ArrayList();
         brandclassArray = new ArrayList();
+        subCategory = new ArrayList<String>();
         flag = false;
     }
 
@@ -192,6 +194,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         } else {
             childViewHolder.mCheckBox.setChecked(false);
         }
+
 
         convertView.setOnClickListener(null);
 
@@ -823,6 +826,11 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+
+
+
+
+
 
 }
 

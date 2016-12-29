@@ -49,6 +49,11 @@
     <string name="pvaSales">PvA Sales%</string>
     <string name="fullSize">Option%</string>
     <string name="xaxis_label">Weeks --></string>
+    <string name="department">Department</string>
+    <string name="category">Category</string>
+    <string name="planclass">Plan Class</string>
+    <string name="brand">Brand</string>
+    <string name="brand_plan_class">Brand Plan Class</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

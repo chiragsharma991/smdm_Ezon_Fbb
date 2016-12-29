@@ -639,9 +639,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
             case R.id.btnCore:
                 //Toast.makeText(SalesPvAActivity.this, "WTD", Toast.LENGTH_SHORT).show();
-                if (FIndex_SegmentClick.equals("Core"))
+                if (FIndex_SegmentClick.equals("All"))
                     break;
-                FIndex_SegmentClick = "Core";
+                FIndex_SegmentClick = "All";
                 llfIndexhierarchy.setVisibility(View.GONE);
                 llfreshnessIndex.setVisibility(View.GONE);
                 freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
@@ -730,7 +730,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 //                                freshnessIndexDetails = new FreshnessIndexDetails();
 //
 //                                if (txtFIndexClass.getText().toString().equals("Department")) {
-//                                    freshnessIndexDetails.setPlanDept("All");
+///
+//
+//                           freshnessIndexDetails.setPlanDept("All");
 //                                } else if (txtFIndexClass.getText().toString().equals("Category")) {
 //                                    freshnessIndexDetails.setPlanCategory("All");
 //                                } else if (txtFIndexClass.getText().toString().equals("Plan Class")) {
@@ -1299,10 +1301,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     }
                                 }
                                 ArrayList<Integer> colors = new ArrayList<>();
-                                colors.add(Color.parseColor("#8857a6"));
-                                colors.add(Color.parseColor("#b33d2f"));
-                                colors.add(Color.parseColor("#386e34"));
-                                colors.add(Color.parseColor("#308fab"));
+                                colors.add(Color.parseColor("#31d6c5"));
+                                colors.add(Color.parseColor("#aea9fd"));
+                                colors.add(Color.parseColor("#fe8081"));
+                                colors.add(Color.parseColor("#ffc65b"));
                                 ArrayList<String> labels = new ArrayList<>();
                                 if (currentgroup > 0.0f) {
 
