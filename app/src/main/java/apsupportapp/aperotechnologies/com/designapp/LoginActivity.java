@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -54,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     Boolean log_flag = false;
     SharedPreferences sharedPreferences;
     private LinearLayout LinearLogin;
+    private Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,15 +127,21 @@ public class LoginActivity extends AppCompatActivity {
         if(LocalNotificationReceiver.logoutAlarm)
         {
             View view=findViewById(android.R.id.content);
-            Snackbar snackbar=Snackbar.make(view,"Session has been Log out Please Retry",Snackbar.LENGTH_LONG).setAction("Retry", new View.OnClickListener() {
+             snackbar = Snackbar.make(view, "Session has been Log out Please Retry", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    snackbar.dismiss();
 
                 }
             });
             snackbar.setActionTextColor(getResources().getColor(R.color.smdm_actionbar));
             snackbar.show();
             LocalNotificationReceiver.logoutAlarm=false;
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.cancel(LocalNotificationReceiver.notId);
+
+
         }
     }
 

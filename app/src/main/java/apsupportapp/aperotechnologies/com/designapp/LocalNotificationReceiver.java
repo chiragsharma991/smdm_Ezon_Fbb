@@ -15,6 +15,7 @@ import java.util.Random;
 
 public class LocalNotificationReceiver extends BroadcastReceiver {
     public static boolean logoutAlarm=false;
+    public static int notId;
     Context cont;
 
     @Override
@@ -48,7 +49,7 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Random myRandom = new Random();
-        int notId = myRandom.nextInt();
+        notId = myRandom.nextInt();
         logoutAlarm = true;
 
         NotificationCompat.Builder mBuilder = null;
@@ -69,4 +70,6 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
 
 
     }
+
+
 }

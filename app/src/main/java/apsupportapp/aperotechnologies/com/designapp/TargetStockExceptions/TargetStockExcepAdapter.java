@@ -32,6 +32,7 @@ public class TargetStockExcepAdapter extends BaseAdapter{
     Context context;
     int Position;
     ProgressBar progressView = null;
+    //testing by chirag
 
     //private ValueFilter valueFiAlter;
 

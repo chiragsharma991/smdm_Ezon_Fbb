@@ -71,7 +71,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     RadioButton CheckWTD, CheckL4W, CheckSTD;
     String userId, bearertoken;
     private TextView Toolbar_title;
-    String TAG = "WorstPerformerInventory";
+    String TAG = "BestPerformerInventory";
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -102,6 +102,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private Switch BestAndWorst;
     private String orderby = "DESC";
     private CheckBox BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming;
+    private boolean coreSelection = false;
 
 
     @Override
@@ -133,15 +134,15 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             limit = 10;
             count = 0;
             top = 10;
+            footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
+            BestInventListview.addFooterView(footer);
             requestRunningPromoApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
-        footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
-        BestInventListview.addFooterView(footer);
         // footer.setVisibility(View.GONE);
         // BestPerformanceListView.setAdapter(bestPromoAdapter);
 
@@ -152,10 +153,20 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
 
         if (Reusable_Functions.chkStatus(context)) {
+            String url;
+            if (coreSelection) {
 
-            String url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                //core selection without season params
 
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&corefashion=" + corefashion + "&view=" + view;
+            } else {
+
+                // fashion select with season params
+
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+            }
             Log.e(TAG, "URL" + url);
+
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -174,6 +185,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                     BestInventListview.setTag("FOOTER_REMOVE");
                                     if (BestInventList.size() == 0) {
                                         BestInventListview.setVisibility(View.GONE);
+                                        return;
+
 
                                     }
                                     //  BestInvent_fashion.setEnabled(true);
@@ -244,6 +257,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 //    BestInvent_fashion.setEnabled(true);
                                 //   BestInvent_core.setEnabled(true);
                                 Reusable_Functions.hDialog();
+                                Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
                                 BestInventListview.removeFooterView(footer);
                                 BestInventListview.setTag("FOOTER_REMOVE");
                                 e.printStackTrace();
@@ -662,14 +676,14 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void BestAndWorstToggle() {
         if (BestAndWorst.isChecked()) {
-                limit = 10;
-                offsetvalue = 0;
-                top = 10;
-                orderby = "ASC";
-                Toolbar_title.setText("Worst Performers");
-                Log.e(TAG, "BestAndWorstToggle:is checked log");
-                BestInventList.clear();
-                BestInventListview.setVisibility(View.GONE);
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            orderby = "ASC";
+            Toolbar_title.setText("Worst Performers");
+            Log.e(TAG, "BestAndWorstToggle:is checked log");
+            BestInventList.clear();
+            BestInventListview.setVisibility(View.GONE);
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.sDialog(this, "Loading.......");
                 requestRunningPromoApi();
@@ -681,14 +695,14 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
             }
         } else {
-                limit = 10;
-                offsetvalue = 0;
-                top = 10;
-                orderby = "DESC";
-                Toolbar_title.setText("Best Performers");
-                Log.e(TAG, "BestAndWorstToggle:is unchecked log");
-                BestInventList.clear();
-                BestInventListview.setVisibility(View.GONE);
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            orderby = "DESC";
+            Toolbar_title.setText("Best Performers");
+            Log.e(TAG, "BestAndWorstToggle:is unchecked log");
+            BestInventList.clear();
+            BestInventListview.setVisibility(View.GONE);
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.sDialog(this, "Loading.......");
                 requestRunningPromoApi();
@@ -938,15 +952,16 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         switch (checkedId) {
             case R.id.bestInvent_core:
                 if (BestInvent_core.isChecked()) {
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Core";
-                        lazyScroll = "OFF";
-                        BestInventList.clear();
+                    limit = 10;
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Core";
+                    lazyScroll = "OFF";
+                    BestInventList.clear();
                     BestInventListview.setVisibility(View.GONE);
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(context, "Loading data...");
+                        coreSelection = true;
                         requestRunningPromoApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -957,17 +972,18 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 break;
             case R.id.bestInvent_fashion:
                 if (BestInvent_fashion.isChecked()) {
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Fashion";
-                        lazyScroll = "OFF";
+                    limit = 10;
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Fashion";
+                    lazyScroll = "OFF";
                     BestInventListview.setVisibility(View.GONE);
 
                     BestInventList.clear();
 
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(this, "Loading.......");
+                        coreSelection = false;
                         requestRunningPromoApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();

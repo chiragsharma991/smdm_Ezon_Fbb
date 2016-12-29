@@ -79,8 +79,8 @@ public class BestPromoAdapter extends BaseAdapter {
             holder.PromotionName = (TextView) convertView.findViewById(R.id.bst_head_child);
             holder.Bst_PromoValues_child = (TextView) convertView.findViewById(R.id.bst_PromoValues_child);
             holder.Bst_PromoValuesU_child = (TextView) convertView.findViewById(R.id.bst_PromoValuesU_child);
-            holder.Bst_txtStoreCode = (TextView)convertView.findViewById(R.id.bst_txtStoreCode);
-            holder.Bst_txtStoreName = (TextView)convertView.findViewById(R.id.bst_txtStoreName);
+           // holder.Bst_txtStoreCode = (TextView)convertView.findViewById(R.id.bst_storecode);
+          //  holder.Bst_txtStoreName = (TextView)convertView.findViewById(R.id.bst_txtStoreName);
             holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
            // holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.Bst_image_child = (ImageView) convertView.findViewById(R.id.bst_image_child);
@@ -96,8 +96,11 @@ public class BestPromoAdapter extends BaseAdapter {
 
         }
         holder.PromotionName.setText(arrayList.get(position).getPromoDesc());
-        //holder.Bst_txtStoreCode.setText(arrayList.get(position).getStoreCode());
-        //holder.Bst_txtStoreName.setText(arrayList.get(position).getStoreDesc());
+
+
+
+        //holder.Bst_txtStoreCode.setText(arrayList.get(0).getStoreCode().toString());
+        //holder.Bst_txtStoreName.setText(arrayList.get(0).getStoreDesc().toString());
         holder.Bst_PromoValues_child.setText("₹\t"+Math.round(arrayList.get(position).getDurSaleNetVal()));
         holder.Bst_PromoValuesU_child.setText(""+(int)arrayList.get(position).getDurSaleTotQty());
 

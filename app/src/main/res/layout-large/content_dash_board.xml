@@ -1128,6 +1128,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Target Stock Exceptions"
+                            android:textColor="@color/smdm_light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
                             />
@@ -1193,6 +1194,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
+                            android:textColor="@color/smdm_light_Black"
                             android:text="Sell Thru Exceptions" />
                     </LinearLayout>
 
