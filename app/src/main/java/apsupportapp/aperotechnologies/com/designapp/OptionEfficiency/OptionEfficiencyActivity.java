@@ -1452,9 +1452,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                 }
                                 ArrayList<Integer> colors = new ArrayList<>();
-                                colors.add(Color.parseColor("#8857a6"));
-                                colors.add(Color.parseColor("#b33d2f"));
-                                colors.add(Color.parseColor("#386e34"));
+                                colors.add(Color.parseColor("#31d6c5"));
+                                colors.add(Color.parseColor("#aea9fd"));
+                                colors.add(Color.parseColor("#fe8081"));
 
                                 ArrayList<String> labels = new ArrayList<>();
                                 if (fullSizeCount > 0.0f) {

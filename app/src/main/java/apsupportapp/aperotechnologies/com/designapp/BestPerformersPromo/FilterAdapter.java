@@ -103,7 +103,4 @@ public class FilterAdapter extends BaseAdapter {
 
     }
 
-
-
-
 }
