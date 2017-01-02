@@ -581,6 +581,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
+
                                 requestFIndexPieChart();
                             } else {
                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -727,14 +728,14 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                     freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
                                 }
-//                                freshnessIndexDetails = new FreshnessIndexDetails();
-//
+                                freshnessIndexDetails = new FreshnessIndexDetails();
+
+
 //                                if (txtFIndexClass.getText().toString().equals("Department")) {
-///
-//
-//                           freshnessIndexDetails.setPlanDept("All");
+//                                  freshnessIndexDetails.setPlanDept("All");
 //                                } else if (txtFIndexClass.getText().toString().equals("Category")) {
 //                                    freshnessIndexDetails.setPlanCategory("All");
+//
 //                                } else if (txtFIndexClass.getText().toString().equals("Plan Class")) {
 //                                    freshnessIndexDetails.setPlanClass("All");
 //                                } else if (txtFIndexClass.getText().toString().equals("Brand")) {
@@ -744,7 +745,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 //                                }
 //
 //                                freshnessIndexDetailsArrayList.add(0, freshnessIndexDetails);
-//
+
 
                                 fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 listViewFIndex.setAdapter(fIndexAdapter);
@@ -1337,9 +1338,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 pieChart.setEntryLabelColor(Color.BLACK);
                                 pieChart.setExtraOffsets(5, 10, 5, 5);
                                 pieChart.setHoleRadius(0);
-                                //pieChart.setHoleColor(Color.WHITE);
+                               // pieChart.setHoleColor(Color.WHITE);
                                 pieChart.setTransparentCircleRadius(0);
                                 pieChart.setData(pieData);
+                                //pieChart.setDrawCenterText(true);
+                              //  pieChart.setCenterText(String.valueOf(upcoming) + String.valueOf(oldgroup));
                                 pieChart.animateXY(4000, 4000);
                                 pieChart.setDescription(null);
                                 pieChart.setTouchEnabled(false);

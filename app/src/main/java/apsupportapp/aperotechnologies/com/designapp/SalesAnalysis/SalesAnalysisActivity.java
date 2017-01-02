@@ -80,7 +80,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     int offsetvalue = 0, limit = 100;
     int count = 0, level;
     RequestQueue queue;
-    static String planDept, planCategory, planClass;
+    static String planDept, planCategory, planClass,brandnm;
     Gson gson;
     int focusposition = 0;
     LinearLayout rankLayout;
@@ -99,6 +99,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     int currentIndex ,top;
     Parcelable state;
 
+
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +110,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         txtSalesClickedValue = " ";
         val = "";
         context = this;
+     //   SalesFilter.searchDept = " ";
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -160,7 +163,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 onBackPressed();
                /* Intent i = new Intent(SalesAnalysisActivity.this, DashBoardActivity.class);
                 startActivity(i);*/
-                finish();
+                //finish();
             }
         });
 
@@ -235,9 +238,14 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             limit = 100;
             count = 0;
             level = 1;
-            //currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-            requestSalesListDisplayAPI();
-
+            if(getIntent().getStringExtra("selectedDept")==null) {
+                requestSalesListDisplayAPI();
+            }
+            else
+            {
+                saleFirstVisibleItem = getIntent().getStringExtra("selectedDept");
+                requestSalesSelectedFilterVal();
+            }
             Log.e("state on create",""+state);
 
         } else {
@@ -751,7 +759,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
 
 
-
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
@@ -1255,6 +1262,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
     }
 
+
     private void requestSalesCategoryList(final String deptName) {
 
         String salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
@@ -1478,8 +1486,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
                                 }
-
-
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestSalesBrandListAPI(planDept, planCategory, planclass);
@@ -1558,14 +1564,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     }
 
     private void requestSalesBrandPlanListAPI(String deptName, String category, final String plan_class, final String brandnm) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
 
         String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + planDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategory.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + salespva_brandplan_listurl);
@@ -1665,6 +1663,103 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+
+    private void requestSalesSelectedFilterVal() {
+        String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" +  saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e("url", " " + salespva_brandplan_listurl);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.i("Sales List : ", " " + response);
+                        Log.i("Sales List response length", "" + response.length());
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
+
+                            } else if (response.length() == limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
+                                    salesAnalysisClassArrayList.add(salesAnalysisClass);
+
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                requestSalesSelectedFilterVal();
+
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
+                                    salesAnalysisClassArrayList.add(salesAnalysisClass);
+                                }
+
+                                for (int i = 0; i < 3; i++) {
+                                    ImageView imgdot = new ImageView(context);
+                                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
+                                    layoutParams.setMargins(3, 3, 3, 3);
+                                    imgdot.setLayoutParams(layoutParams);
+                                    imgdot.setImageResource(R.mipmap.dots_unselected);
+                                    lldots.addView(imgdot);
+
+                                }
+                                int currentItem = vwpagersales.getCurrentItem();
+                                Log.e("----"," "+vwpagersales.getCurrentItem());
+                                ImageView img = (ImageView) lldots.getChildAt(currentItem);
+                                img.setImageResource(R.mipmap.dots_selected);
+
+                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+                                listView_SalesAnalysis.setAdapter(salesadapter);
+                                salesadapter.notifyDataSetChanged();
+
+                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
+
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept();
+                                Log.e("saleFirstVisibleItem in brandplanclass list", "-----" + saleFirstVisibleItem);
+                                requestSalesPagerOnScrollAPI();
+                            }
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
 
 
     @Override

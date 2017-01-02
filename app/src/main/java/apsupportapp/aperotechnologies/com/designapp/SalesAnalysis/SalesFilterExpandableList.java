@@ -9,11 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +51,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.ListCategory;
 import apsupportapp.aperotechnologies.com.designapp.model.ListPlanClass;
 
 
-public class SalesFilterExpandableList extends BaseExpandableListAdapter {
+public class SalesFilterExpandableList extends BaseExpandableListAdapter  {
 
     // Define activity context
     private Context mContext;
@@ -196,7 +200,8 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         }
 
 
-        convertView.setOnClickListener(null);
+  //      convertView.setOnClickListener(null);
+
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,12 +212,20 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 TextView txtView = (TextView) rel.getChildAt(0);
                 String txtClickedVal = txtView.getText().toString();
 
-                if(groupPosition == 4)
-                {
-                    cb.setChecked(true);
-                    return;
-                }
 
+                if(cb.isChecked() == false)
+                {
+                    if(groupPosition == 0){
+                       SalesFilterActivity.pfilter_list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+                    }
+                   // salesList.add(mListDataGroup.get(groupPosition)+"."+txtClickedVal);
+                   cb.setChecked(true);
+                }
+                else
+                {
+                    salesList.remove(mListDataGroup.get(groupPosition)+"."+txtClickedVal);
+                    cb.setChecked(false);
+                }
 //                if (cb.isChecked() == false) {
 //                    ////Log.e("checkbox is not selected", "");
 //                    if (Reusable_Functions.chkStatus(mContext)) {
@@ -404,11 +417,10 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 //                        }
 //
 //
-//                    }
-                }
+                    }
+               // }
             }
-
-            );
+      );
             return convertView;
         }
 
@@ -422,7 +434,9 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             return false;
         }
 
-        public final class GroupViewHolder {
+
+
+    public final class GroupViewHolder {
 
             TextView mGroupText;
             ImageView mImage;
@@ -826,6 +840,8 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+
+
 
 
 
