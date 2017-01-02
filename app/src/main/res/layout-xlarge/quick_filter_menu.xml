@@ -53,8 +53,9 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:text="Quick Filter"
-                        android:textColor="#ffffff"
-                        android:textSize="17sp" />
+                        android:textColor="@color/divider_salescard1"
+                        android:textSize="@dimen/smdm_quickfilter_title_large"
+                        />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -82,8 +83,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Season Group"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp" />
+                        android:textColor="@color/smdm_quickfiltertxt_color"
+                        android:textSize="@dimen/smdm_quickfilter_title_large"
+                        />
 
                 </LinearLayout>
 
@@ -113,7 +115,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Current"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/smdm_quickfilter_title_large"
+                            />
 
                     </LinearLayout>
 
@@ -157,7 +160,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Previous"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/smdm_quickfilter_title_large"
+                            />
 
                     </LinearLayout>
 
@@ -197,7 +201,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Old"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/smdm_quickfilter_title_large"
+                            />
 
                     </LinearLayout>
 
@@ -238,7 +243,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Upcoming"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/smdm_quickfilter_title_large"
+                            />
 
                     </LinearLayout>
 
@@ -267,6 +273,175 @@
                     android:layout_height="2dp"
                     android:background="@color/divider_salescard" />
 
+
+                <!--Time-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Time"
+                        android:textColor="@color/smdm_quickfiltertxt_color"
+                        android:textSize="@dimen/smdm_quickfilter_title_large"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/smdm_quickfilter_divider"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/divider_salescard" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WTD"
+                            android:textSize="@dimen/smdm_quickfilter_title_large"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+
+                        <RadioButton
+                            android:id="@+id/skewed_checkWTD"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@android:color/black"
+                            android:focusable="true" />
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="L4W"
+                            android:textSize="@dimen/smdm_quickfilter_title_large"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+
+                        <RadioButton
+                            android:id="@+id/skewed_checkL4W"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@android:color/black"
+                            android:focusable="true" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="STD"
+                            android:textSize="@dimen/smdm_quickfilter_title_large"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+
+                        <RadioButton
+                            android:id="@+id/skewed_checkSTD"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@android:color/black"
+                            android:focusable="true"
+                            android:checked="true"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
             </LinearLayout>
 
             <RelativeLayout
@@ -285,8 +460,9 @@
                     android:background="@color/colorPrimary"
                     android:clickable="false"
                     android:text="Done"
-                    android:textColor="#ffffff"
-                    android:textSize="14sp" />
+                    android:textColor="@color/divider_salescard1"
+                    android:textSize="@dimen/smdm_quickfilter_title_large"
+                    />
 
             </RelativeLayout>
         </RelativeLayout>

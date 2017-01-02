@@ -165,7 +165,8 @@
                     android:layout_toRightOf="@+id/bestInvent_BtnBack"
                     android:layout_marginLeft="20dp"
                     android:textColor="@color/divider_salescard1"
-                    android:id="@+id/toolbar_title" />
+                    android:id="@+id/toolbar_title"
+                    />
 
                 <RelativeLayout
                     android:layout_alignParentRight="true"

@@ -81,7 +81,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     LinearLayout llfreshnessIndex, llfIndexhierarchy;
     SegmentedGroup segmented3;
     int level;
-    FreshnessIndexDetails freshnessIndexDetails;
+    FreshnessIndexDetails freshnessIndexDetails,freshnessIndexDetail;
     RelativeLayout freshnessIndex_imageBtnBack, freshnessIndex_imgfilter;
     RelativeLayout btnFIndexPrev, btnFIndexNext;
     Gson gson;
@@ -1174,9 +1174,113 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     // Pie Chart val changed on Scroll of list view
     private void requestFIndexPieChart() {
         Log.e(TAG,"Department onsroll api" + fIndexFirstVisibleItem);
-        Log.e("Header Class", txtFIndexClass.getText().toString());
+      //  Log.e("Header Class", txtFIndexClass.getText().toString());
         String url = "";
         txtNoChart.setVisibility(View.GONE);
+
+        if(fIndexFirstVisibleItem.equals("All"))
+        {
+            Log.e(TAG, "fIndexFirstVisibleItem.equals: ALL" );
+            ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+
+
+                    upcoming = (float) freshnessIndexDetail.getUpcomingGroupCount();
+                    oldgroup = (float) freshnessIndexDetail.getOldGroupCount();
+                    previousgroup = (float) freshnessIndexDetail.getPreviousGroupCount();
+                    currentgroup = (float) freshnessIndexDetail.getCurrentGroupCount();
+                    Log.e(TAG,"Values-------"+ upcoming + "\t" + oldgroup + "\t" + previousgroup + "\t" + currentgroup);
+
+
+
+            ArrayList<Integer> colors = new ArrayList<>();
+            colors.add(Color.parseColor("#31d6c5"));
+            colors.add(Color.parseColor("#aea9fd"));
+            colors.add(Color.parseColor("#ffc65b"));
+            colors.add(Color.parseColor("#fe8081"));
+            ArrayList<String> labels = new ArrayList<>();
+            if (currentgroup > 0.0f) {
+
+                entries.add(new PieEntry(currentgroup, "Current"));
+                Log.e(TAG, "currentgroup: ");
+            }else
+            {
+                current = true;
+            }
+
+            if (previousgroup > 0.0f) {
+
+                entries.add(new PieEntry(previousgroup, "Previous"));
+                Log.e(TAG, "previousgroup: ");
+
+            }else
+            {
+                previous = true;
+
+            }
+
+            if (oldgroup > 0.0f) {
+
+                entries.add(new PieEntry(oldgroup, "Old"));
+                Log.e(TAG, "oldgroup: ");
+
+            }else
+            {
+                old = true;
+
+            }
+            if (upcoming > 0.0f) {
+
+                entries.add(new PieEntry(upcoming, "Upcoming"));
+                Log.e(TAG, "upcoming: ");
+
+            }else
+            {
+                upcome = true;
+
+
+            }
+            if(current&&previous&&old&&upcome)
+            {
+                txtNoChart.setVisibility(View.VISIBLE);
+                current=false;
+                previous=false;
+                old=false;
+                upcome=false;
+
+            }
+
+            dataSet = new PieDataSet(entries, "");
+            dataSet.setColors(colors);
+            dataSet.setValueLineWidth(0.5f);
+            dataSet.setValueTextColor(Color.BLACK);
+            pieData = new PieData(dataSet);
+            pieData.setValueFormatter(new MyValueFormatter());
+            dataSet.setValueLinePart1Length(1.5f);
+            dataSet.setValueLinePart2Length(1.8f);
+            pieChart.setDrawMarkers(false);
+            pieData.setValueTextSize(11f);
+            dataSet.setXValuePosition(null);
+            dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+            pieChart.setEntryLabelColor(Color.BLACK);
+            pieChart.setExtraOffsets(5, 10, 5, 5);
+            pieChart.setHoleRadius(0);
+            //pieChart.setHoleColor(Color.WHITE);
+            pieChart.setTransparentCircleRadius(0);
+            pieChart.setData(pieData);
+            pieChart.animateXY(4000, 4000);
+            pieChart.setDescription(null);
+            pieChart.setTouchEnabled(false);
+            Legend l = pieChart.getLegend();
+            l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+            l.setFormSize(11f);
+            l.setEnabled(true);
+            llfreshnessIndex.setVisibility(View.VISIBLE);
+            Reusable_Functions.hDialog();
+            return;
+
+        }
+
+
 
 
         if (txtFIndexClass.getText().toString().equals("Department")) {
@@ -1275,10 +1379,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     }
                                 }
                                 ArrayList<Integer> colors = new ArrayList<>();
-                                colors.add(Color.parseColor("#8857a6"));
-                                colors.add(Color.parseColor("#b33d2f"));
-                                colors.add(Color.parseColor("#386e34"));
-                                colors.add(Color.parseColor("#308fab"));
+                                colors.add(Color.parseColor("#31d6c5"));
+                                colors.add(Color.parseColor("#aea9fd"));
+                                colors.add(Color.parseColor("#ffc65b"));
+                                colors.add(Color.parseColor("#fe8081"));
                                 ArrayList<String> labels = new ArrayList<>();
                                 if (currentgroup > 0.0f) {
 
@@ -1429,34 +1533,43 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             } else {
-                                freshnessIndexDetails = new FreshnessIndexDetails();
+                                freshnessIndexDetail = new FreshnessIndexDetails();
                                 for (i = 0; i < response.length(); i++) {
 
-                                    freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
+                                    freshnessIndexDetail = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                 }
 
 
                                 if (txtFIndexClass.getText().toString().equals("Department")) {
-                                    freshnessIndexDetails.setPlanDept("All");
+                                    freshnessIndexDetail.setPlanDept("All");
                                 } else if (txtFIndexClass.getText().toString().equals("Category")) {
-                                    freshnessIndexDetails.setPlanCategory("All");
+                                    freshnessIndexDetail.setPlanCategory("All");
                                 } else if (txtFIndexClass.getText().toString().equals("Plan Class")) {
-                                    freshnessIndexDetails.setPlanClass("All");
+                                    freshnessIndexDetail.setPlanClass("All");
                                 } else if (txtFIndexClass.getText().toString().equals("Brand")) {
-                                    freshnessIndexDetails.setBrandName("All");
+                                    freshnessIndexDetail.setBrandName("All");
                                 } else if (txtFIndexClass.getText().toString().equals("Brand Plan Class")) {
-                                    freshnessIndexDetails.setBrandplanClass("All");
+                                    freshnessIndexDetail.setBrandplanClass("All");
                                 }
 
-                                freshnessIndexDetails.setStkOnhandQty(freshnessIndexDetails.getStkOnhandQty());
-                                freshnessIndexDetails.setStkOnhandQtyCount(100);
-                                freshnessIndexDetails.setStkGitQty(freshnessIndexDetails.getStkGitQty());
+                                freshnessIndexDetail.setStkOnhandQty(freshnessIndexDetail.getStkOnhandQty());
+                                freshnessIndexDetail.setStkOnhandQtyCount(100);
+                                freshnessIndexDetail.setStkGitQty(freshnessIndexDetail.getStkGitQty());
+
+                                freshnessIndexDetail.setUpcomingGroupCount(freshnessIndexDetail.getUpcomingGroupCount());
+                                freshnessIndexDetail.setOldGroupCount(freshnessIndexDetail.getOldGroupCount());
+                                freshnessIndexDetail.setPreviousGroupCount(freshnessIndexDetail.getPreviousGroupCount());
+                                freshnessIndexDetail.setCurrentGroupCount(freshnessIndexDetail.getCurrentGroupCount());
+
+
+
+
 
                                 Log.e(TAG, "soh: "+freshnessIndexDetails.getStkOnhandQty()+" "+freshnessIndexDetails.getPreviousGroupCount()+" "+freshnessIndexDetails.getStkGitQty() );
 
                             }
 
-                            freshnessIndexDetailsArrayList.add(0, freshnessIndexDetails);
+                            freshnessIndexDetailsArrayList.add(0, freshnessIndexDetail);
                             Log.e(TAG, "After add 0 freshnessIndexDetailsArrayList: "+freshnessIndexDetailsArrayList.size() );
 
 

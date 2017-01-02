@@ -15,6 +15,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -481,6 +483,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                 } else {
 
+//in this checkvalueIs  save the previous done condition params and call to true or false
+
 
                     switch (checkValueIs.toString()) {
                         case "BestCheckCurrent":
@@ -541,13 +545,41 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                     }
                 }
 
+                //overridePendingTransition(R.anim.startingfrom_right,R.anim.startingfrom_left);
+                TranslateAnimation animation = new TranslateAnimation(0,600,0,0); // new TranslateAnimation (float fromXDelta,float toXDelta, float fromYDelta, float toYDelta)
 
+                animation.setDuration(2000); // animation duration
+                animation.setRepeatCount(0); // animation repeat count
+                animation.setRepeatMode(0); // repeat animation (left to right, right to left)
+
+                animation.setFillAfter(true);
+                quickFilterPopup.startAnimation(animation);
                 quickFilterPopup.setVisibility(View.GONE);
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        Log.e(TAG, "onAnimationStart: " );
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        Log.e(TAG, "onAnimationEnd: " );
+                        animation.cancel();
+
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        Log.e(TAG, "onAnimationRepeat: " );
+
+                    }
+                });
                 break;
 
             case R.id.bestQfDoneLayout:
 
-                //Time >>>
+                //Time >>>if you press done then you pass checkTimeValueIs and checkValueIs params
                 if (Reusable_Functions.chkStatus(context)) {
 
 
@@ -934,7 +966,40 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     }
 
     private void filterFunction() {
+
+        //overridePendingTransition(R.anim.startingfrom_right,R.anim.startingfrom_left);
+        TranslateAnimation animation = new TranslateAnimation(100,0,0,0); // new TranslateAnimation (float fromXDelta,float toXDelta, float fromYDelta, float toYDelta)
+
+        animation.setDuration(2000); // animation duration
+        animation.setRepeatCount(0); // animation repeat count
+        animation.setRepeatMode(0); // repeat animation (left to right, right to left)
+
+        animation.setFillAfter(true);
+        quickFilterPopup.startAnimation(animation);
         quickFilterPopup.setVisibility(View.VISIBLE);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                Log.e(TAG, "onAnimationStart: " );
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Log.e(TAG, "onAnimationEnd: " );
+                animation.cancel();
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                Log.e(TAG, "onAnimationRepeat: " );
+
+            }
+        });
+
+
     }
 
     @Override

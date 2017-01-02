@@ -48,25 +48,26 @@
         android:layout_below="@+id/skewed_segmented"
         android:layout_marginTop="20dp"
         >
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/skewedListView"
-            android:layout_marginTop="10dp"
-            android:dividerHeight="1dp"
 
-            >
-
-        </ListView>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/smdm_divider"
             android:background="@color/divider_salescard"
             android:layout_marginTop="9dp"
             >
 
         </View>
 
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/skewedListView"
+            android:dividerHeight="1dp"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
+
+        </ListView>
 
 
     </RelativeLayout>
@@ -120,11 +121,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Skewed Sizes"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/smdm_header_title_large"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/skewed_BtnBack"
                     android:layout_marginLeft="20dp"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/divider_salescard1"
                     android:id="@+id/toolbar_title" />
 
                 <RelativeLayout
@@ -163,8 +164,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Store : "
-                android:textColor="#920609"
-                android:textSize="13sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/smdm_store_title_large"/>
 
             <TextView
                 android:id="@+id/txtStoreCode"
@@ -172,8 +173,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/tstoreCode"
-                android:textColor="#000000"
-                android:textSize="13sp" />
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/smdm_store_title_large" />
 
             <TextView
                 android:id="@+id/txtStoreName"
@@ -181,8 +182,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@id/txtStoreCode"
-                android:textColor="#000000"
-                android:textSize="13sp" />
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/smdm_store_title_large"/>
 
             <RelativeLayout
                 android:id="@+id/sk_quickFilter"

@@ -63,8 +63,9 @@
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/freshnessIndex_imageBtnBack"
                         android:text="Freshness Index"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp" />
+                        android:textColor="@color/divider_salescard1"
+                        android:textSize="@dimen/smdm_header_title_large"
+                        />
 
 
 
@@ -103,7 +104,8 @@
                     android:layout_height="wrap_content"
                     android:text="Store : "
                     android:textColor="@color/colorPrimary"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/smdm_store_title_large"
+                    />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -113,7 +115,7 @@
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/largelayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -123,7 +125,7 @@
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/largelayout_storesize" />
 
             </RelativeLayout>
 
@@ -268,7 +270,8 @@
                                 android:text="Department"
                                 android:textStyle="normal"
                                 android:textColor="@color/bg_store_code_text"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/smdm_departmentTitleLarge"
+                                />
 
 
                             <RelativeLayout
@@ -301,7 +304,8 @@
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
+                            />
 
 
                         <TextView
@@ -315,7 +319,7 @@
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)%"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal"/>
 
 
@@ -328,7 +332,7 @@
                             android:gravity="center_vertical|center"
                             android:text="GIT(U)"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal"/>
 
 
@@ -424,5 +428,5 @@
 
 
         </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -64,8 +64,10 @@
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/optionEfficiency_imageBtnBack"
                         android:text="Option Efficiency"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp" />
+                        android:textColor="@color/divider_salescard1"
+                        android:textSize="@dimen/smdm_header_title_normal"
+                        />
+
 
 
                     <RelativeLayout
@@ -102,7 +104,8 @@
                     android:layout_height="wrap_content"
                     android:text="Store : "
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/normallayout_storesize" />
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -112,7 +115,8 @@
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/normallayout_storesize" />
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -122,7 +126,8 @@
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/normallayout_storesize" />
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
 
                 <RelativeLayout
                     android:id="@+id/oe_quickFilter"
@@ -130,7 +135,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="0dp">
+                    android:layout_marginRight="0dp"
+                    >
 
                     <Button
                         android:layout_width="16dp"
@@ -175,10 +181,11 @@
                     android:text="Core" />
 
 
+
+
             </info.hoang8f.android.segmented.SegmentedGroup>
 
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/llayoutOEfficiency"
             android:layout_width="match_parent"
@@ -191,10 +198,22 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/noChartOption"
+                    android:text="No Chart data available"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:textSize="@dimen/largelayout_storesize"
+
+                    />
+
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/oe_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="210dp" />
+                    android:layout_height="270dp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -210,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="@color/txt_color"
-                    android:textSize="@dimen/normallayout_textsize" />
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
@@ -232,7 +251,6 @@
                     android:layout_height="80dp"
                     android:orientation="vertical">
 
-                    
                     <RelativeLayout
                         android:id="@+id/llOEheader"
                         android:layout_width="match_parent"
@@ -241,16 +259,15 @@
 
 
                         <RelativeLayout
-                            android:layout_marginRight="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="50dp">
 
 
                             <RelativeLayout
+                                android:layout_centerVertical="true"
                                 android:id="@+id/oe_btnPrev"
                                 android:layout_width="20dp"
-                                android:layout_height="40dp"
-                                android:layout_centerVertical="true">
+                                android:layout_height="40dp">
 
                                 <Button
                                     android:layout_width="20dp"
@@ -262,23 +279,24 @@
 
 
                             <TextView
+                                android:layout_toRightOf="@+id/oe_btnPrev"
                                 android:id="@+id/oe_txtHeaderClass"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
-                                android:layout_toRightOf="@+id/oe_btnPrev"
                                 android:text="Department"
+                                android:textStyle="normal"
                                 android:textColor="@color/bg_store_code_text"
-                                android:textSize="@dimen/normallayout_textsize"
-                                android:textStyle="normal" />
+                                android:textSize="@dimen/smdm_departmentTitle"
+                                />
 
 
                             <RelativeLayout
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/oe_txtHeaderClass"
                                 android:id="@+id/oe_btnNext"
                                 android:layout_width="20dp"
-                                android:layout_height="40dp"
-                                android:layout_centerVertical="true"
-                                android:layout_toRightOf="@+id/oe_txtHeaderClass">
+                                android:layout_height="40dp">
 
                                 <Button
                                     android:layout_width="20dp"
@@ -291,20 +309,21 @@
                         </RelativeLayout>
 
                         <TextView
+                            android:textStyle="normal"
                             android:id="@+id/oe_txtOption"
                             android:layout_width="60dp"
+                            android:layout_marginLeft="5dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
                             android:layout_marginRight="180dp"
                             android:layout_toLeftOf="@+id/oe_txtOption_Perc"
                             android:gravity="center_vertical|center"
                             android:text="Option"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="@dimen/normallayout_textsize"
-                            android:textStyle="normal" />
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            />
 
 
                         <TextView
@@ -318,8 +337,8 @@
                             android:gravity="center_vertical|center"
                             android:text="@string/fullSize"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="@dimen/normallayout_textsize"
-                            android:textStyle="normal" />
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal"/>
 
 
                         <TextView
@@ -328,13 +347,13 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="60dp"
                             android:layout_toLeftOf="@+id/oe_txtSOH_U_Perc"
+                            android:layout_marginRight="60dp"
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="@dimen/normallayout_textsize"
-                            android:textStyle="normal" />
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal"/>
 
                         <TextView
                             android:id="@+id/oe_txtSOH_U_Perc"
@@ -345,8 +364,9 @@
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)%"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="@dimen/normallayout_textsize"
-                            android:textStyle="normal" />
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal"/>
+
 
 
                     </RelativeLayout>
@@ -357,6 +377,8 @@
                         android:background="@color/bg_header">
 
                         <EditText
+                            android:editable="false"
+                            android:padding="2dp"
                             android:id="@+id/edt_OEfficiency_Class"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
@@ -365,13 +387,13 @@
                             android:layout_marginRight="240dp"
                             android:layout_toLeftOf="@+id/edt_FIndex_SOH"
                             android:background="@drawable/border"
-                            android:editable="false"
                             android:gravity="center_vertical"
-                            android:padding="2dp"
                             android:textColor="@android:color/black" />
 
 
                         <EditText
+                            android:editable="false"
+                            android:paddingRight="2dp"
                             android:id="@+id/edt_OEfficiency_Option"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
@@ -380,12 +402,11 @@
                             android:layout_marginRight="180dp"
                             android:layout_toLeftOf="@+id/edt_OEfficiency_Option_Perc"
                             android:background="@drawable/border"
-                            android:editable="false"
-                            android:gravity="center_vertical"
-                            android:paddingRight="2dp" />
+                            android:gravity="center_vertical" />
 
 
                         <EditText
+                            android:editable="false"
                             android:id="@+id/edt_OEfficiency_Option_Perc"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
@@ -394,35 +415,35 @@
                             android:layout_marginRight="120dp"
                             android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_U"
                             android:background="@drawable/border"
-                            android:editable="false"
                             android:textColor="@android:color/black" />
 
                         <EditText
+                            android:editable="false"
                             android:id="@+id/edt_OEfficiency_SOH_U"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
                             android:layout_marginRight="60dp"
                             android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_Perc"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:background="@drawable/border"
-                            android:editable="false"
                             android:textColor="@android:color/black" />
 
                         <EditText
+                            android:editable="false"
                             android:id="@+id/edt_OEfficiency_SOH_Perc"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:background="@drawable/border"
-                            android:editable="false"
                             android:textColor="@android:color/black" />
 
 
                     </RelativeLayout>
 
                 </LinearLayout>
+
 
                 <View
                     android:layout_below="@+id/linear"
@@ -434,18 +455,23 @@
 
                 <ListView
                     android:id="@+id/oe_list"
+                    android:dividerHeight="0dp"
+                    android:divider="@null"
+                    android:scrollbars="vertical"
+                    android:scrollbarSize="3dp"
+                    android:scrollIndicators="right"
+                    android:scrollbarThumbVertical="@android:color/darker_gray"
+                    android:scrollbarFadeDuration="0"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
-                    android:divider="@null"
-                    android:dividerHeight="0dp"
-                    android:scrollIndicators="right"
-                    android:scrollbarAlwaysDrawVerticalTrack="true"
-                    android:scrollbarFadeDuration="0"
-                    android:scrollbarSize="3dp"
-                    android:scrollbarThumbVertical="@android:color/darker_gray"
-                    android:scrollbars="vertical"
-                    android:smoothScrollbar="true"></ListView>
+                    android:smoothScrollbar="true">
+
+                </ListView>
+
+
+
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
