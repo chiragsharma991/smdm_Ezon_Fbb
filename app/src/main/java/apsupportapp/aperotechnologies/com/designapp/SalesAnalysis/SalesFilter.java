@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
@@ -12,8 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -45,6 +50,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.KeyProductActivity;
+import apsupportapp.aperotechnologies.com.designapp.ListAdapter;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -59,7 +66,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
 
     TextView txtdepartment, txtcategory, txtplanclass, txtbrand, txtbrandclass;
     LinearLayout linear_dept, linear_category, linear_planclass, linear_brandnm, linear_brandclass;
-    String dept = "OFF", category = "OFF", planCls = "OFF", brand = "OFF", brandCls = "OFF";
+     static String dept = "OFF", category = "OFF", planCls = "OFF", brand = "OFF", brandCls = "OFF";
     ListView deptListView, catListView, planClsListView, brandListView, brandClsListView;
     ArrayList<String> depmentList, catryList, planClsList, brndList, brndClsList;
     RelativeLayout Filter_imageBtnBack;
@@ -68,11 +75,12 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
     Context context;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
-    SalesFilterAdapter salesFilterAdapter;
+    static SalesFilterAdapter salesFilterAdapter, categoryAdapter, planClassAdapter, branAdapter, brandClsAdapter;
     EditText editSearch;
     ImageButton btnSearch;
     String searchData;
     int offsetvalue = 0, limit = 100, count = 0, level = 1;
+    public  String searchDept = "", searchCategory = "", searchPlanClass = "", searchBrand = "", searchBrandPlanClass = "";
 
 
     @Override
@@ -91,23 +99,42 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
         queue = new RequestQueue(cache, network);
         queue.start();
 
+        depmentList = new ArrayList<String>();
+        catryList = new ArrayList<String>();
+        planClsList = new ArrayList<String>();
+        brndList = new ArrayList<String>();
+        brndClsList = new ArrayList<String>();
         intialize();
         main();
 
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                salesFilterAdapter.getFilter().filter(s);
+                // Log.e("Size",""+salesFilterAdapter.getCount());
+                // salesFilterAdapter.getFilter().filter(s);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                salesFilterAdapter.getFilter().filter(s);
+                searchData = editSearch.getText().toString();
+                Log.e("list", searchData);
+                //  s = searchData;
+                //editSearch.clearFocus();
+                InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
+                    Log.e("Search Data in Dept", searchData);
+                    salesFilterAdapter.getFilter().filter(searchData);
+                    categoryAdapter.getFilter().filter(searchData);
+                    Log.e("Search Data in Plan Class", "" + searchData);
+                    planClassAdapter.getFilter().filter(searchData);
+                    branAdapter.getFilter().filter(searchData);
+                    brandClsAdapter.getFilter().filter(searchData);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                salesFilterAdapter.getFilter().filter(s);
+
+
             }
         });
 
@@ -115,6 +142,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
     }
 
     private void main() {
+        //Department List
         depmentList = new ArrayList<String>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -128,7 +156,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
 
             Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
+        //Category List
         catryList = new ArrayList<String>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -142,7 +170,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
 
             Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
+        //Plan Class
         planClsList = new ArrayList<String>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -156,6 +184,8 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
 
             Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
+
+        //Brand Name
         brndList = new ArrayList<String>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -169,21 +199,20 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
 
             Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
+        //Brand Plan Class
         brndClsList = new ArrayList<String>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading  data...");
             offsetvalue = 0;
-            count = 0;
             limit = 100;
+            count = 0;
             level = 5;
             requestBrandPlanClassAPI(offsetvalue, limit);
         } else {
 
             Toast.makeText(SalesFilter.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     private void intialize() {
@@ -193,24 +222,26 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
         txtplanclass = (TextView) findViewById(R.id.txtplanclass);
         txtbrand = (TextView) findViewById(R.id.txtbrand);
         txtbrandclass = (TextView) findViewById(R.id.txtbrandplanclass);
-
         linear_dept = (LinearLayout) findViewById(R.id.linear_dept);
         linear_category = (LinearLayout) findViewById(R.id.linear_category);
         linear_planclass = (LinearLayout) findViewById(R.id.linear_planClass);
         linear_brandnm = (LinearLayout) findViewById(R.id.linear_brand);
         linear_brandclass = (LinearLayout) findViewById(R.id.linear_brandclass);
-
         Filter_imageBtnBack = (RelativeLayout) findViewById(R.id.filter_imageBtnBack);
         FilterOk = (RelativeLayout) findViewById(R.id.filterOk);
-
-        editSearch = (EditText) findViewById(R.id.editSearch);
-        btnSearch = (ImageButton) findViewById(R.id.btnSeatchList);
+        editSearch = (EditText) findViewById(R.id.editSearchSales);
+       // btnSearch = (ImageButton) findViewById(R.id.btnSeatchList);
 
         deptListView = (ListView) findViewById(R.id.deptList);
+        setListViewHeightBasedOnChildren(deptListView);
         catListView = (ListView) findViewById(R.id.categoryList);
+        setListViewHeightBasedOnChildren(catListView);
         planClsListView = (ListView) findViewById(R.id.planClassList);
+        setListViewHeightBasedOnChildren(planClsListView);
         brandListView = (ListView) findViewById(R.id.brandList);
+        setListViewHeightBasedOnChildren(brandListView);
         brandClsListView = (ListView) findViewById(R.id.brandclassList);
+        setListViewHeightBasedOnChildren(brandClsListView);
 
         txtdepartment.setOnClickListener(this);
         txtcategory.setOnClickListener(this);
@@ -219,12 +250,31 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
         txtbrandclass.setOnClickListener(this);
         Filter_imageBtnBack.setOnClickListener(this);
         FilterOk.setOnClickListener(this);
-        btnSearch.setOnClickListener(this);
+     //   btnSearch.setOnClickListener(this);
 
 
     }
 
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+         android.widget.ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+            return;
 
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0)
+                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -243,32 +293,26 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
             case R.id.txtbrandplanclass:
                 loadBrandClassData();
                 break;
-
             case R.id.filter_imageBtnBack:
                 filterBack();
                 break;
             case R.id.filterOk:
-                Toast.makeText(this, "Activity is still in process", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Selected Dept : "+searchDept, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SalesFilter.this,SalesAnalysisActivity.class);
+                intent.putExtra("selectedDept",searchDept);
+                startActivity(intent);
+                finish();
                 break;
-            case R.id.btnSeatchList:
-                searchData = editSearch.getText().toString();
-
-                Log.e("list", searchData);
-                editSearch.clearFocus();
-                InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
-                salesFilterAdapter.getFilter().filter(searchData);
-                break;
+//            case R.id.btnSeatchList:
+//                break;
 
         }
-
-
     }
 
     private void filterBack() {
         if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
-            // Intent intent = new Intent(context, SalesAnalysisActivity.class);
-            // startActivity(intent);
+             Intent intent = new Intent(SalesFilter.this, SalesAnalysisActivity.class);
+             startActivity(intent);
             finish();
         }
 //        else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
@@ -311,6 +355,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
         if (planCls.equals("OFF")) {
             linear_planclass.setVisibility(View.VISIBLE);
             txtplanclass.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+
             planCls = "ON";
         } else {
             linear_planclass.setVisibility(View.GONE);
@@ -324,6 +369,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
         if (brand.equals("OFF")) {
             linear_brandnm.setVisibility(View.VISIBLE);
             txtbrand.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+
             brand = "ON";
         } else {
             linear_brandnm.setVisibility(View.GONE);
@@ -355,7 +401,8 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Department Response", response.toString());
+                        Log.e("Department Response", response.toString());
+                        Log.e("Department response size", "" + response.length());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -365,9 +412,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
-
                                     String plandept = productName1.getString("planDept");
-
                                     depmentList.add(plandept);
                                 }
 
@@ -378,7 +423,6 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
-
                                     String planDept = productName1.getString("planDept");
                                     depmentList.add(planDept);
 
@@ -388,7 +432,29 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                             salesFilterAdapter = new SalesFilterAdapter(depmentList, getApplicationContext());
                             deptListView.setAdapter(salesFilterAdapter);
                             deptListView.setTextFilterEnabled(true);
-//                                listView.setTextFilterEnabled(true);
+                            deptListView.setOnTouchListener(new View.OnTouchListener() {
+                                // Setting on Touch Listener for handling the touch inside ScrollView
+                                @Override
+                                public boolean onTouch(View v, MotionEvent event) {
+                                    // Disallow the touch request for parent scroll on touch of child view
+                                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                                    return false;
+                                }
+                            });
+                            deptListView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+                            deptListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    String productSubDeptItem = (String) parent.getItemAtPosition(position);
+
+                                    searchDept = productSubDeptItem.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                    view.setBackgroundColor(Color.GRAY);
+                                }
+                            });
+
+
+
+
 
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {
@@ -430,7 +496,8 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Category Response", response.toString());
+                        Log.e("Category Response", response.toString());
+                        Log.e("Category response size", "" + response.length());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -460,13 +527,20 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                                 }
 
                             }
-                            salesFilterAdapter = new SalesFilterAdapter(catryList, getApplicationContext());
-                            catListView.setAdapter(salesFilterAdapter);
+                            categoryAdapter = new SalesFilterAdapter(catryList, getApplicationContext());
+                            catListView.setAdapter(categoryAdapter);
                             catListView.setTextFilterEnabled(true);
 
-                            //Collections.sort(subdept);
-                            //  listDataChild.put(listDataHeader.get(1), subCategory);
-                            // pfilter_list.expandGroup(1);
+                            catListView.setOnTouchListener(new View.OnTouchListener() {
+                                // Setting on Touch Listener for handling the touch inside ScrollView
+                                @Override
+                                public boolean onTouch(View v, MotionEvent event) {
+                                    // Disallow the touch request for parent scroll on touch of child view
+                                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                                    return false;
+                                }
+                            });
+
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -506,7 +580,8 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("PlanClass Response", response.toString() + " Size" + response.length());
+                        Log.e("PlanClass Response", response.toString());
+                        Log.e("Plan Class response size", "" + response.length());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -518,7 +593,6 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String planClass = productName1.getString("planClass");
-
                                     planClsList.add(planClass);
                                 }
 
@@ -535,10 +609,18 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
 
                                 }
                             }
-                            salesFilterAdapter = new SalesFilterAdapter(planClsList, getApplicationContext());
-                            planClsListView.setAdapter(salesFilterAdapter);
+                            planClassAdapter = new SalesFilterAdapter(planClsList, getApplicationContext());
+                            planClsListView.setAdapter(planClassAdapter);
                             planClsListView.setTextFilterEnabled(true);
-
+                            planClsListView.setOnTouchListener(new View.OnTouchListener() {
+                                // Setting on Touch Listener for handling the touch inside ScrollView
+                                @Override
+                                public boolean onTouch(View v, MotionEvent event) {
+                                    // Disallow the touch request for parent scroll on touch of child view
+                                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                                    return false;
+                                }
+                            });
 
                             //Collections.sort(subdept);
                             //  listDataChild.put(listDataHeader.get(2), subPlanClass);
@@ -584,7 +666,8 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Brand Name Response", response.toString() + "Size---" + response.length());
+                        Log.e("Brand Name Response", response.toString());
+                        Log.e("Brand response size", "" + response.length());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -609,14 +692,20 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
 
                                     String brandName = productName1.getString("brandName");
                                     brndList.add(brandName);
-
-
                                 }
-
                             }
-                            salesFilterAdapter = new SalesFilterAdapter(brndList, getApplicationContext());
-                            brandListView.setAdapter(salesFilterAdapter);
+                            branAdapter = new SalesFilterAdapter(brndList, getApplicationContext());
+                            brandListView.setAdapter(branAdapter);
                             brandListView.setTextFilterEnabled(true);
+                            brandListView.setOnTouchListener(new View.OnTouchListener() {
+                                // Setting on Touch Listener for handling the touch inside ScrollView
+                                @Override
+                                public boolean onTouch(View v, MotionEvent event) {
+                                    // Disallow the touch request for parent scroll on touch of child view
+                                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                                    return false;
+                                }
+                            });
 
                             //Collections.sort(subdept);
                             // listDataChild.put(listDataHeader.get(3), subBrandnm);
@@ -662,7 +751,8 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Brand Class Response", response.toString() + "Size ---" + response.length());
+                        Log.e("Brand Class Response", response.toString());
+                        Log.e("Brand Class response size", "" + response.length());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -690,12 +780,23 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                                 }
 
                             }
-                            salesFilterAdapter = new SalesFilterAdapter(brndClsList, getApplicationContext());
-                            brandClsListView.setAdapter(salesFilterAdapter);
+                            brandClsAdapter = new SalesFilterAdapter(brndClsList, getApplicationContext());
+                            brandClsListView.setAdapter(brandClsAdapter);
                             brandClsListView.setTextFilterEnabled(true);
+
+                            brandClsListView.setOnTouchListener(new View.OnTouchListener() {
+                                // Setting on Touch Listener for handling the touch inside ScrollView
+                                @Override
+                                public boolean onTouch(View v, MotionEvent event) {
+                                    // Disallow the touch request for parent scroll on touch of child view
+                                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                                    return false;
+                                }
+                            });
+
                             //Collections.sort(subdept);
-                            //   listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
-                            //   pfilter_list.expandGroup(4);
+                            //listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
+                            //pfilter_list.expandGroup(4);
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");

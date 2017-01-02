@@ -5,8 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -33,9 +38,11 @@ import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.KeyProductActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SearchActivity1;
 
 
 public class SalesFilterActivity extends Activity {
@@ -51,6 +58,7 @@ public class SalesFilterActivity extends Activity {
     RequestQueue queue;
     List<String> subdept, subCategory, subPlanClass, subBrandnm, subBrandPlanClass;
     public static String plandeptName;
+    EditText editTextSearch;
 
 
     public static List<Integer> groupImages;
@@ -85,12 +93,14 @@ public class SalesFilterActivity extends Activity {
         pfilter_list.setDivider(getResources().getDrawable(R.color.grey));
         pfilter_list.setDividerHeight(2);
         prepareListData();
+        pfilter_list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
         listAdapter = new SalesFilterExpandableList(this, listDataHeader, listDataChild, pfilter_list, listAdapter);
 
         pfilter_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
         // setting list adapter
         pfilter_list.setAdapter(listAdapter);
+
         listAdapter.notifyDataSetChanged();
 
         btnS_Filterback.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +138,29 @@ public class SalesFilterActivity extends Activity {
                 //pfilter_list.collapseGroup(groupPosition);
             }
         });
+
+        //Edit Text Search
+       // editTextSearch = (EditText)findViewById(R.id.editSearchSales);
+//
+//
+
+//        editTextSearch.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+
+
     }
 
 
@@ -252,7 +285,8 @@ public class SalesFilterActivity extends Activity {
 
                                 }
                                 //Collections.sort(subdept);
-                               // listDataChild.put(listDataHeader.get(0), subdept);
+                            //    listDataChild.put(listDataHeader.get(0), subdept);
+
                                 // pfilter_list.expandGroup(0);
                                 Reusable_Functions.hDialog();
                             }

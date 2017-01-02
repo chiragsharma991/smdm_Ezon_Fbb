@@ -235,7 +235,7 @@ public class DashBoardActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashBoardActivity.this, TopFullCut.class);
-                startActivity(intent);
+                //startActivity(intent);
                 if(timer != null)
                 {
                     timer.cancel();

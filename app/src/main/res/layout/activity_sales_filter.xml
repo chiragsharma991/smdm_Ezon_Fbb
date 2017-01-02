@@ -5,13 +5,10 @@
     android:id="@+id/activity_filter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     >
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
 
         <android.support.v7.widget.Toolbar
@@ -86,13 +83,15 @@
         </android.support.v7.widget.Toolbar>
 
         <RelativeLayout
+            android:id="@+id/relSearch"
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
 
             <EditText
-                android:id="@+id/editSearch"
+                android:id="@+id/editSearchSales"
                 style="@style/myEditText"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
@@ -100,26 +99,29 @@
                 android:layout_marginRight="60dp"
                 android:layout_weight="9"
                 android:background="@android:color/transparent"
-                android:hint="Enter text"
+                android:hint="Search"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textCursorDrawable="@drawable/color_cursor" />
 
-            <ImageButton
-                android:id="@+id/btnSeatchList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_arrow_forward_white"
-                android:tint="@color/colorPrimary" />
+            <!--<ImageButton-->
+                <!--android:id="@+id/btnSeatchList"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:src="@drawable/ic_arrow_forward_white"-->
+                <!--android:tint="@color/colorPrimary" />-->
 
 
         </RelativeLayout>
 
         <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linear"
+            android:layout_below="@+id/relSearch"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="10dp"
@@ -127,10 +129,23 @@
             android:background="@color/colorPrimary"></LinearLayout>
 
 
+    <ScrollView
+        android:layout_below="@id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/hierarchylayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
                 <!--Department-->
 
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -138,14 +153,14 @@
                     <TextView
                         android:id="@+id/txtdepartment"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:drawableRight="@drawable/downlist"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="@string/department"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
 
 
@@ -156,7 +171,7 @@
                     <LinearLayout
                         android:id="@+id/linear_dept"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="200dp"
                         android:orientation="vertical"
                         android:visibility="gone">
 
@@ -173,11 +188,6 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/divider_salescard" />
 
 
                 </LinearLayout>
@@ -185,6 +195,7 @@
                 <!--Category-->
 
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -199,7 +210,7 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="@string/category"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                     <!--Mc edit text-->
 
@@ -214,7 +225,7 @@
                         <ListView
                             android:id="@+id/categoryList"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="200dp"
 
                             >
 
@@ -224,12 +235,6 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/divider_salescard" />
-
 
                 </LinearLayout>
 
@@ -237,6 +242,7 @@
                 <!--PlanClass-->
 
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -251,7 +257,7 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="@string/planclass"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
 
 
@@ -269,7 +275,7 @@
                         <ListView
                             android:id="@+id/planClassList"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="200dp"
 
                             >
 
@@ -279,17 +285,13 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/divider_salescard" />
 
 
                 </LinearLayout>
 
                 <!--BrandName-->
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -304,7 +306,7 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="@string/brand"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
 
 
@@ -322,7 +324,7 @@
                         <ListView
                             android:id="@+id/brandList"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="200dp"
 
                             >
 
@@ -332,17 +334,12 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/divider_salescard" />
-
 
                 </LinearLayout>
 
                 <!--BrandPlanClass-->
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -357,7 +354,7 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="@string/brand_plan_class"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
 
 
@@ -375,7 +372,7 @@
                         <ListView
                             android:id="@+id/brandclassList"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="200dp"
 
                             >
 
@@ -385,17 +382,10 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/divider_salescard" />
-
-
                 </LinearLayout>
 
 </LinearLayout>
 
-
+    </ScrollView>
 
 </RelativeLayout>

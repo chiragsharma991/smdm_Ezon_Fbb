@@ -1,15 +1,22 @@
 package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -18,11 +25,10 @@ import apsupportapp.aperotechnologies.com.designapp.ValueAdapter;
 /**
  * Created by pamrutkar on 29/12/16.
  */
-public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
+public class SalesFilterAdapter extends BaseAdapter implements Filterable {
 
     private ArrayList<String> arrayList;
     private ArrayList<String> mFilterList;
-
 
     //private List mStringFilterList;
 
@@ -30,6 +36,8 @@ public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
     Context context;
     private int Position;
     SFilter sFilter;
+    List<String> selectedItemsPositions;//to store all selected items position
+
 
     //private ValueFilter valueFilter;
 
@@ -40,6 +48,7 @@ public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
         this.mFilterList = arrayList;
         this.context = context;
         mInflater = LayoutInflater.from(context);
+       selectedItemsPositions = new ArrayList<>();
         getFilter();
 
         //getFilter();
@@ -49,7 +58,6 @@ public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
     @Override
     public int getCount() {
 
-
         return arrayList.size();
     }
 
@@ -58,6 +66,7 @@ public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
     public Object getItem(int position) {
 
         return arrayList.get(position);
+
     }
 
     //Get the row id associated with the specified position in the list.
@@ -72,24 +81,51 @@ public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         //Log.e("in ","getview");
-
-        Position=position;
+        Position = position;
         final SalesFilterAdapter.Holder holder;
         if (convertView == null) {
-            holder=new SalesFilterAdapter.Holder();
+            holder = new SalesFilterAdapter.Holder();
             convertView = mInflater.inflate(R.layout.activity_filter_child, null);
-            holder.FilterMc=(TextView)convertView.findViewById(R.id.filterMc);
+            holder.FilterMc = (TextView) convertView.findViewById(R.id.filterMc);
+            holder.checkBox=(CheckBox)convertView.findViewById(R.id.checkFilterMc);
+            holder.checkBox.setVisibility(View.INVISIBLE);
             convertView.setTag(holder);
         } else {
-            holder=(SalesFilterAdapter.Holder)convertView.getTag();
+            holder = (SalesFilterAdapter.Holder) convertView.getTag();
 
         }
         holder.FilterMc.setText(arrayList.get(position));
-
-
-
-        // ---------------------click listener -------------------------
-
+//        if(selectedItemsPositions.contains(holder.FilterMc.getTag()))
+//        {
+//            convertView.setBackgroundColor();
+//        }
+//        else
+//        {
+//            holder.checkBox.setChecked(false);
+//        }
+//
+//       convertView.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View v) {
+//
+//               RelativeLayout rel = (RelativeLayout) v;
+//               CheckBox cb = (CheckBox) rel.getChildAt(1);
+//               TextView txtView = (TextView) rel.getChildAt(0);
+//               String txtClickedVal = txtView.getText().toString();
+//
+//
+//               if(cb.isChecked() == false)
+//               {
+//                   selectedItemsPositions.add(arrayList.get(position));
+//                   cb.setChecked(true);
+//               }
+//               else
+//               {
+//                   selectedItemsPositions.remove(holder.FilterMc);
+//                   cb.setChecked(false);
+//               }
+//           }
+//       });
 
         return convertView;
     }
@@ -101,6 +137,7 @@ public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
         }
         return sFilter;
     }
+
     public class SFilter extends Filter {
 
         //Invoked in a worker thread to filter the data according to the constraint.
@@ -110,7 +147,8 @@ public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
             FilterResults results = new FilterResults();
             if (constraint != null && constraint.length() > 0) {
                 ArrayList<String> filterList = new ArrayList<String>();
-                for (int i = 0; i < arrayList.size(); i++) {
+                Log.e("Filter Array Size", "" + mFilterList.size());
+                for (int i = 0; i < mFilterList.size(); i++) {
                     if (mFilterList.get(i).toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
                         filterList.add(mFilterList.get(i));
                     }
@@ -130,9 +168,23 @@ public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
         @Override
         protected void publishResults(CharSequence constraint,
                                       FilterResults results) {
-
             arrayList = (ArrayList<String>) results.values;
-            notifyDataSetChanged();
+
+                SalesFilter.salesFilterAdapter.notifyDataSetChanged();
+
+
+                SalesFilter.categoryAdapter.notifyDataSetChanged();
+
+
+                SalesFilter.planClassAdapter.notifyDataSetChanged();
+
+
+                SalesFilter.branAdapter.notifyDataSetChanged();
+
+
+                SalesFilter.brandClsAdapter.notifyDataSetChanged();
+
+
         }
     }
 
@@ -140,6 +192,7 @@ public class SalesFilterAdapter extends BaseAdapter  implements Filterable {
     private class Holder {
 
         TextView FilterMc;
+        CheckBox checkBox;
 
 
     }

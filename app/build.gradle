@@ -21,14 +21,14 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '24.0.3'
+    buildToolsVersion '23.0.0'
 
     defaultConfig {
         applicationId "apsupportapp.aperotechnologies.com.designapp"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 59
-        versionName "1.59"
+        versionCode 60
+        versionName "1.60"
     }
     buildTypes {
         release {
@@ -43,7 +43,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
@@ -65,9 +65,5 @@ dependencies {
     //compile 'me.sudar:zxing-orient:2.1.1@aar'
     compile files('libs/gson-2.3.1.jar')
     compile 'com.daprlabs.aaron:cardstack:0.3.0'
-
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-
-
-
 }
