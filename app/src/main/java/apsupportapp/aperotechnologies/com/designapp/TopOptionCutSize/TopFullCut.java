@@ -59,7 +59,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class TopFullCut extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     TextView Top_txtStoreCode, Top_txtStoreName;
-    RelativeLayout TopBest_BtnBack,TopOption_imgfilter;
+    RelativeLayout TopBest_BtnBack,TopOption_imgfilter,TopBest_qfDoneLayout,TopBest_quickFilter_baseLayout,TopBest_sk_quickFilter;
     RunningPromoListDisplay TopOptionListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
@@ -80,9 +80,11 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     private View footer;
     private String lazyScroll = "OFF";
     private SegmentedGroup Top_segmented;
-    private RadioButton Top_fashion, Top_core;
+    private RadioButton Top_fashion, Top_core,Topfull_checkWTD,Topfull_checkL4W,Topfull_checkSTD;
     private ToggleButton Toggle_top_fav;
     private String corefashion = "Fashion";
+    private String checkTimeValueIs=null;
+    private String view="STD";
 
 
     @Override
@@ -128,7 +130,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
     private void requestRunningPromoApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
+        String url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion+"&view=" + view;
 
         Log.e(TAG, "URL" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -285,6 +287,11 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         Top_txtStoreName = (TextView) findViewById(R.id.top_txtStoreName);
 
         TopBest_BtnBack = (RelativeLayout) findViewById(R.id.topBest_BtnBack);
+        TopBest_sk_quickFilter = (RelativeLayout) findViewById(R.id.sk_quickFilter);
+        TopBest_qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
+        TopBest_quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilterPopup);
+        TopBest_quickFilter_baseLayout.setVisibility(View.GONE);
+
         TopOption_imgfilter = (RelativeLayout) findViewById(R.id.topOption_imgfilter);
 
         TopOptionListView = (ListView) findViewById(R.id.topOptionListView);
@@ -295,12 +302,23 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
         Top_fashion = (RadioButton) findViewById(R.id.top_fashion);
 
+        Topfull_checkWTD = (RadioButton) findViewById(R.id.topfull_checkWTD);
+        Topfull_checkL4W = (RadioButton) findViewById(R.id.topfull_checkL4W);
+        Topfull_checkSTD = (RadioButton) findViewById(R.id.topfull_checkSTD);
+
         Toggle_top_fav = (ToggleButton) findViewById(R.id.toggle_top_fav);
 
 
         Top_segmented.setOnCheckedChangeListener(TopFullCut.this);
         TopBest_BtnBack.setOnClickListener(TopFullCut.this);
+        TopBest_sk_quickFilter.setOnClickListener(TopFullCut.this);
+        Topfull_checkWTD.setOnClickListener(TopFullCut.this);
+        TopBest_quickFilter_baseLayout.setOnClickListener(TopFullCut.this);
+        Topfull_checkL4W.setOnClickListener(TopFullCut.this);
+        Topfull_checkSTD.setOnClickListener(TopFullCut.this);
         TopOption_imgfilter.setOnClickListener(TopFullCut.this);
+        TopBest_qfDoneLayout.setOnClickListener(TopFullCut.this);
+
 
 
     }
@@ -312,6 +330,9 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.topBest_BtnBack:
                 onBackPressed();
+                break;
+            case R.id.sk_quickFilter:
+                filterFunction();
                 break;
             case R.id.topOption_imgfilter:
                 Intent intent = new Intent(this, InventoryFilterActivity.class);
@@ -326,9 +347,110 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 }
 
                 break;
+            
+
+            case R.id.topfull_checkWTD:
+                Topfull_checkWTD.setChecked(true);
+                Topfull_checkL4W.setChecked(false);
+                Topfull_checkSTD.setChecked(false);
+                break;
+            case R.id.topfull_checkL4W:
+                Topfull_checkWTD.setChecked(false);
+                Topfull_checkL4W.setChecked(true);
+                Topfull_checkSTD.setChecked(false);
+                break;
+            case R.id.topfull_checkSTD:
+                Topfull_checkWTD.setChecked(false);
+                Topfull_checkL4W.setChecked(false);
+                Topfull_checkSTD.setChecked(true);
+                break;
+
+            case R.id.qfDoneLayout:
+
+                if (Reusable_Functions.chkStatus(context)) {
+
+                    if(Topfull_checkWTD.isChecked())
+                    {
+                        checkTimeValueIs = "CheckWTD";
+                        view = "WTD";
+                        DoneTime();
+                    }else if(Topfull_checkL4W.isChecked())
+                    {
+                        checkTimeValueIs = "CheckL4W";
+                        view = "L4W";
+                        DoneTime();
+
+                    }else if(Topfull_checkSTD.isChecked())
+                    {
+                        checkTimeValueIs = "CheckSTD";
+                        view = "STD";
+                        DoneTime();
+
+                    }
+
+                     else {
+                        Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+
+
+            case R.id.quickFilterPopup:
+                if (checkTimeValueIs == null){
+                    Topfull_checkWTD.setChecked(false);
+                    Topfull_checkL4W.setChecked(false);
+                    Topfull_checkSTD.setChecked(true);
+                } else {
+
+                    switch (checkTimeValueIs.toString()) {
+                        case "CheckWTD":
+                            Topfull_checkWTD.setChecked(true);
+                            Topfull_checkL4W.setChecked(false);
+                            Topfull_checkSTD.setChecked(false);
+                            Log.i(TAG, "CheckWTD is checked");
+                            break;
+                        case "CheckL4W":
+                            Topfull_checkWTD.setChecked(false);
+                            Topfull_checkL4W.setChecked(true);
+                            Topfull_checkSTD.setChecked(false);
+                            Log.i(TAG, "CheckL4W is checked");
+                            break;
+                        case "CheckSTD":
+                            Topfull_checkWTD.setChecked(false);
+                            Topfull_checkL4W.setChecked(false);
+                            Topfull_checkSTD.setChecked(true);
+                            Log.i(TAG, "CheckSTD is checked");
+                            break;
+                        default:
+                            break;
+
+
+                    }
+                }
+                TopBest_quickFilter_baseLayout.setVisibility(View.GONE);
+
+                break;
 
 
         }
+    }
+
+    private void filterFunction() {
+        TopBest_quickFilter_baseLayout.setVisibility(View.VISIBLE);
+
+    }
+
+    private void DoneTime() {
+        limit = 10;
+        offsetvalue = 0;
+        top = 10;
+        TopOptionList.clear();
+        Reusable_Functions.sDialog(this, "Loading.......");
+        requestRunningPromoApi();
     }
 
 

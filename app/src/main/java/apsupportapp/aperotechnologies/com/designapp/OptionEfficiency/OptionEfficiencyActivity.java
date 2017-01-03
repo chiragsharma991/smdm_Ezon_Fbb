@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.OptionEfficiency;
 
+import android.app.MediaRouteButton;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,6 +51,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexAdapter;
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexDetails;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -64,7 +68,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     RadioButton oe_btnCore, oe_btnFashion;
     public String OEfficiency_SegmentClick;
     ArrayList<OptionEfficiencyDetails> optionEfficiencyDetailsArrayList, optionArrayList;
-    TextView txtStoreCode, txtStoreDesc, oe_txtHeaderClass, oe_txtDeptName;
+    TextView txtStoreCode, txtStoreDesc, oe_txtHeaderClass, oe_txtDeptName,txtNoChart;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
     int offsetvalue = 0, limit = 100;
@@ -79,10 +83,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     LinearLayout llayoutOEfficiency, oe_llayouthierarchy;
     SegmentedGroup optionEfficiency_segmentedGrp;
     int level;
-    OptionEfficiencyDetails optionEfficiencyDetails;
+    OptionEfficiencyDetails optionEfficiencyDetails,optionEfficiencyDetail;
     OptionEfficiencyAdapter oe_Adapter;
     RelativeLayout optionEfficiency_imageBtnBack, optionEfficiency_imgfilter, oe_quickFilter, quickFilterPopup, quickFilter_baseLayout;
-    RelativeLayout oe_btnPrev, oe_btnNext, qfDoneLayout,quickFilter_BorderLayout;
+    RelativeLayout oe_btnPrev, oe_btnNext, qfDoneLayout, quickFilter_BorderLayout;
     Gson gson;
     PieData pieData;
     float fullSizeCount = 0.0f, fullCutCount = 0.0f, partCutCount = 0.0f;
@@ -91,7 +95,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
     private String checkSeasonGpVal = null;
     boolean flag = false;
-    private String qfButton="OFF";
+    private String qfButton = "OFF";
+    private String TAG = "OptionEfficiencyActivity";
+    private boolean CutCount=false,fullSize=false,fullCut=false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -153,7 +159,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             }
         });
 
-      //  quick Filter
+        //  quick Filter
         oe_quickFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,7 +213,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 //
 //                }
 //                quickFilterPopup.setVisibility(View.GONE);
-                if(qfButton.equals("OFF")) {
+                if (qfButton.equals("OFF")) {
                     checkCurrent.setChecked(true);
                     checkUpcoming.setChecked(false);
                     checkOld.setChecked(false);
@@ -419,7 +425,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         break;
 
                     case "Brand":
-                       oe_btnNext.setVisibility(View.INVISIBLE);
+                        oe_btnNext.setVisibility(View.INVISIBLE);
                         oe_txtHeaderClass.setText("Brand Plan Class");
 
                         fromWhere = "Brand Plan Class";
@@ -512,7 +518,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 switch (oe_txtHeaderClass.getText().toString()) {
 
                     case "Department":
-                       oe_btnPrev.setVisibility(View.VISIBLE);
+                        oe_btnPrev.setVisibility(View.VISIBLE);
 
                         oe_txtHeaderClass.setText("Category");
                         oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanDept();
@@ -643,15 +649,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private void initializeUI() {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        txtNoChart = (TextView) findViewById(R.id.noChartOption);
         oe_txtHeaderClass = (TextView) findViewById(R.id.oe_txtHeaderClass);
         oe_txtDeptName = (TextView) findViewById(R.id.oe_txtDeptName);
         optionEfficiency_imageBtnBack = (RelativeLayout) findViewById(R.id.optionEfficiency_imageBtnBack);
         optionEfficiency_imgfilter = (RelativeLayout) findViewById(R.id.optionEfficiency_imgfilter);
         oe_quickFilter = (RelativeLayout) findViewById(R.id.oe_quickFilter);
-        quickFilterPopup= (RelativeLayout)findViewById(R.id.quickFilterPopup);
-        quickFilter_baseLayout = (RelativeLayout)findViewById(R.id.quickFilter_baseLayout);
-        qfDoneLayout =(RelativeLayout)findViewById(R.id.qfDoneLayout);
-     //   quickFilterPopup.setVisibility(View.GONE);
+        quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
+        quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
+        qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
+        //   quickFilterPopup.setVisibility(View.GONE);
         oe_pieChart = (PieChart) findViewById(R.id.oe_pieChart);
         oe_listView = (ListView) findViewById(R.id.oe_list);
         oe_listView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
@@ -666,7 +673,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oe_btnCore = (RadioButton) findViewById(R.id.oe_btnCore);
         oe_btnFashion = (RadioButton) findViewById(R.id.oe_btnFashion);
         oe_btnFashion.toggle();
-        quickFilter_BorderLayout=(RelativeLayout)findViewById(R.id.quickFilter_BorderLayout);
+        quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
         optionArrayList = new ArrayList<OptionEfficiencyDetails>();
         checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
@@ -684,7 +691,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-           case R.id.qfDoneLayout:
+            case R.id.qfDoneLayout:
 
 //                if (checkCurrent.isChecked()) {
 //                    popupCurrent();
@@ -713,7 +720,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 //                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
 //
 //                }
-                qfButton="ON";
+                qfButton = "ON";
                 if (checkCurrent.isChecked()) {
                     popupCurrent();
                     checkPrevious.setChecked(false);
@@ -915,14 +922,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private void requestOptionEfficiencyDetails() {
 
         String fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("url", " " + fIdetails);
+        Log.e(TAG,"url"+ fIdetails);
 
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Option Details Class: ", " " + response);
+                        Log.i(TAG,"Option Details Class: " + response);
                         Log.i("response length", "" + response.length());
                         int i;
                         try {
@@ -945,51 +952,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
                                     optionEfficiencyDetailsArrayList.add(optionEfficiencyDetails);
                                 }
-//                                freshnessIndexDetails = new FreshnessIndexDetails();
-//
-//                                if (txtFIndexClass.getText().toString().equals("Department")) {
-//                                    freshnessIndexDetails.setPlanDept("Current");
-//                                } else if (txtFIndexClass.getText().toString().equals("Category")) {
-//                                    freshnessIndexDetails.setPlanCategory("Current");
-//                                } else if (txtFIndexClass.getText().toString().equals("Plan Class")) {
-//                                    freshnessIndexDetails.setPlanClass("Current");
-//                                } else if (txtFIndexClass.getText().toString().equals("Brand")) {
-//                                    freshnessIndexDetails.setBrandName("Current");
-//                                } else if (txtFIndexClass.getText().toString().equals("Brand Plan Class")) {
-//                                    freshnessIndexDetails.setBrandplanClass("Current");
-//                                }
-//
-//                                freshnessIndexDetailsArrayList.add(0, freshnessIndexDetails);
-//
 
-                                oe_Adapter = new OptionEfficiencyAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
-                                oe_listView.setAdapter(oe_Adapter);
-                                oe_Adapter.notifyDataSetChanged();
-                                txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(0).getStoreDescription());
 
-                                if (oe_txtHeaderClass.getText().toString().equals("Department")) {
-                                    level = 1;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanDept().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
-                                    level = 2;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanCategory().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Plan Class")) {
-                                    level = 3;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanClass().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
-                                    level = 4;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getBrandName().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class")) {
-                                    level = 5;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getBrandplanClass().toString();
-                                }
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                requestOEPieChart();
+
 
                             }
+                            Log.e(TAG, "requestAll and list size is: "+optionEfficiencyDetailsArrayList.size());
+                            requestAll();
+
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1021,6 +991,122 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
+
+    }
+
+    private void requestAll() {
+        String fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId;
+        Log.e(TAG, "requestAll" + fIdetails);
+
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Log.i(TAG,"Freshness Index Details Class: " + response);
+                        Log.i("response length", "" + response.length());
+                        int i;
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            } else {
+                                optionEfficiencyDetail = new OptionEfficiencyDetails();
+                                for (i = 0; i < response.length(); i++) {
+
+                                    optionEfficiencyDetail = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
+                                }
+
+                                if (oe_txtHeaderClass.getText().toString().equals("Department")) {
+                                    optionEfficiencyDetail.setPlanDept("All");
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
+                                    optionEfficiencyDetail.setPlanCategory("All");
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Plan Class")) {
+                                    optionEfficiencyDetail.setPlanClass("All");
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
+                                    optionEfficiencyDetail.setBrandName("All");
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class")) {
+                                    optionEfficiencyDetail.setBrandplanClass("All");
+                                }
+
+                                optionEfficiencyDetail.setStkOnhandQty(optionEfficiencyDetail.getStkOnhandQty());
+                                optionEfficiencyDetail.setStkOnhandQtyCount(optionEfficiencyDetail.getStkOnhandQtyCount());
+                                optionEfficiencyDetail.setOptionCount(optionEfficiencyDetail.getOptionCount());
+                                optionEfficiencyDetail.setFullSizeCount(optionEfficiencyDetail.getFullSizeCount());
+
+                                optionEfficiencyDetail.setFullSizeCount(optionEfficiencyDetail.getFullSizeCount());
+                                optionEfficiencyDetail.setPartCutCount(optionEfficiencyDetail.getPartCutCount());
+                                optionEfficiencyDetail.setFullCutCount(optionEfficiencyDetail.getFullCutCount());
+
+
+                                Log.e(TAG, "soh: "+optionEfficiencyDetails.getStkOnhandQty()+" "+optionEfficiencyDetails.getStkOnhandQtyCount()+" "+optionEfficiencyDetails.getOptionCount()+" "+optionEfficiencyDetails.getFullSizeCount() );
+
+
+                                optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetail);
+
+
+                                oe_Adapter = new OptionEfficiencyAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
+                                oe_listView.setAdapter(oe_Adapter);
+                                oe_Adapter.notifyDataSetChanged();
+                                txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(0).getStoreDescription());
+
+                                if (oe_txtHeaderClass.getText().toString().equals("Department")) {
+                                    level = 1;
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanDept().toString();
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
+                                    level = 2;
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanCategory().toString();
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Plan Class")) {
+                                    level = 3;
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getPlanClass().toString();
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
+                                    level = 4;
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getBrandName().toString();
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class")) {
+                                    level = 5;
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(oe_listView.getFirstVisiblePosition()).getBrandplanClass().toString();
+                                }
+                                Log.e(TAG, "oe_FirstVisibleItem: "+oe_FirstVisibleItem );
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestOEPieChart();
+
+
+                            }
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "Server not found", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+
 
     }
 
@@ -1369,6 +1455,89 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         Log.e("Department onsroll api", "" + oe_FirstVisibleItem);
         Log.e("Header Class", oe_txtHeaderClass.getText().toString());
         String url = "";
+        txtNoChart.setVisibility(View.GONE);
+
+        if(oe_FirstVisibleItem.equals("All"))
+        {
+            Log.e(TAG, "fIndexFirstVisibleItem.equals: ALL" );
+            ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+
+
+            fullSizeCount = (float) optionEfficiencyDetail.getFullSizeCount();
+            partCutCount = (float) optionEfficiencyDetail.getPartCutCount();
+            fullCutCount = (float) optionEfficiencyDetail.getFullCutCount();
+            Log.e(TAG,"Values-------"+ fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount );
+
+
+            ArrayList<Integer> colors = new ArrayList<>();
+            colors.add(Color.parseColor("#31d6c5"));
+            colors.add(Color.parseColor("#aea9fd"));
+            colors.add(Color.parseColor("#fe8081"));
+
+            ArrayList<String> labels = new ArrayList<>();
+            if (fullSizeCount > 0.0f) {
+
+                entries.add(new PieEntry(fullSizeCount, "Full Size"));
+            }else
+            {
+                fullSize = true;
+            }
+            if (partCutCount > 0.0f) {
+
+                entries.add(new PieEntry(partCutCount, "Part Cut"));
+            }else
+            {
+                CutCount = true;
+
+            }
+            if (fullCutCount > 0.0f) {
+
+                entries.add(new PieEntry(fullCutCount, "Full Cut"));
+            }else
+            {
+                fullCut = true;
+
+            }
+            if(fullSize&&CutCount&&fullCut)
+            {
+                txtNoChart.setVisibility(View.VISIBLE);
+                fullSize=false;
+                CutCount=false;
+                fullCut=false;
+
+            }
+
+            dataset = new PieDataSet(entries, "");
+            dataset.setColors(colors);
+            dataset.setValueLineWidth(0.7f);
+            dataset.setValueTextColor(Color.BLACK);
+            pieData = new PieData(dataset);
+            pieData.setValueFormatter(new MyValueFormatter());
+            dataset.setValueLinePart1Length(1.2f);
+            dataset.setValueLinePart2Length(1.8f);
+            oe_pieChart.setDrawMarkers(false);
+            pieData.setValueTextSize(10f);
+            dataset.setXValuePosition(null);
+            dataset.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+            oe_pieChart.setEntryLabelColor(Color.BLACK);
+            oe_pieChart.setExtraOffsets(5, 10, 5, 5);
+            oe_pieChart.setHoleRadius(0);
+            oe_pieChart.setHoleColor(Color.WHITE);
+            oe_pieChart.setTransparentCircleRadius(0);
+            oe_pieChart.setData(pieData);
+            oe_pieChart.animateXY(4000, 4000);
+            oe_pieChart.setDescription(null);
+            oe_pieChart.setTouchEnabled(false);
+            Legend l = oe_pieChart.getLegend();
+            l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+            l.setEnabled(true);
+            l.setFormSize(11f);
+            llayoutOEfficiency.setVisibility(View.VISIBLE);
+            Reusable_Functions.hDialog();
+            return;
+
+        }
+
 
         if (oe_txtHeaderClass.getText().toString().equals("Department")) {
             url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
@@ -1381,13 +1550,13 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class")) {
             url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
         }
-        Log.e("Url", "" + url);
+        Log.e(TAG,"Url"+ url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("OE Pie Chart on Scroll  : ", " " + response);
+                        Log.e(TAG,"OE Pie Chart on Scroll  : "+response);
                         Log.e("OE Pie Chart response", "" + response.length());
                         try {
                             int i;
@@ -1413,7 +1582,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                 entries = new ArrayList<PieEntry>();
                                 for (OptionEfficiencyDetails optionEfficiency : optionArrayList) {
-                                    if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanDept())) {
+                                    if (oe_FirstVisibleItem.equals("All")) {
+                                        fullSizeCount = (float) optionEfficiency.getFullSizeCount();
+                                        partCutCount = (float) optionEfficiency.getPartCutCount();
+                                        fullCutCount = (float) optionEfficiency.getFullCutCount();
+
+                                        Log.e(TAG,"Values-------"+ fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
+
+                                    }else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanDept())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
@@ -1460,14 +1636,33 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 if (fullSizeCount > 0.0f) {
 
                                     entries.add(new PieEntry(fullSizeCount, "Full Size"));
+                                }else
+                                {
+                                    fullSize = true;
                                 }
                                 if (partCutCount > 0.0f) {
 
                                     entries.add(new PieEntry(partCutCount, "Part Cut"));
+                                }else
+                                {
+                                    CutCount = true;
+
                                 }
                                 if (fullCutCount > 0.0f) {
 
                                     entries.add(new PieEntry(fullCutCount, "Full Cut"));
+                                }else
+                                {
+                                    fullCut = true;
+
+                                }
+                                if(fullSize&&CutCount&&fullCut)
+                                {
+                                    txtNoChart.setVisibility(View.VISIBLE);
+                                    fullSize=false;
+                                    CutCount=false;
+                                    fullCut=false;
+
                                 }
 
                                 dataset = new PieDataSet(entries, "");

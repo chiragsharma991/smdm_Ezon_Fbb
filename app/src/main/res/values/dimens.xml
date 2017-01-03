@@ -60,6 +60,7 @@
     <dimen name="smdm_cardValuesSubtitle_normal">17sp</dimen>
 
     <dimen name="smdm_departmentTitle">12sp</dimen>
+    <dimen name="smdm_departmentTitleLarge">13sp</dimen>
 
 
 
