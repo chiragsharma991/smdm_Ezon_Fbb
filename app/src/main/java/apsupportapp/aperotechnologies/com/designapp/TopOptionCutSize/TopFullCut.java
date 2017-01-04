@@ -59,7 +59,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class TopFullCut extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     TextView Top_txtStoreCode, Top_txtStoreName;
-    RelativeLayout TopBest_BtnBack,TopOption_imgfilter,TopBest_qfDoneLayout,TopBest_quickFilter_baseLayout,TopBest_sk_quickFilter;
+    RelativeLayout TopBest_BtnBack, TopOption_imgfilter, TopBest_qfDoneLayout, TopBest_quickFilter_baseLayout, TopBest_sk_quickFilter;
     RunningPromoListDisplay TopOptionListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
@@ -80,11 +80,11 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     private View footer;
     private String lazyScroll = "OFF";
     private SegmentedGroup Top_segmented;
-    private RadioButton Top_fashion, Top_core,Topfull_checkWTD,Topfull_checkL4W,Topfull_checkSTD;
+    private RadioButton Top_fashion, Top_core, Topfull_checkWTD, Topfull_checkL4W, Topfull_checkSTD;
     private ToggleButton Toggle_top_fav;
     private String corefashion = "Fashion";
-    private String checkTimeValueIs=null;
-    private String view="STD";
+    private String checkTimeValueIs = null;
+    private String view = "STD";
 
 
     @Override
@@ -130,58 +130,59 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
     private void requestRunningPromoApi() {
 
-        String url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion+"&view=" + view;
+        if (Reusable_Functions.chkStatus(context)) {
 
-        Log.e(TAG, "URL" + url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Top Option : " + " " + response);
-                        Log.i(TAG, "response" + "" + response.length());
-                        TopOptionListView.setVisibility(View.VISIBLE);
+            String url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
 
-
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                TopOptionListView.removeFooterView(footer);
-                                TopOptionListView.setTag("FOOTER_REMOVE");
-
-                                if (TopOptionList.size() == 0) {
-                                    TopOptionListView.setVisibility(View.GONE);
+            Log.e(TAG, "URL" + url);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.i(TAG, "Top Option : " + " " + response);
+                            Log.i(TAG, "response" + "" + response.length());
+                            TopOptionListView.setVisibility(View.VISIBLE);
 
 
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    TopOptionListView.removeFooterView(footer);
+                                    TopOptionListView.setTag("FOOTER_REMOVE");
+
+                                    if (TopOptionList.size() == 0) {
+                                        TopOptionListView.setVisibility(View.GONE);
+
+
+                                    }
+                                } else if (response.length() == limit) {
+
+
+                                    Log.e(TAG, "Top eql limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        TopOptionListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        TopOptionList.add(TopOptionListDisplay);
+
+                                    }
+                                    offsetvalue = offsetvalue + 10;
+                                    top = top + 10;
+                                    //  count++;
+
+                                    // requestRunningPromoApi();
+
+                                } else if (response.length() < limit) {
+                                    Log.e(TAG, "promo /= limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        TopOptionListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        TopOptionList.add(TopOptionListDisplay);
+                                        offsetvalue = offsetvalue + response.length();
+                                        top = top + response.length();
+
+                                    }
                                 }
-                            } else if (response.length() == limit) {
-
-
-                                Log.e(TAG, "Top eql limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    TopOptionListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    TopOptionList.add(TopOptionListDisplay);
-
-                                }
-                                offsetvalue = offsetvalue + 10;
-                                top = top + 10;
-                                //  count++;
-
-                                // requestRunningPromoApi();
-
-                            } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    TopOptionListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    TopOptionList.add(TopOptionListDisplay);
-                                    offsetvalue = offsetvalue + response.length();
-                                    top = top + response.length();
-
-                                }
-                            }
 
 
                            /* if(popPromo==10)
@@ -192,93 +193,101 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
                             }*/
 
-                            if (lazyScroll.equals("ON")) {
-                                topOptionAdapter.notifyDataSetChanged();
-                                lazyScroll = "OFF";
-                                footer.setVisibility(View.GONE);
+                                if (lazyScroll.equals("ON")) {
+                                    topOptionAdapter.notifyDataSetChanged();
+                                    lazyScroll = "OFF";
+                                    footer.setVisibility(View.GONE);
 
-                            } else {
-                                topOptionAdapter = new TopOptionAdapter(TopOptionList, context);
-                                TopOptionListView.setAdapter(topOptionAdapter);
+                                } else {
+                                    topOptionAdapter = new TopOptionAdapter(TopOptionList, context);
+                                    TopOptionListView.setAdapter(topOptionAdapter);
 
 
+                                }
+
+                                Top_txtStoreCode.setText(TopOptionList.get(0).getStoreCode());
+                                Top_txtStoreName.setText(TopOptionList.get(0).getStoreDesc());
+
+                                Reusable_Functions.hDialog();
+                            } catch (Exception e) {
+                                Reusable_Functions.hDialog();
+                                TopOptionListView.removeFooterView(footer);
+                                TopOptionListView.setTag("FOOTER_REMOVE");
+                                Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                                Log.e(TAG, "catch...Error" + e.toString());
                             }
-
-                            Top_txtStoreCode.setText(TopOptionList.get(0).getStoreCode());
-                            Top_txtStoreName.setText(TopOptionList.get(0).getStoreDesc());
-
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                            //topOptionAdapter.notifyDataSetChanged();
                             TopOptionListView.removeFooterView(footer);
                             TopOptionListView.setTag("FOOTER_REMOVE");
-                            e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
+                            TopOptionListView.setVisibility(View.GONE);
+
+                            error.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "Network problem has been found", Toast.LENGTH_SHORT).show();
-                        //topOptionAdapter.notifyDataSetChanged();
-                        TopOptionListView.removeFooterView(footer);
-                        TopOptionListView.setTag("FOOTER_REMOVE");
-                        error.printStackTrace();
-                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
                 }
+            };
+            int socketTimeout = 60000;//5 seconds
 
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
 
 
 //---------------seton Click list listener------------------//
 
-        TopOptionListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
+            TopOptionListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
 
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
+                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE && lazyScroll.equals("OFF")) {
 
 
-                    if(TopOptionListView.getTag().equals("FOOTER_REMOVE"))
-                    {
-                        TopOptionListView.addFooterView(footer);
-                        TopOptionListView.setTag("FOOTER_ADDED");
+                        if (TopOptionListView.getTag().equals("FOOTER_REMOVE")) {
+                            TopOptionListView.addFooterView(footer);
+                            TopOptionListView.setTag("FOOTER_ADDED");
 
+                        }
+                        footer.setVisibility(View.VISIBLE);
+
+                        lazyScroll = "ON";
+                        requestRunningPromoApi();
                     }
-                    footer.setVisibility(View.VISIBLE);
 
-                    lazyScroll = "ON";
-                    requestRunningPromoApi();
                 }
 
-            }
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                    this.FirstVisibleItem = firstVisibleItem;
+                    this.VisibleItemCount = visibleItemCount;
+                    this.TotalItemCount = totalItemCount;
 
-                this.FirstVisibleItem = firstVisibleItem;
-                this.VisibleItemCount = visibleItemCount;
-                this.TotalItemCount = totalItemCount;
-
-            }
-        });
+                }
+            });
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            Reusable_Functions.hDialog();
+            TopOptionListView.removeFooterView(footer);
+            TopOptionListView.setTag("FOOTER_REMOVE");
+        }
     }
 
 
@@ -320,7 +329,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         TopBest_qfDoneLayout.setOnClickListener(TopFullCut.this);
 
 
-
     }
 
 
@@ -347,7 +355,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 }
 
                 break;
-            
+
 
             case R.id.topfull_checkWTD:
                 Topfull_checkWTD.setChecked(true);
@@ -369,38 +377,37 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
                 if (Reusable_Functions.chkStatus(context)) {
 
-                    if(Topfull_checkWTD.isChecked())
-                    {
+                    if (Topfull_checkWTD.isChecked()) {
                         checkTimeValueIs = "CheckWTD";
                         view = "WTD";
                         DoneTime();
-                    }else if(Topfull_checkL4W.isChecked())
-                    {
+                    } else if (Topfull_checkL4W.isChecked()) {
                         checkTimeValueIs = "CheckL4W";
                         view = "L4W";
                         DoneTime();
 
-                    }else if(Topfull_checkSTD.isChecked())
-                    {
+                    } else if (Topfull_checkSTD.isChecked()) {
                         checkTimeValueIs = "CheckSTD";
                         view = "STD";
                         DoneTime();
 
                     }
 
-                     else {
-                        Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
 
-                    }
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
                 }
+
+                TopBest_quickFilter_baseLayout.setVisibility(View.GONE);
+
                 break;
 
 
+            //base layout clicking>>>
+
             case R.id.quickFilterPopup:
-                if (checkTimeValueIs == null){
+                if (checkTimeValueIs == null) {
                     Topfull_checkWTD.setChecked(false);
                     Topfull_checkL4W.setChecked(false);
                     Topfull_checkSTD.setChecked(true);
@@ -466,6 +473,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+        // Id is changed so that we have change core in fashion
+
         switch (checkedId) {
             case R.id.top_core:
                 if (Top_core.isChecked()) {
@@ -475,7 +484,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                         limit = 10;
                         offsetvalue = 0;
                         top = 10;
-                        corefashion = "Core";
+                        corefashion = "Fashion";
                         lazyScroll = "OFF";
                         TopOptionList.clear();
                         TopOptionListView.setVisibility(View.GONE);
@@ -494,14 +503,13 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                         limit = 10;
                         offsetvalue = 0;
                         top = 10;
-                        corefashion = "Fashion";
+                        corefashion = "Core";
                         lazyScroll = "OFF";
                         TopOptionList.clear();
                         TopOptionListView.setVisibility(View.GONE);
                         Reusable_Functions.sDialog(this, "Loading.......");
                         requestRunningPromoApi();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         TopOptionListView.setVisibility(View.GONE);
 

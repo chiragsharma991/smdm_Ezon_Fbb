@@ -122,55 +122,57 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
     private void requestFloorAvailabilityApi() {
 
-        //String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
-        String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
+        if (Reusable_Functions.chkStatus(context)) {
 
-        Log.e(TAG, "URL" + url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e(TAG, "Floor Availability: " + " " + response);
-                        Log.e(TAG, "response" + "" + response.length());
-                        floorListView.setVisibility(View.VISIBLE);
+            //String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+            String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
 
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                floorListView.removeFooterView(footer);
-                                floorListView.setTag("FOOTER_REMOVE");
-                                if (FloorList.size() == 0) {
-                                    floorListView.setVisibility(View.GONE);
+            Log.e(TAG, "URL" + url);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.e(TAG, "Floor Availability: " + " " + response);
+                            Log.e(TAG, "response" + "" + response.length());
+                            floorListView.setVisibility(View.VISIBLE);
 
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    floorListView.removeFooterView(footer);
+                                    floorListView.setTag("FOOTER_REMOVE");
+                                    if (FloorList.size() == 0) {
+                                        floorListView.setVisibility(View.GONE);
+
+                                    }
+
+                                } else if (response.length() == limit) {
+                                    Log.e(TAG, "Top eql limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        floorAvailabilityDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
+                                        FloorList.add(floorAvailabilityDetails);
+
+                                    }
+                                    offsetvalue = offsetvalue + 10;
+                                    top = top + 10;
+                                    //  count++;
+
+                                    // requestStockAgeingApi();
+
+                                } else if (response.length() < limit) {
+                                    Log.e(TAG, "promo /= limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        floorAvailabilityDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
+                                        FloorList.add(floorAvailabilityDetails);
+
+                                        offsetvalue = offsetvalue + response.length();
+                                        top = top + response.length();
+
+                                    }
                                 }
-
-                            } else if (response.length() == limit) {
-                                Log.e(TAG, "Top eql limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    floorAvailabilityDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
-                                    FloorList.add(floorAvailabilityDetails);
-
-                                }
-                                offsetvalue = offsetvalue + 10;
-                                top = top + 10;
-                                //  count++;
-
-                                // requestStockAgeingApi();
-
-                            } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    floorAvailabilityDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
-                                    FloorList.add(floorAvailabilityDetails);
-
-                                    offsetvalue = offsetvalue + response.length();
-                                    top = top + response.length();
-
-                                }
-                            }
 
 
                            /* if(popPromo==10)
@@ -181,95 +183,103 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
                             }*/
 
-                            if (lazyScroll.equals("ON")) {
+                                if (lazyScroll.equals("ON")) {
+                                    floorAvailabilityAdapter.notifyDataSetChanged();
+                                    lazyScroll = "OFF";
+                                    footer.setVisibility(View.GONE);
+
+                                } else {
+                                    floorAvailabilityAdapter = new FloorAvailabilityAdapter(FloorList, context);
+                                    floorListView.setAdapter(floorAvailabilityAdapter);
+                                    floor_txtStoreCode.setText(FloorList.get(0).getStoreCode());
+                                    floor_txtStoreName.setText(FloorList.get(0).getStoreDescription());
+
+                                }
+
+
+                                Reusable_Functions.hDialog();
+                            } catch (Exception e) {
+
+                                FloorList.clear();
                                 floorAvailabilityAdapter.notifyDataSetChanged();
-                                lazyScroll = "OFF";
+                                floorListView.setVisibility(View.GONE);
+                                Reusable_Functions.hDialog();
                                 footer.setVisibility(View.GONE);
-
-                            } else {
-                                floorAvailabilityAdapter = new FloorAvailabilityAdapter(FloorList, context);
-                                floorListView.setAdapter(floorAvailabilityAdapter);
-                                floor_txtStoreCode.setText(FloorList.get(0).getStoreCode());
-                                floor_txtStoreName.setText(FloorList.get(0).getStoreDescription());
-
+                                Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, "no data found in catch" + e.toString(), Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                                Log.e(TAG, "catch...Error" + e.toString());
                             }
-
-
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-                        } catch (Exception e) {
-
-                            FloorList.clear();
-                            floorAvailabilityAdapter.notifyDataSetChanged();
+                            Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                            floorListView.removeFooterView(footer);
+                            floorListView.setTag("FOOTER_REMOVE");
                             floorListView.setVisibility(View.GONE);
-                            Reusable_Functions.hDialog();
-                            footer.setVisibility(View.GONE);
-                            //Toast.makeText(context, "no data found in catch" + e.toString(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
+
+                            error.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "Network problem has been found", Toast.LENGTH_SHORT).show();
-                        floorListView.removeFooterView(footer);
-                        floorListView.setTag("FOOTER_REMOVE");
-                        error.printStackTrace();
-                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
                 }
+            };
+            int socketTimeout = 60000;//5 seconds
 
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
 
 
 //---------------seton Click list listener------------------//
 
-        floorListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
+            floorListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
 
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
+                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE && lazyScroll.equals("OFF")) {
 
-                    if (floorListView.getTag().equals("FOOTER_REMOVE")) {
-                        floorListView.addFooterView(footer);
-                        floorListView.setTag("FOOTER_ADDED");
+                        if (floorListView.getTag().equals("FOOTER_REMOVE")) {
+                            floorListView.addFooterView(footer);
+                            floorListView.setTag("FOOTER_ADDED");
 
+                        }
+
+
+                        footer.setVisibility(View.VISIBLE);
+                        lazyScroll = "ON";
+                        requestFloorAvailabilityApi();
+                        //Reusable_Functions.sDialog(context, "Loading data...");
                     }
-
-
-
-                    footer.setVisibility(View.VISIBLE);
-                    lazyScroll = "ON";
-                    requestFloorAvailabilityApi();
-                    //Reusable_Functions.sDialog(context, "Loading data...");
                 }
-            }
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                this.FirstVisibleItem = firstVisibleItem;
-                this.VisibleItemCount = visibleItemCount;
-                this.TotalItemCount = totalItemCount;
+                    this.FirstVisibleItem = firstVisibleItem;
+                    this.VisibleItemCount = visibleItemCount;
+                    this.TotalItemCount = totalItemCount;
 
-            }
-        });
+                }
+            });
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            Reusable_Functions.hDialog();
+            floorListView.removeFooterView(footer);
+            floorListView.setTag("FOOTER_REMOVE");
+        }
     }
 
 
@@ -334,7 +344,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 Intent intent = new Intent(FloorAvailabilityActivity.this, InventoryFilterActivity.class);
                 intent.putExtra("checkfrom", "floorAvailability");
                 startActivity(intent);
-               // finish();
+                // finish();
                 break;
             case R.id.floor_quickFilter:
 

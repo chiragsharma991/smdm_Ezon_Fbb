@@ -136,12 +136,14 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             limit = 10;
             count = 0;
             top = 10;
-            footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
-            BestInventListview.addFooterView(footer);
+
             requestRunningPromoApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
+
+        footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
+        BestInventListview.addFooterView(footer);
 
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
 
@@ -271,9 +273,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "Network problem has been found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             BestInventListview.removeFooterView(footer);
                             BestInventListview.setTag("FOOTER_REMOVE");
+                            BestInventListview.setVisibility(View.GONE);
+
 
                             error.printStackTrace();
                         }
@@ -303,7 +307,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 @Override
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
+                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE && lazyScroll.equals("OFF")) {
 
                         if (BestInventListview.getTag().equals("FOOTER_REMOVE")) {
                             BestInventListview.addFooterView(footer);
@@ -333,6 +337,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             BestInventListview.removeFooterView(footer);
             BestInventListview.setTag("FOOTER_REMOVE");
+            Reusable_Functions.hDialog();
+
         }
     }
 
@@ -546,7 +552,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 }
 
                 //overridePendingTransition(R.anim.startingfrom_right,R.anim.startingfrom_left);
-                TranslateAnimation animation = new TranslateAnimation(0,600,0,0); // new TranslateAnimation (float fromXDelta,float toXDelta, float fromYDelta, float toYDelta)
+              /*  TranslateAnimation animation = new TranslateAnimation(0,600,0,0); // new TranslateAnimation (float fromXDelta,float toXDelta, float fromYDelta, float toYDelta)
 
                 animation.setDuration(2000); // animation duration
                 animation.setRepeatCount(0); // animation repeat count
@@ -574,7 +580,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         Log.e(TAG, "onAnimationRepeat: " );
 
                     }
-                });
+                });*/
+
+                quickFilterPopup.setVisibility(View.GONE);
+
                 break;
 
             case R.id.bestQfDoneLayout:
@@ -754,7 +763,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         if (Reusable_Functions.chkStatus(context)) {
             if (BstInventory_Fwd_chk.isChecked()) {
-                BstInventory_Fwd_chk.setChecked(false);
+
+                BstInventory_salesU_chk.setChecked(false);
+                BstInventory_salesThru_chk.setChecked(false);
+                BstInventory_Fwd_chk.setChecked(true);
+                BstInventory_coverNsell_chk.setChecked(false);
                 BaseLayoutInventory.setVisibility(View.GONE);
                 Log.e(TAG, "FWD pop up if");
 
@@ -788,7 +801,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         if (Reusable_Functions.chkStatus(context)) {
 
             if (BstInventory_coverNsell_chk.isChecked()) {
-                BstInventory_coverNsell_chk.setChecked(false);
+                BstInventory_salesU_chk.setChecked(false);
+                BstInventory_salesThru_chk.setChecked(false);
+                BstInventory_Fwd_chk.setChecked(false);
+                BstInventory_coverNsell_chk.setChecked(true);
                 BaseLayoutInventory.setVisibility(View.GONE);
                 Log.e(TAG, "coverNsell pop up if");
 
@@ -820,11 +836,16 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         if (Reusable_Functions.chkStatus(context)) {
 
             if (BstInventory_salesThru_chk.isChecked()) {
-                BstInventory_salesThru_chk.setChecked(false);
+
+                BstInventory_salesU_chk.setChecked(false);
+                BstInventory_salesThru_chk.setChecked(true);
+                BstInventory_Fwd_chk.setChecked(false);
+                BstInventory_coverNsell_chk.setChecked(false);
+
                 BaseLayoutInventory.setVisibility(View.GONE);
                 Log.e(TAG, "salesThru pop up if");
 
-            } else if (!BestInvent_fashion.isChecked()) {
+            } else if (!BstInventory_salesThru_chk.isChecked()) {
 
                 BstInventory_salesU_chk.setChecked(false);
                 BstInventory_salesThru_chk.setChecked(true);
@@ -853,7 +874,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
             if (BstInventory_salesU_chk.isChecked()) {
 
-                BstInventory_salesU_chk.setChecked(false);
+                BstInventory_salesU_chk.setChecked(true);
+                BstInventory_salesThru_chk.setChecked(false);
+                BstInventory_Fwd_chk.setChecked(false);
+                BstInventory_coverNsell_chk.setChecked(false);
+
                 BaseLayoutInventory.setVisibility(View.GONE);
                 Log.e(TAG, "salesUpopUp pop up if");
             } else if (!BstInventory_salesU_chk.isChecked()) {
@@ -967,8 +992,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void filterFunction() {
 
+        quickFilterPopup.setVisibility(View.VISIBLE);
+
         //overridePendingTransition(R.anim.startingfrom_right,R.anim.startingfrom_left);
-        TranslateAnimation animation = new TranslateAnimation(100,0,0,0); // new TranslateAnimation (float fromXDelta,float toXDelta, float fromYDelta, float toYDelta)
+      /*  TranslateAnimation animation = new TranslateAnimation(100,0,0,0); // new TranslateAnimation (float fromXDelta,float toXDelta, float fromYDelta, float toYDelta)
 
         animation.setDuration(2000); // animation duration
         animation.setRepeatCount(0); // animation repeat count
@@ -997,7 +1024,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 Log.e(TAG, "onAnimationRepeat: " );
 
             }
-        });
+        });*/
 
 
     }

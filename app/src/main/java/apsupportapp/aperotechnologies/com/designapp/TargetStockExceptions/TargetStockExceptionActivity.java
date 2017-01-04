@@ -91,7 +91,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private SeekBar TargetSeek;
     private TextView targetMax;
     private int setValue;
-    private boolean coreSelection=false;
+    private boolean coreSelection = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,70 +133,73 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void requestTargetStockExcepApi() {
 
-        String url;
-        if (coreSelection) {
-
-            //core selection without season params
-
-            url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
-        } else {
-
-            // fashion select with season params
-
-            url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
-        }
+        if (Reusable_Functions.chkStatus(context)) {
 
 
-        Log.e(TAG, "URL" + url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Target Stock Exception : " + " " + response);
-                        Log.i(TAG, "response" + "" + response.length());
-                        targetListView.setVisibility(View.VISIBLE);
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                targetListView.removeFooterView(footer);
-                                targetListView.setTag("FOOTER_REMOVE");
-                                if (targetStockList.size() == 0) {
-                                    targetListView.setVisibility(View.GONE);
-                                    return;
+            String url;
+            if (coreSelection) {
+
+                //core selection without season params
+
+                url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
+            } else {
+
+                // fashion select with season params
+
+                url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
+            }
+
+
+            Log.e(TAG, "URL" + url);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.i(TAG, "Target Stock Exception : " + " " + response);
+                            Log.i(TAG, "response" + "" + response.length());
+                            targetListView.setVisibility(View.VISIBLE);
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    targetListView.removeFooterView(footer);
+                                    targetListView.setTag("FOOTER_REMOVE");
+                                    if (targetStockList.size() == 0) {
+                                        targetListView.setVisibility(View.GONE);
+                                        return;
+                                    }
+
+                                } else if (response.length() == limit) {
+                                    Log.e(TAG, "Top eql limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        targetStockDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
+                                        targetStockList.add(targetStockDetails);
+
+                                    }
+                                    offsetvalue = offsetvalue + 10;
+                                    top = top + 10;
+                                    //  count++;
+
+                                    // requestTargetStockExcepApi();
+
+                                } else if (response.length() < limit) {
+                                    Log.e(TAG, "promo /= limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        targetStockDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
+                                        targetStockList.add(targetStockDetails);
+
+                                        offsetvalue = offsetvalue + response.length();
+                                        top = top + response.length();
+
+                                    }
+                                    targetListView.removeFooterView(footer);
+                                    targetListView.setTag("FOOTER_REMOVE");
                                 }
 
-                            } else if (response.length() == limit) {
-                                Log.e(TAG, "Top eql limit");
-                                for (int i = 0; i < response.length(); i++) {
 
-                                    targetStockDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
-                                    targetStockList.add(targetStockDetails);
-
-                                }
-                                offsetvalue = offsetvalue + 10;
-                                top = top + 10;
-                                //  count++;
-
-                                // requestTargetStockExcepApi();
-
-                            } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    targetStockDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
-                                    targetStockList.add(targetStockDetails);
-
-                                    offsetvalue = offsetvalue + response.length();
-                                    top = top + response.length();
-
-                                }
-                                targetListView.removeFooterView(footer);
-                                targetListView.setTag("FOOTER_REMOVE");
-                            }
-
-
-                            footer.setVisibility(View.GONE);
+                                footer.setVisibility(View.GONE);
                            /* if(popPromo==10)
                             {
                                 topOptionAdapter = new TopOptionAdapter(TopOptionList,context);
@@ -205,95 +208,103 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                             }*/
 
-                            if (lazyScroll.equals("ON")) {
+                                if (lazyScroll.equals("ON")) {
+                                    targetAgeingAdapter.notifyDataSetChanged();
+                                    lazyScroll = "OFF";
+                                } else {
+                                    targetAgeingAdapter = new TargetStockExcepAdapter(targetStockList, context);
+                                    targetListView.setAdapter(targetAgeingAdapter);
+                                    target_txtStoreCode.setText(targetStockList.get(0).getStoreCode());
+                                    target_txtStoreName.setText(targetStockList.get(0).getStoreDescription());
+
+                                }
+
+
+                                Reusable_Functions.hDialog();
+                            } catch (Exception e) {
+
+
+                                targetStockList.clear();
                                 targetAgeingAdapter.notifyDataSetChanged();
-                                lazyScroll = "OFF";
-                            } else {
-                                targetAgeingAdapter = new TargetStockExcepAdapter(targetStockList, context);
-                                targetListView.setAdapter(targetAgeingAdapter);
-                                target_txtStoreCode.setText(targetStockList.get(0).getStoreCode());
-                                target_txtStoreName.setText(targetStockList.get(0).getStoreDescription());
-
+                                targetListView.setVisibility(View.GONE);
+                                Reusable_Functions.hDialog();
+                                footer.setVisibility(View.GONE);
+                                Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                                targetListView.removeFooterView(footer);
+                                targetListView.setTag("FOOTER_REMOVE");
+                                e.printStackTrace();
+                                Log.e(TAG, "catch...Error" + e.toString());
                             }
-
-
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-                        } catch (Exception e) {
-
-
-                            targetStockList.clear();
-                            targetAgeingAdapter.notifyDataSetChanged();
-                            targetListView.setVisibility(View.GONE);
-                            Reusable_Functions.hDialog();
-                            footer.setVisibility(View.GONE);
-                            Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             targetListView.removeFooterView(footer);
                             targetListView.setTag("FOOTER_REMOVE");
-                            e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
+                            targetListView.setVisibility(View.GONE);
+
+                            error.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
-                        targetListView.removeFooterView(footer);
-                        targetListView.setTag("FOOTER_REMOVE");
-                        error.printStackTrace();
-                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
                 }
+            };
+            int socketTimeout = 60000;//5 seconds
 
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
 
 
 //---------------seton Click list listener------------------//
 
-        targetListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
+            targetListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
 
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE&&lazyScroll.equals("OFF")) {
-                    if (targetListView.getTag().equals("FOOTER_REMOVE")) {
-                        targetListView.addFooterView(footer);
-                        targetListView.setTag("FOOTER_ADDED");
+                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE && lazyScroll.equals("OFF")) {
+                        if (targetListView.getTag().equals("FOOTER_REMOVE")) {
+                            targetListView.addFooterView(footer);
+                            targetListView.setTag("FOOTER_ADDED");
 
+                        }
+
+
+                        Log.e(TAG, "onScrollStateChanged:  log");
+                        footer.setVisibility(View.VISIBLE);
+                        lazyScroll = "ON";
+                        requestTargetStockExcepApi();
+                        //Reusable_Functions.sDialog(context, "Loading data...");
                     }
-
-
-                    Log.e(TAG, "onScrollStateChanged:  log");
-                    footer.setVisibility(View.VISIBLE);
-                    lazyScroll = "ON";
-                    requestTargetStockExcepApi();
-                    //Reusable_Functions.sDialog(context, "Loading data...");
                 }
-            }
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                this.FirstVisibleItem = firstVisibleItem;
-                this.VisibleItemCount = visibleItemCount;
-                this.TotalItemCount = totalItemCount;
+                    this.FirstVisibleItem = firstVisibleItem;
+                    this.VisibleItemCount = visibleItemCount;
+                    this.TotalItemCount = totalItemCount;
 
-            }
-        });
+                }
+            });
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            Reusable_Functions.hDialog();
+            targetListView.removeFooterView(footer);
+            targetListView.setTag("FOOTER_REMOVE");
+        }
     }
 
 
@@ -1068,7 +1079,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         Reusable_Functions.sDialog(context, "Loading data...");
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
-                        coreSelection=true;
+                        coreSelection = true;
                         requestTargetStockExcepApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1086,7 +1097,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         Reusable_Functions.sDialog(context, "Loading data...");
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
-                        coreSelection=false;
+                        coreSelection = false;
                         requestTargetStockExcepApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();

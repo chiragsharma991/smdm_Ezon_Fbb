@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:id="@+id/skewedListView"
             android:dividerHeight="1dp"
-
+            android:layout_marginTop="10dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true">
 

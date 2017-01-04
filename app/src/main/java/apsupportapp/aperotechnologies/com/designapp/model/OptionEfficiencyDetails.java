@@ -22,6 +22,16 @@ public class OptionEfficiencyDetails {
     String brandplanClass;
     String seasongroup;
 
+    public double getSohCountFullSize() {
+        return sohCountFullSize;
+    }
+
+    public void setSohCountFullSize(double sohCountFullSize) {
+        this.sohCountFullSize = sohCountFullSize;
+    }
+
+    double sohCountFullSize;
+
     public String getSeasongroup() {
         return seasongroup;
     }

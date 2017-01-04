@@ -85,6 +85,7 @@
                         android:textSize="@dimen/smdm_inflator_title_normal"
 
 
+
                         />
 
                     <RelativeLayout

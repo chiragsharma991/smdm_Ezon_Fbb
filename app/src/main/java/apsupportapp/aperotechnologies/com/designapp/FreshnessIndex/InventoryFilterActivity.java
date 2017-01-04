@@ -104,16 +104,16 @@ public class InventoryFilterActivity extends Activity {
             public void onClick(View v) {
 
                 if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex")) {
-                    Intent intent = new Intent(InventoryFilterActivity.this, FreshnessIndexActivity.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(InventoryFilterActivity.this, FreshnessIndexActivity.class);
+                   // startActivity(intent);
                     finish();
                 } else if (getIntent().getStringExtra("checkfrom").equals("optionEfficiency")) {
                     Intent intent = new Intent(InventoryFilterActivity.this, OptionEfficiencyActivity.class);
                     startActivity(intent);
                     finish();
                 } else if (getIntent().getStringExtra("checkfrom").equals("skewedSize")) {
-                    Intent intent = new Intent(InventoryFilterActivity.this, SkewedSizesActivity.class);
-                    startActivity(intent);
+                  //  Intent intent = new Intent(InventoryFilterActivity.this, SkewedSizesActivity.class);
+                    //startActivity(intent);
                     finish();
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing")) {
@@ -265,16 +265,16 @@ public class InventoryFilterActivity extends Activity {
     public void onBackPressed() {
 
         if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex")) {
-            Intent intent = new Intent(InventoryFilterActivity.this, FreshnessIndexActivity.class);
-            startActivity(intent);
+           // Intent intent = new Intent(InventoryFilterActivity.this, FreshnessIndexActivity.class);
+           // startActivity(intent);
             finish();
         } else if (getIntent().getStringExtra("checkfrom").equals("optionEfficiency")) {
-            Intent intent = new Intent(InventoryFilterActivity.this, OptionEfficiencyActivity.class);
-            startActivity(intent);
+           // Intent intent = new Intent(InventoryFilterActivity.this, OptionEfficiencyActivity.class);
+           // startActivity(intent);
             finish();
         } else if (getIntent().getStringExtra("checkfrom").equals("skewedSize")) {
-            Intent intent = new Intent(InventoryFilterActivity.this, SkewedSizesActivity.class);
-            startActivity(intent);
+           // Intent intent = new Intent(InventoryFilterActivity.this, SkewedSizesActivity.class);
+          //  startActivity(intent);
             finish();
         }
         else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing")) {

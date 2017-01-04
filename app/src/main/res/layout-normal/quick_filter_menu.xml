@@ -128,7 +128,7 @@
                         android:orientation="vertical">
 
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/checkCurrent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                         android:orientation="vertical">
 
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/checkPrevious"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -214,7 +214,7 @@
                         android:orientation="vertical">
 
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/checkOld"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -256,7 +256,7 @@
                         android:orientation="vertical">
 
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/checkUpcoming"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
