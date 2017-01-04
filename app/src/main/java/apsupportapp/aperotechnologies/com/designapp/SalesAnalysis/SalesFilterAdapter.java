@@ -171,17 +171,9 @@ public class SalesFilterAdapter extends BaseAdapter implements Filterable {
             arrayList = (ArrayList<String>) results.values;
 
                 SalesFilter.salesFilterAdapter.notifyDataSetChanged();
-
-
                 SalesFilter.categoryAdapter.notifyDataSetChanged();
-
-
                 SalesFilter.planClassAdapter.notifyDataSetChanged();
-
-
                 SalesFilter.branAdapter.notifyDataSetChanged();
-
-
                 SalesFilter.brandClsAdapter.notifyDataSetChanged();
 
 

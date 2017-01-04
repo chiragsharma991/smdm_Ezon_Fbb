@@ -196,7 +196,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         relimgfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SalesAnalysisActivity.this, SalesFilter.class);
+                Intent intent = new Intent(SalesAnalysisActivity.this, SalesFilterActivity.class);
                 intent.putExtra("checkfrom", "SalesAnalysis");
                 startActivity(intent);
 

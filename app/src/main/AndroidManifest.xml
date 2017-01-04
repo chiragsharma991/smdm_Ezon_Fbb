@@ -86,6 +86,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".SalesAnalysis.SalesFilterActivity"
+            android:theme="@style/CheckboxTheme"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
