@@ -61,6 +61,8 @@ public class SalesFilterActivity extends Activity {
     SharedPreferences sharedPreferences;
     RequestQueue queue;
     Context context;
+    //git testing 05/01/2017
+
     String TAG = "SalesFilterActivity";
     static List<String> subdept, subCategory, subPlanClass, subBrandnm, subBrandPlanClass;
     public static String plandeptName;

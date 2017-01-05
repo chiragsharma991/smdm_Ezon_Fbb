@@ -75,6 +75,8 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
     Context context;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
+    //git testing 05/01/2017
+
     static SalesFilterAdapter salesFilterAdapter, categoryAdapter, planClassAdapter, branAdapter, brandClsAdapter;
     EditText editSearch;
     ImageButton btnSearch;

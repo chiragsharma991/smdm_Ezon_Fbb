@@ -78,6 +78,8 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     private GroupViewHolder groupViewHolder;
     private String groupText;
     private String childText;
+    //git testing 05/01/2017
+
     static String planDepartmentName, planCategoryName, planClassName;
     SalesFilterExpandableList listAdapter;
     Boolean flag = false;
