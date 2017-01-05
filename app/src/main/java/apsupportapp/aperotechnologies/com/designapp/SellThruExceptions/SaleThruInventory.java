@@ -162,12 +162,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                                     BestInventListview.setTag("FOOTER_REMOVE");
                                     if (BestInventList.size() == 0) {
                                         BestInventListview.setVisibility(View.GONE);
-                                        return;
-
                                     }
-                                    //  BestInvent_fashion.setEnabled(true);
-                                    // BestInvent_core.setEnabled(true);
-
+                                    return;
 
                                 } else if (response.length() == limit) {
 

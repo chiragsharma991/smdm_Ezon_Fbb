@@ -89,6 +89,8 @@
                             android:paddingLeft="10dp"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="@dimen/smdm_inflator_title_large"
+                            android:textStyle="bold"
+
 
 
                             />

@@ -166,8 +166,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                     targetListView.setTag("FOOTER_REMOVE");
                                     if (targetStockList.size() == 0) {
                                         targetListView.setVisibility(View.GONE);
-                                        return;
+
                                     }
+                                    return;
 
                                 } else if (response.length() == limit) {
                                     Log.e(TAG, "Top eql limit");

@@ -193,8 +193,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
 
                                     }
-                                    //  BestInvent_fashion.setEnabled(true);
-                                    // BestInvent_core.setEnabled(true);
+                                    return;
 
 
                                 } else if (response.length() == limit) {

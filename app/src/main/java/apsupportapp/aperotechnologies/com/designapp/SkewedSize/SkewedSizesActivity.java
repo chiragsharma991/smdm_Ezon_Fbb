@@ -57,7 +57,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     RelativeLayout Skewed_BtnBack, sk_imgfilter, sk_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout;
     RunningPromoListDisplay SkewedSizeListDisplay;
     private SharedPreferences sharedPreferences;
-    RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming,Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
+    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
+    RadioButton Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
     String userId, bearertoken;
     String TAG = "SkewedSizesActivity";
     private int count = 0;
@@ -154,9 +155,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                     footer.setVisibility(View.GONE);
                                     if (SkewedSizeList.size() == 0) {
                                         SkewedSizeListview.setVisibility(View.GONE);
-                                        return;
-
                                     }
+                                    return;
 
                                 } else if (response.length() == limit) {
 
@@ -313,10 +313,10 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
         quickFilterPopup.setVisibility(View.GONE);
         Toggle_skewed_fav = (ToggleButton) findViewById(R.id.toggle_skewed_fav);
-        checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
-        checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
-        checkOld = (RadioButton) findViewById(R.id.checkOld);
-        checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
+        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
+        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
+        checkOld = (CheckBox) findViewById(R.id.checkOld);
+        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
 
         Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
         Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);

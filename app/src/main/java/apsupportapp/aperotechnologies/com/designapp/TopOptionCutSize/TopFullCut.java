@@ -153,9 +153,9 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
                                     if (TopOptionList.size() == 0) {
                                         TopOptionListView.setVisibility(View.GONE);
-
-
                                     }
+                                    return;
+
                                 } else if (response.length() == limit) {
 
 

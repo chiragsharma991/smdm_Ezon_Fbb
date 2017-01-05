@@ -22,6 +22,10 @@ public class FreshnessIndexDetails {
     String planClass;
     String brandName;
     String brandplanClass;
+    double upcomingGrpCount;
+    double oldGrpCount;
+    double previousGrpCount;
+
 
 
     public String getBrandName() {
@@ -153,4 +157,27 @@ public class FreshnessIndexDetails {
     }
 
 
+    public double getUpcomingGrpCount() {
+        return upcomingGrpCount;
+    }
+
+    public void setUpcomingGrpCount(double upcomingGrpCount) {
+        this.upcomingGrpCount = upcomingGrpCount;
+    }
+
+    public double getOldGrpCount() {
+        return oldGrpCount;
+    }
+
+    public void setOldGrpCount(double oldGrpCount) {
+        this.oldGrpCount = oldGrpCount;
+    }
+
+    public double getPreviousGrpCount() {
+        return previousGrpCount;
+    }
+
+    public void setPreviousGrpCount(double previousGrpCount) {
+        this.previousGrpCount = previousGrpCount;
+    }
 }

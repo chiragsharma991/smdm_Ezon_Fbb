@@ -158,6 +158,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                                     if (StockAgeingList.size() == 0) {
                                         StockAgListView.setVisibility(View.GONE);
                                     }
+                                    return;
 
                                 } else if (response.length() == limit) {
                                     Log.e(TAG, "Top eql limit");

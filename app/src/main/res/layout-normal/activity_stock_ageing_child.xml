@@ -78,6 +78,7 @@
                         android:text="Buy One Get One"
                         android:textColor="@color/bg_store_code_text"
                         android:textSize="@dimen/smdm_inflator_title_normal"
+                        android:textStyle="bold"
 
 
                         />

@@ -31,13 +31,18 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/Login"
+            />
+
         <activity
             android:name=".DashBoardActivity"
             android:label="@string/title_activity_dash_board"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
         <activity
             android:name=".AboutUsActivity"
             android:screenOrientation="portrait"

@@ -67,7 +67,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
+    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
@@ -83,6 +83,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private ToggleButton Toggle_floor_fav;
     private String corefashion = "Fashion";
     String floorcheckSeasonGpVal = null;
+    private RadioButton Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +147,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                                         floorListView.setVisibility(View.GONE);
 
                                     }
+                                    return;
 
                                 } else if (response.length() == limit) {
                                     Log.e(TAG, "Top eql limit");
@@ -300,16 +302,24 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         floor_fashion = (RadioButton) findViewById(R.id.floor_fashion);
         floor_fashion.toggle();
         Toggle_floor_fav = (ToggleButton) findViewById(R.id.toggle_floor_fav);
-        checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
-        checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
-        checkOld = (RadioButton) findViewById(R.id.checkOld);
 
-        checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
+        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
+        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
+        checkOld = (CheckBox) findViewById(R.id.checkOld);
+        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
+
+        Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
+        Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);
+        Skewed_checkSTD = (RadioButton) findViewById(R.id.skewed_checkSTD);
 
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
+
+        Skewed_checkWTD.setOnClickListener(this);
+        Skewed_checkL4W.setOnClickListener(this);
+        Skewed_checkSTD.setOnClickListener(this);
 
 
         qfDoneLayout.setOnClickListener(this);

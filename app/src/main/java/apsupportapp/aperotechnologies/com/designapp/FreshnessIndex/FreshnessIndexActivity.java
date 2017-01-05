@@ -73,6 +73,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     int count = 0;
     RequestQueue queue;
     String FreshnessIndexValue;
+    //test git 5/1/17
     Context context;
     String fromWhere, fIndexFirstVisibleItem, freshnessIndex_ClickedVal, fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand;
     PieChart pieChart;
@@ -150,6 +151,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            llfreshnessIndex.setVisibility(View.GONE);
+
         }
 
         // previous
@@ -708,13 +711,15 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Freshness Index Details Class: ", " " + response);
+                        Log.i(TAG,"Freshness Index Details Class: " + response);
                         Log.i("response length", "" + response.length());
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                //Reusable_Functions.hDialog();
+                                //Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+
+                                return;
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
 
@@ -743,8 +748,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             }
 
                         } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                           // Reusable_Functions.hDialog();
+                            //Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -752,8 +757,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        //Reusable_Functions.hDialog();
+                       //Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        //llfreshnessIndex.setVisibility(View.GONE);
+
                         error.printStackTrace();
                     }
                 }
@@ -1313,6 +1320,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                llfreshnessIndex.setVisibility(View.VISIBLE);
+
 
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
@@ -1468,6 +1477,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            llfreshnessIndex.setVisibility(View.VISIBLE);
+
                             e.printStackTrace();
                         }
                     }
@@ -1477,6 +1488,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        llfreshnessIndex.setVisibility(View.VISIBLE);
+
                         error.printStackTrace();
                     }
                 }
@@ -1528,12 +1541,16 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void onResponse(JSONArray response) {
                        // Log.i(TAG,"Freshness Index Details Class: " + response);
-                        Log.i(TAG,"response length"+ response.length());
+                        Log.i(TAG,"response length and"+ response.length()+"\n"+response);
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                llfreshnessIndex.setVisibility(View.GONE);
+
+                                return;
+
                             } else {
                                 freshnessIndexDetail = new FreshnessIndexDetails();
                                 for (i = 0; i < response.length(); i++) {
@@ -1558,16 +1575,18 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 freshnessIndexDetail.setStkOnhandQtyCount(100);
                                 freshnessIndexDetail.setStkGitQty(freshnessIndexDetail.getStkGitQty());
 
-                                freshnessIndexDetail.setUpcomingGroupCount(freshnessIndexDetail.getUpcomingGroupCount());
-                                freshnessIndexDetail.setOldGroupCount(freshnessIndexDetail.getOldGroupCount());
-                                freshnessIndexDetail.setPreviousGroupCount(freshnessIndexDetail.getPreviousGroupCount());
-                                freshnessIndexDetail.setCurrentGroupCount(freshnessIndexDetail.getCurrentGroupCount());
+                                //getCurrentGroupCount is not avaible in Api
+
+                                freshnessIndexDetail.setUpcomingGroupCount(freshnessIndexDetail.getUpcomingGrpCount());
+                                freshnessIndexDetail.setOldGroupCount(freshnessIndexDetail.getOldGrpCount());
+                                freshnessIndexDetail.setPreviousGroupCount(freshnessIndexDetail.getPreviousGrpCount());
+                                freshnessIndexDetail.setCurrentGroupCount(0.0);
 
 
 
 
 
-                                Log.e(TAG, "soh: "+freshnessIndexDetail.getUpcomingGroupCount()+" "+freshnessIndexDetail.getOldGroupCount()+" "+freshnessIndexDetail.getPreviousGroupCount() );
+                                Log.e(TAG, "Graph values: "+freshnessIndexDetail.getUpcomingGrpCount()+" "+freshnessIndexDetail.getOldGrpCount()+" "+freshnessIndexDetail.getPreviousGrpCount()+freshnessIndexDetail.getCurrentGroupCount() );
 
                             }
 
@@ -1621,6 +1640,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                            llfreshnessIndex.setVisibility(View.GONE);
+
                             e.printStackTrace();
                         }
                     }
@@ -1630,6 +1651,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found", Toast.LENGTH_SHORT).show();
+                        llfreshnessIndex.setVisibility(View.GONE);
                         error.printStackTrace();
 
                     }

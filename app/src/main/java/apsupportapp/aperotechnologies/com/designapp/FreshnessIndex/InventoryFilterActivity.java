@@ -108,8 +108,8 @@ public class InventoryFilterActivity extends Activity {
                    // startActivity(intent);
                     finish();
                 } else if (getIntent().getStringExtra("checkfrom").equals("optionEfficiency")) {
-                    Intent intent = new Intent(InventoryFilterActivity.this, OptionEfficiencyActivity.class);
-                    startActivity(intent);
+                   // Intent intent = new Intent(InventoryFilterActivity.this, OptionEfficiencyActivity.class);
+                   // startActivity(intent);
                     finish();
                 } else if (getIntent().getStringExtra("checkfrom").equals("skewedSize")) {
                   //  Intent intent = new Intent(InventoryFilterActivity.this, SkewedSizesActivity.class);
