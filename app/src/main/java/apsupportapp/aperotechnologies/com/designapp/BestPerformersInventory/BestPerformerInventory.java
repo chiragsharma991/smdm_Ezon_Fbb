@@ -35,6 +35,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Network;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -47,6 +48,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -167,7 +170,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                 // fashion select with season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+
+                 url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
             }
             Log.e(TAG, "URL" + url);
 
@@ -276,10 +280,49 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                             BestInventListview.removeFooterView(footer);
                             BestInventListview.setTag("FOOTER_REMOVE");
                             BestInventListview.setVisibility(View.GONE);
+                     //       Log.e(TAG, "onErrorResponse  " + error.getMessage().toString());
+
+
+                            String json = null;
+
+                            NetworkResponse response = error.networkResponse;
+                            if(response != null && response.data != null){
+                                switch(response.statusCode){
+                                    case 400:
+                                        json = new String(response.data);
+                                        json = trimMessage(json, "message");
+                                        if(json != null) displayMessage(json);
+                                        break;
+                                }
+                                //Additional cases
+                            }
+
 
 
                             error.printStackTrace();
                         }
+
+                        public String trimMessage(String json, String key){
+                            String trimmedString = null;
+
+                            try{
+                                JSONObject obj = new JSONObject(json);
+                                trimmedString = obj.getString(key);
+                            } catch(JSONException e){
+                                e.printStackTrace();
+                                return null;
+                            }
+
+                            return trimmedString;
+                        }
+
+                        //Somewhere that has access to a context
+                        public void displayMessage(String toastString){
+                            Toast.makeText(context, toastString, Toast.LENGTH_LONG).show();
+                        }
+
+
+
                     }
 
             ) {
@@ -886,7 +929,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "6 ";
+                orderbycol = "6";
                 BestInventList.clear();
                 Log.e(TAG, "salesUpopUp pop up else");
                 Reusable_Functions.sDialog(this, "Loading.......");

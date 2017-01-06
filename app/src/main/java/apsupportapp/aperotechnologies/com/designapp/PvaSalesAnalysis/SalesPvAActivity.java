@@ -101,6 +101,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     TextView txtpvahDeptName, txtpvahCategory, txtpvahPlanClass, txtpvahBrand;
     String pvaVal;
     int currentIndex;
+    //git testing 05/01/2017
     boolean flag = false;
     View footer;
 
