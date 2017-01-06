@@ -474,7 +474,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/quick_filter_menu">
+    <include layout="@layout/oe_quick_filter_menu">
 
     </include>
 

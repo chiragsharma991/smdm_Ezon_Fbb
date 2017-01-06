@@ -104,46 +104,51 @@ public class OptionEfficiencyAdapter extends BaseAdapter {
         if (fromWhere.equals("Department")) {
 
             viewHolder.oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanDept());
+
+            viewHolder.oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
             viewHolder.oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
             viewHolder.oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
-            viewHolder.oe_txtOption.setText(""+Math.round(optionEfficiencyDetails.getOptionCount()));
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
 
         } else if (fromWhere.equals("Category")) {
 
 
             viewHolder.oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanCategory());
+
+            viewHolder.oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
             viewHolder.oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
             viewHolder.oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
-            viewHolder.oe_txtOption.setText(""+Math.round(optionEfficiencyDetails.getOptionCount()));
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
 
         } else if (fromWhere.equals("Plan Class")) {
 
             viewHolder.oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanClass());
+
+            viewHolder.oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
             viewHolder.oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
             viewHolder.oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
-            viewHolder.oe_txtOption.setText(""+Math.round(optionEfficiencyDetails.getOptionCount()));
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
 
 
         } else if (fromWhere.equals("Brand")) {
 
 
             viewHolder.oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandName());
+
+            viewHolder.oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
             viewHolder.oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
             viewHolder.oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
-            viewHolder.oe_txtOption.setText(""+Math.round(optionEfficiencyDetails.getOptionCount()));
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
 
         } else if (fromWhere.equals("Brand Plan Class")) {
 
 
             viewHolder.oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandplanClass());
+
+            viewHolder.oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
             viewHolder.oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
             viewHolder.oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
-            viewHolder.oe_txtOption.setText(""+Math.round(optionEfficiencyDetails.getOptionCount()));
-            viewHolder.oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
         }
 
 

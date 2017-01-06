@@ -280,9 +280,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                     VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
                     visualAssort1.setLikeDislikeFlg("0");
                 }
-
-
-
             }
 
             @Override
@@ -357,8 +354,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 //        cardStack.setLeftImage(R.id.left_image);
 //        cardStack.setRightImage(R.id.right_image);
 
-
-    }
+ }
 
     private void requestdisplayVisualAssortment() {
 

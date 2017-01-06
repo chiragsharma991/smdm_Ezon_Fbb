@@ -80,7 +80,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     int offsetvalue = 0, limit = 100;
     int count = 0;
     RequestQueue queue;
-    //test git 5/1/17
+    //test git 6/1/17
     String OptionefficiencyValue, seasonGroup;
     Context context;
     String fromWhere, oe_FirstVisibleItem, oe_ClickedVal, oe_PlanDept, oe_Category, oe_PlanClass;
@@ -107,7 +107,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private String qfButton = "OFF";
     private String TAG = "OptionEfficiencyActivity";
     private boolean CutCount = false, fullSize = false, fullCut = false;
-    private String view = "STD";
+   // private String view = "STD";
     private boolean coreSelection=false;
 
     @Override
@@ -183,15 +183,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         quickFilter_baseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkTimeValueIs == null && checkValueIs == null) {
+                if (checkTimeValueIs == null ) {
                     checkCurrent.setChecked(true);
                     checkPrevious.setChecked(false);
                     checkOld.setChecked(false);
                     checkUpcoming.setChecked(false);
-
-                    Skewed_checkWTD.setChecked(false);
-                    Skewed_checkL4W.setChecked(false);
-                    Skewed_checkSTD.setChecked(true);
+//
+//                    Skewed_checkWTD.setChecked(false);
+//                    Skewed_checkL4W.setChecked(false);
+//                    Skewed_checkSTD.setChecked(true);
 
 
                 } else {
@@ -232,30 +232,30 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             break;
 
                     }
-                    switch (checkTimeValueIs.toString()) {
-                        case "CheckWTD":
-                            Skewed_checkWTD.setChecked(true);
-                            Skewed_checkL4W.setChecked(false);
-                            Skewed_checkSTD.setChecked(false);
-                            Log.i(TAG, "CheckWTD is checked");
-                            break;
-                        case "CheckL4W":
-                            Skewed_checkWTD.setChecked(false);
-                            Skewed_checkL4W.setChecked(true);
-                            Skewed_checkSTD.setChecked(false);
-                            Log.i(TAG, "CheckL4W is checked");
-                            break;
-                        case "CheckSTD":
-                            Skewed_checkWTD.setChecked(false);
-                            Skewed_checkL4W.setChecked(false);
-                            Skewed_checkSTD.setChecked(true);
-                            Log.i(TAG, "CheckSTD is checked");
-                            break;
-                        default:
-                            break;
-
-
-                    }
+//                    switch (checkTimeValueIs.toString()) {
+//                        case "CheckWTD":
+//                            Skewed_checkWTD.setChecked(true);
+//                            Skewed_checkL4W.setChecked(false);
+//                            Skewed_checkSTD.setChecked(false);
+//                            Log.i(TAG, "CheckWTD is checked");
+//                            break;
+//                        case "CheckL4W":
+//                            Skewed_checkWTD.setChecked(false);
+//                            Skewed_checkL4W.setChecked(true);
+//                            Skewed_checkSTD.setChecked(false);
+//                            Log.i(TAG, "CheckL4W is checked");
+//                            break;
+//                        case "CheckSTD":
+//                            Skewed_checkWTD.setChecked(false);
+//                            Skewed_checkL4W.setChecked(false);
+//                            Skewed_checkSTD.setChecked(true);
+//                            Log.i(TAG, "CheckSTD is checked");
+//                            break;
+//                        default:
+//                            break;
+//
+//
+//                    }
                 }
 
 
@@ -583,6 +583,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             llayoutOEfficiency.setVisibility(View.GONE);
                             fromWhere = "Category";
                             level = 2;
+                            seasonGroup = "Current";
                             if (Reusable_Functions.chkStatus(context)) {
                                 Reusable_Functions.hDialog();
                                 Reusable_Functions.sDialog(context, "Loading data...");
@@ -613,6 +614,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 Log.e("txtClicked category --", "" + oe_ClickedVal);
                                 fromWhere = "Plan Class";
                                 level = 3;
+                                seasonGroup = "Current";
                                 if (Reusable_Functions.chkStatus(context)) {
                                     Reusable_Functions.hDialog();
                                     Reusable_Functions.sDialog(context, "Loading data...");
@@ -642,6 +644,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanClass();
                                 Log.e("txtClicked plan class---", "" + oe_ClickedVal);
                                 fromWhere = "Brand";
+                                seasonGroup = "Current";
                                 level = 4;
                                 if (Reusable_Functions.chkStatus(context)) {
                                     Reusable_Functions.hDialog();
@@ -675,6 +678,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getBrandName();
                                 Log.e("txtSalesClickedValue3---", "" + oe_ClickedVal);
                                 fromWhere = "Brand Plan Class";
+                                seasonGroup = "Current";
                                 level = 5;
                                 if (Reusable_Functions.chkStatus(context)) {
                                     Reusable_Functions.hDialog();
@@ -701,91 +705,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         });
     }
 
-    private void requestHearderAPI() {
-
-        String url;
-        if (coreSelection) {
-
-            //core selection without season params
-             url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&view=" + view;
-
-
-        } else {
-
-            // fashion select with season params
-             url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&seasongroup=" + seasonGroup+ "&view=" + view;
-
-        }
-
-
-        Log.e(TAG, "Url" + url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Header Response" + response);
-                        Log.e("Length-----", "" + response.length());
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                               // Reusable_Functions.hDialog();
-
-                                return;
-                            } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    optionEfficiencyDetail = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
-                                    headerList.add(optionEfficiencyDetail);
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-
-                                requestHearderAPI();
-
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    optionEfficiencyDetail = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
-                                    headerList.add(optionEfficiencyDetail);
-                                }
-                            }
-                            Log.e(TAG, "headerList : " + headerList.get(0).getFullCutCount());
-
-
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                          //  Toast.makeText(context, "catch no data found in header" , Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                      //  Reusable_Functions.hDialog();
-                      //  Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
-
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-
-
-    }
 
 
     private void initializeUI() {
@@ -824,19 +743,19 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
         checkOld = (CheckBox) findViewById(R.id.checkOld);
         checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
-
-        Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
-        Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);
-        Skewed_checkSTD = (RadioButton) findViewById(R.id.skewed_checkSTD);
+//
+//        Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
+//        Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);
+//        Skewed_checkSTD = (RadioButton) findViewById(R.id.skewed_checkSTD);
 
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
-
-        Skewed_checkWTD.setOnClickListener(this);
-        Skewed_checkL4W.setOnClickListener(this);
-        Skewed_checkSTD.setOnClickListener(this);
+//
+//        Skewed_checkWTD.setOnClickListener(this);
+//        Skewed_checkL4W.setOnClickListener(this);
+//        Skewed_checkSTD.setOnClickListener(this);
 
         qfDoneLayout.setOnClickListener(this);
         quickFilter_BorderLayout.setOnClickListener(this);
@@ -849,23 +768,23 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                 if (Reusable_Functions.chkStatus(context)) {
 
-
-                    if (Skewed_checkWTD.isChecked()) {
-                        checkTimeValueIs = "CheckWTD";
-                        view = "WTD";
-
-
-                    } else if (Skewed_checkL4W.isChecked()) {
-                        checkTimeValueIs = "CheckL4W";
-                        view = "L4W";
-
-
-                    } else if (Skewed_checkSTD.isChecked()) {
-                        checkTimeValueIs = "CheckSTD";
-                        view = "STD";
-
-
-                    }
+//
+//                    if (Skewed_checkWTD.isChecked()) {
+//                        checkTimeValueIs = "CheckWTD";
+//                        view = "WTD";
+//
+//
+//                    } else if (Skewed_checkL4W.isChecked()) {
+//                        checkTimeValueIs = "CheckL4W";
+//                        view = "L4W";
+//
+//
+//                    } else if (Skewed_checkSTD.isChecked()) {
+//                        checkTimeValueIs = "CheckSTD";
+//                        view = "STD";
+//
+//
+//                    }
 
 
                     //season group
@@ -933,21 +852,21 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 break;
 
 
-            case R.id.skewed_checkWTD:
-                Skewed_checkWTD.setChecked(true);
-                Skewed_checkL4W.setChecked(false);
-                Skewed_checkSTD.setChecked(false);
-                break;
-            case R.id.skewed_checkL4W:
-                Skewed_checkL4W.setChecked(true);
-                Skewed_checkSTD.setChecked(false);
-                Skewed_checkWTD.setChecked(false);
-                break;
-            case R.id.skewed_checkSTD:
-                Skewed_checkSTD.setChecked(true);
-                Skewed_checkL4W.setChecked(false);
-                Skewed_checkWTD.setChecked(false);
-                break;
+//            case R.id.skewed_checkWTD:
+//                Skewed_checkWTD.setChecked(true);
+//                Skewed_checkL4W.setChecked(false);
+//                Skewed_checkSTD.setChecked(false);
+//                break;
+//            case R.id.skewed_checkL4W:
+//                Skewed_checkL4W.setChecked(true);
+//                Skewed_checkSTD.setChecked(false);
+//                Skewed_checkWTD.setChecked(false);
+//                break;
+//            case R.id.skewed_checkSTD:
+//                Skewed_checkSTD.setChecked(true);
+//                Skewed_checkL4W.setChecked(false);
+//                Skewed_checkWTD.setChecked(false);
+//                break;
 
         }
     }
@@ -1052,7 +971,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
-                    coreSelection = true;
+                   // coreSelection = true;
 
                     requestHearderAPI();
                     requestOptionEfficiencyDetails();
@@ -1077,7 +996,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
-                    coreSelection = false;
+                  //  coreSelection = false;
 
                     requestHearderAPI();
                     requestOptionEfficiencyDetails();
@@ -1095,23 +1014,105 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     //----------------------------API Declaration---------------------------//
+
+
+    private void requestHearderAPI() {
+
+        String url = "";
+//        if (coreSelection)
+//        {
+//            //core selection without season params
+//            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&view=" + view;
+//        } else
+//        {
+            // fashion select with season params
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&seasongroup=" + seasonGroup;
+       // }
+        Log.e(TAG, "Url" + url);
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e(TAG, "Header Response" + response);
+                        Log.e("Length-----", "" + response.length());
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                // Reusable_Functions.hDialog();
+
+                                return;
+                            } else if (response.length() == limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    optionEfficiencyHeader = gson.fromJson(response.get(i).toString(), OptionEfficiencyHeader.class);
+                                    oeHeaderList.add(optionEfficiencyHeader);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+
+                                requestHearderAPI();
+
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    optionEfficiencyHeader = gson.fromJson(response.get(i).toString(), OptionEfficiencyHeader.class);
+                                    oeHeaderList.add(optionEfficiencyHeader);                                }
+                            }
+                            // Log.e(TAG, "headerList : " + headerList.get(0).getFullCutCount());
+
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            //  Toast.makeText(context, "catch no data found in header" , Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //  Reusable_Functions.hDialog();
+                        //  Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+
+
+    }
+
     // API 1.33
     private void requestOptionEfficiencyDetails() {
 
 
         String fIdetails;
-        if (coreSelection) {
-
-            //core selection without season params
-            fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+ "&view=" + view;
-
-
-        } else {
+//        if (coreSelection) {
+//
+//            //core selection without season params
+//            fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+ "&view=" + view;
+//
+//
+//        } else {
 
             // fashion select with season params
-             fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit+ "&view=" + view;
+             fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit;
 
-        }
+      //  }
 
         Log.e(TAG, "requestOptionEfficiencyDetails" + fIdetails);
 
@@ -1149,20 +1150,28 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                 if (oe_txtHeaderClass.getText().toString().equals("Department")) {
                                     optionEfficiencyDetails.setPlanDept("All");
+
+                                    Log.e(TAG,"Full Size Count"+optionEfficiencyHeader.getSohCountFullSize());
+
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
                                     optionEfficiencyDetails.setPlanCategory("All");
+
+
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Plan Class")) {
                                     optionEfficiencyDetails.setPlanClass("All");
+
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
                                     optionEfficiencyDetails.setBrandName("All");
+
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class")) {
                                     optionEfficiencyDetails.setBrandplanClass("All");
+
                                 }
 
-                                optionEfficiencyDetails.setOptionCount(optionEfficiencyDetail.getOptionCount());
-                                optionEfficiencyDetails.setOptionCountByStore(optionEfficiencyDetail.getFullSizeCount());
-                                optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyDetail.getStkOnhandQty());
-                                optionEfficiencyDetails.setStkOnhandQtyCount(optionEfficiencyDetail.getStkOnhandQtyCount());
+                                optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
+                                optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
+                                optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
+                                optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
                                 optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
 
 
@@ -1174,6 +1183,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
 //                                llayoutOEfficiency.setVisibility(View.VISIBLE);
 //                                Reusable_Functions.hDialog();
+                                oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
@@ -1219,7 +1229,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void requestHeaderPieChart() {
-        String url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
         Log.e(TAG,"Url" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -1375,7 +1385,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
         String oe_category_listurl = " ";
 
-        oe_category_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        oe_category_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
         Log.e("url", " " + oe_category_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_category_listurl,
@@ -1461,7 +1471,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     // For Plan Class on click of Category Val
     private void request_OE_PlanClassList(final String deptName, final String category) {
 
-        String oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        String oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
         Log.e("url", " " + oe_planclass_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_planclass_listurl,
@@ -1543,7 +1553,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     // For Brand on click of Plan Class Val
     private void request_OE_BrandList(String deptName, String category, final String planclass) {
 
-        String oe_brand_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        String oe_brand_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
         Log.e("url", " " + oe_brand_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brand_listurl,
@@ -1628,7 +1638,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     // For BrandPlanCLass on click of Brand Val
     private void request_OE_BrandPlanList(String deptName, String category, String plan_class, final String brandnm) {
 
-        String oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + oe_PlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        String oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + oe_PlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
         Log.e("url", " " + oe_brandplan_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brandplan_listurl,
@@ -1719,15 +1729,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
 
         if (oe_txtHeaderClass.getText().toString().equals("Department")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
         } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
         } else if (oe_txtHeaderClass.getText().toString().equals("Plan Class")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
         } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
         } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
         }
         Log.e(TAG, "Url" + url);
 

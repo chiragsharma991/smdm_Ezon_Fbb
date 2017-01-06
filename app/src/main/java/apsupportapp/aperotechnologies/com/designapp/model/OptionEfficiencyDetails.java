@@ -9,7 +9,7 @@ public class OptionEfficiencyDetails {
     String storeCode;
     String storeDescription;
     String planDept;
-    double optionCount;
+    int optionCount;
     double optionCountByStore;
     double stkOnhandQty;
     double stkOnhandQtyCount;
@@ -83,11 +83,11 @@ public class OptionEfficiencyDetails {
         this.planDept = planDept;
     }
 
-    public double getOptionCount() {
+    public int getOptionCount() {
         return optionCount;
     }
 
-    public void setOptionCount(double optionCount) {
+    public void setOptionCount(int optionCount) {
         this.optionCount = optionCount;
     }
 

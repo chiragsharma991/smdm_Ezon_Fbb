@@ -26,6 +26,15 @@ public class FreshnessIndexDetails {
     double oldGrpCount;
     double previousGrpCount;
 
+    public double getSohCurrentGrpCount() {
+        return sohCurrentGrpCount;
+    }
+
+    public void setSohCurrentGrpCount(double sohCurrentGrpCount) {
+        this.sohCurrentGrpCount = sohCurrentGrpCount;
+    }
+
+    double sohCurrentGrpCount;
 
 
     public String getBrandName() {

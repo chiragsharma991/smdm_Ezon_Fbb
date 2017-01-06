@@ -73,7 +73,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     int count = 0;
     RequestQueue queue;
     String FreshnessIndexValue;
-    //test git 5/1/17
+    //test git 6/1/17
     Context context;
     String fromWhere, fIndexFirstVisibleItem, freshnessIndex_ClickedVal, fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand;
     PieChart pieChart;
@@ -1079,65 +1079,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 txtfIndexDeptName.setText(FreshnessIndexValue);
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
 
-//
-//                                ArrayList<Entry> entries = new ArrayList<>();
-//                                for (FreshnessIndexDetails fresh : freshnessIndexDetailsArrayList) {
-//
-//                                        upcoming = (float) fresh.getUpcomingGroupCount();
-//                                        oldgroup = (float) fresh.getOldGroupCount();
-//                                        previousgroup = (float) fresh.getPreviousGroupCount();
-//                                        currentgroup = (float) fresh.getCurrentGroupCount();
-//
-//
-//                                    Log.e("Values", "" + fresh.getUpcomingGroupCount() + "\t" + fresh.getOldGroupCount() + "\t" + fresh.getPreviousGroupCount() + "\t" + fresh.getCurrentGroupCount());
-//
-//                                }
-//                                ArrayList<Integer> colors = new ArrayList<>();
-//                                colors.add(Color.parseColor("#8857a6"));
-//                                colors.add(Color.parseColor("#b33d2f"));
-//                                colors.add(Color.parseColor("#386e34"));
-//                                colors.add(Color.parseColor("#308fab"));
-//                                ArrayList<String> labels = new ArrayList<>();
-////                            if(currentgroup > 0.0f)
-////                            {
-//                                labels.add("Current");
-//                                entries.add(new Entry(currentgroup, 0));
-////                            }
-////                            if(previousgroup > 0.0f)
-////                            {
-//                                labels.add("Previous");
-//                                entries.add(new Entry(previousgroup, 1));
-//                                // }
-////                            if(oldgroup > 0.0f)
-////                            {
-//                                labels.add("Old");
-//                                entries.add(new Entry(oldgroup, 2));
-//                                //}
-////                            if(upcoming > 0.0f)
-////                            {
-//                                labels.add("Upcoming");
-//                                entries.add(new Entry(upcoming, 3));
-//                                //}
-//
-//                                PieDataSet dataset = new PieDataSet(entries, "");
-//                                dataset.setColors(colors);
-//                                dataset.setSliceSpace(3);
-//
-//                                dataset.setSelectionShift(5);
-//                                pieData = new PieData(labels, dataset);
-//                                //pieData.setValueFormatter(new MyValueFormatter());
-//                                pieData.setValueTextSize(10f);
-//                                pieData.setValueTextColor(Color.WHITE);
-//                                pieChart.setData(pieData);
-//                                pieChart.animateXY(4000, 4000);
-//                                pieChart.setDescription("");
-//
-//                                Legend l = pieChart.getLegend();
-//                                l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-//                                l.setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
-//                                l.setEnabled(true);
-//                                llfreshnessIndex.setVisibility(View.VISIBLE);
-//                                Reusable_Functions.hDialog();
                                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(listViewFIndex.getFirstVisiblePosition()).getBrandplanClass().toString();
                                 offsetvalue = 0;
                                 limit = 100;
@@ -1181,10 +1122,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     }
 
     // Pie Chart val changed on Scroll of list view
-    private void requestFIndexPieChart() {
+    private void requestFIndexPieChart()
+    {
         Log.e(TAG,"Department onsroll api" + fIndexFirstVisibleItem);
       //  Log.e("Header Class", txtFIndexClass.getText().toString());
-        String url = "";
+        String url = " ";
         txtNoChart.setVisibility(View.GONE);
 
         if(fIndexFirstVisibleItem.equals("All"))
@@ -1196,7 +1138,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     upcoming = (float) freshnessIndexDetail.getUpcomingGroupCount();
                     oldgroup = (float) freshnessIndexDetail.getOldGroupCount();
                     previousgroup = (float) freshnessIndexDetail.getPreviousGroupCount();
-                    currentgroup = (float) freshnessIndexDetail.getCurrentGroupCount();
+                    currentgroup = (float) freshnessIndexDetail.getSohCurrentGrpCount();
                     Log.e(TAG,"Values-------"+ upcoming + "\t" + oldgroup + "\t" + previousgroup + "\t" + currentgroup);
 
 
@@ -1286,11 +1228,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             llfreshnessIndex.setVisibility(View.VISIBLE);
             Reusable_Functions.hDialog();
             return;
-
         }
-
-
-
 
         if (txtFIndexClass.getText().toString().equals("Department")) {
             url = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&dept=" + fIndexFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
@@ -1301,7 +1239,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         } else if (txtFIndexClass.getText().toString().equals("Brand")) {
             url = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + fIndexFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
         } else if (txtFIndexClass.getText().toString().equals("Brand Plan Class")) {
-
             url = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brandclass=" + fIndexFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
         }
         Log.e(TAG,"requestFIndexPieChart Url  "+ url);
@@ -1493,7 +1430,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -1580,13 +1516,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 freshnessIndexDetail.setUpcomingGroupCount(freshnessIndexDetail.getUpcomingGrpCount());
                                 freshnessIndexDetail.setOldGroupCount(freshnessIndexDetail.getOldGrpCount());
                                 freshnessIndexDetail.setPreviousGroupCount(freshnessIndexDetail.getPreviousGrpCount());
-                                freshnessIndexDetail.setCurrentGroupCount(0.0);
+                                freshnessIndexDetail.setSohCurrentGrpCount(freshnessIndexDetail.getSohCurrentGrpCount());
 
-
-
-
-
-                                Log.e(TAG, "Graph values: "+freshnessIndexDetail.getUpcomingGrpCount()+" "+freshnessIndexDetail.getOldGrpCount()+" "+freshnessIndexDetail.getPreviousGrpCount()+freshnessIndexDetail.getCurrentGroupCount() );
+                               Log.e(TAG, "Graph values: "+freshnessIndexDetail.getUpcomingGrpCount()+" "+freshnessIndexDetail.getOldGrpCount()+" "+freshnessIndexDetail.getPreviousGrpCount()+freshnessIndexDetail.getSohCurrentGrpCount() );
 
                             }
 
