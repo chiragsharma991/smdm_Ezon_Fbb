@@ -13,6 +13,7 @@ import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
+
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -37,8 +38,11 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -48,6 +52,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
+import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
@@ -55,7 +60,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
     TextView Skewed_txtStoreCode, Skewed_txtStoreName;
     RelativeLayout Skewed_BtnBack, sk_imgfilter, sk_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout;
-    RunningPromoListDisplay SkewedSizeListDisplay;
+    SkewedSizeListDisplay skewedSizeListDisplay;
     private SharedPreferences sharedPreferences;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     RadioButton Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
@@ -70,7 +75,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private RequestQueue queue;
     private Gson gson;
     ListView SkewedSizeListview;
-    ArrayList<RunningPromoListDisplay> SkewedSizeList;
+    ArrayList<SkewedSizeListDisplay> SkewedSizeList;
     private int focusposition = 0;
     private boolean userScrolled;
     private SkewedSizeAdapter SkewedSizeAdapter;
@@ -95,7 +100,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         initalise();
         gson = new Gson();
         SkewedSizeListview.setVisibility(View.VISIBLE);
-        SkewedSizeList = new ArrayList<RunningPromoListDisplay>();
+        SkewedSizeList = new ArrayList<SkewedSizeListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -105,7 +110,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         queue = new RequestQueue(cache, network);
         queue.start();
         SkewedSizeListview.setTag("FOOTER");
-
         Reusable_Functions.sDialog(this, "Loading.......");
         requestRunningPromoApi();
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
@@ -117,6 +121,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
 
     }
+
+
 
     private void requestRunningPromoApi() {
 
@@ -164,8 +170,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                     Log.e(TAG, "Top eql limit");
                                     for (int i = 0; i < response.length(); i++) {
 
-                                        SkewedSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                        SkewedSizeList.add(SkewedSizeListDisplay);
+                                        skewedSizeListDisplay = gson.fromJson(response.get(i).toString(), SkewedSizeListDisplay.class);
+                                        SkewedSizeList.add(skewedSizeListDisplay);
 
                                     }
                                     offsetvalue = offsetvalue + 10;
@@ -178,8 +184,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                     Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++) {
 
-                                        SkewedSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                        SkewedSizeList.add(SkewedSizeListDisplay);
+                                        skewedSizeListDisplay = gson.fromJson(response.get(i).toString(), SkewedSizeListDisplay.class);
+                                        SkewedSizeList.add(skewedSizeListDisplay);
                                         offsetvalue = offsetvalue + response.length();
                                         top = top + response.length();
 
@@ -207,7 +213,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                 }
 
                                 Skewed_txtStoreCode.setText(SkewedSizeList.get(0).getStoreCode());
-                                Skewed_txtStoreName.setText(SkewedSizeList.get(0).getStoreDesc());
+                                Skewed_txtStoreName.setText(SkewedSizeList.get(0).getStoreDescription());
 
                                 Reusable_Functions.hDialog();
 

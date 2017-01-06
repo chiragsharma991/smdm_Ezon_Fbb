@@ -5,6 +5,7 @@ package apsupportapp.aperotechnologies.com.designapp.SkewedSize;
  */
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,12 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
-
-
+import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 
 
 /**
@@ -33,17 +35,18 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 
 public class SkewedSizeAdapter extends BaseAdapter {
 
-    private ArrayList<RunningPromoListDisplay> arrayList;
+    private ArrayList<SkewedSizeListDisplay> arrayList;
 
     //private List mStringFilterList;
 
     private LayoutInflater mInflater;
     Context context;
     private int Position;
+    String TAG="SkewedSizesActivity";
 
     //private ValueFilter valueFilter;
 
-    public SkewedSizeAdapter(ArrayList<RunningPromoListDisplay> arrayList, Context context) {
+    public SkewedSizeAdapter(ArrayList<SkewedSizeListDisplay> arrayList, Context context) {
 
         // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
@@ -106,10 +109,12 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
         }
         holder.skewed_option.setText(arrayList.get(position).getOption());
-        holder.skewed_SOHU.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
-        holder.skewed_fwc.setText("" +Math.round(arrayList.get(position).getFwdWeekCover()));
-        holder.Skewed_ProdAttribute.setText(arrayList.get(position).getProdAttribute4());
-        holder.Skewed_SOH.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
+       // holder.skewed_SOHU.setText(calculation(arrayList.get(position).getStkOnhandQty()));
+        holder.skewed_fwc.setText(arrayList.get(position).getFwdWeekCover());
+       // holder.Skewed_ProdAttribute.setText(arrayList.get(position).getProdAttribute4());
+       // holder.Skewed_SOH.setText((arrayList.get(position).getStkOnhandQty()));
+        Log.e(TAG, "getView: "+calculation(arrayList.get(position).getStkOnhandQty()));
+
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
             Picasso.with(this.context).
@@ -141,6 +146,29 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
 
         return convertView;
+    }
+
+
+    private int calculation(String value) {
+        List<String> items = Arrays.asList(value.split("\\s*,\\s*"));
+        int stkOnhandQty []=new int[items.size()];
+        for (int i = 0; i <items.size(); i++) {
+            stkOnhandQty[i]=Integer.parseInt(items.get(i));
+        }
+        return sumof(stkOnhandQty);
+
+
+    }
+
+    private int sumof(int[] stkOnhandQty )
+    {
+        int sum=0;
+        for(int y : stkOnhandQty)
+        {
+            sum += y;
+        }
+        return sum;
+       // Log.e(TAG, "sumof: "+sum );
     }
 
 
