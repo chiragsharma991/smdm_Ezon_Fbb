@@ -300,9 +300,9 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.filterOk:
                 Toast.makeText(this, "Selected Dept : "+searchDept, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SalesFilter.this,SalesAnalysisActivity.class);
-                intent.putExtra("selectedDept",searchDept);
-                startActivity(intent);
+                //Intent intent = new Intent(SalesFilter.this,SalesAnalysisActivity.class);
+              //  intent.putExtra("selectedDept",searchDept);
+              //  startActivity(intent);
                 finish();
                 break;
 //            case R.id.btnSeatchList:
@@ -313,8 +313,8 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
 
     private void filterBack() {
         if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
-             Intent intent = new Intent(SalesFilter.this, SalesAnalysisActivity.class);
-             startActivity(intent);
+            // Intent intent = new Intent(SalesFilter.this, SalesAnalysisActivity.class);
+            // startActivity(intent);
             finish();
         }
 //        else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {

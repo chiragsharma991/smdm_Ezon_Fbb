@@ -26,6 +26,7 @@ public class RunningPromoListDisplay {
     String prodAttribute4;
     String prodLevel6Desc;
 
+
     public String getArticleDesc() {
         return articleDesc;
     }
@@ -63,8 +64,7 @@ public class RunningPromoListDisplay {
     }
 
     public double getSellThruUnits() {
-        return sellThruUnits;
-    }
+        return sellThruUnits;}
 
     public void setSellThruUnits(double sellThruUnits) {
         this.sellThruUnits = sellThruUnits;
@@ -77,6 +77,7 @@ public class RunningPromoListDisplay {
     String articleDesc;
     String prodAttribute2;
 
+
     public double getStkOnhandQty() {
         return stkOnhandQty;
     }
@@ -86,7 +87,17 @@ public class RunningPromoListDisplay {
     int saleTotQty;
     int stkGitQty;
     double sellThruUnits;
+    double sellthruUnits;
     double fwdWeekCover;
+
+    public double getSellthruUnits() {
+        return sellthruUnits;
+    }
+
+    public void setSellthruUnits(double sellthruUnits) {
+        this.sellthruUnits = sellthruUnits;
+    }
+
     double ros;
 
     public double getSellthruUnitsZonal() {

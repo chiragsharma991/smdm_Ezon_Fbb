@@ -90,7 +90,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     int checkTargetROSVal = 7;
     private SeekBar TargetSeek;
     private TextView targetMax;
-    private int setValue;
+    private int setValue=7;
     private boolean coreSelection = false;
 
     @Override
@@ -909,14 +909,14 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupCurrent() {
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
+            //Reusable_Functions.hDialog();
+           // Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             seasongroup = "Current";
             targetStockList.clear();
-            requestTargetStockExcepApi();
+           // requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -924,14 +924,14 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupPrevious() {
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
+            //Reusable_Functions.hDialog();
+           // Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             seasongroup = "Previous";
             targetStockList.clear();
-            requestTargetStockExcepApi();
+            //requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -939,14 +939,14 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupOld() {
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
+          //  Reusable_Functions.hDialog();
+            //Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             seasongroup = "Old";
             targetStockList.clear();
-            requestTargetStockExcepApi();
+            //requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -954,14 +954,14 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupUpcoming() {
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
+           // Reusable_Functions.hDialog();
+           // Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             seasongroup = "Upcoming";
             targetStockList.clear();
-            requestTargetStockExcepApi();
+            //requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -970,14 +970,14 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupWTD() {
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
+          //  Reusable_Functions.hDialog();
+          //  Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             view = "WTD";
             targetStockList.clear();
-            requestTargetStockExcepApi();
+           // requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -986,14 +986,14 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupL4W() {
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
+           // Reusable_Functions.hDialog();
+          //  Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             view = "L4W";
             targetStockList.clear();
-            requestTargetStockExcepApi();
+          //  requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1002,14 +1002,14 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupYTD() {
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
+           // Reusable_Functions.hDialog();
+          //  Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             view = "STD";
             targetStockList.clear();
-            requestTargetStockExcepApi();
+           // requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
