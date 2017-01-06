@@ -628,12 +628,17 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 if (pvaFirstVisibleItem.equals("All")) {
 
+                                    lineChart.setPinchZoom(false);
+                                    lineChart.setScaleEnabled(false);
                                     requestSalesWeekChart();
 
                                 } else {
                                     //relChartLayout.setVisibility(View.GONE);
                                     salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                     //lineChart.invalidate();
+                                    lineChart.setPinchZoom(false);
+                                    lineChart.setTouchEnabled(false);
+lineChart.setScaleEnabled(false);
                                     requestPvAChartAPI();
 
                                 }
@@ -1129,6 +1134,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 lineChart.setTouchEnabled(true);
                                 lineChart.setScaleYEnabled(true);
                                 lineChart.setScaleXEnabled(true);
+
                                 //lineChart.setDoubleTapToZoomEnabled(false);
 
 

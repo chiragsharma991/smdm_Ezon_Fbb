@@ -7,7 +7,7 @@ package apsupportapp.aperotechnologies.com.designapp.model;
 public class OptionEfficiencyHeader {
     String storeCode;
     String storeDescription;
-    double optionCount;
+    int optionCount;
     double fullSizeOption;
 
     public double getFullSizeCount() {
@@ -74,11 +74,11 @@ public class OptionEfficiencyHeader {
         this.fullSizeOption = fullSizeOption;
     }
 
-    public double getOptionCount() {
+    public int getOptionCount() {
         return optionCount;
     }
 
-    public void setOptionCount(double optionCount) {
+    public void setOptionCount(int optionCount) {
         this.optionCount = optionCount;
     }
 
@@ -105,5 +105,15 @@ public class OptionEfficiencyHeader {
     double fullCutCount;
     double stkOnhandQty;
     double stkOnhandQtyCount;
+
+    public double getSohCountFullSize() {
+        return sohCountFullSize;
+    }
+
+    public void setSohCountFullSize(double sohCountFullSize) {
+        this.sohCountFullSize = sohCountFullSize;
+    }
+
+    double sohCountFullSize;
 
 }

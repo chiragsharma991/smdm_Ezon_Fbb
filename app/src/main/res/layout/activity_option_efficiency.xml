@@ -213,7 +213,7 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/oe_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="270dp" />
+                    android:layout_height="210dp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -476,7 +476,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/quick_filter_menu">
+    <include layout="@layout/oe_quick_filter_menu">
 
     </include>
 
