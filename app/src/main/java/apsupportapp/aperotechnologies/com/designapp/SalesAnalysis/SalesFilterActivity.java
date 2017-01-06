@@ -1,18 +1,14 @@
 package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -52,7 +48,7 @@ import apsupportapp.aperotechnologies.com.designapp.SearchActivity1;
 public class SalesFilterActivity extends Activity {
 
     RelativeLayout btnS_Filterback, btnS_Done;
-   static SalesFilterExpandableList listAdapter;
+    SalesFilterExpandableList listAdapter;
     public static ExpandableListView pfilter_list;
     ArrayList<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
@@ -60,11 +56,7 @@ public class SalesFilterActivity extends Activity {
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
-    Context context;
-    //git testing 05/01/2017
-
-    String TAG = "SalesFilterActivity";
-    static List<String> subdept, subCategory, subPlanClass, subBrandnm, subBrandPlanClass;
+    List<String> subdept, subCategory, subPlanClass, subBrandnm, subBrandPlanClass;
     public static String plandeptName;
     EditText editTextSearch;
 
@@ -78,13 +70,14 @@ public class SalesFilterActivity extends Activity {
         setContentView(R.layout.activity_salespva_filter);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         Log.e("came here", "");
-        context = this;
+
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+
 
         subdept = new ArrayList<String>();
         subCategory = new ArrayList<String>();
@@ -96,21 +89,35 @@ public class SalesFilterActivity extends Activity {
         btnS_Done = (RelativeLayout) findViewById(R.id.imageBtnSalesFilterDone);
 
         pfilter_list = (ExpandableListView) findViewById(R.id.expandableListView_subdept);
-        pfilter_list.setTextFilterEnabled(true);
         //noinspection deprecation,deprecation
         pfilter_list.setDivider(getResources().getDrawable(R.color.grey));
         pfilter_list.setDividerHeight(2);
         prepareListData();
+        pfilter_list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
         listAdapter = new SalesFilterExpandableList(this, listDataHeader, listDataChild, pfilter_list, listAdapter);
 
-       // pfilter_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
+        pfilter_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
         // setting list adapter
         pfilter_list.setAdapter(listAdapter);
 
-        //listAdapter.notifyDataSetChanged();
+        listAdapter.notifyDataSetChanged();
 
+        btnS_Filterback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+                    Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+                    Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
 
         pfilter_list.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
@@ -132,74 +139,26 @@ public class SalesFilterActivity extends Activity {
             }
         });
 
-//        pfilter_list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        //Edit Text Search
+       // editTextSearch = (EditText)findViewById(R.id.editSearchSales);
+//
+//
+
+//        editTextSearch.addTextChangedListener(new TextWatcher() {
 //            @Override
-//            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//                int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition, childPosition));
-//                parent.setItemChecked(index, true);
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 //
+//            }
 //
-//                return false;
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
 //            }
 //        });
-
-      //  Edit Text Search
-        editTextSearch = (EditText)findViewById(R.id.editSearchSales);
-
-
-
-        editTextSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String searchData = editTextSearch.getText().toString();
-               // editTextSearch.clearFocus();
-                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
-                listAdapter.filterData(editTextSearch.getText().toString());
-               // listAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-
-            }
-        });
-
-
-        btnS_Filterback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
-                    Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
-                    Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-
-
-
-        btnS_Done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(SalesFilterActivity.this,SalesAnalysisActivity.class);
-                intent.putExtra("selectedDept",SalesFilterExpandableList.txtClickedVal);
-                Log.e(TAG,"txtClickedVal"+SalesFilterExpandableList.txtClickedVal);
-                startActivity(intent);
-            }
-        });
 
 
     }
@@ -242,6 +201,7 @@ public class SalesFilterActivity extends Activity {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+
                 level = 1;
                 requestDeptAPI(offsetvalue, limit);
             }
@@ -249,6 +209,7 @@ public class SalesFilterActivity extends Activity {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+
                 level = 2;
                 requestCategoryAPI(offsetvalue, limit);
             }
@@ -256,6 +217,7 @@ public class SalesFilterActivity extends Activity {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+
                 level = 3;
                 requestPlanClassAPI(offsetvalue, limit);
             }
@@ -263,6 +225,7 @@ public class SalesFilterActivity extends Activity {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+
                 level = 4;
                 requestBrandNameAPI(offsetvalue, limit);
             }
@@ -270,6 +233,7 @@ public class SalesFilterActivity extends Activity {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+
                 level = 5;
                 requestBrandPlanClassAPI(offsetvalue, limit);
             }
@@ -321,7 +285,7 @@ public class SalesFilterActivity extends Activity {
 
                                 }
                                 //Collections.sort(subdept);
-                            //   listDataChild.put(listDataHeader.get(0), subdept);
+                            //    listDataChild.put(listDataHeader.get(0), subdept);
 
                                 // pfilter_list.expandGroup(0);
                                 Reusable_Functions.hDialog();
@@ -393,7 +357,7 @@ public class SalesFilterActivity extends Activity {
 
                                 }
                                 //Collections.sort(subdept);
-                             //   listDataChild.put(listDataHeader.get(1), subCategory);
+                              //  listDataChild.put(listDataHeader.get(1), subCategory);
                                 // pfilter_list.expandGroup(1);
                                 Reusable_Functions.hDialog();
                             }
@@ -447,6 +411,7 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String planClass = productName1.getString("planClass");
+
                                     subPlanClass.add(planClass);
                                 }
 
@@ -463,7 +428,7 @@ public class SalesFilterActivity extends Activity {
 
                                 }
                                 //Collections.sort(subdept);
-                             //   listDataChild.put(listDataHeader.get(2), subPlanClass);
+                              //  listDataChild.put(listDataHeader.get(2), subPlanClass);
                                 //  pfilter_list.expandGroup(2);
                                 Reusable_Functions.hDialog();
                             }
@@ -531,9 +496,11 @@ public class SalesFilterActivity extends Activity {
 
                                     String brandName = productName1.getString("brandName");
                                     subBrandnm.add(brandName);
+
+
                                 }
                                 //Collections.sort(subdept);
-                              //  listDataChild.put(listDataHeader.get(3), subBrandnm);
+                               // listDataChild.put(listDataHeader.get(3), subBrandnm);
                                 // pfilter_list.expandGroup(3);
                                 Reusable_Functions.hDialog();
                             }
@@ -604,7 +571,7 @@ public class SalesFilterActivity extends Activity {
                                     subBrandPlanClass.add(brandClass);
                                 }
                                 //Collections.sort(subdept);
-                           //     listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
+                             //   listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
                                 //   pfilter_list.expandGroup(4);
                                 Reusable_Functions.hDialog();
                             }
@@ -649,5 +616,6 @@ public class SalesFilterActivity extends Activity {
             startActivity(intent);
             finish();
         }
+
     }
 }

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -69,7 +70,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  */
 public class OptionEfficiencyActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
-    RadioButton oe_btnCore, oe_btnFashion;
+    private RadioButton oe_btnCore, oe_btnFashion,Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
     public String OEfficiency_SegmentClick;
     ArrayList<OptionEfficiencyDetails> optionEfficiencyDetailsArrayList, optionArrayList, headerList;
     ArrayList<OptionEfficiencyHeader> oeHeaderList;
@@ -79,11 +80,13 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     int offsetvalue = 0, limit = 100;
     int count = 0;
     RequestQueue queue;
+    //test git 5/1/17
     String OptionefficiencyValue, seasonGroup;
     Context context;
     String fromWhere, oe_FirstVisibleItem, oe_ClickedVal, oe_PlanDept, oe_Category, oe_PlanClass;
     PieChart oe_pieChart;
     ListView oe_listView;
+    private String checkValueIs = null, checkTimeValueIs = null;
     int focusposition, oe_FirstPositionValue;
     LinearLayout llayoutOEfficiency, oe_llayouthierarchy;
     SegmentedGroup optionEfficiency_segmentedGrp;
@@ -98,12 +101,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     float fullSizeCount = 0.0f, fullCutCount = 0.0f, partCutCount = 0.0f;
 
     ArrayList<PieEntry> entries;
-    RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
+    private CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     private String checkSeasonGpVal = null;
     boolean flag = false;
     private String qfButton = "OFF";
     private String TAG = "OptionEfficiencyActivity";
     private boolean CutCount = false, fullSize = false, fullCut = false;
+    private String view = "STD";
+    private boolean coreSelection=false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -146,6 +151,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            llayoutOEfficiency.setVisibility(View.GONE);
+
         }
 
         //onClick of Back Button
@@ -162,7 +169,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 Intent intent = new Intent(OptionEfficiencyActivity.this, InventoryFilterActivity.class);
                 intent.putExtra("checkfrom", "optionEfficiency");
                 startActivity(intent);
-                finish();
+               // finish();
             }
         });
 
@@ -176,56 +183,82 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         quickFilter_baseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                if (checkSeasonGpVal == null ) {
-//                    checkCurrent.setChecked(false);
-//                    checkPrevious.setChecked(false);
-//                    checkOld.setChecked(false);
-//                    checkUpcoming.setChecked(false);
-//
-//
-//                } else {
-//                    switch (checkSeasonGpVal.toString()) {
-//                        case "Current":
-//                            checkCurrent.setChecked(true);
-//                            checkPrevious.setChecked(false);
-//                            checkOld.setChecked(false);
-//                            checkUpcoming.setChecked(false);
-//
-//                            Log.e("Current checked", "" + checkCurrent.isChecked());
-//                            break;
-//
-//                        case "Previous":
-//                            checkUpcoming.setChecked(false);
-//                            checkPrevious.setChecked(true);
-//                            checkCurrent.setChecked(false);
-//                            checkOld.setChecked(false);
-//                            Log.e("Previous checked", "" + checkPrevious.isChecked());
-//                            break;
-//                        case "Old":
-//                            checkOld.setChecked(true);
-//                            checkCurrent.setChecked(false);
-//                            checkPrevious.setChecked(false);
-//                            checkUpcoming.setChecked(false);
-//                            Log.e("Old checked", "" + checkOld.isChecked());
-//                            break;
-//                        case "Upcoming":
-//                            checkUpcoming.setChecked(true);
-//                            checkCurrent.setChecked(false);
-//                            checkOld.setChecked(false);
-//                            checkPrevious.setChecked(false);
-//                            Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
-//                            break;
-//                    }
-//
-//                }
-//                quickFilterPopup.setVisibility(View.GONE);
-                if (qfButton.equals("OFF")) {
+                if (checkTimeValueIs == null && checkValueIs == null) {
                     checkCurrent.setChecked(true);
-                    checkUpcoming.setChecked(false);
-                    checkOld.setChecked(false);
                     checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+
+                    Skewed_checkWTD.setChecked(false);
+                    Skewed_checkL4W.setChecked(false);
+                    Skewed_checkSTD.setChecked(true);
+
+
+                } else {
+
+//in this checkvalueIs  save the previous done condition params and call to true or false
+
+
+                    switch (checkValueIs.toString()) {
+                        case "BestCheckCurrent":
+                            checkCurrent.setChecked(true);
+                            checkPrevious.setChecked(false);
+                            checkOld.setChecked(false);
+                            checkUpcoming.setChecked(false);
+                            Log.i(TAG, "BestCheckCurrent is checked");
+                            break;
+                        case "BestCheckPrevious":
+                            checkCurrent.setChecked(false);
+                            checkPrevious.setChecked(true);
+                            checkOld.setChecked(false);
+                            checkUpcoming.setChecked(false);
+                            Log.i(TAG, "BestCheckPrevious is checked");
+                            break;
+                        case "BestCheckOld":
+                            checkCurrent.setChecked(false);
+                            checkPrevious.setChecked(false);
+                            checkOld.setChecked(true);
+                            checkUpcoming.setChecked(false);
+                            Log.i(TAG, "BestCheckOld is checked");
+                            break;
+                        case "BestCheckUpcoming":
+                            checkCurrent.setChecked(false);
+                            checkPrevious.setChecked(false);
+                            checkOld.setChecked(false);
+                            checkUpcoming.setChecked(true);
+                            Log.i(TAG, "BestCheckUpcoming is checked");
+                            break;
+                        default:
+                            break;
+
+                    }
+                    switch (checkTimeValueIs.toString()) {
+                        case "CheckWTD":
+                            Skewed_checkWTD.setChecked(true);
+                            Skewed_checkL4W.setChecked(false);
+                            Skewed_checkSTD.setChecked(false);
+                            Log.i(TAG, "CheckWTD is checked");
+                            break;
+                        case "CheckL4W":
+                            Skewed_checkWTD.setChecked(false);
+                            Skewed_checkL4W.setChecked(true);
+                            Skewed_checkSTD.setChecked(false);
+                            Log.i(TAG, "CheckL4W is checked");
+                            break;
+                        case "CheckSTD":
+                            Skewed_checkWTD.setChecked(false);
+                            Skewed_checkL4W.setChecked(false);
+                            Skewed_checkSTD.setChecked(true);
+                            Log.i(TAG, "CheckSTD is checked");
+                            break;
+                        default:
+                            break;
+
+
+                    }
                 }
+
+
                 quickFilterPopup.setVisibility(View.GONE);
 
             }
@@ -669,19 +702,35 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void requestHearderAPI() {
-        String url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
+
+        String url;
+        if (coreSelection) {
+
+            //core selection without season params
+             url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&view=" + view;
+
+
+        } else {
+
+            // fashion select with season params
+             url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&seasongroup=" + seasonGroup+ "&view=" + view;
+
+        }
+
+
         Log.e(TAG, "Url" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "Header Response" + response);
+                        Log.i(TAG, "Header Response" + response);
                         Log.e("Length-----", "" + response.length());
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                               // Reusable_Functions.hDialog();
+
+                                return;
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -705,7 +754,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "catch no data found in header" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(context, "catch no data found in header" , Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -713,8 +762,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                      //  Reusable_Functions.hDialog();
+                      //  Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+
                         error.printStackTrace();
                     }
                 }
@@ -770,14 +820,24 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         optionArrayList = new ArrayList<OptionEfficiencyDetails>();
         headerList = new ArrayList<OptionEfficiencyDetails>();
         oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
-        checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
-        checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
-        checkOld = (RadioButton) findViewById(R.id.checkOld);
-        checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
+        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
+        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
+        checkOld = (CheckBox) findViewById(R.id.checkOld);
+        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
+
+        Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
+        Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);
+        Skewed_checkSTD = (RadioButton) findViewById(R.id.skewed_checkSTD);
+
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
+
+        Skewed_checkWTD.setOnClickListener(this);
+        Skewed_checkL4W.setOnClickListener(this);
+        Skewed_checkSTD.setOnClickListener(this);
+
         qfDoneLayout.setOnClickListener(this);
         quickFilter_BorderLayout.setOnClickListener(this);
     }
@@ -787,67 +847,66 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         switch (v.getId()) {
             case R.id.qfDoneLayout:
 
-//                if (checkCurrent.isChecked()) {
-//                    popupCurrent();
-//                    checkSeasonGpVal = "Current";
-//
-//                    quickFilterPopup.setVisibility(View.GONE);
-//
-//                } else if (checkPrevious.isChecked()) {
-//                    popupPrevious();
-//                    checkSeasonGpVal = "Previous";
-//
-//                    quickFilterPopup.setVisibility(View.GONE);
-//
-//                } else if (checkOld.isChecked()) {
-//                    popupOld();
-//                    checkSeasonGpVal = "Old";
-//
-//                    quickFilterPopup.setVisibility(View.GONE);
-//
-//                } else if (checkUpcoming.isChecked()) {
-//                    popupUpcoming();
-//                    checkSeasonGpVal = "Upcoming";
-//
-//                    quickFilterPopup.setVisibility(View.GONE);
-//                } else {
-//                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
-//
-//                }
-                qfButton = "ON";
-                if (checkCurrent.isChecked()) {
-                    popupCurrent();
-                    checkPrevious.setChecked(false);
-                    checkOld.setChecked(false);
-                    checkUpcoming.setChecked(false);
-                    quickFilterPopup.setVisibility(View.GONE);
+                if (Reusable_Functions.chkStatus(context)) {
 
-                } else if (checkPrevious.isChecked()) {
-                    popupPrevious();
-                    checkCurrent.setChecked(false);
-                    checkOld.setChecked(false);
-                    checkUpcoming.setChecked(false);
-                    quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (checkOld.isChecked()) {
-                    popupOld();
-                    checkPrevious.setChecked(false);
-                    checkCurrent.setChecked(false);
-                    checkUpcoming.setChecked(false);
-                    quickFilterPopup.setVisibility(View.GONE);
+                    if (Skewed_checkWTD.isChecked()) {
+                        checkTimeValueIs = "CheckWTD";
+                        view = "WTD";
 
-                } else if (checkUpcoming.isChecked()) {
-                    popupUpcoming();
-                    checkCurrent.setChecked(false);
-                    checkPrevious.setChecked(false);
-                    checkOld.setChecked(false);
-                    quickFilterPopup.setVisibility(View.GONE);
 
+                    } else if (Skewed_checkL4W.isChecked()) {
+                        checkTimeValueIs = "CheckL4W";
+                        view = "L4W";
+
+
+                    } else if (Skewed_checkSTD.isChecked()) {
+                        checkTimeValueIs = "CheckSTD";
+                        view = "STD";
+
+
+                    }
+
+
+                    //season group
+
+                    if (checkCurrent.isChecked()) {
+                        checkValueIs = "BestCheckCurrent";
+                        popupCurrent();
+
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    } else if (checkPrevious.isChecked()) {
+                        checkValueIs = "BestCheckPrevious";
+                        popupPrevious();
+
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    } else if (checkOld.isChecked()) {
+                        checkValueIs = "BestCheckOld";
+                        popupOld();
+
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    } else if (checkUpcoming.isChecked()) {
+                        checkValueIs = "BestCheckUpcoming";
+                        popupUpcoming();
+
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    } else {
+
+                        quickFilterPopup.setVisibility(View.GONE);
+
+                    }
                 } else {
-                    Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
                 }
+
                 break;
+
+
             case R.id.checkCurrent:
                 checkCurrent.setChecked(true);
                 checkPrevious.setChecked(false);
@@ -873,6 +932,23 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 checkPrevious.setChecked(false);
                 break;
 
+
+            case R.id.skewed_checkWTD:
+                Skewed_checkWTD.setChecked(true);
+                Skewed_checkL4W.setChecked(false);
+                Skewed_checkSTD.setChecked(false);
+                break;
+            case R.id.skewed_checkL4W:
+                Skewed_checkL4W.setChecked(true);
+                Skewed_checkSTD.setChecked(false);
+                Skewed_checkWTD.setChecked(false);
+                break;
+            case R.id.skewed_checkSTD:
+                Skewed_checkSTD.setChecked(true);
+                Skewed_checkL4W.setChecked(false);
+                Skewed_checkWTD.setChecked(false);
+                break;
+
         }
     }
 
@@ -890,8 +966,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             offsetvalue = 0;
             limit = 100;
             count = 0;
-            level = 1;
+           // level = 1;
             seasonGroup = "Current";
+            requestHearderAPI();
             requestOptionEfficiencyDetails();
 
         } else {
@@ -909,10 +986,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             offsetvalue = 0;
             limit = 100;
             count = 0;
-            level = 1;
+           // level = 1;
             seasonGroup = "Previous";
+            requestHearderAPI();
             requestOptionEfficiencyDetails();
-
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -929,10 +1006,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             offsetvalue = 0;
             limit = 100;
             count = 0;
-            level = 1;
+           // level = 1;
             seasonGroup = "Old";
+            requestHearderAPI();
             requestOptionEfficiencyDetails();
-
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -948,10 +1025,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             offsetvalue = 0;
             limit = 100;
             count = 0;
-            level = 1;
+          //  level = 1;
             seasonGroup = "Upcoming";
+            requestHearderAPI();
             requestOptionEfficiencyDetails();
-
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -975,6 +1052,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
+                    coreSelection = true;
+
                     requestHearderAPI();
                     requestOptionEfficiencyDetails();
 
@@ -998,6 +1077,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
+                    coreSelection = false;
+
                     requestHearderAPI();
                     requestOptionEfficiencyDetails();
 
@@ -1017,7 +1098,21 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     // API 1.33
     private void requestOptionEfficiencyDetails() {
 
-        String fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit;
+
+        String fIdetails;
+        if (coreSelection) {
+
+            //core selection without season params
+            fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+ "&view=" + view;
+
+
+        } else {
+
+            // fashion select with season params
+             fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit+ "&view=" + view;
+
+        }
+
         Log.e(TAG, "requestOptionEfficiencyDetails" + fIdetails);
 
 
@@ -1032,6 +1127,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                llayoutOEfficiency.setVisibility(View.GONE);
+                                return;
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
 
@@ -1065,7 +1162,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionEfficiencyDetails.setOptionCount(optionEfficiencyDetail.getOptionCount());
                                 optionEfficiencyDetails.setOptionCountByStore(optionEfficiencyDetail.getFullSizeCount());
                                 optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyDetail.getStkOnhandQty());
-                                optionEfficiencyDetails.setStkOnhandQtyCount(100);
+                                optionEfficiencyDetails.setStkOnhandQtyCount(optionEfficiencyDetail.getStkOnhandQtyCount());
                                 optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
 
 
@@ -1077,16 +1174,18 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
 //                                llayoutOEfficiency.setVisibility(View.VISIBLE);
 //                                Reusable_Functions.hDialog();
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            requestHeaderPieChart();
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestHeaderPieChart();
                             }
 
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "catch:no data found in Details " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "catch:no data found in Details ", Toast.LENGTH_SHORT).show();
+                            llayoutOEfficiency.setVisibility(View.GONE);
+
                             e.printStackTrace();
                         }
                     }
@@ -1095,7 +1194,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                        llayoutOEfficiency.setVisibility(View.GONE);
+
                         error.printStackTrace();
                     }
                 }
@@ -1119,7 +1220,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     private void requestHeaderPieChart() {
         String url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("Url", "" + url);
+        Log.e(TAG,"Url" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1130,17 +1231,21 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no chart data found", Toast.LENGTH_SHORT).show();
+                                llayoutOEfficiency.setVisibility(View.VISIBLE);
+
+
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
                                     optionEfficiencyHeader = gson.fromJson(response.get(i).toString(), OptionEfficiencyHeader.class);
                                     oeHeaderList.add(optionEfficiencyHeader);
+
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
 
-                               requestHeaderPieChart();
+                                requestHeaderPieChart();
 
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1151,11 +1256,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 entries = new ArrayList<PieEntry>();
                                 for (OptionEfficiencyHeader optionEfficiency : oeHeaderList) {
 
-                                        fullSizeCount = (float) optionEfficiency.getFullSizeCount();
-                                        partCutCount = (float) optionEfficiency.getPartCutCount();
-                                        fullCutCount = (float) optionEfficiency.getFullCutCount();
+                                    fullSizeCount = (float) optionEfficiency.getFullSizeCount();
+                                    partCutCount = (float) optionEfficiency.getPartCutCount();
+                                    fullCutCount = (float) optionEfficiency.getFullCutCount();
 
-                                        Log.e(TAG, "Values-------" + fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
+                                    Log.e(TAG, "Values-------" + fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
 
                                 }
                                 ArrayList<Integer> colors = new ArrayList<>();
@@ -1192,7 +1297,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                 }
 
-                             PieDataSet   dataset = new PieDataSet(entries, "");
+                                PieDataSet   dataset = new PieDataSet(entries, "");
                                 dataset.setColors(colors);
                                 dataset.setValueLineWidth(0.7f);
                                 dataset.setValueTextColor(Color.BLACK);
@@ -1228,7 +1333,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "catch no data found in Graphheader" , Toast.LENGTH_SHORT).show();
+                            llayoutOEfficiency.setVisibility(View.VISIBLE);
+
                             e.printStackTrace();
                         }
                     }
@@ -1237,7 +1344,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                        llayoutOEfficiency.setVisibility(View.VISIBLE);
+
                         error.printStackTrace();
                     }
                 }
@@ -1608,6 +1717,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         String url = "";
         txtNoChart.setVisibility(View.GONE);
 
+
         if (oe_txtHeaderClass.getText().toString().equals("Department")) {
             url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
         } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
@@ -1631,7 +1741,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found in DetailPieChart", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
@@ -1663,35 +1773,35 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
 
-                                        Log.e("Values-------", "" + fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
+                                        Log.e(TAG,"Values-------" + fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
 
                                     } else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanCategory())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
 
-                                        Log.e("Values-------", "" + fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
+                                        Log.e(TAG,"Values-------"+ fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
 
                                     } else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanClass())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
 
-                                        Log.e("Values-------", "" + fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
+                                        Log.e(TAG,"Values-------"+ fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
 
                                     } else if (oe_FirstVisibleItem.equals(optionEfficiency.getBrandName())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
 
-                                        Log.e("Values-------", "" + fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
+                                        Log.e(TAG,"Values-------" + fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
 
                                     } else if (oe_FirstVisibleItem.equals(optionEfficiency.getBrandplanClass())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
 
-                                        Log.e("Values-------", "" + fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
+                                        Log.e(TAG,"Values-------"+ fullSizeCount + "\t" + partCutCount + "\t" + fullCutCount);
 
                                     }
 
@@ -1730,7 +1840,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                 }
 
-                             PieDataSet   dataset = new PieDataSet(entries, "");
+                                PieDataSet   dataset = new PieDataSet(entries, "");
                                 dataset.setColors(colors);
                                 dataset.setValueLineWidth(0.7f);
                                 dataset.setValueTextColor(Color.BLACK);
@@ -1762,7 +1872,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "catch no data found in GraphDetail" , Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1771,7 +1881,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }

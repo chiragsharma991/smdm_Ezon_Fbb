@@ -59,7 +59,7 @@
                     android:textSize="@dimen/smdm_header_title_normal"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/topBest_BtnBack"
-                    android:layout_marginLeft="@dimen/smdm_header_title_normal"
+                    android:layout_marginLeft="20dp"
                     android:textColor="@color/divider_salescard1"
                     android:id="@+id/toolbar_title" />
 
@@ -84,6 +84,8 @@
 
 
             </RelativeLayout>
+
+
         </android.support.v7.widget.Toolbar>
 
 
@@ -91,7 +93,7 @@
             android:layout_marginTop="18dp"
             android:layout_marginLeft="10dp"
             android:id="@+id/storelayout"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -110,7 +112,7 @@
                 android:layout_marginLeft="3dp"
                 android:id="@+id/top_txtStoreCode"
                 android:layout_width="wrap_content"
-                android:textColor="#000000"
+                android:textColor="@color/bg_store_code_text"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/top_storecode"
                 android:textSize="@dimen/smdm_store_title_normal"
@@ -122,9 +124,26 @@
                 android:id="@+id/top_txtStoreName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/smdm_store_title_normal"
                 />
+
+            <RelativeLayout
+                android:id="@+id/sk_quickFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="0dp"
+                >
+
+                <Button
+                    android:layout_width="16dp"
+                    android:layout_height="29dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/quick_filter"
+                    android:clickable="false" />
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -205,6 +224,7 @@
     </RelativeLayout>
 
 
+    <include layout="@layout/topfullcut_quick_filter_menu"/>
 
 
 

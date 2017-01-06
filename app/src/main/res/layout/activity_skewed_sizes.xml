@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:id="@+id/skewedListView"
             android:dividerHeight="1dp"
-
+            android:layout_marginTop="10dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true">
 
@@ -72,16 +72,13 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/quick_filter_menu"
-        android:id="@+id/include" />
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearToolbar"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/include">
+        android:layout_alignParentStart="true">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -208,6 +205,7 @@
         </RelativeLayout>
 
     </LinearLayout>
+    <include layout="@layout/quick_filter_menu"/>
 
 </RelativeLayout>
 

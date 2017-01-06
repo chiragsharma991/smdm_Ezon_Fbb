@@ -57,7 +57,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     RelativeLayout Skewed_BtnBack, sk_imgfilter, sk_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout;
     RunningPromoListDisplay SkewedSizeListDisplay;
     private SharedPreferences sharedPreferences;
-    RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming,Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
+    CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
+    RadioButton Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
     String userId, bearertoken;
     String TAG = "SkewedSizesActivity";
     private int count = 0;
@@ -105,8 +106,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         queue.start();
         SkewedSizeListview.setTag("FOOTER");
 
-        requestRunningPromoApi();
         Reusable_Functions.sDialog(this, "Loading.......");
+        requestRunningPromoApi();
         // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
@@ -154,9 +155,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                     footer.setVisibility(View.GONE);
                                     if (SkewedSizeList.size() == 0) {
                                         SkewedSizeListview.setVisibility(View.GONE);
-                                        return;
-
                                     }
+                                    return;
 
                                 } else if (response.length() == limit) {
 
@@ -217,7 +217,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                 SkewedSizeListview.setVisibility(View.GONE);
                                 Log.e(TAG, "catch...Error" + e.toString());
                                 SkewedSizeListview.setVisibility(View.GONE);
-                                Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 SkewedSizeListview.removeFooterView(footer);
                                 SkewedSizeListview.setTag("FOOTER_REMOVE");
@@ -233,6 +233,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                             Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             SkewedSizeListview.removeFooterView(footer);
                             SkewedSizeListview.setTag("FOOTER_REMOVE");
+                            SkewedSizeListview.setVisibility(View.GONE);
+
                             error.printStackTrace();
                         }
                     }
@@ -311,10 +313,10 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
         quickFilterPopup.setVisibility(View.GONE);
         Toggle_skewed_fav = (ToggleButton) findViewById(R.id.toggle_skewed_fav);
-        checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
-        checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
-        checkOld = (RadioButton) findViewById(R.id.checkOld);
-        checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
+        checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
+        checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
+        checkOld = (CheckBox) findViewById(R.id.checkOld);
+        checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
 
         Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
         Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);
@@ -356,11 +358,14 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 Intent intent = new Intent(SkewedSizesActivity.this, InventoryFilterActivity.class);
                 intent.putExtra("checkfrom", "skewedSize");
                 startActivity(intent);
-                finish();
+                //finish();
                 break;
             case R.id.sk_quickFilter:
                 filterFunction();
                 break;
+
+            // base layout selections>>
+
             case R.id.quickFilter_baseLayout:
                 if (qfButton.equals("OFF")&&checkTimeValueIs == null){
                     checkCurrent.setChecked(true);
@@ -374,21 +379,29 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 } else {
                     switch (qfButton.toString()) {
                         case "checkCurrent":
+                            checkCurrent.setChecked(true);
                             checkPrevious.setChecked(false);
                             checkOld.setChecked(false);
                             checkUpcoming.setChecked(false);
+                            break;
                         case "checkPrevious":
+                            checkPrevious.setChecked(true);
                             checkCurrent.setChecked(false);
                             checkOld.setChecked(false);
                             checkUpcoming.setChecked(false);
+                            break;
                         case "checkOld":
+                            checkOld.setChecked(true);
                             checkPrevious.setChecked(false);
                             checkCurrent.setChecked(false);
                             checkUpcoming.setChecked(false);
+                            break;
                         case "checkUpcoming":
+                            checkUpcoming.setChecked(true);
                             checkCurrent.setChecked(false);
                             checkPrevious.setChecked(false);
                             checkOld.setChecked(false);
+                            break;
 
                     }
 
@@ -424,7 +437,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
                 if (Reusable_Functions.chkStatus(context)) {
 
-                    qfButton = "ON";
 
 
                     if(Skewed_checkWTD.isChecked())
@@ -611,18 +623,20 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+        //change core fashion according to chnage in xml layout
+
         switch (checkedId) {
             case R.id.skewed_core:
                 if (Skewed_core.isChecked()) {
                     limit = 10;
                     offsetvalue = 0;
                     top = 10;
-                    corefashion = "Core";
+                    corefashion = "Fashion";
                     SkewedSizeList.clear();
                     SkewedSizeListview.setVisibility(View.GONE);
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(this, "Loading.......");
-                        coreSelection = true;
+                        coreSelection = false;
                         requestRunningPromoApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -636,12 +650,12 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                     limit = 10;
                     offsetvalue = 0;
                     top = 10;
-                    corefashion = "Fashion";
+                    corefashion = "Core";
                     SkewedSizeList.clear();
                     SkewedSizeListview.setVisibility(View.GONE);
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(this, "Loading.......");
-                        coreSelection = false;
+                        coreSelection = true;
                         requestRunningPromoApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();

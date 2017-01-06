@@ -66,7 +66,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    CheckBox  checkAgeing1, checkAgeing2, checkAgeing3;
+    CheckBox checkAgeing1, checkAgeing2, checkAgeing3;
     RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
     Context context = this;
     private RequestQueue queue;
@@ -83,7 +83,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private ToggleButton Toggle_stock_fav;
     private String corefashion = "Fashion";
     String checkSeasonGpVal = null, checkAgeingVal = null;
-    private boolean coreSelection=false;
+    private boolean coreSelection = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,64 +124,68 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
     private void requestStockAgeingApi() {
 
-        String url;
-        if (coreSelection) {
+        if (Reusable_Functions.chkStatus(context)) {
 
-            //core selection without season params
+            String url;
+            if (coreSelection) {
 
-            url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
-        } else {
+                //core selection without season params
 
-            // fashion select with season params
+                url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
+            } else {
 
-            url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
-        }
+                // fashion select with season params
 
-       // String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
+                url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+            }
 
-        Log.e(TAG, "URL" + url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Stock Aging : " + " " + response);
-                        Log.i(TAG, "response" + "" + response.length());
-                        StockAgListView.setVisibility(View.VISIBLE);
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                StockAgListView.removeFooterView(footer);
-                                StockAgListView.setTag("FOOTER_REMOVE");                                 if (StockAgeingList.size() == 0) {
-                                    StockAgListView.setVisibility(View.GONE);
+            // String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
+
+            Log.e(TAG, "URL" + url);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.i(TAG, "Stock Aging : " + " " + response);
+                            Log.i(TAG, "response" + "" + response.length());
+                            StockAgListView.setVisibility(View.VISIBLE);
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    StockAgListView.removeFooterView(footer);
+                                    StockAgListView.setTag("FOOTER_REMOVE");
+                                    if (StockAgeingList.size() == 0) {
+                                        StockAgListView.setVisibility(View.GONE);
+                                    }
+                                    return;
+
+                                } else if (response.length() == limit) {
+                                    Log.e(TAG, "Top eql limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        StockAgeingListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        StockAgeingList.add(StockAgeingListDisplay);
+
+                                    }
+                                    offsetvalue = offsetvalue + 10;
+                                    top = top + 10;
+                                    //  count++;
+
+                                    // requestStockAgeingApi();
+
+                                } else if (response.length() < limit) {
+                                    Log.e(TAG, "promo /= limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        StockAgeingListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        StockAgeingList.add(StockAgeingListDisplay);
+
+                                        offsetvalue = offsetvalue + response.length();
+                                        top = top + response.length();
+
+                                    }
                                 }
-
-                            } else if (response.length() == limit) {
-                                Log.e(TAG, "Top eql limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    StockAgeingListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    StockAgeingList.add(StockAgeingListDisplay);
-
-                                }
-                                offsetvalue = offsetvalue + 10;
-                                top = top + 10;
-                                //  count++;
-
-                                // requestStockAgeingApi();
-
-                            } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    StockAgeingListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
-                                    StockAgeingList.add(StockAgeingListDisplay);
-
-                                    offsetvalue = offsetvalue + response.length();
-                                    top = top + response.length();
-
-                                }
-                            }
 
 
                            /* if(popPromo==10)
@@ -192,98 +196,107 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                             }*/
 
-                            if (lazyScroll.equals("ON")) {
-                                Log.i(TAG, "Set Lazy scroll and notify are ON : ");
+                                if (lazyScroll.equals("ON")) {
+                                    Log.i(TAG, "Set Lazy scroll and notify are ON : ");
+                                    stockAgeingAdapter.notifyDataSetChanged();
+                                    lazyScroll = "OFF";
+                                    footer.setVisibility(View.GONE);
+
+
+                                } else {
+                                    stockAgeingAdapter = new StockAgeingAdapter(StockAgeingList, context);
+                                    StockAgListView.setAdapter(stockAgeingAdapter);
+                                    Log.i(TAG, "Set Adapter calling: ");
+                                    stock_txtStoreCode.setText(StockAgeingList.get(0).getStoreCode());
+                                    stock_txtStoreName.setText(StockAgeingList.get(0).getStoreDescription());
+
+
+                                }
+
+
+                                Reusable_Functions.hDialog();
+                            } catch (Exception e) {
+
+
+                                StockAgeingList.clear();
                                 stockAgeingAdapter.notifyDataSetChanged();
-                                lazyScroll = "OFF";
-                                footer.setVisibility(View.GONE);
-
-
-                            } else {
-                                stockAgeingAdapter = new StockAgeingAdapter(StockAgeingList, context);
-                                StockAgListView.setAdapter(stockAgeingAdapter);
-                                Log.i(TAG, "Set Adapter calling: ");
-                                stock_txtStoreCode.setText(StockAgeingList.get(0).getStoreCode());
-                                stock_txtStoreName.setText(StockAgeingList.get(0).getStoreDescription());
-
-
+                                StockAgListView.setVisibility(View.GONE);
+                                Reusable_Functions.hDialog();
+                                StockAgListView.removeFooterView(footer);
+                                StockAgListView.setTag("FOOTER_REMOVE");
+                                Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                                Log.e(TAG, "catch...Error" + e.toString());
                             }
-
-
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
-                        } catch (Exception e) {
-
-
-                            StockAgeingList.clear();
-                            stockAgeingAdapter.notifyDataSetChanged();
-                            StockAgListView.setVisibility(View.GONE);
-                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             StockAgListView.removeFooterView(footer);
-                            StockAgListView.setTag("FOOTER_REMOVE");                               // Toast.makeText(context, "no data found in catch" + e.toString(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
+                            StockAgListView.setTag("FOOTER_REMOVE");
+                            Log.e(TAG, "onErrorResponse: " + error.getMessage().toString());
+                            StockAgListView.setVisibility(View.GONE);
+
+                            error.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "Server Time Out", Toast.LENGTH_SHORT).show();
-                        StockAgListView.removeFooterView(footer);
-                        StockAgListView.setTag("FOOTER_REMOVE");
-                        Log.e(TAG, "onErrorResponse: "+error.getMessage().toString() );
-                        error.printStackTrace();
-                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
                 }
+            };
+            int socketTimeout = 60000;//5 seconds
 
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
 
 
 //---------------seton Click list listener------------------//
 
-        StockAgListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
+            StockAgListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
 
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE) {
-                    if (StockAgListView.getTag().equals("FOOTER_REMOVE")) {
-                        StockAgListView.addFooterView(footer);
-                        StockAgListView.setTag("FOOTER_ADDED");
+                    if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE && lazyScroll.equals("OFF")) {
+                        if (StockAgListView.getTag().equals("FOOTER_REMOVE")) {
+                            StockAgListView.addFooterView(footer);
+                            StockAgListView.setTag("FOOTER_ADDED");
 
+                        }
+                        footer.setVisibility(View.VISIBLE);
+                        lazyScroll = "ON";
+                        Log.i(TAG, "calling Scroll api: " + FirstVisibleItem + " " + VisibleItemCount + " " + TotalItemCount);
+                        requestStockAgeingApi();
+                        //Reusable_Functions.sDialog(context, "Loading data...");
                     }
-                    footer.setVisibility(View.VISIBLE);
-                    lazyScroll = "ON";
-                    Log.i(TAG, "calling Scroll api: "+FirstVisibleItem+" "+VisibleItemCount+" "+TotalItemCount);
-                    requestStockAgeingApi();
-                    //Reusable_Functions.sDialog(context, "Loading data...");
                 }
-            }
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                this.FirstVisibleItem = firstVisibleItem;
-                this.VisibleItemCount = visibleItemCount;
-                this.TotalItemCount = totalItemCount;
+                    this.FirstVisibleItem = firstVisibleItem;
+                    this.VisibleItemCount = visibleItemCount;
+                    this.TotalItemCount = totalItemCount;
 
-            }
-        });
+                }
+            });
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            Reusable_Functions.hDialog();
+            StockAgListView.removeFooterView(footer);
+            StockAgListView.setTag("FOOTER_REMOVE");
+        }
     }
 
 
@@ -352,7 +365,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 Intent intent1 = new Intent(StockAgeingActivity.this, InventoryFilterActivity.class);
                 intent1.putExtra("checkfrom", "stockAgeing");
                 startActivity(intent1);
-              //  finish();
+                //  finish();
                 break;
             case R.id.sa_quickFilter:
                 quickFilterPopup.setVisibility(View.VISIBLE);
@@ -600,17 +613,17 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         switch (checkedId) {
             case R.id.stock_core:
                 if (stock_core.isChecked()) {
-                        //Reusable_Functions.hDialog();
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Core";
-                        lazyScroll = "OFF";
+                    //Reusable_Functions.hDialog();
+                    limit = 10;
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Core";
+                    lazyScroll = "OFF";
                     if (Reusable_Functions.chkStatus(context)) {
                         StockAgeingList.clear();
                         Reusable_Functions.sDialog(context, "Loading data...");
                         StockAgListView.setVisibility(View.GONE);
-                        coreSelection=true;
+                        coreSelection = true;
                         requestStockAgeingApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -622,16 +635,16 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             case R.id.stock_fashion:
                 if (stock_fashion.isChecked()) {
                     //    Reusable_Functions.hDialog();
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Fashion";
-                        lazyScroll = "OFF";
+                    limit = 10;
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Fashion";
+                    lazyScroll = "OFF";
                     if (Reusable_Functions.chkStatus(context)) {
                         StockAgeingList.clear();
                         StockAgListView.setVisibility(View.GONE);
                         Reusable_Functions.sDialog(context, "Loading data...");
-                        coreSelection=false;
+                        coreSelection = false;
                         requestStockAgeingApi();
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();

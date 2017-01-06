@@ -691,6 +691,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
+
                                     String brandName = productName1.getString("brandName");
                                     brndList.add(brandName);
                                 }
@@ -784,6 +785,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                             brandClsAdapter = new SalesFilterAdapter(brndClsList, getApplicationContext());
                             brandClsListView.setAdapter(brandClsAdapter);
                             brandClsListView.setTextFilterEnabled(true);
+
                             brandClsListView.setOnTouchListener(new View.OnTouchListener() {
                                 // Setting on Touch Listener for handling the touch inside ScrollView
                                 @Override
@@ -833,5 +835,6 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
         super.onBackPressed();
         filterBack();
     }
+
 
 }

@@ -93,7 +93,7 @@
             android:layout_marginTop="18dp"
             android:layout_marginLeft="10dp"
             android:id="@+id/storelayout"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -127,6 +127,23 @@
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/smdm_store_title_large"
                 />
+
+            <RelativeLayout
+                android:id="@+id/sk_quickFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="0dp"
+                >
+
+                <Button
+                    android:layout_width="16dp"
+                    android:layout_height="29dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/quick_filter"
+                    android:clickable="false" />
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -207,6 +224,7 @@
     </RelativeLayout>
 
 
+    <include layout="@layout/topfullcut_quick_filter_menu"/>
 
 
 

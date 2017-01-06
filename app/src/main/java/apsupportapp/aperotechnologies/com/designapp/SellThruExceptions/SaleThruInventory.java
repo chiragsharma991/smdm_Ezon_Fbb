@@ -162,12 +162,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                                     BestInventListview.setTag("FOOTER_REMOVE");
                                     if (BestInventList.size() == 0) {
                                         BestInventListview.setVisibility(View.GONE);
-                                        return;
-
                                     }
-                                    //  BestInvent_fashion.setEnabled(true);
-                                    // BestInvent_core.setEnabled(true);
-
+                                    return;
 
                                 } else if (response.length() == limit) {
 
@@ -254,6 +250,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                             Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             BestInventListview.removeFooterView(footer);
                             BestInventListview.setTag("FOOTER_REMOVE");
+                            BestInventListview.setVisibility(View.GONE);
+
                             error.printStackTrace();
                         }
                     }
@@ -311,6 +309,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             Reusable_Functions.hDialog();
+            BestInventListview.removeFooterView(footer);
+            BestInventListview.setTag("FOOTER_REMOVE");
 
         }
     }

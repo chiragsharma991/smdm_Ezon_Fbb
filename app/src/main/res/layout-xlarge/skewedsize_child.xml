@@ -21,13 +21,24 @@
 
             >
 
+            <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/progressPicaso"
+                android:layout_centerInParent="true"
+                android:background="#0000"
+                android:keepScreenOn="true"
+                android:theme="@style/ProgressBar"
+                >
+            </ProgressBar>
+
             <ImageView
                 android:id="@+id/skewed_image_child"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
                 android:scaleType="fitXY"
-                android:src="@mipmap/placeholder"
 
                 />
 
@@ -76,8 +87,9 @@
                             android:layout_gravity="bottom"
                             android:text="Buy One Get One"
                             android:paddingLeft="10dp"
-                            android:textColor="#000000"
-                            android:textSize="13sp"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_inflator_title_large"
+                            android:textStyle="bold"
 
 
                             />
@@ -118,7 +130,7 @@
                 <TextView
                     android:id="@+id/bst_lineOne_child"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="@dimen/smdm_inflater_divider"
                     android:layout_alignStart="@+id/bst_head_child"
                     android:layout_marginTop="10dp"
                     android:background="@color/divider_salescard" />
@@ -142,7 +154,8 @@
                         android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="SOH(U)"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
@@ -150,7 +163,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        />
 
                     <TextView
                         android:id="@+id/skewed_SOHU"
@@ -160,7 +174,8 @@
                         android:layout_weight="0.7"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        />
 
                 </LinearLayout>
 
@@ -181,7 +196,8 @@
                         android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="FWC"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
@@ -189,7 +205,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        />
 
                     <TextView
                         android:id="@+id/skewed_fwc"
@@ -199,7 +216,8 @@
                         android:layout_weight="0.7"
                         android:singleLine="true"
                         android:text="100"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        />
 
                 </LinearLayout>
 
@@ -219,7 +237,8 @@
                         android:layout_weight="0.2"
                         android:singleLine="true"
                         android:text="Sizes"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
@@ -228,7 +247,8 @@
                         android:layout_weight="0.1"
                         android:text=":"
                         android:visibility="invisible"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        />
 
                     <TextView
                         android:id="@+id/skewed_RosU"
@@ -239,7 +259,8 @@
                         android:singleLine="true"
                         android:text="5"
                         android:visibility="invisible"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        />
 
                 </LinearLayout>
 
@@ -309,9 +330,9 @@
                                 android:text="XXXL"
                                 android:gravity="center"
                                 android:padding="2dp"
-                                android:textColor="#ffffffff"
+                                android:textColor="@color/divider_salescard1"
                                 android:background="@drawable/cell_shape_mark"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/smdm_inflator_subtitle_large"
                                 />
 
 
@@ -379,11 +400,11 @@
                                 android:layout_width="50dp"
                                 android:id="@+id/skewed_SOH"
                                 android:text="5"
-                                android:textColor="#ffffff"
+                                android:textColor="@color/divider_salescard1"
                                 android:gravity="center"
                                 android:padding="2dp"
                                 android:background="@drawable/cell_shape_mark"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/smdm_inflator_subtitle_large"
                                 />
                         </TableRow>
 
