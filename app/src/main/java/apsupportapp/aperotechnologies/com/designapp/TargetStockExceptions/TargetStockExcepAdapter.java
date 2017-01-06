@@ -98,6 +98,7 @@ public class TargetStockExcepAdapter extends BaseAdapter{
             holder.target_option.setText(arrayList.get(position).getPlanDept());
             holder.target_SOH_U.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
             holder.target_ROS_U.setText("" + String.format("%.1f", arrayList.get(position).getTargetROS()));
+
             holder.target_ROS.setText("" + String.format("%.1f", arrayList.get(position).getRos()));
             holder.target_Availability.setText("" +Math.round(arrayList.get(position).getAvailabilityPct())+ "%");
         }

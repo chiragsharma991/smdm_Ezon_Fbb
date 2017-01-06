@@ -160,6 +160,7 @@
             android:layout_height="30dp"
             android:layout_below="@+id/linearToolbar"
             android:layout_marginTop="18dp"
+            android:visibility="gone"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:weightSum="2"
