@@ -628,18 +628,16 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 if (pvaFirstVisibleItem.equals("All")) {
 
-                                    lineChart.setPinchZoom(false);
+                                     lineChart.invalidate();
                                     lineChart.setScaleEnabled(false);
                                     requestSalesWeekChart();
 
                                 } else {
                                     //relChartLayout.setVisibility(View.GONE);
                                     salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                                    //lineChart.invalidate();
-                                    lineChart.setPinchZoom(false);
-                                    lineChart.setTouchEnabled(false);
-lineChart.setScaleEnabled(false);
-                                    requestPvAChartAPI();
+                                    lineChart.invalidate();
+                                    lineChart.setScaleEnabled(false);
+                                   requestPvAChartAPI();
 
                                 }
 
@@ -802,73 +800,6 @@ lineChart.setScaleEnabled(false);
     }
 
 
-//    public LineDataSet getLineDataSet() {
-//        ArrayList<Entry> entry = new ArrayList<>();
-//        for (int i = 0; i < salesAnalysisClassArrayList.size(); i++) {
-//            Log.e("line data", "" + salesAnalysisClassArrayList.get(i).getPvaAchieved());
-//            float value = (float) salesAnalysisClassArrayList.get(i).getPvaAchieved();
-//            Entry lineValues = new Entry(value, i);
-//            entry.add(lineValues);
-//        }
-//        LineDataSet linedataSet = new LineDataSet(entry, "PvAAchieved");
-//        linedataSet.setDrawValues(false);
-//        linedataSet.setColor(Color.parseColor("#ed5752"));
-//        return linedataSet;
-//    }
-
-//    public LineDataSet getpvaLineDataSet() {
-//        ArrayList<Entry> pvaentry = new ArrayList<>();
-//        for (int i = 0; i < pvaChartArrayList.size(); i++) {
-//            Log.e("line data", "" + pvaChartArrayList.get(i).getPvaAchieved());
-//            float value = (float) pvaChartArrayList.get(i).getPvaAchieved();
-//            Entry pvalineValues = new Entry(value, i);
-//            pvaentry.add(pvalineValues);
-//
-//        }
-//        LineDataSet pvalinedataSet = new LineDataSet(pvaentry, "PvAAchieved");
-//        pvalinedataSet.setDrawValues(false);
-//        pvalinedataSet.setColor(Color.MAGENTA);
-//        return pvalinedataSet;
-//    }
-
-    // this method is used to create data for Bar graph<br />
-//    public ArrayList<IBarDataSet> getDataSet() {
-//
-//        ArrayList<IBarDataSet> dataSets = null;
-//        ArrayList<BarEntry> group1 = new ArrayList<>();
-//
-//        for (int i = 0; i < salesAnalysisClassArrayList.size(); i++) {
-//            // Log.e("getSaleNetVal--", "" + salesAnalysisClassArrayList.get(i).getPlanSaleNetVal());
-//            float value = (float) salesAnalysisClassArrayList.get(i).getPlanSaleNetVal();
-//            BarEntry barchartValues1 = new BarEntry(value, i);
-//            group1.add(barchartValues1);
-//        }
-////            }
-////        }
-//
-//
-//        ArrayList<BarEntry> group2 = new ArrayList();
-//        for (int i = 0; i < salesAnalysisClassArrayList.size(); i++) {
-//            //Log.e("getPlanSaleNetVal--", "" + salesAnalysisClassArrayList.get(i).getSaleNetVal());
-//            float value2 = (float) salesAnalysisClassArrayList.get(i).getSaleNetVal();
-//            BarEntry barchartValues2 = new BarEntry(value2, i);
-//            group2.add(barchartValues2);
-//        }
-//
-//        BarDataSet barDataSet = new BarDataSet(group1, "Plan Sales");
-//
-//        barDataSet.setColor(Color.BLUE);
-//        barDataSet.setDrawValues(false);
-//        BarDataSet barDataSet1 = new BarDataSet(group2, "Net Sales");
-//        barDataSet1.setDrawValues(false);
-//        barDataSet1.setColor(Color.parseColor("#a45df1"));
-//        dataSets = new ArrayList<>();
-//        dataSets.add(barDataSet);
-//        dataSets.add(barDataSet1);
-//        return dataSets;
-//    }
-
-
     // API 1.20
     private void requestSalesListDisplayAPI() {
         String salespva_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
@@ -958,12 +889,8 @@ lineChart.setScaleEnabled(false);
                                 {
                                     salesPvAAdapter.notifyDataSetChanged();
                                 }
-
-
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
-
-
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
@@ -1072,14 +999,10 @@ lineChart.setScaleEnabled(false);
                                     float saleNetVal1 = (float) salesPvAAnalysisWeekArrayList.get(j).getSaleNetVal();
                                     Log.e("Val Net Sale---", "" + saleNetVal1);
                                     yVal_select_netSale.add(new Entry(j, saleNetVal1));
-
                                 }
-
                                 LineDataSet lineDataSet1, lineDataSet2;
                                 lineDataSet1 = new LineDataSet(yVal_select_planSale, "Plan Sales");
                                 lineDataSet1.setDrawValues(false);
-
-
                                 lineDataSet2 = new LineDataSet(yVal_select_netSale, "Net Sales");
                                 lineDataSet2.setDrawValues(false);
                                 //    set the line to be drawn like this "- - - - - -"
@@ -1131,14 +1054,8 @@ lineChart.setScaleEnabled(false);
                                 //  lineChart.addView(lineChart);
 
                                 Log.e("lineChartData", "" + lineChartdata.getDataSetCount());
-                                lineChart.setTouchEnabled(true);
-                                lineChart.setScaleYEnabled(true);
-                                lineChart.setScaleXEnabled(true);
-
-                                //lineChart.setDoubleTapToZoomEnabled(false);
-
-
-                                //  relChartLayout.setVisibility(View.VISIBLE);
+                                lineChart.setTouchEnabled(false);
+                                lineChart.setScaleEnabled(false);
                                 llayoutSalesPvA.setVisibility(View.VISIBLE);
                                 Reusable_Functions.hDialog();
 
@@ -1278,12 +1195,11 @@ lineChart.setScaleEnabled(false);
                                 lineChart.getAxisLeft().setDrawGridLines(false);
                                 lineChart.getXAxis().setDrawGridLines(false);
                                 lineChart.setDescription(null);
-                                lineChart.setTouchEnabled(true);
-                                lineChart.setScaleYEnabled(true);
-                                lineChart.setScaleXEnabled(true);
+                                lineChart.setTouchEnabled(false);
+                                lineChart.setScaleEnabled(false);
+//                                lineChart.setScaleYEnabled(true);
+//                                lineChart.setScaleXEnabled(true);
 
-                                // lineChart.setDoubleTapToZoomEnabled(false);
-                                // relChartLayout.setVisibility(View.VISIBLE);
                                 llayoutSalesPvA.setVisibility(View.VISIBLE);
 
                                 Reusable_Functions.hDialog();

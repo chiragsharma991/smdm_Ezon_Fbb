@@ -1063,7 +1063,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            //  Toast.makeText(context, "catch no data found in header" , Toast.LENGTH_SHORT).show();
+                              Toast.makeText(context, " no data found " , Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1193,7 +1193,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "catch:no data found in Details ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found ", Toast.LENGTH_SHORT).show();
                             llayoutOEfficiency.setVisibility(View.GONE);
 
                             e.printStackTrace();
@@ -1343,7 +1343,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "catch no data found in Graphheader" , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, " no data found " , Toast.LENGTH_SHORT).show();
                             llayoutOEfficiency.setVisibility(View.VISIBLE);
 
                             e.printStackTrace();
@@ -1882,7 +1882,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "catch no data found in GraphDetail" , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, " no data found " , Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
