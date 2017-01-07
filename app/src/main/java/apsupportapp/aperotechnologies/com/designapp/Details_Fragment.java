@@ -20,7 +20,7 @@ public class Details_Fragment extends Fragment {
     String articleOption;
     TextView txtProductName, txtCollcetion, txtFabric, txtFit, txtFinish, txtSeason, txtfirstReceiteDate, txtlastReceiteDate,
             txtFwdWeekCover, txtTwSalesUnit, txtLwSalesUnit, txtYtdSalesUnit, txtSOH, txtGIT, txtBaseStock, txtPrice, txtsalesThruUnit,
-            txtROS, txtBenefit, txtArticleOption;
+            txtROS, txtBenefit, txtArticleOption,txtStoreDesc, txtStoreCode;
     ImageView imgPromo, imgKeyProduct, imgProfile;
 
     public Details_Fragment() {
@@ -40,6 +40,8 @@ public class Details_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.details_fragment, container, false);
+        txtStoreCode =(TextView)view.findViewById(R.id.txtStoreCode);
+        txtStoreDesc =(TextView)view.findViewById(R.id.txtStoreName);
         txtArticleOption = (TextView) view.findViewById(R.id.txtArticle);
         txtArticleOption.setText(articleOption);
         txtProductName = (TextView) view.findViewById(R.id.txtProductName);
@@ -98,7 +100,8 @@ public class Details_Fragment extends Fragment {
             imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_green);
 
         }
-
+        txtStoreCode.setText(styleDetailsBean.getStoreCode());
+        txtStoreDesc.setText(styleDetailsBean.getStoreDesc());
         txtProductName.setText(styleDetailsBean.getProductName());
         txtCollcetion.setText(styleDetailsBean.getCollectionName());
         txtFabric.setText(styleDetailsBean.getProductFabricDesc());

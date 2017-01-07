@@ -316,7 +316,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 else
                 {
                     //GO FOR POST METHOD
-
                     VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
                     visualAssort1.setLikeDislikeFlg("1");
                 }
