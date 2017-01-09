@@ -535,15 +535,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (salesAnalysisClassArrayList.size() != 0) {
-
                     if (view.getFirstVisiblePosition() <= salesAnalysisClassArrayList.size() - 1) {
-
                         focusposition = view.getFirstVisiblePosition();
-
                         listView_SalesAnalysis.setSelection(view.getFirstVisiblePosition());
                         currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
                         //Log.e("firstVisibleItem", " " + view.getFirstVisiblePosition() + " " + arrayList.get(view.getFirstVisiblePosition()).getPlanDept());
-
                         currentIndex = focusposition;
                         Log.e(TAG,"focusPosition----"+currentIndex);
                         if (txtheaderplanclass.getText().toString().equals("Department")) {
@@ -583,7 +579,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             }
                         }
                         selFirstPositionValue = focusposition;
-
                     } else {
                         focusposition = salesAnalysisClassArrayList.size() - 1;
                         listView_SalesAnalysis.setSelection(salesAnalysisClassArrayList.size() - 1);
@@ -595,10 +590,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     }
                 }
             }
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
             }
         });
 
@@ -642,15 +635,13 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             break;
 
                         case "Category":
+
                             Log.e("in sales analysis category", "-----" + planDept);
-
                             if (flag == true) {
-
                                 txtheaderplanclass.setText("Plan Class");
                                 llayoutSalesAnalysis.setVisibility(View.GONE);
                                 //String planCategry= salesAnalysisClassArrayList.get(position).getPlanCategory().substring(0,1).toUpperCase()+salesAnalysisClassArrayList.get(position).getPlanCategory().substring(1).toLowerCase();
                                 txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
-
                                 Log.e("txtClicked category --", "" + txtSalesClickedValue);
                                 fromWhere = "Plan Class";
                                 //SalesPagerAdapter.currentPage = 0;
@@ -677,14 +668,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             } else {
                                 Log.e("Please select dept name", "");
                             }
-
                             break;
-
                         case "Plan Class":
                             Log.e("in sales analysis plan class", "-----" + planDept);
-
                             if (flag == true) {
-
                                 txtheaderplanclass.setText("Brand");
                                 llayoutSalesAnalysis.setVisibility(View.GONE);
                                 //String planCls= salesAnalysisClassArrayList.get(position).getPlanClass().substring(0,1).toUpperCase()+salesAnalysisClassArrayList.get(position).getPlanClass().substring(1).toLowerCase();
@@ -714,12 +701,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             } else {
                                 Log.e("Please Select Dept name", "-------");
                             }
-
-
                             break;
                         case "Brand":
                             Log.e("in sales analysis brand", "-----" + planDept);
-
                             if (flag == true) {
                                 relnextbtn.setVisibility(View.INVISIBLE);
                                 txtheaderplanclass.setText("Brand Plan Class");
@@ -749,10 +733,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             } else {
                                 Log.e("Please select dept name", "------1");
                             }
-
-
                             break;
-
                     }
                 }
             }
@@ -773,6 +754,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
+                listView_SalesAnalysis.invalidateViews();
                 llhierarchy.setVisibility(View.GONE);
                 currentVmPos= vwpagersales.getCurrentItem();
                 Log.e(TAG, "currentVmPos: "+currentVmPos );
@@ -811,7 +793,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
                 Log.e(TAG," in LW foucpos"+currentIndex);
                 saleFirstVisibleItem = " ";
-
+                listView_SalesAnalysis.invalidateViews();
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                 llayoutSalesAnalysis.setVisibility(View.GONE);
@@ -839,6 +821,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
+                listView_SalesAnalysis.invalidateViews();
                 currentVmPos= vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
                 currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
@@ -874,6 +857,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
+                listView_SalesAnalysis.invalidateViews();
                 currentVmPos= vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
                 currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
@@ -908,17 +892,14 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
     //Api to display class level values(Api 1.20)
     private void requestSalesListDisplayAPI() {
-
         String url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.i("Sales Analysis Class: ", " " + response);
                         Log.i("response length", "" + response.length());
-
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -938,7 +919,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
                                 }
-
                                 for (i = 0; i < 3; i++) {
                                     ImageView imgdot = new ImageView(context);
                                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
@@ -952,15 +932,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 Log.e("----"," "+vwpagersales.getCurrentItem());
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
-
                                 txtStoreCode.setText("" + salesAnalysisClassArrayList.get(i).getStoreCode());
                                 // Log.e("storecode", "------" + salesAnalysisClassArrayList.get(1).getStoreCode());
                                 txtStoreDesc.setText("" + salesAnalysisClassArrayList.get(i).getStoreDesc());
-
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-
                                 if (txtheaderplanclass.getText().toString().equals("Department")) {
-
                                     salesAnalysisClass.setPlanDept("All");
                                 } else if (txtheaderplanclass.getText().toString().equals("Category")) {
                                     salesAnalysisClass.setPlanCategory("All");
@@ -971,8 +947,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
                                     salesAnalysisClass.setBrandplanClass("All");
                                 }
-
-
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
                                 Log.e(TAG,"focusPosition in API----"+currentIndex);
                                 salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context,currentIndex, fromWhere, listView_SalesAnalysis);
@@ -980,19 +954,20 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 if(listView_SalesAnalysis.getAdapter() == null)
                                 {
                                     listView_SalesAnalysis.setAdapter(salesadapter);
+                                    salesadapter.notifyDataSetChanged();
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
                                     requestSalesViewPagerValueAPI();
-
                                 }
                                 else
                                 {
-                                    listView_SalesAnalysis.destroyDrawingCache();
-                                    listView_SalesAnalysis.setVisibility(ListView.INVISIBLE);
-                                    listView_SalesAnalysis.setVisibility(ListView.VISIBLE);
-
-                                    listView_SalesAnalysis.scrollBy(0,currentIndex);
+                                    listView_SalesAnalysis.invalidateViews();
+                                    salesadapter.notifyDataSetChanged();
+                                   // listView_SalesAnalysis.destroyDrawingCache();
+//                                    listView_SalesAnalysis.setVisibility(ListView.INVISIBLE);
+//                                    listView_SalesAnalysis.setVisibility(ListView.VISIBLE);
+                                  //  listView_SalesAnalysis.scrollBy(0,currentIndex);
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
@@ -1009,7 +984,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getBrandplanClass().toString();
                                     }
                                     requestSalesPagerOnScrollAPI();
-
                                 }
 
 
