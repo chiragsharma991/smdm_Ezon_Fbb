@@ -255,7 +255,15 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     Reusable_Functions.sDialog(context, "Loading..");
                     String articleOption = visualAssort1.getArticleOption();
                     String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+                    if(checkLikedislike == null)
+                    {
+                        checkLikedislike = "";
+                    }
                     String checkFeedback = visualAssort1.getFeedback();
+                    if(checkFeedback == null)
+                    {
+                        checkFeedback = "";
+                    }
                     int checkSizeSet = visualAssort1.getSizeSet();
                     Log.i("", "order set done click: position " + position + " articleOption " + articleOption + " checkLikedislike " + checkLikedislike + " checkSizeSet " + checkSizeSet);
 
@@ -340,7 +348,15 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     Reusable_Functions.sDialog(context, "Loading..");
                     String articleOption = visualAssort1.getArticleOption();
                     String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+                    if(checkLikedislike == null)
+                    {
+                        checkLikedislike = "";
+                    }
                     String checkFeedback = visualAssort1.getFeedback();
+                    if(checkFeedback == null)
+                    {
+                        checkFeedback = "";
+                    }
                     int checkSizeSet = visualAssort1.getSizeSet();
                     Log.i("", "comment done click: position " + position + " articleOption " + articleOption + " checkLikedislike " + checkLikedislike + " checkSizeSet " + checkSizeSet + " checkFeedback " + checkFeedback);
 

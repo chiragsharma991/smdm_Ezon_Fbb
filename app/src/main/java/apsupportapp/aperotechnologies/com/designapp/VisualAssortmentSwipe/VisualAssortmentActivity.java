@@ -249,7 +249,15 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 VisualAssort visualAssort1 = visualassortmentlist.get(position);
                 String articleOption = visualAssort1.getArticleOption();
                 String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+                if(checkLikedislike == null)
+                {
+                    checkLikedislike = "";
+                }
                 String checkFeedback = visualAssort1.getFeedback();
+                if(checkFeedback == null)
+                {
+                    checkFeedback = "";
+                }
                 int checkSizeSet = visualAssort1.getSizeSet();
                 Log.i("MainActivity", "card was swiped left: position " + position+" articleOption "+articleOption+" checkLikedislike "+checkLikedislike+" checkSizeSet "+checkSizeSet+" checkFeedback "+checkFeedback);
 
@@ -266,7 +274,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if(!checkLikedislike.equals("") || checkSizeSet != 0 ||(!checkFeedback.equals("")))
+                if(checkLikedislike != null || checkFeedback != null || !checkLikedislike.equals("") || checkSizeSet != 0 ||(!checkFeedback.equals("")))
                 {
                     //GO FOR PUT METHOD
 
@@ -286,11 +294,18 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             public void cardSwipedRight(int position) {
 
                 //like
-
                 VisualAssort visualAssort1 = visualassortmentlist.get(position);
                 String articleOption = visualAssort1.getArticleOption();
                 String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+                if(checkLikedislike == null)
+                {
+                    checkLikedislike = "";
+                }
                 String checkFeedback = visualAssort1.getFeedback();
+                if(checkFeedback == null)
+                {
+                    checkFeedback = "";
+                }
                 int checkSizeSet = visualAssort1.getSizeSet();
                 Log.i("MainActivity", "card was swiped right: position " + position+" articleOption "+articleOption+" checkLikedislike "+checkLikedislike+" checkSizeSet "+checkSizeSet+" checkFeedback "+checkFeedback);
 
@@ -307,7 +322,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if(!checkLikedislike.equals("") || checkSizeSet != 0 ||(!checkFeedback.equals("")))
+                if(checkLikedislike != null || checkFeedback != null ||  !checkLikedislike.equals("") || checkSizeSet != 0 ||(!checkFeedback.equals("")))
                 {
                     //GO FOR PUT METHOD
                     VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
@@ -365,6 +380,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.i("response visualassortment: ", " "+response.length());
+                        Log.e("response",""+response);
 
                         try
                         {
@@ -378,12 +394,10 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     visualAssort = gson.fromJson(response.get(i).toString(), VisualAssort.class);
-
                                     visualassortmentlist.add(visualAssort);
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-
                                 adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
                                 cardStack.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
@@ -392,7 +406,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                             }
                             else if (response.length() < limit)
                             {
-
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     visualAssort = gson.fromJson(response.get(i).toString(), VisualAssort.class);
@@ -400,17 +413,13 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 }
                                 offsetvalue = 0;
                                 count = 0;
-
                                 adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
                                 cardStack.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
                                 Reusable_Functions.hDialog();
                             }
-
-
                             for(int i = 0; i < visualassortmentlist.size(); i++)
                             {
-
                                 Log.e("size"," "+visualassortmentlist.size());
                                 Log.e("--ArticleOpt--"," "+visualassortmentlist.get(i).getArticleOption());
                                 Log.e("--isLikeDislike--"," "+visualassortmentlist.get(i).getLikeDislikeFlg());
