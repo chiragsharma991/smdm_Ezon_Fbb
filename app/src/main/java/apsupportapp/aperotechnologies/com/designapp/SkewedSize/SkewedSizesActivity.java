@@ -4,11 +4,14 @@ package apsupportapp.aperotechnologies.com.designapp.SkewedSize;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -206,7 +209,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                     SkewedSizeAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                 } else {
-                                    SkewedSizeAdapter = new SkewedSizeAdapter(SkewedSizeList, context);
+                                    SkewedSizeAdapter = new SkewedSizeAdapter(SkewedSizeList, context,getResources());
                                     SkewedSizeListview.setAdapter(SkewedSizeAdapter);
 
 
@@ -303,6 +306,17 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
 
     private void initalise() {
+
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        WindowManager wm = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE); // the results will be higher than using the activity context object or the getWindowManager() shortcut
+//        wm.getDefaultDisplay().getMetrics(displayMetrics);
+//        int screenWidth = displayMetrics.widthPixels;
+//        int screenHeight = displayMetrics.heightPixels;
+
+     //   Toast.makeText(context, "resolution is "+screenWidth+" "+screenHeight, Toast.LENGTH_SHORT).show();
+
+
+
         Skewed_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         Skewed_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
 

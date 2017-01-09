@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
+
+    >
 
     <RelativeLayout
         android:id="@+id/rel"
@@ -17,9 +20,11 @@
             android:layout_marginTop="10dp" >
 
             <RelativeLayout
-                android:layout_marginLeft="10dp"
+
                 android:layout_marginRight="65dp"
                 android:id="@+id/innerrellay"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -28,27 +33,28 @@
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store : "
-                    android:textColor="#920609"
-                    android:textSize="14sp" />
+                    android:text="@string/store"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/smdm_store_title_large"
+                    />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tstoreCode"
-                    android:hint="storecode"
-                    android:textColor="#000000"
-                    android:textSize="14sp"/>
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_large"
+                    />
 
                 <TextView
                     android:id="@+id/txtStoreName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/txtStoreCode"
-                    android:hint="storename"
-                    android:textColor="#000000"
-                    android:textSize="14sp"/>
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_large"
+                    />
 
 
                 <TextView
@@ -58,8 +64,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/txtStoreName"
                     android:layout_width="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_large"
                     android:layout_height="wrap_content" />
 
                 <TextView
@@ -68,7 +74,9 @@
                     android:text="@string/number_in_units"
                     android:layout_below="@+id/txtSubDeptName"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/smdm_store_title_large"
+                    />
 
             </RelativeLayout>
 

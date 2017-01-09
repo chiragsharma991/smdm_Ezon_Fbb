@@ -5,6 +5,8 @@ package apsupportapp.aperotechnologies.com.designapp.SkewedSize;
  */
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -19,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.squareup.picasso.Callback;
@@ -40,6 +43,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 
 public class SkewedSizeAdapter extends BaseAdapter {
 
+    private final Resources resources;
     private ArrayList<SkewedSizeListDisplay> arrayList;
 
     //private List mStringFilterList;
@@ -58,12 +62,13 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
     //private ValueFilter valueFilter;
 
-    public SkewedSizeAdapter(ArrayList<SkewedSizeListDisplay> arrayList, Context context) {
+    public SkewedSizeAdapter(ArrayList<SkewedSizeListDisplay> arrayList, Context context, Resources resources) {
 
         // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         this.context = context;
         mInflater = LayoutInflater.from(context);
+        this.resources=resources;
 
         //getFilter();
     }
@@ -194,12 +199,27 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
             mType = new TextView(context);
 
-            mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
 
 
-//            mType.setLayoutParams(new LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.WRAP_CONTENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+            if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+                Log.e(TAG, "Normal sized screen:" );
+                mType.setLayoutParams(new LinearLayout.LayoutParams(75,35));
+                mType.setTextSize(10);
+
+            }
+            else if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+                Log.e(TAG, "Small sized screen :" );
+                mType.setLayoutParams(new LinearLayout.LayoutParams(75,35));
+                mType.setTextSize(10);
+
+            }
+            else {
+                Log.e(TAG, "Screen Size is neither large, normal or small :" );
+                mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
+                mType.setTextSize(12);
+
+
+            }
 
 
             if(setFlag.get(i).equals("Y")){
@@ -213,7 +233,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
                 mType.setTextColor(Color.parseColor("#404040"));
 
             }
-            mType.setTextSize(12);
             mType.setGravity(Gravity.CENTER);
             mType.setText(""+items.get(i));
 
@@ -232,7 +251,28 @@ public class SkewedSizeAdapter extends BaseAdapter {
             mType = new TextView(context);
 
 
-            mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
+
+
+            if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+                Log.e(TAG, "Normal sized screen:" );
+                mType.setLayoutParams(new LinearLayout.LayoutParams(75,35));
+                mType.setTextSize(10);
+
+            }
+            else if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+                Log.e(TAG, "Small sized screen :" );
+                mType.setLayoutParams(new LinearLayout.LayoutParams(75,35));
+                mType.setTextSize(10);
+
+            }
+            else {
+                Log.e(TAG, "Screen Size is neither large, normal or small :" );
+                mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
+                mType.setTextSize(12);
+
+
+            }
+
 
 
             //       mType.setPadding(5, 3, 0, 3);
@@ -247,7 +287,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
                 mType.setTextColor(Color.parseColor("#404040"));
 
             }
-            mType.setTextSize(12);
             mType.setGravity(Gravity.CENTER);
             mType.setText(""+product.get(i));
             mType.setTypeface(null, Typeface.BOLD);
@@ -287,6 +326,8 @@ public class SkewedSizeAdapter extends BaseAdapter {
         return sum;
         // Log.e(TAG, "sumof: "+sum );
     }
+
+
 
 
     private class Holder {

@@ -292,39 +292,55 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-
-            <LinearLayout
-                android:layout_marginTop="5dp"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp"
-
-
+                android:animateLayoutChanges="true"
+                android:scrollbars="none"
                 >
 
                 <LinearLayout
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/productInfo"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+
+
                     >
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/productInfo"
+                        >
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/sohDetails"
+                        >
+
+
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/sohDetails"
-                    >
-
-                </LinearLayout>
 
 
-            </LinearLayout>
+
+            </HorizontalScrollView>
+
+
 
 
 
@@ -336,7 +352,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/divider_salescard"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0.7dp"
             >
 
         </View>
