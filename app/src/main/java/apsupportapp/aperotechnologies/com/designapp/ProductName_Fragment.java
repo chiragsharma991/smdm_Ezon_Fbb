@@ -798,7 +798,7 @@ public class ProductName_Fragment extends Fragment {
         String info[] = {
                 String.valueOf(productDetails.getL2hrsNetSales()),
                 String.valueOf(productDetails.getDayNetSales()),
-                String.valueOf(productDetails.getWtdNetSales()),
+                String.valueOf(format.format(productDetails.getWtdNetSales())),
                 String.valueOf(String.format("%.1f", productDetails.getDayNetSalesPercent())).concat("%"),
                 String.valueOf(String.format("%.1f", productDetails.getWtdNetSalesPercent())).concat("%"),
                 String.valueOf(format.format(productDetails.getSoh())),

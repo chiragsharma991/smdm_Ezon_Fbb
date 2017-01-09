@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <com.daprlabs.cardstack.SwipeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -65,22 +64,24 @@
 
 
 
-                <!--<RelativeLayout-->
-                <!--android:id="@+id/imageBtnSearch"-->
-                <!--android:background="@drawable/button_red_effect"-->
-                <!--android:layout_width="@dimen/header_clickable_width"-->
-                <!--android:layout_height="@dimen/header_clickable_height"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_centerVertical="true">-->
+                <RelativeLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="0dp"
+                    android:id="@+id/visualsort"
+                    android:background="@drawable/button_red_effect"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_centerVertical="true">
 
-                <!--<Button-->
-                <!--android:clickable="false"-->
-                <!--android:background="@mipmap/key_product_search_icon1"-->
-                <!--android:layout_width="20dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_centerInParent="true"/>-->
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/sort_icon"
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:layout_centerInParent="true"/>
 
-                <!--</RelativeLayout>-->
+                </RelativeLayout>
+
 
 
 
@@ -95,89 +96,6 @@
 
     </LinearLayout>
 
-
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/footer"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_gravity="bottom"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="76dp">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:weightSum="4"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="76dp">-->
-
-
-    <!--<RelativeLayout-->
-    <!--android:background="@color/colorPrimary"-->
-    <!--android:id="@+id/imgrellike"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<ImageButton-->
-    <!--android:id="@+id/imgbtnlike"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:clickable="false"-->
-    <!--android:background="@mipmap/like_unselected"-->
-    <!--android:layout_width="30dp"-->
-    <!--android:layout_height="28dp" />-->
-
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-    <!--android:background="@color/colorPrimary"-->
-    <!--android:id="@+id/imgreldislike"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<ImageButton-->
-    <!--android:id="@+id/imgbtndislike"-->
-    <!--android:background="@drawable/dislike"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:clickable="false"-->
-    <!--android:layout_width="30dp"-->
-    <!--android:layout_height="28dp" />-->
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-    <!--android:background="@drawable/button_red_effect"-->
-    <!--android:id="@+id/imgrelbuy"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<ImageButton-->
-    <!--android:id="@+id/imgbtnbuy"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:clickable="false"-->
-    <!--android:background="@mipmap/order_set"-->
-    <!--android:layout_width="20dp"-->
-    <!--android:layout_height="28dp" />-->
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-    <!--android:background="@drawable/button_red_effect"-->
-    <!--android:id="@+id/imgrelcomment"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<ImageButton-->
-    <!--android:id="@+id/imgbtncomment"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:clickable="false"-->
-    <!--android:background="@mipmap/comment"-->
-    <!--android:layout_width="28dp"-->
-    <!--android:layout_height="28dp" />-->
-    <!--</RelativeLayout>-->
-
-    <!--</LinearLayout>-->
-    <!--</RelativeLayout>-->
-
     <RelativeLayout
         android:background="@android:color/transparent"
         android:id="@+id/layoutComment"
@@ -186,72 +104,72 @@
         android:layout_marginBottom="76dp"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linlayoutComment"
-            android:background="@android:color/white"
-            android:orientation="vertical"
+    <LinearLayout
+        android:id="@+id/linlayoutComment"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="150dp">
+
+        <View
+            android:background="#CFD2D1"
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_height="150dp">
+            android:layout_height="2dp"/>
 
-            <View
-                android:background="#CFD2D1"
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/txtComment"
+            android:layout_margin="10dp"
+            android:gravity="top"
+            android:text = "Comment"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <View
+            android:background="#E9EDED"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
+                android:imeOptions="actionDone"
+                android:maxLines="4"
+                android:minHeight="100dp"
+                android:background="@drawable/edittext"
+                android:padding="5dp"
+                android:layout_toLeftOf="@+id/btnCommentDone"
+                android:id="@+id/edtTextComment"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:hint = "Comments"
+                android:textCursorDrawable="@null"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"/>
-
-            <TextView
-                android:layout_centerVertical="true"
-                android:id="@+id/txtComment"
-                android:layout_margin="10dp"
-                android:gravity="top"
-                android:text = "Comment"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-
-            <View
-                android:background="#E9EDED"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
-
-            <RelativeLayout
+            <Button
+                android:background="@android:color/white"
+                android:id="@+id/btnCommentDone"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
                 android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:text="Done"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
 
+        </RelativeLayout>
 
-                <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
-                    android:imeOptions="actionDone"
-                    android:maxLines="4"
-                    android:minHeight="100dp"
-                    android:background="@drawable/edittext"
-                    android:padding="5dp"
-                    android:layout_toLeftOf="@+id/btnCommentDone"
-                    android:id="@+id/edtTextComment"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentTop="true"
-                    android:hint = "Comments"
-                    android:textCursorDrawable="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:background="@android:color/white"
-                    android:id="@+id/btnCommentDone"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_margin="10dp"
-                    android:text="Done"
-                    android:textSize="14sp"
-                    android:textAllCaps="false"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
+    </LinearLayout>
 
     </RelativeLayout>
 
@@ -262,55 +180,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linlayoutBuy"
-            android:background="@android:color/white"
-            android:orientation="vertical"
+    <LinearLayout
+        android:id="@+id/linlayoutBuy"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="200dp">
+
+        <View
+            android:background="#CFD2D1"
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_height="200dp">
+            android:layout_height="2dp"/>
 
-            <View
-                android:background="#CFD2D1"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/txtOrderSets"
+                android:layout_margin="10dp"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:text = "Order Sets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:gravity="right"
+                android:layout_centerVertical="true"
+                android:id="@+id/llSize"
+                android:layout_alignParentRight="true"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_centerVertical="true"
-                    android:id="@+id/txtOrderSets"
-                    android:layout_margin="10dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:text = "Order Sets"
+                    android:id="@+id/txtSize"
+                    android:layout_marginRight="10dp"
+                    android:text = "XS, S, L"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
 
-                <LinearLayout
-                    android:gravity="right"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/llSize"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content">
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_centerVertical="true"
-                        android:id="@+id/txtSize"
-                        android:layout_marginRight="10dp"
-                        android:text = "XS, S, L"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-
-                </LinearLayout>
-
-                <!--<LinearLayout-->
+            <!--<LinearLayout-->
                 <!--android:gravity="right"-->
                 <!--android:layout_below="@+id/llSize"-->
                 <!--android:layout_alignParentRight="true"-->
@@ -318,84 +236,84 @@
                 <!--android:layout_height="wrap_content">-->
 
                 <!--<TextView-->
-                <!--android:id="@+id/txtXSSet"-->
-                <!--android:layout_marginBottom="3dp"-->
-                <!--android:gravity="top"-->
-                <!--android:text = "100,"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+                    <!--android:id="@+id/txtXSSet"-->
+                    <!--android:layout_marginBottom="3dp"-->
+                    <!--android:gravity="top"-->
+                    <!--android:text = "100,"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
 
                 <!--<TextView-->
-                <!--android:id="@+id/txtSSet"-->
-                <!--android:layout_marginBottom="3dp"-->
-                <!--android:gravity="top"-->
-                <!--android:text = "200,"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+                    <!--android:id="@+id/txtSSet"-->
+                    <!--android:layout_marginBottom="3dp"-->
+                    <!--android:gravity="top"-->
+                    <!--android:text = "200,"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
 
                 <!--<TextView-->
-                <!--android:id="@+id/txtLSet"-->
-                <!--android:layout_marginBottom="3dp"-->
-                <!--android:gravity="top"-->
-                <!--android:text = "300"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+                    <!--android:id="@+id/txtLSet"-->
+                    <!--android:layout_marginBottom="3dp"-->
+                    <!--android:gravity="top"-->
+                    <!--android:text = "300"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
 
-                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
 
 
-            </RelativeLayout>
+        </RelativeLayout>
 
-            <View
-                android:background="#E9EDED"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+        <View
+            android:background="#E9EDED"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
-            <TextView
+        <TextView
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:gravity="top"
+            android:text = "Enter suggested no of size sets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
+                android:background="@drawable/edittext"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:id="@+id/edtTextSets"
+                android:padding="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_margin="10dp"
-                android:gravity="top"
-                android:text = "Enter suggested no of size sets"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:inputType="number"
+                android:textCursorDrawable="@null"
+                android:hint = "0"
+                android:layout_width="150dp"
+                android:layout_height="50dp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <Button
+                android:background="@android:color/white"
+                android:id="@+id/btnBuyDone"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="Done"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
 
-                <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
-                    android:background="@drawable/edittext"
-                    android:imeOptions="actionDone"
-                    android:singleLine="true"
-                    android:id="@+id/edtTextSets"
-                    android:padding="5dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_margin="10dp"
-                    android:inputType="number"
-                    android:textCursorDrawable="@null"
-                    android:hint = "0"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp" />
+        </RelativeLayout>
 
-                <Button
-                    android:background="@android:color/white"
-                    android:id="@+id/btnBuyDone"
-                    android:layout_alignParentRight="true"
-                    android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:text="Done"
-                    android:textSize="14sp"
-                    android:textAllCaps="false"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
+    </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -424,6 +342,8 @@
             android:layout_height="94dp" />
 
     </RelativeLayout>
+
+    <include layout="@layout/activity_popup_visualassort"></include>
 
 </com.daprlabs.cardstack.SwipeFrameLayout>
 

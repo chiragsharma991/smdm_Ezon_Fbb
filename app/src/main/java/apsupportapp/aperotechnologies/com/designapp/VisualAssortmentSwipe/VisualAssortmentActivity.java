@@ -3,6 +3,7 @@ package apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +53,9 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
 import apsupportapp.aperotechnologies.com.designapp.model.VisualAssortComment;
 
+import static apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.SwipeDeckAdapter.btnlike;
+import static apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.SwipeDeckAdapter.rellike;
+
 public class VisualAssortmentActivity extends AppCompatActivity {
 
     private static final String TAG = "VisualAssortmentActivity";
@@ -59,17 +64,18 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     private Context context = this;
     ArrayList<VisualAssort> visualassortmentlist;
     private SwipeDeckAdapter adapter;
-
+    String likeDislikeFlg ;
     SharedPreferences sharedPreferences;
     String userId, bearertoken;
-
+    RadioButton visualAssort_PendingChk,visualAssort_CompletedChk;
+    LinearLayout visualAssort_Pending,visualAssort_Completed;
     RequestQueue queue;
     Gson gson;
     VisualAssort visualAssort;
     int offsetvalue=0,limit=100;
     int count=0;
 
-    RelativeLayout imgBtnBack;
+    RelativeLayout imgBtnBack,visualsort,visualAssortSortLayout;
     public static RelativeLayout layoutBuy, layoutComment;
     static Button btnBuyDone;
     static Button btnCommentDone;
@@ -99,20 +105,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         queue.start();
         gson = new Gson();
 
-        if (Reusable_Functions.chkStatus(context)) {
-
-            reloverlay.setVisibility(View.VISIBLE);
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
-            offsetvalue = 0;
-            limit = 100;
-            count = 0;
-            requestdisplayVisualAssortment();
-
-        } else
-        {
-            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-        }
 
         reloverlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +115,13 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
 
         imgBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
+        visualsort = (RelativeLayout)findViewById(R.id.visualsort);
+        visualAssortSortLayout = (RelativeLayout)findViewById(R.id.visualAssortSortLayout);
+        visualAssortSortLayout.setVisibility(View.GONE);
+        visualAssort_Pending = (LinearLayout)findViewById(R.id.visualAssort_Pending);
+        visualAssort_Completed = (LinearLayout)findViewById(R.id.visualAssort_Completed);
+        visualAssort_PendingChk = (RadioButton)findViewById(R.id.visualAssort_PendingChk);
+        visualAssort_CompletedChk =(RadioButton)findViewById(R.id.visualAssort_CompletedChk);
         layoutBuy = (RelativeLayout) findViewById(R.id.layoutBuy);
         layoutComment = (RelativeLayout) findViewById(R.id.layoutComment);
         btnBuyDone = (Button) findViewById(R.id.btnBuyDone);
@@ -132,6 +131,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         txtSize = (TextView) findViewById(R.id.txtSize);
 
 
+
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +139,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 onBackClick();
             }
         });
+
 
         edtTextSets.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
@@ -240,6 +241,52 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             }
 
         });
+
+        //Visual Sort
+        visualAssort_PendingChk.setChecked(true);
+        visualsort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visual_sort_function();
+            }
+        });
+        visualAssort_Pending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visualAssort_pendingFunction();
+            }
+        });
+        visualAssort_Completed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visualAssort_CompletedFunction();
+            }
+        });
+        visualAssortSortLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visualAssortSortLayout.setVisibility(View.GONE);
+            }
+        });
+
+
+        if (Reusable_Functions.chkStatus(context)) {
+
+            reloverlay.setVisibility(View.VISIBLE);
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
+            likeDislikeFlg = "Pending";
+            requestdisplayVisualAssortment();
+
+        } else
+        {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+        }
+
+
 
         cardStack.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override
@@ -370,9 +417,65 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
  }
 
+    private void visualAssort_CompletedFunction() {
+        if (visualAssort_CompletedChk.isChecked()) {
+
+            visualAssort_CompletedChk.setChecked(true);
+            visualAssort_PendingChk.setChecked(false);
+            visualAssortSortLayout.setVisibility(View.GONE);
+            Log.e(TAG, "Completed");
+
+
+        } else if (!visualAssort_CompletedChk.isChecked()) {
+            visualAssort_CompletedChk.setChecked(true);
+            visualAssort_PendingChk.setChecked(false);
+
+           // reloverlay.setVisibility(View.VISIBLE);
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
+            likeDislikeFlg = "Completed";
+            requestdisplayVisualAssortment();
+
+            visualAssortSortLayout.setVisibility(View.GONE);
+        }
+    }
+    private void visualAssort_pendingFunction() {
+        if (visualAssort_PendingChk.isChecked()) {
+
+            visualAssort_CompletedChk.setChecked(false);
+            visualAssort_PendingChk.setChecked(true);
+            visualAssortSortLayout.setVisibility(View.GONE);
+            Log.e(TAG, "Pending");
+
+
+        } else if (!visualAssort_PendingChk.isChecked()) {
+            visualAssort_CompletedChk.setChecked(false);
+            visualAssort_PendingChk.setChecked(true);
+
+           // reloverlay.setVisibility(View.VISIBLE);
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            offsetvalue = 0;
+            limit = 100;
+            count = 0;
+            likeDislikeFlg = "Pending";
+            requestdisplayVisualAssortment();
+
+            visualAssortSortLayout.setVisibility(View.GONE);
+        }
+    }
+
+    private void visual_sort_function() {
+        visualAssortSortLayout.setVisibility(View.VISIBLE);
+    }
+
+
     private void requestdisplayVisualAssortment() {
 
-        String url =  ConstsCore.web_url + "/v1/display/visualassortments/" + userId+"?offset="+offsetvalue+"&limit="+ limit;
+        String url =  ConstsCore.web_url + "/v1/display/visualassortments/" + userId+"?offset="+offsetvalue+"&limit="+ limit+"&likeDislike="+likeDislikeFlg;
         Log.e("url", " URL VASSORT "+url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -418,13 +521,24 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 adapter.notifyDataSetChanged();
                                 Reusable_Functions.hDialog();
                             }
-                            for(int i = 0; i < visualassortmentlist.size(); i++)
+
+                            if(likeDislikeFlg.equals("Pending"))
                             {
-                                Log.e("size"," "+visualassortmentlist.size());
-                                Log.e("--ArticleOpt--"," "+visualassortmentlist.get(i).getArticleOption());
-                                Log.e("--isLikeDislike--"," "+visualassortmentlist.get(i).getLikeDislikeFlg());
-                                Log.e("--isFeedBack--"," "+visualassortmentlist.get(i).getFeedback());
+
                             }
+                            else if(likeDislikeFlg.equals("Completed"))
+                            {
+                               SwipeDeckAdapter.rellike.getChildAt(0).setBackgroundResource(R.mipmap.like_unselected);
+                                SwipeDeckAdapter.rellike.setBackgroundColor(Color.parseColor("#920609"));
+
+                            }
+//                            for(int i = 0; i < visualassortmentlist.size(); i++)
+//                            {
+//                                Log.e("size"," "+visualassortmentlist.size());
+//                                Log.e("--ArticleOpt--"," "+visualassortmentlist.get(i).getArticleOption());
+//                                Log.e("--isLikeDislike--"," "+visualassortmentlist.get(i).getLikeDislikeFlg());
+//                                Log.e("--isFeedBack--"," "+visualassortmentlist.get(i).getFeedback());
+//                            }
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
