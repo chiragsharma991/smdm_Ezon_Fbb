@@ -494,7 +494,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                         checkOld.setChecked(false);
                         quickFilterPopup.setVisibility(View.GONE);
 
-                     //Time check>>>>>>>
+                        //Time check>>>>>>>
 
 
 
