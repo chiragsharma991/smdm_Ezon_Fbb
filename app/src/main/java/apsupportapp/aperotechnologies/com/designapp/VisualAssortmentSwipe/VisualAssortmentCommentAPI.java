@@ -51,7 +51,7 @@ public class VisualAssortmentCommentAPI {
                             if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();
                             } else {
-                                Toast.makeText(context, "Data is saved successfully", Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(context, "Data is saved successfully", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
@@ -99,7 +99,7 @@ public class VisualAssortmentCommentAPI {
                             if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();
                             } else {
-                                Toast.makeText(context, "Data is updated successfully", Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(context, "Data is updated successfully", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {

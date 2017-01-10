@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
+    xmlns:app="http://schemas.android.com/tools"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/relStoreLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_screen_color"
+        android:padding="10dp">
+
+
+        <TextView
+            android:id="@+id/tstoreCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Store : "
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/largelayout_storesize" />
+
+        <TextView
+            android:id="@+id/txtStoreCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/tstoreCode"
+            android:hint=""
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/largelayout_storesize" />
+
+        <TextView
+            android:id="@+id/txtStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@id/txtStoreCode"
+            android:hint=""
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/largelayout_storesize" />
+
+    </RelativeLayout>
+
+<ScrollView
+    android:layout_below="@+id/relStoreLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
@@ -9,7 +55,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="#ffffff"
+        android:background="@color/bg_screen_color"
         android:layout_height="wrap_content">
 
         <TextView
@@ -665,3 +711,4 @@
 
     </LinearLayout>
 </ScrollView>
+    </RelativeLayout>

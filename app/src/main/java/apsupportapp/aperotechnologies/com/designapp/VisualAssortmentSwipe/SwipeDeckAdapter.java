@@ -35,8 +35,8 @@ public class SwipeDeckAdapter extends BaseAdapter {
     private Context context;
     SwipeDeck cardStack;
     View layoutView;
-    RelativeLayout rellike, reldislike, relbuy, relcomment;
-    ImageButton btnlike, btndislike, btnbuy, btncomment;
+   static RelativeLayout rellike, reldislike, relbuy, relcomment;
+    static ImageButton btnlike, btndislike, btnbuy, btncomment;
     ArrayList<VisualAssort> visualassortmentlist;
     ImageView img_VisualAssortment;
     TextView txtName, txtSeason, txtColor, txtFabric, txtFit, txtCollection, txtSizeRatio, txtAmount;
@@ -255,7 +255,15 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     Reusable_Functions.sDialog(context, "Loading..");
                     String articleOption = visualAssort1.getArticleOption();
                     String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+                    if(checkLikedislike == null)
+                    {
+                        checkLikedislike = "";
+                    }
                     String checkFeedback = visualAssort1.getFeedback();
+                    if(checkFeedback == null)
+                    {
+                        checkFeedback = "";
+                    }
                     int checkSizeSet = visualAssort1.getSizeSet();
                     Log.i("", "order set done click: position " + position + " articleOption " + articleOption + " checkLikedislike " + checkLikedislike + " checkSizeSet " + checkSizeSet);
 
@@ -340,7 +348,15 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     Reusable_Functions.sDialog(context, "Loading..");
                     String articleOption = visualAssort1.getArticleOption();
                     String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+                    if(checkLikedislike == null)
+                    {
+                        checkLikedislike = "";
+                    }
                     String checkFeedback = visualAssort1.getFeedback();
+                    if(checkFeedback == null)
+                    {
+                        checkFeedback = "";
+                    }
                     int checkSizeSet = visualAssort1.getSizeSet();
                     Log.i("", "comment done click: position " + position + " articleOption " + articleOption + " checkLikedislike " + checkLikedislike + " checkSizeSet " + checkSizeSet + " checkFeedback " + checkFeedback);
 

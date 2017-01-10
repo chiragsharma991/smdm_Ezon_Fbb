@@ -42,10 +42,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -787,17 +789,20 @@ public class ProductName_Fragment extends Fragment {
     }
 
     TableRow tableRowForTableDProd_Frag(ProductNameBean productDetails) {
+
+
         TableRow tableRowForTableDProd_Frag = new TableRow(this.context);
         int loopCount = ((TableRow) this.tableBProd_Frag.getChildAt(0)).getChildCount();
         NetPercent = String.valueOf(productDetails.getDayNetSalesPercent()).concat("%");
+        NumberFormat format = NumberFormat.getNumberInstance(new Locale("","in"));
         String info[] = {
                 String.valueOf(productDetails.getL2hrsNetSales()),
                 String.valueOf(productDetails.getDayNetSales()),
-                String.valueOf(productDetails.getWtdNetSales()),
+                String.valueOf(format.format(productDetails.getWtdNetSales())),
                 String.valueOf(String.format("%.1f", productDetails.getDayNetSalesPercent())).concat("%"),
                 String.valueOf(String.format("%.1f", productDetails.getWtdNetSalesPercent())).concat("%"),
-                String.valueOf(productDetails.getSoh()),
-                String.valueOf(productDetails.getGit())
+                String.valueOf(format.format(productDetails.getSoh())),
+                String.valueOf(format.format(productDetails.getGit()))
         };
 
         for (int x = 0; x < loopCount; x++) {
@@ -1009,11 +1014,12 @@ public class ProductName_Fragment extends Fragment {
                     public void onResponse(JSONArray response) {
                         Log.i("ProductName Response", response.toString());
                         try {
+                            int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(getActivity(), "no product data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for ( i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
 
@@ -1047,7 +1053,7 @@ public class ProductName_Fragment extends Fragment {
                                 count++;
                                 requestProductAPI(offsetvalue, limit);
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for ( i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
 

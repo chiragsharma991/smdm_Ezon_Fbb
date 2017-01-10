@@ -115,8 +115,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_option_efficiency);
         getSupportActionBar().hide();
-
-
         fromWhere = "Department";
         OEfficiency_SegmentClick = "Fashion";
         oe_FirstVisibleItem = "";
@@ -971,7 +969,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
-                   // coreSelection = true;
+                    coreSelection = true;
 
                     requestHearderAPI();
                     requestOptionEfficiencyDetails();
@@ -996,7 +994,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
-                  //  coreSelection = false;
+                    coreSelection = false;
 
                     requestHearderAPI();
                     requestOptionEfficiencyDetails();
@@ -1019,15 +1017,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private void requestHearderAPI() {
 
         String url = "";
-//        if (coreSelection)
-//        {
-//            //core selection without season params
-//            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&view=" + view;
-//        } else
-//        {
-            // fashion select with season params
+        if (coreSelection)
+        {
+            //core selection without season params
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level;
+        } else
+        {
+           //  fashion select with season params
             url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&seasongroup=" + seasonGroup;
-       // }
+        }
         Log.e(TAG, "Url" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -1063,7 +1061,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            //  Toast.makeText(context, "catch no data found in header" , Toast.LENGTH_SHORT).show();
+                              Toast.makeText(context, " no data found " , Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1101,18 +1099,17 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
 
         String fIdetails;
-//        if (coreSelection) {
-//
-//            //core selection without season params
-//            fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+ "&view=" + view;
-//
-//
-//        } else {
+        if (coreSelection) {
 
-            // fashion select with season params
+            //core selection without season params
+            fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
+
+
+        } else {
+
+        //     fashion select with season params
              fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit;
-
-      //  }
+        }
 
         Log.e(TAG, "requestOptionEfficiencyDetails" + fIdetails);
 
@@ -1193,7 +1190,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "catch:no data found in Details ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found ", Toast.LENGTH_SHORT).show();
                             llayoutOEfficiency.setVisibility(View.GONE);
 
                             e.printStackTrace();
@@ -1229,8 +1226,19 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void requestHeaderPieChart() {
-        String url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
+        String url = "";
+        if(coreSelection) {
+            //core selection without season group
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit ;
+
+        }
+        else {
+            //fashion selection with season group
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
+
+        }
         Log.e(TAG,"Url" + url);
+
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1343,7 +1351,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "catch no data found in Graphheader" , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, " no data found " , Toast.LENGTH_SHORT).show();
                             llayoutOEfficiency.setVisibility(View.VISIBLE);
 
                             e.printStackTrace();
@@ -1384,8 +1392,18 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private void request_OE_CategoryList(final String deptName) {
 
         String oe_category_listurl = " ";
+        if(coreSelection) {
+             //core selection without seasongroup
+            oe_category_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit ;
 
-        oe_category_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+        }
+        else
+        {
+            //fashion selection with seasiongroup
+            oe_category_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
+
+        }
+
         Log.e("url", " " + oe_category_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_category_listurl,
@@ -1470,8 +1488,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     // For Plan Class on click of Category Val
     private void request_OE_PlanClassList(final String deptName, final String category) {
+        String oe_planclass_listurl = " ";
+        if(coreSelection) {
 
-        String oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+            oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        }
+        else {
+            oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
+        }
         Log.e("url", " " + oe_planclass_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_planclass_listurl,
@@ -1553,9 +1577,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     // For Brand on click of Plan Class Val
     private void request_OE_BrandList(String deptName, String category, final String planclass) {
 
-        String oe_brand_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
-        Log.e("url", " " + oe_brand_listurl);
+        String oe_brand_listurl = "";
+        if(coreSelection) {
+            oe_brand_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit ;
 
+        }
+        else
+        {
+            oe_brand_listurl  = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+        }
+        Log.e("url", " " + oe_brand_listurl);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1637,8 +1668,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     // For BrandPlanCLass on click of Brand Val
     private void request_OE_BrandPlanList(String deptName, String category, String plan_class, final String brandnm) {
+        String oe_brandplan_listurl = "";
+        if(coreSelection) {
+            oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + oe_PlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
-        String oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + oe_PlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+        }else {
+            oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + oe_PlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
+        }
+
         Log.e("url", " " + oe_brandplan_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brandplan_listurl,
@@ -1729,15 +1766,47 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
 
         if (oe_txtHeaderClass.getText().toString().equals("Department")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+            if(coreSelection) {
+                //core selection without seasongroup
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit ;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+
+            }
         } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+            if (coreSelection) {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit ;
+            }
+            else {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+            }
         } else if (oe_txtHeaderClass.getText().toString().equals("Plan Class")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+            if(coreSelection) {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+            }
         } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
-        } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class")) {
-            url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
+            if(coreSelection) {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
+            }
+        } else if (oe_txtHeaderClass.getText().toString().equals("Brand Plan Class"))
+        {
+            if(coreSelection) {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit ;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
+            }
         }
         Log.e(TAG, "Url" + url);
 
@@ -1882,7 +1951,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "catch no data found in GraphDetail" , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, " no data found " , Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }

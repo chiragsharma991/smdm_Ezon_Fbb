@@ -32,7 +32,7 @@ public class VisualAssort {
     private String seasonName;
     private String size;
     private String color;
-    private int unitGrossPrice;
+    private double unitGrossPrice;
     private String likeDislikeFlg;
     private String feedback;
     private int sizeSet;
@@ -273,11 +273,11 @@ public class VisualAssort {
         return color;
     }
 
-    public void setUnitGrossPrice(int unitGrossPrice) {
+    public void setUnitGrossPrice(double unitGrossPrice) {
         this.unitGrossPrice = unitGrossPrice;
     }
 
-    public int getUnitGrossPrice() {
+    public double getUnitGrossPrice() {
         return unitGrossPrice;
     }
 

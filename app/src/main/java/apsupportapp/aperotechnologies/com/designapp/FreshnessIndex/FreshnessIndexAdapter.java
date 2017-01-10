@@ -111,7 +111,7 @@ public class FreshnessIndexAdapter extends BaseAdapter {
         } else if (fromWhere.equals("Category")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getPlanCategory());
-            viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
+            viewHolder.txtfindexSOH.setText(""+freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
             viewHolder.txtfindexGIT.setText(""+Math.round(freshnessIndexDetails.getStkGitQty()));
 
@@ -120,7 +120,7 @@ public class FreshnessIndexAdapter extends BaseAdapter {
         } else if (fromWhere.equals("Plan Class")) {
 
             viewHolder.txtfindexClass.setText(freshnessIndexDetails.getPlanClass());
-            viewHolder.txtfindexSOH.setText(""+(int)freshnessIndexDetails.getStkOnhandQty());
+            viewHolder.txtfindexSOH.setText(""+freshnessIndexDetails.getStkOnhandQty());
             viewHolder.txtfindexSOH_U.setText(" "+ String.format("%.1f",freshnessIndexDetails.getStkOnhandQtyCount()));
             viewHolder.txtfindexGIT.setText(""+Math.round(freshnessIndexDetails.getStkGitQty()));
 

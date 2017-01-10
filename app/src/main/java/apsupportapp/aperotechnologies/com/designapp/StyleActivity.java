@@ -649,9 +649,10 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 Toast.makeText(StyleActivity.this, "No data found", Toast.LENGTH_LONG).show();
 
                             } else {
-
                                 Reusable_Functions.hDialog();
                                 JSONObject styleDetails = response.getJSONObject(0);
+                                String storeCode = styleDetails.getString("storeCode");
+                                String storeDesc = styleDetails.getString("storeDesc");
                                 String articleOption = styleDetails.getString("articleOption");
                                 String productName = styleDetails.getString("productName");
                                 String collectionName = styleDetails.getString("collectionName");
@@ -659,68 +660,53 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 String productFitDesc = styleDetails.getString("productFitDesc");
                                 String productFinishDesc = styleDetails.getString("productFinishDesc");
                                 String seasonName = styleDetails.getString("seasonName");
-
                                 String promoFlg = styleDetails.getString("promoFlg");
                                 String keyProductFlg = styleDetails.getString("keyProductFlg");
-
-
                                 String firstReceiptDate = styleDetails.getString("firstReceiptDate");
                                 String lastReceiptDate = styleDetails.getString("lastReceiptDate");
                                 double fwdWeekCover = styleDetails.getDouble("fwdWeekCover");
-
                                 int twSaleTotQty = styleDetails.getInt("twSaleTotQty");
                                 int lwSaleTotQty = styleDetails.getInt("lwSaleTotQty");
                                 int ytdSaleTotQty = styleDetails.getInt("ytdSaleTotQty");
-
                                 int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
                                 int stkGitQty = styleDetails.getInt("stkGitQty");
                                 int targetStock = styleDetails.getInt("targetStock");
-
                                 int unitGrossPrice = styleDetails.getInt("unitGrossPrice");
                                 double sellThruUnitsRcpt = styleDetails.getDouble("sellThruUnitsRcpt");
                                 double ros = styleDetails.getDouble("ros");
-
                                 String articleCode = styleDetails.getString("articleCode");
                                 String productImageURL = styleDetails.getString("productImageURL");
                                 Log.e("row4:===", productImageURL);
-
                                 styleDetailsBean = new StyleDetailsBean();
+                                styleDetailsBean.setStoreCode(storeCode);
+                                styleDetailsBean.setStoreDesc(storeDesc);
                                 styleDetailsBean.setProductName(productName);
                                 styleDetailsBean.setCollectionName(collectionName);
                                 styleDetailsBean.setProductFabricDesc(productFabricDesc);
                                 styleDetailsBean.setProductFitDesc(productFitDesc);
                                 styleDetailsBean.setProductFinishDesc(productFinishDesc);
                                 styleDetailsBean.setSeasonName(seasonName);
-
                                 styleDetailsBean.setFirstReceiptDate(firstReceiptDate);
                                 styleDetailsBean.setLastReceiptDate(lastReceiptDate);
                                 styleDetailsBean.setFwdWeekCover(fwdWeekCover);
-
                                 styleDetailsBean.setTwSaleTotQty(twSaleTotQty);
                                 styleDetailsBean.setLwSaleTotQty(lwSaleTotQty);
                                 styleDetailsBean.setYtdSaleTotQty(ytdSaleTotQty);
-
                                 styleDetailsBean.setStkOnhandQty(stkOnhandQty);
                                 styleDetailsBean.setStkGitQty(stkGitQty);
                                 styleDetailsBean.setTargetStock(targetStock);
-
                                 styleDetailsBean.setUnitGrossPrice(unitGrossPrice);
                                 styleDetailsBean.setSellThruUnitsRcpt(sellThruUnitsRcpt);
                                 styleDetailsBean.setRos(ros);
-
                                 styleDetailsBean.setPromoFlag(promoFlg);
                                 styleDetailsBean.setKeyProductFlg(keyProductFlg);
                                 styleDetailsBean.setProductImageURL(productImageURL);
-
-
                                 Intent intent = new Intent(StyleActivity.this, SwitchingTabActivity.class);
                                 intent.putExtra("articleCode", articleCode);
                                 intent.putExtra("articleOption", articleOption);
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
-
                                 intent.putExtra("selCollectionname", collectionNM);
                                 intent.putExtra("selOptionName", optionName);
-
                                 startActivity(intent);
                                 finish();
                             }
@@ -753,15 +739,12 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
     }
 
 
     private void requestCollectionAPI(int offsetvalue1, final int limit1) {
         String url = ConstsCore.web_url + "/v1/display/collections/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
-
         Log.i("URL   ", url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -772,39 +755,32 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No collection data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == collectionlimit) {
-
                                 Log.i("limit eq resp length", "" + response.length());
                                 Log.e("offsetvalue", "" + collectionoffset);
                                 Log.e("limit", "" + collectionlimit);
                                 Log.e("count", "" + collectioncount);
-
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
                                     Log.e("collectionName  :", collectionName.getString("collectionName"));
                                     arrayList.add(collectionName.getString("collectionName"));
                                     Log.e("size in limit :", "" + arrayList.size());
-
                                 }
-
                                 collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
                                 collectioncount++;
                                 requestCollectionAPI(collectionoffset, collectionlimit);
-
                             } else if (response.length() < collectionlimit) {
                                 Reusable_Functions.hDialog();
-
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
-
                                     arrayList.add(collectionName.getString("collectionName"));
                                     Log.e("size  :", "" + arrayList.size());
                                 }
                                 Collections.sort(arrayList);
                                 arrayList.add(0, "Select Collection");
                                 Log.e("selcollectionName", "==== " + selcollectionName);
-
                                 if (selcollectionName == null || selcollectionName.equals(null)) {
                                     collection.setText("Select Collection");
                                 } else {
@@ -818,14 +794,11 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                     } else {
                                         collection.setText("Select Collection");
                                     }
-
                                 }
-
                                 collection.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         edtsearchCollection.setText("");
-
                                         collectionLayout.setVisibility(View.VISIBLE);
                                         optionLayout.setVisibility(View.GONE);
                                     }
@@ -853,7 +826,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                         if (inputManager != null) {
                                             inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                                         }
-
                                         if (collectionNM.equalsIgnoreCase("Select Collection")) {
                                             //Toast.makeText(StyleActivity.this,"Please select Collection",Toast.LENGTH_LONG).show();
                                         } else {
@@ -907,10 +879,8 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
     private void requestArticleOptionsAPI(final String collectionNM, int offsetvalue1, final int limit1) {
         String url;
-
         url = ConstsCore.web_url + "/v1/display/collectionoptions/" + userId + "?collectionName=" + collectionNM.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.i("URL article   ", url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -923,17 +893,14 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No options data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
-
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String articleOptions = jsonResponse.getString("articleOptions");
                                     articleOptionList.add(articleOptions);
                                 }
-
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
-
                             } else if (response.length() < limit) {
                                 Log.i(" Response length", "" + response.length());
                                 for (int i = 0; i < response.length(); i++) {
@@ -942,11 +909,8 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                     //   Log.e("articleOptions  :", "   " + articleOptions);
                                     articleOptionList.add(articleOptions);
                                 }
-
                                 Reusable_Functions.hDialog();
-
                                 Log.e("articleOptionList", articleOptionList.size() + "");
-
                                 Collections.sort(articleOptionList);
                                 articleOptionList.add(0, "Select Option");
                                 style.setEnabled(true);
@@ -956,9 +920,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                     style.setText("Select Option");
                                 } else {
                                 }
-
                                 optionAdapter.notifyDataSetChanged();
-
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");

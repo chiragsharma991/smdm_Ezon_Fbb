@@ -38,10 +38,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Option_Fragment extends Fragment {
@@ -337,13 +339,14 @@ public class Option_Fragment extends Fragment {
         TableRow taleRowForTableD = new TableRow(this.context);
 
         int loopCount = ((TableRow) tableBOpt_Frag.getChildAt(0)).getChildCount();
+        NumberFormat format = NumberFormat.getNumberInstance(new Locale("","in"));
         String info[] = {
 
                 String.valueOf(productDetails.getL2hrsNetSales()),
                 String.valueOf(productDetails.getDayNetSales()),
-                String.valueOf(productDetails.getWtdNetSales()),
-                String.valueOf(productDetails.getSoh()),
-                String.valueOf(productDetails.getGit())
+                String.valueOf(format.format(productDetails.getWtdNetSales())),
+                String.valueOf(format.format(productDetails.getSoh())),
+                String.valueOf(format.format(productDetails.getGit()))
         };
 
         for (int x = 0; x < loopCount; x++) {

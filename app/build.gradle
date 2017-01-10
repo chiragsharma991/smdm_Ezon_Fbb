@@ -17,8 +17,6 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-
-
 android {
     compileSdkVersion 23
     buildToolsVersion '23.0.0'
@@ -27,8 +25,8 @@ android {
         applicationId "apsupportapp.aperotechnologies.com.designapp"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 63
-        versionName "1.63"
+        versionCode 67
+        versionName "1.67"
     }
     buildTypes {
         release {

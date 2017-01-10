@@ -274,9 +274,9 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                     txtSohUVal.setText("" + format.format(Math.round( salesAnalysis.getStkOnhandQty())));
 //                    txtRosVal0.setText("" + String.format("%.1f",salesAnalysis.getRos()));
 //                    txtFwdWkCoverVal0.setText("" + String.format("%.1f",salesAnalysis.getFwdWeekCover()));
-                    txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getWowNetSalesGrowthPct()) + "%");
+                    txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
                     txtPlanSalesPerc.setText("" + Math.round( salesAnalysis.getPvaAchieved()) + "%");
-                    txtNetSalesUPerc.setText("" + Math.round( salesAnalysis.getWowNetSalesUnitsGrowthPct()) + "%");
+                    txtNetSalesUPerc.setText("" + Math.round( salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
 
 
                     //
@@ -326,9 +326,9 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 //                    txtFwdWkCoverVal0.setText(" " +String.format("%.1f", salesAnalysis.getVelocity()));
 
 
-                    txtNetSalesPerc.setText("" + Math.round( salesAnalysis.getWowNetSalesGrowthPct()) + "%");
+                    txtNetSalesPerc.setText("" + Math.round( salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
-                    txtNetSalesUPerc.setText("" + Math.round( salesAnalysis.getWowNetSalesUnitsGrowthPct()) + "%");
+                    txtNetSalesUPerc.setText("" + Math.round( salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
                     Log.i("saleNetVal IN L4W", "" + salesAnalysis.getSaleNetVal());
                 }
                 //           txtNetSalesPerc.setText(salesAnalysis.);

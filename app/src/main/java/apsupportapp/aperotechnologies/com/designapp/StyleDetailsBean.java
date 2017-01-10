@@ -15,6 +15,25 @@ public class StyleDetailsBean implements Serializable {
     String promoFlag, productImageURL;
     String usp;
     double fwdWeekCover, ros;
+    String storeCode;
+
+    public String getStoreDesc() {
+        return storeDesc;
+    }
+
+    public void setStoreDesc(String storeDesc) {
+        this.storeDesc = storeDesc;
+    }
+
+    public String getStoreCode() {
+        return storeCode;
+    }
+
+    public void setStoreCode(String storeCode) {
+        this.storeCode = storeCode;
+    }
+
+    String storeDesc;
 
     public String getProductImageURL() {
         return productImageURL;
