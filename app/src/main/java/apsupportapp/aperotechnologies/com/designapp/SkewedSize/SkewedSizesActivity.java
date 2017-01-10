@@ -313,7 +313,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 //        int screenWidth = displayMetrics.widthPixels;
 //        int screenHeight = displayMetrics.heightPixels;
 
-        //   Toast.makeText(context, "resolution is "+screenWidth+" "+screenHeight, Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(context, "resolution is "+screenWidth+" "+screenHeight, Toast.LENGTH_SHORT).show();
 
 
 
