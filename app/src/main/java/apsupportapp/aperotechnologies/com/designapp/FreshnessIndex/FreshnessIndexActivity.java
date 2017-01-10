@@ -1247,9 +1247,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG,"Sales Pva Chart on Scroll  : "+ response);
+                        Log.i(TAG,"Pie Chart on Scroll  : "+ response);
 
-                        Log.e("Sales Pva Chart response", "" + response.length());
+                        Log.e("Pie Chart response", "" + response.length());
                         try {
 
                             int i;

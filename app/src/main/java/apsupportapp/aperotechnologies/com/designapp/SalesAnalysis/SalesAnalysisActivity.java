@@ -56,7 +56,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     SegmentedGroup segmentedGroupSales;
     LinearLayout llayoutSalesAnalysis;
     SalesAnalysisListDisplay salesAnalysisClass;
-   public static SalesAnalysisViewPagerValue salesAnalysis;
+    public static SalesAnalysisViewPagerValue salesAnalysis;
     ArrayList<SalesAnalysisViewPagerValue> analysisArrayList, salesList;
     ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList;
     static ViewPager vwpagersales;
@@ -82,7 +82,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     int offsetvalue = 0, limit = 100;
     int count = 0, level;
     RequestQueue queue;
-    static String planDept, planCategory, planClass,brandnm;
+    static String planDept, planCategory, planClass, brandnm;
     Gson gson;
     int focusposition = 0;
     LinearLayout rankLayout;
@@ -98,9 +98,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     String val;
     boolean flag = false;
     int currentVmPos;
-    int currentIndex ,top;
+    static int currentIndex = 0;
+    int top;
     Parcelable state;
-
+    int value = 0;
 
 
     @Override
@@ -112,7 +113,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         txtSalesClickedValue = " ";
         val = "";
         context = this;
-     //   SalesFilter.searchDept = " ";
+        //   SalesFilter.searchDept = " ";
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -141,14 +142,13 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         txtheaderplanclass = (TextView) findViewById(R.id.headerplanclass);
 
         //Rank UI Components
-       // rankLayout = (LinearLayout) findViewById(R.id.rankLayout);
+        // rankLayout = (LinearLayout) findViewById(R.id.rankLayout);
         txtZonalSales = (TextView) findViewById(R.id.txtZonalSales);
         txtNationalSales = (TextView) findViewById(R.id.txtNationalSales);
         txtZonalYOY = (TextView) findViewById(R.id.txtZonalYOY);
         txtNationalYOY = (TextView) findViewById(R.id.txtNationalYOY);
 
         //WOW & YOY UI Components
-
 
         txtheaderplanclass.setText("Department");
 
@@ -157,7 +157,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         RelativeLayout relpopuplayout = (RelativeLayout) findViewById(R.id.relpopuplayout);
         relpopuplayout.setOnClickListener(null);
 
-      //  RelativeLayout relrankLayout = (RelativeLayout) findViewById(R.id.relrankLayout);
+        //  RelativeLayout relrankLayout = (RelativeLayout) findViewById(R.id.relrankLayout);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,7 +213,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         salesList = new ArrayList<SalesAnalysisViewPagerValue>();
 
         vwpagersales = (ViewPager) findViewById(R.id.viewpager);
-       // vwpagersales.setCurrentItem(0);
+        // vwpagersales.setCurrentItem(0);
         pageradapter = new SalesPagerAdapter();
         pageradapter.notifyDataSetChanged();
         lldots = (LinearLayout) findViewById(R.id.lldots);
@@ -240,15 +240,13 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             limit = 100;
             count = 0;
             level = 1;
-            if(getIntent().getStringExtra("selectedDept")==null) {
+            if (getIntent().getStringExtra("selectedDept") == null) {
                 requestSalesListDisplayAPI();
-            }
-            else
-            {
+            } else {
                 saleFirstVisibleItem = getIntent().getStringExtra("selectedDept");
                 requestSalesSelectedFilterVal();
             }
-            Log.e("state on create",""+state);
+            Log.e("state on create", "" + state);
 
         } else {
 
@@ -303,7 +301,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         llhierarchy.setVisibility(View.GONE);
                         txtheaderplanclass.setText("Plan Class");
                         fromWhere = "Plan Class";
-                        flag= false;
+                        flag = false;
                         level = 3;
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         llayoutSalesAnalysis.setVisibility(View.GONE);
@@ -472,7 +470,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         txtheaderplanclass.setText("Brand");
                         fromWhere = "Brand";
                         level = 4;
-                       // SalesPagerAdapter.currentPage = 0;
+                        // SalesPagerAdapter.currentPage = 0;
                         if (lldots != null) {
                             lldots.removeAllViews();
                         }
@@ -540,9 +538,12 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         listView_SalesAnalysis.setSelection(view.getFirstVisiblePosition());
                         currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
 
-                        //Log.e("firstVisibleItem", " " + view.getFirstVisiblePosition() + " " + arrayList.get(view.getFirstVisiblePosition()).getPlanDept());
+                        View v = listView_SalesAnalysis.getChildAt(0);
+                        Log.e(TAG, "View" + v);
+                        top = (v == null) ? 0 : (v.getTop() - listView_SalesAnalysis.getPaddingTop());
+
                         currentIndex = focusposition;
-                        Log.e(TAG,"focusPosition----"+currentIndex);
+                        Log.e(TAG, "focusPosition----" + currentIndex);
                         if (txtheaderplanclass.getText().toString().equals("Department")) {
                             saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
                         } else if (txtheaderplanclass.getText().toString().equals("Category")) {
@@ -555,12 +556,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                             saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
                         }
 
-                        //Log.e("analysisArrayList", " " + analysisArrayList.size());
                         if (focusposition != selFirstPositionValue) {
                             if (Reusable_Functions.chkStatus(context)) {
                                 Reusable_Functions.hDialog();
                                 Reusable_Functions.sDialog(context, "Loading data...");
-                               //SalesPagerAdapter.currentPage = 0;
+                                //SalesPagerAdapter.currentPage = 0;
 //                                if (lldots != null) {
 //                                    lldots.removeAllViews();
 //                                }
@@ -591,6 +591,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     }
                 }
             }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
@@ -602,7 +603,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.e(TAG, "listview position" + position);
                 //listView_SalesAnalysis.setSelector(android.R.color.darker_gray);
-                if(position < salesAnalysisClassArrayList.size()) {
+                if (position < salesAnalysisClassArrayList.size()) {
                     switch (txtheaderplanclass.getText().toString()) {
 
                         case "Department":
@@ -742,7 +743,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     }
 
 
-
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
@@ -757,10 +757,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 }
                 listView_SalesAnalysis.invalidateViews();
                 llhierarchy.setVisibility(View.GONE);
-                currentVmPos= vwpagersales.getCurrentItem();
-                Log.e(TAG, "currentVmPos: "+currentVmPos );
+                currentVmPos = vwpagersales.getCurrentItem();
+                Log.e(TAG, "currentVmPos: " + currentVmPos);
                 currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-                Log.e(TAG," in WTD foucpos"+currentIndex);
+                Log.e(TAG, " in WTD foucpos" + currentIndex);
                 // save position here, and set position on API call's onPostexecute that scroll pos will get on Scroll method??
                 saleFirstVisibleItem = " ";
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -773,9 +773,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     limit = 100;
                     count = 0;
                     requestSalesListDisplayAPI();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 Log.e("---1---", " ");
@@ -789,10 +787,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                 if (lldots != null) {
                     lldots.removeAllViews();
                 }
-                currentVmPos= vwpagersales.getCurrentItem();
+                currentVmPos = vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
                 currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-                Log.e(TAG," in LW foucpos"+currentIndex);
+                Log.e(TAG, " in LW foucpos" + currentIndex);
                 saleFirstVisibleItem = " ";
                 listView_SalesAnalysis.invalidateViews();
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -804,11 +802,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
-                    Log.e("array list size",""+salesAnalysisClassArrayList.size());
+                    Log.e("array list size", "" + salesAnalysisClassArrayList.size());
+                    value = 2;
                     requestSalesListDisplayAPI();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 Log.e("---2---", " ");
@@ -823,27 +820,25 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     lldots.removeAllViews();
                 }
                 listView_SalesAnalysis.invalidateViews();
-                currentVmPos= vwpagersales.getCurrentItem();
+                currentVmPos = vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
                 currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-                Log.e(TAG," in L4W foucpos"+currentIndex);
+                Log.e(TAG, " in L4W foucpos" + currentIndex);
                 saleFirstVisibleItem = " ";
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                 llayoutSalesAnalysis.setVisibility(View.GONE);
-                if (Reusable_Functions.chkStatus(context))
-                {
+                if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading data...");
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
-                    Log.e("array list size in L4W","----"+salesAnalysisClassArrayList.size());
+                    Log.e("array list size in L4W", "----" + salesAnalysisClassArrayList.size());
 
                     requestSalesListDisplayAPI();
 
-                } else
-                {
+                } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 Log.e("---3---", " ");
@@ -859,27 +854,24 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                     lldots.removeAllViews();
                 }
                 listView_SalesAnalysis.invalidateViews();
-                currentVmPos= vwpagersales.getCurrentItem();
+                currentVmPos = vwpagersales.getCurrentItem();
                 llhierarchy.setVisibility(View.GONE);
                 currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-                Log.e(TAG," in YTD foucpos"+currentIndex);
+                Log.e(TAG, " in YTD foucpos" + currentIndex);
                 saleFirstVisibleItem = " ";
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                 llayoutSalesAnalysis.setVisibility(View.GONE);
-                if (Reusable_Functions.chkStatus(context))
-                {
+                if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading data...");
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
-                    Log.e("array list size in YTD",""+salesAnalysisClassArrayList.size());
+                    Log.e("array list size in YTD", "" + salesAnalysisClassArrayList.size());
 
                     requestSalesListDisplayAPI();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 Log.e("---4---", " ");
@@ -930,11 +922,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 }
                                 final int currentItem = vwpagersales.getCurrentItem();
-                                Log.e("----"," "+vwpagersales.getCurrentItem());
+                                Log.e("----", " " + vwpagersales.getCurrentItem());
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
                                 txtStoreCode.setText("" + salesAnalysisClassArrayList.get(i).getStoreCode());
-                                // Log.e("storecode", "------" + salesAnalysisClassArrayList.get(1).getStoreCode());
                                 txtStoreDesc.setText("" + salesAnalysisClassArrayList.get(i).getStoreDesc());
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
                                 if (txtheaderplanclass.getText().toString().equals("Department")) {
@@ -949,84 +940,102 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                     salesAnalysisClass.setBrandplanClass("All");
                                 }
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
-                                Log.e(TAG,"focusPosition in API----"+currentIndex);
-                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context,currentIndex, fromWhere, listView_SalesAnalysis);
-                               // listView_SalesAnalysis.setAdapter(salesadapter);
+                                Log.e(TAG, "focusPosition in API----" + currentIndex);
+                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+
+                                Log.e("--- ", " salesAnalysisClassArrayList" + salesAnalysisClassArrayList.size());
+                                Log.e("listView_SalesAnalysis.getAdapter()", " " + listView_SalesAnalysis.getAdapter());
+
 //                                if(listView_SalesAnalysis.getAdapter() == null)
 //                                {
-                                    listView_SalesAnalysis.setAdapter(salesadapter);
-                                    salesadapter.notifyDataSetChanged();
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    requestSalesViewPagerValueAPI();
+                                listView_SalesAnalysis.setAdapter(salesadapter);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestSalesViewPagerValueAPI();
+//                            } else {
+//
+////                                    Log.e("currentIndex", " "+currentIndex);
+////                                    //listView_SalesAnalysis.setSelection(currentIndex);
+////                                    salesadapter.notifyDataSetChanged();
+//                                salesadapter.updateData(salesAnalysisClassArrayList);
+////                                    salesAnalysisClassArrayList.clear();
+////                                    salesAnalysisClassArrayList.addAll(salesAnalysisClassArrayList);
+////                                    salesadapter = new SalesAnalysisAdapter(context,salesAnalysisClassArrayList);
+////                                    listView_SalesAnalysis.setAdapter(salesadapter);
+//                                //listView_SalesAnalysis.setSelectionFromTop(currentIndex, 0);
+//                                offsetvalue = 0;
+//                                limit = 100;
+//                                count = 0;
+//                                analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+//                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+//                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanDept().toString();
+//                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+//                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanCategory().toString();
+//                                } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+//                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanClass().toString();
+//                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+//                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getBrandName().toString();
+//                                } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+//                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getBrandplanClass().toString();
 //                                }
-//                                else
-//                                {
-//                                    listView_SalesAnalysis.invalidateViews();
-//                                    salesadapter.notifyDataSetChanged();
-//                                   // listView_SalesAnalysis.destroyDrawingCache();
-////                                    listView_SalesAnalysis.setVisibility(ListView.INVISIBLE);
-////                                    listView_SalesAnalysis.setVisibility(ListView.VISIBLE);
-//                                  //  listView_SalesAnalysis.scrollBy(0,currentIndex);
-//                                    offsetvalue = 0;
-//                                    limit = 100;
-//                                    count = 0;
-//                                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-//                                    if (txtheaderplanclass.getText().toString().equals("Department")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanDept().toString();
-//                                    } else if (txtheaderplanclass.getText().toString().equals("Category")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanCategory().toString();
-//                                    } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanClass().toString();
-//                                    } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getBrandName().toString();
-//                                    } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getBrandplanClass().toString();
-//                                    }
-//                                    requestSalesPagerOnScrollAPI();
-//                                }
+//                                requestSalesPagerOnScrollAPI();
+//                            }
 
 
-                            }
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+
+                    catch(
+                    Exception e
+                    )
+
+                    {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
+                        e.printStackTrace();
                     }
                 }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-
     }
+
+    ,
+            new Response.ErrorListener()
+
+    {
+        @Override
+        public void onErrorResponse (VolleyError error){
+        Reusable_Functions.hDialog();
+        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+        error.printStackTrace();
+    }
+    }
+
+    )
+
+    {
+        @Override
+        public Map<String, String> getHeaders ()throws AuthFailureError {
+        Map<String, String> params = new HashMap<>();
+        params.put("Content-Type", "application/json");
+        params.put("Authorization", "Bearer " + bearertoken);
+        return params;
+    }
+    }
+
+    ;
+    int socketTimeout = 60000;//5 seconds
+
+    RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+    postRequest.setRetryPolicy(policy);
+    queue.add(postRequest);
+
+}
     //Api 1.19 for view pager values on store level like wtd , lw
 
     private void requestSalesViewPagerValueAPI() {
         //Log.e("saleFirstVisibleItem in Api",""+saleFirstVisibleItem);
 
-        String url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level +"&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
 
         Log.e("Url", "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -1072,10 +1081,10 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                             //Log.i("-------",""+analysisArrayList.size());
 
-                            Log.i("----getCurrentItem---",""+vwpagersales.getCurrentItem());
-                               pageradapter = new SalesPagerAdapter(context, analysisArrayList, focusposition, vwpagersales, lldots, salesadapter, listView_SalesAnalysis, salesAnalysisClassArrayList, fromWhere, pageradapter);
-                               vwpagersales.setAdapter(pageradapter);
-                               vwpagersales.setCurrentItem(currentVmPos);
+                            Log.i("----getCurrentItem---", "" + vwpagersales.getCurrentItem());
+                            pageradapter = new SalesPagerAdapter(context, analysisArrayList, focusposition, vwpagersales, lldots, salesadapter, listView_SalesAnalysis, salesAnalysisClassArrayList, fromWhere, pageradapter);
+                            vwpagersales.setAdapter(pageradapter);
+                            vwpagersales.setCurrentItem(currentVmPos);
                             pageradapter.notifyDataSetChanged();
                             //txtZonalSales.setText("" + salesAnalysis.getZonalSalesRank());
 //                            txtNationalSales.setText("" + salesAnalysis.getNationalSalesRank());
@@ -1128,24 +1137,15 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
         String url = "";
 
-        if (txtheaderplanclass.getText().toString().equals("Department"))
-        {
+        if (txtheaderplanclass.getText().toString().equals("Department")) {
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&department=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
-        }
-        else if (txtheaderplanclass.getText().toString().equals("Category"))
-        {
+        } else if (txtheaderplanclass.getText().toString().equals("Category")) {
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&category=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
-        }
-        else if (txtheaderplanclass.getText().toString().equals("Plan Class"))
-        {
+        } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&class=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
-        }
-        else if (txtheaderplanclass.getText().toString().equals("Brand"))
-        {
+        } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&brand=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
-        }
-        else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class"))
-        {
+        } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&brandclass=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
         }
         Log.e("Url", "" + url);
@@ -1193,6 +1193,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 Log.e("salesAnalysisClassArrayList", "---" + salesAnalysisClassArrayList);
                                 pageradapter = new SalesPagerAdapter(context, analysisArrayList, focusposition, vwpagersales, lldots, salesadapter, listView_SalesAnalysis, salesAnalysisClassArrayList, fromWhere, pageradapter);
                                 //Log.i("-------",""+analysisArrayList.size());
+
                                 vwpagersales.setAdapter(pageradapter);
                                 vwpagersales.setCurrentItem(currentVmPos);
                                 pageradapter.notifyDataSetChanged();
@@ -1282,7 +1283,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 }
                                 int currentItem = vwpagersales.getCurrentItem();
-                                Log.e("----"," "+vwpagersales.getCurrentItem());
+                                Log.e("----", " " + vwpagersales.getCurrentItem());
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
@@ -1296,7 +1297,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 val = deptName;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
-                               // llayoutSalesAnalysis.setVisibility(View.VISIBLE);
+                                // llayoutSalesAnalysis.setVisibility(View.VISIBLE);
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
@@ -1384,7 +1385,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 }
                                 int currentItem = vwpagersales.getCurrentItem();
-                                Log.e("----"," "+vwpagersales.getCurrentItem());
+                                Log.e("----", " " + vwpagersales.getCurrentItem());
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
@@ -1484,7 +1485,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 }
                                 int currentItem = vwpagersales.getCurrentItem();
-                                Log.e("----"," "+vwpagersales.getCurrentItem());
+                                Log.e("----", " " + vwpagersales.getCurrentItem());
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
@@ -1494,7 +1495,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 flag = true;
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
-                               // String plnCls = planclass.substring(0,1).toUpperCase()+planclass.substring(1).toLowerCase();
+                                // String plnCls = planclass.substring(0,1).toUpperCase()+planclass.substring(1).toLowerCase();
                                 val += " > " + planclass;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
@@ -1585,7 +1586,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 }
                                 int currentItem = vwpagersales.getCurrentItem();
-                                Log.e("----"," "+vwpagersales.getCurrentItem());
+                                Log.e("----", " " + vwpagersales.getCurrentItem());
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
@@ -1595,11 +1596,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
-                                 String brnd = brandnm.substring(0,1).toUpperCase()+brandnm.substring(1).toLowerCase();
+                                String brnd = brandnm.substring(0, 1).toUpperCase() + brandnm.substring(1).toLowerCase();
                                 val += " > " + brandnm;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
-                               // llayoutSalesAnalysis.setVisibility(View.VISIBLE);
+                                // llayoutSalesAnalysis.setVisibility(View.VISIBLE);
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
@@ -1642,7 +1643,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     }
 
     private void requestSalesSelectedFilterVal() {
-        String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" +  saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+        String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + salespva_brandplan_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
@@ -1685,7 +1686,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 }
                                 int currentItem = vwpagersales.getCurrentItem();
-                                Log.e("----"," "+vwpagersales.getCurrentItem());
+                                Log.e("----", " " + vwpagersales.getCurrentItem());
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
@@ -1738,7 +1739,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
     }
 
 
-
     @Override
     public void onBackPressed() {
 
@@ -1748,8 +1748,8 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 //            SalesPagerAdapter.currentPage = 0;
             /*Intent i = new Intent(SalesAnalysisActivity.this, DashBoardActivity.class);
             startActivity(i);*/
-            finish();
-       // }
+        finish();
+        // }
 
     }
 

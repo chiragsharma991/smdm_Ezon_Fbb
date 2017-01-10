@@ -188,6 +188,11 @@
         <activity android:name=".SalesAnalysis.SalesFilter"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
+
+
+        <activity android:name=".VisualAssortmentSwipe.VisualReportActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
