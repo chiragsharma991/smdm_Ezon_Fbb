@@ -63,42 +63,43 @@
                      android:layout_below="@+id/txtStoreName"
                      android:layout_marginTop="5dp" />
      -->
-            <TextView
-                android:id="@+id/txt_Sku_article_Option_Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtStoreName"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/bg_store_code_text"
-                android:textSize="@dimen/normallayout_storesize" />
+                <TextView
+                    android:id="@+id/txt_Sku_article_Option_Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/txtStoreName"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/normallayout_storesize" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_Sku_article_Option_Name"
-                android:layout_marginTop="10dp"
-                android:textSize="@dimen/normallayout_storesize"
-                android:text="@string/number_in_units" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_Sku_article_Option_Name"
+                    android:layout_marginTop="10dp"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:text="@string/number_in_units" />
 
 
+            </RelativeLayout>
+
+
+            <RelativeLayout
+
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/innerrellay">
+
+            </RelativeLayout>
         </RelativeLayout>
 
-
-        <RelativeLayout
-
-            android:id="@+id/relativeLayout"
+        <FrameLayout
+            android:id="@+id/child_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/innerrellay">
-
-        </RelativeLayout>
+            android:layout_height="match_parent"></FrameLayout>
     </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/child_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
-</RelativeLayout>
 
 </RelativeLayout>

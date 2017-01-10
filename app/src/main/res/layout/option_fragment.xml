@@ -10,8 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-
         <RelativeLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -19,7 +17,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="5dp"> >
 
             <RelativeLayout
                 android:layout_marginLeft="10dp"
@@ -71,8 +69,8 @@
 
                 <TextView
                     android:id="@+id/txtnounits"
-                    android:textSize="@dimen/normallayout_storesize"
                     android:layout_marginTop="7dp"
+                    android:textSize="@dimen/normallayout_storesize"
                     android:text="@string/number_in_units"
                     android:layout_below="@+id/txtArticleName"
                     android:layout_width="wrap_content"
