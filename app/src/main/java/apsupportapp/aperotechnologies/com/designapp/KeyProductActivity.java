@@ -56,7 +56,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         queue.start();
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Product Name"));
+        tabLayout.addTab(tabLayout.newTab().setText("Product "));
         tabLayout.addTab(tabLayout.newTab().setText("Option"));
         tabLayout.addTab(tabLayout.newTab().setText("SKU"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);

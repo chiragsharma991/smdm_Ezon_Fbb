@@ -539,6 +539,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                         focusposition = view.getFirstVisiblePosition();
                         listView_SalesAnalysis.setSelection(view.getFirstVisiblePosition());
                         currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
+
                         //Log.e("firstVisibleItem", " " + view.getFirstVisiblePosition() + " " + arrayList.get(view.getFirstVisiblePosition()).getPlanDept());
                         currentIndex = focusposition;
                         Log.e(TAG,"focusPosition----"+currentIndex);
@@ -951,40 +952,40 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 Log.e(TAG,"focusPosition in API----"+currentIndex);
                                 salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context,currentIndex, fromWhere, listView_SalesAnalysis);
                                // listView_SalesAnalysis.setAdapter(salesadapter);
-                                if(listView_SalesAnalysis.getAdapter() == null)
-                                {
+//                                if(listView_SalesAnalysis.getAdapter() == null)
+//                                {
                                     listView_SalesAnalysis.setAdapter(salesadapter);
                                     salesadapter.notifyDataSetChanged();
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
                                     requestSalesViewPagerValueAPI();
-                                }
-                                else
-                                {
-                                    listView_SalesAnalysis.invalidateViews();
-                                    salesadapter.notifyDataSetChanged();
-                                   // listView_SalesAnalysis.destroyDrawingCache();
-//                                    listView_SalesAnalysis.setVisibility(ListView.INVISIBLE);
-//                                    listView_SalesAnalysis.setVisibility(ListView.VISIBLE);
-                                  //  listView_SalesAnalysis.scrollBy(0,currentIndex);
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                    if (txtheaderplanclass.getText().toString().equals("Department")) {
-                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanDept().toString();
-                                    } else if (txtheaderplanclass.getText().toString().equals("Category")) {
-                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanCategory().toString();
-                                    } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
-                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanClass().toString();
-                                    } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
-                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getBrandName().toString();
-                                    } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
-                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getBrandplanClass().toString();
-                                    }
-                                    requestSalesPagerOnScrollAPI();
-                                }
+//                                }
+//                                else
+//                                {
+//                                    listView_SalesAnalysis.invalidateViews();
+//                                    salesadapter.notifyDataSetChanged();
+//                                   // listView_SalesAnalysis.destroyDrawingCache();
+////                                    listView_SalesAnalysis.setVisibility(ListView.INVISIBLE);
+////                                    listView_SalesAnalysis.setVisibility(ListView.VISIBLE);
+//                                  //  listView_SalesAnalysis.scrollBy(0,currentIndex);
+//                                    offsetvalue = 0;
+//                                    limit = 100;
+//                                    count = 0;
+//                                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+//                                    if (txtheaderplanclass.getText().toString().equals("Department")) {
+//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanDept().toString();
+//                                    } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanCategory().toString();
+//                                    } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getPlanClass().toString();
+//                                    } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getBrandName().toString();
+//                                    } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(currentIndex).getBrandplanClass().toString();
+//                                    }
+//                                    requestSalesPagerOnScrollAPI();
+//                                }
 
 
                             }

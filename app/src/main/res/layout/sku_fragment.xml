@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/child_option_fragment"
     android:layout_width="match_parent"
+    android:background="@color/bg_screen_color"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -12,45 +13,56 @@
 
         <RelativeLayout
             android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp">
 
-            <TextView
-                android:id="@+id/tstoreCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/store"
-                android:textColor="#920609"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/txtStoreCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tstoreCode"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/txtStoreName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_toRightOf="@id/txtStoreCode"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-            <!-- <TextView
-                 android:id="@+id/txt_Sku_Product_Name"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@+id/txtStoreName"
-                 android:layout_marginTop="5dp" />
- -->
+                android:layout_marginRight="10dp"
+                android:id="@+id/innerrellay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/tstoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/normallayout_storesize" />
+
+                <TextView
+                    android:id="@+id/txtStoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@+id/tstoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/normallayout_storesize" />
+
+                <TextView
+                    android:id="@+id/txtStoreName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/txtStoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/normallayout_storesize" />
+
+                <!-- <TextView
+                     android:id="@+id/txt_Sku_Product_Name"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_below="@+id/txtStoreName"
+                     android:layout_marginTop="5dp" />
+     -->
             <TextView
                 android:id="@+id/txt_Sku_article_Option_Name"
                 android:layout_width="wrap_content"
@@ -58,14 +70,15 @@
                 android:layout_below="@+id/txtStoreName"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/normallayout_storesize" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_Sku_article_Option_Name"
                 android:layout_marginTop="10dp"
+                android:textSize="@dimen/normallayout_storesize"
                 android:text="@string/number_in_units" />
 
 
@@ -77,7 +90,7 @@
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/linearLayout">
+            android:layout_below="@+id/innerrellay">
 
         </RelativeLayout>
     </RelativeLayout>
@@ -88,3 +101,4 @@
         android:layout_height="match_parent"></FrameLayout>
 </RelativeLayout>
 
+</RelativeLayout>

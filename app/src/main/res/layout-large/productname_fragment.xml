@@ -63,7 +63,7 @@
                     android:layout_below="@+id/txtStoreName"
                     android:layout_width="wrap_content"
                     android:textSize="@dimen/largelayout_storesize"
-                    android:textColor="#000000"
+                    android:textColor="@color/bg_store_code_text"
                     android:layout_height="wrap_content" />
 
                 <TextView
