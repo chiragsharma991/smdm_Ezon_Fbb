@@ -87,7 +87,9 @@
                     android:id="@+id/imgProfile"
                     android:layout_width="110dp"
                     android:layout_height="150dp"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription"
+                    android:scaleType="fitCenter"
+                    />
 
             </LinearLayout>
 
@@ -106,7 +108,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.4"
                         android:text="@string/product_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -118,9 +120,8 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:id="@+id/txtProductName"
-                        android:text="@string/product_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
@@ -135,7 +136,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.4"
                         android:text="Collection"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -147,9 +148,8 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:id="@+id/txtCollcetion"
-                        android:text="Collection  "
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
@@ -164,7 +164,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.4"
                         android:text="Fabric"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -176,9 +176,8 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:id="@+id/txtFabric"
-                        android:text="Fabric  "
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
@@ -193,7 +192,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.4"
                         android:text="Fit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -206,7 +205,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:id="@+id/txtFit"
                         android:text="Fit  "
                         android:layout_width="0dp"
@@ -222,7 +221,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.4"
                         android:text="Finish"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -235,7 +234,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:id="@+id/txtFinish"
                         android:text="Finish  "
                         android:layout_width="0dp"
@@ -251,7 +250,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.4"
                         android:text="Season"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -263,7 +262,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:id="@+id/txtSeason"
                         android:text="Season  "
                         android:layout_width="0dp"

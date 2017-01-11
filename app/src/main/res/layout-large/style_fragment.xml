@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
     <TextView
         android:id="@+id/txtarticleOption"
         android:text="@string/article_option"
@@ -85,7 +86,6 @@
                         <TextView
                             android:layout_weight="1.0"
                             android:id="@+id/txtSales"
-                            android:text="Sales  "
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -101,7 +101,6 @@
                         <TextView
                             android:layout_weight="1.0"
                             android:id="@+id/txtSalesThruUnit"
-                            android:text="Sell Thru% (U)  "
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -129,9 +128,8 @@
 
 
                         <TextView
-                            android:layout_weight="1.0"
+                            android:layout_weight="0.99"
                             android:id="@+id/txtSalesUnit"
-                            android:text="Sales Unit  "
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -146,7 +144,6 @@
                         <TextView
                             android:layout_weight="1.0"
                             android:id="@+id/txtRos"
-                            android:text="ROS  "
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -176,7 +173,6 @@
                         <TextView
                             android:layout_weight="1.0"
                             android:id="@+id/txtFwdCover"
-                            android:text="Fwd Week Cover  "
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -190,7 +186,6 @@
                         <TextView
                             android:layout_weight="1.0"
                             android:id="@+id/txtSOh"
-                            android:text="SOH  "
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -219,7 +214,6 @@
                         <TextView
                             android:layout_weight="1.0"
                             android:id="@+id/txtGit"
-                            android:text="GIT(U)  "
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -241,12 +235,177 @@
 
     </LinearLayout>
 
+
+
+<!--second layout starting    -->
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:background="#ffffff"
-        android:layout_below="@+id/linearLayout"></RelativeLayout>
+        android:layout_below="@+id/linearLayout"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/promoCat"
+            android:layout_marginTop="10dip"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableRunningPromo"
+                android:background="@color/colorPrimary"
+
+
+                >
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    >
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:text="Color"
+                        android:textStyle="bold"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                        android:textColor="@color/divider_salescard1"
+
+                        />
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Size"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                        android:textColor="@color/divider_salescard1"
+                        />
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:text="TW Sales(U)"
+                        android:textStyle="bold"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                        android:textColor="@color/divider_salescard1"
+                        />
+                    <TextView
+                        android:layout_weight="2"
+                        android:text="SOH(U)"
+                        android:layout_width="0dp"
+                        android:textStyle="bold"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                        android:textColor="@color/divider_salescard1"
+                        />
+
+                    <TextView
+                        android:layout_weight="2"
+                        android:text="FWD"
+                        android:layout_width="0dp"
+                        android:textStyle="bold"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                        android:textColor="@color/divider_salescard1"
+                        />
+
+
+
+                </TableRow>
+
+            </TableLayout>
+
+
+            <ScrollView
+                android:layout_height="match_parent"
+                android:scrollbars="horizontal|vertical"
+                android:layout_width="match_parent"
+                android:scrollbarStyle="outsideInset"
+                android:fillViewport="true"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearTable"
+                    android:orientation="vertical">
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:id="@+id/style_loadingBar"
+        android:visibility="visible"
+        >
+
+        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"
+            android:background="#0000"
+            android:keepScreenOn="true"
+            android:theme="@style/ProgressBar"
+
+
+            >
+
+
+
+        </ProgressBar>
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

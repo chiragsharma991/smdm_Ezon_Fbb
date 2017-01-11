@@ -466,26 +466,26 @@
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:visibility="invisible"
                         android:layout_height="wrap_content">
 
                         <ImageButton
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
-                            android:id="@+id/formal1"
+                            android:id="@+id/btnVisualReport"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="#ffffff"
-                            android:src="@mipmap/option_efficiency" />
+                            android:src="@mipmap/report_icon" />
 
 
                         <TextView
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
+                            android:textColor="@color/smdm_light_Black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="Option Efficiency" />
+                            android:text="Options Report" />
                     </LinearLayout>
 
                     <LinearLayout

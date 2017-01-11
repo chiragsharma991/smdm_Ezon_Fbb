@@ -38,6 +38,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.security.AccessControlContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +50,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 
-
+import static java.security.AccessController.getContext;
 
 
 public class SalesAnalysisAdapter extends BaseAdapter{
@@ -61,7 +62,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
     SalesAnalysisListDisplay salesAnalysisListDisplay;
     int focusposition,selFirstPositionValue;
     ListView listView_SalesAnalysis;
-
+  int currentIndex;
     int offsetvalue = 0, count = 0, limit = 100;
     private LayoutInflater mInflater;
 
@@ -71,8 +72,13 @@ public class SalesAnalysisAdapter extends BaseAdapter{
     int level ;
     Gson gson;
 
-    public SalesAnalysisAdapter()
-    {}
+    public SalesAnalysisAdapter(Context context, ArrayList<SalesAnalysisListDisplay> arrayList)
+    {
+        this.context = context;
+        this.arrayList= arrayList;
+
+
+    }
 
 
     //private ValueFilter valueFilter;
@@ -85,6 +91,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
         this.fromwhere = fromwhere;
         this.listView_SalesAnalysis = listView_SalesAnalysis;
         mInflater = LayoutInflater.from(context);
+        this.currentIndex = currentIndex;
         level = 1;
         focusposition = 0;
         selFirstPositionValue = 0;
@@ -246,6 +253,21 @@ public class SalesAnalysisAdapter extends BaseAdapter{
         RelativeLayout innerrel, relValue;
         TextView txtPlan, txtValue,txtPvAValue;
         TextView txtAchieve;
+    }
+
+   public void updateData(ArrayList<SalesAnalysisListDisplay> users) {
+
+       arrayList.addAll(users);
+
+        if(salesadapter == null) {
+            salesadapter = new SalesAnalysisAdapter(arrayList,context,currentIndex, fromwhere, listView_SalesAnalysis);
+            listView_SalesAnalysis.setAdapter(salesadapter);
+
+            if (listView_SalesAnalysis.getFirstVisiblePosition() > currentIndex || listView_SalesAnalysis.getLastVisiblePosition() < currentIndex)
+                listView_SalesAnalysis.setSelection(currentIndex);
+        }
+       //  salesadapter.notifyDataSetChanged();
+
     }
 
     public static int convertSpToPixels(double sp, Context context) {

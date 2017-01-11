@@ -87,7 +87,10 @@
                     android:id="@+id/imgProfile"
                     android:layout_width="110dp"
                     android:layout_height="150dp"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription"
+                    android:scaleType="fitCenter"
+
+                    />
 
             </LinearLayout>
 
