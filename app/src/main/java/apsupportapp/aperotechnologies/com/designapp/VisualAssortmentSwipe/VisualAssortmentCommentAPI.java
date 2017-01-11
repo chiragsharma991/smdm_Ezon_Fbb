@@ -46,7 +46,7 @@ public class VisualAssortmentCommentAPI {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Login   Response   ", response.toString());
+                        Log.e("Login   Response   ", response.toString());
                         try {
                             if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();

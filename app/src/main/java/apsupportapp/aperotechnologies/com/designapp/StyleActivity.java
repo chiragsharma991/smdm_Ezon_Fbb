@@ -88,6 +88,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     private ListView listCollection, listOption;
     ListAdapter collectionAdapter;
     ListAdapter1 optionAdapter;
+    private String TAG="StyleActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -635,13 +636,13 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?eanNumber=" + content;
         }
 
-        Log.i("URL style  ", "" + url);
+        Log.e(TAG,"requestStyleDetailsAPI  "+ url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Style details :   ", response.toString());
+                        Log.i(TAG," requestStyleDetailsAPI :   "+response.toString());
                         try {
 
                             if (response.equals(null) || response == null || response.length() == 0) {
@@ -701,6 +702,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 styleDetailsBean.setPromoFlag(promoFlg);
                                 styleDetailsBean.setKeyProductFlg(keyProductFlg);
                                 styleDetailsBean.setProductImageURL(productImageURL);
+                                Log.e(TAG, "intent calling: " );
                                 Intent intent = new Intent(StyleActivity.this, SwitchingTabActivity.class);
                                 intent.putExtra("articleCode", articleCode);
                                 intent.putExtra("articleOption", articleOption);
@@ -744,12 +746,12 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
     private void requestCollectionAPI(int offsetvalue1, final int limit1) {
         String url = ConstsCore.web_url + "/v1/display/collections/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
-        Log.i("URL   ", url);
+        Log.e(TAG,"requestCollectionAPI   "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Collection Response   ", response.toString());
+                        Log.i(TAG,"requestCollectionAPI   "+response.toString());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && collectioncount == 0) {
                                 Reusable_Functions.hDialog();
@@ -880,12 +882,12 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     private void requestArticleOptionsAPI(final String collectionNM, int offsetvalue1, final int limit1) {
         String url;
         url = ConstsCore.web_url + "/v1/display/collectionoptions/" + userId + "?collectionName=" + collectionNM.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.i("URL article   ", url);
+        Log.e(TAG,"requestArticleOptionsAPI   "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("ArticleOption Response ", response.toString() + " " + articleOptionList.size());
+                        Log.i(TAG,"requestArticleOptionsAPI Response "+response.toString() + " " + articleOptionList.size());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 articleOptionList.add(0, "Select Option");

@@ -85,14 +85,26 @@ public class SkewedSizeListDisplay
     String prodAttribute4;
     String prodImageURL;
     String stkOnhandQty;
+    String stkOnhandQtyTotal;
     String fwdWeekCover;
+    String fwdWeekCoverTotal;
     String skewedFlag;
     int skewedFlagCount;
 
 
+    public String getStkOnhandQtyTotal() {
+        return stkOnhandQtyTotal;
+    }
 
+    public void setStkOnhandQtyTotal(String stkOnhandQtyTotal) {
+        this.stkOnhandQtyTotal = stkOnhandQtyTotal;
+    }
 
+    public String getFwdWeekCoverTotal() {
+        return fwdWeekCoverTotal;
+    }
 
-
-
+    public void setFwdWeekCoverTotal(String fwdWeekCoverTotal) {
+        this.fwdWeekCoverTotal = fwdWeekCoverTotal;
+    }
 }

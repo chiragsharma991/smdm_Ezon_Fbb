@@ -1218,6 +1218,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             //pieChart.setHoleColor(Color.WHITE);
             pieChart.setTransparentCircleRadius(0);
             pieChart.setData(pieData);
+            pieChart.invalidate();
             pieChart.animateXY(4000, 4000);
             pieChart.setDescription(null);
             pieChart.setTouchEnabled(false);
@@ -1401,6 +1402,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 //pieChart.setHoleColor(Color.WHITE);
                                 pieChart.setTransparentCircleRadius(0);
                                 pieChart.setData(pieData);
+                                pieChart.invalidate();
                                 pieChart.animateXY(4000, 4000);
                                 pieChart.setDescription(null);
                                 pieChart.setTouchEnabled(false);

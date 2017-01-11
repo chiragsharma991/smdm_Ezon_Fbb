@@ -39,6 +39,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.crashlytics.android.answers.LoginEvent;
+import com.google.gson.Gson;
 
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
@@ -59,6 +61,9 @@ import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualReportActivity;
 import apsupportapp.aperotechnologies.com.designapp.WorstPerformersInventory.WorstPerformerInventory;
+import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;
+import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
+import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -80,7 +85,7 @@ public class DashBoardActivity extends AppCompatActivity
     ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,
             btnSkewedSize,btnCutSize,btnStockAgeing,BtnWorstPerformers;
     LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory;
-    TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt;
+    TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt,RefreshTime;
 
     //ExpandableHeightGridView style_grid;
     EventAdapter eventAdapter;
@@ -94,6 +99,7 @@ public class DashBoardActivity extends AppCompatActivity
     RequestQueue queue;
     boolean flag=true;
     String userId, bearertoken;
+    SharedPreferences sharedPreferences;
     //private Boolean exit = false;
     ArrayList<String> arrayList,eventUrlList;
     Context context;
@@ -101,7 +107,7 @@ public class DashBoardActivity extends AppCompatActivity
 
 
     ArrayList<ProductNameBean> productNameBeanArrayList;
-    SharedPreferences sharedPreferences;
+
 
     //Event ViewPager
 
@@ -121,6 +127,11 @@ public class DashBoardActivity extends AppCompatActivity
     private boolean VisualAssort=false;
     private boolean Sales=false;
     private boolean Inventory=false;
+    private Gson gson;
+    private EtlStatus etlStatus;
+    private ArrayList<EtlStatus>etlStatusList;
+
+    //git tese 10/1/2017
 
 
     @Override
@@ -140,7 +151,8 @@ public class DashBoardActivity extends AppCompatActivity
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken","");
 
-        Log.e("userId"," "+userId);
+        Log.e(TAG,"userId"+userId);
+        Log.e(TAG,"bearertoken"+bearertoken);
 
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -151,7 +163,7 @@ public class DashBoardActivity extends AppCompatActivity
         eventUrlList = new ArrayList<>();
         productNameBeanArrayList=new ArrayList<>();
         Bundle data=getIntent().getExtras();
-
+        gson = new Gson();
 
 
 
@@ -216,7 +228,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-               // finish();
+                // finish();
             }
         });
         BtnWorstPerformers.setOnClickListener(new View.OnClickListener() {
@@ -228,7 +240,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-              //  finish();
+                //  finish();
             }
         });
         btnCutSize.setOnClickListener(new View.OnClickListener() {
@@ -240,7 +252,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-               // finish();
+                // finish();
             }
         });
 
@@ -256,7 +268,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-               // finish();
+                // finish();
             }
         });
 
@@ -269,7 +281,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-               // finish();
+                // finish();
             }
         });
 
@@ -282,7 +294,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-               // finish();
+                // finish();
             }
         });
 
@@ -296,7 +308,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-              //  finish();
+                //  finish();
             }
         });
 
@@ -315,7 +327,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-             //   finish();
+                //   finish();
 
             }
         });
@@ -329,7 +341,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-              //  finish();
+                //  finish();
 
             }
 
@@ -345,7 +357,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-              //  finish();
+                //  finish();
             }
         });
 
@@ -358,7 +370,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-             //   finish();
+                //   finish();
             }
         });
 
@@ -372,7 +384,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-              //  finish();
+                //  finish();
             }
         });
         btnFeshnessindex.setOnClickListener(new View.OnClickListener() {
@@ -385,7 +397,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-             //   finish();
+                //   finish();
             }
         });
         btnOptionEfficiency.setOnClickListener(new View.OnClickListener() {
@@ -398,7 +410,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-             //   finish();
+                //   finish();
             }
         });
         btnStockAgeing.setOnClickListener(new View.OnClickListener() {
@@ -411,7 +423,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-             //   finish();
+                //   finish();
             }
         });
         btnBestPerformersInv.setOnClickListener(new View.OnClickListener() {
@@ -424,7 +436,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-            //    finish();
+                //    finish();
             }
         });
         btnFloorAvailability.setOnClickListener(new View.OnClickListener() {
@@ -437,7 +449,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-              //  finish();
+                //  finish();
             }
         });
         btnTargetStockExcep.setOnClickListener(new View.OnClickListener() {
@@ -450,7 +462,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-             //   finish();
+                //   finish();
             }
         });
         btnSellThruExcep.setOnClickListener(new View.OnClickListener() {
@@ -463,7 +475,7 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
 
-            //    finish();
+                //    finish();
             }
         });
         btnVisualReport.setOnClickListener(new View.OnClickListener() {
@@ -477,6 +489,8 @@ public class DashBoardActivity extends AppCompatActivity
                 }
             }
         });
+
+        RefreshTimeAPI();
 
     }
 
@@ -511,7 +525,7 @@ public class DashBoardActivity extends AppCompatActivity
             productInfo.setVisibility(View.GONE);
 
         }
-         if(VisualAssort)
+        if(VisualAssort)
         {
             visualAssort.setVisibility(View.VISIBLE);
 
@@ -629,6 +643,7 @@ public class DashBoardActivity extends AppCompatActivity
 
         promoAnalysisTxt=(TextView)findViewById(R.id.headerpromo);
         inventoryTxt=(TextView)findViewById(R.id.headerinvent);
+        RefreshTime=(TextView)findViewById(R.id.refreshTime);
 
         hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
         productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -781,46 +796,57 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
 
-    private void requestLoginAPI()
+    private void RefreshTimeAPI()
     {
-        String url = ConstsCore.web_url+"/v1/login";
+        String url = ConstsCore.web_url+"/v1/display/etlstatus/"+userId;
+        Log.e(TAG, "requestLoginAPI: "+url);
+        etlStatusList=new ArrayList<EtlStatus>();
 
-        final String password = sharedPreferences.getString("password","");
-        final String auth_code = sharedPreferences.getString("authcode","");
+        // final String password = sharedPreferences.getString("password","");
+        //  final String auth_code = sharedPreferences.getString("authcode","");
 
-        Log.e("authcode"," "+auth_code);
+        // Log.e("authcode"," "+auth_code);
 
-        final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
-                new Response.Listener<JSONObject>()
-                {
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response)
+                    public void onResponse(JSONArray response)
                     {
-                        Log.i("Login   Response   ", response.toString());
+                        Log.i(TAG,"Login   Response   "+response.toString()+"\n length is"+response.length());
                         try
                         {
                             if(response == null || response.equals(null))
                             {
-                                Reusable_Functions.hDialog();
+                                RefreshTime.setText("N/A");
+                            }else
+                            {
 
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    etlStatus = gson.fromJson(response.get(i).toString(), EtlStatus.class);
+                                    etlStatusList.add(etlStatus);
+
+                                }
+                                RefreshTime.setText(etlStatusList.get(0).getLastETLDate());
                             }
 
-                            String bearerToken = response.getString("bearerToken");
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("bearerToken",bearerToken);
-                            editor.apply();
-
-                            //Marketing events API
-                            requestMarketingEventsAPI();
+//                            String bearerToken = response.getString("bearerToken");
+//                            SharedPreferences.Editor editor = sharedPreferences.edit();
+//                            editor.putString("bearerToken",bearerToken);
+//                            editor.apply();
+//
+//                            //Marketing events API
+//                            requestMarketingEventsAPI();
 
 
 
                         }
                         catch(Exception e)
                         {
-                            Log.e("Exception e",e.toString() +"");
+                            Log.e(TAG,"Exception e =  "+e.getMessage());
+                            RefreshTime.setText("N/A");
+
                             e.printStackTrace();
-                            Reusable_Functions.hDialog();
                         }
                     }
                 },
@@ -828,8 +854,11 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     @Override
                     public void onErrorResponse(VolleyError error)
+
                     {
-                        Reusable_Functions.hDialog();
+                        Log.e(TAG,"Response.ErrorListener e"+error.getMessage());
+                        RefreshTime.setText("N/A");
+
                         error.printStackTrace();
                     }
                 }
@@ -839,9 +868,10 @@ public class DashBoardActivity extends AppCompatActivity
             public Map<String, String> getHeaders() throws AuthFailureError
             {
                 //String auth_code = "Basic " + Base64.encodeToString((uname+":"+password).getBytes(), Base64.NO_WRAP); //Base64.NO_WRAP flag
-                Log.i("Auth Code", auth_code);
+                //  Log.i("Auth Code", auth_code);
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", auth_code);
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
 
 
@@ -924,12 +954,12 @@ public class DashBoardActivity extends AppCompatActivity
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
 
-                     hrflash="YES";
-                     pdInfo="NO";
-                     vsAssort="NO";
-                     sAles="NO";
-                     pmAnalysis="NO";
-                     inVENtory="NO";
+                    hrflash="YES";
+                    pdInfo="NO";
+                    vsAssort="NO";
+                    sAles="NO";
+                    pmAnalysis="NO";
+                    inVENtory="NO";
                     HourlyFlash=true;
                     Promo=false;
                     ProductInfo=false;

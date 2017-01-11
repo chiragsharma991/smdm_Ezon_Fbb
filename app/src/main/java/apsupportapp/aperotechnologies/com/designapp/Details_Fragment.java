@@ -130,7 +130,7 @@ public class Details_Fragment extends Fragment {
         txtGIT.setText("" + styleDetailsBean.getStkGitQty());
         txtBaseStock.setText("" + styleDetailsBean.getTargetStock());
 
-        txtPrice.setText("Rs." + styleDetailsBean.getUnitGrossPrice());
+        txtPrice.setText("₹" + styleDetailsBean.getUnitGrossPrice());
         txtsalesThruUnit.setText("" + String.format("%.1f", styleDetailsBean.getSellThruUnitsRcpt()) + "%");
         txtROS.setText("" + String.format("%.1f", styleDetailsBean.getRos()));
 

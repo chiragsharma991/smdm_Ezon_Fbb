@@ -43,6 +43,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
     SharedPreferences sharedPreferences;
     String userId, bearertoken;
     int pos;
+    static LinearLayout fragmentLayout;
 
     public SwipeDeckAdapter(ArrayList<VisualAssort> visualassortmentlist, Context context, SwipeDeck cardStack) {
         this.visualassortmentlist = visualassortmentlist;
@@ -75,6 +76,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         layoutView = inflater.inflate(R.layout.fragment_visualassortment, parent, false);
+        fragmentLayout = (LinearLayout)layoutView.findViewById(R.id.fragmentLayout);
         rellike = (RelativeLayout) layoutView.findViewById(R.id.imgrellike);
         reldislike = (RelativeLayout) layoutView.findViewById(R.id.imgreldislike);
         relbuy = (RelativeLayout) layoutView.findViewById(R.id.imgrelbuy);
@@ -277,18 +279,37 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         e.printStackTrace();
                     }
 
-                    if (!checkLikedislike.equals("") || checkSizeSet != 0 || (!checkFeedback.equals(""))) {
-                        //GO FOR PUT METHOD
-                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
-                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
-                        relbuy.setEnabled(false);
-                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
-                    } else {
+//                    if (!checkLikedislike.equals("") || checkSizeSet != 0 || (!checkFeedback.equals(""))) {
+//                        //GO FOR PUT METHOD
+//                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+//                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
+//                        relbuy.setEnabled(false);
+//                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+//                    } else {
+//                        //GO FOR POST METHOD
+//                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+//                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
+//                        relbuy.setEnabled(false);
+//                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+//                    }
+
+                    if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
+                    {
+
                         //GO FOR POST METHOD
                         VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
                         VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
                         relbuy.setEnabled(false);
                         visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+                    }
+                    else
+                    {
+                        //GO FOR PUT METHOD
+                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
+                        relbuy.setEnabled(false);
+                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+
                     }
 
                 }
@@ -370,18 +391,37 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         e.printStackTrace();
                     }
 
-                    if (!checkLikedislike.equals("") || checkSizeSet != 0 || (!checkFeedback.equals(""))) {
-                        //GO FOR PUT METHOD
-                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
-                        VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
-                        relcomment.setEnabled(false);
-                        visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
-                    } else {
+//                    if (!checkLikedislike.equals("") || checkSizeSet != 0 || (!checkFeedback.equals(""))) {
+//                        //GO FOR PUT METHOD
+//                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+//                        VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
+//                        relcomment.setEnabled(false);
+//                        visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
+//                    } else {
+//                        //GO FOR POST METHOD
+//                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+//                        VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
+//                        relcomment.setEnabled(false);
+//                        visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
+//                    }
+
+                    if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
+                    {
+
                         //GO FOR POST METHOD
                         VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
                         VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
                         relcomment.setEnabled(false);
                         visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
+                    }
+                    else
+                    {
+                        //GO FOR PUT METHOD
+                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+                        VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
+                        relcomment.setEnabled(false);
+                        visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
+
                     }
 
                 }

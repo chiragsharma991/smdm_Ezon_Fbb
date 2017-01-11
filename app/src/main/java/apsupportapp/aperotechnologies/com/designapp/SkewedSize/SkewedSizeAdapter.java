@@ -47,6 +47,8 @@ public class SkewedSizeAdapter extends BaseAdapter {
     private ArrayList<SkewedSizeListDisplay> arrayList;
 
     //private List mStringFilterList;
+    //git tese 10/1/2017
+
 
     private LayoutInflater mInflater;
     Context context;
@@ -129,12 +131,14 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
         }
         holder.skewed_option.setText(arrayList.get(position).getOption());
-        holder.skewed_SOHU.setText(""+calculation(arrayList.get(position).getStkOnhandQty()));
+        holder.skewed_SOHU.setText(arrayList.get(position).getStkOnhandQtyTotal());
+        int totalSOH=calculation(arrayList.get(position).getStkOnhandQty());
         product=new ArrayList<String>();
         product.clear();
         product = Arrays.asList(arrayList.get(position).getProdAttribute4().split("\\s*,\\s*"));
         setFlag = Arrays.asList(arrayList.get(position).getSkewedFlag().split("\\s*,\\s*"));
-        setFwc = Arrays.asList(arrayList.get(position).getFwdWeekCover().split("\\s*,\\s*"));
+        holder.skewed_fwc.setText(arrayList.get(position).getFwdWeekCoverTotal());
+       /* setFwc = Arrays.asList(arrayList.get(position).getFwdWeekCover().split("\\s*,\\s*"));
         // ArrayList<String>setNewFwc=new ArrayList<String>();
         StringBuilder stringBuild=new StringBuilder();
         for (int i = 0; i <setFwc.size() ; i++) {
@@ -145,7 +149,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
         }
         stringBuild.deleteCharAt(stringBuild.length()-1);
-        holder.skewed_fwc.setText(stringBuild);
+        holder.skewed_fwc.setText(stringBuild);*/
 
         createText();
         createSOH();
@@ -203,14 +207,14 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
             if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
                 Log.e(TAG, "Normal sized screen:" );
-                mType.setLayoutParams(new LinearLayout.LayoutParams(75,35));
-                mType.setTextSize(10);
+                mType.setLayoutParams(new LinearLayout.LayoutParams(90,45));
+                mType.setTextSize(7);
 
             }
             else if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
                 Log.e(TAG, "Small sized screen :" );
-                mType.setLayoutParams(new LinearLayout.LayoutParams(75,35));
-                mType.setTextSize(10);
+                mType.setLayoutParams(new LinearLayout.LayoutParams(90,45));
+                mType.setTextSize(7);
 
             }
             else {
@@ -255,14 +259,14 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
             if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
                 Log.e(TAG, "Normal sized screen:" );
-                mType.setLayoutParams(new LinearLayout.LayoutParams(75,35));
-                mType.setTextSize(10);
+                mType.setLayoutParams(new LinearLayout.LayoutParams(90,45));
+                mType.setTextSize(7);
 
             }
             else if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
                 Log.e(TAG, "Small sized screen :" );
-                mType.setLayoutParams(new LinearLayout.LayoutParams(75,35));
-                mType.setTextSize(10);
+                mType.setLayoutParams(new LinearLayout.LayoutParams(90,45));
+                mType.setTextSize(7);
 
             }
             else {

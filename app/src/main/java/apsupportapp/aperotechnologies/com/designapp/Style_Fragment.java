@@ -83,6 +83,7 @@ public class Style_Fragment extends Fragment {
 
     List<SampleObject> sampleObjects = sampleObjects();
     int headerCellsWidth[] = new int[headers.length];
+    private String TAG="StyleActivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,12 +117,12 @@ public class Style_Fragment extends Fragment {
     private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
 
         String url = ConstsCore.web_url + "/v1/display/sizes/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.i("URL   ", url);
+        Log.e(TAG,"requestStyleColorDetailsAPI   "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("Stylecolor details :   ", response.toString());
+                        Log.i(TAG,"requestStyleColorDetailsAPI :   "+response.toString());
                         Log.e("Response lenght ", String.valueOf(response.length()));
                         try {
                             if (response.equals(null) || response == null || response.length() == 0) {
@@ -231,13 +232,13 @@ public class Style_Fragment extends Fragment {
     private void requestStyleSizeDetailsAPI() {
 
         String url = ConstsCore.web_url + "/v1/display/styles/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26");
-        Log.i("URL   ", url);
+        Log.e(TAG,"requestStyleSizeDetailsAPI   "+url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Style Size details :   ", response.toString());
+                        Log.i(TAG,"requestStyleSizeDetailsAPI :   "+response.toString());
                         try {
                             if (response.equals(null) || response == null) {
                                 Reusable_Functions.hDialog();
