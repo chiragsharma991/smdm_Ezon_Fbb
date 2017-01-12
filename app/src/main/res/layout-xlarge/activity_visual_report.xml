@@ -68,33 +68,43 @@
 
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
-        </LinearLayout>
 
 
 
-        <RelativeLayout
-            android:id="@+id/relPielayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-                   <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/noChart"-->
-                <!--android:text="No Chart data available"-->
-                <!--android:layout_centerInParent="true"-->
-                <!--android:gravity="center"-->
-                <!--android:visibility="gone"-->
-                <!--android:textSize="@dimen/largelayout_storesize"-->
 
-                <!--/>-->
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/vreport_pieChart"
-               android:layout_margin="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </RelativeLayout>
     </LinearLayout>
 
+    <LinearLayout
+
+        android:id="@+id/llfreshnessIndex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relPielayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/noChart"
+            android:text="No Chart data available"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textSize="@dimen/largelayout_storesize"
+
+            />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/vreport_pieChart"
+            android:layout_width="match_parent"
+            android:layout_height="540dp" />
+    </RelativeLayout>
+</LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

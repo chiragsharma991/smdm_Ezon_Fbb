@@ -25,6 +25,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -133,6 +134,9 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 }
                                 //fIndexAdapter.notifyDataSetChanged();
 
+
+
+
                                 ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
                                 for (VisualReport v_report : visualReportArrayList) {
 
@@ -187,18 +191,20 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 pieData = new PieData(dataSet);
                                // pieData.setValueFormatter(new MyValueFormatter());
                                 pieChart.setDrawMarkers(false);
-                                pieData.setValueTextSize(14f);
+                                pieData.setValueTextSize(12f);
                                 dataSet.setXValuePosition(null);
-                                dataSet.setYValuePosition(PieDataSet.ValuePosition.INSIDE_SLICE);
-                                pieChart.setEntryLabelColor(Color.BLACK);
-                                pieChart.setHoleRadius(80);
+                                dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+                                pieChart.setEntryLabelColor(Color.WHITE);
+                                pieChart.setHoleRadius(65);
                                 pieChart.setHoleColor(Color.parseColor("#ffc65b"));
                                 pieChart.setCenterText(String.valueOf(format.format(Math.round(totalOptions)))+ "\nTotal");
-                                pieChart.setCenterTextSize(40f);
+                                pieChart.setCenterTextSize(35f);
                                 pieChart.setCenterTextColor(Color.WHITE);
                                 pieChart.setTransparentCircleRadius(0);
                                 pieChart.setData(pieData);
+                                pieChart.setNoDataText("");
                                 pieChart.setDescription(null);
+                                pieChart.invalidate();
                                 pieChart.animateXY(1000,1000);
                                 pieChart.setTouchEnabled(false);
                                 Legend l = pieChart.getLegend();
