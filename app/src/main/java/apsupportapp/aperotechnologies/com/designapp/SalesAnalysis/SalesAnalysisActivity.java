@@ -981,8 +981,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 //                                }
 //                                requestSalesPagerOnScrollAPI();
 //                            }
-
-
                         }
                     }
 
@@ -1031,6 +1029,7 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
 }
     //Api 1.19 for view pager values on store level like wtd , lw
+
 
     private void requestSalesViewPagerValueAPI() {
         //Log.e("saleFirstVisibleItem in Api",""+saleFirstVisibleItem);
