@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -42,12 +43,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 
 public class Style_Fragment extends Fragment {
     TableLayout tableA;
     TableLayout tableB;
     TableLayout tableC;
     TableLayout tableD;
+
     TextView txtSales, txtGit, txtFwdWeekCover, txtSalesUnit, txtSalesThruUnit, txtRos, txtSOh, txtarticleOption;
     View view;
     String userId, bearertoken;
@@ -71,6 +75,8 @@ public class Style_Fragment extends Fragment {
     String articleCode, articleOption;
     int offsetvalue = 0, limit = 100;
     int count = 0;
+    String TA="StyleActivity";
+
     // set the header titles
     String headers[] = {
             "             Color            ",
@@ -84,6 +90,8 @@ public class Style_Fragment extends Fragment {
     List<SampleObject> sampleObjects = sampleObjects();
     int headerCellsWidth[] = new int[headers.length];
     private String TAG="StyleActivity";
+    private LinearLayout LinearTable;
+    private RelativeLayout Style_loadingBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,11 +114,13 @@ public class Style_Fragment extends Fragment {
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
+           // Reusable_Functions.sDialog(context, "Loading data...");
             requestStyleSizeDetailsAPI();
             requestStyleColorDetailsAPI(offsetvalue, limit);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+            Style_loadingBar.setVisibility(View.GONE);
+
         }
     }
 
@@ -128,6 +138,7 @@ public class Style_Fragment extends Fragment {
                             if (response.equals(null) || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No size data found", Toast.LENGTH_LONG).show();
+                                Style_loadingBar.setVisibility(View.GONE);
 
                             } else if (response.length() == limit) {
 
@@ -197,10 +208,14 @@ public class Style_Fragment extends Fragment {
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
-                                Reusable_Functions.hDialog();
+                               // createTable();
+                                Style_loadingBar.setVisibility(View.GONE);
+
+                                // Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
+                            Style_loadingBar.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
@@ -209,6 +224,8 @@ public class Style_Fragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
+                        Style_loadingBar.setVisibility(View.GONE);
+
                         // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
@@ -227,6 +244,45 @@ public class Style_Fragment extends Fragment {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
+    }
+
+    private void createTable()
+    {
+        int sumTW=0,sumSOH=0;
+        for (int i = 0; i < styleColorBeanList.size(); i++) {
+
+            LayoutInflater layoutInflater = (LayoutInflater)getActivity()
+                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+            view = (ViewGroup) layoutInflater.inflate(R.layout.activity_stylefragment_child, null);
+            TextView StyleColorName = (TextView) view.findViewById(R.id.styleColorName);
+            TextView StyleFwd = (TextView) view.findViewById(R.id.styleFwd);
+            TextView StyleSize = (TextView) view.findViewById(R.id.styleSize);
+            TextView StyleSOH = (TextView) view.findViewById(R.id.styleSOH);
+            TextView StyleTW = (TextView) view.findViewById(R.id.styleTW);
+            StyleColorName.setText(styleColorBeanList.get(i).getColor());
+            StyleFwd.setText(String.format("%.1f",styleColorBeanList.get(i).getFwdWeekCover()));
+            StyleSize.setText(styleColorBeanList.get(i).getSize());
+            StyleSOH.setText(""+styleColorBeanList.get(i).getStkOnhandQty());
+            StyleTW.setText(""+styleColorBeanList.get(i).getTwSaleTotQty());
+            sumTW+=styleColorBeanList.get(i).getTwSaleTotQty();
+            sumSOH+=styleColorBeanList.get(i).getStkOnhandQty();
+
+            LinearTable.addView(view);
+
+        }
+        LayoutInflater layoutInflater = (LayoutInflater)getActivity()
+                .getSystemService(LAYOUT_INFLATER_SERVICE);
+        view = (ViewGroup) layoutInflater.inflate(R.layout.activity_style_totalchild, null);
+        TextView StyleTW_total = (TextView) view.findViewById(R.id.styleTW_total);
+        TextView StyleSOH_total = (TextView) view.findViewById(R.id.styleSOH_total);
+        StyleTW_total.setText(""+sumTW);
+        StyleSOH_total.setText(""+sumSOH);
+
+        LinearTable.addView(view);
+        Reusable_Functions.hDialog();
+
+
+
     }
 
     private void requestStyleSizeDetailsAPI() {
@@ -258,7 +314,7 @@ public class Style_Fragment extends Fragment {
 
                                     int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
 
-                                    txtSales.setText(": Rs." + Sales);
+                                    txtSales.setText("\u20B9" + Sales);
                                     txtSalesUnit.setText(": " + twSaleTotQty);
                                     txtFwdWeekCover.setText(": " + String.format("%.1f", fwdWeekCover));
                                     txtGit.setText(": " + stkGitQty);
@@ -288,7 +344,7 @@ public class Style_Fragment extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
+                params.put("Authorization", "Bearer " +bearertoken);
                 return params;
             }
         };
@@ -301,12 +357,16 @@ public class Style_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.style_fragment, container, false);
+        Log.e(TA, "Style fragment onCreateView: ");
+
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
+        Style_loadingBar = (RelativeLayout) view.findViewById(R.id.style_loadingBar);
         txtarticleOption = (TextView) view.findViewById(R.id.txtarticleOption);
         //style size text
         txtSales = (TextView) view.findViewById(R.id.txtSales);
         txtSalesUnit = (TextView) view.findViewById(R.id.txtSalesUnit);
+        LinearTable = (LinearLayout) view.findViewById(R.id.linearTable);
         txtFwdWeekCover = (TextView) view.findViewById(R.id.txtFwdCover);
         txtGit = (TextView) view.findViewById(R.id.txtGit);
         txtSalesThruUnit = (TextView) view.findViewById(R.id.txtSalesThruUnit);

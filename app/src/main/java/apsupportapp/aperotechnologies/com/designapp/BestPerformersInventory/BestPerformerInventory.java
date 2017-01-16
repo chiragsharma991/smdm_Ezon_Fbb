@@ -320,9 +320,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         public void displayMessage(String toastString){
                             Toast.makeText(context, toastString, Toast.LENGTH_LONG).show();
                         }
-
-
-
                     }
 
             ) {
@@ -357,11 +354,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                         }
                         footer.setVisibility(View.VISIBLE);
-
                         lazyScroll = "ON";
                         //BestInvent_fashion.setEnabled(false);
                         //BestInvent_core.setEnabled(false);
-
                         requestRunningPromoApi();
                     }
 

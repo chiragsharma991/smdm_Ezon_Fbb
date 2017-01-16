@@ -18,6 +18,7 @@ public class Details_Fragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     StyleDetailsBean styleDetailsBean;
     String articleOption;
+    String TAG="StyleActivity";
     TextView txtProductName, txtCollcetion, txtFabric, txtFit, txtFinish, txtSeason, txtfirstReceiteDate, txtlastReceiteDate,
             txtFwdWeekCover, txtTwSalesUnit, txtLwSalesUnit, txtYtdSalesUnit, txtSOH, txtGIT, txtBaseStock, txtPrice, txtsalesThruUnit,
             txtROS, txtBenefit, txtArticleOption,txtStoreDesc, txtStoreCode;
@@ -40,6 +41,7 @@ public class Details_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.details_fragment, container, false);
+        Log.e(TAG, "Details_Fragment onCreateView: ");
         txtStoreCode =(TextView)view.findViewById(R.id.txtStoreCode);
         txtStoreDesc =(TextView)view.findViewById(R.id.txtStoreName);
         txtArticleOption = (TextView) view.findViewById(R.id.txtArticle);
@@ -80,8 +82,8 @@ public class Details_Fragment extends Fragment {
                     .error(R.drawable.placeholder)
                     .into(imgProfile);
         } else {
-            Picasso.with(getActivity()).load(R.drawable.placeholder)
-                    .resize(110, 150)
+            Picasso.with(getActivity()).load(R.drawable.placeholder).centerInside().fit()
+                  //  .resize(110, 150)
                     .into(imgProfile);
 
         }

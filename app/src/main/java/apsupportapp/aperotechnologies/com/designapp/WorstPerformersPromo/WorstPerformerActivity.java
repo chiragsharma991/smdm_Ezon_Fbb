@@ -161,9 +161,6 @@ public class WorstPerformerActivity extends AppCompatActivity implements View.On
 
                                 }
                             }
-
-
-
                             footer.setVisibility(View.GONE);
 
                             // BestPromo_footer.setVisibility(View.GONE);
@@ -181,8 +178,6 @@ public class WorstPerformerActivity extends AppCompatActivity implements View.On
                             {
                                 worstPromoAdapter = new WorstPromoAdapter(WorstpromoList,context);
                                 WorstPerformanceListView.setAdapter(worstPromoAdapter);
-
-
                             }
 
                             Reusable_Functions.hDialog();
@@ -190,9 +185,6 @@ public class WorstPerformerActivity extends AppCompatActivity implements View.On
                             //  Bst_storecode.setText(BestpromoList.get(0).getStoreCode());
                             // Bst_txtStoreName.setText(BestpromoList.get(0).getStoreDesc());
                             Log.v(TAG,"set text on");
-
-
-
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();

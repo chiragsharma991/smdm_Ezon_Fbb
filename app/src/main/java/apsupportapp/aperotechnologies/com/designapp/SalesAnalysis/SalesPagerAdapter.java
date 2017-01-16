@@ -81,7 +81,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
         Log.e("in sales adapter", " ---");
         this.context = context;
         this.arrayList = arrayList;
-        Log.i("size", "" + arrayList.size());
+       // Log.i("size", "" + arrayList.size());
         this.focusposition = focusposition;
         this.vwpagersales = vwpagersales;
         this.lldots = lldots;
@@ -369,7 +369,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             // update listview
 
             SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisClassArrayList.get(0);
-            Log.e("listv", "" + listView_SalesAnalysis.getFirstVisiblePosition());
+           // Log.e("listv", "" + listView_SalesAnalysis.getFirstVisiblePosition());
 
             if (listView_SalesAnalysis.getFirstVisiblePosition() == 0) {
 

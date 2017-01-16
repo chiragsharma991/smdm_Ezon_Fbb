@@ -263,10 +263,10 @@ public class SalesAnalysisAdapter extends BaseAdapter{
             salesadapter = new SalesAnalysisAdapter(arrayList,context,currentIndex, fromwhere, listView_SalesAnalysis);
             listView_SalesAnalysis.setAdapter(salesadapter);
 
-            if (listView_SalesAnalysis.getFirstVisiblePosition() > currentIndex || listView_SalesAnalysis.getLastVisiblePosition() < currentIndex)
-                listView_SalesAnalysis.setSelection(currentIndex);
+//            if (listView_SalesAnalysis.getFirstVisiblePosition() > currentIndex || listView_SalesAnalysis.getLastVisiblePosition() < currentIndex)
+//                listView_SalesAnalysis.setSelection(currentIndex);
         }
-       //  salesadapter.notifyDataSetChanged();
+         salesadapter.notifyDataSetChanged();
 
     }
 

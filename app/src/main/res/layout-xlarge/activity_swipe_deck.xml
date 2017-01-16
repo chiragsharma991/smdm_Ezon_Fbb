@@ -92,6 +92,7 @@
 
         <com.daprlabs.cardstack.SwipeDeck
             android:id="@+id/swipe_deck"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

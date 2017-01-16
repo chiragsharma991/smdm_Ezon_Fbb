@@ -138,6 +138,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
                                 RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
                                 PromoListView.setAdapter(runningPromoAdapter);
+                               // PromoListView.setSelectionFromTop(3,0);
                                 Reusable_Functions.hDialog();
 
                                 // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());

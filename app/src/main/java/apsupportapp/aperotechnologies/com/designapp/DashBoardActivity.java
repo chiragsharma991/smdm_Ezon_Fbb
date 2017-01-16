@@ -661,6 +661,7 @@ public class DashBoardActivity extends AppCompatActivity
 
 
 
+
         hourlyFlash=(LinearLayout)findViewById(R.id.lin1);
         productInfo=(LinearLayout)findViewById(R.id.lineartwo);
         visualAssort=(LinearLayout)findViewById(R.id.linearthree);
