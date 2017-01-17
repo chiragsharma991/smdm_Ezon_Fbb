@@ -549,8 +549,6 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
         listView_SalesAnalysis.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-
                 if (salesAnalysisClassArrayList.size() != 0) {
                     if (view.getFirstVisiblePosition() <= salesAnalysisClassArrayList.size() - 1) {
                         focusposition = view.getFirstVisiblePosition();
@@ -974,11 +972,11 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
                                 }
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
                                 Log.e(TAG, "focusPosition in API----" + currentIndex);
+                                salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
 
                                 Log.e("--- ", " salesAnalysisClassArrayList" + salesAnalysisClassArrayList.size());
 
                                 if (listView_SalesAnalysis.getAdapter() == null) {
-                                    salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                     listView_SalesAnalysis.setAdapter(salesadapter);
                                     offsetvalue = 0;
                                     limit = 100;
@@ -989,9 +987,9 @@ public class SalesAnalysisActivity extends AppCompatActivity implements RadioGro
 
                                 {
 //                                    salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-//                                    listView_SalesAnalysis.setAdapter(salesadapter);
-                                    salesadapter.updateData(salesAnalysisClassArrayList);
-                                    // salesadapter.notifyDataSetChanged();
+                                    listView_SalesAnalysis.setAdapter(salesadapter);
+                                  //  salesadapter.updateData(salesAnalysisClassArrayList);
+                                     salesadapter.notifyDataSetChanged();
                                     int position = 0;
 
                                     Log.e("saleFirstVisibleItem", " " + saleFirstVisibleItem);
