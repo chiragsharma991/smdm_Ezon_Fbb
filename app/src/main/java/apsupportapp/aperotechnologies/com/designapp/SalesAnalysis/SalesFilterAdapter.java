@@ -48,7 +48,7 @@ public class SalesFilterAdapter extends BaseAdapter implements Filterable {
         this.mFilterList = arrayList;
         this.context = context;
         mInflater = LayoutInflater.from(context);
-       selectedItemsPositions = new ArrayList<>();
+        selectedItemsPositions = new ArrayList<>();
         getFilter();
 
         //getFilter();
@@ -170,19 +170,19 @@ public class SalesFilterAdapter extends BaseAdapter implements Filterable {
                                       FilterResults results) {
             arrayList = (ArrayList<String>) results.values;
 
-                SalesFilter.salesFilterAdapter.notifyDataSetChanged();
+            SalesFilter.salesFilterAdapter.notifyDataSetChanged();
 
 
-                SalesFilter.categoryAdapter.notifyDataSetChanged();
+            SalesFilter.categoryAdapter.notifyDataSetChanged();
 
 
-                SalesFilter.planClassAdapter.notifyDataSetChanged();
+            SalesFilter.planClassAdapter.notifyDataSetChanged();
 
 
-                SalesFilter.branAdapter.notifyDataSetChanged();
+            SalesFilter.branAdapter.notifyDataSetChanged();
 
 
-                SalesFilter.brandClsAdapter.notifyDataSetChanged();
+            SalesFilter.brandClsAdapter.notifyDataSetChanged();
 
 
         }

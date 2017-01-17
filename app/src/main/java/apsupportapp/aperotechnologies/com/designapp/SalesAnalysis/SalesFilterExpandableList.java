@@ -65,7 +65,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 
     ExpandableListView expandableListView;
     List<String> salesList;
-   static  String txtClickedVal;
+    static  String txtClickedVal;
     //    List<ListCategory> categoryArray;
 //    List<ListPlanClass> planclassArray;
 //    List<ListBrand> brandArray;
@@ -220,7 +220,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 
 
                                                RelativeLayout rel = (RelativeLayout) v;
-                         //                      CheckBox cb = (CheckBox) rel.getChildAt(1);
+                                               //                      CheckBox cb = (CheckBox) rel.getChildAt(1);
                                                TextView txtView = (TextView) rel.getChildAt(0);
                                                txtClickedVal= txtView.getText().toString();
                                                v.setBackgroundColor(R.color.bel_lightgrey_text);
@@ -481,7 +481,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 SalesFilterActivity.pfilter_list.expandGroup(3);
                 SalesFilterActivity.pfilter_list.expandGroup(4);
 
-           }
+            }
 
             notifyDataSetChanged();
 

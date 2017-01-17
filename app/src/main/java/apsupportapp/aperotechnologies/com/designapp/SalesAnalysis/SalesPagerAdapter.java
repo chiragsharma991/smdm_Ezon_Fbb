@@ -81,7 +81,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
         Log.e("in sales adapter", " ---");
         this.context = context;
         this.arrayList = arrayList;
-        Log.i("size", "" + arrayList.size());
+        // Log.i("size", "" + arrayList.size());
         this.focusposition = focusposition;
         this.vwpagersales = vwpagersales;
         this.lldots = lldots;
@@ -232,8 +232,8 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             rankRelLayout = (RelativeLayout) itemView.findViewById(R.id.rankRelLayout);
             rankRelLayout.setVisibility(View.GONE);
             linPvAZonalRank =(LinearLayout)itemView.findViewById(R.id.linPvAZonalRank);
-                    linPvANationalRank= (LinearLayout)itemView.findViewById(R.id.linPvANationalRank);
-                    linYoYZonalRank = (LinearLayout)itemView.findViewById(R.id.linYoYZonalRank);
+            linPvANationalRank= (LinearLayout)itemView.findViewById(R.id.linPvANationalRank);
+            linYoYZonalRank = (LinearLayout)itemView.findViewById(R.id.linYoYZonalRank);
             linYoYNationalRank = (LinearLayout)itemView.findViewById(R.id.linYoYNationalRank);
 
         } else if (position == 2) {
@@ -369,7 +369,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             // update listview
 
             SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisClassArrayList.get(0);
-            Log.e("listv", "" + listView_SalesAnalysis.getFirstVisiblePosition());
+            // Log.e("listv", "" + listView_SalesAnalysis.getFirstVisiblePosition());
 
             if (listView_SalesAnalysis.getFirstVisiblePosition() == 0) {
 
@@ -460,7 +460,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                 txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
                 txtZonalSalesVal.setText("" + Math.round( salesAnalysis.getPvaAchievedZonal()) + "%");
                 txtNationalSalesVal.setText("" + Math.round( salesAnalysis.getPvaAchievedNational()) + "%");
-                
+
                 relPvASales.setBackgroundResource(R.drawable.rounded_edittext2);
                 if (Math.round( salesAnalysis.getPvaAchieved()) > Math.round( salesAnalysis.getPvaAchievedZonal()) && Math.round( salesAnalysis.getPvaAchieved()) > Math.round( salesAnalysis.getPvaAchievedNational())) {
 //                    txtStoreVal_PvASales.setTextColor(Color.GREEN);
@@ -510,7 +510,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                         relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
                         relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
                         relRank.setBackgroundResource(R.drawable.rounded_edittext3);
-                
+
                         txtStoreVal_PvASales1.setText("" + Math.round( salesAnalysis.getPvaAchieved()) + "%");
                         txtZonalSalesVal.setText("" + Math.round( salesAnalysis.getPvaAchievedZonal()) + "%");
                         txtNationalSalesVal.setText("" + Math.round( salesAnalysis.getPvaAchievedNational()) + "%");
@@ -850,7 +850,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 
         } else if (position == 2) {
             if (salesAnalysis != null) {
-              double ros= Double.parseDouble(String.format("%.1f",salesAnalysis.getRos()));
+                double ros= Double.parseDouble(String.format("%.1f",salesAnalysis.getRos()));
                 Log.e("ros",""+ros);
                 double fwdwkcover= Double.parseDouble(String.format("%.1f",salesAnalysis.getFwdWeekCover()));
                 Log.e("fwdwkcover",""+fwdwkcover);
@@ -944,7 +944,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-       // Log.e("Scroll Pos",""+position);
+        // Log.e("Scroll Pos",""+position);
 
     }
 

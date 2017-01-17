@@ -443,19 +443,56 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewpager"
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
-                android:layout_marginTop="10dp"></android.support.v4.view.ViewPager>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+
+
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp">
+
+
+
+
+
+                </android.support.v4.view.ViewPager>
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:padding="10dp"
+                    android:id="@+id/progressBar1"
+                    android:visibility="gone"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:theme="@style/ProgressBar"
+                    android:layout_centerInParent="true">
+
+                </ProgressBar>
+
+            </RelativeLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/lldots"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"></LinearLayout>
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal"
+                >
+
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/llhierarchy"
@@ -610,12 +647,14 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+
                 <View
                     android:layout_below="@+id/linear"
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:background="@color/border_round_edittext" />
+
                 <ListView
                     android:id="@+id/listView_SalesAnalysis"
                     android:layout_width="match_parent"
@@ -632,5 +671,25 @@
 
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@android:color/transparent"
+        android:id="@+id/style_loadingBar"
+        android:visibility="gone">
+
+        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"
+            android:keepScreenOn="true"
+            style="?android:attr/progressBarStyle">
+        </ProgressBar>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -62,7 +62,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
     SalesAnalysisListDisplay salesAnalysisListDisplay;
     int focusposition,selFirstPositionValue;
     ListView listView_SalesAnalysis;
-  int currentIndex;
+    int currentIndex;
     int offsetvalue = 0, count = 0, limit = 100;
     private LayoutInflater mInflater;
 
@@ -168,7 +168,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 //            {
 //                viewHolder.txtPvAValue.setText(""+(int)analysisArrayList.get(position).getPvaAchieved());
 //            }
-    //        String planDept = productNameBean.getPlanDept().substring(0,1).toUpperCase()+productNameBean.getPlanDept().substring(1).toLowerCase();
+            //        String planDept = productNameBean.getPlanDept().substring(0,1).toUpperCase()+productNameBean.getPlanDept().substring(1).toLowerCase();
             viewHolder.nameTv.setText(productNameBean.getPlanDept());
             viewHolder.txtPvAValue.setText(" " + Math.round( productNameBean.getPvaAchieved()) + "%");
 
@@ -176,14 +176,14 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
         } else if (fromwhere.equals("Category")) {
 
-      //      String planCat=productNameBean.getPlanCategory().substring(0,1).toUpperCase()+productNameBean.getPlanCategory().substring(1).toLowerCase();
+            //      String planCat=productNameBean.getPlanCategory().substring(0,1).toUpperCase()+productNameBean.getPlanCategory().substring(1).toLowerCase();
             viewHolder.nameTv.setText(productNameBean.getPlanCategory());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
 
         } else if (fromwhere.equals("Plan Class")) {
 
-           // String planCls = productNameBean.getPlanClass().substring(0,1).toUpperCase()+productNameBean.getPlanClass().substring(1).toLowerCase();
+            // String planCls = productNameBean.getPlanClass().substring(0,1).toUpperCase()+productNameBean.getPlanClass().substring(1).toLowerCase();
             viewHolder.nameTv.setText(productNameBean.getPlanClass());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
             //viewHolder.txtValue.setText(productNameBean.getPlanClass().toLowerCase());
@@ -196,7 +196,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
         } else if (fromwhere.equals("Brand Plan Class")) {
 
-        //    String brndPlnCls= productNameBean.getBrandplanClass().substring(0,1).toUpperCase()+productNameBean.getBrandplanClass().substring(1).toLowerCase();
+            //    String brndPlnCls= productNameBean.getBrandplanClass().substring(0,1).toUpperCase()+productNameBean.getBrandplanClass().substring(1).toLowerCase();
             viewHolder.nameTv.setText(productNameBean.getBrandplanClass());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
@@ -240,10 +240,10 @@ public class SalesAnalysisAdapter extends BaseAdapter{
             viewHolder.txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
         }
 
-         //txtPvAClickedValue = viewHolder.nameTv.getText().toString();
+        //txtPvAClickedValue = viewHolder.nameTv.getText().toString();
 
 
-       return convertView;
+        return convertView;
     }
 
     private class Holder {
@@ -255,18 +255,18 @@ public class SalesAnalysisAdapter extends BaseAdapter{
         TextView txtAchieve;
     }
 
-   public void updateData(ArrayList<SalesAnalysisListDisplay> users) {
+    public void updateData(ArrayList<SalesAnalysisListDisplay> users) {
 
-       arrayList.addAll(users);
+        arrayList.addAll(users);
 
         if(salesadapter == null) {
             salesadapter = new SalesAnalysisAdapter(arrayList,context,currentIndex, fromwhere, listView_SalesAnalysis);
             listView_SalesAnalysis.setAdapter(salesadapter);
 
-            if (listView_SalesAnalysis.getFirstVisiblePosition() > currentIndex || listView_SalesAnalysis.getLastVisiblePosition() < currentIndex)
-                listView_SalesAnalysis.setSelection(currentIndex);
+//            if (listView_SalesAnalysis.getFirstVisiblePosition() > currentIndex || listView_SalesAnalysis.getLastVisiblePosition() < currentIndex)
+//                listView_SalesAnalysis.setSelection(currentIndex);
         }
-       //  salesadapter.notifyDataSetChanged();
+        salesadapter.notifyDataSetChanged();
 
     }
 

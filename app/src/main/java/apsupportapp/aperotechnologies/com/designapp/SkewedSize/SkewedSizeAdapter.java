@@ -137,7 +137,8 @@ public class SkewedSizeAdapter extends BaseAdapter {
         product.clear();
         product = Arrays.asList(arrayList.get(position).getProdAttribute4().split("\\s*,\\s*"));
         setFlag = Arrays.asList(arrayList.get(position).getSkewedFlag().split("\\s*,\\s*"));
-        holder.skewed_fwc.setText(String.format("%.1f",arrayList.get(position).getFwdWeekCoverTotal()));
+        double fwc = Double.parseDouble(arrayList.get(position).getFwdWeekCoverTotal());
+        holder.skewed_fwc.setText(String.format("%.1f",fwc));
        /* setFwc = Arrays.asList(arrayList.get(position).getFwdWeekCover().split("\\s*,\\s*"));
         // ArrayList<String>setNewFwc=new ArrayList<String>();
         StringBuilder stringBuild=new StringBuilder();
