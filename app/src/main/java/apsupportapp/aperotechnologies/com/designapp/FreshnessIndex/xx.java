@@ -1,3 +1,68 @@
+/*
+package apsupportapp.aperotechnologies.com.designapp.FreshnessIndex;
+
+*/
+/**
+ * Created by csuthar on 19/01/17.
+ *//*
+
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Cache;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
+import info.hoang8f.android.segmented.SegmentedGroup;
+
 package apsupportapp.aperotechnologies.com.designapp.FreshnessIndex;
 
 import android.content.Context;
@@ -17,7 +82,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -63,9 +127,11 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
+*/
 /**
  * Created by pamrutkar on 22/11/16.
- */
+ *//*
+
 
 public class FreshnessIndexActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
@@ -101,9 +167,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private String TAG = "FreshnessIndexActivity";
     private boolean current = false, previous = false, old = false, upcome = false;
     private int totalItemCount = 0;
-     int firstVisibleItem = 0;
-   JsonArrayRequest postRequest;
-    private ProgressBar processBar;
+    int firstVisibleItem = 0;
+    JsonArrayRequest postRequest;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -135,9 +200,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         freshnessIndex_imageBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  Intent intent = new Intent(FreshnessIndexActivity.this, DashBoardActivity.class);
+              */
+/*  Intent intent = new Intent(FreshnessIndexActivity.this, DashBoardActivity.class);
                 intent.putExtra("BACKTO","inventory");
-                startActivity(intent);*/
+                startActivity(intent);*//*
+
                 finish();
             }
         });
@@ -422,6 +489,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
 
         // hierarchy level drill down on selected item click
+*/
 /*        listViewFIndex.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -560,7 +628,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
             }
 
-        });*/
+        });*//*
+
 
         //list view on Scroll event
 
@@ -569,16 +638,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-
-            }
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
-            {
-
-                if (freshnessIndexDetailsArrayList.size() != 0 && newState== 0) {
-                    //check ideal condition then call .....
+                if (freshnessIndexDetailsArrayList.size() != 0) {
                     if (firstVisibleItem < freshnessIndexSnapAdapter.getItemCount() - 1) {
-                        //10<10 where footer is call then it goes else condition
+
 
 
                         RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
@@ -588,7 +650,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         Log.e(TAG, "onScrollStateChanged: " + firstVisibleItem);
                         if(firstVisibleItem >= freshnessIndexDetailsArrayList.size())
                         {
-                            //8=8
                             firstVisibleItem = freshnessIndexDetailsArrayList.size() - 1;
                             LinearLayoutManager llm = (LinearLayoutManager)listViewFIndex .getLayoutManager();
                             llm.scrollToPosition(firstVisibleItem);
@@ -622,7 +683,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             {
                                 postRequest.cancel();
                             }
-                            processBar.setVisibility(View.VISIBLE);
                             requestFIndexPieChart();
 
 
@@ -647,6 +707,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 //                        //  llm.scrollToPosition(11);
 //                    }
                 }
+            }
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+            {
+
 
             }
 
@@ -655,6 +720,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
 
 
+*/
 /*            @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 //                if (scrollState == SCROLL_STATE_IDLE) {
@@ -716,12 +782,12 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         });
 
 
-    }*/
+    }*//*
+
 
     private void initializeUI() {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
-        processBar=(ProgressBar)findViewById(R.id.progressBar);
         txtNoChart = (TextView) findViewById(R.id.noChart);
         txtFIndexClass = (TextView) findViewById(R.id.txtFIndexClass);
         txtfIndexDeptName = (TextView) findViewById(R.id.txtfIndexDeptName);
@@ -729,7 +795,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         freshnessIndex_imgfilter = (RelativeLayout) findViewById(R.id.freshnessIndex_imgfilter);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);
         listViewFIndex = (RecyclerView) findViewById(R.id.listView_SalesAnalysis);
-       // listViewFIndex.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
+        // listViewFIndex.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         llfreshnessIndex = (LinearLayout) findViewById(R.id.llfreshnessIndex);
         llfIndexhierarchy = (LinearLayout) findViewById(R.id.llfIndexhierarchy);
         btnFIndexPrev = (RelativeLayout) findViewById(R.id.btnFIndexPrev);
@@ -890,7 +956,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + freshnessindex_category_listurl);
 
-         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
+        postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -931,7 +997,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
 
 
-                               //0 fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
+                                //0 fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 //listViewFIndex.setAdapter(fIndexAdapter);
                                 flag = true;
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
@@ -946,7 +1012,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 2;
-                                processBar.setVisibility(View.VISIBLE);
                                 requestFIndexPieChart();
 
                             }
@@ -1029,8 +1094,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
 
-                              //  fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
-                               // listViewFIndex.setAdapter(fIndexAdapter);
+                                //  fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
+                                // listViewFIndex.setAdapter(fIndexAdapter);
                                 flag = true;
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
@@ -1043,7 +1108,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 3;
-                                processBar.setVisibility(View.VISIBLE);
                                 requestFIndexPieChart();
 
                             }
@@ -1124,7 +1188,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
 
-                               // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
+                                // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 //listViewFIndex.setAdapter(fIndexAdapter);
                                 flag = true;
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
@@ -1139,7 +1203,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 4;
-                                processBar.setVisibility(View.VISIBLE);
                                 requestFIndexPieChart();
 
                             }
@@ -1223,8 +1286,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
 
-                               // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
-                               // listViewFIndex.setAdapter(fIndexAdapter);
+                                // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
+                                // listViewFIndex.setAdapter(fIndexAdapter);
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
@@ -1237,7 +1300,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 5;
-                                processBar.setVisibility(View.VISIBLE);
                                 requestFIndexPieChart();
 
                             }
@@ -1373,7 +1435,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             l.setFormSize(11f);
             l.setEnabled(true);
             llfreshnessIndex.setVisibility(View.VISIBLE);
-            processBar.setVisibility(View.GONE);
             Reusable_Functions.hDialog();
             return;
         }
@@ -1391,7 +1452,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         }
         Log.e(TAG, "requestFIndexPieChart Url  " + url);
 
-       postRequest = new JsonArrayRequest(Request.Method.GET, url,
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -1550,8 +1611,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
                                 l.setFormSize(11f);
                                 l.setEnabled(true);
-                                processBar.setVisibility(View.GONE);
-
                                 llfreshnessIndex.setVisibility(View.VISIBLE);
                                 Reusable_Functions.hDialog();
                             }
@@ -1615,7 +1674,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         Log.e(TAG, "requestAll" + fIdetails);
 
 
-          postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
+        postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -1719,7 +1778,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
-                            processBar.setVisibility(View.VISIBLE);
                             requestFIndexPieChart();
 
                         } catch (Exception e) {
@@ -1762,11 +1820,14 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     @Override
     public void onBackPressed() {
 
- /*     Intent intent = new Intent(FreshnessIndexActivity.this, DashBoardActivity.class);
+ */
+/*     Intent intent = new Intent(FreshnessIndexActivity.this, DashBoardActivity.class);
         intent.putExtra("BACKTO","inventory");
-        startActivity(intent);*/
+        startActivity(intent);*//*
+
         finish();
     }
 
 }
 
+*/
