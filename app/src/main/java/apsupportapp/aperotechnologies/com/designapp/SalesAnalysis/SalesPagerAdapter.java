@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -256,13 +257,6 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
         }
 
 
-//        analysisClass = salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition());
-//        Log.i("salesAnalysis value",""+salesAnalysisClassArrayList.get(listView_SalesAnalysis.getFirstVisiblePosition()));
-//        salesAnalysis=arrayList.get(focusposition);
-//        Log.e("in sales pager adapter",""+salesAnalysis);
-
-
-//        Log.e("in sales pager adapter","");
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("","in"));
 
         if (position == 0) {
@@ -322,17 +316,17 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 
                 if (salesAnalysis != null) {
 
-                    txtNetSalesVal.setText("\u20B9\t" + format.format(Math.round( salesAnalysis.getSaleNetVal())));
-                    txtPlanSalesVal.setText("\u20B9\t" +format.format(Math.round( salesAnalysis.getPlanSaleNetVal())));
-                    txtNetSalesUVal.setText(" " + format.format(Math.round( salesAnalysis.getSaleTotQty())));
-                    txtSohUVal.setText(" " + format.format(Math.round( salesAnalysis.getStkOnhandQty())));
+                    txtNetSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getSaleNetVal())));
+                    txtPlanSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getPlanSaleNetVal())));
+                    txtNetSalesUVal.setText(" " + format.format(Math.round(salesAnalysis.getSaleTotQty())));
+                    txtSohUVal.setText(" " + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
 //                    txtRosVal0.setText(" " + String.format("%.1f",salesAnalysis.getInvTurns()));
 //                    txtFwdWkCoverVal0.setText(" " +String.format("%.1f", salesAnalysis.getVelocity()));
 
 
-                    txtNetSalesPerc.setText("" + Math.round( salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
+                    txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
-                    txtNetSalesUPerc.setText("" + Math.round( salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
+                    txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
                     Log.i("saleNetVal IN L4W", "" + salesAnalysis.getSaleNetVal());
                 }
                 //           txtNetSalesPerc.setText(salesAnalysis.);
@@ -369,22 +363,22 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                 }
                 ////
 
-            }
-            // update listview
-
-         //   SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisClassArrayList.get(0);
-        //    RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(listView_SalesAnalysis);
-           // int visibleItemCount = recyclerView.getChildCount();
-     //      int totalItemCount = mRecyclerViewHelper.getItemCount();
-       //    int firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
-
-
+//                //update list view
+//                   SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisClassArrayList.get(0);
+////                    RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(listView_SalesAnalysis);
+////                 //  int visibleItemCount = recyclerView.getChildCount();
+////                      int totalItemCount = mRecyclerViewHelper.getItemCount();
+//                LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
+//                    int firstVisibleItem = llm.findFirstVisibleItemPosition();
+//                Log.e( "instantiateItem: ",""+firstVisibleItem );
+//
+//
 //            if (firstVisibleItem == 0) {
 //
 //                if (salesAnalysisClass.getPlanDept() != null) {
 //                    if (salesAnalysisClass.getPlanDept().equals("All")) {
 //                        Log.e("-----", "All");
-//                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
+//                        salesAnalysisClass.setPvaAchieved(25);
 //                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
 //                        salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
 //                        listView_SalesAnalysis.setAdapter(salesadapter);
@@ -440,8 +434,11 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 //                    }
 //
 //                }
-//
 //            }
+
+         }
+
+
 
 
         } else if (position == 1) {
@@ -812,48 +809,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             }
 
 
-            /*
-            LinearLayout layout = (LinearLayout) itemView;
-            LinearLayout layout1 = (LinearLayout) layout.getChildAt(0);
-            RelativeLayout relpvasales = (RelativeLayout) layout1.getChildAt(0);
-            RelativeLayout relyoysales = (RelativeLayout) layout1.getChildAt(1);
 
-            relpvasales.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("PVA Sales", "----");
-                    updatelistview("PVA Sales");
-                }
-            });
-
-            relyoysales.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("YOY Sales", "----");
-                    updatelistview("YOY Sales");
-                }
-            });
-
-            LinearLayout layout2 = (LinearLayout) layout.getChildAt(1);
-            RelativeLayout relsellthrou = (RelativeLayout) layout2.getChildAt(0);
-            RelativeLayout relmixsales = (RelativeLayout) layout2.getChildAt(1);
-
-            relsellthrou.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("Sell Thro U", "----");
-                    updatelistview("Sell Thro U");
-                }
-            });
-
-            relmixsales.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("Mix Sales", "----");
-                    updatelistview("Mix Sales");
-                }
-            });
-            */
 
 
         } else if (position == 2) {
@@ -869,79 +825,8 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                 txtFwdWkCoverVal2.setText(""+fwdwkcover);
             }
 
-            /*LinearLayout layout = (LinearLayout) itemView;
-            LinearLayout layout1 = (LinearLayout) layout.getChildAt(0);
-            RelativeLayout relsoh2 = (RelativeLayout) layout1.getChildAt(0);
-            RelativeLayout relgit = (RelativeLayout) layout1.getChildAt(1);
-
-            relsoh2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("SOH 2", "----");
-                    updatelistview("SOH 2");
-                }
-            });
-
-            relgit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("GIT", "----");
-                    updatelistview("GIT");
-                }
-            });
-
-            LinearLayout layout2 = (LinearLayout) layout.getChildAt(1);
-            RelativeLayout relros2 = (RelativeLayout) layout2.getChildAt(0);
-            RelativeLayout relfwdwkcover2 = (RelativeLayout) layout2.getChildAt(1);
-
-            relros2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("ROS 2", "----");
-                    updatelistview("ROS 2");
-                }
-            });
-
-            relfwdwkcover2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("Fwd Wk Cover 2", "----");
-                    updatelistview("Fwd Wk Cover 2");
-                }
-            });*/
-
-
         }
 
-//        itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.e("view "," "+v.getParent());
-//                LinearLayout layout = (LinearLayout) v;
-//                LinearLayout layout1 = (LinearLayout) layout.getChildAt(0);
-//                RelativeLayout layout2 = (RelativeLayout) layout1.getChildAt(0);
-//
-//                ViewPager pager = (ViewPager) v.getParent();
-//                if(pager.getCurrentItem() == 0)
-//                {
-//                    Log.e("currentItem==","0"+" " +layout2);
-//                    salesadapter = new SalesAnalysisAdapter(arrayList, context, "NetSales");
-//                    listView_SalesAnalysis.setAdapter(salesadapter);
-//                    salesadapter.notifyDataSetChanged();
-//                }
-//                else if(pager.getCurrentItem() == 1)
-//                {
-//                    Log.e("currentItem==","1");
-//                }
-//                else if(pager.getCurrentItem() == 2)
-//                {
-//                    Log.e("currentItem==","2");
-//                }
-//
-//
-//
-//            }
-//        });
 
         vwpagersales.setOnPageChangeListener(this);
         // Add viewpager_item.xml to ViewPager

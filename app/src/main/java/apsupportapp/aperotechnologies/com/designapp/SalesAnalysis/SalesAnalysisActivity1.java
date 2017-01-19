@@ -112,8 +112,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     ProgressBar progressBar1;
     JsonArrayRequest postRequest;
     int firstVisiblePosition;
-    public int totalItemCount, firstVisibleItem=0;
-
+    static public int firstVisibleItem=0;
+    public int totalItemCount;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -360,7 +360,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 //
                         relprevbtn.setVisibility(View.INVISIBLE);
                         //relnextbtn.setVisibility(View.VISIBLE);
-//                        relprevbtn.setBackgroundResource(R.color.bg_header);
+//
                         //SalesPagerAdapter.currentPage = 0;
                         if (lldots != null) {
                             lldots.removeAllViews();
@@ -537,75 +537,44 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         });
 
 
-        //-----------------------------ON SCROLL LISTENER-----------------------------//
+        //
+        //
+
+
+
 
         listView_SalesAnalysis.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
-
-//                if (salesadapter.getItemCount() != 0) {
-//                    RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
-//                    int visibleItemCount = recyclerView.getChildCount();
-//                    totalItemCount = mRecyclerViewHelper.getItemCount();
-//                    firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
-//                    Log.e(TAG, "onScrolled: " + firstVisibleItem + "   count is " + totalItemCount);
-//
-//
-//                    if (0 == recyclerView.getScrollState()) {
-//
-//                        Log.e("", "log");
-//
-//                        //      LinearLayoutManager llm = (LinearLayoutManager) recyclerListView.getLayoutManager();
-//
-//                        //      llm.scrollToPositionWithOffset(2, snapAdapter.getItemCount());
-////
-//                        //      LinearLayoutManager llm = (LinearLayoutManager) recyclerListView.getLayoutManager();
-////
-//                        //   llm.scrollToPositionWithOffset(19, snapAdapter.getItemCount());
-//
-//                    } else {
-////                        int focusposition = snapAdapter.getItemCount() - 4;
-////                        Log.e( "footer is on: ",""+firstVisibleItem );
-////
-////                        LinearLayoutManager llm = (LinearLayoutManager) recyclerListView.getLayoutManager();
-////
-////                        llm.scrollToPositionWithOffset(focusposition, snapAdapter.getItemCount());
-//                    }
-//                }
-            }
-
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (salesAnalysisClassArrayList.size()!=0) {
-                    if (firstVisibleItem <= salesAnalysisClassArrayList.size()) {
-//                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//                    recyclerView.setLayoutManager(mLayoutManager);
-//                    LinearLayoutManager layoutManager = ((LinearLayoutManager) listView_SalesAnalysis.getLayoutManager());
-//                      totalItemCount = layoutManager.getItemCount()-1;
-//                      firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
+                if (salesAnalysisClassArrayList.size() != 0) {
+                    if (firstVisibleItem < salesadapter.getItemCount() - 1) {
                         RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
-                    int visibleItemCount = recyclerView.getChildCount();
-                    totalItemCount = mRecyclerViewHelper.getItemCount();
-                    firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
+                        int visibleItemCount = recyclerView.getChildCount();
+                        totalItemCount = mRecyclerViewHelper.getItemCount();
+                        firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
+                        Log.e(TAG, "onScrollStateChanged: " + firstVisibleItem);
+                        if(firstVisibleItem >= salesAnalysisClassArrayList.size())
+                        {
+                            firstVisibleItem = salesAnalysisClassArrayList.size() - 1;
+                            LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
+                            llm.scrollToPosition(firstVisibleItem);
+                            //return;
+                        }
 
-                    Log.e("STATE_IDLE>>>>>>>>", "" + firstVisibleItem+"size:"+salesAnalysisClassArrayList.size()+"totalcnt:"+totalItemCount);
-
-                            if (txtheaderplanclass.getText().toString().equals("Department")) {
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().toString();
-                            } else if (txtheaderplanclass.getText().toString().equals("Category")) {
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().toString();
-                            } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().toString();
-                            } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().toString();
-                            } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().toString();
-                            }
-                           // if (firstVisibleItem != selFirstPositionValue) {
-                                if (Reusable_Functions.chkStatus(context)) {
+                        if (txtheaderplanclass.getText().toString().equals("Department")) {
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().toString();
+                        } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().toString();
+                        } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().toString();
+                        } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().toString();
+                        } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+                            saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().toString();
+                        }
+                        //  if (firstVisibleItem != selFirstPositionValue) {
+                        if (Reusable_Functions.chkStatus(context)) {
                                     Reusable_Functions.hDialog();
                                     currentVmPos = vwpagersales.getCurrentItem();
                                     offsetvalue = 0;
@@ -624,38 +593,108 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     } else {
                                         requestSalesPagerOnScrollAPI();
                                     }
-                                    //    }
+
                                 } else {
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
-                      //  }
-                      //  selFirstPositionValue = firstVisibleItem;
-                        } else {
-                           // firstVisibleItem = salesAnalysisClassArrayList.size()-1;
-                        //    selFirstPositionValue = firstVisibleItem;
-                        }
+
+                        // }
+                        //  selFirstPositionValue = firstVisibleItem;
+                    } else {
+                        Log.e(TAG, "onScrollStateChanged: ");
+                        firstVisibleItem = salesAnalysisClassArrayList.size() - 1;
+                        //selFirstPositionValue = firstVisibleItem;
+                    }
 
 
-//                    } catch (Exception e) {
-//                        Log.e(TAG, "if condition catchXXXXXXXX: ");
-//
-//                    }
-
-
-                    if (firstVisibleItem+1 >= salesAnalysisClassArrayList.size()) {
+                    if (firstVisibleItem >= salesadapter.getItemCount() - 2) {
                         Log.e(TAG, "STATE_IDLE>>>>>>>>" + "firstvisible=" + firstVisibleItem + "and total=" + totalItemCount);
 
                         LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
-                         Log.e("Array Size",""+salesAnalysisClassArrayList.size() +" totalItemCount :"+totalItemCount);
+                        Log.e("Array Size", "" + salesAnalysisClassArrayList.size() + " totalItemCount :" + totalItemCount);
                         // llm.scrollToPositionWithOffset(totalItemCount-14, totalItemCount);
-                        llm.scrollToPositionWithOffset(salesAnalysisClassArrayList.size()-2, 0);
+                        //  llm.scrollToPosition(11);
                     }
                 }
 
-                }
+
             }
 
-            );
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                Log.e("newState", " " + newState);
+
+
+//                if (salesAnalysisClassArrayList.size()!=0) {
+//                    if (firstVisibleItem < salesadapter.getItemCount()-2) {
+//                        Log.e(TAG, "onScrollStateChanged: "+firstVisibleItem+"and item count"+salesadapter.getItemCount() );
+//                    RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+//                    int visibleItemCount = recyclerView.getChildCount();
+//                    totalItemCount = mRecyclerViewHelper.getItemCount();
+//                    firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
+//
+//                    Log.e("STATE_IDLE>>>>>>>>", "" + firstVisibleItem+"size:"+salesAnalysisClassArrayList.size()+"totalcnt:"+totalItemCount);
+//
+//                            if (txtheaderplanclass.getText().toString().equals("Department")) {
+//                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().toString();
+//                            } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+//                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().toString();
+//                            } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+//                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().toString();
+//                            } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+//                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().toString();
+//                            } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+//                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().toString();
+//                            }
+//                          //  if (firstVisibleItem != selFirstPositionValue) {
+//                                if (Reusable_Functions.chkStatus(context)) {
+//                                    Reusable_Functions.hDialog();
+//                                    currentVmPos = vwpagersales.getCurrentItem();
+//                                    offsetvalue = 0;
+//                                    limit = 100;
+//                                    count = 0;
+//                                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+//
+//                                    progressBar1.setVisibility(View.VISIBLE);
+//
+//                                    if (postRequest != null) {
+//                                        postRequest.cancel();
+//                                    }
+//
+//                                    if (saleFirstVisibleItem.equals("All")) {
+//                                        requestSalesViewPagerValueAPI();
+//                                    } else {
+//                                        requestSalesPagerOnScrollAPI();
+//                                    }
+//
+//                                } else {
+//                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                                }
+//                       // }
+//                      //  selFirstPositionValue = firstVisibleItem;
+//                        } else {
+//                        Log.e(TAG, "onScrollStateChanged: ");
+//                            firstVisibleItem = salesAnalysisClassArrayList.size()-1;
+//                           //selFirstPositionValue = firstVisibleItem;
+//                        }
+//
+//
+//                   if (firstVisibleItem >= salesadapter.getItemCount()-2) {
+//                        Log.e(TAG, "STATE_IDLE>>>>>>>>" + "firstvisible=" + firstVisibleItem + "and total=" + totalItemCount);
+//
+//                        LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
+//                         Log.e("Array Size",""+salesAnalysisClassArrayList.size() +" totalItemCount :"+totalItemCount);
+//                        // llm.scrollToPositionWithOffset(totalItemCount-14, totalItemCount);
+//                      //  llm.scrollToPosition(11);
+//                    }
+//                }
+//
+//                }
+            }
+        });
 
 
 //        listView_SalesAnalysis.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -897,7 +936,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     currentVmPos = vwpagersales.getCurrentItem();
                     Log.e(TAG, "currentVmPos: " + currentVmPos);
                     // currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-                    Log.e(TAG, " in WTD foucpos" + focusposition);
+                    Log.e(TAG, " in WTD foucpos" + firstVisibleItem);
                     // save position here, and set position on API call's onPostexecute that scroll pos will get on Scroll method??
                     //saleFirstVisibleItem = " ";
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -928,7 +967,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     currentVmPos = vwpagersales.getCurrentItem();
                     llhierarchy.setVisibility(View.GONE);
                     //   currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-                    Log.e(TAG, " in LW foucpos" + focusposition);
+                    Log.e(TAG, " in LW foucpos" + firstVisibleItem);
                     //saleFirstVisibleItem = " ";
                     // listView_SalesAnalysis.invalidateViews();
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -962,7 +1001,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     currentVmPos = vwpagersales.getCurrentItem();
                     llhierarchy.setVisibility(View.GONE);
                     //    currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-                    Log.e(TAG, " in L4W foucpos" + focusposition);
+                    Log.e(TAG, " in L4W foucpos" + firstVisibleItem);
                     //saleFirstVisibleItem = " ";
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                     analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
@@ -997,7 +1036,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     currentVmPos = vwpagersales.getCurrentItem();
                     llhierarchy.setVisibility(View.GONE);
                     // currentIndex = listView_SalesAnalysis.getFirstVisiblePosition();
-                    Log.e(TAG, " in YTD foucpos" + focusposition);
+                    Log.e(TAG, " in YTD foucpos" + firstVisibleItem);
                     //saleFirstVisibleItem = " ";
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                     analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
@@ -1081,14 +1120,19 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
                                 if (txtheaderplanclass.getText().toString().equals("Department")) {
                                     salesAnalysisClass.setPlanDept("All");
+
                                 } else if (txtheaderplanclass.getText().toString().equals("Category")) {
                                     salesAnalysisClass.setPlanCategory("All");
+
                                 } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
                                     salesAnalysisClass.setPlanClass("All");
+
                                 } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
                                     salesAnalysisClass.setBrandName("All");
+
                                 } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
                                     salesAnalysisClass.setBrandplanClass("All");
+
                                 }
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
                                 Log.e(TAG, "focusPosition in API----" + currentIndex);
@@ -1107,81 +1151,81 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                 Log.e("--- ", " salesAnalysisClassArrayList" + salesAnalysisClassArrayList.size());
 
-//                                if (listView_SalesAnalysis.getAdapter() == null) {
-//                                    listView_SalesAnalysis.setAdapter(salesadapter);
+                                if (listView_SalesAnalysis.getAdapter() == null) {
+                                    listView_SalesAnalysis.setAdapter(salesadapter);
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
                                 requestSalesViewPagerValueAPI();
 //
-//                                } else if (listView_SalesAnalysis.getAdapter() != null)
-//
-//                                {
-//                                    salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                                //   listView_SalesAnalysis.setAdapter(salesadapter);
-                                // salesadapter.updateData(salesAnalysisClassArrayList);
-                                // salesadapter.notifyDataSetChanged();
+                                } else if (listView_SalesAnalysis.getAdapter() != null)
+
+                                {
+                                    salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+                                   listView_SalesAnalysis.setAdapter(salesadapter);
+//                                 salesadapter.updateData(salesAnalysisClassArrayList);
+//                                 salesadapter.notifyDataSetChanged();
 
 
                                // Log.e("saleFirstVisibleItem", " " + saleFirstVisibleItem);
 
-//                                    for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
-//                                       // Log.e("salesAnalys"," "+salesAnalysisClassArrayList.get(j).toString());
-//                                        if (txtheaderplanclass.getText().toString().equals("Department")) {
-//                                            if (salesAnalysisClassArrayList.get(j).getPlanDept().equals(saleFirstVisibleItem)) {
-//                                                focusposition = j;
-//                                                listView_SalesAnalysis.setScrollingTouchSlop(focusposition, 0);
-//                                            }
-//                                        } else if (txtheaderplanclass.getText().toString().equals("Category")) {
-//                                            if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
-//                                                focusposition = j;
-//                                                listView_SalesAnalysis.setSelectionFromTop(focusposition, 0);
-//                                            }
-//                                        }
-//                                        else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
-//                                            if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
-//                                                focusposition = j;
-//                                                listView_SalesAnalysis.setSelectionFromTop(focusposition, 0);
-//                                            }
-//                                        }
-//                                        else if (txtheaderplanclass.getText().toString().equals("Brand")) {
-//                                            if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
-//                                                focusposition = j;
-//                                                listView_SalesAnalysis.setSelectionFromTop(focusposition, 0);
-//                                            }
-//                                        }
-//                                        else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
-//                                            if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
-//                                                focusposition = j;
-//                                                listView_SalesAnalysis.setSelectionFromTop(focusposition, 0);
-//                                            }
-//                                        }
-//                                    }
-//                                    if (txtheaderplanclass.getText().toString().equals("Department")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
-//                                    } else if (txtheaderplanclass.getText().toString().equals("Category")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory().toString();
-//                                    } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass().toString();
-//                                    } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName().toString();
-//                                    } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
-//                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
-//                                    }
-//                                    if (saleFirstVisibleItem.equals("All")) {
-//                                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                //   requestSalesViewPagerValueAPI();
-//
-//                                    } else {
-//
-//                                        offsetvalue = 0;
-//                                        limit = 100;
-//                                        count = 0;
-//                                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-//
-//                                        requestSalesPagerOnScrollAPI();
-//                                    }
-                                //      }
+                                    for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
+                                       // Log.e("salesAnalys"," "+salesAnalysisClassArrayList.get(j).toString());
+                                        if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                            if (salesAnalysisClassArrayList.get(j).getPlanDept().equals(saleFirstVisibleItem)) {
+                                                firstVisibleItem = j;
+                                                listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
+                                            }
+                                        } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                            if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
+                                                firstVisibleItem = j;
+                                                listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
+                                            }
+                                        }
+                                        else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+                                            if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
+                                                firstVisibleItem = j;
+                                                listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
+                                            }
+                                        }
+                                        else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                            if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
+                                                firstVisibleItem = j;
+                                                listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
+                                            }
+                                        }
+                                        else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+                                            if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
+                                                firstVisibleItem = j;
+                                                listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
+                                            }
+                                        }
+                                    }
+                                    if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().toString();
+                                    } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().toString();
+                                    } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().toString();
+                                    } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().toString();
+                                    } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().toString();
+                                    }
+                                    if (saleFirstVisibleItem.equals("All")) {
+                                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                                        requestSalesViewPagerValueAPI();
+
+                                    } else {
+
+                                        offsetvalue = 0;
+                                        limit = 100;
+                                        count = 0;
+                                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+
+                                        requestSalesPagerOnScrollAPI();
+                                    }
+                                      }
                             }
                         } catch (Exception e)
 
@@ -1282,18 +1326,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                             //Log.i("-------",""+analysisArrayList.size());
 
+
+
                             Log.i("----getCurrentItem---", "" + vwpagersales.getCurrentItem());
                             pageradapter = new SalesPagerAdapter(context, analysisArrayList, focusposition, vwpagersales, lldots, salesadapter, listView_SalesAnalysis, salesAnalysisClassArrayList, fromWhere, pageradapter);
                             vwpagersales.setAdapter(pageradapter);
                             vwpagersales.setCurrentItem(currentVmPos);
                             pageradapter.notifyDataSetChanged();
-                            scrolling = true;
-                            //txtZonalSales.setText("" + salesAnalysis.getZonalSalesRank());
-//                            txtNationalSales.setText("" + salesAnalysis.getNationalSalesRank());
-//                            txtZonalYOY.setText("" + salesAnalysis.getZonalYOYGrowthRank());
-//                            txtNationalYOY.setText("" + salesAnalysis.getNationalYOYGrowthRank());
-
-                            // Log.i("Sales Zonal Rank",""+salesAnalysis.getZonalSalesRank());
 
                             // llayoutSalesAnalysis.setVisibility(View.VISIBLE);
                             // Reusable_Functions.hDialog();
@@ -1411,22 +1450,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 Log.e("Focus position on scroll ", "" + focusposition);
                                 progressBar1.setVisibility(View.GONE);
                                 Style_loadingBar.setVisibility(View.GONE);
-//                                }
-//                                else
-//                                {
-//                                    Log.e("in Scroll API","");
-//                                    requestSalesPagerOnScrollAPI();
-//                                }
-
-//                                txtZonalSales.setText("" + salesAnalysis.getZonalSalesRank());
-//                                txtNationalSales.setText("" + salesAnalysis.getNationalSalesRank());
-//                                txtZonalYOY.setText("" + salesAnalysis.getZonalYOYGrowthRank());
-//                                txtNationalYOY.setText("" + salesAnalysis.getNationalYOYGrowthRank());
-                                // llayoutSalesAnalysis.setVisibility(View.VISIBLE);
-                                // Reusable_Functions.hDialog();
-
-
-                            }
+                                }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();

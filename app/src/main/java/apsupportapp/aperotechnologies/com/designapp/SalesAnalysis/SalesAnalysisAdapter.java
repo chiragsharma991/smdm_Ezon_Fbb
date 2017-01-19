@@ -134,7 +134,6 @@ public class SalesAnalysisAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        //Log.e("in ","getview");
         final Holder viewHolder;
 
         if (convertView == null) {
@@ -144,9 +143,9 @@ public class SalesAnalysisAdapter extends BaseAdapter{
             viewHolder.nameTv = (TextView) convertView.findViewById(R.id.txtVal);
             viewHolder.rel = (RelativeLayout) convertView.findViewById(R.id.rel);
             viewHolder.innerrel = (RelativeLayout) convertView.findViewById(R.id.innerrellay);
-            viewHolder.relValue = (RelativeLayout) convertView.findViewById(R.id.relValue);
+           // viewHolder.relValue = (RelativeLayout) convertView.findViewById(R.id.relValue);
             viewHolder.txtPlan = (TextView) convertView.findViewById(R.id.txtPlan);
-            viewHolder.txtValue = (TextView) convertView.findViewById(R.id.txtValue);
+           // viewHolder.txtValue = (TextView) convertView.findViewById(R.id.txtValue);
             viewHolder.txtAchieve = (TextView) convertView.findViewById(R.id.txtAchieve);
             viewHolder.txtPvAValue =(TextView) convertView.findViewById(R.id.txtPvAValue);
 
@@ -160,15 +159,9 @@ public class SalesAnalysisAdapter extends BaseAdapter{
         final SalesAnalysisListDisplay productNameBean = (SalesAnalysisListDisplay) arrayList.get(position);
 
 
-        // Log.e("--- ", " "+viewHolder.rel.getMeasuredWidth() + " "+ (200/100));
-
         if (fromwhere.equals("Department")) {
 
-//            if(arrayList.get(position).getPlanDept().equals("All"))
-//            {
-//                viewHolder.txtPvAValue.setText(""+(int)analysisArrayList.get(position).getPvaAchieved());
-//            }
-            //        String planDept = productNameBean.getPlanDept().substring(0,1).toUpperCase()+productNameBean.getPlanDept().substring(1).toLowerCase();
+
             viewHolder.nameTv.setText(productNameBean.getPlanDept());
             viewHolder.txtPvAValue.setText(" " + Math.round( productNameBean.getPvaAchieved()) + "%");
 
@@ -176,27 +169,24 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
         } else if (fromwhere.equals("Category")) {
 
-            //      String planCat=productNameBean.getPlanCategory().substring(0,1).toUpperCase()+productNameBean.getPlanCategory().substring(1).toLowerCase();
             viewHolder.nameTv.setText(productNameBean.getPlanCategory());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
 
         } else if (fromwhere.equals("Plan Class")) {
 
-            // String planCls = productNameBean.getPlanClass().substring(0,1).toUpperCase()+productNameBean.getPlanClass().substring(1).toLowerCase();
+
             viewHolder.nameTv.setText(productNameBean.getPlanClass());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
-            //viewHolder.txtValue.setText(productNameBean.getPlanClass().toLowerCase());
+
 
         } else if (fromwhere.equals("Brand")) {
 
-            //String brnd= productNameBean.getBrandName().substring(0,1).toUpperCase()+productNameBean.getBrandName().substring(1).toLowerCase();
             viewHolder.nameTv.setText(productNameBean.getBrandName());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
         } else if (fromwhere.equals("Brand Plan Class")) {
 
-            //    String brndPlnCls= productNameBean.getBrandplanClass().substring(0,1).toUpperCase()+productNameBean.getBrandplanClass().substring(1).toLowerCase();
             viewHolder.nameTv.setText(productNameBean.getBrandplanClass());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
@@ -240,10 +230,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
             viewHolder.txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
         }
 
-        //txtPvAClickedValue = viewHolder.nameTv.getText().toString();
-
-
-        return convertView;
+       return convertView;
     }
 
     private class Holder {
