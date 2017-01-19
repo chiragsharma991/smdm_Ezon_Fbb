@@ -50,8 +50,9 @@ import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvail
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
+
 import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
@@ -351,7 +352,7 @@ public class DashBoardActivity extends AppCompatActivity
         imgBtnSales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashBoardActivity.this,SalesAnalysisActivity.class);
+                Intent intent = new Intent(DashBoardActivity.this,SalesAnalysisActivity1.class);
                 startActivity(intent);
                 if(timer != null)
                 {

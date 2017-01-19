@@ -1,11 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp">
+        android:layout_height="wrap_content">
 
         <!--Name-->
 
@@ -19,9 +19,7 @@
             android:layout_marginRight="255dp"
             android:layout_marginLeft="3dp"
             android:layout_toLeftOf="@+id/relative2"
-            android:gravity="center_vertical|start"
-
-            >
+            android:gravity="center_vertical|start">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,17 +27,9 @@
                 android:text="name"
                 android:textSize="@dimen/smdm_rowInflaterLayout_normal"
                 android:textColor="@color/txt_color"
-                android:id="@+id/txtPromoName"
-
-                />
-
-
-
+                android:id="@+id/txtPromoName"/>
 
         </RelativeLayout>
-
-
-
         <!--startDate-->
 
         <RelativeLayout
@@ -51,11 +41,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="178dp"
             android:layout_toLeftOf="@+id/relative3"
-            android:gravity="center_vertical"
-
-
-
-            >
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -65,19 +51,10 @@
                 android:text="02/09/93"
                 android:textSize="@dimen/smdm_rowInflaterLayout_normal"
                 android:textColor="@color/txt_color"
-                android:id="@+id/txtstartDate"
-
-                />
-
-
+                android:id="@+id/txtstartDate"/>
 
         </RelativeLayout>
-
-
-
-
         <!--EndDate-->
-
         <RelativeLayout
             android:id="@+id/relative3"
             android:layout_width="75dp"
@@ -86,9 +63,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="102dp"
             android:layout_toLeftOf="@+id/relative4"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical">
 
-            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,16 +139,6 @@
 
 
         </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
 
     </RelativeLayout>
 

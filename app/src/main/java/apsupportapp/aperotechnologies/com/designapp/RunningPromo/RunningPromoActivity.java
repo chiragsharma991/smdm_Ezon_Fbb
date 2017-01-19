@@ -3,11 +3,17 @@ package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -28,6 +34,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -43,7 +50,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
-public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener {
+public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener,GravitySnapHelper.SnapListener {
 
     TextView storecode, storedesc, promoval1, promoval2;
     RelativeLayout imageback, imagefilter;
@@ -57,10 +64,14 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
     Context context = RunningPromoActivity.this;
     private RequestQueue queue;
     private Gson gson;
-    ListView PromoListView;
+    RecyclerView PromoListView;
     ArrayList<RunningPromoListDisplay> promoList;
     private int focusposition = 0;
     private int itemCount = 0;
+    private int totalItemCount;
+    private boolean scrolling=false;
+    private RunningPromoSnapAdapter runningPromoSnapAdapter;
+    private int firstVisibleItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +79,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_running_promo);
         getSupportActionBar().hide();
         initalise();
-        PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
+      //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         promoList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -81,6 +92,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         queue.start();
         //Running testing
         Reusable_Functions.sDialog(this, "Loading.......");
+        runningPromoSnapAdapter=new RunningPromoSnapAdapter();
         requestRunningPromoApi();
 
     }
@@ -111,6 +123,8 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
                                         runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         promoList.add(runningPromoListDisplay);
+                                        runningPromoSnapAdapter.addSnap(runningPromoListDisplay);
+
 
                                     }
                                     offsetvalue = (limit * count) + limit;
@@ -125,6 +139,12 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
                                         runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         promoList.add(runningPromoListDisplay);
+                                        runningPromoSnapAdapter.addSnap(runningPromoListDisplay);
+                                     }
+
+                                    for (int j = 0; j <20 ; j++) {
+                                        RunningPromoListDisplay footer=new RunningPromoListDisplay();
+                                        runningPromoSnapAdapter.addSnap(footer);
 
                                     }
                                     Log.e(TAG, "promolistSize" + promoList.size());
@@ -136,8 +156,18 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                                 }
 
 
+                              //  RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
+                               // PromoListView.setAdapter(runningPromoAdapter);
+                                PromoListView.setLayoutManager(new LinearLayoutManager(
+                                        PromoListView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                        LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                PromoListView.setOnFlingListener(null);
+                                new GravitySnapHelper(48).attachToRecyclerView(PromoListView);
+
+                                PromoListView.setAdapter(runningPromoSnapAdapter);
+
                                 RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
-                                PromoListView.setAdapter(runningPromoAdapter);
+                                PromoListView.setAdapter(runningPromoSnapAdapter);
                                // PromoListView.setSelectionFromTop(3,0);
                                 Reusable_Functions.hDialog();
 
@@ -183,6 +213,103 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
             //-----------------------------ON CLICK LISTENER-----------------------------//
 
 
+            PromoListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                    if (runningPromoSnapAdapter.getItemCount() != 0) {
+                        RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+                        int visibleItemCount = recyclerView.getChildCount();
+                        totalItemCount = mRecyclerViewHelper.getItemCount();
+                        firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
+                        Log.e(TAG, "onScrolled: "+firstVisibleItem+"   count is "+totalItemCount );
+
+
+
+                        if (0==recyclerView.getScrollState())
+                        {
+
+                            Log.e( "","log" );
+
+                            //      LinearLayoutManager llm = (LinearLayoutManager) recyclerListView.getLayoutManager();
+
+                            //      llm.scrollToPositionWithOffset(2, snapAdapter.getItemCount());
+//
+                            //      LinearLayoutManager llm = (LinearLayoutManager) recyclerListView.getLayoutManager();
+//
+                            //   llm.scrollToPositionWithOffset(19, snapAdapter.getItemCount());
+
+                        }
+
+                        else {
+//                        int focusposition = snapAdapter.getItemCount() - 4;
+//                        Log.e( "footer is on: ",""+firstVisibleItem );
+//
+//                        LinearLayoutManager llm = (LinearLayoutManager) recyclerListView.getLayoutManager();
+//
+//                        llm.scrollToPositionWithOffset(focusposition, snapAdapter.getItemCount());
+                        }
+                    }
+                }
+
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (0==recyclerView.getScrollState())
+                    {
+                        Log.e( "STATE_IDLE>>>>>>>>",""+firstVisibleItem);
+
+                        try {
+                            if(firstVisibleItem<=promoList.size()-1) {
+                                Log.e(TAG, "if condition true: ");
+                                promoval1.setText("\u20B9\t" + Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal()));
+                                promoval2.setText("" + promoList.get(firstVisibleItem).getDurSaleTotQty());
+                                storecode.setText(promoList.get(firstVisibleItem).getStoreCode());
+                                storedesc.setText(promoList.get(firstVisibleItem).getStoreDesc());
+                            }
+                            else
+                            {
+                                promoval1.setText("\u20B9\t" + Math.round(promoList.get(promoList.size()-1).getDurSaleNetVal()));
+                                promoval2.setText("" + promoList.get(promoList.size()-1).getDurSaleTotQty());
+                                storecode.setText(promoList.get(promoList.size()-1).getStoreCode());
+                                storedesc.setText(promoList.get(promoList.size()-1).getStoreDesc());
+
+                            }
+
+                        }catch (Exception e)
+                        {
+                            Log.e(TAG, "if condition catchXXXXXXXX: ");
+
+                        }
+
+
+
+                        if(firstVisibleItem>=totalItemCount-20){
+                            Log.e(TAG,"STATE_IDLE>>>>>>>>"+"firstvisible="+firstVisibleItem+"and total="+totalItemCount);
+
+                            LinearLayoutManager llm = (LinearLayoutManager) PromoListView.getLayoutManager();
+
+                           // llm.scrollToPositionWithOffset(totalItemCount-14, totalItemCount);
+                            llm.scrollToPositionWithOffset(promoList.size(), 80);
+
+
+
+                        }
+                    }
+
+                }
+            });
+
+
+
+
+        }
+
+
+
+
+/*
             PromoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -194,21 +321,55 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                     }
 
                 }
-            });
+            });*/
 
 
-            PromoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+         /*   PromoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
 
+                    //Log.e(TAG, "scroll on" + " " + scrollState);
 
+
+                    switch (scrollState) {
+                        case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
+                            if (scrolling){
+                                // get first visible item
+                                View itemView = view.getChildAt(0);
+                                int top = Math.abs(itemView.getTop()); // top is a negative value
+                                int bottom = Math.abs(itemView.getBottom());
+                                if (top >= bottom){
+                                    ((ListView)view).setSelectionFromTop(view.getFirstVisiblePosition()+1, 0);
+                                } else {
+                                    ((ListView)view).setSelectionFromTop(view.getFirstVisiblePosition(), 0);
+                                }
+                            }
+                            scrolling = false;
+                            break;
+                        case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+                        case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
+                            Log.i(TAG,"TEST"+"SCROLLING");
+                            scrolling = true;
+                            break;
+                    }
+*//*
                     if (promoList.size() != 0) {
 
                         if (view.getFirstVisiblePosition() <= promoList.size() - 1) {
+                            Log.e(TAG, "scroll on" + " " + scrollState);
+
 
                             focusposition = view.getFirstVisiblePosition();
 
+//                           // smoothScrollToPositionFromTop(view,2);
+//                            int h1 = PromoListView.getHeight();
+//                            int h2 = PromoListView.getHeight();
+//
+//                            PromoListView.smoothScrollToPositionFromTop(view.getFirstVisiblePosition(), h1/2 - h2/2);
+//                            PromoListView.smoothScrollToPositionFromTop(view.getFirstVisiblePosition(),0);
                             PromoListView.setSelection(view.getFirstVisiblePosition());
+
+                            // PromoListView.setSelection(view.getFirstVisiblePosition());
                             Log.e(TAG, "firstVisibleItem" + " " + focusposition);
                             //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
                             promoval1.setText("\u20B9\t" + Math.round(promoList.get(focusposition).getDurSaleNetVal()));
@@ -222,7 +383,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                             PromoListView.setSelection(promoList.size() - 1);
 
                         }
-                    }
+                    }*//*
 
 
                 }
@@ -238,8 +399,13 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
             Reusable_Functions.hDialog();
 
 
-        }
+        }*/
+
+
+
     }
+
+
 
 
     private void initalise() {
@@ -249,12 +415,67 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         promoval2 = (TextView) findViewById(R.id.txtPromoVal2);
         imageback = (RelativeLayout) findViewById(R.id.rp_imageBtnBack);
         imagefilter = (RelativeLayout) findViewById(R.id.rp_imgfilter);
-        PromoListView = (ListView) findViewById(R.id.promoListview);
+
+        PromoListView = (RecyclerView) findViewById(R.id.promoListview);
+        PromoListView.setLayoutManager(new LinearLayoutManager(this));
+        PromoListView.setHasFixedSize(true);
 
         imageback.setOnClickListener(this);
         imagefilter.setOnClickListener(this);
 
 
+    }
+
+    public static void smoothScrollToPositionFromTop(final AbsListView view, final int position) {
+        View child = getChildAtPosition(view, position);
+        // There's no need to scroll if child is already at top or view is already scrolled to its end
+        if ((child != null) && ((child.getTop() == 0) || ((child.getTop() > 0) && !view.canScrollVertically(1)))) {
+            Log.e("if condition Scroll","-----");
+
+            return;
+        }
+
+        view.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(final AbsListView view, final int scrollState) {
+                if (scrollState == SCROLL_STATE_IDLE) {
+                    view.setOnScrollListener(null);
+
+                    // Fix for scrolling bug
+                    new Handler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            view.setSelection(position);
+                            Log.e("View Scroll","-----");
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount,
+                                 final int totalItemCount) { }
+        });
+
+        // Perform scrolling to position
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                view.smoothScrollToPositionFromTop(position, 0);
+                Log.e(" smoothScrollToPositionFromTop Scroll","-----");
+
+            }
+        });
+    }
+
+
+    public static View getChildAtPosition(final AdapterView view, final int position) {
+        final int index = position - view.getFirstVisiblePosition();
+        if ((index >= 0) && (index < view.getChildCount())) {
+            return view.getChildAt(index);
+        } else {
+            return null;
+        }
     }
 
 
@@ -281,5 +502,10 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
        /* Intent intent=new Intent(context, DashBoardActivity.class);
         startActivity(intent);*/
         finish();
+    }
+
+    @Override
+    public void onSnap(int position) {
+
     }
 }

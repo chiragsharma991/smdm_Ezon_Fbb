@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 
@@ -39,8 +42,8 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
     ViewPager vwpagersales;
     LinearLayout lldots;
     int currentIndex;
-    SalesAnalysisAdapter salesadapter;
-    ListView listView_SalesAnalysis;
+    SalesAnalysisSnapAdapter salesadapter;
+    RecyclerView listView_SalesAnalysis;
     LayoutInflater inflater;
     public static int currentPage ;
     SalesPagerAdapter pagerAdapter;
@@ -76,11 +79,12 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
     ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList;
     String fromWhere;
 
-    public SalesPagerAdapter(Context context, ArrayList<SalesAnalysisViewPagerValue> arrayList, int focusposition, ViewPager vwpagersales, LinearLayout lldots, SalesAnalysisAdapter salesadapter, ListView listView_SalesAnalysis, ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList, String fromWhere, SalesPagerAdapter pagerAdapter) {
+    public SalesPagerAdapter(Context context, ArrayList<SalesAnalysisViewPagerValue> arrayList, int focusposition, ViewPager vwpagersales, LinearLayout lldots, SalesAnalysisSnapAdapter salesadapter, RecyclerView listView_SalesAnalysis, ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList, String fromWhere, SalesPagerAdapter pagerAdapter) {
 
         Log.e("in sales adapter", " ---");
         this.context = context;
         this.arrayList = arrayList;
+        // Log.i("size", "" + arrayList.size());
        // Log.i("size", "" + arrayList.size());
         this.focusposition = focusposition;
         this.vwpagersales = vwpagersales;
@@ -158,7 +162,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             txtPlanSalesName = (TextView) itemView.findViewById(R.id.txtPlanSalesName);
             txtNetSalesUName = (TextView) itemView.findViewById(R.id.txtNetSalesUName);
 
-            if (SalesAnalysisActivity.selectedsegValue.equals("WTD") || SalesAnalysisActivity.selectedsegValue.equals("LW")) {
+            if (SalesAnalysisActivity1.selectedsegValue.equals("WTD") || SalesAnalysisActivity1.selectedsegValue.equals("LW")) {
 
                 txtNetSales.setText("Net Sales");
                 txtPlanSales.setText("Plan Sales");
@@ -171,7 +175,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                 txtNetSalesUName.setText("WOW Gr%");
 
 
-            } else if (SalesAnalysisActivity.selectedsegValue.equals("L4W") || SalesAnalysisActivity.selectedsegValue.equals("YTD")) {
+            } else if (SalesAnalysisActivity1.selectedsegValue.equals("L4W") || SalesAnalysisActivity1.selectedsegValue.equals("YTD")) {
 
                 txtNetSales.setText("Net Sales");
                 txtPlanSales.setText("Plan Sales");
@@ -232,8 +236,8 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             rankRelLayout = (RelativeLayout) itemView.findViewById(R.id.rankRelLayout);
             rankRelLayout.setVisibility(View.GONE);
             linPvAZonalRank =(LinearLayout)itemView.findViewById(R.id.linPvAZonalRank);
-                    linPvANationalRank= (LinearLayout)itemView.findViewById(R.id.linPvANationalRank);
-                    linYoYZonalRank = (LinearLayout)itemView.findViewById(R.id.linYoYZonalRank);
+            linPvANationalRank= (LinearLayout)itemView.findViewById(R.id.linPvANationalRank);
+            linYoYZonalRank = (LinearLayout)itemView.findViewById(R.id.linYoYZonalRank);
             linYoYNationalRank = (LinearLayout)itemView.findViewById(R.id.linYoYNationalRank);
 
         } else if (position == 2) {
@@ -264,7 +268,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
         if (position == 0) {
 
 
-            if (SalesAnalysisActivity.selectedsegValue.equals("WTD") || SalesAnalysisActivity.selectedsegValue.equals("LW")) {
+            if (SalesAnalysisActivity1.selectedsegValue.equals("WTD") || SalesAnalysisActivity1.selectedsegValue.equals("LW")) {
 
                 if (salesAnalysis != null) {
                     Log.e("Round val",""+Math.round(salesAnalysis.getSaleNetVal()));
@@ -314,7 +318,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                 }
 
 
-            } else if (SalesAnalysisActivity.selectedsegValue.equals("L4W") || SalesAnalysisActivity.selectedsegValue.equals("YTD")) {
+            } else if (SalesAnalysisActivity1.selectedsegValue.equals("L4W") || SalesAnalysisActivity1.selectedsegValue.equals("YTD")) {
 
                 if (salesAnalysis != null) {
 
@@ -368,72 +372,76 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             }
             // update listview
 
-            SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisClassArrayList.get(0);
-           // Log.e("listv", "" + listView_SalesAnalysis.getFirstVisiblePosition());
+         //   SalesAnalysisListDisplay salesAnalysisClass = salesAnalysisClassArrayList.get(0);
+        //    RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(listView_SalesAnalysis);
+           // int visibleItemCount = recyclerView.getChildCount();
+     //      int totalItemCount = mRecyclerViewHelper.getItemCount();
+       //    int firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
 
-            if (listView_SalesAnalysis.getFirstVisiblePosition() == 0) {
 
-                if (salesAnalysisClass.getPlanDept() != null) {
-                    if (salesAnalysisClass.getPlanDept().equals("All")) {
-                        Log.e("-----", "All");
-                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                        listView_SalesAnalysis.setAdapter(salesadapter);
-                        salesadapter.notifyDataSetChanged();
-                    }
-
-                }
-
-                if (salesAnalysisClass.getPlanCategory() != null) {
-                    if (salesAnalysisClass.getPlanCategory().equals("All")) {
-                        Log.e("-----", "All");
-                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                        listView_SalesAnalysis.setAdapter(salesadapter);
-                        salesadapter.notifyDataSetChanged();
-                    }
-
-                }
-
-                if (salesAnalysisClass.getPlanClass() != null) {
-                    if (salesAnalysisClass.getPlanClass().equals("All")) {
-                        Log.e("-----", "All");
-                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                        listView_SalesAnalysis.setAdapter(salesadapter);
-                        salesadapter.notifyDataSetChanged();
-                    }
-
-                }
-
-                if (salesAnalysisClass.getBrandName() != null) {
-                    if (salesAnalysisClass.getBrandName().equals("All")) {
-                        Log.e("-----", "All");
-                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                        listView_SalesAnalysis.setAdapter(salesadapter);
-                        salesadapter.notifyDataSetChanged();
-                    }
-
-                }
-
-                if (salesAnalysisClass.getBrandplanClass() != null) {
-                    if (salesAnalysisClass.getBrandplanClass().equals("All")) {
-                        Log.e("-----", "All");
-                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
-                        salesadapter = new SalesAnalysisAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                        listView_SalesAnalysis.setAdapter(salesadapter);
-                        salesadapter.notifyDataSetChanged();
-                    }
-
-                }
-
-            }
+//            if (firstVisibleItem == 0) {
+//
+//                if (salesAnalysisClass.getPlanDept() != null) {
+//                    if (salesAnalysisClass.getPlanDept().equals("All")) {
+//                        Log.e("-----", "All");
+//                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
+//                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
+//                        salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+//                        listView_SalesAnalysis.setAdapter(salesadapter);
+//                        salesadapter.notifyDataSetChanged();
+//                    }
+//
+//                }
+//
+//                if (salesAnalysisClass.getPlanCategory() != null) {
+//                    if (salesAnalysisClass.getPlanCategory().equals("All")) {
+//                        Log.e("-----", "All");
+//                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
+//                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
+//                        salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+//                        listView_SalesAnalysis.setAdapter(salesadapter);
+//                        salesadapter.notifyDataSetChanged();
+//                    }
+//
+//                }
+//
+//                if (salesAnalysisClass.getPlanClass() != null) {
+//                    if (salesAnalysisClass.getPlanClass().equals("All")) {
+//                        Log.e("-----", "All");
+//                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
+//                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
+//                        salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+//                        listView_SalesAnalysis.setAdapter(salesadapter);
+//                        salesadapter.notifyDataSetChanged();
+//                    }
+//
+//                }
+//
+//                if (salesAnalysisClass.getBrandName() != null) {
+//                    if (salesAnalysisClass.getBrandName().equals("All")) {
+//                        Log.e("-----", "All");
+//                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
+//                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
+//                        salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+//                        listView_SalesAnalysis.setAdapter(salesadapter);
+//                        salesadapter.notifyDataSetChanged();
+//                    }
+//
+//                }
+//
+//                if (salesAnalysisClass.getBrandplanClass() != null) {
+//                    if (salesAnalysisClass.getBrandplanClass().equals("All")) {
+//                        Log.e("-----", "All");
+//                        salesAnalysisClass.setPvaAchieved(salesAnalysis.getPvaAchieved());
+//                        salesAnalysisClassArrayList.set(0, salesAnalysisClass);
+//                        salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+//                        listView_SalesAnalysis.setAdapter(salesadapter);
+//                        salesadapter.notifyDataSetChanged();
+//                    }
+//
+//                }
+//
+//            }
 
 
         } else if (position == 1) {
@@ -460,7 +468,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                 txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
                 txtZonalSalesVal.setText("" + Math.round( salesAnalysis.getPvaAchievedZonal()) + "%");
                 txtNationalSalesVal.setText("" + Math.round( salesAnalysis.getPvaAchievedNational()) + "%");
-                
+
                 relPvASales.setBackgroundResource(R.drawable.rounded_edittext2);
                 if (Math.round( salesAnalysis.getPvaAchieved()) > Math.round( salesAnalysis.getPvaAchievedZonal()) && Math.round( salesAnalysis.getPvaAchieved()) > Math.round( salesAnalysis.getPvaAchievedNational())) {
 //                    txtStoreVal_PvASales.setTextColor(Color.GREEN);
@@ -510,7 +518,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                         relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
                         relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
                         relRank.setBackgroundResource(R.drawable.rounded_edittext3);
-                
+
                         txtStoreVal_PvASales1.setText("" + Math.round( salesAnalysis.getPvaAchieved()) + "%");
                         txtZonalSalesVal.setText("" + Math.round( salesAnalysis.getPvaAchievedZonal()) + "%");
                         txtNationalSalesVal.setText("" + Math.round( salesAnalysis.getPvaAchievedNational()) + "%");
@@ -850,7 +858,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 
         } else if (position == 2) {
             if (salesAnalysis != null) {
-              double ros= Double.parseDouble(String.format("%.1f",salesAnalysis.getRos()));
+                double ros= Double.parseDouble(String.format("%.1f",salesAnalysis.getRos()));
                 Log.e("ros",""+ros);
                 double fwdwkcover= Double.parseDouble(String.format("%.1f",salesAnalysis.getFwdWeekCover()));
                 Log.e("fwdwkcover",""+fwdwkcover);
@@ -944,7 +952,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-       // Log.e("Scroll Pos",""+position);
+        // Log.e("Scroll Pos",""+position);
 
     }
 

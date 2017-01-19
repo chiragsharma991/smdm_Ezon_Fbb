@@ -321,9 +321,7 @@
                             android:text="End Date"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="@dimen/smdm_departmentTitle"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold"/>
 
 
                         <TextView
@@ -338,9 +336,7 @@
                             android:text="Days"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="@dimen/smdm_departmentTitle"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold"/>
 
 
 
@@ -366,8 +362,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard"
-                        >
+                        android:background="@color/bg_salescard">
 
                         <EditText
                             android:editable="false"
@@ -401,7 +396,6 @@
 
 
                         <EditText
-
                             android:id="@+id/edt_Enddate"
                             android:layout_width="75dp"
                             android:layout_height="30dp"
@@ -439,35 +433,31 @@
                             android:background="@drawable/border"
                             android:textColor="@android:color/black" />
 
-
                     </RelativeLayout>
-
                 </LinearLayout>
-
-
-                <ListView
-                    android:id="@+id/promoListview"
-                    android:dividerHeight="0dp"
-                    android:divider="@null"
-                    android:paddingTop="10dp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_marginTop="46dp"
-                    android:smoothScrollbar="true"
-                    >
+                    android:paddingTop="10dp">
 
-                </ListView>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/promoListview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        />
 
-
+                </LinearLayout>
 
             </RelativeLayout>
 
             <!--bottom layout-->
 
         </LinearLayout>
-
-
-
 
     </LinearLayout>
 

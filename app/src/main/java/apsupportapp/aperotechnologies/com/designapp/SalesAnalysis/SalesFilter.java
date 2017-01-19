@@ -66,7 +66,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
 
     TextView txtdepartment, txtcategory, txtplanclass, txtbrand, txtbrandclass;
     LinearLayout linear_dept, linear_category, linear_planclass, linear_brandnm, linear_brandclass;
-     static String dept = "OFF", category = "OFF", planCls = "OFF", brand = "OFF", brandCls = "OFF";
+    static String dept = "OFF", category = "OFF", planCls = "OFF", brand = "OFF", brandCls = "OFF";
     ListView deptListView, catListView, planClsListView, brandListView, brandClsListView;
     ArrayList<String> depmentList, catryList, planClsList, brndList, brndClsList;
     RelativeLayout Filter_imageBtnBack;
@@ -124,13 +124,13 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
                 //editSearch.clearFocus();
                 InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
-                    Log.e("Search Data in Dept", searchData);
-                    salesFilterAdapter.getFilter().filter(searchData);
-                    categoryAdapter.getFilter().filter(searchData);
-                    Log.e("Search Data in Plan Class", "" + searchData);
-                    planClassAdapter.getFilter().filter(searchData);
-                    branAdapter.getFilter().filter(searchData);
-                    brandClsAdapter.getFilter().filter(searchData);
+                Log.e("Search Data in Dept", searchData);
+                salesFilterAdapter.getFilter().filter(searchData);
+                categoryAdapter.getFilter().filter(searchData);
+                Log.e("Search Data in Plan Class", "" + searchData);
+                planClassAdapter.getFilter().filter(searchData);
+                branAdapter.getFilter().filter(searchData);
+                brandClsAdapter.getFilter().filter(searchData);
             }
 
             @Override
@@ -232,7 +232,7 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
         Filter_imageBtnBack = (RelativeLayout) findViewById(R.id.filter_imageBtnBack);
         FilterOk = (RelativeLayout) findViewById(R.id.filterOk);
         editSearch = (EditText) findViewById(R.id.editSearchSales);
-       // btnSearch = (ImageButton) findViewById(R.id.btnSeatchList);
+        // btnSearch = (ImageButton) findViewById(R.id.btnSeatchList);
 
         deptListView = (ListView) findViewById(R.id.deptList);
         setListViewHeightBasedOnChildren(deptListView);
@@ -252,13 +252,13 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
         txtbrandclass.setOnClickListener(this);
         Filter_imageBtnBack.setOnClickListener(this);
         FilterOk.setOnClickListener(this);
-     //   btnSearch.setOnClickListener(this);
+        //   btnSearch.setOnClickListener(this);
 
 
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {
-         android.widget.ListAdapter listAdapter = listView.getAdapter();
+        android.widget.ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null)
             return;
 
@@ -301,8 +301,8 @@ public class SalesFilter extends AppCompatActivity implements View.OnClickListen
             case R.id.filterOk:
                 Toast.makeText(this, "Selected Dept : "+searchDept, Toast.LENGTH_SHORT).show();
                 //Intent intent = new Intent(SalesFilter.this,SalesAnalysisActivity.class);
-              //  intent.putExtra("selectedDept",searchDept);
-              //  startActivity(intent);
+                //  intent.putExtra("selectedDept",searchDept);
+                //  startActivity(intent);
                 finish();
                 break;
 //            case R.id.btnSeatchList:

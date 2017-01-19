@@ -466,6 +466,43 @@
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:padding="10dp"
+                    android:id="@+id/progressBar1"
+                    android:visibility="gone"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:theme="@style/ProgressBar"
+                    android:layout_centerInParent="true">
+
+                </ProgressBar>
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+
+
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp">
+
+
+
+
+
+                </android.support.v4.view.ViewPager>
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:padding="10dp"
                     android:id="@+id/progressBar1"

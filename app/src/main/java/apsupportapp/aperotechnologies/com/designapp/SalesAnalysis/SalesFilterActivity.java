@@ -52,7 +52,7 @@ import apsupportapp.aperotechnologies.com.designapp.SearchActivity1;
 public class SalesFilterActivity extends Activity {
 
     RelativeLayout btnS_Filterback, btnS_Done;
-   static SalesFilterExpandableList listAdapter;
+    static SalesFilterExpandableList listAdapter;
     public static ExpandableListView pfilter_list;
     ArrayList<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
@@ -104,7 +104,7 @@ public class SalesFilterActivity extends Activity {
 
         listAdapter = new SalesFilterExpandableList(this, listDataHeader, listDataChild, pfilter_list, listAdapter);
 
-       // pfilter_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
+        // pfilter_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
         // setting list adapter
         pfilter_list.setAdapter(listAdapter);
 
@@ -143,7 +143,7 @@ public class SalesFilterActivity extends Activity {
 //            }
 //        });
 
-      //  Edit Text Search
+        //  Edit Text Search
         editTextSearch = (EditText)findViewById(R.id.editSearchSales);
 
 
@@ -157,11 +157,11 @@ public class SalesFilterActivity extends Activity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String searchData = editTextSearch.getText().toString();
-               // editTextSearch.clearFocus();
+                // editTextSearch.clearFocus();
                 InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
                 listAdapter.filterData(editTextSearch.getText().toString());
-               // listAdapter.notifyDataSetChanged();
+                // listAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -177,12 +177,12 @@ public class SalesFilterActivity extends Activity {
             public void onClick(View v) {
 
                 if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
-                  //  Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
-                  //  startActivity(intent);
+                    //  Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
+                    //  startActivity(intent);
                     finish();
                 } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
-                   // Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
-                  //  startActivity(intent);
+                    // Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
+                    //  startActivity(intent);
                     finish();
                 }
             }
@@ -194,7 +194,7 @@ public class SalesFilterActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SalesFilterActivity.this,SalesAnalysisActivity.class);
+                Intent intent = new Intent(SalesFilterActivity.this,SalesAnalysisActivity1.class);
                 intent.putExtra("selectedDept",SalesFilterExpandableList.txtClickedVal);
                 Log.e(TAG,"txtClickedVal"+SalesFilterExpandableList.txtClickedVal);
                 startActivity(intent);
@@ -321,7 +321,7 @@ public class SalesFilterActivity extends Activity {
 
                                 }
                                 //Collections.sort(subdept);
-                            //   listDataChild.put(listDataHeader.get(0), subdept);
+                                //   listDataChild.put(listDataHeader.get(0), subdept);
 
                                 // pfilter_list.expandGroup(0);
                                 Reusable_Functions.hDialog();
@@ -393,7 +393,7 @@ public class SalesFilterActivity extends Activity {
 
                                 }
                                 //Collections.sort(subdept);
-                             //   listDataChild.put(listDataHeader.get(1), subCategory);
+                                //   listDataChild.put(listDataHeader.get(1), subCategory);
                                 // pfilter_list.expandGroup(1);
                                 Reusable_Functions.hDialog();
                             }
@@ -463,7 +463,7 @@ public class SalesFilterActivity extends Activity {
 
                                 }
                                 //Collections.sort(subdept);
-                             //   listDataChild.put(listDataHeader.get(2), subPlanClass);
+                                //   listDataChild.put(listDataHeader.get(2), subPlanClass);
                                 //  pfilter_list.expandGroup(2);
                                 Reusable_Functions.hDialog();
                             }
@@ -533,7 +533,7 @@ public class SalesFilterActivity extends Activity {
                                     subBrandnm.add(brandName);
                                 }
                                 //Collections.sort(subdept);
-                              //  listDataChild.put(listDataHeader.get(3), subBrandnm);
+                                //  listDataChild.put(listDataHeader.get(3), subBrandnm);
                                 // pfilter_list.expandGroup(3);
                                 Reusable_Functions.hDialog();
                             }
@@ -604,7 +604,7 @@ public class SalesFilterActivity extends Activity {
                                     subBrandPlanClass.add(brandClass);
                                 }
                                 //Collections.sort(subdept);
-                           //     listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
+                                //     listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
                                 //   pfilter_list.expandGroup(4);
                                 Reusable_Functions.hDialog();
                             }
@@ -642,11 +642,11 @@ public class SalesFilterActivity extends Activity {
     public void onBackPressed() {
         if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
             //Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
-           // startActivity(intent);
+            // startActivity(intent);
             finish();
         } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
-           // Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
-           // startActivity(intent);
+            // Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
+            // startActivity(intent);
             finish();
         }
     }

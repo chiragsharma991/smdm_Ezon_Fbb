@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gravitysnaphelper/gravitysnaphelper.iml" filepath="$PROJECT_DIR$/gravitysnaphelper/gravitysnaphelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/smdm_android.iml" filepath="$PROJECT_DIR$/smdm_android.iml" />
     </modules>
   </component>
