@@ -2,28 +2,55 @@ package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Cache;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
+
+
+
+
 
 public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements GravitySnapHelper.SnapListener {
 
@@ -35,23 +62,26 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     int focusposition,selFirstPositionValue;
     RecyclerView listView_SalesAnalysis;
     int currentIndex;
+    SalesAnalysisSnapAdapter salesadapter;
     int offsetvalue = 0, count = 0, limit = 100;
     private LayoutInflater mInflater;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 2;
-    Context context;
+     Context context;
     String fromwhere;
     int level ;
     Gson gson;
-    private ArrayList<SalesAnalysisListDisplay> mSnaps;
+
+
+    public ArrayList<SalesAnalysisListDisplay> mSnaps;
     // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
-    private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            return false;
-        }
-    };
+//    private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
+//        @Override
+//        public boolean onTouch(View v, MotionEvent event) {
+//            v.getParent().requestDisallowInterceptTouchEvent(true);
+//            return false;
+//        }
+//    };
 
     public SalesAnalysisSnapAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, RecyclerView listView_SalesAnalysis) {
 
@@ -123,11 +153,12 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
 
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
 
         if (viewHolder instanceof SalesViewHolder) {
-            if (position <= mSnaps.size()) {
+//            if (position <= mSnaps.size()) {
                 SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
+
                 if (fromwhere.equals("Department")) {
 
                     ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
@@ -160,8 +191,6 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 double calplanVal = planVal * singlePercVal; // planned value multiplied by single perc value
                 double calachieveVal = achieveVal * singlePercVal; // Achieved value multiplied by single perc value
 
-//        int planvalueinpx = convertSpToPixels(calplanVal, context); //converting value from sp to px
-//        int achievevalueinpx = convertSpToPixels(calachieveVal, context); //converting value from sp to px
 
                 float density = context.getResources().getDisplayMetrics().density;
                 int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
@@ -183,7 +212,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 } else {
                     ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
                 }
-            }
+          //  }
         }
         else
         {
@@ -193,7 +222,9 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
   }
 
 
-    public static class SalesViewHolder extends RecyclerView.ViewHolder {
+
+
+    public  class SalesViewHolder extends RecyclerView.ViewHolder {
 
 
         TextView nameTv;
@@ -201,6 +232,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
         RelativeLayout innerrel, relValue;
         TextView txtPlan, txtValue,txtPvAValue;
         TextView txtAchieve;
+        OnItemClickListener clickListener;
 
         public SalesViewHolder(View itemView) {
             super(itemView);
@@ -215,19 +247,22 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
             txtPvAValue =(TextView) itemView.findViewById(R.id.txtPvAValue);
 
         }
+
+
     }
 
-    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
-//        Button loadButton;
-//        ProgressBar progressBar;
+    public  class ProgressViewHolder extends RecyclerView.ViewHolder {
+
         TextView txtView;
 
         public ProgressViewHolder(View footerView){
             super(footerView);
-//            loadButton = (Button) footerView.findViewById(R.id.reload_button);
-//            progressBar = (ProgressBar) footerView.findViewById(R.id.progress_load);
+
           //  txtView = (TextView)footerView.findViewById(R.id.txtView);
         }
     }
+
+
+
 
 }
