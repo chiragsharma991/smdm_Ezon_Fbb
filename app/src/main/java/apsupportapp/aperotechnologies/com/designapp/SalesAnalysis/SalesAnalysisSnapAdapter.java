@@ -94,12 +94,12 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
     private boolean isPositionItem(int position) {
        // return position == 0;
-        return position != getItemCount()-1;
+        return position !=mSnaps.size();
     }
 
     @Override
     public int getItemCount() {
-        return mSnaps.size();
+        return mSnaps.size()+1;
     }
 
     @Override
@@ -109,19 +109,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.child_sales_listview, parent, false);
-//
-//
-////        if (viewType == VERTICAL) {
-////            view.findViewById(R.id.recyclerView).setOnTouchListener(mTouchListener);
-////        }
-//
-//        return new SalesAnalysisSnapAdapter.SalesViewHolder(view);
-
-
-
-        if (viewType == VIEW_ITEM) {
+           if (viewType == VIEW_ITEM) {
             View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.child_sales_listview, parent, false);
             return new SalesAnalysisSnapAdapter.SalesViewHolder(v);
         } else if (viewType == VIEW_PROG){
@@ -138,73 +126,69 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
         if (viewHolder instanceof SalesViewHolder) {
-            SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
-            if (fromwhere.equals("Department")) {
+            if (position <= mSnaps.size()) {
+                SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
+                if (fromwhere.equals("Department")) {
 
-                ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
-                ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
+                    ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
 
+                } else if (fromwhere.equals("Category")) {
 
-            } else if (fromwhere.equals("Category")) {
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
+                    ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-                ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
-                ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                } else if (fromwhere.equals("Plan Class")) {
 
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
+                    ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-            } else if (fromwhere.equals("Plan Class")) {
+                } else if (fromwhere.equals("Brand")) {
 
-                ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
-                ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
+                    ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-            } else if (fromwhere.equals("Brand")) {
+                } else if (fromwhere.equals("Brand Plan Class")) {
 
-                ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
-                ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
+                    ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                }
 
-            } else if (fromwhere.equals("Brand Plan Class")) {
-
-                ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
-                ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
-
-            }
-
-            double singlePercVal = 0.5;//50/100;// width divide by 100 perc
-
-            int planVal = 100; // planned value from API
-            double achieveVal = productNameBean.getPvaAchieved();// Achieved value from API
-
-            double calplanVal = planVal * singlePercVal; // planned value multiplied by single perc value
-            double calachieveVal = achieveVal * singlePercVal; // Achieved value multiplied by single perc value
+                double singlePercVal = 0.5;//50/100;// width divide by 100 perc
+                int planVal = 100; // planned value from API
+                double achieveVal = productNameBean.getPvaAchieved();// Achieved value from API
+                double calplanVal = planVal * singlePercVal; // planned value multiplied by single perc value
+                double calachieveVal = achieveVal * singlePercVal; // Achieved value multiplied by single perc value
 
 //        int planvalueinpx = convertSpToPixels(calplanVal, context); //converting value from sp to px
 //        int achievevalueinpx = convertSpToPixels(calachieveVal, context); //converting value from sp to px
 
-            float density = context.getResources().getDisplayMetrics().density;
-
-            int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
-            //Log.e("", "==finalCalplanVal= " + finalCalplanVal);
-            int finalCalachieveVal = (int) (density * calachieveVal); //converting value from px to dp
-            // Log.e("", "==finalCalachieveVal= " + finalCalachieveVal);
-
-
-            ((SalesViewHolder) viewHolder).txtPlan.setWidth(finalCalachieveVal);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, 24);
-            params.setMargins(finalCalplanVal, 0, 0, 0);
-            ((SalesViewHolder) viewHolder).txtAchieve.setLayoutParams(params);
+                float density = context.getResources().getDisplayMetrics().density;
+                int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
+                //Log.e("", "==finalCalplanVal= " + finalCalplanVal);
+                int finalCalachieveVal = (int) (density * calachieveVal); //converting value from px to dp
+                // Log.e("", "==finalCalachieveVal= " + finalCalachieveVal);
 
 
-            if (achieveVal < 70) {
-                ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.RED);
-            } else if (achieveVal > 90) {
-                ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.GREEN);//yellow
-            } else {
-                ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
+                ((SalesViewHolder) viewHolder).txtPlan.setWidth(finalCalachieveVal);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, 24);
+                params.setMargins(finalCalplanVal, 0, 0, 0);
+                ((SalesViewHolder) viewHolder).txtAchieve.setLayoutParams(params);
+
+
+                if (achieveVal < 70) {
+                    ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.RED);
+                } else if (achieveVal > 90) {
+                    ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.GREEN);//yellow
+                } else {
+                    ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
+                }
             }
         }
-//        else
-//        {
-//           // ((ProgressViewHolder) viewHolder).txtView.setText(" ");
-//        }
+        else
+        {
+           // ((ProgressViewHolder) viewHolder).txtView.setText(" ");
+        }
 
   }
 
@@ -224,9 +208,9 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
            nameTv = (TextView) itemView.findViewById(R.id.txtVal);
            rel = (RelativeLayout) itemView.findViewById(R.id.rel);
             innerrel = (RelativeLayout) itemView.findViewById(R.id.innerrellay);
-            relValue = (RelativeLayout) itemView.findViewById(R.id.relValue);
+           // relValue = (RelativeLayout) itemView.findViewById(R.id.relValue);
            txtPlan = (TextView) itemView.findViewById(R.id.txtPlan);
-           txtValue = (TextView) itemView.findViewById(R.id.txtValue);
+           //txtValue = (TextView) itemView.findViewById(R.id.txtValue);
             txtAchieve = (TextView) itemView.findViewById(R.id.txtAchieve);
             txtPvAValue =(TextView) itemView.findViewById(R.id.txtPvAValue);
 
