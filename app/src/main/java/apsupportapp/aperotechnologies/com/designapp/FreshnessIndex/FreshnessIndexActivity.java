@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -59,6 +60,7 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -104,6 +106,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
      int firstVisibleItem = 0;
    JsonArrayRequest postRequest;
     private ProgressBar processBar;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -421,146 +424,167 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         });
 
 
-        // hierarchy level drill down on selected item click
-/*        listViewFIndex.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+  /*      listViewFIndex.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position < freshnessIndexDetailsArrayList.size()) {
-                    switch (txtFIndexClass.getText().toString()) {
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
 
-
-                        case "Department":
-                            btnFIndexPrev.setVisibility(View.VISIBLE);
-                            txtFIndexClass.setText("Category");
-                            Log.e("position", "" + listViewFIndex.getCheckedItemPosition() + "position" + position + "posotion1" + focusposition);
-                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanDept();
-                            Log.e("txtClicked department--", "" + freshnessIndex_ClickedVal);
-                            llfIndexhierarchy.setVisibility(View.GONE);
-                            llfreshnessIndex.setVisibility(View.GONE);
-                            fromWhere = "Category";
-                            level = 2;
-                            if (Reusable_Functions.chkStatus(context)) {
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                freshnessIndexDetailsArrayList.clear();
-                                Log.i("dept next", "-----");
-                                request_FreshnessIndex_CategoryList(freshnessIndex_ClickedVal);
-
-                                fIndexPlanDept = freshnessIndex_ClickedVal;
-
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-
-                            break;
-
-                        case "Category":
-                            Log.e("in category", "---" + fIndexPlanDept);
-                            if (flag == true) {
-                                txtFIndexClass.setText("Plan Class");
-                                llfIndexhierarchy.setVisibility(View.GONE);
-                                llfreshnessIndex.setVisibility(View.GONE);
-                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanCategory();
-                                Log.e("txtClicked category --", "" + freshnessIndex_ClickedVal);
-                                fromWhere = "Plan Class";
-                                level = 3;
-                                if (Reusable_Functions.chkStatus(context)) {
-                                    Reusable_Functions.hDialog();
-                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    freshnessIndexDetailsArrayList.clear();
-                                    Log.i("category next", "-----");
-                                    Log.i("come", "----" + fIndexPlanDept);
-                                    fIndexCategory = freshnessIndex_ClickedVal;
-                                    request_FreshnessIndex_PlanClassList(fIndexPlanDept, fIndexCategory);
-
-
-                                    Log.e("fIndexCategory--", "" + fIndexCategory);
-                                } else {
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
-                            }
-
-
-                            break;
-                        case "Plan Class":
-                            Log.e("In plan class", "-------" + fIndexPlanDept);
-                            if (flag == true) {
-                                Log.e("fIndexPlanDept in ELSE ", fIndexPlanDept);
-                                txtFIndexClass.setText("Brand");
-                                llfIndexhierarchy.setVisibility(View.GONE);
-                                llfreshnessIndex.setVisibility(View.GONE);
-                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanClass();
-                                Log.e("txtClicked plan class---", "" + freshnessIndex_ClickedVal);
-                                fromWhere = "Brand";
-                                level = 4;
-                                if (Reusable_Functions.chkStatus(context)) {
-                                    Reusable_Functions.hDialog();
-                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    freshnessIndexDetailsArrayList.clear();
-                                    Log.i("Plan Class next", "-----");
-                                    fIndexPlanClass = freshnessIndex_ClickedVal;
-                                    request_FreshnessIndex_BrandList(fIndexPlanDept, fIndexCategory, fIndexPlanClass);
-
-
-                                    Log.e("fIndexPlanClass---", "" + fIndexPlanClass);
-                                } else {
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
-                            }
-
-                            break;
-
-                        case "Brand":
-                            if (flag == true) {
-                                Log.e("in brand", "----" + fIndexPlanDept);
-                                btnFIndexNext.setVisibility(View.INVISIBLE);
-                                txtFIndexClass.setText("Brand Plan Class");
-                                llfIndexhierarchy.setVisibility(View.GONE);
-                                llfreshnessIndex.setVisibility(View.GONE);
-                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getBrandName();
-                                Log.e("txtSalesClickedValue3---", "" + freshnessIndex_ClickedVal);
-                                fromWhere = "Brand Plan Class";
-                                level = 5;
-                                if (Reusable_Functions.chkStatus(context)) {
-                                    Reusable_Functions.hDialog();
-                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    freshnessIndexDetailsArrayList.clear();
-                                    Log.i("brand next", "-----");
-                                    fIndexBrand = freshnessIndex_ClickedVal;
-
-                                    request_FreshnessIndex_BrandPlanList(fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand);
-
-                                } else {
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
-                            }
-
-                            break;
-
-                    }
-                }
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
 
             }
 
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
         });*/
+
+
+        listViewFIndex.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        if(position < freshnessIndexDetailsArrayList.size()) {
+                            switch (txtFIndexClass.getText().toString()) {
+
+
+                                case "Department":
+                                    btnFIndexPrev.setVisibility(View.VISIBLE);
+                                    txtFIndexClass.setText("Category");
+                                    //Log.e("position", "" + listViewFIndex.getCheckedItemPosition() + "position" + position + "posotion1" + focusposition);
+                                    freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanDept();
+                                    Log.e("txtClicked department--", "" + freshnessIndex_ClickedVal);
+                                    llfIndexhierarchy.setVisibility(View.GONE);
+                                    llfreshnessIndex.setVisibility(View.GONE);
+                                    fromWhere = "Category";
+                                    level = 2;
+                                    if (Reusable_Functions.chkStatus(context)) {
+                                        Reusable_Functions.hDialog();
+                                        Reusable_Functions.sDialog(context, "Loading data...");
+                                        offsetvalue = 0;
+                                        limit = 100;
+                                        count = 0;
+                                        freshnessIndexDetailsArrayList.clear();
+                                        Log.i("dept next", "-----");
+                                        request_FreshnessIndex_CategoryList(freshnessIndex_ClickedVal);
+
+                                        fIndexPlanDept = freshnessIndex_ClickedVal;
+
+                                    } else {
+                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    break;
+
+                                case "Category":
+                                    Log.e("in category", "---" + fIndexPlanDept);
+                                    if (flag == true) {
+                                        txtFIndexClass.setText("Plan Class");
+                                        llfIndexhierarchy.setVisibility(View.GONE);
+                                        llfreshnessIndex.setVisibility(View.GONE);
+                                        freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanCategory();
+                                        Log.e("txtClicked category --", "" + freshnessIndex_ClickedVal);
+                                        fromWhere = "Plan Class";
+                                        level = 3;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            freshnessIndexDetailsArrayList.clear();
+                                            Log.i("category next", "-----");
+                                            Log.i("come", "----" + fIndexPlanDept);
+                                            fIndexCategory = freshnessIndex_ClickedVal;
+                                            request_FreshnessIndex_PlanClassList(fIndexPlanDept, fIndexCategory);
+
+
+                                            Log.e("fIndexCategory--", "" + fIndexCategory);
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                    }
+
+
+                                    break;
+                                case "Plan Class":
+                                    Log.e("In plan class", "-------" + fIndexPlanDept);
+                                    if (flag == true) {
+                                        Log.e("fIndexPlanDept in ELSE ", fIndexPlanDept);
+                                        txtFIndexClass.setText("Brand");
+                                        llfIndexhierarchy.setVisibility(View.GONE);
+                                        llfreshnessIndex.setVisibility(View.GONE);
+                                        freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanClass();
+                                        Log.e("txtClicked plan class---", "" + freshnessIndex_ClickedVal);
+                                        fromWhere = "Brand";
+                                        level = 4;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            freshnessIndexDetailsArrayList.clear();
+                                            Log.i("Plan Class next", "-----");
+                                            fIndexPlanClass = freshnessIndex_ClickedVal;
+                                            request_FreshnessIndex_BrandList(fIndexPlanDept, fIndexCategory, fIndexPlanClass);
+
+
+                                            Log.e("fIndexPlanClass---", "" + fIndexPlanClass);
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                    }
+
+                                    break;
+
+                                case "Brand":
+                                    if (flag == true) {
+                                        Log.e("in brand", "----" + fIndexPlanDept);
+                                        btnFIndexNext.setVisibility(View.INVISIBLE);
+                                        txtFIndexClass.setText("Brand Plan Class");
+                                        llfIndexhierarchy.setVisibility(View.GONE);
+                                        llfreshnessIndex.setVisibility(View.GONE);
+                                        freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getBrandName();
+                                        Log.e("txtSalesClickedValue3---", "" + freshnessIndex_ClickedVal);
+                                        fromWhere = "Brand Plan Class";
+                                        level = 5;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            freshnessIndexDetailsArrayList.clear();
+                                            Log.i("brand next", "-----");
+                                            fIndexBrand = freshnessIndex_ClickedVal;
+
+                                            request_FreshnessIndex_BrandPlanList(fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand);
+
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                    }
+
+                                    break;
+
+                            }
+                        }
+
+                    }
+                })
+        );
+
+        // hierarchy level drill down on selected item click
+
 
         //list view on Scroll event
 
@@ -575,9 +599,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             public void onScrollStateChanged(RecyclerView recyclerView, int newState)
             {
 
-                if (freshnessIndexDetailsArrayList.size() != 0 && newState== 0) {
+                Log.i(TAG, ""+"scroll state"+newState );
+                if (freshnessIndexDetailsArrayList.size() != 0 && newState== RecyclerView.SCROLL_STATE_IDLE) {
                     //check ideal condition then call .....
                     if (firstVisibleItem < freshnessIndexSnapAdapter.getItemCount() - 1) {
+                        Log.i(TAG, "onScrollStateChanged: item "+firstVisibleItem+"getitem Count"+freshnessIndexSnapAdapter.getItemCount());
                         //10<10 where footer is call then it goes else condition
 
 
@@ -585,10 +611,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         int visibleItemCount = recyclerView.getChildCount();
                         totalItemCount = mRecyclerViewHelper.getItemCount();
                         firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
-                        Log.e(TAG, "onScrollStateChanged: " + firstVisibleItem);
                         if(firstVisibleItem >= freshnessIndexDetailsArrayList.size())
                         {
                             //8=8
+                            Log.i(TAG, "footer end: item "+firstVisibleItem+"getitem Count"+freshnessIndexSnapAdapter.getItemCount() );
+
                             firstVisibleItem = freshnessIndexDetailsArrayList.size() - 1;
                             LinearLayoutManager llm = (LinearLayoutManager)listViewFIndex .getLayoutManager();
                             llm.scrollToPosition(firstVisibleItem);
@@ -1770,6 +1797,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         startActivity(intent);*/
         finish();
     }
+
 
 }
 
