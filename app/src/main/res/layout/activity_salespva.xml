@@ -444,16 +444,24 @@
                     android:background="@color/border_round_edittext" />
 
 
-                <ListView
+                <!--<ListView-->
+                    <!--android:id="@+id/list"-->
+                    <!--android:dividerHeight="0dp"-->
+                    <!--android:divider="@null"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="45dp"-->
+                    <!--android:smoothScrollbar="true"></ListView>-->
+
+
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/list"
-                    android:dividerHeight="0dp"
-                    android:divider="@null"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
-                    android:smoothScrollbar="true"></ListView>
-
-
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:smoothScrollbar="true" />
 
             </RelativeLayout>
 

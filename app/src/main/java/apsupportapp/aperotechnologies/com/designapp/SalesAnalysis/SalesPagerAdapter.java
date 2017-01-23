@@ -68,7 +68,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
     TextView txtStoreVal_PvASales1, txtZonalSalesVal, txtNationalSalesVal;
     TextView relPvASales, relYoYSales, relSellThru, relMixSales, relRank;
     TextView txtPvAZonalRankVal, txtPvANationalRankVal, txtYoYZonalRankVal, txtYoYNationalRankVal;
-    RelativeLayout storesales, zonalsales, nationalsales, sznchildRelLayout, rankRelLayout;
+    RelativeLayout storesales, zonalsales, nationalsales, sznchildRelLayout, rankRelLayout,pmsyrtxtRelLayout;
     LinearLayout linPvAZonalRank,linPvANationalRank,linYoYZonalRank,linYoYNationalRank;
 
     // ViewPager 2
@@ -236,10 +236,11 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             sznchildRelLayout.setVisibility(View.VISIBLE);
             rankRelLayout = (RelativeLayout) itemView.findViewById(R.id.rankRelLayout);
             rankRelLayout.setVisibility(View.GONE);
-            linPvAZonalRank =(LinearLayout)itemView.findViewById(R.id.linPvAZonalRank);
-            linPvANationalRank= (LinearLayout)itemView.findViewById(R.id.linPvANationalRank);
-            linYoYZonalRank = (LinearLayout)itemView.findViewById(R.id.linYoYZonalRank);
-            linYoYNationalRank = (LinearLayout)itemView.findViewById(R.id.linYoYNationalRank);
+            pmsyrtxtRelLayout = (RelativeLayout) itemView.findViewById(R.id.pmsyrtxtRelLayout);
+            linPvAZonalRank = (LinearLayout) itemView.findViewById(R.id.linPvAZonalRank);
+            linPvANationalRank = (LinearLayout) itemView.findViewById(R.id.linPvANationalRank);
+            linYoYZonalRank = (LinearLayout) itemView.findViewById(R.id.linYoYZonalRank);
+            linYoYNationalRank = (LinearLayout) itemView.findViewById(R.id.linYoYNationalRank);
 
         } else if (position == 2) {
             itemView = inflater.inflate(R.layout.child_sales_viewpager2, container,
@@ -257,7 +258,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
         }
 
 
-        NumberFormat format = NumberFormat.getNumberInstance(new Locale("","in"));
+        NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
 
         if (position == 0) {
 
@@ -361,423 +362,431 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                     txtNetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
                     txtNetSalesUVal.setTextColor(Color.parseColor("#70e503"));
 
-
-                }
-                SalesAnalysisListDisplay salesAnalysisListDisplay = salesAnalysisClassArrayList.get(0);
-                LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
-                int firstVisibleItemPosition = llm.findFirstVisibleItemPosition();
-                Log.e("instantiateItem: ", "" + firstVisibleItemPosition);
-
-                if (firstVisibleItemPosition == 0) {
-                    if (salesAnalysisListDisplay.getPlanDept() != null) {
-                        if (salesAnalysisListDisplay.getPlanDept().equals("All")) {
-                            Log.e("-----", "All");
-                            salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                            salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                            salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                            listView_SalesAnalysis.setAdapter(salesadapter);
-                            salesadapter.notifyDataSetChanged();
-
-                        }
-                    }
-                    if (salesAnalysisListDisplay.getPlanCategory() != null) {
-                        if (salesAnalysisListDisplay.getPlanCategory().equals("All")) {
-                            Log.e("-----", "All");
-                            salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                            salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                            // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                            // listView_SalesAnalysis.setAdapter(salesadapter);
-                            salesadapter.notifyDataSetChanged();
-
-                        }
-                    }
-
-                    if (salesAnalysisListDisplay.getPlanClass() != null) {
-                        if (salesAnalysisListDisplay.getPlanClass().equals("All")) {
-                            Log.e("-----", "All");
-                            salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                            salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                            // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                            // listView_SalesAnalysis.setAdapter(salesadapter);
-                            salesadapter.notifyDataSetChanged();
-
-                        }
-                    }
-                    if (salesAnalysisListDisplay.getBrandName() != null) {
-                        if (salesAnalysisListDisplay.getBrandName().equals("All")) {
-                            Log.e("-----", "All");
-                            salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                            salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                            // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                            // listView_SalesAnalysis.setAdapter(salesadapter);
-                            salesadapter.notifyDataSetChanged();
-
-                        }
-                    }
-                    if (salesAnalysisListDisplay.getBrandplanClass() != null) {
-                        if (salesAnalysisListDisplay.getBrandplanClass().equals("All")) {
-                            Log.e("-----", "All");
-                            salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
-                            salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                            // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                            // listView_SalesAnalysis.setAdapter(salesadapter);
-                            salesadapter.notifyDataSetChanged();
-
-                        }
-                    }
-                }
-
-
-            } else if (position == 1) {
-
-                if (salesAnalysis != null) {
-
-                    sznchildRelLayout.setVisibility(View.VISIBLE);
-                    rankRelLayout.setVisibility(View.GONE);
-                    txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
-                    txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getPvaAchievedZonal()) + "%");
-                    txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getPvaAchievedNational()) + "%");
-
-                    relPvASales.setBackgroundResource(R.drawable.rounded_edittext2);
-                    if (Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                    txtStoreVal_PvASales.setTextColor(Color.GREEN);
-                        storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                        zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                        nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-
-                    } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                    txtZonalVal_PvASales.setTextColor(Color.GREEN);
-                        zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                        storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                        nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                    } else if (Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchievedZonal())) {
-//                    txtNationalVal_PvASales.setTextColor(Color.GREEN);
-                        nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                        storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                        zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                    } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedNational())
-                            && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchieved())
-                            && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchievedZonal())) {
-//                    txtStoreVal_PvASales.setTextColor(Color.GREEN);
-                        storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                        nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                        zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                    } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                    txtZonalVal_PvASales.setTextColor(Color.GREEN);
-                        zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                        storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                        nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                    }
-
-
-                    //PvA Sales
-                    relPvASales.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            sznchildRelLayout.setVisibility(View.VISIBLE);
-                            rankRelLayout.setVisibility(View.GONE);
-
-                            relPvASales.setBackgroundResource(R.drawable.rounded_edittext2);
-                            relMixSales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relRank.setBackgroundResource(R.drawable.rounded_edittext3);
-
-                            txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
-                            txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getPvaAchievedZonal()) + "%");
-                            txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getPvaAchievedNational()) + "%");
-
-                            if (Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                        txtStoreVal_PvASales.setTextColor(Color.GREEN);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-
-                            } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                        txtZonalVal_PvASales.setTextColor(Color.GREEN);)
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchievedZonal())) {
-//                        txtNationalVal_PvASales.setTextColor(Color.GREEN);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedNational())
-                                    && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchieved())
-                                    && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchievedZonal())) {
-//                        txtStoreVal_PvASales.setTextColor(Color.GREEN);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                       txtZonalVal_PvASales.setTextColor(Color.GREEN);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                            } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchievedNational()) < Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) < Math.round(salesAnalysis.getPvaAchievedZonal())) {
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                            }
-
-
-                        }
-                    });
-                    //YoY Sales
-                    relYoYSales.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            sznchildRelLayout.setVisibility(View.VISIBLE);
-                            rankRelLayout.setVisibility(View.GONE);
-
-                            relPvASales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relMixSales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relYoYSales.setBackgroundResource(R.drawable.rounded_edittext2);
-                            relRank.setBackgroundResource(R.drawable.rounded_edittext3);
-
-                            txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
-                            txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) + "%");
-                            txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) + "%");
-
-                            //YOY Sales
-                            if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
-//                    txtStoreVal_YOYSales.setTextColor(Color.GREEN);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
-//                    txtZonalVal_YOYSales.setTextColor(Color.GREEN);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
-//                    txtNationalVal_YOYSales.setTextColor(Color.GREEN);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())
-                                    && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct())
-                                    && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
-//                    txtStoreVal_YOYSales.setTextColor(Color.GREEN);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
-//                    txtZonalVal_YOYSales.setTextColor(Color.GREEN);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                            } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                            }
-
-
-                        }
-                    });
-
-                    //Sell Thru
-                    relSellThru.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            sznchildRelLayout.setVisibility(View.VISIBLE);
-                            rankRelLayout.setVisibility(View.GONE);
-
-                            relPvASales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relMixSales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relSellThru.setBackgroundResource(R.drawable.rounded_edittext2);
-                            relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relRank.setBackgroundResource(R.drawable.rounded_edittext3);
-
-                            txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getSellThruUnits()) + "%");
-                            txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getSellThruUnitsZonal()) + "%");
-                            txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getSellThruUnitsNational()) + "%");
-
-
-                            //Sell Thro
-
-                            if (Math.round(salesAnalysis.getSellThruUnits()) > Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnits()) > Math.round(salesAnalysis.getSellThruUnitsNational())) {
-//                    txtStoreVal_SellThro.setTextColor(Color.GREEN);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnitsNational())) {
-//                    txtZonalVal_SellThro.setTextColor(Color.GREEN);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnitsZonal())) {
-//                    txtNationalVal_SellThro.setTextColor(Color.GREEN);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsZonal())
-                                    && Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnitsNational())
-                                    && Math.round(salesAnalysis.getSellThruUnitsNational()) == Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) == Math.round(salesAnalysis.getSellThruUnitsZonal())) {
-//                    txtStoreVal_SellThro.setTextColor(Color.GREEN);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsNational())) {
-//                    txtZonalVal_SellThro.setTextColor(Color.GREEN);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnitsNational()) < Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) < Math.round(salesAnalysis.getSellThruUnitsZonal())) {
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                            }
-
-                        }
-                    });
-
-                    //Mix Sales
-                    relMixSales.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            sznchildRelLayout.setVisibility(View.VISIBLE);
-                            rankRelLayout.setVisibility(View.GONE);
-
-                            relPvASales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relMixSales.setBackgroundResource(R.drawable.rounded_edittext2);
-                            relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relRank.setBackgroundResource(R.drawable.rounded_edittext3);
-
-                            txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getMixSales()) + "%");
-                            txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getMixSalesZonal()) + "%");
-                            txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getMixsalesNational()) + "%");
-
-                            //Mix Sales
-                            if (Math.round(salesAnalysis.getMixSales()) > Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) > Math.round(salesAnalysis.getMixsalesNational())) {
-//                    txtStoreVal_MixSales.setTextColor(Color.GREEN);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getMixSalesZonal()) > Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixSalesZonal()) > Math.round(salesAnalysis.getMixsalesNational())) {
-//                    txtZonalVal_MixSales.setTextColor(Color.GREEN);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-
-                            } else if (Math.round(salesAnalysis.getMixsalesNational()) > Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) > Math.round(salesAnalysis.getMixSalesZonal())) {
-//                    txtNationalVal_MixSales.setTextColor(Color.GREEN);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-                            } else if (Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixsalesNational())
-                                    && Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixsalesNational()) && Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixSales())
-                                    && Math.round(salesAnalysis.getMixsalesNational()) == Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) == Math.round(salesAnalysis.getMixSalesZonal())) {
-//                    txtStoreVal_MixSales.setTextColor(Color.GREEN);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-
-
-                            } else if (Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixsalesNational()) && Math.round(salesAnalysis.getMixSales()) < Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) < Math.round(salesAnalysis.getMixsalesNational())) {
-//                    txtZonalVal_MixSales.setTextColor(Color.GREEN);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                            } else if (Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixsalesNational()) < Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) < Math.round(salesAnalysis.getMixSalesZonal())) {
-                                storesales.setBackgroundResource(R.drawable.rounded_edittext1);
-                                zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                                nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
-                            }
-
-                        }
-                    });
-
-                    //Rank
-                    relRank.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            rankRelLayout.setVisibility(View.VISIBLE);
-                            sznchildRelLayout.setVisibility(View.GONE);
-
-                            relPvASales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relMixSales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
-                            relRank.setBackgroundResource(R.drawable.rounded_edittext2);
-
-
-                            txtPvAZonalRankVal.setText("" + salesAnalysis.getZonalSalesRank());
-                            txtPvANationalRankVal.setText("" + salesAnalysis.getNationalSalesRank());
-                            txtYoYZonalRankVal.setText("" + salesAnalysis.getZonalYOYGrowthRank());
-                            txtYoYNationalRankVal.setText("" + salesAnalysis.getNationalYOYGrowthRank());
-
-                            //Sales Rank Condtion
-                            if (salesAnalysis.getZonalSalesRank() > salesAnalysis.getNationalSalesRank())
-
-                            {
-                                Log.e("Rank Condition", "" + salesAnalysis.getZonalSalesRank());
-                                linPvAZonalRank.setBackgroundResource(R.color.smdm_green);
-                                linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
-                            } else if (salesAnalysis.getNationalSalesRank() > salesAnalysis.getZonalSalesRank()) {
-                                linPvAZonalRank.setBackgroundResource(R.color.smdm_amber);
-                                linPvANationalRank.setBackgroundResource(R.color.smdm_green);
-                            } else if (salesAnalysis.getZonalSalesRank() == salesAnalysis.getNationalSalesRank()) {
-                                linPvAZonalRank.setBackgroundResource(R.color.smdm_green);
-                                linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
-                            }
-                            //YoY Rank Condition
-                            if (salesAnalysis.getZonalYOYGrowthRank() > salesAnalysis.getNationalYOYGrowthRank()) {
-                                linYoYZonalRank.setBackgroundResource(R.color.smdm_green);
-                                linYoYNationalRank.setBackgroundResource(R.color.smdm_amber);
-                            } else if (salesAnalysis.getNationalYOYGrowthRank() > salesAnalysis.getZonalYOYGrowthRank()) {
-                                linYoYZonalRank.setBackgroundResource(R.color.smdm_amber);
-                                linYoYNationalRank.setBackgroundResource(R.color.smdm_green);
-                            } else if (salesAnalysis.getZonalYOYGrowthRank() == salesAnalysis.getNationalYOYGrowthRank()) {
-                                linYoYZonalRank.setBackgroundResource(R.color.smdm_green);
-                                linYoYNationalRank.setBackgroundResource(R.color.smdm_amber);
-
-                            }
-                        }
-                    });
-
-                }
-
-
-            } else if (position == 2) {
-                if (salesAnalysis != null) {
-                    double ros = Double.parseDouble(String.format("%.1f", salesAnalysis.getRos()));
-                    Log.e("ros", "" + ros);
-                    double fwdwkcover = Double.parseDouble(String.format("%.1f", salesAnalysis.getFwdWeekCover()));
-                    Log.e("fwdwkcover", "" + fwdwkcover);
-
-                    txtSOHVal2.setText(" " + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-                    txtGITVal.setText(" " + format.format(Math.round(salesAnalysis.getStkGitQty())));
-                    txtROSVal2.setText(format.format(ros));
-                    txtFwdWkCoverVal2.setText("" + fwdwkcover);
                 }
 
             }
+            if(salesAnalysisClassArrayList.size()!=0){
+            SalesAnalysisListDisplay salesAnalysisListDisplay = salesAnalysisClassArrayList.get(position);
+            LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
+            int firstVisibleItemPosition = llm.findFirstVisibleItemPosition();
+            Log.e("instantiateItem: ", "" + firstVisibleItemPosition);
+
+            //if (firstVisibleItemPosition == 0) {
+            if (salesAnalysisListDisplay.getPlanDept() != null) {
+                if (salesAnalysisListDisplay.getPlanDept().equals("All")) {
+                    Log.e("-----", "All");
+                    salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
+                    salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
+                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+                    //listView_SalesAnalysis.setAdapter(salesadapter);
+                    salesadapter.notifyDataSetChanged();
+
+                }
+            }
+            if (salesAnalysisListDisplay.getPlanCategory() != null) {
+                if (salesAnalysisListDisplay.getPlanCategory().equals("All")) {
+                    Log.e("-----", "All");
+                    salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
+                    salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
+                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+                    // listView_SalesAnalysis.setAdapter(salesadapter);
+                    salesadapter.notifyDataSetChanged();
+
+                }
+            }
+
+            if (salesAnalysisListDisplay.getPlanClass() != null) {
+                if (salesAnalysisListDisplay.getPlanClass().equals("All")) {
+                    Log.e("-----", "All");
+                    salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
+                    salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
+                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+                    // listView_SalesAnalysis.setAdapter(salesadapter);
+                    salesadapter.notifyDataSetChanged();
+
+                }
+            }
+            if (salesAnalysisListDisplay.getBrandName() != null) {
+                if (salesAnalysisListDisplay.getBrandName().equals("All")) {
+                    Log.e("-----", "All");
+                    salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
+                    salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
+                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+                    // listView_SalesAnalysis.setAdapter(salesadapter);
+                    salesadapter.notifyDataSetChanged();
+
+                }
+            }
+            if (salesAnalysisListDisplay.getBrandplanClass() != null) {
+                if (salesAnalysisListDisplay.getBrandplanClass().equals("All")) {
+                    Log.e("-----", "All");
+                    salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
+                    salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
+                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
+                    // listView_SalesAnalysis.setAdapter(salesadapter);
+                    salesadapter.notifyDataSetChanged();
+
+                }
+            }
+         }
+
+        } else if (position == 1) {
+
+            if (salesAnalysis != null) {
+
+                sznchildRelLayout.setVisibility(View.VISIBLE);
+                rankRelLayout.setVisibility(View.GONE);
+
+                txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
+                txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getPvaAchievedZonal()) + "%");
+                txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getPvaAchievedNational()) + "%");
+
+                relPvASales.setBackgroundResource(R.drawable.rounded_edittext2);
+                if (Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
+//                    txtStoreVal_PvASales.setTextColor(Color.GREEN);
+                    storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                    zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                    nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+
+                } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
+//                    txtZonalVal_PvASales.setTextColor(Color.GREEN);
+                    zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                    storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                    nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                } else if (Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchievedZonal())) {
+//                    txtNationalVal_PvASales.setTextColor(Color.GREEN);
+                    nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                    storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                    zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedNational())
+                        && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchieved())
+                        && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchievedZonal())) {
+//                    txtStoreVal_PvASales.setTextColor(Color.GREEN);
+                    storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                    nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                    zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedNational())) {
+//                    txtZonalVal_PvASales.setTextColor(Color.GREEN);
+                    zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                    storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                    nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                }
+
+
+                //PvA Sales
+                relPvASales.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        pmsyrtxtRelLayout.setTag("PvA%");
+                        sznchildRelLayout.setVisibility(View.VISIBLE);
+                        rankRelLayout.setVisibility(View.GONE);
+
+                        relPvASales.setBackgroundResource(R.drawable.rounded_edittext2);
+                        relMixSales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relRank.setBackgroundResource(R.drawable.rounded_edittext3);
+
+                        txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
+                        txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getPvaAchievedZonal()) + "%");
+                        txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getPvaAchievedNational()) + "%");
+
+                        if (Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
+//                        txtStoreVal_PvASales.setTextColor(Color.GREEN);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+
+                        } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
+//                        txtZonalVal_PvASales.setTextColor(Color.GREEN);)
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchievedZonal())) {
+//                        txtNationalVal_PvASales.setTextColor(Color.GREEN);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedNational())
+                                && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchieved())
+                                && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchievedZonal())) {
+//                        txtStoreVal_PvASales.setTextColor(Color.GREEN);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedNational())) {
+//                       txtZonalVal_PvASales.setTextColor(Color.GREEN);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                        } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchievedNational()) < Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) < Math.round(salesAnalysis.getPvaAchievedZonal())) {
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                        }
+                    }
+                });
+                //YoY Sales
+                relYoYSales.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sznchildRelLayout.setVisibility(View.VISIBLE);
+                        rankRelLayout.setVisibility(View.GONE);
+
+                        relPvASales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relMixSales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relYoYSales.setBackgroundResource(R.drawable.rounded_edittext2);
+                        relRank.setBackgroundResource(R.drawable.rounded_edittext3);
+
+                        txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
+                        txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) + "%");
+                        txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) + "%");
+
+                        //YOY Sales
+                        if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
+//                    txtStoreVal_YOYSales.setTextColor(Color.GREEN);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
+//                    txtZonalVal_YOYSales.setTextColor(Color.GREEN);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
+//                    txtNationalVal_YOYSales.setTextColor(Color.GREEN);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())
+                                && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct())
+                                && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
+//                    txtStoreVal_YOYSales.setTextColor(Color.GREEN);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
+//                    txtZonalVal_YOYSales.setTextColor(Color.GREEN);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                        }
+
+
+                    }
+                });
+
+                //Sell Thru
+                relSellThru.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sznchildRelLayout.setVisibility(View.VISIBLE);
+                        rankRelLayout.setVisibility(View.GONE);
+
+                        relPvASales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relMixSales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relSellThru.setBackgroundResource(R.drawable.rounded_edittext2);
+                        relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relRank.setBackgroundResource(R.drawable.rounded_edittext3);
+
+                        txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getSellThruUnits()) + "%");
+                        txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getSellThruUnitsZonal()) + "%");
+                        txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getSellThruUnitsNational()) + "%");
+
+
+                        //Sell Thro
+
+                        if (Math.round(salesAnalysis.getSellThruUnits()) > Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnits()) > Math.round(salesAnalysis.getSellThruUnitsNational())) {
+//                    txtStoreVal_SellThro.setTextColor(Color.GREEN);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnitsNational())) {
+//                    txtZonalVal_SellThro.setTextColor(Color.GREEN);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnitsZonal())) {
+//                    txtNationalVal_SellThro.setTextColor(Color.GREEN);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsZonal())
+                                && Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnitsNational())
+                                && Math.round(salesAnalysis.getSellThruUnitsNational()) == Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) == Math.round(salesAnalysis.getSellThruUnitsZonal())) {
+//                    txtStoreVal_SellThro.setTextColor(Color.GREEN);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsNational())) {
+//                    txtZonalVal_SellThro.setTextColor(Color.GREEN);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnitsNational()) < Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) < Math.round(salesAnalysis.getSellThruUnitsZonal())) {
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                        }
+
+                    }
+                });
+
+                //Mix Sales
+                relMixSales.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sznchildRelLayout.setVisibility(View.VISIBLE);
+                        rankRelLayout.setVisibility(View.GONE);
+
+                        relPvASales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relMixSales.setBackgroundResource(R.drawable.rounded_edittext2);
+                        relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relRank.setBackgroundResource(R.drawable.rounded_edittext3);
+
+                        txtStoreVal_PvASales1.setText("" + Math.round(salesAnalysis.getMixSales()) + "%");
+                        txtZonalSalesVal.setText("" + Math.round(salesAnalysis.getMixSalesZonal()) + "%");
+                        txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getMixsalesNational()) + "%");
+
+                        //Mix Sales
+                        if (Math.round(salesAnalysis.getMixSales()) > Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) > Math.round(salesAnalysis.getMixsalesNational())) {
+//                    txtStoreVal_MixSales.setTextColor(Color.GREEN);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getMixSalesZonal()) > Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixSalesZonal()) > Math.round(salesAnalysis.getMixsalesNational())) {
+//                    txtZonalVal_MixSales.setTextColor(Color.GREEN);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+
+                        } else if (Math.round(salesAnalysis.getMixsalesNational()) > Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) > Math.round(salesAnalysis.getMixSalesZonal())) {
+//                    txtNationalVal_MixSales.setTextColor(Color.GREEN);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+                        } else if (Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixsalesNational())
+                                && Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixsalesNational()) && Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixSales())
+                                && Math.round(salesAnalysis.getMixsalesNational()) == Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) == Math.round(salesAnalysis.getMixSalesZonal())) {
+//                    txtStoreVal_MixSales.setTextColor(Color.GREEN);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+
+
+                        } else if (Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixsalesNational()) && Math.round(salesAnalysis.getMixSales()) < Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) < Math.round(salesAnalysis.getMixsalesNational())) {
+//                    txtZonalVal_MixSales.setTextColor(Color.GREEN);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                        } else if (Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixsalesNational()) < Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) < Math.round(salesAnalysis.getMixSalesZonal())) {
+                            storesales.setBackgroundResource(R.drawable.rounded_edittext1);
+                            zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                            nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
+                        }
+
+                    }
+                });
+
+                //Rank
+                relRank.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rankRelLayout.setVisibility(View.VISIBLE);
+                        sznchildRelLayout.setVisibility(View.GONE);
+
+                        relPvASales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relMixSales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relSellThru.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
+                        relRank.setBackgroundResource(R.drawable.rounded_edittext2);
+
+
+                        txtPvAZonalRankVal.setText("" + salesAnalysis.getZonalSalesRank());
+                        txtPvANationalRankVal.setText("" + salesAnalysis.getNationalSalesRank());
+                        txtYoYZonalRankVal.setText("" + salesAnalysis.getZonalYOYGrowthRank());
+                        txtYoYNationalRankVal.setText("" + salesAnalysis.getNationalYOYGrowthRank());
+
+                        //Sales Rank Condtion
+                        if (salesAnalysis.getZonalSalesRank() > salesAnalysis.getNationalSalesRank())
+
+                        {
+                            Log.e("Rank Condition", "" + salesAnalysis.getZonalSalesRank());
+                            linPvAZonalRank.setBackgroundResource(R.color.smdm_green);
+                            linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
+                        } else if (salesAnalysis.getNationalSalesRank() > salesAnalysis.getZonalSalesRank()) {
+                            linPvAZonalRank.setBackgroundResource(R.color.smdm_amber);
+                            linPvANationalRank.setBackgroundResource(R.color.smdm_green);
+                        } else if (salesAnalysis.getZonalSalesRank() == salesAnalysis.getNationalSalesRank()) {
+                            linPvAZonalRank.setBackgroundResource(R.color.smdm_green);
+                            linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
+                        }
+                        //YoY Rank Condition
+                        if (salesAnalysis.getZonalYOYGrowthRank() > salesAnalysis.getNationalYOYGrowthRank()) {
+                            linYoYZonalRank.setBackgroundResource(R.color.smdm_green);
+                            linYoYNationalRank.setBackgroundResource(R.color.smdm_amber);
+                        } else if (salesAnalysis.getNationalYOYGrowthRank() > salesAnalysis.getZonalYOYGrowthRank()) {
+                            linYoYZonalRank.setBackgroundResource(R.color.smdm_amber);
+                            linYoYNationalRank.setBackgroundResource(R.color.smdm_green);
+                        } else if (salesAnalysis.getZonalYOYGrowthRank() == salesAnalysis.getNationalYOYGrowthRank()) {
+                            linYoYZonalRank.setBackgroundResource(R.color.smdm_green);
+                            linYoYNationalRank.setBackgroundResource(R.color.smdm_amber);
+
+                        }
+                    }
+                });
+
+            }
+
+
+        } else if (position == 2) {
+            if (salesAnalysis != null) {
+                double ros = Double.parseDouble(String.format("%.1f", salesAnalysis.getRos()));
+                Log.e("ros", "" + ros);
+                double fwdwkcover = Double.parseDouble(String.format("%.1f", salesAnalysis.getFwdWeekCover()));
+                Log.e("fwdwkcover", "" + fwdwkcover);
+
+                txtSOHVal2.setText(" " + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
+                txtGITVal.setText(" " + format.format(Math.round(salesAnalysis.getStkGitQty())));
+                txtROSVal2.setText(format.format(ros));
+                txtFwdWkCoverVal2.setText("" + fwdwkcover);
+            }
+
         }
+
+
+
+
+
+
+
 
         vwpagersales.setOnPageChangeListener(this);
         // Add viewpager_item.xml to ViewPager
