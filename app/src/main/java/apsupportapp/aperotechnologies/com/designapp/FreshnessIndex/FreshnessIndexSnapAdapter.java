@@ -136,7 +136,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
         if (viewHolder instanceof FreshnessHolder) {
-            if(position <= freshnessIndexDetailsArrayList.size()) {
+            if(position < freshnessIndexDetailsArrayList.size()) {
                 FreshnessIndexDetails freshnessIndexDetails = freshnessIndexDetailsArrayList.get(position);
                 //  fromWhere = "Department";
                 if (fromWhere.equals("Department")) {

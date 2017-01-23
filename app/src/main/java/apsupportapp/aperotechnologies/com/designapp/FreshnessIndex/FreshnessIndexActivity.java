@@ -1453,7 +1453,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     // Pie Chart val changed on Scroll of list view
     private void requestFIndexPieChart() {
-        Log.e(TAG, "Department onsroll api" + fIndexFirstVisibleItem);
+        Log.e(TAG, "pi chart position" + fIndexFirstVisibleItem);
         //  Log.e("Header Class", txtFIndexClass.getText().toString());
         String url = " ";
         txtNoChart.setVisibility(View.GONE);
