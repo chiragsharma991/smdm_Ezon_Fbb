@@ -367,9 +367,9 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             }
             if(salesAnalysisClassArrayList.size()!=0){
             SalesAnalysisListDisplay salesAnalysisListDisplay = salesAnalysisClassArrayList.get(position);
-            LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
-            int firstVisibleItemPosition = llm.findFirstVisibleItemPosition();
-            Log.e("instantiateItem: ", "" + firstVisibleItemPosition);
+           // LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
+           // int firstVisibleItemPosition = llm.findFirstVisibleItemPosition();
+           // Log.e("instantiateItem: ", "" + firstVisibleItemPosition);
 
             //if (firstVisibleItemPosition == 0) {
             if (salesAnalysisListDisplay.getPlanDept() != null) {
@@ -378,7 +378,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
                     // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                    //listView_SalesAnalysis.setAdapter(salesadapter);
+                   // listView_SalesAnalysis.setAdapter(salesadapter);
                     salesadapter.notifyDataSetChanged();
 
                 }

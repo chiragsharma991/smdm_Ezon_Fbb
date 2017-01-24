@@ -70,41 +70,171 @@
             </android.support.v7.widget.Toolbar>
 
 
+        </LinearLayout>
 
+        <LinearLayout
 
-    </LinearLayout>
-
-    <LinearLayout
-
-        android:id="@+id/llfreshnessIndex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <RelativeLayout
-        android:id="@+id/relPielayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
-
-        <TextView
+            android:id="@+id/llfreshnessIndex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/noChart"
-            android:text="No Chart data available"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:visibility="gone"
-            android:textSize="@dimen/largelayout_storesize"
+            android:orientation="vertical">
 
-            />
+            <RelativeLayout
+                android:id="@+id/relPielayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/vreport_pieChart"
-            android:layout_width="match_parent"
-            android:layout_height="540dp" />
-    </RelativeLayout>
-</LinearLayout>
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/vreport_pieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="540dp" />
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/visual_report_progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:padding="10dp"
+                    android:theme="@style/ProgressBar"
+                    android:visibility="gone">
+
+                </ProgressBar>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="left"
+                    android:layout_weight="0.2"
+                    android:singleLine="true"
+                    android:text="@string/likes"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/visual_report_textsize_large"
+                    />
+
+
+                <TextView
+                    android:id="@+id/vr_likesVal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:gravity="right"
+                    android:layout_weight="0.8"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/visual_report_textsize_large"/>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="@dimen/smdm_divider"
+                android:background="@color/divider_salescard"
+                android:layout_marginTop="2dp">
+
+            </View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="left"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_weight="0.2"
+                    android:singleLine="true"
+                    android:text="@string/dislikes"
+                    android:textSize="@dimen/visual_report_textsize_large"
+                    />
+
+
+                <TextView
+                    android:id="@+id/vr_dislikesVal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:gravity="right"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_weight="0.8"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textSize="@dimen/visual_report_textsize_large"/>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="@dimen/smdm_divider"
+                android:background="@color/divider_salescard"
+                android:layout_marginTop="2dp">
+
+            </View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="left"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_weight="0.2"
+                    android:singleLine="true"
+                    android:text="@string/pending"
+                    android:textSize="@dimen/visual_report_textsize_large"
+                    />
+
+
+                <TextView
+                    android:id="@+id/vr_PendingVal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:gravity="right"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_weight="0.8"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textSize="@dimen/visual_report_textsize_large"/>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="@dimen/smdm_divider"
+                android:background="@color/divider_salescard"
+                android:layout_marginTop="2dp">
+
+            </View>
+
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

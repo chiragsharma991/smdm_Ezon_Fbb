@@ -218,7 +218,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp" />
 
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/pva_progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:padding="10dp"
+                    android:theme="@style/ProgressBar"
+                    android:visibility="gone">
 
+                </ProgressBar>
 
                 <TextView
                     android:layout_below="@+id/linechart"

@@ -102,7 +102,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     TextView txtZonalSales, txtNationalSales;
     TextView txtZonalYOY, txtNationalYOY;
     TextView txthDeptName;
-    int selFirstPositionValue = 0;
+    int selFirstPositionValue = 500;
     String txtSalesClickedValue;
     String val;
     boolean flag = false,onClickFlag=false;
@@ -131,7 +131,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        selFirstPositionValue = 0;
         etListText = (EditText) findViewById(R.id.etListText);
         Style_loadingBar = (RelativeLayout) findViewById(R.id.style_loadingBar);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
@@ -187,7 +186,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         relimgfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SalesAnalysisActivity1.this, SalesFilter.class);
+                Intent intent = new Intent(SalesAnalysisActivity1.this, SalesFilterActivity.class);
                 intent.putExtra("checkfrom", "SalesAnalysis");
                 startActivity(intent);
                 //postRequest_hierarchy.cancel();
@@ -743,18 +742,18 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     count = 0;
                     analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
 
-                    progressBar1.setVisibility(View.VISIBLE);
-
-                    if (postRequest != null) {
-                        postRequest.cancel();
+                    if(firstVisibleItem != selFirstPositionValue) {
+                        if (postRequest != null) {
+                            postRequest.cancel();
+                        }
+                        progressBar1.setVisibility(View.VISIBLE);
+                        if (saleFirstVisibleItem.equals("All")) {
+                            requestSalesViewPagerValueAPI();
+                        } else {
+                            requestSalesPagerOnScrollAPI();
+                        }
+                        selFirstPositionValue = firstVisibleItem;
                     }
-
-                    if (saleFirstVisibleItem.equals("All")) {
-                        requestSalesViewPagerValueAPI();
-                    } else {
-                        requestSalesPagerOnScrollAPI();
-                    }
-
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
@@ -762,8 +761,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 // }
                 //  selFirstPositionValue = firstVisibleItem;
             } else {
-                Log.e(TAG, "onScrollStateChanged: ");
                 firstVisibleItem = salesAnalysisClassArrayList.size() - 1;
+                LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
+                llm.scrollToPosition(firstVisibleItem);
 
                 if (txtheaderplanclass.getText().toString().equals("Department")) {
                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().toString();
@@ -784,24 +784,24 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     count = 0;
                     analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
 
-                    progressBar1.setVisibility(View.VISIBLE);
+                    if(firstVisibleItem != selFirstPositionValue) {
 
-                    if (postRequest != null) {
-                        postRequest.cancel();
+                        if (postRequest != null) {
+                            postRequest.cancel();
+                        }
+                        progressBar1.setVisibility(View.VISIBLE);
+                        if (saleFirstVisibleItem.equals("All")) {
+                            requestSalesViewPagerValueAPI();
+                        } else {
+                            requestSalesPagerOnScrollAPI();
+                        }
+                        selFirstPositionValue = firstVisibleItem;
                     }
-
-                    if (saleFirstVisibleItem.equals("All")) {
-                        requestSalesViewPagerValueAPI();
-                    } else {
-                        requestSalesPagerOnScrollAPI();
-                    }
-
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
 
-                LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
-                llm.scrollToPosition(firstVisibleItem);
+
               //  return;
             }
 
@@ -1787,7 +1787,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
-                                onClickFlag = false;
                                 onClickFlag = false;
 
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
