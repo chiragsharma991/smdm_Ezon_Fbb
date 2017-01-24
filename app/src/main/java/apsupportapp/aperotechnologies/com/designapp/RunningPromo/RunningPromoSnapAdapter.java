@@ -81,7 +81,9 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof Holder) {
-            RunningPromoListDisplay snap = promoList.get(position);
+            if(position < promoList.size()) {
+
+                RunningPromoListDisplay snap = promoList.get(position);
             // holder.snapTextView.setText(snap.getText());
 
             ((Holder)holder).PromotionName.setText(snap.getPromoDesc());
@@ -97,6 +99,7 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
                     Context.startActivity(intent);
                 }
             });
+        }
         }
         else
         {

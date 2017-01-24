@@ -272,9 +272,13 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
             PromoListView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent i = new Intent(context, RunningPromoDetails.class);
-                    i.putExtra("VM", promoList.get(position).getPromoDesc());
-                    context.startActivity(i);
+                    if(position<promoList.size())
+                    {
+                        Intent i = new Intent(context, RunningPromoDetails.class);
+                        i.putExtra("VM", promoList.get(position).getPromoDesc());
+                        context.startActivity(i);
+                    }
+
                 }
             }));
 
