@@ -10,7 +10,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -50,6 +52,7 @@ import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessInde
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexDetails;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
 import apsupportapp.aperotechnologies.com.designapp.model.VisualReport;
 
 /**
@@ -67,8 +70,10 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     Gson gson;
     int offset  = 0,limit = 10,count = 0;
     VisualReport visualReport;
+    ProgressBar visual_report_progressBar;
     ArrayList<VisualReport> visualReportArrayList;
     float pendingOptions = 0.0f, likedOptions = 0.0f, dislikedOptions = 0.0f, totalOptions = 0.0f;
+    TextView vr_likeVal,vr_dislikeVal,vr_pendingVal;
     PieDataSet dataSet;
     PieData pieData;
 
@@ -87,10 +92,28 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         queue.start();
         gson = new Gson();
         visualreport_imageBtnBack = (RelativeLayout)findViewById(R.id.visualreport_imageBtnBack);
+        vr_likeVal = (TextView)findViewById(R.id.vr_likesVal);
+        vr_dislikeVal = (TextView)findViewById(R.id.vr_dislikesVal);
+        vr_pendingVal = (TextView)findViewById(R.id.vr_PendingVal);
         pieChart = (PieChart)findViewById(R.id.vreport_pieChart);
+        visual_report_progressBar = (ProgressBar)findViewById(R.id.visual_report_progressBar);
         visualreport_imageBtnBack.setOnClickListener(this);
         visualReportArrayList = new ArrayList<VisualReport>();
-        requestVisualReportAPI();
+        if (Reusable_Functions.chkStatus(context)) {
+
+            Reusable_Functions.hDialog();
+            visual_report_progressBar.setVisibility(View.VISIBLE);
+            offset = 0;
+            limit = 10;
+            count = 0;
+            requestVisualReportAPI();
+
+        } else
+        {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+        }
+
+
     }
 
     private void requestVisualReportAPI() {
@@ -111,6 +134,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
 
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0 ) {
                                 Reusable_Functions.hDialog();
+                                visual_report_progressBar.setVisibility(View.GONE);
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
 
@@ -132,10 +156,6 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                     visualReport = gson.fromJson(response.get(i).toString(), VisualReport.class);
                                     visualReportArrayList.add(visualReport);
                                 }
-                                //fIndexAdapter.notifyDataSetChanged();
-
-
-
 
                                 ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
                                 for (VisualReport v_report : visualReportArrayList) {
@@ -148,6 +168,10 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
 
 
                                 }
+                                NumberFormat format = NumberFormat.getNumberInstance(new Locale("","in"));
+                                vr_likeVal.setText(format.format(Math.round(likedOptions)));
+                                vr_dislikeVal.setText(format.format(Math.round(dislikedOptions)));
+                                vr_pendingVal.setText(format.format(Math.round(pendingOptions)));
                                 ArrayList<Integer> colors = new ArrayList<>();
                                 //colors.add(Color.parseColor("#ffc65b"));
                                 colors.add(Color.parseColor("#31d6cf"));
@@ -181,24 +205,22 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                     entries.add(new PieEntry(pendingOptions,"Pending"));
                                     Log.e(TAG, "pending: ");
                                 }
-
-
-                                NumberFormat format = NumberFormat.getNumberInstance(new Locale("","in"));
                                 dataSet = new PieDataSet(entries,"");
                                 dataSet.setColors(colors);
-
                                 dataSet.setValueTextColor(Color.BLACK);
                                 pieData = new PieData(dataSet);
                                // pieData.setValueFormatter(new MyValueFormatter());
                                 pieChart.setDrawMarkers(false);
                                 pieData.setValueTextSize(12f);
                                 dataSet.setXValuePosition(null);
+                                dataSet.setValueLineWidth(0.6f);
                                 dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
                                 pieChart.setEntryLabelColor(Color.WHITE);
                                 pieChart.setHoleRadius(65);
                                 pieChart.setHoleColor(Color.parseColor("#ffc65b"));
                                 pieChart.setCenterText(String.valueOf(format.format(Math.round(totalOptions)))+ "\nTotal");
                                 pieChart.setCenterTextSize(35f);
+                                pieChart.setExtraTopOffset(10f);
                                 pieChart.setCenterTextColor(Color.WHITE);
                                 pieChart.setTransparentCircleRadius(0);
                                 pieChart.setData(pieData);
@@ -213,9 +235,11 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 l.setFormSize(15f);
                                 l.setEnabled(true);
                                 Reusable_Functions.hDialog();
+                                visual_report_progressBar.setVisibility(View.GONE);
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
+                            visual_report_progressBar.setVisibility(View.GONE);
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }

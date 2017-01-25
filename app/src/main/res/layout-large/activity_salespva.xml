@@ -217,6 +217,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp" />
 
+
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/pva_progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:padding="10dp"
+                    android:theme="@style/ProgressBar"
+                    android:visibility="gone">
+
+                </ProgressBar>
+
                 <TextView
                     android:layout_below="@+id/linechart"
                     android:layout_width="match_parent"
@@ -243,63 +258,6 @@
                     android:layout_margin="10dp"
                     android:textColor="@color/txt_color"
                     android:textSize="12sp" />
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahDeptNameNext"-->
-                    <!--android:layout_width="5dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahCategory"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahCategoryNext"-->
-                    <!--android:layout_width="5dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahPlanClass"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahPlanClassNext"-->
-                    <!--android:layout_width="5dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/txtpvahBrand"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="10dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:text=">"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="12sp" />-->
-
 
             </LinearLayout>
 
@@ -494,14 +452,31 @@
                     android:layout_height="1dip"
                     android:background="@color/border_round_edittext" />
 
-                <ListView
-                    android:id="@+id/list"
-                    android:dividerHeight="0dp"
-                    android:divider="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
-                    android:smoothScrollbar="true"></ListView>
+                <!--<ListView-->
+                    <!--android:id="@+id/list"-->
+                    <!--android:dividerHeight="0dp"-->
+                    <!--android:divider="@null"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="45dp"-->
+                    <!--android:smoothScrollbar="true"></ListView>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="45dp"-->
+                    <!--android:orientation="vertical">-->
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:divider="@null"
+                        android:dividerHeight="0dp"
+                        android:smoothScrollbar="true" />
+
+
+                <!--</LinearLayout>-->
 
 
 
