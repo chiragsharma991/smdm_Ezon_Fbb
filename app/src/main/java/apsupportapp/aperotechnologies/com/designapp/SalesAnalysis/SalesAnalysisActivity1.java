@@ -801,21 +801,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
 
-
-              //  return;
             }
-
-
-//            if (firstVisibleItem >= salesadapter.getItemCount() - 2) {
-//                Log.e(TAG, "STATE_IDLE>>>>>>>>" + "firstvisible=" + firstVisibleItem + "and total=" + totalItemCount);
-//
-//                LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
-//                Log.e("Array Size", "" + salesAnalysisClassArrayList.size() + " totalItemCount :" + totalItemCount);
-//                // llm.scrollToPositionWithOffset(totalItemCount-14, totalItemCount);
-//                //  llm.scrollToPosition(11);
-//            }
         }
-
     }
 
 
