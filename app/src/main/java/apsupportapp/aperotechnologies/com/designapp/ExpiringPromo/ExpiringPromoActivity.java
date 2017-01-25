@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.ExpiringPromo;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,7 +11,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -31,6 +35,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -42,6 +47,9 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
 public class ExpiringPromoActivity extends AppCompatActivity implements View.OnClickListener{
@@ -58,9 +66,13 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
-    ListView ExpireListView;
+    RecyclerView ExpireListView;
     ArrayList<RunningPromoListDisplay> ExpireList;
     private int focusposition = 0;
+    private int totalItemCount=0;
+    int prevState = RecyclerView.SCROLL_STATE_IDLE;
+    int currentState = RecyclerView.SCROLL_STATE_IDLE;
+    private ExpiringPromoSnapAdapter expiringPromoSnapAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +80,12 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_expiring_promo);
         getSupportActionBar().hide();
         initalise();
-        ExpireListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
+       // ExpireListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         ExpireList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -133,9 +144,19 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                                 }
 
 
+                                ExpireListView.setLayoutManager(new LinearLayoutManager(
+                                        ExpireListView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                        LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                ExpireListView.setOnFlingListener(null);
+                                new GravitySnapHelper(48).attachToRecyclerView(ExpireListView);
+                                expiringPromoSnapAdapter = new ExpiringPromoSnapAdapter(ExpireList, context);
+                                ExpireListView.setAdapter(expiringPromoSnapAdapter);
+                                Reusable_Functions.hDialog();
+
+/*
                                 ExpiringPromoAdapter runningPromoAdapter = new ExpiringPromoAdapter(ExpireList, context);
                                 ExpireListView.setAdapter(runningPromoAdapter);
-                                Reusable_Functions.hDialog();
+                                Reusable_Functions.hDialog();*/
 
                                 // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
 
@@ -191,46 +212,69 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
 */
 
 
-            ExpireListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            ExpireListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
-                public void onScrollStateChanged(AbsListView view, int scrollState) {
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                    RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+                    int visibleItemCount = recyclerView.getChildCount();
+                    totalItemCount = mRecyclerViewHelper.getItemCount();
+                    focusposition = mRecyclerViewHelper.findFirstVisibleItemPosition();
 
 
-                    if (ExpireList.size() != 0) {
-
-                        if (view.getFirstVisiblePosition() <= ExpireList.size() - 1) {
-
-                            focusposition = view.getFirstVisiblePosition();
-
-                            ExpireListView.setSelection(view.getFirstVisiblePosition());
-                            Log.e(TAG, "firstVisibleItem" + " " + focusposition);
-                            //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                            promoval1.setText("\u20B9\t" + (int) ExpireList.get(focusposition).getDurSaleNetVal());
-                            promoval2.setText("" + ExpireList.get(focusposition).getDurSaleTotQty());
-                            storecode.setText(ExpireList.get(focusposition).getStoreCode());
-                            storedesc.setText(ExpireList.get(focusposition).getStoreDesc());
+                }
 
 
-                        } else {
-                            focusposition = ExpireList.size() - 1;
-                            ExpireListView.setSelection(ExpireList.size() - 1);
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, final int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
 
-                        }
+
+                    currentState = newState;
+                    if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE) {
+
+                        Handler h = new Handler();
+                        h.postDelayed(new Runnable() {
+                            public void run() {
+                                TimeUP();
+                                Log.e(TAG, "run: position is"+focusposition );
+
+                            }
+                        }, 400);
+
+
                     }
+                    prevState = currentState;
 
 
                 }
 
-                @Override
-                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                }
             });
+
+
+        }
+    }
+
+    private void TimeUP()
+    {
+        if (focusposition < expiringPromoSnapAdapter.getItemCount() - 1) {
+            promoval1.setText("\u20B9\t" + (int) ExpireList.get(focusposition).getDurSaleNetVal());
+            promoval2.setText("" + ExpireList.get(focusposition).getDurSaleTotQty());
+            storecode.setText(ExpireList.get(focusposition).getStoreCode());
+            storedesc.setText(ExpireList.get(focusposition).getStoreDesc());
 
         }
         else {
-            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            focusposition = ExpireList.size() - 1;
+            LinearLayoutManager llm = (LinearLayoutManager)ExpireListView.getLayoutManager();
+            llm.scrollToPosition(focusposition);
 
+            promoval1.setText("\u20B9\t" + Math.round(ExpireList.get(focusposition).getDurSaleNetVal()));
+            promoval2.setText("" + ExpireList.get(focusposition).getDurSaleTotQty());
+            storecode.setText(ExpireList.get(focusposition).getStoreCode());
+            storedesc.setText(ExpireList.get(focusposition).getStoreDesc());
         }
     }
 
@@ -242,7 +286,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
         promoval2 = (TextView) findViewById(R.id.txt_exp_PromoVal2);
         imageback = (RelativeLayout) findViewById(R.id.exp_imageBtnBack);
         imagefilter = (RelativeLayout) findViewById(R.id.exp_imgfilter);
-        ExpireListView = (ListView) findViewById(R.id.expireListview);
+        ExpireListView = (RecyclerView) findViewById(R.id.expirePromoListview);
 
         imageback.setOnClickListener(this);
         imagefilter.setOnClickListener(this);
