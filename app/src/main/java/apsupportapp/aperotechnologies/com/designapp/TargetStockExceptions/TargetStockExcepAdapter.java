@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingAdapter;
@@ -94,28 +96,26 @@ public class TargetStockExcepAdapter extends BaseAdapter{
             holder=(TargetStockExcepAdapter.Holder)convertView.getTag();
 
         }
+        NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
+
         if(TargetStockExceptionActivity.level == 1) {
+
             holder.target_option.setText(arrayList.get(position).getPlanDept());
-            holder.target_SOH_U.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
-            holder.target_ROS_U.setText("" + String.format("%.1f", arrayList.get(position).getTargetROS()));
 
-            holder.target_ROS.setText("" + String.format("%.1f", arrayList.get(position).getRos()));
-            holder.target_Availability.setText("" +Math.round(arrayList.get(position).getAvailabilityPct())+ "%");
         }
-        else if(TargetStockExceptionActivity.level == 2) {
+        else if(TargetStockExceptionActivity.level == 2)
+        {
             holder.target_option.setText(arrayList.get(position).getPlanCategory());
-            holder.target_SOH_U.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
-            holder.target_ROS_U.setText("" + String.format("%.1f", arrayList.get(position).getTargetROS()));
-            holder.target_ROS.setText("" + String.format("%.1f", arrayList.get(position).getRos()));
-            holder.target_Availability.setText("" +Math.round(arrayList.get(position).getAvailabilityPct()) + "%");
 
-        } else if(TargetStockExceptionActivity.level == 3) {
+       }
+        else if(TargetStockExceptionActivity.level == 3)
+       {
             holder.target_option.setText(arrayList.get(position).getPlanClass());
-            holder.target_SOH_U.setText("" +Math.round(arrayList.get(position).getStkOnhandQty()));
-            holder.target_ROS_U.setText("" + String.format("%.1f", arrayList.get(position).getTargetROS()));
-            holder.target_ROS.setText("" + String.format("%.1f", arrayList.get(position).getRos()));
-            holder.target_Availability.setText("" +Math.round(arrayList.get(position).getAvailabilityPct())+ "%");
-        }
+       }
+        holder.target_SOH_U.setText("" +formatter.format(Math.round(arrayList.get(position).getStkOnhandQty())));
+        holder.target_ROS_U.setText("" + String.format("%.1f", arrayList.get(position).getTargetROS()));
+        holder.target_ROS.setText("" + String.format("%.1f", arrayList.get(position).getRos()));
+        holder.target_Availability.setText("" +Math.round(arrayList.get(position).getAvailabilityPct())+ "%");
 
         // ---------------------click listener -------------------------
         return convertView;

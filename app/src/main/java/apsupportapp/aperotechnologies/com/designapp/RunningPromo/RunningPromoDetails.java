@@ -35,8 +35,10 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -194,14 +196,9 @@ public class RunningPromoDetails extends AppCompatActivity {
                                         runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         promoList.add(runningPromoListDisplay);
                                         Log.e(TAG, "Promolist size" + promoList.size());
-
                                     }
-
-
                                     addTexttoTable();
-
                                 }
-
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 e.printStackTrace();
@@ -218,33 +215,29 @@ public class RunningPromoDetails extends AppCompatActivity {
                             error.printStackTrace();
                         }
                     }
-
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
                     params.put("Content-Type", "application/json");
                     params.put("Authorization", "Bearer " + bearertoken);
-
                     Log.e("params ", " " + params);
                     return params;
                 }
             };
             int socketTimeout = 60000;//5 seconds
-
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-
         }
     }
 
     private void addTexttoTable() {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearTable);
         for (int i = 0; i < promoList.size(); i++) {
-
+            NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
             layoutInflater = (LayoutInflater) getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
             view = (ViewGroup) layoutInflater.inflate(R.layout.activity_runningpromotable_child, null);
@@ -253,15 +246,12 @@ public class RunningPromoDetails extends AppCompatActivity {
             TextView ProdSaleU = (TextView) view.findViewById(R.id.prodSaleU);
             TextView SoH = (TextView) view.findViewById(R.id.soH);
             Mc.setText(promoList.get(i).getProdLevel6Desc());
-            Prodsale.setText("\u20B9\t" + Math.round(promoList.get(i).getDurSaleNetVal()));
-            ProdSaleU.setText("" + (int) promoList.get(i).getDurSaleTotQty());
-            SoH.setText("" + Math.round(promoList.get(i).getStkOnhandQty()));
+            Prodsale.setText("\u20B9\t" + format.format(Math.round(promoList.get(i).getDurSaleNetVal())));
+            ProdSaleU.setText("" +  promoList.get(i).getDurSaleTotQty());
+            SoH.setText("" + format.format(Math.round(promoList.get(i).getStkOnhandQty())));
             Reusable_Functions.hDialog();
             linearLayout.addView(view);
-
         }
-
-
     }
 
     @Override

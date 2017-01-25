@@ -40,8 +40,10 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterActivity;
@@ -146,9 +148,10 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                                         promoList.add(runningPromoListDisplay);
                                      }
 
+                                    NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
 
                                     Log.e(TAG, "promolistSize" + promoList.size());
-                                    promoval1.setText("\u20B9\t" + (int) promoList.get(0).getDurSaleNetVal());
+                                    promoval1.setText("\u20B9\t" + format.format(Math.round(promoList.get(0).getDurSaleNetVal())));
                                     promoval2.setText("" + promoList.get(0).getDurSaleTotQty());
                                     storecode.setText(promoList.get(0).getStoreCode());
                                     storedesc.setText(promoList.get(0).getStoreDesc());
@@ -247,26 +250,8 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                     }
                     prevState = currentState;
 
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
+                  }
             });
-
-
-
-
-
 
 
             PromoListView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
@@ -382,10 +367,12 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
     {
        // if (promoList.size() != 0 && newState== RecyclerView.SCROLL_STATE_IDLE) {
             //check ideal condition then call .....
-            if (firstVisibleItem < runningPromoSnapAdapter.getItemCount() - 1) {
+        NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
+
+        if (firstVisibleItem < runningPromoSnapAdapter.getItemCount() - 1) {
                 Log.i(TAG, "onScrollStateChanged: item "+firstVisibleItem+"getitem Count"+runningPromoSnapAdapter.getItemCount());
                 //10<10 where footer is call then it goes else condition
-                promoval1.setText("\u20B9\t" + Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal()));
+                promoval1.setText("\u20B9\t" + format.format(Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal())));
                 promoval2.setText("" + promoList.get(firstVisibleItem).getDurSaleTotQty());
                 storecode.setText(promoList.get(firstVisibleItem).getStoreCode());
                 storedesc.setText(promoList.get(firstVisibleItem).getStoreDesc());
@@ -396,13 +383,11 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                 LinearLayoutManager llm = (LinearLayoutManager)PromoListView .getLayoutManager();
                 llm.scrollToPosition(firstVisibleItem);
 
-                promoval1.setText("\u20B9\t" + Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal()));
+                promoval1.setText("\u20B9\t" + format.format(Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal())));
                 promoval2.setText("" + promoList.get(firstVisibleItem).getDurSaleTotQty());
                 storecode.setText(promoList.get(firstVisibleItem).getStoreCode());
                 storedesc.setText(promoList.get(firstVisibleItem).getStoreDesc());
             }
-
-
     }
 
 
@@ -424,57 +409,6 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    public static void smoothScrollToPositionFromTop(final AbsListView view, final int position) {
-        View child = getChildAtPosition(view, position);
-        // There's no need to scroll if child is already at top or view is already scrolled to its end
-        if ((child != null) && ((child.getTop() == 0) || ((child.getTop() > 0) && !view.canScrollVertically(1)))) {
-            Log.e("if condition Scroll","-----");
-
-            return;
-        }
-
-        view.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(final AbsListView view, final int scrollState) {
-                if (scrollState == SCROLL_STATE_IDLE) {
-                    view.setOnScrollListener(null);
-
-                    // Fix for scrolling bug
-                    new Handler().post(new Runnable() {
-                        @Override
-                        public void run() {
-                            view.setSelection(position);
-                            Log.e("View Scroll","-----");
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount,
-                                 final int totalItemCount) { }
-        });
-
-        // Perform scrolling to position
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                view.smoothScrollToPositionFromTop(position, 0);
-                Log.e(" smoothScrollToPositionFromTop Scroll","-----");
-
-            }
-        });
-    }
-
-
-    public static View getChildAtPosition(final AdapterView view, final int position) {
-        final int index = position - view.getFirstVisiblePosition();
-        if ((index >= 0) && (index < view.getChildCount())) {
-            return view.getChildAt(index);
-        } else {
-            return null;
-        }
-    }
 
 
     @Override
