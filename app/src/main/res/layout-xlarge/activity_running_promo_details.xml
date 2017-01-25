@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Promotions"
+                android:text="Promo Details"
                 android:textSize="@dimen/smdm_header_title_large"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/rpd_ImageBtnBack"

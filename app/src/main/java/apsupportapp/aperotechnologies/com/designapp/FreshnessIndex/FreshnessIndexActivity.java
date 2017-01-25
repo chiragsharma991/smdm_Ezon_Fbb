@@ -495,8 +495,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 case "Category":
                                     if (flag == true) {
                                         txtFIndexClass.setText("Plan Class");
-                                        llfIndexhierarchy.setVisibility(View.GONE);
-                                        llfreshnessIndex.setVisibility(View.GONE);
+                                       // llfIndexhierarchy.setVisibility(View.GONE);
+                                       // llfreshnessIndex.setVisibility(View.GONE);
                                         freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanCategory();
                                         fromWhere = "Plan Class";
                                         level = 3;
@@ -526,8 +526,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 case "Plan Class":
                                     if (flag == true) {
                                         txtFIndexClass.setText("Brand");
-                                        llfIndexhierarchy.setVisibility(View.GONE);
-                                        llfreshnessIndex.setVisibility(View.GONE);
+                                      //  llfIndexhierarchy.setVisibility(View.GONE);
+                                      //  llfreshnessIndex.setVisibility(View.GONE);
                                         freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanClass();
                                         fromWhere = "Brand";
                                         level = 4;
@@ -558,8 +558,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     if (flag == true) {
                                         btnFIndexNext.setVisibility(View.INVISIBLE);
                                         txtFIndexClass.setText("Brand Plan Class");
-                                        llfIndexhierarchy.setVisibility(View.GONE);
-                                        llfreshnessIndex.setVisibility(View.GONE);
+                                    //    llfIndexhierarchy.setVisibility(View.GONE);
+                                    //    llfreshnessIndex.setVisibility(View.GONE);
                                         freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getBrandName();
                                         fromWhere = "Brand Plan Class";
                                         level = 5;
@@ -1443,8 +1443,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         Log.e(TAG, "requestFIndexPieChart selected item: "+fIndexFirstVisibleItem );
 
+        offsetvalue = 0;
+        limit = 100;
+        count = 0;
         String url = " ";
         txtNoChart.setVisibility(View.GONE);
+        fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
+
 
         if (fIndexFirstVisibleItem.equals("All")) {
             ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
@@ -1454,7 +1459,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             oldgroup = (float) freshnessIndexDetail.getOldGroupCount();
             previousgroup = (float) freshnessIndexDetail.getPreviousGroupCount();
             currentgroup = (float) freshnessIndexDetail.getSohCurrentGrpCount();
-            Log.e(TAG, "requestFIndexPieChart: "+current+" ,"+previous+" ,"+old+" ,"+upcome);
+            Log.e(TAG, "requestFIndexPieChart: "+upcoming+" ,"+oldgroup+" ,"+previousgroup+" ,"+currentgroup);
 
 
 
@@ -1572,6 +1577,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
 
                             } else if (response.length() == limit) {
+
                                 for (i = 0; i < response.length(); i++) {
 
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
@@ -1597,7 +1603,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                         oldgroup = (float) fresh.getOldGroupCount();
                                         previousgroup = (float) fresh.getPreviousGroupCount();
                                         currentgroup = (float) fresh.getCurrentGroupCount();
-                                        Log.e(TAG, "requestFIndexPieChart: "+current+" ,"+previous+" ,"+old+" ,"+upcome);
+                                        Log.e(TAG, "requestFIndexPieChart: "+upcoming+" ,"+oldgroup+" ,"+previousgroup+" ,"+currentgroup);
 
 
                                     } else if (fIndexFirstVisibleItem.equals(fresh.getPlanDept())) {
@@ -1605,14 +1611,14 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                         oldgroup = (float) fresh.getOldGroupCount();
                                         previousgroup = (float) fresh.getPreviousGroupCount();
                                         currentgroup = (float) fresh.getCurrentGroupCount();
-                                        Log.e(TAG, "requestFIndexPieChart: "+current+" ,"+previous+" ,"+old+" ,"+upcome);
+                                        Log.e(TAG, "requestFIndexPieChart: "+upcoming+" ,"+oldgroup+" ,"+previousgroup+" ,"+currentgroup);
 
                                     } else if (fIndexFirstVisibleItem.equals(fresh.getPlanCategory())) {
                                         upcoming = (float) fresh.getUpcomingGroupCount();
                                         oldgroup = (float) fresh.getOldGroupCount();
                                         previousgroup = (float) fresh.getPreviousGroupCount();
                                         currentgroup = (float) fresh.getCurrentGroupCount();
-                                        Log.e(TAG, "requestFIndexPieChart: "+current+" ,"+previous+" ,"+old+" ,"+upcome);
+                                        Log.e(TAG, "requestFIndexPieChart: "+upcoming+" ,"+oldgroup+" ,"+previousgroup+" ,"+currentgroup);
 
 
                                     } else if (fIndexFirstVisibleItem.equals(fresh.getPlanClass())) {
@@ -1620,7 +1626,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                         oldgroup = (float) fresh.getOldGroupCount();
                                         previousgroup = (float) fresh.getPreviousGroupCount();
                                         currentgroup = (float) fresh.getCurrentGroupCount();
-                                        Log.e(TAG, "requestFIndexPieChart: "+current+" ,"+previous+" ,"+old+" ,"+upcome);
+                                        Log.e(TAG, "requestFIndexPieChart: "+upcoming+" ,"+oldgroup+" ,"+previousgroup+" ,"+currentgroup);
 
 
                                     } else if (fIndexFirstVisibleItem.equals(fresh.getBrandName())) {
@@ -1628,7 +1634,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                         oldgroup = (float) fresh.getOldGroupCount();
                                         previousgroup = (float) fresh.getPreviousGroupCount();
                                         currentgroup = (float) fresh.getCurrentGroupCount();
-                                        Log.e(TAG, "requestFIndexPieChart: "+current+" ,"+previous+" ,"+old+" ,"+upcome);
+                                        Log.e(TAG, "requestFIndexPieChart: "+upcoming+" ,"+oldgroup+" ,"+previousgroup+" ,"+currentgroup);
 
 
                                     } else if (fIndexFirstVisibleItem.equals(fresh.getBrandplanClass())) {
@@ -1636,7 +1642,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                         oldgroup = (float) fresh.getOldGroupCount();
                                         previousgroup = (float) fresh.getPreviousGroupCount();
                                         currentgroup = (float) fresh.getCurrentGroupCount();
-                                        Log.e(TAG, "requestFIndexPieChart: "+current+" ,"+previous+" ,"+old+" ,"+upcome);
+                                        Log.e(TAG, "requestFIndexPieChart: "+upcoming+" ,"+oldgroup+" ,"+previousgroup+" ,"+currentgroup);
 
 
                                     }

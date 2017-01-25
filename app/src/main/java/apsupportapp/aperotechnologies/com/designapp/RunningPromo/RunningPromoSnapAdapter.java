@@ -87,16 +87,52 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
             // holder.snapTextView.setText(snap.getText());
 
             ((Holder)holder).PromotionName.setText(snap.getPromoDesc());
+                ((Holder) holder).PromotionName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(Context, RunningPromoDetails.class);
+                                i.putExtra("VM", promoList.get(position).getPromoDesc());
+                                Context.startActivity(i);
+                    }
+                });
             ((Holder)holder).StartDate.setText(snap.getPromoStartDate());
-            ((Holder)holder).EndDate.setText(snap.getPromoEndDate());
-            ((Holder)holder).Days.setText("" + snap.getPromoDays());
-            ((Holder)holder).Vm.setOnClickListener(new View.OnClickListener() {
+
+                ((Holder) holder).StartDate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(Context, RunningPromoDetails.class);
+                        i.putExtra("VM", promoList.get(position).getPromoDesc());
+                        Context.startActivity(i);
+                    }
+                });
+
+
+             ((Holder)holder).EndDate.setText(snap.getPromoEndDate());
+                ((Holder) holder).EndDate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(Context, RunningPromoDetails.class);
+                        i.putExtra("VM", promoList.get(position).getPromoDesc());
+                        Context.startActivity(i);
+                    }
+                });
+                ((Holder)holder).Days.setText("" + snap.getPromoDays());
+                ((Holder) holder).Days.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(Context, RunningPromoDetails.class);
+                        i.putExtra("VM", promoList.get(position).getPromoDesc());
+                        Context.startActivity(i);
+                    }
+                });
+                ((Holder)holder).Vm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent=new Intent(Context,VM.class);
                     intent.putExtra("VM",promoList.get(position).getPromoDesc());
                     intent.putExtra("FROM","RunningPromo");
                     Context.startActivity(intent);
+
                 }
             });
         }
