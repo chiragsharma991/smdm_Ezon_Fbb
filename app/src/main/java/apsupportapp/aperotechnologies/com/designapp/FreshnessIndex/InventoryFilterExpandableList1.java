@@ -41,7 +41,6 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-
 import apsupportapp.aperotechnologies.com.designapp.model.ListBrand;
 import apsupportapp.aperotechnologies.com.designapp.model.ListBrandClass;
 import apsupportapp.aperotechnologies.com.designapp.model.ListCategory;
@@ -49,7 +48,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.ListPlanClass;
 import apsupportapp.aperotechnologies.com.designapp.model.ListProdLevel6;
 
 
-public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
+public class InventoryFilterExpandableList1 extends BaseExpandableListAdapter {
 
     // Define activity context
     private Context mContext;
@@ -72,10 +71,10 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
     private String groupText;
     private String childText;
     static String planDepartmentName,planCategoryName,planClassName,brand_Name;
-    InventoryFilterExpandableList listAdapter;
+    InventoryFilterExpandableList1 listAdapter;
     Boolean flag = false;
 
-    public InventoryFilterExpandableList(Context context, ArrayList<String> listDataGroup, HashMap<String, List<String>> listDataChild, ExpandableListView expandableListView, InventoryFilterExpandableList listAdapter) {
+    public InventoryFilterExpandableList1(Context context, ArrayList<String> listDataGroup, HashMap<String, List<String>> listDataChild, ExpandableListView expandableListView, InventoryFilterExpandableList1 listAdapter) {
 
         mContext = context;
         mListDataGroup = listDataGroup;
@@ -209,260 +208,260 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
                 CheckBox cb = (CheckBox) rel.getChildAt(1);
                 TextView txtView = (TextView) rel.getChildAt(0);
                 String txtClickedVal = txtView.getText().toString();
+//
+                if(groupPosition == 5)
+                {
+                    cb.setChecked(true);
+                    return;
+                }
 
-//                if(groupPosition == 5)
-//                {
-//                    cb.setChecked(true);
-//                    return;
-//                }
-//
-//                if (cb.isChecked() == false) {
-//                    ////Log.e("checkbox is not selected", "");
-//                    if (Reusable_Functions.chkStatus(mContext)) {
-//
-//                        Reusable_Functions.sDialog(mContext, "Loading  data...");
-//                        offsetvalue = 0;
-//                        count = 0;
-//                        limit = 100;
-//
-//                        if (groupPosition == 0) {
-//                            level = 2;
-//                            tempcategorylist = new ArrayList();
-//                            InventoryFilterActivity.pfilter_list.collapseGroup(1);
-//                            planDepartmentName = txtClickedVal;
-//                            Log.i("click dept value",""+planDepartmentName);
-//                            String groupname = mListDataGroup.get(0);
-//                            requestInventoryCategoryAPI(offsetvalue, limit, planDepartmentName, groupname, cb);
-//
-//                        }
-//                        else if (groupPosition == 1)
-//                        {
-//                            level = 3;
-//                            tempplanclass = new ArrayList();
-//                            InventoryFilterActivity.pfilter_list.collapseGroup(2);
-//                            planCategoryName = txtClickedVal;
-//                            Log.i("click category value---",""+planCategoryName);
-//                            String groupname = mListDataGroup.get(1);
-//
-//                            requestInventoryPlanClassAPI(offsetvalue, limit, planDepartmentName, txtClickedVal, groupname, cb);
-//
-//
-//                        }
-//                        else if (groupPosition == 2)
-//                        {
-//                            level = 4;
-//                            tempbrandname = new ArrayList();
-//                            InventoryFilterActivity.pfilter_list.collapseGroup(3);
-//                            planClassName = txtClickedVal;
-//                            Log.i("click brand name value --- ",""+planClassName);
-//                            String groupname = mListDataGroup.get(2);
-//                            requestInventoryBrandNameAPI(offsetvalue, limit,planDepartmentName, planCategoryName, txtClickedVal, groupname, cb);
-//
-//                        }
-//                        else if(groupPosition == 3)
-//                        {
-//                            level = 5;
-//                            tempbrandplanclass = new ArrayList();
-//                            brand_Name = txtClickedVal;
-//                            Log.i("click brand name value --- ",""+brand_Name);
-//                            InventoryFilterActivity.pfilter_list.collapseGroup(4);
-//                            String groupname = mListDataGroup.get(3);
-//                            requestInventoryBrandClassAPI(offsetvalue, limit,planDepartmentName,planCategoryName,planClassName, txtClickedVal, groupname, cb);
-//
-//                        }
-//
-//                        else if(groupPosition == 4)
-//                        {
-//                            level = 6;
-//                            tempprodlevel6 = new ArrayList();
-//                            InventoryFilterActivity.pfilter_list.collapseGroup(5);
-//                            Log.i("click brand name value --- ",""+txtClickedVal);
-//                            String groupname = mListDataGroup.get(4);
-//                            requestInventoryProdLevel6API(offsetvalue, limit,planDepartmentName,planCategoryName,planClassName,brand_Name, txtClickedVal, groupname, cb);
-//                        }
-//                        } else
-//                        {
-//                            Toast.makeText(mContext, "Check your network connectivity", Toast.LENGTH_LONG).show();
-//                        }
-//                    } else {
-//                        Log.e("groupPosition ", " " + groupPosition);
-//
-//                        if (groupPosition == 0)  //Department Group
-//                        {
-//                            //Log.e("here ", " " + planclassArray.size());
-//                            // category array
-//                            for (int i = 0; i < categoryArray.size(); i++) {
-//                                if (categoryArray.get(i).getSubdept().equals(txtClickedVal)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(1);
-//                                    categorylist.removeAll(categoryArray.get(i).getCategory());
-//                                    Log.e("salesList"," ---111--- "+salesList);
-//                                    salesList.remove(mListDataGroup.get(0)+"."+categoryArray.get(i).getSubdept());
-//                                    categoryArray.remove(i);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
-//
-//                                }
-//                            }
-//
-//                            for (int k = 0; k < planclassArray.size(); k++) {
-//                                Log.e("sub ", " " + planclassArray.get(k).getSubdept() + " " + planclassArray.get(k).getSubdept().equals(txtClickedVal));
-//                                if (planclassArray.get(k).getSubdept().equals(txtClickedVal)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(2);
-//                                    Log.e("plan list", " === " + planclassArray.get(k).getPlanclass() + " " + planclassArray.get(k).getCategory());
-//                                    planClassList.removeAll(planclassArray.get(k).getPlanclass());
-//                                    salesList.remove(mListDataGroup.get(1)+"."+planclassArray.get(k).getCategory());
-//                                    planclassArray.remove(k);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
-//                                }
-//                            }
-//                            for (int j = 0; j < brandArray.size(); j++) {
-//                                   if (brandArray.get(j).getSubdept().equals(txtClickedVal)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(3);
-//                                    brandNameList.removeAll(brandArray.get(j).getBrand());
-//                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(j).getPlanclass());
-//                                    brandArray.remove(j);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
-//                                }
-//                            }
-//                            for (int m = 0;  m < brandclassArray.size(); m++) {
-//
-//                                if (brandclassArray.get(m).getSubdept().equals(txtClickedVal)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(4);
-//                                    brandplanclassList.removeAll(brandclassArray.get(m).getBrandClass());
-//                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(m).getBrand());
-//                                    brandclassArray.remove(m);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
-//                                }
-//                            }
-//                            Log.e("salesList"," ---222--- "+salesList);
-//
-//                        } else if (groupPosition == 1) //Category Group
-//                        {
-//                            for (int j = 0; j < planclassArray.size(); j++)
-//                            {
-//                                if (planclassArray.get(j).getCategory().equals(txtClickedVal)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(2);
-//                                    planClassList.removeAll(planclassArray.get(j).getPlanclass());
-//                                    salesList.remove(mListDataGroup.get(1)+"."+planclassArray.get(j).getCategory());
-//                                    planclassArray.remove(j);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
-//                                }
-//                            }
-//                            for (int k = 0; k < brandArray.size(); k++)
-//                            {
-//                                if (brandArray.get(k).getCategory().equals(txtClickedVal)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(3);
-//                                    brandNameList.removeAll(brandArray.get(k).getBrand());
-//                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(k).getPlanclass());
-//                                    brandArray.remove(k);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
-//                                }
-//                            }
-//                            for (int l = 0; l < brandclassArray.size(); l++)
-//                            {
-//                                if (brandclassArray.get(l).getCategory().equals(planCategoryName)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(4);
-//                                    brandplanclassList.removeAll(brandclassArray.get(l).getBrandClass());
-//                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(l).getBrand());
-//                                    brandclassArray.remove(l);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
-//                                }
-//                            }
-//                            for (int m = 0; m < mcArray.size(); m++)
-//                            {
-//                                if (mcArray.get(m).getCategory().equals(planCategoryName)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(5);
-//                                    prodlevel6list.removeAll(mcArray.get(m).getPrdlevel6());
-//                                    salesList.remove(mListDataGroup.get(4)+"."+mcArray.get(m).getBrandClass());
-//                                    mcArray.remove(m);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
-//                                }
-//                            }
-//                        }else if(groupPosition == 2)  // Plan Class Group
-//                        {
-//                            for (int i = 0; i < brandArray.size(); i++)
-//                            {
-//                                if (brandArray.get(i).getPlanclass().equals(txtClickedVal)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(3);
-//                                    brandNameList.removeAll(brandArray.get(i).getBrand());
-//                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(i).getPlanclass());
-//                                    brandArray.remove(i);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
-//                                }
-//                            }
-//                            for (int j = 0; j < brandclassArray.size(); j++)
-//                            {
-//                                if (brandclassArray.get(j).getPlanclass().equals(txtClickedVal)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(4);
-//                                    brandplanclassList.removeAll(brandclassArray.get(j).getBrandClass());
-//                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(j).getBrand());
-//                                    brandclassArray.remove(j);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
-//                                }
-//                            }
-//                            for (int k = 0; k < mcArray.size(); k++)
-//                            {
-//                                if (mcArray.get(k).getPlanclass().equals(txtClickedVal)) {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(5);
-//                                    prodlevel6list.removeAll(mcArray.get(k).getPrdlevel6());
-//                                    salesList.remove(mListDataGroup.get(4)+"."+mcArray.get(k).getBrandClass());
-//                                    mcArray.remove(k);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
-//                                }
-//                            }
-//
-//                        } else if(groupPosition == 3) //Brand
-//                        {
-//                            for(int i = 0;i < brandclassArray.size(); i++)
-//                            {
-//                                if(brandclassArray.get(i).getBrand().equals(txtClickedVal))
-//                                {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(4);
-//                                    brandplanclassList.removeAll(brandclassArray.get(i).getBrandClass());
-//                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(i).getBrand());
-//                                    brandclassArray.remove(i);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
-//                                }
-//                            }
-//                            for(int j = 0;j < mcArray.size(); j++)
-//                            {
-//                                if(mcArray.get(j).getBrand().equals(txtClickedVal))
-//                                {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(5);
-//                                    prodlevel6list.removeAll(mcArray.get(j).getPrdlevel6());
-//                                    salesList.remove(mListDataGroup.get(4)+"."+mcArray.get(j).getBrandClass());
-//                                    mcArray.remove(j);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
-//                                }
-//                            }
-//                        } else if(groupPosition == 4) //Brand Plan Class
-//                        {
-//                            for(int i = 0;i < mcArray.size(); i++)
-//                            {
-//                                if(mcArray.get(i).getBrandClass().equals(txtClickedVal))
-//                                {
-//                                    InventoryFilterActivity.pfilter_list.collapseGroup(5);
-//                                    prodlevel6list.removeAll(mcArray.get(i).getPrdlevel6());
-//                                    salesList.remove(mListDataGroup.get(4)+"."+mcArray.get(i).getBrandClass());
-//                                    mcArray.remove(i);
-//                                    cb.setChecked(false);
-//                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
-//                                }
-//                            }
-//                        }
-//                     }
+                if (cb.isChecked() == false) {
+                    ////Log.e("checkbox is not selected", "");
+                    if (Reusable_Functions.chkStatus(mContext)) {
+
+                        Reusable_Functions.sDialog(mContext, "Loading  data...");
+                        offsetvalue = 0;
+                        count = 0;
+                        limit = 100;
+                        
+                        if (groupPosition == 0) {
+                            level = 2;
+                            tempcategorylist = new ArrayList();
+                            InventoryFilterActivity.pfilter_list.collapseGroup(1);
+                            planDepartmentName = txtClickedVal;
+                            Log.i("click dept value",""+planDepartmentName);
+                            String groupname = mListDataGroup.get(0);
+                            requestInventoryCategoryAPI(offsetvalue, limit, planDepartmentName, groupname, cb);
+
+                        }
+                        else if (groupPosition == 1)
+                        {
+                            level = 3;
+                            tempplanclass = new ArrayList();
+                            InventoryFilterActivity.pfilter_list.collapseGroup(2);
+                            planCategoryName = txtClickedVal;
+                            Log.i("click category value---",""+planCategoryName);
+                            String groupname = mListDataGroup.get(1);
+
+                            requestInventoryPlanClassAPI(offsetvalue, limit, planDepartmentName, txtClickedVal, groupname, cb);
+
+
+                        }
+                        else if (groupPosition == 2)
+                        {
+                            level = 4;
+                            tempbrandname = new ArrayList();
+                            InventoryFilterActivity.pfilter_list.collapseGroup(3);
+                            planClassName = txtClickedVal;
+                            Log.i("click brand name value --- ",""+planClassName);
+                            String groupname = mListDataGroup.get(2);
+                            requestInventoryBrandNameAPI(offsetvalue, limit,planDepartmentName, planCategoryName, txtClickedVal, groupname, cb);
+
+                        }
+                        else if(groupPosition == 3)
+                        {
+                            level = 5;
+                            tempbrandplanclass = new ArrayList();
+                            brand_Name = txtClickedVal;
+                            Log.i("click brand name value --- ",""+brand_Name);
+                            InventoryFilterActivity.pfilter_list.collapseGroup(4);
+                            String groupname = mListDataGroup.get(3);
+                            requestInventoryBrandClassAPI(offsetvalue, limit,planDepartmentName,planCategoryName,planClassName, txtClickedVal, groupname, cb);
+
+                        }
+
+                        else if(groupPosition == 4)
+                        {
+                            level = 6;
+                            tempprodlevel6 = new ArrayList();
+                            InventoryFilterActivity.pfilter_list.collapseGroup(5);
+                            Log.i("click brand name value --- ",""+txtClickedVal);
+                            String groupname = mListDataGroup.get(4);
+                            requestInventoryProdLevel6API(offsetvalue, limit,planDepartmentName,planCategoryName,planClassName,brand_Name, txtClickedVal, groupname, cb);
+                        }
+                        } else
+                        {
+                            Toast.makeText(mContext, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Log.e("groupPosition ", " " + groupPosition);
+
+                        if (groupPosition == 0)  //Department Group
+                        {
+                            //Log.e("here ", " " + planclassArray.size());
+                            // category array
+                            for (int i = 0; i < categoryArray.size(); i++) {
+                                if (categoryArray.get(i).getSubdept().equals(txtClickedVal)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(1);
+                                    categorylist.removeAll(categoryArray.get(i).getCategory());
+                                    Log.e("salesList"," ---111--- "+salesList);
+                                    salesList.remove(mListDataGroup.get(0)+"."+categoryArray.get(i).getSubdept());
+                                    categoryArray.remove(i);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
+
+                                }
+                            }
+
+                            for (int k = 0; k < planclassArray.size(); k++) {
+                                Log.e("sub ", " " + planclassArray.get(k).getSubdept() + " " + planclassArray.get(k).getSubdept().equals(txtClickedVal));
+                                if (planclassArray.get(k).getSubdept().equals(txtClickedVal)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(2);
+                                    Log.e("plan list", " === " + planclassArray.get(k).getPlanclass() + " " + planclassArray.get(k).getCategory());
+                                    planClassList.removeAll(planclassArray.get(k).getPlanclass());
+                                    salesList.remove(mListDataGroup.get(1)+"."+planclassArray.get(k).getCategory());
+                                    planclassArray.remove(k);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
+                                }
+                            }
+                            for (int j = 0; j < brandArray.size(); j++) {
+                                   if (brandArray.get(j).getSubdept().equals(txtClickedVal)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(3);
+                                    brandNameList.removeAll(brandArray.get(j).getBrand());
+                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(j).getPlanclass());
+                                    brandArray.remove(j);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
+                                }
+                            }
+                            for (int m = 0;  m < brandclassArray.size(); m++) {
+
+                                if (brandclassArray.get(m).getSubdept().equals(txtClickedVal)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(4);
+                                    brandplanclassList.removeAll(brandclassArray.get(m).getBrandClass());
+                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(m).getBrand());
+                                    brandclassArray.remove(m);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
+                                }
+                            }
+                            Log.e("salesList"," ---222--- "+salesList);
+
+                        } else if (groupPosition == 1) //Category Group
+                        {
+                            for (int j = 0; j < planclassArray.size(); j++)
+                            {
+                                if (planclassArray.get(j).getCategory().equals(txtClickedVal)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(2);
+                                    planClassList.removeAll(planclassArray.get(j).getPlanclass());
+                                    salesList.remove(mListDataGroup.get(1)+"."+planclassArray.get(j).getCategory());
+                                    planclassArray.remove(j);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
+                                }
+                            }
+                            for (int k = 0; k < brandArray.size(); k++)
+                            {
+                                if (brandArray.get(k).getCategory().equals(txtClickedVal)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(3);
+                                    brandNameList.removeAll(brandArray.get(k).getBrand());
+                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(k).getPlanclass());
+                                    brandArray.remove(k);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
+                                }
+                            }
+                            for (int l = 0; l < brandclassArray.size(); l++)
+                            {
+                                if (brandclassArray.get(l).getCategory().equals(planCategoryName)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(4);
+                                    brandplanclassList.removeAll(brandclassArray.get(l).getBrandClass());
+                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(l).getBrand());
+                                    brandclassArray.remove(l);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
+                                }
+                            }
+                            for (int m = 0; m < mcArray.size(); m++)
+                            {
+                                if (mcArray.get(m).getCategory().equals(planCategoryName)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(5);
+                                    prodlevel6list.removeAll(mcArray.get(m).getPrdlevel6());
+                                    salesList.remove(mListDataGroup.get(4)+"."+mcArray.get(m).getBrandClass());
+                                    mcArray.remove(m);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
+                                }
+                            }
+                        }else if(groupPosition == 2)  // Plan Class Group
+                        {
+                            for (int i = 0; i < brandArray.size(); i++)
+                            {
+                                if (brandArray.get(i).getPlanclass().equals(txtClickedVal)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(3);
+                                    brandNameList.removeAll(brandArray.get(i).getBrand());
+                                    salesList.remove(mListDataGroup.get(2)+"."+brandArray.get(i).getPlanclass());
+                                    brandArray.remove(i);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
+                                }
+                            }
+                            for (int j = 0; j < brandclassArray.size(); j++)
+                            {
+                                if (brandclassArray.get(j).getPlanclass().equals(txtClickedVal)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(4);
+                                    brandplanclassList.removeAll(brandclassArray.get(j).getBrandClass());
+                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(j).getBrand());
+                                    brandclassArray.remove(j);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
+                                }
+                            }
+                            for (int k = 0; k < mcArray.size(); k++)
+                            {
+                                if (mcArray.get(k).getPlanclass().equals(txtClickedVal)) {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(5);
+                                    prodlevel6list.removeAll(mcArray.get(k).getPrdlevel6());
+                                    salesList.remove(mListDataGroup.get(4)+"."+mcArray.get(k).getBrandClass());
+                                    mcArray.remove(k);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
+                                }
+                            }
+
+                        } else if(groupPosition == 3) //Brand
+                        {
+                            for(int i = 0;i < brandclassArray.size(); i++)
+                            {
+                                if(brandclassArray.get(i).getBrand().equals(txtClickedVal))
+                                {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(4);
+                                    brandplanclassList.removeAll(brandclassArray.get(i).getBrandClass());
+                                    salesList.remove(mListDataGroup.get(3)+"."+brandclassArray.get(i).getBrand());
+                                    brandclassArray.remove(i);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
+                                }
+                            }
+                            for(int j = 0;j < mcArray.size(); j++)
+                            {
+                                if(mcArray.get(j).getBrand().equals(txtClickedVal))
+                                {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(5);
+                                    prodlevel6list.removeAll(mcArray.get(j).getPrdlevel6());
+                                    salesList.remove(mListDataGroup.get(4)+"."+mcArray.get(j).getBrandClass());
+                                    mcArray.remove(j);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
+                                }
+                            }
+                        } else if(groupPosition == 4) //Brand Plan Class
+                        {
+                            for(int i = 0;i < mcArray.size(); i++)
+                            {
+                                if(mcArray.get(i).getBrandClass().equals(txtClickedVal))
+                                {
+                                    InventoryFilterActivity.pfilter_list.collapseGroup(5);
+                                    prodlevel6list.removeAll(mcArray.get(i).getPrdlevel6());
+                                    salesList.remove(mListDataGroup.get(4)+"."+mcArray.get(i).getBrandClass());
+                                    mcArray.remove(i);
+                                    cb.setChecked(false);
+                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
+                                }
+                            }
+                        }
+                     }
                 }
             }
 

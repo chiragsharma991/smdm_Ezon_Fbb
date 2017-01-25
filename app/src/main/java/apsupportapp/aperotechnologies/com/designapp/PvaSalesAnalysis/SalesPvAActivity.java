@@ -237,7 +237,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                             Reusable_Functions.hDialog();
                             pva_progressBar.setVisibility(View.VISIBLE);
-                            //Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -269,7 +269,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             pva_progressBar.setVisibility(View.VISIBLE);
-                            //  Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -303,7 +303,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         if (Reusable_Functions.chkStatus(context)) {
 
                             Reusable_Functions.hDialog();
-                            //   Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.VISIBLE);
                             offsetvalue = 0;
                             limit = 100;
@@ -337,7 +337,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         if (Reusable_Functions.chkStatus(context)) {
 
                             Reusable_Functions.hDialog();
-                            //   Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.VISIBLE);
                             offsetvalue = 0;
                             limit = 100;
@@ -385,7 +385,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         if (Reusable_Functions.chkStatus(context)) {
 
                             Reusable_Functions.hDialog();
-                            //    Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.VISIBLE);
                             offsetvalue = 0;
                             limit = 100;
@@ -415,7 +415,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                      //   llayoutSalesPvA.setVisibility(View.GONE);
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
-                            //  Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.VISIBLE);
                             offsetvalue = 0;
                             limit = 100;
@@ -448,7 +448,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                       //  llayoutSalesPvA.setVisibility(View.GONE);
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
-                            //  Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.VISIBLE);
                             offsetvalue = 0;
                             limit = 100;
@@ -482,7 +482,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                        // llayoutSalesPvA.setVisibility(View.GONE);
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
-                            //   Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.VISIBLE);
                             offsetvalue = 0;
                             limit = 100;
@@ -556,7 +556,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     level = 2;
                                     if (Reusable_Functions.chkStatus(context)) {
                                         Reusable_Functions.hDialog();
-                                        //  Reusable_Functions.sDialog(context, "Loading data...");
+                                        Reusable_Functions.sDialog(context, "Loading data...");
                                         pva_progressBar.setVisibility(View.VISIBLE);
                                         offsetvalue = 0;
                                         limit = 100;
@@ -584,7 +584,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                         level = 3;
                                         if (Reusable_Functions.chkStatus(context)) {
                                             Reusable_Functions.hDialog();
-                                            //     Reusable_Functions.sDialog(context, "Loading data...");
+                                            Reusable_Functions.sDialog(context, "Loading data...");
                                             pva_progressBar.setVisibility(View.VISIBLE);
                                             offsetvalue = 0;
                                             limit = 100;
@@ -617,7 +617,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                         if (Reusable_Functions.chkStatus(context)) {
                                             Reusable_Functions.hDialog();
                                             pva_progressBar.setVisibility(View.VISIBLE);
-                                            //  Reusable_Functions.sDialog(context, "Loading data...");
+                                            Reusable_Functions.sDialog(context, "Loading data...");
                                             offsetvalue = 0;
                                             limit = 100;
                                             count = 0;
@@ -649,7 +649,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                         if (Reusable_Functions.chkStatus(context)) {
                                             Reusable_Functions.hDialog();
                                             pva_progressBar.setVisibility(View.VISIBLE);
-                                            //  Reusable_Functions.sDialog(context, "Loading data...");
+                                            Reusable_Functions.sDialog(context, "Loading data...");
                                             offsetvalue = 0;
                                             limit = 100;
                                             count = 0;
@@ -1316,7 +1316,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 //                                lineChart.setScaleXEnabled(true);
                                 //  llayoutSalesPvA.setVisibility(View.VISIBLE);
                                 pva_progressBar.setVisibility(View.GONE);
-
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
@@ -1497,7 +1496,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         pva_progressBar.setVisibility(View.GONE);
-
                         Toast.makeText(context, "no  plan class data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }

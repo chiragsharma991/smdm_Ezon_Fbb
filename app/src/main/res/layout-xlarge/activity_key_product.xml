@@ -102,24 +102,20 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/bg_screen_color"
-        android:layout_marginLeft="10dp"
-
-
-        >
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Refresh Time :"
             android:textColor="@color/bg_store_code_text"
-            android:textSize="@dimen/smdm_inflator_title_large"
-
-
-            />
+            android:textSize="@dimen/largelayout_storesize" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,10 +123,7 @@
             android:id="@+id/refreshTime"
             android:layout_marginLeft="5dp"
             android:textColor="@color/bg_store_code_text"
-            android:textSize="@dimen/smdm_inflator_title_large"
-
-
-            />
+            android:textSize="@dimen/largelayout_storesize"/>
 
     </LinearLayout>
 

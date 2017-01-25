@@ -32,19 +32,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
-import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
-import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
-import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
-import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.TargetStockExceptionActivity;
-import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
 import apsupportapp.aperotechnologies.com.designapp.WorstPerformersInventory.WorstPerformerInventory;
-import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 
 
 public class InventoryFilterActivity extends Activity {
@@ -132,8 +123,8 @@ public class InventoryFilterActivity extends Activity {
                     finish();
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("worstPerformers")) {
-                    Intent intent = new Intent(InventoryFilterActivity.this, WorstPerformerInventory.class);
-                    startActivity(intent);
+                  //  Intent intent = new Intent(InventoryFilterActivity.this, WorstPerformerInventory.class);
+                  //  startActivity(intent);
                     finish();
                 }
                 else if (getIntent().getStringExtra("checkfrom").equals("targetStockException")) {
@@ -293,8 +284,8 @@ public class InventoryFilterActivity extends Activity {
             finish();
         }
         else if (getIntent().getStringExtra("checkfrom").equals("worstPerformers")) {
-            Intent intent = new Intent(InventoryFilterActivity.this, WorstPerformerInventory.class);
-            startActivity(intent);
+           // Intent intent = new Intent(InventoryFilterActivity.this, WorstPerformerInventory.class);
+          //  startActivity(intent);
             finish();
         }
         else if (getIntent().getStringExtra("checkfrom").equals("targetStockException")) {

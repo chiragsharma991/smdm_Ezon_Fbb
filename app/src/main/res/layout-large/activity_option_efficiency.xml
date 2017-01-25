@@ -8,9 +8,7 @@
     tools:context=".OptionEfficiency.OptionEfficiencyActivity">
 
 
-    <include layout="@layout/oe_quick_filter_menu">
 
-    </include>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -504,6 +502,8 @@
             </RelativeLayout>
        </LinearLayout>
     </LinearLayout>
+    <include layout="@layout/oe_quick_filter_menu">
 
+    </include>
 
 </RelativeLayout>

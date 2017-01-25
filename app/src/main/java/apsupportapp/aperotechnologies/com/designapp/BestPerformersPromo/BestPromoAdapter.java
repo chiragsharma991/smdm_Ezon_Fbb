@@ -16,7 +16,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
@@ -97,12 +99,12 @@ public class BestPromoAdapter extends BaseAdapter {
         }
         holder.PromotionName.setText(arrayList.get(position).getPromoDesc());
 
-
+        NumberFormat format  = NumberFormat.getNumberInstance(new Locale("", "in"));
 
         //holder.Bst_txtStoreCode.setText(arrayList.get(0).getStoreCode().toString());
         //holder.Bst_txtStoreName.setText(arrayList.get(0).getStoreDesc().toString());
-        holder.Bst_PromoValues_child.setText("₹\t"+Math.round(arrayList.get(position).getDurSaleNetVal()));
-        holder.Bst_PromoValuesU_child.setText(""+(int)arrayList.get(position).getDurSaleTotQty());
+        holder.Bst_PromoValues_child.setText("₹\t"+format.format(Math.round(arrayList.get(position).getDurSaleNetVal())));
+        holder.Bst_PromoValuesU_child.setText(""+arrayList.get(position).getDurSaleTotQty());
 
 
 

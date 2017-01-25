@@ -1072,7 +1072,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 FreshnessIndexValue = deptName;
                                 txtfIndexDeptName.setText(FreshnessIndexValue);
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
+                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanCategory().toString();
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
@@ -1085,7 +1085,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1094,7 +1094,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "server not found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1168,7 +1168,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 FreshnessIndexValue += " > " + category;
                                 txtfIndexDeptName.setText(FreshnessIndexValue);
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
+                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanClass().toString();
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
@@ -1265,7 +1265,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 FreshnessIndexValue += " > " + planclass;
                                 txtfIndexDeptName.setText(FreshnessIndexValue);
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
+                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getBrandName().toString();
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
@@ -1364,7 +1364,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 txtfIndexDeptName.setText(FreshnessIndexValue);
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
 
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
+                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getBrandplanClass().toString();
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;

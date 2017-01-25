@@ -70,16 +70,13 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 //    List<ListPlanClass> planclassArray;
 //    List<ListBrand> brandArray;
 //    List<ListBrandClass> brandclassArray;
-    List tempcategorylist, tempplanclass, tempbrandname, tempbrandplanclass;
-    List<String> subCategory;
+
     private HashMap<String, List<String>> mListDataChild, dublicate_listDataChild;
-    private List<String> mListDataGroup, mFilterList, arrayList;
+    private List<String> mListDataGroup;
     private ChildViewHolder childViewHolder;
     private GroupViewHolder groupViewHolder;
     private String groupText;
     private String childText;
-    //git testing 05/01/2017
-
     static String planDepartmentName, planCategoryName, planClassName;
     SalesFilterExpandableList listAdapter;
     Boolean flag = false;
@@ -98,7 +95,6 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         this.listAdapter = listAdapter;
         articleOptionList = new ArrayList();
         salesList = new ArrayList<>();
-        this.mFilterList = new ArrayList<String>();
         this.dublicate_listDataChild = new HashMap<String, List<String>>();
         this.dublicate_listDataChild.putAll(mListDataChild);
 //        categoryArray = new ArrayList();
@@ -135,15 +131,12 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.sfilter_list_group, null);
-
             groupViewHolder = new GroupViewHolder();
-
             groupViewHolder.mGroupText = (TextView) convertView.findViewById(R.id.lblListHeader);
-//            groupViewHolder.mImage = (ImageView) convertView.findViewById(R.id.groupImage);
-//            int imageId = SalesFilterActivity.groupImages.get(groupPosition);
-//            groupViewHolder.mImage.setImageResource(imageId);
+
             convertView.setTag(groupViewHolder);
             planDepartmentName = " ";
+
         } else {
             groupViewHolder = (GroupViewHolder) convertView.getTag();
         }
@@ -220,7 +213,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 
 
                                                RelativeLayout rel = (RelativeLayout) v;
-                                               //                      CheckBox cb = (CheckBox) rel.getChildAt(1);
+                                               //CheckBox cb = (CheckBox) rel.getChildAt(1);
                                                TextView txtView = (TextView) rel.getChildAt(0);
                                                txtClickedVal= txtView.getText().toString();
                                                v.setBackgroundColor(R.color.bel_lightgrey_text);

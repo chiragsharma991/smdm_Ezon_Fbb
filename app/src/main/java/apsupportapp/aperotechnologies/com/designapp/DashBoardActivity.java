@@ -38,8 +38,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.crashlytics.android.answers.LoginEvent;
 import com.google.gson.Gson;
 
 
@@ -62,9 +60,7 @@ import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualReportActivity;
 import apsupportapp.aperotechnologies.com.designapp.WorstPerformersInventory.WorstPerformerInventory;
-import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
-import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
