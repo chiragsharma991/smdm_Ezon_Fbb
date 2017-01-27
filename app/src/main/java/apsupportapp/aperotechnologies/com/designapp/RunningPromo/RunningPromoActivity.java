@@ -42,10 +42,8 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterActivity;
@@ -152,8 +150,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
 
                                     Log.e(TAG, "promolistSize" + promoList.size());
-                                    NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
-                                    promoval1.setText("\u20B9\t" +  format.format(Math.round(promoList.get(0).getDurSaleNetVal())));
+                                    promoval1.setText("\u20B9\t" + (int) promoList.get(0).getDurSaleNetVal());
                                     promoval2.setText("" + promoList.get(0).getDurSaleTotQty());
                                     storecode.setText(promoList.get(0).getStoreCode());
                                     storedesc.setText(promoList.get(0).getStoreDesc());
@@ -414,12 +411,10 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
     private void TimeUP() {
         // if (promoList.size() != 0 && newState== RecyclerView.SCROLL_STATE_IDLE) {
         //check ideal condition then call .....
-        NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
-
         if (firstVisibleItem < runningPromoSnapAdapter.getItemCount() - 1) {
             Log.i(TAG, "onScrollStateChanged: item " + firstVisibleItem + "getitem Count" + runningPromoSnapAdapter.getItemCount());
             //10<10 where footer is call then it goes else condition
-            promoval1.setText("\u20B9\t" + format.format(Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal())));
+            promoval1.setText("\u20B9\t" + Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal()));
             promoval2.setText("" + promoList.get(firstVisibleItem).getDurSaleTotQty());
             storecode.setText(promoList.get(firstVisibleItem).getStoreCode());
             storedesc.setText(promoList.get(firstVisibleItem).getStoreDesc());
@@ -429,7 +424,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
             LinearLayoutManager llm = (LinearLayoutManager) PromoListView.getLayoutManager();
             llm.scrollToPosition(firstVisibleItem);
 
-            promoval1.setText("\u20B9\t" + format.format(Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal())));
+            promoval1.setText("\u20B9\t" + Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal()));
             promoval2.setText("" + promoList.get(firstVisibleItem).getDurSaleTotQty());
             storecode.setText(promoList.get(firstVisibleItem).getStoreCode());
             storedesc.setText(promoList.get(firstVisibleItem).getStoreDesc());

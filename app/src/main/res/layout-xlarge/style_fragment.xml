@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
     <TextView
         android:id="@+id/txtarticleOption"
         android:text="@string/article_option"
@@ -127,7 +128,7 @@
 
 
                     <TextView
-                        android:layout_weight="0.99"
+                        android:layout_weight="1.0"
                         android:id="@+id/txtSalesUnit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -406,7 +407,5 @@
 
 
     </RelativeLayout>
-
-
 
 </RelativeLayout>

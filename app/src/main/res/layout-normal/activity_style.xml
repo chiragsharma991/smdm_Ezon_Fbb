@@ -86,7 +86,9 @@
                     android:background="@android:color/white"
                     android:drawableRight="@mipmap/search_option_dropdown_arrow"
                     android:padding="10dp"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:singleLine="true"
+                    />
 
                 <View
                     android:layout_width="match_parent"
@@ -99,6 +101,7 @@
                     android:id="@+id/searchablespinnerlibrary1"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:singleLine="true"
                     android:background="@android:color/white"
                     android:drawableBottom="@color/darker_grey"
                     android:drawableRight="@mipmap/search_option_dropdown_arrow"
