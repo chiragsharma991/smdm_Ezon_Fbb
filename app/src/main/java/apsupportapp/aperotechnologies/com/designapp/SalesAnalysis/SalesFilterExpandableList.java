@@ -77,7 +77,6 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     private GroupViewHolder groupViewHolder;
     private String groupText;
     private String childText;
-    static String planDepartmentName, planCategoryName, planClassName;
     SalesFilterExpandableList listAdapter;
     Boolean flag = false;
     //  SFilter sFilter;
@@ -135,7 +134,6 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             groupViewHolder.mGroupText = (TextView) convertView.findViewById(R.id.lblListHeader);
 
             convertView.setTag(groupViewHolder);
-            planDepartmentName = " ";
 
         } else {
             groupViewHolder = (GroupViewHolder) convertView.getTag();

@@ -221,13 +221,6 @@ public class SalesFilterActivity extends Activity {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-//        groupImages = new ArrayList<Integer>();
-//        groupImages.add(R.mipmap.filter_department_icon);
-//        groupImages.add(R.mipmap.filter_category_icon);
-//        groupImages.add(R.mipmap.filter_planclass_icon);
-//        groupImages.add(R.mipmap.filter_brand_icon);
-//        groupImages.add(R.mipmap.filter_brandplanclass_icon);
-
         // Adding group name data
         listDataHeader.add("Department");
         listDataHeader.add("Category");
@@ -238,35 +231,40 @@ public class SalesFilterActivity extends Activity {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(SalesFilterActivity.this, "Loading data...");
 
-            if (listDataHeader.get(0).equals("Department")) {
+            if (listDataHeader.get(0).equals("Department"))
+            {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
                 level = 1;
                 requestDeptAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(1).equals("Category")) {
+            if (listDataHeader.get(1).equals("Category"))
+            {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
                 level = 2;
                 requestCategoryAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(2).equals("Plan Class")) {
+            if (listDataHeader.get(2).equals("Plan Class"))
+            {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
                 level = 3;
                 requestPlanClassAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(3).equals("Brand")) {
+            if (listDataHeader.get(3).equals("Brand"))
+            {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
                 level = 4;
                 requestBrandNameAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(4).equals("Brand Plan Class")) {
+            if (listDataHeader.get(4).equals("Brand Plan Class"))
+            {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
@@ -276,6 +274,7 @@ public class SalesFilterActivity extends Activity {
         } else {
             Toast.makeText(SalesFilterActivity.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
+
         listDataChild.put(listDataHeader.get(0),subdept);
         listDataChild.put(listDataHeader.get(1),subCategory);
         listDataChild.put(listDataHeader.get(2),subPlanClass);
@@ -357,7 +356,8 @@ public class SalesFilterActivity extends Activity {
 
     //Category List
     public void requestCategoryAPI(int offsetvalue1, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
+
+        String url =  ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -428,7 +428,7 @@ public class SalesFilterActivity extends Activity {
 
     //Plan Class List
     public void requestPlanClassAPI(int offsetvalue1, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
+        String url =  ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
