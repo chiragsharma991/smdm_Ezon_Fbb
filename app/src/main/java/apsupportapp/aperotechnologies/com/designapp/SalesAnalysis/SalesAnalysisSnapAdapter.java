@@ -156,7 +156,8 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
 
         if (viewHolder instanceof SalesViewHolder) {
-            if (position <= mSnaps.size()) {
+            if (position <  mSnaps.size()) {
+
                 SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
 
                 if (fromwhere.equals("Department")) {

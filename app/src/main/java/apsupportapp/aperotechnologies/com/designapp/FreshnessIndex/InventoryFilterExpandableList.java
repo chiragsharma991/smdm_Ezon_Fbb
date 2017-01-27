@@ -36,12 +36,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.ListBrand;
 import apsupportapp.aperotechnologies.com.designapp.model.ListBrandClass;
 import apsupportapp.aperotechnologies.com.designapp.model.ListCategory;
@@ -59,19 +61,17 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
 
     ExpandableListView expandableListView;
     List<String> salesList;
-    List<ListCategory> categoryArray;
-    List<ListPlanClass> planclassArray;
-    List<ListBrand> brandArray;
-    List<ListBrandClass> brandclassArray;
-    List<ListProdLevel6> mcArray;
-    List tempcategorylist,tempplanclass,tempbrandname,tempbrandplanclass,tempprodlevel6;
-    private HashMap<String, List<String>> mListDataChild;
+//    List<ListCategory> categoryArray;
+//    List<ListPlanClass> planclassArray;
+//    List<ListBrand> brandArray;
+//    List<ListBrandClass> brandclassArray;
+//    List<ListProdLevel6> mcArray;
+    private HashMap<String, List<String>> mListDataChild, dublicate_listDataChild;
     private ArrayList<String> mListDataGroup;
     private ChildViewHolder childViewHolder;
     private GroupViewHolder groupViewHolder;
     private String groupText;
     private String childText;
-    static String planDepartmentName,planCategoryName,planClassName,brand_Name;
     InventoryFilterExpandableList listAdapter;
     Boolean flag = false;
 
@@ -88,11 +88,13 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
         this.expandableListView = expandableListView;
         this.listAdapter = listAdapter;
         salesList = new ArrayList<>();
-        categoryArray = new ArrayList();
-        planclassArray = new ArrayList();
-        brandArray = new ArrayList();
-        brandclassArray = new ArrayList();
-        mcArray = new ArrayList();
+        this.dublicate_listDataChild = new HashMap<String, List<String>>();
+        this.dublicate_listDataChild.putAll(mListDataChild);
+//        categoryArray = new ArrayList();
+//        planclassArray = new ArrayList();
+//        brandArray = new ArrayList();
+//        brandclassArray = new ArrayList();
+//        mcArray = new ArrayList();
         flag = false;
         level = 1;
     }
@@ -131,7 +133,6 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
 //            int imageId = InventoryFilterActivity.groupImages.get(groupPosition);
 //            groupViewHolder.mImage.setImageResource(imageId);
             convertView.setTag(groupViewHolder);
-            planDepartmentName = " ";
 
         } else {
 
@@ -482,7 +483,56 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
             return false;
         }
 
-        public final class GroupViewHolder {
+    public void filterData(String query) {
+
+
+        String charText = query.toLowerCase(Locale.getDefault());
+        mListDataChild.clear();
+        if (charText.length() == 0) {
+            Log.e("add in list: ", "" + dublicate_listDataChild.size());
+            mListDataChild.putAll(dublicate_listDataChild);
+            //Collapse Group
+           InventoryFilterActivity.pfilter_list.collapseGroup(0);
+            InventoryFilterActivity.pfilter_list.collapseGroup(1);
+            InventoryFilterActivity.pfilter_list.collapseGroup(2);
+            InventoryFilterActivity.pfilter_list.collapseGroup(3);
+            InventoryFilterActivity.pfilter_list.collapseGroup(4);
+            InventoryFilterActivity.pfilter_list.collapseGroup(5);
+
+
+        } else {
+            // for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 5; j++) {
+                List<String> arrayList = new ArrayList<String>();
+
+                for (int k = 0; k < dublicate_listDataChild.get(mListDataGroup.get(j)).size(); k++) {
+                    if (dublicate_listDataChild.get(mListDataGroup.get(j)).get(k).toLowerCase(Locale.getDefault()).contains(charText)) {
+                        arrayList.add(dublicate_listDataChild.get(mListDataGroup.get(j)).get(k));
+
+                    }
+                }
+                mListDataChild.put(mListDataGroup.get(j), arrayList);
+                InventoryFilterActivity.pfilter_list.expandGroup(0);
+                InventoryFilterActivity.pfilter_list.expandGroup(1);
+                InventoryFilterActivity.pfilter_list.expandGroup(2);
+                InventoryFilterActivity.pfilter_list.expandGroup(3);
+                InventoryFilterActivity.pfilter_list.expandGroup(4);
+                InventoryFilterActivity.pfilter_list.expandGroup(5);
+            }
+
+            notifyDataSetChanged();
+
+        }
+
+        Log.e("After notifying filterData size : ", "" + mListDataChild.get(mListDataGroup.get(0)).size());
+
+    }
+
+
+
+
+
+    public final class GroupViewHolder {
 
             TextView mGroupText;
             ImageView mImage;
@@ -494,506 +544,506 @@ public class InventoryFilterExpandableList extends BaseExpandableListAdapter {
         }
 
     
-    
-    // API declration used API 1.18
-    public void requestInventoryCategoryAPI(int offsetvalue1, int limit1, final String deptName, final String groupname, final CheckBox cb) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
-
-        String inv_category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?level="+level+"&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-
-        Log.i("URL   ", inv_category_url);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, inv_category_url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("Inventory Category Filter Response", response.toString());
-                        Log.e("Inventory category list","---"+response.length());
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(mContext, "no category data found", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
-                                Reusable_Functions.hDialog();
-
-                                for (int i = 0; i < response.length(); i++) {
-                                    JSONObject productName1 = response.getJSONObject(i);
-
-                                    String category = productName1.getString("planCategory");
-                                    categorylist.add(category);
-                                    tempcategorylist.add(category);
-
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-                                requestInventoryCategoryAPI(offsetvalue, limit, deptName, groupname, cb);
-
-                            } else {
-                                if (response.length() < limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject productName1 = response.getJSONObject(i);
-
-                                        String category = productName1.getString("planCategory");
-                                        categorylist.add(category);
-                                        tempcategorylist.add(category);
-
-                                    }
-                                    //Collections.sort(categorylist);
-                                    mListDataChild.put(mListDataGroup.get(1), categorylist);
-                                    ListCategory plancategory = new ListCategory();
-                                    plancategory.setSubdept(deptName);
-                                    plancategory.setCategory(tempcategorylist);
-                                    categoryArray.add(plancategory);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
-                                    Reusable_Functions.hDialog();
-                                    Log.e("here ","----111----");
-                                    
-                                    salesList.add(groupname+"."+planDepartmentName);
-                                    cb.setChecked(true);
-                                }
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-
-    }
-
-    @SuppressLint("LongLogTag")
-
-    // Plan class API
-    public void requestInventoryPlanClassAPI(int offsetvalue1, int limit1, String plandeptName, final String category, final String groupname, final CheckBox cb) {
-
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
-
-         String inv_planclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level="+level +"&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-
-        Log.e("requestPlanClassAPI URL   ", inv_planclass_url);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, inv_planclass_url,
-                new Response.Listener<JSONArray>() {
-                    @SuppressLint("LongLogTag")
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("Inventory Plan Class Filter Response", response.toString());
-                        Log.e("Inventory plan class list", " " + response.length());
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(mContext, "no plan class data found", Toast.LENGTH_LONG).show();
-
-                            } else {
-                                if (response.length() == limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject productName1 = response.getJSONObject(i);
-
-                                        String planClass = productName1.getString("planClass");
-                                        planClassList.add(planClass);
-                                        tempplanclass.add(planClass);
-
-                                    }
-                                    offsetvalue = (limit * count) + limit;
-                                    count++;
-                                    requestInventoryPlanClassAPI(offsetvalue, limit, planDepartmentName, category, groupname, cb);
-
-                                } else if (response.length() < limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject productName1 = response.getJSONObject(i);
-
-                                        String planClass = productName1.getString("planClass");
-                                        planClassList.add(planClass);
-                                        tempplanclass.add(planClass);
-
-                                    }
-
-                                    mListDataChild.put(mListDataGroup.get(2), planClassList);
-
-                                    ListPlanClass planclass = new ListPlanClass();
-                                    planclass.setSubdept(planDepartmentName);
-                                    planclass.setCategory(category);
-                                    planclass.setPlanclass(tempplanclass);
-                                    planclassArray.add(planclass);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
-                                    Reusable_Functions.hDialog();
-                                    salesList.add(groupname+"."+category);
-                                    cb.setChecked(true);
-                                    Log.e("planClass size", " " + planclassArray.size());
-
-
-                                }
-                            }
-                        } catch (Exception e) {
-                            //Log.e("Exception e", e.toString() + "");
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
-
-    //Brand Name Api
-    public void requestInventoryBrandNameAPI(int offsetvalue1, int limit1, String plandeptName, String category, final String planClass, final String groupname, final CheckBox cb) {
-
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
-
-        String inv_brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level="+ level +"&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-
-        Log.e("requestPlanClassAPI URL   ", inv_brand_url);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, inv_brand_url,
-                new Response.Listener<JSONArray>() {
-                    @SuppressLint("LongLogTag")
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("Inventory Brand Filter Response", response.toString());
-                        Log.e("Inventory brand list", " " + response.length());
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(mContext, "no brand name data found", Toast.LENGTH_LONG).show();
-
-                            } else {
-                                if (response.length() == limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject productName1 = response.getJSONObject(i);
-
-                                        String brand_name = productName1.getString("brandName");
-                                        brandNameList.add(brand_name);
-                                        tempbrandname.add(brand_name);
-
-                                    }
-                                    offsetvalue = (limit * count) + limit;
-                                    count++;
-                                    requestInventoryBrandNameAPI(offsetvalue, limit, planDepartmentName, planCategoryName,planClass, groupname, cb);
-
-                                } else if (response.length() < limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject productName1 = response.getJSONObject(i);
-
-                                        String brand_name = productName1.getString("brandName");
-                                        brandNameList.add(brand_name);
-                                        tempbrandname.add(brand_name);
-                                    }
-                                    mListDataChild.put(mListDataGroup.get(3), brandNameList);
-
-                                    ListBrand brandNm = new ListBrand();
-                                    brandNm.setSubdept(planDepartmentName);
-                                    brandNm.setCategory(planCategoryName);
-                                    brandNm.setPlanclass(planClass);
-                                    brandNm.setBrand(tempbrandname);
-                                    brandArray.add(brandNm);
-
-                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
-                                    Reusable_Functions.hDialog();
-                                    salesList.add(groupname+"."+planClass);
-                                    cb.setChecked(true);
-                                    Log.e("brand name size", " " + brandArray.size());
-
-                             }
-                            }
-                        } catch (Exception e) {
-                            //Log.e("Exception e", e.toString() + "");
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
-
-    //Brand Class Api
-    public void requestInventoryBrandClassAPI(int offsetvalue1, int limit1, String plandeptName, String category, String planclass, final String brand, final String groupname, final CheckBox cb)
-    {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
-
-        String inv_brandplanclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level="+level+"&dept="+ planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClassName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand="+brand.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("requestPlanClassAPI URL   ", inv_brandplanclass_url);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, inv_brandplanclass_url,
-                new Response.Listener<JSONArray>() {
-                    @SuppressLint("LongLogTag")
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("Inv Brand Plan Class Filter Response", response.toString());
-                        Log.e("Inv brand plan class list", " " + response.length());
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(mContext, "no brand plan class data found", Toast.LENGTH_LONG).show();
-
-                            } else {
-                                if (response.length() == limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject productName1 = response.getJSONObject(i);
-
-                                        String brandPlanClass = productName1.getString("brandPlanClass");
-                                        brandplanclassList.add(brandPlanClass);
-                                        tempbrandplanclass.add(brandPlanClass);
-
-                                    }
-                                    offsetvalue = (limit * count) + limit;
-                                    count++;
-                                    requestInventoryBrandClassAPI(offsetvalue, limit, planDepartmentName, planCategoryName,planClassName,brand, groupname, cb);
-
-                                } else if (response.length() < limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject productName1 = response.getJSONObject(i);
-
-                                        String brandPlanClass = productName1.getString("brandPlanClass");
-                                        brandplanclassList.add(brandPlanClass);
-                                        tempbrandplanclass.add(brandPlanClass);
-
-                                    }
-                                    mListDataChild.put(mListDataGroup.get(4), brandplanclassList);
-
-                                    ListBrandClass brandplancls = new ListBrandClass();
-                                    brandplancls.setSubdept(planDepartmentName);
-                                    brandplancls.setCategory(planCategoryName);
-                                    brandplancls.setPlanclass(planClassName);
-                                    brandplancls.setBrand(brand);
-                                    brandplancls.setBrandClass(tempbrandplanclass);
-                                    brandclassArray.add(brandplancls);
-
-                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
-                                    Reusable_Functions.hDialog();
-                                    salesList.add(groupname+"."+brand);
-                                    cb.setChecked(true);
-                                    Log.e("brand plan class size", " " + brandclassArray.size());
-
-                                }
-                            }
-                        } catch (Exception e) {
-                            //Log.e("Exception e", e.toString() + "");
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
-
-    // Prod level 6 Api
-    private void requestInventoryProdLevel6API(int offsetvalue1, int limit1, String planDept, String planCategory, String planClass, String brandnm, final String brandPlanClass, final String groupname, final CheckBox cb) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
-        String userId = sharedPreferences.getString("userId", "");
-        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
-        BasicNetwork network = new BasicNetwork(new HurlStack());
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
-      String url = ConstsCore.web_url +"/v1/display/salesanalysishierarchy/"+userId+"?level="+level+"&dept="+planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&class="+planClassName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand="+brand_Name.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brandclass="+brandPlanClass.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset=" + offsetvalue + "&limit=" + limit;
-
-       // String inv_prodlevel6_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level="+level+"&dept="+ planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClassName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand= "+ brand_Name.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brandclass=" + brandPlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("requestPlanClassAPI URL   ", url);
-
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @SuppressLint("LongLogTag")
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("Inv Prod level 6 Filter Response", response.toString());
-                        Log.e("Inv prod level 6 list", " " + response.length());
-
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(mContext, "no brand plan class data found", Toast.LENGTH_LONG).show();
-
-                            } else {
-                                if (response.length() == limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject productName1 = response.getJSONObject(i);
-
-                                        String mcCode = productName1.getString("prodLevel6Code");
-                                        String mc = productName1.getString("prodLevel6Desc");
-                                        prodlevel6list.add(mc);
-                                        tempprodlevel6.add(mc);
-
-                                    }
-                                    offsetvalue = (limit * count) + limit;
-                                    count++;
-                                    requestInventoryProdLevel6API(offsetvalue, limit, planDepartmentName, planCategoryName,planClassName,brand_Name,brandPlanClass, groupname, cb);
-
-                                } else if (response.length() < limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject productName1 = response.getJSONObject(i);
-
-                                        String mcCode = productName1.getString("prodLevel6Code");
-                                        String mc = productName1.getString("prodLevel6Desc");
-                                        prodlevel6list.add(mc);
-                                        tempprodlevel6.add(mc);
-
-
-                                    }
-                                    mListDataChild.put(mListDataGroup.get(5), prodlevel6list);
-                                    ListProdLevel6 mc = new ListProdLevel6();
-                                    mc.setSubdept(planDepartmentName);
-                                    mc.setCategory(planCategoryName);
-                                    mc.setPlanclass(planClassName);
-                                    mc.setBrand(brand_Name);
-                                    mc.setBrandClass(brandPlanClass);
-                                    mc.setPrdlevel6(tempprodlevel6);
-                                    mcArray.add(mc);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
-                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
-                                    Reusable_Functions.hDialog();
-                                    salesList.add(groupname+"."+brandPlanClass);
-                                    cb.setChecked(true);
-                                    Log.e("array size", " " + mcArray.size());
-
-                                }
-                            }
-                        } catch (Exception e) {
-                            //Log.e("Exception e", e.toString() + "");
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-
-    }
+//
+//    // API declration used API 1.18
+//    public void requestInventoryCategoryAPI(int offsetvalue1, int limit1, final String deptName, final String groupname, final CheckBox cb) {
+//
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
+//        String userId = sharedPreferences.getString("userId", "");
+//        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+//        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
+//        BasicNetwork network = new BasicNetwork(new HurlStack());
+//        RequestQueue queue = new RequestQueue(cache, network);
+//        queue.start();
+//
+//        String inv_category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?level="+level+"&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+//
+//        Log.i("URL   ", inv_category_url);
+//
+//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, inv_category_url,
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        Log.e("Inventory Category Filter Response", response.toString());
+//                        Log.e("Inventory category list","---"+response.length());
+//                        try {
+//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+//
+//                                Reusable_Functions.hDialog();
+//                                Toast.makeText(mContext, "no category data found", Toast.LENGTH_LONG).show();
+//                            } else if (response.length() == limit) {
+//                                Reusable_Functions.hDialog();
+//
+//                                for (int i = 0; i < response.length(); i++) {
+//                                    JSONObject productName1 = response.getJSONObject(i);
+//
+//                                    String category = productName1.getString("planCategory");
+//                                    categorylist.add(category);
+//                                    tempcategorylist.add(category);
+//
+//                                }
+//                                offsetvalue = (limit * count) + limit;
+//                                count++;
+//                                requestInventoryCategoryAPI(offsetvalue, limit, deptName, groupname, cb);
+//
+//                            } else {
+//                                if (response.length() < limit) {
+//                                    for (int i = 0; i < response.length(); i++) {
+//                                        JSONObject productName1 = response.getJSONObject(i);
+//
+//                                        String category = productName1.getString("planCategory");
+//                                        categorylist.add(category);
+//                                        tempcategorylist.add(category);
+//
+//                                    }
+//                                    //Collections.sort(categorylist);
+//                                    mListDataChild.put(mListDataGroup.get(1), categorylist);
+//                                    ListCategory plancategory = new ListCategory();
+//                                    plancategory.setSubdept(deptName);
+//                                    plancategory.setCategory(tempcategorylist);
+//                                    categoryArray.add(plancategory);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
+//                                    Reusable_Functions.hDialog();
+//                                    Log.e("here ","----111----");
+//
+//                                    salesList.add(groupname+"."+planDepartmentName);
+//                                    cb.setChecked(true);
+//                                }
+//                            }
+//
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Reusable_Functions.hDialog();
+//                        error.printStackTrace();
+//                    }
+//                }
+//
+//        ) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("Content-Type", "application/json");
+//                params.put("Authorization", "Bearer " + bearertoken);
+//                return params;
+//            }
+//        };
+//        int socketTimeout = 60000;//5 seconds
+//
+//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+//        postRequest.setRetryPolicy(policy);
+//        queue.add(postRequest);
+//
+//    }
+//
+//    @SuppressLint("LongLogTag")
+//
+//    // Plan class API
+//    public void requestInventoryPlanClassAPI(int offsetvalue1, int limit1, String plandeptName, final String category, final String groupname, final CheckBox cb) {
+//
+//
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
+//        String userId = sharedPreferences.getString("userId", "");
+//        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+//        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
+//        BasicNetwork network = new BasicNetwork(new HurlStack());
+//        RequestQueue queue = new RequestQueue(cache, network);
+//        queue.start();
+//
+//         String inv_planclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level="+level +"&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+//
+//        Log.e("requestPlanClassAPI URL   ", inv_planclass_url);
+//
+//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, inv_planclass_url,
+//                new Response.Listener<JSONArray>() {
+//                    @SuppressLint("LongLogTag")
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        Log.e("Inventory Plan Class Filter Response", response.toString());
+//                        Log.e("Inventory plan class list", " " + response.length());
+//
+//                        try {
+//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+//
+//                                Reusable_Functions.hDialog();
+//                                Toast.makeText(mContext, "no plan class data found", Toast.LENGTH_LONG).show();
+//
+//                            } else {
+//                                if (response.length() == limit) {
+//                                    for (int i = 0; i < response.length(); i++) {
+//                                        JSONObject productName1 = response.getJSONObject(i);
+//
+//                                        String planClass = productName1.getString("planClass");
+//                                        planClassList.add(planClass);
+//                                        tempplanclass.add(planClass);
+//
+//                                    }
+//                                    offsetvalue = (limit * count) + limit;
+//                                    count++;
+//                                    requestInventoryPlanClassAPI(offsetvalue, limit, planDepartmentName, category, groupname, cb);
+//
+//                                } else if (response.length() < limit) {
+//                                    for (int i = 0; i < response.length(); i++) {
+//                                        JSONObject productName1 = response.getJSONObject(i);
+//
+//                                        String planClass = productName1.getString("planClass");
+//                                        planClassList.add(planClass);
+//                                        tempplanclass.add(planClass);
+//
+//                                    }
+//
+//                                    mListDataChild.put(mListDataGroup.get(2), planClassList);
+//
+//                                    ListPlanClass planclass = new ListPlanClass();
+//                                    planclass.setSubdept(planDepartmentName);
+//                                    planclass.setCategory(category);
+//                                    planclass.setPlanclass(tempplanclass);
+//                                    planclassArray.add(planclass);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
+//                                    Reusable_Functions.hDialog();
+//                                    salesList.add(groupname+"."+category);
+//                                    cb.setChecked(true);
+//                                    Log.e("planClass size", " " + planclassArray.size());
+//
+//
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            //Log.e("Exception e", e.toString() + "");
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Reusable_Functions.hDialog();
+//                        error.printStackTrace();
+//                    }
+//                }
+//        ) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("Content-Type", "application/json");
+//                params.put("Authorization", "Bearer " + bearertoken);
+//                return params;
+//            }
+//        };
+//        int socketTimeout = 60000;//5 seconds
+//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+//        postRequest.setRetryPolicy(policy);
+//        queue.add(postRequest);
+//    }
+//
+//    //Brand Name Api
+//    public void requestInventoryBrandNameAPI(int offsetvalue1, int limit1, String plandeptName, String category, final String planClass, final String groupname, final CheckBox cb) {
+//
+//
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
+//        String userId = sharedPreferences.getString("userId", "");
+//        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+//        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
+//        BasicNetwork network = new BasicNetwork(new HurlStack());
+//        RequestQueue queue = new RequestQueue(cache, network);
+//        queue.start();
+//
+//        String inv_brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level="+ level +"&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+//
+//        Log.e("requestPlanClassAPI URL   ", inv_brand_url);
+//
+//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, inv_brand_url,
+//                new Response.Listener<JSONArray>() {
+//                    @SuppressLint("LongLogTag")
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        Log.e("Inventory Brand Filter Response", response.toString());
+//                        Log.e("Inventory brand list", " " + response.length());
+//
+//                        try {
+//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+//                                Reusable_Functions.hDialog();
+//                                Toast.makeText(mContext, "no brand name data found", Toast.LENGTH_LONG).show();
+//
+//                            } else {
+//                                if (response.length() == limit) {
+//                                    for (int i = 0; i < response.length(); i++) {
+//                                        JSONObject productName1 = response.getJSONObject(i);
+//
+//                                        String brand_name = productName1.getString("brandName");
+//                                        brandNameList.add(brand_name);
+//                                        tempbrandname.add(brand_name);
+//
+//                                    }
+//                                    offsetvalue = (limit * count) + limit;
+//                                    count++;
+//                                    requestInventoryBrandNameAPI(offsetvalue, limit, planDepartmentName, planCategoryName,planClass, groupname, cb);
+//
+//                                } else if (response.length() < limit) {
+//                                    for (int i = 0; i < response.length(); i++) {
+//                                        JSONObject productName1 = response.getJSONObject(i);
+//
+//                                        String brand_name = productName1.getString("brandName");
+//                                        brandNameList.add(brand_name);
+//                                        tempbrandname.add(brand_name);
+//                                    }
+//                                    mListDataChild.put(mListDataGroup.get(3), brandNameList);
+//
+//                                    ListBrand brandNm = new ListBrand();
+//                                    brandNm.setSubdept(planDepartmentName);
+//                                    brandNm.setCategory(planCategoryName);
+//                                    brandNm.setPlanclass(planClass);
+//                                    brandNm.setBrand(tempbrandname);
+//                                    brandArray.add(brandNm);
+//
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
+//                                    Reusable_Functions.hDialog();
+//                                    salesList.add(groupname+"."+planClass);
+//                                    cb.setChecked(true);
+//                                    Log.e("brand name size", " " + brandArray.size());
+//
+//                             }
+//                            }
+//                        } catch (Exception e) {
+//                            //Log.e("Exception e", e.toString() + "");
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Reusable_Functions.hDialog();
+//                        error.printStackTrace();
+//                    }
+//                }
+//        ) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("Content-Type", "application/json");
+//                params.put("Authorization", "Bearer " + bearertoken);
+//                return params;
+//            }
+//        };
+//        int socketTimeout = 60000;//5 seconds
+//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+//        postRequest.setRetryPolicy(policy);
+//        queue.add(postRequest);
+//    }
+//
+//    //Brand Class Api
+//    public void requestInventoryBrandClassAPI(int offsetvalue1, int limit1, String plandeptName, String category, String planclass, final String brand, final String groupname, final CheckBox cb)
+//    {
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
+//        String userId = sharedPreferences.getString("userId", "");
+//        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+//        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
+//        BasicNetwork network = new BasicNetwork(new HurlStack());
+//        RequestQueue queue = new RequestQueue(cache, network);
+//        queue.start();
+//
+//        String inv_brandplanclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level="+level+"&dept="+ planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClassName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand="+brand.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+//        Log.e("requestPlanClassAPI URL   ", inv_brandplanclass_url);
+//
+//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, inv_brandplanclass_url,
+//                new Response.Listener<JSONArray>() {
+//                    @SuppressLint("LongLogTag")
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        Log.e("Inv Brand Plan Class Filter Response", response.toString());
+//                        Log.e("Inv brand plan class list", " " + response.length());
+//
+//                        try {
+//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+//
+//                                Reusable_Functions.hDialog();
+//                                Toast.makeText(mContext, "no brand plan class data found", Toast.LENGTH_LONG).show();
+//
+//                            } else {
+//                                if (response.length() == limit) {
+//                                    for (int i = 0; i < response.length(); i++) {
+//                                        JSONObject productName1 = response.getJSONObject(i);
+//
+//                                        String brandPlanClass = productName1.getString("brandPlanClass");
+//                                        brandplanclassList.add(brandPlanClass);
+//                                        tempbrandplanclass.add(brandPlanClass);
+//
+//                                    }
+//                                    offsetvalue = (limit * count) + limit;
+//                                    count++;
+//                                    requestInventoryBrandClassAPI(offsetvalue, limit, planDepartmentName, planCategoryName,planClassName,brand, groupname, cb);
+//
+//                                } else if (response.length() < limit) {
+//                                    for (int i = 0; i < response.length(); i++) {
+//                                        JSONObject productName1 = response.getJSONObject(i);
+//
+//                                        String brandPlanClass = productName1.getString("brandPlanClass");
+//                                        brandplanclassList.add(brandPlanClass);
+//                                        tempbrandplanclass.add(brandPlanClass);
+//
+//                                    }
+//                                    mListDataChild.put(mListDataGroup.get(4), brandplanclassList);
+//
+//                                    ListBrandClass brandplancls = new ListBrandClass();
+//                                    brandplancls.setSubdept(planDepartmentName);
+//                                    brandplancls.setCategory(planCategoryName);
+//                                    brandplancls.setPlanclass(planClassName);
+//                                    brandplancls.setBrand(brand);
+//                                    brandplancls.setBrandClass(tempbrandplanclass);
+//                                    brandclassArray.add(brandplancls);
+//
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
+//                                    Reusable_Functions.hDialog();
+//                                    salesList.add(groupname+"."+brand);
+//                                    cb.setChecked(true);
+//                                    Log.e("brand plan class size", " " + brandclassArray.size());
+//
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            //Log.e("Exception e", e.toString() + "");
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Reusable_Functions.hDialog();
+//                        error.printStackTrace();
+//                    }
+//                }
+//        ) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("Content-Type", "application/json");
+//                params.put("Authorization", "Bearer " + bearertoken);
+//                return params;
+//            }
+//        };
+//        int socketTimeout = 60000;//5 seconds
+//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+//        postRequest.setRetryPolicy(policy);
+//        queue.add(postRequest);
+//    }
+//
+//    // Prod level 6 Api
+//    private void requestInventoryProdLevel6API(int offsetvalue1, int limit1, String planDept, String planCategory, String planClass, String brandnm, final String brandPlanClass, final String groupname, final CheckBox cb) {
+//
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
+//        String userId = sharedPreferences.getString("userId", "");
+//        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+//        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
+//        BasicNetwork network = new BasicNetwork(new HurlStack());
+//        RequestQueue queue = new RequestQueue(cache, network);
+//        queue.start();
+//      String url = ConstsCore.web_url +"/v1/display/salesanalysishierarchy/"+userId+"?level="+level+"&dept="+planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&class="+planClassName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand="+brand_Name.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brandclass="+brandPlanClass.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset=" + offsetvalue + "&limit=" + limit;
+//
+//       // String inv_prodlevel6_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level="+level+"&dept="+ planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClassName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand= "+ brand_Name.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brandclass=" + brandPlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+//        Log.e("requestPlanClassAPI URL   ", url);
+//
+//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+//                new Response.Listener<JSONArray>() {
+//                    @SuppressLint("LongLogTag")
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        Log.e("Inv Prod level 6 Filter Response", response.toString());
+//                        Log.e("Inv prod level 6 list", " " + response.length());
+//
+//                        try {
+//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+//
+//                                Reusable_Functions.hDialog();
+//                                Toast.makeText(mContext, "no brand plan class data found", Toast.LENGTH_LONG).show();
+//
+//                            } else {
+//                                if (response.length() == limit) {
+//                                    for (int i = 0; i < response.length(); i++) {
+//                                        JSONObject productName1 = response.getJSONObject(i);
+//
+//                                        String mcCode = productName1.getString("prodLevel6Code");
+//                                        String mc = productName1.getString("prodLevel6Desc");
+//                                        prodlevel6list.add(mc);
+//                                        tempprodlevel6.add(mc);
+//
+//                                    }
+//                                    offsetvalue = (limit * count) + limit;
+//                                    count++;
+//                                    requestInventoryProdLevel6API(offsetvalue, limit, planDepartmentName, planCategoryName,planClassName,brand_Name,brandPlanClass, groupname, cb);
+//
+//                                } else if (response.length() < limit) {
+//                                    for (int i = 0; i < response.length(); i++) {
+//                                        JSONObject productName1 = response.getJSONObject(i);
+//
+//                                        String mcCode = productName1.getString("prodLevel6Code");
+//                                        String mc = productName1.getString("prodLevel6Desc");
+//                                        prodlevel6list.add(mc);
+//                                        tempprodlevel6.add(mc);
+//
+//
+//                                    }
+//                                    mListDataChild.put(mListDataGroup.get(5), prodlevel6list);
+//                                    ListProdLevel6 mc = new ListProdLevel6();
+//                                    mc.setSubdept(planDepartmentName);
+//                                    mc.setCategory(planCategoryName);
+//                                    mc.setPlanclass(planClassName);
+//                                    mc.setBrand(brand_Name);
+//                                    mc.setBrandClass(brandPlanClass);
+//                                    mc.setPrdlevel6(tempprodlevel6);
+//                                    mcArray.add(mc);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(5);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(4);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(3);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(2);
+//                                    InventoryFilterActivity.pfilter_list.expandGroup(1);
+//                                    Reusable_Functions.hDialog();
+//                                    salesList.add(groupname+"."+brandPlanClass);
+//                                    cb.setChecked(true);
+//                                    Log.e("array size", " " + mcArray.size());
+//
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            //Log.e("Exception e", e.toString() + "");
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Reusable_Functions.hDialog();
+//                        error.printStackTrace();
+//                    }
+//                }
+//        ) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("Content-Type", "application/json");
+//                params.put("Authorization", "Bearer " + bearertoken);
+//                return params;
+//            }
+//        };
+//        int socketTimeout = 60000;//5 seconds
+//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+//        postRequest.setRetryPolicy(policy);
+//        queue.add(postRequest);
+//
+//    }
 
 }
 
