@@ -8,11 +8,15 @@
     tools:context=".OptionEfficiency.OptionEfficiencyActivity">
 
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_screen_color"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,10 +33,10 @@
                 android:contentInsetLeft="0dp"
                 android:contentInsetRight="0dp"
                 android:contentInsetStart="0dp"
-                app:contentInsetEnd="0dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp">
+                segmentedgroup:contentInsetEnd="0dp"
+                segmentedgroup:contentInsetLeft="0dp"
+                segmentedgroup:contentInsetRight="0dp"
+                segmentedgroup:contentInsetStart="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -468,6 +472,7 @@
                     android:background="@color/border_round_edittext" />
 
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -492,10 +497,8 @@
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
-
     <include layout="@layout/oe_quick_filter_menu">
 
     </include>
-
 
 </RelativeLayout>

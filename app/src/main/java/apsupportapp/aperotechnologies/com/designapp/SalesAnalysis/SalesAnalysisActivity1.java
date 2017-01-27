@@ -272,8 +272,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         // llayoutSalesAnalysis.setVisibility(View.GONE);
                         if (Reusable_Functions.chkStatus(context)) {
 
-                            Reusable_Functions.hDialog();
-                            // Reusable_Functions.sDialog(context, "Loading data...");
+                           Reusable_Functions.hDialog();
+                           Reusable_Functions.sDialog(context, "Loading data...");
                            progressBar1.setVisibility(View.VISIBLE);
                             offsetvalue = 0;
                             limit = 100;
@@ -306,8 +306,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
-                            //Reusable_Functions.sDialog(context, "Loading data...");
-                          progressBar1.setVisibility(View.VISIBLE);
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            progressBar1.setVisibility(View.VISIBLE);
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -337,7 +337,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                            progressBar1.setVisibility(View.VISIBLE);
-                            //Reusable_Functions.sDialog(context, "Loading data...");
+                           Reusable_Functions.sDialog(context, "Loading data...");
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -368,7 +368,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             progressBar1.setVisibility(View.VISIBLE);
-                            //  Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -410,7 +410,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                             Reusable_Functions.hDialog();
                             progressBar1.setVisibility(View.VISIBLE);
-                            // Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -438,7 +438,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             progressBar1.setVisibility(View.VISIBLE);
-                            // Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -469,7 +469,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                             Reusable_Functions.hDialog();
                             progressBar1.setVisibility(View.VISIBLE);
-                            // Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -503,7 +503,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                             Reusable_Functions.hDialog();
                             progressBar1.setVisibility(View.VISIBLE);
-                            // Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.sDialog(context, "Loading data...");
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -582,7 +582,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     if (Reusable_Functions.chkStatus(context)) {
                                         Reusable_Functions.hDialog();
                                         progressBar1.setVisibility(View.VISIBLE);
-                                        // Reusable_Functions.sDialog(context, "Loading data...");
+                                        Reusable_Functions.sDialog(context, "Loading data...");
                                         offsetvalue = 0;
                                         limit = 100;
                                         count = 0;
@@ -616,7 +616,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                             Reusable_Functions.hDialog();
                                             progressBar1.setVisibility(View.VISIBLE);
 
-                                            //  Reusable_Functions.sDialog(context, "Loading data...");
+                                            Reusable_Functions.sDialog(context, "Loading data...");
                                             offsetvalue = 0;
                                             limit = 100;
                                             count = 0;
@@ -652,7 +652,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                         if (Reusable_Functions.chkStatus(context)) {
                                             Reusable_Functions.hDialog();
                                             progressBar1.setVisibility(View.VISIBLE);
-                                            // Reusable_Functions.sDialog(context, "Loading data...");
+                                            Reusable_Functions.sDialog(context, "Loading data...");
                                             offsetvalue = 0;
                                             limit = 100;
                                             count = 0;
@@ -688,7 +688,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                         if (Reusable_Functions.chkStatus(context)) {
                                             Reusable_Functions.hDialog();
                                             progressBar1.setVisibility(View.VISIBLE);
-                                            // Reusable_Functions.sDialog(context, "Loading data...");
+                                            Reusable_Functions.sDialog(context, "Loading data...");
                                             offsetvalue = 0;
                                             limit = 100;
                                             count = 0;
@@ -801,21 +801,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
 
-
-              //  return;
             }
-
-
-//            if (firstVisibleItem >= salesadapter.getItemCount() - 2) {
-//                Log.e(TAG, "STATE_IDLE>>>>>>>>" + "firstvisible=" + firstVisibleItem + "and total=" + totalItemCount);
-//
-//                LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
-//                Log.e("Array Size", "" + salesAnalysisClassArrayList.size() + " totalItemCount :" + totalItemCount);
-//                // llm.scrollToPositionWithOffset(totalItemCount-14, totalItemCount);
-//                //  llm.scrollToPosition(11);
-//            }
         }
-
     }
 
 
@@ -844,7 +831,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 //  llayoutSalesAnalysis.setVisibility(View.GONE);
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
-                    // Reusable_Functions.sDialog(context, "Loading data...");
+                   // Reusable_Functions.sDialog(context, "Loading data...");
                     progressBar1.setVisibility(View.VISIBLE);
                     offsetvalue = 0;
                     limit = 100;
@@ -875,7 +862,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 // llayoutSalesAnalysis.setVisibility(View.GONE);
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
-                    // Reusable_Functions.sDialog(context, "Loading data...");
+                 //   Reusable_Functions.sDialog(context, "Loading data...");
                     progressBar1.setVisibility(View.VISIBLE);
                     offsetvalue = 0;
                     limit = 100;
@@ -908,7 +895,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 // llayoutSalesAnalysis.setVisibility(View.GONE);
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
-                    // Reusable_Functions.sDialog(context, "Loading data...");
+                 //   Reusable_Functions.sDialog(context, "Loading data...");
                     progressBar1.setVisibility(View.VISIBLE);
                     offsetvalue = 0;
                     limit = 100;
@@ -943,7 +930,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     progressBar1.setVisibility(View.VISIBLE);
-                    // Reusable_Functions.sDialog(context, "Loading data...");
+                  //  Reusable_Functions.sDialog(context, "Loading data...");
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
@@ -976,7 +963,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                // Reusable_Functions.hDialog();
+                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 Style_loadingBar.setVisibility(View.GONE);
                             } else if (response.length() == limit) {
@@ -1235,7 +1222,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
 
                         } catch (Exception e) {
-                            //Reusable_Functions.hDialog();
+                            Reusable_Functions.hDialog();
                           //  Style_loadingBar.setVisibility(View.GONE);
                             progressBar1.setVisibility(View.GONE);
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -1246,7 +1233,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Reusable_Functions.hDialog();
+                         Reusable_Functions.hDialog();
                        // Style_loadingBar.setVisibility(View.GONE);
                         progressBar1.setVisibility(View.GONE);
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -1342,6 +1329,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 pageradapter.notifyDataSetChanged();
                                 Log.e("Focus position on scroll ", "" + focusposition);
                                 progressBar1.setVisibility(View.GONE);
+                                Reusable_Functions.hDialog();
                              //   Style_loadingBar.setVisibility(View.GONE);
                             }
                         } catch (Exception e) {

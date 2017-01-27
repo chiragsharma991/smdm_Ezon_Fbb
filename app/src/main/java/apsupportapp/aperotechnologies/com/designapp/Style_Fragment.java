@@ -314,13 +314,13 @@ public class Style_Fragment extends Fragment {
 
                                     int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
 
-                                    txtSales.setText("\u20B9" + Sales);
-                                    txtSalesUnit.setText(": " + twSaleTotQty);
-                                    txtFwdWeekCover.setText(": " + String.format("%.1f", fwdWeekCover));
-                                    txtGit.setText(": " + stkGitQty);
-                                    txtSalesThruUnit.setText(": " + String.format("%.1f", sellThruUnitsRcpt) + "%");
-                                    txtRos.setText(": " + String.format("%.1f", ros));
-                                    txtSOh.setText(": " + stkOnhandQty);
+                                    txtSales.setText(":"+"\u20B9" + Sales);
+                                    txtSalesUnit.setText(":" + twSaleTotQty);
+                                    txtFwdWeekCover.setText(":" + String.format("%.1f", fwdWeekCover));
+                                    txtGit.setText(":" + stkGitQty);
+                                    txtSalesThruUnit.setText(":" + String.format("%.1f", sellThruUnitsRcpt) + "%");
+                                    txtRos.setText(":" + String.format("%.1f", ros));
+                                    txtSOh.setText(":" + stkOnhandQty);
                                     txtarticleOption.setText("" + articleOption);
                                 }
                             }

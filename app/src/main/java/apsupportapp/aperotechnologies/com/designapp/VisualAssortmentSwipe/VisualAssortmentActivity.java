@@ -63,7 +63,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     private SwipeDeck cardStack;
     private Context context = this;
     ArrayList<VisualAssort> visualassortmentlist;
-    private SwipeDeckAdapter adapter;
+    SwipeDeckAdapter adapter;
     String likeDislikeFlg ;
     SharedPreferences sharedPreferences;
     String userId, bearertoken;
@@ -422,7 +422,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 Log.i("MainActivity", "no more cards");
 
                 if (flag == false) {
-                    Log.e("--------","");
                     if (Reusable_Functions.chkStatus(context)) {
                         visualassortmentlist = new ArrayList<VisualAssort>();
                         Reusable_Functions.sDialog(context, "Loading data...");
@@ -478,6 +477,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 limit = 100;
                 count = 0;
                 flag = false;
+                cardStack.setVisibility(View.GONE);
                 visualassortmentlist = new ArrayList<VisualAssort>();
                 likeDislikeFlg = "Completed";
                 requestdisplayVisualAssortment();
@@ -510,6 +510,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 limit = 100;
                 count = 0;
                 flag = false;
+                cardStack.setVisibility(View.GONE);
                 visualassortmentlist = new ArrayList<VisualAssort>();
                 likeDislikeFlg = "Pending";
                 requestdisplayVisualAssortment();
@@ -542,14 +543,16 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         Log.e("response",""+response);
 
                         try
+
                         {
+
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0)
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
-                                adapter.layoutView.setVisibility(View.GONE);
-
+                                cardStack.setVisibility(View.GONE);
                             }
+
                             else if (response.length() == limit)
                             {
                                 for (int i = 0; i < response.length(); i++)
@@ -559,13 +562,23 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-
-                                adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
-                                cardStack.setAdapter(adapter);
-                                adapter.notifyDataSetChanged();
-                                flag = true;
-                                Reusable_Functions.hDialog();
-
+                               // visualassortmentlist.clear();
+                                if(visualassortmentlist.size() == 0)
+                                {
+                                    Log.e(TAG, "onResponse: "+visualassortmentlist.size());
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    cardStack.setVisibility(View.GONE);
+                                    Reusable_Functions.hDialog();
+                                }
+                                else
+                                {
+                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
+                                    cardStack.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                    cardStack.setVisibility(View.VISIBLE);
+                                    flag = true;
+                                    Reusable_Functions.hDialog();
+                                }
                             }
                             else if (response.length() < limit)
                             {
@@ -574,12 +587,22 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                     visualAssort = gson.fromJson(response.get(i).toString(), VisualAssort.class);
                                     visualassortmentlist.add(visualAssort);
                                 }
-
-                                adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
-                                cardStack.setAdapter(adapter);
-                                adapter.notifyDataSetChanged();
-                                flag = true;
-                                Reusable_Functions.hDialog();
+                               // visualassortmentlist.clear();
+                                if(visualassortmentlist.size() == 0)
+                                {
+                                    Log.e(TAG, "onResponse1111: "+visualassortmentlist.size());
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    cardStack.setVisibility(View.GONE);
+                                    Reusable_Functions.hDialog();
+                                }
+                                else {
+                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
+                                    cardStack.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                    cardStack.setVisibility(View.VISIBLE);
+                                    flag = true;
+                                    Reusable_Functions.hDialog();
+                                }
 
                             }
 
@@ -748,19 +771,19 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 });
                             }*/
 
-                            for(int i = 0; i < visualassortmentlist.size(); i++)
-                            {
-                                Log.e("size"," "+visualassortmentlist.size());
-                                Log.e("--ArticleOpt--"," "+visualassortmentlist.get(i).getArticleOption());
-                                Log.e("--isLikeDislike--"," "+visualassortmentlist.get(i).getLikeDislikeFlg());
-                                Log.e("--isFeedBack--"," "+visualassortmentlist.get(i).getFeedback());
-                            }
+//                            for(int i = 0; i < visualassortmentlist.size(); i++)
+//                            {
+//                                Log.e("size"," "+visualassortmentlist.size());
+//                                Log.e("--ArticleOpt--"," "+visualassortmentlist.get(i).getArticleOption());
+//                                Log.e("--isLikeDislike--"," "+visualassortmentlist.get(i).getLikeDislikeFlg());
+//                                Log.e("--isFeedBack--"," "+visualassortmentlist.get(i).getFeedback());
+//                            }
 
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                            adapter.layoutView.setVisibility(View.GONE);
+                            cardStack.setVisibility(View.GONE);
 
                             e.printStackTrace();
                         }
@@ -772,7 +795,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         error.getMessage();
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "  no data found", Toast.LENGTH_LONG).show();
-                        adapter.layoutView.setVisibility(View.GONE);
+                        cardStack.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }

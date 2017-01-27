@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.35"
                         android:text="Promo Sales"
                         android:layout_gravity="center"
                         android:singleLine="true"
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.55"
                         android:id="@+id/bst_PromoValues_child"
                         android:text="Promo Sales"
                         android:layout_gravity="center"
@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.35"
                         android:text="Promo Sales(U)"
                         android:layout_width="0dp"
                         android:layout_gravity="center"
@@ -143,7 +143,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.55"
                         android:id="@+id/bst_PromoValuesU_child"
                         android:text="Promo Sales"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"

@@ -20,7 +20,7 @@
             android:layout_marginBottom="5dp">
 
             <RelativeLayout
-                android:layout_marginRight="65dp"
+                android:layout_toLeftOf="@+id/imageBtnFilter"
                 android:id="@+id/innerrellay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

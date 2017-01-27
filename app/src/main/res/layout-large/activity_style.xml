@@ -88,6 +88,7 @@
                 android:drawableRight="@mipmap/search_option_dropdown_arrow"
                 android:id="@+id/searchablespinnerlibrary"
                 android:layout_width="match_parent"
+                android:singleLine="true"
                 android:layout_height="50dp" />
 
             <View
@@ -104,6 +105,7 @@
                 android:drawableBottom="@color/darker_grey"
                 android:drawableRight="@mipmap/search_option_dropdown_arrow"
                 android:id="@+id/searchablespinnerlibrary1"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
 

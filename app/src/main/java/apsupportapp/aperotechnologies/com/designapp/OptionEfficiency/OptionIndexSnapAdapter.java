@@ -16,7 +16,9 @@ import android.widget.TextView;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexDetails;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -135,48 +137,50 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (viewHolder instanceof OptionHolder) {
             if(position < OptionIndexDetailsArrayList.size()) {
                 OptionEfficiencyDetails optionEfficiencyDetails = OptionIndexDetailsArrayList.get(position);
+                NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
+
                 //  fromWhere = "Department";
                 if (fromWhere.equals("Department")) {
 
                     ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanDept());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
                     ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
+                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
                     ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
 
 
                 } else if (fromWhere.equals("Category")) {
 
                     ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanCategory());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
                     ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
+                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
                     ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
 
                 } else if (fromWhere.equals("Plan Class")) {
 
                     ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanClass());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
                     ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
+                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
                     ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
 
 
                 } else if (fromWhere.equals("Brand")) {
 
                     ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandName());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
                     ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
+                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
                     ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
 
 
                 } else if (fromWhere.equals("Brand Plan Class")) {
 
                     ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandplanClass());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+optionEfficiencyDetails.getOptionCount());
+                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
                     ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+Math.round(optionEfficiencyDetails.getStkOnhandQty()));
+                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
                     ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
                 }
             }

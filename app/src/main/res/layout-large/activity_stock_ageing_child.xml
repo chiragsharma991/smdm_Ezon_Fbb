@@ -141,7 +141,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:singleLine="true"
-                        android:text="Aging"
+                        android:text="Ageing"
                         android:textSize="@dimen/smdm_inflator_subtitle_large" />
 
                     <TextView

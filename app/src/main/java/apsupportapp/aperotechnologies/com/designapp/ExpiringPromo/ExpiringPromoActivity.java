@@ -40,8 +40,10 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -133,19 +135,19 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
 
                                         ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         ExpireList.add(ExpiringPromoListDisplay);
-
-
                                     }
-                                    Log.e(TAG, "promolistSize" + ExpireList.size());
-                                    promoval1.setText("\u20B9\t" + (int) ExpireList.get(0).getDurSaleNetVal());
+
+                                    NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
+
+                                    promoval1.setText("\u20B9\t" +  format.format(Math.round(ExpireList.get(0).getDurSaleNetVal())));
                                     promoval2.setText("" + ExpireList.get(0).getDurSaleTotQty());
                                     storecode.setText(ExpireList.get(0).getStoreCode());
                                     storedesc.setText(ExpireList.get(0).getStoreDesc());
+
                                 }
 
 
-                                ExpireListView.setLayoutManager(new LinearLayoutManager(
-                                        ExpireListView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                ExpireListView.setLayoutManager(new LinearLayoutManager(ExpireListView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 ExpireListView.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(ExpireListView);
@@ -259,8 +261,9 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
 
     private void TimeUP()
     {
+        NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
         if (focusposition < expiringPromoSnapAdapter.getItemCount() - 1) {
-            promoval1.setText("\u20B9\t" + (int) ExpireList.get(focusposition).getDurSaleNetVal());
+            promoval1.setText("\u20B9\t" + format.format(Math.round(ExpireList.get(focusposition).getDurSaleNetVal())));
             promoval2.setText("" + ExpireList.get(focusposition).getDurSaleTotQty());
             storecode.setText(ExpireList.get(focusposition).getStoreCode());
             storedesc.setText(ExpireList.get(focusposition).getStoreDesc());
@@ -271,7 +274,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
             LinearLayoutManager llm = (LinearLayoutManager)ExpireListView.getLayoutManager();
             llm.scrollToPosition(focusposition);
 
-            promoval1.setText("\u20B9\t" + Math.round(ExpireList.get(focusposition).getDurSaleNetVal()));
+            promoval1.setText("\u20B9\t" + format.format(Math.round(ExpireList.get(focusposition).getDurSaleNetVal())));
             promoval2.setText("" + ExpireList.get(focusposition).getDurSaleTotQty());
             storecode.setText(ExpireList.get(focusposition).getStoreCode());
             storedesc.setText(ExpireList.get(focusposition).getStoreDesc());
