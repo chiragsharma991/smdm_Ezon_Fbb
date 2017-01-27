@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
     RequestQueue queue;
     MySingleton m_config;
-    Boolean log_flag = false;
+    boolean log_flag = false;
     SharedPreferences sharedPreferences;
     private LinearLayout LinearLogin;
     private Snackbar snackbar;

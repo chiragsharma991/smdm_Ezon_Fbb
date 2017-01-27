@@ -26,11 +26,9 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
         {
         Log.e("LocalNotificationReceiver", "onReceive: IF "+isApplicationForeGround);
 
-
         Intent i = new Intent(context, TransparentActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
-
         }
         else
         {
@@ -63,13 +61,7 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
         mBuilder.setDeleteIntent(contentIntent);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setAutoCancel(true);
-
         notificationManager.notify(notId, mBuilder.build());
-
-
-
-
     }
-
 
 }

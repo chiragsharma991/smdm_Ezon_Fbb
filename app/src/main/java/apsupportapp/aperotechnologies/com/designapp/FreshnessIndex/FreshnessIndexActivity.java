@@ -533,7 +533,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                                                 }
                                             } else {
-                                                Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                                Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
                                                 Reusable_Functions.hDialog();
 
                                             }
@@ -568,7 +568,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                                                 }
                                             } else {
-                                                Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                                Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
                                                 Reusable_Functions.hDialog();
 
                                             }
@@ -604,7 +604,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                                                 }
                                             } else {
-                                                Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                                Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
                                                 Reusable_Functions.hDialog();
 
                                             }
