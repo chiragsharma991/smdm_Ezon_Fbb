@@ -630,6 +630,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             @Override
             public void onItemClick(View view, int position)
             {
+                OnItemClick=true;
+
                 if(position < optionEfficiencyDetailsArrayList.size()) {
                     switch (oe_txtHeaderClass.getText().toString()) {
 
@@ -653,6 +655,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 limit = 100;
                                 count = 0;
                                 optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+
                                 request_OE_CategoryList(oe_ClickedVal);
                                 oe_PlanDept = oe_ClickedVal;
 
@@ -769,8 +772,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     private void TimeUP() {
 
+        Log.e(TAG, "focus position on scroll: "+focusposition);
 
-        if (focusposition < optionIndexSnapAdapter.getItemCount() - 1) {
+        if (focusposition < optionIndexSnapAdapter.getItemCount() - 1  && OnItemClick==false) {
 
             if (oe_txtHeaderClass.getText().toString().equals("Department")) {
                 level = 1;
@@ -796,7 +800,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 count = 0;
                 //optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
 
-                if(focusposition!=OveridePositionValue) {
+                if(focusposition!=OveridePositionValue ) {
 
                     if (postRequest != null) {
                         postRequest.cancel();
@@ -1291,6 +1295,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         //     fashion select with season params
              fIdetails = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit;
         }
+        Log.e(TAG, "requestOptionEfficiencyDetails: "+fIdetails);
 
 
 
@@ -1351,6 +1356,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
                                 optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
                                 optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
+                                Log.e(TAG, "optionEfficiencyDetailsArrayList size: "+optionEfficiencyDetailsArrayList.size() );
 
                                 oe_listView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -1601,6 +1607,13 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     private void requestHeaderPieChart() {
         String url = "";
+        Log.e(TAG, "Item selection on Pie chart: "+oe_FirstVisibleItem );
+         offsetvalue = 0;
+         limit = 100;
+         count = 0;
+        oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
+
+
         if(coreSelection) {
             //core selection without season group
             url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit ;
@@ -1611,6 +1624,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
 
         }
+        Log.e(TAG, "requestHeaderPieChart: "+url );
 
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -1651,6 +1665,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                     partCutCount = (float) optionEfficiency.getPartCutCount();
                                     fullCutCount = (float) optionEfficiency.getFullCutCount();
+                                    Log.e(TAG, "pie chart values: "+ fullSizeCount+" ,"+partCutCount+" ,"+fullCutCount);
+
 
 
                                 }
@@ -1782,6 +1798,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             oe_category_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
 
         }
+        Log.e(TAG, "request_OE_CategoryList: "+oe_category_listurl );
 
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_category_listurl,
@@ -1794,6 +1811,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
+
+
                                 for (i = 0; i < response.length(); i++) {
 
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
@@ -1882,6 +1901,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         else {
             oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
         }
+        Log.e(TAG, "request_OE_PlanClassList: "+oe_planclass_listurl );
 
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_planclass_listurl,
@@ -1983,6 +2003,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         {
             oe_brand_listurl  = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
         }
+        Log.e(TAG, "request_OE_BrandList: "+oe_brand_listurl );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2081,7 +2102,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + oe_PlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
         }
 
-
+        Log.e(TAG, "request_OE_BrandPlanList: "+oe_brandplan_listurl );
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
@@ -2174,6 +2195,13 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     private void requestOEPieChart() {
 
+        Log.e(TAG, "Item selection on Pie chart: "+oe_FirstVisibleItem );
+        offsetvalue = 0;
+        limit = 100;
+        count = 0;
+        optionArrayList = new ArrayList<OptionEfficiencyDetails>();
+
+
         String url = "";
         txtNoChart.setVisibility(View.GONE);
 
@@ -2220,7 +2248,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
             }
+
+
         }
+        Log.e(TAG, "requestOEPieChart: "+url );
 
            postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -2257,36 +2288,47 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
+                                        Log.e(TAG, "pie chart values: "+ fullSizeCount+" ,"+partCutCount+" ,"+fullCutCount);
 
 
                                     } else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanDept())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
+                                        Log.e(TAG, "pie chart values: "+ fullSizeCount+" ,"+partCutCount+" ,"+fullCutCount);
+
 
 
                                     } else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanCategory())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
+                                        Log.e(TAG, "pie chart values: "+ fullSizeCount+" ,"+partCutCount+" ,"+fullCutCount);
+
 
 
                                     } else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanClass())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
+                                        Log.e(TAG, "pie chart values: "+ fullSizeCount+" ,"+partCutCount+" ,"+fullCutCount);
+
 
 
                                     } else if (oe_FirstVisibleItem.equals(optionEfficiency.getBrandName())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
+                                        Log.e(TAG, "pie chart values: "+ fullSizeCount+" ,"+partCutCount+" ,"+fullCutCount);
+
 
 
                                     } else if (oe_FirstVisibleItem.equals(optionEfficiency.getBrandplanClass())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
+                                        Log.e(TAG, "pie chart values: "+ fullSizeCount+" ,"+partCutCount+" ,"+fullCutCount);
+
 
 
                                     }
