@@ -208,14 +208,14 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
             if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
                 Log.e(TAG, "Normal sized screen:" );
-                mType.setLayoutParams(new LinearLayout.LayoutParams(90,45));
-                mType.setTextSize(7);
+                mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
+                mType.setTextSize(12);
 
             }
             else if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
                 Log.e(TAG, "Small sized screen :" );
-                mType.setLayoutParams(new LinearLayout.LayoutParams(90,45));
-                mType.setTextSize(7);
+                mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
+                mType.setTextSize(12);
 
             }
             else {
