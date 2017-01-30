@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -17,7 +17,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="245dp"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/cell_shape"
             android:layout_toLeftOf="@+id/relative2"
             android:gravity="center_vertical|start"
 
@@ -27,8 +28,8 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="name"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 android:id="@+id/txt_up_PromoName"
 
                 />
@@ -45,13 +46,15 @@
         <RelativeLayout
             android:paddingRight="2dp"
             android:id="@+id/relative2"
-            android:layout_width="75dp"
+            android:layout_width="86.5dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="163dp"
+            android:layout_marginRight="160dp"
             android:layout_toLeftOf="@+id/relative3"
             android:gravity="center_vertical"
+            android:background="@drawable/cell_shape"
+
 
 
 
@@ -63,8 +66,8 @@
                 android:singleLine="true"
                 android:gravity="center"
                 android:text="02/09/93"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 android:id="@+id/txt_up_startDate"
 
                 />
@@ -80,8 +83,9 @@
 
         <RelativeLayout
             android:id="@+id/relative3"
-            android:layout_width="75dp"
+            android:layout_width="79dp"
             android:layout_height="30dp"
+            android:background="@drawable/cell_shape"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="82dp"
@@ -96,8 +100,8 @@
                 android:text="02/09/93"
                 android:id="@+id/txt_up_EndDate"
                 android:gravity="center"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
                 />
 
 
@@ -115,18 +119,18 @@
 
         <RelativeLayout
             android:id="@+id/relative5"
-            android:layout_width="77dp"
+            android:layout_width="83dp"
             android:layout_height="30dp"
-            android:layout_marginRight="3dp"
+            android:layout_marginRight="0dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:background="@drawable/cell_shape"
             >
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/up_imgVm"
-
                 android:src="@mipmap/filter_planclass_icon"
                 android:scaleType="fitCenter"
                 android:padding="5dp"

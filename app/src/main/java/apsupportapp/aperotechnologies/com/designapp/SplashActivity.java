@@ -115,8 +115,7 @@ public class SplashActivity extends AppCompatActivity {
                         requestLoginAPI();
                     }else
                     {
-                        Log.e("", "onClick: "+"in if  condition" );
-
+                        checkNetwork();
                     }
 
 
