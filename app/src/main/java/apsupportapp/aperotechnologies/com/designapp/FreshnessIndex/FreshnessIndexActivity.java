@@ -461,7 +461,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     public void onItemClick(View v, final int position) {
 
                         OnItemClick=true;
-                        Reusable_Functions.sDialog(context, "Loading data...");
+                       // Reusable_Functions.sDialog(context, "Loading data...");
 
 
                         Handler h = new Handler();

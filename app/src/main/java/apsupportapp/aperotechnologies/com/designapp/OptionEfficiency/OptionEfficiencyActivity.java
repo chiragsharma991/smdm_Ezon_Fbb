@@ -662,6 +662,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             } else {
 
                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
+
                             }
                             break;
 
@@ -694,7 +696,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(context, "Please select Dept name", Toast.LENGTH_SHORT);
+                                Toast.makeText(context, "Please select Dept name", Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
                             }
 
                             break;
@@ -725,7 +728,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(context, "Please select Dept name", Toast.LENGTH_SHORT);
+                                Toast.makeText(context, "Please select Dept name", Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
                             }
 
                             break;
@@ -757,7 +761,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(context, "Please select Dept name", Toast.LENGTH_SHORT);
+                                Toast.makeText(context, "Please select Dept name", Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
                             }
                             break;
                     }

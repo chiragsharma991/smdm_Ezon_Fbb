@@ -62,14 +62,14 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 
     int offsetvalue = 0, limit = 100, count = 0, level;
     ArrayList categorylist, articleOptionList, planClassList, brandNameList, brandplanclassList;
-
+    List tempcategorylist, tempplanclass, tempbrandname, tempbrandplanclass;
     ExpandableListView expandableListView;
     List<String> salesList;
-    static  String txtClickedVal;
-    //    List<ListCategory> categoryArray;
-//    List<ListPlanClass> planclassArray;
-//    List<ListBrand> brandArray;
-//    List<ListBrandClass> brandclassArray;
+    static String txtClickedVal;
+    List<ListCategory> categoryArray;
+    List<ListPlanClass> planclassArray;
+    List<ListBrand> brandArray;
+    List<ListBrandClass> brandclassArray;
 
     private HashMap<String, List<String>> mListDataChild, dublicate_listDataChild;
     private List<String> mListDataGroup;
@@ -77,6 +77,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     private GroupViewHolder groupViewHolder;
     private String groupText;
     private String childText;
+    public static String planDepartmentName, planClassName, planCategoryName;
     SalesFilterExpandableList listAdapter;
     Boolean flag = false;
     //  SFilter sFilter;
@@ -96,11 +97,10 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         salesList = new ArrayList<>();
         this.dublicate_listDataChild = new HashMap<String, List<String>>();
         this.dublicate_listDataChild.putAll(mListDataChild);
-//        categoryArray = new ArrayList();
-//        planclassArray = new ArrayList();
-//        brandArray = new ArrayList();
-//        brandclassArray = new ArrayList();
-//        subCategory = new ArrayList<String>();
+        categoryArray = new ArrayList();
+        planclassArray = new ArrayList();
+        brandArray = new ArrayList();
+        brandclassArray = new ArrayList();
         flag = false;
     }
 
@@ -169,6 +169,11 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     }
 
     @Override
+    public boolean hasStableIds() {
+        return false;
+    }
+
+    @Override
     public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         final int mGroupPosition = groupPosition;
@@ -183,8 +188,8 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             childViewHolder = new ChildViewHolder();
             childViewHolder.mChildText = (TextView) convertView
                     .findViewById(R.id.txtdeptname);
-//            childViewHolder.mCheckBox = (CheckBox) convertView
-//                    .findViewById(R.id.itemCheckBox);
+            childViewHolder.mCheckBox = (CheckBox) convertView
+                    .findViewById(R.id.itemCheckBox);
             convertView.setTag(R.layout.sfilter_list_item, childViewHolder);
 
         } else {
@@ -194,11 +199,11 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 
         childViewHolder.mChildText.setText(childText);
 
-//        if (salesList.contains(mListDataGroup.get(groupPosition) + "." + childText)) {
-//            childViewHolder.mCheckBox.setChecked(true);
-//        } else {
-//            childViewHolder.mCheckBox.setChecked(false);
-//        }
+        if (salesList.contains(mListDataGroup.get(groupPosition) + "." + childText)) {
+            childViewHolder.mCheckBox.setChecked(true);
+        } else {
+            childViewHolder.mCheckBox.setChecked(false);
+        }
 
 
         convertView.setOnClickListener(null);
@@ -207,57 +212,48 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
-
-
-
                                                RelativeLayout rel = (RelativeLayout) v;
-                                               //CheckBox cb = (CheckBox) rel.getChildAt(1);
+                                               CheckBox cb = (CheckBox) rel.getChildAt(1);
                                                TextView txtView = (TextView) rel.getChildAt(0);
-                                               txtClickedVal= txtView.getText().toString();
-                                               v.setBackgroundColor(R.color.bel_lightgrey_text);
-
-//                                               if (cb.isChecked() == false) {
+                                               txtClickedVal = txtView.getText().toString();
+                                               Log.e(TAG, "onClick: " + txtClickedVal);
+                                               if (cb.isChecked() == false) {
+                                                   salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
+                                                   Log.e(TAG, "salesList" + salesList);
+                                                   cb.setChecked(true);
+                                               } else {
+                                                   salesList.remove(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
+                                                   cb.setChecked(false);
+                                               }
+//         mListDataChild.clear();
 //
-//                                                  salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
-//                                                   Log.e(TAG,"salesList"+salesList);
-//                                                   cb.setChecked(true);
-//                                               } else {
-//                                                   salesList.remove(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
-//                                                   cb.setChecked(false);
-//                                               }
-//                if (cb.isChecked() == false) {
-//                    ////Log.e("checkbox is not selected", "");
-//                    if (Reusable_Functions.chkStatus(mContext)) {
-//
-//                        Reusable_Functions.sDialog(mContext, "Loading  data...");
-//                        offsetvalue = 0;
-//                        count = 0;
-//                        limit = 100;
-//                        if (groupPosition == 0) {
-//                            tempcategorylist = new ArrayList();
-//                            SalesFilterActivity.pfilter_list.collapseGroup(1);
-//                            planDepartmentName = txtClickedVal;
-//                            Log.i("click dept value",""+planDepartmentName);
-//                            String groupname = mListDataGroup.get(0);
-//                            requestCategoryAPI(offsetvalue, limit, planDepartmentName, groupname, cb);
-//
-//                        }
+//         if (cb.isChecked() == false) {
+//          if (Reusable_Functions.chkStatus(mContext)) {
+//             Reusable_Functions.sDialog(mContext, "Loading  data...");
+//             offsetvalue = 0;
+//             count = 0;
+//             limit = 100;
+//             if (groupPosition == 0) {
+//             tempcategorylist = new ArrayList();
+//             SalesFilterActivity.pfilter_list.collapseGroup(1);
+//             planDepartmentName = txtClickedVal;
+//             Log.i("click dept value", "" + planDepartmentName);
+//             String groupname = mListDataGroup.get(0);
+//             requestCategoryAPI(offsetvalue, limit, planDepartmentName, groupname, cb);
+//           }
+//          }
+//   }
 //                        else if (groupPosition == 1)
 //                        {
-//
 //                            tempplanclass = new ArrayList();
 //                            SalesFilterActivity.pfilter_list.collapseGroup(2);
 //                            planCategoryName = txtClickedVal;
 //                            Log.i("click category value---",""+planCategoryName);
 //                            String groupname = mListDataGroup.get(1);
-//
 //                            requestPlanClassAPI(offsetvalue, limit, planDepartmentName, txtClickedVal, groupname, cb);
-//
-//
 //                        }
 //                        else if (groupPosition == 2)
 //                        {
-//
 //                            tempbrandname = new ArrayList();
 //                            SalesFilterActivity.pfilter_list.collapseGroup(3);
 //                            planClassName = txtClickedVal;
@@ -273,18 +269,18 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 //                            String groupname = mListDataGroup.get(3);
 //                            requestBrandClassNameAPI(offsetvalue, limit,planDepartmentName,planCategoryName,planClassName, txtClickedVal, groupname, cb);
 //                        }
-//
-////                        if(flag == true)
-////                        {
-////                            salesList.add(mListDataGroup.get(groupPosition)+"."+txtClickedVal);
-////                            cb.setChecked(true);
-////                        }
-//
-//
+
+//                        if(flag == true)
+//                        {
+//                            salesList.add(mListDataGroup.get(groupPosition)+"."+txtClickedVal);
+//                            cb.setChecked(true);
+//                        }
+
+
 //                        } else {
 //                            Toast.makeText(mContext, "Check your network connectivity", Toast.LENGTH_LONG).show();
 //                        }
-//                    }
+                                           }
 //            else {
 //                        Log.e("groupPosition ", " " + groupPosition);
 //
@@ -415,23 +411,19 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 //                            }
 //                        }
 //
-//
-                                           }
-                                           // }
+//                                           }
+//                                            }
                                        }
         );
         return convertView;
     }
+
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
     }
 
-    @Override
-    public boolean hasStableIds() {
-        return false;
-    }
 
     public void filterData(String query) {
 
@@ -493,449 +485,400 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         CheckBox mCheckBox;
     }
 
-//    @Override
-//    public Filter getFilter() {
-//        if (sFilter == null) {
-//            sFilter = new SalesFilterExpandableList.SFilter();
-//        }
-//        return sFilter;
-//    }
-//
-//    public class SFilter extends Filter {
-//
-//        //Invoked in a worker thread to filter the data according to the constraint.
-//        @Override
-//        protected FilterResults performFiltering(CharSequence constraint) {
-//
-//            FilterResults results = new FilterResults();
-//
-//
-//            mFilterList = SalesFilterActivity.subdept;
-//            Log.e("Filter Array Size", "" + mFilterList.size());
-//
-//            if (constraint != null && constraint.length() > 0) {
-//                ArrayList<String> filterList = new ArrayList<String>();
-//                for (int i = 0; i < mFilterList.size(); i++) {
-//                    if (mFilterList.get(i).toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
-//                        filterList.add(mFilterList.get(i));
-//                        Log.e("List after filter", "" + filterList.size());
-//                    }
-//                }
-//                results.count = filterList.size();
-//                results.values = filterList;
-//            } else {
-//                results.count = mFilterList.size();
-//                results.values = mFilterList;
-//            }
-//            return results;
-//        }
-//
-//        //Invoked in the UI thread to publish the filtering results in the user interface.
-//        @SuppressWarnings("unchecked")
-//
-//        @Override
-//        protected void publishResults(CharSequence constraint,
-//                                      FilterResults results) {
-//            mFilterList = (ArrayList<String>) results.values;
-//            SalesFilterActivity.listAdapter.notifyDataSetChanged();
-//
-//        }
-//    }
+
+    public void requestCategoryAPI(int offsetvalue1, int limit1, final String deptName, final String groupname, final CheckBox cb) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
+        String userId = sharedPreferences.getString("userId", "");
+        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
+        BasicNetwork network = new BasicNetwork(new HurlStack());
+        RequestQueue queue = new RequestQueue(cache, network);
+        queue.start();
+
+        String category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?level=PCA&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+
+        Log.i("URL   ", category_url);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, category_url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("Category Filter Response", response.toString());
+                        Log.e("category list", "---" + response.length());
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(mContext, "no category data found", Toast.LENGTH_LONG).show();
+                            } else if (response.length() == limit) {
+                                Reusable_Functions.hDialog();
+
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject productName1 = response.getJSONObject(i);
+
+                                    String category = productName1.getString("planCategory");
+                                    categorylist.add(category);
+                                    tempcategorylist.add(category);
+
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                requestCategoryAPI(offsetvalue, limit, deptName, groupname, cb);
+
+                            } else {
+                                if (response.length() < limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject productName1 = response.getJSONObject(i);
+
+                                        String category = productName1.getString("planCategory");
+                                        categorylist.add(category);
+                                        tempcategorylist.add(category);
+
+                                    }
+                                    //Collections.sort(categorylist);
+                                    mListDataChild.put(mListDataGroup.get(1), categorylist);
+                                    ListCategory plancategory = new ListCategory();
+                                    plancategory.setSubdept(deptName);
+                                    plancategory.setCategory(tempcategorylist);
+                                    categoryArray.add(plancategory);
+                                    SalesFilterActivity.pfilter_list.expandGroup(1);
+                                    Reusable_Functions.hDialog();
+                                    Log.e("here ", "----111----");
+
+                                    salesList.add(groupname + "." + planDepartmentName);
+                                    cb.setChecked(true);
+                                }
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+
+    }
+
+    @SuppressLint("LongLogTag")
 
 
-//    public void requestCategoryAPI(int offsetvalue1, int limit1, final String deptName, final String groupname, final CheckBox cb) {
-//
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
-//        String userId = sharedPreferences.getString("userId", "");
-//        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-//        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
-//        BasicNetwork network = new BasicNetwork(new HurlStack());
-//        RequestQueue queue = new RequestQueue(cache, network);
-//        queue.start();
-//
-//        String category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?level=PCA&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-//
-//        Log.i("URL   ", category_url);
-//
-//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, category_url,
-//                new Response.Listener<JSONArray>() {
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        Log.e("Category Filter Response", response.toString());
-//                        Log.e("category list","---"+response.length());
-//                        try {
-//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-//
-//                                Reusable_Functions.hDialog();
-//                                Toast.makeText(mContext, "no category data found", Toast.LENGTH_LONG).show();
-//                            } else if (response.length() == limit) {
-//                                Reusable_Functions.hDialog();
-//
-//                                for (int i = 0; i < response.length(); i++) {
-//                                    JSONObject productName1 = response.getJSONObject(i);
-//
-//                                    String category = productName1.getString("planCategory");
-//                                    categorylist.add(category);
-//                                    tempcategorylist.add(category);
-//
-//                                }
-//                                offsetvalue = (limit * count) + limit;
-//                                count++;
-//                                requestCategoryAPI(offsetvalue, limit, deptName, groupname, cb);
-//
-//                            } else {
-//                                if (response.length() < limit) {
-//                                    for (int i = 0; i < response.length(); i++) {
-//                                        JSONObject productName1 = response.getJSONObject(i);
-//
-//                                        String category = productName1.getString("planCategory");
-//                                        categorylist.add(category);
-//                                        tempcategorylist.add(category);
-//
-//                                    }
-//                                    //Collections.sort(categorylist);
-//                                    mListDataChild.put(mListDataGroup.get(1), categorylist);
-//                                    ListCategory plancategory = new ListCategory();
-//                                    plancategory.setSubdept(deptName);
-//                                    plancategory.setCategory(tempcategorylist);
-//                                    categoryArray.add(plancategory);
-//                                    SalesFilterActivity.pfilter_list.expandGroup(1);
-//                                    Reusable_Functions.hDialog();
-//                                    Log.e("here ","----111----");
-//
-//                                    salesList.add(groupname+"."+planDepartmentName);
-//                                    cb.setChecked(true);
-//                                }
-//                            }
-//
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Reusable_Functions.hDialog();
-//                        error.printStackTrace();
-//                    }
-//                }
-//
-//        ) {
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("Content-Type", "application/json");
-//                params.put("Authorization", "Bearer " + bearertoken);
-//                return params;
-//            }
-//        };
-//        int socketTimeout = 60000;//5 seconds
-//
-//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-//        postRequest.setRetryPolicy(policy);
-//        queue.add(postRequest);
-//
-//    }
-
-//    @SuppressLint("LongLogTag")
-//
-//
-//    public void requestPlanClassAPI(int offsetvalue1, int limit1, String plandeptName, final String category, final String groupname, final CheckBox cb) {
-//
-//
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
-//        String userId = sharedPreferences.getString("userId", "");
-//        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-//        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
-//        BasicNetwork network = new BasicNetwork(new HurlStack());
-//        RequestQueue queue = new RequestQueue(cache, network);
-//        queue.start();
-//
-//         String planclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level=PCL&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&category="+category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-//
-//        Log.e("requestPlanClassAPI URL   ", planclass_url);
-//
-//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, planclass_url,
-//                new Response.Listener<JSONArray>() {
-//                    @SuppressLint("LongLogTag")
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        Log.e("Plan Class Filter Response", response.toString());
-//                        Log.e("plan class list", " " + response.length());
-//
-//                        try {
-//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-//
-//                                Reusable_Functions.hDialog();
-//                                Toast.makeText(mContext, "no plan class data found", Toast.LENGTH_LONG).show();
-//
-//                            } else {
-//                                if (response.length() == limit) {
-//                                    for (int i = 0; i < response.length(); i++) {
-//                                        JSONObject productName1 = response.getJSONObject(i);
-//
-//                                        String planClass = productName1.getString("planClass");
-//                                        planClassList.add(planClass);
-//                                        tempplanclass.add(planClass);
-//
-//                                    }
-//                                    offsetvalue = (limit * count) + limit;
-//                                    count++;
-//                                    requestPlanClassAPI(offsetvalue, limit, planDepartmentName, category, groupname, cb);
-//
-//                                } else if (response.length() < limit) {
-//                                    for (int i = 0; i < response.length(); i++) {
-//                                        JSONObject productName1 = response.getJSONObject(i);
-//
-//                                        String planClass = productName1.getString("planClass");
-//                                        planClassList.add(planClass);
-//                                        tempplanclass.add(planClass);
-//
-//                                    }
-//
-//                                    mListDataChild.put(mListDataGroup.get(2), planClassList);
-//
-//                                    ListPlanClass planclass = new ListPlanClass();
-//                                    planclass.setSubdept(planDepartmentName);
-//                                    planclass.setCategory(category);
-//                                    planclass.setPlanclass(tempplanclass);
-//                                    planclassArray.add(planclass);
-//                                    SalesFilterActivity.pfilter_list.expandGroup(2);
-//                                    SalesFilterActivity.pfilter_list.expandGroup(1);
-//                                    Reusable_Functions.hDialog();
-//                                    salesList.add(groupname+"."+category);
-//                                    cb.setChecked(true);
-//                                    Log.e("planClass size", " " + planclassArray.size());
-//
-//
-//                                }
-//                            }
-//                        } catch (Exception e) {
-//                            //Log.e("Exception e", e.toString() + "");
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Reusable_Functions.hDialog();
-//                        error.printStackTrace();
-//                    }
-//                }
-//        ) {
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("Content-Type", "application/json");
-//                params.put("Authorization", "Bearer " + bearertoken);
-//                return params;
-//            }
-//        };
-//        int socketTimeout = 60000;//5 seconds
-//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-//        postRequest.setRetryPolicy(policy);
-//        queue.add(postRequest);
-//    }
+    public void requestPlanClassAPI(int offsetvalue1, int limit1, String plandeptName, final String category, final String groupname, final CheckBox cb) {
 
 
-//    public void requestBrandNameAPI(int offsetvalue1, int limit1, String plandeptName, String category, final String planClass, final String groupname, final CheckBox cb) {
-//
-//
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
-//        String userId = sharedPreferences.getString("userId", "");
-//        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-//        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
-//        BasicNetwork network = new BasicNetwork(new HurlStack());
-//        RequestQueue queue = new RequestQueue(cache, network);
-//        queue.start();
-//
-//        String brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level=BRN&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-//
-//        Log.e("requestPlanClassAPI URL   ", brand_url);
-//
-//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, brand_url,
-//                new Response.Listener<JSONArray>() {
-//                    @SuppressLint("LongLogTag")
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        Log.e("Brand Filter Response", response.toString());
-//                        Log.e("brand list", " " + response.length());
-//
-//                        try {
-//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-//                                Reusable_Functions.hDialog();
-//                                Toast.makeText(mContext, "no brand name data found", Toast.LENGTH_LONG).show();
-//
-//                            } else {
-//                                if (response.length() == limit) {
-//                                    for (int i = 0; i < response.length(); i++) {
-//                                        JSONObject productName1 = response.getJSONObject(i);
-//
-//                                        String brand_name = productName1.getString("brandName");
-//                                        brandNameList.add(brand_name);
-//                                        tempbrandname.add(brand_name);
-//
-//                                    }
-//                                    offsetvalue = (limit * count) + limit;
-//                                    count++;
-//                                    requestBrandNameAPI(offsetvalue, limit, planDepartmentName, planCategoryName,planClass, groupname, cb);
-//
-//                                } else if (response.length() < limit) {
-//                                    for (int i = 0; i < response.length(); i++) {
-//                                        JSONObject productName1 = response.getJSONObject(i);
-//
-//                                        String brand_name = productName1.getString("brandName");
-//                                        brandNameList.add(brand_name);
-//                                        tempbrandname.add(brand_name);
-//                                    }
-//                                    mListDataChild.put(mListDataGroup.get(3), brandNameList);
-//
-//                                    ListBrand brandNm = new ListBrand();
-//                                    brandNm.setSubdept(planDepartmentName);
-//                                    brandNm.setCategory(planCategoryName);
-//                                    brandNm.setPlanclass(planClass);
-//                                    brandNm.setBrand(tempbrandname);
-//                                    brandArray.add(brandNm);
-//
-//                                    SalesFilterActivity.pfilter_list.expandGroup(3);
-//                                    SalesFilterActivity.pfilter_list.expandGroup(2);
-//                                    SalesFilterActivity.pfilter_list.expandGroup(1);
-//                                    Reusable_Functions.hDialog();
-//                                    salesList.add(groupname+"."+planClass);
-//                                    cb.setChecked(true);
-//                                    Log.e("brand name size", " " + brandArray.size());
-//
-//                             }
-//                            }
-//                        } catch (Exception e) {
-//                            //Log.e("Exception e", e.toString() + "");
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Reusable_Functions.hDialog();
-//                        error.printStackTrace();
-//                    }
-//                }
-//        ) {
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("Content-Type", "application/json");
-//                params.put("Authorization", "Bearer " + bearertoken);
-//                return params;
-//            }
-//        };
-//        int socketTimeout = 60000;//5 seconds
-//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-//        postRequest.setRetryPolicy(policy);
-//        queue.add(postRequest);
-//    }
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
+        String userId = sharedPreferences.getString("userId", "");
+        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
+        BasicNetwork network = new BasicNetwork(new HurlStack());
+        RequestQueue queue = new RequestQueue(cache, network);
+        queue.start();
 
-//    public void requestBrandClassNameAPI(int offsetvalue1, int limit1, String plandeptName, String category, String planclass, final String brand, final String groupname, final CheckBox cb) {
-//
-//
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
-//        String userId = sharedPreferences.getString("userId", "");
-//        final String bearertoken = sharedPreferences.getString("bearerToken", "");
-//        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
-//        BasicNetwork network = new BasicNetwork(new HurlStack());
-//        RequestQueue queue = new RequestQueue(cache, network);
-//        queue.start();
-//
-//        String brandplanclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/"+ userId +"?level=BPC&dept="+ planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClassName.replaceAll(" ", "%20").replaceAll("&", "%26")+"&brand="+brand.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-//        Log.e("requestPlanClassAPI URL   ", brandplanclass_url);
-//
-//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, brandplanclass_url,
-//                new Response.Listener<JSONArray>() {
-//                    @SuppressLint("LongLogTag")
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        Log.e("Brand Plan Class Filter Response", response.toString());
-//                        Log.e("brand plan class list", " " + response.length());
-//
-//                        try {
-//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-//
-//                                Reusable_Functions.hDialog();
-//                                Toast.makeText(mContext, "no brand plan class data found", Toast.LENGTH_LONG).show();
-//
-//                            } else {
-//                                if (response.length() == limit) {
-//                                    for (int i = 0; i < response.length(); i++) {
-//                                        JSONObject productName1 = response.getJSONObject(i);
-//
-//                                        String brandPlanClass = productName1.getString("brandPlanClass");
-//                                        brandplanclassList.add(brandPlanClass);
-//                                        tempbrandplanclass.add(brandPlanClass);
-//
-//                                    }
-//                                    offsetvalue = (limit * count) + limit;
-//                                    count++;
-//                                    requestBrandClassNameAPI(offsetvalue, limit, planDepartmentName, planCategoryName,planClassName,brand, groupname, cb);
-//
-//                                } else if (response.length() < limit) {
-//                                    for (int i = 0; i < response.length(); i++) {
-//                                        JSONObject productName1 = response.getJSONObject(i);
-//
-//                                        String brandPlanClass = productName1.getString("brandPlanClass");
-//                                        brandplanclassList.add(brandPlanClass);
-//                                        tempbrandplanclass.add(brandPlanClass);
-//
-//                                    }
-//                                    mListDataChild.put(mListDataGroup.get(4), brandplanclassList);
-//
-//                                    ListBrandClass brandplancls = new ListBrandClass();
-//                                    brandplancls.setSubdept(planDepartmentName);
-//                                    brandplancls.setCategory(planCategoryName);
-//                                    brandplancls.setPlanclass(planClassName);
-//                                    brandplancls.setBrand(brand);
-//                                    brandplancls.setBrandClass(tempbrandplanclass);
-//                                    brandclassArray.add(brandplancls);
-//
-//                                    SalesFilterActivity.pfilter_list.expandGroup(4);
-//                                    SalesFilterActivity.pfilter_list.expandGroup(3);
-//                                    SalesFilterActivity.pfilter_list.expandGroup(2);
-//                                    SalesFilterActivity.pfilter_list.expandGroup(1);
-//                                    Reusable_Functions.hDialog();
-//                                    salesList.add(groupname+"."+brand);
-//                                    cb.setChecked(true);
-//                                    Log.e("brand plan class size", " " + brandclassArray.size());
-//
-//                                }
-//                            }
-//                        } catch (Exception e) {
-//                            //Log.e("Exception e", e.toString() + "");
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Reusable_Functions.hDialog();
-//                        error.printStackTrace();
-//                    }
-//                }
-//        ) {
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("Content-Type", "application/json");
-//                params.put("Authorization", "Bearer " + bearertoken);
-//                return params;
-//            }
-//        };
-//        int socketTimeout = 60000;//5 seconds
-//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-//        postRequest.setRetryPolicy(policy);
-//        queue.add(postRequest);
-//    }
+        String planclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?level=PCL&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+
+        Log.e("requestPlanClassAPI URL   ", planclass_url);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, planclass_url,
+                new Response.Listener<JSONArray>() {
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("Plan Class Filter Response", response.toString());
+                        Log.e("plan class list", " " + response.length());
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(mContext, "no plan class data found", Toast.LENGTH_LONG).show();
+
+                            } else {
+                                if (response.length() == limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject productName1 = response.getJSONObject(i);
+
+                                        String planClass = productName1.getString("planClass");
+                                        planClassList.add(planClass);
+                                        tempplanclass.add(planClass);
+
+                                    }
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+                                    requestPlanClassAPI(offsetvalue, limit, planDepartmentName, category, groupname, cb);
+
+                                } else if (response.length() < limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject productName1 = response.getJSONObject(i);
+
+                                        String planClass = productName1.getString("planClass");
+                                        planClassList.add(planClass);
+                                        tempplanclass.add(planClass);
+
+                                    }
+
+                                    mListDataChild.put(mListDataGroup.get(2), planClassList);
+
+                                    ListPlanClass planclass = new ListPlanClass();
+                                    planclass.setSubdept(planDepartmentName);
+                                    planclass.setCategory(category);
+                                    planclass.setPlanclass(tempplanclass);
+                                    planclassArray.add(planclass);
+                                    SalesFilterActivity.pfilter_list.expandGroup(2);
+                                    SalesFilterActivity.pfilter_list.expandGroup(1);
+                                    Reusable_Functions.hDialog();
+                                    salesList.add(groupname + "." + category);
+                                    cb.setChecked(true);
+                                    Log.e("planClass size", " " + planclassArray.size());
+
+
+                                }
+                            }
+                        } catch (Exception e) {
+                            //Log.e("Exception e", e.toString() + "");
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+
+    public void requestBrandNameAPI(int offsetvalue1, int limit1, String plandeptName, String category, final String planClass, final String groupname, final CheckBox cb) {
+
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
+        String userId = sharedPreferences.getString("userId", "");
+        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
+        BasicNetwork network = new BasicNetwork(new HurlStack());
+        RequestQueue queue = new RequestQueue(cache, network);
+        queue.start();
+
+        String brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?level=BRN&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+
+        Log.e("requestPlanClassAPI URL   ", brand_url);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, brand_url,
+                new Response.Listener<JSONArray>() {
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("Brand Filter Response", response.toString());
+                        Log.e("brand list", " " + response.length());
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(mContext, "no brand name data found", Toast.LENGTH_LONG).show();
+
+                            } else {
+                                if (response.length() == limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject productName1 = response.getJSONObject(i);
+
+                                        String brand_name = productName1.getString("brandName");
+                                        brandNameList.add(brand_name);
+                                        tempbrandname.add(brand_name);
+
+                                    }
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+                                    requestBrandNameAPI(offsetvalue, limit, planDepartmentName, planCategoryName, planClass, groupname, cb);
+
+                                } else if (response.length() < limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject productName1 = response.getJSONObject(i);
+
+                                        String brand_name = productName1.getString("brandName");
+                                        brandNameList.add(brand_name);
+                                        tempbrandname.add(brand_name);
+                                    }
+                                    mListDataChild.put(mListDataGroup.get(3), brandNameList);
+
+                                    ListBrand brandNm = new ListBrand();
+                                    brandNm.setSubdept(planDepartmentName);
+                                    brandNm.setCategory(planCategoryName);
+                                    brandNm.setPlanclass(planClass);
+                                    brandNm.setBrand(tempbrandname);
+                                    brandArray.add(brandNm);
+
+                                    SalesFilterActivity.pfilter_list.expandGroup(3);
+                                    SalesFilterActivity.pfilter_list.expandGroup(2);
+                                    SalesFilterActivity.pfilter_list.expandGroup(1);
+                                    Reusable_Functions.hDialog();
+                                    salesList.add(groupname + "." + planClass);
+                                    cb.setChecked(true);
+                                    Log.e("brand name size", " " + brandArray.size());
+
+                                }
+                            }
+                        } catch (Exception e) {
+                            //Log.e("Exception e", e.toString() + "");
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+    public void requestBrandClassNameAPI(int offsetvalue1, int limit1, String plandeptName, String category, String planclass, final String brand, final String groupname, final CheckBox cb) {
+
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
+        String userId = sharedPreferences.getString("userId", "");
+        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
+        BasicNetwork network = new BasicNetwork(new HurlStack());
+        RequestQueue queue = new RequestQueue(cache, network);
+        queue.start();
+
+        String brandplanclass_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?level=BPC&dept=" + planDepartmentName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategoryName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClassName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brand.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e("requestPlanClassAPI URL   ", brandplanclass_url);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, brandplanclass_url,
+                new Response.Listener<JSONArray>() {
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("Brand Plan Class Filter Response", response.toString());
+                        Log.e("brand plan class list", " " + response.length());
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(mContext, "no brand plan class data found", Toast.LENGTH_LONG).show();
+
+                            } else {
+                                if (response.length() == limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject productName1 = response.getJSONObject(i);
+
+                                        String brandPlanClass = productName1.getString("brandPlanClass");
+                                        brandplanclassList.add(brandPlanClass);
+                                        tempbrandplanclass.add(brandPlanClass);
+
+                                    }
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+                                    requestBrandClassNameAPI(offsetvalue, limit, planDepartmentName, planCategoryName, planClassName, brand, groupname, cb);
+
+                                } else if (response.length() < limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject productName1 = response.getJSONObject(i);
+
+                                        String brandPlanClass = productName1.getString("brandPlanClass");
+                                        brandplanclassList.add(brandPlanClass);
+                                        tempbrandplanclass.add(brandPlanClass);
+
+                                    }
+                                    mListDataChild.put(mListDataGroup.get(4), brandplanclassList);
+
+                                    ListBrandClass brandplancls = new ListBrandClass();
+                                    brandplancls.setSubdept(planDepartmentName);
+                                    brandplancls.setCategory(planCategoryName);
+                                    brandplancls.setPlanclass(planClassName);
+                                    brandplancls.setBrand(brand);
+                                    brandplancls.setBrandClass(tempbrandplanclass);
+                                    brandclassArray.add(brandplancls);
+
+                                    SalesFilterActivity.pfilter_list.expandGroup(4);
+                                    SalesFilterActivity.pfilter_list.expandGroup(3);
+                                    SalesFilterActivity.pfilter_list.expandGroup(2);
+                                    SalesFilterActivity.pfilter_list.expandGroup(1);
+                                    Reusable_Functions.hDialog();
+                                    salesList.add(groupname + "." + brand);
+                                    cb.setChecked(true);
+                                    Log.e("brand plan class size", " " + brandclassArray.size());
+
+                                }
+                            }
+                        } catch (Exception e) {
+                            //Log.e("Exception e", e.toString() + "");
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
 
 
 }

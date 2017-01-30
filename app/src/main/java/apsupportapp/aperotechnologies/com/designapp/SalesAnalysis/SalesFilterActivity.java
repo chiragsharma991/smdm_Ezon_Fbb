@@ -194,10 +194,10 @@ public class SalesFilterActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SalesFilterActivity.this,SalesAnalysisActivity1.class);
-                intent.putExtra("selectedDept",SalesFilterExpandableList.txtClickedVal);
-                Log.e(TAG,"txtClickedVal"+SalesFilterExpandableList.txtClickedVal);
-                startActivity(intent);
+//                Intent intent = new Intent(SalesFilterActivity.this,SalesAnalysisActivity1.class);
+//                intent.putExtra("selectedDept",SalesFilterExpandableList.txtClickedVal);
+//                Log.e(TAG,"txtClickedVal"+SalesFilterExpandableList.txtClickedVal);
+//                startActivity(intent);
             }
         });
 

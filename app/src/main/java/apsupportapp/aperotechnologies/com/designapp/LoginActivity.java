@@ -158,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Reusable_Functions.hDialog();
 
                             }
-                            Long notificationTime = System.currentTimeMillis() +1500000;
+                            Long notificationTime = System.currentTimeMillis() + 1800000; //30 minutes
                             Log.e("notificationTime", "onResponse: "+notificationTime );
                             setLocalnotification(context, notificationTime);
                             String username = response.getString("loginName");

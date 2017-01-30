@@ -544,7 +544,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     @Override
                     public void onItemClick(View view, final int position) {
                         onItemClickFlag = true;
-                        Reusable_Functions.sDialog(context, "Loading data...");
+                       // Reusable_Functions.sDialog(context, "Loading data...");
                         Handler h = new Handler();
                         h.postDelayed(new Runnable() {
                             public void run() {
@@ -553,7 +553,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                     switch (txtheaderplanclass.getText().toString()) {
                                         case "Department":
-
                                             btnSalesPrev.setVisibility(View.VISIBLE);
                                             txtheaderplanclass.setText("Category");
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
@@ -562,6 +561,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                             fromWhere = "Category";
                                             level = 2;
                                             if (Reusable_Functions.chkStatus(context)) {
+                                                if (postRequest != null) {
+                                                    postRequest.cancel();
+                                                }
                                                 Reusable_Functions.hDialog();
                                                 Reusable_Functions.sDialog(context, "Loading data...");
                                                 pva_progressBar.setVisibility(View.VISIBLE);
@@ -579,10 +581,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                             break;
 
                                         case "Category":
-                                            Log.e("in pva category", "-----" + planDept);
-
                                             if (flag == true) {
-
                                                 txtheaderplanclass.setText("Plan Class");
                                                 //     llayoutSalesPvA.setVisibility(View.GONE);
                                                 txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
@@ -590,6 +589,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                                 fromWhere = "Plan Class";
                                                 level = 3;
                                                 if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
                                                     Reusable_Functions.hDialog();
                                                     Reusable_Functions.sDialog(context, "Loading data...");
                                                     pva_progressBar.setVisibility(View.VISIBLE);
@@ -606,6 +608,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                 }
                                             } else {
+                                                Reusable_Functions.hDialog();
                                                 Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
                                             }
 
@@ -619,6 +622,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                                 fromWhere = "Brand";
                                                 level = 4;
                                                 if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
                                                     Reusable_Functions.hDialog();
                                                     pva_progressBar.setVisibility(View.VISIBLE);
                                                     Reusable_Functions.sDialog(context, "Loading data...");
@@ -634,6 +640,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                 }
                                             } else {
+                                                Reusable_Functions.hDialog();
                                                 Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
                                             }
 
@@ -651,6 +658,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                                 fromWhere = "Brand Plan Class";
                                                 level = 5;
                                                 if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
                                                     Reusable_Functions.hDialog();
                                                     pva_progressBar.setVisibility(View.VISIBLE);
                                                     Reusable_Functions.sDialog(context, "Loading data...");
@@ -665,11 +675,14 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                 }
                                             } else {
+                                                Reusable_Functions.hDialog();
                                                 Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
                                             }
 
                                             break;
                                         default:
+//                                            Reusable_Functions.hDialog();
+//                                            Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
                                             break;
                                     }
                                 }
@@ -1201,12 +1214,14 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 Log.e("lineChartData", "" + lineChartdata.getDataSetCount());
                                 lineChart.setTouchEnabled(false);
                                 lineChart.setScaleEnabled(false);
+                                onItemClickFlag=false;
                                 pva_progressBar.setVisibility(View.GONE);
                                 // llayoutSalesPvA.setVisibility(View.VISIBLE);
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
+                            onItemClickFlag=false;
                             pva_progressBar.setVisibility(View.GONE);
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
@@ -1217,6 +1232,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
+                        onItemClickFlag=false;
                         pva_progressBar.setVisibility(View.GONE);
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
@@ -1322,11 +1338,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 //                                lineChart.setScaleYEnabled(true);
 //                                lineChart.setScaleXEnabled(true);
                                 //  llayoutSalesPvA.setVisibility(View.VISIBLE);
+                                onItemClickFlag=false;
                                 pva_progressBar.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
+                            onItemClickFlag=false;
                             pva_progressBar.setVisibility(View.GONE);
                             Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
@@ -1337,6 +1355,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
+                        onItemClickFlag=false;
                         pva_progressBar.setVisibility(View.GONE);
                         Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
@@ -1392,8 +1411,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
-                                flag = true;
-                                onItemClickFlag = false;
+
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 pvaVal = " ";
@@ -1407,6 +1425,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 //analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+                                flag = true;
                                 requestPvAChartAPI();
                             }
                         } catch (Exception e) {
@@ -1473,8 +1492,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
-                                flag = true;
-                                onItemClickFlag = false;
+
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 pvaVal += " > " + category;
@@ -1488,6 +1506,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
                                 Log.e("saleFirstVisibleItem in category list", "-----" + pvaFirstVisibleItem);
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+                                flag = true;
                                 requestPvAChartAPI();
                             }
                         } catch (Exception e) {
@@ -1556,8 +1575,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
-                                flag = true;
-                                onItemClickFlag = false;
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 pvaVal += " > " + planclass;
@@ -1571,6 +1588,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
                                 Log.e("saleFirstVisibleItem in category list", "-----" + pvaFirstVisibleItem);
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+                                flag = true;
                                 requestPvAChartAPI();
 
                             }
@@ -1646,7 +1664,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
-                                onItemClickFlag = false;
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 pvaVal += " > " + brandnm;
@@ -1725,6 +1742,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     salesAnalysisViewPagerValue = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
                                     arrayList.add(salesAnalysisViewPagerValue);
                                 }
+                                onItemClickFlag= false;
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();

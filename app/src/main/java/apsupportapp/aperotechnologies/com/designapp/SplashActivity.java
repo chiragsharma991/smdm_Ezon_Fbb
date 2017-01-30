@@ -59,7 +59,6 @@ public class SplashActivity extends AppCompatActivity {
         context = this;
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
         Log.e("---", " " + getResources().getDisplayMetrics().density);
 
         if (sharedPreferences.getBoolean("log_flag", false) == true) {
@@ -70,6 +69,8 @@ public class SplashActivity extends AppCompatActivity {
                     progressbar.getIndeterminateDrawable().setColorFilter(0xFFFFFFFF, android.graphics.PorterDuff.Mode.MULTIPLY);
                 }
             } else {
+                progressbar.setVisibility(View.GONE);
+                checkNetwork();
               //  Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
             }
         }
@@ -83,7 +84,7 @@ public class SplashActivity extends AppCompatActivity {
                         if (Reusable_Functions.chkStatus(context)) {
                             requestLoginAPI();
                         } else {
-                             checkNetwork();
+
                             //Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                         }
                     } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
@@ -111,15 +112,14 @@ public class SplashActivity extends AppCompatActivity {
                     if(Reusable_Functions.chkStatus(context))
                     {
                         Log.e("", "onClick: "+"in dismiss condition" );
-                       // snackbar.dismiss();
+                        progressbar.setVisibility(View.VISIBLE);
                         requestLoginAPI();
                     }else
                     {
                         Log.e("", "onClick: "+"in if  condition" );
+                        checkNetwork();
 
                     }
-
-
                 }
             });
             snackbar.setActionTextColor(getResources().getColor(R.color.smdm_actionbar));
@@ -130,8 +130,6 @@ public class SplashActivity extends AppCompatActivity {
 
 
        // }
-
-
     }
 
     private void requestLoginAPI() {
@@ -152,8 +150,10 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i("Login   Response   ", response.toString());
-                        try {
-                            if (response == null || response.equals(null)) {
+                        try
+                        {
+                            if (response == null || response.equals(null))
+                            {
                                 Reusable_Functions.hDialog();
                             }
                             String bearerToken = response.getString("bearerToken");
@@ -166,8 +166,10 @@ public class SplashActivity extends AppCompatActivity {
                             startActivity(i);
                             progressbar.setVisibility(View.GONE);
                             finish();
-                        } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
+                        }
+                        catch (Exception e)
+                        {
+                            Log.e("Exception e", e.toString() + " ");
                             e.printStackTrace();
                             Reusable_Functions.hDialog();
                         }
@@ -183,10 +185,12 @@ public class SplashActivity extends AppCompatActivity {
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
+
                 Log.i("Auth Code", auth_code);
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", auth_code);
                 return params;
+
             }
         };
         int socketTimeout = 60000;//5 seconds
@@ -195,13 +199,7 @@ public class SplashActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-
-
-
-
-
-
-    @Override
+   @Override
     protected void onDestroy() {
         super.onDestroy();
     }

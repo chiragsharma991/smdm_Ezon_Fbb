@@ -567,7 +567,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     @Override
                     public void onItemClick(View view, final int position) {
                         onClickFlag = true;
-                        Reusable_Functions.sDialog(context, "Loading data...");
+                     //   Reusable_Functions.sDialog(context, "Loading data...");
 
 
                         Handler h = new Handler();
@@ -593,6 +593,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     currentVmPos = vwpagersales.getCurrentItem();
                                     level = 2;
                                     if (Reusable_Functions.chkStatus(context)) {
+                                        if (postRequest != null) {
+                                            postRequest.cancel();
+                                        }
                                         Reusable_Functions.hDialog();
                                         progressBar1.setVisibility(View.VISIBLE);
                                         Reusable_Functions.sDialog(context, "Loading data...");
@@ -610,8 +613,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     break;
 
                                 case "Category":
-
-                                    Log.e("in sales analysis category", "-----" + planDept);
                                     if (flag == true) {
                                         txtheaderplanclass.setText("Plan Class");
                                         //  llayoutSalesAnalysis.setVisibility(View.GONE);
@@ -626,9 +627,11 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                         currentVmPos = vwpagersales.getCurrentItem();
                                         level = 3;
                                         if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
                                             Reusable_Functions.hDialog();
                                             progressBar1.setVisibility(View.VISIBLE);
-
                                             Reusable_Functions.sDialog(context, "Loading data...");
                                             offsetvalue = 0;
                                             limit = 100;
@@ -643,13 +646,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
+                                        Reusable_Functions.hDialog();
                                         Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
-                                        Log.e("Please select dept name", "");
                                     }
                                     break;
 
                                 case "Plan Class":
-                                    Log.e("in sales analysis plan class", "-----" + planDept);
                                     if (flag == true) {
                                         txtheaderplanclass.setText("Brand");
                                         //   llayoutSalesAnalysis.setVisibility(View.GONE);
@@ -664,6 +666,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                         currentVmPos = vwpagersales.getCurrentItem();
                                         level = 4;
                                         if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
                                             Reusable_Functions.hDialog();
                                             progressBar1.setVisibility(View.VISIBLE);
                                             Reusable_Functions.sDialog(context, "Loading data...");
@@ -679,13 +684,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
+                                        Reusable_Functions.hDialog();
                                         Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
-                                        Log.e("Please Select Dept name", "-------");
                                     }
                                     break;
 
                                 case "Brand":
-                                    Log.e("in sales analysis brand", "-----" + planDept);
                                     if (flag == true) {
                                         relnextbtn.setVisibility(View.INVISIBLE);
                                         txtheaderplanclass.setText("Brand Plan Class");
@@ -701,6 +705,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                         currentVmPos = vwpagersales.getCurrentItem();
                                         level = 5;
                                         if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
                                             Reusable_Functions.hDialog();
                                             progressBar1.setVisibility(View.VISIBLE);
                                             Reusable_Functions.sDialog(context, "Loading data...");
@@ -714,9 +721,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
+                                        Reusable_Functions.hDialog();
                                         Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
-                                        Log.e("Please select dept name", "------1");
                                     }
+                                    break;
+                                default:
+//                                    Reusable_Functions.hDialog();
+//                                    Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+
                                     break;
                             }
 
@@ -1066,6 +1078,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 //                                {
                                     salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                     listView_SalesAnalysis.setAdapter(salesadapter);
+                                flag=false;
 
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
                                         if (txtheaderplanclass.getText().toString().equals("Department")) {
@@ -1232,16 +1245,17 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             vwpagersales.setAdapter(pageradapter);
                             vwpagersales.setCurrentItem(currentVmPos);
                             pageradapter.notifyDataSetChanged();
-
+                            onClickFlag = false;
                             // llayoutSalesAnalysis.setVisibility(View.VISIBLE);
-                            // Reusable_Functions.hDialog();
+                             Reusable_Functions.hDialog();
                          //   Style_loadingBar.setVisibility(View.GONE);
                             progressBar1.setVisibility(View.GONE);
 
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                          //  Style_loadingBar.setVisibility(View.GONE);
+                            onClickFlag = false;
+                            //  Style_loadingBar.setVisibility(View.GONE);
                             progressBar1.setVisibility(View.GONE);
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
@@ -1252,6 +1266,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     @Override
                     public void onErrorResponse(VolleyError error) {
                          Reusable_Functions.hDialog();
+                        onClickFlag = false;
                        // Style_loadingBar.setVisibility(View.GONE);
                         progressBar1.setVisibility(View.GONE);
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -1345,6 +1360,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 vwpagersales.setAdapter(pageradapter);
                                 vwpagersales.setCurrentItem(currentVmPos);
                                 pageradapter.notifyDataSetChanged();
+                                onClickFlag = false;
                                 Log.e("Focus position on scroll ", "" + focusposition);
                                 progressBar1.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
@@ -1353,6 +1369,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            onClickFlag = false;
                             progressBar1.setVisibility(View.GONE);
                          //   Style_loadingBar.setVisibility(View.GONE);
 
@@ -1365,6 +1382,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        onClickFlag = false;
                         progressBar1.setVisibility(View.GONE);
                       //  Style_loadingBar.setVisibility(View.GONE);
 
@@ -1447,9 +1465,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
-                                flag = true;
-                                salesadapter.notifyDataSetChanged();
-                                onClickFlag = false;
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 val = "";
@@ -1463,6 +1478,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
                                 Log.e("saleFirstVisibleItem in category list", "-----" + saleFirstVisibleItem);
+                                flag = true;
                                 requestSalesPagerOnScrollAPI();
                             }
 
@@ -1563,9 +1579,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
-                                flag = true;
-                                salesadapter.notifyDataSetChanged();
-                                onClickFlag = false;
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 // String categry = category.substring(0,1).toUpperCase()+category.substring(1).toLowerCase();
@@ -1580,6 +1593,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisiblePosition).getPlanClass();
                                 Log.e("saleFirstVisibleItem in plan class list", "-----" + saleFirstVisibleItem);
+                                flag = true;
                                 requestSalesPagerOnScrollAPI();
                             }
 
@@ -1678,10 +1692,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
-                                flag = true;
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
-                                onClickFlag = false;
                                 // String plnCls = planclass.substring(0,1).toUpperCase()+planclass.substring(1).toLowerCase();
                                 val += " > " + planclass;
                                 txthDeptName.setText(val);
@@ -1693,6 +1705,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
                                 Log.e("saleFirstVisibleItem in brand list", "-----" + saleFirstVisibleItem);
+                                flag = true;
                                 requestSalesPagerOnScrollAPI();
                             }
 
@@ -1793,8 +1806,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
-                                onClickFlag = false;
-
                                 txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 String brnd = brandnm.substring(0, 1).toUpperCase() + brandnm.substring(1).toLowerCase();
