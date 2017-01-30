@@ -251,7 +251,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         relprevbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (postRequest != null) {
+                    postRequest.cancel();
+                }
                 switch (txtheaderplanclass.getText().toString()) {
 
                     case "Brand Plan Class":
@@ -388,6 +390,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         relnextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (postRequest != null) {
+                    postRequest.cancel();
+                }
                 switch (txtheaderplanclass.getText().toString()) {
                     case "Department":
                         relprevbtn.setVisibility(View.VISIBLE);
@@ -560,9 +565,17 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         listView_SalesAnalysis.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
-                    public void onItemClick(View view, int position) {
+                    public void onItemClick(View view, final int position) {
                         onClickFlag = true;
-                        if (position < salesAnalysisClassArrayList.size()) {
+                        Reusable_Functions.sDialog(context, "Loading data...");
+
+
+                        Handler h = new Handler();
+                        h.postDelayed(new Runnable() {
+                            public void run() {
+
+
+                                if (position < salesAnalysisClassArrayList.size()) {
                             switch (txtheaderplanclass.getText().toString()) {
 
                                 case "Department":
@@ -630,6 +643,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
+                                        Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
                                         Log.e("Please select dept name", "");
                                     }
                                     break;
@@ -665,6 +679,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
+                                        Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
                                         Log.e("Please Select Dept name", "-------");
                                     }
                                     break;
@@ -699,12 +714,15 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
+                                        Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
                                         Log.e("Please select dept name", "------1");
                                     }
                                     break;
                             }
 
                         }
+                            }
+                        }, 700);
                     }
                 }));
     }

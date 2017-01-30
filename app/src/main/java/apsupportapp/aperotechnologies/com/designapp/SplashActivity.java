@@ -1,11 +1,13 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
@@ -42,6 +44,8 @@ public class SplashActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     ProgressBar progressbar;
     Context context;
+    private Snackbar snackbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +70,7 @@ public class SplashActivity extends AppCompatActivity {
                     progressbar.getIndeterminateDrawable().setColorFilter(0xFFFFFFFF, android.graphics.PorterDuff.Mode.MULTIPLY);
                 }
             } else {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
             }
         }
         Thread background = new Thread() {
@@ -79,7 +83,8 @@ public class SplashActivity extends AppCompatActivity {
                         if (Reusable_Functions.chkStatus(context)) {
                             requestLoginAPI();
                         } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                             checkNetwork();
+                            //Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                         }
                     } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
                         Intent i = new Intent(SplashActivity.this, LoginActivity.class);
@@ -92,6 +97,41 @@ public class SplashActivity extends AppCompatActivity {
         };
         // start thread
         background.start();
+    }
+
+    private void checkNetwork() {
+        Log.e("TAG", "Check Network: ");
+//        if(LocalNotificationReceiver.logoutAlarm)
+//        {
+            View v=findViewById(android.R.id.content);
+        snackbar = Snackbar.make(v,"Check your network ", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(Reusable_Functions.chkStatus(context))
+                    {
+                        Log.e("", "onClick: "+"in dismiss condition" );
+                       // snackbar.dismiss();
+                        requestLoginAPI();
+                    }else
+                    {
+                        Log.e("", "onClick: "+"in if  condition" );
+
+                    }
+
+
+                }
+            });
+            snackbar.setActionTextColor(getResources().getColor(R.color.smdm_actionbar));
+            snackbar.show();
+//            LocalNotificationReceiver.logoutAlarm=false;
+//            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//            notificationManager.cancel(LocalNotificationReceiver.notId);
+
+
+       // }
+
+
     }
 
     private void requestLoginAPI() {
@@ -154,6 +194,12 @@ public class SplashActivity extends AppCompatActivity {
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+
+
+
+
+
+
 
     @Override
     protected void onDestroy() {
