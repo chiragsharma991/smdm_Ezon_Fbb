@@ -283,6 +283,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
+                OptionefficiencyValue="";
 
                 switch (oe_txtHeaderClass.getText().toString()) {
 
@@ -402,6 +403,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
+                OptionefficiencyValue="";
                 switch (oe_txtHeaderClass.getText().toString()) {
 
                     case "Department":
@@ -662,12 +664,12 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             } else {
 
                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+
                             }
                             break;
 
                         case "Category":
 
-                            if (flag == true) {
 
                                 oe_txtHeaderClass.setText("Plan Class");
                               //  oe_llayouthierarchy.setVisibility(View.GONE);
@@ -693,13 +695,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 } else {
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {
-                                Toast.makeText(context, "Please select Dept name", Toast.LENGTH_SHORT);
-                            }
+
 
                             break;
                         case "Plan Class":
-                            if (flag == true) {
                                 oe_txtHeaderClass.setText("Brand");
                              //   oe_llayouthierarchy.setVisibility(View.GONE);
                             //    llayoutOEfficiency.setVisibility(View.GONE);
@@ -724,14 +723,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 } else {
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {
-                                Toast.makeText(context, "Please select Dept name", Toast.LENGTH_SHORT);
-                            }
+
 
                             break;
 
                         case "Brand":
-                            if (flag == true) {
                                 oe_btnNext.setVisibility(View.INVISIBLE);
                                 oe_txtHeaderClass.setText("Brand Plan Class");
                            //     oe_llayouthierarchy.setVisibility(View.GONE);
@@ -756,10 +752,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 } else {
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {
-                                Toast.makeText(context, "Please select Dept name", Toast.LENGTH_SHORT);
-                            }
+
                             break;
+
+                        default:
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, " select another dept name", Toast.LENGTH_SHORT).show();
+                            OnItemClick=false;
+
+                            break;
+
                     }
                 }
 
@@ -1139,7 +1141,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         OnItemClick=true;
-
+        OptionefficiencyValue="";
         switch (checkedId) {
 
             case R.id.oe_btnCore:
@@ -1841,11 +1843,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
                                 oe_listView.setAdapter(optionIndexSnapAdapter);
 
-                                flag = true;
+                               // flag = true;
                                // txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
                                // txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(0).getStoreDescription());
                                 OptionefficiencyValue = " ";
-                                OptionefficiencyValue = deptName;
+                                OptionefficiencyValue =" > "+deptName;
                                 oe_txtDeptName.setText(OptionefficiencyValue);
                                 oe_llayouthierarchy.setVisibility(View.VISIBLE);
 
@@ -1896,10 +1898,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         String oe_planclass_listurl = " ";
         if(coreSelection) {
 
-            oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+            oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         }
         else {
-            oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
+            oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
         }
         Log.e(TAG, "request_OE_PlanClassList: "+oe_planclass_listurl );
 
@@ -1996,12 +1998,12 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
         String oe_brand_listurl = "";
         if(coreSelection) {
-            oe_brand_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit ;
+            oe_brand_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit ;
 
         }
         else
         {
-            oe_brand_listurl  = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
+            oe_brand_listurl  = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&seasongroup="+seasonGroup;
         }
         Log.e(TAG, "request_OE_BrandList: "+oe_brand_listurl );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brand_listurl,
@@ -2096,10 +2098,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private void request_OE_BrandPlanList(String deptName, String category, String plan_class, final String brandnm) {
         String oe_brandplan_listurl = "";
         if(coreSelection) {
-            oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + oe_PlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+            oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
         }else {
-            oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_PlanDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + oe_Category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + oe_PlanClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
+            oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
         }
 
         Log.e(TAG, "request_OE_BrandPlanList: "+oe_brandplan_listurl );
