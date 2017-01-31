@@ -96,8 +96,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="5dp"
                 android:layout_marginTop="8dp">
 
 
@@ -156,19 +155,19 @@
                 android:id="@+id/relTablelayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:layout_margin="5dp"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <RelativeLayout
                         android:id="@+id/llheader"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
                         android:background="@color/colorPrimary">
 
 
@@ -246,25 +245,23 @@
 
                     </RelativeLayout>
 
+                    <ListView
+                        android:id="@+id/up_promoListview"
+                        android:dividerHeight="0dp"
+                        android:divider="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:smoothScrollbar="true"
+                        >
+
+                    </ListView>
+
 
 
                 </LinearLayout>
 
 
-                <ListView
-                    android:id="@+id/up_promoListview"
-                    android:dividerHeight="0dp"
-                    android:divider="@null"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:paddingTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="46dp"
-                    android:smoothScrollbar="true"
-                    >
 
-                </ListView>
 
 
 

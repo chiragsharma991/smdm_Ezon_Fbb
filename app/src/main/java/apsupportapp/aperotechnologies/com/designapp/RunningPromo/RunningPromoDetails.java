@@ -135,8 +135,7 @@ public class RunningPromoDetails extends AppCompatActivity {
             Toast.makeText(RunningPromoDetails.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
-
-        tableRow();
+       tableRow();
 
 
     }

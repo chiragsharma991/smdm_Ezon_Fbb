@@ -230,8 +230,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         btnSalesNext.setVisibility(View.VISIBLE);
                         txtheaderplanclass.setText("Brand");
                         fromWhere = "Brand";
-                        flag = false;
+                      //  flag = false;
                         level = 4;
+                        pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
@@ -261,7 +262,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         txtheaderplanclass.setText("Plan Class");
                         fromWhere = "Plan Class";
                         level = 3;
-                        flag = false;
+                        pvaVal = " ";
+                        // flag = false;
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
@@ -294,7 +296,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         txtheaderplanclass.setText("Category");
                         fromWhere = "Category";
                         level = 2;
-                        flag = false;
+                        pvaVal = " ";
+                        // flag = false;
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
@@ -328,7 +331,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         txtheaderplanclass.setText("Department");
                         fromWhere = "Department";
                         level = 1;
-                        flag = false;
+                        pvaVal = " ";
+                        //  flag = false;
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
@@ -378,7 +382,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         txtheaderplanclass.setText("Category");
                         fromWhere = "Category";
                         level = 2;
-                        flag = false;
+                        pvaVal = " ";
+                        //  flag = false;
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
                         // relChartLayout.setVisibility(View.GONE);
@@ -408,8 +413,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     case "Category":
                         fromWhere = "Plan Class";
                         txtheaderplanclass.setText("Plan Class");
-                        flag = false;
+                      //  flag = false;
                         level = 3;
+                        pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
@@ -441,8 +447,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     case "Plan Class":
                         txtheaderplanclass.setText("Brand");
                         fromWhere = "Brand";
-                        flag = false;
+                      //  flag = false;
                         level = 4;
+                        pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
@@ -475,8 +482,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                         txtheaderplanclass.setText("Brand Plan Class");
                         fromWhere = "Brand Plan Class";
-                        flag = false;
+                      //  flag = false;
                         level = 5;
+                        pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
@@ -581,7 +589,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                             break;
 
                                         case "Category":
-                                            if (flag == true) {
+//                                            if (flag == true) {
                                                 txtheaderplanclass.setText("Plan Class");
                                                 //     llayoutSalesPvA.setVisibility(View.GONE);
                                                 txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
@@ -601,20 +609,20 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                                     salesAnalysisClassArrayList.clear();
                                                     Log.i("category next", "-----");
                                                     Log.i("come", "----" + planDept);
-                                                    requestSalesPvAPlanClassListAPI(planDept, txtPvAClickedValue);
+                                                    requestSalesPvAPlanClassListAPI(txtPvAClickedValue);
                                                     planCategory = txtPvAClickedValue;
                                                     Log.e("planCategory--", "" + planCategory);
                                                 } else {
                                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                 }
-                                            } else {
-                                                Reusable_Functions.hDialog();
-                                                Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
-                                            }
+//                                            } else {
+//                                                Reusable_Functions.hDialog();
+//                                                Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
+//                                            }
 
                                             break;
                                         case "Plan Class":
-                                            if (flag == true) {
+                                         //   if (flag == true) {
                                                 txtheaderplanclass.setText("Brand");
                                                 llayoutSalesPvA.setVisibility(View.GONE);
                                                 txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
@@ -633,26 +641,24 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                                     count = 0;
                                                     salesAnalysisClassArrayList.clear();
                                                     Log.i("Plan Class next", "-----");
-                                                    requestSalesPvABrandListAPI(planDept, planCategory, txtPvAClickedValue);
+                                                    requestSalesPvABrandListAPI(txtPvAClickedValue);
                                                     planClass = txtPvAClickedValue;
                                                     Log.e("planClass---", "" + planClass);
                                                 } else {
                                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                 }
-                                            } else {
-                                                Reusable_Functions.hDialog();
-                                                Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
-                                            }
-
-
+//                                            } else {
+//                                                Reusable_Functions.hDialog();
+//                                                Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
+//                                            }
                                             break;
                                         case "Brand":
                                             Log.e("in sales pva brand ", "-----" + planDept);
 
-                                            if (flag == true) {
+                                           // if (flag == true) {
                                                 btnSalesNext.setVisibility(View.INVISIBLE);
                                                 txtheaderplanclass.setText("Brand Plan Class");
-                                                //  llayoutSalesPvA.setVisibility(View.GONE);
+                                                //llayoutSalesPvA.setVisibility(View.GONE);
                                                 txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
                                                 Log.e("txtSalesClickedValue3---", "" + txtPvAClickedValue);
                                                 fromWhere = "Brand Plan Class";
@@ -669,15 +675,15 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                                     count = 0;
                                                     salesAnalysisClassArrayList.clear();
                                                     Log.i("brand next", "-----");
-                                                    requestSalesPvABrandPlanListAPI(planDept, planCategory, planClass, txtPvAClickedValue);
+                                                    requestSalesPvABrandPlanListAPI(txtPvAClickedValue);
 
                                                 } else {
                                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                 }
-                                            } else {
-                                                Reusable_Functions.hDialog();
-                                                Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
-                                            }
+//                                            } else {
+//                                                Reusable_Functions.hDialog();
+//                                                Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
+//                                            }
 
                                             break;
                                         default:
@@ -858,7 +864,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 if (salesPvA_SegmentClick.equals("WTD"))
                     break;
                 salesPvA_SegmentClick = "WTD";
-
+                pvaVal = " ";
                 llpvahierarchy.setVisibility(View.GONE);
                 // llayoutSalesPvA.setVisibility(View.GONE);
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -888,6 +894,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     break;
 
                 salesPvA_SegmentClick = "LW";
+                pvaVal = " ";
                 llpvahierarchy.setVisibility(View.GONE);
                 // llayoutSalesPvA.setVisibility(View.GONE);
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -1045,13 +1052,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
-                                    flag = false;
+                                   // flag = false;
                                     llpvahierarchy.setVisibility(View.GONE);
                                     salesPvAAnalysisWeekArrayList.clear();
                                     requestSalesWeekChart();
 
                                 } else {
-                                    flag = false;
+                                   // flag = false;
                                     llpvahierarchy.setVisibility(View.GONE);
                                     offsetvalue = 0;
                                     limit = 100;
@@ -1423,9 +1430,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 limit = 100;
                                 count = 0;
                                 //analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
+                                pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanCategory();
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                                flag = true;
+                               // flag = true;
                                 requestPvAChartAPI();
                             }
                         } catch (Exception e) {
@@ -1462,8 +1469,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
     }
 
-    private void requestSalesPvAPlanClassListAPI(final String deptName, final String category) {
-        String salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&department=" + planDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+    private void requestSalesPvAPlanClassListAPI(final String category) {
+        String salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + salespva_planclass_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
                 new Response.Listener<JSONArray>() {
@@ -1483,7 +1490,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                requestSalesPvAPlanClassListAPI(deptName, category);
+                                requestSalesPvAPlanClassListAPI(category);
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
@@ -1503,10 +1510,10 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 count = 0;
                                 salesPvAAnalysisWeekArrayList.clear();
                                 //analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
+                                pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanClass();
                                 Log.e("saleFirstVisibleItem in category list", "-----" + pvaFirstVisibleItem);
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                                flag = true;
+                             //   flag = true;
                                 requestPvAChartAPI();
                             }
                         } catch (Exception e) {
@@ -1541,9 +1548,10 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue.add(postRequest);
     }
 
-    private void requestSalesPvABrandListAPI(String deptName, String category, final String planclass) {
+    private void requestSalesPvABrandListAPI(final String planclass) {
 
-        String salespva_brand_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&department=" + planDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategory.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        String salespva_brand_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+
         Log.e("url", " " + salespva_brand_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brand_listurl,
                 new Response.Listener<JSONArray>() {
@@ -1566,7 +1574,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                requestSalesPvABrandListAPI(planDept, planCategory, planclass);
+                                requestSalesPvABrandListAPI(planclass);
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
@@ -1585,10 +1593,10 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 count = 0;
                                 salesPvAAnalysisWeekArrayList.clear();
                                 //analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
+                                pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandName();
                                 Log.e("saleFirstVisibleItem in category list", "-----" + pvaFirstVisibleItem);
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                                flag = true;
+                               // flag = true;
                                 requestPvAChartAPI();
 
                             }
@@ -1625,9 +1633,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue.add(postRequest);
     }
 
-    private void requestSalesPvABrandPlanListAPI(String deptName, String category, String plan_class, final String brandnm) {
+    private void requestSalesPvABrandPlanListAPI(final String brandnm) {
 
-        final String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&department=" + planDept.replaceAll(" ", "%20").replaceAll("&", "%26") + "&category=" + planCategory.replaceAll(" ", "%20").replaceAll("&", "%26") + "&class=" + planClass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        final String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level  + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + salespva_brandplan_listurl);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
@@ -1652,7 +1660,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                requestSalesPvABrandPlanListAPI(planDept, planCategory, planClass, brandnm);
+                                requestSalesPvABrandPlanListAPI(brandnm);
 
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1674,7 +1682,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 count = 0;
                                 salesPvAAnalysisWeekArrayList.clear();
                                 //analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass();
+                                pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandplanClass();
                                 Log.e("saleFirstVisibleItem in category list", "-----" + pvaFirstVisibleItem);
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 requestPvAChartAPI();

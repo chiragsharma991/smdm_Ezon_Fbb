@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 
 public class Details_Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -74,6 +77,9 @@ public class Details_Fragment extends Fragment {
         imgKeyProduct = (ImageView) view.findViewById(R.id.imgKeyProduct);
         imgProfile = (ImageView) view.findViewById(R.id.imgProfile);
 
+        NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
+
+
         Log.e("productImageURL", styleDetailsBean.getProductImageURL());
 
         if (!styleDetailsBean.getProductImageURL().equals("")) {
@@ -132,7 +138,7 @@ public class Details_Fragment extends Fragment {
         txtGIT.setText("" + styleDetailsBean.getStkGitQty());
         txtBaseStock.setText("" + styleDetailsBean.getTargetStock());
 
-        txtPrice.setText("₹" + styleDetailsBean.getUnitGrossPrice());
+        txtPrice.setText("₹" +format.format(styleDetailsBean.getUnitGrossPrice()));
         txtsalesThruUnit.setText("" + String.format("%.1f", styleDetailsBean.getSellThruUnitsRcpt()) + "%");
         txtROS.setText("" + String.format("%.1f", styleDetailsBean.getRos()));
 
