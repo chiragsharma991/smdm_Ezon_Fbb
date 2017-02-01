@@ -90,7 +90,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     Context context;
     LineChart lineChart;
     RecyclerView listViewSalesPvA;
-    int focusposition, selFirstPositionValue = 500, totalItemCount;
+    int focusposition, selFirstPositionValue = 0, totalItemCount;
     //CombinedData data;
     int level;
     SalesAnalysisListDisplay salesAnalysisListDisplay;
@@ -193,7 +193,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 //        listViewSalesPvA.addFooterView(footer);
         if (Reusable_Functions.chkStatus(context)) {
             // Reusable_Functions.hDialog();
-            // Reusable_Functions.sDialog(context, "Loading data...");
+            Reusable_Functions.sDialog(context, "Loading data...");
             pva_progressBar.setVisibility(View.VISIBLE);
             offsetvalue = 0;
             limit = 100;
@@ -537,7 +537,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
-                            TimeUP();
+                            if(onItemClickFlag == false) {
+                                TimeUP();
+                            }
                         }
                     }, 700);
                 }
@@ -687,8 +689,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                             break;
                                         default:
-//                                            Reusable_Functions.hDialog();
-//                                            Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                            Reusable_Functions.hDialog();
+                                          //  Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                            onItemClickFlag = false;
                                             break;
                                     }
                                 }
@@ -724,7 +727,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     private void TimeUP() {
 
 
-        if (focusposition < salesPvAAdapter.getItemCount() - 1) {
+        if (focusposition < salesPvAAdapter.getItemCount() - 1 && onItemClickFlag == false) {
 
             if (txtheaderplanclass.getText().toString().equals("Department")) {
                 level = 1;
@@ -870,6 +873,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context,"Loading Data...");
                     pva_progressBar.setVisibility(View.VISIBLE);
                     offsetvalue = 0;
                     limit = 100;
@@ -900,6 +904,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context,"Loading Data...");
                     pva_progressBar.setVisibility(View.VISIBLE);
                     offsetvalue = 0;
                     limit = 100;

@@ -88,6 +88,7 @@ public class RunningPromoDetails extends AppCompatActivity {
     private TableRow tablerow;
     private LayoutInflater layoutInflater;
     private RelativeLayout backButton;
+    private TextView EndDate;
 
 
     @Override
@@ -95,6 +96,7 @@ public class RunningPromoDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running_promo_details);
         getSupportActionBar().hide();
+        EndDate=(TextView)findViewById(R.id.endDate);
         // getSupportActionBar().setTitle("Running Promo Details");
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         context = this;
@@ -113,6 +115,12 @@ public class RunningPromoDetails extends AppCompatActivity {
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        EndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
         //relProd_Frag = (RelativeLayout) findViewById(R.id.rel);

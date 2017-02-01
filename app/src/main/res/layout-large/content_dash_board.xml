@@ -223,7 +223,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:textColor="@color/smdm_dark_Black"
-                android:layout_below="@+id/lin1"
+                android:layout_below="@+id/time"
                 android:text="Product Information"
                 android:layout_marginTop="5dp"
                 android:textSize="16sp"
@@ -1247,7 +1247,7 @@
 
             <TextView
                 android:id="@+id/headermarketing"
-                android:layout_below="@+id/lin3"
+                android:layout_below="@+id/lin1"
                 android:visibility="visible"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -1315,7 +1315,7 @@
                 android:textColor="@color/smdm_dark_Black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_below="@+id/time"
+                android:layout_below="@+id/lin4"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -1340,7 +1340,7 @@
 
                 android:id="@+id/headerpromo"
                 android:gravity="center_vertical"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:textColor="@color/smdm_dark_Black"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
