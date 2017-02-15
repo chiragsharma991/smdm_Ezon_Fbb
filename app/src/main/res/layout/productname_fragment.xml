@@ -6,6 +6,7 @@
 
     <RelativeLayout
         android:id="@+id/rel"
+        android:background="@color/bg_screen_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -81,6 +82,7 @@
                 android:id="@+id/imageBtnFilter"
                 android:layout_width="50dp"
                 android:layout_height="25dp"
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@mipmap/key_product_filter" />
@@ -91,6 +93,7 @@
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
+            android:background="@color/bg_screen_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/linearLayout">

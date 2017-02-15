@@ -36,17 +36,27 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SearchActivity1;
+import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
+import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
+import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
+import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.TargetStockExceptionActivity;
+import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
+
+import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1.SalesAnalysisActivity;
 
 
 public class SalesFilterActivity extends Activity {
@@ -56,11 +66,15 @@ public class SalesFilterActivity extends Activity {
     public static ExpandableListView pfilter_list;
     ArrayList<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-    int offsetvalue = 0, limit = 100, count = 0, level = 1;
+    int offsetvalue = 0, limit = 100, count = 0;
+    public static int level_filter = 1;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
+
+
     RequestQueue queue;
     Context context;
+    static boolean flag;
     //git testing 05/01/2017
 
     String TAG = "SalesFilterActivity";
@@ -70,6 +84,8 @@ public class SalesFilterActivity extends Activity {
 
 
     public static List<Integer> groupImages;
+    public static RelativeLayout processbar;
+    private Intent intent;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -85,7 +101,11 @@ public class SalesFilterActivity extends Activity {
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
+        SalesFilterExpandableList.text1 = "";
+        SalesFilterExpandableList.text2 = "";
+        SalesFilterExpandableList.text3 = "";
+        SalesFilterExpandableList.text4 = "";
+        SalesFilterExpandableList.text5 = "";
         subdept = new ArrayList<String>();
         subCategory = new ArrayList<String>();
         subBrandnm = new ArrayList<String>();
@@ -94,6 +114,13 @@ public class SalesFilterActivity extends Activity {
 
         btnS_Filterback = (RelativeLayout) findViewById(R.id.imageBtnSFilterBack);
         btnS_Done = (RelativeLayout) findViewById(R.id.imageBtnSalesFilterDone);
+        processbar = (RelativeLayout) findViewById(R.id.process_filter);
+        processbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         pfilter_list = (ExpandableListView) findViewById(R.id.expandableListView_subdept);
         pfilter_list.setTextFilterEnabled(true);
@@ -109,7 +136,6 @@ public class SalesFilterActivity extends Activity {
         pfilter_list.setAdapter(listAdapter);
 
         //listAdapter.notifyDataSetChanged();
-
 
 
         pfilter_list.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
@@ -132,20 +158,9 @@ public class SalesFilterActivity extends Activity {
             }
         });
 
-//        pfilter_list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-//            @Override
-//            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//                int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition, childPosition));
-//                parent.setItemChecked(index, true);
-//
-//
-//                return false;
-//            }
-//        });
 
         //  Edit Text Search
-        editTextSearch = (EditText)findViewById(R.id.editSearchSales);
-
+        editTextSearch = (EditText) findViewById(R.id.editSearchSales);
 
 
         editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -159,7 +174,7 @@ public class SalesFilterActivity extends Activity {
                 String searchData = editTextSearch.getText().toString();
                 // editTextSearch.clearFocus();
                 InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
+                inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
                 listAdapter.filterData(editTextSearch.getText().toString());
                 // listAdapter.notifyDataSetChanged();
             }
@@ -176,7 +191,7 @@ public class SalesFilterActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+             /*   if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
                     //  Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
                     //  startActivity(intent);
                     finish();
@@ -184,39 +199,153 @@ public class SalesFilterActivity extends Activity {
                     // Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
                     //  startActivity(intent);
                     finish();
-                }
+                }*/
+                finish();
             }
         });
-
 
 
         btnS_Done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SalesFilterActivity.this,SalesAnalysisActivity1.class);
-                intent.putExtra("selectedDept",SalesFilterExpandableList.txtClickedVal);
-                Log.e(TAG,"txtClickedVal"+SalesFilterExpandableList.txtClickedVal);
-                startActivity(intent);
+                StringBuilder build = new StringBuilder();
+
+                if (SalesFilterExpandableList.text1.length() != 0) {
+                    String deptmnt = SalesFilterExpandableList.text1.toString().replace("%","%25");
+                    String updateDept = deptmnt.replace(" ","%20").replace("&","%26");
+                    String Department = "department=" + updateDept;
+                    build.append("&");
+                    level_filter = 2;
+                    build.append(Department.replace(",$", ""));
+                    Log.e(TAG, "onClick:" + SalesFilterExpandableList.text1);
+                }
+
+                if (SalesFilterExpandableList.text2.length() != 0) {
+                    String categry = SalesFilterExpandableList.text2.toString().replace("%","%25");
+                    String updateCategory = categry.replace(" ","%20").replace("&","%26");
+                    String Categary = "category=" + updateCategory;
+                    build.append("&");
+                    level_filter = 3;
+                    build.append(Categary.replace(",$", ""));
+                    Log.e(TAG, "onClick--1:" + SalesFilterExpandableList.text2);
+
+                }
+
+                if (SalesFilterExpandableList.text3.toString().length() != 0) {
+                    Log.e(TAG, "text 3: " + SalesFilterExpandableList.text3);
+                    String plancls = SalesFilterExpandableList.text3.toString().replace("%","%25");
+                    String updatePlanClass = plancls.replace(" ","%20").replace("&","%26");
+                    String planclass = "class=" + updatePlanClass;
+                    build.append("&");
+                    level_filter = 4;
+                    build.append(planclass.replace(",$", ""));
+
+                }
+
+                if (SalesFilterExpandableList.text4.length() != 0) {
+                    String brand = SalesFilterExpandableList.text4.toString().replace("%","%25");
+                    String updateBrand = brand.replace(" ","%20").replace("&","%26");
+                    String Brand = "brand=" + updateBrand;
+                    build.append("&");
+                    level_filter = 5;
+                    build.append(Brand.replace(",$", ""));
+
+                }
+
+                if (SalesFilterExpandableList.text5.length() != 0) {
+                    String brandcls = SalesFilterExpandableList.text5.toString().replace("%","%25");
+                    String updateBrandCls = brandcls.replace(" ","%20").replace("&","%26");
+                    String Brandclass = "brandclass=" + updateBrandCls;
+                    build.append("&");
+                    level_filter = 6;
+                    build.append(Brandclass.replace(",$", ""));
+
+                }
+                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+                    intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity1.class);
+                    if (build.length() != 0) {SalesAnalysisActivity1.SalesAnalysisActivity.finish();}
+                    callback(build);
+
+
+                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+                    intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
+                    callback(build);
+
+
+                }else if (getIntent().getStringExtra("checkfrom").equals("TopFullCut"))
+                {
+                    intent = new Intent(SalesFilterActivity.this, TopFullCut.class);
+                    if (build.length() != 0) { TopFullCut.topFullcut.finish(); }
+                    callback(build);
+
+
+                }else if (getIntent().getStringExtra("checkfrom").equals("skewedSize"))
+                {
+                    intent = new Intent(SalesFilterActivity.this, SkewedSizesActivity.class);
+                    if (build.length() != 0) { SkewedSizesActivity.SkewedSizes.finish(); }
+                    callback(build);
+
+
+                }
+                else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers"))
+                {
+                    intent = new Intent(SalesFilterActivity.this, BestPerformerInventory.class);
+                    if (build.length() != 0) { BestPerformerInventory.bestperoformer.finish(); }
+                    callback(build);
+
+
+                } else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing"))
+                {
+                    intent = new Intent(SalesFilterActivity.this, StockAgeingActivity.class);
+                    if (build.length() != 0) { StockAgeingActivity.stockAgeing.finish(); }
+                    callback(build);
+
+
+                } else if (getIntent().getStringExtra("checkfrom").equals("floorAvailability"))
+                {
+                    intent = new Intent(SalesFilterActivity.this, FloorAvailabilityActivity.class);
+                    if (build.length() != 0) { FloorAvailabilityActivity.floorAvailability.finish(); }
+                    callback(build);
+
+
+                } else if (getIntent().getStringExtra("checkfrom").equals("targetStockException"))
+                {
+                    intent = new Intent(SalesFilterActivity.this, TargetStockExceptionActivity.class);
+                    if (build.length() != 0) { TargetStockExceptionActivity.targetStockException.finish(); }
+                    callback(build);
+
+
+                } else if (getIntent().getStringExtra("checkfrom").equals("sellThruExceptions"))
+                {
+                    intent = new Intent(SalesFilterActivity.this, SaleThruInventory.class);
+                    if (build.length() != 0) { SaleThruInventory.saleThru.finish(); }
+                    callback(build);
+
+
+                }
             }
         });
+    }
 
+    private void callback(StringBuilder build)
+    {
+        if (build.length() == 0) {
+            Toast.makeText(context, "Please select value..", Toast.LENGTH_SHORT).show();
+            Log.e(" in if condition", "====");
+            return;
+        } else {
+            Log.e(" in else condition", "====");
+            intent.putExtra("selectedDept", build.toString());
 
+        }
+        Log.e(TAG, "onClick: " + build);
+        startActivity(intent);
+        finish();
     }
 
 
-//    @Override
-//    public void onWindowFocusChanged(boolean hasFocus) {
-//        super.onWindowFocusChanged(hasFocus);
-//        pfilter_list.setIndicatorBounds(pfilter_list.getRight() - 40, pfilter_list.getWidth());
-//    }
-
-
-    /*
-     * Preparing the list data
-     */
-
-    private void prepareListData() {
+    public void prepareListData() {
 
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
@@ -231,67 +360,63 @@ public class SalesFilterActivity extends Activity {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(SalesFilterActivity.this, "Loading data...");
 
-            if (listDataHeader.get(0).equals("Department"))
-            {
+            if (listDataHeader.get(0).equals("Department")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
-                level = 1;
+                level_filter = 1;
                 requestDeptAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(1).equals("Category"))
-            {
+            if (listDataHeader.get(1).equals("Category")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
-                level = 2;
+                level_filter = 2;
                 requestCategoryAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(2).equals("Plan Class"))
-            {
+            if (listDataHeader.get(2).equals("Plan Class")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
-                level = 3;
+                level_filter = 3;
                 requestPlanClassAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(3).equals("Brand"))
-            {
+            if (listDataHeader.get(3).equals("Brand")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
-                level = 4;
+                level_filter = 4;
                 requestBrandNameAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(4).equals("Brand Plan Class"))
-            {
+            if (listDataHeader.get(4).equals("Brand Plan Class")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
-                level = 5;
+                level_filter = 5;
                 requestBrandPlanClassAPI(offsetvalue, limit);
             }
         } else {
             Toast.makeText(SalesFilterActivity.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
-        listDataChild.put(listDataHeader.get(0),subdept);
-        listDataChild.put(listDataHeader.get(1),subCategory);
-        listDataChild.put(listDataHeader.get(2),subPlanClass);
-        listDataChild.put(listDataHeader.get(3),subBrandnm);
-        listDataChild.put(listDataHeader.get(4),subBrandPlanClass);
+        listDataChild.put(listDataHeader.get(0), subdept);
+        listDataChild.put(listDataHeader.get(1), subCategory);
+        listDataChild.put(listDataHeader.get(2), subPlanClass);
+        listDataChild.put(listDataHeader.get(3), subBrandnm);
+        listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
+
     }
 
     // Department List
     public void requestDeptAPI(int offsetvalue1, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Department Response", response.toString());
+                        //  Log.i("Department Response", response.toString());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -303,7 +428,6 @@ public class SalesFilterActivity extends Activity {
                                     JSONObject productName1 = response.getJSONObject(i);
 
                                     String plandept = productName1.getString("planDept");
-
                                     subdept.add(plandept);
                                 }
 
@@ -357,14 +481,14 @@ public class SalesFilterActivity extends Activity {
     //Category List
     public void requestCategoryAPI(int offsetvalue1, int limit1) {
 
-        String url =  ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Category Response", response.toString());
+                        //   Log.i("Category Response", response.toString());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -428,14 +552,14 @@ public class SalesFilterActivity extends Activity {
 
     //Plan Class List
     public void requestPlanClassAPI(int offsetvalue1, int limit1) {
-        String url =  ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("PlanClass Response", response.toString() + " Size" + response.length());
+                        // Log.i("PlanClass Response", response.toString() + " Size" + response.length());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -499,14 +623,14 @@ public class SalesFilterActivity extends Activity {
 
     //Brand Name List
     public void requestBrandNameAPI(int offsetvalue1, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Brand Name Response", response.toString() + "Size---" + response.length());
+                        // Log.i("Brand Name Response", response.toString() + "Size---" + response.length());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -520,7 +644,6 @@ public class SalesFilterActivity extends Activity {
                                     String brandName = productName1.getString("brandName");
                                     subBrandnm.add(brandName);
                                 }
-
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestBrandNameAPI(offsetvalue, limit);
@@ -570,14 +693,14 @@ public class SalesFilterActivity extends Activity {
     //Brand Plan Class List
     public void requestBrandPlanClassAPI(int offsetvalue1, int limit1) {
 
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
         Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Brand Class Response", response.toString() + "Size ---" + response.length());
+                        //  Log.i("Brand Class Response", response.toString() + "Size ---" + response.length());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -640,7 +763,7 @@ public class SalesFilterActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+     /*   if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
             //Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
             // startActivity(intent);
             finish();
@@ -648,6 +771,8 @@ public class SalesFilterActivity extends Activity {
             // Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
             // startActivity(intent);
             finish();
-        }
+
+        }*/
+        finish();
     }
 }

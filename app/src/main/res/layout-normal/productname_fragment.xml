@@ -81,6 +81,7 @@
                 android:id="@+id/imageBtnFilter"
                 android:layout_width="50dp"
                 android:layout_height="25dp"
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@mipmap/key_product_filter" />

@@ -7,11 +7,11 @@
     android:padding="8dp">
 
     <!--<ImageView-->
-        <!--android:layout_width="30dp"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:id="@+id/groupImage"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--/>-->
+    <!--android:layout_width="30dp"-->
+    <!--android:layout_height="30dp"-->
+    <!--android:id="@+id/groupImage"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--/>-->
 
 
     <TextView

@@ -25,6 +25,20 @@ public class FreshnessIndexDetails {
     double upcomingGrpCount;
     double oldGrpCount;
     double previousGrpCount;
+    double coreGroupCount;
+    double coreGrpCount;
+
+
+
+
+
+    public double getCoreGroupCount() {
+        return coreGroupCount;
+    }
+
+    public void setCoreGroupCount(double coreGroupCount) {
+        this.coreGroupCount = coreGroupCount;
+    }
 
     public double getSohCurrentGrpCount() {
         return sohCurrentGrpCount;
@@ -188,5 +202,13 @@ public class FreshnessIndexDetails {
 
     public void setPreviousGrpCount(double previousGrpCount) {
         this.previousGrpCount = previousGrpCount;
+    }
+
+    public double getCoreGrpCount() {
+        return coreGrpCount;
+    }
+
+    public void setCoreGrpCount(double coreGrpCount) {
+        this.coreGrpCount = coreGrpCount;
     }
 }

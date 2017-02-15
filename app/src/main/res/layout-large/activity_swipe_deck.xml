@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/tools"
     android:visibility="visible"
+    android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
     <LinearLayout
@@ -115,7 +116,7 @@
         android:layout_height="150dp">
 
         <View
-            android:background="#CFD2D1"
+            android:background="@color/smdm_divider_Black"
             android:layout_width="match_parent"
             android:layout_height="2dp"/>
 
@@ -132,7 +133,7 @@
 
 
         <View
-            android:background="#E9EDED"
+            android:background="@color/smdm_divider_Black"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
@@ -191,7 +192,7 @@
         android:layout_height="200dp">
 
         <View
-            android:background="#CFD2D1"
+            android:background="@color/smdm_divider_Black"
             android:layout_width="match_parent"
             android:layout_height="2dp"/>
 
@@ -270,7 +271,7 @@
         </RelativeLayout>
 
         <View
-            android:background="#E9EDED"
+            android:background="@color/smdm_divider_Black"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 

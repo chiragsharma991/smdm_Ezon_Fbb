@@ -141,7 +141,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
            if (viewType == VIEW_ITEM) {
             View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.child_sales_listview, parent, false);
-            return new SalesAnalysisSnapAdapter.SalesViewHolder(v);
+            return new SalesViewHolder(v);
         } else if (viewType == VIEW_PROG){
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_footer, parent, false);

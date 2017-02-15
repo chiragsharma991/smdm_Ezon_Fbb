@@ -155,6 +155,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
+            processBar.setVisibility(View.GONE);
             offsetvalue = 0;
             limit = 100;
             count = 0;
@@ -299,6 +300,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
+                            processBar.setVisibility(View.GONE);
                             oe_FirstVisibleItem="All";
                             offsetvalue = 0;
                             limit = 100;
@@ -325,6 +327,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
+                            processBar.setVisibility(View.GONE);
                             oe_FirstVisibleItem="All";
                             offsetvalue = 0;
                             limit = 100;
@@ -350,6 +353,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
+                            processBar.setVisibility(View.GONE);
                             oe_FirstVisibleItem="All";
                             offsetvalue = 0;
                             limit = 100;
@@ -375,6 +379,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
+                            processBar.setVisibility(View.GONE);
                             oe_FirstVisibleItem="All";
                             offsetvalue = 0;
                             limit = 100;
@@ -418,6 +423,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
+                            processBar.setVisibility(View.GONE);
                             oe_FirstVisibleItem="All";
                           //  processBar.setVisibility(View.VISIBLE);
 
@@ -444,7 +450,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
-                           // processBar.setVisibility(View.VISIBLE);
+                            processBar.setVisibility(View.GONE);
+                            // processBar.setVisibility(View.VISIBLE);
                             oe_FirstVisibleItem="All";
                             offsetvalue = 0;
                             limit = 100;
@@ -471,6 +478,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
+                            processBar.setVisibility(View.GONE);
                             oe_FirstVisibleItem="All";
                             offsetvalue = 0;
                             limit = 100;
@@ -497,6 +505,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
+                            processBar.setVisibility(View.GONE);
                             oe_FirstVisibleItem="All";
 
                             offsetvalue = 0;
@@ -650,6 +659,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             if (Reusable_Functions.chkStatus(context)) {
                                 Reusable_Functions.hDialog();
                                 Reusable_Functions.sDialog(context, "Loading data...");
+                                processBar.setVisibility(View.GONE);
                                 if (postRequest != null) {
                                     postRequest.cancel();
                                 }
@@ -685,6 +695,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     }
                                     Reusable_Functions.hDialog();
                                     Reusable_Functions.sDialog(context, "Loading data...");
+                                    processBar.setVisibility(View.GONE);
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
@@ -712,6 +723,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     }
                                     Reusable_Functions.hDialog();
                                     Reusable_Functions.sDialog(context, "Loading data...");
+                                    processBar.setVisibility(View.GONE);
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
@@ -742,6 +754,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     }
                                     Reusable_Functions.hDialog();
                                     Reusable_Functions.sDialog(context, "Loading data...");
+                                    processBar.setVisibility(View.GONE);
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
@@ -758,6 +771,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         default:
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, " select another dept name", Toast.LENGTH_SHORT).show();
+                            processBar.setVisibility(View.GONE);
                             OnItemClick=false;
 
                             break;
@@ -1067,6 +1081,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
+            processBar.setVisibility(View.GONE);
             offsetvalue = 0;
             limit = 100;
             count = 0;
@@ -1087,6 +1102,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
+            processBar.setVisibility(View.GONE);
             offsetvalue = 0;
             limit = 100;
             count = 0;
@@ -1107,6 +1123,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
+            processBar.setVisibility(View.GONE);
             offsetvalue = 0;
             limit = 100;
             count = 0;
@@ -1126,6 +1143,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
+            processBar.setVisibility(View.GONE);
             offsetvalue = 0;
             limit = 100;
             count = 0;

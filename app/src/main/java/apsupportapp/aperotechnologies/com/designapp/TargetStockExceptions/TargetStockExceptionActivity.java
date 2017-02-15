@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,6 +46,7 @@ import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.FloorAvailabilityDetails;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
@@ -92,6 +94,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private TextView targetMax;
     private int setValue=7;
     private boolean coreSelection = false;
+    public static Activity targetStockException;
+    private boolean from_filter=false;
+    private String selectedString="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +105,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         getSupportActionBar().hide();
         initalise();
         gson = new Gson();
+        targetStockException=this;
         targetStockList = new ArrayList<FloorAvailabilityDetails>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -120,7 +126,17 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             top = 10;
             level = 1;
             view = "STD";
-            requestTargetStockExcepApi();
+
+            if (getIntent().getStringExtra("selectedDept") == null) {
+                from_filter = false;
+            } else if (getIntent().getStringExtra("selectedDept") != null) {
+                selectedString = getIntent().getStringExtra("selectedDept");
+                //   selectedString = selectedString.replace(" ","%20");
+                from_filter = true;
+
+            }
+
+            requestTargetStockExcepApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -131,22 +147,36 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     }
 
-    private void requestTargetStockExcepApi() {
+    private void requestTargetStockExcepApi(final String selectedString) {
 
         if (Reusable_Functions.chkStatus(context)) {
 
 
             String url;
-            if (coreSelection) {
+            if (from_filter) {
+                if (coreSelection) {
 
-                //core selection without season params
+                    //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
+                    url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion+ "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal ;
+                } else {
+
+                    // fashion select with season params
+
+                    url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+ "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal ;
+                }
             } else {
+                if (coreSelection) {
 
-                // fashion select with season params
+                    //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
+                    url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion+ "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal ;
+                } else {
+
+                    // fashion select with season params
+
+                    url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+ "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal ;
+                }
             }
 
 
@@ -190,11 +220,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                                         targetStockDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
                                         targetStockList.add(targetStockDetails);
-
-                                        offsetvalue = offsetvalue + response.length();
-                                        top = top + response.length();
-
                                     }
+                                    offsetvalue = offsetvalue + response.length();
+                                    top = top + response.length();
                                     targetListView.removeFooterView(footer);
                                     targetListView.setTag("FOOTER_REMOVE");
                                 }
@@ -286,7 +314,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         Log.e(TAG, "onScrollStateChanged:  log");
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
-                        requestTargetStockExcepApi();
+                        requestTargetStockExcepApi(selectedString);
                         //Reusable_Functions.sDialog(context, "Loading data...");
                     }
                 }
@@ -409,7 +437,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                 break;
             case R.id.target_imgfilter:
-                Intent intent1 = new Intent(TargetStockExceptionActivity.this, InventoryFilterActivity.class);
+                Intent intent1 = new Intent(TargetStockExceptionActivity.this, SalesFilterActivity.class);
                 intent1.putExtra("checkfrom", "targetStockException");
                 startActivity(intent1);
                 //finish();
@@ -1025,7 +1053,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             top = 10;
             level = 1;
             targetStockList.clear();
-            requestTargetStockExcepApi();
+            requestTargetStockExcepApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1041,7 +1069,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             top = 10;
             level = 2;
             targetStockList.clear();
-            requestTargetStockExcepApi();
+            requestTargetStockExcepApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1057,7 +1085,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             top = 10;
             level = 3;
             targetStockList.clear();
-            requestTargetStockExcepApi();
+            requestTargetStockExcepApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1081,7 +1109,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
                         coreSelection = true;
-                        requestTargetStockExcepApi();
+                        requestTargetStockExcepApi(selectedString);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
@@ -1099,7 +1127,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
                         coreSelection = false;
-                        requestTargetStockExcepApi();
+                        requestTargetStockExcepApi(selectedString);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }

@@ -205,7 +205,7 @@
         </RelativeLayout>
 
     </LinearLayout>
-    <include layout="@layout/quick_filter_menu"/>
+    <include layout="@layout/quick_filter_skewedsizes_menu"/>
 
 </RelativeLayout>
 

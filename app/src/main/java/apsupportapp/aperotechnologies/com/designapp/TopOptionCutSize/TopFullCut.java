@@ -1,8 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -42,16 +39,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPromoAdapter;
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.LocalNotificationReceiver;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.TransparentActivity;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -85,6 +78,10 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     private String corefashion = "Fashion";
     private String checkTimeValueIs = null;
     private String view = "STD";
+    private boolean from_filter=false;
+    private String selectedString="";
+    public static Activity topFullcut;
+
 
 
     @Override
@@ -94,6 +91,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         getSupportActionBar().hide();
         initalise();
         gson = new Gson();
+        topFullcut=this;
         TopOptionListView.setVisibility(View.VISIBLE);
         TopOptionList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -106,6 +104,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         queue.start();
         TopOptionListView.setTag("FOOTER");
 
+
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
@@ -113,7 +112,17 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
             limit = 10;
             count = 0;
             top = 10;
-            requestRunningPromoApi();
+
+            if (getIntent().getStringExtra("selectedDept") == null) {
+                from_filter=false;
+            }
+            else if(getIntent().getStringExtra("selectedDept") != null) {
+                selectedString  = getIntent().getStringExtra("selectedDept");
+                //   selectedString = selectedString.replace(" ","%20");
+                from_filter=true;
+
+            }
+            requestRunningPromoApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -128,11 +137,18 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
     }
 
-    private void requestRunningPromoApi() {
+    private void requestRunningPromoApi(final String selectedString) {
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            String url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+            String url;
+            if(from_filter)
+            {
+                 url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?view=" + view + "&corefashion=" + corefashion + "&level=" + SalesFilterActivity.level_filter +  selectedString + "&top=" + top + "&offset=" + offsetvalue + "&limit=" + limit;
+            }else
+            {
+                url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+            }
 
             Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -147,6 +163,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
+
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     TopOptionListView.removeFooterView(footer);
                                     TopOptionListView.setTag("FOOTER_REMOVE");
@@ -178,10 +195,9 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
                                         TopOptionListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         TopOptionList.add(TopOptionListDisplay);
-                                        offsetvalue = offsetvalue + response.length();
-                                        top = top + response.length();
-
                                     }
+                                    offsetvalue = offsetvalue + response.length();
+                                    top = top + response.length();
                                 }
 
 
@@ -209,6 +225,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                 Top_txtStoreName.setText(TopOptionList.get(0).getStoreDesc());
 
                                 Reusable_Functions.hDialog();
+
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 TopOptionListView.removeFooterView(footer);
@@ -268,7 +285,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                         footer.setVisibility(View.VISIBLE);
 
                         lazyScroll = "ON";
-                        requestRunningPromoApi();
+                        requestRunningPromoApi(selectedString);
                     }
 
                 }
@@ -343,7 +360,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 filterFunction();
                 break;
             case R.id.topOption_imgfilter:
-                Intent intent = new Intent(this, InventoryFilterActivity.class);
+                Intent intent = new Intent(this, SalesFilterActivity.class);
                 intent.putExtra("checkfrom", "TopFullCut");
                 startActivity(intent);
                 break;
@@ -457,7 +474,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         top = 10;
         TopOptionList.clear();
         Reusable_Functions.sDialog(this, "Loading.......");
-        requestRunningPromoApi();
+        requestRunningPromoApi(selectedString);
     }
 
 
@@ -467,7 +484,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
        /* Intent intent=new Intent(context, DashBoardActivity.class);
         intent.putExtra("BACKTO","inventory");
         startActivity(intent);*/
-        finish();
+        this.finish();
     }
 
     @Override
@@ -488,7 +505,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                         lazyScroll = "OFF";
                         TopOptionList.clear();
                         TopOptionListView.setVisibility(View.GONE);
-                        requestRunningPromoApi();
+                        requestRunningPromoApi(selectedString);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         TopOptionListView.setVisibility(View.GONE);
@@ -508,7 +525,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                         TopOptionList.clear();
                         TopOptionListView.setVisibility(View.GONE);
                         Reusable_Functions.sDialog(this, "Loading.......");
-                        requestRunningPromoApi();
+                        requestRunningPromoApi(selectedString);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         TopOptionListView.setVisibility(View.GONE);

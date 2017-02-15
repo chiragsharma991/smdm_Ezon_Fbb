@@ -10,6 +10,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -106,7 +110,25 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
 
         if(!arrayList.get(position).getProdImageURL().equals(""))
         {
-            Picasso.with(this.context).
+            Glide.with(this.context)
+                    .load(arrayList.get(position).getProdImageURL())
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            holder.ProgressPicaso.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .into(holder.floor_image_child)
+            ;
+
+          /*  Picasso.with(this.context).
 
                     load(arrayList.get(position).getProdImageURL()).
                     into(holder.floor_image_child, new Callback() {
@@ -120,13 +142,15 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
                             holder.ProgressPicaso.setVisibility(View.GONE);
 
                         }
-                    });
+                    });*/
         }else {
             holder.ProgressPicaso.setVisibility(View.GONE);
 
-            Picasso.with(this.context).
+            Glide.with(this.context).
                     load(R.mipmap.placeholder).
                     into(holder.floor_image_child);
+
+
 
         }
 

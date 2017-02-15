@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
     android:orientation="vertical"
     tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
 
@@ -174,7 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:background="#B73020"
+                    android:background="@color/colorPrimary"
                     android:text="@string/submit"
                     android:textAllCaps="false"
                     android:textColor="#ffffff" />
@@ -192,7 +193,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="30dp"
                         android:layout_toLeftOf="@+id/imgor"
-                        android:background="#566573">
+                        android:background="@color/bg_screen_color"
+                        >
 
                     </RelativeLayout>
 
@@ -212,7 +214,8 @@
                         android:layout_marginRight="7dp"
                         android:layout_marginTop="30dp"
                         android:layout_toRightOf="@+id/imgor"
-                        android:background="#566573">
+                        android:background="@color/bg_screen_color"
+                        >
 
                     </RelativeLayout>
 
@@ -224,7 +227,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:background="#B73020"
+                    android:background="@color/colorPrimary"
                     android:text="@string/scan_barcode"
                     android:textAllCaps="false"
                     android:textColor="#ffffff" />
@@ -282,7 +285,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#666666" />
+                android:background="@color/bg_screen_color" />
 
             <ListView
                 android:id="@+id/listCollection"
@@ -336,7 +339,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#666666" />
+                android:background="@color/bg_screen_color" />
 
             <ListView
                 android:id="@+id/listOption"

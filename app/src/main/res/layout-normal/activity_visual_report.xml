@@ -143,7 +143,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="2dp"
-                android:background="@color/divider_salescard">
+                android:background="@color/smdm_divider_Black"
+                >
 
             </View>
 
@@ -190,7 +191,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="2dp"
-                android:background="@color/divider_salescard">
+                android:background="@color/smdm_divider_Black"
+                >
 
             </View>
 
@@ -237,7 +239,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="2dp"
-                android:background="@color/divider_salescard">
+                android:background="@color/smdm_divider_Black"
+                >
 
             </View>
 

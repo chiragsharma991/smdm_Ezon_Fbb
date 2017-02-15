@@ -103,7 +103,7 @@ public class Option_Fragment extends Fragment {
         view = (ViewGroup) inflater.inflate(R.layout.option_fragment, container, false);
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
-        relativeLayout.setBackgroundColor(Color.WHITE);
+        relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));
         txtOptionName = (TextView) view.findViewById(R.id.txtArticleName);
 
         txtnounits = (TextView) view.findViewById(R.id.txtnounits);
@@ -247,7 +247,7 @@ public class Option_Fragment extends Fragment {
         params.setMargins(2, 0, 0, 0);
 
         TextView textView = this.headerTextView(headers[0]);
-        textView.setBackgroundColor(Color.parseColor("#B73020"));
+        textView.setBackgroundColor(Color.parseColor("#2277b1"));
         textView.setTextColor(Color.parseColor("#ffffff"));
         componentATableRow.addView(textView);
 
@@ -267,7 +267,7 @@ public class Option_Fragment extends Fragment {
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-            textView.setBackgroundColor(Color.parseColor("#B73020"));
+            textView.setBackgroundColor(Color.parseColor("#2277b1"));
             textView.setTextColor(Color.parseColor("#ffffff"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);

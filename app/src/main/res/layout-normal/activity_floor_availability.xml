@@ -135,7 +135,7 @@
                     android:id="@+id/floor_quickFilter"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:gravity="end"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
@@ -163,7 +163,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:weightSum="2"
-            android:visibility="gone"
+            android:visibility="visible"
             android:orientation="horizontal"
             segmentedgroup:sc_border_width="1dp"
             segmentedgroup:sc_corner_radius="14dp"
@@ -227,5 +227,28 @@
     <include layout="@layout/quick_filter_menu">
 
     </include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/process_filter"
+        android:visibility="gone"
+        >
+
+        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"
+            android:background="#0000"
+            android:keepScreenOn="true"
+            android:theme="@style/ProgressBar_black"
+            >
+
+        </ProgressBar>
+
+
+    </RelativeLayout>
 
 </RelativeLayout>
