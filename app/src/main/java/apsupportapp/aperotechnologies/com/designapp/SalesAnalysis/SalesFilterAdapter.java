@@ -82,16 +82,16 @@ public class SalesFilterAdapter extends BaseAdapter implements Filterable {
 
         //Log.e("in ","getview");
         Position = position;
-        final SalesFilterAdapter.Holder holder;
+        final Holder holder;
         if (convertView == null) {
-            holder = new SalesFilterAdapter.Holder();
+            holder = new Holder();
             convertView = mInflater.inflate(R.layout.activity_filter_child, null);
             holder.FilterMc = (TextView) convertView.findViewById(R.id.filterMc);
             holder.checkBox=(CheckBox)convertView.findViewById(R.id.checkFilterMc);
             holder.checkBox.setVisibility(View.INVISIBLE);
             convertView.setTag(holder);
         } else {
-            holder = (SalesFilterAdapter.Holder) convertView.getTag();
+            holder = (Holder) convertView.getTag();
 
         }
         holder.FilterMc.setText(arrayList.get(position));
@@ -133,7 +133,7 @@ public class SalesFilterAdapter extends BaseAdapter implements Filterable {
     @Override
     public Filter getFilter() {
         if (sFilter == null) {
-            sFilter = new SalesFilterAdapter.SFilter();
+            sFilter = new SFilter();
         }
         return sFilter;
     }

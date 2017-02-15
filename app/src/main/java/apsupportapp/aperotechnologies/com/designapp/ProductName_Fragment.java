@@ -167,7 +167,6 @@ public class ProductName_Fragment extends Fragment {
                 txt_subdepName.setVisibility(View.GONE);
             }
             if (f_productName != null)
-
             {
                 productNameBeanArrayList = new ArrayList<ProductNameBean>();
                 requestFilterProductName(offsetvalue, limit);
@@ -175,14 +174,16 @@ public class ProductName_Fragment extends Fragment {
                 txt_subdepName.setVisibility(View.VISIBLE);
             }
 
-            if (!SearchActivity1.searchSubDept.equals("")) {
+            if (!SearchActivity1.searchSubDept.equals(""))
+            {
                 productNameBeanArrayList = new ArrayList<ProductNameBean>();
                 requestSearchSubDeptAPI(offsetvalue, limit);
                 txt_subdepName.setText(SearchActivity1.searchSubDept.replaceAll("%20", " ").replaceAll("%26", "&"));
                 txt_subdepName.setVisibility(View.VISIBLE);
             }
 
-            if (!SearchActivity1.searchProductName.equals("")) {
+            if (!SearchActivity1.searchProductName.equals(""))
+            {
                 productNameBeanArrayList = new ArrayList<ProductNameBean>();
                 requestSearchProductName(offsetvalue, limit);
                 txt_subdepName.setVisibility(View.GONE);

@@ -170,7 +170,6 @@
 
                 <RelativeLayout
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
                     android:id="@+id/bestInvent_imgfilter"
                     android:background="@drawable/button_red_effect"
                     android:layout_width="@dimen/header_clickable_width"

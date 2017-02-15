@@ -101,7 +101,6 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private boolean isPositionItem(int position) {
-        // return position == 0;
         return position != OptionIndexDetailsArrayList.size();
     }
 

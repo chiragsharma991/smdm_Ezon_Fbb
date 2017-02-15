@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -36,10 +38,14 @@ public class VisualAssortmentCommentAPI {
 
     public static void requestSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context) {
 
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 2048 * 2048); // 2MB cap
         Network network = new BasicNetwork(new HurlStack());
-        queue = new RequestQueue(cache, network);
-        queue.start();
+        if (queue != null) {
+            queue.stop();
+        } else if(queue == null){
+            queue = new RequestQueue(cache, network);
+            queue.start();
+        }
         String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId;
         Log.e("url", " post VASSORT " + url + " ==== " + obj.toString());
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, obj.toString(),
@@ -51,7 +57,7 @@ public class VisualAssortmentCommentAPI {
                             if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();
                             } else {
-                              //  Toast.makeText(context, "Data is saved successfully", Toast.LENGTH_SHORT).show();
+                                //  Toast.makeText(context, "Data is saved successfully", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
@@ -83,11 +89,14 @@ public class VisualAssortmentCommentAPI {
 
     public static void requestUpdateSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context) {
 
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 2048 * 2048); // 2MB cap
         Network network = new BasicNetwork(new HurlStack());
-        queue = new RequestQueue(cache, network);
-        queue.start();
-
+        if (queue != null) {
+            queue.stop();
+        } else if(queue == null){
+            queue = new RequestQueue(cache, network);
+            queue.start();
+        }
         String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId;
         Log.e("url", " put VASSORT " + url + " ==== " + obj.toString());
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, obj.toString(),
@@ -99,7 +108,7 @@ public class VisualAssortmentCommentAPI {
                             if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();
                             } else {
-                              //  Toast.makeText(context, "Data is updated successfully", Toast.LENGTH_SHORT).show();
+                                //  Toast.makeText(context, "Data is updated successfully", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {

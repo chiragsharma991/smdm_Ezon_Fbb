@@ -409,9 +409,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                 break;
             case R.id.target_imgfilter:
-                Intent intent1 = new Intent(TargetStockExceptionActivity.this, InventoryFilterActivity.class);
-                intent1.putExtra("checkfrom", "targetStockException");
-                startActivity(intent1);
+//                Intent intent1 = new Intent(TargetStockExceptionActivity.this, SalesFilterActivity.class);
+//                intent1.putExtra("checkfrom", "targetStockException");
+//                startActivity(intent1);
                 //finish();
                 break;
             case R.id.target_quickFilter:
@@ -434,9 +434,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
 
                     TargetSeek.setProgress(70);
-
-
-
 
                  /*   checktwo.setChecked(false);
                     checkthree.setChecked(false);
@@ -468,6 +465,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             Log.e("Previous checked", "" + checkPrevious.isChecked());
                             break;
                         case "Old":
+
                             checkOld.setChecked(true);
                             checkCurrent.setChecked(false);
                             checkPrevious.setChecked(false);
@@ -475,6 +473,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             Log.e("Old checked", "" + checkOld.isChecked());
                             break;
                         case "Upcoming":
+
                             checkUpcoming.setChecked(true);
                             checkCurrent.setChecked(false);
                             checkOld.setChecked(false);

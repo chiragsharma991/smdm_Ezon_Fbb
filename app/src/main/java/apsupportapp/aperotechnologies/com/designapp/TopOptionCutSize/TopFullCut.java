@@ -1,8 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -42,16 +39,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPromoAdapter;
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.LocalNotificationReceiver;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.TransparentActivity;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -74,17 +67,19 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     private Gson gson;
     ListView TopOptionListView;
     ArrayList<RunningPromoListDisplay> TopOptionList;
-    private int focusposition = 0;
-    private boolean userScrolled;
     private TopOptionAdapter topOptionAdapter;
     private View footer;
     private String lazyScroll = "OFF";
     private SegmentedGroup Top_segmented;
     private RadioButton Top_fashion, Top_core, Topfull_checkWTD, Topfull_checkL4W, Topfull_checkSTD;
     private ToggleButton Toggle_top_fav;
-    private String corefashion = "Fashion";
-    private String checkTimeValueIs = null;
-    private String view = "STD";
+    private static String corefashion="Fashion";
+    private static String checkTimeValueIs = null;
+    private static String view="STD";
+    private boolean from_filter=false,filter_toggleClick = false;
+    private String selectedString="";
+    public static Activity topFullcut;
+
 
 
     @Override
@@ -94,6 +89,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         getSupportActionBar().hide();
         initalise();
         gson = new Gson();
+        topFullcut=this;
         TopOptionListView.setVisibility(View.VISIBLE);
         TopOptionList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -106,6 +102,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         queue.start();
         TopOptionListView.setTag("FOOTER");
 
+
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
@@ -113,26 +110,55 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
             limit = 10;
             count = 0;
             top = 10;
-            requestRunningPromoApi();
+
+            if (getIntent().getStringExtra("selectedDept") == null) {
+                from_filter=false;
+                filter_toggleClick = false;
+            }
+            else if(getIntent().getStringExtra("selectedDept") != null) {
+                selectedString  = getIntent().getStringExtra("selectedDept");
+                from_filter=true;
+                filter_toggleClick = true;
+
+            }
+            retainSegmentValue();
+            requestRunningPromoApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
-        // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
+
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
         TopOptionListView.addFooterView(footer);
-        // footer.setVisibility(View.GONE);
-        // BestPerformanceListView.setAdapter(bestPromoAdapter);
 
 
     }
 
-    private void requestRunningPromoApi() {
+    private void retainSegmentValue() {
+        filter_toggleClick = true;
+        if(corefashion.equals("Fashion"))
+        {
+           Top_core.toggle();
+        }
+        else {
+           Top_fashion.toggle();
+        }
+        maintainquickFilterVal();
+    }
+
+    private void requestRunningPromoApi(final String selectedString) {
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            String url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+            String url;
+            if(from_filter)
+            {
+                 url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?view=" + view + "&corefashion=" + corefashion + "&level=" + SalesFilterActivity.level_filter +  selectedString + "&top=" + top + "&offset=" + offsetvalue + "&limit=" + limit;
+            }else
+            {
+                url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+            }
 
             Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -147,6 +173,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
+
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     TopOptionListView.removeFooterView(footer);
                                     TopOptionListView.setTag("FOOTER_REMOVE");
@@ -178,10 +205,9 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
                                         TopOptionListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         TopOptionList.add(TopOptionListDisplay);
-                                        offsetvalue = offsetvalue + response.length();
-                                        top = top + response.length();
-
                                     }
+                                    offsetvalue = offsetvalue + response.length();
+                                    top = top + response.length();
                                 }
 
 
@@ -209,6 +235,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                 Top_txtStoreName.setText(TopOptionList.get(0).getStoreDesc());
 
                                 Reusable_Functions.hDialog();
+
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 TopOptionListView.removeFooterView(footer);
@@ -268,7 +295,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                         footer.setVisibility(View.VISIBLE);
 
                         lazyScroll = "ON";
-                        requestRunningPromoApi();
+                        requestRunningPromoApi(selectedString);
                     }
 
                 }
@@ -307,7 +334,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         Top_segmented = (SegmentedGroup) findViewById(R.id.top_segmented);
 
         Top_core = (RadioButton) findViewById(R.id.top_core);
-        Top_core.toggle();
+
 
         Top_fashion = (RadioButton) findViewById(R.id.top_fashion);
 
@@ -343,7 +370,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 filterFunction();
                 break;
             case R.id.topOption_imgfilter:
-                Intent intent = new Intent(this, InventoryFilterActivity.class);
+                Intent intent = new Intent(this, SalesFilterActivity.class);
                 intent.putExtra("checkfrom", "TopFullCut");
                 startActivity(intent);
                 break;
@@ -407,38 +434,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
             //base layout clicking>>>
 
             case R.id.quickFilterPopup:
-                if (checkTimeValueIs == null) {
-                    Topfull_checkWTD.setChecked(false);
-                    Topfull_checkL4W.setChecked(false);
-                    Topfull_checkSTD.setChecked(true);
-                } else {
-
-                    switch (checkTimeValueIs.toString()) {
-                        case "CheckWTD":
-                            Topfull_checkWTD.setChecked(true);
-                            Topfull_checkL4W.setChecked(false);
-                            Topfull_checkSTD.setChecked(false);
-                            Log.i(TAG, "CheckWTD is checked");
-                            break;
-                        case "CheckL4W":
-                            Topfull_checkWTD.setChecked(false);
-                            Topfull_checkL4W.setChecked(true);
-                            Topfull_checkSTD.setChecked(false);
-                            Log.i(TAG, "CheckL4W is checked");
-                            break;
-                        case "CheckSTD":
-                            Topfull_checkWTD.setChecked(false);
-                            Topfull_checkL4W.setChecked(false);
-                            Topfull_checkSTD.setChecked(true);
-                            Log.i(TAG, "CheckSTD is checked");
-                            break;
-                        default:
-                            break;
-
-
-                    }
-                }
-                TopBest_quickFilter_baseLayout.setVisibility(View.GONE);
+                maintainquickFilterVal();
 
                 break;
 
@@ -446,9 +442,43 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    private void maintainquickFilterVal() {
+        if (checkTimeValueIs == null) {
+            Topfull_checkWTD.setChecked(false);
+            Topfull_checkL4W.setChecked(false);
+            Topfull_checkSTD.setChecked(true);
+        } else {
+
+            switch (checkTimeValueIs.toString()) {
+                case "CheckWTD":
+                    Topfull_checkWTD.setChecked(true);
+                    Topfull_checkL4W.setChecked(false);
+                    Topfull_checkSTD.setChecked(false);
+                    Log.i(TAG, "CheckWTD is checked");
+                    break;
+                case "CheckL4W":
+                    Topfull_checkWTD.setChecked(false);
+                    Topfull_checkL4W.setChecked(true);
+                    Topfull_checkSTD.setChecked(false);
+                    Log.i(TAG, "CheckL4W is checked");
+                    break;
+                case "CheckSTD":
+                    Topfull_checkWTD.setChecked(false);
+                    Topfull_checkL4W.setChecked(false);
+                    Topfull_checkSTD.setChecked(true);
+                    Log.i(TAG, "CheckSTD is checked");
+                    break;
+                default:
+                    break;
+
+
+            }
+        }
+        TopBest_quickFilter_baseLayout.setVisibility(View.GONE);
+    }
+
     private void filterFunction() {
         TopBest_quickFilter_baseLayout.setVisibility(View.VISIBLE);
-
     }
 
     private void DoneTime() {
@@ -457,7 +487,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         top = 10;
         TopOptionList.clear();
         Reusable_Functions.sDialog(this, "Loading.......");
-        requestRunningPromoApi();
+        requestRunningPromoApi(selectedString);
     }
 
 
@@ -467,59 +497,69 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
        /* Intent intent=new Intent(context, DashBoardActivity.class);
         intent.putExtra("BACKTO","inventory");
         startActivity(intent);*/
-        finish();
+        view = null;
+        corefashion = null;
+        checkTimeValueIs = null;
+        view = "STD";
+        corefashion = "Fashion";
+        this.finish();
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         // Id is changed so that we have change core in fashion
+        if(filter_toggleClick == false) {
+            switch (checkedId) {
+                case R.id.top_core:
+                    if (Top_core.isChecked()) {
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            limit = 10;
+                            offsetvalue = 0;
+                            top = 10;
+                            corefashion = "Fashion";
+                            lazyScroll = "OFF";
+                            TopOptionList.clear();
+                            TopOptionListView.setVisibility(View.GONE);
+                            requestRunningPromoApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            TopOptionListView.setVisibility(View.GONE);
 
-        switch (checkedId) {
-            case R.id.top_core:
-                if (Top_core.isChecked()) {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Fashion";
-                        lazyScroll = "OFF";
-                        TopOptionList.clear();
-                        TopOptionListView.setVisibility(View.GONE);
-                        requestRunningPromoApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        TopOptionListView.setVisibility(View.GONE);
-
+                        }
                     }
-                }
-                break;
-            case R.id.top_fashion:
-                if (Top_fashion.isChecked()) {
-                    if (Reusable_Functions.chkStatus(context)) {
+                    break;
+                case R.id.top_fashion:
+                    if (Top_fashion.isChecked()) {
+                        if (Reusable_Functions.chkStatus(context)) {
 
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Core";
-                        lazyScroll = "OFF";
-                        TopOptionList.clear();
-                        TopOptionListView.setVisibility(View.GONE);
-                        Reusable_Functions.sDialog(this, "Loading.......");
-                        requestRunningPromoApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        TopOptionListView.setVisibility(View.GONE);
+                            limit = 10;
+                            offsetvalue = 0;
+                            top = 10;
+                            corefashion = "Core";
+                            lazyScroll = "OFF";
+                            TopOptionList.clear();
+                            TopOptionListView.setVisibility(View.GONE);
+                            Reusable_Functions.sDialog(this, "Loading.......");
+                            requestRunningPromoApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            TopOptionListView.setVisibility(View.GONE);
 
+                        }
                     }
-                }
 
 
-                break;
+                    break;
 
 
+            }
+        }
+        else
+        {
+            filter_toggleClick = false;
         }
 
     }

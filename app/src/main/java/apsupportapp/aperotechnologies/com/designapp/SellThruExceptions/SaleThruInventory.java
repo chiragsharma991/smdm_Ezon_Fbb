@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.SellThruExceptions;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,6 +47,7 @@ import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -66,7 +68,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private int offsetvalue = 0;
     private int top = 10;
     private int popPromo = 0;
-    Context context = this;
     private RequestQueue queue;
     private Gson gson;
     ListView BestInventListview;
@@ -75,21 +76,26 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private boolean userScrolled;
     private SaleThruInventoryAdapter bestPerformerInventoryAdapter;
     private View footer;
-    private String lazyScroll = "OFF", seasonGroup = "Current";
+    private String lazyScroll = "OFF";
+    private static String seasonGroup = "Current" ;
     private SegmentedGroup BestInvent_segmented;
     private RadioButton BestInvent_core, BestInvent_fashion;
     private ToggleButton Toggle_bestInvent_fav;
-    private String corefashion = "Fashion";
+    private static String corefashion = "Fashion" ;
     private ImageView Skewed_quickFilter;
     private int orderbycol = 1;
+    Context context;
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU, BstInventory_salesThru, BstInventory_Fwd, BstInventory_coverNsell;
     private RadioButton BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
     private RelativeLayout BaseLayoutInventory;
-    private String checkValueIs = null, checkTimeValueIs = null;
-    private String view = "STD";
+    private static String checkValueIs = null, checkTimeValueIs = null;
+    private static String view = "STD" ;
     private TextView Toolbar_title;
-    private boolean coreSelection=false;
+    private boolean coreSelection=false,filter_toggleClick = false;
+    public static Activity saleThru;
+    private boolean from_filter=false;
+    private String selectedString="";
 
 
     @Override
@@ -102,8 +108,12 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         BaseLayoutInventory.setVisibility(View.GONE);
         BestInventListview.setVisibility(View.VISIBLE);
         Bst_sortInventory.setVisibility(View.GONE);
-
         gson = new Gson();
+        context = this;
+        saleThru=this;
+//        corefashion = "Fashion";
+//        seasonGroup = "Current";
+//        view = "STD";
         BestInventList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -115,33 +125,57 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         queue.start();
         BestInventListview.setTag("FOOTER");
 
-        Reusable_Functions.sDialog(this, "Loading.......");
-        requestRunningPromoApi();
-        // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
+        Reusable_Functions.hDialog();
+        Reusable_Functions.sDialog(context, "Loading.......");
+
+        if (getIntent().getStringExtra("selectedDept") == null) {
+            from_filter = false;
+            filter_toggleClick = false;
+        } else if (getIntent().getStringExtra("selectedDept") != null) {
+            selectedString = getIntent().getStringExtra("selectedDept");
+            from_filter = true;
+            filter_toggleClick = true;
+
+        }
+        retainSegmentVal();
+        requestRunningPromoApi(selectedString);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
-
         BestInventListview.addFooterView(footer);
-        // footer.setVisibility(View.GONE);
-        // BestPerformanceListView.setAdapter(bestPromoAdapter);
+     }
 
 
-    }
 
-    private void requestRunningPromoApi() {
+    private void requestRunningPromoApi(final String selectedString) {
 
 
         if (Reusable_Functions.chkStatus(context)) {
 
             String url;
-            if (coreSelection) {
 
-                //core selection without season params
+            if (from_filter) {
+                if (coreSelection) {
 
-                url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                    //core selection without season params
+
+                    url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                } else {
+
+                    // fashion select with season params
+
+                    url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                }
             } else {
-                // fashion select with season params
+                if (coreSelection) {
 
-                url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                    //core selection without season params
+
+                    url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                } else {
+
+                    // fashion select with season params
+
+                    url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                }
             }
 
             Log.e(TAG, "URL" + url);
@@ -189,10 +223,9 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         BestInventList.add(BestInventSizeListDisplay);
-                                        offsetvalue = offsetvalue + response.length();
-                                        top = top + response.length();
-
                                     }
+                                    offsetvalue = offsetvalue + response.length();
+                                    top = top + response.length();
                                     BestInventListview.removeFooterView(footer);
                                     BestInventListview.setTag("FOOTER_REMOVE");
                                 }
@@ -293,7 +326,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                         //BestInvent_fashion.setEnabled(false);
                         //BestInvent_core.setEnabled(false);
 
-                        requestRunningPromoApi();
+                        requestRunningPromoApi(selectedString);
                     }
 
                 }
@@ -338,7 +371,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
         BestInvent_core = (RadioButton) findViewById(R.id.bestInvent_core);
         BestInvent_fashion = (RadioButton) findViewById(R.id.bestInvent_fashion);
-        BestInvent_fashion.toggle();
+       // BestInvent_fashion.toggle();
         Bst_sortInventory = (RelativeLayout) findViewById(R.id.bst_sortInventory);
         BaseLayoutInventory = (RelativeLayout) findViewById(R.id.baseLayoutInventory);
         BstInventory_salesU = (LinearLayout) findViewById(R.id.bstInventory_salesU);
@@ -391,6 +424,20 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         BestInvent_imgfilter.setOnClickListener(this);
     }
 
+    public void retainSegmentVal() {
+        filter_toggleClick = true;
+        if(corefashion.equals("Fashion"))
+        {
+            BestInvent_fashion.toggle();
+            coreSelection = false;
+        }
+        else
+        {
+            BestInvent_core.toggle();
+            coreSelection = true;
+        }
+        maintainquickFilterVal();
+    }
 
     @Override
     public void onClick(View v) {
@@ -432,7 +479,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
                 break;
             case R.id.bestInvent_imgfilter:
-                Intent intent = new Intent(this, InventoryFilterActivity.class);
+                Intent intent = new Intent(this, SalesFilterActivity.class);
                 intent.putExtra("checkfrom", "sellThruExceptions");
                 startActivity(intent);
                 //finish();
@@ -447,80 +494,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
             // Base layout>>>>
             case R.id.baseQuickFilterPopup:
-                if (checkTimeValueIs == null && checkValueIs == null) {
-                    BestCheckCurrent.setChecked(true);
-                    BestCheckPrevious.setChecked(false);
-                    BestCheckOld.setChecked(false);
-                    BestCheckUpcoming.setChecked(false);
-                    CheckWTD.setChecked(false);
-                    CheckL4W.setChecked(false);
-                    CheckSTD.setChecked(true);
+                maintainquickFilterVal();
 
-
-                } else {
-
-
-                    switch (checkValueIs.toString()) {
-                        case "BestCheckCurrent":
-                            BestCheckCurrent.setChecked(true);
-                            BestCheckPrevious.setChecked(false);
-                            BestCheckOld.setChecked(false);
-                            BestCheckUpcoming.setChecked(false);
-                            Log.i(TAG, "BestCheckCurrent is checked");
-                            break;
-                        case "BestCheckPrevious":
-                            BestCheckCurrent.setChecked(false);
-                            BestCheckPrevious.setChecked(true);
-                            BestCheckOld.setChecked(false);
-                            BestCheckUpcoming.setChecked(false);
-                            Log.i(TAG, "BestCheckPrevious is checked");
-                            break;
-                        case "BestCheckOld":
-                            BestCheckCurrent.setChecked(false);
-                            BestCheckPrevious.setChecked(false);
-                            BestCheckOld.setChecked(true);
-                            BestCheckUpcoming.setChecked(false);
-                            Log.i(TAG, "BestCheckOld is checked");
-                            break;
-                        case "BestCheckUpcoming":
-                            BestCheckCurrent.setChecked(false);
-                            BestCheckPrevious.setChecked(false);
-                            BestCheckOld.setChecked(false);
-                            BestCheckUpcoming.setChecked(true);
-                            Log.i(TAG, "BestCheckUpcoming is checked");
-                            break;
-                        default:
-                            break;
-
-                    }
-                    switch (checkTimeValueIs.toString()) {
-                        case "CheckWTD":
-                            CheckWTD.setChecked(true);
-                            CheckL4W.setChecked(false);
-                            CheckSTD.setChecked(false);
-                            Log.i(TAG, "CheckWTD is checked");
-                            break;
-                        case "CheckL4W":
-                            CheckWTD.setChecked(false);
-                            CheckL4W.setChecked(true);
-                            CheckSTD.setChecked(false);
-                            Log.i(TAG, "CheckL4W is checked");
-                            break;
-                        case "CheckSTD":
-                            CheckWTD.setChecked(false);
-                            CheckL4W.setChecked(false);
-                            CheckSTD.setChecked(true);
-                            Log.i(TAG, "CheckSTD is checked");
-                            break;
-                        default:
-                            break;
-
-
-                    }
-                }
-
-
-                quickFilterPopup.setVisibility(View.GONE);
                 break;
 
             case R.id.bestQfDoneLayout:
@@ -646,6 +621,82 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         }
     }
 
+    public void maintainquickFilterVal() {
+        if (checkTimeValueIs == null && checkValueIs == null) {
+            BestCheckCurrent.setChecked(true);
+            BestCheckPrevious.setChecked(false);
+            BestCheckOld.setChecked(false);
+            BestCheckUpcoming.setChecked(false);
+            CheckWTD.setChecked(false);
+            CheckL4W.setChecked(false);
+            CheckSTD.setChecked(true);
+
+
+        } else {
+            switch (checkValueIs.toString()) {
+                case "BestCheckCurrent":
+                    BestCheckCurrent.setChecked(true);
+                    BestCheckPrevious.setChecked(false);
+                    BestCheckOld.setChecked(false);
+                    BestCheckUpcoming.setChecked(false);
+                    Log.i(TAG, "BestCheckCurrent is checked");
+                    break;
+                case "BestCheckPrevious":
+                    BestCheckCurrent.setChecked(false);
+                    BestCheckPrevious.setChecked(true);
+                    BestCheckOld.setChecked(false);
+                    BestCheckUpcoming.setChecked(false);
+                    Log.i(TAG, "BestCheckPrevious is checked");
+                    break;
+                case "BestCheckOld":
+                    BestCheckCurrent.setChecked(false);
+                    BestCheckPrevious.setChecked(false);
+                    BestCheckOld.setChecked(true);
+                    BestCheckUpcoming.setChecked(false);
+                    Log.i(TAG, "BestCheckOld is checked");
+                    break;
+                case "BestCheckUpcoming":
+                    BestCheckCurrent.setChecked(false);
+                    BestCheckPrevious.setChecked(false);
+                    BestCheckOld.setChecked(false);
+                    BestCheckUpcoming.setChecked(true);
+                    Log.i(TAG, "BestCheckUpcoming is checked");
+                    break;
+                default:
+                    break;
+
+            }
+            switch (checkTimeValueIs.toString()) {
+                case "CheckWTD":
+                    CheckWTD.setChecked(true);
+                    CheckL4W.setChecked(false);
+                    CheckSTD.setChecked(false);
+                    Log.i(TAG, "CheckWTD is checked");
+                    break;
+                case "CheckL4W":
+                    CheckWTD.setChecked(false);
+                    CheckL4W.setChecked(true);
+                    CheckSTD.setChecked(false);
+                    Log.i(TAG, "CheckL4W is checked");
+                    break;
+                case "CheckSTD":
+                    CheckWTD.setChecked(false);
+                    CheckL4W.setChecked(false);
+                    CheckSTD.setChecked(true);
+                    Log.i(TAG, "CheckSTD is checked");
+                    break;
+                default:
+                    break;
+
+
+            }
+        }
+
+
+        quickFilterPopup.setVisibility(View.GONE);
+
+    }
+
     private void FwdPopUp() {
 
         if (BstInventory_Fwd_chk.isChecked()) {
@@ -667,7 +718,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
             BaseLayoutInventory.setVisibility(View.GONE);
 
 
@@ -696,7 +747,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
             BaseLayoutInventory.setVisibility(View.GONE);
 
         }
@@ -723,7 +774,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
             BaseLayoutInventory.setVisibility(View.GONE);
 
         }
@@ -749,7 +800,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
             BaseLayoutInventory.setVisibility(View.GONE);
 
         }
@@ -768,7 +819,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             seasonGroup = "Current";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -784,7 +835,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             seasonGroup = "Previous";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -801,7 +852,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             seasonGroup = "Old";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -816,7 +867,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             seasonGroup = "All";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -834,7 +885,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             seasonGroup = "Upcoming";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -847,56 +898,63 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       /* Intent intent = new Intent(context, DashBoardActivity.class);
-        intent.putExtra("BACKTO","inventory");
-        startActivity(intent);*/
+        corefashion  = null;
+        view = null;
+        seasonGroup = null;
+        checkTimeValueIs = null;
+        checkValueIs = null;
+        corefashion = "Fashion";
+        view = "STD";
+        seasonGroup = "Current";
         finish();
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        switch (checkedId) {
-            case R.id.bestInvent_core:
-                if (BestInvent_core.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Core";
-                    if (Reusable_Functions.chkStatus(context)) {
-                        BestInventList.clear();
-                        //bestPerformerInventoryAdapter.notifyDataSetChanged();
-                        BestInventListview.setVisibility(View.GONE);
-                        Reusable_Functions.sDialog(this, "Loading.......");
-                        coreSelection = true;
-                        requestRunningPromoApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        if(filter_toggleClick == false) {
+            switch (checkedId) {
+                case R.id.bestInvent_core:
+                    if (BestInvent_core.isChecked()) {
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Core";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            BestInventList.clear();
+                            //bestPerformerInventoryAdapter.notifyDataSetChanged();
+                            BestInventListview.setVisibility(View.GONE);
+                            Reusable_Functions.sDialog(this, "Loading.......");
+                            coreSelection = true;
+                            requestRunningPromoApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-                break;
-            case R.id.bestInvent_fashion:
-                if (BestInvent_fashion.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Fashion";
-                    if (Reusable_Functions.chkStatus(context)) {
-                        BestInventList.clear();
-                        //bestPerformerInventoryAdapter.notifyDataSetChanged();
-                        BestInventListview.setVisibility(View.GONE);
-                        Reusable_Functions.sDialog(this, "Loading.......");
-                        coreSelection = false;
-                        requestRunningPromoApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.bestInvent_fashion:
+                    if (BestInvent_fashion.isChecked()) {
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Fashion";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            BestInventList.clear();
+                            //bestPerformerInventoryAdapter.notifyDataSetChanged();
+                            BestInventListview.setVisibility(View.GONE);
+                            Reusable_Functions.sDialog(this, "Loading.......");
+                            coreSelection = false;
+                            requestRunningPromoApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
+                        }
                     }
-
-                }
-                break;
-
-
+                    break;
+            }
+        }
+        else {
+            filter_toggleClick = false;
         }
 
     }

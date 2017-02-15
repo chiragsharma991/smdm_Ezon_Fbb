@@ -1,10 +1,12 @@
 package apsupportapp.aperotechnologies.com.designapp.SkewedSize;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +39,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -54,6 +57,7 @@ import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilt
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -66,7 +70,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     SkewedSizeListDisplay skewedSizeListDisplay;
     private SharedPreferences sharedPreferences;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
-    RadioButton Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
+    RadioButton Skewed_checkWTD, Skewed_checkL4W, Skewed_checkSTD;
     String userId, bearertoken;
     String TAG = "SkewedSizesActivity";
     private int count = 0;
@@ -83,16 +87,20 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private boolean userScrolled;
     private SkewedSizeAdapter SkewedSizeAdapter;
     private View footer;
-    private String lazyScroll = "OFF", seasonGroup = "Current";
+    private String lazyScroll = "OFF";
+    private static String seasonGroup = "Current";
     private SegmentedGroup Skewed_segmented;
     private RadioButton Skewed_core, Skewed_fashion;
     private ToggleButton Toggle_skewed_fav;
-    private String corefashion = "Fashion";
+    private static String corefashion = "Fashion";
     private ImageView Skewed_quickFilter;
-    private String qfButton = "OFF";
+    private static String qfButton = "OFF";
     private boolean coreSelection = false;
-    private String checkTimeValueIs=null;
-    private String view="STD";
+    private static String checkTimeValueIs = null;
+    private static String view = "STD";
+    public static Activity SkewedSizes;
+    private boolean from_filter = false, filter_toggleClick = false;
+    private String selectedString = "";
 
 
     @Override
@@ -102,6 +110,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().hide();
         initalise();
         gson = new Gson();
+        SkewedSizes = this;
         SkewedSizeListview.setVisibility(View.VISIBLE);
         SkewedSizeList = new ArrayList<SkewedSizeListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -114,8 +123,18 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         queue.start();
         SkewedSizeListview.setTag("FOOTER");
         Reusable_Functions.sDialog(this, "Loading.......");
-        requestRunningPromoApi();
-        // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
+        if (getIntent().getStringExtra("selectedDept") == null) {
+            from_filter = false;
+            filter_toggleClick = false;
+
+        } else if (getIntent().getStringExtra("selectedDept") != null) {
+            selectedString = getIntent().getStringExtra("selectedDept");
+            from_filter = true;
+            filter_toggleClick = true;
+        }
+        retainValuesFilter();
+        requestRunningPromoApi(selectedString);
+
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
 
         SkewedSizeListview.addFooterView(footer);
@@ -125,26 +144,52 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    public void retainValuesFilter() {
+        filter_toggleClick = true;
+        if (corefashion.equals("Fashion")) {
+            Skewed_core.toggle();
+            Log.e(TAG, "Fashion toggle: " );
+            coreSelection = false;
+
+        } else {
+            Skewed_fashion.toggle();
+            Log.e(TAG, "Core toggle: " );
+
+            coreSelection = true;
+
+        }
+        quickFilterValCheckClick();
+    }
 
 
-    private void requestRunningPromoApi() {
+    private void requestRunningPromoApi(final String selectedString) {
 
         if (Reusable_Functions.chkStatus(context)) {
 
             String url;
-            if (coreSelection) {
+            if (from_filter) {
+                if (coreSelection) {
 
-                //core selection without season params
+                    //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion+"&view=" + view;
+                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                } else {
+
+                    // fashion select with season params
+
+                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                }
             } else {
+                if (coreSelection) {
 
-                // fashion select with season params
+                    //core selection without season params
+                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                } else {
 
-                url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup+"&view=" + view;
+                    // fashion select with season params
+                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                }
             }
-
-
             Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
@@ -189,10 +234,10 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
                                         skewedSizeListDisplay = gson.fromJson(response.get(i).toString(), SkewedSizeListDisplay.class);
                                         SkewedSizeList.add(skewedSizeListDisplay);
-                                        offsetvalue = offsetvalue + response.length();
-                                        top = top + response.length();
 
                                     }
+                                    offsetvalue = offsetvalue + response.length();
+                                    top = top + response.length();
                                 }
 
 
@@ -209,9 +254,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                     SkewedSizeAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                 } else {
-                                    SkewedSizeAdapter = new SkewedSizeAdapter(SkewedSizeList, context,getResources());
+                                    SkewedSizeAdapter = new SkewedSizeAdapter(SkewedSizeList, context, getResources());
                                     SkewedSizeListview.setAdapter(SkewedSizeAdapter);
-
 
                                 }
 
@@ -283,7 +327,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                         footer.setVisibility(View.VISIBLE);
 
                         lazyScroll = "ON";
-                        requestRunningPromoApi();
+                        requestRunningPromoApi(selectedString);
                     }
 
                 }
@@ -313,8 +357,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 //        int screenWidth = displayMetrics.widthPixels;
 //        int screenHeight = displayMetrics.heightPixels;
 
-     //   Toast.makeText(context, "resolution is "+screenWidth+" "+screenHeight, Toast.LENGTH_SHORT).show();
-
+        //   Toast.makeText(context, "resolution is "+screenWidth+" "+screenHeight, Toast.LENGTH_SHORT).show();
 
 
         Skewed_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
@@ -326,7 +369,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         Skewed_segmented = (SegmentedGroup) findViewById(R.id.skewed_segmented);
         sk_quickFilter = (RelativeLayout) findViewById(R.id.sk_quickFilter);
         Skewed_core = (RadioButton) findViewById(R.id.skewed_core);
-        Skewed_core.toggle();
+      //  Skewed_core.toggle();
         Skewed_fashion = (RadioButton) findViewById(R.id.skewed_fashion);
         quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
         quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
@@ -375,7 +418,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
                 break;
             case R.id.sk_imgfilter:
-                Intent intent = new Intent(SkewedSizesActivity.this, InventoryFilterActivity.class);
+                Intent intent = new Intent(SkewedSizesActivity.this, SalesFilterActivity.class);
                 intent.putExtra("checkfrom", "skewedSize");
                 startActivity(intent);
                 //finish();
@@ -387,70 +430,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             // base layout selections>>
 
             case R.id.quickFilter_baseLayout:
-                if (qfButton.equals("OFF")&&checkTimeValueIs == null){
-                    checkCurrent.setChecked(true);
-                    checkUpcoming.setChecked(false);
-                    checkOld.setChecked(false);
-                    checkPrevious.setChecked(false);
+                quickFilterValCheckClick();
 
-                    Skewed_checkWTD.setChecked(false);
-                    Skewed_checkL4W.setChecked(false);
-                    Skewed_checkSTD.setChecked(true);
-                } else {
-                    switch (qfButton.toString()) {
-                        case "checkCurrent":
-                            checkCurrent.setChecked(true);
-                            checkPrevious.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkUpcoming.setChecked(false);
-                            break;
-                        case "checkPrevious":
-                            checkPrevious.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkUpcoming.setChecked(false);
-                            break;
-                        case "checkOld":
-                            checkOld.setChecked(true);
-                            checkPrevious.setChecked(false);
-                            checkCurrent.setChecked(false);
-                            checkUpcoming.setChecked(false);
-                            break;
-                        case "checkUpcoming":
-                            checkUpcoming.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkPrevious.setChecked(false);
-                            checkOld.setChecked(false);
-                            break;
-
-                    }
-
-                    switch (checkTimeValueIs.toString()) {
-                        case "CheckWTD":
-                            Skewed_checkWTD.setChecked(true);
-                            Skewed_checkL4W.setChecked(false);
-                            Skewed_checkSTD.setChecked(false);
-                            Log.i(TAG, "CheckWTD is checked");
-                            break;
-                        case "CheckL4W":
-                            Skewed_checkWTD.setChecked(false);
-                            Skewed_checkL4W.setChecked(true);
-                            Skewed_checkSTD.setChecked(false);
-                            Log.i(TAG, "CheckL4W is checked");
-                            break;
-                        case "CheckSTD":
-                            Skewed_checkWTD.setChecked(false);
-                            Skewed_checkL4W.setChecked(false);
-                            Skewed_checkSTD.setChecked(true);
-                            Log.i(TAG, "CheckSTD is checked");
-                            break;
-                        default:
-                            break;
-
-
-                    }
-                }
-                quickFilterPopup.setVisibility(View.GONE);
 
                 break;
             case R.id.qfDoneLayout:
@@ -458,22 +439,16 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 if (Reusable_Functions.chkStatus(context)) {
 
 
-
-                    if(Skewed_checkWTD.isChecked())
-                    {
+                    if (Skewed_checkWTD.isChecked()) {
                         checkTimeValueIs = "CheckWTD";
                         view = "WTD";
-                    }else if(Skewed_checkL4W.isChecked())
-                    {
+                    } else if (Skewed_checkL4W.isChecked()) {
                         checkTimeValueIs = "CheckL4W";
                         view = "L4W";
-                    }else if(Skewed_checkSTD.isChecked())
-                    {
+                    } else if (Skewed_checkSTD.isChecked()) {
                         checkTimeValueIs = "CheckSTD";
                         view = "STD";
                     }
-
-
 
 
                     if (checkCurrent.isChecked()) {
@@ -509,8 +484,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                         quickFilterPopup.setVisibility(View.GONE);
 
                         //Time check>>>>>>>
-
-
 
 
                     } else {
@@ -565,6 +538,74 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void quickFilterValCheckClick() {
+        if (qfButton.equals("OFF") && checkTimeValueIs == null) {
+            checkCurrent.setChecked(true);
+            checkUpcoming.setChecked(false);
+            checkOld.setChecked(false);
+            checkPrevious.setChecked(false);
+
+            Skewed_checkWTD.setChecked(false);
+            Skewed_checkL4W.setChecked(false);
+            Skewed_checkSTD.setChecked(true);
+        } else {
+            switch (qfButton.toString()) {
+                case "checkCurrent":
+                    checkCurrent.setChecked(true);
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    break;
+                case "checkPrevious":
+                    checkPrevious.setChecked(true);
+                    checkCurrent.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    break;
+                case "checkOld":
+                    checkOld.setChecked(true);
+                    checkPrevious.setChecked(false);
+                    checkCurrent.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    break;
+                case "checkUpcoming":
+                    checkUpcoming.setChecked(true);
+                    checkCurrent.setChecked(false);
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    break;
+
+            }
+
+            switch (checkTimeValueIs.toString()) {
+                case "CheckWTD":
+                    Skewed_checkWTD.setChecked(true);
+                    Skewed_checkL4W.setChecked(false);
+                    Skewed_checkSTD.setChecked(false);
+                    Log.i(TAG, "CheckWTD is checked");
+                    break;
+                case "CheckL4W":
+                    Skewed_checkWTD.setChecked(false);
+                    Skewed_checkL4W.setChecked(true);
+                    Skewed_checkSTD.setChecked(false);
+                    Log.i(TAG, "CheckL4W is checked");
+                    break;
+                case "CheckSTD":
+                    Skewed_checkWTD.setChecked(false);
+                    Skewed_checkL4W.setChecked(false);
+                    Skewed_checkSTD.setChecked(true);
+                    Log.i(TAG, "CheckSTD is checked");
+                    break;
+                default:
+                    break;
+
+
+            }
+        }
+        quickFilterPopup.setVisibility(View.GONE);
+
+    }
+
     private void popupCurrent() {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -574,7 +615,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             seasonGroup = "Current";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -590,7 +631,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             seasonGroup = "Previous";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -606,7 +647,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             seasonGroup = "Old";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -621,7 +662,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             seasonGroup = "Upcoming";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi();
+            requestRunningPromoApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -634,9 +675,16 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-      /*  Intent intent=new Intent(context, DashBoardActivity.class);
-        intent.putExtra("BACKTO","inventory");
-        startActivity(intent);*/
+        corefashion = null;
+        seasonGroup = null;
+        view = null;
+        checkTimeValueIs = null;
+        qfButton = null;
+        qfButton = "OFF";
+
+        corefashion = "Fashion";
+        seasonGroup = "Current";
+        view = "STD";
         finish();
     }
 
@@ -644,50 +692,57 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         //change core fashion according to chnage in xml layout
-
-        switch (checkedId) {
-            case R.id.skewed_core:
-                if (Skewed_core.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Fashion";
-                    SkewedSizeList.clear();
-                    SkewedSizeListview.setVisibility(View.GONE);
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.sDialog(this, "Loading.......");
-                        coreSelection = false;
-                        requestRunningPromoApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        Reusable_Functions.hDialog();
+        if (filter_toggleClick == false) {
+            switch (checkedId) {
+                case R.id.skewed_core:
+                    if (Skewed_core.isChecked()) {
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Fashion";
+                        SkewedSizeList.clear();
                         SkewedSizeListview.setVisibility(View.GONE);
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(this, "Loading.......");
+                            coreSelection = false;
+                            requestRunningPromoApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            SkewedSizeListview.setVisibility(View.GONE);
+                        }
                     }
-                }
-                break;
-            case R.id.skewed_fashion:
-                if (Skewed_fashion.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Core";
-                    SkewedSizeList.clear();
-                    SkewedSizeListview.setVisibility(View.GONE);
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.sDialog(this, "Loading.......");
-                        coreSelection = true;
-                        requestRunningPromoApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        Reusable_Functions.hDialog();
+                    break;
+                case R.id.skewed_fashion:
+                    if (Skewed_fashion.isChecked()) {
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Core";
+                        SkewedSizeList.clear();
                         SkewedSizeListview.setVisibility(View.GONE);
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(this, "Loading.......");
+                            coreSelection = true;
+                            requestRunningPromoApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            SkewedSizeListview.setVisibility(View.GONE);
 
+                        }
                     }
-                }
-                break;
+                    break;
 
 
+            }
+        }
+        else
+        {
+            filter_toggleClick = false;
         }
 
     }
+
+
 }

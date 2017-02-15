@@ -5,16 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
@@ -36,33 +32,21 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
-import apsupportapp.aperotechnologies.com.designapp.KeyProductActivity;
-import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.SearchActivity1;
-import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
-import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
-import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
-import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.TargetStockExceptionActivity;
-import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
-import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 
+import static apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity.Sales_Pva_Activity;
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1.SalesAnalysisActivity;
 
 
-public class SalesFilterActivity extends Activity {
+public class SalesFilterActivity1 extends Activity {
 
     RelativeLayout btnS_Filterback, btnS_Done;
     static SalesFilterExpandableList listAdapter;
@@ -74,7 +58,7 @@ public class SalesFilterActivity extends Activity {
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
 
-    boolean field_flag = false;
+
     RequestQueue queue;
     Context context;
     static boolean flag;
@@ -88,7 +72,6 @@ public class SalesFilterActivity extends Activity {
 
     public static List<Integer> groupImages;
     public static RelativeLayout processbar;
-    private Intent intent;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -194,7 +177,7 @@ public class SalesFilterActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-             /*   if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
                     //  Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
                     //  startActivity(intent);
                     finish();
@@ -202,8 +185,7 @@ public class SalesFilterActivity extends Activity {
                     // Intent intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
                     //  startActivity(intent);
                     finish();
-                }*/
-                finish();
+                }
             }
         });
 
@@ -215,64 +197,18 @@ public class SalesFilterActivity extends Activity {
                 StringBuilder build = new StringBuilder();
 
                 if (SalesFilterExpandableList.text1.length() != 0) {
-                    String deptmnt = SalesFilterExpandableList.text1.toString().replace("%", "%25");
-                    String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
-                    String Department;
-
-//                    if (getIntent().getStringExtra("checkfrom").equals("visualAssort"))
-//                    {
-//                        Department = "dept=" + updateDept;
-//
-//                    } else if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex"))
-//                    {
-//                        Department = "dept=" + updateDept;
-//                    }
-//                     else if (getIntent().getStringExtra("checkfrom").equals("TopFullCut"))
-//                    {
-//                        Department = "dept=" + updateDept;
-//                    }
-//                    else if (getIntent().getStringExtra("checkfrom").equals("skewedSize"))
-//                    {
-//                        Department = "dept=" + updateDept;
-//                    }
-//                    else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers"))
-//                    {
-//                        Department = "dept=" + updateDept;
-//                    }
-//                    else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing"))
-//                    {
-//                        Department = "dept=" + updateDept;
-//                    }
-//                    else if (getIntent().getStringExtra("checkfrom").equals("floorAvailability"))
-//                    {
-//                        Department = "dept=" + updateDept;
-//                    }
-//                    else
-//                    {
-//                        Department = "department=" + updateDept;
-//                    }
-
-                    if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis"))
-                    {
-                        Department = "department=" + updateDept;
-                    }
-                    else if(getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
-                    {
-                        Department = "department=" + updateDept;
-                    }
-                    else
-                    {
-                        Department = "dept=" + updateDept;
-                    }
-                        build.append("&");
+                    String deptmnt = SalesFilterExpandableList.text1.toString().replace("%","%25");
+                    String updateDept = deptmnt.replace(" ","%20").replace("&","%26");
+                    String Department = "department=" + updateDept;
+                    build.append("&");
                     level_filter = 2;
                     build.append(Department.replace(",$", ""));
                     Log.e(TAG, "onClick:" + SalesFilterExpandableList.text1);
                 }
 
                 if (SalesFilterExpandableList.text2.length() != 0) {
-                    String categry = SalesFilterExpandableList.text2.toString().replace("%", "%25");
-                    String updateCategory = categry.replace(" ", "%20").replace("&", "%26");
+                    String categry = SalesFilterExpandableList.text2.toString().replace("%","%25");
+                    String updateCategory = categry.replace(" ","%20").replace("&","%26");
                     String Categary = "category=" + updateCategory;
                     build.append("&");
                     level_filter = 3;
@@ -283,8 +219,8 @@ public class SalesFilterActivity extends Activity {
 
                 if (SalesFilterExpandableList.text3.toString().length() != 0) {
                     Log.e(TAG, "text 3: " + SalesFilterExpandableList.text3);
-                    String plancls = SalesFilterExpandableList.text3.toString().replace("%", "%25");
-                    String updatePlanClass = plancls.replace(" ", "%20").replace("&", "%26");
+                    String plancls = SalesFilterExpandableList.text3.toString().replace("%","%25");
+                    String updatePlanClass = plancls.replace(" ","%20").replace("&","%26");
                     String planclass = "class=" + updatePlanClass;
                     build.append("&");
                     level_filter = 4;
@@ -293,8 +229,8 @@ public class SalesFilterActivity extends Activity {
                 }
 
                 if (SalesFilterExpandableList.text4.length() != 0) {
-                    String brand = SalesFilterExpandableList.text4.toString().replace("%", "%25");
-                    String updateBrand = brand.replace(" ", "%20").replace("&", "%26");
+                    String brand = SalesFilterExpandableList.text4.toString().replace("%","%25");
+                    String updateBrand = brand.replace(" ","%20").replace("&","%26");
                     String Brand = "brand=" + updateBrand;
                     build.append("&");
                     level_filter = 5;
@@ -303,8 +239,8 @@ public class SalesFilterActivity extends Activity {
                 }
 
                 if (SalesFilterExpandableList.text5.length() != 0) {
-                    String brandcls = SalesFilterExpandableList.text5.toString().replace("%", "%25");
-                    String updateBrandCls = brandcls.replace(" ", "%20").replace("&", "%26");
+                    String brandcls = SalesFilterExpandableList.text5.toString().replace("%","%25");
+                    String updateBrandCls = brandcls.replace(" ","%20").replace("&","%26");
                     String Brandclass = "brandclass=" + updateBrandCls;
                     build.append("&");
                     level_filter = 6;
@@ -312,115 +248,38 @@ public class SalesFilterActivity extends Activity {
 
                 }
                 if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
-                    intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity1.class);
-                    if (build.length() != 0) {
-                        SalesAnalysisActivity1.SalesAnalysisActivity.finish();
+                    Intent intent = new Intent(SalesFilterActivity1.this, SalesAnalysisActivity1.class);
+                    if (build.length() == 0) {
+                        Toast.makeText(context, "Please select value..", Toast.LENGTH_SHORT).show();
+                        Log.e(" in if condition", "====");
+                        return;
+                    } else {
+                        Log.e(" in else condition", "====");
+                        SalesAnalysisActivity.finish();
+                        intent.putExtra("selectedDept", build.toString());
+
                     }
-                    callback(build);
-
-
+                    Log.e(TAG, "onClick: " + build);
+                    startActivity(intent);
+                    finish();
                 } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
-                    intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
-                    if (build.length() != 0) {
-                        SalesPvAActivity.Sales_Pva_Activity.finish();
-                    }
-                    callback(build);
+                    Intent intent = new Intent(SalesFilterActivity1.this, SalesPvAActivity.class);
+                    if (build.length() == 0) {
+                        Toast.makeText(context, "Please select value..", Toast.LENGTH_SHORT).show();
+                        Log.e(" in if condition", "====");
+                        return;
+                    } else {
+                        Log.e(" in else condition", "====");
+                        Sales_Pva_Activity.finish();
+                        intent.putExtra("selectedDept", build.toString());
 
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("TopFullCut")) {
-                    intent = new Intent(SalesFilterActivity.this, TopFullCut.class);
-                    if (build.length() != 0) {
-                        TopFullCut.topFullcut.finish();
                     }
-                    callback(build);
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("visualAssort")) {
-                    intent = new Intent(SalesFilterActivity.this, VisualAssortmentActivity.class);
-
-                    if (build.length() != 0) {
-                        VisualAssortmentActivity.Visual_Assortment_Activity.finish();
-                    }
-                    callback(build);
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("skewedSize")) {
-                    intent = new Intent(SalesFilterActivity.this, SkewedSizesActivity.class);
-                    if (build.length() != 0) {
-                        SkewedSizesActivity.SkewedSizes.finish();
-                    }
-                    callback(build);
-                } else if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex")) {
-                    intent = new Intent(SalesFilterActivity.this, FreshnessIndexActivity.class);
-                    if (build.length() != 0) {
-                        FreshnessIndexActivity.freshness_Index.finish();
-                    }
-                    callback(build);
+                    Log.e(TAG, "onClick: " + build);
+                    startActivity(intent);
+                    finish();
                 }
-                else if (getIntent().getStringExtra("checkfrom").equals("optionEfficiency")) {
-                    intent = new Intent(SalesFilterActivity.this, OptionEfficiencyActivity.class);
-                    if (build.length() != 0) {
-                        OptionEfficiencyActivity.option_Efficiency.finish();
-                    }
-                    callback(build);
-                }
-                else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
-                    intent = new Intent(SalesFilterActivity.this, BestPerformerInventory.class);
-                    if (build.length() != 0) {
-                        BestPerformerInventory.bestperoformer.finish();
-                    }
-                    callback(build);
-
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing")) {
-                    intent = new Intent(SalesFilterActivity.this, StockAgeingActivity.class);
-                    if (build.length() != 0) {
-                        StockAgeingActivity.stockAgeing.finish();
-                    }
-                    callback(build);
-
-
-                }
-                else if (getIntent().getStringExtra("checkfrom").equals("floorAvailability"))
-                {
-                    intent = new Intent(SalesFilterActivity.this, FloorAvailabilityActivity.class);
-                    if (build.length() != 0) { FloorAvailabilityActivity.floorAvailability.finish(); }
-                    callback(build);
-
-
-                }
-//                else if (getIntent().getStringExtra("checkfrom").equals("targetStockException"))
-//                {
-//                    intent = new Intent(SalesFilterActivity.this, TargetStockExceptionActivity.class);
-//                    if (build.length() != 0) { TargetStockExceptionActivity.targetStockException.finish(); }
-//                    callback(build);
-//
-//
-//                }
-                else if (getIntent().getStringExtra("checkfrom").equals("sellThruExceptions"))
-                {
-                    intent = new Intent(SalesFilterActivity.this, SaleThruInventory.class);
-                    if (build.length() != 0) { SaleThruInventory.saleThru.finish(); }
-                    callback(build);
-
-
-                }
-
-
             }
         });
-    }
-
-    private void callback(StringBuilder build) {
-        if (build.length() == 0) {
-            Toast.makeText(context, "Please select value..", Toast.LENGTH_SHORT).show();
-            Log.e(" in if condition", "====");
-            return;
-        } else {
-            Log.e(" in else condition", "====");
-            intent.putExtra("selectedDept", build.toString());
-        }
-        Log.e(TAG, "onClick: " + build);
-        startActivity(intent);
-        finish();
     }
 
 
@@ -435,9 +294,9 @@ public class SalesFilterActivity extends Activity {
         listDataHeader.add("Plan Class");
         listDataHeader.add("Brand");
         listDataHeader.add("Brand Plan Class");
-        if (Reusable_Functions.chkStatus(SalesFilterActivity.this)) {
+        if (Reusable_Functions.chkStatus(SalesFilterActivity1.this)) {
             Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(SalesFilterActivity.this, "Loading data...");
+            Reusable_Functions.sDialog(SalesFilterActivity1.this, "Loading data...");
 
             if (listDataHeader.get(0).equals("Department")) {
                 offsetvalue = 0;
@@ -475,7 +334,7 @@ public class SalesFilterActivity extends Activity {
                 requestBrandPlanClassAPI(offsetvalue, limit);
             }
         } else {
-            Toast.makeText(SalesFilterActivity.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SalesFilterActivity1.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
         listDataChild.put(listDataHeader.get(0), subdept);
@@ -499,7 +358,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity1.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -571,7 +430,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity1.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -642,7 +501,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity1.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -713,7 +572,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity1.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -783,7 +642,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity1.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -842,7 +701,7 @@ public class SalesFilterActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-     /*   if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
             //Intent intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity.class);
             // startActivity(intent);
             finish();
@@ -851,7 +710,6 @@ public class SalesFilterActivity extends Activity {
             // startActivity(intent);
             finish();
 
-        }*/
-        finish();
+        }
     }
 }

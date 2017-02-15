@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.StockAgeing;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
 import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopOptionAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
@@ -60,7 +62,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     RelativeLayout stock_BtnBack, stock_BtnFilter, stock_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
     RunningPromoListDisplay StockAgeingListDisplay;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken, seasongroup = "Current";
+    String userId, bearertoken;
+    private static String seasongroup = "Current";
     String TAG = "StockAgeingActivity";
     private int count = 0;
     private int limit = 10;
@@ -81,9 +84,16 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private SegmentedGroup stock_segmented;
     private RadioButton stock_fashion, stock_core;
     private ToggleButton Toggle_stock_fav;
-    private String corefashion = "Fashion";
-    String checkSeasonGpVal = null, checkAgeingVal = null;
+    private static String corefashion = "Fashion";
+    private static String checkSeasonGpVal = null;
+    String checkAgeingVal = null;
     private boolean coreSelection = false;
+    private boolean from_filter=false;
+    private String selectedString="";
+    public static Activity stockAgeing;
+    private boolean toggleClick=false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +101,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_stock_ageing);
         getSupportActionBar().hide();
         initalise();
-
+//corefashion  checkSeasonGpVal seasongroup
         gson = new Gson();
+        stockAgeing=this;
         StockAgeingList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -111,7 +122,17 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             limit = 10;
             count = 0;
             top = 10;
-            requestStockAgeingApi();
+
+            if (getIntent().getStringExtra("selectedDept") == null) {
+                from_filter = false;
+            } else if (getIntent().getStringExtra("selectedDept") != null) {
+                selectedString = getIntent().getStringExtra("selectedDept");
+                //   selectedString = selectedString.replace(" ","%20");
+                from_filter = true;
+
+            }
+            RetainFromMain_filter();
+            requestStockAgeingApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -122,22 +143,121 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void requestStockAgeingApi() {
+    private void RetainFromMain_filter()
+    {
+        //corefashion  checkSeasonGpVal seasongroup
+
+        toggleClick=true;
+
+        if(corefashion.equals("Fashion"))
+        {
+            stock_fashion.toggle();
+            coreSelection=false;
+
+        }else
+        {
+            stock_core.toggle();
+            coreSelection=true;
+        }
+        baseclick();
+    }
+
+    private void baseclick()
+    {
+        if (checkSeasonGpVal == null && checkAgeingVal == null) {
+            checkCurrent.setChecked(true);
+            checkPrevious.setChecked(false);
+            checkOld.setChecked(false);
+            checkUpcoming.setChecked(false);
+            checkAgeing1.setChecked(false);
+            checkAgeing2.setChecked(false);
+            checkAgeing3.setChecked(false);
+
+        } else {
+            switch (checkSeasonGpVal.toString()) {
+                case "Current":
+                    checkCurrent.setChecked(true);
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+
+                    Log.e("Current checked", "" + checkCurrent.isChecked());
+                    break;
+
+                case "Previous":
+                    checkPrevious.setChecked(true);
+                    checkCurrent.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    Log.e("Previous checked", "" + checkPrevious.isChecked());
+                    break;
+                case "Old":
+                    checkOld.setChecked(true);
+                    checkCurrent.setChecked(false);
+                    checkPrevious.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    Log.e("Old checked", "" + checkOld.isChecked());
+                    break;
+                case "Upcoming":
+                    checkUpcoming.setChecked(true);
+                    checkCurrent.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkPrevious.setChecked(false);
+                    Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
+                    break;
+            }
+
+                 /*   switch (checkAgeingVal.toString()) {
+                        case "CheckAgeing1":
+                            checkAgeing1.setChecked(true);
+                            checkAgeing2.setChecked(false);
+                            checkAgeing3.setChecked(false);
+                            break;
+                        case "CheckAgeing2":
+                            checkAgeing2.setChecked(true);
+                            checkAgeing1.setChecked(false);
+                            checkAgeing3.setChecked(false);
+                            break;
+                        case "CheckAgeing3":
+                            checkAgeing3.setChecked(true);
+                            checkAgeing2.setChecked(false);
+                            checkAgeing1.setChecked(false);
+                            break;
+                    }*/
+        }
+    }
+
+    private void requestStockAgeingApi(final String selectedString) {
 
         if (Reusable_Functions.chkStatus(context)) {
 
             String url;
-            if (coreSelection) {
+            if (from_filter) {
+                if (coreSelection) {
 
-                //core selection without season params
+                    //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
+                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion ;
+                } else {
+
+                    // fashion select with season params
+
+                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup ;
+                }
             } else {
+                if (coreSelection) {
 
-                // fashion select with season params
+                    //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
+                } else {
+
+                    // fashion select with season params
+
+                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup ;
+                }
             }
+
 
             // String url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
 
@@ -181,10 +301,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                                         StockAgeingListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         StockAgeingList.add(StockAgeingListDisplay);
 
-                                        offsetvalue = offsetvalue + response.length();
-                                        top = top + response.length();
-
                                     }
+                                    offsetvalue = offsetvalue + 10;
+                                    top = top + 10;
                                 }
 
 
@@ -277,7 +396,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
                         Log.i(TAG, "calling Scroll api: " + FirstVisibleItem + " " + VisibleItemCount + " " + TotalItemCount);
-                        requestStockAgeingApi();
+                        requestStockAgeingApi(selectedString);
                         //Reusable_Functions.sDialog(context, "Loading data...");
                     }
                 }
@@ -312,10 +431,12 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
         quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
         StockAgListView = (ListView) findViewById(R.id.stockListView);
+
         stock_segmented = (SegmentedGroup) findViewById(R.id.stock_segmented);
         stock_core = (RadioButton) findViewById(R.id.stock_core);
         stock_fashion = (RadioButton) findViewById(R.id.stock_fashion);
-        stock_fashion.toggle();
+       // stock_fashion.toggle();
+
         Toggle_stock_fav = (ToggleButton) findViewById(R.id.toggle_top_fav);
         checkCurrent = (RadioButton) findViewById(R.id.checkCurrent);
         checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
@@ -351,7 +472,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             /*    Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
                 intent.putExtra("BACKTO","inventory");
                 startActivity(intent);*/
-                finish();
+                onBackPressed();
                 break;
             case R.id.toggle_stock_fav:
                 if (Toggle_stock_fav.isChecked()) {
@@ -362,7 +483,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                 break;
             case R.id.stockAgeing_imgfilter:
-                Intent intent1 = new Intent(StockAgeingActivity.this, InventoryFilterActivity.class);
+                Intent intent1 = new Intent(StockAgeingActivity.this, SalesFilterActivity.class);
                 intent1.putExtra("checkfrom", "stockAgeing");
                 startActivity(intent1);
                 //  finish();
@@ -371,67 +492,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 quickFilterPopup.setVisibility(View.VISIBLE);
                 break;
             case R.id.quickFilter_baseLayout:
-                if (checkSeasonGpVal == null && checkAgeingVal == null) {
-                    checkCurrent.setChecked(true);
-                    checkPrevious.setChecked(false);
-                    checkOld.setChecked(false);
-                    checkUpcoming.setChecked(false);
-                    checkAgeing1.setChecked(false);
-                    checkAgeing2.setChecked(false);
-                    checkAgeing3.setChecked(false);
-
-                } else {
-                    switch (checkSeasonGpVal.toString()) {
-                        case "Current":
-                            checkCurrent.setChecked(true);
-                            checkPrevious.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkUpcoming.setChecked(false);
-
-                            Log.e("Current checked", "" + checkCurrent.isChecked());
-                            break;
-
-                        case "Previous":
-                            checkPrevious.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkUpcoming.setChecked(false);
-                            Log.e("Previous checked", "" + checkPrevious.isChecked());
-                            break;
-                        case "Old":
-                            checkOld.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkPrevious.setChecked(false);
-                            checkUpcoming.setChecked(false);
-                            Log.e("Old checked", "" + checkOld.isChecked());
-                            break;
-                        case "Upcoming":
-                            checkUpcoming.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkPrevious.setChecked(false);
-                            Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
-                            break;
-                    }
-
-                 /*   switch (checkAgeingVal.toString()) {
-                        case "CheckAgeing1":
-                            checkAgeing1.setChecked(true);
-                            checkAgeing2.setChecked(false);
-                            checkAgeing3.setChecked(false);
-                            break;
-                        case "CheckAgeing2":
-                            checkAgeing2.setChecked(true);
-                            checkAgeing1.setChecked(false);
-                            checkAgeing3.setChecked(false);
-                            break;
-                        case "CheckAgeing3":
-                            checkAgeing3.setChecked(true);
-                            checkAgeing2.setChecked(false);
-                            checkAgeing1.setChecked(false);
-                            break;
-                    }*/
-                }
+                baseclick();
                 quickFilterPopup.setVisibility(View.GONE);
                 break;
             case R.id.qfDoneLayout:
@@ -555,7 +616,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             top = 10;
             seasongroup = "Current";
             StockAgeingList.clear();
-            requestStockAgeingApi();
+            requestStockAgeingApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -570,7 +631,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             top = 10;
             seasongroup = "Previous";
             StockAgeingList.clear();
-            requestStockAgeingApi();
+            requestStockAgeingApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -585,7 +646,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             top = 10;
             seasongroup = "Old";
             StockAgeingList.clear();
-            requestStockAgeingApi();
+            requestStockAgeingApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -600,7 +661,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             top = 10;
             seasongroup = "Upcoming";
             StockAgeingList.clear();
-            requestStockAgeingApi();
+            requestStockAgeingApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -610,49 +671,56 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        switch (checkedId) {
-            case R.id.stock_core:
-                if (stock_core.isChecked()) {
-                    //Reusable_Functions.hDialog();
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Core";
-                    lazyScroll = "OFF";
-                    if (Reusable_Functions.chkStatus(context)) {
-                        StockAgeingList.clear();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        StockAgListView.setVisibility(View.GONE);
-                        coreSelection = true;
-                        requestStockAgeingApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        StockAgListView.setVisibility(View.GONE);
+        if(toggleClick==false) {
 
-                    }
-                }
-                break;
-            case R.id.stock_fashion:
-                if (stock_fashion.isChecked()) {
-                    //    Reusable_Functions.hDialog();
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Fashion";
-                    lazyScroll = "OFF";
-                    if (Reusable_Functions.chkStatus(context)) {
-                        StockAgeingList.clear();
-                        StockAgListView.setVisibility(View.GONE);
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        coreSelection = false;
-                        requestStockAgeingApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        StockAgListView.setVisibility(View.GONE);
+            switch (checkedId) {
+                case R.id.stock_core:
+                    if (stock_core.isChecked()) {
+                        //Reusable_Functions.hDialog();
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Core";
+                        lazyScroll = "OFF";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            StockAgeingList.clear();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            StockAgListView.setVisibility(View.GONE);
+                            coreSelection = true;
+                            requestStockAgeingApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            StockAgListView.setVisibility(View.GONE);
 
+                        }
                     }
-                }
-                break;
+                    break;
+                case R.id.stock_fashion:
+                    if (stock_fashion.isChecked()) {
+                        //    Reusable_Functions.hDialog();
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Fashion";
+                        lazyScroll = "OFF";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            StockAgeingList.clear();
+                            StockAgListView.setVisibility(View.GONE);
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            coreSelection = false;
+                            requestStockAgeingApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            StockAgListView.setVisibility(View.GONE);
+
+                        }
+                    }
+                    break;
+
+            }
+        }else
+        {
+            toggleClick=false;
 
         }
     }
@@ -663,6 +731,13 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
        /* Intent intent = new Intent(StockAgeingActivity.this, DashBoardActivity.class);
         intent.putExtra("BACKTO","inventory");
         startActivity(intent);*/
+        //corefashion  checkSeasonGpVal seasongroup
+        corefashion=null;
+        checkSeasonGpVal=null;
+        seasongroup=null;
+
+        corefashion="Fashion";
+        seasongroup="Current";
         finish();
     }
 

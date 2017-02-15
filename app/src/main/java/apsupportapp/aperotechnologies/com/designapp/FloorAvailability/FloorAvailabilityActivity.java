@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.FloorAvailability;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.FloorAvailabilityDetails;
@@ -61,9 +63,11 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     RelativeLayout quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
     FloorAvailabilityDetails floorAvailabilityDetails;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken, seasongroup = "Current";
+    String userId, bearertoken;
+    private static String seasongroup = "Current";
     String TAG = "FloorAvailabilty";
     private int count = 0;
+    private boolean coreSelection = false;
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
@@ -81,9 +85,13 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private SegmentedGroup floor_segmented;
     private RadioButton floor_fashion, floor_core;
     private ToggleButton Toggle_floor_fav;
-    private String corefashion = "Fashion";
-    String floorcheckSeasonGpVal = null;
+    private static String corefashion = "Fashion";
+    private static String floorcheckSeasonGpVal = null;
     private RadioButton Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
+    public static Activity floorAvailability;
+    private boolean from_filter=false;
+    private String selectedString="";
+    private boolean toggleClick=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +100,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         getSupportActionBar().hide();
         initalise();
         gson = new Gson();
+        floorAvailability=this;
         FloorList = new ArrayList<FloorAvailabilityDetails>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -103,6 +112,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         queue.start();
         floorListView.setTag("FOOTER");
         floorListView.setVisibility(View.VISIBLE);
+
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
@@ -110,7 +120,16 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             limit = 10;
             count = 0;
             top = 10;
-            requestFloorAvailabilityApi();
+            if (getIntent().getStringExtra("selectedDept") == null) {
+                from_filter = false;
+            } else if (getIntent().getStringExtra("selectedDept") != null) {
+                selectedString = getIntent().getStringExtra("selectedDept");
+                //   selectedString = selectedString.replace(" ","%20");
+                from_filter = true;
+
+            }
+            RetainFromMain_filter();
+            requestFloorAvailabilityApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -121,12 +140,38 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
     }
 
-    private void requestFloorAvailabilityApi() {
+    private void requestFloorAvailabilityApi( final String selectedString) {
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            //String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
-            String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
+            String url;
+            if (from_filter) {
+                if (coreSelection) {
+
+                    //core selection without season params
+
+                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion ;
+                } else {
+
+                    // fashion select with season params
+
+                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup ;
+                }
+            } else {
+                if (coreSelection) {
+
+                    //core selection without season params
+
+                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
+                } else {
+
+                    // fashion select with season params
+
+                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup ;
+                }
+            }
+
+           // String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
 
             Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -170,10 +215,9 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                                         floorAvailabilityDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
                                         FloorList.add(floorAvailabilityDetails);
 
-                                        offsetvalue = offsetvalue + response.length();
-                                        top = top + response.length();
-
                                     }
+                                    offsetvalue = offsetvalue + 10;
+                                    top = top + 10;
                                 }
 
 
@@ -262,7 +306,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
-                        requestFloorAvailabilityApi();
+                        requestFloorAvailabilityApi(selectedString);
                         //Reusable_Functions.sDialog(context, "Loading data...");
                     }
                 }
@@ -292,15 +336,16 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         floor_BtnFilter = (RelativeLayout) findViewById(R.id.fa_imgfilter);
         floor_quickFilter = (RelativeLayout) findViewById(R.id.floor_quickFilter);
         quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
-        quickFilterPopup.setVisibility(View.GONE);
+       // quickFilterPopup.setVisibility(View.GONE);
         quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
         qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
         quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
         floorListView = (ListView) findViewById(R.id.floorListView);
+
         floor_segmented = (SegmentedGroup) findViewById(R.id.floor_segmented);
         floor_core = (RadioButton) findViewById(R.id.floor_core);
         floor_fashion = (RadioButton) findViewById(R.id.floor_fashion);
-        floor_fashion.toggle();
+
         Toggle_floor_fav = (ToggleButton) findViewById(R.id.toggle_floor_fav);
 
         checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
@@ -308,18 +353,18 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         checkOld = (CheckBox) findViewById(R.id.checkOld);
         checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
 
-        Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
-        Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);
-        Skewed_checkSTD = (RadioButton) findViewById(R.id.skewed_checkSTD);
+      //  Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
+     //   Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);
+      //  Skewed_checkSTD = (RadioButton) findViewById(R.id.skewed_checkSTD);
 
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
 
-        Skewed_checkWTD.setOnClickListener(this);
-        Skewed_checkL4W.setOnClickListener(this);
-        Skewed_checkSTD.setOnClickListener(this);
+     //   Skewed_checkWTD.setOnClickListener(this);
+    //    Skewed_checkL4W.setOnClickListener(this);
+      //  Skewed_checkSTD.setOnClickListener(this);
 
 
         qfDoneLayout.setOnClickListener(this);
@@ -331,6 +376,23 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         quickFilter_BorderLayout.setOnClickListener(this);
     }
 
+    private void RetainFromMain_filter()
+    {
+        toggleClick=true;
+
+        if(corefashion.equals("Fashion"))
+        {
+            floor_fashion.toggle();
+            coreSelection=false;
+
+        }else
+        {
+            floor_core.toggle();
+            coreSelection=true;
+        }
+        baseclick();
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -340,7 +402,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
              /*   Intent intent1 = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
                 intent1.putExtra("BACKTO","inventory");
                 startActivity(intent1);*/
-                finish();
+                onBackPressed();
                 break;
             case R.id.toggle_stock_fav:
                 if (Toggle_floor_fav.isChecked()) {
@@ -351,7 +413,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
                 break;
             case R.id.fa_imgfilter:
-                Intent intent = new Intent(FloorAvailabilityActivity.this, InventoryFilterActivity.class);
+                Intent intent = new Intent(FloorAvailabilityActivity.this, SalesFilterActivity.class);
                 intent.putExtra("checkfrom", "floorAvailability");
                 startActivity(intent);
                 // finish();
@@ -361,49 +423,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 quickFilterPopup.setVisibility(View.VISIBLE);
                 break;
             case R.id.quickFilter_baseLayout:
-                if (floorcheckSeasonGpVal == null) {
-                    checkCurrent.setChecked(true);
-                    checkPrevious.setChecked(false);
-                    checkOld.setChecked(false);
-                    checkUpcoming.setChecked(false);
-
-
-                } else {
-                    switch (floorcheckSeasonGpVal.toString()) {
-                        case "Current":
-                            checkCurrent.setChecked(true);
-                            checkPrevious.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkUpcoming.setChecked(false);
-
-                            Log.e("Current checked", "" + checkCurrent.isChecked());
-                            break;
-
-                        case "Previous":
-                            checkPrevious.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkUpcoming.setChecked(false);
-                            Log.e("Previous checked", "" + checkPrevious.isChecked());
-                            break;
-                        case "Old":
-                            checkOld.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkPrevious.setChecked(false);
-                            checkUpcoming.setChecked(false);
-                            Log.e("Old checked", "" + checkOld.isChecked());
-                            break;
-                        case "Upcoming":
-                            checkUpcoming.setChecked(true);
-                            checkCurrent.setChecked(false);
-                            checkOld.setChecked(false);
-                            checkPrevious.setChecked(false);
-                            Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
-                            break;
-                    }
-
-
-                }
+                baseclick();
                 quickFilterPopup.setVisibility(View.GONE);
                 break;
             case R.id.qfDoneLayout:
@@ -472,6 +492,53 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
     }
 
+    private void baseclick()
+    {
+        if (floorcheckSeasonGpVal == null) {
+            checkCurrent.setChecked(true);
+            checkPrevious.setChecked(false);
+            checkOld.setChecked(false);
+            checkUpcoming.setChecked(false);
+
+
+        } else {
+            switch (floorcheckSeasonGpVal.toString()) {
+                case "Current":
+                    checkCurrent.setChecked(true);
+                    checkPrevious.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+
+                    Log.e("Current checked", "" + checkCurrent.isChecked());
+                    break;
+
+                case "Previous":
+                    checkPrevious.setChecked(true);
+                    checkCurrent.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    Log.e("Previous checked", "" + checkPrevious.isChecked());
+                    break;
+                case "Old":
+                    checkOld.setChecked(true);
+                    checkCurrent.setChecked(false);
+                    checkPrevious.setChecked(false);
+                    checkUpcoming.setChecked(false);
+                    Log.e("Old checked", "" + checkOld.isChecked());
+                    break;
+                case "Upcoming":
+                    checkUpcoming.setChecked(true);
+                    checkCurrent.setChecked(false);
+                    checkOld.setChecked(false);
+                    checkPrevious.setChecked(false);
+                    Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
+                    break;
+            }
+
+
+        }
+    }
+
     private void popupCurrent() {
 
 
@@ -484,7 +551,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             top = 10;
             seasongroup = "Current";
             FloorList.clear();
-            requestFloorAvailabilityApi();
+            requestFloorAvailabilityApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -500,7 +567,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             top = 10;
             seasongroup = "Previous";
             FloorList.clear();
-            requestFloorAvailabilityApi();
+            requestFloorAvailabilityApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -517,7 +584,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             top = 10;
             seasongroup = "Old";
             FloorList.clear();
-            requestFloorAvailabilityApi();
+            requestFloorAvailabilityApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -534,7 +601,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             top = 10;
             seasongroup = "Upcoming";
             FloorList.clear();
-            requestFloorAvailabilityApi();
+            requestFloorAvailabilityApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -544,6 +611,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+        if(toggleClick==false){
         switch (checkedId) {
             case R.id.floor_core:
                 if (floor_core.isChecked()) {
@@ -558,7 +626,8 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                         lazyScroll = "OFF";
                         FloorList.clear();
                         floorListView.setVisibility(View.GONE);
-                        requestFloorAvailabilityApi();
+                        coreSelection = true;
+                        requestFloorAvailabilityApi(selectedString);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         floorListView.setVisibility(View.GONE);
@@ -578,7 +647,8 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                         lazyScroll = "OFF";
                         FloorList.clear();
                         floorListView.setVisibility(View.GONE);
-                        requestFloorAvailabilityApi();
+                        coreSelection = false;
+                        requestFloorAvailabilityApi(selectedString);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         floorListView.setVisibility(View.GONE);
@@ -588,7 +658,12 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 break;
 
         }
+    }else
+        {
+            toggleClick=false;
+        }
     }
+
 
     @Override
     public void onBackPressed() {
@@ -596,6 +671,13 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
        /* Intent intent = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
         intent.putExtra("BACKTO","inventory");
         startActivity(intent);*/
+        seasongroup = null;
+        corefashion=null;
+        floorcheckSeasonGpVal=null;
+
+        seasongroup = "Current";
+        corefashion="Fashion";
+
         finish();
     }
 

@@ -284,8 +284,8 @@ public class InventoryFilterExpandableList1 extends BaseExpandableListAdapter {
                             Toast.makeText(mContext, "Check your network connectivity", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Log.e("groupPosition ", " " + groupPosition);
 
+                        Log.e("groupPosition ", " " + groupPosition);
                         if (groupPosition == 0)  //Department Group
                         {
                             //Log.e("here ", " " + planclassArray.size());
@@ -315,6 +315,7 @@ public class InventoryFilterExpandableList1 extends BaseExpandableListAdapter {
                                     InventoryFilterActivity.pfilter_list.expandGroup(2);
                                 }
                             }
+
                             for (int j = 0; j < brandArray.size(); j++) {
                                    if (brandArray.get(j).getSubdept().equals(txtClickedVal)) {
                                     InventoryFilterActivity.pfilter_list.collapseGroup(3);
@@ -336,6 +337,7 @@ public class InventoryFilterExpandableList1 extends BaseExpandableListAdapter {
                                     InventoryFilterActivity.pfilter_list.expandGroup(4);
                                 }
                             }
+
                             Log.e("salesList"," ---222--- "+salesList);
 
                         } else if (groupPosition == 1) //Category Group
