@@ -274,7 +274,7 @@
                     android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />
+                    android:background="@color/smdm_divider_Black" />
 
 
                 <LinearLayout
@@ -288,7 +288,7 @@
                         android:id="@+id/llheader"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_header"
+                        android:background="@color/smdm_divider_Black_light"
                         >
 
 
@@ -392,7 +392,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_header">
+                        android:background="@color/bg_screen_color">
 
                         <EditText
                             android:editable="false"
@@ -448,13 +448,13 @@
                     </RelativeLayout>
 
                 </LinearLayout>
-                <View
+              <!--  <View
                     android:layout_below="@+id/linear"
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:background="@color/border_round_edittext" />
-
+-->
 
                 <!--<ListView-->
                     <!--android:id="@+id/list"-->

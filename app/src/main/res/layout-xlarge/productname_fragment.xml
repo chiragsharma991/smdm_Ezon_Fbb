@@ -71,6 +71,7 @@
                     android:textSize="@dimen/largelayout_storesize"
                     android:text="@string/number_in_units"
                     android:layout_below="@+id/txtSubDeptName"
+                    android:textColor="@color/bg_store_code_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -93,6 +94,7 @@
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
+            android:background="@color/bg_screen_color"
             android:layout_height="match_parent"
             android:layout_below="@+id/linearLayout">
 

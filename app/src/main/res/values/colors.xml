@@ -20,7 +20,10 @@
     <color name="bg_header">#f3f2f2</color>
     <color name="border_round_edittext">#e7e7e7</color>
     <color name="bg_store_code_text">#404040</color>
+<!--
     <color name="txt_color">#252525</color>
+-->
+    <color name="txt_color">#757575</color>
     <color name="smdm_green">#70e503</color>
     <color name="smdm_amber">#ff7e00</color>
     <color name="smdm_blue">#215187</color>
@@ -29,7 +32,8 @@
 
 
 
-    <color name="smdm_dark_Black">#252525</color>
+   <!-- <color name="smdm_dark_Black">#252525</color>-->
+    <color name="smdm_dark_Black">#404040</color>
     <color name="smdm_light_Black">#404040</color>
     <color name="smdm_divider_Black">#dfdedf</color>
     <color name="smdm_divider_Black_light">#e8e8e8</color>
@@ -38,8 +42,11 @@
     <color name="smdm_border">#dfdedf</color>
     <color name="smdm_DepartmentBox">#f3f2f2</color>
     <color name="smdm_actionbar">#2277b1</color>
-    <color name="smdm_quickfiltertxt_color">#252525</color>
+    <color name="smdm_quickfiltertxt_color">#404040</color>
     <color name="smdm_PopUptxt_color">#252525</color>
+    <color name="smdm_PopUp_color">#dcdfdf</color>
+    <color name="smdm_default_color">#757575</color>
+
 
 
 </resources>

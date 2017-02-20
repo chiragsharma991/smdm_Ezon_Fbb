@@ -212,7 +212,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/smdm_divider"
-            android:background="@color/divider_salescard"
+            android:background="@color/smdm_divider_Black"
             android:layout_marginTop="9dp"
             >
 

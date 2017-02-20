@@ -9,7 +9,7 @@
     tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
 
     <RelativeLayout
-        android:background="#ffffff"
+        android:background="@color/bg_screen_color"
         android:id="@+id/stylemainlayout"
         android:visibility="gone"
         android:layout_width="match_parent"
@@ -70,7 +70,8 @@
     <ScrollView
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,7 +86,7 @@
             <TextView
                 android:textSize="15sp"
                 android:padding="10dp"
-                android:background="@android:color/white"
+                android:background="@color/bg_screen_color"
                 android:drawableRight="@mipmap/search_option_dropdown_arrow"
                 android:id="@+id/searchablespinnerlibrary"
                 android:layout_width="match_parent"
@@ -96,13 +97,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="0dp"
-                android:background="#C7C4C4"></View>
+                android:background="@color/smdm_divider_Black"
+                >
+
+            </View>
 
 
             <TextView
                 android:textSize="15sp"
                 android:padding="10dp"
-                android:background="@android:color/white"
+                android:background="@color/bg_screen_color"
                 android:drawableBottom="@color/darker_grey"
                 android:drawableRight="@mipmap/search_option_dropdown_arrow"
                 android:id="@+id/searchablespinnerlibrary1"
@@ -114,7 +118,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="0dp"
-                android:background="#C7C4C4"/>
+                android:background="@color/smdm_divider_Black"
+                />
 
 
 
@@ -186,7 +191,9 @@
             <RelativeLayout
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/bg_screen_color"
+                >
 
                 <RelativeLayout
                     android:layout_toLeftOf="@+id/imgor"
@@ -194,7 +201,7 @@
                     android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="1dp"
-                    android:background="@color/smdm_divider_Black"
+                    android:background="#566573"
                     android:layout_marginTop="30dp">
 
                 </RelativeLayout>
@@ -214,7 +221,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_marginLeft="10dp"
                     android:layout_height="1dp"
-                    android:background="@color/smdm_divider_Black"
+                    android:background="#566573"
                     android:layout_marginTop="30dp">
 
                 </RelativeLayout>
@@ -247,7 +254,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:background="@android:color/white"
+            android:background="@color/bg_screen_color"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -255,7 +262,7 @@
 
             <TextView
                 android:text="Select Collection"
-                android:textColor="#000000"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="22sp"
                 android:padding="20dp"
                 android:layout_width="match_parent"
@@ -271,7 +278,7 @@
             android:drawableTint="#000000"
             android:textColor="#666666"
             android:textCursorDrawable="@null"
-            android:background="@android:color/transparent"
+            android:background="@color/bg_screen_color"
             android:drawablePadding="5dp"
             android:drawableLeft="@mipmap/key_product_search_icon"
            android:maxLines="1"
@@ -306,7 +313,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:background="@android:color/white"
+            android:background="@color/bg_screen_color"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -314,7 +321,7 @@
 
             <TextView
                 android:text="Select Option"
-                android:textColor="#000000"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="22sp"
                 android:padding="20dp"
                 android:layout_width="match_parent"
@@ -325,7 +332,7 @@
             android:drawableTint="@color/darker_grey"
             android:textColor="#666666"
             android:textCursorDrawable="@null"
-            android:background="@android:color/transparent"
+            android:background="@color/bg_screen_color"
             android:drawablePadding="5dp"
             android:drawableLeft="@mipmap/key_product_search_icon"
             android:maxLines="1"

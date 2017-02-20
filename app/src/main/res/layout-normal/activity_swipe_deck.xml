@@ -118,83 +118,6 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:background="@android:color/transparent"
-        android:id="@+id/layoutComment"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="76dp"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:id="@+id/linlayoutComment"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="150dp">
-
-        <View
-            android:background="@color/smdm_divider_Black"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
-
-        <TextView
-            android:layout_centerVertical="true"
-            android:id="@+id/txtComment"
-            android:layout_margin="10dp"
-            android:gravity="top"
-            android:text = "Comment"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-        <View
-            android:background="@color/smdm_divider_Black"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-
-        <RelativeLayout
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
-                android:imeOptions="actionDone"
-                android:maxLines="4"
-                android:minHeight="100dp"
-                android:background="@drawable/edittext"
-                android:padding="5dp"
-                android:layout_toLeftOf="@+id/btnCommentDone"
-                android:id="@+id/edtTextComment"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentTop="true"
-                android:hint = "Comments"
-                android:textCursorDrawable="@null"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:background="@android:color/white"
-                android:id="@+id/btnCommentDone"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_margin="10dp"
-                android:text="Done"
-                android:textSize="14sp"
-                android:textAllCaps="false"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/layoutBuy"
         android:visibility="gone"
         android:layout_marginBottom="76dp"
@@ -203,7 +126,7 @@
 
     <LinearLayout
         android:id="@+id/linlayoutBuy"
-        android:background="@android:color/white"
+        android:background="@color/bg_screen_color"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
@@ -223,7 +146,7 @@
                 android:id="@+id/txtOrderSets"
                 android:layout_margin="10dp"
                 android:gravity="center_vertical"
-                android:textColor="@android:color/black"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="16sp"
                 android:text = "Order Sets"
                 android:layout_width="wrap_content"
@@ -243,6 +166,7 @@
                     android:id="@+id/txtSize"
                     android:layout_marginRight="10dp"
                     android:text = "XS, S, L"
+                    android:textColor="@color/smdm_default_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -298,6 +222,7 @@
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
             android:gravity="top"
+            android:textColor="@color/smdm_default_color"
             android:text = "Enter suggested no of size sets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -315,6 +240,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_margin="10dp"
                 android:inputType="number"
+                android:textColor="@color/bg_store_code_text"
                 android:textCursorDrawable="@null"
                 android:hint = "0"
                 android:layout_width="150dp"
@@ -365,6 +291,84 @@
     </RelativeLayout>
 
     <include layout="@layout/activity_popup_visualassort"></include>
+
+    <RelativeLayout
+        android:background="@android:color/transparent"
+        android:id="@+id/layoutComment"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="76dp"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linlayoutComment"
+        android:background="@color/bg_screen_color"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="150dp">
+
+        <View
+            android:background="@color/smdm_divider_Black"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/txtComment"
+            android:layout_margin="10dp"
+            android:gravity="top"
+            android:text = "Comment"
+            android:textSize="16sp"
+            android:textColor="@color/bg_store_code_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <View
+            android:background="@color/smdm_divider_Black"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
+                android:imeOptions="actionDone"
+                android:maxLines="4"
+                android:minHeight="100dp"
+                android:background="@drawable/edittext"
+                android:padding="5dp"
+                android:layout_toLeftOf="@+id/btnCommentDone"
+                android:id="@+id/edtTextComment"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:hint = "Comments"
+                android:textColor="@color/bg_store_code_text"
+                android:textCursorDrawable="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:background="@android:color/white"
+                android:id="@+id/btnCommentDone"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:text="Done"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    </RelativeLayout>
 
 </com.daprlabs.cardstack.SwipeFrameLayout>
 

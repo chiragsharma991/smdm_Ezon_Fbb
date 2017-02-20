@@ -9,7 +9,7 @@
         android:id="@+id/txtarticleOption"
         android:text="@string/article_option"
         android:textSize="15sp"
-        android:textColor="#000000"
+        android:textColor="@color/bg_store_code_text"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
@@ -22,8 +22,6 @@
         android:orientation="vertical"
         android:layout_below="@+id/txtarticleOption"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -38,7 +36,7 @@
                 android:text="Style Performance"
                 android:background="@color/smdm_divider_Black"
                 android:padding="5dp"
-                android:textColor="#000000"
+                android:textColor="@color/bg_store_code_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -79,6 +77,7 @@
                     <TextView
                         android:layout_weight="1.0"
                         android:text="TW Sales"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
@@ -87,6 +86,7 @@
                         android:layout_weight="1.0"
                         android:id="@+id/txtSales"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
 
@@ -94,6 +94,7 @@
                         android:layout_weight="1.0"
                         android:text="Sell Thru% (U)"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
 
@@ -102,6 +103,7 @@
                         android:layout_weight="1.0"
                         android:id="@+id/txtSalesThruUnit"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -122,6 +124,7 @@
                     <TextView
                         android:layout_weight="1.0"
                         android:text="TW Sales (U)"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
@@ -131,6 +134,7 @@
                         android:layout_weight="1.0"
                         android:id="@+id/txtSalesUnit"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
 
@@ -138,12 +142,14 @@
                         android:layout_weight="1.0"
                         android:text="ROS (U)"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
 
                     <TextView
                         android:layout_weight="1.0"
                         android:id="@+id/txtRos"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
@@ -166,6 +172,7 @@
                         android:layout_weight="1.0"
                         android:text="Fwd Week Cover"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
 
@@ -174,11 +181,13 @@
                         android:layout_weight="1.0"
                         android:id="@+id/txtFwdCover"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:layout_weight="1.0"
                         android:text="SOH (U)"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
@@ -187,6 +196,7 @@
                         android:layout_weight="1.0"
                         android:id="@+id/txtSOh"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -208,6 +218,7 @@
                         android:layout_weight="1.0"
                         android:text="GIT(U)"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
 
@@ -215,6 +226,7 @@
                         android:layout_weight="1.0"
                         android:id="@+id/txtGit"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -244,7 +256,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        android:background="#ffffff"
+        android:background="@color/bg_screen_color"
         android:layout_below="@+id/linearLayout"
         >
 
@@ -258,84 +270,84 @@
             android:orientation="vertical">
 
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tableRunningPromo"
-                android:background="@color/colorPrimary"
+            <!-- <TableLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/tableRunningPromo"
+                 android:background="@color/colorPrimary"
 
 
-                >
+                 >
 
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    >
-                    <TextView
-                        android:layout_weight="3"
-                        android:layout_width="0dp"
-                        android:text="Color"
-                        android:textStyle="bold"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
+                 <TableRow
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:padding="5dp"
+                     >
+                     <TextView
+                         android:layout_weight="3"
+                         android:layout_width="0dp"
+                         android:text="Color"
+                         android:textStyle="bold"
+                         android:layout_height="match_parent"
+                         android:gravity="center"
+                         android:padding="2dp"
+                         android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                         android:textColor="@color/divider_salescard1"
 
-                        />
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="Size"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
-                        />
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:text="TW Sales(U)"
-                        android:textStyle="bold"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
-                        />
-                    <TextView
-                        android:layout_weight="2"
-                        android:text="SOH(U)"
-                        android:layout_width="0dp"
-                        android:textStyle="bold"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
-                        />
+                         />
+                     <TextView
+                         android:layout_weight="2"
+                         android:layout_width="0dp"
+                         android:layout_height="match_parent"
+                         android:text="Size"
+                         android:gravity="center"
+                         android:padding="2dp"
+                         android:textStyle="bold"
+                         android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                         android:textColor="@color/divider_salescard1"
+                         />
+                     <TextView
+                         android:layout_weight="2"
+                         android:layout_width="0dp"
+                         android:text="TW Sales(U)"
+                         android:textStyle="bold"
+                         android:layout_height="match_parent"
+                         android:gravity="center"
+                         android:padding="2dp"
+                         android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                         android:textColor="@color/divider_salescard1"
+                         />
+                     <TextView
+                         android:layout_weight="2"
+                         android:text="SOH(U)"
+                         android:layout_width="0dp"
+                         android:textStyle="bold"
+                         android:layout_height="match_parent"
+                         android:gravity="center"
+                         android:padding="2dp"
+                         android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                         android:textColor="@color/divider_salescard1"
+                         />
 
-                    <TextView
-                        android:layout_weight="2"
-                        android:text="FWD"
-                        android:layout_width="0dp"
-                        android:textStyle="bold"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
-                        />
+                     <TextView
+                         android:layout_weight="2"
+                         android:text="FWD"
+                         android:layout_width="0dp"
+                         android:textStyle="bold"
+                         android:layout_height="match_parent"
+                         android:gravity="center"
+                         android:padding="2dp"
+                         android:textSize="@dimen/smdm_rowInflaterLayout_large"
+                         android:textColor="@color/divider_salescard1"
+                         />
 
 
 
-                </TableRow>
+                 </TableRow>
 
-            </TableLayout>
+             </TableLayout>-->
 
 
             <ScrollView
@@ -383,7 +395,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
+        android:background="@color/bg_screen_color"
         android:id="@+id/style_loadingBar"
         android:visibility="visible"
         >

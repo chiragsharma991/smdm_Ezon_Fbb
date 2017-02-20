@@ -49,7 +49,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
+        android:background="@color/bg_screen_color"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
 
@@ -63,7 +63,7 @@
                 android:id="@+id/txtArticle"
                 android:text="@string/article_option"
                 android:textSize="15sp"
-                android:textColor="#000000"
+                android:textColor="@color/bg_store_code_text"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
@@ -112,11 +112,13 @@
                             android:layout_weight="0.3"
                             android:text="@string/product_name"
                             android:layout_width="0dp"
+                            android:textColor="@color/bg_store_code_text"
                             android:layout_height="wrap_content" />
 
                         <TextView
                             android:layout_weight="0.1"
                             android:text=":"
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -124,6 +126,7 @@
                             android:layout_weight="0.6"
                             android:id="@+id/txtProductName"
                             android:text="@string/product_name"
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -140,12 +143,14 @@
                         <TextView
                             android:layout_weight="0.3"
                             android:text="Collection"
+                            android:textColor="@color/bg_store_code_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
                         <TextView
                             android:layout_weight="0.1"
                             android:text=":"
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -153,6 +158,7 @@
                             android:layout_weight="0.6"
                             android:id="@+id/txtCollcetion"
                             android:text="Collection  "
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -169,12 +175,14 @@
                         <TextView
                             android:layout_weight="0.3"
                             android:text="Fabric"
+                            android:textColor="@color/bg_store_code_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
                         <TextView
                             android:layout_weight="0.1"
                             android:text=":"
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -182,6 +190,7 @@
                             android:layout_weight="0.6"
                             android:id="@+id/txtFabric"
                             android:text="Fabric  "
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -198,6 +207,7 @@
                         <TextView
                             android:layout_weight="0.3"
                             android:text="Fit"
+                            android:textColor="@color/bg_store_code_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -205,12 +215,14 @@
                         <TextView
                             android:layout_weight="0.1"
                             android:text=":"
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
                         <TextView
                             android:layout_weight="0.6"
                             android:id="@+id/txtFit"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Fit  "
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
@@ -227,6 +239,7 @@
                         <TextView
                             android:layout_weight="0.3"
                             android:text="Finish"
+                            android:textColor="@color/bg_store_code_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -234,6 +247,7 @@
                         <TextView
                             android:layout_weight="0.1"
                             android:text=":"
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -241,6 +255,7 @@
                             android:layout_weight="0.6"
                             android:id="@+id/txtFinish"
                             android:text="Finish  "
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -256,6 +271,7 @@
                         <TextView
                             android:layout_weight="0.3"
                             android:text="Season"
+                            android:textColor="@color/bg_store_code_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -263,12 +279,14 @@
                             android:layout_weight="0.1"
                             android:text=":"
                             android:layout_width="0dp"
+                            android:textColor="@color/smdm_default_color"
                             android:layout_height="wrap_content" />
 
                         <TextView
                             android:layout_weight="0.6"
                             android:id="@+id/txtSeason"
                             android:text="Season  "
+                            android:textColor="@color/smdm_default_color"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
 
@@ -292,6 +310,7 @@
                     <TextView
                         android:id="@+id/promotions"
                         android:text="Promotions  :"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -313,6 +332,7 @@
                     <TextView
                         android:id="@+id/txtkeyProducts"
                         android:text="Key Product :"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -329,7 +349,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:background="#BBBDBB"
+                android:background="@color/smdm_divider_Black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
@@ -341,6 +361,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 android:text="Key Metrics"
+                android:textStyle="bold"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="20sp"
                 android:layout_height="wrap_content" />
 
@@ -363,10 +385,11 @@
                         android:id="@+id/txtfirstReceiteDate"
                         android:layout_width="wrap_content"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="First Receipt Date"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -374,7 +397,7 @@
 
                 <View
                     android:layout_width="1dp"
-                    android:background="#BBBDBB"
+                    android:background="@color/smdm_divider_Black"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="match_parent"></View>
@@ -388,11 +411,12 @@
                     <TextView
                         android:id="@+id/txtlastReceiteDate"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="End Receipt Date"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -400,7 +424,7 @@
 
                 <View
                     android:layout_width="1dp"
-                    android:background="#BBBDBB"
+                    android:background="@color/smdm_divider_Black"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="match_parent">
@@ -415,11 +439,12 @@
                     <TextView
                         android:id="@+id/txtFwdWeekCover"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="Fwd Week Cover"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -428,7 +453,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:background="#BBBDBB"
+                android:background="@color/smdm_divider_Black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_height="1dp"></View>
@@ -452,11 +477,12 @@
                     <TextView
                         android:id="@+id/txtTwSalesUnit"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="TW Sales (U)"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -464,7 +490,7 @@
 
                 <View
                     android:layout_width="1dp"
-                    android:background="#BBBDBB"
+                    android:background="@color/smdm_divider_Black"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="match_parent"></View>
@@ -478,11 +504,12 @@
                     <TextView
                         android:id="@+id/txtLwSalesUnit"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="LW Sales (U)"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -490,7 +517,7 @@
 
                 <View
                     android:layout_width="1dp"
-                    android:background="#BBBDBB"
+                    android:background="@color/smdm_divider_Black"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="match_parent"></View>
@@ -504,11 +531,12 @@
                     <TextView
                         android:id="@+id/txtYtdSalesUnit"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="YTD Sales (U)"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -517,7 +545,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:background="#BBBDBB"
+                android:background="@color/smdm_divider_Black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_height="1dp"></View>
@@ -539,11 +567,12 @@
                     <TextView
                         android:id="@+id/txtSOH"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="SOH (U)"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -551,7 +580,7 @@
 
                 <View
                     android:layout_width="1dp"
-                    android:background="#BBBDBB"
+                    android:background="@color/smdm_divider_Black"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="match_parent"></View>
@@ -564,18 +593,19 @@
                     <TextView
                         android:id="@+id/txtGIT"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="GIT (U)"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <View
                     android:layout_width="1dp"
-                    android:background="#BBBDBB"
+                    android:background="@color/smdm_divider_Black"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="match_parent"></View>
@@ -588,11 +618,12 @@
                     <TextView
                         android:id="@+id/txtBaseStock"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="Base Stock (U)"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -600,7 +631,7 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:background="#BBBDBB"
+                android:background="@color/smdm_divider_Black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_height="1dp"></View>
@@ -623,18 +654,19 @@
                     <TextView
                         android:id="@+id/txtPrice"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="Price"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <View
                     android:layout_width="1dp"
-                    android:background="#BBBDBB"
+                    android:background="@color/smdm_divider_Black"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="match_parent"></View>
@@ -647,11 +679,12 @@
                     <TextView
                         android:id="@+id/txtsalesThruUnit"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="Sell Thru% (U)"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -659,7 +692,7 @@
 
                 <View
                     android:layout_width="1dp"
-                    android:background="#BBBDBB"
+                    android:background="@color/smdm_divider_Black"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="match_parent"></View>
@@ -673,11 +706,12 @@
                     <TextView
                         android:id="@+id/txtROS"
                         android:textSize="14sp"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:text="ROS (U)"
-                        android:textColor="#ff0000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -686,7 +720,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:background="#BBBDBB"
+                android:background="@color/smdm_divider_Black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
@@ -704,9 +738,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/bg_store_code_text"
                     android:text="Benefits: "/>
                 <TextView
                     android:id="@+id/txtBenefit"
+                    android:textColor="@color/smdm_default_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NA"/>

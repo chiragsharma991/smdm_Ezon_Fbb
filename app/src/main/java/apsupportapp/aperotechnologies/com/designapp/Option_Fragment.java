@@ -287,8 +287,8 @@ public class Option_Fragment extends Fragment {
 
             final TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getArticleOption());
             final TableRow taleRowForTableD = this.taleRowForTableD(productNameBeanArrayList.get(k));
-            tableRowForTableC.setBackgroundColor(Color.WHITE);
-            taleRowForTableD.setBackgroundColor(Color.LTGRAY);
+            tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
+            taleRowForTableD.setBackgroundColor(Color.parseColor("#dfdedf"));
             final int i = k;
             tableRowForTableC.setOnClickListener(new View.OnClickListener() {
 
@@ -365,7 +365,7 @@ public class Option_Fragment extends Fragment {
     TextView bodyTextView(String label) {
 
         TextView bodyTextView = new TextView(this.context);
-        bodyTextView.setBackgroundColor(Color.WHITE);
+        bodyTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         bodyTextView.setText(label);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);

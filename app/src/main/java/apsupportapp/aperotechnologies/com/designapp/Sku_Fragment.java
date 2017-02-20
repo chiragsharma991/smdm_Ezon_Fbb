@@ -102,7 +102,7 @@ public class Sku_Fragment extends Fragment {
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         rel = (RelativeLayout) view.findViewById(R.id.rel);
-        relativeLayout.setBackgroundColor(Color.WHITE);
+        relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));
         txt_articleOption = (TextView) view.findViewById(R.id.txt_Sku_article_Option_Name);
         Cache cache = new DiskBasedCache(getActivity().getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -418,8 +418,8 @@ public class Sku_Fragment extends Fragment {
             TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getSize());
 
             TableRow taleRowForTableD = this.taleRowForTableD(productNameBeanArrayList.get(k));
-            tableRowForTableC.setBackgroundColor(Color.WHITE);
-            taleRowForTableD.setBackgroundColor(Color.LTGRAY);
+            tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
+            taleRowForTableD.setBackgroundColor(Color.parseColor("#dfdedf"));
             this.tableC.addView(tableRowForTableC);
             this.tableD.addView(taleRowForTableD);
         }
@@ -465,7 +465,7 @@ public class Sku_Fragment extends Fragment {
     // table cell standard TextView
     TextView bodyTextView(String label) {
         TextView bodyTextView = new TextView(this.context);
-        bodyTextView.setBackgroundColor(Color.WHITE);
+        bodyTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         bodyTextView.setText(label);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);
@@ -476,7 +476,7 @@ public class Sku_Fragment extends Fragment {
     TextView headerTextView(String label) {
 
         TextView headerTextView = new TextView(this.context);
-        headerTextView.setBackgroundColor(Color.WHITE);
+        headerTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         headerTextView.setText(label);
         headerTextView.setGravity(Gravity.CENTER);
         headerTextView.setPadding(5, 5, 5, 5);

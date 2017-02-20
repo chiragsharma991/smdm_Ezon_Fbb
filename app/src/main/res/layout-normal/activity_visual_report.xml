@@ -77,7 +77,8 @@
             android:layout_below="@+id/linearToolbar"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="320dp">
+            android:layout_height="320dp"
+            >
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/vreport_pieChart"
@@ -117,7 +118,8 @@
                     android:gravity="left"
                     android:singleLine="true"
                     android:text="@string/likes"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textStyle="bold"
+                    android:textColor="@color/smdm_default_color"
                     android:textSize="@dimen/visual_report_textsize_normal" />
 
 
@@ -165,7 +167,8 @@
                     android:gravity="left"
                     android:singleLine="true"
                     android:text="@string/dislikes"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textStyle="bold"
+                    android:textColor="@color/smdm_default_color"
                     android:textSize="@dimen/visual_report_textsize_normal" />
 
 
@@ -213,7 +216,8 @@
                     android:gravity="left"
                     android:singleLine="true"
                     android:text="@string/pending"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textStyle="bold"
+                    android:textColor="@color/smdm_default_color"
                     android:textSize="@dimen/visual_report_textsize_normal" />
 
 

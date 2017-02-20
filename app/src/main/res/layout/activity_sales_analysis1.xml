@@ -12,7 +12,9 @@
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/bg_screen_color"
+        >
 
 
         <LinearLayout
@@ -131,6 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:background="@color/bg_screen_color"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="8dp">
 
@@ -357,7 +360,7 @@
                     android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />
+                    android:background="@color/smdm_divider_Black" />
 
                 <LinearLayout
                     android:layout_below="@+id/view1"
@@ -370,7 +373,7 @@
                         android:id="@+id/llheader"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_header">
+                        android:background="@color/smdm_divider_Black_light">
 
 
                         <RelativeLayout
@@ -438,7 +441,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_salescard">
+                        android:background="@color/bg_screen_color">
 
 
                         <EditText
@@ -480,13 +483,13 @@
 
                     </RelativeLayout>
                 </LinearLayout>
-                <View
-                    android:layout_below="@+id/linear"
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />
-
+                <!--   <View
+                       android:layout_below="@+id/linear"
+                       android:id="@+id/view2"
+                       android:layout_width="match_parent"
+                       android:layout_height="1dip"
+                       android:background="@color/border_round_edittext" />
+   -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

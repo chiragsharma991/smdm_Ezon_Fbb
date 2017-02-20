@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="150dp"
-                android:background="@drawable/popup_border"
+                android:background="@color/bg_screen_color"
                 android:orientation="vertical">
 
 
@@ -89,7 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/rank"
-                    android:background="@color/text_grey" />
+                    android:background="@color/smdm_divider_Black"
+                    />
 
 
                 <LinearLayout
@@ -249,6 +250,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
+        android:background="@color/bg_screen_color"
         android:layout_below="@+id/rankLayout"
         android:orientation="vertical">
 
@@ -348,6 +350,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:background="@color/bg_screen_color"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -440,6 +443,7 @@
         <LinearLayout
             android:id="@+id/llayoutSalesAnalysis"
             android:layout_width="match_parent"
+            android:background="@color/bg_screen_color"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -487,6 +491,7 @@
 
             <LinearLayout
                 android:id="@+id/llhierarchy"
+                android:background="@color/bg_screen_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -515,7 +520,7 @@
                     android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />
+                    android:background="@color/smdm_divider_Black" />
 
                 <LinearLayout
                     android:id="@+id/linear"
@@ -529,14 +534,15 @@
                         android:id="@+id/llheader"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_header">
+                        android:background="@color/smdm_divider_Black_light">
 
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="10dp">
+                            android:layout_marginLeft="10dp"
+                            >
 
 
                             <RelativeLayout
@@ -594,7 +600,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_header">
+                        android:background="@color/bg_screen_color"
+                        >
 
                         <EditText
                             android:id="@+id/etListText"
@@ -640,13 +647,13 @@
 
                 </LinearLayout>
 
-                <View
+               <!-- <View
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:layout_below="@+id/linear"
-                    android:background="@color/border_round_edittext" />
-
+                    android:background="@color/smdm_divider_Black" />
+-->
                 <!--<ListView-->
                 <!--android:id="@+id/listView_SalesAnalysis"-->
                 <!--android:layout_width="match_parent"-->
@@ -674,7 +681,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
 
-                       />
+                        />
 
 
                 </LinearLayout>

@@ -77,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txt_Sku_article_Option_Name"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/largelayout_storesize"
                     android:text="@string/number_in_units" />
 
@@ -90,6 +91,7 @@
 
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
+            android:background="@color/bg_screen_color"
             android:layout_height="match_parent"
             android:layout_below="@+id/linearLayout">
 

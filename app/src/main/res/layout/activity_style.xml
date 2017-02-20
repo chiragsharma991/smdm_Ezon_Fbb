@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen_color"
     android:orientation="vertical"
     tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
 
@@ -12,7 +11,7 @@
         android:id="@+id/stylemainlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
+        android:background="@color/bg_screen_color"
         android:visibility="gone">
 
         <android.support.v7.widget.Toolbar
@@ -84,7 +83,7 @@
                     android:id="@+id/searchablespinnerlibrary"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@android:color/white"
+                    android:background="@color/bg_screen_color"
                     android:drawableRight="@mipmap/search_option_dropdown_arrow"
                     android:padding="10dp"
                     android:textSize="15sp"
@@ -95,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="0dp"
-                    android:background="#C7C4C4"></View>
+                    android:background="@color/smdm_divider_Black"></View>
 
 
                 <TextView
@@ -103,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:singleLine="true"
-                    android:background="@android:color/white"
+                    android:background="@color/bg_screen_color"
                     android:drawableBottom="@color/darker_grey"
                     android:drawableRight="@mipmap/search_option_dropdown_arrow"
                     android:padding="10dp"
@@ -113,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="0dp"
-                    android:background="#C7C4C4" />
+                    android:background="@color/smdm_divider_Black" />
 
 
                 <!--<TextView-->
@@ -193,8 +192,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="30dp"
                         android:layout_toLeftOf="@+id/imgor"
-                        android:background="@color/bg_screen_color"
-                        >
+                        android:background="#566573">
 
                     </RelativeLayout>
 
@@ -214,8 +212,7 @@
                         android:layout_marginRight="7dp"
                         android:layout_marginTop="30dp"
                         android:layout_toRightOf="@+id/imgor"
-                        android:background="@color/bg_screen_color"
-                        >
+                        android:background="#566573">
 
                     </RelativeLayout>
 
@@ -249,7 +246,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:background="@android:color/white"
+            android:background="@color/bg_screen_color"
             android:orientation="vertical">
 
             <TextView
@@ -257,7 +254,7 @@
                 android:layout_height="wrap_content"
                 android:padding="20dp"
                 android:text="Select Collection"
-                android:textColor="#000000"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="22sp" />
 
             <!--<SearchView-->
@@ -270,7 +267,7 @@
                 android:id="@+id/searchCollection"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@android:color/transparent"
+                android:background="@color/bg_screen_color"
                 android:drawableLeft="@mipmap/key_product_search_icon"
                 android:drawablePadding="5dp"
                 android:drawableTint="#000000"
@@ -285,7 +282,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:background="@color/bg_screen_color" />
+                android:background="@color/smdm_divider_Black" />
 
             <ListView
                 android:id="@+id/listCollection"
@@ -308,7 +305,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:background="@android:color/white"
+            android:background="@color/bg_screen_color"
             android:orientation="vertical">
 
             <TextView
@@ -316,7 +313,7 @@
                 android:layout_height="wrap_content"
                 android:padding="20dp"
                 android:text="Select Option"
-                android:textColor="#000000"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="22sp" />
 
 
@@ -324,7 +321,7 @@
                 android:id="@+id/searchOption"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@android:color/transparent"
+                android:background="@color/bg_screen_color"
                 android:drawableLeft="@mipmap/key_product_search_icon"
                 android:drawablePadding="5dp"
                 android:drawableTint="@color/darker_grey"
@@ -339,7 +336,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:background="@color/bg_screen_color" />
+                android:background="@color/smdm_divider_Black" />
 
             <ListView
                 android:id="@+id/listOption"

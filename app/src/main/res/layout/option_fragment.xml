@@ -69,6 +69,7 @@
                     android:id="@+id/txtnounits"
                     android:layout_marginTop="7dp"
                     android:textSize="@dimen/normallayout_storesize"
+                    android:textColor="@color/bg_store_code_text"
                     android:text="@string/number_in_units"
                     android:layout_below="@+id/txtArticleName"
                     android:layout_width="wrap_content"
@@ -77,13 +78,13 @@
             </RelativeLayout>
 
             <!--<Button-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:id="@+id/imageBtnFilter"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:background="@mipmap/key_product_filter" />-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:id="@+id/imageBtnFilter"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="@mipmap/key_product_filter" />-->
 
 
         </RelativeLayout>
@@ -91,6 +92,7 @@
         <RelativeLayout
 
             android:id="@+id/relativeLayout"
+            android:background="@color/bg_screen_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/linearLayout">

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:gravity="top"
+    android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
     <LinearLayout
@@ -29,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
+                android:textColor="@color/smdm_default_color"
                 android:gravity="left"
                 android:text="Net Sales"
                 android:textSize="12sp" />
@@ -42,7 +44,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
                 android:text="12,15,1215"
-                android:textColor="@android:color/black"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="17sp" />
 
             <ImageView
@@ -76,7 +78,7 @@
                     android:text="djshjd"
                     android:textSize="11sp" />
 
-              <TextView
+                <TextView
                     android:id="@+id/txtNetSalesPerc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="left"
+                android:textColor="@color/smdm_default_color"
                 android:layout_marginLeft="8dp"
                 android:text="Plan Sales"
                 android:textSize="12sp" />
@@ -120,7 +123,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
                 android:text="12,15,1215"
-                android:textColor="@android:color/black"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="17sp" />
 
             <ImageView
@@ -142,7 +145,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@+id/txtPlanSalesVal">
-
                 <TextView
                     android:id="@+id/txtPlanSalesName"
                     android:layout_width="wrap_content"
@@ -193,6 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="left"
+                android:textColor="@color/smdm_default_color"
                 android:layout_marginLeft="8dp"
                 android:text="Net Sales(U)"
                 android:textSize="12sp" />
@@ -206,7 +209,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
                 android:text="12,15,1215"
-                android:textColor="@android:color/black"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="17sp" />
 
 
@@ -275,6 +278,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="left"
+                android:textColor="@color/smdm_default_color"
                 android:layout_marginLeft="8dp"
                 android:text="SOH(U)"
                 android:textSize="12sp" />
@@ -288,7 +292,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
                 android:text="12,15,1215"
-                android:textColor="@android:color/black"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="17sp" />
 
 

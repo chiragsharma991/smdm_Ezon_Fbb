@@ -72,6 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtArticleName"
                     android:layout_marginTop="7dp"
+                    android:textColor="@color/bg_store_code_text"
                     android:text="@string/number_in_units"
                     android:textSize="@dimen/largelayout_storesize" />
 
@@ -92,6 +93,7 @@
         <RelativeLayout
 
             android:id="@+id/relativeLayout"
+            android:background="@color/bg_screen_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/linearLayout">

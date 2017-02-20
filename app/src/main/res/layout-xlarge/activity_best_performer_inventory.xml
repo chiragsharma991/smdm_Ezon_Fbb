@@ -101,7 +101,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/smdm_divider"
-            android:background="@color/divider_salescard"
+            android:background="@color/smdm_divider_Black"
             android:layout_marginTop="9dp"
             >
 
@@ -165,7 +165,8 @@
                     android:layout_toRightOf="@+id/bestInvent_BtnBack"
                     android:layout_marginLeft="20dp"
                     android:textColor="@color/divider_salescard1"
-                    android:id="@+id/toolbar_title" />
+                    android:id="@+id/toolbar_title"
+                    />
 
                 <RelativeLayout
                     android:layout_alignParentRight="true"
@@ -186,6 +187,7 @@
 
                 <RelativeLayout
                     android:layout_toLeftOf="@+id/bestInvent_imgfilter"
+                    android:layout_marginRight="0dp"
                     android:visibility="visible"
                     android:id="@+id/bst_sortInventory"
                     android:background="@drawable/button_red_effect"
@@ -212,7 +214,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            >
 
 
             <TextView

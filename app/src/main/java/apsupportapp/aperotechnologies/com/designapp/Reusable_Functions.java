@@ -35,7 +35,7 @@ public class Reusable_Functions {
 
     public static void sDialog(Context cont, String message) {
         if (progressDialog == null) {
-            progressDialog = new ProgressDialog(cont, R.style.AppCompatAlertDialogStyle);
+            progressDialog = new ProgressDialog(cont);//, R.style.AppCompatAlertDialogStyle);
             progressDialog.setIndeterminate(true);
             progressDialog.setMessage(message);
             progressDialog.setCancelable(false);

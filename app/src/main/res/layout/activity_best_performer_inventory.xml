@@ -101,7 +101,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/smdm_divider"
-            android:background="@color/divider_salescard"
+            android:background="@color/smdm_divider_Black"
             android:layout_marginTop="9dp"
             >
 
@@ -186,6 +186,7 @@
 
                 <RelativeLayout
                     android:layout_toLeftOf="@+id/bestInvent_imgfilter"
+                    android:layout_marginRight="0dp"
                     android:visibility="visible"
                     android:id="@+id/bst_sortInventory"
                     android:background="@drawable/button_red_effect"
@@ -293,6 +294,7 @@
 
 
     </RelativeLayout>
+
 
 
 </RelativeLayout>
