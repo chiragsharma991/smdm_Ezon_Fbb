@@ -66,6 +66,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
     public SkewedSizeAdapter(ArrayList<SkewedSizeListDisplay> arrayList, Context context, Resources resources) {
 
+        // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         this.context = context;
         mInflater = LayoutInflater.from(context);
@@ -100,6 +101,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
+        //Log.e("in ","getview");
 
         Position = position;
 
@@ -159,6 +161,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
         // holder.Skewed_ProdAttribute.setText(arrayList.get(position).getProdAttribute4());
         // holder.Skewed_SOH.setText((arrayList.get(position).getStkOnhandQty()));
+        Log.e(TAG, "getView: "+calculation(arrayList.get(position).getStkOnhandQty()));
 
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
@@ -204,16 +207,19 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
 
             if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+                //Log.e(TAG, "Normal sized screen:" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(120,50));
                 mType.setTextSize(12);
 
             }
             else if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+               // Log.e(TAG, "Small sized screen :" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
                 mType.setTextSize(12);
 
             }
             else {
+              //  Log.e(TAG, "Screen Size is neither large, normal or small :" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
                 mType.setTextSize(12);
 
@@ -253,6 +259,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
 
             if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+               // Log.e(TAG, "Normal sized screen:" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(120,50));
                 mType.setTextSize(12);
                 //mType.setLayoutParams(new LinearLayout.LayoutParams(90,45));
@@ -260,11 +267,13 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
             }
             else if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+              //  Log.e(TAG, "Small sized screen :" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
                 mType.setTextSize(12);
 
             }
             else {
+               // Log.e(TAG, "Screen Size is neither large, normal or small :" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
                 mType.setTextSize(12);
 
@@ -322,6 +331,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
             sum += y;
         }
         return sum;
+        // Log.e(TAG, "sumof: "+sum );
     }
 
 

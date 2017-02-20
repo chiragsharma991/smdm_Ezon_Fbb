@@ -13,11 +13,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.daprlabs.cardstack.SwipeDeck;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,13 +42,14 @@ public class SwipeDeckAdapter extends BaseAdapter {
     private Context context;
     SwipeDeck cardStack;
     View layoutView;
-   static RelativeLayout rellike, reldislike, relbuy, relcomment;
+    static RelativeLayout rellike, reldislike, relbuy, relcomment;
     static ImageButton btnlike, btndislike, btnbuy, btncomment;
     ArrayList<VisualAssort> visualassortmentlist;
     ImageView img_VisualAssortment;
     TextView txtName, txtSeason, txtColor, txtFabric, txtFit, txtCollection, txtSizeRatio, txtAmount;
     SharedPreferences sharedPreferences;
     String userId, bearertoken;
+    ProgressBar visualprogressPicaso;
     int pos;
     static LinearLayout fragmentLayout;
 
@@ -93,6 +101,8 @@ public class SwipeDeckAdapter extends BaseAdapter {
 //        edtTextComment = (EditText) layoutView.findViewById(R.id.edtTextComment);
 
         img_VisualAssortment = (ImageView) layoutView.findViewById(R.id.card_image);
+        visualprogressPicaso= (ProgressBar)layoutView.findViewById(R.id.visualprogressPicaso);
+        visualprogressPicaso.setVisibility(View.VISIBLE);
         txtName = (TextView) layoutView.findViewById(R.id.txtname);
         txtSeason = (TextView) layoutView.findViewById(R.id.txtSeason);
         txtColor = (TextView) layoutView.findViewById(R.id.txtColor);
@@ -116,6 +126,63 @@ public class SwipeDeckAdapter extends BaseAdapter {
         txtCollection.setText("Collection : " + visualAssort.getCollectionName());
         txtAmount.setText("\u20B9 " + visualAssort.getUnitGrossPrice());
         txtSizeRatio.setText("Size Ratio : " + visualAssort.getSize());
+//        if(!visualAssort.getProdImageURL().equals("")) {
+//            Picasso.with(this.context).
+//
+//                    load(visualAssort.getProdImageURL()).
+//                    into(img_VisualAssortment, new Callback() {
+//                        @Override
+//                        public void onSuccess() {
+//                            visualprogressPicaso.setVisibility(View.GONE);
+//                        }
+//
+//                        @Override
+//                        public void onError() {
+//                            visualprogressPicaso.setVisibility(View.GONE);
+//
+//                        }
+//                    });
+//        }else {
+//            visualprogressPicaso.setVisibility(View.GONE);
+//
+//            Picasso.with(this.context).
+//                    load(R.mipmap.placeholder).
+//                    into(img_VisualAssortment);
+//
+//        }
+        if(!visualAssort.getProdImageURL().equals(""))
+        {
+            Glide.with(this.context)
+                    .load(visualAssort.getProdImageURL())
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            visualprogressPicaso.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                          visualprogressPicaso.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .into(img_VisualAssortment)
+            ;
+
+        }else {
+          visualprogressPicaso.setVisibility(View.GONE);
+
+            Glide.with(this.context).
+                    load(R.mipmap.img_placeholder).
+                    into(img_VisualAssortment);
+
+
+
+        }
+
+
+
 //        if(visualAssort.getLikeDislikeFlg() == null)
 //        {
 //            btnlike.setBackgroundResource(R.mipmap.like_unselected);
@@ -313,9 +380,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     }
 
                 }
-                //VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
-//                edtTextSets.setText("0");
-//                btnbuy.setEnabled(false);
+
                 InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputManager != null) {
                     inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);

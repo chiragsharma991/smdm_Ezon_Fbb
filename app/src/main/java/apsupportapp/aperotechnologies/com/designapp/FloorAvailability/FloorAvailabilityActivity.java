@@ -92,7 +92,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private boolean from_filter=false;
     private String selectedString="";
     private boolean toggleClick=false;
-    private RelativeLayout processLoad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +100,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         getSupportActionBar().hide();
         initalise();
         gson = new Gson();
-        processLoad=(RelativeLayout)findViewById(R.id.process_filter);
         floorAvailability=this;
         FloorList = new ArrayList<FloorAvailabilityDetails>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -117,10 +115,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
-            processLoad.setVisibility(View.GONE);
-           // Reusable_Functions.sDialog(context, "Loading data...");
-            processLoad.setVisibility(View.VISIBLE);
-            Log.e(TAG, "onCreate: " );
+            Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;
             limit = 10;
             count = 0;
@@ -190,8 +185,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
-                                    processLoad.setVisibility(View.GONE);
-                                    Log.e(TAG, "hDialog: " );
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     floorListView.removeFooterView(footer);
                                     floorListView.setTag("FOOTER_REMOVE");
@@ -251,10 +244,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
 
                                 Reusable_Functions.hDialog();
-                                processLoad.setVisibility(View.GONE);
-                                Log.e(TAG, "hDialog: " );
-
-
                             } catch (Exception e) {
 
                                 FloorList.clear();
@@ -689,9 +678,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         seasongroup = "Current";
         corefashion="Fashion";
 
-        Reusable_Functions.hDialog();
-
-        this.finish();
+        finish();
     }
 
 

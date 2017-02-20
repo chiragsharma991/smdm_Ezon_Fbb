@@ -91,13 +91,10 @@ public class UpcomingPromoAdapter extends BaseAdapter {
             holder.StartDate = (TextView) convertView.findViewById(R.id.txt_up_startDate);
             holder.EndDate = (TextView) convertView.findViewById(R.id.txt_up_EndDate);
             holder.Vm = (ImageView) convertView.findViewById(R.id.up_imgVm);
-
-
             convertView.setTag(holder);
 
         } else {
             holder=(Holder)convertView.getTag();
-
         }
         Log.e("------","----"+arrayList.size());
         Log.e("values",""+arrayList.get(0).getPromoDesc()+""+arrayList.get(0).getPromoStartDate()+""+arrayList.get(0).getPromoEndDate());
@@ -108,27 +105,15 @@ public class UpcomingPromoAdapter extends BaseAdapter {
 
         // ---------------------click listener -------------------------
 
-
-
-
-
             holder.Vm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,VM.class);
-                intent.putExtra("VM",arrayList.get(position).getPromoDesc());
-                intent.putExtra("FROM","UpcomingPromo");
-                context.startActivity(intent);
+            Intent intent=new Intent(context,VM.class);
+            intent.putExtra("VM",arrayList.get(position).getPromoDesc());
+            intent.putExtra("FROM","UpcomingPromo");
+            context.startActivity(intent);
             }
        });
-
-
-
-
-
-
-
-
 
         return convertView;
     }

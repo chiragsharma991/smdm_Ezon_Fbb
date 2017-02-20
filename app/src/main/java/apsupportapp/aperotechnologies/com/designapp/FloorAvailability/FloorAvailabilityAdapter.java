@@ -80,9 +80,9 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
 
         Position=position;
 
-        final FloorAvailabilityAdapter.Holder holder;
+        final Holder holder;
         if (convertView == null) {
-            holder=new FloorAvailabilityAdapter.Holder();
+            holder=new Holder();
             convertView = mInflater.inflate(R.layout.activity_floor_availability_child, null);
             holder.floor_option = (TextView) convertView.findViewById(R.id.floor_option);
             holder.floor_SOH_U=(TextView)convertView.findViewById(R.id.floor_SOH_U);
@@ -96,7 +96,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
 
         } else {
 
-            holder=(FloorAvailabilityAdapter.Holder)convertView.getTag();
+            holder=(Holder)convertView.getTag();
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
 
         }

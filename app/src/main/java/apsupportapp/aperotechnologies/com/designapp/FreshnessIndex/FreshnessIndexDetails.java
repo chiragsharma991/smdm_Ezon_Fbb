@@ -40,6 +40,27 @@ public class FreshnessIndexDetails {
         this.coreGroupCount = coreGroupCount;
     }
 
+    public double getCoreGrpCount() {
+        return coreGrpCount;
+    }
+
+    public void setCoreGrpCount(double coreGrpCount) {
+        this.coreGrpCount = coreGrpCount;
+    }
+
+    double coreGrpCount;
+
+    public double getCoreGroupCount() {
+        return coreGroupCount;
+    }
+
+    public void setCoreGroupCount(double coreGroupCount) {
+        this.coreGroupCount = coreGroupCount;
+    }
+
+    double coreGroupCount;
+
+
     public double getSohCurrentGrpCount() {
         return sohCurrentGrpCount;
     }

@@ -144,8 +144,8 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
                                 } else if (response.length() < limit) {
                                     Log.e(TAG, "promo /= limit");
-                                    for (int i = 0; i < response.length(); i++) {
-
+                                    for (int i = 0; i < response.length(); i++)
+                                    {
                                         runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         promoList.add(runningPromoListDisplay);
                                     }

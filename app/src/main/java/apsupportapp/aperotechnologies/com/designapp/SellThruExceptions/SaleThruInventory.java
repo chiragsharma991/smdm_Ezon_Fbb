@@ -96,7 +96,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     public static Activity saleThru;
     private boolean from_filter=false;
     private String selectedString="";
-    private RelativeLayout processLoad;
 
 
     @Override
@@ -105,7 +104,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_best_performer_inventory);
         getSupportActionBar().hide();
         initalise();
-        processLoad=(RelativeLayout)findViewById(R.id.process_filter);
         BstInventory_salesU_chk.setChecked(true);
         BaseLayoutInventory.setVisibility(View.GONE);
         BestInventListview.setVisibility(View.VISIBLE);
@@ -128,9 +126,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         BestInventListview.setTag("FOOTER");
 
         Reusable_Functions.hDialog();
-        processLoad.setVisibility(View.GONE);
-        processLoad.setVisibility(View.VISIBLE);
-       // Reusable_Functions.sDialog(context, "Loading.......");
+        Reusable_Functions.sDialog(context, "Loading.......");
 
         if (getIntent().getStringExtra("selectedDept") == null) {
             from_filter = false;
@@ -195,7 +191,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
-                                    processLoad.setVisibility(View.GONE);
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     BestInventListview.removeFooterView(footer);
                                     BestInventListview.setTag("FOOTER_REMOVE");
@@ -263,7 +258,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
 
                                 Reusable_Functions.hDialog();
-                                processLoad.setVisibility(View.GONE);
 
 
                             } catch (Exception e) {

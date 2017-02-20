@@ -197,6 +197,38 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         }
 
         baseclick();
+        sortRetain();
+    }
+
+    private void sortRetain()
+    {
+        switch (orderbycol.toString())
+        {
+            case "6":
+                BstInventory_salesU_chk.setChecked(true);
+                BstInventory_salesThru_chk.setChecked(false);
+                BstInventory_Fwd_chk.setChecked(false);
+                BstInventory_coverNsell_chk.setChecked(false);
+                break;
+            case "9":
+                BstInventory_salesU_chk.setChecked(false);
+                BstInventory_salesThru_chk.setChecked(true);
+                BstInventory_Fwd_chk.setChecked(false);
+                BstInventory_coverNsell_chk.setChecked(false);
+                break;
+            case "10":
+                BstInventory_salesU_chk.setChecked(false);
+                BstInventory_salesThru_chk.setChecked(false);
+                BstInventory_Fwd_chk.setChecked(true);
+                BstInventory_coverNsell_chk.setChecked(false);
+                break;
+            case "10,9":
+                BstInventory_salesU_chk.setChecked(false);
+                BstInventory_salesThru_chk.setChecked(false);
+                BstInventory_Fwd_chk.setChecked(false);
+                BstInventory_coverNsell_chk.setChecked(true);
+                break;
+        }
     }
 
     private void baseclick()

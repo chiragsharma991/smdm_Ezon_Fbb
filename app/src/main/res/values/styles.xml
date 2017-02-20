@@ -77,10 +77,20 @@
     <item name="android:background">#666666</item>
         <item name="android:colorBackground">@color/cardview_light_background</item>
     </style>
+
     <style name="ProgressBar" parent="Theme.AppCompat.Light.Dialog.Alert">
+
         <item name="colorAccent">#c5c5c5</item>
         <item name="android:textColorPrimary">#ffffff</item>
         <item name="android:background">#666666</item>
+
+    </style>
+    <style name="ProgressBar_black" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+        <item name="colorAccent">#000</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:background">#666666</item>
+
     </style>
     <style name="ProgressBar_black" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">#000</item>

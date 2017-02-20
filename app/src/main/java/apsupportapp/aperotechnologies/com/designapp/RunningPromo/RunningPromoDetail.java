@@ -202,17 +202,9 @@ public class RunningPromoDetail extends AppCompatActivity {
 //                                });
 //                                Collections.reverse(productNameBeanArrayList);
 
-
-
-
-                                // txtStoreCode.setText(promoList.get(0).getStoreCode());
+                                //txtStoreCode.setText(promoList.get(0).getStoreCode());
                                 //txtStoreDesc.setText(promoList.get(0).getStoreDesc());
-
-
-
-
                                 addTexttoTable();
-
                             }
 
                         } catch (Exception e) {

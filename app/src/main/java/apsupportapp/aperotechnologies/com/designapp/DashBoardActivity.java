@@ -51,6 +51,7 @@ import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAAct
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
 
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
@@ -750,6 +751,9 @@ public class DashBoardActivity extends AppCompatActivity
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.commit();
+            SalesFilterActivity.level_filter = 0;
+            SalesAnalysisActivity1.selectedsegValue = null;
+            SalesAnalysisActivity1.level = 0;
             Intent intent = new Intent(DashBoardActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
