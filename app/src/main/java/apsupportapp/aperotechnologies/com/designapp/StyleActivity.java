@@ -5,13 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -51,17 +56,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Handler;
 
-import amobile.android.barcodesdk.api.IWrapperCallBack;
-import amobile.android.barcodesdk.api.Wrapper;
 
-public class StyleActivity extends AppCompatActivity implements IWrapperCallBack //implements IWrapperCallBack {
+public class StyleActivity extends AppCompatActivity
+//implements IWrapperCallBack {
 {
     Button btnBarcode;
-    private Wrapper m_wrapper = null;
+    //  private Wrapper m_wrapper = null;
     RelativeLayout imageBtnBack;
     TextView collection, style;
-    EditText edtSearch;
     ArrayAdapter<String> adapter1, adapter2;
     List<String> collectionList, list;
     ArrayList<String> arrayList, articleOptionList;
@@ -79,8 +83,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     int collectionoffset = 0, collectionlimit = 100, collectioncount = 0;
     SharedPreferences sharedPreferences;
     Button btnSubmit;
-    EditText edtsearchCollection, edtsearchOption;
-
+    EditText edtsearchCollection, edtsearchOption, edit_barcode;
     public static String selcollectionName = null, seloptionName = null;
 
     RelativeLayout stylemainlayout;
@@ -88,7 +91,15 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     private ListView listCollection, listOption;
     ListAdapter collectionAdapter;
     ListAdapter1 optionAdapter;
-    private String TAG="StyleActivity";
+    private String TAG = "StyleActivity";
+    private static final String SOURCE_TAG = "com.motorolasolutions.emdk.datawedge.source";
+    private static final String LABEL_TYPE_TAG = "com.motorolasolutions.emdk.datawedge.label_type";
+    private static final String DATA_STRING_TAG = "com.motorolasolutions.emdk.datawedge.data_string";
+    private static final String ACTION_SOFTSCANTRIGGER = "com.motorolasolutions.emdk.datawedge.api.ACTION_SOFTSCANTRIGGER";
+    private static final String EXTRA_PARAM = "com.motorolasolutions.emdk.datawedge.api.EXTRA_PARAMETER";
+    private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
+    private static String ourIntentAction = "com.motorolasolutions.emdk.sample.dwdemosample.RECVR";
+    String barcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,13 +112,13 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        if (isAMobileModel()) {
-            Log.e("amobile device", "");
-            m_wrapper = new Wrapper(StyleActivity.this);
-
-            IntentFilter filter = new IntentFilter("BROADCAST_BARCODE");
-            registerReceiver(m_brc, filter);
-        }
+//        if (isAMobileModel()) {
+//            Log.e("amobile device", "");
+//          //  m_wrapper = new Wrapper(StyleActivity.this);
+//
+//            IntentFilter filter = new IntentFilter();
+//            registerReceiver(m_brc, filter);
+//        }
 
         context = this;
         m_config = MySingleton.getInstance(context);
@@ -127,7 +138,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading collection data...");
             requestCollectionAPI(collectionoffset, collectionlimit);
-
         } else {
 
             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -139,18 +149,15 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         optionLayout = (LinearLayout) findViewById(R.id.optionLayout);
         edtsearchCollection = (EditText) findViewById(R.id.searchCollection);
         edtsearchOption = (EditText) findViewById(R.id.searchOption);
-
+        edit_barcode = (EditText) findViewById(R.id.editBarcode);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         btnBarcode = (Button) findViewById(R.id.btnBarcode);
         imageBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
-
         if (getIntent().getExtras() != null) {
             selcollectionName = getIntent().getExtras().getString("selCollectionname");
             seloptionName = getIntent().getExtras().getString("selOptionName");
         }
-
         Log.e("selcollectionName", " " + selcollectionName + " " + seloptionName);
-
         collection = (TextView) findViewById(R.id.searchablespinnerlibrary);
         collection.setText("Select Collection");
         listCollection = (ListView) findViewById(R.id.listCollection);
@@ -159,7 +166,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         listCollection.setAdapter(collectionAdapter);
         listCollection.setTextFilterEnabled(true);
         collectionAdapter.notifyDataSetChanged();
-
         style = (TextView) findViewById(R.id.searchablespinnerlibrary1);
         style.setText("Select Option");
         style.setEnabled(false);
@@ -174,17 +180,17 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             public void onClick(View v) {
                 if (collection.getText().toString().trim().equals("Select Collection")) {
                     Toast.makeText(StyleActivity.this, "Please select Collection", Toast.LENGTH_LONG).show();
+
                 } else if (style.getText().toString().trim().equals("Select Option")) {
                     Toast.makeText(StyleActivity.this, "Please select Option", Toast.LENGTH_LONG).show();
+
                 } else {
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading  data...");
                         Log.e("select item", optionName);
                         requestStyleDetailsAPI(optionName, "optionname");
-
                     } else {
-
                         Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -196,12 +202,42 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             @Override
             public void onClick(View v) {
                 Log.e("scan clicked", "");
-                if (isAMobileModel())
+                if (isAMobileModel()) {
 
-                {
-                    if (m_wrapper != null && m_wrapper.IsOpen()) {
-                        m_wrapper.Scan();
-                    }
+                    Intent intent_barcode = new Intent();
+                    intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
+                    intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
+                    StyleActivity.this.sendBroadcast(intent_barcode);
+                    edit_barcode.setText(" ");
+                    barcode = " ";
+
+
+                    android.os.Handler h = new android.os.Handler();
+                    h.postDelayed(new Runnable() {
+                        public void run() {
+
+                            Intent i1 = getIntent();
+                            Log.e("getIntent : ", "" + getIntent());
+                            Log.e("barcode :", " " + i1 + "\ntxt :" + edit_barcode.getText().toString());
+                            barcode = edit_barcode.getText().toString();
+                            if(!barcode.equals(" ")) {
+                                Toast.makeText(StyleActivity.this, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
+                                TimeUP();
+                            }
+                            else{
+                                View view=findViewById(android.R.id.content);
+
+                                Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
+                            }
+                        }
+                    }, 1500);
+
+
+                    //   handleDecodeData(intent);
+
+//                    if (m_wrapper != null && m_wrapper.IsOpen()) {
+//                        m_wrapper.Scan();
+//                    }
                 } else if (!isAMobileModel()) {
                     Log.e("regular device", "");
                     scanBarcode(view);
@@ -209,14 +245,13 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                 }
             }
         });
+
         imageBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selcollectionName = null;
                 seloptionName = null;
                 DashBoardActivity._collectionitems = new ArrayList();
-               /* Intent intent = new Intent(StyleActivity.this, DashBoardActivity.class);
-                startActivity(intent);*/
                 finish();
 
             }
@@ -250,14 +285,12 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                 }
                 return false;
             }
-
         });
 
         edtsearchOption.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 optionAdapter.getFilter().filter(s);
-
             }
 
             @Override
@@ -280,12 +313,9 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                     if (inputManager != null) {
                         inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     }
-
-
                 }
                 return false;
             }
-
         });
 
         style.setOnClickListener(new View.OnClickListener() {
@@ -307,7 +337,6 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                 optionName = (String) optionAdapter.getItem(position);
                 style.setText(optionName.trim());
                 Log.e("optionName ", " " + optionName);
-
                 stylemainlayout.setVisibility(View.VISIBLE);
                 collectionLayout.setVisibility(View.GONE);
                 optionLayout.setVisibility(View.GONE);
@@ -320,65 +349,95 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         });
     }
 
+    private void TimeUP()
+    {
+
+
+            if (Reusable_Functions.chkStatus(StyleActivity.this)) {
+                Reusable_Functions.hDialog();
+                Reusable_Functions.sDialog(StyleActivity.this, "Loading  data...");
+                requestStyleDetailsAPI(barcode, "barcode");
+            } else {
+                Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+            }
+   }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        EditText et = (EditText) findViewById(R.id.editBarcode);
+
+
+//        handleDecodeData(intent);
+        Log.e("=======", "-------");
+    }
+
+    private void handleDecodeData(Intent i) {
+
+
+    }
+
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        if (m_wrapper != null) {
-            if (m_wrapper.Open()) {
-                m_wrapper.SetDispathBarCode(false);
-                m_wrapper.SetLightMode2D(Wrapper.LightMode2D.mix);
-                m_wrapper.SetTimeOut(30);
-            } else {
-                m_wrapper = null;
-            }
-        }
+//        if (m_wrapper != null) {
+//            if (m_wrapper.Open()) {
+//                m_wrapper.SetDispathBarCode(false);
+//                m_wrapper.SetLightMode2D(Wrapper.LightMode2D.mix);
+//                m_wrapper.SetTimeOut(30);
+//            } else {
+//                m_wrapper = null;
+//            }
+//        }
     }
 
     @Override
     protected void onDestroy() {
         if (isAMobileModel()) {
-            unregisterReceiver(m_brc);
+            //    unregisterReceiver(m_brc);
         }
-
-        if (m_wrapper != null) {
-            m_wrapper.Close();
-            m_wrapper = null;
-        }
-
+//        if (m_wrapper != null) {
+//            m_wrapper.Close();
+//            m_wrapper = null;
+//        }
         super.onDestroy();
     }
 
-    @Override
-    public void onDataReady(String strData) {
-        byte[] bytes = strData.getBytes();
-        if (strData == null) {
-            Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
-        } else if (strData.equalsIgnoreCase("Unknown command : setLightMode2D")) {
-            Log.e("Do nothing", "");
-        } else if (strData.equalsIgnoreCase("Time Out")) {
+//    public void onNewIntent(Intent i) {
+//
+//        handleDecodeData(i);
+//
+//    }
 
-        } else {
 
-            Toast.makeText(this, "Barcode Scanned: " + strData, Toast.LENGTH_LONG).show();
-            if (Reusable_Functions.chkStatus(context)) {
-                Reusable_Functions.hDialog();
-                Reusable_Functions.sDialog(context, "Loading  data...");
-
-                requestStyleDetailsAPI(strData, "barcode");
-
-            } else {
-                Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
-            }
-        }
-
-    }
+//    @Override
+//    public void onDataReady(String strData) {
+//        byte[] bytes = strData.getBytes();
+//        if (strData == null) {
+//            Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
+//        } else if (strData.equalsIgnoreCase("Unknown command : setLightMode2D")) {
+//            Log.e("Do nothing", "");
+//        } else if (strData.equalsIgnoreCase("Time Out")) {
+//
+//        } else {
+//            Toast.makeText(this, "Barcode Scanned: " + strData, Toast.LENGTH_LONG).show();
+//            if (Reusable_Functions.chkStatus(context)) {
+//                Reusable_Functions.hDialog();
+//                Reusable_Functions.sDialog(context, "Loading  data...");
+//                requestStyleDetailsAPI(strData, "barcode");
+//            } else {
+//                Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+//            }
+//        }
+//    }
 
     private BroadcastReceiver m_brc = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent != null) {
-                String s = intent.getStringExtra("BROADCAST_BARCODE_STRING");
+                String s = intent.getStringExtra(ACTION_SOFTSCANTRIGGER);
                 if (s != null) {
                     // m_text.setText(s);
                     Log.e("printing string s=", s);
@@ -387,25 +446,24 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         }
     };
 
-    @Override
-    public void onServiceConnected() {
-        // do something after connecting
-        int i = 0;
-    }
-
-    @Override
-    public void onServiceDisConnected() {
-        // do something after disconnecting
-        int i = 0;
-    }
-
+//    @Override
+//    public void onServiceConnected() {
+//        // do something after connecting
+//        int i = 0;
+//    }
+//
+//    @Override
+//    public void onServiceDisConnected() {
+//        // do something after disconnecting
+//        int i = 0;
+//    }
+//
 
     private boolean isAMobileModel() {
         Log.e("checking model", "");
         getDeviceInfo();
         Log.e("model is ", "" + Build.MODEL);
-
-        return Build.MODEL.contains("G0550");
+        return Build.MODEL.contains("TC75");
     }
 
     public void scanBarcode(View view) {
@@ -443,7 +501,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         }
     }
 
-//
+
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -534,8 +592,8 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 //                                        styleDetailsBean.setProductFinishDesc(productFinishDesc);
 //                                        styleDetailsBean.setSeasonName(seasonName);
 //
-////                                    styleDetailsBean.setFirstReceiptDate(firstReceiptDate);
-////                                    styleDetailsBean.setLastReceiptDate(lastReceiptDate);
+//                                        styleDetailsBean.setFirstReceiptDate(firstReceiptDate);
+//                                        styleDetailsBean.setLastReceiptDate(lastReceiptDate);
 //                                        styleDetailsBean.setFwdWeekCover(fwdWeekCover);
 //
 //                                        styleDetailsBean.setTwSaleTotQty(twSaleTotQty);
@@ -627,28 +685,25 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         }
     }
 
-
     private void requestStyleDetailsAPI(String content, String check) {
-        String url = "";
+        String url = " ";
         if (check.equals("optionname")) {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + content.replaceAll(" ", "%20").replaceAll("&", "%26");
         } else if (check.equals("barcode")) {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?eanNumber=" + content;
         }
-
-        Log.e(TAG,"requestStyleDetailsAPI  "+ url);
+        Log.e(TAG, "requestStyleDetailsAPI  " + url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG," requestStyleDetailsAPI :   "+response.toString());
+                        Log.i(TAG, " requestStyleDetailsAPI :   " + response.toString());
                         try {
 
                             if (response.equals(null) || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No data found", Toast.LENGTH_LONG).show();
-
                             } else {
                                 Reusable_Functions.hDialog();
                                 JSONObject styleDetails = response.getJSONObject(0);
@@ -702,7 +757,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 styleDetailsBean.setPromoFlag(promoFlg);
                                 styleDetailsBean.setKeyProductFlg(keyProductFlg);
                                 styleDetailsBean.setProductImageURL(productImageURL);
-                                Log.e(TAG, "intent calling: " );
+                                Log.e(TAG, "intent calling: ");
                                 Intent intent = new Intent(StyleActivity.this, SwitchingTabActivity.class);
                                 intent.putExtra("articleCode", articleCode);
                                 intent.putExtra("articleOption", articleOption);
@@ -743,15 +798,14 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
         queue.add(postRequest);
     }
 
-
     private void requestCollectionAPI(int offsetvalue1, final int limit1) {
         String url = ConstsCore.web_url + "/v1/display/collections/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
-        Log.e(TAG,"requestCollectionAPI   "+url);
+        Log.e(TAG, "requestCollectionAPI   " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG,"requestCollectionAPI   "+response.toString());
+                        Log.i(TAG, "requestCollectionAPI   " + response.toString());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && collectioncount == 0) {
                                 Reusable_Functions.hDialog();
@@ -761,8 +815,7 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
                                 Log.e("offsetvalue", "" + collectionoffset);
                                 Log.e("limit", "" + collectionlimit);
                                 Log.e("count", "" + collectioncount);
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
                                     Log.e("collectionName  :", collectionName.getString("collectionName"));
@@ -882,12 +935,12 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
     private void requestArticleOptionsAPI(final String collectionNM, int offsetvalue1, final int limit1) {
         String url;
         url = ConstsCore.web_url + "/v1/display/collectionoptions/" + userId + "?collectionName=" + collectionNM.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e(TAG,"requestArticleOptionsAPI   "+url);
+        Log.e(TAG, "requestArticleOptionsAPI   " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG,"requestArticleOptionsAPI Response "+response.toString() + " " + articleOptionList.size());
+                        Log.i(TAG, "requestArticleOptionsAPI Response " + response.toString() + " " + articleOptionList.size());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 articleOptionList.add(0, "Select Option");
@@ -954,18 +1007,16 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-
         if (optionLayout.getVisibility() == View.VISIBLE) {
             optionLayout.setVisibility(View.GONE);
             collectionLayout.setVisibility(View.GONE);
             stylemainlayout.setVisibility(View.VISIBLE);
 
+
             InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
-
         } else if (collectionLayout.getVisibility() == View.VISIBLE) {
             optionLayout.setVisibility(View.GONE);
             collectionLayout.setVisibility(View.GONE);
@@ -975,12 +1026,11 @@ public class StyleActivity extends AppCompatActivity implements IWrapperCallBack
             if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
-
         } else {
             selcollectionName = null;
             seloptionName = null;
             DashBoardActivity._collectionitems = new ArrayList();
-         /*   Intent intent = new Intent(StyleActivity.this, DashBoardActivity.class);
+         /* Intent intent = new Intent(StyleActivity.this,DashBoardActivity.class);
             startActivity(intent);*/
             finish();
         }
