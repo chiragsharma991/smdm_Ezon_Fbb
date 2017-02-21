@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:text="Store : "
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/smdm_store_title_large" />
+                    android:textSize="@dimen/smdm_store_title_normal" />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -136,7 +136,7 @@
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/smdm_store_title_large" />
+                    android:textSize="@dimen/smdm_store_title_normal" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -146,7 +146,7 @@
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/smdm_store_title_large" />
+                    android:textSize="@dimen/smdm_store_title_normal" />
 
             </RelativeLayout>
 
@@ -194,6 +194,7 @@
                         android:layout_marginTop="2dp"
                         android:gravity="left"
                         android:text="Promo Sales"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_cardValuesTitle_normal" />
 
 
@@ -205,7 +206,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="35dp"
                         android:maxLength="14"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/bg_store_code_text"
                         android:textSize="@dimen/smdm_cardValuesSubtitle_normal" />
 
 
@@ -231,6 +232,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="2dp"
                         android:gravity="left"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Promo Sales(U)"
                         android:textSize="@dimen/smdm_cardValuesTitle_normal" />
 
@@ -243,8 +245,10 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="35dp"
                         android:maxLength="14"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/smdm_cardValuesSubtitle_normal" />
+                        android:textSize="@dimen/smdm_cardValuesSubtitle_normal"
+                        android:textColor="@color/bg_store_code_text"
+
+                        />
 
 
                 </RelativeLayout>

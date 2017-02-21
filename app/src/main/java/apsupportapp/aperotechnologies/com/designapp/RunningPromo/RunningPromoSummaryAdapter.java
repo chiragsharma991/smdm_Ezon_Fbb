@@ -26,7 +26,7 @@ public class RunningPromoSummaryAdapter extends RecyclerView.Adapter<RecyclerVie
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
     private final ArrayList<RunningPromoListDisplay> promoList;
-    private final RunningPromoActivity Context;
+    private final Context Context;
     private clickChild Interface_clickListner;
 
 
@@ -39,11 +39,11 @@ public class RunningPromoSummaryAdapter extends RecyclerView.Adapter<RecyclerVie
         }
     };
 
-    public RunningPromoSummaryAdapter(ArrayList<RunningPromoListDisplay> promoList, RunningPromoActivity runningPromoActivity) {
+    public RunningPromoSummaryAdapter(ArrayList<RunningPromoListDisplay> promoList, Context context) {
 
         this.promoList=promoList;
-        this.Context=runningPromoActivity;
-        this.Interface_clickListner=(clickChild)runningPromoActivity;
+        this.Context=context;
+        this.Interface_clickListner=(clickChild)context;
 
     }
 

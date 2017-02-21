@@ -25,6 +25,7 @@
                 android:padding="5dp"
                 android:id="@+id/summary_department"
                 android:gravity="start"
+                android:textSize="@dimen/smdm_rowInflaterLayout_large"
                 android:textColor="@color/smdm_default_color"
                 />
 
@@ -46,6 +47,7 @@
                 android:id="@+id/summary_numberOfPromo"
                 android:layout_weight="1"
                 android:gravity="start"
+                android:textSize="@dimen/smdm_rowInflaterLayout_large"
                 android:textColor="@color/smdm_default_color"
 
                 />
