@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="Department"
                 android:padding="5dp"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
                 android:id="@+id/summary_department"
                 android:gravity="start"
                 android:textColor="@color/smdm_default_color"
@@ -45,6 +46,7 @@
                 android:padding="5dp"
                 android:id="@+id/summary_numberOfPromo"
                 android:layout_weight="1"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
                 android:gravity="start"
                 android:textColor="@color/smdm_default_color"
 

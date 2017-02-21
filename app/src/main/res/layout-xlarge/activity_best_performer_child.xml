@@ -93,6 +93,7 @@
                         android:layout_gravity="center"
                         android:singleLine="true"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         />
@@ -103,6 +104,7 @@
                         android:layout_gravity="center"
                         android:layout_width="0dp"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -112,6 +114,7 @@
                         android:layout_gravity="center"
                         android:singleLine="true"
                         android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         android:layout_height="wrap_content" />
 
@@ -132,6 +135,7 @@
                         android:layout_gravity="center"
                         android:singleLine="true"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -140,6 +144,7 @@
                         android:layout_width="0dp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        android:textColor="@color/smdm_default_color"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -147,6 +152,7 @@
                         android:id="@+id/bst_PromoValuesU_child"
                         android:text="Promo Sales"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
+                        android:textColor="@color/smdm_default_color"
                         android:singleLine="true"
                         android:layout_gravity="center"
                         android:layout_width="0dp"

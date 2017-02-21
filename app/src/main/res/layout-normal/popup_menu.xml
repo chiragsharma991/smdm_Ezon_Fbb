@@ -56,7 +56,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Sort By"
-                                android:textColor="@color/smdm_PopUptxt_color"
+                                android:textColor="@color/bg_store_code_text"
                                 android:textSize="@dimen/smdm_PopUp_subtitle_normal"
                                 />
 
@@ -93,6 +93,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Promo Sales"
+                                    android:textColor="@color/smdm_default_color"
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
                                     />
 
@@ -148,7 +149,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Promo Sales(U)"
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
-
+                                    android:textColor="@color/smdm_default_color"
                                     />
 
 

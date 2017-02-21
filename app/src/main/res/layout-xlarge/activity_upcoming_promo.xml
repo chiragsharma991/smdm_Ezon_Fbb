@@ -184,7 +184,7 @@
                             android:gravity="center_vertical|start"
                             android:text="Promotion Name"
                             android:textColor="@color/divider_salescard1"
-                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="bold"/>
 
                         <!--</RelativeLayout>-->
@@ -204,7 +204,7 @@
                             android:gravity="center_vertical|center"
                             android:text="Start Date"
                             android:textColor="@color/divider_salescard1"
-                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="bold"/>
 
 
@@ -219,7 +219,7 @@
                             android:gravity="center_vertical|center"
                             android:text="End Date"
                             android:textColor="@color/divider_salescard1"
-                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="bold"
 
                             />
@@ -237,7 +237,7 @@
                             android:gravity="center_vertical|center"
                             android:text="VM"
                             android:textColor="@color/divider_salescard1"
-                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="bold"
                             />
 

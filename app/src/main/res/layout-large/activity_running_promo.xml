@@ -194,7 +194,8 @@
                         android:layout_marginTop="2dp"
                         android:gravity="left"
                         android:text="Promo Sales"
-                        android:textSize="@dimen/smdm_cardValuesTitle_normal" />
+                        android:textColor="@color/smdm_default_color"
+                        android:textSize="@dimen/smdm_cardValuesTitle_large" />
 
 
                     <TextView
@@ -205,8 +206,8 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="35dp"
                         android:maxLength="14"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/smdm_cardValuesSubtitle_normal" />
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_cardValuesSubtitle_large" />
 
 
                 </RelativeLayout>
@@ -231,8 +232,9 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="2dp"
                         android:gravity="left"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Promo Sales(U)"
-                        android:textSize="@dimen/smdm_cardValuesTitle_normal" />
+                        android:textSize="@dimen/smdm_cardValuesTitle_large" />
 
 
                     <TextView
@@ -243,7 +245,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="35dp"
                         android:maxLength="14"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/bg_store_code_text"
                         android:textSize="@dimen/smdm_cardValuesSubtitle_normal" />
 
 
@@ -288,8 +290,9 @@
                                 android:gravity="center_vertical|center"
                                 android:text="Promotion Name"
                                 android:textColor="@color/bg_store_code_text"
-                                android:textSize="@dimen/smdm_departmentTitle"
-                                android:textStyle="bold" />
+                                android:textSize="@dimen/smdm_departmentTitleLarge"
+                                android:textStyle="bold"
+                                />
 
                             <!--</RelativeLayout>-->
                             <TextView
@@ -304,7 +307,7 @@
                                 android:gravity="center_vertical|center"
                                 android:text="Start Date"
                                 android:textColor="@color/bg_store_code_text"
-                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textSize="@dimen/smdm_departmentTitleLarge"
                                 android:textStyle="bold" />
 
 
@@ -319,7 +322,7 @@
                                 android:gravity="center_vertical|center"
                                 android:text="End Date"
                                 android:textColor="@color/bg_store_code_text"
-                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textSize="@dimen/smdm_departmentTitleLarge"
                                 android:textStyle="bold"
 
                                 />
@@ -336,7 +339,7 @@
                                 android:gravity="center_vertical|center"
                                 android:text="Days"
                                 android:textColor="@color/bg_store_code_text"
-                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textSize="@dimen/smdm_departmentTitleLarge"
                                 android:textStyle="bold"
 
                                 />
@@ -352,7 +355,7 @@
                                 android:gravity="center_vertical|center"
                                 android:text="VM"
                                 android:textColor="@color/bg_store_code_text"
-                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textSize="@dimen/smdm_departmentTitleLarge"
                                 android:textStyle="bold" />
 
 

@@ -133,6 +133,8 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(RunningPromoActivity.this, "no data found", Toast.LENGTH_SHORT).show();
+                                    return;
+
                                 } else if (response.length() == limit) {
                                     Log.e(TAG, "promo eql limit");
                                     for (int i = 0; i < response.length(); i++) {
@@ -240,6 +242,8 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(RunningPromoActivity.this, "no data found", Toast.LENGTH_SHORT).show();
+                                    return;
+
                                 } else if (response.length() == limit) {
                                     Log.e(TAG, "promo eql limit");
                                     for (int i = 0; i < response.length(); i++) {
