@@ -1813,7 +1813,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             mFormat = new DecimalFormat("###,###,###,##0.0"); // use two decimal if needed
         }
 
-
         public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
 //           return mFormat.format(value) + ""; // e.g. append a dollar-sign
 
@@ -1943,7 +1942,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
         txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
 
-
         if (txtFIndexClass.getText().toString().equals("Department")) {
             level = 1;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
@@ -1954,10 +1952,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     llm.scrollToPosition(j);
                     fIndexFirstVisibleItem = firstSelectItem;
                 }
-
-
             }
-
         } else if (txtFIndexClass.getText().toString().equals("Category")) {
             level = 2;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
@@ -1978,10 +1973,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                     llm.scrollToPosition(j);
                     fIndexFirstVisibleItem = firstSelectItem;
-
                 }
             }
-
         } else if (txtFIndexClass.getText().toString().equals("Brand")) {
             level = 4;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
@@ -1992,8 +1985,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     fIndexFirstVisibleItem = firstSelectItem;
 
                 }
-
-
             }
 
         } else if (txtFIndexClass.getText().toString().equals("Brand Plan Class")) {

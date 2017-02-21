@@ -181,6 +181,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                             Reusable_Functions.hDialog();
+                            getDeviceInfo();
                             Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
                             intent.putExtra("from", "login");
                             intent.putExtra("BACKTO", "login");
@@ -218,7 +219,28 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(postRequest);
 
     }
+    public String getDeviceInfo() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        Log.e("Model is : ", "" + Build.MODEL);
+        if (model.startsWith(manufacturer)) {
+            return capitalize(model);
+        } else {
+            return capitalize(manufacturer) + " " + model;
+        }
+    }
 
+    private String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
+        }
+    }
     @Override
     public void onBackPressed() {
         finish();

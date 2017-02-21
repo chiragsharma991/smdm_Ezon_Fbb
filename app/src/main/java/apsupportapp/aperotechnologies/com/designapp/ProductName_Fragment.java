@@ -848,7 +848,10 @@ public class ProductName_Fragment extends Fragment {
     TextView bodyTextView(String label) {
 
         TextView bodyTextView = new TextView(this.context);
-        bodyTextView.setBackgroundColor(Color.WHITE);
+        bodyTextView.setBackgroundColor(Color.WHITE
+
+
+        );
         bodyTextView.setText(label);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);

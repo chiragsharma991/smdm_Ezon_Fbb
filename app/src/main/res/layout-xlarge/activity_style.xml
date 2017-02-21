@@ -10,7 +10,7 @@
     <RelativeLayout
         android:background="#ffffff"
         android:id="@+id/stylemainlayout"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -230,6 +230,17 @@
                     android:textColor="#ffffff"
                     android:background="#B73020"
                     />
+
+
+                <EditText
+                    android:background="@android:color/transparent"
+                    android:cursorVisible="false"
+                    android:clickable="false"
+                    android:inputType="none"
+                    android:textColor="#ffffff"
+                    android:id="@+id/editBarcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
             </LinearLayout>
         </ScrollView>
 
