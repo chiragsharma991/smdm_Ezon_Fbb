@@ -30,18 +30,18 @@
 
                 />
 
-            <!--   <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:padding="10dp"
-                   android:id="@+id/imgLoader_BstWorstPromo"
-                   android:layout_centerInParent="true"
-                   android:background="#0000"
-                   android:keepScreenOn="true"
-                   android:theme="@style/ProgressBar"
-                   >
+         <!--   <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/imgLoader_BstWorstPromo"
+                android:layout_centerInParent="true"
+                android:background="#0000"
+                android:keepScreenOn="true"
+                android:theme="@style/ProgressBar"
+                >
 
-               </ProgressBar>-->
+            </ProgressBar>-->
 
         </RelativeLayout>
         <RelativeLayout
@@ -66,14 +66,14 @@
                     android:text="Buy One Get One "
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/smdm_inflator_title_large"
-                    />
+                   />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/smdm_inflater_divider"
                     android:id="@+id/bst_lineOne_child"
                     android:background="@color/divider_salescard"
                     android:layout_alignStart="@+id/bst_head_child"
-                    android:layout_marginTop="10dp"
+                  android:layout_marginTop="10dp"
                     />
 
 

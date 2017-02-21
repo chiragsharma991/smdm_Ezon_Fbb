@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:id="@+id/storesales"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/rounded_edittext4"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtPvASales"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="6dp"
+            android:gravity="center"
+            android:text="STORE"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtStoreVal_PvASales1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/txtPvASales"
+            android:background="@color/edit_border_color"
+            android:gravity="center"
+            android:text="40%"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/txtStoreVal_PvASalesName"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/txtStoreVal_PvASales1"
+            android:gravity="center" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/zonalsales"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@+id/storesales"
+        android:background="@drawable/rounded_edittext4"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtZonalSales"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="6dp"
+            android:gravity="center"
+            android:text="ZONAL"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/txtZonalName"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/txtZonalSalesVal"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txtZonalSalesVal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtZonalSales"
+            android:background="@color/edit_border_color"
+            android:gravity="center"
+            android:text="40%"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/nationalsales"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/rounded_edittext4"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtNationalSales"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="6dp"
+            android:gravity="center"
+            android:text="NATIONAL"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtNationalSalesVal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/txtNationalSales"
+            android:background="@color/edit_border_color"
+            android:gravity="center"
+            android:text="40%"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/txtNationalName"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/txtNationalSalesVal"
+            android:gravity="center" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/pmsyrtxtRelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sznRelLayout">
+
+        <TextView
+            android:id="@+id/relPvASales"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext3"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="PvA Sales%"
+            android:textColor="#000000"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/relYoYSales"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/relPvASales"
+            android:background="@drawable/rounded_edittext3"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="YoY Sales%"
+
+            android:textColor="#000000"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/relSellThru"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/relYoYSales"
+            android:background="@drawable/rounded_edittext3"
+            android:clickable="true"
+            android:gravity="center"
+
+            android:text="Sell Thru(U)%"
+            android:textColor="#000000"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/relMixSales"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/relSellThru"
+            android:background="@drawable/rounded_edittext3"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Mix(Sales%)"
+            android:textColor="#000000"
+            android:textSize="10sp" />
+
+
+        <TextView
+
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/relPvASales"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_edittext3"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Rank"
+            android:textColor="#000000"
+            android:textSize="10sp" />
+    </RelativeLayout>
+</LinearLayout>

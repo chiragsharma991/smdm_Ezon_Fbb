@@ -31,7 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/prodSale"
-                android:text="Promo\nSales"
+                android:text="Promo\nSaless"
                 android:gravity="center"
                 android:padding="2dp"
                 android:background="@drawable/cell_shape"

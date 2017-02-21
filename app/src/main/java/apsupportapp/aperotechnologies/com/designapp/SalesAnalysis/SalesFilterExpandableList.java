@@ -537,7 +537,6 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 Log.e("str1==", " " + str_cate);
                 text2 = str_cate;
                 requestCategoryAPI(level, text2);
-
             }
         }
         if (level == 4) {

@@ -235,7 +235,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
             }else
             {
                 mType.setBackgroundResource(R.drawable.cell_shape);
-                mType.setTextColor(Color.parseColor("#404040"));
+                mType.setTextColor(Color.parseColor("#757575"));
 
             }
             mType.setGravity(Gravity.CENTER);

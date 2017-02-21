@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/bg_screen_color"
     tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
 
 
@@ -117,7 +118,8 @@
         android:orientation="horizontal"
         segmentedgroup:sc_border_width="1dp"
         segmentedgroup:sc_corner_radius="18dp"
-        segmentedgroup:sc_tint_color="#B73020">
+        segmentedgroup:sc_tint_color="@color/colorPrimary"
+        >
 
         <RadioButton
             android:id="@+id/button31"
@@ -125,7 +127,7 @@
             android:layout_height="40dp"
             android:text="Sub Dept"
             android:layout_weight="1"
-            android:backgroundTint="#B73020"
+            android:backgroundTint="@color/smdm_border"
             style="@style/RadioButton" />
 
         <RadioButton
@@ -134,6 +136,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:text="Product Name"
+            android:backgroundTint="@color/smdm_border"
             style="@style/RadioButton" />
 
         <!--<RadioButton-->
@@ -174,18 +177,21 @@
             android:src="@drawable/ic_arrow_forward_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tint="#B73020"
+            android:tint="@color/colorPrimary"
             android:layout_marginRight="10dp"
             android:id="@+id/btnSeatchList" />
 
 
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="#B73020"></LinearLayout>
+        android:background="@color/colorPrimary"
+
+        ></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

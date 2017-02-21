@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/smdm_quickfilter_divider"
                     android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard" />
+                    android:background="@color/smdm_divider_Black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -115,6 +115,7 @@
                             android:layout_height="wrap_content"
                             android:text="WTD"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                            android:textColor="@color/smdm_default_color"
                             />
 
                     </LinearLayout>
@@ -167,6 +168,7 @@
                             android:layout_height="wrap_content"
                             android:text="L4W"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                            android:textColor="@color/smdm_default_color"
                             />
 
                     </LinearLayout>
@@ -211,6 +213,8 @@
                             android:layout_height="wrap_content"
                             android:text="STD"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                            android:textColor="@color/smdm_default_color"
+
                             />
 
                     </LinearLayout>

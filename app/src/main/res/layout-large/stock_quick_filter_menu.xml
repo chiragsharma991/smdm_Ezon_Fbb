@@ -114,6 +114,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Current"
+                                android:textColor="@color/smdm_default_color"
                                 android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                         </LinearLayout>
@@ -132,6 +133,7 @@
                                 android:layout_height="wrap_content"
                                 android:buttonTint="@android:color/black"
                                 android:focusable="true"
+                                android:textColor="@color/smdm_default_color"
                                 android:checked="true"
                                 />
 
@@ -157,6 +159,7 @@
                                 android:id="@+id/txtpopPrevious"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/smdm_default_color"
                                 android:text="Previous"
                                 android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -197,6 +200,7 @@
                                 android:id="@+id/txtpopOld"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/smdm_default_color"
                                 android:text="Old"
                                 android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -238,6 +242,7 @@
                                 android:id="@+id/txtpopUpcoming"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/smdm_default_color"
                                 android:text="Upcoming"
                                 android:textSize="@dimen/smdm_quickfilter_title_large" />
 

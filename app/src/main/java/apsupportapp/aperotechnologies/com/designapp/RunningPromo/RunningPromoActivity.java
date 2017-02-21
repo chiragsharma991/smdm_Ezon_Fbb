@@ -59,10 +59,11 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SplashActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
-public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener, GravitySnapHelper.SnapListener {
+public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener, GravitySnapHelper.SnapListener,clickChild {
 
     TextView storecode, storedesc, promoval1, promoval2;
     RelativeLayout imageback, imagefilter;
+    LinearLayout Running_promo, Running_summary;
     RunningPromoListDisplay runningPromoListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
@@ -74,15 +75,17 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
     private RequestQueue queue;
     private Gson gson;
     RecyclerView PromoListView;
-    ArrayList<RunningPromoListDisplay> promoList;
+    ArrayList<RunningPromoListDisplay> promoList,summary_list;
     private int focusposition = 0;
     private int itemCount = 0;
     private int totalItemCount;
     private boolean scrolling = false;
     private RunningPromoSnapAdapter runningPromoSnapAdapter;
+    private RunningPromoSummaryAdapter runningPromoSummaryAdapter;
     private int firstVisibleItem = 0;
     int prevState = RecyclerView.SCROLL_STATE_IDLE;
     int currentState = RecyclerView.SCROLL_STATE_IDLE;
+    private RecyclerView PromoList_summary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         promoList = new ArrayList<RunningPromoListDisplay>();
+        summary_list = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -101,9 +105,119 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        //Running testing
+        Running_promo.setVisibility(View.GONE);
+        Running_summary.setVisibility(View.VISIBLE);
         Reusable_Functions.sDialog(this, "Loading.......");
-        requestRunningPromoApi();
+        requestRunningPromosummary();
+
+    }
+
+    private void requestRunningPromosummary() {
+
+
+        if (Reusable_Functions.chkStatus(context)) {
+
+            //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
+            String url = ConstsCore.web_url + "/v1/display/runningpromosummary/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+
+            Log.e(TAG, "Promo Summary Url" + "" + url);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.i(TAG, "Running promo : " + " " + response);
+                            Log.i(TAG, "Sales View Pager response" + "" + response.length());
+
+
+                            try {
+                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(RunningPromoActivity.this, "no data found", Toast.LENGTH_SHORT).show();
+                                } else if (response.length() == limit) {
+                                    Log.e(TAG, "promo eql limit");
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        summary_list.add(runningPromoListDisplay);
+
+
+                                    }
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+                                    //
+
+                                    requestRunningPromosummary();
+
+                                } else if (response.length() < limit) {
+                                    Log.e(TAG, "promo /= limit");
+                                    for (int i = 0; i < response.length(); i++)
+                                    {
+                                        runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
+                                        summary_list.add(runningPromoListDisplay);
+                                    }
+                                    count = 0;
+                                    limit = 100;
+                                    offsetvalue = 0;
+
+
+                                }
+
+
+                                //  RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
+                                // PromoListView.setAdapter(runningPromoAdapter);
+                                PromoList_summary.setLayoutManager(new LinearLayoutManager(PromoList_summary.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                PromoList_summary.setOnFlingListener(null);
+                                new GravitySnapHelper(48).attachToRecyclerView(PromoList_summary);
+                                runningPromoSummaryAdapter = new RunningPromoSummaryAdapter(summary_list, RunningPromoActivity.this);
+                                PromoList_summary.setAdapter(runningPromoSummaryAdapter);
+
+                                // PromoListView.setSelectionFromTop(3,0);
+                                Reusable_Functions.hDialog();
+
+                                // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
+
+
+                            } catch (Exception e) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
+
+                                e.printStackTrace();
+                                Log.e(TAG, "catch...Error" + e.toString());
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            error.printStackTrace();
+                        }
+                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
+                }
+            };
+            int socketTimeout = 60000;//5 seconds
+
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+
+
+        }
+
+
+
+
 
     }
 
@@ -111,7 +225,6 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
             String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
 
             Log.e(TAG, "Url" + "" + url);
@@ -257,159 +370,11 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
             });
 
 
-//            PromoListView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(View view,final int position) {
-//                    if (position < promoList.size()) {
-//
-////                        LinearLayout rel = (LinearLayout) view;
-////                        TextView txtview = (TextView)rel.getChildAt(0);
-////                        txtview.setOnClickListener(new View.OnClickListener() {
-////                            @Override
-////                            public void onClick(View view) {
-////                                Intent i = new Intent(context, RunningPromoDetails.class);
-////                                i.putExtra("VM", promoList.get(position).getPromoDesc());
-////                                context.startActivity(i);
-////                            }
-////                        });
-//
-////                        switch (view.getId()) {
-////                            case R.id.txtPromoName:
-////                                Intent i = new Intent(context, RunningPromoDetails.class);
-////                                i.putExtra("VM", promoList.get(position).getPromoDesc());
-////                                context.startActivity(i);
-////                                break;
-////                            case R.id.txtstartDate:
-////                                Intent j = new Intent(context, RunningPromoDetails.class);
-////                                j.putExtra("VM", promoList.get(position).getPromoDesc());
-////                                context.startActivity(j);
-////                                break;
-////                            case R.id.txtEndDate:
-////                                Intent k = new Intent(context, RunningPromoDetails.class);
-////                                k.putExtra("VM", promoList.get(position).getPromoDesc());
-////                                context.startActivity(k);
-////                                break;
-////                            case R.id.txtDays:
-////                                Intent l = new Intent(context, RunningPromoDetails.class);
-////                                l.putExtra("VM", promoList.get(position).getPromoDesc());
-////                                context.startActivity(l);
-////                                break;
-////
-////                        }
-//
-//
-//
-//                            Log.e(TAG, "onItemClick: "+view.getId() );
-//                            //Intent i = new Intent(context, RunningPromoDetails.class);
-//                            //i.putExtra("VM", promoList.get(position).getPromoDesc());
-//                           // context.startActivity(i);
-//
-//
-//
-//                    }
-//
-//                }
-//            }));
-
-       /*     PromoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.e(TAG, "listview position" + position + "and list is" + itemCount);
-                    if (itemCount >= position) {
-                        Intent i = new Intent(context, RunningPromoDetails.class);
-                        i.putExtra("VM", promoList.get(position).getPromoDesc());
-                        context.startActivity(i);
-                    }
-
-                }
-            });*/
-
-
-         /*   PromoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-                @Override
-                public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-                    //Log.e(TAG, "scroll on" + " " + scrollState);
-
-
-                    switch (scrollState) {
-                        case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-                            if (scrolling){
-                                // get first visible item
-                                View itemView = view.getChildAt(0);
-                                int top = Math.abs(itemView.getTop()); // top is a negative value
-                                int bottom = Math.abs(itemView.getBottom());
-                                if (top >= bottom){
-                                    ((ListView)view).setSelectionFromTop(view.getFirstVisiblePosition()+1, 0);
-                                } else {
-                                    ((ListView)view).setSelectionFromTop(view.getFirstVisiblePosition(), 0);
-                                }
-                            }
-                            scrolling = false;
-                            break;
-                        case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-                        case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
-                            Log.i(TAG,"TEST"+"SCROLLING");
-                            scrolling = true;
-                            break;
-                    }
-*//*
-                    if (promoList.size() != 0) {
-
-                        if (view.getFirstVisiblePosition() <= promoList.size() - 1) {
-                            Log.e(TAG, "scroll on" + " " + scrollState);
-
-
-                            focusposition = view.getFirstVisiblePosition();
-
-//                           // smoothScrollToPositionFromTop(view,2);
-//                            int h1 = PromoListView.getHeight();
-//                            int h2 = PromoListView.getHeight();
-//
-//                            PromoListView.smoothScrollToPositionFromTop(view.getFirstVisiblePosition(), h1/2 - h2/2);
-//                            PromoListView.smoothScrollToPositionFromTop(view.getFirstVisiblePosition(),0);
-                            PromoListView.setSelection(view.getFirstVisiblePosition());
-
-                            // PromoListView.setSelection(view.getFirstVisiblePosition());
-                            Log.e(TAG, "firstVisibleItem" + " " + focusposition);
-                            //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                            promoval1.setText("\u20B9\t" + Math.round(promoList.get(focusposition).getDurSaleNetVal()));
-                            promoval2.setText("" + promoList.get(focusposition).getDurSaleTotQty());
-                            storecode.setText(promoList.get(focusposition).getStoreCode());
-                            storedesc.setText(promoList.get(focusposition).getStoreDesc());
-
-
-                        } else {
-                            focusposition = promoList.size() - 1;
-                            PromoListView.setSelection(promoList.size() - 1);
-
-                        }
-                    }*//*
-
-
-                }
-
-                @Override
-                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-                }
-            });
-
-        } else {
-            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            Reusable_Functions.hDialog();
-
-
-        }*/
 
 
         }
     }
 
-    private void callActivity()
-    {
-
-    }
 
     private void TimeUP() {
         // if (promoList.size() != 0 && newState== RecyclerView.SCROLL_STATE_IDLE) {
@@ -447,8 +412,11 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         promoval2 = (TextView) findViewById(R.id.txtPromoVal2);
         imageback = (RelativeLayout) findViewById(R.id.rp_imageBtnBack);
         imagefilter = (RelativeLayout) findViewById(R.id.rp_imgfilter);
+        Running_promo = (LinearLayout) findViewById(R.id.running_promo);
+        Running_summary = (LinearLayout) findViewById(R.id.running_summary);
 
         PromoListView = (RecyclerView) findViewById(R.id.promoListview);
+        PromoList_summary = (RecyclerView) findViewById(R.id.promoList_summary);
         PromoListView.setLayoutManager(new LinearLayoutManager(this));
         PromoListView.setHasFixedSize(true);
 
@@ -539,6 +507,16 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onSnap(int position) {
+
+    }
+
+    @Override
+    public void onClick(String value) {
+
+          Reusable_Functions.sDialog(this, "Loading.......");
+          requestRunningPromoApi();
+          Running_promo.setVisibility(View.VISIBLE);
+          Running_summary.setVisibility(View.GONE);
 
     }
 }

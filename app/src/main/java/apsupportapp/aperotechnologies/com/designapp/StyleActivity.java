@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -219,18 +220,17 @@ public class StyleActivity extends AppCompatActivity
                             Log.e("getIntent : ", "" + getIntent());
                             Log.e("barcode :", " " + i1 + "\ntxt :" + edit_barcode.getText().toString());
                             barcode = edit_barcode.getText().toString();
-                            Toast.makeText(StyleActivity.this, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                            if (Reusable_Functions.chkStatus(StyleActivity.this)) {
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(StyleActivity.this, "Loading  data...");
-                                requestStyleDetailsAPI(barcode, "barcode");
-                            } else {
-                                Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                            if(!barcode.equals(" ")) {
+                                Toast.makeText(StyleActivity.this, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
+                                TimeUP();
+                            }
+                            else{
+                                View view=findViewById(android.R.id.content);
+
+                                Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
                             }
                         }
                     }, 1500);
-                    // tet commit
-
 
 
                     //   handleDecodeData(intent);
@@ -348,6 +348,19 @@ public class StyleActivity extends AppCompatActivity
             }
         });
     }
+
+    private void TimeUP()
+    {
+
+
+            if (Reusable_Functions.chkStatus(StyleActivity.this)) {
+                Reusable_Functions.hDialog();
+                Reusable_Functions.sDialog(StyleActivity.this, "Loading  data...");
+                requestStyleDetailsAPI(barcode, "barcode");
+            } else {
+                Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+            }
+   }
 
     @Override
     protected void onNewIntent(Intent intent) {

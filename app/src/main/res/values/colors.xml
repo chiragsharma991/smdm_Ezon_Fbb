@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#b5301f</color>
-    <color name="colorPrimaryDark">#510305</color>
-    <color name="colorAccent">#920609</color>
+    <color name="colorPrimary">#2277b1</color>
+    <color name="colorPrimaryDark">#162e3d</color>
+    <color name="colorAccent">#1e699b</color>
     <color name="grey">#f0f0f0</color>
     <color name="darker_grey">#666666</color>
     <color name="text_grey">#CFD2D1</color>
@@ -10,7 +10,7 @@
 
 
     <color name="bg_salescard">#F7F5F6</color>
-    <color name="divider_salescard">#d9d7d8</color>
+    <color name="divider_salescard">#dfdedf</color>
     <color name="divider_salescard1">#ffffff</color>
     <color name="pink">#FE0000</color>
     <color name="green">#05c706</color>
@@ -20,7 +20,10 @@
     <color name="bg_header">#f3f2f2</color>
     <color name="border_round_edittext">#e7e7e7</color>
     <color name="bg_store_code_text">#404040</color>
+<!--
     <color name="txt_color">#252525</color>
+-->
+    <color name="txt_color">#757575</color>
     <color name="smdm_green">#70e503</color>
     <color name="smdm_amber">#ff7e00</color>
     <color name="smdm_blue">#215187</color>
@@ -29,16 +32,19 @@
 
 
 
-    <color name="smdm_dark_Black">#252525</color>
+   <!-- <color name="smdm_dark_Black">#252525</color>-->
+    <color name="smdm_dark_Black">#404040</color>
     <color name="smdm_light_Black">#404040</color>
-    <color name="smdm_divider_Black">#e7e7e7</color>
+    <color name="smdm_divider_Black">#dfdedf</color>
+    <color name="smdm_divider_Black_light">#e8e8e8</color>
     <color name="smdm_background">#f8f6f6</color>
     <color name="smdm_greyinbox">#ffffff</color>
-    <color name="smdm_border">#e7e7e7</color>
+    <color name="smdm_border">#dfdedf</color>
     <color name="smdm_DepartmentBox">#f3f2f2</color>
-    <color name="smdm_actionbar">#b5301f</color>
-    <color name="smdm_quickfiltertxt_color">#252525</color>
-    <color name="smdm_PopUptxt_color">#252525</color>
-
+    <color name="smdm_actionbar">#2277b1</color>
+    <color name="smdm_quickfiltertxt_color">#404040</color>
+    <color name="smdm_PopUptxt_color">#404040</color>
+    <color name="smdm_PopUp_color">#dcdfdf</color>
+    <color name="smdm_default_color">#757575</color>
 
 </resources>

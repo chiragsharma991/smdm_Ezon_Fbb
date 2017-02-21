@@ -241,18 +241,18 @@ public class DashBoardActivity extends AppCompatActivity
                 //  finish();
             }
         });
-        btnCutSize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashBoardActivity.this, TopFullCut.class);
-                startActivity(intent);
-                if(timer != null)
-                {
-                    timer.cancel();
-                }
-                // finish();
-            }
-        });
+//        btnCutSize.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(DashBoardActivity.this, TopFullCut.class);
+//                startActivity(intent);
+//                if(timer != null)
+//                {
+//                    timer.cancel();
+//                }
+//                // finish();
+//            }
+//        });
 
 
         BtnBestWorstpromo.setOnClickListener(new View.OnClickListener() {
@@ -680,7 +680,7 @@ public class DashBoardActivity extends AppCompatActivity
         BtnWorstPerformers=(ImageButton)findViewById(R.id.btnWorstPerformers);
         btnFeshnessindex=(ImageButton)findViewById(R.id.btnFeshnessindex);
         btnOptionEfficiency = (ImageButton)findViewById(R.id.btnOptionEfficiency);
-        btnCutSize = (ImageButton)findViewById(R.id.btnCutSize);
+   //     btnCutSize = (ImageButton)findViewById(R.id.btnCutSize);
         btnSkewedSize =(ImageButton)findViewById(R.id.btnSkewedSize);
         btnStockAgeing = (ImageButton)findViewById(R.id.btnStockAgeing);
         btnBestPerformersInv = (ImageButton)findViewById(R.id.btnBestPerformers);

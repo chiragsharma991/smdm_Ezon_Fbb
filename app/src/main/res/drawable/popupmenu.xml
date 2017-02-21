@@ -3,12 +3,12 @@
     android:shape="rectangle"   >
 
     <solid
-        android:color="#DCDFDF" >
+        android:color="@color/smdm_PopUp_color" >
     </solid>
 
     <stroke
         android:width="0dp"
-        android:color="#80000000" >
+        android:color="@color/smdm_divider_Black" >
     </stroke>
 
     <padding

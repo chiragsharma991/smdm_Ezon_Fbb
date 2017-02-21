@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/bg_screen_color"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="apsupportapp.aperotechnologies.com.designapp.DashBoardActivity"
@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Refresh Time :"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/smdm_inflator_title_large"
 
                     />
@@ -98,7 +98,7 @@
                             android:id="@+id/imageBtnKeyProducts"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/hourly_analysis"
                             />
 
@@ -128,7 +128,7 @@
                             android:id="@+id/formal8"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/option_efficiency" />
 
 
@@ -154,7 +154,7 @@
                             android:id="@+id/formal9"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/cut_size_report"
                             />
 
@@ -181,7 +181,7 @@
                             android:id="@+id/formal10"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/skewed_size"
                             />
 
@@ -272,7 +272,7 @@
                             android:id="@+id/imageBtnStyle"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/product_info"
                             />
 
@@ -302,7 +302,7 @@
                             android:id="@+id/formal4"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/option_efficiency" />
 
 
@@ -328,7 +328,7 @@
                             android:id="@+id/formal5"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/cut_size_report"
                             />
 
@@ -355,7 +355,7 @@
                             android:id="@+id/formal6"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/skewed_size"
                             />
 
@@ -445,7 +445,7 @@
                             android:id="@+id/btnVisualAssortment"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/visual_assortment"
                             />
 
@@ -474,7 +474,7 @@
                             android:id="@+id/btnVisualReport"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/report_icon" />
 
 
@@ -501,7 +501,7 @@
                             android:id="@+id/formal2"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/cut_size_report"
                             />
 
@@ -528,7 +528,7 @@
                             android:id="@+id/formal3"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/skewed_size"
                             />
 
@@ -599,7 +599,7 @@
                             android:id="@+id/btnRunningpromo"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/running_promo"
                             />
 
@@ -628,7 +628,7 @@
                             android:id="@+id/btnUpcomingpromo"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/upcoming_promo" />
 
 
@@ -654,7 +654,7 @@
                             android:id="@+id/btnExpiringpromo"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/expiring_promo"
                             />
 
@@ -681,7 +681,7 @@
                             android:id="@+id/btnBestWorstpromo"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/best_worst_promo"
                             />
 
@@ -750,7 +750,7 @@
                             android:id="@+id/btnSales"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/sales_analysis"
                             />
 
@@ -780,7 +780,7 @@
                             android:id="@+id/btnPVA"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/sales_pva" />
 
 
@@ -807,7 +807,7 @@
                             android:id="@+id/formal12"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/cut_size_report"
                             />
 
@@ -834,7 +834,7 @@
                             android:id="@+id/formal13"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/skewed_size"
                             />
 
@@ -899,7 +899,7 @@
                             android:id="@+id/btnFeshnessindex"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/feshness_index"
                             />
 
@@ -928,7 +928,7 @@
                             android:id="@+id/btnOptionEfficiency"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/option_efficiency" />
 
 
@@ -942,33 +942,33 @@
                             android:text="Option Efficiency" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
+                    <!--<LinearLayout-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content">-->
 
-                        <ImageButton
-                            android:gravity="center_horizontal"
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/btnCutSize"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="#ffffff"
-                            android:src="@mipmap/cut_size_report"
-                            />
+                        <!--<ImageButton-->
+                            <!--android:gravity="center_horizontal"-->
+                            <!--android:layout_gravity="center_horizontal"-->
+                            <!--android:id="@+id/btnCutSize"-->
+                            <!--android:layout_width="80dp"-->
+                            <!--android:layout_height="80dp"-->
+                            <!--android:background="@color/bg_screen_color"-->
+                            <!--android:src="@mipmap/cut_size_report"-->
+                            <!--/>-->
 
-                        <TextView
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Top Options by Full Cut"
-                            android:textColor="@color/smdm_light_Black"
-                            android:gravity="center_horizontal"
-                            android:textSize="13sp" />
+                        <!--<TextView-->
+                            <!--android:layout_gravity="center_horizontal"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Top Options by Full Cut"-->
+                            <!--android:textColor="@color/smdm_light_Black"-->
+                            <!--android:gravity="center_horizontal"-->
+                            <!--android:textSize="13sp" />-->
 
 
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -981,7 +981,7 @@
                             android:id="@+id/btnSkewedSize"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/skewed_size"
                             />
 
@@ -996,6 +996,32 @@
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnBestPerformers"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/best_worst_promo"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Best/Worst Performers"
+                            android:textColor="@color/smdm_light_Black"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
                     <!--<LinearLayout-->
                     <!--android:orientation="vertical"-->
                     <!--android:layout_weight="1"-->
@@ -1031,33 +1057,6 @@
                     android:weightSum="4">
 
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-
-                        <ImageButton
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/btnBestPerformers"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="#ffffff"
-                            android:src="@mipmap/best_worst_promo"
-                            />
-
-
-                        <TextView
-                            android:gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Best/Worst Performers"
-                            android:textColor="@color/smdm_light_Black"
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="13sp"
-                            />
-                    </LinearLayout>
-
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -1072,7 +1071,7 @@
                             android:id="@+id/btnWorstPerformers"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/worst_promo" />
 
 
@@ -1098,7 +1097,7 @@
                             android:id="@+id/btnStockAgeing"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/stock_ageing_excep_icon"
                             />
 
@@ -1125,7 +1124,7 @@
                             android:id="@+id/btnFloorAvailability"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/floor_availability_icon"
                             />
 
@@ -1151,7 +1150,7 @@
                             android:id="@+id/btnTargetStockExcep"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="#ffffff"
+                            android:background="@color/bg_screen_color"
                             android:src="@mipmap/target_stock_exceptions_icon"
                             />
 
@@ -1167,6 +1166,31 @@
                             />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btnSellThruExcep"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/sell_thru_exceptions_icon" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/smdm_light_Black"
+                            android:text="Sell Thru Exceptions" />
+                    </LinearLayout>
 
                     <!--<LinearLayout-->
                     <!--android:orientation="vertical"-->
@@ -1196,46 +1220,13 @@
 
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="4">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:weightSum="4">-->
 
-
-
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-
-                        <ImageButton
-                            android:gravity="center_horizontal"
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/btnSellThruExcep"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="#ffffff"
-                            android:src="@mipmap/sell_thru_exceptions_icon" />
-
-
-                        <TextView
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="13sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/smdm_light_Black"
-                            android:text="Sell Thru Exceptions" />
-                    </LinearLayout>
-
-
-
-
-
-                </LinearLayout>
+               <!--</LinearLayout>-->
 
 
 
@@ -1315,7 +1306,7 @@
                 android:textColor="@color/smdm_dark_Black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_below="@+id/lin4"
+                android:layout_below="@+id/lin3"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -1340,7 +1331,7 @@
 
                 android:id="@+id/headerpromo"
                 android:gravity="center_vertical"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:textColor="@color/smdm_dark_Black"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"

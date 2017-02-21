@@ -210,12 +210,12 @@ public class SwipeDeckAdapter extends BaseAdapter {
             btndislike.setBackgroundResource(R.mipmap.dislike_selected);
         } else if (visualAssort.getLikeDislikeFlg().equals("1")) {
             btnlike.setBackgroundResource(R.mipmap.like_unselected);
-            rellike.setBackgroundColor(Color.parseColor("#920609"));
+            rellike.setBackgroundColor(Color.parseColor("#2277b1"));
             btndislike.setBackgroundResource(R.mipmap.dislike_selected);
         } else if (visualAssort.getLikeDislikeFlg().equals("0")) {
             btnlike.setBackgroundResource(R.mipmap.like_selected);
             btndislike.setBackgroundResource(R.mipmap.dislike_unselected);
-            reldislike.setBackgroundColor(Color.parseColor("#920609"));
+            reldislike.setBackgroundColor(Color.parseColor("#2277b1"));
         } else {
             btnlike.setBackgroundResource(R.mipmap.like_selected);
             btndislike.setBackgroundResource(R.mipmap.dislike_selected);
@@ -245,10 +245,10 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
                 ImageButton btn1 = (ImageButton) rel1.getChildAt(0);
                 btn1.setBackgroundResource(R.mipmap.like_unselected);
-                rel1.setBackgroundColor(Color.parseColor("#920609"));
+                rel1.setBackgroundColor(Color.parseColor("#2277b1"));
                 ImageButton btn2 = (ImageButton) rel2.getChildAt(0);
                 btn2.setBackgroundResource(R.mipmap.dislike_selected);
-                rel2.setBackgroundColor(Color.parseColor("#B73020"));
+                rel2.setBackgroundColor(Color.parseColor("#2277b1"));
                 cardStack.swipeTopCardRight(180);
 
             }
@@ -277,10 +277,10 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
                 ImageButton btn1 = (ImageButton) rel1.getChildAt(0);
                 btn1.setBackgroundResource(R.mipmap.like_selected);
-                rel1.setBackgroundColor(Color.parseColor("#B73020"));
+                rel1.setBackgroundColor(Color.parseColor("#2277b1"));
                 ImageButton btn2 = (ImageButton) rel2.getChildAt(0);
                 btn2.setBackgroundResource(R.mipmap.dislike_unselected);
-                rel2.setBackgroundColor(Color.parseColor("#920609"));
+                rel2.setBackgroundColor(Color.parseColor("#2277b1"));
                 cardStack.swipeTopCardLeft(180);
             }
         });

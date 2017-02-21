@@ -134,7 +134,7 @@ public class ProductName_Fragment extends Fragment {
 
         relProd_Frag = (RelativeLayout) view.findViewById(R.id.rel);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
-        relativeLayout.setBackgroundColor(Color.WHITE);
+        relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));  //dfdedf
 
         relProd_Frag.setVisibility(View.VISIBLE);
         btnProdFilter = (Button) view.findViewById(R.id.imageBtnFilter);
@@ -655,8 +655,8 @@ public class ProductName_Fragment extends Fragment {
         horizontalScrollViewD = new MyHorizontalScrollView(this.context);
         scrollViewC = new MyScrollView(this.context);
         scrollViewD = new MyScrollView(this.context);
-        tableAProd_Frag.setBackgroundColor(Color.GREEN);
-        horizontalScrollViewB.setBackgroundColor(Color.LTGRAY);
+        tableAProd_Frag.setBackgroundColor(Color.parseColor("#000000"));
+        horizontalScrollViewB.setBackgroundColor(Color.parseColor("#dfdedf"));
     }
 
     // set essential component IDs
@@ -712,7 +712,7 @@ public class ProductName_Fragment extends Fragment {
                 TableRow.LayoutParams.WRAP_CONTENT, 80);
         params.setMargins(2, 0, 0, 0);
         TextView textView = this.headerTextView(headers[0]);
-        textView.setBackgroundColor(Color.parseColor("#B73020"));
+        textView.setBackgroundColor(Color.parseColor("#2277b1"));
         textView.setTextColor(Color.parseColor("#ffffff"));
         componentATableRow.addView(textView);
         return componentATableRow;
@@ -731,7 +731,7 @@ public class ProductName_Fragment extends Fragment {
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-            textView.setBackgroundColor(Color.parseColor("#B73020"));
+            textView.setBackgroundColor(Color.parseColor("#2277b1"));
             textView.setTextColor(Color.parseColor("#ffffff"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
@@ -754,8 +754,8 @@ public class ProductName_Fragment extends Fragment {
             params.setMargins(2, 0, 0, 0);
 
             final TableRow tableRowForTableDProd_Frag = this.tableRowForTableDProd_Frag(productNameBeanArrayList.get(k));
-            tableRowForTableCProd_Frag.setBackgroundColor(Color.WHITE);
-            tableRowForTableDProd_Frag.setBackgroundColor(Color.LTGRAY);
+            tableRowForTableCProd_Frag.setBackgroundColor(Color.parseColor("#dfdedf"));
+            tableRowForTableDProd_Frag.setBackgroundColor(Color.parseColor("#dfdedf"));
             final int i = k;
 
             tableRowForTableCProd_Frag.setOnClickListener(new View.OnClickListener() {
@@ -848,10 +848,7 @@ public class ProductName_Fragment extends Fragment {
     TextView bodyTextView(String label) {
 
         TextView bodyTextView = new TextView(this.context);
-        bodyTextView.setBackgroundColor(Color.WHITE
-
-
-        );
+        bodyTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         bodyTextView.setText(label);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);
@@ -862,7 +859,7 @@ public class ProductName_Fragment extends Fragment {
     TextView headerTextView(String label) {
 
         TextView headerTextView = new TextView(this.context);
-        headerTextView.setBackgroundColor(Color.WHITE);
+        headerTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         headerTextView.setText(label);
         headerTextView.setGravity(Gravity.CENTER);
         headerTextView.setPadding(5, 5, 5, 5);

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B73020"
+    android:background="@color/colorPrimary"
     tools:context="apsupportapp.aperotechnologies.com.designapp.SplashActivity">
 
     <ImageView
@@ -11,7 +11,7 @@
         android:layout_marginTop="150dp"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:contentDescription="Future group logo" />
+        tools:ignore="ContentDescription" />
 
     <ProgressBar
         android:progressDrawable="@drawable/progress_bar"

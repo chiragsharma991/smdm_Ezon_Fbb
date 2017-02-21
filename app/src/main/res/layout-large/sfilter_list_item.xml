@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="70dp"
+    android:background="@color/bg_screen_color"
     android:orientation="vertical" >
 
     <TextView
@@ -13,7 +14,7 @@
         android:textSize="14sp"
         android:layout_alignParentLeft="true"
         android:paddingTop="5dp"
-        android:textColor="#000000"
+        android:textColor="@color/smdm_dark_Black"
         android:paddingBottom="5dp"
         android:paddingLeft="20dp" />
 
@@ -29,13 +30,13 @@
         android:textColor="@android:color/holo_red_light"
         android:paddingTop="5dp"/>
 
-    <View
+    <!--<View
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/grey"
+        android:background="@color/smdm_divider_Black"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        />
+        />-->
 
 </RelativeLayout>

@@ -119,9 +119,10 @@
                     android:layout_marginLeft="20dp"
                     android:gravity="left"
                     android:layout_weight="0.2"
+                    android:textStyle="bold"
                     android:singleLine="true"
                     android:text="@string/likes"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textColor="@color/smdm_default_color"
                     android:textSize="@dimen/visual_report_textsize_large"
                     />
 
@@ -144,7 +145,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_height="@dimen/smdm_divider"
-                android:background="@color/divider_salescard"
+                android:background="@color/smdm_divider_Black"
                 android:layout_marginTop="2dp">
 
             </View>
@@ -160,7 +161,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:gravity="left"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textStyle="bold"
+                    android:textColor="@color/smdm_default_color"
                     android:layout_weight="0.2"
                     android:singleLine="true"
                     android:text="@string/dislikes"
@@ -186,7 +188,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_height="@dimen/smdm_divider"
-                android:background="@color/divider_salescard"
+                android:background="@color/smdm_divider_Black"
                 android:layout_marginTop="2dp">
 
             </View>
@@ -202,8 +204,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:gravity="left"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textColor="@color/smdm_default_color"
                     android:layout_weight="0.2"
+                    android:textStyle="bold"
                     android:singleLine="true"
                     android:text="@string/pending"
                     android:textSize="@dimen/visual_report_textsize_large"
@@ -228,7 +231,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_height="@dimen/smdm_divider"
-                android:background="@color/divider_salescard"
+                android:background="@color/smdm_divider_Black"
                 android:layout_marginTop="2dp">
 
             </View>

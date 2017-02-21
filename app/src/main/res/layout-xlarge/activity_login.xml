@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B73020"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context="apsupportapp.aperotechnologies.com.designapp.LoginActivity">
 
@@ -22,12 +22,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-
         android:layout_marginTop="60dp"
         android:gravity="center"
-         android:inputType="text"
         android:hint="@string/username"
         android:maxLines="1"
+        android:inputType="text"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
         android:textCursorDrawable="@drawable/cursor_color" />
@@ -38,11 +37,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
+
         android:layout_marginTop="10dp"
         android:gravity="center"
+
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:maxLines="1"
+       android:maxLines="1"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
         android:textCursorDrawable="@drawable/cursor_color" />

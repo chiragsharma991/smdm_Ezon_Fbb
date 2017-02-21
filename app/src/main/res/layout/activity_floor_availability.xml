@@ -228,4 +228,27 @@
 
     </include>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/process_filter"
+        android:visibility="gone"
+        >
+
+        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"
+            android:background="#0000"
+            android:keepScreenOn="true"
+            android:theme="@style/ProgressBar_black"
+            >
+
+        </ProgressBar>
+
+
+    </RelativeLayout>
+
 </RelativeLayout>

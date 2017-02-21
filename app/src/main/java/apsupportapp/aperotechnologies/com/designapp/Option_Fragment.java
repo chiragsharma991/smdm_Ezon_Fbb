@@ -103,7 +103,7 @@ public class Option_Fragment extends Fragment {
         view = (ViewGroup) inflater.inflate(R.layout.option_fragment, container, false);
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
-        relativeLayout.setBackgroundColor(Color.WHITE);
+        relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));
         txtOptionName = (TextView) view.findViewById(R.id.txtArticleName);
 
         txtnounits = (TextView) view.findViewById(R.id.txtnounits);
@@ -184,7 +184,6 @@ public class Option_Fragment extends Fragment {
 
         tableAOpt_Frag.setBackgroundColor(Color.GREEN);
         horizontalScrollViewB.setBackgroundColor(Color.LTGRAY);
-
     }
 
     // set essential component IDs
@@ -247,7 +246,7 @@ public class Option_Fragment extends Fragment {
         params.setMargins(2, 0, 0, 0);
 
         TextView textView = this.headerTextView(headers[0]);
-        textView.setBackgroundColor(Color.parseColor("#B73020"));
+        textView.setBackgroundColor(Color.parseColor("#2277b1"));
         textView.setTextColor(Color.parseColor("#ffffff"));
         componentATableRow.addView(textView);
 
@@ -267,7 +266,7 @@ public class Option_Fragment extends Fragment {
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-            textView.setBackgroundColor(Color.parseColor("#B73020"));
+            textView.setBackgroundColor(Color.parseColor("#2277b1"));
             textView.setTextColor(Color.parseColor("#ffffff"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
@@ -287,8 +286,8 @@ public class Option_Fragment extends Fragment {
 
             final TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getArticleOption());
             final TableRow taleRowForTableD = this.taleRowForTableD(productNameBeanArrayList.get(k));
-            tableRowForTableC.setBackgroundColor(Color.WHITE);
-            taleRowForTableD.setBackgroundColor(Color.LTGRAY);
+            tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
+            taleRowForTableD.setBackgroundColor(Color.parseColor("#dfdedf"));
             final int i = k;
             tableRowForTableC.setOnClickListener(new View.OnClickListener() {
 
@@ -310,12 +309,19 @@ public class Option_Fragment extends Fragment {
                     KeyProductActivity.prodName = "";
                 }
             });
+            tableRowForTableC.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    Toast.makeText(getActivity(),"Option Tab...",Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            });
 
             tableCOpt_Frag.addView(tableRowForTableC);
             tableDOpt_Frag.addView(taleRowForTableD);
         }
         Reusable_Functions.hDialog();
-
     }
 
 
@@ -323,21 +329,16 @@ public class Option_Fragment extends Fragment {
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
         params.setMargins(0, 2, 0, 0);
-
         TableRow tableRowForTableC = new TableRow(this.context);
-
         TextView textView = this.bodyTextView(productNameDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         tableRowForTableC.addView(textView, params);
-
         return tableRowForTableC;
 
     }
 
     TableRow taleRowForTableD(ProductNameBean productDetails) {
-
         TableRow taleRowForTableD = new TableRow(this.context);
-
         int loopCount = ((TableRow) tableBOpt_Frag.getChildAt(0)).getChildCount();
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("","in"));
         String info[] = {
@@ -365,7 +366,7 @@ public class Option_Fragment extends Fragment {
     TextView bodyTextView(String label) {
 
         TextView bodyTextView = new TextView(this.context);
-        bodyTextView.setBackgroundColor(Color.WHITE);
+        bodyTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         bodyTextView.setText(label);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);

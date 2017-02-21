@@ -3,6 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
 
@@ -140,6 +141,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.3"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Ageing"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -149,6 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
+                        android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -160,6 +163,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.6"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -192,6 +196,7 @@
                         android:layout_weight="0.3"
                         android:singleLine="true"
                         android:text="SOH(U)"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -201,6 +206,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -212,6 +218,7 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="100"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -257,12 +264,6 @@
 
 
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
     </RelativeLayout>
-
-
 </RelativeLayout>

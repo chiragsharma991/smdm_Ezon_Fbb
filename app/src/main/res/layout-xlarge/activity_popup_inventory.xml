@@ -72,7 +72,7 @@
                             android:layout_height="@dimen/smdm_popup_divider"
                             android:layout_alignStart="@+id/bst_head_child"
                             android:layout_marginTop="5dp"
-                            android:background="@color/divider_salescard" />
+                            android:background="@color/smdm_divider_Black" />
 
 
                         <!--Sales(U) -->
@@ -98,6 +98,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Sales(U)"
+                                    android:textColor="@color/smdm_default_color"
                                     android:textSize="@dimen/smdm_PopUp_title_large"
 
                                     />
@@ -159,6 +160,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Sell Thru%(U)"
                                     android:textSize="@dimen/smdm_PopUp_title_large"
 
@@ -220,6 +222,7 @@
                                     android:id="@+id/popPromoU"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Fwd Week Cover"
                                     android:textSize="@dimen/smdm_PopUp_title_large"
 
@@ -278,6 +281,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Cover and sell Thru%(U) "
                                     android:textSize="@dimen/smdm_PopUp_title_large"
 

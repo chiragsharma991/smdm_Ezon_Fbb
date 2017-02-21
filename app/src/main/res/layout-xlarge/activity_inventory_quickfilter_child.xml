@@ -53,7 +53,8 @@
                         android:layout_marginLeft="10dp"
                         android:text="Quick Filter"
                         android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_quickfilter_title_large" />
+                        android:textSize="@dimen/smdm_quickfilter_title_large"
+                        />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -92,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/smdm_quickfilter_divider"
                     android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard" />
+                    android:background="@color/smdm_divider_Black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -112,6 +113,7 @@
                             android:id="@+id/txtpopCurrent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Current"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
                             />
@@ -156,6 +158,7 @@
                             android:id="@+id/txtpopPrevious"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Previous"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
                             />
@@ -197,6 +200,7 @@
                             android:id="@+id/txtpopOld"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Old"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
                             />
@@ -239,6 +243,7 @@
                             android:id="@+id/txtpopUpcoming"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Upcoming"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
                             />
@@ -288,7 +293,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/smdm_quickfilter_divider"
                     android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard" />
+                    android:background="@color/smdm_divider_Black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -307,6 +312,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="WTD"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
                             />
@@ -329,19 +335,7 @@
                             android:focusable="true" />
 
                     </LinearLayout>
-
-
-
-
-
-
-
-
-
                 </LinearLayout>
-
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -359,6 +353,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="L4W"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
                             />
@@ -403,6 +398,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="STD"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
                             />
@@ -453,7 +449,8 @@
                     android:clickable="false"
                     android:text="Done"
                     android:textColor="@color/divider_salescard1"
-                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                    android:textSize="@dimen/smdm_quickfilter_title_large"
+                    />
 
             </RelativeLayout>
         </RelativeLayout>

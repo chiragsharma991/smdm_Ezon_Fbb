@@ -8,6 +8,7 @@ public class RunningPromoListDisplay {
 
 
 
+
     String storeCode;
     String storeDescription;
     String alphanumericPromoCode;
@@ -25,6 +26,26 @@ public class RunningPromoListDisplay {
 
     String prodAttribute4;
     String prodLevel6Desc;
+    String planDepartment;
+    int noOfPromotions;
+
+
+
+    public String getPlanDepartment() {
+        return planDepartment;
+    }
+
+    public void setPlanDepartment(String planDepartment) {
+        this.planDepartment = planDepartment;
+    }
+
+    public int getNoOfPromotions() {
+        return noOfPromotions;
+    }
+
+    public void setNoOfPromotions(int noOfPromotions) {
+        this.noOfPromotions = noOfPromotions;
+    }
 
 
     public String getArticleDesc() {
