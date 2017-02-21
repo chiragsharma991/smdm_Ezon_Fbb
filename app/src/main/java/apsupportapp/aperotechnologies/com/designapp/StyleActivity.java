@@ -229,6 +229,9 @@ public class StyleActivity extends AppCompatActivity
                             }
                         }
                     }, 1500);
+                    // tet commit
+
+
 
                     //   handleDecodeData(intent);
 
