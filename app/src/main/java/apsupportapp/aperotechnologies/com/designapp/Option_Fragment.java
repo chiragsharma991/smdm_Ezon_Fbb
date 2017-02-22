@@ -309,14 +309,14 @@ public class Option_Fragment extends Fragment {
                     KeyProductActivity.prodName = "";
                 }
             });
-            tableRowForTableC.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-
-                    Toast.makeText(getActivity(),"Option Tab...",Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            });
+//            tableRowForTableC.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View v) {
+//
+//                    Toast.makeText(getActivity(),"Option Tab...",Toast.LENGTH_SHORT).show();
+//                    return false;
+//                }
+//            });
 
             tableCOpt_Frag.addView(tableRowForTableC);
             tableDOpt_Frag.addView(taleRowForTableD);

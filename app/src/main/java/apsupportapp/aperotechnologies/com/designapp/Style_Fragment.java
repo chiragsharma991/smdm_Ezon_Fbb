@@ -102,7 +102,7 @@ public class Style_Fragment extends Fragment {
         Bundle bundle = getActivity().getIntent().getExtras();
         articleCode = bundle.getString("articleCode");
         articleOption = bundle.getString("articleOption");
-
+        Log.e("Option in Style Fragment"," "+articleOption);
         context = getContext();
         styleColorBeanList = new ArrayList<>();
         m_config = MySingleton.getInstance(context);
@@ -126,7 +126,7 @@ public class Style_Fragment extends Fragment {
 
     private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
 
-        String url = ConstsCore.web_url + "/v1/display/sizes/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/sizes/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e(TAG,"requestStyleColorDetailsAPI   "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -1204,7 +1204,7 @@ public class Style_Fragment extends Fragment {
                                 styleDetailsBean.setSellThruUnitsRcpt(sellThruUnitsRcpt);
                                 styleDetailsBean.setRos(ros);
 
-                                styleDetailsBean.setPromoFlag(promoFlg);
+                                styleDetailsBean.setPromoFlg(promoFlg);
                                 styleDetailsBean.setKeyProductFlg(keyProductFlg);
                                 styleDetailsBean.setProductImageURL(productImageURL);
 

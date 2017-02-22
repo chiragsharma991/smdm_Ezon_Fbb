@@ -138,8 +138,8 @@ public class StyleActivity extends AppCompatActivity
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading collection data...");
             requestCollectionAPI(collectionoffset, collectionlimit);
-        } else {
-
+        } else
+        {
             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
@@ -232,12 +232,6 @@ public class StyleActivity extends AppCompatActivity
                         }
                     }, 1500);
 
-
-                    //   handleDecodeData(intent);
-
-//                    if (m_wrapper != null && m_wrapper.IsOpen()) {
-//                        m_wrapper.Scan();
-//                    }
                 } else if (!isAMobileModel()) {
                     Log.e("regular device", "");
                     scanBarcode(view);
@@ -685,7 +679,8 @@ public class StyleActivity extends AppCompatActivity
         }
     }
 
-    private void requestStyleDetailsAPI(String content, String check) {
+    private void requestStyleDetailsAPI(String content, String check)
+    {
         String url = " ";
         if (check.equals("optionname")) {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + content.replaceAll(" ", "%20").replaceAll("&", "%26");
@@ -754,7 +749,7 @@ public class StyleActivity extends AppCompatActivity
                                 styleDetailsBean.setUnitGrossPrice(unitGrossPrice);
                                 styleDetailsBean.setSellThruUnitsRcpt(sellThruUnitsRcpt);
                                 styleDetailsBean.setRos(ros);
-                                styleDetailsBean.setPromoFlag(promoFlg);
+                                styleDetailsBean.setPromoFlg(promoFlg);
                                 styleDetailsBean.setKeyProductFlg(keyProductFlg);
                                 styleDetailsBean.setProductImageURL(productImageURL);
                                 Log.e(TAG, "intent calling: ");
@@ -798,7 +793,8 @@ public class StyleActivity extends AppCompatActivity
         queue.add(postRequest);
     }
 
-    private void requestCollectionAPI(int offsetvalue1, final int limit1) {
+    private void requestCollectionAPI(int offsetvalue1, final int limit1)
+    {
         String url = ConstsCore.web_url + "/v1/display/collections/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
         Log.e(TAG, "requestCollectionAPI   " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -866,26 +862,29 @@ public class StyleActivity extends AppCompatActivity
                                         collectionNM = (String) collectionAdapter.getItem(position);
                                         collection.setText(collectionNM.trim());
 
-                                        if (selcollectionName == null || selcollectionName.equals(null)) {
+                                        if (selcollectionName == null || selcollectionName.equals(null))
+                                        {
 
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             selcollectionName = null;
                                             seloptionName = null;
                                         }
-
                                         Log.e("collectionNM", " " + collectionNM);
                                         collectionLayout.setVisibility(View.GONE);
                                         optionLayout.setVisibility(View.GONE);
-
                                         InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                         if (inputManager != null) {
                                             inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                                         }
                                         if (collectionNM.equalsIgnoreCase("Select Collection")) {
                                             //Toast.makeText(StyleActivity.this,"Please select Collection",Toast.LENGTH_LONG).show();
-                                        } else {
-
-                                            if (Reusable_Functions.chkStatus(context)) {
+                                        }
+                                        else
+                                        {
+                                            if (Reusable_Functions.chkStatus(context))
+                                            {
                                                 Reusable_Functions.sDialog(context, "Loading options data...");
                                                 Log.e("select item", collectionNM);
                                                 offsetvalue = 0;
@@ -894,9 +893,9 @@ public class StyleActivity extends AppCompatActivity
                                                 articleOptionList.clear();
                                                 Log.e("articleOptionList---", " " + articleOptionList.size());
                                                 requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
-
-                                            } else {
-
+                                            }
+                                            else
+                                            {
                                                 Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                             }
                                         }
@@ -911,7 +910,8 @@ public class StyleActivity extends AppCompatActivity
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -929,7 +929,6 @@ public class StyleActivity extends AppCompatActivity
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
     }
 
     private void requestArticleOptionsAPI(final String collectionNM, int offsetvalue1, final int limit1) {
@@ -1011,8 +1010,6 @@ public class StyleActivity extends AppCompatActivity
             optionLayout.setVisibility(View.GONE);
             collectionLayout.setVisibility(View.GONE);
             stylemainlayout.setVisibility(View.VISIBLE);
-
-
             InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
@@ -1021,7 +1018,6 @@ public class StyleActivity extends AppCompatActivity
             optionLayout.setVisibility(View.GONE);
             collectionLayout.setVisibility(View.GONE);
             stylemainlayout.setVisibility(View.VISIBLE);
-
             InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);

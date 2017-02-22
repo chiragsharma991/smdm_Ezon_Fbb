@@ -364,8 +364,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                     if (BestInventList.size() == 0) {
                                         BestInventListview.setVisibility(View.GONE);
                                         return;
-
-
                                     }
                                     return;
 
@@ -419,14 +417,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 } else {
                                     bestPerformerInventoryAdapter = new BestPerformerInventoryAdapter(BestInventList, context);
                                     BestInventListview.setAdapter(bestPerformerInventoryAdapter);
-
-
                                 }
-
-
                                 Reusable_Functions.hDialog();
-
-
                             } catch (Exception e) {
                                 BestInventList.clear();
                                 bestPerformerInventoryAdapter.notifyDataSetChanged();

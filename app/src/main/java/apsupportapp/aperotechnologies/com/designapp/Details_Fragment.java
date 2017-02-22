@@ -94,10 +94,10 @@ public class Details_Fragment extends Fragment {
 
         }
 
-        if (styleDetailsBean.getPromoFlag().equals("N") || styleDetailsBean.getPromoFlag().equals("")) {
+        if (styleDetailsBean.getPromoFlg().equals("N") || styleDetailsBean.getPromoFlg().equals("")) {
             imgPromo.setImageResource(R.mipmap.option_detail_indicator_red);
 
-        } else if (styleDetailsBean.getPromoFlag().equals("Y")) {
+        } else if(styleDetailsBean.getPromoFlg().equals("Y")) {
             imgPromo.setImageResource(R.mipmap.option_detail_indicator_green);
         }
 
@@ -138,7 +138,7 @@ public class Details_Fragment extends Fragment {
         txtGIT.setText("" + styleDetailsBean.getStkGitQty());
         txtBaseStock.setText("" + styleDetailsBean.getTargetStock());
 
-        txtPrice.setText("₹" +format.format(styleDetailsBean.getUnitGrossPrice()));
+        txtPrice.setText("₹" +format.format(Math.round(styleDetailsBean.getUnitGrossPrice())));
         txtsalesThruUnit.setText("" + String.format("%.1f", styleDetailsBean.getSellThruUnitsRcpt()) + "%");
         txtROS.setText("" + String.format("%.1f", styleDetailsBean.getRos()));
 

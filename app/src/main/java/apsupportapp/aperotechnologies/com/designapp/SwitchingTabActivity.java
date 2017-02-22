@@ -11,6 +11,12 @@ import android.view.View;
 
 import android.widget.RelativeLayout;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
+import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
+import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
+import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
+import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
+
 public class SwitchingTabActivity extends AppCompatActivity {
 
     RelativeLayout backButton, imageBtnHomePage;
@@ -34,14 +40,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SwitchingTabActivity.this, StyleActivity.class);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
-                intent.putExtra("selCollectionname", getIntent().getExtras().getString("selCollectionname"));
-                intent.putExtra("selOptionName", getIntent().getExtras().getString("selOptionName"));
-                startActivity(intent);
-                finish();
-
+             onBackPressed();
             }
         });
 
@@ -84,12 +83,44 @@ public class SwitchingTabActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(SwitchingTabActivity.this, StyleActivity.class);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
-        intent.putExtra("selCollectionname", getIntent().getExtras().getString("selCollectionname"));
-        intent.putExtra("selOptionName", getIntent().getExtras().getString("selOptionName"));
-        startActivity(intent);
-        finish();
+        if(getIntent().getStringExtra("checkFrom").equals("SkewedActivity"))
+        {
+            Intent intent = new Intent(SwitchingTabActivity.this, SkewedSizesActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("checkFrom").equals("floor_availability"))
+        {
+            Intent intent = new Intent(SwitchingTabActivity.this, FloorAvailabilityActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("checkFrom").equals("stockAgeing"))
+        {
+            Intent intent = new Intent(SwitchingTabActivity.this, StockAgeingActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("checkFrom").equals("sell_thru_exception"))
+        {
+            Intent intent = new Intent(SwitchingTabActivity.this, SaleThruInventory.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("checkFrom").equals("topCut"))
+        {
+            Intent intent = new Intent(SwitchingTabActivity.this, SaleThruInventory.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            Intent intent = new Intent(SwitchingTabActivity.this, StyleActivity.class);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+            intent.putExtra("selCollectionname", getIntent().getExtras().getString("selCollectionname"));
+            intent.putExtra("selOptionName", getIntent().getExtras().getString("selOptionName"));
+            startActivity(intent);
+            finish();
+        }
     }
 }

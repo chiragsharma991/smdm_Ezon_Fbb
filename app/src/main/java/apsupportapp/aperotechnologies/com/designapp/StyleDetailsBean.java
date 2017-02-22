@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 
 public class StyleDetailsBean implements Serializable {
-    String productName;
     String collectionName;
     String productFabricDesc;
     String productFitDesc;
@@ -12,10 +11,67 @@ public class StyleDetailsBean implements Serializable {
     String seasonName;
     String firstReceiptDate;
     String lastReceiptDate;
-    String promoFlag, productImageURL;
+
+    public String getPromoFlg() {
+        return promoFlg;
+    }
+
+    public void setPromoFlg(String promoFlg) {
+        this.promoFlg = promoFlg;
+    }
+
+    String promoFlg, productImageURL;
     String usp;
+    String productName;
     double fwdWeekCover, ros;
     String storeCode;
+    String articleOption;
+
+    public String getProdLevel6Code() {
+        return prodLevel6Code;
+    }
+
+    public void setProdLevel6Code(String prodLevel6Code) {
+        this.prodLevel6Code = prodLevel6Code;
+    }
+
+    public String getArticleOption() {
+        return articleOption;
+    }
+
+    public void setArticleOption(String articleOption) {
+        this.articleOption = articleOption;
+    }
+
+    public String getProdLevel6Desc() {
+        return prodLevel6Desc;
+    }
+
+    public void setProdLevel6Desc(String prodLevel6Desc) {
+        this.prodLevel6Desc = prodLevel6Desc;
+    }
+
+    public String getArticleCode() {
+        return articleCode;
+    }
+
+    public void setArticleCode(String articleCode) {
+        this.articleCode = articleCode;
+    }
+
+    public String getArticleDesc() {
+        return articleDesc;
+    }
+
+    public void setArticleDesc(String articleDesc) {
+        this.articleDesc = articleDesc;
+    }
+
+    String prodLevel6Code;
+    String prodLevel6Desc;
+    String articleCode;
+    String articleDesc;
+
 
     public String getStoreDesc() {
         return storeDesc;
@@ -51,16 +107,11 @@ public class StyleDetailsBean implements Serializable {
         this.keyProductFlg = keyProductFlg;
     }
 
-    public String getPromoFlag() {
-        return promoFlag;
-    }
 
-    public void setPromoFlag(String promoFlag) {
-        this.promoFlag = promoFlag;
-    }
 
     String keyProductFlg;
-    int stkOnhandQty, stkGitQty, targetStock, twSaleTotQty, lwSaleTotQty, ytdSaleTotQty, unitGrossPrice;
+    int stkOnhandQty, stkGitQty, targetStock, twSaleTotQty, lwSaleTotQty, ytdSaleTotQty;
+    double unitGrossPrice;
     double sellThruUnitsRcpt;
 
     public String getProductName() {
@@ -183,11 +234,11 @@ public class StyleDetailsBean implements Serializable {
         this.targetStock = targetStock;
     }
 
-    public int getUnitGrossPrice() {
+    public double getUnitGrossPrice() {
         return unitGrossPrice;
     }
 
-    public void setUnitGrossPrice(int unitGrossPrice) {
+    public void setUnitGrossPrice(double unitGrossPrice) {
         this.unitGrossPrice = unitGrossPrice;
     }
 

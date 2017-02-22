@@ -11,9 +11,6 @@
     tools:context="apsupportapp.aperotechnologies.com.designapp.DashBoardActivity"
     tools:showIn="@layout/app_bar_dash_board">
 
-
-
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
