@@ -125,8 +125,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
                             return false;
                         }
                     })
-                    .into(holder.floor_image_child)
-            ;
+                    .into(holder.floor_image_child);
 
           /*  Picasso.with(this.context).
 

@@ -94,6 +94,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@color/smdm_divider_Black" />
 
                 <LinearLayout
@@ -116,6 +118,7 @@
                             android:layout_height="wrap_content"
                             android:text="Current"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
+                            android:textColor="@color/smdm_default_color"
                             />
 
                     </LinearLayout>
@@ -160,6 +163,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Previous"
+                            android:textColor="@color/smdm_default_color"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
                             />
 
@@ -202,6 +206,7 @@
                             android:layout_height="wrap_content"
                             android:text="Old"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
+                            android:textColor="@color/smdm_default_color"
                             />
 
                     </LinearLayout>
@@ -244,6 +249,7 @@
                             android:layout_height="wrap_content"
                             android:text="Upcoming"
                             android:textSize="@dimen/smdm_quickfilter_title_large"
+                            android:textColor="@color/smdm_default_color"
                             />
 
                     </LinearLayout>

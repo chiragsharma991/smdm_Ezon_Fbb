@@ -10,6 +10,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -104,25 +108,30 @@ public class TopOptionAdapter extends BaseAdapter {
         holder.Top_RosU.setText(""+String.format("%.1f",arrayList.get(position).getRos()));
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
-            Picasso.with(this.context).
 
-                    load(arrayList.get(position).getProdImageURL()).
-                    into(holder.Top_image_child, new Callback() {
+            Glide.with(this.context)
+                    .load(arrayList.get(position).getProdImageURL())
+                    .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
-                        public void onSuccess() {
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                             holder.ProgressPicaso.setVisibility(View.GONE);
+                            return false;
                         }
 
                         @Override
-                        public void onError() {
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                             holder.ProgressPicaso.setVisibility(View.GONE);
-
+                            return false;
                         }
-                    });
+                    })
+                    .into(holder.Top_image_child);
+
+
         }else {
+
             holder.ProgressPicaso.setVisibility(View.GONE);
 
-            Picasso.with(this.context).
+            Glide.with(this.context).
                     load(R.mipmap.placeholder).
                     into(holder.Top_image_child);
 

@@ -93,6 +93,8 @@
                     android:id="@+id/bst_lineOne_child"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:background="@color/smdm_divider_Black" />
 
@@ -267,13 +269,13 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/bst_lineTwo_child"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/divider_salescard" />
+                <!--    <View
+                        android:id="@+id/bst_lineTwo_child"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/divider_salescard" />
 
-
+    -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -295,6 +297,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/smdm_quickfilter_divider"
                     android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@color/smdm_divider_Black" />
 
                 <LinearLayout
