@@ -16,6 +16,7 @@ import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvail
 import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
+import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 
 public class SwitchingTabActivity extends AppCompatActivity {
 
@@ -110,6 +111,18 @@ public class SwitchingTabActivity extends AppCompatActivity {
         else if(getIntent().getStringExtra("checkFrom").equals("topCut"))
         {
             Intent intent = new Intent(SwitchingTabActivity.this, SaleThruInventory.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("checkFrom").equals("option_fragment"))
+        {
+            Intent intent = new Intent(SwitchingTabActivity.this, KeyProductActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("checkFrom").equals("visualAssortment"))
+        {
+            Intent intent = new Intent(SwitchingTabActivity.this, VisualAssortmentActivity.class);
             startActivity(intent);
             finish();
         }

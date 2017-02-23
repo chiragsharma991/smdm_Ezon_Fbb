@@ -370,10 +370,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
         for (int i = 0; i <product.size() ; i++) {
 
             mType = new TextView(context);
-
-
-
-
             if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
                // Log.e(TAG, "Normal sized screen:" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(120,50));
@@ -392,41 +388,23 @@ public class SkewedSizeAdapter extends BaseAdapter {
                // Log.e(TAG, "Screen Size is neither large, normal or small :" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
                 mType.setTextSize(12);
-
-
             }
-
-
-
-            //       mType.setPadding(5, 3, 0, 3);
+            //  mType.setPadding(5, 3, 0, 3);
             if(setFlag.get(i).equals("Y")){
                 mType.setBackgroundResource(R.drawable.cell_shape_mark);
                 mType.setTextColor(Color.parseColor("#ffffff"));
-
-
             }else
             {
                 mType.setBackgroundResource(R.drawable.cell_shape);
                 mType.setTextColor(Color.parseColor("#404040"));
-
             }
             mType.setGravity(Gravity.CENTER);
             mType.setText(""+product.get(i));
             mType.setTypeface(null, Typeface.BOLD);
 
             holder.ProductAttribute.addView(mType);
-
-
-
-
         }
-
-
-
-
-
     }
-
 
     private int calculation(String value) {
         items = Arrays.asList(value.split("\\s*,\\s*"));
@@ -435,8 +413,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
             stkOnhandQty[i]=Integer.parseInt(items.get(i));
         }
         return sumof(stkOnhandQty);
-
-
     }
 
     private int sumof(int[] stkOnhandQty )
@@ -449,9 +425,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
         return sum;
         // Log.e(TAG, "sumof: "+sum );
     }
-
-
-
 
     private class Holder {
 

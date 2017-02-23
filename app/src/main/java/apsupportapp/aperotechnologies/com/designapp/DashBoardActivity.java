@@ -751,9 +751,9 @@ public class DashBoardActivity extends AppCompatActivity
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.commit();
-            SalesFilterActivity.level_filter = 0;
+            SalesFilterActivity.level_filter = 1;
             SalesAnalysisActivity1.selectedsegValue = null;
-            SalesAnalysisActivity1.level = 0;
+            SalesAnalysisActivity1.level = 1;
             Intent intent = new Intent(DashBoardActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();

@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
@@ -18,21 +19,41 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Cache;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.daprlabs.cardstack.SwipeDeck;
+import com.google.gson.Gson;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
+import apsupportapp.aperotechnologies.com.designapp.StyleDetailsBean;
+import apsupportapp.aperotechnologies.com.designapp.SwitchingTabActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.*;
 import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
 
@@ -52,6 +73,11 @@ public class SwipeDeckAdapter extends BaseAdapter {
     ProgressBar visualprogressPicaso;
     int pos;
     static LinearLayout fragmentLayout;
+    String TAG = "VisualAssortmentActivity";
+    Gson gson;
+    ArrayList<StyleDetailsBean> optionList;
+    StyleDetailsBean styleDetailsBean;
+    int offset , limit;
 
     public SwipeDeckAdapter(ArrayList<VisualAssort> visualassortmentlist, Context context, SwipeDeck cardStack) {
         this.visualassortmentlist = visualassortmentlist;
@@ -61,6 +87,11 @@ public class SwipeDeckAdapter extends BaseAdapter {
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         pos = 0;
+        optionList = new ArrayList<StyleDetailsBean>();
+        gson = new Gson();
+        offset = 0;
+        limit = 10;
+
     }
 
     @Override
@@ -119,6 +150,22 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
         final VisualAssort visualAssort = visualassortmentlist.get(position);
         txtName.setText(visualAssort.getArticleOption());
+        //Option Click event to get detail information
+        txtName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                //  Toast.makeText(context,"Option Click...",Toast.LENGTH_SHORT).show();
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading  data...");
+                    Log.e("select item",visualAssort.getArticleOption());
+                    requestOptionDetailsAPI(visualAssort.getArticleOption());
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         txtSeason.setText("Season : " + visualAssort.getSeasonName());
         txtColor.setText("Color : " + visualAssort.getColor());
         txtFabric.setText("Fabric : " + visualAssort.getProductFabricDesc());
@@ -505,4 +552,82 @@ public class SwipeDeckAdapter extends BaseAdapter {
         return layoutView;
 
     }
+
+    private void requestOptionDetailsAPI(String option)
+    {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
+        String userId = sharedPreferences.getString("userId", "");
+        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        BasicNetwork network = new BasicNetwork(new HurlStack());
+        RequestQueue queue = new RequestQueue(cache, network);
+        queue.start();
+
+        String url = " ";
+
+        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
+
+        Log.e(TAG, "requestStyleDetailsAPI  " + url);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
+                        try {
+                            int i;
+                            if (response.equals(null) || response == null || response.length() == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
+                            } else if(response.length() < limit){
+                                Reusable_Functions.hDialog();
+                                for ( i = 0; i < response.length(); i++) {
+
+                                    styleDetailsBean = gson.fromJson(response.get(i).toString(), StyleDetailsBean.class);
+                                    optionList.add(styleDetailsBean);
+
+                                }
+
+                                Log.e(TAG, "intent calling: ");
+                                Intent intent = new Intent(context, SwitchingTabActivity.class);
+                                intent.putExtra("checkFrom","visualAssortment");
+                                intent.putExtra("articleCode",styleDetailsBean.getArticleCode());
+                                intent.putExtra("articleOption",styleDetailsBean.getArticleOption());
+                                Log.e("Article Option :",""+styleDetailsBean.getArticleOption());
+                                intent.putExtra("styleDetailsBean", styleDetailsBean);
+                                context.startActivity(intent);
+                                VisualAssortmentActivity.Visual_Assortment_Activity.finish();
+                            }
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Log.e("", "" + error.networkResponse + "");
+                        Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,6 +62,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
     private String TAG="KeyProductActivity";
     private ArrayList<EtlStatus> etlStatusList;
     private Gson gson;
+    public static Activity key_product_activity;
     //git tese 10/1/2017
 
 
@@ -71,6 +73,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
         context = this;
+        key_product_activity = this;
         m_config = MySingleton.getInstance(context);
         intialize();
 

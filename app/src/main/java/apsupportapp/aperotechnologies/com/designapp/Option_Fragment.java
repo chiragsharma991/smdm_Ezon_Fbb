@@ -1,8 +1,10 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
@@ -34,6 +36,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,7 +59,9 @@ public class Option_Fragment extends Fragment {
     HorizontalScrollView horizontalScrollViewB;
     HorizontalScrollView horizontalScrollViewD;
     ArrayList<ProductNameBean> productNameBeanArrayList;
-
+    ArrayList<StyleDetailsBean> optionDetailsList;
+    StyleDetailsBean styleDetailsBean;
+    Gson gson;
     String userId, productName, bearertoken;
     ScrollView scrollViewC;
     ScrollView scrollViewD;
@@ -75,15 +80,15 @@ public class Option_Fragment extends Fragment {
             "     GIT    ",
 
     };
-
+    boolean flag_Click = false;
     int headerCellsWidth[] = new int[headers.length];
     ProductNameBean productNameBean;
     TextView txtStoreCode, txtStoreDesc;
     MySingleton m_config;
     String prodName;
-    int offsetvalue = 0, limit = 100;
+    int offsetvalue = 0, limit = 100, limit1 = 10;
     int count = 0;
-
+    int clickFlag = 0;
     SharedPreferences sharedPreferences;
     TextView txtOptionName;
 
@@ -117,7 +122,7 @@ public class Option_Fragment extends Fragment {
         initComponents();
         setComponentsId();
         setScrollViewAndHorizontalScrollViewTag();
-
+        gson = new Gson();
         horizontalScrollViewB.addView(tableBOpt_Frag);
         scrollViewC.addView(tableCOpt_Frag);
         scrollViewD.addView(horizontalScrollViewD);
@@ -293,6 +298,7 @@ public class Option_Fragment extends Fragment {
 
                 @Override
                 public void onClick(View v) {
+                    Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
                     tableAOpt_Frag.removeAllViews();
                     tableBOpt_Frag.removeAllViews();
                     tableRowForTableC.removeAllViews();
@@ -307,16 +313,36 @@ public class Option_Fragment extends Fragment {
                     tab.getTabAt(2).select();
                     rowPressListener.communicateToFragment(productNameBeanArrayList.get(i).getProductName(), productNameBeanArrayList.get(i).getArticleOption());
                     KeyProductActivity.prodName = "";
+
                 }
             });
-//            tableRowForTableC.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//
-//                    Toast.makeText(getActivity(),"Option Tab...",Toast.LENGTH_SHORT).show();
-//                    return false;
-//                }
-//            });
+
+            android.os.Handler h = new android.os.Handler();
+            h.postDelayed(new Runnable() {
+                public void run() {
+                    tableRowForTableC.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            // TODO Auto-generated method stub
+                            Toast.makeText(context, "Long Clicked", Toast.LENGTH_SHORT).show();
+                            optionDetailsList = new ArrayList<StyleDetailsBean>();
+                            offsetvalue = 0;
+                            limit1 = 10;
+                            tableRowForTableC.setBackgroundColor(R.color.colorPrimary);
+
+                            if (Reusable_Functions.chkStatus(context)) {
+                                Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading  data...");
+                                Log.e("select item", productNameBeanArrayList.get(i).getArticleOption());
+                                requestOptionDetailsAPI(productNameBeanArrayList.get(i).getArticleOption());
+                            } else {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                            }
+                            return true;
+                        }
+                    });
+                }
+            }, 1000);
 
             tableCOpt_Frag.addView(tableRowForTableC);
             tableDOpt_Frag.addView(taleRowForTableD);
@@ -332,6 +358,7 @@ public class Option_Fragment extends Fragment {
         TableRow tableRowForTableC = new TableRow(this.context);
         TextView textView = this.bodyTextView(productNameDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+        //  textView.setBackgroundResource(R.drawable.bg_pressed_text_color);
         tableRowForTableC.addView(textView, params);
         return tableRowForTableC;
 
@@ -340,7 +367,7 @@ public class Option_Fragment extends Fragment {
     TableRow taleRowForTableD(ProductNameBean productDetails) {
         TableRow taleRowForTableD = new TableRow(this.context);
         int loopCount = ((TableRow) tableBOpt_Frag.getChildAt(0)).getChildCount();
-        NumberFormat format = NumberFormat.getNumberInstance(new Locale("","in"));
+        NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
         String info[] = {
 
                 String.valueOf(productDetails.getL2hrsNetSales()),
@@ -539,6 +566,82 @@ public class Option_Fragment extends Fragment {
         }
     }
 
+    private void requestOptionDetailsAPI(String option) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
+        String userId = sharedPreferences.getString("userId", "");
+        final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        BasicNetwork network = new BasicNetwork(new HurlStack());
+        RequestQueue queue = new RequestQueue(cache, network);
+        queue.start();
+
+        String url = " ";
+
+        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit1;
+
+        Log.e(" ", "requestStyleDetailsAPI  " + url);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e(" ", " requestStyleDetailsAPI :   " + response.toString());
+                        try {
+                            int i;
+                            if (response.equals(null) || response == null || response.length() == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
+                            } else if (response.length() < limit) {
+                                Reusable_Functions.hDialog();
+                                for (i = 0; i < response.length(); i++) {
+
+                                    styleDetailsBean = gson.fromJson(response.get(i).toString(), StyleDetailsBean.class);
+                                    optionDetailsList.add(styleDetailsBean);
+
+                                }
+
+                                Log.e("------ ", "intent calling: ");
+                                Intent intent = new Intent(context, SwitchingTabActivity.class);
+                                intent.putExtra("checkFrom", "option_fragment");
+                                intent.putExtra("articleCode", styleDetailsBean.getArticleCode());
+                                intent.putExtra("articleOption", styleDetailsBean.getArticleOption());
+                                Log.e("Article Option :", "" + styleDetailsBean.getArticleOption());
+                                intent.putExtra("styleDetailsBean", styleDetailsBean);
+                                context.startActivity(intent);
+                                KeyProductActivity.key_product_activity.finish();
+                            }
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Log.e("", "" + error.networkResponse + "");
+                        Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+
     public void requestProductArticleAPI(int offsetvalue1, int limit1) {
 
         String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?view=articleOption&productName=" + prodName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
@@ -673,7 +776,6 @@ public class Option_Fragment extends Fragment {
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {

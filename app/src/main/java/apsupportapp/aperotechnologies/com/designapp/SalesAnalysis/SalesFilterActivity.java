@@ -203,7 +203,7 @@ public class SalesFilterActivity extends Activity {
                     //  startActivity(intent);
                     finish();
                 }*/
-                finish();
+               onBackPressed();
             }
         });
 
@@ -852,6 +852,8 @@ public class SalesFilterActivity extends Activity {
             finish();
 
         }*/
+        InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromInputMethod(editTextSearch.getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
         finish();
     }
 }
