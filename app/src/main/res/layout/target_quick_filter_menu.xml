@@ -70,6 +70,7 @@
                 android:layout_marginTop="29dp"
                 android:fadeScrollbars="false"
                 android:scrollIndicators="right"
+                android:background="@drawable/popupmenu"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbarFadeDuration="0"
                 android:scrollbarSize="3dp"
@@ -84,7 +85,6 @@
                         android:id="@+id/qfilter_seasonGpLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/popupmenu"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -109,6 +109,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/smdm_quickfilter_divider"
                             android:layout_marginTop="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:background="@color/divider_salescard" />
 
                         <LinearLayout
@@ -298,7 +300,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/qfilter_seasonGpLayout"
-                        android:background="@drawable/popupmenu"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -323,6 +324,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_marginTop="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:background="@color/divider_salescard" />
                         <!--WTD-->
                         <LinearLayout
@@ -463,7 +466,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/qfilter_Time"
-                        android:background="@drawable/popupmenu"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -488,6 +490,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_marginTop="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:background="@color/divider_salescard" />
 
                         <LinearLayout
@@ -622,7 +626,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/qfilter_Title"
-                        android:background="@drawable/popupmenu"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -647,6 +650,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_marginTop="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:background="@color/divider_salescard" />
 
 

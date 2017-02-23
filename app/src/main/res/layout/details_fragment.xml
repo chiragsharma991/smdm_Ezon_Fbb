@@ -83,6 +83,12 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
 
+                <RelativeLayout
+                    android:id="@+id/rel_image_child"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
                 <ImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="110dp"
@@ -90,6 +96,23 @@
                     tools:ignore="ContentDescription"
                     android:scaleType="fitCenter"
                     />
+
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:padding="10dp"
+                             android:id="@+id/detail_progressPicaso"
+                             android:layout_centerInParent="true"
+                             android:background="#0000"
+                             android:keepScreenOn="true"
+                             android:theme="@style/ProgressBar"
+                    >
+
+
+
+                </ProgressBar>
+                </RelativeLayout>
 
             </LinearLayout>
 

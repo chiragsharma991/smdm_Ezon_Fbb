@@ -8,8 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
@@ -26,7 +31,7 @@ public class Details_Fragment extends Fragment {
             txtFwdWeekCover, txtTwSalesUnit, txtLwSalesUnit, txtYtdSalesUnit, txtSOH, txtGIT, txtBaseStock, txtPrice, txtsalesThruUnit,
             txtROS, txtBenefit, txtArticleOption,txtStoreDesc, txtStoreCode;
     ImageView imgPromo, imgKeyProduct, imgProfile;
-
+    ProgressBar progressBar;
     public Details_Fragment() {
         // Required empty public constructor
     }
@@ -59,7 +64,8 @@ public class Details_Fragment extends Fragment {
         txtfirstReceiteDate = (TextView) view.findViewById(R.id.txtfirstReceiteDate);
         txtlastReceiteDate = (TextView) view.findViewById(R.id.txtlastReceiteDate);
         txtFwdWeekCover = (TextView) view.findViewById(R.id.txtFwdWeekCover);
-
+        progressBar = (ProgressBar) view.findViewById(R.id.detail_progressPicaso);
+        progressBar.setVisibility(View.VISIBLE);
         txtTwSalesUnit = (TextView) view.findViewById(R.id.txtTwSalesUnit);
         txtLwSalesUnit = (TextView) view.findViewById(R.id.txtLwSalesUnit);
         txtYtdSalesUnit = (TextView) view.findViewById(R.id.txtYtdSalesUnit);
@@ -82,15 +88,46 @@ public class Details_Fragment extends Fragment {
 
         Log.e("productImageURL", styleDetailsBean.getProductImageURL());
 
-        if (!styleDetailsBean.getProductImageURL().equals("")) {
+//        if (!styleDetailsBean.getProductImageURL().equals("")) {
+//
+//            Picasso.with(getActivity()).load(styleDetailsBean.getProductImageURL()).centerInside().fit()
+//                    .error(R.mipmap.placeholder)
+//                    .into(imgProfile);
+//        } else {
+//            Picasso.with(getActivity()).load(R.mipmap.placeholder).centerInside().fit()
+//                  //  .resize(110, 150)
+//                    .into(imgProfile);
+//
+//        }
 
-            Picasso.with(getActivity()).load(styleDetailsBean.getProductImageURL()).centerInside().fit()
-                    .error(R.drawable.placeholder)
+        if(!styleDetailsBean.getProductImageURL().equals(""))
+        {
+            Glide.
+                    with(getActivity())
+                    .load(styleDetailsBean.getProductImageURL())
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                           progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
                     .into(imgProfile);
-        } else {
-            Picasso.with(getActivity()).load(R.drawable.placeholder).centerInside().fit()
-                  //  .resize(110, 150)
-                    .into(imgProfile);
+
+        }else {
+            progressBar.setVisibility(View.GONE);
+
+            Glide.with(getActivity()).
+                    load(R.mipmap.placeholder).
+                    into(imgProfile);
+
+
 
         }
 

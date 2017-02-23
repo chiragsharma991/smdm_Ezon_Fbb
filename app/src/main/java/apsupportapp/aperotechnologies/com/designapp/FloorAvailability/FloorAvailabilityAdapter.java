@@ -164,7 +164,8 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
 
         if(!arrayList.get(position).getProdImageURL().equals(""))
         {
-            Glide.with(this.context)
+            Glide.
+                    with(this.context)
                     .load(arrayList.get(position).getProdImageURL())
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
@@ -179,8 +180,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter {
                             return false;
                         }
                     })
-                    .into(holder.floor_image_child)
-            ;
+                    .into(holder.floor_image_child);
 
           /*  Picasso.with(this.context).
 
