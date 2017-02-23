@@ -237,7 +237,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         level = 3;
                         //flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        // llfIndexhierarchy.setVisibility(View.GONE);
+                        //     llfIndexhierarchy.setVisibility(View.GONE);
                         //llfreshnessIndex.setVisibility(View.GONE);
 
                         if (Reusable_Functions.chkStatus(context)) {
