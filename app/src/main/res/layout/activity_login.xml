@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
+    android:id="@+id/linearLogin"
     android:orientation="vertical"
     tools:context="apsupportapp.aperotechnologies.com.designapp.LoginActivity">
 
@@ -24,8 +25,8 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="60dp"
         android:gravity="center"
-        android:hint="@string/username"
         android:inputType="text"
+        android:hint="@string/username"
         android:maxLines="1"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
@@ -61,7 +62,8 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/loggedin"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            />
         <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:textColor="#ffffff"-->
@@ -77,8 +79,10 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="25dp"
-        android:background="@mipmap/signin_button"
-        android:textColor="#000000" />
+        android:text="LOG IN"
+        android:textColor="#000000"
+        android:backgroundTint="@drawable/ripple_effect"
+        />
     <!--<TextView-->
     <!--android:id="@+id/btnForgetPassword"-->
     <!--android:layout_width="match_parent"-->

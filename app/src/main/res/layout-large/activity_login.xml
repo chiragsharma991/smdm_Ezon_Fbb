@@ -79,8 +79,10 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="25dp"
-        android:background="@mipmap/signin_button"
-        android:textColor="#000000" />
+        android:text="LOG IN"
+        android:textColor="#000000"
+        android:backgroundTint="@drawable/ripple_effect"
+        />
     <!--<TextView-->
     <!--android:id="@+id/btnForgetPassword"-->
     <!--android:layout_width="match_parent"-->

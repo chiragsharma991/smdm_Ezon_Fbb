@@ -46,6 +46,8 @@ import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerf
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
+import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ActualKeyProduct.ActualProduct;
+import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
@@ -77,7 +79,7 @@ import java.util.TimerTask;
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
-    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment;
+    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment,ActualKeyProduct;
     ImageButton btnFloorAvailability,btnTargetStockExcep,btnSellThruExcep,btnVisualReport;
     ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnBestPerformersInv;
     ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,
@@ -486,6 +488,16 @@ public class DashBoardActivity extends AppCompatActivity
                     timer.cancel();
                 }
             }
+        });   ActualKeyProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,ActualProduct.class);
+                startActivity(intent);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+            }
         });
 
         RefreshTimeAPI();
@@ -671,6 +683,7 @@ public class DashBoardActivity extends AppCompatActivity
         imageBtnKeyProducts=(ImageButton)findViewById(R.id.imageBtnKeyProducts);
         imgBtnSales = (ImageButton) findViewById(R.id.btnSales);
         imgBtnVisualAssortment = (ImageButton) findViewById(R.id.btnVisualAssortment);
+        ActualKeyProduct = (ImageButton) findViewById(R.id.actualKeyProduct);
         imgBtnPvaAnalysis = (ImageButton) findViewById(R.id.btnPVA);
         imgBtnRunningPromo=(ImageButton)findViewById(R.id.btnRunningpromo);
         BtnUpcomingpromo=(ImageButton)findViewById(R.id.btnUpcomingpromo);

@@ -150,7 +150,7 @@
         android:background="#ccc"
         android:layout_weight="1"
         android:orientation="vertical">
-        <fragment android:name="apsupportapp.aperotechnologies.com.designapp.ProductName_Fragment"
+        <fragment android:name="apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductName_Fragment"
             android:id="@+id/frag_1"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />
@@ -162,7 +162,7 @@
         android:layout_weight="1"
         android:background="#eee"
         android:orientation="vertical">
-        <fragment android:name="apsupportapp.aperotechnologies.com.designapp.Option_Fragment"
+        <fragment android:name="apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.Option_Fragment"
             android:id="@+id/frag_2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />

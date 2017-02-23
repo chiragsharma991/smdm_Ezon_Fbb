@@ -52,6 +52,8 @@ import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.FilterAc
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexDetails;
+import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
+import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
@@ -59,7 +61,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SplashActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
-public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener, GravitySnapHelper.SnapListener,clickChild {
+public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener, GravitySnapHelper.SnapListener,clickChild,HttpResponse {
 
     TextView storecode, storedesc, promoval1, promoval2;
     RelativeLayout imageback, imagefilter;
@@ -109,7 +111,15 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         Running_summary.setVisibility(View.VISIBLE);
         Reusable_Functions.sDialog(this, "Loading.......");
         requestRunningPromosummary();
+        //check();
 
+    }
+
+    private void check() {
+
+        String url = ConstsCore.web_url + "/v1/display/runningpromosummary/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+
+        ApiRequest request=new ApiRequest(context,bearertoken,url,TAG);
     }
 
     private void requestRunningPromosummary() {
@@ -522,5 +532,11 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
           Running_promo.setVisibility(View.VISIBLE);
           Running_summary.setVisibility(View.GONE);
 
+    }
+
+    @Override
+    public void response(JSONArray response) {
+        Log.e(TAG, "response: "+response );
+        Reusable_Functions.hDialog();
     }
 }

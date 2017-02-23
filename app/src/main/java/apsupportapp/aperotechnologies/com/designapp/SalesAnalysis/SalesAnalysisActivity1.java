@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -195,6 +196,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         pageradapter.notifyDataSetChanged();
         lldots = (LinearLayout) findViewById(R.id.lldots);
         lldots.setOrientation(LinearLayout.HORIZONTAL);
+
+        TabLayout tab=(TabLayout)findViewById(R.id.dotTab);
+        tab.setupWithViewPager(vwpagersales, true);
+
         llhierarchy = (LinearLayout) findViewById(R.id.llhierarchy);
         llhierarchy.setOrientation(LinearLayout.HORIZONTAL);
         relLayoutSales = (RelativeLayout) findViewById(R.id.relTablelayout);

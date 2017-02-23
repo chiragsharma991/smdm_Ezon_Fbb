@@ -119,13 +119,13 @@
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         android:layout_height="wrap_content">
 
                         <ImageButton
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
-                            android:id="@+id/formal8"
+                            android:id="@+id/actualKeyProduct"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
@@ -138,7 +138,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="Option Efficiency" />
+                            android:text="ActualKeyProduct"
+                            />
                     </LinearLayout>
 
                     <LinearLayout
