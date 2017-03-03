@@ -69,9 +69,9 @@
 
             <LinearLayout
                 android:visibility="gone"
-                android:id="@+id/lin1"
+                android:id="@+id/linplanactual"
                 android:orientation="vertical"
-                android:layout_below="@+id/headersmdm"
+                android:layout_below="@+id/headerplanactual"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -86,46 +86,17 @@
                     android:orientation="horizontal"
                     android:weightSum="4">
 
-
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-
-                        <ImageButton
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/imageBtnKeyProducts"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="@color/bg_screen_color"
-                            android:src="@mipmap/hourly_analysis"
-                            />
-
-
-                        <TextView
-                            android:gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="KeyProduct Hrly Info"
-                            android:textColor="@color/smdm_light_Black"
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="13sp"
-                            />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         android:layout_height="wrap_content">
 
                         <ImageButton
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
-                            android:id="@+id/formal8"
+                            android:id="@+id/actualKeyProduct"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
@@ -138,62 +109,64 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="Option Efficiency" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:visibility="invisible"
-                        android:layout_height="wrap_content">
-
-                        <ImageButton
-                            android:gravity="center_horizontal"
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/formal9"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="@color/bg_screen_color"
-                            android:src="@mipmap/cut_size_report"
+                            android:text="@string/key_product_plan"
+                            android:textColor="@color/smdm_light_Black"
                             />
-
-                        <TextView
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cut-Size Report"
-                            android:gravity="center_horizontal"
-                            android:textSize="13sp" />
-
-
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
+                    <!--<LinearLayout-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:visibility="invisible"-->
+                        <!--android:layout_height="wrap_content">-->
 
-                        <ImageButton
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/formal10"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="@color/bg_screen_color"
-                            android:src="@mipmap/skewed_size"
-                            />
+                        <!--<ImageButton-->
+                            <!--android:gravity="center_horizontal"-->
+                            <!--android:layout_gravity="center_horizontal"-->
+                            <!--android:id="@+id/formal9"-->
+                            <!--android:layout_width="80dp"-->
+                            <!--android:layout_height="80dp"-->
+                            <!--android:background="@color/bg_screen_color"-->
+                            <!--android:src="@mipmap/cut_size_report"-->
+                            <!--/>-->
+
+                        <!--<TextView-->
+                            <!--android:layout_gravity="center_horizontal"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Cut-Size Report"-->
+                            <!--android:gravity="center_horizontal"-->
+                            <!--android:textSize="13sp" />-->
 
 
-                        <TextView
-                            android:gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="SkewedSize"
-                            android:textSize="13sp"
-                            android:layout_gravity="center_horizontal" />
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:visibility="invisible"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<ImageButton-->
+                            <!--android:layout_gravity="center_horizontal"-->
+                            <!--android:id="@+id/formal10"-->
+                            <!--android:layout_width="80dp"-->
+                            <!--android:layout_height="80dp"-->
+                            <!--android:background="@color/bg_screen_color"-->
+                            <!--android:src="@mipmap/skewed_size"-->
+                            <!--/>-->
+
+
+                        <!--<TextView-->
+                            <!--android:gravity="center_horizontal"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="SkewedSize"-->
+                            <!--android:textSize="13sp"-->
+                            <!--android:layout_gravity="center_horizontal" />-->
+                    <!--</LinearLayout>-->
 
 
 
@@ -381,6 +354,123 @@
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/lin1"
+                android:orientation="vertical"
+                android:layout_below="@+id/headersmdm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/imageBtnKeyProducts"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/hourly_analysis"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="KeyProduct Hrly Info"
+                            android:textColor="@color/smdm_light_Black"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal9"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/cut_size_report"
+                            />
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cut-Size Report"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/formal10"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/skewed_size"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+            </LinearLayout>
 
 
             <!--second ending-->
@@ -1238,7 +1328,7 @@
 
             <TextView
                 android:id="@+id/headermarketing"
-                android:layout_below="@+id/lin1"
+                android:layout_below="@+id/linplanactual"
                 android:visibility="visible"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -1297,7 +1387,6 @@
                 android:layout_height="10dp"/>
 
             <TextView
-
                 android:id="@+id/headersmdm"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
@@ -1311,6 +1400,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/headerplanactual"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/plan_actual"
+                android:textColor="@color/smdm_dark_Black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/lin1"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:layout_below="@+id/headerplanactual"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/smdm_divider_Black"
+                />
+
 
             <TextView
                 android:id="@+id/headerinvent"

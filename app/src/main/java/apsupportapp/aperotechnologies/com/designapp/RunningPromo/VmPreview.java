@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,6 +76,9 @@ public class VmPreview extends AppCompatActivity {
         vm_imageBtnBack=(RelativeLayout)findViewById(R.id.vm_imageBtnBack);
 
         lldots = (LinearLayout) findViewById(R.id.dotIndicator);
+        TabLayout tab=(TabLayout)findViewById(R.id.dotTab);
+        tab.setupWithViewPager(mViewPager, true);
+
         //lldots.setOrientation(LinearLayout.HORIZONTAL);
         data=getIntent().getExtras();
 

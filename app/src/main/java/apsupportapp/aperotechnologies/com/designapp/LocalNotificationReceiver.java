@@ -54,7 +54,7 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
         // application is in background or close
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, 0);
         mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.logo)
+                .setSmallIcon(R.mipmap.notification_logo)
                 .setContentTitle("SMDM")
                 .setContentText(message);
 

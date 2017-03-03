@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -195,6 +196,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         pageradapter.notifyDataSetChanged();
         lldots = (LinearLayout) findViewById(R.id.lldots);
         lldots.setOrientation(LinearLayout.HORIZONTAL);
+
+        TabLayout tab=(TabLayout)findViewById(R.id.dotTab);
+        tab.setupWithViewPager(vwpagersales, true);
+
         llhierarchy = (LinearLayout) findViewById(R.id.llhierarchy);
         llhierarchy.setOrientation(LinearLayout.HORIZONTAL);
         relLayoutSales = (RelativeLayout) findViewById(R.id.relTablelayout);
@@ -757,7 +762,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 level = 1;
                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().toString();
             } else if (txtheaderplanclass.getText().toString().equals("Category")) {
-                level =2 ;
+                level = 2 ;
                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().toString();
             } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
                 level = 3;
@@ -806,7 +811,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 level = 1;
                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().toString();
             } else if (txtheaderplanclass.getText().toString().equals("Category")) {
-                level =2 ;
+                level = 2 ;
                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().toString();
             } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
                 level = 3;
@@ -882,7 +887,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         val = "";
                         if (getIntent().getStringExtra("selectedDept") == null) {
                             requestSalesListDisplayAPI();
-
                         } else {
 
 
@@ -890,8 +894,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             // str = str.replace(" ","%20");
                             requestSalesSelectedFilterVal(str);
                         }
-
-
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
@@ -929,8 +931,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             requestSalesListDisplayAPI();
 
                         } else {
-
-
                             String str = getIntent().getStringExtra("selectedDept");
                             //  str = str.replace(" ","%20");
                             requestSalesSelectedFilterVal(str);

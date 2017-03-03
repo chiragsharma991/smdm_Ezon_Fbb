@@ -74,8 +74,6 @@ public class RunningPromoDetail extends AppCompatActivity {
     String TAG = "RunningPromoDetails";
 
 
-    //
-
     RunningPromoListDisplay runningPromoListDisplay;
     ArrayList<RunningPromoListDisplay> promoList;
     Gson gson;

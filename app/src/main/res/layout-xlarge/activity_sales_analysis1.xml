@@ -477,8 +477,19 @@
 
             </RelativeLayout>
 
+            <android.support.design.widget.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dotTab"
+                segmentedgroup:tabBackground="@drawable/tab_selection"
+                segmentedgroup:tabGravity="center"
+                segmentedgroup:tabIndicatorHeight="0dp"
+                >
+
+            </android.support.design.widget.TabLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/lldots"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
@@ -600,7 +611,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_screen_color">
+                        android:background="@color/bg_screen_color"
+                        >
 
                         <EditText
                             android:id="@+id/etListText"
@@ -645,6 +657,13 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+
+                <!--     <View
+                         android:id="@+id/view2"
+                         android:layout_width="match_parent"
+                         android:layout_height="1dip"
+                         android:layout_below="@+id/linear"
+                         android:background="@color/smdm_divider_Black" />-->
 
            <!--     <View
                     android:id="@+id/view2"

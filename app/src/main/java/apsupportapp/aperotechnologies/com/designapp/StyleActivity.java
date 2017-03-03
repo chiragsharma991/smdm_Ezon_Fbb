@@ -226,7 +226,6 @@ public class StyleActivity extends AppCompatActivity
                             }
                             else{
                                 View view=findViewById(android.R.id.content);
-
                                 Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
                             }
                         }
@@ -754,6 +753,7 @@ public class StyleActivity extends AppCompatActivity
                                 styleDetailsBean.setProductImageURL(productImageURL);
                                 Log.e(TAG, "intent calling: ");
                                 Intent intent = new Intent(StyleActivity.this, SwitchingTabActivity.class);
+                                intent.putExtra("checkFrom","styleActivity");
                                 intent.putExtra("articleCode", articleCode);
                                 intent.putExtra("articleOption", articleOption);
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);

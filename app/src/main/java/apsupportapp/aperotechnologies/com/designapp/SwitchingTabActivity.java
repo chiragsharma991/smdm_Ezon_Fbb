@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
+import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
 import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
@@ -126,10 +127,8 @@ public class SwitchingTabActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        else {
+        else if(getIntent().getStringExtra("checkFrom").equals("styleActivity")){
             Intent intent = new Intent(SwitchingTabActivity.this, StyleActivity.class);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
             intent.putExtra("selCollectionname", getIntent().getExtras().getString("selCollectionname"));
             intent.putExtra("selOptionName", getIntent().getExtras().getString("selOptionName"));
             startActivity(intent);

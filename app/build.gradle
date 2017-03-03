@@ -25,9 +25,9 @@ android {
         applicationId "apsupportapp.aperotechnologies.com.designapp"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 96
-        versionName "1.96"
-        targetSdkVersion 23
+        versionCode 2
+        versionName "2.03"
+
 
     }
     buildTypes {
