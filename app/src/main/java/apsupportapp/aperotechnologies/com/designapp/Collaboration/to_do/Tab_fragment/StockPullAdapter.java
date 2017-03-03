@@ -32,7 +32,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 
     public StockPullAdapter(ArrayList<ToDo_Modal> list, Context context) {
         this.list=list;
-        this.context=context;
+        this.context=context;//
 
 
 
