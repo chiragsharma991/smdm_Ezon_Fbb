@@ -38,6 +38,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Handler;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.LocalNotificationReceiver;
@@ -104,7 +105,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
 
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
+
+            dissmiss_progress();
             Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;
             limit = 10;
@@ -132,6 +134,20 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
         TopOptionListView.addFooterView(footer);
 
+
+    }
+
+    private void dissmiss_progress()
+    {
+        Thread mThread = new Thread() {
+            @Override
+            public void run() {
+                Log.e(TAG, "run: ----Thread" );
+                Reusable_Functions.hDialog();
+            }
+        };
+
+        mThread.start();
 
     }
 
@@ -172,8 +188,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                    Reusable_Functions.hDialog();
-
+                                   // Reusable_Functions.hDialog();
+                                    dissmiss_progress();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     TopOptionListView.removeFooterView(footer);
                                     TopOptionListView.setTag("FOOTER_REMOVE");
@@ -234,10 +250,15 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                 Top_txtStoreCode.setText(TopOptionList.get(0).getStoreCode());
                                 Top_txtStoreName.setText(TopOptionList.get(0).getStoreDesc());
 
-                                Reusable_Functions.hDialog();
+                               // Reusable_Functions.hDialog();
+
+                                dissmiss_progress();
+
+
 
                             } catch (Exception e) {
-                                Reusable_Functions.hDialog();
+                                //Reusable_Functions.hDialog();
+                                dissmiss_progress();
                                 TopOptionListView.removeFooterView(footer);
                                 TopOptionListView.setTag("FOOTER_REMOVE");
                                 Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
@@ -249,7 +270,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Reusable_Functions.hDialog();
+                            //Reusable_Functions.hDialog();
+                            dissmiss_progress();
                             Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             //topOptionAdapter.notifyDataSetChanged();
                             TopOptionListView.removeFooterView(footer);
@@ -311,7 +333,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
             });
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            Reusable_Functions.hDialog();
+           // Reusable_Functions.hDialog();
+            dissmiss_progress();
             TopOptionListView.removeFooterView(footer);
             TopOptionListView.setTag("FOOTER_REMOVE");
         }
@@ -514,7 +537,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 case R.id.top_core:
                     if (Top_core.isChecked()) {
                         if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
+                            //Reusable_Functions.hDialog();
+                            dissmiss_progress();
                             Reusable_Functions.sDialog(context, "Loading data...");
                             limit = 10;
                             offsetvalue = 0;

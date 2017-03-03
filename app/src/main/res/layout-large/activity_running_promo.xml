@@ -28,14 +28,11 @@
                 android:layout_height="@dimen/toolbar_header_height"
                 android:layout_alignParentTop="true"
                 android:background="?attr/colorPrimary"
-                android:contentInsetEnd="0dp"
-                android:contentInsetLeft="0dp"
-                android:contentInsetRight="0dp"
-                android:contentInsetStart="0dp"
                 segmentedgroup:contentInsetEnd="0dp"
                 segmentedgroup:contentInsetLeft="0dp"
                 segmentedgroup:contentInsetRight="0dp"
-                segmentedgroup:contentInsetStart="0dp">
+                segmentedgroup:contentInsetStart="0dp"
+                >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
