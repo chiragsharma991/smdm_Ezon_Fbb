@@ -3,6 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
 
@@ -124,7 +125,8 @@
                     android:layout_height="@dimen/smdm_inflater_divider"
                     android:layout_alignStart="@+id/bst_head_child"
                     android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard" />
+                    android:background="@color/divider_salescard"
+                    />
 
 
                 <!--Promo sales-->
@@ -144,6 +146,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.35"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Sales(U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -153,6 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
+                        android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -164,6 +168,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.45"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -186,6 +191,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.35"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="SOH(U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -196,6 +202,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
@@ -206,6 +213,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.45"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -227,6 +235,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.35"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="GIT(U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -236,6 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
+                        android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -247,6 +257,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.45"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -268,6 +279,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.35"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Sell Thru% (U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -277,6 +289,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
+                        android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -288,6 +301,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.45"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -310,6 +324,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.35"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="FWC"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -320,6 +335,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
@@ -330,6 +346,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.45"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -352,6 +369,7 @@
                         android:layout_weight="0.35"
                         android:singleLine="true"
                         android:text="ROS(U)"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
@@ -361,6 +379,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
@@ -372,6 +391,7 @@
                         android:layout_weight="0.45"
                         android:singleLine="true"
                         android:text="100"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 

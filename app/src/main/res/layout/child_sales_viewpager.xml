@@ -78,7 +78,7 @@
                     android:text="djshjd"
                     android:textSize="11sp" />
 
-                <TextView
+              <TextView
                     android:id="@+id/txtNetSalesPerc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

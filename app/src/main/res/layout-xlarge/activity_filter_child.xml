@@ -24,10 +24,10 @@
                 android:id="@+id/filterMc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
+                android:paddingLeft="15dp"
                 android:text="L123-Lace Party Top Black"
                 android:textColor="@android:color/black"
-                android:textSize="11sp"
+                android:textSize="14sp"
 
                 />
 

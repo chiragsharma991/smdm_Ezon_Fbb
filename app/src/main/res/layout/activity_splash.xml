@@ -11,7 +11,7 @@
         android:layout_marginTop="150dp"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:contentDescription="Future group logo" />
+        tools:ignore="ContentDescription" />
 
     <ProgressBar
         android:progressDrawable="@drawable/progress_bar"

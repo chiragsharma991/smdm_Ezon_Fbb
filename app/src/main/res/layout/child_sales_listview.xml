@@ -6,6 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         >
 
         <TextView
@@ -25,7 +26,7 @@
         <RelativeLayout
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:id="@+id/rel"
+           android:id="@+id/rel"
             android:layout_width="100dp"
             android:layout_height="30dp">
 
@@ -33,8 +34,8 @@
             <RelativeLayout
                 android:layout_centerVertical="true"
                 android:id="@+id/innerrellay"
-                android:layout_width="90dp"
                 android:layout_marginLeft="5dp"
+                android:layout_width="90dp"
                 android:layout_height="10dp">
 
                 <TextView
@@ -58,7 +59,6 @@
             android:layout_marginRight="210dp"
             android:id="@+id/txtVal"
             android:text="Name"
-            android:gravity=""
             android:padding="5dp"
             android:singleLine="true"
             android:textSize="@dimen/normallayout_textsize"

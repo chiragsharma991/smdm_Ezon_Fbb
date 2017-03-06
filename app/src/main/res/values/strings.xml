@@ -57,6 +57,8 @@
     <string name="likes">Likes</string>
     <string name="dislikes">Dislikes</string>
     <string name="pending">Pending</string>
+    <string name="key_product_plan">Plan vs Actual </string>
+    <string name="plan_actual">Key Products</string>
 
     <string-array name="colour_name">
         <item>Blue</item>

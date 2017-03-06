@@ -160,6 +160,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.2"
                             android:singleLine="true"
+                            android:textColor="@color/smdm_default_color"
                             android:text="SOH(U)"
                             android:textSize="@dimen/smdm_inflator_subtitle_large"
                             />
@@ -170,6 +171,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.1"
                             android:text=":"
+                            android:textColor="@color/smdm_default_color"
                             android:textSize="@dimen/smdm_inflator_subtitle_large"
                             />
 
@@ -181,6 +183,7 @@
                             android:layout_weight="0.7"
                             android:singleLine="true"
                             android:text="100"
+                            android:textColor="@color/smdm_default_color"
                             android:textSize="@dimen/smdm_inflator_subtitle_large"
                             />
 
@@ -202,6 +205,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.2"
                             android:singleLine="true"
+                            android:textColor="@color/smdm_default_color"
                             android:text="FWC"
                             android:textSize="@dimen/smdm_inflator_subtitle_large"
                             />
@@ -212,6 +216,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.1"
                             android:text=":"
+                            android:textColor="@color/smdm_default_color"
                             android:textSize="@dimen/smdm_inflator_subtitle_large"
                             />
 
@@ -223,6 +228,7 @@
                             android:layout_weight="0.7"
                             android:singleLine="true"
                             android:text="100"
+                            android:textColor="@color/smdm_default_color"
                             android:textSize="@dimen/smdm_inflator_subtitle_large"
                             />
 
@@ -243,6 +249,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.2"
                             android:singleLine="true"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Sizes"
                             android:textSize="@dimen/smdm_inflator_subtitle_large"
                             />
@@ -252,6 +259,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.1"
+                            android:textColor="@color/smdm_default_color"
                             android:text=":"
                             android:visibility="invisible"
                             android:textSize="@dimen/smdm_inflator_subtitle_large"
@@ -264,6 +272,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.7"
                             android:singleLine="true"
+                            android:textColor="@color/smdm_default_color"
                             android:text="5"
                             android:visibility="invisible"
                             android:textSize="@dimen/smdm_inflator_subtitle_large"

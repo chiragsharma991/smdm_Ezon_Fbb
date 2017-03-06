@@ -5,7 +5,6 @@
     android:id="@+id/activity_top_full_cut"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TopOptionCutSize.TopFullCut"
     android:background="@color/bg_screen_color"
     >
 

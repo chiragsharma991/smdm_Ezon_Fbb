@@ -144,7 +144,9 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    public void retainValuesFilter() {
+    public void
+
+    retainValuesFilter() {
         filter_toggleClick = true;
         if (corefashion.equals("Fashion")) {
             Skewed_core.toggle();

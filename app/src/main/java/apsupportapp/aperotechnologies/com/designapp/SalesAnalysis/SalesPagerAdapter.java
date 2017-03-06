@@ -775,8 +775,8 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 
                 txtSOHVal2.setText(" " + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
                 txtGITVal.setText(" " + format.format(Math.round(salesAnalysis.getStkGitQty())));
-                txtROSVal2.setText(format.format(ros));
-                txtFwdWkCoverVal2.setText("" + fwdwkcover);
+                txtROSVal2.setText(" "+ format.format(ros));
+                txtFwdWkCoverVal2.setText(" " + fwdwkcover);
             }
 
         }

@@ -38,6 +38,7 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -93,29 +94,27 @@ public class StockPullFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
         this.context=context;
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
-
         Log.e(TAG, "onCreateView: -- StockPullFragment" );
         view = (ViewGroup) inflater.inflate(R.layout.fragment_stock_pull, container, false);
         ReceiverSummaryList=new ArrayList<>();
         initialise();
         MainMethod();
-
         return view;
     }
 
-    private void initialise() {
-
+    private void initialise()
+    {
         recyclerView=(RecyclerView)view.findViewById(R.id.stockPull_list);
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
@@ -125,7 +124,6 @@ public class StockPullFragment extends Fragment {
                 new Details().StartActivity(context,ReceiverSummaryList.get(position).getMccodeDesc());
             }
         }));
-
     }
 
     private void MainMethod() 
@@ -133,8 +131,7 @@ public class StockPullFragment extends Fragment {
         NetworkProcess();
         Reusable_Functions.sDialog(context, "Loading.......");
         requestTransferRequestsummary();
-        
-        
+
     }
 
     private void requestTransferRequestsummary()
@@ -146,12 +143,13 @@ public class StockPullFragment extends Fragment {
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
-                        public void onResponse(JSONArray response) {
+                        public void onResponse(JSONArray response)
+                        {
                             Log.i(TAG, "To_DO response : " + " " + response);
                             Log.i(TAG, "To_DO response length" + "" + response.length());
 
-
-                            try {
+                            try
+                            {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -182,9 +180,7 @@ public class StockPullFragment extends Fragment {
                                     limit = 100;
                                     offsetvalue = 0;
 
-
                                 }
-
 
                                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 recyclerView.setOnFlingListener(null);
@@ -192,9 +188,6 @@ public class StockPullFragment extends Fragment {
                                 StockPullAdapter stockPullAdapter = new StockPullAdapter(ReceiverSummaryList,getActivity());
                                 recyclerView.setAdapter(stockPullAdapter);
                                 Reusable_Functions.hDialog();
-
-                                // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
-
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
@@ -226,17 +219,16 @@ public class StockPullFragment extends Fragment {
                 }
             };
             int socketTimeout = 60000;//5 seconds
-
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
-
-
         }
         else
         {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
             Reusable_Functions.hDialog();
+
 
         }
 
@@ -256,22 +248,20 @@ public class StockPullFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(Uri uri)
+    {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
 
 
-
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
         mListener = null;
     }
-
-
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

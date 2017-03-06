@@ -3,6 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+                android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
 
@@ -85,7 +86,6 @@
                         android:textStyle="bold"
 
 
-
                         />
 
                     <RelativeLayout
@@ -142,9 +142,10 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.5"
                         android:singleLine="true"
                         android:text="SOH(U)"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
@@ -152,6 +153,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.1"
+                        android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -160,9 +162,10 @@
                         android:id="@+id/floor_SOH_U"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.4"
                         android:singleLine="true"
                         android:text="100"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
@@ -182,7 +185,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.5"
+                        android:textColor="@color/smdm_default_color"
                         android:text="No of Days Passed"
                         android:singleLine="true"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
@@ -193,6 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.1"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
@@ -200,9 +205,10 @@
                         android:id="@+id/floor_NoofDays"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.4"
                         android:singleLine="true"
                         android:text="100"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
@@ -220,7 +226,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.5"
+                        android:textColor="@color/smdm_default_color"
                         android:text="First Receipt Date"
                         android:singleLine="true"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
@@ -231,6 +238,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.1"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
@@ -238,9 +246,10 @@
                         android:id="@+id/floor_ReceiptDate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.4"
                         android:singleLine="true"
                         android:text="5"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 

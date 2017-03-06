@@ -36,15 +36,15 @@
                 />
 
 
-            <TextView
+             <TextView
                 android:id="@+id/txtSOHUVal2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
-                android:text="12,15,1215"
-                android:textColor="@color/bg_store_code_text"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentLeft="true"
+                 android:layout_marginLeft="8dp"
+                 android:layout_marginTop="35dp"
+                 android:text="12,15,1215"
+                 android:textColor="@color/bg_store_code_text"
                 android:textSize="19sp" />
 
 

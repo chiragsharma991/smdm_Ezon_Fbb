@@ -1,474 +1,501 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/quickFilterPopup"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="68dp"
-    android:visibility="gone">
+    android:background="@color/bg_screen_color"
+    tools:context=".OptionEfficiency.OptionEfficiencyActivity">
 
-    <!--base layout for click anywhere-->
 
-    <RelativeLayout
-        android:id="@+id/quickFilter_baseLayout"
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:background="@color/bg_screen_color"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/quickFilter_BorderLayout"
-            android:layout_width="200dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:visibility="visible">
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/relLayoutFilter"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:visibility="visible">
-
-                <ImageView
-                    android:id="@+id/img_quickFilter"
-                    android:layout_width="16dp"
-                    android:layout_height="29dp"
-                    android:layout_alignParentStart="true"
-                    android:background="@mipmap/quick_filter" />
-
+                android:layout_height="@dimen/toolbar_header_height"
+                android:layout_alignParentTop="true"
+                android:background="?attr/colorPrimary"
+                android:contentInsetEnd="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp">
 
                 <RelativeLayout
-                    android:id="@+id/qfilterLabelLayout"
-                    android:layout_width="200dp"
-                    android:layout_height="29dp"
-                    android:layout_toRightOf="@+id/img_quickFilter"
-                    android:background="@color/colorPrimary"
-                    android:visibility="visible">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
+                    <RelativeLayout
+                        android:id="@+id/optionEfficiency_imageBtnBack"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="0dp"
+                        android:background="@drawable/button_red_effect">
+
+                        <Button
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/common_back_icon"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/txtQuickFilterLabel"
+                        android:id="@+id/toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:text="Quick Filter"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/optionEfficiency_imageBtnBack"
+                        android:text="Option Efficiency"
                         android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_quickfilter_title_large"
+                        android:textSize="@dimen/smdm_header_title_normal"
                         />
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/optionEfficiency_imgfilter"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_red_effect">
+
+                        <Button
+                            android:layout_width="19dp"
+                            android:layout_height="19dp"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/filter_icon_nav"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp">
+
+
+                <TextView
+                    android:id="@+id/tstoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
+
+                <TextView
+                    android:id="@+id/txtStoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@+id/tstoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
+
+                <TextView
+                    android:id="@+id/txtStoreName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/txtStoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/oe_quickFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="0dp"
+                    >
+
+                    <Button
+                        android:layout_width="16dp"
+                        android:layout_height="29dp"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/quick_filter"
+                        android:clickable="false" />
                 </RelativeLayout>
 
             </RelativeLayout>
 
-            <!--main pop up border-->
+
+            <info.hoang8f.android.segmented.SegmentedGroup
+                android:id="@+id/optionEfficiency_segmentedGrp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                segmentedgroup:sc_border_width="1dp"
+                segmentedgroup:sc_corner_radius="14dp"
+                segmentedgroup:sc_tint_color="@color/colorPrimary">
+
+                <RadioButton
+                    android:id="@+id/oe_btnFashion"
+                    style="@style/RadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Fashion" />
+
+                <RadioButton
+                    android:id="@+id/oe_btnCore"
+                    style="@style/RadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Core" />
+
+
+
+
+            </info.hoang8f.android.segmented.SegmentedGroup>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llayoutOEfficiency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/oe_relPielayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/noChartOption"
+                    android:text="No Chart data available"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:textSize="@dimen/largelayout_storesize"
+
+                    />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/oe_pieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp" />
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:visibility="gone"
+                    android:id="@+id/progressBar"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:theme="@style/ProgressBar"
+                    >
+
+                </ProgressBar>
+
+            </RelativeLayout>
 
             <LinearLayout
-                android:layout_below="@+id/relLayoutFilter"
-                android:id="@+id/qfilter_menuPopupLayout"
-                android:layout_width="185dp"
-                android:layout_marginLeft="15dp"
+                android:id="@+id/oe_llayouthierarchy"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/popupmenu"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/oe_txtDeptName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/txtSeasonGrp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Season Group"
-                        android:textColor="@color/smdm_quickfiltertxt_color"
-                        android:textSize="@dimen/smdm_quickfilter_title_large"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/bst_lineOne_child"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/smdm_divider_Black" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtpopCurrent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Current"
-                            android:textSize="@dimen/smdm_quickfilter_title_large"
-                            android:textColor="@color/smdm_default_color"
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-
-                        <CheckBox
-                            android:id="@+id/checkCurrent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:buttonTint="@android:color/black"
-                            android:focusable="true"
-                            android:checked="true"
-                            />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!--Previous-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtpopPrevious"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Previous"
-                            android:textColor="@color/smdm_default_color"
-                            android:textSize="@dimen/smdm_quickfilter_title_large"
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-
-                        <CheckBox
-                            android:id="@+id/checkPrevious"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:buttonTint="@android:color/black"
-                            android:focusable="true" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtpopOld"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Old"
-                            android:textSize="@dimen/smdm_quickfilter_title_large"
-                            android:textColor="@color/smdm_default_color"
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-
-                        <CheckBox
-                            android:id="@+id/checkOld"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:buttonTint="@android:color/black"
-                            android:focusable="true" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!--Upcoming  -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtpopUpcoming"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Upcoming"
-                            android:textSize="@dimen/smdm_quickfilter_title_large"
-                            android:textColor="@color/smdm_default_color"
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-
-                        <CheckBox
-                            android:id="@+id/checkUpcoming"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:buttonTint="@android:color/black"
-                            android:focusable="true" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!--<View-->
-                <!--android:id="@+id/bst_lineTwo_child"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="2dp"-->
-                <!--android:background="@color/divider_salescard" />-->
-
-
-                <!--&lt;!&ndash;Time&ndash;&gt;-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:text="Time"-->
-                <!--android:textColor="@color/smdm_quickfiltertxt_color"-->
-                <!--android:textSize="@dimen/smdm_quickfilter_title_large"-->
-                <!--/>-->
-
-                <!--</LinearLayout>-->
-
-                <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/smdm_quickfilter_divider"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:background="@color/divider_salescard" />-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:weightSum="10">-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_weight="3"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="WTD"-->
-                <!--android:textSize="@dimen/smdm_quickfilter_title_large"-->
-                <!--/>-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="7"-->
-                <!--android:gravity="end"-->
-                <!--android:orientation="vertical">-->
-
-
-                <!--<RadioButton-->
-                <!--android:id="@+id/skewed_checkWTD"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:buttonTint="@android:color/black"-->
-                <!--android:focusable="true" />-->
-
-                <!--</LinearLayout>-->
-
-
-
-
-
-
-
-
-
-                <!--</LinearLayout>-->
-
-
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:weightSum="10">-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_weight="3"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="L4W"-->
-                <!--android:textSize="@dimen/smdm_quickfilter_title_large"-->
-                <!--/>-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="7"-->
-                <!--android:gravity="end"-->
-                <!--android:orientation="vertical">-->
-
-
-                <!--<RadioButton-->
-                <!--android:id="@+id/skewed_checkL4W"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:buttonTint="@android:color/black"-->
-                <!--android:focusable="true" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--</LinearLayout>-->
-
-
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:weightSum="10">-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_weight="3"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="STD"-->
-                <!--android:textSize="@dimen/smdm_quickfilter_title_large"-->
-                <!--/>-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="7"-->
-                <!--android:gravity="end"-->
-                <!--android:orientation="vertical">-->
-
-
-                <!--<RadioButton-->
-                <!--android:id="@+id/skewed_checkSTD"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:buttonTint="@android:color/black"-->
-                <!--android:focusable="true"-->
-                <!--android:checked="true"-->
-                <!--/>-->
-
-                <!--</LinearLayout>-->
-
-                <!--</LinearLayout>-->
-
-
-
+                    android:layout_margin="10dp"
+                    android:textColor="@color/txt_color"
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_below="@+id/qfilter_menuPopupLayout"
-                android:id="@+id/qfDoneLayout"
-                android:layout_width="184dp"
-                android:layout_marginLeft="15dp"
-                android:layout_height="25dp"
-                android:background="@color/colorPrimary"
-                android:visibility="visible">
+                android:id="@+id/relOETablelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
-                <Button
+                <View
+                    android:id="@+id/view1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@color/colorPrimary"
-                    android:clickable="false"
-                    android:text="Done"
-                    android:textColor="@color/divider_salescard1"
-                    android:textSize="@dimen/smdm_quickfilter_title_large"
-                    />
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />
+                <LinearLayout
+                    android:layout_below="@+id/view1"
+                    android:id="@+id/linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/llOEheader"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@color/smdm_divider_Black_light">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp">
+
+
+                            <RelativeLayout
+                                android:layout_centerVertical="true"
+                                android:id="@+id/oe_btnPrev"
+                                android:layout_width="20dp"
+                                android:layout_height="40dp">
+
+                                <Button
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerInParent="true"
+                                    android:background="@mipmap/back_arrow"
+                                    android:clickable="false" />
+                            </RelativeLayout>
+
+
+                            <TextView
+                                android:layout_toRightOf="@+id/oe_btnPrev"
+                                android:id="@+id/oe_txtHeaderClass"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="Department"
+                                android:textStyle="normal"
+                                android:textColor="@color/bg_store_code_text"
+                                android:textSize="@dimen/smdm_departmentTitle"
+                                />
+
+
+                            <RelativeLayout
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/oe_txtHeaderClass"
+                                android:id="@+id/oe_btnNext"
+                                android:layout_width="20dp"
+                                android:layout_height="40dp">
+
+                                <Button
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerInParent="true"
+                                    android:background="@mipmap/next_arrow"
+                                    android:clickable="false" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:textStyle="normal"
+                            android:id="@+id/oe_txtOption"
+                            android:layout_width="60dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="180dp"
+                            android:layout_toLeftOf="@+id/oe_txtOption_Perc"
+                            android:gravity="center_vertical|center"
+                            android:text="Option"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            />
+
+
+                        <TextView
+                            android:id="@+id/oe_txtOption_Perc"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="120dp"
+                            android:layout_toLeftOf="@+id/oe_txtSOH_U"
+                            android:gravity="center_vertical|center"
+                            android:text="@string/fullSize"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal"/>
+
+
+                        <TextView
+                            android:id="@+id/oe_txtSOH_U"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/oe_txtSOH_U_Perc"
+                            android:layout_marginRight="60dp"
+                            android:gravity="center_vertical|center"
+                            android:text="SOH(U)"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal"/>
+
+                        <TextView
+                            android:id="@+id/oe_txtSOH_U_Perc"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical|center"
+                            android:text="SOH(U)%"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal"/>
+
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@color/bg_screen_color">
+
+                        <EditText
+                            android:editable="false"
+                            android:padding="2dp"
+                            android:id="@+id/edt_OEfficiency_Class"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="240dp"
+                            android:layout_toLeftOf="@+id/edt_FIndex_SOH"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:textColor="@android:color/black" />
+
+
+                        <EditText
+                            android:editable="false"
+                            android:paddingRight="2dp"
+                            android:id="@+id/edt_OEfficiency_Option"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="180dp"
+                            android:layout_toLeftOf="@+id/edt_OEfficiency_Option_Perc"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical" />
+
+
+                        <EditText
+                            android:editable="false"
+                            android:id="@+id/edt_OEfficiency_Option_Perc"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="120dp"
+                            android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_U"
+                            android:background="@drawable/border"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:editable="false"
+                            android:id="@+id/edt_OEfficiency_SOH_U"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="60dp"
+                            android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_Perc"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/border"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:editable="false"
+                            android:id="@+id/edt_OEfficiency_SOH_Perc"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/border"
+                            android:textColor="@android:color/black" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+<!--
+                <View
+                    android:layout_below="@+id/linear"
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/oe_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dividerHeight="0dp"
+                        android:divider="@null"
+                        android:scrollbarFadeDuration="0"
+                        android:smoothScrollbar="true" />
+
+
+
+                </LinearLayout>
+
+
 
             </RelativeLayout>
-        </RelativeLayout>
-    </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/oe_quick_filter_menu">
+
+    </include>
+
+
 </RelativeLayout>

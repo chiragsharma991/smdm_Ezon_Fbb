@@ -69,19 +69,15 @@ public class ProductName_Fragment extends Fragment {
     TableLayout tableBProd_Frag;
     TableLayout tableCProd_Frag;
     TableLayout tableDProd_Frag;
-
     Button btnProdFilter;
     ViewGroup view;
     HorizontalScrollView horizontalScrollViewB;
     HorizontalScrollView horizontalScrollViewD;
     ArrayList<ProductNameBean> productNameBeanArrayList;
-
     ScrollView scrollViewC;
     ScrollView scrollViewD;
     RequestQueue queue;
     Context context;
-
-
     RelativeLayout relativeLayout;
     public static RelativeLayout relProd_Frag;
     // set the header titles
@@ -97,40 +93,32 @@ public class ProductName_Fragment extends Fragment {
 
     };
 
-
     int headerCellsWidth[] = new int[headers.length];
     ProductNameBean productNameBean;
     TextView txtStoreCode, txtStoreDesc;
     String userId, bearertoken;
-
     MySingleton m_config;
     int offsetvalue = 0, limit = 100;
     int count = 0;
     int componentId1=1,componentId2=2,componentId3=3,componentId4=4;
-
     OnRowPressListener rowPressListener;
-
     SharedPreferences sharedPreferences;
     private String NetPercent;
-
     String f_productName;
     TextView txt_subdepName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         m_config = MySingleton.getInstance(getActivity());
-
     }
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = (ViewGroup) inflater.inflate(R.layout.productname_fragment, container, false);
 
+        view = (ViewGroup) inflater.inflate(R.layout.productname_fragment, container, false);
         context = view.getContext();
         txtStoreCode = (TextView) view.findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) view.findViewById(R.id.txtStoreName);
@@ -138,17 +126,13 @@ public class ProductName_Fragment extends Fragment {
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
         f_productName = getActivity().getIntent().getStringExtra("filterproductname");
-
         relProd_Frag = (RelativeLayout) view.findViewById(R.id.rel);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));  //dfdedf
-
         relProd_Frag.setVisibility(View.VISIBLE);
         btnProdFilter = (Button) view.findViewById(R.id.imageBtnFilter);
         txt_subdepName = (TextView) view.findViewById(R.id.txtSubDeptName);
-
         Log.e("parent", " " + KeyProductActivity.viewPager.getParent());
         LinearLayout layout = (LinearLayout) KeyProductActivity.viewPager.getParent();
         TabLayout tab = (TabLayout) layout.getChildAt(1);
@@ -166,7 +150,6 @@ public class ProductName_Fragment extends Fragment {
             Log.e("--- ", " " + (!SearchActivity1.searchSubDept.equals("")));
             Log.e("--- ", " " + (!SearchActivity1.searchProductName.equals("")));
             Log.e("--- ", " " + (!SearchActivity1.searchArticleOption.equals("")));
-
 
             // this condition is checked because when we click on option tab from SKU this gets called
             if (SearchActivity1.searchSubDept.equals("") && SearchActivity1.searchProductName.equals("") && f_productName == null)// && SearchActivity1.searchArticleOption.equals(""))
@@ -221,7 +204,6 @@ public class ProductName_Fragment extends Fragment {
                 getActivity().finish();
             }
         });
-
         return view;
     }
 

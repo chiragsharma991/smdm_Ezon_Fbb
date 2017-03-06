@@ -14,12 +14,12 @@
             android:textSize="12sp"
             android:layout_marginLeft="5dp"
             android:id="@+id/txtPlanClass"
-            android:gravity="center|left"
             android:text="Name"
             android:layout_alignParentRight="true"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
+            android:gravity="center|left"
             android:layout_marginRight="260dp"
             android:layout_toLeftOf="@+id/txtNetSales"
             android:textColor="@color/txt_color" />
@@ -76,6 +76,8 @@
                     android:layout_height="10dp" />
 
                 <TextView
+                    android:layout_marginBottom="2dp"
+                    android:layout_centerVertical="true"
                     android:id= "@+id/txtAchieve"
                     android:background="@color/txt_color"
                     android:layout_width="5dp"

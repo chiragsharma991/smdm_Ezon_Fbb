@@ -3,6 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+                android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
 
@@ -15,22 +16,22 @@
         android:padding="5dp">
 
         <!--<RelativeLayout-->
-        <!--android:id="@+id/stock_Rel_image_child"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
+            <!--android:id="@+id/stock_Rel_image_child"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
 
 
 
 
-        <!--<ImageView-->
-        <!--android:id="@+id/stock_image_child"-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:layout_marginTop="0dp"-->
-        <!--android:scaleType="fitXY"-->
-        <!--android:src="@mipmap/placeholder"-->
+            <!--<ImageView-->
+                <!--android:id="@+id/stock_image_child"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_marginTop="0dp"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@mipmap/placeholder"-->
 
-        <!--/>-->
+                <!--/>-->
 
         <!--</RelativeLayout>-->
 
@@ -103,12 +104,12 @@
 
 
                 <!--<TextView-->
-                <!--android:id="@+id/bst_lineOne_child"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_alignStart="@+id/bst_head_child"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:background="@color/divider_salescard" />-->
+                    <!--android:id="@+id/bst_lineOne_child"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_alignStart="@+id/bst_head_child"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@color/divider_salescard" />-->
 
 
                 <!--SOH (U)-->
@@ -128,6 +129,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.3"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="SOH(U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -137,6 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
+                        android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -148,6 +151,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.6"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -170,6 +174,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.3"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Target ROS(U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -179,6 +184,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
+                        android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -190,13 +196,14 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.6"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 
                 </LinearLayout>
 
-                <!--ROS(U)-->
+              <!--ROS(U)-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -211,6 +218,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.3"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="ROS(U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -220,6 +228,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
+                        android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -231,6 +240,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.6"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="5"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -252,6 +262,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.3"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Availability%"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -261,6 +272,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
+                        android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
@@ -273,6 +285,7 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="5"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
 

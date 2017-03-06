@@ -272,7 +272,6 @@ public class GravitySnapHelper extends LinearSnapHelper {
                 return ((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
             }
         }
-
         return RecyclerView.NO_POSITION;
 
     }

@@ -2,6 +2,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+                android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
 
@@ -80,8 +81,6 @@
                         android:textSize="@dimen/smdm_inflator_title_normal"
                         android:textStyle="bold"
 
-
-
                         />
 
                     <RelativeLayout
@@ -141,6 +140,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.4"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="SOH(U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         android:id="@+id/textView6"
@@ -152,6 +152,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -163,6 +164,7 @@
                         android:layout_weight="0.4"
                         android:singleLine="true"
                         android:text="100"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -184,6 +186,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.4"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Sales(U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         android:id="@+id/textView7" />
@@ -194,6 +197,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -205,6 +209,7 @@
                         android:layout_weight="0.4"
                         android:singleLine="true"
                         android:text="100"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -225,6 +230,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.4"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Sell thru % (U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -235,6 +241,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -246,6 +253,7 @@
                         android:layout_weight="0.4"
                         android:singleLine="true"
                         android:text="100"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -265,6 +273,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.4"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Zonal sell\nthru % (U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -274,6 +283,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -284,6 +294,7 @@
                         android:layout_weight="0.4"
                         android:singleLine="true"
                         android:text="100"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -298,8 +309,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
                     android:visibility="gone"
+                    android:orientation="horizontal"
                     android:weightSum="1">
 
                     <TextView
@@ -308,6 +319,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.4"
                         android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
                         android:text="Wks on floor"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -318,6 +330,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -329,6 +342,7 @@
                         android:layout_weight="0.4"
                         android:singleLine="true"
                         android:text="NA"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 

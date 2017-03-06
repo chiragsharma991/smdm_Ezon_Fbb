@@ -145,7 +145,6 @@ public class Sku_Fragment extends Fragment {
         productName1 = productName;
         articleOption = articlOption;
         if (Reusable_Functions.chkStatus(context)) {
-
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;

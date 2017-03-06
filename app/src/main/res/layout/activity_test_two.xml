@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="5dp">
 
 
     <android.support.v7.widget.CardView
@@ -25,167 +30,167 @@
             android:layout_height="match_parent">
 
 
-            <LinearLayout
-                android:id="@+id/linearHead"
+        <LinearLayout
+            android:id="@+id/linearHead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/header"
+                android:background="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:background="@android:color/white"
-                android:orientation="vertical">
+                android:padding="5dp">
 
-                <RelativeLayout
-                    android:id="@+id/header"
-                    android:background="@android:color/white"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/stock_McCodeDesc"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dp">
+                    android:layout_alignParentLeft="true"
+                    android:text="2004-Knighthood Shift"
+                    android:textColor="@color/bg_store_code_text"
+                    />
 
-                    <TextView
-                        android:id="@+id/stock_McCodeDesc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="2004-Knighthood Shift"
-                        android:textColor="@color/bg_store_code_text"
-                        />
-
-                    <TextView
-                        android:id="@+id/stock_transfer_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:text="Pending"
-                        android:textColor="@color/smdm_amber"
-                        />
+                <TextView
+                    android:id="@+id/stock_transfer_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Pending"
+                    android:textColor="@color/smdm_amber"
+                    />
 
 
-                </RelativeLayout>
+            </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/smdm_border"
-                    >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/smdm_border"
+                >
 
-                </View>
+            </View>
 
 
-                <!--staring weight-->
+            <!--staring weight-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:padding="5dp"
+                android:weightSum="3"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@android:color/white"
-                    android:padding="5dp"
-                    android:weightSum="3"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1.1"
                     >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1.1"
+                        android:orientation="vertical"
                         >
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            >
+                            android:text="Short Qty"
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Short Qty"
+                            />
 
-                                />
-
-                            <TextView
-                                android:id="@+id/stock_sohRequested"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="100"
-                                android:textColor="@color/pink"
-                                />
-
-
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/stock_sohRequested"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100"
+                            android:textColor="@color/pink"
+                            />
 
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.1"
-                        >
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Avl. Qty"
-
-                                />
-
-                            <TextView
-                                android:id="@+id/stock_avi"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="98"
-                                android:textColor="@color/smdm_green"
-                                />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-                        >
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Option Req Action"
-
-                                />
-
-                            <TextView
-                                android:id="@+id/stock_numberOfOption"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="03"
-                                android:textColor="@color/smdm_amber"
-                                />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Avl. Qty"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/stock_avi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="98"
+                            android:textColor="@color/smdm_green"
+                            />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Option Req Action"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/stock_numberOfOption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="03"
+                            android:textColor="@color/smdm_amber"
+                            />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
             </LinearLayout>
+        </LinearLayout>
 
             <!--bellow layout-->
 

@@ -137,8 +137,7 @@
                             android:layout_height="wrap_content"
                             android:buttonTint="@android:color/black"
                             android:focusable="true"
-                            android:checked="true"
-                            />
+                            android:checked="true"/>
 
                     </LinearLayout>
                 </LinearLayout>

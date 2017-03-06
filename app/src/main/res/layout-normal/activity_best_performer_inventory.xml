@@ -52,10 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bestInvent_segmented"
         android:id="@+id/switchRelay"
-        android:padding="10dp"
-
-
-        >
+        android:padding="10dp">
 
         <Switch
             android:layout_width="wrap_content"
@@ -72,9 +69,7 @@
             android:text="Best/Worst"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@id/bestNworstswitch"
-            android:layout_alignBaseline="@id/bestNworstswitch"
-
-            />
+            android:layout_alignBaseline="@id/bestNworstswitch"/>
 
 
     </RelativeLayout>
@@ -83,19 +78,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/switchRelay"
-        >
-
-
+        android:layout_below="@+id/switchRelay">
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/bestInvent_ListView"
             android:layout_marginTop="10dp"
-            android:dividerHeight="1dp"
-
-            >
+            android:dividerHeight="1dp">
 
         </ListView>
         <View

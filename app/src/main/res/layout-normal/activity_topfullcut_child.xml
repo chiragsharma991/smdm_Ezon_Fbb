@@ -111,9 +111,7 @@
                             android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:textOff=""
-                            android:textOn=""
-
-                            />
+                            android:textOn=""/>
 
 
                     </RelativeLayout>
@@ -151,6 +149,7 @@
                         android:singleLine="true"
                         android:text="SOH(U)"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        android:textColor="@color/smdm_default_color"
                         />
 
                     <TextView
@@ -159,7 +158,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:textColor="@color/smdm_default_color"/>
 
                     <TextView
                         android:id="@+id/top_SOHU"
@@ -170,6 +170,7 @@
                         android:singleLine="true"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        android:textColor="@color/smdm_default_color"
                         />
 
                 </LinearLayout>
@@ -191,6 +192,7 @@
                         android:layout_weight="0.35"
                         android:singleLine="true"
                         android:text="Base Stock(U)"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -200,6 +202,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="12sp" />
 
                     <TextView
@@ -210,6 +213,7 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="100"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -231,6 +235,7 @@
                         android:layout_weight="0.35"
                         android:singleLine="true"
                         android:text="ROS(U)"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -240,6 +245,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="12sp" />
 
                     <TextView
@@ -250,6 +256,7 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="5"
+                        android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 

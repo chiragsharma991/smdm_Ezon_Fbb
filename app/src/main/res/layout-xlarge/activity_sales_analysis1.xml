@@ -611,7 +611,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_screen_color">
+                        android:background="@color/bg_screen_color"
+                        >
 
                         <EditText
                             android:id="@+id/etListText"
@@ -664,6 +665,13 @@
                          android:layout_below="@+id/linear"
                          android:background="@color/smdm_divider_Black" />-->
 
+           <!--     <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_below="@+id/linear"
+                    android:background="@color/smdm_divider_Black" />-->
+
                 <!--<ListView-->
                 <!--android:id="@+id/listView_SalesAnalysis"-->
                 <!--android:layout_width="match_parent"-->
@@ -691,7 +699,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dip"
 
-                        />
+                       />
 
 
                 </LinearLayout>

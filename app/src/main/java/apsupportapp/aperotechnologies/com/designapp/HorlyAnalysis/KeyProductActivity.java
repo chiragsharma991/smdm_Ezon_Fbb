@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,10 +47,10 @@ import apsupportapp.aperotechnologies.com.designapp.SearchActivity1;
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
 
-public class KeyProductActivity extends AppCompatActivity implements View.OnClickListener, OnRowPressListener {
+public class KeyProductActivity extends AppCompatActivity implements View.OnClickListener,OnRowPressListener {
     RelativeLayout btnBack;
     RelativeLayout btnSearch;
-    public static String prodName = "";
+    public static String prodName = "",segClk = "";
     private final String LOG_TAG = "MainActivity";
     KeyProductAdapter adapter;
     TabLayout tabLayout;
@@ -65,9 +66,10 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
     String userId, bearertoken;
     private EtlStatus etlStatus;
     SharedPreferences sharedPreferences;
-    private String TAG="KeyProductActivity";
+    private String TAG="KeyProductPlanActivity";
     private ArrayList<EtlStatus> etlStatusList;
     private Gson gson;
+    public static Activity key_product_activity;
     //git tese 10/1/2017
 
 
@@ -78,6 +80,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
         context = this;
+        key_product_activity = this;
         m_config = MySingleton.getInstance(context);
         intialize();
 
@@ -125,7 +128,9 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
                     Option_Fragment.tableDOpt_Frag.removeAllViews();
                     Option_Fragment.view.removeView(Option_Fragment.rel);
                     KeyProductActivity.prodName = "";
+
                 }
+
             }
 
             @Override
@@ -244,7 +249,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
                 SearchActivity1.searchSubDept = "";
                 SearchActivity1.searchProductName = "";
                 SearchActivity1.searchArticleOption = "";
-             /*   Intent intent = new Intent(KeyProductActivity.this, DashBoardActivity.class);
+             /*   Intent intent = new Intent(KeyProductPlanActivity.this, DashBoardActivity.class);
                 startActivity(intent);*/
                 finish();
                 break;
@@ -262,6 +267,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         Log.e("product ==== ", " " + productName);
         Log.e("adapter.getFragment(1) ", " " + adapter);
         KeyProductActivity.prodName = productName;
+       // KeyProductActivity.segClk = segmentClick;
 
         Option_Fragment fragment = (Option_Fragment) adapter.getFragment(1);
         if (fragment != null) {
@@ -285,6 +291,8 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+
+
     @Override
     public void onBackPressed() {
 
@@ -293,8 +301,6 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         SearchActivity1.searchSubDept = "";
         SearchActivity1.searchProductName = "";
         SearchActivity1.searchArticleOption = "";
-        /*Intent intent = new Intent(KeyProductActivity.this, DashBoardActivity.class);
-        startActivity(intent);*/
         finish();
     }
 }

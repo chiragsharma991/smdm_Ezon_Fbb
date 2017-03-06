@@ -133,21 +133,21 @@
                     android:textSize="@dimen/smdm_store_title_large"
                     />
 
-                <RelativeLayout
-                    android:id="@+id/oe_quickFilter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="0dp"
-                    >
+            <RelativeLayout
+                android:id="@+id/oe_quickFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="0dp"
+               >
 
-                    <Button
-                        android:layout_width="16dp"
-                        android:layout_height="29dp"
-                        android:layout_centerInParent="true"
-                        android:background="@mipmap/quick_filter"
-                        android:clickable="false" />
+                <Button
+                    android:layout_width="16dp"
+                    android:layout_height="29dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/quick_filter"
+                    android:clickable="false" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -464,12 +464,12 @@
                 </LinearLayout>
 
 
-                <!--  <View
-                      android:layout_below="@+id/linear"
-                      android:id="@+id/view2"
-                      android:layout_width="match_parent"
-                      android:layout_height="1dip"
-                      android:background="@color/border_round_edittext" />-->
+              <!--  <View
+                    android:layout_below="@+id/linear"
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/border_round_edittext" />-->
 
 
 
@@ -495,7 +495,7 @@
 
 
             </RelativeLayout>
-        </LinearLayout>
+       </LinearLayout>
     </LinearLayout>
     <include layout="@layout/oe_quick_filter_menu">
 

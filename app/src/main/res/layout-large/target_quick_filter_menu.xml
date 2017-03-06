@@ -133,6 +133,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Current"
+                                    android:textColor="@color/smdm_default_color"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
@@ -175,6 +176,7 @@
                                     android:id="@+id/txtpopPrevious"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Previous"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -215,6 +217,7 @@
                                     android:id="@+id/txtpopOld"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Old"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -256,6 +259,7 @@
                                     android:id="@+id/txtpopUpcoming"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Upcoming"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -340,6 +344,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="WTD"
+                                    android:textColor="@color/smdm_default_color"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
@@ -381,6 +386,7 @@
                                     android:id="@+id/txtpopL4W"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="L4W"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -424,6 +430,7 @@
                                     android:id="@+id/txtAgeing3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="STD"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -502,6 +509,7 @@
                                     android:id="@+id/txtpopDept"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Department"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -545,6 +553,7 @@
                                     android:id="@+id/txtpopCategory"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Category"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -585,6 +594,7 @@
                                     android:id="@+id/txtpopPlanClass"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Plan Class"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
@@ -711,19 +721,8 @@
                                     android:text="7"
                                     android:gravity="center"
                                     android:textSize="@dimen/smdm_quickfilter_title_large"
-
                                     />
-
-
                             </LinearLayout>
-
-
-
-
-
-
-
-
 
                         </LinearLayout>
 
@@ -757,8 +756,6 @@
                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
             </RelativeLayout>
-
-
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

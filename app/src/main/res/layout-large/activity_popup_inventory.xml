@@ -98,6 +98,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Sales(U)"
+                                    android:textColor="@color/smdm_default_color"
                                     android:textSize="@dimen/smdm_PopUp_title_large"
 
                                     />
@@ -159,6 +160,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Sell Thru%(U)"
                                     android:textSize="@dimen/smdm_PopUp_title_large"
 
@@ -220,6 +222,7 @@
                                     android:id="@+id/popPromoU"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Fwd Week Cover"
                                     android:textSize="@dimen/smdm_PopUp_title_large"
 
@@ -278,6 +281,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Cover and sell Thru%(U) "
                                     android:textSize="@dimen/smdm_PopUp_title_large"
 

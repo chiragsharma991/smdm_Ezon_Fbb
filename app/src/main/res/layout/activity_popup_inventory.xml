@@ -99,7 +99,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Sales(U)"
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
-
+                                    android:textColor="@color/smdm_default_color"
                                     />
 
 
@@ -159,6 +159,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
                                     android:text="Sell Thru%(U)"
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
 
@@ -222,6 +223,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Fwd Week Cover"
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
+                                    android:textColor="@color/smdm_default_color"
 
                                     />
 
@@ -280,6 +282,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Cover and sell Thru%(U) "
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
+                                    android:textColor="@color/smdm_default_color"
 
                                     />
 
@@ -301,34 +304,20 @@
                                     android:layout_weight="5"
                                     android:clickable="false"
                                     android:buttonTint="@android:color/black"
-
-
-
                                     />
-
 
                             </LinearLayout>
 
-
                         </LinearLayout>
 
-
-
-
-
-
                     </LinearLayout>
-
 
                 </RelativeLayout>
 
             </LinearLayout>
 
-
         </RelativeLayout>
 
-
     </RelativeLayout>
-
 
 </RelativeLayout>

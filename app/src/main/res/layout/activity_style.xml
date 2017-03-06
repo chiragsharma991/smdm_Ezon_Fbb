@@ -228,7 +228,6 @@
                     android:text="@string/scan_barcode"
                     android:textAllCaps="false"
                     android:textColor="#ffffff" />
-
                 <EditText
                     android:background="@android:color/transparent"
                     android:cursorVisible="false"
@@ -238,7 +237,6 @@
                     android:id="@+id/editBarcode"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
-
 
             </LinearLayout>
         </ScrollView>

@@ -115,6 +115,7 @@
                             android:id="@+id/txtpopCurrent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Current"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />
@@ -159,6 +160,7 @@
                             android:id="@+id/txtpopPrevious"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Previous"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />
@@ -200,6 +202,7 @@
                             android:id="@+id/txtpopOld"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Old"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />
@@ -242,6 +245,7 @@
                             android:id="@+id/txtpopUpcoming"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="Upcoming"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />
@@ -312,6 +316,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="WTD"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />
@@ -335,15 +340,7 @@
 
                     </LinearLayout>
 
-
-
-
-
-
-
-
-
-                </LinearLayout>
+             </LinearLayout>
 
 
 
@@ -364,6 +361,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="L4W"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />
@@ -408,6 +406,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
                             android:text="STD"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />

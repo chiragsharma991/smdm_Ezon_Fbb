@@ -445,7 +445,7 @@
                     </RelativeLayout>
 
                 </LinearLayout>
-            <!--    <View
+               <!-- <View
                     android:layout_below="@+id/linear"
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
@@ -453,27 +453,27 @@
                     android:background="@color/border_round_edittext" />
 -->
                 <!--<ListView-->
-                <!--android:id="@+id/list"-->
-                <!--android:dividerHeight="0dp"-->
-                <!--android:divider="@null"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="45dp"-->
-                <!--android:smoothScrollbar="true"></ListView>-->
+                    <!--android:id="@+id/list"-->
+                    <!--android:dividerHeight="0dp"-->
+                    <!--android:divider="@null"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="45dp"-->
+                    <!--android:smoothScrollbar="true"></ListView>-->
                 <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="45dp"-->
-                <!--android:orientation="vertical">-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="45dp"-->
+                    <!--android:orientation="vertical">-->
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
-                    android:divider="@null"
-                    android:dividerHeight="0dp"
-                    android:smoothScrollbar="true" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:divider="@null"
+                        android:dividerHeight="0dp"
+                        android:smoothScrollbar="true" />
 
 
                 <!--</LinearLayout>-->

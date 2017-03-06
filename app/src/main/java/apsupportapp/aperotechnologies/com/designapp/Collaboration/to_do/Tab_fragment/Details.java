@@ -43,8 +43,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
-import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
+
 
 public class Details extends AppCompatActivity {
 

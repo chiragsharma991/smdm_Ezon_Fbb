@@ -448,7 +448,7 @@
                     </RelativeLayout>
 
                 </LinearLayout>
-            <!--    <View
+              <!--  <View
                     android:layout_below="@+id/linear"
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
@@ -457,13 +457,13 @@
 -->
 
                 <!--<ListView-->
-                <!--android:id="@+id/list"-->
-                <!--android:dividerHeight="0dp"-->
-                <!--android:divider="@null"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="45dp"-->
-                <!--android:smoothScrollbar="true"></ListView>-->
+                    <!--android:id="@+id/list"-->
+                    <!--android:dividerHeight="0dp"-->
+                    <!--android:divider="@null"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="45dp"-->
+                    <!--android:smoothScrollbar="true"></ListView>-->
 
 
                 <android.support.v7.widget.RecyclerView

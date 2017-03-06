@@ -118,9 +118,7 @@
             android:text="Refresh Time :"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/normallayout_storesize"
-
-
-            />
+           />
 
         <TextView
             android:layout_width="wrap_content"
