@@ -28,7 +28,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -42,9 +41,6 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSnapAdapter;
-import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
 
 public class StockPullFragment extends Fragment {
@@ -121,6 +117,7 @@ public class StockPullFragment extends Fragment {
     private void initialise() {
 
         recyclerView=(RecyclerView)view.findViewById(R.id.stockPull_list);
+
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
