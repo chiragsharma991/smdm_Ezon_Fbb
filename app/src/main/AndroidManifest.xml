@@ -38,7 +38,7 @@
             android:label="@string/title_activity_dash_board"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".AboutUsActivity"
             android:screenOrientation="portrait"
@@ -203,6 +203,18 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <activity android:name=".HorlyAnalysis.ActualKeyProduct.ActualProduct" />
+        <activity android:name=".Test" />
+        <activity
+            android:name=".Collaboration.to_do.To_Do"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Test2" />
+        <activity
+            android:name=".Collaboration.Status.StatusActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Collaboration.to_do.Tab_fragment.Details"></activity>
     </application>
 
 </manifest>

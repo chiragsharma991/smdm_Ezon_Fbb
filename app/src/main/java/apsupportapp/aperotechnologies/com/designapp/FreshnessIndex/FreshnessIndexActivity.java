@@ -173,10 +173,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             }
             else if(getIntent().getStringExtra("selectedDept") != null)
             {
-               String  selectedString  = getIntent().getStringExtra("selectedDept");
-               filter_toggleClick = true;
-               retainValuesFilter();
-               requestFreshnessIndexFilterVal(selectedString);
+                String  selectedString  = getIntent().getStringExtra("selectedDept");
+                filter_toggleClick = true;
+                retainValuesFilter();
+                requestFreshnessIndexFilterVal(selectedString);
 
             }
 
@@ -204,7 +204,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Brand");
                         fromWhere = "Brand";
                         level = 4;
-                      //  flag = false;
+                        //  flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         // llfIndexhierarchy.setVisibility(View.GONE);
                         // llfreshnessIndex.setVisibility(View.GONE);
@@ -237,7 +237,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         level = 3;
                         //flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        // llfIndexhierarchy.setVisibility(View.GONE);
+                        //     llfIndexhierarchy.setVisibility(View.GONE);
                         //llfreshnessIndex.setVisibility(View.GONE);
 
                         if (Reusable_Functions.chkStatus(context)) {
@@ -268,7 +268,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Category");
                         fromWhere = "Category";
                         level = 2;
-                       // flag = false;
+                        // flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         // llfIndexhierarchy.setVisibility(View.GONE);
                         // llfreshnessIndex.setVisibility(View.GONE);
@@ -298,7 +298,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Department");
                         fromWhere = "Department";
                         level = 1;
-                      //  flag = false;
+                        //  flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         //  llfIndexhierarchy.setVisibility(View.GONE);
                         //  llfreshnessIndex.setVisibility(View.GONE);
@@ -372,7 +372,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         fromWhere = "Plan Class";
                         txtFIndexClass.setText("Plan Class");
                         level = 3;
-                       // flag = false;
+                        // flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         //    llfIndexhierarchy.setVisibility(View.GONE);
                         //  llfreshnessIndex.setVisibility(View.GONE);
@@ -400,7 +400,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         txtFIndexClass.setText("Brand");
                         fromWhere = "Brand";
                         level = 4;
-                       // flag = false;
+                        // flag = false;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         //  llfIndexhierarchy.setVisibility(View.GONE);
                         //  llfreshnessIndex.setVisibility(View.GONE);
@@ -428,7 +428,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     case "Brand":
                         btnFIndexNext.setVisibility(View.INVISIBLE);
                         txtFIndexClass.setText("Brand Plan Class");
-                      //  flag = false;
+                        //  flag = false;
                         fromWhere = "Brand Plan Class";
                         level = 5;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
@@ -830,7 +830,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         segmented3.setOnCheckedChangeListener(FreshnessIndexActivity.this);
         btnCore = (RadioButton) findViewById(R.id.btnCore);
         btnFashion = (RadioButton) findViewById(R.id.btnFashion);
-       // btnFashion.toggle();
+        // btnFashion.toggle();
         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
     }
@@ -844,7 +844,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         } else {
             btnFashion.toggle();
             Log.e(TAG, "Core toggle: " );
-    }
+        }
 
     }
     @Override
@@ -1080,7 +1080,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 2;
-                              //  processBar.setVisibility(View.VISIBLE);
+                                //  processBar.setVisibility(View.VISIBLE);
                                 requestFIndexPieChart();
 
                             }
@@ -1188,7 +1188,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 3;
-                               // processBar.setVisibility(View.VISIBLE);
+                                // processBar.setVisibility(View.VISIBLE);
                                 requestFIndexPieChart();
 
                             }
@@ -1298,7 +1298,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 4;
-                             //   processBar.setVisibility(View.VISIBLE);
+                                //   processBar.setVisibility(View.VISIBLE);
                                 requestFIndexPieChart();
 
                             }
@@ -1407,7 +1407,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 5;
-                              //  processBar.setVisibility(View.VISIBLE);
+                                //  processBar.setVisibility(View.VISIBLE);
                                 requestFIndexPieChart();
                             }
 
@@ -1489,7 +1489,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             ArrayList<String> labels = new ArrayList<>();
             if (currentgroup > 0.0f)
             {
-               entries.add(new PieEntry(currentgroup, "Current"));
+                entries.add(new PieEntry(currentgroup, "Current"));
             } else
             {
                 current = true;
@@ -2076,7 +2076,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                               requestFreshnessIndexFilterVal(selectedString);
+                                requestFreshnessIndexFilterVal(selectedString);
 
                             } else if (response.length() < limit) {
                                 for (i = 0; i < response.length(); i++) {

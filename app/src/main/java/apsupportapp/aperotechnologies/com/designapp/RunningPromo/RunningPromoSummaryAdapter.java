@@ -106,7 +106,7 @@ public class RunningPromoSummaryAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
 
-    public static class Holder extends RecyclerView.ViewHolder {
+    private static class Holder extends RecyclerView.ViewHolder {
 
         //   public TextView snapTextView;
         //   public RecyclerView recyclerView;

@@ -354,6 +354,41 @@
 
             </LinearLayout>
 
+            <!--one row-->
+
+
+
+
+
+
+            <!--second-->
+
+            <TextView
+                android:id="@+id/productinfo"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/smdm_dark_Black"
+                android:layout_below="@+id/time"
+                android:text="Product Information"
+                android:layout_marginTop="5dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:layout_below="@+id/productinfo"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/smdm_divider_Black"
+                />
+
+
+
+
 
             <LinearLayout
                 android:visibility="gone"
@@ -1106,7 +1141,7 @@
                             android:gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Best/Worst Performers"
+                            android:text="Skewed Sizes"
                             android:textColor="@color/smdm_light_Black"
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
@@ -1328,7 +1363,7 @@
 
             <TextView
                 android:id="@+id/headermarketing"
-                android:layout_below="@+id/linplanactual"
+                android:layout_below="@+id/collaboration_subView"
                 android:visibility="visible"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -1471,6 +1506,10 @@
                 android:layout_below="@+id/linearthree"
                 android:layout_alignParentStart="true" />
 
+
+
+
+
             <!--<apsupportapp.aperotechnologies.com.designapp.ExpandableHeightGridView-->
             <!--android:id="@+id/spotsView"-->
             <!--android:layout_width="match_parent"-->
@@ -1486,6 +1525,174 @@
             <!--android:verticalSpacing="10dp" />-->
 
 
+
+            <TextView
+                android:id="@+id/collaboration"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Collboration"
+                android:textColor="@color/smdm_dark_Black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/lin1"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true" />
+
+
+            <TextView
+                android:layout_below="@+id/collaboration"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/smdm_divider_Black"
+                />
+
+
+            <!--collaboration sub views-->
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/collaboration_subView"
+                android:orientation="vertical"
+                android:layout_below="@+id/collaboration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/to_do"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/hourly_analysis"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="To Do"
+                            android:textColor="@color/smdm_light_Black"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="visible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/status"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/option_efficiency" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Status"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/cut_size_report"
+                            />
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cut-Size Report"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/skewed_size"
+                            />
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
         </RelativeLayout>
+
+
     </ScrollView>
 </LinearLayout>

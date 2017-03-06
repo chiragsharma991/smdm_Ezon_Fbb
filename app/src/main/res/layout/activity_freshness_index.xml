@@ -8,10 +8,15 @@
     tools:context="apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity">
 
 
+
+
+
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +40,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    >
 
                     <RelativeLayout
                         android:id="@+id/freshnessIndex_imageBtnBack"
@@ -64,7 +70,7 @@
                         android:layout_toRightOf="@+id/freshnessIndex_imageBtnBack"
                         android:text="Freshness Index"
                         android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_header_title_normal"
+                        android:textSize="@dimen/smdm_header_title_large"
                         />
 
 
@@ -104,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:text="Store : "
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/smdm_store_title_normal"
+                    android:textSize="@dimen/smdm_store_title_large"
                     />
 
                 <TextView
@@ -115,8 +121,7 @@
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/smdm_store_title_normal"
-                    />
+                    android:textSize="@dimen/largelayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -126,8 +131,7 @@
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/smdm_store_title_normal"
-                    />
+                    android:textSize="@dimen/largelayout_storesize" />
 
             </RelativeLayout>
 
@@ -196,7 +200,7 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/fIndex_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="210dp" />
+                    android:layout_height="270dp" />
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
@@ -211,9 +215,6 @@
                     >
 
                 </ProgressBar>
-
-
-
             </RelativeLayout>
 
             <LinearLayout
@@ -243,7 +244,7 @@
                     android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />
+                    android:background="@color/smdm_divider_Black" />
 
                 <LinearLayout
                     android:layout_below="@+id/view1"
@@ -289,7 +290,7 @@
                                 android:text="Department"
                                 android:textStyle="normal"
                                 android:textColor="@color/bg_store_code_text"
-                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textSize="@dimen/smdm_departmentTitleLarge"
                                 />
 
 
@@ -323,7 +324,7 @@
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
                             />
 
 
@@ -338,7 +339,7 @@
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)%"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal"/>
 
 
@@ -351,7 +352,7 @@
                             android:gravity="center_vertical|center"
                             android:text="GIT(U)"
                             android:textColor="@color/bg_store_code_text"
-                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal"/>
 
 
@@ -418,12 +419,6 @@
 
                 </LinearLayout>
 
-           <!--     <View
-                    android:layout_below="@+id/linear"
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -450,4 +445,9 @@
 
         </LinearLayout>
     </LinearLayout>
+
+
+
+
+
 </RelativeLayout>

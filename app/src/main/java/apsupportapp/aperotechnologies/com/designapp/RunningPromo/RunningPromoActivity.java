@@ -177,11 +177,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
                                 //  RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
                                 // PromoListView.setAdapter(runningPromoAdapter);
-                                PromoList_summary.setLayoutManager(new LinearLayoutManager(PromoList_summary.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                                PromoList_summary.setOnFlingListener(null);
-                                new GravitySnapHelper(48).attachToRecyclerView(PromoList_summary);
-                                runningPromoSummaryAdapter = new RunningPromoSummaryAdapter(summary_list, RunningPromoActivity.this);
-                                PromoList_summary.setAdapter(runningPromoSummaryAdapter);
+
 
                                 // PromoListView.setSelectionFromTop(3,0);
                                 Reusable_Functions.hDialog();
