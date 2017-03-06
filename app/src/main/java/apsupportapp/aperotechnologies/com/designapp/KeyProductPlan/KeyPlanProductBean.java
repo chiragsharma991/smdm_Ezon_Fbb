@@ -14,6 +14,16 @@ public class KeyPlanProductBean {
          String size;
     double pvaSales;
 
+    public String getAchColor() {
+        return achColor;
+    }
+
+    public void setAchColor(String achColor) {
+        this.achColor = achColor;
+    }
+
+    String achColor;
+
     public String getLevel() {
         return level;
     }

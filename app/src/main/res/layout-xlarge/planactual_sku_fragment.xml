@@ -18,7 +18,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="0dp">
             <RelativeLayout
                 android:id="@+id/innerrellay"
                 android:layout_width="match_parent"
@@ -110,6 +110,56 @@
 
 
             </info.hoang8f.android.segmented.SegmentedGroup>
+
+            <RelativeLayout
+                android:id="@+id/colorRelLayout"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/segmentedGrpSku"
+                android:layout_marginTop="8dp">
+
+                <Button
+                    android:id="@+id/txtSkuGreen"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="110dp"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:background="@color/smdm_green"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="12sp"/>
+
+
+                <Button
+                    android:id="@+id/txtSkuRed"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="130dp"
+                    android:layout_toRightOf="@+id/txtSkuGreen"
+                    android:background="@color/smdm_red"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="12sp"/>
+
+
+                <Button
+                    android:id="@+id/txtSkuAmber"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="130dp"
+                    android:layout_toRightOf="@+id/txtSkuRed"
+                    android:background="@color/smdm_amber"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
 
         </RelativeLayout>
 

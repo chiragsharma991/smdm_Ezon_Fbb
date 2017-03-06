@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -45,6 +46,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -85,7 +87,7 @@ public class Plan_Option_Fragment extends Fragment {
     Gson gson;
     String option_seg_clk = "WTD";
     int planlevel = 2;
-    String userId, bearertoken;
+    String userId, bearertoken,achColor;
     ScrollView scrollViewC;
     ScrollView scrollViewD;
     RequestQueue queue;
@@ -94,6 +96,7 @@ public class Plan_Option_Fragment extends Fragment {
     RelativeLayout option_relativeLayout;
     private boolean opttoggleClick=false;
     public static RelativeLayout optrel;
+    Button txtOptionGreen, txtOptionRed,txtOptionAmber;
     // set the header titles
     String headers[] = {
             "       Option        ",
@@ -150,6 +153,9 @@ public class Plan_Option_Fragment extends Fragment {
         opt_btnWTD = (RadioButton) optionview.findViewById(R.id.planactual_optbtnWTD);
        // opt_btnWTD.toggle();
         opt_btnLW = (RadioButton) optionview.findViewById(R.id.planactual_optbtnLW);
+        txtOptionGreen = (Button)optionview.findViewById(R.id.txtOptionGreen);
+        txtOptionRed = (Button)optionview.findViewById(R.id.txtOptionRed);
+        txtOptionAmber = (Button)optionview.findViewById(R.id.txtOptionAmber);
 
         // option tab click
         if (KeyProductPlanActivity.plan_pager.getCurrentItem() == 1 && KeyProductPlanActivity.productName.equals("")) {
@@ -220,6 +226,85 @@ public class Plan_Option_Fragment extends Fragment {
 
 
            }
+        });
+        txtOptionGreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                optrel.setVisibility(View.VISIBLE);
+                tableAPlanOpt_Frag.removeAllViews();
+                tableBPlanOpt_Frag.removeAllViews();
+                tableCPlanOpt_Frag.removeAllViews();
+                tableDPlanOpt_Frag.removeAllViews();
+                if (Reusable_Functions.chkStatus(context)) {
+
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    planlevel = 2;
+                    achColor = "Green";
+                    productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                    retainSegmentVal();
+                    requestPlanOptionAchColorAPI(offsetvalue, limit);
+
+                }
+            }
+
+        });
+        txtOptionRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                optrel.setVisibility(View.VISIBLE);
+                tableAPlanOpt_Frag.removeAllViews();
+                tableBPlanOpt_Frag.removeAllViews();
+                tableCPlanOpt_Frag.removeAllViews();
+                tableDPlanOpt_Frag.removeAllViews();
+                if (Reusable_Functions.chkStatus(context)) {
+
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    planlevel = 2;
+                    achColor = "Red";
+                    productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                    retainSegmentVal();
+                    requestPlanOptionAchColorAPI(offsetvalue, limit);
+
+                }
+            }
+
+        });
+        txtOptionAmber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                optrel.setVisibility(View.VISIBLE);
+                tableAPlanOpt_Frag.removeAllViews();
+                tableBPlanOpt_Frag.removeAllViews();
+                tableCPlanOpt_Frag.removeAllViews();
+                tableDPlanOpt_Frag.removeAllViews();
+                if (Reusable_Functions.chkStatus(context)) {
+
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    planlevel = 2;
+                    achColor = "Amber";
+                    productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                    retainSegmentVal();
+                    requestPlanOptionAchColorAPI(offsetvalue, limit);
+
+
+                }
+            }
+
         });
 
         initComponents();
@@ -484,8 +569,6 @@ public class Plan_Option_Fragment extends Fragment {
                 textViewB.setBackgroundColor(Color.parseColor("#fe0000"));
             }
 
-
-
             taleRowForTableD.addView(textViewB, params);
         }
 
@@ -683,7 +766,7 @@ public class Plan_Option_Fragment extends Fragment {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(getActivity(), "no product data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
 
@@ -699,7 +782,7 @@ public class Plan_Option_Fragment extends Fragment {
                                     double pvaStock = productName1.getDouble("pvaStock");
                                     String storeCode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
-
+                                    String achColor = productName1.getString("achColor");
                                     keyPlanProductBean = new KeyPlanProductBean();
                                     keyPlanProductBean.setLevel(option);
                                     keyPlanProductBean.setPlanSaleNetVal(planSaleNetVal);
@@ -707,7 +790,7 @@ public class Plan_Option_Fragment extends Fragment {
                                     keyPlanProductBean.setInvClosingQty(invClosingQty);
                                     keyPlanProductBean.setPlanTargetStockQty(planTargetStockQty);
                                     keyPlanProductBean.setSaleNetVal(saleNetVal);
-                                    keyPlanProductBean.setPlanSaleTotQty(saleTotQty);
+                                    keyPlanProductBean.setSaleTotQty(saleTotQty);
                                     keyPlanProductBean.setPvaSales(pvaSales);
                                     keyPlanProductBean.setPvaStock(pvaStock);
                                     keyPlanProductBean.setStoreCode(storeCode);
@@ -731,6 +814,7 @@ public class Plan_Option_Fragment extends Fragment {
                                     double pvaStock = productName1.getDouble("pvaStock");
                                     String storeCode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
+                                    String achColor = productName1.getString("achColor");
                                     keyPlanProductBean = new KeyPlanProductBean();
                                     keyPlanProductBean.setLevel(option);
                                     keyPlanProductBean.setPlanSaleNetVal(planSaleNetVal);
@@ -738,7 +822,7 @@ public class Plan_Option_Fragment extends Fragment {
                                     keyPlanProductBean.setInvClosingQty(invClosingQty);
                                     keyPlanProductBean.setPlanTargetStockQty(planTargetStockQty);
                                     keyPlanProductBean.setSaleNetVal(saleNetVal);
-                                    keyPlanProductBean.setPlanSaleTotQty(saleTotQty);
+                                    keyPlanProductBean.setSaleTotQty(saleTotQty);
                                     keyPlanProductBean.setPvaSales(pvaSales);
                                     keyPlanProductBean.setPvaStock(pvaStock);
                                     keyPlanProductBean.setStoreCode(storeCode);
@@ -794,4 +878,133 @@ public class Plan_Option_Fragment extends Fragment {
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+
+    private void requestPlanOptionAchColorAPI(final int offset, int limit1) {
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26")+"&achColor="+achColor+
+                "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e("URL   ", url + " " + bearertoken);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("PlanProductName Response", " " + response.toString() + "\nlength: " + response.length());
+                        try {
+                            int i;
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(getActivity(), "no data found", Toast.LENGTH_LONG).show();
+                            } else if (response.length() == limit) {
+                                for (i = 0; i < response.length(); i++) {
+
+                                    JSONObject productName1 = response.getJSONObject(i);
+                                    option = productName1.getString("level");
+                                    double planSaleNetVal = productName1.getDouble("planSaleNetVal");
+                                    double planSaleTotQty = productName1.getDouble("planSaleTotQty");
+                                    double planTargetStockQty = productName1.getDouble("planTargetStockQty");
+                                    double saleNetVal = productName1.getDouble("saleNetVal");
+                                    double saleTotQty = productName1.getDouble("saleTotQty");
+                                    double invClosingQty = productName1.getDouble("invClosingQty");
+                                    double pvaSales = productName1.getDouble("pvaSales");
+                                    double pvaStock = productName1.getDouble("pvaStock");
+                                    String storeCode = productName1.getString("storeCode");
+                                    String storeDesc = productName1.getString("storeDesc");
+                                    String achColor = productName1.getString("achColor");
+
+                                    keyPlanProductBean = new KeyPlanProductBean();
+                                    keyPlanProductBean.setLevel(option);
+                                    keyPlanProductBean.setPlanSaleNetVal(planSaleNetVal);
+                                    keyPlanProductBean.setPlanSaleTotQty(planSaleTotQty);
+                                    keyPlanProductBean.setInvClosingQty(invClosingQty);
+                                    keyPlanProductBean.setPlanTargetStockQty(planTargetStockQty);
+                                    keyPlanProductBean.setSaleNetVal(saleNetVal);
+                                    keyPlanProductBean.setSaleTotQty(saleTotQty);
+                                    keyPlanProductBean.setPvaSales(pvaSales);
+                                    keyPlanProductBean.setPvaStock(pvaStock);
+                                    keyPlanProductBean.setStoreCode(storeCode);
+                                    keyPlanProductBean.setStoreDesc(storeDesc);
+                                    productNameBeanArrayList.add(keyPlanProductBean);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                requestPlanOptionAchColorAPI(offsetvalue, limit);
+                            } else if (response.length() < limit) {
+                                for (i = 0; i < response.length(); i++) {
+                                    JSONObject productName1 = response.getJSONObject(i);
+                                    option = productName1.getString("level");
+                                    double planSaleNetVal = productName1.getDouble("planSaleNetVal");
+                                    double planSaleTotQty = productName1.getDouble("planSaleTotQty");
+                                    double planTargetStockQty = productName1.getDouble("planTargetStockQty");
+                                    double saleNetVal = productName1.getDouble("saleNetVal");
+                                    double saleTotQty = productName1.getDouble("saleTotQty");
+                                    double invClosingQty = productName1.getDouble("invClosingQty");
+                                    double pvaSales = productName1.getDouble("pvaSales");
+                                    double pvaStock = productName1.getDouble("pvaStock");
+                                    String storeCode = productName1.getString("storeCode");
+                                    String storeDesc = productName1.getString("storeDesc");
+                                    String achColor = productName1.getString("achColor");
+                                    keyPlanProductBean = new KeyPlanProductBean();
+                                    keyPlanProductBean.setLevel(option);
+                                    keyPlanProductBean.setPlanSaleNetVal(planSaleNetVal);
+                                    keyPlanProductBean.setPlanSaleTotQty(planSaleTotQty);
+                                    keyPlanProductBean.setInvClosingQty(invClosingQty);
+                                    keyPlanProductBean.setPlanTargetStockQty(planTargetStockQty);
+                                    keyPlanProductBean.setSaleNetVal(saleNetVal);
+                                    keyPlanProductBean.setSaleTotQty(saleTotQty);
+                                    keyPlanProductBean.setPvaSales(pvaSales);
+                                    keyPlanProductBean.setPvaStock(pvaStock);
+                                    keyPlanProductBean.setStoreCode(storeCode);
+                                    keyPlanProductBean.setStoreDesc(storeDesc);
+                                    productNameBeanArrayList.add(keyPlanProductBean);
+                                }
+
+                                txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
+                                addTableRowToTableA();
+                                addTableRowToTableB();
+                                resizeHeaderHeight();
+                                getTableRowHeaderCellWidth();
+                                Log.e("view childcount", " " + optionview.getChildCount());
+                                if (optionview.getChildCount() == 1) {
+                                    scrollViewC.scrollTo(0, 0);
+                                    scrollViewD.scrollTo(0, 0);
+                                    optionview.addView(optrel);
+                                }
+
+
+                                generateTableC_AndTable_B();
+                                resizeBodyTableRowHeight();
+                            }
+                        } catch (Exception e) {
+
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+
+                Log.e("params ", " " + params);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
 }

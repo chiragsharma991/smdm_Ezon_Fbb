@@ -43,6 +43,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.security.Key;
 import java.text.NumberFormat;
@@ -85,6 +86,8 @@ public class Plan_Product extends Fragment {
     RelativeLayout relativeLayout;
     public static RelativeLayout relPlanProd_Frag;
     int planlevel;
+
+    Button txtProdGreen,txtProdRed,txtProdAmber;
     private  boolean plantoggleClick=true;
     // set the header titles
     String headers[] = {
@@ -92,9 +95,9 @@ public class Plan_Product extends Fragment {
            " PvA\n\t\tSales% ",
            "  PvA\n\t\tStk%   ",
            "  Plan\n\t\tSales   ",
-           "    Sales\n\t\t(U)    ",
-           "    Plan\n\t\tStk    ",
-           "    Stk\n\t\t(U)    "
+           "    Sales\n\t\t\t(U)    ",
+           "    Plan\n\t\t\tStk    ",
+           "    Stk\n\t\t\t(U)    "
 
     };
 
@@ -107,7 +110,7 @@ public class Plan_Product extends Fragment {
     int count = 0;
     OnRowPressListener1 rowPressListener;
     SharedPreferences sharedPreferences;
-    String filterProductValues = "";
+    String filterProductValues = "",achColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -153,7 +156,9 @@ public class Plan_Product extends Fragment {
        // plan_btnWTD.toggle();
         plan_btnLW = (RadioButton) view.findViewById(R.id.planactual_prodbtnLW);
         Log.e( "onCreateView: ","" +prodsegClick );
-
+        txtProdGreen = (Button)view.findViewById(R.id.txtProdGreen);
+        txtProdRed = (Button) view.findViewById(R.id.txtProdRed);
+        txtProdAmber = (Button) view.findViewById(R.id.txtProdAmber);
 
         Log.e("TAG", "onCreateView: Productview>>>>>" );
 
@@ -197,6 +202,7 @@ public class Plan_Product extends Fragment {
                                 break;
                             }
                             prodsegClick = "WTD";
+
                             relPlanProd_Frag.setVisibility(View.VISIBLE);
                             tableAProd_Frag.removeAllViews();
                             tableBProd_Frag.removeAllViews();
@@ -227,6 +233,7 @@ public class Plan_Product extends Fragment {
                                 break;
                             }
                             prodsegClick = "LW";
+
                             relPlanProd_Frag.setVisibility(View.VISIBLE);
                             tableAProd_Frag.removeAllViews();
                             tableBProd_Frag.removeAllViews();
@@ -261,6 +268,88 @@ public class Plan_Product extends Fragment {
                  }
              }
          });
+
+        txtProdGreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                relPlanProd_Frag.setVisibility(View.VISIBLE);
+                tableAProd_Frag.removeAllViews();
+                tableBProd_Frag.removeAllViews();
+                tableCProd_Frag.removeAllViews();
+                tableDProd_Frag.removeAllViews();
+                if (Reusable_Functions.chkStatus(context)) {
+
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    planlevel = 1;
+                    achColor = "Green";
+                    productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                    plantoggleClick = false;
+                    RetainSegVal();
+                    requestPlanProductAchColorAPI(offsetvalue, limit);
+
+            }
+            }
+
+        });
+        txtProdRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                relPlanProd_Frag.setVisibility(View.VISIBLE);
+                tableAProd_Frag.removeAllViews();
+                tableBProd_Frag.removeAllViews();
+                tableCProd_Frag.removeAllViews();
+                tableDProd_Frag.removeAllViews();
+                if (Reusable_Functions.chkStatus(context)) {
+
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    planlevel = 1;
+                    achColor = "Red";
+                    productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                    plantoggleClick = false;
+                    RetainSegVal();
+                    requestPlanProductAchColorAPI(offsetvalue, limit);
+
+                }
+            }
+
+        });
+        txtProdAmber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                relPlanProd_Frag.setVisibility(View.VISIBLE);
+                tableAProd_Frag.removeAllViews();
+                tableBProd_Frag.removeAllViews();
+                tableCProd_Frag.removeAllViews();
+                tableDProd_Frag.removeAllViews();
+                if (Reusable_Functions.chkStatus(context)) {
+
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    planlevel = 1;
+                    achColor = "Amber";
+                    productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                    plantoggleClick = false;
+                    RetainSegVal();
+                    requestPlanProductAchColorAPI(offsetvalue, limit);
+
+                }
+            }
+
+        });
 
         initComponents();
         setComponentsId();
@@ -656,15 +745,16 @@ public class Plan_Product extends Fragment {
         }
     }
 
-    private void requestPlanProductAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("URL   ", url + " " + bearertoken);
+
+    private void requestFilterProductAPI(final int offset, int limit1) {
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&productName="+filterProductValues.replace(" ","%20").replaceAll("&", "%26") +"&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e("filtre product Url   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("PlanProductName Response", " " + response.toString() + "\nlength: " + response.length());
+                        Log.e("PlanProductFilter Response", " " + response.toString() + "\nlength: " + response.length());
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -685,7 +775,7 @@ public class Plan_Product extends Fragment {
                                     double pvaStock = productName1.getDouble("pvaStock");
                                     String storeCode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
-
+                                    String achColor = productName1.getString("achColor");
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
                                     productNameBean.setPlanSaleNetVal(planSaleNetVal);
@@ -693,7 +783,7 @@ public class Plan_Product extends Fragment {
                                     productNameBean.setInvClosingQty(invClosingQty);
                                     productNameBean.setPlanTargetStockQty(planTargetStockQty);
                                     productNameBean.setSaleNetVal(saleNetVal);
-                                    productNameBean.setPlanSaleTotQty(saleTotQty);
+                                    productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
                                     productNameBean.setStoreCode(storeCode);
@@ -702,7 +792,7 @@ public class Plan_Product extends Fragment {
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                requestPlanProductAPI(offsetvalue, limit);
+                                requestFilterProductAPI(offsetvalue, limit);
                             } else if (response.length() < limit) {
                                 for (i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
@@ -717,7 +807,7 @@ public class Plan_Product extends Fragment {
                                     double pvaStock = productName1.getDouble("pvaStock");
                                     String storeCode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
-
+                                    String achColor = productName1.getString("achColor");
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
                                     productNameBean.setPlanSaleNetVal(planSaleNetVal);
@@ -725,7 +815,7 @@ public class Plan_Product extends Fragment {
                                     productNameBean.setInvClosingQty(invClosingQty);
                                     productNameBean.setPlanTargetStockQty(planTargetStockQty);
                                     productNameBean.setSaleNetVal(saleNetVal);
-                                    productNameBean.setPlanSaleTotQty(saleTotQty);
+                                    productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
                                     productNameBean.setStoreCode(storeCode);
@@ -733,12 +823,7 @@ public class Plan_Product extends Fragment {
                                     productNameBeanArrayList.add(productNameBean);
                                 }
 
-//                                Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
-//                                    public int compare(ProductNameBean one, ProductNameBean other) {
-//                                        return new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
-//                                    }
-//                                });
-//                                Collections.reverse(productNameBeanArrayList);
+
                                 txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
                                 addTableRowToTableA();
@@ -785,15 +870,15 @@ public class Plan_Product extends Fragment {
         queue.add(postRequest);
     }
 
-    private void requestFilterProductAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&productName="+filterProductValues.replace(" ","%20").replaceAll("&", "%26") +"&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("filtre product Url   ", url + " " + bearertoken);
+    private void requestPlanProductAPI(final int offset, int limit1) {
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e("URL   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("PlanProductFilter Response", " " + response.toString() + "\nlength: " + response.length());
+                        Log.e("PlanProductName Response", " " + response.toString() + "\nlength: " + response.length());
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -814,7 +899,7 @@ public class Plan_Product extends Fragment {
                                     double pvaStock = productName1.getDouble("pvaStock");
                                     String storeCode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
-
+                                    String achColor = productName1.getString("achColor");
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
                                     productNameBean.setPlanSaleNetVal(planSaleNetVal);
@@ -822,7 +907,7 @@ public class Plan_Product extends Fragment {
                                     productNameBean.setInvClosingQty(invClosingQty);
                                     productNameBean.setPlanTargetStockQty(planTargetStockQty);
                                     productNameBean.setSaleNetVal(saleNetVal);
-                                    productNameBean.setPlanSaleTotQty(saleTotQty);
+                                    productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
                                     productNameBean.setStoreCode(storeCode);
@@ -846,6 +931,98 @@ public class Plan_Product extends Fragment {
                                     double pvaStock = productName1.getDouble("pvaStock");
                                     String storeCode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
+                                    String achColor = productName1.getString("achColor");
+                                    productNameBean = new KeyPlanProductBean();
+                                    productNameBean.setLevel(level);
+                                    productNameBean.setPlanSaleNetVal(planSaleNetVal);
+                                    productNameBean.setPlanSaleTotQty(planSaleTotQty);
+                                    productNameBean.setInvClosingQty(invClosingQty);
+                                    productNameBean.setPlanTargetStockQty(planTargetStockQty);
+                                    productNameBean.setSaleNetVal(saleNetVal);
+                                    productNameBean.setSaleTotQty(saleTotQty);
+                                    productNameBean.setPvaSales(pvaSales);
+                                    productNameBean.setPvaStock(pvaStock);
+                                    productNameBean.setStoreCode(storeCode);
+                                    productNameBean.setStoreDesc(storeDesc);
+                                    productNameBeanArrayList.add(productNameBean);
+                                }
+
+                                txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
+                                addTableRowToTableA();
+                                addTableRowToTableB();
+                                resizeHeaderHeight();
+                                getTableRowHeaderCellWidth();
+                                generateTableC_AndTable_B();
+                                resizeBodyTableRowHeight();
+                                plantoggleClick=false;
+                            }
+                        } catch (Exception e) {
+
+                            e.printStackTrace();
+                            plantoggleClick=false;
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                        plantoggleClick=false;
+
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+
+                Log.e("params ", " " + params);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+    private void requestPlanProductAchColorAPI(final int offset, int limit1) {
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&achColor=" + achColor +"&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e("URL   ", url + " " + bearertoken);
+
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("PlanProduct Ach Color Response", " " + response.toString() + "\nlength: " + response.length());
+                        try {
+                            int i;
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no product data found", Toast.LENGTH_LONG).show();
+                            } else if (response.length() == limit) {
+                                for (i = 0; i < response.length(); i++) {
+
+                                    JSONObject productName1 = response.getJSONObject(i);
+                                    String level = productName1.getString("level");
+                                    double planSaleNetVal = productName1.getDouble("planSaleNetVal");
+                                    double planSaleTotQty = productName1.getDouble("planSaleTotQty");
+                                    double planTargetStockQty = productName1.getDouble("planTargetStockQty");
+                                    double saleNetVal = productName1.getDouble("saleNetVal");
+                                    double saleTotQty = productName1.getDouble("saleTotQty");
+                                    double invClosingQty = productName1.getDouble("invClosingQty");
+                                    double pvaSales = productName1.getDouble("pvaSales");
+                                    double pvaStock = productName1.getDouble("pvaStock");
+                                    String storeCode = productName1.getString("storeCode");
+                                    String storeDesc = productName1.getString("storeDesc");
+                                    String achColor = productName1.getString("achColor");
 
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
@@ -854,7 +1031,40 @@ public class Plan_Product extends Fragment {
                                     productNameBean.setInvClosingQty(invClosingQty);
                                     productNameBean.setPlanTargetStockQty(planTargetStockQty);
                                     productNameBean.setSaleNetVal(saleNetVal);
-                                    productNameBean.setPlanSaleTotQty(saleTotQty);
+                                    productNameBean.setSaleTotQty(saleTotQty);
+                                    productNameBean.setPvaSales(pvaSales);
+                                    productNameBean.setPvaStock(pvaStock);
+                                    productNameBean.setStoreCode(storeCode);
+                                    productNameBean.setStoreDesc(storeDesc);
+                                    productNameBeanArrayList.add(productNameBean);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                requestPlanProductAchColorAPI(offsetvalue, limit);
+                            } else if (response.length() < limit) {
+                                for (i = 0; i < response.length(); i++) {
+                                    JSONObject productName1 = response.getJSONObject(i);
+                                    String level = productName1.getString("level");
+                                    double planSaleNetVal = productName1.getDouble("planSaleNetVal");
+                                    double planSaleTotQty = productName1.getDouble("planSaleTotQty");
+                                    double planTargetStockQty = productName1.getDouble("planTargetStockQty");
+                                    double saleNetVal = productName1.getDouble("saleNetVal");
+                                    double saleTotQty = productName1.getDouble("saleTotQty");
+                                    double invClosingQty = productName1.getDouble("invClosingQty");
+                                    double pvaSales = productName1.getDouble("pvaSales");
+                                    double pvaStock = productName1.getDouble("pvaStock");
+                                    String storeCode = productName1.getString("storeCode");
+                                    String storeDesc = productName1.getString("storeDesc");
+                                    String achColor = productName1.getString("achColor");
+
+                                    productNameBean = new KeyPlanProductBean();
+                                    productNameBean.setLevel(level);
+                                    productNameBean.setPlanSaleNetVal(planSaleNetVal);
+                                    productNameBean.setPlanSaleTotQty(planSaleTotQty);
+                                    productNameBean.setInvClosingQty(invClosingQty);
+                                    productNameBean.setPlanTargetStockQty(planTargetStockQty);
+                                    productNameBean.setSaleNetVal(saleNetVal);
+                                    productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
                                     productNameBean.setStoreCode(storeCode);
@@ -862,12 +1072,6 @@ public class Plan_Product extends Fragment {
                                     productNameBeanArrayList.add(productNameBean);
                                 }
 
-//                                Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
-//                                    public int compare(ProductNameBean one, ProductNameBean other) {
-//                                        return new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
-//                                    }
-//                                });
-//                                Collections.reverse(productNameBeanArrayList);
                                 txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
                                 addTableRowToTableA();
