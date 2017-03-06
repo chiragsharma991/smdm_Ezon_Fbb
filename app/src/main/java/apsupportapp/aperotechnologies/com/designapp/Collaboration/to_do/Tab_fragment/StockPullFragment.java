@@ -124,7 +124,8 @@ public class StockPullFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                new Details().StartActivity(context);
+
+                new Details().StartActivity(context,ReceiverSummaryList.get(position).getMccodeDesc());
             }
         }));
 
@@ -238,6 +239,7 @@ public class StockPullFragment extends Fragment {
         else
         {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+            Reusable_Functions.hDialog();
 
         }
 

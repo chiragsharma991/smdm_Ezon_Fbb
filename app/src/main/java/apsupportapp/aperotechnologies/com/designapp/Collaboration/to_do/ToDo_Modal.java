@@ -6,16 +6,17 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do;
 
 public class ToDo_Modal {
 
-   String storeCode;
-   String storeDesc;
-   String transferStatus;
-   Double stkOnhandQtyRequested;
-   Double stkQtyAvl;
-   int noOfOptions;
-   int stkOnhandQty;
-   int stkGitQty;
-   Double fwdWeekCover;
+    String storeCode;
+    String storeDesc;
+    String transferStatus;
+    Double stkOnhandQtyRequested;
+    Double stkQtyAvl;
+    int noOfOptions;
+    int stkOnhandQty;
+    int stkGitQty;
+    Double fwdWeekCover;
     String mccodeDesc;
+    String level;
 
 
     public String getStoreCode() {
@@ -96,5 +97,13 @@ public class ToDo_Modal {
 
     public void setMccodeDesc(String mccodeDesc) {
         this.mccodeDesc = mccodeDesc;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }
