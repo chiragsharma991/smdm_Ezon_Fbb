@@ -28,7 +28,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private final Context context;
     private final ArrayList<ToDo_Modal> list;
     private static boolean check=false;
-    public  boolean[] Toggle;
+    public static boolean[] Toggle;
 
 
 
@@ -54,6 +54,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
+        Log.e("TAG", "Stock detail: "+position );
+
         if(holder instanceof StockDetailsAdapter.Holder) {
             if(position < list.size()) {
 
@@ -73,7 +75,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((StockDetailsAdapter.Holder)holder).Detail_reqQty.setText(""+list.get(position).getStkOnhandQtyRequested());
                 ((StockDetailsAdapter.Holder)holder).Detail_Git.setText(""+(int)list.get(position).getStkGitQty());
                 ((StockDetailsAdapter.Holder)holder).Detail_AviQty.setText(""+list.get(position).getStkQtyAvl());
-                ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
+               /* ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Log.e("TAG", "onClick:>>>> "+position );
@@ -88,20 +90,21 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         {
                             Toggle[position]=true;
 
-                            LayoutInflater layoutInflater = (LayoutInflater)context.getApplicationContext()
-                                    .getSystemService(context.LAYOUT_INFLATER_SERVICE);
-                            ViewGroup layout = (ViewGroup) layoutInflater.inflate(R.layout.details_header_child, null);
-
-                            ((StockDetailsAdapter.Holder)holder).detailsLinear.addView(layout);
+                           // ArrayList<String>listData=new ArrayList<String>();
+                           // String xyz="Testing position is="+position;
+                           // listData.add(xyz);
+                           // Details.HashmapList.put(position,listData);
                             notifyDataSetChanged();
 
                         }
 
 
                     }
-                });
+                });*/
 
-
+                DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(Details.HashmapList,context,position);
+                ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
+              //  Log.e("Tab", "Hash Map size is "+Details.HashmapList.get(position).size());
 
 
 
@@ -120,7 +123,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
         private final TextView Detail_Soh,Detail_optionLevel,Detail_reqQty,Detail_Git,Detail_AviQty;
-        private LinearLayout Sizeslayout,detailsLinear;
+        private LinearLayout Sizeslayout;
+        protected RecyclerView detailsLinear;
         public Holder(View itemView) {
             super(itemView);
             Detail_optionLevel=(TextView)itemView.findViewById(R.id.detail_optionLevel);
@@ -129,7 +133,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Detail_Git=(TextView)itemView.findViewById(R.id.detail_Git);
             Detail_AviQty=(TextView)itemView.findViewById(R.id.detail_AviQty);
             Sizeslayout=(LinearLayout)itemView.findViewById(R.id.detail_size);
-            detailsLinear=(LinearLayout)itemView.findViewById(R.id.details_headerChild);
+            detailsLinear=(RecyclerView)itemView.findViewById(R.id.details_headerChild);
 
 
 

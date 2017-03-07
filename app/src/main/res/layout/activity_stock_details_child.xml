@@ -238,7 +238,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/detail_size"
                 android:orientation="vertical"
-                android:visibility="gone"
+                android:visibility="visible"
                 >
 
                 <View
@@ -319,8 +319,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:id="@+id/details_headerChild"
                     >
+
+                    <android.support.v7.widget.RecyclerView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/details_headerChild"
+                        android:scrollbars="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        />
 
 
 

@@ -58,13 +58,15 @@ public class Details extends AppCompatActivity {
     private int offsetvalue = 0;
     private RequestQueue queue;
     private String TAG = "ToDo_Fregment";
-    private ArrayList<ToDo_Modal> DetailsList;
+    private ArrayList<ToDo_Modal> DetailsList, ChildDetailList;
     private ToDo_Modal toDo_modal;
     public static RecyclerView recyclerView;
     private int levelOfOption = 1;  //  1 is for option and 2 is for size
     private String MCCodeDesc = "";    // code and description
+    private String option = "";    // code and description
     private StockDetailsAdapter stockPullAdapter;
     private LinearLayout detailsLinear;
+    public static HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
 
 
     @Override
@@ -85,19 +87,111 @@ public class Details extends AppCompatActivity {
         queue = new RequestQueue(cache, network);
         queue.start();
 
-        if (1 == 1) {
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestReceiversDetails();}
-        else {
-          //  Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+            requestReceiversDetails();
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private void requestReceiversChildDetails(final int position) {
+
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") + "&option=" + option.replaceAll(" ", "%20");
+
+        Log.e(TAG, "Details Url" + "" + url);
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.i(TAG, "Detail api response : " + " " + response);
+                        Log.i(TAG, "Detail api total length" + "" + response.length());
+
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
+
+                            } else if (response.length() == limit) {
+                                Log.e(TAG, "promo eql limit");
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
+                                    ChildDetailList.add(toDo_modal);
+
+
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                //
+
+                                requestReceiversChildDetails(position);
+
+                            } else if (response.length() < limit) {
+                                Log.e(TAG, "promo /= limit");
+                                for (int i = 0; i < response.length(); i++) {
+                                    toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
+                                    ChildDetailList.add(toDo_modal);
+                                }
+                                count = 0;
+                                limit = 100;
+                                offsetvalue = 0;
+
+
+                            }
+
+                            HashmapList.put(position, ChildDetailList);
+                            stockPullAdapter.notifyDataSetChanged();
+                            Reusable_Functions.hDialog();
+
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+
+                            e.printStackTrace();
+                            Log.e(TAG, "catch...Error" + e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+        Reusable_Functions.hDialog();
+
 
     }
 
 
     private void requestReceiversDetails() {
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ","%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20");
+
 
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -145,7 +239,9 @@ public class Details extends AppCompatActivity {
                             recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             stockPullAdapter = new StockDetailsAdapter(DetailsList, context);
+                            MakeHashMap(DetailsList);
                             recyclerView.setAdapter(stockPullAdapter);
+
                             Reusable_Functions.hDialog();
 
 
@@ -188,51 +284,59 @@ public class Details extends AppCompatActivity {
 
     }
 
+    private void MakeHashMap(ArrayList<ToDo_Modal> detailsList) {
+
+        HashmapList = new HashMap<Integer, ArrayList<ToDo_Modal>>();
+
+        for (int i = 0; i < detailsList.size(); i++) {
+            ArrayList<ToDo_Modal> listData = new ArrayList<ToDo_Modal>();
+            HashmapList.put(i, listData);
+        }
+
+    }
+
     private void initalise() {
 
-        String data=getIntent().getExtras().getString("MCCodeDesc");
-        MCCodeDesc=data;
+        String data = getIntent().getExtras().getString("MCCodeDesc");
+        MCCodeDesc = data;
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
-      /*  recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
-                if(StockDetailsAdapter.Toggle[position]==true)
-                {
-                    StockDetailsAdapter.Toggle[position]=false;
+                if (StockDetailsAdapter.Toggle[position] == true) {
+                    StockDetailsAdapter.Toggle[position] = false;
                     stockPullAdapter.notifyDataSetChanged();
 
 
-
-                }else
-                {
-                    StockDetailsAdapter.Toggle[position]=true;
-                    Log.e(TAG, "add layout: >>>>>");
-                    detailsLinear=(LinearLayout)view.findViewById(R.id.details_headerChild);
-                    LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext()
-                            .getSystemService(LAYOUT_INFLATER_SERVICE);
-                    ViewGroup layout = (ViewGroup) layoutInflater.inflate(R.layout.details_header_child, null);
-
-                    detailsLinear.addView(layout);
-                    stockPullAdapter.notifyDataSetChanged();
+                } else {
+                    StockDetailsAdapter.Toggle[position] = true;
+                    MCCodeDesc = DetailsList.get(position).getMccodeDesc();
+                    option = DetailsList.get(position).getLevel();
+                    levelOfOption = 2;
+                    ChildDetailList = new ArrayList<ToDo_Modal>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.sDialog(context, "Loading.......");
+                        requestReceiversChildDetails(position);
+                    } else {
+                        Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
 
             }
-        }));*/
+        }));
 
     }
-
-
 
 
     public void StartActivity(Context context) {
         context.startActivity(new Intent(context, Details.class));
     }
 
-    public void StartActivity(Context context,String data) {
-        Intent intent=new Intent(context,Details.class);
-        intent.putExtra("MCCodeDesc",data);
+    public void StartActivity(Context context, String data) {
+        Intent intent = new Intent(context, Details.class);
+        intent.putExtra("MCCodeDesc", data);
         context.startActivity(intent);
     }
 }
