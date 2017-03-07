@@ -45,6 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
+
 public class Details extends AppCompatActivity {
 
     private Gson gson;

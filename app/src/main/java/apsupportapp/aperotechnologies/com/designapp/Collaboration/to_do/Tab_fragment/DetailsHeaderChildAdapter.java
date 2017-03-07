@@ -1,16 +1,20 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
 import android.content.Context;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -23,6 +27,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
     private final Context context;
     private final int PrePosition;
     private final HashMap<Integer, ArrayList<ToDo_Modal>> list;
+    private static Set<Pair<Integer, Integer>> CheckedItems = new HashSet<Pair<Integer, Integer>>();
 
 
 
@@ -46,10 +51,34 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
 
         Log.e("TAG", "On Detail child: "+position );
 
+        final Pair<Integer, Integer> Childtag = new Pair<Integer, Integer>(PrePosition,position);
+
         ((DetailsHeaderChildAdapter.Holder)holder).DetailChild_size.setText(list.get(PrePosition).get(position).getLevel());
         ((DetailsHeaderChildAdapter.Holder)holder).DetailChild_requiredQty.setText(""+list.get(PrePosition).get(position).getStkOnhandQtyRequested());
         ((DetailsHeaderChildAdapter.Holder)holder).DetailChild_aviQty.setText(""+list.get(PrePosition).get(position).getStkQtyAvl());
+        ((DetailsHeaderChildAdapter.Holder)holder).DetailChild_checkBox.setTag(Childtag);
 
+        ((DetailsHeaderChildAdapter.Holder)holder).DetailChild_checkBox.setChecked(CheckedItems.contains(Childtag));
+
+        ((DetailsHeaderChildAdapter.Holder)holder).DetailChild_checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final CheckBox cb = (CheckBox) view;
+                final Pair<Integer, Integer> tagFlag = (Pair<Integer, Integer>) view.getTag();
+
+                //this is check and uncheked method to remove and add flag ...
+                if (cb.isChecked())
+                {
+                    CheckedItems.add(tagFlag);
+                } else
+                {
+                    CheckedItems.remove(tagFlag);
+                }
+
+                Log.e( "TAG", "CheckedItems sizes are: "+CheckedItems.size() );
+            }
+        });
 
     }
 

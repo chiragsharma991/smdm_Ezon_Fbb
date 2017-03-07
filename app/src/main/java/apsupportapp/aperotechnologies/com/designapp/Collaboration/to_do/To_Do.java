@@ -13,8 +13,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -48,17 +50,19 @@ import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoAct
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
-public class To_Do extends AppCompatActivity {
+public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toobar;
     private ViewPager viewPager;
     private TabLayout tab;
+    private RelativeLayout ToDo_imageBtnBack;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do);
+        initialise();
        // getSupportActionBar().hide();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_to_do);
         setSupportActionBar(toolbar);
@@ -69,8 +73,11 @@ public class To_Do extends AppCompatActivity {
 
     }
 
-
-
+    private void initialise()
+    {
+        ToDo_imageBtnBack=(RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
+        ToDo_imageBtnBack.setOnClickListener(this);
+    }
 
 
     private void checkCollapsing()
@@ -106,6 +113,11 @@ public class To_Do extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View view)
+    {
+        finish();
+    }
 }
 
 
