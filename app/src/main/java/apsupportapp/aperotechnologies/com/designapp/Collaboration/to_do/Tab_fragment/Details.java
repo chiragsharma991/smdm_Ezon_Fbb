@@ -10,7 +10,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -37,6 +41,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
@@ -55,9 +60,11 @@ public class Details extends AppCompatActivity {
     private String TAG = "ToDo_Fregment";
     private ArrayList<ToDo_Modal> DetailsList;
     private ToDo_Modal toDo_modal;
-    private RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
     private int levelOfOption = 1;  //  1 is for option and 2 is for size
     private String MCCodeDesc = "";    // code and description
+    private StockDetailsAdapter stockPullAdapter;
+    private LinearLayout detailsLinear;
 
 
     @Override
@@ -78,15 +85,15 @@ public class Details extends AppCompatActivity {
         queue = new RequestQueue(cache, network);
         queue.start();
 
-        if(1==1) {
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestReceiversDetails();
-        }
+            requestReceiversDetails();}
         else {
-            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
 
     }
+
 
     private void requestReceiversDetails() {
 
@@ -118,8 +125,6 @@ public class Details extends AppCompatActivity {
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                //
-
                                 requestReceiversDetails();
 
                             } else if (response.length() < limit) {
@@ -131,13 +136,11 @@ public class Details extends AppCompatActivity {
                                 count = 0;
                                 limit = 100;
                                 offsetvalue = 0;
-
-
                             }
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                            StockDetailsAdapter stockPullAdapter = new StockDetailsAdapter(DetailsList, context);
+                            stockPullAdapter = new StockDetailsAdapter(DetailsList, context);
                             recyclerView.setAdapter(stockPullAdapter);
                             Reusable_Functions.hDialog();
 
@@ -176,18 +179,47 @@ public class Details extends AppCompatActivity {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-        Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         Reusable_Functions.hDialog();
 
 
     }
 
     private void initalise() {
+
         String data=getIntent().getExtras().getString("MCCodeDesc");
         MCCodeDesc=data;
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
+      /*  recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                if(StockDetailsAdapter.Toggle[position]==true)
+                {
+                    StockDetailsAdapter.Toggle[position]=false;
+                    stockPullAdapter.notifyDataSetChanged();
+
+
+
+                }else
+                {
+                    StockDetailsAdapter.Toggle[position]=true;
+                    Log.e(TAG, "add layout: >>>>>");
+                    detailsLinear=(LinearLayout)view.findViewById(R.id.details_headerChild);
+                    LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext()
+                            .getSystemService(LAYOUT_INFLATER_SERVICE);
+                    ViewGroup layout = (ViewGroup) layoutInflater.inflate(R.layout.details_header_child, null);
+
+                    detailsLinear.addView(layout);
+                    stockPullAdapter.notifyDataSetChanged();
+
+                }
+
+            }
+        }));*/
 
     }
+
+
 
 
     public void StartActivity(Context context) {
@@ -199,4 +231,5 @@ public class Details extends AppCompatActivity {
         intent.putExtra("MCCodeDesc",data);
         context.startActivity(intent);
     }
+
 }

@@ -54,12 +54,12 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
                 // holder.snapTextView.setText(snap.getText());
 
                 ((StockPullAdapter.Holder)holder).TransferStatus.setText(list.get(position).getTransferStatus());
-                ((StockPullAdapter.Holder)holder).SOH_Requested.setText(""+list.get(position).getStkOnhandQtyRequested());
-                ((StockPullAdapter.Holder)holder).QTY_Avi.setText(""+list.get(position).getStkQtyAvl());
+                ((StockPullAdapter.Holder)holder).SOH_Requested.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
+                ((StockPullAdapter.Holder)holder).QTY_Avi.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((StockPullAdapter.Holder)holder).NumberOfOption.setText(""+list.get(position).getNoOfOptions());
                 ((StockPullAdapter.Holder)holder).SOH.setText(""+list.get(position).getStkOnhandQty());
                 ((StockPullAdapter.Holder)holder).GIT_Qty.setText(""+list.get(position).getStkGitQty());
-                ((StockPullAdapter.Holder)holder).FWD.setText(""+list.get(position).getFwdWeekCover());
+                ((StockPullAdapter.Holder)holder).FWD.setText(""+String.format("%.1f",list.get(position).getFwdWeekCover()));
                 ((StockPullAdapter.Holder)holder).McCodeDescribtion.setText(list.get(position).getMccodeDesc());
 
 

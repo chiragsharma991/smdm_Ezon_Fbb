@@ -214,7 +214,12 @@
             android:name=".Collaboration.Status.StatusActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Collaboration.to_do.Tab_fragment.Details"></activity>
+        <activity android:name=".Collaboration.to_do.Tab_fragment.Details"
+            android:screenOrientation="portrait"
+
+            >
+
+        </activity>
     </application>
 
 </manifest>
