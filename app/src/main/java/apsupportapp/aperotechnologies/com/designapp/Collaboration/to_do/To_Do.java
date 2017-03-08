@@ -64,7 +64,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_to_do);
        // getSupportActionBar().hide();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_to_do);
-        rp_imageBtnBack = (RelativeLayout)findViewById(R.id.rp_imageBtnBack);
+        rp_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         rp_imageBtnBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
         checkCollapsing();

@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/rp_imageBtnBack"
+                android:layout_toRightOf="@+id/toDo_imageBtnBack"
                 android:text="To Do"
                 android:textColor="@color/divider_salescard1"
                 android:textSize="@dimen/smdm_header_title_large" />
