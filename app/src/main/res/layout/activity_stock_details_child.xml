@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+
+            >
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="5dp"
         app:cardUseCompatPadding="true"
         android:id="@+id/card123"
         app:cardCornerRadius="5dp"
-        app:contentPadding="5dp"
-        app:cardBackgroundColor="@color/white"
-
-        >
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:cardBackgroundColor="@color/white">
         <!--Main linear vertical-->
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:weightSum="5"
-                >
+                android:weightSum="5">
 
                 <!--list data horizental-->
 
                 <LinearLayout
+                    android:layout_marginLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.75"
-                    android:gravity="left"
-                    >
+                    android:gravity="left">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Option"
-                        android:textColor="@color/bg_store_code_text"
-                        />
+                        android:textColor="@color/bg_store_code_text"/>
 
 
                 </LinearLayout>
@@ -53,14 +52,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.05"
-                    android:gravity="left"
-                    >
+                    android:gravity="left">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ReqQty"
-                        android:textColor="@color/bg_store_code_text"
-                        />
+                        android:text="Req Qty"
+                        android:textColor="@color/bg_store_code_text"/>
 
 
                 </LinearLayout>
@@ -74,8 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="SOH"
-                        android:textColor="@color/bg_store_code_text"
-                        />
+                        android:textColor="@color/bg_store_code_text"/>
 
 
                 </LinearLayout>
@@ -83,25 +79,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.08"
-                    android:gravity="left"
-                    >
+                    android:gravity="left">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="GIT"
                         android:textColor="@color/bg_store_code_text"/>
 
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.08"
-                    android:gravity="left"
-                    >
+                    android:gravity="left"                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Avi Qty"
+                        android:text="Avl Qty"
                         android:singleLine="true"
                         android:textColor="@color/bg_store_code_text"
                         />
@@ -137,9 +132,9 @@
 
                     <android.support.v7.widget.AppCompatCheckBox
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
 
-
+                        />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -150,13 +145,16 @@
                         />
 
 
+
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.05"
-                    android:gravity="left">
+                    android:gravity="left"
 
+                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -164,6 +162,7 @@
                         android:id="@+id/detail_reqQty"
                         android:textColor="@color/smdm_default_color"
                         />
+
 
                 </LinearLayout>
                 <LinearLayout
@@ -179,6 +178,7 @@
                         android:id="@+id/detail_Soh"
                         android:textColor="@color/smdm_default_color"
                         />
+
 
                 </LinearLayout>
                 <LinearLayout
@@ -221,9 +221,6 @@
 
 
             <!--hidden layout-->
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -253,6 +250,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         >
+
 
                     </LinearLayout>
                     <LinearLayout
@@ -288,145 +286,41 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="left"
-                        >
+                        android:gravity="left">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Avi Qty"
+                            android:text="Avl Qty"
                             android:singleLine="true"
                             android:textColor="@color/bg_store_code_text"
                             android:id="@+id/textView10" />
 
                     </LinearLayout>
 
-
                 </LinearLayout>
-                
-                
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/details_headerChild">
+                    android:orientation="vertical">
 
-
-
-                    <LinearLayout
+                    <android.support.v7.widget.RecyclerView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/details_headerChild"
+                        android:scrollbars="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center_vertical"
-                        android:weightSum="4"
-                        >
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            >
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="left"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Size"
-                                android:textColor="@color/bg_store_code_text"
-                                />
-
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="left"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Req Qty"
-                                android:textColor="@color/bg_store_code_text"
-                                />
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="left"
-                            >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Avi Qty"
-                                android:singleLine="true"
-                                android:textColor="@color/bg_store_code_text"
-                            />
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
+                        android:layout_height="match_parent"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        />
 
                 </LinearLayout>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
-
-
-
-
-             
-
-
-
-
-
-               
-
-
-
-
-
-                
-
-
-
-
-
-
-
-
 
             </LinearLayout>
-
-
             <!--hidden layout ending-->
-
-
         </LinearLayout>
-
         <!--Main layout ending-->
-
-
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

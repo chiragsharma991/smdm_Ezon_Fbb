@@ -13,8 +13,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -48,11 +50,12 @@ import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoAct
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
-public class To_Do extends AppCompatActivity {
+public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toobar;
     private ViewPager viewPager;
     private TabLayout tab;
+    RelativeLayout rp_imageBtnBack;
 
 
     @Override
@@ -61,16 +64,11 @@ public class To_Do extends AppCompatActivity {
         setContentView(R.layout.activity_to_do);
        // getSupportActionBar().hide();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_to_do);
+        rp_imageBtnBack = (RelativeLayout)findViewById(R.id.rp_imageBtnBack);
+        rp_imageBtnBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
         checkCollapsing();
-
-
-
-
-    }
-
-
-
+   }
 
 
     private void checkCollapsing()
@@ -79,10 +77,10 @@ public class To_Do extends AppCompatActivity {
         {
             Window window = getWindow();
 
-// clear FLAG_TRANSLUCENT_STATUS flag:
+            // clear FLAG_TRANSLUCENT_STATUS flag:
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+           // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 // finally change the color
@@ -105,7 +103,21 @@ public class To_Do extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.rp_imageBtnBack :
+               onBackPressed();
+                break;
+        }
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
 
 
