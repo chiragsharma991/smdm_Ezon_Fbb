@@ -228,8 +228,6 @@ public class StockPullFragment extends Fragment {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
 
             Reusable_Functions.hDialog();
-
-
         }
 
     }

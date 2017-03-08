@@ -62,9 +62,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
                 ((StockPullAdapter.Holder)holder).FWD.setText(""+String.format("%.1f",list.get(position).getFwdWeekCover()));
                 ((StockPullAdapter.Holder)holder).McCodeDescribtion.setText(list.get(position).getMccodeDesc());
 
-
-
-            }
+           }
         }
 
 

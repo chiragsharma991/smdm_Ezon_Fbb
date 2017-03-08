@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     >
 
@@ -13,13 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardUseCompatPadding="true"
-        app:cardElevation="5dp"
+        app:cardElevation="0dp"
         app:cardCornerRadius="10dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:foreground="@drawable/ripple_effect"
-
-        >
+       >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -88,20 +84,21 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1.1"
+                    android:layout_weight="1"
                     >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+
                         >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Short Qty"
+                            android:gravity="left"
 
                             />
 
@@ -109,6 +106,7 @@
                             android:id="@+id/stock_sohRequested"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
                             android:text="100"
                             android:textColor="@color/pink"
                             />
@@ -122,19 +120,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.1"
+                    android:layout_weight="1"
+
                     >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+
                         >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Avl. Qty"
+                            android:gravity="center"
+
 
                             />
 
@@ -142,6 +144,7 @@
                             android:id="@+id/stock_avi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
                             android:text="98"
                             android:textColor="@color/smdm_green"
                             />
@@ -155,19 +158,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_weight="1"
+
                     >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+
                         >
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Option Req Action"
+                            android:gravity="right"
+                            android:singleLine="true"
 
                             />
 
@@ -175,6 +182,7 @@
                             android:id="@+id/stock_numberOfOption"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
                             android:text="03"
                             android:textColor="@color/smdm_amber"
                             />
