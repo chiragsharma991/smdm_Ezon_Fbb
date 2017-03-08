@@ -100,7 +100,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
-                            android:src="@mipmap/option_efficiency" />
+                            android:src="@mipmap/planvsactual" />
 
 
                         <TextView
@@ -1497,7 +1497,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Collboration"
+                android:text="Collaboration"
                 android:textColor="@color/smdm_dark_Black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -1552,7 +1552,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
-                            android:src="@mipmap/hourly_analysis"
+                            android:src="@mipmap/todo"
                             />
 
 
@@ -1572,7 +1572,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:layout_height="wrap_content">
 
                         <ImageButton
@@ -1582,7 +1582,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
-                            android:src="@mipmap/option_efficiency" />
+                            android:src="@mipmap/status" />
 
 
                         <TextView

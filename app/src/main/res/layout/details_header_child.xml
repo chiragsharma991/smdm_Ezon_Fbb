@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="Small"
                 android:id="@+id/detailChild_size"
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/smdm_default_color"
                 />
 
 
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="54"
                 android:id="@+id/detailChild_requiredQty"
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/smdm_default_color"
                 />
 
         </LinearLayout>
@@ -68,8 +68,9 @@
                 android:layout_height="wrap_content"
                 android:text="01"
                 android:singleLine="true"
-                android:textColor="@color/bg_store_code_text"
-                android:id="@+id/detailChild_aviQty" />
+                android:textColor="@color/smdm_default_color"
+                android:id="@+id/detailChild_aviQty"
+                />
 
         </LinearLayout>
 

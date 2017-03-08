@@ -55,29 +55,20 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toobar;
     private ViewPager viewPager;
     private TabLayout tab;
-    private RelativeLayout ToDo_imageBtnBack;
+    RelativeLayout rp_imageBtnBack;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do);
-        initialise();
        // getSupportActionBar().hide();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_to_do);
+        rp_imageBtnBack = (RelativeLayout)findViewById(R.id.rp_imageBtnBack);
+        rp_imageBtnBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
         checkCollapsing();
-
-
-
-
-    }
-
-    private void initialise()
-    {
-        ToDo_imageBtnBack=(RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
-        ToDo_imageBtnBack.setOnClickListener(this);
-    }
+   }
 
 
     private void checkCollapsing()
@@ -86,10 +77,10 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         {
             Window window = getWindow();
 
-// clear FLAG_TRANSLUCENT_STATUS flag:
+            // clear FLAG_TRANSLUCENT_STATUS flag:
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+           // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 // finally change the color
@@ -112,10 +103,19 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         viewPager.setAdapter(adapter);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.rp_imageBtnBack :
+               onBackPressed();
+                break;
+        }
+    }
 
     @Override
-    public void onClick(View view)
-    {
+    public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 }

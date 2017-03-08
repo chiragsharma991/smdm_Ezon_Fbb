@@ -29,6 +29,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private final ArrayList<ToDo_Modal> list;
     private static boolean check=false;
     public static boolean[] Toggle;
+    public OnPress onPressInterface;
 
 
 
@@ -36,12 +37,9 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.list=list;
         this.context=context;//
         Toggle= new boolean[list.size()];
+        onPressInterface=(OnPress)context;
 
-
-
-
-
-    }
+   }
 
 
 
@@ -70,12 +68,12 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
 
-                ((StockDetailsAdapter.Holder)holder).Detail_Soh.setText(""+(int)list.get(position).getStkOnhandQty());
+                ((StockDetailsAdapter.Holder)holder).Detail_Soh.setText(""+Math.round(list.get(position).getStkOnhandQty()));
                 ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setText(list.get(position).getLevel());
-                ((StockDetailsAdapter.Holder)holder).Detail_reqQty.setText(""+list.get(position).getStkOnhandQtyRequested());
-                ((StockDetailsAdapter.Holder)holder).Detail_Git.setText(""+(int)list.get(position).getStkGitQty());
-                ((StockDetailsAdapter.Holder)holder).Detail_AviQty.setText(""+list.get(position).getStkQtyAvl());
-               /* ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
+                ((StockDetailsAdapter.Holder)holder).Detail_reqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
+                ((StockDetailsAdapter.Holder)holder).Detail_Git.setText(""+Math.round(list.get(position).getStkGitQty()));
+                ((StockDetailsAdapter.Holder)holder).Detail_AviQty.setText(""+Math.round(list.get(position).getStkQtyAvl()));
+                ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Log.e("TAG", "onClick:>>>> "+position );
@@ -89,25 +87,25 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         }else
                         {
                             Toggle[position]=true;
+                            onPressInterface.OnPress(position);
 
-                           // ArrayList<String>listData=new ArrayList<String>();
+
+                            // ArrayList<String>listData=new ArrayList<String>();
                            // String xyz="Testing position is="+position;
                            // listData.add(xyz);
                            // Details.HashmapList.put(position,listData);
-                            notifyDataSetChanged();
+                           // notifyDataSetChanged();
 
                         }
 
 
                     }
-                });*/
+                });
+
 
                 DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(Details.HashmapList,context,position);
                 ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
               //  Log.e("Tab", "Hash Map size is "+Details.HashmapList.get(position).size());
-
-
-
 
             }
         }
@@ -119,10 +117,10 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return list.size();
     }
 
-    private static class Holder extends RecyclerView.ViewHolder {
+    public static class Holder extends RecyclerView.ViewHolder {
 
-
-        private final TextView Detail_Soh,Detail_optionLevel,Detail_reqQty,Detail_Git,Detail_AviQty;
+        private final TextView Detail_Soh,Detail_reqQty,Detail_Git,Detail_AviQty;
+        TextView Detail_optionLevel;
         private LinearLayout Sizeslayout;
         protected RecyclerView detailsLinear;
         public Holder(View itemView) {

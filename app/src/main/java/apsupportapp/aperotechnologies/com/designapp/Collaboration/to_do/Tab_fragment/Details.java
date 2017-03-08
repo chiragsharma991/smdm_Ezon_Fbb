@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,23 +46,23 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
-
-public class Details extends AppCompatActivity {
+public class Details extends AppCompatActivity implements OnPress,View.OnClickListener {
 
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
     private String bearertoken;
     private ToDo_Modal toDo_Modal;
-    Context context = Details.this;
+    Context context ;
     private int count = 0;
     private int limit = 100;
     private int offsetvalue = 0;
     private RequestQueue queue;
     private String TAG = "ToDo_Fregment";
     private ArrayList<ToDo_Modal> DetailsList, ChildDetailList;
+    RelativeLayout details_imageBtnBack;
     private ToDo_Modal toDo_modal;
-    public static RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private int levelOfOption = 1;  //  1 is for option and 2 is for size
     private String MCCodeDesc = "";    // code and description
     private String option = "";    // code and description
@@ -75,7 +76,9 @@ public class Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         getSupportActionBar().hide();
+        context = this;
         initalise();
+
         //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         DetailsList = new ArrayList<ToDo_Modal>();
@@ -89,7 +92,8 @@ public class Details extends AppCompatActivity {
         queue.start();
 
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.sDialog(this, "Loading.......");
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
             requestReceiversDetails();
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
@@ -301,32 +305,32 @@ public class Details extends AppCompatActivity {
         String data = getIntent().getExtras().getString("MCCodeDesc");
         MCCodeDesc = data;
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-                if (StockDetailsAdapter.Toggle[position] == true) {
-                    StockDetailsAdapter.Toggle[position] = false;
-                    stockPullAdapter.notifyDataSetChanged();
-
-
-                } else {
-                    StockDetailsAdapter.Toggle[position] = true;
-                    MCCodeDesc = DetailsList.get(position).getMccodeDesc();
-                    option = DetailsList.get(position).getLevel();
-                    levelOfOption = 2;
-                    ChildDetailList = new ArrayList<ToDo_Modal>();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.sDialog(context, "Loading.......");
-                        requestReceiversChildDetails(position);
-                    } else {
-                        Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-
-            }
-        }));
+        details_imageBtnBack = (RelativeLayout)findViewById(R.id.details_imageBtnBack);
+        details_imageBtnBack.setOnClickListener(this);
+//        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//
+//                if (StockDetailsAdapter.Toggle[position] == true) {
+//                    StockDetailsAdapter.Toggle[position] = false;
+//                    stockPullAdapter.notifyDataSetChanged();
+//                } else {
+//                    StockDetailsAdapter.Toggle[position] = true;
+//                    MCCodeDesc = DetailsList.get(position).getMccodeDesc();
+//                    option = DetailsList.get(position).getLevel();
+//                    levelOfOption = 2;
+//                    ChildDetailList = new ArrayList<ToDo_Modal>();
+//                    if (Reusable_Functions.chkStatus(context)) {
+//                        Reusable_Functions.sDialog(context, "Loading.......");
+//                        requestReceiversChildDetails(position);
+//                    } else {
+//                        Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                }
+//
+//            }
+//        }));
 
     }
 
@@ -339,5 +343,36 @@ public class Details extends AppCompatActivity {
         Intent intent = new Intent(context, Details.class);
         intent.putExtra("MCCodeDesc", data);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void OnPress(int position) {
+        MCCodeDesc = DetailsList.get(position).getMccodeDesc();
+        option = DetailsList.get(position).getLevel();
+        levelOfOption = 2;
+        ChildDetailList = new ArrayList<ToDo_Modal>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.sDialog(Details.this, "Loading....");
+
+            requestReceiversChildDetails(position);
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.details_imageBtnBack :
+                onBackPressed();
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
