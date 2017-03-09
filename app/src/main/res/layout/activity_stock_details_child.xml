@@ -3,19 +3,19 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+
+            >
 
 
     <android.support.v7.widget.CardView
+        android:id="@+id/card123"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardUseCompatPadding="true"
-        android:id="@+id/card123"
-        app:cardCornerRadius="5dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        app:cardBackgroundColor="@color/white">
+        app:cardElevation="0dp"
+        app:cardCornerRadius="10dp"
+        >
         <!--Main linear vertical-->
 
         <LinearLayout
@@ -33,7 +33,7 @@
                 <!--list data horizental-->
 
                 <LinearLayout
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="7dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.75"
@@ -42,6 +42,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Option"
+                        android:textSize="@dimen/normallayout_storesize"
                         android:textColor="@color/bg_store_code_text"/>
 
 
@@ -55,6 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Req Qty"
+                        android:textSize="@dimen/normallayout_storesize"
                         android:textColor="@color/bg_store_code_text"/>
 
 
@@ -82,6 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="GIT"
+                        android:textSize="@dimen/normallayout_storesize"
                         android:textColor="@color/bg_store_code_text"/>
 
 
@@ -95,6 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Avl Qty"
+                        android:textSize="@dimen/normallayout_storesize"
                         android:singleLine="true"
                         android:textColor="@color/bg_store_code_text"
                         />
@@ -128,15 +132,17 @@
                     android:gravity="left"
                     >
 
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/detail_headerCheck"
 
                         />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Test"
+                        android:textSize="@dimen/smdm_inflator_title_normal"
                         android:id="@+id/detail_optionLevel"
                         android:singleLine="true"
                         android:textColor="@color/smdm_default_color"
@@ -157,6 +163,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="15"
+                        android:textSize="@dimen/smdm_inflator_title_normal"
                         android:id="@+id/detail_reqQty"
                         android:textColor="@color/smdm_default_color"
                         />
@@ -173,6 +180,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="19"
+                        android:textSize="@dimen/smdm_inflator_title_normal"
                         android:id="@+id/detail_Soh"
                         android:textColor="@color/smdm_default_color"
                         />
@@ -189,6 +197,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="50"
+                        android:textSize="@dimen/smdm_inflator_title_normal"
                         android:id="@+id/detail_Git"
                         android:textColor="@color/smdm_default_color"
                         />
@@ -205,6 +214,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="14"
+                        android:textSize="@dimen/smdm_inflator_title_normal"
                         android:id="@+id/detail_AviQty"
                         android:textColor="@color/smdm_default_color"
                         />
@@ -239,7 +249,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="1dp"
                     android:gravity="center_vertical"
                     android:weightSum="4"
                     >
@@ -261,6 +271,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Size"
+                            android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/bg_store_code_text"
                             />
 
@@ -276,6 +287,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Req Qty"
+                            android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/bg_store_code_text"
                             />
 
@@ -290,6 +302,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Avl Qty"
+                            android:textSize="@dimen/normallayout_storesize"
                             android:singleLine="true"
                             android:textColor="@color/bg_store_code_text"
                             android:id="@+id/textView10" />

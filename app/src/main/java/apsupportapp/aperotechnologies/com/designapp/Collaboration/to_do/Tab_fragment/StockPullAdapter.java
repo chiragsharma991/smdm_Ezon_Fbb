@@ -3,7 +3,6 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fra
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,6 @@ import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSummaryAdapter;
-import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
 /**
  * Created by csuthar on 02/03/17.
@@ -62,7 +59,9 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
                 ((StockPullAdapter.Holder)holder).FWD.setText(""+String.format("%.1f",list.get(position).getFwdWeekCover()));
                 ((StockPullAdapter.Holder)holder).McCodeDescribtion.setText(list.get(position).getMccodeDesc());
 
-           }
+
+
+            }
         }
 
 

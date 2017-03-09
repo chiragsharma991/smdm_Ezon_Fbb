@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
         android:gravity="center_vertical"
         android:weightSum="4"
         >
@@ -15,6 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+
             >
 
             <CheckBox
@@ -35,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small"
+                android:textSize="@dimen/smdm_inflator_title_normal"
                 android:id="@+id/detailChild_size"
                 android:textColor="@color/smdm_default_color"
                 />
@@ -51,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="54"
+                android:textSize="@dimen/smdm_inflator_title_normal"
                 android:id="@+id/detailChild_requiredQty"
                 android:textColor="@color/smdm_default_color"
                 />
@@ -67,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01"
+                android:textSize="@dimen/smdm_inflator_title_normal"
                 android:singleLine="true"
                 android:textColor="@color/smdm_default_color"
                 android:id="@+id/detailChild_aviQty"

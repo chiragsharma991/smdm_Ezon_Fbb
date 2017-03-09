@@ -209,7 +209,6 @@
             android:name=".Collaboration.to_do.To_Do"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Test2" />
         <activity
             android:name=".Collaboration.Status.StatusActivity"
             android:screenOrientation="portrait"

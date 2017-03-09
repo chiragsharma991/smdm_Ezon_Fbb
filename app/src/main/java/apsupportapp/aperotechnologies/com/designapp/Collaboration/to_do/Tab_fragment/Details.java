@@ -375,4 +375,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         super.onBackPressed();
         finish();
     }
+
+
 }
