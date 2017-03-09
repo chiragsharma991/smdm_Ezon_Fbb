@@ -3,7 +3,7 @@
     android:shape="rectangle"   >
 
     <solid
-        android:color="@color/green" >
+        android:color="@color/smdm_divider_Black_light" >
     </solid>
 
     <padding
@@ -14,7 +14,7 @@
     </padding>
 
     <corners
-        android:radius="14dp"   >
+        android:radius="5dp"   >
     </corners>
 
 </shape>
