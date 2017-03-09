@@ -130,7 +130,7 @@ public class TransferRequestFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
 
-               // new Details().StartActivity(context,ReceiverSummaryList.get(position).getMccodeDesc());
+                new TransferRequest_Details().StartActivity(context);
             }
         }));
     }

@@ -165,7 +165,6 @@ public class Details_Fragment extends Fragment {
         } else {
             txtlastReceiteDate.setText(styleDetailsBean.getLastReceiptDate());
         }
-
         txtFwdWeekCover.setText("" + String.format("%.1f", styleDetailsBean.getFwdWeekCover()));
         txtTwSalesUnit.setText("" + styleDetailsBean.getTwSaleTotQty());
         txtLwSalesUnit.setText("" + styleDetailsBean.getLwSaleTotQty());
