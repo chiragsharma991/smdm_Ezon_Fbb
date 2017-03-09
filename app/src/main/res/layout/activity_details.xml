@@ -104,9 +104,48 @@
         android:layout_above="@+id/stock_detailSubmit"
 
         >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/storeDesc"
+            android:padding="5dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/todo_detailStoreCode"
+                android:textColor="@color/bg_store_code_text"
+                android:layout_alignParentLeft="true"
+                android:textSize="16dp"
+                android:text="Store Code"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/todo_detailStoreAvlQty"
+                android:textColor="@color/bg_store_code_text"
+                android:layout_alignParentRight="true"
+                android:textSize="16dp"
+                android:text="100"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailStoreAvlQty"
+                android:layout_toLeftOf="@+id/todo_detailStoreAvlQty"
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="16dp"
+                android:text="Total Avl Qty:"
+                />
+
+            
+        </RelativeLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/stockDetail_list"
             android:scrollbars="vertical"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/storeDesc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
