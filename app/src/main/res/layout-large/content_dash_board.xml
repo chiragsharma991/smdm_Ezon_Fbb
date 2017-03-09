@@ -1572,7 +1572,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_height="wrap_content">
 
                         <ImageButton

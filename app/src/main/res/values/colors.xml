@@ -46,5 +46,10 @@
     <color name="smdm_PopUptxt_color">#404040</color>
     <color name="smdm_PopUp_color">#dcdfdf</color>
     <color name="smdm_default_color">#757575</color>
+    <color name="smdm_status_complete_color">#48c430</color>
+    <color name="smdm_status_pending_color">#9c9c9c</color>
+
+
+
 
 </resources>

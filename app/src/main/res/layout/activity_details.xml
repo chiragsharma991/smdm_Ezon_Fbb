@@ -21,7 +21,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -86,28 +87,45 @@
         </LinearLayout>
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/stockDetail_list"
-            android:scrollbars="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
 
 
-        <!--<Button-->
-            <!--android:layout_below="@+id/linear_head"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:text="Submit"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--/>-->
+
+
 
 
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listviewLayout"
+        android:layout_below="@+id/linear_head"
+        android:layout_above="@+id/stock_detailSubmit"
+
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/stockDetail_list"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </RelativeLayout>
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:id="@+id/stock_detailSubmit"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimary"
+        />
 
 
 

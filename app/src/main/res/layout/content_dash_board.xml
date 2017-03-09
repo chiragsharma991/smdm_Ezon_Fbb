@@ -115,57 +115,57 @@
                     </LinearLayout>
 
                     <!--<LinearLayout-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:visibility="invisible"-->
-                        <!--android:layout_height="wrap_content">-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:visibility="invisible"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                        <!--<ImageButton-->
-                            <!--android:gravity="center_horizontal"-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:id="@+id/formal9"-->
-                            <!--android:layout_width="80dp"-->
-                            <!--android:layout_height="80dp"-->
-                            <!--android:background="@color/bg_screen_color"-->
-                            <!--android:src="@mipmap/cut_size_report"-->
-                            <!--/>-->
+                    <!--<ImageButton-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/formal9"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="@color/bg_screen_color"-->
+                    <!--android:src="@mipmap/cut_size_report"-->
+                    <!--/>-->
 
-                        <!--<TextView-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="Cut-Size Report"-->
-                            <!--android:gravity="center_horizontal"-->
-                            <!--android:textSize="13sp" />-->
+                    <!--<TextView-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Cut-Size Report"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:textSize="13sp" />-->
 
 
                     <!--</LinearLayout>-->
 
                     <!--<LinearLayout-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:visibility="invisible"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content">-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:visibility="invisible"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                        <!--<ImageButton-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:id="@+id/formal10"-->
-                            <!--android:layout_width="80dp"-->
-                            <!--android:layout_height="80dp"-->
-                            <!--android:background="@color/bg_screen_color"-->
-                            <!--android:src="@mipmap/skewed_size"-->
-                            <!--/>-->
+                    <!--<ImageButton-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/formal10"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="@color/bg_screen_color"-->
+                    <!--android:src="@mipmap/skewed_size"-->
+                    <!--/>-->
 
 
-                        <!--<TextView-->
-                            <!--android:gravity="center_horizontal"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="SkewedSize"-->
-                            <!--android:textSize="13sp"-->
-                            <!--android:layout_gravity="center_horizontal" />-->
+                    <!--<TextView-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="SkewedSize"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:layout_gravity="center_horizontal" />-->
                     <!--</LinearLayout>-->
 
 
@@ -1035,29 +1035,29 @@
                     </LinearLayout>
 
                     <!--<LinearLayout-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content">-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                        <!--<ImageButton-->
-                            <!--android:gravity="center_horizontal"-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:id="@+id/btnCutSize"-->
-                            <!--android:layout_width="80dp"-->
-                            <!--android:layout_height="80dp"-->
-                            <!--android:background="@color/bg_screen_color"-->
-                            <!--android:src="@mipmap/cut_size_report"-->
-                            <!--/>-->
+                    <!--<ImageButton-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:id="@+id/btnCutSize"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:background="@color/bg_screen_color"-->
+                    <!--android:src="@mipmap/cut_size_report"-->
+                    <!--/>-->
 
-                        <!--<TextView-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="Top Options by Full Cut"-->
-                            <!--android:textColor="@color/smdm_light_Black"-->
-                            <!--android:gravity="center_horizontal"-->
-                            <!--android:textSize="13sp" />-->
+                    <!--<TextView-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Top Options by Full Cut"-->
+                    <!--android:textColor="@color/smdm_light_Black"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:textSize="13sp" />-->
 
 
                     <!--</LinearLayout>-->
@@ -1312,12 +1312,12 @@
 
                 </LinearLayout>
                 <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="horizontal"-->
-                    <!--android:weightSum="4">-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:weightSum="4">-->
 
-               <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
 
 
 
@@ -1572,7 +1572,7 @@
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_height="wrap_content">
 
                         <ImageButton

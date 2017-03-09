@@ -21,7 +21,6 @@
                 android:minHeight="@dimen/toolbar_header_height"
                 android:layout_alignParentTop="true"
                 android:background="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:theme="@style/ThemeOverlay.AppCompat.Light"
                 app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
