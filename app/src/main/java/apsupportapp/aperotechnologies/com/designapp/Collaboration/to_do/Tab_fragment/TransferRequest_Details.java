@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -69,6 +70,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private TransferDetailsAdapter transferDetailsAdapter;
     private LinearLayout detailsLinear;
     public static HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
+    private TextView txt_caseNo,txt_valtotalreqty;
 
 
     @Override
@@ -234,9 +236,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                     Sender_DetailsList.add(transfer_request_model);
 
                                 }
-                                count = 0;
-                                limit = 100;
-                                offsetvalue = 0;
+
 
                            }
 
@@ -246,7 +246,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context);
                            // MakeHashMap(Sender_DetailsList);
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
-
+                            txt_caseNo.setText(transfer_request_model.getCaseNo());
+                           // txt_valtotalreqty.setText(""+Math.round(transfer_request_model.getStkOnhandQtyRequested()));
                             Reusable_Functions.hDialog();
 
 
@@ -306,6 +307,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
       //  MCCodeDesc = data;
         tr_recyclerView = (RecyclerView) findViewById(R.id.trasnsferreq_detail_list);
         tr_imageBtnBack = (RelativeLayout)findViewById(R.id.tr_details_imageBtnBack);
+        txt_caseNo = (TextView)findViewById(R.id.txt_caseNo);
+        txt_valtotalreqty = (TextView)findViewById(R.id.txt_valtotalreqty);
         tr_imageBtnBack.setOnClickListener(this);
     }
 

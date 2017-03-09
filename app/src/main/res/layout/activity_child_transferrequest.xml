@@ -42,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:text="2663"
-                        android:textSize="@dimen/largelayout_textsize"
+                        android:textSize="@dimen/normallayout_textsize"
                         android:textColor="@color/bg_store_code_text"
                         />
 
@@ -51,7 +51,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="1.5dp"
-                        android:textSize="@dimen/largelayout_textsize"
+                        android:textSize="@dimen/normallayout_textsize"
                         android:layout_toRightOf="@+id/transferRequest_stockCode"
                         android:text="Malad"
                         android:textColor="@color/bg_store_code_text"
@@ -63,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:textSize="@dimen/largelayout_textsize"
+                        android:textSize="@dimen/smdm_inflator_title_normal"
                         android:text="Pending"
                         android:textColor="@color/smdm_amber"
                         />
@@ -110,6 +110,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Case#"
+                                android:textSize="@dimen/smdm_inflator_title_normal"
                                 android:textColor="@color/txt_color"
 
                                 />
@@ -120,6 +121,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:text="1"
+                                android:textSize="@dimen/largelayout_storesize"
                                 android:textColor="@color/smdm_light_Black"
                                 />
 
@@ -145,6 +147,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Req. Qty"
+                                android:textSize="@dimen/smdm_inflator_title_normal"
                                 android:textColor="@color/txt_color"
 
                                 />
@@ -155,6 +158,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:text="98"
+                                android:textSize="@dimen/largelayout_storesize"
                                 android:textColor="@color/smdm_red"
                                 />
 
@@ -180,6 +184,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Avl. Qty"
+                                android:textSize="@dimen/smdm_inflator_title_normal"
                                 android:textColor="@color/txt_color"
 
                                 />
@@ -190,6 +195,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:text="03"
+                                android:textSize="@dimen/largelayout_storesize"
                                 android:textColor="@color/smdm_green"
                                 />
 
@@ -214,6 +220,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Option Req Action"
+                                android:textSize="@dimen/smdm_inflator_title_normal"
                                 android:textColor="@color/txt_color"
 
                                 />
@@ -224,6 +231,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:text="1"
+                                android:textSize="@dimen/largelayout_storesize"
                                 android:textColor="@color/smdm_amber"
                                 />
 
@@ -272,6 +280,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:text="5 Days"
+                        android:textSize="@dimen/smdm_inflator_title_normal"
                         android:textColor="@color/txt_color"
                         />
 
