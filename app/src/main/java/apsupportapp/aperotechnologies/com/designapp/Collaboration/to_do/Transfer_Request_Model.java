@@ -71,4 +71,36 @@ public class Transfer_Request_Model {
     double optionCount;
     String noOfDays;
 
+
+
+
+        String level;
+
+    public double getStkOnhandQty() {
+        return stkOnhandQty;
+    }
+
+    public void setStkOnhandQty(double stkOnhandQty) {
+        this.stkOnhandQty = stkOnhandQty;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public double getStkGitQty() {
+        return stkGitQty;
+    }
+
+    public void setStkGitQty(double stkGitQty) {
+        this.stkGitQty = stkGitQty;
+    }
+
+    double stkOnhandQty;
+       double stkGitQty;
+
 }

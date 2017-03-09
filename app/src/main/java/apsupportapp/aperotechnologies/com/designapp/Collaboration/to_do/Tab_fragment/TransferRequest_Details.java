@@ -48,6 +48,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 public class TransferRequest_Details extends AppCompatActivity implements OnPress,View.OnClickListener {
 
+    //Git test
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
@@ -59,14 +60,13 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private int offsetvalue = 0;
     private RequestQueue queue;
     private String TAG = "TransferRequest_Details";
-    private ArrayList<Transfer_Request_Model> DetailsList, ChildDetailList;
-    RelativeLayout details_imageBtnBack;
-    private ToDo_Modal toDo_modal;
-    private RecyclerView recyclerView;
+    private ArrayList<Transfer_Request_Model> Sender_DetailsList, ChildDetailList;
+    RelativeLayout tr_imageBtnBack;
+    private RecyclerView tr_recyclerView;
     private int levelOfOption = 1;  //  1 is for option and 2 is for size
     private String MCCodeDesc = "";    // code and description
     private String option = "";    // code and description
-    private StockDetailsAdapter stockPullAdapter;
+    private TransferDetailsAdapter transferDetailsAdapter;
     private LinearLayout detailsLinear;
     public static HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
 
@@ -74,14 +74,13 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+        setContentView(R.layout.activity_transferreq_details);
         getSupportActionBar().hide();
         context = this;
         initalise();
 
-        //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
-        DetailsList = new ArrayList<Transfer_Request_Model>();
+        Sender_DetailsList = new ArrayList<Transfer_Request_Model>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -94,7 +93,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
-         //   requestReceiversDetails();
+            requestSenderDetails();
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
@@ -193,101 +192,102 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 //    }
 
 
-//    private void requestReceiversDetails() {
-//
-//        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20");
-//
-//
-//        Log.e(TAG, "Details Url" + "" + url);
-//        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-//                new Response.Listener<JSONArray>() {
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        Log.i(TAG, "Detail api response : " + " " + response);
-//                        Log.i(TAG, "Detail api total length" + "" + response.length());
-//
-//
-//                        try {
-//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-//                                Reusable_Functions.hDialog();
-//                                Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
-//                                return;
-//
-//                            } else if (response.length() == limit) {
-//                                Log.e(TAG, "promo eql limit");
-//                                for (int i = 0; i < response.length(); i++) {
-//
-//                                    toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
-//                                    DetailsList.add(toDo_modal);
-//
-//
-//                                }
-//                                offsetvalue = (limit * count) + limit;
-//                                count++;
-//                                //
-//
-//                                requestReceiversDetails();
-//
-//                            } else if (response.length() < limit) {
-//                                Log.e(TAG, "promo /= limit");
-//                                for (int i = 0; i < response.length(); i++) {
-//                                    toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
-//                                    DetailsList.add(toDo_modal);
-//                                }
-//                                count = 0;
-//                                limit = 100;
-//                                offsetvalue = 0;
-//
-//
-//                            }
-//                            recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-//                            recyclerView.setOnFlingListener(null);
-//                            // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-//                            stockPullAdapter = new StockDetailsAdapter(DetailsList, context);
-//                            MakeHashMap(DetailsList);
-//                            recyclerView.setAdapter(stockPullAdapter);
-//
-//                            Reusable_Functions.hDialog();
-//
-//
-//                        } catch (Exception e) {
-//                            Reusable_Functions.hDialog();
-//                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-//                            Reusable_Functions.hDialog();
-//
-//                            e.printStackTrace();
-//                            Log.e(TAG, "catch...Error" + e.toString());
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Reusable_Functions.hDialog();
-//                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-//                        Reusable_Functions.hDialog();
-//                        error.printStackTrace();
-//                    }
-//                }
-//
-//        ) {
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("Content-Type", "application/json");
-//                params.put("Authorization", "Bearer " + bearertoken);
-//                return params;
-//            }
-//        };
-//        int socketTimeout = 60000;//5 seconds
-//
-//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-//        postRequest.setRetryPolicy(policy);
-//        queue.add(postRequest);
-//        Reusable_Functions.hDialog();
-//
-//
-//    }
+    private void requestSenderDetails() {
+
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption ;
+
+
+        Log.e(TAG, "Details Url" + "" + url);
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.i(TAG, "Detail api response : " + " " + response);
+                        Log.i(TAG, "Detail api total length" + "" + response.length());
+
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
+
+                            } else if (response.length() == limit) {
+                                Log.e(TAG, "promo eql limit");
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
+                                    Sender_DetailsList.add(transfer_request_model);
+
+
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                //
+
+                                requestSenderDetails();
+
+                            } else if (response.length() < limit) {
+                                Log.e(TAG, "promo /= limit");
+                                for (int i = 0; i < response.length(); i++) {
+                                    transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
+                                    Sender_DetailsList.add(transfer_request_model);
+
+                                }
+                                count = 0;
+                                limit = 100;
+                                offsetvalue = 0;
+
+                           }
+
+                            tr_recyclerView.setLayoutManager(new LinearLayoutManager(tr_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                            tr_recyclerView.setOnFlingListener(null);
+                            // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
+                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context);
+                           // MakeHashMap(Sender_DetailsList);
+                            tr_recyclerView.setAdapter(transferDetailsAdapter);
+
+                            Reusable_Functions.hDialog();
+
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+
+                            e.printStackTrace();
+                            Log.e(TAG, "catch...Error" + e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+        Reusable_Functions.hDialog();
+
+
+    }
 
     private void MakeHashMap(ArrayList<ToDo_Modal> detailsList) {
 
@@ -302,23 +302,16 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void initalise() {
 
-        String data = getIntent().getExtras().getString("MCCodeDesc");
-        MCCodeDesc = data;
-        recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
-        details_imageBtnBack = (RelativeLayout)findViewById(R.id.details_imageBtnBack);
-        details_imageBtnBack.setOnClickListener(this);
-
-
+//        String data = getIntent().getExtras().getString("MCCodeDesc");
+      //  MCCodeDesc = data;
+        tr_recyclerView = (RecyclerView) findViewById(R.id.trasnsferreq_detail_list);
+        tr_imageBtnBack = (RelativeLayout)findViewById(R.id.tr_details_imageBtnBack);
+        tr_imageBtnBack.setOnClickListener(this);
     }
-
 
     public void StartActivity(Context context) {
-        context.startActivity(new Intent(context, Details.class));
-    }
-
-    public void StartActivity(Context context, String data) {
-        Intent intent = new Intent(context, Details.class);
-        intent.putExtra("MCCodeDesc", data);
+        Intent intent = new Intent(context, TransferRequest_Details.class);
+//        intent.putExtra("MCCodeDesc", data);
         context.startActivity(intent);
     }
 
@@ -340,7 +333,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.details_imageBtnBack :
+            case R.id.tr_details_imageBtnBack :
                 onBackPressed();
                 break;
         }
