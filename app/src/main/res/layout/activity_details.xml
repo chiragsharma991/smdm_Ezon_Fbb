@@ -21,8 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -69,30 +68,10 @@
                         android:textColor="@color/divider_salescard1"
                         android:textSize="@dimen/smdm_header_title_large" />
 
-
-
-
-
-
-
-
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
-
-
-
-
-
         </LinearLayout>
-
-
-
-
-
-
-
-
 
     </LinearLayout>
 
@@ -101,21 +80,55 @@
         android:layout_height="match_parent"
         android:id="@+id/listviewLayout"
         android:layout_below="@+id/linear_head"
-        android:layout_above="@+id/stock_detailSubmit"
+        android:layout_above="@+id/stock_detailSubmit">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/storeDesc"
+            android:padding="5dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/todo_detailStoreCode"
+                android:textColor="@color/bg_store_code_text"
+                android:layout_alignParentLeft="true"
+                android:textSize="14sp"
+                android:text="Store Code"
+                />
 
-        >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/todo_detailStoreAvlQty"
+                android:textColor="@color/bg_store_code_text"
+                android:layout_alignParentRight="true"
+                android:textSize="14sp"
+                android:text="100"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailStoreAvlQty"
+                android:layout_toLeftOf="@+id/todo_detailStoreAvlQty"
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="14sp"
+                android:text="Total Avl Qty :"
+                />
+
+            
+        </RelativeLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/stockDetail_list"
             android:scrollbars="vertical"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/storeDesc"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 
-
-
-    <Button
+   <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Submit"
@@ -124,9 +137,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
         android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"
-        />
-
-
+        android:background="@color/colorPrimary"/>
 
 </RelativeLayout>

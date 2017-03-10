@@ -65,10 +65,13 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     private RecyclerView recyclerView;
     private int levelOfOption = 1;  //  1 is for option and 2 is for size
     private String MCCodeDesc = "";    // code and description
+    private String MCCode = "";    // code and description
     private String option = "";    // code and description
     private StockDetailsAdapter stockPullAdapter;
     private LinearLayout detailsLinear;
     public static HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
+    private TextView Todo_detailStoreCode;
+    private TextView Todo_detailStoreAvlQty;
 
 
     @Override
@@ -302,10 +305,16 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
     private void initalise() {
 
-        String data = getIntent().getExtras().getString("MCCodeDesc");
-        MCCodeDesc = data;
+        String data1 = getIntent().getExtras().getString("MCCodeDesc");
+        Double data2 = getIntent().getExtras().getDouble("AvlQty");
+        MCCodeDesc = data1;
+        MCCode=String.valueOf(Math.round(data2));
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
         details_imageBtnBack = (RelativeLayout)findViewById(R.id.details_imageBtnBack);
+        Todo_detailStoreCode = (TextView)findViewById(R.id.todo_detailStoreCode);
+        Todo_detailStoreAvlQty = (TextView)findViewById(R.id.todo_detailStoreAvlQty);
+        Todo_detailStoreCode.setText(MCCodeDesc);
+        Todo_detailStoreAvlQty.setText(MCCode);
         details_imageBtnBack.setOnClickListener(this);
 //        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
 //            @Override
@@ -339,9 +348,10 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         context.startActivity(new Intent(context, Details.class));
     }
 
-    public void StartActivity(Context context, String data) {
+    public void StartActivity(Context context, String data1,Double data2) {
         Intent intent = new Intent(context, Details.class);
-        intent.putExtra("MCCodeDesc", data);
+        intent.putExtra("MCCodeDesc", data1);
+        intent.putExtra("AvlQty", data2);
         context.startActivity(intent);
     }
 

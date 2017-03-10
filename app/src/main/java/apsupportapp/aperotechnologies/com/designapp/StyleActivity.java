@@ -210,8 +210,6 @@ public class StyleActivity extends AppCompatActivity
                     StyleActivity.this.sendBroadcast(intent_barcode);
                     edit_barcode.setText(" ");
                     barcode = " ";
-
-
                     android.os.Handler h = new android.os.Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
@@ -326,14 +324,12 @@ public class StyleActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.e(" ", " " + parent + " " + position + " " + view);
-
                 optionName = (String) optionAdapter.getItem(position);
                 style.setText(optionName.trim());
                 Log.e("optionName ", " " + optionName);
                 stylemainlayout.setVisibility(View.VISIBLE);
                 collectionLayout.setVisibility(View.GONE);
                 optionLayout.setVisibility(View.GONE);
-
                 InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputManager != null) {
                     inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
@@ -344,22 +340,19 @@ public class StyleActivity extends AppCompatActivity
 
     private void TimeUP()
     {
-
-
-            if (Reusable_Functions.chkStatus(StyleActivity.this)) {
-                Reusable_Functions.hDialog();
-                Reusable_Functions.sDialog(StyleActivity.this, "Loading  data...");
-                requestStyleDetailsAPI(barcode, "barcode");
+       if (Reusable_Functions.chkStatus(StyleActivity.this)) {
+             Reusable_Functions.hDialog();
+             Reusable_Functions.sDialog(StyleActivity.this, "Loading  data...");
+             requestStyleDetailsAPI(barcode, "barcode");
             } else {
                 Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
-            }
+       }
    }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         EditText et = (EditText) findViewById(R.id.editBarcode);
-
 
 //        handleDecodeData(intent);
         Log.e("=======", "-------");

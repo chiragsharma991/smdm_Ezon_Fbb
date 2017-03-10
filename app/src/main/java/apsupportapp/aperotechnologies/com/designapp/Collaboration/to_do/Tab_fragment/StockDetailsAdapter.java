@@ -192,7 +192,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private LinearLayout Sizeslayout;
         private CheckBox Detail_headerCheck;
         protected RecyclerView detailsLinear;
-        public Holder(View itemView) {
+        public Holder(View itemView)
+        {
             super(itemView);
             Detail_optionLevel=(TextView)itemView.findViewById(R.id.detail_optionLevel);
             Detail_reqQty=(TextView)itemView.findViewById(R.id.detail_reqQty);
@@ -202,12 +203,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Sizeslayout=(LinearLayout)itemView.findViewById(R.id.detail_size);
             detailsLinear=(RecyclerView)itemView.findViewById(R.id.details_headerChild);
             Detail_headerCheck=(CheckBox) itemView.findViewById(R.id.detail_headerCheck);
-
-
-
-
-
-
         }
 
     }

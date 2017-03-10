@@ -1,0 +1,108 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical" android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="5"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+
+            >
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tr_detailChild_checkBox"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Small"
+                android:textSize="@dimen/smdm_inflator_title_normal"
+                android:id="@+id/txt_trdetailChild_size"
+                android:textColor="@color/smdm_default_color"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="54"
+                android:textSize="@dimen/smdm_inflator_title_normal"
+                android:id="@+id/txt_trdetailchild_reqty"
+                android:textColor="@color/smdm_default_color"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="@dimen/smdm_inflator_title_normal"
+                android:singleLine="true"
+                android:textColor="@color/smdm_default_color"
+                android:id="@+id/txt_trdetailchild_scanqty"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            >
+
+            <ImageButton
+                android:layout_gravity="center_horizontal"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@mipmap/scan_icon"
+                android:id="@+id/imgbtn_detailchild_scan"
+                />
+
+
+            <EditText
+                android:background="@android:color/transparent"
+                android:cursorVisible="false"
+                android:clickable="false"
+                android:inputType="none"
+                android:textColor="#ffffff"
+                android:id="@+id/et_trcdetailchildBarcode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

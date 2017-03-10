@@ -121,7 +121,7 @@ public class StockPullFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
 
-                new Details().StartActivity(context,ReceiverSummaryList.get(position).getMccodeDesc());
+                new Details().StartActivity(context,ReceiverSummaryList.get(position).getMccodeDesc(),ReceiverSummaryList.get(position).getStkQtyAvl());
             }
         }));
     }
