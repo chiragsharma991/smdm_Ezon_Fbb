@@ -11,11 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
 
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeReceived;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeTransfer;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.TransferRequestFragment;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeReceiver;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeSender;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 public class StatusActivity extends AppCompatActivity {
@@ -60,8 +57,8 @@ public class StatusActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager)
     {
         StatusViewPagerAdapter adapter = new StatusViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ToBeTransfer(), "TO BE TRANSFER");
-        adapter.addFragment(new ToBeReceived(), "TO BE RECEIVED");
+        adapter.addFragment(new ToBeReceiver(), "TO BE TRANSFER");
+        adapter.addFragment(new ToBeSender(), "TO BE RECEIVED");
         viewPager.setAdapter(adapter);
     }
 }

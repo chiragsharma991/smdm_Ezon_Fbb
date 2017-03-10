@@ -88,7 +88,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_best_performer);
         getSupportActionBar().hide();
         initalise();
-        //test git 27dec
+        //activity_status_track_one git 27dec
         CheckBstSale.setChecked(true);
         SortPopup.setVisibility(View.GONE);
         BestPerformanceListView.setVisibility(View.VISIBLE);

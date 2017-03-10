@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@android:color/white"
             android:padding="5dp"
             >
             <RelativeLayout
@@ -94,6 +95,7 @@
                 android:weightSum="3"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
+                android:padding="5dp"
                 >
                 <LinearLayout
                     android:layout_width="wrap_content"

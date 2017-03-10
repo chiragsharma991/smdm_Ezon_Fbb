@@ -70,6 +70,7 @@
 
     <dimen name="stock_textsize_large">13sp</dimen>
     <dimen name="stock_textsize_normal">12sp</dimen>
+    <dimen name="stock_textsize_Title">14sp</dimen>
 
 
 </resources>

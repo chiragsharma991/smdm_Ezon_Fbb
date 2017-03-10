@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,14 +36,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullAdapter;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
-public class ToBeReceived extends Fragment {
+public class ToBeSender extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -53,7 +52,7 @@ public class ToBeReceived extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private String TAG="StatusFragment";
+    private String TAG="StatusSender_Fragment";
     private OnFragmentInteractionListener mListener;
     private ViewGroup view;
     private Context context;
@@ -70,13 +69,13 @@ public class ToBeReceived extends Fragment {
     private RecyclerView recyclerView;
 
 
-    public ToBeReceived() {
+    public ToBeSender() {
         // Required empty public constructor
     }
 
 
-    public static ToBeReceived newInstance(String param1, String param2) {
-        ToBeReceived fragment = new ToBeReceived();
+    public static ToBeSender newInstance(String param1, String param2) {
+        ToBeSender fragment = new ToBeSender();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -175,7 +174,7 @@ public class ToBeReceived extends Fragment {
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                            ToBeReceivedAdapter Adapter = new ToBeReceivedAdapter(SenderSummaryList,getActivity());
+                            ToBeSenderAdapter Adapter = new ToBeSenderAdapter(SenderSummaryList,getActivity());
                             recyclerView.setAdapter(Adapter);
                             Reusable_Functions.hDialog();
 
@@ -230,7 +229,14 @@ public class ToBeReceived extends Fragment {
 
     private void initialise() {
 
-         recyclerView=(RecyclerView)view.findViewById(R.id.to_be_received_list);
+        recyclerView=(RecyclerView)view.findViewById(R.id.to_be_received_list);
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                new ToBeSenderDetails().StartActivity(context,SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getReqStoreCode());
+            }
+        }));
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -17,6 +17,7 @@
     <color name="text_sales">#000000</color>
     <color name="edit_border_color">#e3e2e3</color>
     <color name="bg_screen_color">#f8f6f6</color>
+    <color name="bg_screen_color_transparent">#99f8f6f6</color>
     <color name="bg_header">#f3f2f2</color>
     <color name="border_round_edittext">#e7e7e7</color>
     <color name="bg_store_code_text">#404040</color>

@@ -133,10 +133,10 @@
             android:name=".BestPerformersPromo.FilterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <!--<activity-->
-            <!--android:name=".TopOptionCutSize.TopFullCut"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:windowSoftInputMode="stateHidden" />-->
+        <!-- <activity -->
+        <!-- android:name=".TopOptionCutSize.TopFullCut" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:windowSoftInputMode="stateHidden" /> -->
         <activity
             android:name=".SkewedSize.SkewedSizesActivity"
             android:screenOrientation="portrait"
@@ -188,13 +188,14 @@
             android:name=".VisualAssortmentSwipe.VisualReportActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-        <activity android:name=".KeyProductPlan.KeyProductPlanActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".KeyProductPlan.KeyProductFilterActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".KeyProductPlan.KeyProductPlanActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".KeyProductPlan.KeyProductFilterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -203,24 +204,22 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-      <activity android:name=".Collaboration.to_do.Tab_fragment.TransferRequest_Details"
-                android:screenOrientation="portrait"
-                 android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".Collaboration.to_do.Tab_fragment.TransferRequest_Details"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Collaboration.to_do.To_Do"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".Collaboration.Status.StatusActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Collaboration.to_do.Tab_fragment.Details"
-            android:screenOrientation="portrait"
-
-            >
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Collaboration.to_do.Tab_fragment.Details"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Collaboration.Status.Tab_fragment.ToBeSenderDetails"></activity>
     </application>
 
 </manifest>
