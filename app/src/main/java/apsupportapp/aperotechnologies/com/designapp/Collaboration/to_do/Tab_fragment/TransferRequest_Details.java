@@ -71,7 +71,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private LinearLayout detailsLinear;
     public static HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
     private TextView txt_caseNo,txt_valtotalreqty;
-
+    // test commit - 10-3-17
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,7 +246,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context);
                            // MakeHashMap(Sender_DetailsList);
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
-                            txt_caseNo.setText(transfer_request_model.getCaseNo());
+                          //  txt_caseNo.setText(transfer_request_model.getCaseNo());
                            // txt_valtotalreqty.setText(""+Math.round(transfer_request_model.getStkOnhandQtyRequested()));
                             Reusable_Functions.hDialog();
 
