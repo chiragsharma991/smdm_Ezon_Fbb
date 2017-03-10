@@ -246,8 +246,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context);
                            // MakeHashMap(Sender_DetailsList);
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
-                            txt_caseNo.setText(transfer_request_model.getCaseNo());
-                           // txt_valtotalreqty.setText(""+Math.round(transfer_request_model.getStkOnhandQtyRequested()));
+
                             Reusable_Functions.hDialog();
 
 
@@ -309,12 +308,14 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         tr_imageBtnBack = (RelativeLayout)findViewById(R.id.tr_details_imageBtnBack);
         txt_caseNo = (TextView)findViewById(R.id.txt_caseNo);
         txt_valtotalreqty = (TextView)findViewById(R.id.txt_valtotalreqty);
+        txt_caseNo.setText("");
         tr_imageBtnBack.setOnClickListener(this);
     }
 
-    public void StartActivity(Context context) {
+    public void StartActivity(String CaseNo,double reqQty,Context context) {
         Intent intent = new Intent(context, TransferRequest_Details.class);
-//        intent.putExtra("MCCodeDesc", data);
+        intent.putExtra("caseNo", CaseNo);
+        intent.putExtra("reqQty", reqQty);
         context.startActivity(intent);
     }
 
