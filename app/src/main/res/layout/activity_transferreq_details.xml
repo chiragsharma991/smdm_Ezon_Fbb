@@ -121,7 +121,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toLeftOf="@+id/txt_valtotalreqty"
             android:gravity="right"
-            android:text="Total Req.Qty :"
+            android:text="Total Req.Qty : "
             android:textColor="@color/bg_store_code_text"
             android:textSize="14sp"/>
 

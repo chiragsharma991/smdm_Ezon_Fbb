@@ -53,7 +53,7 @@ import apsupportapp.aperotechnologies.com.designapp.StyleActivity;
 
 public class TransferRequest_Details extends AppCompatActivity implements OnPress,View.OnClickListener,OnScanBarcode {
 
-    //Git test
+    //Git activity_status_track_one
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
@@ -76,6 +76,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     public static HashMap<Integer, ArrayList<Transfer_Request_Model>> TransferReqHashmapList;
     public static HashMap<Integer, ArrayList<Integer>> TransReqTotalScanQty;
     private TextView txt_caseNo, txt_valtotalreqty;
+    private  int[] scanQty;
 
     // test commit - 10-3-17
 
@@ -110,7 +111,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     }
 
-    private void requestReceiversChildDetails(final int position) {
+    private void requestReceiversChildDetails(final int position)
+    {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20");
 
@@ -152,7 +154,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 limit = 100;
                                 offsetvalue = 0;
                             }
-                          //  TransReqTotalScanQty.put(position, totalScanQtyNos);
+
                             TransferReqHashmapList.put(position, SenderChildDetailList);
                             transferDetailsAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
@@ -177,7 +179,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -200,7 +201,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption;
 
-
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -208,7 +208,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     public void onResponse(JSONArray response) {
                         Log.i(TAG, "Detail api response : " + " " + response);
                         Log.i(TAG, "Detail api total length" + "" + response.length());
-                        try {
+                        try
+                        {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
@@ -235,11 +236,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             tr_recyclerView.setLayoutManager(new LinearLayoutManager(tr_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             tr_recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context);
+                            MakeScanList(Sender_DetailsList);
+                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,scanQty);
                             MakeHashMap(Sender_DetailsList);
+
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
                             Reusable_Functions.hDialog();
-
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -251,7 +253,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
@@ -260,7 +263,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -280,7 +282,15 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     }
 
-    private void MakeHashMap(ArrayList<Transfer_Request_Model> detailsList) {
+    private void MakeScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
+        scanQty=new int[sender_detailsList.size()];
+        for (int i = 0; i <sender_detailsList.size() ; i++) {
+            scanQty[i]=0;
+        }
+    }
+
+    private void MakeHashMap(ArrayList<Transfer_Request_Model> detailsList)
+    {
 
         TransferReqHashmapList = new HashMap<Integer, ArrayList<Transfer_Request_Model>>();
 
@@ -288,10 +298,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             ArrayList<Transfer_Request_Model> listData = new ArrayList<Transfer_Request_Model>();
             TransferReqHashmapList.put(i, listData);
         }
-
     }
 
-    private void initalise() {
+    private void initalise()
+    {
         String caseNo = getIntent().getExtras().getString("caseNo");
         Double data2 = getIntent().getExtras().getDouble("reqQty");
         //  MCCodeDesc = data;
@@ -300,7 +310,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         txt_caseNo = (TextView) findViewById(R.id.txt_caseNo);
         txt_valtotalreqty = (TextView) findViewById(R.id.txt_valtotalreqty);
         txt_caseNo.setText(caseNo);
-        txt_valtotalreqty.setText("\t" + Math.round(data2));
+        txt_valtotalreqty.setText("" + Math.round(data2));
         tr_imageBtnBack.setOnClickListener(this);
     }
 
@@ -356,10 +366,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
             if (result != null) {
-                if (result.getContents() == null) {
+                if (result.getContents() == null)
+                {
                     Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
-                } else {
-
+                } else
+                {
                     Toast.makeText(this, "Barcode Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
 
                 }

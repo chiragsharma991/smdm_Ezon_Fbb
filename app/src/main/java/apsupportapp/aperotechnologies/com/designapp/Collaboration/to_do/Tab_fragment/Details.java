@@ -147,8 +147,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                                 count = 0;
                                 limit = 100;
                                 offsetvalue = 0;
-
-
                             }
 
                             HashmapList.put(position, ChildDetailList);

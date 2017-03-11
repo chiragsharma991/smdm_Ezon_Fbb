@@ -33,7 +33,7 @@
                     android:layout_height="match_parent">
 
                     <RelativeLayout
-                        android:id="@+id/rp_imageBtnBack"
+                        android:id="@+id/status_imageBtnBack"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
                         android:layout_alignParentLeft="true"
@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
-                        android:layout_toRightOf="@+id/rp_imageBtnBack"
+                        android:layout_toRightOf="@+id/status_imageBtnBack"
                         android:text="Status"
                         android:textColor="@color/divider_salescard1"
                         android:textSize="@dimen/smdm_header_title_large" />

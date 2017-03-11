@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
 
-            >
+    >
+
     <LinearLayout
         android:id="@+id/lin_trCard"
         android:background="@drawable/card_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp">
-
-
     <android.support.v7.widget.CardView
         android:id="@+id/card123"
         android:layout_width="match_parent"
@@ -21,6 +20,7 @@
         app:cardUseCompatPadding="true"
         app:cardElevation="0dp"
         app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
         >
         <!--Main linear vertical-->
 
@@ -34,15 +34,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:weightSum="5">
+                android:weightSum="3.8">
 
                 <!--list data horizental-->
 
                 <LinearLayout
-                    android:layout_marginLeft="7dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
+                    android:layout_weight="0.8"
                     android:gravity="left">
                     <TextView
                         android:layout_width="wrap_content"
@@ -56,12 +55,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.05"
+                    android:layout_weight="1"
                     android:gravity="left">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Req Qty"
+                        android:layout_marginLeft="10dp"
                         android:textSize="@dimen/normallayout_storesize"
                         android:textColor="@color/bg_store_code_text"/>
 
@@ -70,22 +70,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.08"
+                    android:layout_weight="1"
                     android:gravity="left"
+                    android:visibility="invisible"
                     >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SOH"
-                        android:textColor="@color/bg_store_code_text"/>
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.08"
-                    android:gravity="left">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -98,12 +86,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.08"
+                    android:layout_weight="1"
                     android:gravity="left"                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Avl Qty"
+                        android:text="Scaned Qty"
                         android:textSize="@dimen/normallayout_storesize"
                         android:singleLine="true"
                         android:textColor="@color/bg_store_code_text"
@@ -125,52 +113,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="5"
                 android:gravity="center_vertical"
-                >
+                android:weightSum="3.8">
 
                 <!--list data horizental-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:gravity="left"
-                    >
+                    android:layout_weight="0.8"
+                    android:gravity="left">
 
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/detail_headerCheck"
-
-                        />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Test"
                         android:textSize="@dimen/smdm_inflator_title_normal"
-                        android:id="@+id/detail_optionLevel"
+                        android:id="@+id/statusSender_detail_optionLevel"
                         android:singleLine="true"
                         android:textColor="@color/smdm_default_color"
                         />
 
 
-
-
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.05"
-                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left">
 
-                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="15"
+                        android:text="100"
+                        android:layout_marginLeft="10dp"
                         android:textSize="@dimen/smdm_inflator_title_normal"
-                        android:id="@+id/detail_reqQty"
+                        android:id="@+id/status_sender_detail_reqQty"
                         android:textColor="@color/smdm_default_color"
                         />
 
@@ -179,41 +157,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.08"
+                    android:layout_weight="1"
                     android:gravity="left"
+                    android:visibility="invisible"
                     >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="19"
-                        android:textSize="@dimen/smdm_inflator_title_normal"
-                        android:id="@+id/detail_Soh"
-                        android:textColor="@color/smdm_default_color"
-                        />
+                        android:text="GIT"
+                        android:textSize="@dimen/normallayout_storesize"
+                        android:textColor="@color/bg_store_code_text"/>
 
 
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.08"
-                    android:gravity="left"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="50"
-                        android:textSize="@dimen/smdm_inflator_title_normal"
-                        android:id="@+id/detail_Git"
-                        android:textColor="@color/smdm_default_color"
-                        />
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.08"
+                    android:layout_weight="1"
                     android:gravity="left"
                     >
                     <TextView
@@ -221,7 +181,7 @@
                         android:layout_height="wrap_content"
                         android:text="14"
                         android:textSize="@dimen/smdm_inflator_title_normal"
-                        android:id="@+id/detail_AviQty"
+                        android:id="@+id/status_sender_detail_ScanedQty"
                         android:textColor="@color/smdm_default_color"
                         />
 
@@ -231,6 +191,7 @@
 
 
             </LinearLayout>
+
             <!--2nd row ending-->
 
 
@@ -239,8 +200,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/detail_size"
+                android:layout_marginTop="3dp"
                 android:orientation="vertical"
-                android:visibility="visible"
+                android:visibility="gone"
                 >
 
                 <View
@@ -255,47 +217,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="1dp"
                     android:gravity="center_vertical"
-                    android:weightSum="4"
-                    >
+                    android:weightSum="3.8">
+
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        >
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="0.8"
                         android:gravity="left"
+                        android:visibility="invisible"
                         >
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Size"
+                            android:text="Option"
                             android:textSize="@dimen/normallayout_storesize"
-                            android:textColor="@color/bg_store_code_text"
-                            />
+                            android:textColor="@color/bg_store_code_text"/>
 
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="left"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Req Qty"
-                            android:textSize="@dimen/normallayout_storesize"
-                            android:textColor="@color/bg_store_code_text"
-                            />
 
                     </LinearLayout>
                     <LinearLayout
@@ -303,19 +242,56 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="left">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Avl Qty"
+                            android:text="Size"
+                            android:textSize="@dimen/normallayout_storesize"
+                            android:textColor="@color/bg_store_code_text"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:visibility="visible"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Req. Qty"
+                            android:textSize="@dimen/normallayout_storesize"
+                            android:textColor="@color/bg_store_code_text"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"                    >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Scaned Qty"
                             android:textSize="@dimen/normallayout_storesize"
                             android:singleLine="true"
                             android:textColor="@color/bg_store_code_text"
-                            android:id="@+id/textView10" />
+                            />
+
 
                     </LinearLayout>
 
+
+
                 </LinearLayout>
+
+
+
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -325,7 +301,7 @@
                     <android.support.v7.widget.RecyclerView
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/details_headerChild"
+                        android:id="@+id/StatusSenderdetails_SubChild"
                         android:scrollbars="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

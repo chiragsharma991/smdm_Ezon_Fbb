@@ -81,7 +81,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     int count = 0;
     RequestQueue queue;
     String FreshnessIndexValue;
-    //test git 6/1/17
+    //activity_status_track_one git 6/1/17
     Context context;
     String fromWhere, fIndexFirstVisibleItem, freshnessIndex_ClickedVal, fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand;
     PieChart pieChart;

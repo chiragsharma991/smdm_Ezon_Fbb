@@ -52,7 +52,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_stock_details_child, parent, false);
-        return new StockDetailsAdapter.Holder(v);    }
+        return new StockDetailsAdapter.Holder(v);
+    }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {

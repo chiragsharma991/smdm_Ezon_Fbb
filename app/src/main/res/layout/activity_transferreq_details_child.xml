@@ -100,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.04"
-                    android:text="Scan"
+                    android:text=""
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
             </LinearLayout>
@@ -173,7 +173,8 @@
                     android:id="@+id/lin_imgbtnScan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.04">
+                    android:layout_weight="1.04"
+                    >
 
                 <ImageButton
                     android:id="@+id/btn_scan"
@@ -215,14 +216,31 @@
                 </View>
 
                 <LinearLayout
-
+                   android:layout_marginLeft="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="1dp"
                     android:gravity="center_horizontal"
-                    android:weightSum="5"
+                    android:weightSum="7"
                     >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -258,7 +276,7 @@
                             android:id="@+id/txt_detail_reqty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Req. Qty"
+                            android:text="Req.Qty"
                             android:textSize="@dimen/smdm_PopUp_subtitle_normal"
                             android:textColor="@color/bg_store_code_text"/>
 
@@ -301,8 +319,6 @@
 
                     </LinearLayout>
 
-
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -311,22 +327,18 @@
                     android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView
+                        android:layout_marginLeft="15dp"
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/recycleview_transferreq_detailChild"
                         android:scrollbars="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                        />
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
                 </LinearLayout>
-
             </LinearLayout>
-
         </LinearLayout>
-
-
     </android.support.v7.widget.CardView>
 </LinearLayout>
 

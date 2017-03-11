@@ -6,21 +6,34 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:weightSum="5"
+        android:weightSum="7"
         >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-
-            >
+            android:gravity="center">
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tr_detailChild_checkBox"
-                />
+                android:id="@+id/tr_detailChild_checkBox"/>
 
 
         </LinearLayout>
@@ -28,16 +41,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="left"
-            >
+            android:gravity="left">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small"
                 android:textSize="@dimen/smdm_inflator_title_normal"
                 android:id="@+id/txt_trdetailChild_size"
-                android:textColor="@color/smdm_default_color"
-                />
+                android:textColor="@color/smdm_default_color"/>
 
 
         </LinearLayout>
@@ -53,16 +64,14 @@
                 android:text="54"
                 android:textSize="@dimen/smdm_inflator_title_normal"
                 android:id="@+id/txt_trdetailchild_reqty"
-                android:textColor="@color/smdm_default_color"
-                />
+                android:textColor="@color/smdm_default_color"/>
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="left"
-            >
+            android:gravity="left">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,8 +80,7 @@
                 android:textSize="@dimen/smdm_inflator_title_normal"
                 android:singleLine="true"
                 android:textColor="@color/smdm_default_color"
-                android:id="@+id/txt_trdetailchild_scanqty"
-                />
+                android:id="@+id/txt_trdetailchild_scanqty"/>
 
         </LinearLayout>
 

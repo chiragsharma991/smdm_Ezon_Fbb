@@ -8,20 +8,20 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeReceived;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeTransfer;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.TransferRequestFragment;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeReceiver;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeSender;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-public class StatusActivity extends AppCompatActivity {
+public class StatusActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
     private TabLayout tab;
+    RelativeLayout status_imageBtnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class StatusActivity extends AppCompatActivity {
         setContentView(R.layout.activity_status);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_status);
         setSupportActionBar(toolbar);
-
+       initialise();
         if(Build.VERSION.SDK_INT>=21)
         {
                     Window window = getWindow();
@@ -53,6 +53,11 @@ public class StatusActivity extends AppCompatActivity {
         tab.setupWithViewPager(viewPager);
     }
 
+    private void initialise() {
+        status_imageBtnBack = (RelativeLayout)findViewById(R.id.status_imageBtnBack);
+        status_imageBtnBack.setOnClickListener(this);
+    }
+
     public static void StartIntent(Context c) {
         c.startActivity(new Intent(c, StatusActivity.class));
     }
@@ -60,8 +65,24 @@ public class StatusActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager)
     {
         StatusViewPagerAdapter adapter = new StatusViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ToBeTransfer(), "TO BE TRANSFER");
-        adapter.addFragment(new ToBeReceived(), "TO BE RECEIVED");
+        adapter.addFragment(new ToBeReceiver(), "TO BE TRANSFER");
+        adapter.addFragment(new ToBeSender(), "TO BE RECEIVED");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.status_imageBtnBack :
+                onBackPressed();
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

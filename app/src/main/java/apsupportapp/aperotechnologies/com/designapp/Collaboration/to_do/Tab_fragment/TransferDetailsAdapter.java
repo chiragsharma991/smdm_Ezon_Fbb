@@ -27,8 +27,10 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
+    private final int[] scanQty;
     private Context context;
     private ArrayList<Transfer_Request_Model> list;
+    private int[]scan;
     private static boolean check=false;
     public static boolean[] Toggle;
     public static boolean[] HeadercheckList;
@@ -38,17 +40,20 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private static final String ACTION_SOFTSCANTRIGGER = "com.motorolasolutions.emdk.datawedge.api.ACTION_SOFTSCANTRIGGER";
     private static final String EXTRA_PARAM = "com.motorolasolutions.emdk.datawedge.api.EXTRA_PARAMETER";
     private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
-    int scanCount;
+    private static int ScanCount=0;
 
 
-    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> list, Context context) {
+    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> list, Context context, int[] scanQty) {
         this.list=list;
         this.context=context;//
         Toggle= new boolean[list.size()];
         HeadercheckList= new boolean[list.size()];
         onPressInterface=(OnPress)context;
         onBarcodeScan = (OnScanBarcode)context;
-        scanCount = 0;
+        scan=new int[list.size()];
+        this.scanQty=scanQty;
+
+
 
 
     }
@@ -96,8 +101,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             }
 
                         }
-
-
                     }
                 });
 
@@ -138,16 +141,15 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         } else if (!isAMobileModel()) {
                             Log.e("regular device", "");
                             onBarcodeScan.onScan(view);
-                            Log.e("scan count",""+scanCount);
-                            scanCount++;
+                            ScanCount++;
+                            scanQty[position]=ScanCount;
+                            notifyDataSetChanged();
                         }
-
                    }
                 });
-                ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(String.valueOf(scanCount));
+                ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(""+scanQty[position]);
                 TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(TransferRequest_Details.TransferReqHashmapList,context,position,TransferDetailsAdapter.this);
                 ((TransferDetailsAdapter.Holder)holder).recycleview_transferreq_detailChild.setAdapter(detailsHeaderChildAdapter);
-
             }
         }
     }
@@ -158,7 +160,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         } else {
             ((TransferDetailsAdapter.Holder) holder).SizesLinLayout.setVisibility(View.GONE);
-
         }
     }
     private boolean isAMobileModel() {
@@ -199,7 +200,8 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         private TextView txt_caseNo,txt_optionval,txt_reqtyval,txt_avlqtyval,txt_sohval,txt_gitval,txt_scanqtyVal;
         ImageButton btn_scan;
         private EditText et_trBarcode;
-        private LinearLayout SizesLinLayout,lin_imgbtnScan;
+        private LinearLayout SizesLinLayout;
+        private ImageButton lin_imgbtnScan;
      //   private CheckBox Detail_headerCheck;
         protected RecyclerView recycleview_transferreq_detailChild;
 
@@ -212,14 +214,11 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             txt_sohval = (TextView)itemView.findViewById(R.id.txt_sohVal);
             txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
-            btn_scan = (ImageButton) itemView.findViewById(R.id.btn_scan);
-            lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
+         //   btn_scan = (ImageButton) itemView.findViewById(R.id.btn_scan);
+            lin_imgbtnScan = (ImageButton)itemView.findViewById(R.id.btn_scan);
             et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
             recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.recycleview_transferreq_detailChild);
             SizesLinLayout = (LinearLayout)itemView.findViewById(R.id.tr_detail_size);
-
-
-
 
         }
 

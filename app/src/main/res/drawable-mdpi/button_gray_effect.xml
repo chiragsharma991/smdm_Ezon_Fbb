@@ -2,8 +2,8 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- <item android:state_focused="true" android:state_pressed="false" android:drawable="@drawable/spinner_effect" />-->
-    <item android:state_focused="true" android:state_pressed="false" android:drawable="@color/bg_salescard" />
-    <item android:state_focused="true" android:state_pressed="true" android:drawable="@color/bg_salescard" />
-    <item android:state_focused="false" android:state_pressed="true" android:drawable="@color/bg_salescard" />
-    <item android:drawable="@color/bg_salescard" />
+    <item android:state_focused="true" android:state_pressed="false" android:drawable="@color/bg_screen_color_transparent" />
+    <item android:state_focused="true" android:state_pressed="true" android:drawable="@color/bg_screen_color_transparent" />
+    <item android:state_focused="false" android:state_pressed="true" android:drawable="@color/bg_screen_color_transparent" />
+    <item android:drawable="@android:color/white" />
 </selector>
