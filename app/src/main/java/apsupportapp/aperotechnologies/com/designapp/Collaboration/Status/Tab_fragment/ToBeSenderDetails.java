@@ -36,16 +36,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.OnPress;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-public class ToBeSenderDetails extends AppCompatActivity implements View.OnClickListener {
+public class ToBeSenderDetails extends AppCompatActivity implements View.OnClickListener,OnPress {
 
     private Context context;
     private RecyclerView recyclerView;
     private Gson gson;
-    private ArrayList<StatusModel> StatusDetailsList;
+    private ArrayList<StatusModel> StatusDetailsList,StatusDetailChild;
     private String TAG="StatusSender_Fragment";
     private SharedPreferences sharedPreferences;
     private String userId;
@@ -60,6 +63,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private StatusModel statusModel;
     private StatusSenderDetailsAdapter statusSenderDetails;
     private TextView storeCode,storeCase;
+    public static HashMap<Integer, ArrayList<StatusModel>> StatusHashmapChildList;
+    private String option="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +148,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                             Log.e(TAG, "data  "+StatusDetailsList.get(0).getLevel() );
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             statusSenderDetails = new StatusSenderDetailsAdapter(StatusDetailsList, context);
+                            MakeHashMap(StatusDetailsList);
                             recyclerView.setAdapter(statusSenderDetails);
 
                             Reusable_Functions.hDialog();
@@ -185,6 +191,16 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     }
 
+    private void MakeHashMap(ArrayList<StatusModel> statusDetailsList) {
+
+        StatusHashmapChildList = new HashMap<Integer, ArrayList<StatusModel>>();
+
+        for (int i = 0; i < statusDetailsList.size(); i++) {
+            ArrayList<StatusModel> listData = new ArrayList<StatusModel>();
+            StatusHashmapChildList.put(i, listData);
+        }
+    }
+
     private void initalise() {
         recyclerView = (RecyclerView) findViewById(R.id.statusDetail_list);
         storeCase = (TextView) findViewById(R.id.status_detailStoreCase);
@@ -209,6 +225,112 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     public void StartActivity(Context context) {
         context.startActivity(new Intent(context, ToBeSenderDetails.class));
+    }
+
+
+    @Override
+    public void OnPress(int position) {
+
+        levelOfOption=2;
+        StatusDetailChild = new ArrayList<StatusModel>();
+        option=StatusDetailsList.get(position).getLevel();
+
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading....");
+
+            requestStatusReceiversSubDetails(position);
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void requestStatusReceiversSubDetails(final int position)
+    {
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
+
+        Log.e(TAG, "SubDetails Url" + "" + url);
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.i(TAG, "SubDetails api response : " + " " + response);
+                        Log.i(TAG, "SubDetails api total length" + "" + response.length());
+
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(ToBeSenderDetails.this, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
+
+                            } else if (response.length() == limit) {
+                                Log.e(TAG, "promo eql limit");
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
+                                    StatusDetailChild.add(statusModel);
+
+
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                //
+
+                                requestStatusReceiversSubDetails(position);
+
+                            } else if (response.length() < limit) {
+                                Log.e(TAG, "promo /= limit");
+                                for (int i = 0; i < response.length(); i++) {
+                                    statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
+                                    StatusDetailChild.add(statusModel);
+                                }
+                                count = 0;
+                                limit = 100;
+                                offsetvalue = 0;
+                            }
+
+                            StatusHashmapChildList.put(position, StatusDetailChild);
+                            statusSenderDetails.notifyDataSetChanged();
+                            Reusable_Functions.hDialog();
+
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+
+                            e.printStackTrace();
+                            Log.e(TAG, "catch...Error" + e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+        Reusable_Functions.hDialog();
+
+
     }
 
     public void StartActivity(Context context, int data1 ,String data2) {
