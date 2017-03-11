@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v4.util.Pair;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,23 +33,35 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
 
     private final Context context;
     private final int PrePosition;
-    private final HashMap<Integer, ArrayList<Transfer_Request_Model>> list;
-    public static Set<Pair<Integer, Integer>> CheckedItems = new HashSet<Pair<Integer, Integer>>();
+
+
+    private int[] childscan;
+    private final HashMap<Integer, ArrayList<Transfer_Request_Model>> list,scanlist;
+    public  Set<Pair<Integer, Integer>> CheckedItems = new HashSet<Pair<Integer, Integer>>();
     private  TransferDetailsAdapter transferDetailsAdapter;
     public OnScanBarcode onBarcodeScan;
-    String barcode;
+    String barcode,checkChildStr;
     private static final String ACTION_SOFTSCANTRIGGER = "com.motorolasolutions.emdk.datawedge.api.ACTION_SOFTSCANTRIGGER";
     private static final String EXTRA_PARAM = "com.motorolasolutions.emdk.datawedge.api.EXTRA_PARAMETER";
     private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
 
 
 
-    public TrDetailsHeaderChildAdapter(HashMap<Integer, ArrayList<Transfer_Request_Model>> list, Context context, int position, TransferDetailsAdapter transferDetailAdapter) {
-        this.list=list;
+
+
+    public TrDetailsHeaderChildAdapter(HashMap<Integer, ArrayList<Transfer_Request_Model>> transferReqHashmapList, HashMap<Integer, ArrayList<Transfer_Request_Model>> transReqTotalScanQty, Context context, int position, TransferDetailsAdapter transferDetailsAdapter) {
+
+        this.list=transferReqHashmapList;
+        this.scanlist = transReqTotalScanQty;
         this.context=context;//
         PrePosition=position;
-        this.transferDetailsAdapter=transferDetailAdapter;
+        this.transferDetailsAdapter=transferDetailsAdapter;
         onBarcodeScan = (OnScanBarcode)context;
+        checkChildStr = "";
+
+
+
+
     }
 
     @Override
@@ -68,10 +82,10 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         ((TrDetailsHeaderChildAdapter.Holder)holder).tr_DetailChild_size.setText(list.get(PrePosition).get(position).getLevel());
         ((TrDetailsHeaderChildAdapter.Holder)holder).tr_DetailChild_requiredQty.setText(""+Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested()));
      //   ((TrDetailsHeaderChildAdapter.Holder)holder).DetailChild_aviQty.setText(""+Math.round(list.get(PrePosition).get(position).getStkQtyAvl()));
-        ((TrDetailsHeaderChildAdapter.Holder)holder).cb_trDetailChild.setTag(Childtag);
+   //     ((TrDetailsHeaderChildAdapter.Holder)holder).cb_trDetailChild.setTag(Childtag);
 
-        ((TrDetailsHeaderChildAdapter.Holder)holder).cb_trDetailChild.setChecked(CheckedItems.contains(Childtag));
-         ((TrDetailsHeaderChildAdapter.Holder) holder).imgbtn_detailchild_scan.setOnClickListener(new View.OnClickListener() {
+      //  ((TrDetailsHeaderChildAdapter.Holder)holder).cb_trDetailChild.setChecked(CheckedItems.contains(Childtag));
+         ((TrDetailsHeaderChildAdapter.Holder) holder).lin_childimgbtnScan.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  Log.e("TAG", "Detail Child Scan onClick:>>>> "+position );
@@ -84,8 +98,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                      context.sendBroadcast(intent_barcode);
                    //  ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
                      barcode = " ";
-
-
                      android.os.Handler h = new android.os.Handler();
                      h.postDelayed(new Runnable() {
                          public void run() {
@@ -107,65 +119,18 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
 
                  } else if (!isAMobileModel()) {
                      Log.e("regular device", "");
-                     onBarcodeScan.onScan(v);
+                     checkChildStr = "ChildAdapter";
+                     onBarcodeScan.onScan(v,position,checkChildStr);
+
 
                  }
              }
          });
-//        ((TrDetailsHeaderChildAdapter.Holder)holder).DetailChild_checkBox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                final CheckBox cb = (CheckBox) view;
-//                final Pair<Integer, Integer> tagFlag = (Pair<Integer, Integer>) view.getTag();
-//
-//                //this is check and uncheked method to remove and add flag ...
-//
-//                // before uncheck you have to calculate past things like :
-//                // 1. child list are selected to all
-//                // 2. one is not selected to all
-//
-//                if (cb.isChecked())
-//                {
-//                    CheckCondition(tagFlag);
-//
-//                } else
-//                {
-//                    UnCheckCondition(tagFlag);
-//                }
-//                Log.e("TAG", "data has been notified.... " );
-//
-//                transferDetailsAdapter.notifyDataSetChanged();
-//
-//            }
-//        });
+     //   ((TrDetailsHeaderChildAdapter.Holder) holder).tr_DetailChild_scanqty.setText(qty[position]);
 
     }
 
-//    private void CheckCondition(Pair<Integer, Integer> tagFlag)
-//    {
-//        CheckedItems.add(tagFlag);
-//
-//        boolean[]CheckChild=new boolean[Details.HashmapList.get(PrePosition).size()];
-//        for (int i = 0; i <Details.HashmapList.get(PrePosition).size(); i++) {
-//
-//
-//            Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(PrePosition,i);
-//            if(CheckedItems.contains(Tag))
-//            {
-//                CheckChild[i]=true;
-//            }else
-//            {
-//                CheckChild[i]=false;
-//            }
-//        }
-//        // if all list are true from all list child then header check will be enable.
-//        if(containsTrue(CheckChild))
-//        {
-//            StockDetailsAdapter.HeadercheckList[PrePosition]=true;
-//        }
-//    }
-//
+
 
     private boolean isAMobileModel() {
         Log.e("checking model", "");
@@ -205,17 +170,19 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
 
 
         private final TextView tr_DetailChild_size,tr_DetailChild_requiredQty,tr_DetailChild_scanqty;
-        private CheckBox cb_trDetailChild;
-        ImageButton imgbtn_detailchild_scan;
+      //  private CheckBox cb_trDetailChild;
+      //  ImageButton imgbtn_detailchild_scan;
         EditText et_trcdetailchildBarcode;
+        LinearLayout lin_childimgbtnScan;
 
         public Holder(View itemView) {
             super(itemView);
             tr_DetailChild_size=(TextView)itemView.findViewById(R.id.txt_trdetailChild_size);
             tr_DetailChild_requiredQty=(TextView)itemView.findViewById(R.id.txt_trdetailchild_reqty);
             tr_DetailChild_scanqty=(TextView)itemView.findViewById(R.id.txt_trdetailchild_scanqty);
-            cb_trDetailChild=(CheckBox) itemView.findViewById(R.id.tr_detailChild_checkBox);
-            imgbtn_detailchild_scan = (ImageButton)itemView.findViewById(R.id.imgbtn_detailchild_scan);
+           // cb_trDetailChild=(CheckBox) itemView.findViewById(R.id.tr_detailChild_checkBox);
+           // imgbtn_detailchild_scan = (ImageButton)itemView.findViewById(R.id.imgbtn_detailchild_scan);
+            lin_childimgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_childimgbtnScan);
             et_trcdetailchildBarcode = (EditText)itemView.findViewById(R.id.et_trcdetailchildBarcode);
         }
 

@@ -1,25 +1,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical" android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:weightSum="7"
+        android:weightSum="6.8"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="0.77"
+            >
 
 
         </LinearLayout>
@@ -27,90 +23,108 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:layout_weight="0.98"
+            android:gravity="left"
+            >
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tr_detailChild_checkBox"/>
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left">
             <TextView
+                android:id="@+id/txt_trdetailChild_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small"
-                android:textSize="@dimen/smdm_inflator_title_normal"
-                android:id="@+id/txt_trdetailChild_size"
-                android:textColor="@color/smdm_default_color"/>
-
+                android:textColor="@color/smdm_default_color"
+                android:textSize="@dimen/smdm_inflator_title_normal"/>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="left"
             >
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.04"
+            android:gravity="left">
             <TextView
+                android:id="@+id/txt_trdetailchild_reqty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="54"
-                android:textSize="@dimen/smdm_inflator_title_normal"
-                android:id="@+id/txt_trdetailchild_reqty"
-                android:textColor="@color/smdm_default_color"/>
+                android:textColor="@color/smdm_default_color"
+                android:textSize="@dimen/smdm_inflator_title_normal"/>
+
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.05"
+            android:gravity="left">
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.95"
             android:gravity="left">
 
             <TextView
+                android:id="@+id/txt_trdetailchild_scanqty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="@dimen/smdm_inflator_title_normal"
                 android:singleLine="true"
+                android:text="0"
                 android:textColor="@color/smdm_default_color"
-                android:id="@+id/txt_trdetailchild_scanqty"/>
+                android:textSize="@dimen/smdm_inflator_title_normal"/>
+
 
         </LinearLayout>
 
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            >
+            android:layout_marginLeft="3dp"
+            android:layout_weight="0.95"
+            android:gravity="left">
 
-            <ImageButton
-                android:layout_gravity="center_horizontal"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@mipmap/scan_icon"
-                android:id="@+id/imgbtn_detailchild_scan"
-                />
+            <LinearLayout
+                android:id="@+id/lin_childimgbtnScan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true">
 
+                <ImageButton
+                    android:id="@+id/imgbtn_detailchild_scan"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@mipmap/scan_icon"
+                    android:scaleType="fitXY"/>
+            </LinearLayout>
 
             <EditText
-                android:background="@android:color/transparent"
-                android:cursorVisible="false"
-                android:clickable="false"
-                android:inputType="none"
-                android:textColor="#ffffff"
                 android:id="@+id/et_trcdetailchildBarcode"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:inputType="none"
+                android:textColor="#ffffff"/>
         </LinearLayout>
+
     </LinearLayout>
+
 
 </LinearLayout>

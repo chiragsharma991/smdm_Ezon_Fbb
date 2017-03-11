@@ -30,6 +30,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
+import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -58,6 +59,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private SharedPreferences sharedPreferences;
     private String userId;
     private String bearertoken;
+    private String check_adapter_str;
+    private int headerAdapterPos, childAdapterPos;
     private Transfer_Request_Model transfer_request_model;
     Context context;
     private int count = 0;
@@ -74,11 +77,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private String option = "";    // code and description
     private TransferDetailsAdapter transferDetailsAdapter;
     public static HashMap<Integer, ArrayList<Transfer_Request_Model>> TransferReqHashmapList;
-    public static HashMap<Integer, ArrayList<Integer>> TransReqTotalScanQty;
+    public static HashMap<Integer, ArrayList<Transfer_Request_Model>> TransReqTotalScanQty;
     private TextView txt_caseNo, txt_valtotalreqty;
     private  int[] scanQty;
-
-    // test commit - 10-3-17
+    private int ScanCount;
+    public  int[] childadapter_scanQty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,12 +111,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void requestReceiversChildDetails(final int position)
     {
-
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20");
 
         Log.e(TAG, "Sender Details Child Url" + "" + url);
@@ -150,12 +151,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                     SenderChildDetailList.add(transfer_request_model);
 
                                 }
-                                count = 0;
-                                limit = 100;
-                                offsetvalue = 0;
+
                             }
 
                             TransferReqHashmapList.put(position, SenderChildDetailList);
+                            TransReqTotalScanQty.put(position,SenderChildDetailList);
                             transferDetailsAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
 
@@ -164,7 +164,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -239,6 +238,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             MakeScanList(Sender_DetailsList);
                             transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,scanQty);
                             MakeHashMap(Sender_DetailsList);
+                           // MakeSubChildScanQty(Sender_DetailsList);
+
 
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
                             Reusable_Functions.hDialog();
@@ -282,10 +283,24 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     }
 
+//    private void MakeSubChildScanQty(ArrayList<Transfer_Request_Model> sender_detailsList)
+//    {
+//        childadapter_scanQty=new int[sender_detailsList.size()];
+//        for (int i = 0; i <sender_detailsList.size() ; i++) {
+//
+//            childadapter_scanQty[i]=0;
+//        }
+//
+//    }
+
     private void MakeScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
+
+        TransReqTotalScanQty = new HashMap<Integer, ArrayList<Transfer_Request_Model>>();
+
         scanQty=new int[sender_detailsList.size()];
         for (int i = 0; i <sender_detailsList.size() ; i++) {
             scanQty[i]=0;
+            TransReqTotalScanQty.put(i,sender_detailsList);
         }
     }
 
@@ -350,16 +365,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         finish();
     }
 
-    @Override
-    public void onScan(View view) {
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setCaptureActivity(AnyOrientationCaptureActivity.class);
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-        integrator.setPrompt("Place a barcode inside the viewfinder rectangle to scan it");
-        integrator.setOrientationLocked(true);
-        integrator.setBeepEnabled(false);
-        integrator.initiateScan();
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -372,12 +378,49 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 } else
                 {
                     Toast.makeText(this, "Barcode Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                    if(check_adapter_str.equals("HeaderAdapter"))
+                    {
+                        ScanCount++;
+                        TransferDetailsAdapter.headeradapter_scanQty[headerAdapterPos]=ScanCount;
+                        transferDetailsAdapter.notifyDataSetChanged();
+                        Log.e("Scan Count ",""+ ScanCount);
+                    }
+                    else
+                    {
+                        ScanCount ++;
+                        TransferDetailsAdapter.headeradapter_scanQty[childAdapterPos]=ScanCount;
+                        transferDetailsAdapter.notifyDataSetChanged();
 
+                    }
                 }
             } else {
                 // This is important, otherwise the result will not be passed to the fragment
                 super.onActivityResult(requestCode, resultCode, data);
             }
 
+    }
+
+    @Override
+    public void onScan(View view, int position, String check) {
+        Log.e("Check :",""+check);
+
+        if(check.equals("HeaderAdapter"))
+        {
+            check_adapter_str = check;
+            headerAdapterPos = position;
+        }
+        else
+        {
+            Log.e("String check :",""+check);
+            check_adapter_str = check;
+            childAdapterPos = position;
+        }
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setCaptureActivity(AnyOrientationCaptureActivity.class);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+        integrator.setPrompt("Place a barcode inside the viewfinder rectangle to scan it");
+        integrator.setOrientationLocked(true);
+        integrator.setBeepEnabled(false);
+        integrator.initiateScan();
     }
 }
