@@ -31,7 +31,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private  Context context;
     private  ArrayList<ToDo_Modal> list;
     private static boolean check=false;
-    public static boolean[] Toggle;
+    private static boolean[] Toggle;
     public static boolean[] HeadercheckList;
     public OnPress onPressInterface;
 

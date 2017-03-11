@@ -6,10 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockDetailsAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
@@ -24,6 +26,7 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
     private ArrayList<StatusModel> list;
     private static boolean check=false;
     private String TAG="StatusSender_Fragment";
+    private static boolean[] Toggle;
 
 
 
@@ -32,6 +35,7 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
     public StatusSenderDetailsAdapter(ArrayList<StatusModel> list, Context context) {
         this.list=list;
         this.context=context;//
+        Toggle= new boolean[list.size()];
 
     }
 
@@ -44,24 +48,55 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
     {
 
         if(holder instanceof StatusSenderDetailsAdapter.Holder) {
             if(position < list.size()) {
 
-                Log.e(TAG, "Stock detail>>>>>>>: "+position+list.get(0).getLevel() );
-
-
+                HandlePositionOnSet(holder,position);
                 ((StatusSenderDetailsAdapter.Holder)holder).OptionLevel.setText(list.get(position).getLevel());
                 ((StatusSenderDetailsAdapter.Holder)holder).ReqQty.setText(""+(int)list.get(position).getStkOnhandQtyRequested());
                 ((StatusSenderDetailsAdapter.Holder)holder).ScanQty.setText(""+Math.round(list.get(position).getStkOnhandQtyAcpt()));
+                ((StatusSenderDetailsAdapter.Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                        if(Toggle[position]==true)
+                        {
+                            Toggle[position]=false;
+                            notifyDataSetChanged();
+
+                        }else
+                        {
+                            Toggle[position]=true;
+                            notifyDataSetChanged();
+
+
+
+                        }
+
+
+                    }
+                });
 
            /*     StatusSenderChildDetails detailsHeaderChildAdapter=new StatusSenderChildDetails(Details.HashmapList,context,position,StockDetailsAdapter.this);
                 ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);*/
 
             }
+        }
+
+    }
+
+    private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
+        if(Toggle[position])
+        {
+            ((StatusSenderDetailsAdapter.Holder)holder).StatusDetailChild_Layout.setVisibility(View.VISIBLE);
+
+        }else
+        {
+            ((StatusSenderDetailsAdapter.Holder)holder).StatusDetailChild_Layout.setVisibility(View.GONE);
+
         }
 
     }
@@ -74,12 +109,13 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
     public static class Holder extends RecyclerView.ViewHolder {
 
         private  TextView OptionLevel,ReqQty,ScanQty  ;
-
+        private LinearLayout StatusDetailChild_Layout;
         public Holder(View itemView) {
             super(itemView);
             OptionLevel=(TextView)itemView.findViewById(R.id.statusSender_detail_optionLevel);
             ReqQty=(TextView)itemView.findViewById(R.id.status_sender_detail_reqQty);
             ScanQty=(TextView)itemView.findViewById(R.id.status_sender_detail_ScanedQty);
+            StatusDetailChild_Layout=(LinearLayout)itemView.findViewById(R.id.StatusDetailChild_size);
 
 
 

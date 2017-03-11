@@ -22,7 +22,9 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -193,7 +195,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/detail_size"
+                android:id="@+id/StatusDetailChild_size"
                 android:layout_marginTop="3dp"
                 android:orientation="vertical"
                 android:visibility="gone"
