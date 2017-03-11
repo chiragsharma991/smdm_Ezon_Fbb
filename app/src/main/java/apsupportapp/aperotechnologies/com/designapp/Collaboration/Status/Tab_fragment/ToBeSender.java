@@ -230,13 +230,13 @@ public class ToBeSender extends Fragment {
     private void initialise() {
 
         recyclerView=(RecyclerView)view.findViewById(R.id.to_be_received_list);
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+      /*  recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
                 new ToBeSenderDetails().StartActivity(context,SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getReqStoreCode());
             }
-        }));
+        }));*/
     }
 
     // TODO: Rename method, update argument and hook method into UI event

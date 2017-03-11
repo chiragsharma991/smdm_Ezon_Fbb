@@ -219,7 +219,12 @@
         <activity
             android:name=".Collaboration.to_do.Tab_fragment.Details"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".Collaboration.Status.Tab_fragment.ToBeSenderDetails"></activity>
+        <activity
+            android:name=".Collaboration.Status.Tab_fragment.ToBeSenderDetails"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
     </application>
 
 </manifest>

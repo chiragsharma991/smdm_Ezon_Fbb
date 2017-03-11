@@ -2,7 +2,6 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fr
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockDetailsAdapter;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.OnPress;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
@@ -27,6 +25,8 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
     private static boolean check=false;
     private String TAG="StatusSender_Fragment";
     private static boolean[] Toggle;
+    public OnPress onPressInterface;
+
 
 
 
@@ -36,6 +36,8 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
         this.list=list;
         this.context=context;//
         Toggle= new boolean[list.size()];
+        onPressInterface=(OnPress)context;
+
 
     }
 
@@ -70,8 +72,16 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
                         }else
                         {
                             Toggle[position]=true;
-                            notifyDataSetChanged();
 
+                            if(ToBeSenderDetails.StatusHashmapChildList.get(position).isEmpty())
+                            {
+                                onPressInterface.OnPress(position);
+
+                            }else
+                            {
+                                notifyDataSetChanged();
+
+                            }
 
 
                         }
@@ -80,8 +90,8 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
                     }
                 });
 
-           /*     StatusSenderChildDetails detailsHeaderChildAdapter=new StatusSenderChildDetails(Details.HashmapList,context,position,StockDetailsAdapter.this);
-                ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);*/
+                  StatusSenderSubChildAdapterDetails detailsHeaderChildAdapter=new StatusSenderSubChildAdapterDetails(ToBeSenderDetails.StatusHashmapChildList,context,position,StatusSenderDetailsAdapter.this);
+                ((StatusSenderDetailsAdapter.Holder)holder).StatusChildListView.setAdapter(detailsHeaderChildAdapter);
 
             }
         }
@@ -110,12 +120,14 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
 
         private  TextView OptionLevel,ReqQty,ScanQty  ;
         private LinearLayout StatusDetailChild_Layout;
+        private RecyclerView StatusChildListView;
         public Holder(View itemView) {
             super(itemView);
             OptionLevel=(TextView)itemView.findViewById(R.id.statusSender_detail_optionLevel);
             ReqQty=(TextView)itemView.findViewById(R.id.status_sender_detail_reqQty);
             ScanQty=(TextView)itemView.findViewById(R.id.status_sender_detail_ScanedQty);
             StatusDetailChild_Layout=(LinearLayout)itemView.findViewById(R.id.StatusDetailChild_size);
+            StatusChildListView=(RecyclerView)itemView.findViewById(R.id.StatusSenderdetails_SubChild);
 
 
 
