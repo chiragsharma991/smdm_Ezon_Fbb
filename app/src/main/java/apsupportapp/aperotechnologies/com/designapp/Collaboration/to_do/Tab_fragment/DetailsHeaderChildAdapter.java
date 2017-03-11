@@ -39,13 +39,12 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
 
     }
 
-
-
-
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.details_header_child, parent, false);
-        return new DetailsHeaderChildAdapter.Holder(v);    }
+        return new DetailsHeaderChildAdapter.Holder(v);
+    }
 
 
     @Override

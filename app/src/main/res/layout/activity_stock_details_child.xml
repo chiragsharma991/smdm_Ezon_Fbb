@@ -6,6 +6,12 @@
               android:layout_height="wrap_content"
 
             >
+    <LinearLayout
+        android:id="@+id/lin_trCard"
+        android:background="@drawable/card_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
 
 
     <android.support.v7.widget.CardView
@@ -333,5 +339,5 @@
         </LinearLayout>
         <!--Main layout ending-->
     </android.support.v7.widget.CardView>
-
+</LinearLayout>
 </LinearLayout>

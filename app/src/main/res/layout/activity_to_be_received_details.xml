@@ -41,7 +41,7 @@
                     android:layout_height="match_parent">
 
                     <RelativeLayout
-                        android:id="@+id/details_imageBtnBack"
+                        android:id="@+id/status_senderdetails_imageBtnBack"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
                         android:layout_alignParentLeft="true"
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
-                        android:layout_toRightOf="@+id/details_imageBtnBack"
+                        android:layout_toRightOf="@+id/status_senderdetails_imageBtnBack"
                         android:text="Details"
                         android:textColor="@color/divider_salescard1"
                         android:textSize="@dimen/smdm_header_title_large" />
@@ -123,21 +123,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/detailStoreAvlQty"
                 android:id="@+id/status_detailStoreCode"
                 android:textColor="@color/bg_store_code_text"
-                android:layout_alignParentRight="true"
                 android:textSize="@dimen/stock_textsize_Title"
-                android:text="Store description"
+                android:text="Store Code "
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/detailStoreAvlQty"
-                android:visibility="invisible"
-                android:layout_toLeftOf="@+id/todo_detailStoreAvlQty"
+                android:layout_alignParentRight="true"
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/stock_textsize_Title"
-                android:text="Total Avl Qty:"
+                android:text=" Store Description"
                 />
 
 

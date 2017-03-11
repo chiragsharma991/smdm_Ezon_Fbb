@@ -56,7 +56,7 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
 
                 HandlePositionOnSet(holder,position);
                 ((StatusSenderDetailsAdapter.Holder)holder).OptionLevel.setText(list.get(position).getLevel());
-                ((StatusSenderDetailsAdapter.Holder)holder).ReqQty.setText(""+(int)list.get(position).getStkOnhandQtyRequested());
+                ((StatusSenderDetailsAdapter.Holder)holder).ReqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((StatusSenderDetailsAdapter.Holder)holder).ScanQty.setText(""+Math.round(list.get(position).getStkOnhandQtyAcpt()));
                 ((StatusSenderDetailsAdapter.Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override

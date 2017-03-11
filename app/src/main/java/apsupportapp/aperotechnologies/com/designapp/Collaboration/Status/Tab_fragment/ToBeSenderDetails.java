@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +40,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-public class ToBeSenderDetails extends AppCompatActivity {
+public class ToBeSenderDetails extends AppCompatActivity implements View.OnClickListener {
 
     private Context context;
     private RecyclerView recyclerView;
@@ -53,6 +55,7 @@ public class ToBeSenderDetails extends AppCompatActivity {
     private int limit = 100;
     private int offsetvalue = 0;
     private int levelOfOption=1;
+    private RelativeLayout status_senderdetails_imageBtnBack;
     private int caseNo=0;
     private StatusModel statusModel;
     private StatusSenderDetailsAdapter statusSenderDetails;
@@ -186,7 +189,8 @@ public class ToBeSenderDetails extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.statusDetail_list);
         storeCase = (TextView) findViewById(R.id.status_detailStoreCase);
         storeCode = (TextView) findViewById(R.id.status_detailStoreCode);
-
+        status_senderdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_senderdetails_imageBtnBack);
+        status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
         String data2 = getIntent().getExtras().getString("CODE");
         storeCase.setText(""+data1);
@@ -212,5 +216,21 @@ public class ToBeSenderDetails extends AppCompatActivity {
         intent.putExtra("CASE",data1);
         intent.putExtra("CODE",data2);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.status_senderdetails_imageBtnBack :
+                onBackPressed();
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

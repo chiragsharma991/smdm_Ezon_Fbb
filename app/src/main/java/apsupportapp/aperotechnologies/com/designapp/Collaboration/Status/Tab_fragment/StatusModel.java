@@ -7,7 +7,7 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fr
 public class StatusModel
 {
     int  caseNo;
-    int  stkOnhandQtyRequested;
+    double  stkOnhandQtyRequested;
     double  stkOnhandQtyAcpt;
     String reqStoreCode;
     String statusInitiated;
@@ -16,11 +16,11 @@ public class StatusModel
     String statusGrn;
     String level;
 
-    public int getStkOnhandQtyRequested() {
+    public double getStkOnhandQtyRequested() {
         return stkOnhandQtyRequested;
     }
 
-    public void setStkOnhandQtyRequested(int stkOnhandQtyRequested) {
+    public void setStkOnhandQtyRequested(double stkOnhandQtyRequested) {
         this.stkOnhandQtyRequested = stkOnhandQtyRequested;
     }
 
