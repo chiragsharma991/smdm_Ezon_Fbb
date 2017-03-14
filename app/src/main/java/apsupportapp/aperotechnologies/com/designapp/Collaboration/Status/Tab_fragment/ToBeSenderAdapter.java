@@ -7,12 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.OnPress;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -23,14 +27,21 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>implements GravitySnapHelper.SnapListener,View.OnClickListener
 {
 
-    private final Context context;
+    Context context;
     private final ArrayList<StatusModel> list;
     private static boolean check=false;
+    private final HashMap<Integer, ArrayList<StatusModel>> statusList;
+    private boolean[] Toggle;
 
 
-    public ToBeSenderAdapter(ArrayList<StatusModel> list, Context context) {
+
+
+    public ToBeSenderAdapter(HashMap<Integer, ArrayList<StatusModel>> statusList, ArrayList<StatusModel> list, Context context) {
+        this.statusList=statusList;
         this.list=list;
         this.context=context;
+        Toggle= new boolean[list.size()];
+
 
 
 
@@ -49,12 +60,15 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if(holder instanceof ToBeSenderAdapter.Holder) {
             if(position < list.size())
             {
+
+                HandlePositionOnSet(holder,position);
                 ((ToBeSenderAdapter.Holder)holder).Status_caseNumber.setText(""+(int)list.get(position).getCaseNo());
                 ((ToBeSenderAdapter.Holder)holder).Status_storeCode.setText(list.get(position).getReqStoreCode());
 //                ((ToBeSenderAdapter.Holder)holder).Status_storedesc.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_docNumber.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_qty.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_date.setText(list.get(position).getCaseNo());
+
                 String StatusInitiated=list.get(position).getStatusInitiated();
                 String StatusAccept=list.get(position).getStatusAccept();
                 String StatusSto=list.get(position).getStatusSto();
@@ -104,6 +118,37 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
 
+    }
+
+    private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
+        if(Toggle[position])
+        {
+            LayoutInflater layoutInflater1 = (LayoutInflater) context.getApplicationContext()
+                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+            ViewGroup view = (ViewGroup) layoutInflater1.inflate(R.layout.activity_status_initiate, null);
+            TextView Status_docNumber=(TextView)view.findViewById(R.id.status_docNumber);
+            TextView Status_qty=(TextView)view.findViewById(R.id.status_qty);
+            TextView Status_date=(TextView)view.findViewById(R.id.status_date);
+            if(statusList.get(position).isEmpty()){
+                Status_docNumber.setText("N/A");
+                Status_qty.setText("N/A");
+                Status_date.setText("N/A");
+            }else
+            {
+                Status_docNumber.setText(""+statusList.get(position).get(0).getDocNo());
+                Status_qty.setText(""+Math.round(statusList.get(position).get(0).getStkOnhandQtyRequested()));
+                Status_date.setText(statusList.get(position).get(0).getReceiver_requested_date());
+            }
+
+            ((ToBeSenderAdapter.Holder) holder).Status_layout.addView(view);
+            ((ToBeSenderAdapter.Holder)holder).Status_layout.setVisibility(View.VISIBLE);
+
+
+        }else
+        {
+            ((ToBeSenderAdapter.Holder)holder).Status_layout.setVisibility(View.GONE);
+
+        }
     }
 
     private void Case1(final int position, RecyclerView.ViewHolder holder) {
@@ -205,7 +250,12 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         {
             case R.id.status_track_position_Initiated:
                 int dublicatePosition=(int)view.getTag();
-
+                int caseNo=list.get(dublicatePosition).getCaseNo();
+                String actionStatus ="RECVR_REQ";
+                ToBeSender toBeSender=new ToBeSender();
+                toBeSender.OnPress(context,caseNo,actionStatus,dublicatePosition);
+                Toggle[dublicatePosition]=true;
+                notifyDataSetChanged();
                 Log.e("TAG", "onClick: Initiated one ------- "+dublicatePosition );
                 break;
             case R.id.status_track_position_SenderAcpt:
@@ -231,6 +281,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static class Holder extends RecyclerView.ViewHolder {
 
         LinearLayout ProcessStatus,Lin_trCard;
+        RelativeLayout Status_layout;
         TextView Status_caseNumber,Status_case,Status_storeCode,Status_storedesc,Status_docNumber,Status_qty,Status_date;
         public Holder(View itemView) {
             super(itemView);
@@ -244,6 +295,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             Status_qty=(TextView)itemView.findViewById(R.id.status_qty);
             Status_date=(TextView)itemView.findViewById(R.id.status_date);
             Lin_trCard=(LinearLayout)itemView.findViewById(R.id.linearClick);
+            Status_layout=(RelativeLayout) itemView.findViewById(R.id.status_layout);
 
 
 
