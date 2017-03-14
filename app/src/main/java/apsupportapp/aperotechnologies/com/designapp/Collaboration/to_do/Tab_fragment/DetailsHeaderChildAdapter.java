@@ -29,13 +29,15 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
     private final HashMap<Integer, ArrayList<ToDo_Modal>> list;
     public static Set<Pair<Integer, Integer>> CheckedItems = new HashSet<Pair<Integer, Integer>>();
     private final StockDetailsAdapter stockDetailsAdapter;
+    private final boolean[] headercheckList;
 
 
-    public DetailsHeaderChildAdapter(HashMap<Integer, ArrayList<ToDo_Modal>> list, Context context, int position, StockDetailsAdapter stockDetailsAdapter) {
+    public DetailsHeaderChildAdapter(HashMap<Integer, ArrayList<ToDo_Modal>> list, boolean[] headercheckList, Context context, int position, StockDetailsAdapter stockDetailsAdapter) {
         this.list=list;
         this.context=context;//
         PrePosition=position;
         this.stockDetailsAdapter=stockDetailsAdapter;
+        this.headercheckList=headercheckList;
 
     }
 
@@ -111,7 +113,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         // if all list are true from all list child then header check will be enable.
         if(containsTrue(CheckChild))
         {
-            StockDetailsAdapter.HeadercheckList[PrePosition]=true;
+            headercheckList[PrePosition]=true;
         }
     }
 
@@ -137,7 +139,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         if(containsTrue(CheckChild))
         {
             Log.e("TAG", "containsTrue:   log... " );
-            StockDetailsAdapter.HeadercheckList[PrePosition]=false;
+            headercheckList[PrePosition]=false;
         }
         CheckedItems.remove(tagFlag);
     }

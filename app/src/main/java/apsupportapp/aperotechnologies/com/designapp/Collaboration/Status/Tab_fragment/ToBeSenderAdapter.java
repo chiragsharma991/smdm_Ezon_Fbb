@@ -59,7 +59,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 String StatusAccept=list.get(position).getStatusAccept();
                 String StatusSto=list.get(position).getStatusSto();
                 String StatusGrn=list.get(position).getStatusGrn();
-                ((Holder) holder).ProcessStatus.removeAllViewsInLayout();
+//                ((Holder) holder).ProcessStatus.removeAllViewsInLayout();
                 ((Holder) holder).Lin_trCard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
