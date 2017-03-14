@@ -2,6 +2,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,6 +13,7 @@
         >
 
         <LinearLayout
+            android:gravity="left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.77"
@@ -31,9 +33,11 @@
                 android:id="@+id/txt_trdetailChild_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Small"
+                android:text=""
                 android:textColor="@color/smdm_default_color"
                 android:textSize="@dimen/smdm_inflator_title_normal"/>
+
+
 
         </LinearLayout>
 
@@ -49,13 +53,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.04"
+            android:layout_weight="1.035"
             android:gravity="left">
+
             <TextView
                 android:id="@+id/txt_trdetailchild_reqty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="54"
+                android:text=""
                 android:textColor="@color/smdm_default_color"
                 android:textSize="@dimen/smdm_inflator_title_normal"/>
 
@@ -68,9 +73,7 @@
             android:layout_weight="1.05"
             android:gravity="left">
 
-
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,20 +86,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="0"
+                android:text=""
                 android:textColor="@color/smdm_default_color"
                 android:textSize="@dimen/smdm_inflator_title_normal"/>
 
-
         </LinearLayout>
-
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
             android:layout_weight="0.95"
-            android:gravity="left">
+            android:gravity="left"
+            android:orientation="horizontal">
+
+
+
+
 
             <LinearLayout
                 android:id="@+id/lin_childimgbtnScan"
@@ -108,15 +112,14 @@
                     android:id="@+id/imgbtn_detailchild_scan"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_gravity="center_horizontal"
                     android:background="@mipmap/scan_icon"
                     android:scaleType="fitXY"/>
             </LinearLayout>
 
             <EditText
                 android:id="@+id/et_trcdetailchildBarcode"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:clickable="false"
                 android:cursorVisible="false"
@@ -124,7 +127,5 @@
                 android:textColor="#ffffff"/>
         </LinearLayout>
 
-    </LinearLayout>
-
-
+   </LinearLayout>
 </LinearLayout>

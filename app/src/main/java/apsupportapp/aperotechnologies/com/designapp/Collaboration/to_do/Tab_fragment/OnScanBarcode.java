@@ -8,5 +8,5 @@ import android.view.View;
 
 public interface OnScanBarcode {
 
-    void onScan(View view,int position ,String check);
+    void onScan(View view, int position, String check, TransferDetailsAdapter transferDetailsAdapter);
 }

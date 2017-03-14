@@ -68,7 +68,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     private String MCCode = "";    // code and description
     private String option = "";    // code and description
     private StockDetailsAdapter stockPullAdapter;
-    private LinearLayout detailsLinear;
     public static HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
     private TextView Todo_detailStoreCode;
     private TextView Todo_detailStoreAvlQty;
