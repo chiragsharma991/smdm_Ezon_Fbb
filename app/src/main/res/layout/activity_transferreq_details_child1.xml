@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/lin_trCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/card_layout">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/tr_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/rel_headertxtLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:weightSum="6.8">
+
+
+                    <TextView
+                        android:id="@+id/txt_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:singleLine="true"
+                        android:text="Option"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+
+                        android:id="@+id/txt_reqty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.98"
+                        android:text="Req.Qty"
+                        android:singleLine="true"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+                        android:id="@+id/txt_avlqty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/txt_reqty"
+                        android:layout_weight="1"
+                        android:text="Avl.Qty"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+                        android:id="@+id/txt_soh"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.04"
+                        android:text="SOH"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+                        android:id="@+id/txt_git"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.05"
+                        android:text="GIT"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+                        android:id="@+id/txt_scanqty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:singleLine="true"
+                        android:text="Scan Qty"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+                        android:id="@+id/txt_scan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:text="scan"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rel_headertxtLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:weightSum="6.8">
+
+
+                    <TextView
+                        android:id="@+id/txt_option1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:visibility="invisible"
+                        android:singleLine="true"
+                        android:text="Option"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+
+                        android:id="@+id/txt_reqty1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.85"
+                        android:text="Size"
+                        android:singleLine="true"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+                        android:id="@+id/txt_avlqty1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/txt_reqty"
+                        android:layout_weight="0.95"
+                        android:text="Avl.Qty"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+                        android:id="@+id/txt_soh1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.04"
+                        android:text="SOH"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+                        android:id="@+id/txt_git1"
+                        android:visibility="invisible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.05"
+                        android:text="GIT"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <TextView
+                        android:id="@+id/txt_scanqty1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:singleLine="true"
+                        android:text="Scan Qty"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/txt_scan1"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="0.95"-->
+                        <!--android:text="scan"-->
+                        <!--android:textColor="@color/bg_store_code_text"-->
+                        <!--android:textSize="@dimen/smdm_PopUp_subtitle_normal"/>-->
+                </LinearLayout>
+
+     </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</LinearLayout>
