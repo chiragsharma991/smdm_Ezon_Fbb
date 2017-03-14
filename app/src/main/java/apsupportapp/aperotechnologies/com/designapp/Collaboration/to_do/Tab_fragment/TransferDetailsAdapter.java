@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Transfer_Request_Model;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -31,9 +32,9 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private Context context;
     private ArrayList<Transfer_Request_Model> list;
+    private HashMap<Integer,ArrayList<Integer>> childScanCount;
     private int[]scan;
     public  boolean[] Tr_HeaderToggle;
- //   public static boolean[] HeadercheckList;
     public OnPress onPressInterface;
     public OnScanBarcode onBarcodeScan;
     String barcode,checkStr;
@@ -43,20 +44,16 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
 
-    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> list, Context context, int[] scanQty) {
+    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> list, Context context, int[] scanQty, HashMap<Integer, ArrayList<Integer>> trchildScanQty) {
         this.list=list;
         this.context=context;//
         Tr_HeaderToggle= new boolean[list.size()];
-   //     HeadercheckList= new boolean[list.size()];
         onPressInterface=(OnPress)context;
         onBarcodeScan = (OnScanBarcode)context;
         scan=new int[list.size()];
+        this.childScanCount = trchildScanQty;
         this.headeradapter_scanQty=scanQty;
         checkStr = "";
-
-
-
-
     }
 
    @Override
@@ -67,7 +64,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        Log.e("TAG", "Stock detail: "+position );
+      //  Log.e("TAG", "Stock detail: "+position );
 
         if(holder instanceof TransferDetailsAdapter.Holder) {
             if(position < list.size()) {
@@ -142,14 +139,14 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         } else if (!isAMobileModel()) {
                             Log.e("regular device", "");
                             checkStr = "HeaderAdapter";
-                            onBarcodeScan.onScan(view,position,checkStr);
-
+                            onBarcodeScan.onScan(view,position,checkStr, TransferDetailsAdapter.this);
                         }
                    }
                 });
                 ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(""+headeradapter_scanQty[position]);
-                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(TransferRequest_Details.TransferReqHashmapList,TransferRequest_Details.TransReqTotalScanQty,context,position,TransferDetailsAdapter.this);
+                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(TransferRequest_Details.TransferReqHashmapList,context,position,TransferDetailsAdapter.this,childScanCount);
                 ((TransferDetailsAdapter.Holder)holder).recycleview_transferreq_detailChild.setAdapter(detailsHeaderChildAdapter);
+                detailsHeaderChildAdapter.notifyDataSetChanged();
             }
         }
     }
