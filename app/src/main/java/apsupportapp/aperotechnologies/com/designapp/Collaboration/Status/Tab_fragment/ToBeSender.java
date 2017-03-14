@@ -1,6 +1,5 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -37,11 +36,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
@@ -237,6 +233,18 @@ public class ToBeSender extends Fragment  {
         queue = new RequestQueue(cache, network);
         queue.start();
     }
+    private void NetworkProcess2(Context context)
+    {
+        gson = new Gson();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        userId = sharedPreferences.getString("userId", "");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
+        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        Network network = new BasicNetwork(new HurlStack());
+        queue = new RequestQueue(cache, network);
+        queue.start();
+    }
 
     private void initialise() {
 
@@ -250,7 +258,7 @@ public class ToBeSender extends Fragment  {
         }));*/
     }
 
-    private void requestSenderCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position,final Context context)
+    private void requestSenderCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position, final Context context, final HashMap<Integer, ArrayList<StatusModel>> statusList, final ToBeSenderAdapter senderAdapter)
     {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/action/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
 
@@ -282,7 +290,7 @@ public class ToBeSender extends Fragment  {
                                 count++;
                                 //
 
-                                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,position,context);
+                                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,position,context, statusList, senderAdapter);
 
                             } else if (response.length() < limit) {
                                 Log.e(TAG, "promo /= limit");
@@ -295,7 +303,9 @@ public class ToBeSender extends Fragment  {
                                 offsetvalue = 0;
                             }
 
+                            Log.e(TAG, "onResponse------: "+StatusDocList.size()+"position"+position );
                             statusList.put(position,StatusDocList);
+                            senderAdapter.notifyDataSetChanged();
                            // SenderAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
 
@@ -368,15 +378,17 @@ public class ToBeSender extends Fragment  {
 
 
 
-    public void  OnPress(Context context, int caseNo, String actionStatus, int dublicatePosition) {
+    public void  OnPress(Context context, int caseNo, String actionStatus, int dublicatePosition, HashMap<Integer, ArrayList<StatusModel>> statusList, ToBeSenderAdapter senderAdapter) {
 
+        NetworkProcess2(context);
+        StatusDocList=new ArrayList<StatusModel>();
 
         String senderStoreCode=userId;
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading....");
 
-            requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,context);
+            requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,context,statusList,senderAdapter);
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }

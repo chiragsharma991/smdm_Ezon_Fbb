@@ -45,6 +45,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
 
+
     }
 
     @Override
@@ -253,9 +254,9 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 int caseNo=list.get(dublicatePosition).getCaseNo();
                 String actionStatus ="RECVR_REQ";
                 ToBeSender toBeSender=new ToBeSender();
-                toBeSender.OnPress(context,caseNo,actionStatus,dublicatePosition);
+                toBeSender.OnPress(context,caseNo,actionStatus,dublicatePosition,statusList,ToBeSenderAdapter.this);
                 Toggle[dublicatePosition]=true;
-                notifyDataSetChanged();
+              //  notifyDataSetChanged();
                 Log.e("TAG", "onClick: Initiated one ------- "+dublicatePosition );
                 break;
             case R.id.status_track_position_SenderAcpt:
