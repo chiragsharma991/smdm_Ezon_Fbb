@@ -28,7 +28,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
     public static int[] headeradapter_scanQty;
-    public static int[] childadapter_scanQty;
 
     private Context context;
     private ArrayList<Transfer_Request_Model> list;

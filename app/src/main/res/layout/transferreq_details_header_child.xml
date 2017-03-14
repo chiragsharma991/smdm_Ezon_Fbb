@@ -2,6 +2,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,6 +13,7 @@
         >
 
         <LinearLayout
+            android:gravity="left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.77"
@@ -35,6 +37,8 @@
                 android:textColor="@color/smdm_default_color"
                 android:textSize="@dimen/smdm_inflator_title_normal"/>
 
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -49,8 +53,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.04"
+            android:layout_weight="1.035"
             android:gravity="left">
+
             <TextView
                 android:id="@+id/txt_trdetailchild_reqty"
                 android:layout_width="wrap_content"
@@ -58,6 +63,7 @@
                 android:text="54"
                 android:textColor="@color/smdm_default_color"
                 android:textSize="@dimen/smdm_inflator_title_normal"/>
+
 
 
         </LinearLayout>
@@ -91,12 +97,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_weight="0.95"
-            android:gravity="left">
+            android:gravity="left"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/lin_childimgbtnScan"
@@ -124,7 +130,8 @@
                 android:textColor="#ffffff"/>
         </LinearLayout>
 
+
     </LinearLayout>
 
 
-</LinearLayout>
+    </LinearLayout>

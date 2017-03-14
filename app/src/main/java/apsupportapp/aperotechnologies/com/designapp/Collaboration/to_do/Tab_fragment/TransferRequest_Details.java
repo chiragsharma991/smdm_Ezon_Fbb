@@ -149,16 +149,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 for (int i = 0; i < response.length(); i++) {
                                     transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
                                     SenderChildDetailList.add(transfer_request_model);
-
                                 }
-
                             }
-
                             TransferReqHashmapList.put(position, SenderChildDetailList);
                             TransReqTotalScanQty.put(position,SenderChildDetailList);
                             transferDetailsAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
-
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
