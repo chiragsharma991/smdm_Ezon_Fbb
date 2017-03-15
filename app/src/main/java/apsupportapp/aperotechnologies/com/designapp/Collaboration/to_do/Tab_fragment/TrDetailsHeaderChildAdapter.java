@@ -62,8 +62,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         countList = new ArrayList<Integer>();
 
 
-
-
     }
 
     @Override
@@ -72,7 +70,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.transferreq_details_header_child, parent, false);
         return new TrDetailsHeaderChildAdapter.Holder(v);
     }
-
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
@@ -105,11 +102,13 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                              Log.e("getIntent : ", "" + ((Activity) context).getIntent());
                              Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString());
                              barcode =   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString();
-                             if(!barcode.equals(" ")) {
+                             if(!barcode.equals(" "))
+                             {
                                  Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
                                  //  TimeUP();
                              }
-                             else{
+                             else
+                             {
                                  View view=((Activity)context).findViewById(android.R.id.content);
                                  Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
                              }
@@ -137,7 +136,8 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         return Build.MODEL.contains("TC75");
     }
 
-    public String getDeviceInfo() {
+    public String getDeviceInfo()
+    {
         String manufacturer = Build.MANUFACTURER;
         String model = Build.MODEL;
         if (model.startsWith(manufacturer)) {
@@ -170,7 +170,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         private final TextView tr_DetailChild_size,tr_DetailChild_requiredQty;
         public TextView tr_DetailChild_scanqty;
         //  private CheckBox cb_trDetailChild;
-          ImageButton imgbtn_detailchild_scan;
+        ImageButton imgbtn_detailchild_scan;
         EditText et_trcdetailchildBarcode;
         LinearLayout lin_childimgbtnScan;
 
@@ -179,13 +179,9 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
             tr_DetailChild_size=(TextView)itemView.findViewById(R.id.txt_trdetailChild_size);
             tr_DetailChild_requiredQty=(TextView)itemView.findViewById(R.id.txt_trdetailchild_reqty);
             tr_DetailChild_scanqty=(TextView)itemView.findViewById(R.id.txt_trdetailchild_scanqty);
-           // cb_trDetailChild=(CheckBox) itemView.findViewById(R.id.tr_detailChild_checkBox);
             imgbtn_detailchild_scan = (ImageButton)itemView.findViewById(R.id.imgbtn_detailchild_scan);
             lin_childimgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_childimgbtnScan);
             et_trcdetailchildBarcode = (EditText)itemView.findViewById(R.id.et_trcdetailchildBarcode);
         }
-
     }
-
-
 }
