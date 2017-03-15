@@ -69,8 +69,10 @@
     // for the colloaboration layout
 
     <dimen name="stock_textsize_large">13sp</dimen>
+    <dimen name="stock_store_textsize">11sp</dimen>
     <dimen name="stock_textsize_normal">12sp</dimen>
     <dimen name="stock_textsize_Title">14sp</dimen>
+    <dimen name="stock_status_textsize">10sp</dimen>
 
 
 </resources>

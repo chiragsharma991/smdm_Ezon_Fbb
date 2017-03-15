@@ -77,16 +77,13 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
                             {
                                 onPressInterface.OnPress(position);
 
-                            }else
+                            }
+                            else
                             {
                                 notifyDataSetChanged();
 
                             }
-
-
                         }
-
-
                     }
                 });
 
@@ -121,20 +118,14 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
         private  TextView OptionLevel,ReqQty,ScanQty  ;
         private LinearLayout StatusDetailChild_Layout;
         private RecyclerView StatusChildListView;
-        public Holder(View itemView) {
+        public Holder(View itemView)
+        {
             super(itemView);
             OptionLevel=(TextView)itemView.findViewById(R.id.statusSender_detail_optionLevel);
             ReqQty=(TextView)itemView.findViewById(R.id.status_sender_detail_reqQty);
             ScanQty=(TextView)itemView.findViewById(R.id.status_sender_detail_ScanedQty);
             StatusDetailChild_Layout=(LinearLayout)itemView.findViewById(R.id.StatusDetailChild_size);
             StatusChildListView=(RecyclerView)itemView.findViewById(R.id.StatusSenderdetails_SubChild);
-
-
-
-
-
-
-
         }
 
     }

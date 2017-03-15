@@ -63,12 +63,8 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             {
 
                 HandlePositionOnSet(holder,position);
-                ((ToBeSenderAdapter.Holder)holder).Status_caseNumber.setText(""+(int)list.get(position).getCaseNo());
+                ((ToBeSenderAdapter.Holder)holder).Status_caseNumber.setText(""+list.get(position).getCaseNo());
                 ((ToBeSenderAdapter.Holder)holder).Status_storeCode.setText(list.get(position).getReqStoreCode());
-//                ((ToBeSenderAdapter.Holder)holder).Status_storedesc.setText(list.get(position).getCaseNo());
-//                ((ToBeSenderAdapter.Holder)holder).Status_docNumber.setText(list.get(position).getCaseNo());
-//                ((ToBeSenderAdapter.Holder)holder).Status_qty.setText(list.get(position).getCaseNo());
-//                ((ToBeSenderAdapter.Holder)holder).Status_date.setText(list.get(position).getCaseNo());
 
                 String StatusInitiated=list.get(position).getStatusInitiated();
                 String StatusAccept=list.get(position).getStatusAccept();
@@ -83,7 +79,6 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     }
                 });
-
 
                 if(StatusInitiated.equals("Yes")&&StatusAccept.equals("No")&&StatusSto.equals("No")&&StatusGrn.equals("No"))
                 {
@@ -102,23 +97,8 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     Case3(position,holder);
 
                 }
-
-
-
-
-            }
-
-
-
-
+           }
         }
-
-
-
-
-
-
-
     }
 
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
@@ -140,16 +120,34 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 Status_qty.setText(""+Math.round(statusList.get(position).get(0).getStkOnhandQtyRequested()));
                 Status_date.setText(statusList.get(position).get(0).getReceiver_requested_date());
             }
-
             ((ToBeSenderAdapter.Holder) holder).Status_layout.addView(view);
             ((ToBeSenderAdapter.Holder)holder).Status_layout.setVisibility(View.VISIBLE);
-
-
         }else
         {
             ((ToBeSenderAdapter.Holder)holder).Status_layout.setVisibility(View.GONE);
 
         }
+    }
+
+    private void Case0(final int position, RecyclerView.ViewHolder holder) {
+
+        LayoutInflater layoutInflater1 = (LayoutInflater) context.getApplicationContext()
+                .getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup view = (ViewGroup) layoutInflater1.inflate(R.layout.activity_status_track_one, null);
+        LinearLayout Initiated=(LinearLayout)view.findViewById(R.id.status_track_position_Initiated);
+        Initiated.setTag(position); //we are using set tag for list view's position
+        LinearLayout SenderAcpt=(LinearLayout)view.findViewById(R.id.status_track_position_SenderAcpt);
+        SenderAcpt.setTag(position);
+        LinearLayout STO=(LinearLayout)view.findViewById(R.id.status_track_position_STO);
+        STO.setTag(position);
+        LinearLayout GRN=(LinearLayout)view.findViewById(R.id.status_track_position_GRN);
+        GRN.setTag(position);
+        Initiated.setOnClickListener(this);
+        SenderAcpt.setOnClickListener(this);
+        STO.setOnClickListener(this);
+        GRN.setOnClickListener(this);
+        ((ToBeSenderAdapter.Holder) holder).ProcessStatus.addView(view);
+
     }
 
     private void Case1(final int position, RecyclerView.ViewHolder holder) {
@@ -171,6 +169,8 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         GRN.setOnClickListener(this);
         ((ToBeSenderAdapter.Holder) holder).ProcessStatus.addView(view);
     }
+
+
 
     private void Case2(final int position, RecyclerView.ViewHolder holder) {
 
@@ -212,29 +212,6 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ((ToBeSenderAdapter.Holder) holder).ProcessStatus.addView(view);
     }
 
-    private void Case0(final int position, RecyclerView.ViewHolder holder) {
-
-        LayoutInflater layoutInflater1 = (LayoutInflater) context.getApplicationContext()
-                .getSystemService(LAYOUT_INFLATER_SERVICE);
-        ViewGroup view = (ViewGroup) layoutInflater1.inflate(R.layout.activity_status_track_one, null);
-        LinearLayout Initiated=(LinearLayout)view.findViewById(R.id.status_track_position_Initiated);
-        Initiated.setTag(position); //we are using set tag for list view's position
-        LinearLayout SenderAcpt=(LinearLayout)view.findViewById(R.id.status_track_position_SenderAcpt);
-        SenderAcpt.setTag(position);
-        LinearLayout STO=(LinearLayout)view.findViewById(R.id.status_track_position_STO);
-        STO.setTag(position);
-        LinearLayout GRN=(LinearLayout)view.findViewById(R.id.status_track_position_GRN);
-        GRN.setTag(position);
-        Initiated.setOnClickListener(this);
-        SenderAcpt.setOnClickListener(this);
-        STO.setOnClickListener(this);
-        GRN.setOnClickListener(this);
-        ((ToBeSenderAdapter.Holder) holder).ProcessStatus.addView(view);
-
-    }
-
-
-
     @Override
     public int getItemCount() {
         return list.size();
@@ -250,6 +227,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (view.getId())
         {
             case R.id.status_track_position_Initiated:
+
                 int dublicatePosition=(int)view.getTag();
                 int caseNo=list.get(dublicatePosition).getCaseNo();
                 String actionStatus ="RECVR_REQ";
@@ -257,21 +235,21 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 toBeSender.OnPress(context,caseNo,actionStatus,dublicatePosition,statusList,ToBeSenderAdapter.this);
                 Toggle[dublicatePosition]=true;
               //  notifyDataSetChanged();
-                Log.e("TAG", "onClick: Initiated one ------- "+dublicatePosition );
+                Log.e("TAG", "onClick: Initiated one ------- "+ dublicatePosition );
                 break;
             case R.id.status_track_position_SenderAcpt:
                 dublicatePosition = (int) view.getTag();
 
-                Log.e("TAG", "onClick: SenderAcpt two ------- "+dublicatePosition );
+                Log.e("TAG", "onClick: SenderAcpt two ------- " + dublicatePosition );
                 break;
             case R.id.status_track_position_STO:
                 dublicatePosition=(int)view.getTag();
 
-                Log.e("TAG", "onClick: STO three ------- "+dublicatePosition );
+                Log.e("TAG", "onClick: STO three ------- " + dublicatePosition );
                 break;
             case R.id.status_track_position_GRN:
                 dublicatePosition=(int)view.getTag();
-                Log.e("TAG", "onClick: GRN  four ------- "+dublicatePosition );
+                Log.e("TAG", "onClick: GRN  four ------- " + dublicatePosition );
                 break;
 
         }
@@ -297,8 +275,6 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             Status_date=(TextView)itemView.findViewById(R.id.status_date);
             Lin_trCard=(LinearLayout)itemView.findViewById(R.id.linearClick);
             Status_layout=(RelativeLayout) itemView.findViewById(R.id.status_layout);
-
-
 
         }
 
