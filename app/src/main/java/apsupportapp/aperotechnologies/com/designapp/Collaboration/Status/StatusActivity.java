@@ -65,8 +65,8 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
     private void setupViewPager(ViewPager viewPager)
     {
         StatusViewPagerAdapter adapter = new StatusViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ToBeReceiver(), "TO BE TRANSFER");
-        adapter.addFragment(new ToBeSender(), "TO BE RECEIVED");
+        adapter.addFragment(new ToBeSender(), "TO BE TRANSFER");
+        adapter.addFragment(new ToBeReceiver(), "TO BE RECEIVED");
         viewPager.setAdapter(adapter);
     }
 
