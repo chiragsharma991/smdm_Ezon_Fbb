@@ -30,9 +30,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private  Context context;
     private  ArrayList<ToDo_Modal> list;
-    private static boolean check=false;
     private static boolean[] Toggle;
-    public static boolean[] HeadercheckList;
+    private static boolean[] HeadercheckList;
     public OnPress onPressInterface;
 
 
@@ -43,6 +42,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Toggle= new boolean[list.size()];
         HeadercheckList= new boolean[list.size()];
         onPressInterface=(OnPress)context;
+        Log.e("TAG", "StockDetailsAdapter:  constructor");
 
    }
 
@@ -118,7 +118,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         }
                     }
                 });
-                DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(Details.HashmapList,context,position,StockDetailsAdapter.this);
+                DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(Details.HashmapList,HeadercheckList,context,position,StockDetailsAdapter.this);
                 ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
 
             }

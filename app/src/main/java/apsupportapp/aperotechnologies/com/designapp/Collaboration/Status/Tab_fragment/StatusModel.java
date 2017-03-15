@@ -7,6 +7,7 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fr
 public class StatusModel
 {
     int  caseNo;
+    int  docNo;
     double  stkOnhandQtyRequested;
     double  stkOnhandQtyAcpt;
     String reqStoreCode;
@@ -15,6 +16,10 @@ public class StatusModel
     String statusSto;
     String statusGrn;
     String level;
+    String receiver_requested_date;
+
+
+
 
     public double getStkOnhandQtyRequested() {
         return stkOnhandQtyRequested;
@@ -90,5 +95,21 @@ public class StatusModel
 
     public void setStatusGrn(String statusGrn) {
         this.statusGrn = statusGrn;
+    }
+
+    public int getDocNo() {
+        return docNo;
+    }
+
+    public void setDocNo(int docNo) {
+        this.docNo = docNo;
+    }
+
+    public String getReceiver_requested_date() {
+        return receiver_requested_date;
+    }
+
+    public void setReceiver_requested_date(String receiver_requested_date) {
+        this.receiver_requested_date = receiver_requested_date;
     }
 }
