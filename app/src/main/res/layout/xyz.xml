@@ -1,229 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
 
+    >
     <LinearLayout
+        android:id="@+id/lin_trCard"
+        android:background="@drawable/card_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="4"
-        android:id="@+id/linear"
-        android:orientation="horizontal"
+        android:padding="5dp"
+        android:orientation="vertical"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
+            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:id="@+id/status_track_position_Initiated"
-
             >
-            <RelativeLayout
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_headerCheck"
+                />
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-                <LinearLayout
-                    android:layout_width="18dp"
-                    android:id="@+id/image1"
-                    android:layout_height="18dp"
-                    android:scaleType="fitCenter"
-                    android:background="@drawable/indicator_24dp"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:orientation="horizontal" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Doc No : "
-                    android:layout_below="@+id/image1"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:id="@+id/doc_number"
-                    android:layout_alignParentLeft="true"
-                    android:textColor="@color/smdm_default_color"
-
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="123"
-                    android:layout_below="@+id/image1"
-                    android:id="@+id/status_docNumber"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:layout_toRightOf="@+id/doc_number"
-                    android:textColor="@color/smdm_default_color"
-
-                    />
-
-
-            </RelativeLayout>
-
-
+                android:layout_height="wrap_content"
+                android:text="Test"
+                android:textStyle="bold"
+                android:textSize="@dimen/smdm_store_title_normal"
+                android:id="@+id/detail_optionLevel"
+                android:singleLine="true"
+                android:textColor="@color/bg_store_code_text"
+                />
 
 
         </LinearLayout>
+
+
+        <!--mid level layout-->
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:background="@drawable/button_gray_effect"
-            android:id="@+id/status_track_position_SenderAcpt"
+            android:orientation="horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:weightSum="4.9"
             >
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.95"
                 >
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:id="@+id/image2"
-                    android:src="@drawable/indicator_24dp"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_textsize_normal"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Avl Qty"
                     android:visibility="invisible"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:singleLine="true"
+                    android:textColor="@color/bg_store_code_text"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="QTY : "
-                    android:layout_below="@+id/image2"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:layout_toLeftOf="@+id/status_qty"
+                    android:text="14"
+                    android:visibility="invisible"
+                    android:textSize="@dimen/smdm_inflator_title_normal"
                     android:textColor="@color/smdm_default_color"
-
                     />
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.9"
+                >
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:layout_below="@+id/image2"
-                    android:id="@+id/status_qty"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/smdm_default_color"
+                    android:text="Short Qty"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textColor="@color/bg_store_code_text"
+                    />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15"
+                    android:layout_marginTop="7dp"
+                    android:textSize="@dimen/smdm_inflator_title_normal"
+                    android:id="@+id/detail_reqQty"
+                    android:textColor="@color/smdm_default_color"
                     />
 
 
-            </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SOH"
+                    android:textStyle="bold"
+                    android:textColor="@color/bg_store_code_text"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19"
+                    android:layout_marginTop="7dp"
+                    android:textSize="@dimen/smdm_inflator_title_normal"
+                    android:id="@+id/detail_Soh"
+                    android:textColor="@color/smdm_default_color"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GIT"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textColor="@color/bg_store_code_text"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50"
+                    android:layout_marginTop="7dp"
+                    android:textSize="@dimen/smdm_inflator_title_normal"
+                    android:id="@+id/detail_Git"
+                    android:textColor="@color/smdm_default_color"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Avl Qty"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:singleLine="true"
+                    android:textColor="@color/bg_store_code_text"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textSize="@dimen/smdm_inflator_title_normal"
+                    android:id="@+id/detail_AviQty"
+                    android:layout_marginTop="7dp"
+                    android:textColor="@color/smdm_default_color"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
 
 
 
 
         </LinearLayout>
+
+
+
+        <!--Hidden part-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/detail_size"
             android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:id="@+id/status_track_position_STO"
-            android:background="@drawable/button_gray_effect"
-
+            android:visibility="visible"
             >
-            <RelativeLayout
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/smdm_border"
+                >
+
+            </View>
+
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/details_headerChild"
+                android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                >
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:id="@+id/image3"
-                    android:src="@drawable/indicator_24dp"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:visibility="invisible"
-                    />
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                />
 
-            </RelativeLayout>
+
+
+
+
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:id="@+id/status_track_position_GRN"
-            android:background="@drawable/button_gray_effect"
-            >
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:id="@+id/image4"
-                    android:src="@drawable/indicator_24dp"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:visibility="invisible"
-                    />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Date : "
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:layout_below="@+id/image4"
-                    android:id="@+id/date"
-                    android:layout_toLeftOf="@+id/status_date"
-                    android:textColor="@color/smdm_default_color"
 
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="02/05/2017"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:layout_below="@+id/image4"
-                    android:id="@+id/status_date"
-                    android:textColor="@color/smdm_default_color"
-                    android:layout_alignParentRight="true"
 
-                    />
 
-            </RelativeLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 
 
-
-
-
-
-
-
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/arrow"
-        >
-
-
-
-
-    </LinearLayout>
-
-
-
-
-
-
-
-</RelativeLayout>
-
-
-
-
-
+</LinearLayout>

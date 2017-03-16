@@ -2,82 +2,135 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:weightSum="4"
         >
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:weightSum="4.9"
             >
-
-            <CheckBox
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/detailChild_checkBox"
-                />
+                android:orientation="horizontal"
+                android:layout_weight="0.95"
+                android:gravity="left|center_vertical"
+                >
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detailChild_checkBox"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Small"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:id="@+id/detailChild_size"
+                    android:textColor="@color/smdm_default_color"
+                    />
 
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            >
-            <TextView
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Small"
-                android:textSize="@dimen/smdm_inflator_title_normal"
-                android:id="@+id/detailChild_size"
-                android:textColor="@color/smdm_default_color"
-                />
+                android:orientation="vertical"
+                android:layout_weight="0.9"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="54"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:id="@+id/detailChild_requiredQty"
+                    android:textColor="@color/smdm_default_color"
+                    />
 
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            >
-            <TextView
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="54"
-                android:textSize="@dimen/smdm_inflator_title_normal"
-                android:id="@+id/detailChild_requiredQty"
-                android:textColor="@color/smdm_default_color"
-                />
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textColor="@color/smdm_default_color"
+                    />
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            >
 
-            <TextView
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="01"
-                android:textSize="@dimen/smdm_inflator_title_normal"
-                android:singleLine="true"
-                android:textColor="@color/smdm_default_color"
-                android:id="@+id/detailChild_aviQty"
-                />
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textColor="@color/smdm_default_color"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:singleLine="true"
+                    android:textColor="@color/smdm_default_color"
+                    android:id="@+id/detailChild_aviQty"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
 
         </LinearLayout>
 
 
     </LinearLayout>
+
+
 
 </LinearLayout>

@@ -74,5 +74,11 @@
     <dimen name="stock_textsize_Title">14sp</dimen>
     <dimen name="stock_status_textsize">10sp</dimen>
 
+    <dimen name="collaboration_stock_title">16sp</dimen>
+    <dimen name="collaboration_stock_title_xlarge">17sp</dimen>
+    <dimen name="collaboration_stock_text">14sp</dimen>
+    <dimen name="collaboration_stock_storecode">15sp</dimen>
+
+
 
 </resources>

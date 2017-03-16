@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pending"
-                    android:textSize="@dimen/stock_textsize_normal"
+                    android:textSize="@dimen/smdm_divider"
                     android:id="@+id/status_case"
                     android:layout_alignParentRight="true"
                     android:textColor="@color/smdm_amber"

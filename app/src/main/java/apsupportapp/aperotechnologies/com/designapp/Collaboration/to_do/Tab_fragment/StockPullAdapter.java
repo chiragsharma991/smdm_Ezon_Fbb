@@ -95,7 +95,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
             FWD=(TextView)itemView.findViewById(R.id.stock_fwc);
             McCodeDescribtion=(TextView)itemView.findViewById(R.id.stock_McCodeDesc);
             NumberOfOption=(TextView)itemView.findViewById(R.id.stock_numberOfOption);
-            Stock_cardView=(CardView)itemView.findViewById(R.id.stockFragment_cardView);
+           // Stock_cardView=(CardView)itemView.findViewById(R.id.stockFragment_cardView);
 
 
 
