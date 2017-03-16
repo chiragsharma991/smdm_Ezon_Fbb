@@ -98,8 +98,8 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private void setupViewPager(ViewPager viewPager) {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StockPullFragment(), "STOCK PULL");
-        adapter.addFragment(new TransferRequestFragment(), "TRANSFER REQUEST");
+        adapter.addFragment(new StockPullFragment(), "Pull From Stores");
+        adapter.addFragment(new TransferRequestFragment(), "Request From Stores");
         viewPager.setAdapter(adapter);
     }
 

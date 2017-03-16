@@ -241,7 +241,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             MakeScanList(Sender_DetailsList);
                             transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,scanQty,TrchildScanQty);
                             MakeHashMap(Sender_DetailsList);
-                           // MakeSubChildScanQty(Sender_DetailsList);
+                            // MakeSubChildScanQty(Sender_DetailsList);
 
 
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
@@ -309,12 +309,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void MakeScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
 
-     //   TransReqTotalScanQty = new HashMap<Integer, ArrayList<Transfer_Request_Model>>();
+        //   TransReqTotalScanQty = new HashMap<Integer, ArrayList<Transfer_Request_Model>>();
 
         scanQty=new int[sender_detailsList.size()];
         for (int i = 0; i <sender_detailsList.size() ; i++) {
             scanQty[i]=0;
-     //       TransReqTotalScanQty.put(i,sender_detailsList);
+            //       TransReqTotalScanQty.put(i,sender_detailsList);
         }
     }
 
@@ -385,40 +385,40 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-            if (result != null) {
-                if (result.getContents() == null)
+        if (result != null) {
+            if (result.getContents() == null)
+            {
+                Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
+            } else
+            {
+                Toast.makeText(this, "Barcode Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                if(check_adapter_str.equals("HeaderAdapter"))
                 {
-                    Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
-                } else
-                {
-                    Toast.makeText(this, "Barcode Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                    if(check_adapter_str.equals("HeaderAdapter"))
-                    {
-                        ScanCount++;
-                        TransferDetailsAdapter.headeradapter_scanQty[headerAdapterPos]=ScanCount;
-                        transferDetailsAdapter.notifyDataSetChanged();
-                        Log.e("Scan Count ",""+ ScanCount);
-                    }
-                    else if(check_adapter_str.equals("ChildAdapter"))
-                    {
-                        ScanCount ++;
-                        Log.e("Child Scan Count ---",""+ ScanCount);
-                        childlist.add(ScanCount);
-
-                     TrchildScanQty.put(childAdapterPos,childlist);
-
-                     Log.e("childAdapterPos" ,""+TrchildScanQty.get(childAdapterPos));
-                     transferDetailsAdapter.notifyDataSetChanged();
-
-                     Log.e("list size -----",""+childlist.size());
-
-
-                    }
+                    ScanCount++;
+                    TransferDetailsAdapter.headeradapter_scanQty[headerAdapterPos]=ScanCount;
+                    transferDetailsAdapter.notifyDataSetChanged();
+                    Log.e("Scan Count ",""+ ScanCount);
                 }
-            } else {
-                // This is important, otherwise the result will not be passed to the fragment
-                super.onActivityResult(requestCode, resultCode, data);
+                else if(check_adapter_str.equals("ChildAdapter"))
+                {
+                    ScanCount ++;
+                    Log.e("Child Scan Count ---",""+ ScanCount);
+                    childlist.add(ScanCount);
+
+                    TrchildScanQty.put(childAdapterPos,childlist);
+
+                    Log.e("childAdapterPos" ,""+TrchildScanQty.get(childAdapterPos));
+                    transferDetailsAdapter.notifyDataSetChanged();
+
+                    Log.e("list size -----",""+childlist.size());
+
+
+                }
             }
+        } else {
+            // This is important, otherwise the result will not be passed to the fragment
+            super.onActivityResult(requestCode, resultCode, data);
+        }
 
     }
 

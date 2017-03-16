@@ -8,6 +8,8 @@ public class StatusModel
 {
     int  caseNo;
     int  docNo;
+    double  stoQty;
+    double  grnQty;
     double  stkOnhandQtyRequested;
     double  stkOnhandQtyAcpt;
     String reqStoreCode;
@@ -17,6 +19,10 @@ public class StatusModel
     String statusGrn;
     String level;
     String receiver_requested_date;
+    String stoDate;
+    String grnDate;
+
+
 
     public double getStkOnhandQtyRequested() {
         return stkOnhandQtyRequested;
@@ -107,4 +113,37 @@ public class StatusModel
 
      }
 
+    
+
+    public double getStoQty() {
+        return stoQty;
+    }
+
+    public void setStoQty(double stoQty) {
+        this.stoQty = stoQty;
+    }
+
+    public double getGrnQty() {
+        return grnQty;
+    }
+
+    public void setGrnQty(double grnQty) {
+        this.grnQty = grnQty;
+    }
+
+    public String getStoDate() {
+        return stoDate;
+    }
+
+    public void setStoDate(String stoDate) {
+        this.stoDate = stoDate;
+    }
+
+    public String getGrnDate() {
+        return grnDate;
+    }
+
+    public void setGrnDate(String grnDate) {
+        this.grnDate = grnDate;
+    }
 }

@@ -29,21 +29,23 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_status);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_status);
         setSupportActionBar(toolbar);
-        initialise();
+       initialise();
         if(Build.VERSION.SDK_INT>=21)
         {
                     Window window = getWindow();
 
-         // clear FLAG_TRANSLUCENT_STATUS flag:
+// clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-         // finally change the color
+// finally change the color
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
 
         }
+
+
 
         viewPager=(ViewPager)findViewById(R.id.status_viewpager);
         setupViewPager(viewPager);
@@ -64,7 +66,7 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
     {
         StatusViewPagerAdapter adapter = new StatusViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ToBeSender(), "TO BE TRANSFER");
-        adapter.addFragment(new  ToBeReceiver(), "TO BE RECEIVED");
+        adapter.addFragment(new ToBeReceiver(), "TO BE RECEIVED");
         viewPager.setAdapter(adapter);
     }
 

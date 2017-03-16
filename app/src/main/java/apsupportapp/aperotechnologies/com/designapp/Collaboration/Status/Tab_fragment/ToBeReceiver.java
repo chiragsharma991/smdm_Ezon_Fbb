@@ -41,7 +41,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
-public class ToBeReceiver extends Fragment {
+public class ToBeReceiver extends Fragment  implements OnclickStatus{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,9 +65,9 @@ public class ToBeReceiver extends Fragment {
     private String bearertoken;
     private RequestQueue queue;
     private StatusModel recstatusModel;
-    private ArrayList<StatusModel> ReceiverSummaryList;
+    private ArrayList<StatusModel> ReceiverSummaryList,ReceiverStatusList;
     private RecyclerView recyclerView_receiver;
-    private HashMap<Integer,ArrayList<StatusModel>> receiver_statusList;
+    private HashMap<Integer,ArrayList<StatusModel>> rec_initiatedStatusList,rec_senderAcpStatusList,rec_stoStatusList,rec_grnStatusList;
     private ToBeReceiverAdapter ReceiverAdapter;
 
 
@@ -166,10 +166,55 @@ public class ToBeReceiver extends Fragment {
         mListener = null;
     }
     private void MakeReceiver_StatusHashMap(ArrayList<StatusModel> senderSummaryList) {
-        receiver_statusList=new HashMap<Integer, ArrayList<StatusModel>>();
+        rec_initiatedStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
         for (int i = 0; i <senderSummaryList.size() ; i++) {
             ArrayList<StatusModel>list=new ArrayList<>();
-            receiver_statusList.put(i,list);
+            rec_initiatedStatusList.put(i,list);
+        }
+        rec_senderAcpStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i <senderSummaryList.size() ; i++) {
+            ArrayList<StatusModel>list=new ArrayList<>();
+            rec_senderAcpStatusList.put(i,list);
+        }
+
+        rec_stoStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i <senderSummaryList.size() ; i++) {
+            ArrayList<StatusModel>list=new ArrayList<>();
+            rec_stoStatusList.put(i,list);
+        }
+
+        rec_grnStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i <senderSummaryList.size() ; i++) {
+            ArrayList<StatusModel>list=new ArrayList<>();
+            rec_grnStatusList.put(i,list);
+        }
+
+    }
+
+    @Override
+    public void Onclick(int caseNo, String actionStatus, int dublicatePosition, int Case) {
+        String rec_senderStoreCode=userId;
+        ReceiverStatusList=new ArrayList<StatusModel>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.sDialog(context, "Loading....");
+
+            // this case is for last two sto and grn
+
+            if(Case==3)
+            {
+                requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
+
+            }else if (Case==4)
+            {
+                requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
+
+            }else
+            {
+                requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
+
+            }
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -225,9 +270,8 @@ public class ToBeReceiver extends Fragment {
 
                             recyclerView_receiver.setLayoutManager(new LinearLayoutManager(recyclerView_receiver.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView_receiver.setOnFlingListener(null);
-                            // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             MakeReceiver_StatusHashMap(ReceiverSummaryList);
-                            ReceiverAdapter = new ToBeReceiverAdapter(receiver_statusList,ReceiverSummaryList,context);
+                            ReceiverAdapter = new ToBeReceiverAdapter(rec_initiatedStatusList,rec_senderAcpStatusList,rec_stoStatusList,rec_grnStatusList,ReceiverSummaryList,context,ToBeReceiver.this);
                             recyclerView_receiver.setAdapter(ReceiverAdapter);
                             Reusable_Functions.hDialog();
 
@@ -264,6 +308,126 @@ public class ToBeReceiver extends Fragment {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
+
+    }
+    private void requestReceiverCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position,final int Case)
+    {
+        String url;
+        if(Case==3)
+        {
+           // url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+
+        }else if(Case==4)
+        {
+          //  url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+
+        }else {
+          //  url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/action/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
+
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/action/" + userId + "?offset=" + offsetval+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
+
+        }
+
+        Log.e(TAG, "SenderCaseStatus Url" + "" + url);
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e(TAG, "ReceiverCaseStatus api response : " + " " + response);
+                        Log.e(TAG, "ReceiverCaseStatus api total length" + "" + response.length());
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                ReceiverAdapter .notifyDataSetChanged();
+                                return;
+
+                            } else if (response.length() == limit) {
+                                Log.e(TAG, "promo eql limit");
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    recstatusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
+                                    ReceiverStatusList.add(recstatusModel);
+
+
+                                }
+                                offsetval = (limit * count) + limit;
+                                count++;
+                                //
+
+                                requestReceiverCaseStatus(caseNo,actionStatus,senderStoreCode,position,Case);
+
+                            } else if (response.length() < limit) {
+                                Log.e(TAG, "promo /= limit");
+                                for (int i = 0; i < response.length(); i++) {
+                                    recstatusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
+                                    ReceiverStatusList.add(recstatusModel);
+
+                                }
+
+                            }
+
+                            if(Case==1)
+                            {
+                                rec_initiatedStatusList.put(position,ReceiverStatusList);
+
+                            }else if(Case==2)
+                            {
+                                rec_senderAcpStatusList.put(position,ReceiverStatusList);
+                            }
+                            else if(Case==3)
+                            {
+                                rec_stoStatusList.put(position,ReceiverStatusList);
+                            }
+                            else if(Case==4)
+                            {
+                                rec_grnStatusList.put(position,ReceiverStatusList);
+                            }
+
+                           ReceiverAdapter.notifyDataSetChanged();
+                            Reusable_Functions.hDialog();
+
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+
+                            e.printStackTrace();
+                            Log.e(TAG, "catch...Error" + e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+        Reusable_Functions.hDialog();
 
     }
 

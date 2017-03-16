@@ -81,50 +81,50 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         ((TrDetailsHeaderChildAdapter.Holder)holder).tr_DetailChild_size.setText(list.get(PrePosition).get(position).getLevel());
         ((TrDetailsHeaderChildAdapter.Holder)holder).tr_DetailChild_requiredQty.setText(""+Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested()));
 
-         ((TrDetailsHeaderChildAdapter.Holder) holder).imgbtn_detailchild_scan.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Log.e("TAG", "Detail Child Scan onClick:>>>> "+position );
+        ((TrDetailsHeaderChildAdapter.Holder) holder).imgbtn_detailchild_scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("TAG", "Detail Child Scan onClick:>>>> "+position );
 
-                 if (isAMobileModel()) {
+                if (isAMobileModel()) {
 
-                     Intent intent_barcode = new Intent();
-                     intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
-                     intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
-                     context.sendBroadcast(intent_barcode);
-                   //  ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
-                     barcode = " ";
-                     android.os.Handler h = new android.os.Handler();
-                     h.postDelayed(new Runnable() {
-                         public void run() {
+                    Intent intent_barcode = new Intent();
+                    intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
+                    intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
+                    context.sendBroadcast(intent_barcode);
+                    //  ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
+                    barcode = " ";
+                    android.os.Handler h = new android.os.Handler();
+                    h.postDelayed(new Runnable() {
+                        public void run() {
 
-                             Intent i1 =((Activity) context).getIntent();
-                             Log.e("getIntent : ", "" + ((Activity) context).getIntent());
-                             Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString());
-                             barcode =   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString();
-                             if(!barcode.equals(" "))
-                             {
-                                 Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                 //  TimeUP();
-                             }
-                             else
-                             {
-                                 View view=((Activity)context).findViewById(android.R.id.content);
-                                 Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
-                             }
-                         }
-                     }, 1500);
+                            Intent i1 =((Activity) context).getIntent();
+                            Log.e("getIntent : ", "" + ((Activity) context).getIntent());
+                            Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString());
+                            barcode =   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString();
+                            if(!barcode.equals(" "))
+                            {
+                                Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
+                                //  TimeUP();
+                            }
+                            else
+                            {
+                                View view=((Activity)context).findViewById(android.R.id.content);
+                                Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
+                            }
+                        }
+                    }, 1500);
 
-                 } else if (!isAMobileModel()) {
+                } else if (!isAMobileModel()) {
 
-                     checkChildStr = "ChildAdapter";
-                     onBarcodeScan.onScan(v,position,checkChildStr,transferDetailsAdapter);
+                    checkChildStr = "ChildAdapter";
+                    onBarcodeScan.onScan(v,position,checkChildStr,transferDetailsAdapter);
 //                     for(int i = 0;i )
 //                     countList.add(1);
-              }
-              notifyDataSetChanged();
-             }
-         });
+                }
+                notifyDataSetChanged();
+            }
+        });
         ((TrDetailsHeaderChildAdapter.Holder) holder).tr_DetailChild_scanqty.setText(""+childScanCount.get(PrePosition).get(position));
 
     }

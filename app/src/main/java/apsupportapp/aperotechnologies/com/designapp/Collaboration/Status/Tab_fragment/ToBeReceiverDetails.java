@@ -97,7 +97,8 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void initalise() {
+    private void initalise()
+    {
         rec_detail_recycleView = (RecyclerView) findViewById(R.id.rec_statusDetail_list);
         rec_storeCase = (TextView) findViewById(R.id.rec_status_detailStoreCase);
         rec_storeCode = (TextView) findViewById(R.id.rec_status_detailStoreCode);
@@ -106,14 +107,13 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
         int data1 = getIntent().getExtras().getInt("CASE");
         String data2 = getIntent().getExtras().getString("CODE");
         rec_storeCase.setText(" " + data1);
-        rec_storeCode.setText(data2);
+      //  rec_storeCode.setText(data2);
         caseNo=data1;
-
     }
 
     private void requestReceiverStatusDetails()
     {
-       // String receiver_status_detail_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo;
+       // String receiver_status_detail_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level+"&senderStoreCode="+userId+"&caseNo="+caseNo;
 
        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level+"&senderStoreCode="+userId+"&caseNo="+caseNo;
 
@@ -123,8 +123,8 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Detail api response : " + " " + response);
-                        Log.i(TAG, "Detail api total length" + "" + response.length());
+                        Log.e(TAG, "Detail api response : " + " " + response);
+                        Log.e(TAG, "Detail api total length" + "" + response.length());
 
 
                         try {
@@ -153,12 +153,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
                                     rec_statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     Rec_Status_dtlList.add(rec_statusModel);
                                 }
-                                count = 0;
-                                limit = 100;
-                                offsetvalue = 0;
-
-
-                            }
+                             }
                             rec_detail_recycleView.setLayoutManager(new LinearLayoutManager(rec_detail_recycleView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             rec_detail_recycleView.setOnFlingListener(null);
                             Log.e(TAG, "data  "+Rec_Status_dtlList.get(0).getLevel() );
@@ -216,7 +211,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
     }
     public void StartActivity(Context context, int caseNo, String reqStoreCode) {
 
-        Intent intent = new Intent(context, ToBeSenderDetails.class);
+        Intent intent = new Intent(context, ToBeReceiverDetails.class);
         intent.putExtra("CASE",caseNo);
         intent.putExtra("CODE",reqStoreCode);
         context.startActivity(intent);
@@ -237,9 +232,113 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void OnPress(int Position) {
+    public void OnPress(int position) {
+        option_level=2;
+        StatusDetailChild = new ArrayList<StatusModel>();
+        option=Rec_Status_dtlList.get(position).getLevel();
+
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.sDialog(ToBeReceiverDetails.this, "Loading....");
+            requestReceiverStatusSubDetails(position);
+
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void requestReceiverStatusSubDetails(final int position)
+    {
+      //  String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
+
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level +"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
+
+        Log.e(TAG, "SubDetails Url" + "" + url);
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e(TAG, "Receiver SubDetails api response : " + " " + response);
+                        Log.e(TAG, "Receiver SubDetails api total length" + "" + response.length());
+
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(ToBeReceiverDetails.this, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
+
+                            } else if (response.length() == limit) {
+                                Log.e(TAG, "promo eql limit");
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    rec_statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
+                                    StatusDetailChild.add(rec_statusModel);
+
+
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                //
+
+                                requestReceiverStatusSubDetails(position);
+
+                            } else if (response.length() < limit) {
+                                Log.e(TAG, "promo /= limit");
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    rec_statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
+                                    StatusDetailChild.add(rec_statusModel);
+
+                                }
+                                count = 0;
+                                limit = 100;
+                                offsetvalue = 0;
+                            }
+
+                            Rec_StatusHashmapChildList.put(position, StatusDetailChild);
+                            rec_details_Adapter.notifyDataSetChanged();
+                            Reusable_Functions.hDialog();
+
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+
+                            e.printStackTrace();
+                            Log.e(TAG, "catch...Error" + e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+        Reusable_Functions.hDialog();
+
 
     }
+
 
     @Override
     public void onBackPressed() {

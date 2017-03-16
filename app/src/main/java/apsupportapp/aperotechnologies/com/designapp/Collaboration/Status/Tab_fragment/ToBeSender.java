@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -36,12 +37,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
-public class ToBeSender extends Fragment  {
+public class ToBeSender extends Fragment implements OnclickStatus {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,7 +69,7 @@ public class ToBeSender extends Fragment  {
     private StatusModel statusModel;
     private ArrayList<StatusModel>SenderSummaryList,StatusDocList;
     private RecyclerView recyclerView;
-    private HashMap<Integer,ArrayList<StatusModel>>statusList;
+    private HashMap<Integer,ArrayList<StatusModel>>initiatedStatusList,senderAcpStatusList,stoStatusList,grnStatusList;
     private ToBeSenderAdapter SenderAdapter;
 
 
@@ -169,7 +173,7 @@ public class ToBeSender extends Fragment  {
                             recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             MakeStatusHashMap(SenderSummaryList);
-                            SenderAdapter = new ToBeSenderAdapter(statusList,SenderSummaryList,context);
+                            SenderAdapter = new ToBeSenderAdapter(initiatedStatusList,senderAcpStatusList,stoStatusList,grnStatusList,SenderSummaryList,context,ToBeSender.this);
                             recyclerView.setAdapter(SenderAdapter);
                             Reusable_Functions.hDialog();
 
@@ -210,26 +214,32 @@ public class ToBeSender extends Fragment  {
     }
 
     private void MakeStatusHashMap(ArrayList<StatusModel> senderSummaryList) {
-        statusList=new HashMap<Integer, ArrayList<StatusModel>>();
+        initiatedStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
         for (int i = 0; i <senderSummaryList.size() ; i++) {
             ArrayList<StatusModel>list=new ArrayList<>();
-            statusList.put(i,list);
+            initiatedStatusList.put(i,list);
+        }
+
+        senderAcpStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i <senderSummaryList.size() ; i++) {
+            ArrayList<StatusModel>list=new ArrayList<>();
+            senderAcpStatusList.put(i,list);
+        }
+
+        stoStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i <senderSummaryList.size() ; i++) {
+            ArrayList<StatusModel>list=new ArrayList<>();
+            stoStatusList.put(i,list);
+        }
+
+        grnStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i <senderSummaryList.size() ; i++) {
+            ArrayList<StatusModel>list=new ArrayList<>();
+            grnStatusList.put(i,list);
         }
     }
 
     private void NetworkProcess()
-    {
-        gson = new Gson();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        userId = sharedPreferences.getString("userId", "");
-        bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        Network network = new BasicNetwork(new HurlStack());
-        queue = new RequestQueue(cache, network);
-        queue.start();
-    }
-    private void NetworkProcess2(Context context)
     {
         gson = new Gson();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -254,9 +264,21 @@ public class ToBeSender extends Fragment  {
         }));*/
     }
 
-    private void requestSenderCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position, final Context context, final HashMap<Integer, ArrayList<StatusModel>> statusList, final ToBeSenderAdapter senderAdapter)
+    private void requestSenderCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position,final int Case)
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/action/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
+        String url;
+        if(Case==3)
+        {
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+
+        }else if(Case==4)
+        {
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+
+        }else {
+             url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/action/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
+
+        }
 
         Log.e(TAG, "SenderCaseStatus Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -269,7 +291,8 @@ public class ToBeSender extends Fragment  {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                SenderAdapter.notifyDataSetChanged();
                                 return;
 
                             } else if (response.length() == limit) {
@@ -285,7 +308,7 @@ public class ToBeSender extends Fragment  {
                                 count++;
                                 //
 
-                                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,position,context, statusList, senderAdapter);
+                                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,position,Case);
 
                             } else if (response.length() < limit) {
                                 Log.e(TAG, "promo /= limit");
@@ -298,10 +321,24 @@ public class ToBeSender extends Fragment  {
                                 offsetvalue = 0;
                             }
 
-                            Log.e(TAG, "onResponse------: "+StatusDocList.size()+"position"+position );
-                            statusList.put(position,StatusDocList);
-                            senderAdapter.notifyDataSetChanged();
-                           // SenderAdapter.notifyDataSetChanged();
+                            if(Case==1)
+                            {
+                                initiatedStatusList.put(position,StatusDocList);
+
+                            }else if(Case==2)
+                            {
+                                senderAcpStatusList.put(position,StatusDocList);
+                            }
+                            else if(Case==3)
+                            {
+                                stoStatusList.put(position,StatusDocList);
+                            }
+                            else if(Case==4)
+                            {
+                                grnStatusList.put(position,StatusDocList);
+                            }
+
+                            SenderAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
 
 
@@ -364,22 +401,34 @@ public class ToBeSender extends Fragment  {
         mListener = null;
     }
 
-
-
-    public void  OnPress(Context context, int caseNo, String actionStatus, int dublicatePosition, HashMap<Integer, ArrayList<StatusModel>> statusList, ToBeSenderAdapter senderAdapter) {
-
-        NetworkProcess2(context);
-        StatusDocList=new ArrayList<StatusModel>();
+    @Override
+    public void Onclick(int caseNo, String actionStatus, int dublicatePosition ,int Case) {
+// Case No. is from api and Case is for fill Arraylist in between 4 button
 
         String senderStoreCode=userId;
-
+        StatusDocList=new ArrayList<StatusModel>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading....");
 
-            requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,context,statusList,senderAdapter);
+            // this case is for last two sto and grn
+
+            if(Case==3)
+            {
+                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
+
+            }else if (Case==4)
+            {
+                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
+
+            }else
+            {
+                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
+
+            }
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 

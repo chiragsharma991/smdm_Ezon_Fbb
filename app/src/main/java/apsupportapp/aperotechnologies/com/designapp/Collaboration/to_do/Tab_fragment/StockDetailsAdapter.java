@@ -16,6 +16,9 @@ import android.widget.TextView;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -28,23 +31,31 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
+    private  HashMap<Integer, ArrayList<ToDo_Modal>> HashMapSubChild;
     private  Context context;
     private  ArrayList<ToDo_Modal> list;
-    private static boolean[] Toggle;
-    private static boolean[] HeadercheckList;
+    private  boolean[] Toggle;
+    private  boolean[] HeadercheckList;
     public OnPress onPressInterface;
+    private Set<Pair<Integer, Integer>> CheckedItems ;
 
 
 
-    public StockDetailsAdapter(ArrayList<ToDo_Modal> list, Context context) {
+
+    public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context) {
         this.list=list;
         this.context=context;//
         Toggle= new boolean[list.size()];
         HeadercheckList= new boolean[list.size()];
         onPressInterface=(OnPress)context;
+        HashMapSubChild=hashmapList;
+        CheckedItems=new HashSet<Pair<Integer,Integer>>();
         Log.e("TAG", "StockDetailsAdapter:  constructor");
 
    }
+
+
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -105,7 +116,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         }else
                         {
                             Toggle[position]=true;
-                            if(Details.HashmapList.get(position).isEmpty())
+                            if(HashMapSubChild.get(position).isEmpty())
                             {
                                 onPressInterface.OnPress(position);
 
@@ -116,9 +127,11 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             }
 
                         }
+
+
                     }
                 });
-                DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(Details.HashmapList,HeadercheckList,context,position,StockDetailsAdapter.this);
+                DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
                 ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
 
             }
@@ -127,12 +140,12 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void SetUncheckInChild(int position) {
 
-        for (int i = 0; i <Details.HashmapList.get(position).size(); i++)
+        for (int i = 0; i <HashMapSubChild.get(position).size(); i++)
         {
             Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(position,i);
-            if(DetailsHeaderChildAdapter.CheckedItems.contains(Tag))
+            if(CheckedItems.contains(Tag))
             {
-                DetailsHeaderChildAdapter.CheckedItems.remove(Tag);
+               CheckedItems.remove(Tag);
             }
 
         }
@@ -141,12 +154,12 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void SetChangeInChild(int position) {
-        for (int i = 0; i <Details.HashmapList.get(position).size(); i++)
+        for (int i = 0; i <HashMapSubChild.get(position).size(); i++)
         {
             Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(position,i);
-            if(!DetailsHeaderChildAdapter.CheckedItems.contains(Tag))
+            if(!CheckedItems.contains(Tag))
             {
-                DetailsHeaderChildAdapter.CheckedItems.add(Tag);
+                CheckedItems.add(Tag);
             }
 
         }

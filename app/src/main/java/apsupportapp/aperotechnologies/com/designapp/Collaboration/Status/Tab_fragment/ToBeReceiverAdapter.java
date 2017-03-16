@@ -26,20 +26,48 @@ import static apsupportapp.aperotechnologies.com.designapp.RunningPromo.VM.list;
 public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>implements GravitySnapHelper.SnapListener,View.OnClickListener
 {
     Context context;
+    private  HashMap<Integer, ArrayList<StatusModel>> receiver_senderAcpStatusList;
+    private  HashMap<Integer, ArrayList<StatusModel>> receiver_stoStatusList;
+    private  HashMap<Integer, ArrayList<StatusModel>> receiver_grnStatusList;
+    private  HashMap<Integer, ArrayList<StatusModel>> receiver_initiatedStatusList;
+
     private  ArrayList<StatusModel> receiver_list;
-    private static boolean check=false;
     private HashMap<Integer, ArrayList<StatusModel>> receiverada_statusList;
     private boolean[] Receiver_Toggle;
+    private int []receiver_trackId;
+    private OnclickStatus onclickStatus;
 
 
+//    public ToBeReceiverAdapter(HashMap<Integer, ArrayList<StatusModel>> receiver_statusList, ArrayList<StatusModel> receiverSummaryList, Context context) {
+//    this.receiverada_statusList = receiver_statusList;
+//        this.receiver_list = receiverSummaryList;
+//        this.context = context;
+//        Receiver_Toggle= new boolean[receiver_list.size()];
+//        receiver_trackId = new int[receiver_list.size()];
+//
+//
+//    }
 
-    public ToBeReceiverAdapter(HashMap<Integer, ArrayList<StatusModel>> receiver_statusList, ArrayList<StatusModel> receiverSummaryList, Context context) {
-    this.receiverada_statusList = receiver_statusList;
-        this.receiver_list = receiverSummaryList;
-        this.context = context;
-        Receiver_Toggle= new boolean[receiver_list.size()];
+    public ToBeReceiverAdapter(HashMap<Integer, ArrayList<StatusModel>> rec_initiatedStatusList,
+                             HashMap<Integer, ArrayList<StatusModel>> rec_senderAcpStatusList,
+                             HashMap<Integer, ArrayList<StatusModel>> rec_stoStatusList,
+                             HashMap<Integer, ArrayList<StatusModel>> rec_grnStatusList,
+                             ArrayList<StatusModel> rec_list,
+                             Context context,
+                             OnclickStatus listner) {
 
+
+        this.receiver_initiatedStatusList=rec_initiatedStatusList;
+        this.receiver_senderAcpStatusList=rec_senderAcpStatusList;
+        this.receiver_stoStatusList=rec_stoStatusList;
+        this.receiver_grnStatusList=rec_grnStatusList;
+        this.receiver_list=rec_list;
+        this.context=context;
+        onclickStatus=listner;
+        Receiver_Toggle = new boolean[receiver_list.size()];
+        receiver_trackId=new int[receiver_list.size()];
     }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,14 +82,14 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             {
 
                 HandlePositionOnSet(holder,position);
-                ((ToBeReceiverAdapter.Holder)holder).Rec_Status_caseNumber.setText(""+(int)receiver_list.get(position).getCaseNo());
+                ((ToBeReceiverAdapter.Holder)holder).Rec_Status_caseNumber.setText(""+receiver_list.get(position).getCaseNo());
                 ((ToBeReceiverAdapter.Holder)holder).Rec_Status_storeCode.setText(receiver_list.get(position).getReqStoreCode());
 
                 String Rec_StatusInitiated=receiver_list.get(position).getStatusInitiated();
                 String Rec_StatusAccept=receiver_list.get(position).getStatusAccept();
                 String Rec_StatusSto=receiver_list.get(position).getStatusSto();
                 String Rec_StatusGrn=receiver_list.get(position).getStatusGrn();
-
+                ((Holder) holder).Lin_ProcessStatus.removeAllViewsInLayout();
                 ((ToBeReceiverAdapter.Holder) holder).Rec_Lin_trCard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -162,7 +190,7 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Initiated.setTag(position); //we are using set tag for list view's position
         LinearLayout SenderAcpt=(LinearLayout)view.findViewById(R.id.rec_status_track_position_SenderAcpt);
         SenderAcpt.setTag(position);
-        LinearLayout STO=(LinearLayout)view.findViewById(R.id.status_track_position_STO);
+        LinearLayout STO=(LinearLayout)view.findViewById(R.id.rec_status_track_position_STO);
         STO.setTag(position);
         LinearLayout GRN=(LinearLayout)view.findViewById(R.id.rec_status_track_position_GRN);
         GRN.setTag(position);
@@ -177,22 +205,71 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if(Receiver_Toggle[position])
         {
+            ((ToBeReceiverAdapter.Holder) holder).Rec_Status_layout.removeAllViewsInLayout();
+            Log.e( "Receiver : HandlePositionOnSet: get view... ",""+position );
             LayoutInflater layoutInflater1 = (LayoutInflater) context.getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
             ViewGroup view = (ViewGroup) layoutInflater1.inflate(R.layout.activity_rec_status_initiate, null);
             TextView Rec_Status_docNumber=(TextView)view.findViewById(R.id.rec_status_docNumber);
             TextView Rec_Status_qty=(TextView)view.findViewById(R.id.rec_status_qty);
             TextView Rec_Status_date=(TextView)view.findViewById(R.id.rec_status_date);
-            if(receiverada_statusList.get(position).isEmpty()){
-                Rec_Status_docNumber.setText("N/A");
-                Rec_Status_qty.setText("N/A");
-                Rec_Status_date.setText("N/A");
-            }else
+            if(receiver_trackId[position]==1)
             {
-                Rec_Status_docNumber.setText(""+receiverada_statusList.get(position).get(0).getDocNo());
-                Rec_Status_qty.setText(""+Math.round(receiverada_statusList.get(position).get(0).getStkOnhandQtyRequested()));
-                Rec_Status_date.setText(receiverada_statusList.get(position).get(0).getReceiver_requested_date());
+                if(receiver_initiatedStatusList.get(position).isEmpty()){
+                    Rec_Status_docNumber.setText("N/A");
+                    Rec_Status_qty.setText("N/A");
+                    Rec_Status_date.setText("N/A");
+                }else
+                {
+                    Rec_Status_docNumber.setText(""+receiver_initiatedStatusList.get(position).get(0).getDocNo());
+                    Rec_Status_qty.setText(""+Math.round(receiver_initiatedStatusList.get(position).get(0).getStkOnhandQtyRequested()));
+                    Rec_Status_date.setText(receiver_initiatedStatusList.get(position).get(0).getReceiver_requested_date());
+                }
+
+            }else if(receiver_trackId[position]==2)
+            {
+                if(receiver_senderAcpStatusList.get(position).isEmpty()){
+                    Rec_Status_docNumber.setText("N/A");
+                    Rec_Status_qty.setText("N/A");
+                    Rec_Status_date.setText("N/A");
+                }else
+                {
+                    Rec_Status_docNumber.setText(""+receiver_senderAcpStatusList.get(position).get(0).getDocNo());
+                    Rec_Status_qty.setText(""+Math.round(receiver_senderAcpStatusList.get(position).get(0).getStkOnhandQtyRequested()));
+                    Rec_Status_date.setText(receiver_senderAcpStatusList.get(position).get(0).getReceiver_requested_date());
+                }
+
             }
+            else if(receiver_trackId[position]==3)
+            {
+                if(receiver_stoStatusList.get(position).isEmpty()){
+                    Rec_Status_docNumber.setText("N/A");
+                    Rec_Status_qty.setText("N/A");
+                    Rec_Status_date.setText("N/A");
+                }else
+                {
+                    Rec_Status_docNumber.setText(""+receiver_stoStatusList.get(position).get(0).getDocNo());
+                    Rec_Status_qty.setText(""+Math.round(receiver_stoStatusList.get(position).get(0).getStoQty()));
+                    Rec_Status_date.setText(receiver_stoStatusList.get(position).get(0).getStoDate());
+                }
+
+            }
+            else if(receiver_trackId[position]==4)
+            {
+                if(receiver_grnStatusList.get(position).isEmpty()){
+                    Rec_Status_docNumber.setText("N/A");
+                    Rec_Status_qty.setText("N/A");
+                    Rec_Status_date.setText("N/A");
+                }else
+                {
+                    Rec_Status_docNumber.setText(""+receiver_grnStatusList.get(position).get(0).getDocNo());
+                    Rec_Status_qty.setText(""+Math.round(receiver_grnStatusList.get(position).get(0).getGrnQty()));
+                    Rec_Status_date.setText(receiver_grnStatusList.get(position).get(0).getGrnDate());
+                }
+
+            }
+
+
             ((ToBeReceiverAdapter.Holder) holder).Rec_Status_layout.addView(view);
             ((ToBeReceiverAdapter.Holder)holder).Rec_Status_layout.setVisibility(View.VISIBLE);
         }else
@@ -209,6 +286,88 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onClick(View v) {
 
+        switch (v.getId())
+        {
+            case R.id.rec_status_track_position_Initiated:
+                int dublicatePosition=(int)v.getTag();
+                if(receiver_list.get(dublicatePosition).getStatusInitiated().equals("Yes"))
+                {
+                    receiver_trackId[dublicatePosition]=1;
+                    int caseNo=receiver_list.get(dublicatePosition).getCaseNo();
+                    String actionStatus ="RECVR_REQ";
+                    if(receiver_initiatedStatusList.get(dublicatePosition).isEmpty())
+                    {
+                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1);
+                        Receiver_Toggle[dublicatePosition]=true;
+                    }else
+                    {
+                        Receiver_Toggle[dublicatePosition]=true;
+                        notifyDataSetChanged();
+                    }
+                }
+
+                Log.e("onClick: Receiver Initiated one ------- ",""+dublicatePosition );
+                break;
+
+            case R.id.rec_status_track_position_SenderAcpt:
+                dublicatePosition = (int) v.getTag();
+                if(receiver_list.get(dublicatePosition).getStatusAccept().equals("Yes"))
+                {
+                    receiver_trackId[dublicatePosition]=2;
+                    int caseNo = receiver_list.get(dublicatePosition).getCaseNo();
+                    String actionStatus ="SENDER_ACPT";
+                    if(receiver_senderAcpStatusList.get(dublicatePosition).isEmpty())
+                    {
+                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2);
+                        Receiver_Toggle[dublicatePosition]=true;
+                    }else
+                    {
+                        Receiver_Toggle[dublicatePosition]=true;
+                        notifyDataSetChanged();
+                    }
+                }
+                Log.e("onClick: Receiver SenderAcpt two ------- ",""+dublicatePosition );
+                break;
+            case R.id.rec_status_track_position_STO:
+                dublicatePosition=(int)v.getTag();
+                if(receiver_list.get(dublicatePosition).getStatusSto().equals("Yes"))
+                {
+                    receiver_trackId[dublicatePosition]=3;
+                    int caseNo1 = receiver_list.get(dublicatePosition).getCaseNo();
+                    if(receiver_stoStatusList.get(dublicatePosition).isEmpty())
+                    {
+                        onclickStatus.Onclick(caseNo1,"",dublicatePosition,3);
+                        Receiver_Toggle[dublicatePosition]=true;
+                    }else
+                    {
+                        Receiver_Toggle[dublicatePosition]=true;
+                        notifyDataSetChanged();
+                    }
+                }
+                Log.e( "onClick: Receiver STO three ------- ",""+dublicatePosition );
+                break;
+            case R.id.rec_status_track_position_GRN:
+                dublicatePosition=(int)v.getTag();
+                if(receiver_list.get(dublicatePosition).getStatusGrn().equals("Yes"))
+                {
+                    receiver_trackId[dublicatePosition]=4;
+                    int caseNo2 = receiver_list.get(dublicatePosition).getCaseNo();
+                    if(receiver_grnStatusList.get(dublicatePosition).isEmpty())
+                    {
+                        onclickStatus.Onclick(caseNo2,"",dublicatePosition,4);
+                        Receiver_Toggle[dublicatePosition]=true;
+                    }else
+                    {
+                        Receiver_Toggle[dublicatePosition]=true;
+                        notifyDataSetChanged();
+                    }
+                }
+
+
+                Log.e( "onClick : Receiver GRN  four ------- ",""+dublicatePosition );
+                break;
+
+        }
     }
 
     @Override

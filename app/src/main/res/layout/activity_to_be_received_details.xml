@@ -118,6 +118,7 @@
                 android:layout_alignParentLeft="true"
                 android:textSize="@dimen/stock_textsize_Title"
                 android:text="Case :"
+                android:textStyle="bold"
                 />
 
             <TextView
@@ -127,7 +128,8 @@
                 android:id="@+id/rec_status_detailStoreCode"
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/stock_textsize_Title"
-                android:text="Store Code "
+                android:text="Total Req Qty : "
+                android:textStyle="bold"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -136,7 +138,8 @@
                 android:layout_alignParentRight="true"
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/stock_textsize_Title"
-                android:text=" Store Description"
+                android:text="100"
+                android:textStyle="bold"
                 />
 
 
@@ -144,7 +147,6 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rec_statusDetail_list"
             android:scrollbars="vertical"
-            android:layout_marginTop="3dp"
             android:layout_below="@+id/storeDesc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -2,6 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fr
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 /**
  * Created by pamrutkar on 15/03/17.
  */
-public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter {
+public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private ArrayList<StatusModel> rec_status_dtllist;
@@ -28,22 +29,24 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter {
 
 
 
-    public ReceiverStatusDetailsAdapter(ArrayList<StatusModel> rec_status_dtlList, Context context) {
+    public ReceiverStatusDetailsAdapter(ArrayList<StatusModel> rec_status_List, Context context) {
         this.context = context;
-        this.rec_status_dtllist = rec_status_dtlList;
+        this.rec_status_dtllist = rec_status_List;
+        Toggle= new boolean[rec_status_dtllist.size()];
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_receiver_details_child, parent, false);
-        return new StatusSenderDetailsAdapter.Holder(v);
+        View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_receiver_details_child1, parent, false);
+        return new ReceiverStatusDetailsAdapter.Holder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if(holder instanceof StatusSenderDetailsAdapter.Holder) {
+        if(holder instanceof ReceiverStatusDetailsAdapter.Holder) {
             if(position < rec_status_dtllist.size()) {
 
+                Log.e(TAG,"position"+position);
                 HandlePositionOnSet(holder,position);
                 ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setText(rec_status_dtllist.get(position).getLevel());
                 ((ReceiverStatusDetailsAdapter.Holder)holder).ShortQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyRequested()));
@@ -74,9 +77,9 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter {
 //                        }
 //                    }
 //                });
-
-//                StatusSenderSubChildAdapterDetails detailsHeaderChildAdapter=new StatusSenderSubChildAdapterDetails(ToBeSenderDetails.StatusHashmapChildList,context,position,StatusSenderDetailsAdapter.this);
-//                ((StatusSenderDetailsAdapter.Holder)holder).StatusChildListView.setAdapter(detailsHeaderChildAdapter);
+//
+//               ReceiverStatusSubChildAdapter detailsHeaderChildAdapter=new ReceiverStatusSubChildAdapter(ToBeSenderDetails.StatusHashmapChildList,context,position,ReceiverStatusDetailsAdapter.this);
+//                ((ReceiverStatusDetailsAdapter.Holder)holder).receiverdetails_SubChild.setAdapter(detailsHeaderChildAdapter);
 
             }
         }

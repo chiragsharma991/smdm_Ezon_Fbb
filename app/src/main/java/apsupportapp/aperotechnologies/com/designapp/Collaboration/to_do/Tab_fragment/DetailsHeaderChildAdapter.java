@@ -25,19 +25,21 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
 
 
     private final Context context;
+
     private final int PrePosition;
-    private final HashMap<Integer, ArrayList<ToDo_Modal>> list;
-    public static Set<Pair<Integer, Integer>> CheckedItems = new HashSet<Pair<Integer, Integer>>();
+    private  HashMap<Integer, ArrayList<ToDo_Modal>> list;
+    private  Set<Pair<Integer, Integer>> CheckedItems;
     private final StockDetailsAdapter stockDetailsAdapter;
     private final boolean[] headercheckList;
 
 
-    public DetailsHeaderChildAdapter(HashMap<Integer, ArrayList<ToDo_Modal>> list, boolean[] headercheckList, Context context, int position, StockDetailsAdapter stockDetailsAdapter) {
+    public DetailsHeaderChildAdapter(HashMap<Integer, ArrayList<ToDo_Modal>> list, boolean[] headercheckList, Set<Pair<Integer, Integer>> checkedItems, Context context, int position, StockDetailsAdapter stockDetailsAdapter) {
         this.list=list;
         this.context=context;//
         PrePosition=position;
         this.stockDetailsAdapter=stockDetailsAdapter;
         this.headercheckList=headercheckList;
+        CheckedItems=checkedItems;
 
     }
 
@@ -97,8 +99,8 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
     {
         CheckedItems.add(tagFlag);
 
-        boolean[]CheckChild=new boolean[Details.HashmapList.get(PrePosition).size()];
-        for (int i = 0; i <Details.HashmapList.get(PrePosition).size(); i++) {
+        boolean[]CheckChild=new boolean[list.get(PrePosition).size()];
+        for (int i = 0; i <list.get(PrePosition).size(); i++) {
 
 
             Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(PrePosition,i);
@@ -122,8 +124,8 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
 
     private void UnCheckCondition(Pair<Integer, Integer> tagFlag)
     {
-        boolean[]CheckChild=new boolean[Details.HashmapList.get(PrePosition).size()];
-        for (int i = 0; i <Details.HashmapList.get(PrePosition).size(); i++) {
+        boolean[]CheckChild=new boolean[list.get(PrePosition).size()];
+        for (int i = 0; i <list.get(PrePosition).size(); i++) {
 
 
             Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(PrePosition,i);

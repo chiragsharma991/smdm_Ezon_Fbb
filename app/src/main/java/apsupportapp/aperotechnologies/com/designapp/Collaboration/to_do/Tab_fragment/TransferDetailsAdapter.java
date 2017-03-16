@@ -56,7 +56,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         checkStr = "";
     }
 
-   @Override
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_transferreq_details_child, parent, false);
         return new TransferDetailsAdapter.Holder(v);    }
@@ -64,7 +64,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-      //  Log.e("TAG", "Stock detail: "+position );
+        //  Log.e("TAG", "Stock detail: "+position );
 
         if(holder instanceof TransferDetailsAdapter.Holder) {
             if(position < list.size()) {
@@ -127,7 +127,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                                     barcode =   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString();
                                     if(!barcode.equals(" ")) {
                                         Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                      //  TimeUP();
+                                        //  TimeUP();
                                     }
                                     else{
                                         View view=((Activity)context).findViewById(android.R.id.content);
@@ -141,7 +141,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             checkStr = "HeaderAdapter";
                             onBarcodeScan.onScan(view,position,checkStr, TransferDetailsAdapter.this);
                         }
-                   }
+                    }
                 });
                 ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(""+headeradapter_scanQty[position]);
                 TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(TransferRequest_Details.TransferReqHashmapList,context,position,TransferDetailsAdapter.this,childScanCount);
@@ -199,7 +199,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         private EditText et_trBarcode;
         private LinearLayout SizesLinLayout;
         private LinearLayout lin_imgbtnScan;
-     //   private CheckBox Detail_headerCheck;
+        //   private CheckBox Detail_headerCheck;
         protected RecyclerView recycleview_transferreq_detailChild;
 
         public Holder(View itemView) {
@@ -212,7 +212,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
             btn_scan = (ImageButton) itemView.findViewById(R.id.btn_scan);
-           // lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
+            // lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
             et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
             recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.recycleview_transferreq_detailChild);
             SizesLinLayout = (LinearLayout)itemView.findViewById(R.id.tr_detail_size);
