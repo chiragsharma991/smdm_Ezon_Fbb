@@ -23,6 +23,7 @@ public class StatusModel
     String grnDate;
 
 
+
     public double getStkOnhandQtyRequested() {
         return stkOnhandQtyRequested;
     }
@@ -46,10 +47,6 @@ public class StatusModel
     public void setLevel(String level) {
         this.level = level;
     }
-
-
-
-
 
     public int getCaseNo() {
         return caseNo;
@@ -113,7 +110,10 @@ public class StatusModel
 
     public void setReceiver_requested_date(String receiver_requested_date) {
         this.receiver_requested_date = receiver_requested_date;
-    }
+
+     }
+
+    
 
     public double getStoQty() {
         return stoQty;

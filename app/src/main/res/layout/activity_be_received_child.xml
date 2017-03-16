@@ -25,13 +25,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@android:color/white"
-            android:padding="5dp"
             >
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/header"
-                android:padding="5dp"
+                android:padding="4dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,13 +68,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="5dp"
+                android:padding="4dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4814"
-                    android:textSize="@dimen/stock_textsize_normal"
+                    android:textSize="@dimen/stock_store_textsize"
                     android:id="@+id/status_storeCode"
                     android:textColor="@color/smdm_default_color"
                     />
@@ -83,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store Description"
-                    android:textSize="@dimen/stock_textsize_normal"
+                    android:textSize="@dimen/stock_store_textsize"
                     android:layout_marginLeft="5dp"
                     android:id="@+id/status_storedesc"
                     android:textColor="@color/smdm_default_color"
@@ -99,9 +98,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="3"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
-                android:padding="5dp"
+                android:padding="4dp"
                 >
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -128,7 +126,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:layout_marginTop="2dp"
                 android:visibility="gone"
                 android:id="@+id/status_layout"
@@ -204,15 +202,7 @@
                     android:id="@+id/arrow"
                     >
 
-
-
-
                 </LinearLayout>-->
-
-
-
-
-
 
 
             </RelativeLayout>

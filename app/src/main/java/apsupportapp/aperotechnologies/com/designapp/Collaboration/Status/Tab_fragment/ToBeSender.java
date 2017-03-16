@@ -115,20 +115,17 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         if(Reusable_Functions.chkStatus(context))
         {
             Reusable_Functions.sDialog(context, "Loading.......");
-
             requestSenderCaseStatusSummary();
 
         }else
         {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
-
             Reusable_Functions.hDialog();
         }
     }
 
     private void requestSenderCaseStatusSummary()
     {
-
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit;
         Log.e(TAG, "Status Sender Summary Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -148,7 +145,8 @@ public class ToBeSender extends Fragment implements OnclickStatus {
 
                             } else if (response.length() == limit) {
                                 Log.e(TAG, "promo eql limit");
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
 
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     SenderSummaryList.add(statusModel);
@@ -156,8 +154,6 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                //
-
                                 requestSenderCaseStatusSummary();
 
                             } else if (response.length() < limit) {
@@ -292,11 +288,10 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                         Log.i(TAG, "SenderCaseStatus api response : " + " " + response);
                         Log.i(TAG, "SenderCaseStatus api total length" + "" + response.length());
 
-
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 SenderAdapter.notifyDataSetChanged();
                                 return;
 
@@ -383,14 +378,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         queue.add(postRequest);
         Reusable_Functions.hDialog();
 
-
     }
-
-
-
-
-
-
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

@@ -36,9 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.OnPress;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -69,7 +67,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_to_be_received_details);
+        setContentView(R.layout.activity_to_be_sender_details);
         getSupportActionBar().hide();
         context = this;
         initalise();
@@ -122,18 +120,16 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     StatusDetailsList.add(statusModel);
-
-
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                //
 
                                 requestStatusReceiversDetails();
 
                             } else if (response.length() < limit) {
                                 Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     StatusDetailsList.add(statusModel);
                                 }
@@ -213,15 +209,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         storeCode.setText(data2);
         caseNo=data1;
 
-
-
     }
-
-
-
-
-
-
 
     public void StartActivity(Context context) {
         context.startActivity(new Intent(context, ToBeSenderDetails.class));

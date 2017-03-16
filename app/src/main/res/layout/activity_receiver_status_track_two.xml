@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+              android:orientation="vertical" android:layout_width="match_parent"
+              android:layout_height="wrap_content">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="4"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:orientation="vertical"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:id="@+id/status_track_position_Initiated"
+            android:id="@+id/rec_status_track_position_Initiated"
             android:background="@drawable/button_gray_effect"
 
             >
@@ -64,7 +64,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:background="@drawable/button_gray_effect"
-            android:id="@+id/status_track_position_SenderAcpt"
+            android:id="@+id/rec_status_track_position_SenderAcpt"
             >
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -108,7 +108,7 @@
             android:orientation="vertical"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:id="@+id/status_track_position_STO"
+            android:id="@+id/rec_status_track_position_STO"
             android:background="@drawable/button_gray_effect"
 
             >
@@ -121,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_centerInParent="true"
-                    android:background="@color/smdm_status_complete_color"
+                    android:background="@color/smdm_status_pending_color"
                     >
 
                 </View>
@@ -129,7 +129,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@mipmap/progress_green"
+                    android:src="@mipmap/progress_gray"
                     android:layout_centerInParent="true"
                     />
 
@@ -153,7 +153,7 @@
             android:orientation="vertical"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:id="@+id/status_track_position_GRN"
+            android:id="@+id/rec_status_track_position_GRN"
             android:background="@drawable/button_gray_effect"
             >
             <RelativeLayout

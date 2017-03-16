@@ -130,7 +130,7 @@
                                 android:layout_marginTop="3dp"
                                 android:text="1"
                                 android:textSize="@dimen/largelayout_storesize"
-                                android:textColor="@color/smdm_light_Black"
+                                android:textColor="@color/text_sales"
                                 />
 
 
@@ -154,7 +154,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Req. Qty"
+                                android:text="Short Qty"
                                 android:textSize="@dimen/smdm_inflator_title_normal"
                                 android:textColor="@color/txt_color"
 
@@ -204,7 +204,7 @@
                                 android:layout_marginTop="3dp"
                                 android:text="03"
                                 android:textSize="@dimen/largelayout_storesize"
-                                android:textColor="@color/smdm_green"
+                                android:textColor="@color/text_sales"
                                 />
 
 
@@ -227,7 +227,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Option Req Action"
+                                android:text="# Options"
                                 android:textSize="@dimen/smdm_inflator_title_normal"
                                 android:textColor="@color/txt_color"
 
@@ -240,7 +240,7 @@
                                 android:layout_marginTop="3dp"
                                 android:text="1"
                                 android:textSize="@dimen/largelayout_storesize"
-                                android:textColor="@color/smdm_amber"
+                                android:textColor="@color/text_sales"
                                 />
 
 

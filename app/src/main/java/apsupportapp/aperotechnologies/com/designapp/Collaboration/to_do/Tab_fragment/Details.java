@@ -69,7 +69,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     private String option = "";    // code and description
     private StockDetailsAdapter stockPullAdapter;
     private LinearLayout detailsLinear;
-    public static HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
+    public  HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
     private TextView Todo_detailStoreCode;
     private TextView Todo_detailStoreAvlQty;
 
@@ -244,8 +244,8 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                            stockPullAdapter = new StockDetailsAdapter(DetailsList, context);
                             MakeHashMap(DetailsList);
+                            stockPullAdapter = new StockDetailsAdapter(DetailsList,HashmapList, context);
                             recyclerView.setAdapter(stockPullAdapter);
 
                             Reusable_Functions.hDialog();
