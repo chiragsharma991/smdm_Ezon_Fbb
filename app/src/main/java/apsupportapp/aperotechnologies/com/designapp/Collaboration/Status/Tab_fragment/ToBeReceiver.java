@@ -129,13 +129,8 @@ public class ToBeReceiver extends Fragment {
     private void initialise() {
 
         recyclerView_receiver=(RecyclerView)view.findViewById(R.id.to_be_sender_list);
-      /*  recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
 
-                new ToBeSenderDetails().StartActivity(context,SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getReqStoreCode());
-            }
-        }));*/
+
     }
 
     private void NetworkProcess()
@@ -186,9 +181,9 @@ public class ToBeReceiver extends Fragment {
     //---------------------------- API Declaration --------------------------//
     private void requestReceiverCaseStatusSummary()
     {
-        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
+       // String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
 
-      //  String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
+        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
         Log.e(TAG, "Status Sender Summary Url" + "" + receiver_case_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
                 new Response.Listener<JSONArray>() {

@@ -59,12 +59,12 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
     private int limit = 100;
     private int offsetvalue = 0;
     private int option_level=1;
-    private RelativeLayout status_senderdetails_imageBtnBack;
+    private RelativeLayout status_receiverdetails_imageBtnBack;
     private int caseNo=0;
     private StatusModel rec_statusModel;
     private ReceiverStatusDetailsAdapter rec_details_Adapter;
     private TextView rec_storeCode,rec_storeCase;
-    public static HashMap<Integer, ArrayList<StatusModel>> StatusHashmapChildList;
+    public static HashMap<Integer, ArrayList<StatusModel>> Rec_StatusHashmapChildList;
     private String option="";
 
 
@@ -98,6 +98,17 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
     }
 
     private void initalise() {
+        rec_detail_recycleView = (RecyclerView) findViewById(R.id.rec_statusDetail_list);
+        rec_storeCase = (TextView) findViewById(R.id.rec_status_detailStoreCase);
+        rec_storeCode = (TextView) findViewById(R.id.rec_status_detailStoreCode);
+        status_receiverdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_receiverdetails_imageBtnBack);
+        status_receiverdetails_imageBtnBack.setOnClickListener(this);
+        int data1 = getIntent().getExtras().getInt("CASE");
+        String data2 = getIntent().getExtras().getString("CODE");
+        rec_storeCase.setText(" " + data1);
+        rec_storeCode.setText(data2);
+        caseNo=data1;
+
     }
 
     private void requestReceiverStatusDetails()
@@ -153,7 +164,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
                             Log.e(TAG, "data  "+Rec_Status_dtlList.get(0).getLevel() );
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             rec_details_Adapter = new ReceiverStatusDetailsAdapter(Rec_Status_dtlList, context);
-                           // MakeHashMap(StatusDetailsList);
+                            MakeHashMap(Rec_Status_dtlList);
                             rec_detail_recycleView.setAdapter(rec_details_Adapter);
                             Reusable_Functions.hDialog();
 
@@ -194,7 +205,15 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
 
     }
 
+    private void MakeHashMap(ArrayList<StatusModel> Rec_Status_dtlList) {
 
+        Rec_StatusHashmapChildList = new HashMap<Integer, ArrayList<StatusModel>>();
+
+        for (int i = 0; i < Rec_Status_dtlList.size(); i++) {
+            ArrayList<StatusModel> listData = new ArrayList<StatusModel>();
+            Rec_StatusHashmapChildList.put(i, listData);
+        }
+    }
     public void StartActivity(Context context, int caseNo, String reqStoreCode) {
 
         Intent intent = new Intent(context, ToBeSenderDetails.class);
@@ -204,13 +223,27 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
 
     }
 
+
+
+
     @Override
     public void onClick(View v) {
-
+        switch (v.getId())
+        {
+            case R.id.status_receiverdetails_imageBtnBack :
+                onBackPressed();
+                break;
+        }
     }
 
     @Override
     public void OnPress(int Position) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

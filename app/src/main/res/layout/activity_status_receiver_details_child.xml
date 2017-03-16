@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/rec_lin_trCard"
+        android:background="@drawable/card_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/receiverDetail_CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="10dp"
+            app:cardPreventCornerOverlap="true">
+            <!--Main linear vertical-->
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:weightSum="3.8">
+
+                    <!--list data horizental-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:gravity="left">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Option"
+                            android:textSize="@dimen/normallayout_storesize"
+                            android:textColor="@color/bg_store_code_text"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Short Qty"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="@dimen/normallayout_storesize"
+                            android:textColor="@color/bg_store_code_text"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:visibility="invisible"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="GIT"
+                            android:textSize="@dimen/normallayout_storesize"
+                            android:textColor="@color/bg_store_code_text"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Avl Qty"
+                            android:textSize="@dimen/normallayout_storesize"
+                            android:singleLine="true"
+                            android:textColor="@color/bg_store_code_text"
+                            />
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <!--1st row ending->
+
+
+
+                <!-2nd row starting-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:weightSum="3.8">
+
+                    <!--list data horizental-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:gravity="left">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Test"
+                            android:textSize="@dimen/smdm_inflator_title_normal"
+                            android:id="@+id/status_receiver_detail_optionLevel"
+                            android:singleLine="true"
+                            android:textColor="@color/smdm_default_color"
+                            />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="@dimen/smdm_inflator_title_normal"
+                            android:id="@+id/status_receiver_detail_shortQty"
+                            android:textColor="@color/smdm_default_color"
+                            />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:visibility="invisible"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="GIT"
+                            android:textSize="@dimen/normallayout_storesize"
+                            android:textColor="@color/bg_store_code_text"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="14"
+                            android:textSize="@dimen/smdm_inflator_title_normal"
+                            android:id="@+id/status_receiver_detail_avlQty"
+                            android:textColor="@color/smdm_default_color"
+                            />
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                <!--2nd row ending-->
+
+
+                <!--hidden layout-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lin_receiver_dtlsubchild"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/smdm_divider_Black"
+                        >
+
+                    </View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:weightSum="3.8">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:gravity="left"
+                            android:visibility="invisible"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Option"
+                                android:textSize="@dimen/normallayout_storesize"
+                                android:textColor="@color/bg_store_code_text"/>
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Size"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="@dimen/normallayout_storesize"
+                                android:textColor="@color/bg_store_code_text"/>
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:visibility="visible"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Short Qty"
+                                android:textSize="@dimen/normallayout_storesize"
+                                android:textColor="@color/bg_store_code_text"/>
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"                    >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Avl Qty"
+                                android:textSize="@dimen/normallayout_storesize"
+                                android:singleLine="true"
+                                android:textColor="@color/bg_store_code_text"
+                                />
+
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.RecyclerView
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/receiverdetails_SubChild"
+                            android:scrollbars="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <!--hidden layout ending-->
+            </LinearLayout>
+            <!--Main layout ending-->
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</LinearLayout>

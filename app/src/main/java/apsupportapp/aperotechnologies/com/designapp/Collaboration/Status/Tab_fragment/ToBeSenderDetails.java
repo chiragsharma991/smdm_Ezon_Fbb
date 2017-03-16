@@ -197,7 +197,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private void initalise() {
+    private void initalise()
+    {
         recyclerView = (RecyclerView) findViewById(R.id.statusDetail_list);
         storeCase = (TextView) findViewById(R.id.status_detailStoreCase);
         storeCode = (TextView) findViewById(R.id.status_detailStoreCode);
@@ -205,7 +206,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
         String data2 = getIntent().getExtras().getString("CODE");
-        storeCase.setText(""+data1);
+        storeCase.setText(" " + data1);
         storeCode.setText(data2);
         caseNo=data1;
 
@@ -225,8 +226,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading....");
-
             requestStatusReceiversSubDetails(position);
+
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
