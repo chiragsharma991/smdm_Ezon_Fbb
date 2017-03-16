@@ -33,6 +33,7 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
         this.context = context;
         this.rec_status_dtllist = rec_status_List;
         Toggle= new boolean[rec_status_dtllist.size()];
+        onPressInterface=(OnPress)context;
     }
 
     @Override
@@ -51,35 +52,35 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
                 ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setText(rec_status_dtllist.get(position).getLevel());
                 ((ReceiverStatusDetailsAdapter.Holder)holder).ShortQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyRequested()));
                 ((ReceiverStatusDetailsAdapter.Holder)holder).AvlQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyAcpt()));
-//                ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//
-//                        if(Toggle[position]==true)
-//                        {
-//                            Toggle[position]=false;
-//                            notifyDataSetChanged();
-//
-//                        }else
-//                        {
-//                            Toggle[position]=true;
-//
-//                            if(ToBeReceiverDetails.Rec_StatusHashmapChildList.get(position).isEmpty())
-//                            {
-//                                onPressInterface.OnPress(position);
-//
-//                            }
-//                            else
-//                            {
-//                                notifyDataSetChanged();
-//
-//                            }
-//                        }
-//                    }
-//                });
-//
-//               ReceiverStatusSubChildAdapter detailsHeaderChildAdapter=new ReceiverStatusSubChildAdapter(ToBeSenderDetails.StatusHashmapChildList,context,position,ReceiverStatusDetailsAdapter.this);
-//                ((ReceiverStatusDetailsAdapter.Holder)holder).receiverdetails_SubChild.setAdapter(detailsHeaderChildAdapter);
+                ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        if(Toggle[position]==true)
+                        {
+                            Toggle[position]=false;
+                            notifyDataSetChanged();
+
+                        }else
+                        {
+                            Toggle[position]=true;
+
+                            if(ToBeReceiverDetails.Rec_StatusHashmapChildList.get(position).isEmpty())
+                            {
+                                onPressInterface.OnPress(position);
+
+                            }
+                            else
+                            {
+                                notifyDataSetChanged();
+
+                            }
+                        }
+                    }
+                });
+
+               ReceiverStatusSubChildAdapter detailsHeaderChildAdapter=new ReceiverStatusSubChildAdapter(ToBeSenderDetails.StatusHashmapChildList,context,position,ReceiverStatusDetailsAdapter.this);
+                ((ReceiverStatusDetailsAdapter.Holder)holder).receiverdetails_SubChild.setAdapter(detailsHeaderChildAdapter);
 
             }
         }

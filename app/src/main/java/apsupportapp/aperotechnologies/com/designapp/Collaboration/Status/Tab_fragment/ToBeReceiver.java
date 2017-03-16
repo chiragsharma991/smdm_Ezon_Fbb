@@ -228,7 +228,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     {
        // String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
 
-        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
+        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
         Log.e(TAG, "Status Sender Summary Url" + "" + receiver_case_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
                 new Response.Listener<JSONArray>() {
@@ -317,18 +317,18 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         {
            // url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
 
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/sto/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
 
         }else if(Case==4)
         {
           //  url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
 
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
 
         }else {
           //  url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/action/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
 
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/action/" + userId + "?offset=" + offsetval+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/action/" + userId + "?offset=" + offsetval+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
 
         }
 

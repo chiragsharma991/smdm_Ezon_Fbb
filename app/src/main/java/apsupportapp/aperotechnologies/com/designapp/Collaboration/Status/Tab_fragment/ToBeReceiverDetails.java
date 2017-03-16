@@ -107,7 +107,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
         int data1 = getIntent().getExtras().getInt("CASE");
         String data2 = getIntent().getExtras().getString("CODE");
         rec_storeCase.setText(" " + data1);
-      //  rec_storeCode.setText(data2);
+        rec_storeCode.setText(data2);
         caseNo=data1;
     }
 
@@ -115,7 +115,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
     {
        // String receiver_status_detail_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level+"&senderStoreCode="+userId+"&caseNo="+caseNo;
 
-       String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level+"&senderStoreCode="+userId+"&caseNo="+caseNo;
+       String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level+"&senderStoreCode="+userId+"&caseNo="+caseNo;
 
 
         Log.e(TAG, "Details Url" + "" + url);
@@ -250,7 +250,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
     {
       //  String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level +"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level +"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
 
         Log.e(TAG, "SubDetails Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
