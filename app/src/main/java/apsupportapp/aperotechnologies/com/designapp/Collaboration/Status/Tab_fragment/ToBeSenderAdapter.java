@@ -62,10 +62,6 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         onclickStatus=listner;
         Toggle = new boolean[list.size()];
         trackId=new int[list.size()];
-
-
-
-
     }
 
     @Override
@@ -106,7 +102,6 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                 });
 
-
                 if(StatusInitiated.equals("Yes")&&StatusAccept.equals("No")&&StatusSto.equals("No")&&StatusGrn.equals("No"))
                 {
                     Case0(position,holder);
@@ -124,23 +119,8 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     Case3(position,holder);
 
                 }
-
-
-
-
             }
-
-
-
-
         }
-
-
-
-
-
-
-
     }
 
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
