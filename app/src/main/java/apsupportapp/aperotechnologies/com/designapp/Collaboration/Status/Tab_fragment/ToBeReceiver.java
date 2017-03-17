@@ -242,7 +242,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                         {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No data found in TO BE RECEIVED", Toast.LENGTH_SHORT).show();
                                 return;
 
                             } else if (response.length() == limit) {

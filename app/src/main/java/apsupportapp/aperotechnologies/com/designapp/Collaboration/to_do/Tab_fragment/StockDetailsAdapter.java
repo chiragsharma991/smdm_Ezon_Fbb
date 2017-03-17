@@ -85,14 +85,14 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             if(((CheckBox)view).isChecked())
                             {
                                 //Header check is enable when view is open
-                                if(Toggle[position]){
+                              //  if(Toggle[position]){
                                     HeadercheckList[position]=true;
                                     SetChangeInChild(position);
 
-                                }else{
-                                    HeadercheckList[position]=false;
+                              //  }else{
+                                   // HeadercheckList[position]=false;
 
-                                }
+                               // }
                                 notifyItemChanged(position);
                             }else
                             {
