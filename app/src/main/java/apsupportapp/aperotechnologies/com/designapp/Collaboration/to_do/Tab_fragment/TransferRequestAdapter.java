@@ -81,11 +81,11 @@ public class TransferRequestAdapter  extends RecyclerView.Adapter<RecyclerView.V
             transferRequest_stockCode = (TextView) itemView.findViewById(R.id.transferRequest_stockCode);
             transferRequest_case = (TextView) itemView.findViewById(R.id.transferRequest_case);
             transferRequest_stockdesc = (TextView) itemView.findViewById(R.id.transferRequest_stockDesc);
-            transferRequest_avlqty = (TextView) itemView.findViewById(R.id.transferRequest_avlqty);
-            transferRequest_reqty = (TextView) itemView.findViewById(R.id.transferRequest_reqty);
-            transferRequest_optreq = (TextView) itemView.findViewById(R.id.transferRequest_optreq);
+          //  transferRequest_avlqty = (TextView) itemView.findViewById(R.id.transferRequest_avlqty);
+         //   transferRequest_reqty = (TextView) itemView.findViewById(R.id.transferRequest_reqty);
+         //   transferRequest_optreq = (TextView) itemView.findViewById(R.id.transferRequest_optreq);
             transferRequest_days = (TextView) itemView.findViewById(R.id.transferRequest_days);
-            transferRequest_cardView = (CardView) itemView.findViewById(R.id.transferRequest_cardView);
+          //  transferRequest_cardView = (CardView) itemView.findViewById(R.id.transferRequest_cardView);
 
 
         }

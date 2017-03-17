@@ -111,8 +111,10 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="5dp"
             android:text="Case No"
+            android:textStyle="bold"
+            android:textSize="@dimen/collaboration_stock_storecode"
             android:textColor="@color/bg_store_code_text"
-            android:textSize="14sp"/>
+            />
 
         <TextView
             android:id="@+id/txt_totalreqty"
@@ -121,9 +123,12 @@
             android:layout_marginLeft="10dp"
             android:layout_toLeftOf="@+id/txt_valtotalreqty"
             android:gravity="right"
-            android:text="Total Req.Qty : "
+            android:text="Total Req.Qty :"
+            android:textStyle="bold"
             android:textColor="@color/bg_store_code_text"
-            android:textSize="14sp"/>
+
+
+            />
 
         <TextView
             android:id="@+id/txt_valtotalreqty"
@@ -132,6 +137,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
             android:text="100"
+            android:textStyle="bold"
             android:textColor="@color/bg_store_code_text"
             android:textSize="14sp"/>
 

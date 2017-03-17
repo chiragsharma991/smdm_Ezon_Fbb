@@ -1,3 +1,4 @@
+/*
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
 import android.content.Context;
@@ -24,9 +25,11 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Mod
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 
+*/
 /**
  * Created by csuthar on 06/03/17.
- */
+ *//*
+
 
 public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -52,7 +55,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         CheckedItems=new HashSet<Pair<Integer,Integer>>();
         Log.e("TAG", "StockDetailsAdapter:  constructor");
 
-   }
+    }
 
 
 
@@ -82,28 +85,25 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     @Override
                     public void onClick(View view) {
 
-                            if(((CheckBox)view).isChecked())
-                            {
-                                //Header check is enable when view is open
-                              //  if(Toggle[position]){
-                                    HeadercheckList[position]=true;
-                                    //SetChangeInChild(position);
+                        if(((CheckBox)view).isChecked())
+                        {
+                            //Header check is enable when view is open
+                            //  if(Toggle[position]){
+                            HeadercheckList[position]=true;
+                            SetChangeInChild(position);
 
-                              //  }else{
-                                   // HeadercheckList[position]=false;
+                            //  }else{
+                            // HeadercheckList[position]=false;
 
-                               // }
-                                notifyItemChanged(position);
-                            }else
-                            {
-                                HeadercheckList[position]=false;
-                               // SetUncheckInChild(position);
-                                notifyItemChanged(position);
-
-                                Log.e("TAG","uncheck notifyDataset changed..." );
-
-                            }
+                            // }
+                            notifyItemChanged(position);
+                        }else
+                        {
+                            HeadercheckList[position]=false;
+                            SetUncheckInChild(position);
+                            // notifyItemChanged(position);
                         }
+                    }
 
 
                 });
@@ -148,7 +148,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(position,i);
             if(CheckedItems.contains(Tag))
             {
-               CheckedItems.remove(Tag);
+                CheckedItems.remove(Tag);
             }
 
         }
@@ -221,3 +221,4 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
 }
+*/

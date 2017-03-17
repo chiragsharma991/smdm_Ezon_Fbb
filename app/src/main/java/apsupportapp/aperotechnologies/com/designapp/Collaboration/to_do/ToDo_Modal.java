@@ -11,12 +11,14 @@ public class ToDo_Modal {
     String transferStatus;
     Double stkOnhandQtyRequested;
     Double stkQtyAvl;
+    Double stkOnhandQty;
+    Double stkGitQty;
     int noOfOptions;
-    int stkOnhandQty;
-    int stkGitQty;
     Double fwdWeekCover;
     String mccodeDesc;
     String level;
+
+
 
 
 
@@ -68,19 +70,19 @@ public class ToDo_Modal {
         this.noOfOptions = noOfOptions;
     }
 
-    public int getStkOnhandQty() {
+    public Double getStkOnhandQty() {
         return stkOnhandQty;
     }
 
-    public void setStkOnhandQty(int stkOnhandQty) {
+    public void setStkOnhandQty(Double stkOnhandQty) {
         this.stkOnhandQty = stkOnhandQty;
     }
 
-    public int getStkGitQty() {
+    public Double getStkGitQty() {
         return stkGitQty;
     }
 
-    public void setStkGitQty(int stkGitQty) {
+    public void setStkGitQty(Double stkGitQty) {
         this.stkGitQty = stkGitQty;
     }
 

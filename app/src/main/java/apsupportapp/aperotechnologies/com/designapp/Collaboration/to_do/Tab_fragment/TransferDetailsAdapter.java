@@ -205,7 +205,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         public Holder(View itemView) {
             super(itemView);
             txt_caseNo = (TextView)itemView.findViewById(R.id.txt_caseNo);
-            txt_optionval = (TextView)itemView.findViewById(R.id.txt_optionVal);
+           // txt_optionval = (TextView)itemView.findViewById(R.id.txt_optionVal);
             txt_reqtyval = (TextView)itemView.findViewById(R.id.txt_reqtyVal);
             txt_avlqtyval = (TextView)itemView.findViewById(R.id.txt_avlqtyVal);
             txt_sohval = (TextView)itemView.findViewById(R.id.txt_sohVal);
@@ -213,9 +213,9 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
             btn_scan = (ImageButton) itemView.findViewById(R.id.btn_scan);
             // lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
-            et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
-            recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.recycleview_transferreq_detailChild);
-            SizesLinLayout = (LinearLayout)itemView.findViewById(R.id.tr_detail_size);
+           // et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
+           // recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.recycleview_transferreq_detailChild);
+            //SizesLinLayout = (LinearLayout)itemView.findViewById(R.id.tr_detail_size);
 
         }
 

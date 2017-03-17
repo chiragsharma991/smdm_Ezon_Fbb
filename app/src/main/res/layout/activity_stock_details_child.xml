@@ -139,6 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="SOH"
+                        android:textSize="@dimen/normallayout_storesize"
                         android:textStyle="bold"
                         android:textColor="@color/bg_store_code_text"/>
 
