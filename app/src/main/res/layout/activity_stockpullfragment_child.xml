@@ -53,8 +53,8 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:textSize="@dimen/collaboration_stock_title"
-                        android:text="2004-Knighthood Shift"
                         android:textColor="@color/bg_store_code_text"
+                        android:text="2004-Knighthood Shift"
                         />
 
 
@@ -62,11 +62,11 @@
                         android:id="@+id/stock_transfer_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Pending"
+                        android:layout_alignParentRight="true"
                         android:textSize="@dimen/collaboration_stock_text"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_alignParentRight="true"
-                        android:text="Pending"
                         android:textColor="@color/smdm_amber"
                         />
 

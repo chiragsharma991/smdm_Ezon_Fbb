@@ -185,7 +185,8 @@ public class StockPullFragment extends Fragment {
                                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 recyclerView.setOnFlingListener(null);
                                 // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                                StockPullAdapter stockPullAdapter = new StockPullAdapter(ReceiverSummaryList,getActivity());
+                                StockPullAdapter stockPullAdapter;
+                                stockPullAdapter = new StockPullAdapter(ReceiverSummaryList,getActivity());
                                 recyclerView.setAdapter(stockPullAdapter);
                                 Reusable_Functions.hDialog();
 
