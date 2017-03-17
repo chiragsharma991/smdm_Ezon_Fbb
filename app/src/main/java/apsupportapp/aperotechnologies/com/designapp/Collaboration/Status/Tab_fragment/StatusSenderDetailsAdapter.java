@@ -45,7 +45,7 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_sender_details_child, parent, false);
+        View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_sender_details_child1, parent, false);
         return new StatusSenderDetailsAdapter.Holder(v);
     }
 

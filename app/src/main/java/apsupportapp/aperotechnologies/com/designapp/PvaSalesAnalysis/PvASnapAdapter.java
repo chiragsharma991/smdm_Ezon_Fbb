@@ -118,25 +118,25 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
-                } else if (fromWhere.equals("Category")) {
+                } else if (fromWhere.equals("Subdept")) {
 
                     ((PvAViewHolder) viewHolder).txtPlanClass.setText(productNameBean.getPlanCategory());
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
-                } else if (fromWhere.equals("Plan Class")) {
+                } else if (fromWhere.equals("Class")) {
 
                     ((PvAViewHolder) viewHolder).txtPlanClass.setText(productNameBean.getPlanClass());
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
 
-                } else if (fromWhere.equals("Brand")) {
+                } else if (fromWhere.equals("Subclass")) {
                     ((PvAViewHolder) viewHolder).txtPlanClass.setText(productNameBean.getBrandName());
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
-                } else if (fromWhere.equals("Brand Plan Class")) {
+                } else if (fromWhere.equals("MC")) {
                     ((PvAViewHolder) viewHolder).txtPlanClass.setText(productNameBean.getBrandplanClass());
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));

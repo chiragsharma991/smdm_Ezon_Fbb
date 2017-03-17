@@ -76,6 +76,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     TextView vr_likeVal,vr_dislikeVal,vr_pendingVal;
     PieDataSet dataSet;
     PieData pieData;
+    String recache;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,6 +107,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
             offset = 0;
             limit = 10;
             count = 0;
+            recache = "true";
             requestVisualReportAPI();
 
         } else
@@ -118,7 +120,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
 
     private void requestVisualReportAPI() {
 
-      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?offset=" + offset + "&limit=" + limit;
+      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?recache="+ recache +"&offset=" + offset + "&limit=" + limit ;
         Log.e(TAG,"requestVisualReportAPI Url  "+ url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

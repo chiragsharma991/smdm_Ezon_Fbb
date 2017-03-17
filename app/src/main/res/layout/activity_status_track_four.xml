@@ -47,7 +47,7 @@
                     android:text="Initiated"
                     android:textColor="@color/smdm_default_color"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_status_textsize"
+                    android:textSize="@dimen/collaboration_stock_text"
                     />
 
 
@@ -93,7 +93,7 @@
                     android:text="Sender Acpt"
                     android:textColor="@color/smdm_default_color"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_status_textsize"
+                    android:textSize="@dimen/collaboration_stock_text"
                     />
 
             </RelativeLayout>
@@ -139,7 +139,7 @@
                     android:text="STO"
                     android:textColor="@color/smdm_default_color"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_status_textsize"
+                    android:textSize="@dimen/collaboration_stock_text"
                     />
 
 
@@ -183,7 +183,7 @@
                     android:text="GRN"
                     android:textColor="@color/smdm_default_color"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_status_textsize"
+                    android:textSize="@dimen/collaboration_stock_text"
                     />
 
 

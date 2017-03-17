@@ -2,13 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
     tools:context="apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeReceiver">
 
-    <!--&lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:text="@string/hello_blank_fragment" />-->
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,7 +14,7 @@
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/activity_be_sender_child"
+        tools:listitem="@layout/activity_to_be_receiver_adapter"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
 </FrameLayout>

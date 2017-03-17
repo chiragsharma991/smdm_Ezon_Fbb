@@ -47,7 +47,7 @@
                     android:text="Initiated"
                     android:textColor="@color/smdm_default_color"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_status_textsize"
+                    android:textSize="@dimen/collaboration_stock_text"
                     />
 
 
@@ -75,17 +75,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_centerInParent="true"
-                    android:background="@color/smdm_status_complete_color"
-                    >
-
-                </View>
+                    android:background="@color/smdm_status_complete_color">                </View>
 
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@mipmap/progress_green"
-                    android:layout_centerInParent="true"
-                    />
+                    android:layout_centerInParent="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -93,8 +89,7 @@
                     android:text="Sender Acpt"
                     android:textColor="@color/smdm_default_color"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_status_textsize"
-                    />
+                    android:textSize="@dimen/collaboration_stock_text"/>
 
             </RelativeLayout>
 
@@ -139,7 +134,7 @@
                     android:text="STO"
                     android:textColor="@color/smdm_default_color"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_status_textsize"
+                    android:textSize="@dimen/collaboration_stock_text"
                     />
 
 
@@ -165,8 +160,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_centerInParent="true"
-                    android:background="@color/smdm_status_pending_color"
-                    >
+                    android:background="@color/smdm_status_pending_color">
 
                 </View>
 
@@ -174,8 +168,7 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@mipmap/progress_gray"
-                    android:layout_centerInParent="true"
-                    />
+                    android:layout_centerInParent="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -183,8 +176,7 @@
                     android:text="GRN"
                     android:textColor="@color/smdm_default_color"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/stock_status_textsize"
-                    />
+                    android:textSize="@dimen/collaboration_stock_text"/>
 
 
             </RelativeLayout>

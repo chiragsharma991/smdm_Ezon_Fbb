@@ -165,22 +165,22 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                     ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
                     ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-                } else if (fromwhere.equals("Category")) {
+                } else if (fromwhere.equals("Subdept")) {
 
                     ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
                     ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-                } else if (fromwhere.equals("Plan Class")) {
+                } else if (fromwhere.equals("Class")) {
 
                     ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
                     ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-                } else if (fromwhere.equals("Brand")) {
+                } else if (fromwhere.equals("Subclass")) {
 
                     ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
                     ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-                } else if (fromwhere.equals("Brand Plan Class")) {
+                } else if (fromwhere.equals("MC")) {
 
                     ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
                     ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");

@@ -421,10 +421,10 @@ public class SalesFilterActivity extends Activity {
 
         // Adding group name data
         listDataHeader.add("Department");
-        listDataHeader.add("Category");
-        listDataHeader.add("Plan Class");
-        listDataHeader.add("Brand");
-        listDataHeader.add("Brand Plan Class");
+        listDataHeader.add("Subdept");
+        listDataHeader.add("Class");
+        listDataHeader.add("Subclass");
+        listDataHeader.add("MC");
         if (Reusable_Functions.chkStatus(SalesFilterActivity.this)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(SalesFilterActivity.this, "Loading data...");
@@ -436,28 +436,28 @@ public class SalesFilterActivity extends Activity {
                 level_filter = 1;
                 requestDeptAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(1).equals("Category")) {
+            if (listDataHeader.get(1).equals("Subdept")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
                 level_filter = 2;
                 requestCategoryAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(2).equals("Plan Class")) {
+            if (listDataHeader.get(2).equals("Class")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
                 level_filter = 3;
                 requestPlanClassAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(3).equals("Brand")) {
+            if (listDataHeader.get(3).equals("Subclass")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
                 level_filter = 4;
                 requestBrandNameAPI(offsetvalue, limit);
             }
-            if (listDataHeader.get(4).equals("Brand Plan Class")) {
+            if (listDataHeader.get(4).equals("MC")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
