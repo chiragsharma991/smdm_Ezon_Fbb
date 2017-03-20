@@ -38,6 +38,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private  boolean[] HeadercheckList;
     public OnPress onPressInterface;
     private Set<Pair<Integer, Integer>> CheckedItems ;
+    private final boolean[] visibleItems;
+
 
 
 
@@ -50,6 +52,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         onPressInterface=(OnPress)context;
         HashMapSubChild=hashmapList;
         CheckedItems=new HashSet<Pair<Integer,Integer>>();
+        visibleItems=new boolean[list.size()];
         Log.e("TAG", "StockDetailsAdapter:  constructor");
 
    }
@@ -87,6 +90,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                 //Header check is enable when view is open
                               //  if(Toggle[position]){
                                     HeadercheckList[position]=true;
+                                    visibleItems[position]=true;
                                     //SetChangeInChild(position);
 
                               //  }else{
@@ -98,6 +102,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             {
                                 HeadercheckList[position]=false;
                                // SetUncheckInChild(position);
+                                visibleItems[position]=true;
                                 notifyItemChanged(position);
 
                                 Log.e("TAG","uncheck notifyDataset changed..." );
@@ -134,7 +139,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                     }
                 });
-                DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
+                DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(visibleItems,HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
                 ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
 
             }

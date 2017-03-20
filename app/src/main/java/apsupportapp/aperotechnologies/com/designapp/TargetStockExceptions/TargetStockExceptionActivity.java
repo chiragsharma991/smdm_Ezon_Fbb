@@ -488,6 +488,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkL4W.setChecked(false);
                             checkYTD.setChecked(false);
                             break;
+
                         case "CheckL4W":
                             checkL4W.setChecked(true);
                             checkWTD.setChecked(false);
@@ -514,6 +515,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkPlanClass.setChecked(true);
                             checkDept.setChecked(false);
                             checkCategory.setChecked(false);
+                            break;
+                        default:
                             break;
                     }
                    /* switch (checkTargetROSVal) {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -762,6 +763,9 @@ public class DashBoardActivity extends AppCompatActivity
 //        style_grid.setExpanded(true);
 
         pager = (ViewPager) findViewById(R.id.viewpager);
+
+        TabLayout tab=(TabLayout)findViewById(R.id.dotTab_dashboard);
+        tab.setupWithViewPager(pager, true);
 
 
         li = (LinearLayout) findViewById(R.id.lill);
