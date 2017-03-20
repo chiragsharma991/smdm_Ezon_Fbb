@@ -151,14 +151,14 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
 
 
-                } else if (fromWhere.equals("Category")) {
+                } else if (fromWhere.equals("Subdept")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanCategory());
                     ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
                     ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
 
-                } else if (fromWhere.equals("Plan Class")) {
+                } else if (fromWhere.equals("Class")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanClass());
                     ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
@@ -166,7 +166,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
 
 
-                } else if (fromWhere.equals("Brand")) {
+                } else if (fromWhere.equals("Subclass")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandName());
                     ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" +  formatter.format(freshnessIndexDetails.getStkOnhandQty()));
@@ -174,7 +174,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
 
 
-                } else if (fromWhere.equals("Brand Plan Class")) {
+                } else if (fromWhere.equals("MC")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandplanClass());
                     ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" +  formatter.format(freshnessIndexDetails.getStkOnhandQty()));

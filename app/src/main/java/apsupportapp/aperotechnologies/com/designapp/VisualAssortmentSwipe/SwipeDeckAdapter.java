@@ -478,7 +478,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                 if (VisualAssortmentActivity.edtTextComment.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Enter some value", Toast.LENGTH_SHORT).show();
                 } else {
-                    Reusable_Functions.sDialog(context, "Loading..");
+                  //  Reusable_Functions.sDialog(context, "Loading..");
                     String articleOption = visualAssort1.getArticleOption();
                     String checkLikedislike = visualAssort1.getLikeDislikeFlg();
                     if(checkLikedislike == null)
@@ -491,7 +491,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         checkFeedback = "";
                     }
                     int checkSizeSet = visualAssort1.getSizeSet();
-                    Log.i("", "comment done click: position " + position + " articleOption " + articleOption + " checkLikedislike " + checkLikedislike + " checkSizeSet " + checkSizeSet + " checkFeedback " + checkFeedback);
+                    Log.e("", "comment done click: position " + position + " articleOption " + articleOption + " checkLikedislike " + checkLikedislike + " checkSizeSet " + checkSizeSet + " checkFeedback " + checkFeedback);
 
                     JSONObject obj = new JSONObject();
                     try {

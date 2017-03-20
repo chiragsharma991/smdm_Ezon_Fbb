@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/bg_screen_color">
 
 
     <LinearLayout
@@ -64,22 +64,22 @@
                              android:theme="@style/ProgressBar"/>
 
                 <ImageView
-                    android:background="@mipmap/gradienteffect"
+
                     android:id="@+id/card_image"
                     android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="ContentDescription" />
-
+                <!--android:background="@mipmap/gradienteffect"-->
 
             </RelativeLayout>
 
 
             <RelativeLayout
-                android:background="@mipmap/gradienteffect"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
+                <!--android:background="@mipmap/gradienteffect"-->
                 <LinearLayout
                     android:layout_toLeftOf="@+id/txtSizeRatio"
                     android:id="@+id/leftlayout"

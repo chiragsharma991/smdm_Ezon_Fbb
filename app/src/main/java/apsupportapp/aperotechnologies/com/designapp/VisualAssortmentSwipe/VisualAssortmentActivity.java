@@ -80,6 +80,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     boolean flag = false;
    JsonArrayRequest postRequest;
     public static Activity Visual_Assortment_Activity;
+    String recache = "";
 
 
     @Override
@@ -287,12 +288,13 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             offsetvalue = 0;
             limit = 100;
             count = 0;
-            flag = false;
+            recache = "true";
+          //  flag = false;
             likeDislikeFlg = "Pending";
             if (postRequest != null) {
                 postRequest.cancel();
             }
-            visualassortmentlist = new ArrayList<VisualAssort>();
+           visualassortmentlist = new ArrayList<VisualAssort>();
             if (getIntent().getStringExtra("selectedDept") == null) {
                 vassort_from_filter=false;
             }
@@ -454,21 +456,21 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             @Override
             public void cardsDepleted() {
                 Log.i("MainActivity", "no more cards");
-
-                if (flag == false) {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        visualassortmentlist = new ArrayList<VisualAssort>();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        requestdisplayVisualAssortment(selectedString);
-
-
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(context, "No more data", Toast.LENGTH_LONG).show();
-
-                }
+                Toast.makeText(context, "No more data", Toast.LENGTH_LONG).show();
+//                if (flag == false) {
+//                    if (Reusable_Functions.chkStatus(context)) {
+//                        visualassortmentlist = new ArrayList<VisualAssort>();
+//                        Reusable_Functions.sDialog(context, "Loading data...");
+//                        requestdisplayVisualAssortment(selectedString);
+//
+//
+//                    } else {
+//                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+//                    }
+//                } else {
+//                    Toast.makeText(context, "No more data", Toast.LENGTH_LONG).show();
+//
+//                }
             }
 
 
@@ -510,9 +512,10 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
-                flag = false;
+                recache = "true";
+             //   flag = false;
                 cardStack.setVisibility(View.GONE);
-                visualassortmentlist = new ArrayList<VisualAssort>();
+               // visualassortmentlist = new ArrayList<VisualAssort>();
                 likeDislikeFlg = "Completed";
                 requestdisplayVisualAssortment(selectedString);
                 visualAssortSortLayout.setVisibility(View.GONE);
@@ -536,15 +539,17 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             visualAssort_CompletedChk.setChecked(false);
             visualAssort_PendingChk.setChecked(true);
 
-            if(Reusable_Functions.chkStatus(context)) {
+            if(Reusable_Functions.chkStatus(context))
+            {
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Loading data...");
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
-                flag = false;
+                recache = "true";
+               // flag = false;
                 cardStack.setVisibility(View.GONE);
-                visualassortmentlist = new ArrayList<VisualAssort>();
+              //  visualassortmentlist = new ArrayList<VisualAssort>();
                 likeDislikeFlg = "Pending";
                 requestdisplayVisualAssortment(selectedString);
                 visualAssortSortLayout.setVisibility(View.GONE);
@@ -558,7 +563,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         }
     }
 
-    private void visual_sort_function() {
+    private void visual_sort_function()
+    {
         visualAssortSortLayout.setVisibility(View.VISIBLE);
     }
 
@@ -567,11 +573,11 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
         String url = " ";
         if (vassort_from_filter) {
-            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString;
+            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString +"&recache="+ recache;
         }
         else
         {
-            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg;
+            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg +"&recache="+ recache;
         }
 
 
@@ -621,7 +627,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                     cardStack.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
                                     cardStack.setVisibility(View.VISIBLE);
-                                    flag = true;
+                                 //   flag = true;
                                     Reusable_Functions.hDialog();
                                 }
                             }
@@ -640,15 +646,15 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                     cardStack.setVisibility(View.GONE);
                                     Reusable_Functions.hDialog();
                                 }
-                                else {
+                                else
+                                {
                                     adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
                                     cardStack.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
                                     cardStack.setVisibility(View.VISIBLE);
-                                    flag = true;
+                                   // flag = true;
                                     Reusable_Functions.hDialog();
                                 }
-
                             }
 //                            for(int i = 0; i < visualassortmentlist.size(); i++)
 //                            {
@@ -679,7 +685,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -690,7 +695,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             }
         };
         int socketTimeout  = 60000 ;
-
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
@@ -706,7 +710,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     public void onBackClick()
     {
         InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if(inputManager != null){
+        if(inputManager != null)
+        {
             inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
@@ -729,9 +734,4 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             this.finish();
         }
     }
-
-
-
-
-
 }

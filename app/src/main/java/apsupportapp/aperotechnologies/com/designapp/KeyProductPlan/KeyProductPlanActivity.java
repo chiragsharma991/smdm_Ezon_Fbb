@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -100,6 +101,8 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
 
                 plan_pager.setCurrentItem(tab.getPosition());
 
+
+
                 if (plan_pager.getCurrentItem() == 1 && KeyProductPlanActivity.productName.equals("")) {
                     View view=findViewById(android.R.id.content);
                     Snackbar.make(view, "Please select product to view options", Snackbar.LENGTH_LONG).show();
@@ -115,6 +118,8 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
                    Plan_Option_Fragment.optionview.removeView(Plan_Option_Fragment.optrel);
                    KeyProductPlanActivity.productName = "";
                }
+
+
            }
 
             @Override
