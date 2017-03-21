@@ -332,7 +332,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private void initalise()
     {
         String caseNo = getIntent().getExtras().getString("caseNo");
-        Double data2 = getIntent().getExtras().getDouble("reqQty");
+        double data2 = getIntent().getExtras().getDouble("reqQty");
         //  MCCodeDesc = data;
         tr_recyclerView = (RecyclerView) findViewById(R.id.trasnsferreq_detail_list);
         tr_imageBtnBack = (RelativeLayout) findViewById(R.id.tr_details_imageBtnBack);

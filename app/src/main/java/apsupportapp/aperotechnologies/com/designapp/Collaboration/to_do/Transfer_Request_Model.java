@@ -100,6 +100,6 @@ public class Transfer_Request_Model {
     }
 
     double stkOnhandQty;
-       double stkGitQty;
+    double stkGitQty;
 
 }

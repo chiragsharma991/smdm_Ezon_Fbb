@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="@android:color/white">
+             android:background="@color/bg_screen_color">
 
 
     <LinearLayout
@@ -69,18 +69,19 @@
                     android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@mipmap/gradienteffect"
+android:background="@mipmap/gradienteffect"
                     tools:ignore="ContentDescription"/>
 
-
+                <!--android:background="@mipmap/gradienteffect"-->
             </RelativeLayout>
 
 
             <RelativeLayout
+                android:background="@mipmap/gradienteffect"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@mipmap/gradienteffect">
-
+               >
+                <!--android:background="@mipmap/gradienteffect"-->
                 <LinearLayout
                     android:id="@+id/leftlayout"
                     android:layout_width="200dp"

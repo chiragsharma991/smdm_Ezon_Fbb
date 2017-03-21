@@ -241,10 +241,10 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 }
                 switch (txtheaderplanclass.getText().toString()) {
 
-                    case "Brand Plan Class":
+                    case "MC":
                         btnSalesNext.setVisibility(View.VISIBLE);
-                        txtheaderplanclass.setText("Brand");
-                        fromWhere = "Brand";
+                        txtheaderplanclass.setText("Subclass");
+                        fromWhere = "Subclass";
                       //  flag = false;
                         level = 4;
                         pvaVal = " ";
@@ -273,9 +273,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         }
 
                         break;
-                    case "Brand":
-                        txtheaderplanclass.setText("Plan Class");
-                        fromWhere = "Plan Class";
+                    case "Subclass":
+                        txtheaderplanclass.setText("Class");
+                        fromWhere = "Class";
                         level = 3;
                         pvaVal = " ";
                         // flag = false;
@@ -304,9 +304,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         Log.e("---2---", " ");
                         break;
 
-                    case "Plan Class":
-                        txtheaderplanclass.setText("Category");
-                        fromWhere = "Category";
+                    case "Class":
+                        txtheaderplanclass.setText("Subdept");
+                        fromWhere = "Subdept";
                         level = 2;
                         pvaVal = " ";
                         // flag = false;
@@ -338,7 +338,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                         break;
 
-                    case "Category":
+                    case "Subdept":
                         btnSalesPrev.setVisibility(View.INVISIBLE);
                         txtheaderplanclass.setText("Department");
                         fromWhere = "Department";
@@ -391,8 +391,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                     case "Department":
                         btnSalesPrev.setVisibility(View.VISIBLE);
-                        txtheaderplanclass.setText("Category");
-                        fromWhere = "Category";
+                        txtheaderplanclass.setText("Subdept");
+                        fromWhere = "Subdept";
                         level = 2;
                         pvaVal = " ";
                         //  flag = false;
@@ -422,9 +422,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         }
                         break;
 
-                    case "Category":
-                        fromWhere = "Plan Class";
-                        txtheaderplanclass.setText("Plan Class");
+                    case "Subdept":
+                        fromWhere = "Class";
+                        txtheaderplanclass.setText("Class");
                       //  flag = false;
                         level = 3;
                         pvaVal = " ";
@@ -456,9 +456,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         Log.e("---2---", " ");
 
                         break;
-                    case "Plan Class":
-                        txtheaderplanclass.setText("Brand");
-                        fromWhere = "Brand";
+                    case "Class":
+                        txtheaderplanclass.setText("Subclass");
+                        fromWhere = "Subclass";
                       //  flag = false;
                         level = 4;
                         pvaVal = " ";
@@ -489,11 +489,11 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                         break;
 
-                    case "Brand":
+                    case "Subclass":
                         btnSalesNext.setVisibility(View.INVISIBLE);
 
-                        txtheaderplanclass.setText("Brand Plan Class");
-                        fromWhere = "Brand Plan Class";
+                        txtheaderplanclass.setText("MC");
+                        fromWhere = "MC";
                       //  flag = false;
                         level = 5;
                         pvaVal = " ";
@@ -576,11 +576,11 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     switch (txtheaderplanclass.getText().toString()) {
                                         case "Department":
                                             btnSalesPrev.setVisibility(View.VISIBLE);
-                                            txtheaderplanclass.setText("Category");
+                                            txtheaderplanclass.setText("Subdept");
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
                                             Log.e("txtClicked department--", "" + txtPvAClickedValue);
                                             //  llayoutSalesPvA.setVisibility(View.GONE);
-                                            fromWhere = "Category";
+                                            fromWhere = "Subdept";
                                             level = 2;
                                             if (Reusable_Functions.chkStatus(context)) {
                                                 if (postRequest != null) {
@@ -602,13 +602,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                             }
                                             break;
 
-                                        case "Category":
+                                        case "Subdeot":
 //                                            if (flag == true) {
-                                                txtheaderplanclass.setText("Plan Class");
+                                                txtheaderplanclass.setText("Class");
                                                 //     llayoutSalesPvA.setVisibility(View.GONE);
                                                 txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
                                                 Log.e("txtClicked category --", "" + txtPvAClickedValue);
-                                                fromWhere = "Plan Class";
+                                                fromWhere = "Class";
                                                 level = 3;
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
@@ -635,13 +635,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 //                                            }
 
                                             break;
-                                        case "Plan Class":
+                                        case "Class":
                                          //   if (flag == true) {
-                                                txtheaderplanclass.setText("Brand");
+                                                txtheaderplanclass.setText("Subclass");
                                                 //llayoutSalesPvA.setVisibility(View.GONE);
                                                 txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
                                                 Log.e("txtClicked plan class---", "" + txtPvAClickedValue);
-                                                fromWhere = "Brand";
+                                                fromWhere = "Subclass";
                                                 level = 4;
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
@@ -666,16 +666,16 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 //                                                Toast.makeText(context, "Please Select dept name..", Toast.LENGTH_SHORT).show();
 //                                            }
                                             break;
-                                        case "Brand":
+                                        case "Subclass":
                                             Log.e("in sales pva brand ", "-----" + planDept);
 
                                            // if (flag == true) {
                                                 btnSalesNext.setVisibility(View.INVISIBLE);
-                                                txtheaderplanclass.setText("Brand Plan Class");
+                                                txtheaderplanclass.setText("MC");
                                                 //llayoutSalesPvA.setVisibility(View.GONE);
                                                 txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
                                                 Log.e("txtSalesClickedValue3---", "" + txtPvAClickedValue);
-                                                fromWhere = "Brand Plan Class";
+                                                fromWhere = "MC";
                                                 level = 5;
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
@@ -762,16 +762,16 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
             if (txtheaderplanclass.getText().toString().equals("Department")) {
                 level = 1;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
-            } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+            } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
                 level = 2;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory().toString();
-            } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+            } else if (txtheaderplanclass.getText().toString().equals("Class")) {
                 level = 3;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass().toString();
-            } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+            } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
                 level = 4;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName().toString();
-            } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+            } else if (txtheaderplanclass.getText().toString().equals("MC")) {
                 level = 5;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
             }
@@ -814,16 +814,16 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
             if (txtheaderplanclass.getText().toString().equals("Department")) {
                 level = 1;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
-            } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+            } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
                 level = 2;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory().toString();
-            } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+            } else if (txtheaderplanclass.getText().toString().equals("Class")) {
                 level = 3;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass().toString();
-            } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+            } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
                 level = 4;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName().toString();
-            } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+            } else if (txtheaderplanclass.getText().toString().equals("MC")) {
                 level = 5;
                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
             }
@@ -1022,25 +1022,25 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
                                     salesAnalysisListDisplay.setPlanCategory("All");
                                     salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
                                     salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
                                     salesAnalysisListDisplay.setPlanClass("All");
                                     salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
                                     salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
                                     salesAnalysisListDisplay.setBrandName("All");
                                     salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
                                     salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
                                     salesAnalysisListDisplay.setBrandplanClass("All");
                                     salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
                                     salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
@@ -1068,22 +1068,22 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                             focusposition = j;
                                             listViewSalesPvA.scrollToPosition(focusposition);
                                         }
-                                    } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                    } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
                                         if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(pvaFirstVisibleItem)) {
                                             focusposition = j;
                                             listViewSalesPvA.scrollToPosition(focusposition);
                                         }
-                                    } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+                                    } else if (txtheaderplanclass.getText().toString().equals("Class")) {
                                         if (salesAnalysisClassArrayList.get(j).getPlanClass().equals(pvaFirstVisibleItem)) {
                                             focusposition = j;
                                             listViewSalesPvA.scrollToPosition(focusposition);
                                         }
-                                    } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                    } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
                                         if (salesAnalysisClassArrayList.get(j).getBrandName().equals(pvaFirstVisibleItem)) {
                                             focusposition = j;
                                             listViewSalesPvA.scrollToPosition(focusposition);
                                         }
-                                    } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+                                    } else if (txtheaderplanclass.getText().toString().equals("MC")) {
                                         if (salesAnalysisClassArrayList.get(j).getBrandplanClass().equals(pvaFirstVisibleItem)) {
                                             focusposition = j;
                                             listViewSalesPvA.scrollToPosition(focusposition);
@@ -1092,13 +1092,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 }
                                 if (txtheaderplanclass.getText().toString().equals("Department")) {
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
                                 }
                                 if (pvaFirstVisibleItem.equals("All")) {
@@ -1176,16 +1176,16 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         if (txtheaderplanclass.getText().toString().equals("Department")) {
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?department=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-        } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+        } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?category=" + pvaFirstVisibleItem+ "&offset=" + offsetvalue + "&limit=" + limit;
-        } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+        } else if (txtheaderplanclass.getText().toString().equals("Class")) {
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?class=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-        } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+        } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?brand=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-        } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+        } else if (txtheaderplanclass.getText().toString().equals("MC")) {
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?brandclass=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
         }
@@ -1867,23 +1867,23 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         Log.i("Sales List response length", "" + response.length());
                         if(SalesFilterActivity.level_filter == 2)
                         {
-                            txtheaderplanclass.setText("Category");
-                            fromWhere = "Category";
+                            txtheaderplanclass.setText("Subdept");
+                            fromWhere = "Subdept";
                             btnSalesPrev.setVisibility(View.VISIBLE);
 
                         }
                         else if(SalesFilterActivity.level_filter == 3)
                         {
-                            txtheaderplanclass.setText("Plan Class");
-                            fromWhere = "Plan Class";
+                            txtheaderplanclass.setText("Class");
+                            fromWhere = "Class";
                             btnSalesPrev.setVisibility(View.VISIBLE);
 
 
                         }
                         else if(SalesFilterActivity.level_filter == 4)
                         {
-                            txtheaderplanclass.setText("Brand");
-                            fromWhere = "Brand";
+                            txtheaderplanclass.setText("Subclass");
+                            fromWhere = "Subclass";
                             btnSalesPrev.setVisibility(View.VISIBLE);
 
 
@@ -1891,8 +1891,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         }
                         else if(SalesFilterActivity.level_filter == 5)
                         {
-                            txtheaderplanclass.setText("Brand Plan Class");
-                            fromWhere = "Brand Plan Class";
+                            txtheaderplanclass.setText("MC");
+                            fromWhere = "MC";
                             btnSalesPrev.setVisibility(View.VISIBLE);
                             btnSalesNext.setVisibility(View.INVISIBLE);
 
@@ -1900,8 +1900,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         }
                         else if(SalesFilterActivity.level_filter == 6)
                         {
-                            txtheaderplanclass.setText("Brand Plan Class");
-                            fromWhere = "Brand Plan Class";
+                            txtheaderplanclass.setText("MC");
+                            fromWhere = "MC";
                             btnSalesPrev.setVisibility(View.VISIBLE);
                             btnSalesNext.setVisibility(View.INVISIBLE);
 
@@ -1955,17 +1955,17 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
 
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
 
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory().toString();
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Plan Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
 
                                     pvaFirstVisibleItem  = salesAnalysisClassArrayList.get(focusposition).getPlanClass().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
 
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Plan Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
 
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
                                 }

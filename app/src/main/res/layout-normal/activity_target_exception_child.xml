@@ -175,7 +175,7 @@
                         android:layout_weight="0.3"
                         android:singleLine="true"
                         android:textColor="@color/smdm_default_color"
-                        android:text="Target ROS(U)"
+                        android:text="Ideal Stock"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 

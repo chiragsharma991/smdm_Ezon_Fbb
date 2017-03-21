@@ -409,6 +409,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                 break;
             case R.id.target_imgfilter:
+
 //                Intent intent1 = new Intent(TargetStockExceptionActivity.this, SalesFilterActivity.class);
 //                intent1.putExtra("checkfrom", "targetStockException");
 //                startActivity(intent1);

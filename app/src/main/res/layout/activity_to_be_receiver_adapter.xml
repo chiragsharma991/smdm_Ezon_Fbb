@@ -24,6 +24,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="0dp"
                 android:background="@android:color/white"
                 android:orientation="vertical"
                 >
@@ -32,7 +33,7 @@
                     android:id="@+id/rel_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
+                    android:padding="3dp"
                     >
 
                     <TextView
@@ -41,8 +42,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:text="C0001"
+                        android:textStyle="bold"
                         android:textColor="@color/bg_store_code_text"
-                        android:textSize="@dimen/stock_textsize_large"
+                        android:textSize="@dimen/collaboration_stock_title"
                         />
 
                     <TextView
@@ -52,7 +54,7 @@
                         android:layout_alignParentRight="true"
                         android:text="Pending"
                         android:textColor="@color/smdm_amber"
-                        android:textSize="@dimen/stock_textsize_large"
+                        android:textSize="@dimen/collaboration_stock_text"
                         />
 
 
@@ -73,7 +75,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="4dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="3dp"
                     >
 
                     <TextView
@@ -81,8 +85,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="4814"
+                        android:textStyle="bold"
                         android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/stock_store_textsize"
+                        android:textSize="@dimen/collaboration_stock_text"
                         />
 
                     <TextView
@@ -90,9 +95,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:textStyle="bold"
                         android:text="Store Description"
                         android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/stock_store_textsize"
+                        android:textSize="@dimen/collaboration_stock_text"
                         />
 
                 </LinearLayout>
@@ -104,7 +110,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="4dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="3dp"
                     android:weightSum="3"
                     >
 

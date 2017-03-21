@@ -143,11 +143,11 @@ public class Plan_Product extends Fragment {
 
         LinearLayout layout = (LinearLayout) KeyProductPlanActivity.plan_pager.getParent();
         TabLayout tab = (TabLayout) layout.getChildAt(1);
-
         if (tab.getTabCount() == 3) {
-            tab.removeTabAt(1);
+            tab.removeTabAt(2);
         }
-        if (tab.getTabCount() == 2) {
+        if(tab.getTabCount() == 2)
+        {
             tab.removeTabAt(1);
         }
 
@@ -397,10 +397,10 @@ public class Plan_Product extends Fragment {
         tableBProd_Frag = new TableLayout(this.context);
         tableCProd_Frag = new TableLayout(this.context);
         tableDProd_Frag = new TableLayout(this.context);
-        horizontalScrollViewB = new Plan_Product.MyHorizontalScrollView(this.context);
-        horizontalScrollViewD = new Plan_Product.MyHorizontalScrollView(this.context);
-        scrollViewC = new Plan_Product.MyScrollView(this.context);
-        scrollViewD = new Plan_Product.MyScrollView(this.context);
+        horizontalScrollViewB = new MyHorizontalScrollView(this.context);
+        horizontalScrollViewD = new MyHorizontalScrollView(this.context);
+        scrollViewC = new MyScrollView(this.context);
+        scrollViewD = new MyScrollView(this.context);
         tableAProd_Frag.setBackgroundColor(Color.parseColor("#000000"));
         horizontalScrollViewB.setBackgroundColor(Color.parseColor("#dfdedf"));
     }
@@ -517,6 +517,12 @@ public class Plan_Product extends Fragment {
                     ViewPager viewPager = (ViewPager) view.getParent();
                     LinearLayout layout = (LinearLayout) viewPager.getParent();
                     TabLayout tab = (TabLayout) layout.getChildAt(1);
+                    if (tab.getTabCount() == 3) {
+                        tab.removeTabAt(2);
+                    }
+                    if(tab.getTabCount() == 2) {
+                       tab.removeTabAt(1);
+                    }
                     tab.addTab(tab.newTab().setText("OPTION"));
                     tab.getTabAt(1).select();
                     rowPressListener.communicateToFragment2(productNameBeanArrayList.get(i).getLevel(),prodsegClick);

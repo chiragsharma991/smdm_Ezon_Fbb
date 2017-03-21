@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -195,7 +196,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public static class Holder extends RecyclerView.ViewHolder {
 
         private TextView txt_caseNo,txt_optionval,txt_reqtyval,txt_avlqtyval,txt_sohval,txt_gitval,txt_scanqtyVal;
-        ImageButton btn_scan;
+        ImageView btn_scan;
         private EditText et_trBarcode;
         private LinearLayout SizesLinLayout;
         private LinearLayout lin_imgbtnScan;
@@ -205,17 +206,17 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         public Holder(View itemView) {
             super(itemView);
             txt_caseNo = (TextView)itemView.findViewById(R.id.txt_caseNo);
-           // txt_optionval = (TextView)itemView.findViewById(R.id.txt_optionVal);
+            txt_optionval = (TextView)itemView.findViewById(R.id.detail_optionLevel);
             txt_reqtyval = (TextView)itemView.findViewById(R.id.txt_reqtyVal);
             txt_avlqtyval = (TextView)itemView.findViewById(R.id.txt_avlqtyVal);
             txt_sohval = (TextView)itemView.findViewById(R.id.txt_sohVal);
             txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
-            btn_scan = (ImageButton) itemView.findViewById(R.id.btn_scan);
+            btn_scan = (ImageView) itemView.findViewById(R.id.btn_scan);
             // lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
            // et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
-           // recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.recycleview_transferreq_detailChild);
-            //SizesLinLayout = (LinearLayout)itemView.findViewById(R.id.tr_detail_size);
+            recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.details_headerChild);
+            SizesLinLayout = (LinearLayout)itemView.findViewById(R.id.detail_size);
 
         }
 

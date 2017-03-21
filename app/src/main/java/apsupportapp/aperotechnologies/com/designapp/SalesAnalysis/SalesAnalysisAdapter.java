@@ -167,25 +167,25 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
 
 
-        } else if (fromwhere.equals("Category")) {
+        } else if (fromwhere.equals("Subdept")) {
 
             viewHolder.nameTv.setText(productNameBean.getPlanCategory());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
 
-        } else if (fromwhere.equals("Plan Class")) {
+        } else if (fromwhere.equals("Class")) {
 
 
             viewHolder.nameTv.setText(productNameBean.getPlanClass());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
 
-        } else if (fromwhere.equals("Brand")) {
+        } else if (fromwhere.equals("Subclass")) {
 
             viewHolder.nameTv.setText(productNameBean.getBrandName());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
 
-        } else if (fromwhere.equals("Brand Plan Class")) {
+        } else if (fromwhere.equals("MC")) {
 
             viewHolder.nameTv.setText(productNameBean.getBrandplanClass());
             viewHolder.txtPvAValue.setText(""+Math.round(productNameBean.getPvaAchieved())+"%");
@@ -254,7 +254,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 //                listView_SalesAnalysis.setSelection(currentIndex);
         }
         salesadapter.notifyDataSetChanged();
-         salesadapter.notifyDataSetChanged();
+        salesadapter.notifyDataSetChanged();
 
     }
 

@@ -9,12 +9,12 @@ public class ToDo_Modal {
     String storeCode;
     String storeDesc;
     String transferStatus;
-    Double stkOnhandQtyRequested;
-    Double stkQtyAvl;
-    Double stkOnhandQty;
-    Double stkGitQty;
+    double stkOnhandQtyRequested;
+    double stkQtyAvl;
+    double stkOnhandQty;
+    double stkGitQty;
     int noOfOptions;
-    Double fwdWeekCover;
+    double fwdWeekCover;
     String mccodeDesc;
     String level;
 
@@ -38,11 +38,11 @@ public class ToDo_Modal {
         this.storeDesc = storeDesc;
     }
 
-    public Double getStkOnhandQtyRequested() {
+    public double getStkOnhandQtyRequested() {
         return stkOnhandQtyRequested;
     }
 
-    public void setStkOnhandQtyRequested(Double stkOnhandQtyRequested) {
+    public void setStkOnhandQtyRequested(double stkOnhandQtyRequested) {
         this.stkOnhandQtyRequested = stkOnhandQtyRequested;
     }
 
@@ -54,11 +54,11 @@ public class ToDo_Modal {
         this.transferStatus = transferStatus;
     }
 
-    public Double getStkQtyAvl() {
+    public double getStkQtyAvl() {
         return stkQtyAvl;
     }
 
-    public void setStkQtyAvl(Double stkQtyAvl) {
+    public void setStkQtyAvl(double stkQtyAvl) {
         this.stkQtyAvl = stkQtyAvl;
     }
 
@@ -70,27 +70,27 @@ public class ToDo_Modal {
         this.noOfOptions = noOfOptions;
     }
 
-    public Double getStkOnhandQty() {
+    public double getStkOnhandQty() {
         return stkOnhandQty;
     }
 
-    public void setStkOnhandQty(Double stkOnhandQty) {
+    public void setStkOnhandQty(double stkOnhandQty) {
         this.stkOnhandQty = stkOnhandQty;
     }
 
-    public Double getStkGitQty() {
+    public double getStkGitQty() {
         return stkGitQty;
     }
 
-    public void setStkGitQty(Double stkGitQty) {
+    public void setStkGitQty(double stkGitQty) {
         this.stkGitQty = stkGitQty;
     }
 
-    public Double getFwdWeekCover() {
+    public double getFwdWeekCover() {
         return fwdWeekCover;
     }
 
-    public void setFwdWeekCover(Double fwdWeekCover) {
+    public void setFwdWeekCover(double fwdWeekCover) {
         this.fwdWeekCover = fwdWeekCover;
     }
 

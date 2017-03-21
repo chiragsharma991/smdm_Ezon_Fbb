@@ -146,6 +146,10 @@ public class Plan_SKU_Fragment extends Fragment {
         prodnm = KeyProductPlanActivity.productName;
        // KeyProductPlanActivity.segClick = "";
         skurel = (RelativeLayout) skuview.findViewById(R.id.planskuactual_rel);
+
+
+
+        Log.e("Current Item :",""+KeyProductPlanActivity.plan_pager.getCurrentItem());
         segmentedGroupSku = (SegmentedGroup) skuview.findViewById(R.id.segmentedGrpSku);
         sku_btnWTD = (RadioButton) skuview.findViewById(R.id.planactual_skubtnWTD);
 
@@ -320,11 +324,15 @@ public class Plan_SKU_Fragment extends Fragment {
 
         optionName = level;
         sku_seg_clk = optionsegmentclick;
-        Log.e("fragment_Communication:"," " +level +"\tsegmentclk :"+optionsegmentclick );
+        Log.e("fragment_Communication:"," " +level +"\tsegmentclk :"+optionsegmentclick +"Curnt Item :"+KeyProductPlanActivity.plan_pager.getChildCount()+"Child Cnt :"+KeyProductPlanActivity.plan_pager.getChildCount());
       //  KeyProductPlanActivity.segClick = "";
         txtOptionName.setText(level);
         if (Reusable_Functions.chkStatus(context)) {
-
+            LinearLayout layout = (LinearLayout) KeyProductPlanActivity.plan_pager.getParent();
+            TabLayout tab = (TabLayout) layout.getChildAt(1);
+            if (tab.getTabCount() == 3) {
+                tab.removeTabAt(1);
+            }
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;
@@ -364,11 +372,11 @@ public class Plan_SKU_Fragment extends Fragment {
         tableCPlanSku = new TableLayout(this.context);
         tableDPlanSku = new TableLayout(this.context);
 
-        horizontalScrollViewB = new Plan_SKU_Fragment.MyHorizontalScrollView(this.context);
-        horizontalScrollViewD = new Plan_SKU_Fragment.MyHorizontalScrollView(this.context);
+        horizontalScrollViewB = new MyHorizontalScrollView(this.context);
+        horizontalScrollViewD = new MyHorizontalScrollView(this.context);
 
-        scrollViewC = new Plan_SKU_Fragment.MyScrollView(this.context);
-        scrollViewD = new Plan_SKU_Fragment.MyScrollView(this.context);
+        scrollViewC = new MyScrollView(this.context);
+        scrollViewD = new MyScrollView(this.context);
 
         tableAPlanSku.setBackgroundColor(Color.GREEN);
         horizontalScrollViewB.setBackgroundColor(Color.LTGRAY);
@@ -798,6 +806,12 @@ public class Plan_SKU_Fragment extends Fragment {
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
+                                Log.e(" sku view childcount", " " + skuview.getChildCount());
+//                                if (skuview.getChildCount() == 2) {
+//                                    scrollViewC.scrollTo(0, 0);
+//                                    scrollViewD.scrollTo(0, 0);
+//                                    skuview.addView(sku_relativeLayout);
+//                                }
                                 Plan_Product.relPlanProd_Frag.removeAllViews();
 
                             }

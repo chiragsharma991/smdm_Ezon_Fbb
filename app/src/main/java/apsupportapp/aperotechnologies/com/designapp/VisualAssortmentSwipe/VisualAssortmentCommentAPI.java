@@ -33,13 +33,14 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
 public class VisualAssortmentCommentAPI {
-    static RequestQueue queue;
-    static Gson gson;
+     RequestQueue queue;
+    Gson gson;
 
     public static void requestSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context) {
 
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 2048 * 2048); // 2MB cap
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
+        RequestQueue queue = null;
         if (queue != null) {
             queue.stop();
         } else if(queue == null){
@@ -48,7 +49,7 @@ public class VisualAssortmentCommentAPI {
         }
         String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId;
         Log.e("url", " post VASSORT " + url + " ==== " + obj.toString());
-        final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, obj.toString(),
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, obj.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -89,8 +90,9 @@ public class VisualAssortmentCommentAPI {
 
     public static void requestUpdateSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context) {
 
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 2048 * 2048); // 2MB cap
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
+        RequestQueue queue = null;
         if (queue != null) {
             queue.stop();
         } else if(queue == null){
@@ -99,7 +101,7 @@ public class VisualAssortmentCommentAPI {
         }
         String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId;
         Log.e("url", " put VASSORT " + url + " ==== " + obj.toString());
-        final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, obj.toString(),
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, obj.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

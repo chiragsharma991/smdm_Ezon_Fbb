@@ -6,14 +6,14 @@
               android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/rec_lin_trCard"
+        android:id="@+id/lin_trCard"
         android:background="@drawable/card_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp">
 
         <android.support.v7.widget.CardView
-            android:id="@+id/receiverDetail_CardView"
+            android:id="@+id/card123"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
@@ -25,16 +25,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-              >
+                android:orientation="vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Option"
+                    android:text="LKM - Pink 100"
+                    android:typeface="normal"
                     android:textStyle="bold"
-                   android:typeface="normal"
-                    android:id="@+id/status_receiver_detail_optionLevel"
+                    android:id="@+id/statusSender_detail_optionLevel"
                     android:textSize="@dimen/normallayout_storesize"
                     android:textColor="@color/bg_store_code_text"/>
 
@@ -74,19 +73,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Short Qty"
-                        android:textStyle="bold"
+                            android:text="Req Qty"
+                            android:typeface="normal"
+                            android:textStyle="bold"
                             android:layout_marginLeft="10dp"
                             android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/bg_store_code_text"
-                          />
+                           />
 
 
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="0.9"
                         android:layout_marginLeft="15dp"
                         android:gravity="left"
                         android:visibility="visible">
@@ -94,8 +94,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Avl Qty"
+                            android:text="Scanned Qty"
                             android:textStyle="bold"
+                            android:typeface="normal"
                             android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/bg_store_code_text"/>
 
@@ -155,11 +156,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
+                            android:text="10"
                             android:layout_marginLeft="10dp"
                             android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/txt_color"
-                            android:id="@+id/status_receiver_detail_shortQty"/>
+                            android:id="@+id/status_sender_detail_reqQty"/>
 
 
                     </LinearLayout>
@@ -168,14 +169,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginLeft="15dp"
-                        android:gravity="left"
-                       >
+                        android:gravity="left">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            android:id="@+id/status_receiver_detail_avlQty"
+                            android:text="10"
+                            android:id="@+id/status_sender_detail_ScanedQty"
                             android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/txt_color"/>
 
@@ -206,7 +206,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/lin_receiver_dtlsubchild"
+                    android:id="@+id/StatusDetailChild_size"
                     android:layout_marginTop="3dp"
                     android:orientation="vertical"
                     android:visibility="visible"
@@ -230,7 +230,7 @@
                         <android.support.v7.widget.RecyclerView
                             xmlns:android="http://schemas.android.com/apk/res/android"
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/receiverdetails_SubChild"
+                            android:id="@+id/StatusSenderdetails_SubChild"
                             android:scrollbars="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

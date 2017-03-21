@@ -126,6 +126,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
 
     private void requestSenderCaseStatusSummary()
     {
+//
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit;
         Log.e(TAG, "Status Sender Summary Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -133,24 +134,24 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.i(TAG, "Status Sender response : " + " " + response);
-                        Log.i(TAG, "Status Sender length" + "" + response.length());
+                        Log.e(TAG, "Status Sender response : " + " " + response);
+                        Log.e(TAG, "Status Sender length" + "" + response.length());
 
                         try
                         {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+
+                                Toast.makeText(context, "No data found from TO BE TRANSFERRED", Toast.LENGTH_SHORT).show();
                                 return;
 
                             } else if (response.length() == limit) {
                                 Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++)
                                 {
-
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     SenderSummaryList.add(statusModel);
-
+//
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
@@ -162,12 +163,18 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                                 {
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     SenderSummaryList.add(statusModel);
+
+
                                 }
-                                count = 0;
-                                limit = 100;
-                                offsetvalue = 0;
 
                             }
+//                            statusModel = new StatusModel();
+//                            statusModel.setCaseNo(10);
+//                            statusModel.setReqStoreCode("2668");
+//                            statusModel.setStatusInitiated("Yes");
+//        statusModel.setStatusAccept("Yes");
+//        statusModel.setStatusSto("No");
+//        statusModel.setStatusGrn("No");
 
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
@@ -302,12 +309,9 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     StatusDocList.add(statusModel);
 
-
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                //
-
                                 requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,position,Case);
 
                             } else if (response.length() < limit) {
