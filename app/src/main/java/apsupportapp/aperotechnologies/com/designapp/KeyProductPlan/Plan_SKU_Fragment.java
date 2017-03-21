@@ -147,6 +147,8 @@ public class Plan_SKU_Fragment extends Fragment {
        // KeyProductPlanActivity.segClick = "";
         skurel = (RelativeLayout) skuview.findViewById(R.id.planskuactual_rel);
 
+
+
         Log.e("Current Item :",""+KeyProductPlanActivity.plan_pager.getCurrentItem());
         segmentedGroupSku = (SegmentedGroup) skuview.findViewById(R.id.segmentedGrpSku);
         sku_btnWTD = (RadioButton) skuview.findViewById(R.id.planactual_skubtnWTD);
@@ -326,7 +328,11 @@ public class Plan_SKU_Fragment extends Fragment {
       //  KeyProductPlanActivity.segClick = "";
         txtOptionName.setText(level);
         if (Reusable_Functions.chkStatus(context)) {
-
+            LinearLayout layout = (LinearLayout) KeyProductPlanActivity.plan_pager.getParent();
+            TabLayout tab = (TabLayout) layout.getChildAt(1);
+            if (tab.getTabCount() == 3) {
+                tab.removeTabAt(1);
+            }
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;

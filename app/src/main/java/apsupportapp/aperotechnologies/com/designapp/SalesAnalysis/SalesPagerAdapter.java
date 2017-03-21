@@ -30,9 +30,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPager
 /**
  * Created by hasai on 20/09/16.
  */
-public class
-
-SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
+public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
 
 
     Context context;
@@ -82,7 +80,6 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 
     public SalesPagerAdapter(Context context, ArrayList<SalesAnalysisViewPagerValue> arrayList, int focusposition, ViewPager vwpagersales, LinearLayout lldots, SalesAnalysisSnapAdapter salesadapter, RecyclerView listView_SalesAnalysis, ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList, String fromWhere, SalesPagerAdapter pagerAdapter) {
 
-        Log.e("in sales adapter", " ---");
         this.context = context;
         this.arrayList = arrayList;
         // Log.i("size", "" + arrayList.size());
@@ -105,7 +102,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
         }
 
         currentPage = vwpagersales.getCurrentItem();
-        Log.e("currentPage "," "+currentPage);
+     //   Log.e("currentPage "," "+currentPage);
 
 
     }
@@ -266,7 +263,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             if (SalesAnalysisActivity1.selectedsegValue.equals("WTD") || SalesAnalysisActivity1.selectedsegValue.equals("LW")) {
 
                 if (salesAnalysis != null) {
-                    Log.e("Round val", "" + Math.round(salesAnalysis.getSaleNetVal()));
+               //     Log.e("Round val", "" + Math.round(salesAnalysis.getSaleNetVal()));
                     txtNetSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getSaleNetVal())));
                     txtPlanSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getPlanSaleNetVal())));
                     txtNetSalesUVal.setText("" + format.format(Math.round(salesAnalysis.getSaleTotQty())));
@@ -328,7 +325,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
                     txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
-                    Log.i("saleNetVal IN L4W", "" + salesAnalysis.getSaleNetVal());
+                 //   Log.i("saleNetVal IN L4W", "" + salesAnalysis.getSaleNetVal());
                 }
                 //           txtNetSalesPerc.setText(salesAnalysis.);
 
@@ -374,7 +371,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             //if (firstVisibleItemPosition == 0) {
             if (salesAnalysisListDisplay.getPlanDept() != null) {
                 if (salesAnalysisListDisplay.getPlanDept().equals("All")) {
-                    Log.e("-----", "All");
+                  //  Log.e("-----", "All");
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
                     // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
@@ -385,7 +382,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             }
             if (salesAnalysisListDisplay.getPlanCategory() != null) {
                 if (salesAnalysisListDisplay.getPlanCategory().equals("All")) {
-                    Log.e("-----", "All");
+                 //   Log.e("-----", "All");
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
                     // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
@@ -397,7 +394,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
 
             if (salesAnalysisListDisplay.getPlanClass() != null) {
                 if (salesAnalysisListDisplay.getPlanClass().equals("All")) {
-                    Log.e("-----", "All");
+                 //   Log.e("-----", "All");
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
                     // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
@@ -408,7 +405,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             }
             if (salesAnalysisListDisplay.getBrandName() != null) {
                 if (salesAnalysisListDisplay.getBrandName().equals("All")) {
-                    Log.e("-----", "All");
+                 //   Log.e("-----", "All");
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
                     // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
@@ -419,7 +416,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
             }
             if (salesAnalysisListDisplay.getBrandplanClass() != null) {
                 if (salesAnalysisListDisplay.getBrandplanClass().equals("All")) {
-                    Log.e("-----", "All");
+                 //   Log.e("-----", "All");
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
                     // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
@@ -805,6 +802,7 @@ SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener
     public void onPageSelected(int position) {
 
         ImageView img = (ImageView) lldots.getChildAt(currentPage);
+
         img.setImageResource(R.mipmap.dots_unselected);
         currentPage = position;
         ImageView img1 = (ImageView) lldots.getChildAt(currentPage);

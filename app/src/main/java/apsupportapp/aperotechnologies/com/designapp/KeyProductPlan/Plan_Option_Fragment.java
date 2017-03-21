@@ -843,7 +843,6 @@ public class Plan_Option_Fragment extends Fragment {
                                     optionview.addView(optrel);
                                 }
 
-
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
                             }

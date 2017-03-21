@@ -602,7 +602,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                             }
                                             break;
 
-                                        case "Subdeot":
+                                        case "Subdept":
 //                                            if (flag == true) {
                                                 txtheaderplanclass.setText("Class");
                                                 //     llayoutSalesPvA.setVisibility(View.GONE);
@@ -700,11 +700,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 //                                            }
 
                                             break;
+
                                         default:
                                             Reusable_Functions.hDialog();
-                                          //  Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                            Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
                                             onItemClickFlag = false;
                                             break;
+
                                     }
                                 }
                             }
@@ -908,9 +910,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                        offsetvalue = 0;
                        limit = 100;
                        count = 0;
-
-
-                       if (getIntent().getStringExtra("selectedDept") == null) {
+                       Log.e("focuspos in WTD",""+focusposition);
+                      if (getIntent().getStringExtra("selectedDept") == null) {
                            requestSalesViewPagerValueAPI();
                            Handler h = new Handler();
                            h.postDelayed(new Runnable() {
@@ -948,6 +949,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                        offsetvalue = 0;
                        limit = 100;
                        count = 0;
+                       Log.e("focuspos in LW",""+focusposition);
+
                        if (getIntent().getStringExtra("selectedDept") == null) {
                            requestSalesViewPagerValueAPI();
                            Handler h = new Handler();
@@ -1062,44 +1065,53 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
 
                                 // Retain values....
-                                for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
-                                    if (txtheaderplanclass.getText().toString().equals("Department")) {
-                                        if (salesAnalysisClassArrayList.get(j).getPlanDept().equals(pvaFirstVisibleItem)) {
-                                            focusposition = j;
-                                            listViewSalesPvA.scrollToPosition(focusposition);
-                                        }
-                                    } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
-                                        if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(pvaFirstVisibleItem)) {
-                                            focusposition = j;
-                                            listViewSalesPvA.scrollToPosition(focusposition);
-                                        }
-                                    } else if (txtheaderplanclass.getText().toString().equals("Class")) {
-                                        if (salesAnalysisClassArrayList.get(j).getPlanClass().equals(pvaFirstVisibleItem)) {
-                                            focusposition = j;
-                                            listViewSalesPvA.scrollToPosition(focusposition);
-                                        }
-                                    } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
-                                        if (salesAnalysisClassArrayList.get(j).getBrandName().equals(pvaFirstVisibleItem)) {
-                                            focusposition = j;
-                                            listViewSalesPvA.scrollToPosition(focusposition);
-                                        }
-                                    } else if (txtheaderplanclass.getText().toString().equals("MC")) {
-                                        if (salesAnalysisClassArrayList.get(j).getBrandplanClass().equals(pvaFirstVisibleItem)) {
-                                            focusposition = j;
-                                            listViewSalesPvA.scrollToPosition(focusposition);
+                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                    for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
+                                        Log.e("In for loop","----");
+                                        level = 1;
+                                        pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
+                                        if (salesAnalysisClassArrayList.get(focusposition).getPlanDept().equals(pvaFirstVisibleItem)) {
+                                            Log.e("j position :", "" + j + "firstVisibleItem pos :" + focusposition);
+                                            listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
                                         }
                                     }
-                                }
-                                if (txtheaderplanclass.getText().toString().equals("Department")) {
-                                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept().toString();
                                 } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
-                                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory().toString();
+                                    for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
+                                        level = 2;
+                                        pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory().toString();
+                                        if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(pvaFirstVisibleItem)) {
+                                            listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
+                                        }
+                                    }
                                 } else if (txtheaderplanclass.getText().toString().equals("Class")) {
-                                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass().toString();
+                                    for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
+                                        level = 3;
+                                        pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass().toString();
+                                        if (salesAnalysisClassArrayList.get(j).getPlanClass().equals(pvaFirstVisibleItem)) {
+                                            listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
+
+                                        }
+                                    }
                                 } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
-                                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName().toString();
+                                    for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
+
+                                        level = 4;
+                                        pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName().toString();
+                                        if (salesAnalysisClassArrayList.get(j).getBrandName().equals(pvaFirstVisibleItem)) {
+                                            listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
+
+                                        }
+                                    }
                                 } else if (txtheaderplanclass.getText().toString().equals("MC")) {
-                                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
+                                    for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
+
+                                        level = 5;
+                                        pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().toString();
+                                        if (salesAnalysisClassArrayList.get(j).getBrandplanClass().equals(pvaFirstVisibleItem)) {
+                                            listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
+
+                                        }
+                                    }
                                 }
                                 if (pvaFirstVisibleItem.equals("All")) {
                                     offsetvalue = 0;
@@ -1456,7 +1468,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
-                                Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Subdept found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1498,7 +1510,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             Reusable_Functions.hDialog();
                             onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
-                            Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No Subdept found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1509,7 +1521,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         Reusable_Functions.hDialog();
                         onItemClickFlag = false;
                         pva_progressBar.setVisibility(View.GONE);
-                        Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No Subdept found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1544,7 +1556,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
-                                Toast.makeText(context, "no plan class data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
@@ -1582,7 +1594,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             Reusable_Functions.hDialog();
                             onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
-                            Toast.makeText(context, "no plan class data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1593,7 +1605,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         Reusable_Functions.hDialog();
                         pva_progressBar.setVisibility(View.GONE);
                         onItemClickFlag = false;
-                        Toast.makeText(context, "no  plan class data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1629,7 +1641,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
-                                Toast.makeText(context, "no brand name data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1670,7 +1682,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             Reusable_Functions.hDialog();
                             pva_progressBar.setVisibility(View.GONE);
                             onItemClickFlag = false;
-                            Toast.makeText(context, "no brand name data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1681,7 +1693,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         Reusable_Functions.hDialog();
                         pva_progressBar.setVisibility(View.GONE);
                         onItemClickFlag = false;
-                        Toast.makeText(context, "no brand name data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1717,7 +1729,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
-                                Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1758,7 +1770,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             Reusable_Functions.hDialog();
                             pva_progressBar.setVisibility(View.GONE);
                             onItemClickFlag = false;
-                            Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1769,7 +1781,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         Reusable_Functions.hDialog();
                         pva_progressBar.setVisibility(View.GONE);
                         onItemClickFlag = false;
-                        Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }

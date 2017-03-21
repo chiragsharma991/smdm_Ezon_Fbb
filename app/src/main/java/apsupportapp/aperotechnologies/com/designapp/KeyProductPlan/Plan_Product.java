@@ -143,11 +143,11 @@ public class Plan_Product extends Fragment {
 
         LinearLayout layout = (LinearLayout) KeyProductPlanActivity.plan_pager.getParent();
         TabLayout tab = (TabLayout) layout.getChildAt(1);
-
         if (tab.getTabCount() == 3) {
-            tab.removeTabAt(1);
+            tab.removeTabAt(2);
         }
-        if (tab.getTabCount() == 2) {
+        if(tab.getTabCount() == 2)
+        {
             tab.removeTabAt(1);
         }
 
@@ -517,6 +517,12 @@ public class Plan_Product extends Fragment {
                     ViewPager viewPager = (ViewPager) view.getParent();
                     LinearLayout layout = (LinearLayout) viewPager.getParent();
                     TabLayout tab = (TabLayout) layout.getChildAt(1);
+                    if (tab.getTabCount() == 3) {
+                        tab.removeTabAt(2);
+                    }
+                    if(tab.getTabCount() == 2) {
+                       tab.removeTabAt(1);
+                    }
                     tab.addTab(tab.newTab().setText("OPTION"));
                     tab.getTabAt(1).select();
                     rowPressListener.communicateToFragment2(productNameBeanArrayList.get(i).getLevel(),prodsegClick);

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -72,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
 
         edtUserName = (EditText) findViewById(R.id.edtUserName);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
+        edtPassword.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         chkKeepMeLogin = (CheckBox) findViewById(R.id.chkKeepMeLogin);
         LinearLogin = (LinearLayout) findViewById(R.id.linearLogin);
 

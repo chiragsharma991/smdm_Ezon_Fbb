@@ -101,8 +101,6 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
 
                 plan_pager.setCurrentItem(tab.getPosition());
 
-
-
                 if (plan_pager.getCurrentItem() == 1 && KeyProductPlanActivity.productName.equals("")) {
                     View view=findViewById(android.R.id.content);
                     Snackbar.make(view, "Please select product to view options", Snackbar.LENGTH_LONG).show();
@@ -117,9 +115,13 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
                    Plan_Option_Fragment.tableDPlanOpt_Frag.removeAllViews();
                    Plan_Option_Fragment.optionview.removeView(Plan_Option_Fragment.optrel);
                    KeyProductPlanActivity.productName = "";
+                   LinearLayout layout = (LinearLayout)plan_pager.getParent();
+                   TabLayout tab1 = (TabLayout) layout.getChildAt(1);
+                    if(tab1.getTabCount() == 2)
+                    {
+                        tab1.removeTabAt(1);
+                    }
                }
-
-
            }
 
             @Override
@@ -191,10 +193,11 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
     @Override
     public void onBackPressed() {
        KeyProductPlanActivity.productName = "";
-     //  KeyProductPlanActivity.segClick="";
+
        KeyProdFilterAdapter.checkedValue = new ArrayList<String>();
         Plan_Product.prodsegClick = "";
         Plan_Product.prodsegClick = "WTD";
+       // KeyProductPlanActivity.plan_pager.setCurrentItem(0);
         finish();
     }
 }
