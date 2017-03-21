@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 uname = edtUserName.getText().toString().trim();
-                password = edtPassword.getText().toString().trim();
+                password = edtPassword.getText().toString().trim().toUpperCase();
 
                 if ((uname.equals("") || uname.length() == 0) || (password.equals("") || password.length() == 0)) {
                     if (uname.equals("") || uname.length() == 0) {

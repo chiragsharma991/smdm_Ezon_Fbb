@@ -41,8 +41,9 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:hint="@string/password"
-        android:inputType="textPassword"
+        android:inputType="textPassword|textCapCharacters"
         android:maxLines="1"
+        android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
         android:textCursorDrawable="@drawable/cursor_color" />

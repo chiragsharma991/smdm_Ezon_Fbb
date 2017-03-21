@@ -112,7 +112,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     // static int firstVisibleItem = 0;
     ProgressBar progressBar1;
     JsonArrayRequest postRequest;
-    int firstVisibleItem = 0;
+    static int firstVisibleItem ;
     public int totalItemCount;
     int prevState = RecyclerView.SCROLL_STATE_IDLE;
     int currentState = RecyclerView.SCROLL_STATE_IDLE;
@@ -128,6 +128,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         val = "";
         context = this;
         SalesAnalysisActivity = this;
+        firstVisibleItem = 0;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -710,14 +711,16 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                             } else {
                                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                             }
-//                                    } else {
+//                                     else {
 //                                        Reusable_Functions.hDialog();
 //                                        Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT).show();
 //                                    }
                                             break;
+
+
                                         default:
                                             Reusable_Functions.hDialog();
-                                            // Toast.makeText(context, "Please select dept name", Toast.LENGTH_SHORT);
+                                            Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
                                             onClickFlag = false;
                                             break;
 
@@ -1082,7 +1085,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                 }
                                 final int currentItem = vwpagersales.getCurrentItem();
-                                Log.e("----", " " + vwpagersales.getCurrentItem());
+                                //     Log.e("----", " " + vwpagersales.getCurrentItem());
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
                                 txtStoreCode.setText("" + salesAnalysisClassArrayList.get(i).getStoreCode());
@@ -1109,69 +1112,61 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
                                 listView_SalesAnalysis.setLayoutManager(new LinearLayoutManager(context));
 
-                                listView_SalesAnalysis.setLayoutManager(new LinearLayoutManager(
-                                        listView_SalesAnalysis.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                listView_SalesAnalysis.setLayoutManager(new LinearLayoutManager(listView_SalesAnalysis.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 listView_SalesAnalysis.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listView_SalesAnalysis);
-
-                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
-
-                                Log.e("--- ", " salesAnalysisClassArrayList" + salesAnalysisClassArrayList.size());
 
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
 
                                 //Retain Values.....
                                 for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
+
                                     if (txtheaderplanclass.getText().toString().equals("Department")) {
-                                        if (salesAnalysisClassArrayList.get(j).getPlanDept().equals(saleFirstVisibleItem)) {
-                                            firstVisibleItem = j;
-                                            listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
-//
+                                        Log.e("In for loop", "----");
+                                        level = 1;
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().toString();
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().equals(saleFirstVisibleItem)) {
+                                            Log.e("j position :", "" + j + "firstVisibleItem pos :" + firstVisibleItem);
+                                            listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                         }
+
                                     } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                                        level = 2;
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().toString();
                                         if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
-                                            firstVisibleItem = j;
-                                            listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
+                                            listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                         }
+
                                     } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+
+                                        level = 3;
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().toString();
                                         if (salesAnalysisClassArrayList.get(j).getPlanClass().equals(saleFirstVisibleItem)) {
-                                            firstVisibleItem = j;
-                                            listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
+                                            listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
+
                                         }
+
                                     } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+
+                                        level = 4;
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().toString();
                                         if (salesAnalysisClassArrayList.get(j).getBrandName().equals(saleFirstVisibleItem)) {
-                                            firstVisibleItem = j;
-                                            listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
+                                            listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
+
                                         }
+
                                     } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+
+                                        level = 5;
+                                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().toString();
                                         if (salesAnalysisClassArrayList.get(j).getBrandplanClass().equals(saleFirstVisibleItem)) {
-                                            firstVisibleItem = j;
-                                            listView_SalesAnalysis.scrollToPosition(firstVisibleItem);
+                                            listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
+
+
                                         }
                                     }
-                                }
-                                if (txtheaderplanclass.getText().toString().equals("Department"))
-                                {
-                                    level = 1;
-                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Subdept"))
-                                {
-                                    level = 2;
-                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Class"))
-                                {
-                                    level = 3;
-                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("Subclass"))
-                                {
-                                    level = 4;
-                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().toString();
-                                } else if (txtheaderplanclass.getText().toString().equals("MC"))
-                                {
-                                    level = 5;
-                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().toString();
                                 }
 
                                 if (saleFirstVisibleItem.equals("All")) {
@@ -1195,7 +1190,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             }
 
                         } catch (Exception e)
-
                         {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -1478,7 +1472,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Subdept data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
 
@@ -1539,7 +1533,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                            Log.e("Exception","");
+                            Toast.makeText(context, "No Subdept data found", Toast.LENGTH_SHORT).show();
                             progressBar1.setVisibility(View.GONE);
                             onClickFlag = false;
                             e.printStackTrace();
@@ -1550,7 +1545,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                        Log.e("Server Error","");
+                        Toast.makeText(context, "No Subdept data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
                         error.printStackTrace();
@@ -1589,7 +1585,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no plan class data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
 
@@ -1653,7 +1649,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no plan class data found", Toast.LENGTH_SHORT).show();
+                            Log.e("Catch Exception","");
+                            Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                             progressBar1.setVisibility(View.GONE);
                             onClickFlag = false;
                             e.printStackTrace();
@@ -1664,7 +1661,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no  plan class data found", Toast.LENGTH_SHORT).show();
+                        Log.e("Server Error","");
+                        Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
                         error.printStackTrace();
@@ -1704,7 +1702,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no brand name data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
                             } else if (response.length() == limit) {
@@ -1767,7 +1765,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no brand name data found", Toast.LENGTH_SHORT).show();
+                            Log.e("Exception","");
+                            Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
                             progressBar1.setVisibility(View.GONE);
                             onClickFlag = false;
                             e.printStackTrace();
@@ -1778,7 +1777,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no brand name data found", Toast.LENGTH_SHORT).show();
+                        Log.e("ServerError","");
+                        Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
                         error.printStackTrace();
@@ -1819,7 +1819,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
 
@@ -1885,7 +1885,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                         {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
                             progressBar1.setVisibility(View.GONE);
                             onClickFlag = false;
                             e.printStackTrace();
@@ -1900,7 +1900,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "no brand plan class data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
                         error.printStackTrace();
@@ -2111,6 +2111,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         level = 0;
         selectedsegValue = "WTD";
         level = 1;
+        firstVisibleItem = 0;
         this.finish();
         //SalesAnalysisActivity.finish();
 

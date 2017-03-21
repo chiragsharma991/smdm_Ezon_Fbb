@@ -702,7 +702,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(context," onBack pressed",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context," onBack pressed",Toast.LENGTH_SHORT).show();
         onBackClick();
     }
 

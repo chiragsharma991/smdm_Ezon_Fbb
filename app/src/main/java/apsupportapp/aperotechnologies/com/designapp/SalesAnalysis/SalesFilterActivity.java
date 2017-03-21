@@ -165,10 +165,9 @@ public class SalesFilterActivity extends Activity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String searchData = editTextSearch.getText().toString();
-                // editTextSearch.clearFocus();
-                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
-                listAdapter.filterData(editTextSearch.getText().toString());
+                editTextSearch.clearFocus();
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);                listAdapter.filterData(editTextSearch.getText().toString());
                 // listAdapter.notifyDataSetChanged();
             }
 
@@ -193,7 +192,7 @@ public class SalesFilterActivity extends Activity {
                     //  startActivity(intent);
                     finish();
                 }*/
-               onBackPressed();
+                onBackPressed();
             }
         });
 
@@ -254,7 +253,7 @@ public class SalesFilterActivity extends Activity {
                     {
                         Department = "dept=" + updateDept;
                     }
-                        build.append("&");
+                    build.append("&");
                     level_filter = 2;
                     build.append(Department.replace(",$", ""));
                     Log.e(TAG, "onClick:" + SalesFilterExpandableList.text1);
@@ -426,9 +425,9 @@ public class SalesFilterActivity extends Activity {
         listDataHeader.add("Subclass");
         listDataHeader.add("MC");
         if (Reusable_Functions.chkStatus(SalesFilterActivity.this)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(SalesFilterActivity.this, "Loading data...");
-
+//            Reusable_Functions.hDialog();
+//            Reusable_Functions.sDialog(SalesFilterActivity.this, "Loading data...");
+            //   processbar.setVisibility(View.VISIBLE);
             if (listDataHeader.get(0).equals("Department")) {
                 offsetvalue = 0;
                 limit = 100;
@@ -436,6 +435,7 @@ public class SalesFilterActivity extends Activity {
                 level_filter = 1;
                 requestDeptAPI(offsetvalue, limit);
             }
+
             if (listDataHeader.get(1).equals("Subdept")) {
                 offsetvalue = 0;
                 limit = 100;
@@ -443,6 +443,8 @@ public class SalesFilterActivity extends Activity {
                 level_filter = 2;
                 requestCategoryAPI(offsetvalue, limit);
             }
+
+
             if (listDataHeader.get(2).equals("Class")) {
                 offsetvalue = 0;
                 limit = 100;
@@ -450,6 +452,9 @@ public class SalesFilterActivity extends Activity {
                 level_filter = 3;
                 requestPlanClassAPI(offsetvalue, limit);
             }
+
+
+
             if (listDataHeader.get(3).equals("Subclass")) {
                 offsetvalue = 0;
                 limit = 100;
@@ -457,6 +462,8 @@ public class SalesFilterActivity extends Activity {
                 level_filter = 4;
                 requestBrandNameAPI(offsetvalue, limit);
             }
+
+
             if (listDataHeader.get(4).equals("MC")) {
                 offsetvalue = 0;
                 limit = 100;
@@ -467,12 +474,13 @@ public class SalesFilterActivity extends Activity {
         } else {
             Toast.makeText(SalesFilterActivity.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-
         listDataChild.put(listDataHeader.get(0), subdept);
         listDataChild.put(listDataHeader.get(1), subCategory);
         listDataChild.put(listDataHeader.get(2), subPlanClass);
         listDataChild.put(listDataHeader.get(3), subBrandnm);
         listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
+
+        Reusable_Functions.hDialog();
 
     }
 
@@ -516,7 +524,10 @@ public class SalesFilterActivity extends Activity {
                                 //   listDataChild.put(listDataHeader.get(0), subdept);
 
                                 // pfilter_list.expandGroup(0);
-                                Reusable_Functions.hDialog();
+                                // Reusable_Functions.hDialog();
+
+
+
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -588,7 +599,10 @@ public class SalesFilterActivity extends Activity {
                                 //Collections.sort(subdept);
                                 //   listDataChild.put(listDataHeader.get(1), subCategory);
                                 // pfilter_list.expandGroup(1);
-                                Reusable_Functions.hDialog();
+
+
+
+                                //    Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -658,7 +672,9 @@ public class SalesFilterActivity extends Activity {
                                 //Collections.sort(subdept);
                                 //   listDataChild.put(listDataHeader.get(2), subPlanClass);
                                 //  pfilter_list.expandGroup(2);
-                                Reusable_Functions.hDialog();
+
+
+                                //    Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -727,7 +743,8 @@ public class SalesFilterActivity extends Activity {
                                 //Collections.sort(subdept);
                                 //  listDataChild.put(listDataHeader.get(3), subBrandnm);
                                 // pfilter_list.expandGroup(3);
-                                Reusable_Functions.hDialog();
+                                //    Reusable_Functions.hDialog();
+
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -798,7 +815,7 @@ public class SalesFilterActivity extends Activity {
                                 //Collections.sort(subdept);
                                 //     listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
                                 //   pfilter_list.expandGroup(4);
-                                Reusable_Functions.hDialog();
+                                //  Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -842,8 +859,8 @@ public class SalesFilterActivity extends Activity {
             finish();
 
         }*/
-        InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromInputMethod(editTextSearch.getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         finish();
     }
 }
