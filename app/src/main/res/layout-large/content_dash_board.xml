@@ -682,14 +682,14 @@
             <!--thirld ending-->
 
 
-            <TextView
-                android:layout_below="@+id/headerpromo"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@color/smdm_divider_Black"
-                android:id="@+id/textView5" />
+            <!--<TextView-->
+                <!--android:layout_below="@+id/headerpromo"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:background="@color/smdm_divider_Black"-->
+                <!--android:id="@+id/textView5" />-->
 
             <LinearLayout
                 android:layout_below="@+id/headerpromo"

@@ -150,22 +150,24 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
 
         holder.BestInvent_SOH.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
         holder.BestInvent_option.setText(arrayList.get(position).getArticleDesc());
-//        //Option Click event to get detail information
-//        holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                //  Toast.makeText(context,"Option Click...",Toast.LENGTH_SHORT).show();
-//                if (Reusable_Functions.chkStatus(context)) {
-//                    Reusable_Functions.hDialog();
-//                    Reusable_Functions.sDialog(context, "Loading  data...");
-//                    Log.e("select item", arrayList.get(position).getArticleDesc());
-//                    requestOptionDetailsAPI(arrayList.get(position).getArticleDesc());
-//                } else {
-//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
+
+
+        //Option Click event to get detail information
+        holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                //  Toast.makeText(context,"Option Click...",Toast.LENGTH_SHORT).show();
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading  data...");
+                    Log.e("select item", arrayList.get(position).getOption());
+                    requestOptionDetailsAPI(arrayList.get(position).getOption());
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         holder.BestInvent_sellThru.setText(""+Math.round(arrayList.get(position).getSellThruUnits()));
         holder.BestInvent_FWC.setText(""+Math.round(arrayList.get(position).getFwdWeekCover()));
@@ -254,7 +256,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
                                 Log.e("Article Option :",""+styleDetailsBean.getArticleOption());
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 context.startActivity(intent);
-                                BestPerformerInventory.bestperoformer.finish();
+                                //BestPerformerInventory.bestperoformer.finish();
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");

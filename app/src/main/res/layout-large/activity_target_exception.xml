@@ -84,6 +84,7 @@
                         <Button
                             android:layout_width="19dp"
                             android:layout_height="19dp"
+                            android:visibility="gone"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/filter_icon_nav"
                             android:clickable="false" />
