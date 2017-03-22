@@ -554,7 +554,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/smdm_default_color"
-                                    android:text="Category"
+                                    android:text="Subdept"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
@@ -595,7 +595,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/smdm_default_color"
-                                    android:text="Plan Class"
+                                    android:text="Class"
                                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
                             </LinearLayout>
@@ -616,6 +616,90 @@
                                     android:focusable="true" />
                             </LinearLayout>
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopPlanSubClass"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
+                                    android:text="Subclass"
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <RadioButton
+                                    android:id="@+id/checkSubClass"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtpopMc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/smdm_default_color"
+                                    android:text="MC"
+                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <RadioButton
+                                    android:id="@+id/checkMc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/black"
+                                    android:focusable="true" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
                     <LinearLayout

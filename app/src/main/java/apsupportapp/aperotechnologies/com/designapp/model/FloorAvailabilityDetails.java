@@ -5,20 +5,37 @@ package apsupportapp.aperotechnologies.com.designapp.model;
  */
 
 public class FloorAvailabilityDetails {
+    public String getBrandName() {
+        return brandName;
+    }
 
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
 
-     String storeCode;
+    public String getBrandplanClass() {
+        return brandplanClass;
+    }
+
+    public void setBrandplanClass(String brandplanClass) {
+        this.brandplanClass = brandplanClass;
+    }
+
+    String storeCode;
     String storeDescription;
     String option;
     String prodImageURL;
 
     String noDaysPassed;
+    String brandName;
+    String brandplanClass;
     String firstReceiptDate;
     double ros;
     double availabilityPct;
     String planDept;
     double stkOnhandQty;
     double targetROS;
+
 
     public String getPlanCategory() {
         return planCategory;
