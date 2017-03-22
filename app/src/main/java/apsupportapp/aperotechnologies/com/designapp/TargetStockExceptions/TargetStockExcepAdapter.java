@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
  */
 public class TargetStockExcepAdapter extends BaseAdapter{
 
-    private final int level;
+    private String TAG="TargetStockExceptionActivity";
     private ArrayList<FloorAvailabilityDetails> arrayList;
 
     //private List mStringFilterList;
@@ -39,12 +40,11 @@ public class TargetStockExcepAdapter extends BaseAdapter{
 
     //private ValueFilter valueFiAlter;
 
-    public TargetStockExcepAdapter(ArrayList<FloorAvailabilityDetails> arrayList, Context context, int level) {
+    public TargetStockExcepAdapter(ArrayList<FloorAvailabilityDetails> arrayList, Context context) {
 
         // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         this.context = context;
-        this.level = level;
         mInflater = LayoutInflater.from(context);
 
         //getFilter();
@@ -100,19 +100,35 @@ public class TargetStockExcepAdapter extends BaseAdapter{
         }
         NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
-        if(level == 1) {
+        if(TargetStockExceptionActivity.level == 1) {
 
+            Log.e(TAG, "level: "+TargetStockExceptionActivity.level);
             holder.target_option.setText(arrayList.get(position).getPlanDept());
 
         }
-        else if(level == 2)
+        else if(TargetStockExceptionActivity.level == 2)
         {
+            Log.e(TAG, "level: "+TargetStockExceptionActivity.level);
+
             holder.target_option.setText(arrayList.get(position).getPlanCategory());
 
        }
-        else if(level == 3)
+        else if(TargetStockExceptionActivity.level == 3)
        {
-            holder.target_option.setText(arrayList.get(position).getPlanClass());
+           Log.e(TAG, "level: "+TargetStockExceptionActivity.level);
+
+           holder.target_option.setText(arrayList.get(position).getPlanClass());
+       }
+        else if(TargetStockExceptionActivity.level == 4)
+       {
+           Log.e(TAG, "level: "+TargetStockExceptionActivity.level);
+
+           holder.target_option.setText(arrayList.get(position).getBrandName());
+       } else if(TargetStockExceptionActivity.level == 5)
+       {
+           Log.e(TAG, "level: "+TargetStockExceptionActivity.level);
+
+           holder.target_option.setText(arrayList.get(position).getBrandplanClass());
        }
         holder.target_SOH_U.setText("" +formatter.format(Math.round(arrayList.get(position).getStkOnhandQty())));
         holder.target_ROS_U.setText("" + String.format("%.1f", arrayList.get(position).getTargetROS()));

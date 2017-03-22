@@ -102,7 +102,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private ToggleButton Toggle_bestInvent_fav;
     private static String corefashion = "Fashion";
     private ImageView Skewed_quickFilter;
-    private static String orderbycol = "9";
+    private static String orderbycol = "10";
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU, BstInventory_salesThru, BstInventory_Fwd, BstInventory_coverNsell;
     private RadioButton BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
@@ -205,25 +205,29 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     {
         switch (orderbycol.toString())
         {
-            case "6":
+            case "7":
+                Log.e(TAG, "sortRetain: 7");
                 BstInventory_salesU_chk.setChecked(true);
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
                 break;
-            case "9":
+            case "10":
+                Log.e(TAG, "sortRetain: 10");
                 BstInventory_salesU_chk.setChecked(false);
                 BstInventory_salesThru_chk.setChecked(true);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
                 break;
-            case "10":
+            case "11":
+                Log.e(TAG, "sortRetain: 11");
                 BstInventory_salesU_chk.setChecked(false);
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(true);
                 BstInventory_coverNsell_chk.setChecked(false);
                 break;
-            case "10,9":
+            case "11,10":
+                Log.e(TAG, "sortRetain: 11,10");
                 BstInventory_salesU_chk.setChecked(false);
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
@@ -421,6 +425,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 }
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {
+                                Log.e(TAG, "catch...Error" + e.toString());
                                 BestInventList.clear();
                                 bestPerformerInventoryAdapter.notifyDataSetChanged();
                                 BestInventListview.setVisibility(View.GONE);
@@ -431,7 +436,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 BestInventListview.removeFooterView(footer);
                                 BestInventListview.setTag("FOOTER_REMOVE");
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -914,7 +918,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(true);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "10";
+                orderbycol = "11";
                 BestInventList.clear();
                 Log.e(TAG, "FWD pop up else");
                 Reusable_Functions.sDialog(this, "Loading.......");
@@ -951,7 +955,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(true);
-                orderbycol = "10,9";
+                orderbycol = "11,10";
                 BestInventList.clear();
                 Log.e(TAG, "coverNsell pop up else");
                 Reusable_Functions.sDialog(this, "Loading.......");
@@ -988,7 +992,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(true);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "9";
+                orderbycol = "10";
                 BestInventList.clear();
                 Log.e(TAG, "salesThru pop up else");
                 Reusable_Functions.sDialog(this, "Loading.......");
@@ -1024,7 +1028,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "6";
+                orderbycol = "7";
                 BestInventList.clear();
                 Log.e(TAG, "salesUpopUp pop up else");
                 Reusable_Functions.sDialog(this, "Loading.......");
@@ -1175,7 +1179,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         //orderby  view  orderbycol  corefashion  seasonGroup  BestInvent_core  BestInvent_fashion  BestAndWorst  checkValueIs  checkTimeValueIs
 
         orderby=null;view=null;orderbycol=null;corefashion=null;seasonGroup=null;checkValueIs=null;checkTimeValueIs=null;title=null;
-        orderby="DESC";view="STD";orderbycol="9";corefashion="Fashion";seasonGroup="Current";checkValueIs=null;checkTimeValueIs=null;title="Best";
+        orderby="DESC";view="STD";orderbycol="10";corefashion="Fashion";seasonGroup="Current";checkValueIs=null;checkTimeValueIs=null;title="Best";
 
         finish();
     }

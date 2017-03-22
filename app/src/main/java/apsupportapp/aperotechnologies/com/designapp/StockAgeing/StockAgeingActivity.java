@@ -501,28 +501,28 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
 
                     if (checkCurrent.isChecked()) {
-                        popupCurrent();
                         checkSeasonGpVal = "Current";
-
                         quickFilterPopup.setVisibility(View.GONE);
+                        popupCurrent();
+
 
                     } else if (checkPrevious.isChecked()) {
-                        popupPrevious();
                         checkSeasonGpVal = "Previous";
-
                         quickFilterPopup.setVisibility(View.GONE);
+                        popupPrevious();
+
 
                     } else if (checkOld.isChecked()) {
-                        popupOld();
                         checkSeasonGpVal = "Old";
-
                         quickFilterPopup.setVisibility(View.GONE);
+                        popupOld();
+
 
                     } else if (checkUpcoming.isChecked()) {
-                        popupUpcoming();
                         checkSeasonGpVal = "Upcoming";
-
                         quickFilterPopup.setVisibility(View.GONE);
+                        popupUpcoming();
+
                     } else {
                         Log.e("Uncheck1", "----" + checkSeasonGpVal);
                         //Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();

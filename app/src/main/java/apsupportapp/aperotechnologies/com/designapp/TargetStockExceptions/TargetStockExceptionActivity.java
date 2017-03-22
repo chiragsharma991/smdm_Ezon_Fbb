@@ -67,11 +67,11 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     int limit = 10;
     int offsetvalue = 0;
     int top = 10;
-    int level = 1;
+    static  int level = 1;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     CheckBox checktwo, checkthree, checkfour, checkfive;
     CheckBox checksix, checkseven, checkeight, checknine, checkten;
-    RadioButton checkDept, checkCategory, checkPlanClass, checkWTD, checkL4W, checkYTD;
+    RadioButton checkDept, checkCategory, checkPlanClass, checkWTD, checkL4W, checkYTD,checkSubClass,checkMc;
     Context context = this;
     private RequestQueue queue;
     private Gson gson;
@@ -213,7 +213,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                     targetAgeingAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                 } else {
-                                    targetAgeingAdapter = new TargetStockExcepAdapter(targetStockList, context,level);
+                                    targetAgeingAdapter = new TargetStockExcepAdapter(targetStockList, context);
                                     targetListView.setAdapter(targetAgeingAdapter);
                                     target_txtStoreCode.setText(targetStockList.get(0).getStoreCode());
                                     target_txtStoreName.setText(targetStockList.get(0).getStoreDescription());
@@ -339,6 +339,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         checkDept = (RadioButton) findViewById(R.id.checkDept);
         checkCategory = (RadioButton) findViewById(R.id.checkCategory);
         checkPlanClass = (RadioButton) findViewById(R.id.checkPlanClass);
+        checkSubClass = (RadioButton) findViewById(R.id.checkSubClass);
+        checkMc = (RadioButton) findViewById(R.id.checkMc);
 
         //Seek Bar
         TargetSeek = (SeekBar) findViewById(R.id.targetSeek);
@@ -369,6 +371,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         checkDept.setOnClickListener(this);
         checkCategory.setOnClickListener(this);
         checkPlanClass.setOnClickListener(this);
+        checkSubClass.setOnClickListener(this);
+        checkMc.setOnClickListener(this);
 /*
         checktwo.setOnClickListener(this);
         checkthree.setOnClickListener(this);
@@ -432,6 +436,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     checkDept.setChecked(true);
                     checkCategory.setChecked(false);
                     checkPlanClass.setChecked(false);
+                    checkSubClass.setChecked(false);
+                    checkMc.setChecked(false);
 
 
                     TargetSeek.setProgress(70);
@@ -506,17 +512,38 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkDept.setChecked(true);
                             checkPlanClass.setChecked(false);
                             checkCategory.setChecked(false);
+                            checkSubClass.setChecked(false);
+                            checkMc.setChecked(false);
                             break;
                         case "CheckCategory":
                             checkCategory.setChecked(true);
                             checkDept.setChecked(false);
                             checkPlanClass.setChecked(false);
+                            checkSubClass.setChecked(false);
+                            checkMc.setChecked(false);
                             break;
                         case "CheckPlanClass":
                             checkPlanClass.setChecked(true);
                             checkDept.setChecked(false);
                             checkCategory.setChecked(false);
+                            checkSubClass.setChecked(false);
+                            checkMc.setChecked(false);
                             break;
+                        case "CheckSubClass":
+                            checkPlanClass.setChecked(false);
+                            checkDept.setChecked(false);
+                            checkCategory.setChecked(false);
+                            checkSubClass.setChecked(true);
+                            checkMc.setChecked(false);
+                            break;
+                        case "CheckMc":
+                            checkPlanClass.setChecked(false);
+                            checkDept.setChecked(false);
+                            checkCategory.setChecked(false);
+                            checkSubClass.setChecked(false);
+                            checkMc.setChecked(true);
+                            break;
+
                         default:
                             break;
                     }
@@ -689,9 +716,21 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                     } else if (checkPlanClass.isChecked()) {
                         popupPlanClass();
-                        checkTimeVal = "CheckPlanClass";
+                        checkTitleVal = "CheckPlanClass";
                         quickFilterPopup.setVisibility(View.GONE);
-                    } else {
+                    }
+                    else if (checkSubClass.isChecked()) {
+                        popupSubClass();
+                        checkTitleVal = "CheckSubClass";
+                        quickFilterPopup.setVisibility(View.GONE);
+                    }
+                    else if (checkMc.isChecked()) {
+                        popupMc();
+                        checkTitleVal = "CheckMc";
+                        quickFilterPopup.setVisibility(View.GONE);
+                    }
+
+                    else {
                         Log.e("Uncheck3", "----" + checkTitleVal);
                     }
                 } else {
@@ -796,16 +835,36 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checkDept.setChecked(true);
                 checkPlanClass.setChecked(false);
                 checkCategory.setChecked(false);
+                checkSubClass.setChecked(false);
+                checkMc.setChecked(false);
                 break;
             case R.id.checkCategory:
                 checkDept.setChecked(false);
                 checkPlanClass.setChecked(false);
                 checkCategory.setChecked(true);
+                checkSubClass.setChecked(false);
+                checkMc.setChecked(false);
                 break;
             case R.id.checkPlanClass:
                 checkDept.setChecked(false);
                 checkPlanClass.setChecked(true);
                 checkCategory.setChecked(false);
+                checkSubClass.setChecked(false);
+                checkMc.setChecked(false);
+                break;
+            case R.id.checkSubClass:
+                checkDept.setChecked(false);
+                checkPlanClass.setChecked(false);
+                checkCategory.setChecked(false);
+                checkSubClass.setChecked(true);
+                checkMc.setChecked(false);
+                break;
+            case R.id.checkMc:
+                checkDept.setChecked(false);
+                checkPlanClass.setChecked(false);
+                checkCategory.setChecked(false);
+                checkSubClass.setChecked(false);
+                checkMc.setChecked(true);
                 break;
      /*       case R.id.checktwo:
                 checktwo.setChecked(true);
@@ -1059,6 +1118,34 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             offsetvalue = 0;
             top = 10;
             level = 3;
+            targetStockList.clear();
+            requestTargetStockExcepApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+
+    } private void popupSubClass() {
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            level = 4;
+            targetStockList.clear();
+            requestTargetStockExcepApi();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+
+    } private void popupMc() {
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            limit = 10;
+            offsetvalue = 0;
+            top = 10;
+            level = 5;
             targetStockList.clear();
             requestTargetStockExcepApi();
         } else {
