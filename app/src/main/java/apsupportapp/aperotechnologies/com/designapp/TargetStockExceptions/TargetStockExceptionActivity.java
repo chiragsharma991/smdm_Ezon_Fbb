@@ -67,7 +67,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     int limit = 10;
     int offsetvalue = 0;
     int top = 10;
-    static int level = 1;
+    int level = 1;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     CheckBox checktwo, checkthree, checkfour, checkfive;
     CheckBox checksix, checkseven, checkeight, checknine, checkten;
@@ -213,7 +213,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                     targetAgeingAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                 } else {
-                                    targetAgeingAdapter = new TargetStockExcepAdapter(targetStockList, context);
+                                    targetAgeingAdapter = new TargetStockExcepAdapter(targetStockList, context,level);
                                     targetListView.setAdapter(targetAgeingAdapter);
                                     target_txtStoreCode.setText(targetStockList.get(0).getStoreCode());
                                     target_txtStoreName.setText(targetStockList.get(0).getStoreDescription());

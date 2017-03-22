@@ -26,6 +26,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
  */
 public class TargetStockExcepAdapter extends BaseAdapter{
 
+    private final int level;
     private ArrayList<FloorAvailabilityDetails> arrayList;
 
     //private List mStringFilterList;
@@ -38,11 +39,12 @@ public class TargetStockExcepAdapter extends BaseAdapter{
 
     //private ValueFilter valueFiAlter;
 
-    public TargetStockExcepAdapter(ArrayList<FloorAvailabilityDetails> arrayList, Context context) {
+    public TargetStockExcepAdapter(ArrayList<FloorAvailabilityDetails> arrayList, Context context, int level) {
 
         // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         this.context = context;
+        this.level = level;
         mInflater = LayoutInflater.from(context);
 
         //getFilter();
@@ -98,17 +100,17 @@ public class TargetStockExcepAdapter extends BaseAdapter{
         }
         NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
-        if(TargetStockExceptionActivity.level == 1) {
+        if(level == 1) {
 
             holder.target_option.setText(arrayList.get(position).getPlanDept());
 
         }
-        else if(TargetStockExceptionActivity.level == 2)
+        else if(level == 2)
         {
             holder.target_option.setText(arrayList.get(position).getPlanCategory());
 
        }
-        else if(TargetStockExceptionActivity.level == 3)
+        else if(level == 3)
        {
             holder.target_option.setText(arrayList.get(position).getPlanClass());
        }

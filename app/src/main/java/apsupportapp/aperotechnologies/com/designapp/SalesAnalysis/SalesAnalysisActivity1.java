@@ -96,7 +96,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     RequestQueue queue;
     static String planDept, planCategory, planClass;
     Gson gson;
-    //  static int focusposition = 0;
+  //  static int focusposition = 0;
     RelativeLayout relimgrank, relimgfilter;
     RelativeLayout Style_loadingBar;
     RelativeLayout relprevbtn, relnextbtn, relimgclose;
@@ -109,10 +109,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     String val;
     boolean flag = false, onClickFlag = false, filter_toggleClick = false;
     int currentVmPos;
-    // static int firstVisibleItem = 0;
+   // static int firstVisibleItem = 0;
     ProgressBar progressBar1;
     JsonArrayRequest postRequest;
-    static int firstVisibleItem ;
+    int firstVisibleItem ;
     public int totalItemCount;
     int prevState = RecyclerView.SCROLL_STATE_IDLE;
     int currentState = RecyclerView.SCROLL_STATE_IDLE;
@@ -186,7 +186,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
             }
         });
-        //  focusposition = 0;
+      //  focusposition = 0;
 
         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
         analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
@@ -530,7 +530,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 int visibleItemCount = recyclerView.getChildCount();
                 totalItemCount = mRecyclerViewHelper.getItemCount();
                 firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
-                //  Log.e("OnScroll", "-----------");
+              //  Log.e("OnScroll", "-----------");
             }
 
             @Override
@@ -540,7 +540,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 currentState = newState;
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE && onClickFlag == false) {
 
-                    //   Log.i(TAG, "" + "scroll state" + newState);
+                 //   Log.i(TAG, "" + "scroll state" + newState);
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
@@ -872,7 +872,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     llhierarchy.setVisibility(View.GONE);
                     currentVmPos = vwpagersales.getCurrentItem();
                     Log.e(TAG, " in WTD foucpos" + firstVisibleItem);
-
+                   
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                     analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                     //  llayoutSalesAnalysis.setVisibility(View.GONE);
@@ -1085,7 +1085,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                 }
                                 final int currentItem = vwpagersales.getCurrentItem();
-                                //     Log.e("----", " " + vwpagersales.getCurrentItem());
+                           //     Log.e("----", " " + vwpagersales.getCurrentItem());
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
                                 txtStoreCode.setText("" + salesAnalysisClassArrayList.get(i).getStoreCode());
@@ -1135,7 +1135,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
                                         level = 2;
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().toString();
-                                        if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(saleFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().equals(saleFirstVisibleItem)) {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                         }
 
@@ -1143,7 +1143,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                         level = 3;
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().toString();
-                                        if (salesAnalysisClassArrayList.get(j).getPlanClass().equals(saleFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().equals(saleFirstVisibleItem)) {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
 
                                         }
@@ -1152,7 +1152,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                         level = 4;
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().toString();
-                                        if (salesAnalysisClassArrayList.get(j).getBrandName().equals(saleFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().equals(saleFirstVisibleItem)) {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
 
                                         }
@@ -1161,7 +1161,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                         level = 5;
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().toString();
-                                        if (salesAnalysisClassArrayList.get(j).getBrandplanClass().equals(saleFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().equals(saleFirstVisibleItem)) {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
 
 
@@ -2111,7 +2111,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         level = 0;
         selectedsegValue = "WTD";
         level = 1;
-        firstVisibleItem = 0;
         this.finish();
         //SalesAnalysisActivity.finish();
 

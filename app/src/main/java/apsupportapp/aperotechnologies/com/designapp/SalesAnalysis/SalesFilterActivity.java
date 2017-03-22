@@ -67,7 +67,7 @@ public class SalesFilterActivity extends Activity {
     boolean field_flag = false;
     RequestQueue queue;
     Context context;
-    static boolean flag;
+    private boolean process_flag_dept = false,process_flag_cat=false,process_flag_class =false,process_flag_brand=false,process_flag_mc = false;
     //git testing 05/01/2017
 
     String TAG = "SalesFilterActivity";
@@ -154,7 +154,7 @@ public class SalesFilterActivity extends Activity {
 
         //  Edit Text Search
         editTextSearch = (EditText) findViewById(R.id.editSearchSales);
-
+        editTextSearch.setSingleLine(true);
 
         editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -165,9 +165,12 @@ public class SalesFilterActivity extends Activity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String searchData = editTextSearch.getText().toString();
-                editTextSearch.clearFocus();
-                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);                listAdapter.filterData(editTextSearch.getText().toString());
+                //editTextSearch.clearFocus();
+
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                //  inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(),Inin);
+                inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
+                listAdapter.filterData(editTextSearch.getText().toString());
                 // listAdapter.notifyDataSetChanged();
             }
 
@@ -192,7 +195,7 @@ public class SalesFilterActivity extends Activity {
                     //  startActivity(intent);
                     finish();
                 }*/
-                onBackPressed();
+               onBackPressed();
             }
         });
 
@@ -253,7 +256,7 @@ public class SalesFilterActivity extends Activity {
                     {
                         Department = "dept=" + updateDept;
                     }
-                    build.append("&");
+                        build.append("&");
                     level_filter = 2;
                     build.append(Department.replace(",$", ""));
                     Log.e(TAG, "onClick:" + SalesFilterExpandableList.text1);
@@ -427,38 +430,40 @@ public class SalesFilterActivity extends Activity {
         if (Reusable_Functions.chkStatus(SalesFilterActivity.this)) {
 //            Reusable_Functions.hDialog();
 //            Reusable_Functions.sDialog(SalesFilterActivity.this, "Loading data...");
-            //   processbar.setVisibility(View.VISIBLE);
+            processbar.setVisibility(View.VISIBLE);
             if (listDataHeader.get(0).equals("Department")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+                process_flag_dept = false;
                 level_filter = 1;
                 requestDeptAPI(offsetvalue, limit);
             }
 
-            if (listDataHeader.get(1).equals("Subdept")) {
+         if (listDataHeader.get(1).equals("Subdept")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+             process_flag_cat = false;
                 level_filter = 2;
                 requestCategoryAPI(offsetvalue, limit);
             }
 
 
-            if (listDataHeader.get(2).equals("Class")) {
+        if (listDataHeader.get(2).equals("Class")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+            process_flag_class = false;
                 level_filter = 3;
                 requestPlanClassAPI(offsetvalue, limit);
             }
-
-
 
             if (listDataHeader.get(3).equals("Subclass")) {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+                process_flag_brand = false;
                 level_filter = 4;
                 requestBrandNameAPI(offsetvalue, limit);
             }
@@ -468,17 +473,21 @@ public class SalesFilterActivity extends Activity {
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
+                process_flag_mc = false;
                 level_filter = 5;
                 requestBrandPlanClassAPI(offsetvalue, limit);
             }
         } else {
             Toast.makeText(SalesFilterActivity.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-        listDataChild.put(listDataHeader.get(0), subdept);
-        listDataChild.put(listDataHeader.get(1), subCategory);
-        listDataChild.put(listDataHeader.get(2), subPlanClass);
-        listDataChild.put(listDataHeader.get(3), subBrandnm);
-        listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
+            listDataChild.put(listDataHeader.get(0), subdept);
+            listDataChild.put(listDataHeader.get(1), subCategory);
+            listDataChild.put(listDataHeader.get(2), subPlanClass);
+            listDataChild.put(listDataHeader.get(3), subBrandnm);
+            listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
+
+
+
 
         Reusable_Functions.hDialog();
 
@@ -524,8 +533,8 @@ public class SalesFilterActivity extends Activity {
                                 //   listDataChild.put(listDataHeader.get(0), subdept);
 
                                 // pfilter_list.expandGroup(0);
-                                // Reusable_Functions.hDialog();
-
+                               // Reusable_Functions.hDialog();
+                            process_flag_dept = true;
 
 
                             }
@@ -600,7 +609,7 @@ public class SalesFilterActivity extends Activity {
                                 //   listDataChild.put(listDataHeader.get(1), subCategory);
                                 // pfilter_list.expandGroup(1);
 
-
+                                process_flag_cat= true;
 
                                 //    Reusable_Functions.hDialog();
                             }
@@ -669,12 +678,13 @@ public class SalesFilterActivity extends Activity {
                                     subPlanClass.add(planClass);
 
                                 }
+                                process_flag_class = true;
                                 //Collections.sort(subdept);
                                 //   listDataChild.put(listDataHeader.get(2), subPlanClass);
                                 //  pfilter_list.expandGroup(2);
 
 
-                                //    Reusable_Functions.hDialog();
+                               //    Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -740,10 +750,11 @@ public class SalesFilterActivity extends Activity {
                                     String brandName = productName1.getString("brandName");
                                     subBrandnm.add(brandName);
                                 }
+                                process_flag_brand = true;
                                 //Collections.sort(subdept);
                                 //  listDataChild.put(listDataHeader.get(3), subBrandnm);
                                 // pfilter_list.expandGroup(3);
-                                //    Reusable_Functions.hDialog();
+                            //    Reusable_Functions.hDialog();
 
                             }
                         } catch (Exception e) {
@@ -812,10 +823,12 @@ public class SalesFilterActivity extends Activity {
                                     String brandClass = productName1.getString("brandPlanClass");
                                     subBrandPlanClass.add(brandClass);
                                 }
+                                process_flag_mc = true;
+                                processbar.setVisibility(View.GONE);
                                 //Collections.sort(subdept);
                                 //     listDataChild.put(listDataHeader.get(4), subBrandPlanClass);
                                 //   pfilter_list.expandGroup(4);
-                                //  Reusable_Functions.hDialog();
+                             //  Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");

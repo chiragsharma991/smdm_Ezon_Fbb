@@ -126,6 +126,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         freshness_Index = this;
         level = 1;
 
+
         selFirstPositionValue = 0;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
@@ -1955,6 +1956,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                     llm.scrollToPosition(firstVisibleItem);
                     //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    llm.scrollToPosition(firstVisibleItem);
+                 //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
 
                 }
             }
@@ -1967,6 +1970,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                     llm.scrollToPosition(firstVisibleItem);
                     //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    llm.scrollToPosition(firstVisibleItem);
+                 //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
                 }
             }
         } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
@@ -1977,6 +1982,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                     llm.scrollToPosition(firstVisibleItem);
                     // fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    llm.scrollToPosition(firstVisibleItem);
+                   // fIndexFirstVisibleItem = fIndexFirstVisibleItem;
 
                 }
             }
@@ -1989,6 +1996,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                     llm.scrollToPosition(firstVisibleItem);
                     //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    llm.scrollToPosition(firstVisibleItem);
+                 //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
 
                 }
             }
