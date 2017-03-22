@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -170,7 +171,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         private final TextView tr_DetailChild_size,tr_DetailChild_requiredQty;
         public TextView tr_DetailChild_scanqty;
         //  private CheckBox cb_trDetailChild;
-        ImageButton imgbtn_detailchild_scan;
+        ImageView imgbtn_detailchild_scan;
         EditText et_trcdetailchildBarcode;
         LinearLayout lin_childimgbtnScan;
 
@@ -179,9 +180,9 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
             tr_DetailChild_size=(TextView)itemView.findViewById(R.id.txt_trdetailChild_size);
             tr_DetailChild_requiredQty=(TextView)itemView.findViewById(R.id.txt_trdetailchild_reqty);
             tr_DetailChild_scanqty=(TextView)itemView.findViewById(R.id.txt_trdetailchild_scanqty);
-            imgbtn_detailchild_scan = (ImageButton)itemView.findViewById(R.id.imgbtn_detailchild_scan);
-            lin_childimgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_childimgbtnScan);
-            et_trcdetailchildBarcode = (EditText)itemView.findViewById(R.id.et_trcdetailchildBarcode);
+            imgbtn_detailchild_scan = (ImageView)itemView.findViewById(R.id.btn_scan);
+           // lin_childimgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_childimgbtnScan);
+           // et_trcdetailchildBarcode = (EditText)itemView.findViewById(R.id.et_trcdetailchildBarcode);
         }
     }
 }

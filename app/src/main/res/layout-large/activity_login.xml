@@ -13,7 +13,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="150dp"
-        android:src="@mipmap/signin_logo_future"
+        android:src="@mipmap/engage247_logo1"
         tools:ignore="ContentDescription" />
 
     <EditText
@@ -40,7 +40,6 @@
 
         android:layout_marginTop="10dp"
         android:gravity="center"
-
         android:hint="@string/password"
         android:inputType="textPassword"
        android:maxLines="1"

@@ -356,7 +356,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                             StockAgListView.removeFooterView(footer);
                             StockAgListView.setTag("FOOTER_REMOVE");
-                            Log.e(TAG, "onErrorResponse: " + error.getMessage().toString());
+                         //   Log.e(TAG, "onErrorResponse: " + error.getMessage().toString());
                             StockAgListView.setVisibility(View.GONE);
 
                             error.printStackTrace();

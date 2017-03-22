@@ -379,11 +379,11 @@ public class Plan_Option_Fragment extends Fragment {
         tableCPlanOpt_Frag = new TableLayout(this.context);
         tableDPlanOpt_Frag = new TableLayout(this.context);
 
-        horizontalScrollViewB = new Plan_Option_Fragment.MyHorizontalScrollView(this.context);
-        horizontalScrollViewD = new Plan_Option_Fragment.MyHorizontalScrollView(this.context);
+        horizontalScrollViewB = new MyHorizontalScrollView(this.context);
+        horizontalScrollViewD = new MyHorizontalScrollView(this.context);
 
-        scrollViewC = new Plan_Option_Fragment.MyScrollView(this.context);
-        scrollViewD = new Plan_Option_Fragment.MyScrollView(this.context);
+        scrollViewC = new MyScrollView(this.context);
+        scrollViewD = new MyScrollView(this.context);
 
         tableAPlanOpt_Frag.setBackgroundColor(Color.GREEN);
         horizontalScrollViewB.setBackgroundColor(Color.LTGRAY);

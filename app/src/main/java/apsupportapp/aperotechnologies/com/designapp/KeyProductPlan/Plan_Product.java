@@ -397,10 +397,10 @@ public class Plan_Product extends Fragment {
         tableBProd_Frag = new TableLayout(this.context);
         tableCProd_Frag = new TableLayout(this.context);
         tableDProd_Frag = new TableLayout(this.context);
-        horizontalScrollViewB = new Plan_Product.MyHorizontalScrollView(this.context);
-        horizontalScrollViewD = new Plan_Product.MyHorizontalScrollView(this.context);
-        scrollViewC = new Plan_Product.MyScrollView(this.context);
-        scrollViewD = new Plan_Product.MyScrollView(this.context);
+        horizontalScrollViewB = new MyHorizontalScrollView(this.context);
+        horizontalScrollViewD = new MyHorizontalScrollView(this.context);
+        scrollViewC = new MyScrollView(this.context);
+        scrollViewD = new MyScrollView(this.context);
         tableAProd_Frag.setBackgroundColor(Color.parseColor("#000000"));
         horizontalScrollViewB.setBackgroundColor(Color.parseColor("#dfdedf"));
     }

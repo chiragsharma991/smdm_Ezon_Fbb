@@ -296,7 +296,7 @@ public class Option_Fragment extends Fragment {
             Log.v("Product Data", this.headerCellsWidth[x] + "");
         }
 
-        for (int k = 0; k < productNameBeanArrayList.size(); k++) {
+        for (int k = 0; k <= productNameBeanArrayList.size() - 1; k++) {
 
             final TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getArticleOption());
             final TableRow taleRowForTableD = this.taleRowForTableD(productNameBeanArrayList.get(k));
@@ -315,7 +315,6 @@ public class Option_Fragment extends Fragment {
                     tableCOpt_Frag.removeAllViews();
                     tableDOpt_Frag.removeAllViews();
                     view.removeView(rel);
-
                     LinearLayout layout = (LinearLayout) KeyProductActivity.viewPager.getParent();
                     TabLayout tab = (TabLayout) layout.getChildAt(1);
                     tab.addTab(tab.newTab().setText("SKU"));

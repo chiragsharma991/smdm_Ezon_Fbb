@@ -267,8 +267,8 @@ public class WorstPerformerActivity extends AppCompatActivity implements View.On
         PopSort = (TextView) findViewById(R.id.popSort);
         BaseLayout = (RelativeLayout) findViewById(R.id.baseLayout);
         SortPopup=(RelativeLayout)findViewById(R.id.sortPopup);
-        CheckWstSale=(CheckBox)findViewById(R.id.checkPromoSale);
-        CheckWstSaleU=(CheckBox)findViewById(R.id.checkPromoSaleU);
+       // CheckWstSale=(CheckBox)findViewById(R.id.checkPromoSale);
+      //  CheckWstSaleU=(CheckBox)findViewById(R.id.checkPromoSaleU);
 
 
         Wst_imageBtnBack.setOnClickListener(this);

@@ -69,7 +69,7 @@ public class KeyProdFilterAdapter extends BaseAdapter implements Filterable {
 
         if (convertView == null) {
 
-            viewHolder = new KeyProdFilterAdapter.Holder();
+            viewHolder = new Holder();
             convertView = mInflater.inflate(R.layout.activity_keyprodfilter_listview, null);
             viewHolder.txt_product = (TextView) convertView.findViewById(R.id.txtplanProduct);
             viewHolder.check_product = (CheckBox)convertView.findViewById(R.id.checkProductName);

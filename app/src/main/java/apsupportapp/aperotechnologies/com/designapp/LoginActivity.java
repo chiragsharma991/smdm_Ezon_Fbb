@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 uname = edtUserName.getText().toString().trim();
-                password = edtPassword.getText().toString().trim();
+                password = edtPassword.getText().toString().trim().toUpperCase();
 
                 if ((uname.equals("") || uname.length() == 0) || (password.equals("") || password.length() == 0)) {
                     if (uname.equals("") || uname.length() == 0) {
@@ -160,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Reusable_Functions.hDialog();
 
                             }
-                            Long notificationTime = System.currentTimeMillis() + 1800000; //30 minutes
+                            Long notificationTime = System.currentTimeMillis() + 18000000; //300 minutes
                             Log.e("notificationTime", "onResponse: "+notificationTime );
                             setLocalnotification(context, notificationTime);
                             String username = response.getString("loginName");

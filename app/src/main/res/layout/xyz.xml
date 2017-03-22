@@ -1,131 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_weight="1.1"
+    android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:weightSum="6.8"
-        >
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:gravity="left"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.77"
-            >
-
-
-        </LinearLayout>
+        <!--top from bottom bar-->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.98"
-            android:gravity="left"
-            >
-
-            <TextView
-                android:id="@+id/txt_trdetailChild_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/smdm_default_color"
-                android:textSize="@dimen/smdm_inflator_title_normal"/>
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            >
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.035"
-            android:gravity="left">
-
-            <TextView
-                android:id="@+id/txt_trdetailchild_reqty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/smdm_default_color"
-                android:textSize="@dimen/smdm_inflator_title_normal"/>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.05"
-            android:gravity="left">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.95"
-            android:gravity="left">
-
-            <TextView
-                android:id="@+id/txt_trdetailchild_scanqty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="@color/smdm_default_color"
-                android:textSize="@dimen/smdm_inflator_title_normal"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.95"
-            android:gravity="left"
-            android:orientation="horizontal">
-
-
-
-
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="2.1">
 
             <LinearLayout
-                android:id="@+id/lin_childimgbtnScan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true">
+                android:layout_weight="2"
+                android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imgbtn_detailchild_scan"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@mipmap/scan_icon"
-                    android:scaleType="fitXY"/>
+                <TextView
+                    android:id="@+id/txtname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Store description"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/collaboration_stock_storecode"/>
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/white">
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ProgressBar
+                            android:id="@+id/visualprogressPicaso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="#0000"
+                            android:keepScreenOn="true"
+                            android:padding="10dp"
+                            android:theme="@style/ProgressBar"/>
+
+
+                        <ImageView
+                            android:id="@+id/card_image"
+                            android:scaleType="fitXY"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:ignore="ContentDescription"
+                            />
+
+
+
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/et_trcdetailchildBarcode"
-                android:layout_width="wrap_content"
+
+            <!--bottom -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:inputType="none"
-                android:textColor="#ffffff"/>
+                android:layout_weight="0.1"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/txtSeason"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Season"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/collaboration_stock_storecode"/>
+
+
+                    <TextView
+                        android:id="@+id/txtAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="\u20B9 25000"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="27dp"/>
+
+
+                    <TextView
+                        android:id="@+id/txtColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Colour"
+                        android:layout_below="@+id/txtSeason"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/collaboration_stock_storecode"/>
+
+
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_below="@+id/txtColor"
+                        >
+
+                        <TextView
+                            android:id="@+id/txtFabric"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fabric"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/collaboration_stock_storecode"/>
+
+
+                        <TextView
+                            android:id="@+id/txtSizeRatio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:text="Size Ratio : XS, S, L"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/collaboration_stock_storecode"/>
+
+
+                        <TextView
+                            android:id="@+id/txtFit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fit"
+                            android:layout_below="@+id/txtFabric"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/collaboration_stock_storecode"/>
+
+
+
+                        <TextView
+                            android:id="@+id/txtCollection"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Collection"
+                            android:layout_below="@+id/txtSizeRatio"
+                            android:layout_alignParentRight="true"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/collaboration_stock_storecode"/>
+
+
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+
+
+
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
+
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="4"
+            >
+
+
+            <RelativeLayout
+                android:id="@+id/imgrellike"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary">
+
+                <ImageButton
+                    android:id="@+id/imgbtnlike"
+                    android:layout_width="30dp"
+                    android:layout_height="28dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/like_unselected"
+                    android:clickable="false"
+                    tools:ignore="ContentDescription"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/imgreldislike"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary">
+
+                <ImageButton
+                    android:id="@+id/imgbtndislike"
+                    android:layout_width="30dp"
+                    android:layout_height="28dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/dislike"
+                    android:clickable="false"
+                    tools:ignore="ContentDescription"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/imgrelbuy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_red_effect">
+
+                <ImageButton
+                    android:id="@+id/imgbtnbuy"
+                    android:layout_width="20dp"
+                    android:layout_height="28dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/order_set"
+                    android:clickable="false"
+                    tools:ignore="ContentDescription"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/imgrelcomment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_red_effect">
+
+                <ImageButton
+                    android:id="@+id/imgbtncomment"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/comment"
+                    android:clickable="false"
+                    tools:ignore="ContentDescription"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
 </LinearLayout>
+

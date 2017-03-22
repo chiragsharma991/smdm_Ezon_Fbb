@@ -372,11 +372,11 @@ public class Plan_SKU_Fragment extends Fragment {
         tableCPlanSku = new TableLayout(this.context);
         tableDPlanSku = new TableLayout(this.context);
 
-        horizontalScrollViewB = new Plan_SKU_Fragment.MyHorizontalScrollView(this.context);
-        horizontalScrollViewD = new Plan_SKU_Fragment.MyHorizontalScrollView(this.context);
+        horizontalScrollViewB = new MyHorizontalScrollView(this.context);
+        horizontalScrollViewD = new MyHorizontalScrollView(this.context);
 
-        scrollViewC = new Plan_SKU_Fragment.MyScrollView(this.context);
-        scrollViewD = new Plan_SKU_Fragment.MyScrollView(this.context);
+        scrollViewC = new MyScrollView(this.context);
+        scrollViewD = new MyScrollView(this.context);
 
         tableAPlanSku.setBackgroundColor(Color.GREEN);
         horizontalScrollViewB.setBackgroundColor(Color.LTGRAY);

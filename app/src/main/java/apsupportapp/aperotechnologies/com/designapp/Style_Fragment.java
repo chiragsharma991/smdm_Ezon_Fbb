@@ -81,9 +81,9 @@ public class Style_Fragment extends Fragment {
     String headers[] = {
             "             Color            ",
             "   Size   ",
-            "    TW Sales (U)    ",
-            "     SOH (U)    ",
-            "    Fwd Week Cover  "
+            "    TW Sales\n\t\t\t(U)    ",
+            "  SOH\n\t\t\t(U)    ",
+            "    FWC   "
 
     };
 
@@ -358,7 +358,6 @@ public class Style_Fragment extends Fragment {
 
         view = inflater.inflate(R.layout.style_fragment, container, false);
         Log.e(TA, "Style fragment onCreateView: ");
-
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));  //dfdedf
@@ -489,12 +488,14 @@ public class Style_Fragment extends Fragment {
     TableRow componentATableRow() {
 
         TableRow componentATableRow = new TableRow(this.context);
+        componentATableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT, 80);
+                TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
         TextView textView = this.headerTextView(headers[0]);
-        textView.setTextColor(Color.WHITE);
         textView.setBackgroundColor(Color.parseColor("#2277b1"));
+        textView.setTextColor(Color.parseColor("#ffffff"));
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
         componentATableRow.addView(textView);
 
         return componentATableRow;
@@ -504,17 +505,17 @@ public class Style_Fragment extends Fragment {
     TableRow componentBTableRow() {
 
         TableRow componentBTableRow = new TableRow(this.context);
-
+componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         int headerFieldCount = headers.length;
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT, 80);
+                TableRow.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-            textView.setTextColor(Color.WHITE);
             textView.setBackgroundColor(Color.parseColor("#2277b1"));
+            textView.setTextColor(Color.parseColor("#ffffff"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
         }
@@ -843,6 +844,7 @@ public class Style_Fragment extends Fragment {
         TableRow tableRowForTableC = new TableRow(this.context);
 //        TextView textView = this.bodyTextView(sampleObject.header1);
         TextView textView = this.bodyTextView(styleDetails);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         tableRowForTableC.addView(textView, params);
 
         return tableRowForTableC;
@@ -949,6 +951,7 @@ public class Style_Fragment extends Fragment {
         TextView bodyTextView = new TextView(this.context);
         bodyTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         bodyTextView.setText(label);
+        bodyTextView.setTextSize(12f);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);
 

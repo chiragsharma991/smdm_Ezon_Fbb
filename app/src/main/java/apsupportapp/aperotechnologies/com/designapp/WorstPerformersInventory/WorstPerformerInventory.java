@@ -58,7 +58,8 @@ public class WorstPerformerInventory extends AppCompatActivity implements View.O
                    quickFilter_baseLayout,BestQfDoneLayout,BestQuickFilterBorder;
     RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
-    RadioButton BestCheckCurrent,BestCheckPrevious,BestCheckOld,BestCheckUpcoming,CheckWTD,CheckL4W,CheckSTD;
+    RadioButton CheckWTD,CheckL4W,CheckSTD;
+    CheckBox BestCheckCurrent,BestCheckPrevious,BestCheckOld,BestCheckUpcoming;
     String userId, bearertoken;
     String TAG = "WorstPerformerInventory";
     private int count = 0;
@@ -345,10 +346,10 @@ public class WorstPerformerInventory extends AppCompatActivity implements View.O
         quickFilterPopup.setVisibility(View.GONE);
         Toggle_bestInvent_fav=(ToggleButton)findViewById(R.id.toggle_bestInvent_fav);
 
-        BestCheckCurrent =(RadioButton)findViewById(R.id.bestCheckCurrent);
-        BestCheckPrevious = (RadioButton)findViewById(R.id.bestCheckPrevious);
-        BestCheckOld = (RadioButton)findViewById(R.id.bestCheckOld);
-        BestCheckUpcoming = (RadioButton)findViewById(R.id.bestCheckUpcoming);
+        BestCheckCurrent =(CheckBox)findViewById(R.id.bestCheckCurrent);
+        BestCheckPrevious = (CheckBox)findViewById(R.id.bestCheckPrevious);
+        BestCheckOld = (CheckBox)findViewById(R.id.bestCheckOld);
+        BestCheckUpcoming = (CheckBox)findViewById(R.id.bestCheckUpcoming);
         CheckWTD = (RadioButton)findViewById(R.id.checkWTD);
         CheckL4W = (RadioButton)findViewById(R.id.checkL4W);
         CheckSTD = (RadioButton)findViewById(R.id.checkSTD);

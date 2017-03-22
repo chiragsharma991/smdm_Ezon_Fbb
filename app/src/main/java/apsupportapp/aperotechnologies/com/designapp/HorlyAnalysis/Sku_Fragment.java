@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -44,6 +46,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.OnRowPressListener;
 import apsupportapp.aperotechnologies.com.designapp.ProductNameBean;
@@ -145,6 +148,12 @@ public class Sku_Fragment extends Fragment {
         productName1 = productName;
         articleOption = articlOption;
         if (Reusable_Functions.chkStatus(context)) {
+            LinearLayout layout = (LinearLayout) KeyProductActivity.viewPager.getParent();
+            TabLayout tab = (TabLayout) layout.getChildAt(1);
+            if (tab.getTabCount() == 3) {
+                tab.removeTabAt(1);
+            }
+
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;

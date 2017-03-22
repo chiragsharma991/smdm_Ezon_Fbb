@@ -63,7 +63,7 @@ public class TransferRequestFragment extends Fragment {
     private int limit = 100;
     private int offsetvalue = 0;
     private RequestQueue queue;
-    private String TAG="TransferRequest_Fregment";
+    private String TAG="ToDo_Fregment";
     private ArrayList<Transfer_Request_Model> SenderSummaryList;
 
 
@@ -161,7 +161,7 @@ public class TransferRequestFragment extends Fragment {
                             {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
-                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "No data found from REQUEST FROM STORES", Toast.LENGTH_SHORT).show();
                                     return;
 
                                 } else if (response.length() == limit) {

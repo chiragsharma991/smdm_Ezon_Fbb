@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -128,7 +129,12 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
                     Option_Fragment.tableDOpt_Frag.removeAllViews();
                     Option_Fragment.view.removeView(Option_Fragment.rel);
                     KeyProductActivity.prodName = "";
-
+                    LinearLayout layout = (LinearLayout)viewPager.getParent();
+                    TabLayout tab1 = (TabLayout) layout.getChildAt(1);
+                    if(tab1.getTabCount() == 2)
+                    {
+                        tab1.removeTabAt(1);
+                    }
                 }
 
             }

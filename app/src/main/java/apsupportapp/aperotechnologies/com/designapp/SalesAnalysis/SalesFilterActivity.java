@@ -157,7 +157,7 @@ public class SalesFilterActivity extends Activity {
 
         //  Edit Text Search
         editTextSearch = (EditText) findViewById(R.id.editSearchSales);
-
+        editTextSearch.setSingleLine(true);
 
         editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -167,6 +167,12 @@ public class SalesFilterActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String searchData = editTextSearch.getText().toString();
+                //editTextSearch.clearFocus();
+
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                //  inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(),Inin);
+                inputManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
                 listAdapter.filterData(editTextSearch.getText().toString());
                 // listAdapter.notifyDataSetChanged();
             }

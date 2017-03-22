@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_screen_color"
     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
@@ -212,6 +212,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pva_noChart"
+                    android:text="No Chart data available"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:textSize="@dimen/largelayout_storesize"/>
+
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/linechart"

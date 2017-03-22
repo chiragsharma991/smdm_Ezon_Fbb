@@ -53,6 +53,11 @@ public class SwitchingTabActivity extends AppCompatActivity {
                 Intent intent = new Intent(SwitchingTabActivity.this, DashBoardActivity.class);
                 startActivity(intent);
                 finish();
+                if(getIntent().getStringExtra("checkFrom").equals("bestInventory"))
+                {
+                    BestPerformerInventory.bestperoformer.finish();
+
+                }
 
             }
         });
@@ -125,6 +130,12 @@ public class SwitchingTabActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(SwitchingTabActivity.this, VisualAssortmentActivity.class);
             startActivity(intent);
+            finish();
+        }
+        else if(getIntent().getStringExtra("checkFrom").equals("bestInventory"))
+        {
+           // Intent intent = new Intent(SwitchingTabActivity.this, VisualAssortmentActivity.class);
+           // startActivity(intent);
             finish();
         }
         else if(getIntent().getStringExtra("checkFrom").equals("styleActivity")){

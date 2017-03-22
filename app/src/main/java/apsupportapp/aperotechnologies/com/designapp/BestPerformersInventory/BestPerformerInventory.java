@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPromoAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
@@ -129,7 +130,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BaseLayoutInventory.setVisibility(View.GONE);
         BestInventListview.setVisibility(View.VISIBLE);
         gson = new Gson();
-        bestperoformer=this;
+        bestperoformer= BestPerformerInventory.this;
         BestInventList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -614,6 +615,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BstInventory_coverNsell.setOnClickListener(this);
         BestInvent_imgfilter.setOnClickListener(this);
     }
+
+
 
 
     @Override

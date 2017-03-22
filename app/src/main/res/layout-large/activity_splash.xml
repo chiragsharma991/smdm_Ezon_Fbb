@@ -7,7 +7,7 @@
     tools:context="apsupportapp.aperotechnologies.com.designapp.SplashActivity">
 
     <ImageView
-        android:src="@mipmap/signin_logo_future"
+        android:src="@mipmap/engage247_logo1"
         android:layout_marginTop="150dp"
         android:layout_width="match_parent"
         android:layout_height="70dp"

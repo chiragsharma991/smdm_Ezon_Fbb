@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SM-DM</string>
+    <string name="app_name">Engage 24x7</string>
     <string name="title_activity_dash_board">Engage 24x7</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -31,7 +31,7 @@
     <string name="s_ros">ROS</string>
     <string name="s_fwd_wk_value">15,15,00,000</string>
     <string name="s_fwd_wk_cover">Fwd Wk Cover</string>
-    <string name="hourly_analysis">KeyProduct Hrly Info</string>
+    <string name="hourly_analysis">Hourly Info</string>
     <string name="visual_assortment">Visual Assortment</string>
     <string name="sales_analysis">Sales Analysis</string>
     <string name="prod_filter">Filter</string>
@@ -39,7 +39,7 @@
     <string name="product_info">Product Info</string>
     <string name="about_us">About Us</string>
     <string name="prod_search">Search</string>
-    <string name="aboutus_app_name">SM-DM App</string>
+    <string name="aboutus_app_name">Engage 24x7</string>
     <string name="sales_pva">Sales PvA</string>
     <string name="product_name">Product</string>
     <string name="product_search_enter_text">Enter Text</string>
