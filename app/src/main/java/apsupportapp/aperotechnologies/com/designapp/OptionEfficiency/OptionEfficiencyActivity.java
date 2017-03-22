@@ -2470,7 +2470,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
             }
-        } else if (oe_txtHeaderClass.getText().toString().equals("MCf"))
+        } else if (oe_txtHeaderClass.getText().toString().equals("MC"))
         {
             if(coreSelection) {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit ;

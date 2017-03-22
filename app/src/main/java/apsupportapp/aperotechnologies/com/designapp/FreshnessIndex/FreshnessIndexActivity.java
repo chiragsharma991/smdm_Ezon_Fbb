@@ -2101,27 +2101,22 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 if (txtFIndexClass.getText().toString().equals("Department")) {
 
                                     level =1 ;
-
                                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
 
                                 } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
                                     level = 2;
-
                                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
 
                                 } else if (txtFIndexClass.getText().toString().equals("Class")) {
                                     level = 3;
-
                                     fIndexFirstVisibleItem  = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
 
                                 } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
-                                    level = 5;
-
+                                    level = 4;
                                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
 
                                 } else if (txtFIndexClass.getText().toString().equals("MC")) {
-                                    level = 4;
-
+                                    level = 5;
                                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
                                 }
 
