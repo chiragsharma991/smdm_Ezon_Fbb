@@ -56,6 +56,7 @@ public class StockPullFragment extends Fragment {
     private int count = 0;
     private int limit = 100;
     private int offsetvalue = 0;
+    private boolean checkNetworkFalse=false;
     private RequestQueue queue;
     private String TAG="ToDo_Fregment";
     private ArrayList<ToDo_Modal>ReceiverSummaryList;
@@ -73,7 +74,26 @@ public class StockPullFragment extends Fragment {
         // Required empty public constructor
     }
 
- 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser)
+        {
+            if(checkNetworkFalse)
+            {
+                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+
+
+    }
+
+
+
+
+
     // TODO: Rename and change types and number of parameters
     public static StockPullFragment newInstance(String param1, String param2) {
         StockPullFragment fragment = new StockPullFragment();
@@ -152,7 +172,8 @@ public class StockPullFragment extends Fragment {
                             {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
-                                    Toast.makeText(context, "No data found from PULL FROM STORES", Toast.LENGTH_SHORT).show();
+                                    checkNetworkFalse=true;
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     return;
 
                                 } else if (response.length() == limit) {

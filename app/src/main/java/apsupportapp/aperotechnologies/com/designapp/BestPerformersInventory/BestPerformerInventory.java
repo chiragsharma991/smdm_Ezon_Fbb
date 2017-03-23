@@ -346,10 +346,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                     url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
                 }
             }
-
-
             Log.e(TAG, "URL" + url);
-
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -357,10 +354,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                             Log.i(TAG, "inventorybestworstperformers Option : " + " " + response);
                             Log.i(TAG, "response" + "" + response.length());
                             BestInventListview.setVisibility(View.VISIBLE);
-
-
                             try {
-
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -375,13 +369,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                                 } else if (response.length() == limit) {
 
-
                                     Log.e(TAG, "Top eql limit");
-                                    for (int i = 0; i < response.length(); i++) {
-
+                                    for (int i = 0; i < response.length(); i++)
+                                    {
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         BestInventList.add(BestInventSizeListDisplay);
-
                                     }
                                     offsetvalue = offsetvalue + 10;
                                     top = top + 10;
@@ -414,11 +406,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                                 Log.e(TAG, "set adapter start");
 
-                                if (lazyScroll.equals("ON")) {
+                                if (lazyScroll.equals("ON"))
+                                {
                                     bestPerformerInventoryAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                     footer.setVisibility(View.GONE);
-
                                 } else {
                                     bestPerformerInventoryAdapter = new BestPerformerInventoryAdapter(BestInventList, context);
                                     BestInventListview.setAdapter(bestPerformerInventoryAdapter);
@@ -429,8 +421,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 BestInventList.clear();
                                 bestPerformerInventoryAdapter.notifyDataSetChanged();
                                 BestInventListview.setVisibility(View.GONE);
-                                //    BestInvent_fashion.setEnabled(true);
-                                //   BestInvent_core.setEnabled(true);
+                                // BestInvent_fashion.setEnabled(true);
+                                // BestInvent_core.setEnabled(true);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
                                 BestInventListview.removeFooterView(footer);
@@ -449,9 +441,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                             BestInventListview.setVisibility(View.GONE);
                      //       Log.e(TAG, "onErrorResponse  " + error.getMessage().toString());
 
-
                             String json = null;
-
                             NetworkResponse response = error.networkResponse;
                             if(response != null && response.data != null){
                                 switch(response.statusCode){
@@ -463,15 +453,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 }
                                 //Additional cases
                             }
-
-
-
-                            error.printStackTrace();
+                           error.printStackTrace();
                         }
-
                         public String trimMessage(String json, String key){
                             String trimmedString = null;
-
                             try{
                                 JSONObject obj = new JSONObject(json);
                                 trimmedString = obj.getString(key);
@@ -479,16 +464,13 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 e.printStackTrace();
                                 return null;
                             }
-
                             return trimmedString;
                         }
-
                         //Somewhere that has access to a context
                         public void displayMessage(String toastString){
                             Toast.makeText(context, toastString, Toast.LENGTH_LONG).show();
                         }
                     }
-
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {

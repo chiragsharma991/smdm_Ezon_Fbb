@@ -797,7 +797,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
         Log.e(TAG, "focus position on scroll: "+focusposition);
 
-        if (focusposition < optionIndexSnapAdapter.getItemCount() - 1  && OnItemClick==false) {
+        if (focusposition < optionEfficiencyDetailsArrayList.size()  && OnItemClick==false) {
 
             if (oe_txtHeaderClass.getText().toString().equals("Department")) {
                 level = 1;
@@ -1776,6 +1776,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
                                 oe_listView.setAdapter(optionIndexSnapAdapter);
                                 optionIndexSnapAdapter.notifyDataSetChanged();
+                                txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(i).getStoreCode());
+                                txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(i).getStoreDescription());
 
                                 offsetvalue = 0;
                                 limit = 100;
@@ -1798,7 +1800,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
                                 }
                                 requestOEPieChart();
-
                             }
 
                         } catch (Exception e) {
@@ -1816,7 +1817,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         Reusable_Functions.hDialog();
                         OnItemClick = false;
                         processBar.setVisibility(View.GONE);
-                        Toast.makeText(context, "no  data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1835,8 +1836,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
-
 
     }
 
@@ -2280,7 +2279,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                 flag = true;
                                 //fIndexAdapter.notifyDataSetChanged();
-                           //     txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
+                            //     txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
                              //   txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(0).getStoreDescription());
 
                                 OptionefficiencyValue += " > " + planclass;
@@ -2470,7 +2469,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&seasongroup="+seasonGroup;
             }
-        } else if (oe_txtHeaderClass.getText().toString().equals("MCf"))
+        } else if (oe_txtHeaderClass.getText().toString().equals("MC"))
         {
             if(coreSelection) {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit ;
@@ -2491,7 +2490,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found in DetailPieChart", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 OnItemClick=false;
                                 processBar.setVisibility(View.GONE);
 

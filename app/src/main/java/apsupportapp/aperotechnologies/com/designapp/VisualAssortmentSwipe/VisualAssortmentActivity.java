@@ -7,6 +7,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -81,6 +85,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
    JsonArrayRequest postRequest;
     public static Activity Visual_Assortment_Activity;
     String recache = "";
+    int maxCharactes ;
 
 
     @Override
@@ -132,9 +137,40 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         edtTextComment = (EditText) findViewById(R.id.edtTextComment);
         txtSize = (TextView) findViewById(R.id.txtSize);
 
+//        edtTextSets.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                String strEnteredVal = edtTextSets.getText().toString();
+//
+//                if(!strEnteredVal.equals("")){
+//                    int num=Integer.parseInt(strEnteredVal);
+//                    if(num<10000){
+//                        edtTextSets.setText(""+num);
+//                    }else{
+//                        Toast.makeText(context,"Please Enter Valid Number",Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+        maxCharactes = 500;
+        edtTextComment.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxCharactes)});
 
 
-        imgBtnBack.setOnClickListener(new View.OnClickListener() {
+        edtTextSets.setFilters(new InputFilter[]{new InputFilterMinMax(0, 10000)});
+
+
+
+            imgBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -731,7 +767,40 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         {
            /* Intent i = new Intent(VisualAssortmentActivity.this, DashBoardActivity.class);
             startActivity(i);*/
-            this.finish();
+           finish();
+        }
+    }
+
+
+    public class InputFilterMinMax implements InputFilter {
+        private int min;
+        private int max;
+
+        public InputFilterMinMax(int min, int max) {
+            this.min = min;
+            this.max = max;
+
+        }
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            //noinspection EmptyCatchBlock
+            try {
+                int input = Integer.parseInt(dest.subSequence(0, dstart).toString() + source + dest.subSequence(dend, dest.length()));
+                if (isInRange(min, max, input))
+                    return null;
+
+                if(max > 10000)
+                {
+                    Toast.makeText(context,"Please Enter valid set",Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (NumberFormatException nfe) { }
+            return "";
+        }
+
+        private boolean isInRange(int a, int b, int c) {
+            return b > a ? c >= a && c <= b : c >= b && c <= a;
         }
     }
 }

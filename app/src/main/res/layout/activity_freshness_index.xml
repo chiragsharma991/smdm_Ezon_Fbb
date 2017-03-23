@@ -193,9 +193,7 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:visibility="gone"
-                    android:textSize="@dimen/largelayout_storesize"
-
-                    />
+                    android:textSize="@dimen/largelayout_storesize"/>
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/fIndex_pieChart"
@@ -211,8 +209,7 @@
                     android:layout_centerInParent="true"
                     android:background="#0000"
                     android:keepScreenOn="true"
-                    android:theme="@style/ProgressBar"
-                    >
+                    android:theme="@style/ProgressBar">
 
                 </ProgressBar>
             </RelativeLayout>

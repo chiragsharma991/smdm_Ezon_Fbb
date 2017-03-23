@@ -139,6 +139,10 @@ public class ProductName_Fragment extends Fragment {
         if (tab.getTabCount() == 3) {
             tab.removeTabAt(2);
         }
+        if(tab.getTabCount() == 2)
+        {
+            tab.removeTabAt(1);
+        }
         if (Reusable_Functions.chkStatus(context)) {
 
             Reusable_Functions.hDialog();
@@ -758,6 +762,13 @@ public class ProductName_Fragment extends Fragment {
                     ViewPager viewPager = (ViewPager) view.getParent();
                     LinearLayout layout = (LinearLayout) viewPager.getParent();
                     TabLayout tab = (TabLayout) layout.getChildAt(1);
+                    if (tab.getTabCount() == 3) {
+                        tab.removeTabAt(2);
+                    }
+                    if(tab.getTabCount() == 2) {
+                        tab.removeTabAt(1);
+                    }
+                    tab.addTab(tab.newTab().setText("OPTION"));
                     tab.getTabAt(1).select();
                     rowPressListener.communicateToFragment2(productNameBeanArrayList.get(i).getProductName());
                 }

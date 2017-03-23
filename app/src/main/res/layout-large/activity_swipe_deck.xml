@@ -120,7 +120,7 @@
         android:id="@+id/layoutComment"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="56dp"
         android:layout_height="match_parent">
 
     <LinearLayout
@@ -225,7 +225,7 @@
     <RelativeLayout
         android:id="@+id/layoutBuy"
         android:visibility="gone"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="56dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

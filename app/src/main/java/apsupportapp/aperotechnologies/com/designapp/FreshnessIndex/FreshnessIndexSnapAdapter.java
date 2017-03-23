@@ -110,7 +110,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemCount() {
-        return freshnessIndexDetailsArrayList.size()+1;
+        return freshnessIndexDetailsArrayList.size() + 1;
     }
 
     @Override

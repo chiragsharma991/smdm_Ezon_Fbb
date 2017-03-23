@@ -212,6 +212,18 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp">
 
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pva_noChart"
+                    android:text="No Chart data available"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:textSize="@dimen/largelayout_storesize"/>
+
+
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/linechart"
                     android:layout_width="match_parent"

@@ -86,7 +86,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     EditText etListText;
     RelativeLayout btnBack;
     RadioButton btnWTD, btnL4W, btnLW, btnYTD;
-    public static String selectedsegValue = "WTD";
+    public static String selectedsegValue ;
     String saleFirstVisibleItem;
     String fromWhere = "Department";
     TextView txtStoreCode, txtStoreDesc;
@@ -125,6 +125,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         getSupportActionBar().hide();
         fromWhere = "Department";
         txtSalesClickedValue = " ";
+        selectedsegValue = "WTD";
         val = "";
         context = this;
         SalesAnalysisActivity = this;
@@ -759,7 +760,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
     private void TimeUP() {
 
-        if (firstVisibleItem < salesadapter.getItemCount() - 1 && onClickFlag == false) {
+        if (firstVisibleItem < salesAnalysisClassArrayList.size() && onClickFlag == false) {
 
             if (txtheaderplanclass.getText().toString().equals("Department")) {
                 level = 1;
@@ -886,9 +887,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         val = "";
                         if (getIntent().getStringExtra("selectedDept") == null) {
                             requestSalesListDisplayAPI();
-                        } else {
-
-
+                        } else
+                        {
                             String str = getIntent().getStringExtra("selectedDept");
                             // str = str.replace(" ","%20");
                             requestSalesSelectedFilterVal(str);
@@ -1154,7 +1154,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().toString();
                                         if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().equals(saleFirstVisibleItem)) {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
-
                                         }
 
                                     } else if (txtheaderplanclass.getText().toString().equals("MC")) {
@@ -1163,8 +1162,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().toString();
                                         if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().equals(saleFirstVisibleItem)) {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
-
-
                                         }
                                     }
                                 }
