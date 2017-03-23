@@ -504,24 +504,28 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                         checkSeasonGpVal = "Current";
                         quickFilterPopup.setVisibility(View.GONE);
                         popupCurrent();
+                        break;
 
 
                     } else if (checkPrevious.isChecked()) {
                         checkSeasonGpVal = "Previous";
                         quickFilterPopup.setVisibility(View.GONE);
                         popupPrevious();
+                        break;
 
 
                     } else if (checkOld.isChecked()) {
                         checkSeasonGpVal = "Old";
                         quickFilterPopup.setVisibility(View.GONE);
                         popupOld();
+                        break;
 
 
                     } else if (checkUpcoming.isChecked()) {
                         checkSeasonGpVal = "Upcoming";
                         quickFilterPopup.setVisibility(View.GONE);
                         popupUpcoming();
+                        break;
 
                     } else {
                         Log.e("Uncheck1", "----" + checkSeasonGpVal);
@@ -531,12 +535,11 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     if (checkAgeing1.isChecked()) {
                         //popupUpcoming();
                         checkAgeingVal = "CheckAgeing1";
-
                         quickFilterPopup.setVisibility(View.GONE);
+
                     } else if (checkAgeing2.isChecked()) {
                         //popupUpcoming();
                         checkAgeingVal = "CheckAgeing2";
-
                         quickFilterPopup.setVisibility(View.GONE);
                     } else if (checkAgeing3.isChecked()) {
                         //popupUpcoming();
