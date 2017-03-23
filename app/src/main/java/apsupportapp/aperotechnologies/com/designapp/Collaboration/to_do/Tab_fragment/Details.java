@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,6 +73,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     public  HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
     private TextView Todo_detailStoreCode;
     private TextView Todo_detailStoreAvlQty;
+    private ProgressBar DetailProcess;
 
 
     @Override
@@ -311,6 +313,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         details_imageBtnBack = (RelativeLayout)findViewById(R.id.details_imageBtnBack);
         Todo_detailStoreCode = (TextView)findViewById(R.id.todo_detailStoreCode);
         Todo_detailStoreAvlQty = (TextView)findViewById(R.id.todo_detailStoreAvlQty);
+        DetailProcess = (ProgressBar)findViewById(R.id.detailProcess);
         Todo_detailStoreCode.setText(MCCodeDesc);
         Todo_detailStoreAvlQty.setText(MCCode);
         details_imageBtnBack.setOnClickListener(this);
@@ -361,6 +364,8 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         ChildDetailList = new ArrayList<ToDo_Modal>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(Details.this, "Loading....");
+          //  DetailProcess.setVisibility(View.VISIBLE);
+
 
             requestReceiversChildDetails(position);
         } else {

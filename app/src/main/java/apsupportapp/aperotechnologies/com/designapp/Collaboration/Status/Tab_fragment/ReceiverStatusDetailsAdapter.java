@@ -23,7 +23,7 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
     private ArrayList<StatusModel> rec_status_dtllist;
     private static boolean check=false;
     private String TAG="ReceiverStatus_Detail_Fragment";
-    private static boolean[] Toggle;
+    private static boolean[] Rec_Toggle;
     public OnPress onPressInterface;
 
 
@@ -31,6 +31,8 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
 
     public ReceiverStatusDetailsAdapter(ArrayList<StatusModel> rec_status_List, Context context) {
         this.context = context;
+        this.rec_status_dtllist = rec_status_dtlList;
+        Rec_Toggle = new boolean[rec_status_dtlList.size()];
         this.rec_status_dtllist = rec_status_List;
         Toggle= new boolean[rec_status_dtllist.size()];
         onPressInterface=(OnPress)context;
@@ -49,6 +51,7 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
 
                 Log.e(TAG,"position"+position);
                 HandlePositionOnSet(holder,position);
+               // HandlePositionOnSet(holder,position);
                 ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setText(rec_status_dtllist.get(position).getLevel());
                 ((ReceiverStatusDetailsAdapter.Holder)holder).ShortQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyRequested()));
                 ((ReceiverStatusDetailsAdapter.Holder)holder).AvlQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyAcpt()));
@@ -86,7 +89,7 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
         }
     }
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
-        if(Toggle[position])
+        if(Rec_Toggle[position])
         {
             ((ReceiverStatusDetailsAdapter.Holder)holder).lin_receiver_dtlsubchild.setVisibility(View.VISIBLE);
 

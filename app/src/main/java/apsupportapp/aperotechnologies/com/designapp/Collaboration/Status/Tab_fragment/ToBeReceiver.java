@@ -240,6 +240,8 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     {
        // String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
 
+        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
+        Log.e(TAG, "Status Receiver Summary Url" + "" + receiver_case_url);
         String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
         Log.e(TAG, "Status Sender Summary Url" + "" + receiver_case_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
@@ -247,8 +249,8 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.i(TAG, "Status Sender response : " + " " + response);
-                        Log.i(TAG, "Status Sender length" + "" + response.length());
+                        Log.i(TAG, "Status Receiver response : " + " " + response);
+                        Log.i(TAG, "Status Receiver length" + "" + response.length());
 
                         try
                         {

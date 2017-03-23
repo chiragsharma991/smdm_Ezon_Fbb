@@ -59,7 +59,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     private static final String TAG = "VisualAssortmentActivity";
     RelativeLayout reloverlay;
     private SwipeDeck cardStack;
-    private Context context = this;
+    private Context context ;
     ArrayList<VisualAssort> visualassortmentlist;
     SwipeDeckAdapter adapter;
     String likeDislikeFlg ;

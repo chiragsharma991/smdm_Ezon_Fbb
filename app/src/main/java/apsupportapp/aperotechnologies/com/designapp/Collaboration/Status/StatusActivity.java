@@ -65,11 +65,10 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
     private void setupViewPager(ViewPager viewPager)
     {
         StatusViewPagerAdapter adapter = new StatusViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ToBeSender(), "TO BE TRANSFERRED");
-        adapter.addFragment(new ToBeReceiver(), "TO BE RECEIVED");
+        adapter.addFragment(new ToBeSender(), "Transfer Status");
+        adapter.addFragment(new ToBeReceiver(), "Receive Status");
         viewPager.setAdapter(adapter);
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId())

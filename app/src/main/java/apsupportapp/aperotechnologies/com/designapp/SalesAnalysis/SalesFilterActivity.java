@@ -320,7 +320,12 @@ public class SalesFilterActivity extends Activity {
                     String updateBrandCls = brandcls.replace(" ", "%20").replace("&", "%26");
                     String Brandclass = "brandclass=" + updateBrandCls;
                     build.append("&");
-                    level_filter = 6;
+                    if(getIntent().getStringExtra("checkfrom").equals("freshnessIndex") || getIntent().getStringExtra("checkfrom").equals("optionEfficiency"))
+                    {
+                        level_filter = 5;
+                    }else {
+                        level_filter = 6;
+                    }
                     build.append(Brandclass.replace(",$", ""));
 
                 }

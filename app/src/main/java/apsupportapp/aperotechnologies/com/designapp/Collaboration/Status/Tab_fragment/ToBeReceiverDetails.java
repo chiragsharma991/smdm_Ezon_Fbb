@@ -218,9 +218,6 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
 
     }
 
-
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId())

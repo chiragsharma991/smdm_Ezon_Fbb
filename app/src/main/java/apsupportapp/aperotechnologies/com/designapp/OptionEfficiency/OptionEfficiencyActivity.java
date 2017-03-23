@@ -1776,8 +1776,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
                                 oe_listView.setAdapter(optionIndexSnapAdapter);
                                 optionIndexSnapAdapter.notifyDataSetChanged();
-                                txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(i).getStoreCode());
-                                txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(i).getStoreDescription());
+                                txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
+                                txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(0).getStoreDescription());
 
                                 offsetvalue = 0;
                                 limit = 100;

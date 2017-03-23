@@ -111,6 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@color/white"
+            app:tabTextAppearance="@style/customTabLayout"
             app:elevation="0dp"
             app:tabMode="fixed"
             app:tabGravity="fill"

@@ -94,7 +94,7 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ToBeReceiverAdapter.Holder) holder).Rec_Lin_trCard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.e("TAG", "onClick: on Linear layout >>>>>>>> " );
+                        Log.e( "onClick: on Receiver Linear layout >>>>>>>> " ,"");
                         new ToBeReceiverDetails().StartActivity(context,receiver_list.get(position).getCaseNo(),receiver_list.get(position).getReqStoreCode());
 
                     }
