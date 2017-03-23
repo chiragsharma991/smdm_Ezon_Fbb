@@ -923,7 +923,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 OnItemClick = false;
 
                                 //Reusable_Functions.hDialog();
-                                //Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
                                 return;
                             } else if (response.length() == limit) {
@@ -950,7 +950,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             OnItemClick = false;
 
                             // Reusable_Functions.hDialog();
-                            //Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -961,7 +961,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         OnItemClick = false;
 
                         //Reusable_Functions.hDialog();
-                        //Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         //llfreshnessIndex.setVisibility(View.GONE);
 
                         error.printStackTrace();
@@ -1540,7 +1540,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 llfreshnessIndex.setVisibility(View.VISIBLE);
                                 OnItemClick = false;
 
@@ -1722,7 +1722,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         }
                         catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             llfreshnessIndex.setVisibility(View.VISIBLE);
                             Log.e(TAG, "in catch: " + e.getMessage());
                             OnItemClick = false;
@@ -1734,7 +1734,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         llfreshnessIndex.setVisibility(View.VISIBLE);
                         OnItemClick = false;
                         error.printStackTrace();
@@ -1790,7 +1790,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 OnItemClick = false;
 
                                 llfreshnessIndex.setVisibility(View.GONE);
@@ -2018,7 +2018,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
 

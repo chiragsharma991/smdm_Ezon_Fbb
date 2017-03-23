@@ -1316,7 +1316,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                              Toast.makeText(context, " No Data Found  " , Toast.LENGTH_SHORT).show();
+                              Toast.makeText(context, " no data found  " , Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1375,7 +1375,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 OnItemClick=false;
                                 llayoutOEfficiency.setVisibility(View.GONE);
                                 processBar.setVisibility(View.GONE);
@@ -1641,7 +1641,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "No Data Found ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found ", Toast.LENGTH_SHORT).show();
                             llayoutOEfficiency.setVisibility(View.GONE);
                             processBar.setVisibility(View.GONE);
                             OnItemClick=false;
@@ -1745,7 +1745,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
                             } else if (response.length() == limit) {
@@ -1776,6 +1776,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
                                 oe_listView.setAdapter(optionIndexSnapAdapter);
                                 optionIndexSnapAdapter.notifyDataSetChanged();
+                                txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(i).getStoreCode());
+                                txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(i).getStoreDescription());
 
                                 offsetvalue = 0;
                                 limit = 100;
@@ -1798,12 +1800,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
                                 }
                                 requestOEPieChart();
-
                             }
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             processBar.setVisibility(View.GONE);
                             OnItemClick = false;
                             e.printStackTrace();
@@ -1816,7 +1817,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         Reusable_Functions.hDialog();
                         OnItemClick = false;
                         processBar.setVisibility(View.GONE);
-                        Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1835,8 +1836,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
-
 
     }
 
@@ -1978,7 +1977,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, " No Data Found " , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, " no data found " , Toast.LENGTH_SHORT).show();
                             llayoutOEfficiency.setVisibility(View.VISIBLE);
                             OnItemClick=false;
                             processBar.setVisibility(View.GONE);
@@ -2491,7 +2490,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 OnItemClick=false;
                                 processBar.setVisibility(View.GONE);
 
@@ -2626,7 +2625,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, " No Data Found " , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, " no data found " , Toast.LENGTH_SHORT).show();
                             OnItemClick=false;
                             processBar.setVisibility(View.GONE);
                             e.printStackTrace();
