@@ -749,9 +749,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             btnL4W.toggle();
             Log.e(TAG, "L4W toggle: ");
 
-        } else if (selectedsegValue.equals("YTD")) {
+        } else if (selectedsegValue.equals("STD")) {
             btnYTD.toggle();
-            Log.e(TAG, "YTD toggle: ");
+            Log.e(TAG, "STD toggle: ");
 
         }
 
@@ -988,9 +988,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     break;
 
                 case R.id.btnYTD:
-                    if (selectedsegValue.equals("YTD"))
+                    if (selectedsegValue.equals("STD"))
                         break;
-                    selectedsegValue = "YTD";
+                    selectedsegValue = "STD";
                     //SalesPagerAdapter.currentPage = 0;
                     if (lldots != null) {
                         lldots.removeAllViews();
@@ -999,7 +999,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     currentVmPos = vwpagersales.getCurrentItem();
                     llhierarchy.setVisibility(View.GONE);
                     // firstVisibleItem = listView_SalesAnalysis.getFirstVisiblePosition();
-                    Log.e(TAG, " in YTD foucpos" + firstVisibleItem);
+                    Log.e(TAG, " in STD foucpos" + firstVisibleItem);
                     //saleFirstVisibleItem = " ";
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                     analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
@@ -1012,7 +1012,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         limit = 100;
                         count = 0;
                         val = "";
-                        Log.e("array list size in YTD", "" + salesAnalysisClassArrayList.size());
+                        Log.e("array list size in STD", "" + salesAnalysisClassArrayList.size());
 
 
                         if (getIntent().getStringExtra("selectedDept") == null) {

@@ -51,7 +51,6 @@
                     android:textSize="@dimen/collaboration_stock_text"
                     android:id="@+id/status_case"
                     android:layout_alignParentRight="true"
-                    android:textColor="@color/smdm_amber"
                     />
 
 

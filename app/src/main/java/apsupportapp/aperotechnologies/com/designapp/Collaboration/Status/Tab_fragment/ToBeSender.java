@@ -64,6 +64,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private int offsetvalue = 0;
     private SharedPreferences sharedPreferences;
     private String userId;
+    private boolean Sender_checkNetwkStatus = false;
     private String bearertoken;
     private RequestQueue queue;
     private StatusModel statusModel;
@@ -102,11 +103,24 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         // Inflate the layout for this fragment
         view = (ViewGroup) inflater.inflate(R.layout.fragment_to_be_received, container, false);
         SenderSummaryList = new ArrayList<>();
+        gson = new Gson();
+        Sender_checkNetwkStatus = false;
         initialise();
         MainMethod();
 
         return view;
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            if (Sender_checkNetwkStatus) {
+                Toast.makeText(context, "No data found from TO BE TRANSFERRED", Toast.LENGTH_SHORT).show();
+
+            }
+        }
     }
 
     private void MainMethod() {
@@ -141,8 +155,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                         {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-
-                                Toast.makeText(context, "No data found from TO BE TRANSFERRED", Toast.LENGTH_SHORT).show();
+                                Sender_checkNetwkStatus = true;
                                 return;
 
                             } else if (response.length() == limit) {

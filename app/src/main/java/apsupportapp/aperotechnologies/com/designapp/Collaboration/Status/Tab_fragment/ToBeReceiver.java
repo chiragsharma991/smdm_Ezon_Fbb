@@ -64,6 +64,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     private String userId;
     private String bearertoken;
     private RequestQueue queue;
+    private boolean Receiver_checkNetwkstatus = false;
     private StatusModel recstatusModel;
     private ArrayList<StatusModel> ReceiverSummaryList,ReceiverStatusList;
     private RecyclerView recyclerView_receiver;
@@ -102,13 +103,24 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         view = (ViewGroup) inflater.inflate(R.layout.fragment_to_be_transfer, container, false);
         ReceiverSummaryList = new ArrayList<>();
         gson = new Gson();
+        Receiver_checkNetwkstatus = false;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         initialise();
         MainMethod();
 
         return view;
+    }
 
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            if (Receiver_checkNetwkstatus) {
+                Toast.makeText(context, "No data found from TO BE RECEIVED", Toast.LENGTH_SHORT).show();
+
+            }
+        }
     }
 
     private void MainMethod() {
@@ -242,7 +254,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                         {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No data found from TO BE RECEIVED", Toast.LENGTH_SHORT).show();
+                                Receiver_checkNetwkstatus= true;
                                 return;
 
                             } else if (response.length() == limit) {

@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,20 +78,18 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if(holder instanceof ToBeSenderAdapter.Holder) {
             if(position < list.size())
             {
-
                 HandlePositionOnSet(holder,position);
-
-                ((ToBeSenderAdapter.Holder)holder).Status_caseNumber.setText(""+(int)list.get(position).getCaseNo());
+                ((ToBeSenderAdapter.Holder)holder).Status_caseNumber.setText(""+"Case#"+list.get(position).getCaseNo());
                 ((ToBeSenderAdapter.Holder)holder).Status_storeCode.setText(list.get(position).getReqStoreCode());
 //                ((ToBeSenderAdapter.Holder)holder).Status_storedesc.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_docNumber.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_qty.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_date.setText(list.get(position).getCaseNo());
 
-                String StatusInitiated=list.get(position).getStatusInitiated();
-                String StatusAccept=list.get(position).getStatusAccept();
-                String StatusSto=list.get(position).getStatusSto();
-                String StatusGrn=list.get(position).getStatusGrn();
+                String StatusInitiated = list.get(position).getStatusInitiated();
+                String StatusAccept = list.get(position).getStatusAccept();
+                String StatusSto = list.get(position).getStatusSto();
+                String StatusGrn = list.get(position).getStatusGrn();
 
                 ((Holder) holder).ProcessStatus.removeAllViewsInLayout();
 
@@ -106,19 +105,26 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if(StatusInitiated.equals("Yes")&&StatusAccept.equals("No")&&StatusSto.equals("No")&&StatusGrn.equals("No"))
                 {
                     Case0(position,holder);
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setText("Pending");
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setTextColor(Color.parseColor("#ff7e00"));
 
                 }else if(StatusInitiated.equals("Yes")&&StatusAccept.equals("Yes")&&StatusSto.equals("No")&&StatusGrn.equals("No"))
                 {
                     Case1(position,holder);
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setText("Pending");
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setTextColor(Color.parseColor("#ff7e00"));
 
                 }else if(StatusInitiated.equals("Yes")&&StatusAccept.equals("Yes")&&StatusSto.equals("Yes")&&StatusGrn.equals("No"))
                 {
                     Case2(position,holder);
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setText("Pending");
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setTextColor(Color.parseColor("#ff7e00"));
 
                 }else if(StatusInitiated.equals("Yes")&&StatusAccept.equals("Yes")&&StatusSto.equals("Yes")&&StatusGrn.equals("Yes"))
                 {
                     Case3(position,holder);
-
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setText("Completed");
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setTextColor(Color.parseColor("#70e503"));
                 }
             }
         }
@@ -141,14 +147,16 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     Status_docNumber.setText("N/A");
                     Status_qty.setText("N/A");
                     Status_date.setText("N/A");
-                }else
+                }
+                else
                 {
                     Status_docNumber.setText(""+initiatedStatusList.get(position).get(0).getDocNo());
                     Status_qty.setText(""+Math.round(initiatedStatusList.get(position).get(0).getStkOnhandQtyRequested()));
                     Status_date.setText(initiatedStatusList.get(position).get(0).getReceiver_requested_date());
                 }
 
-            }else if(trackId[position]==2)
+            }
+            else if(trackId[position]==2)
             {
                 if(senderAcpStatusList.get(position).isEmpty()){
                     Status_docNumber.setText("N/A");
@@ -188,18 +196,12 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     Status_qty.setText(""+Math.round(grnStatusList.get(position).get(0).getGrnQty()));
                     Status_date.setText(grnStatusList.get(position).get(0).getGrnDate());
                 }
-
             }
-
-
             ((ToBeSenderAdapter.Holder) holder).Status_layout.addView(view);
             ((ToBeSenderAdapter.Holder)holder).Status_layout.setVisibility(View.VISIBLE);
-
-
         }else
         {
             ((ToBeSenderAdapter.Holder)holder).Status_layout.setVisibility(View.GONE);
-
         }
     }
 

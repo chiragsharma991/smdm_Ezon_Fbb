@@ -173,7 +173,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 txtNetSalesUName.setText("WOW Gr%");
 
 
-            } else if (SalesAnalysisActivity1.selectedsegValue.equals("L4W") || SalesAnalysisActivity1.selectedsegValue.equals("YTD")) {
+            } else if (SalesAnalysisActivity1.selectedsegValue.equals("L4W") || SalesAnalysisActivity1.selectedsegValue.equals("STD")) {
 
                 txtNetSales.setText("Net Sales");
                 txtPlanSales.setText("Plan Sales");
@@ -310,7 +310,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 }
 
 
-            } else if (SalesAnalysisActivity1.selectedsegValue.equals("L4W") || SalesAnalysisActivity1.selectedsegValue.equals("YTD")) {
+            } else if (SalesAnalysisActivity1.selectedsegValue.equals("L4W") || SalesAnalysisActivity1.selectedsegValue.equals("STD")) {
 
                 if (salesAnalysis != null) {
 

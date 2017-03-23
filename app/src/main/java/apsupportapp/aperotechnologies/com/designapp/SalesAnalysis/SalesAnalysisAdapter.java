@@ -80,8 +80,7 @@ public class SalesAnalysisAdapter extends BaseAdapter{
 
     }
 
-
-    //private ValueFilter valueFilter;
+   //private ValueFilter valueFilter;
 
     public SalesAnalysisAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, ListView listView_SalesAnalysis) {
 

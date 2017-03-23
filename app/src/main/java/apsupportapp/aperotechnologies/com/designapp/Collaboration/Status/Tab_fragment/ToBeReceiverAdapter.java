@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,7 +83,7 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             {
 
                 HandlePositionOnSet(holder,position);
-                ((ToBeReceiverAdapter.Holder)holder).Rec_Status_caseNumber.setText(""+receiver_list.get(position).getCaseNo());
+                ((ToBeReceiverAdapter.Holder)holder).Rec_Status_caseNumber.setText(""+"Case#"+receiver_list.get(position).getCaseNo());
                 ((ToBeReceiverAdapter.Holder)holder).Rec_Status_storeCode.setText(receiver_list.get(position).getReqStoreCode());
 
                 String Rec_StatusInitiated=receiver_list.get(position).getStatusInitiated();
@@ -103,18 +104,30 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 if(Rec_StatusInitiated.equals("Yes") && Rec_StatusAccept.equals("No") && Rec_StatusSto.equals("No") && Rec_StatusGrn.equals("No"))
                 {
                     Rec_Case0(position,holder);
+                    ((ToBeReceiverAdapter.Holder) holder).Rec_Status_case.setText("Pending");
+                    ((ToBeReceiverAdapter.Holder) holder).Rec_Status_case.setTextColor(Color.parseColor("#ff7e00"));
+
 
                 }else if(Rec_StatusInitiated.equals("Yes") && Rec_StatusAccept.equals("Yes") && Rec_StatusSto.equals("No") && Rec_StatusGrn.equals("No"))
                 {
                     Rec_Case1(position,holder);
+                    ((ToBeReceiverAdapter.Holder) holder).Rec_Status_case.setText("Pending");
+                    ((ToBeReceiverAdapter.Holder) holder).Rec_Status_case.setTextColor(Color.parseColor("#ff7e00"));
+
 
                 }else if(Rec_StatusInitiated.equals("Yes") && Rec_StatusAccept.equals("Yes") && Rec_StatusSto.equals("Yes") && Rec_StatusGrn.equals("No"))
                 {
                     Rec_Case2(position,holder);
+                    ((ToBeReceiverAdapter.Holder) holder).Rec_Status_case.setText("Pending");
+                    ((ToBeReceiverAdapter.Holder) holder).Rec_Status_case.setTextColor(Color.parseColor("#ff7e00"));
+
 
                 }else if(Rec_StatusInitiated.equals("Yes") && Rec_StatusAccept.equals("Yes") && Rec_StatusSto.equals("Yes") && Rec_StatusGrn.equals("Yes"))
                 {
                     Rec_Case3(position,holder);
+                    ((ToBeReceiverAdapter.Holder) holder).Rec_Status_case.setText("Completed");
+                    ((ToBeReceiverAdapter.Holder) holder).Rec_Status_case.setTextColor(Color.parseColor("#70e503"));
+
 
                 }
             }

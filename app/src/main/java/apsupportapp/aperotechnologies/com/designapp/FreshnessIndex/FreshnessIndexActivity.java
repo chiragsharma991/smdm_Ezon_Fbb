@@ -1970,6 +1970,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("FI Filter response",""+response);
 
                         if(SalesFilterActivity.level_filter == 2)
                         {
@@ -2054,31 +2055,32 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-//                                offsetvalue = 0;
-//                                limit = 100;
-//                                count = 0;
-//                                fIndexArrayList.clear();
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                fIndexArrayList.clear();
+                                Log.e("First Item..",""+freshnessIndexDetailsArrayList.get(0).getBrandplanClass().toString());
 
                                 if (txtFIndexClass.getText().toString().equals("Department")) {
 
                                     level =1 ;
-                                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
+                                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanDept().toString();
 
                                 } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
                                     level = 2;
-                                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
+                                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanCategory().toString();
 
                                 } else if (txtFIndexClass.getText().toString().equals("Class")) {
                                     level = 3;
-                                    fIndexFirstVisibleItem  = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
+                                    fIndexFirstVisibleItem  = freshnessIndexDetailsArrayList.get(0).getPlanClass().toString();
 
                                 } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
                                     level = 4;
-                                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
+                                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getBrandName().toString();
 
                                 } else if (txtFIndexClass.getText().toString().equals("MC")) {
                                     level = 5;
-                                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
+                                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getBrandplanClass().toString();
                                 }
 
                                 requestFIndexPieChart();
