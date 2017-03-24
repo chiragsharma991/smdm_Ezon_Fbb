@@ -184,8 +184,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             {
                 String  selectedString  = getIntent().getStringExtra("selectedDept");
                 filter_toggleClick = true;
-                 coreSelection = true;
+                coreSelection = true;
                 retainValuesFilter();
+                optionEfficiencyDetailsArrayList= new ArrayList<OptionEfficiencyDetails>();
                 requestOptionEfficiencyFilterVal(selectedString);
 
             }
@@ -1194,7 +1195,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     OEfficiency_SegmentClick = "Core";
                     // oe_llayouthierarchy.setVisibility(View.GONE);
                     //  llayoutOEfficiency.setVisibility(View.GONE);
-                    optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         //Reusable_Functions.sDialog(context, "Loading data...");
@@ -1208,12 +1208,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             Handler h = new Handler();
                             h.postDelayed(new Runnable() {
                                 public void run() {
+                                    optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                                     requestOptionEfficiencyDetails();
                                 }
                             }, 700);
 
                         } else if (getIntent().getStringExtra("selectedDept") != null) {
                             String selectedString = getIntent().getStringExtra("selectedDept");
+                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                             requestOptionEfficiencyFilterVal(selectedString);
 
                         }
@@ -1229,7 +1231,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     OEfficiency_SegmentClick = "Fashion";
                     // oe_llayouthierarchy.setVisibility(View.GONE);
                     // llayoutOEfficiency.setVisibility(View.GONE);
-                    optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         // Reusable_Functions.sDialog(context, "Loading data...");
@@ -1245,12 +1246,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             Handler h = new Handler();
                             h.postDelayed(new Runnable() {
                                 public void run() {
+                                    optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                                     requestOptionEfficiencyDetails();
                                 }
                             }, 700);
 
                         } else if (getIntent().getStringExtra("selectedDept") != null) {
                             String selectedString = getIntent().getStringExtra("selectedDept");
+                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+
                             requestOptionEfficiencyFilterVal(selectedString);
                         }
 
@@ -1746,6 +1750,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                oe_pieChart.setData(null);
+                                oe_pieChart.notifyDataSetChanged();
+                                oe_pieChart.invalidate();
+                                oe_listView.setAdapter(null);
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
                             } else if (response.length() == limit) {

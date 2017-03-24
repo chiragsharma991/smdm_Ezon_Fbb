@@ -31,10 +31,9 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
 
     public ReceiverStatusDetailsAdapter(ArrayList<StatusModel> rec_status_List, Context context) {
         this.context = context;
-        this.rec_status_dtllist = rec_status_dtlList;
-        Rec_Toggle = new boolean[rec_status_dtlList.size()];
         this.rec_status_dtllist = rec_status_List;
-        Toggle= new boolean[rec_status_dtllist.size()];
+        Rec_Toggle = new boolean[rec_status_dtllist.size()];
+        this.rec_status_dtllist = rec_status_List;
         onPressInterface=(OnPress)context;
     }
 
@@ -59,14 +58,14 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
                     @Override
                     public void onClick(View view) {
 
-                        if(Toggle[position]==true)
+                        if(Rec_Toggle[position]==true)
                         {
-                            Toggle[position]=false;
+                            Rec_Toggle[position]=false;
                             notifyDataSetChanged();
 
                         }else
                         {
-                            Toggle[position]=true;
+                            Rec_Toggle[position]=true;
 
                             if(ToBeReceiverDetails.Rec_StatusHashmapChildList.get(position).isEmpty())
                             {
