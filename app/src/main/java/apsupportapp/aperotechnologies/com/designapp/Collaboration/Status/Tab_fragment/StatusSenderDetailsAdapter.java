@@ -46,21 +46,21 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_sender_details_child1, parent, false);
-        return new Holder(v);
+        return new StatusSenderDetailsAdapter.Holder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
     {
 
-        if(holder instanceof Holder) {
+        if(holder instanceof StatusSenderDetailsAdapter.Holder) {
             if(position < list.size()) {
 
                 HandlePositionOnSet(holder,position);
-                ((Holder)holder).OptionLevel.setText(list.get(position).getLevel());
-                ((Holder)holder).ReqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
-                ((Holder)holder).ScanQty.setText(""+Math.round(list.get(position).getStkOnhandQtyAcpt()));
-                ((Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
+                ((StatusSenderDetailsAdapter.Holder)holder).OptionLevel.setText(list.get(position).getLevel());
+                ((StatusSenderDetailsAdapter.Holder)holder).ReqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
+                ((StatusSenderDetailsAdapter.Holder)holder).ScanQty.setText(""+Math.round(list.get(position).getStkOnhandQtyAcpt()));
+                ((StatusSenderDetailsAdapter.Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
@@ -88,7 +88,7 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
                 });
 
                   StatusSenderSubChildAdapterDetails detailsHeaderChildAdapter=new StatusSenderSubChildAdapterDetails(ToBeSenderDetails.StatusHashmapChildList,context,position,StatusSenderDetailsAdapter.this);
-                ((Holder)holder).StatusChildListView.setAdapter(detailsHeaderChildAdapter);
+                ((StatusSenderDetailsAdapter.Holder)holder).StatusChildListView.setAdapter(detailsHeaderChildAdapter);
 
             }
         }
@@ -98,11 +98,11 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
         if(Toggle[position])
         {
-            ((Holder)holder).StatusDetailChild_Layout.setVisibility(View.VISIBLE);
+            ((StatusSenderDetailsAdapter.Holder)holder).StatusDetailChild_Layout.setVisibility(View.VISIBLE);
 
         }else
         {
-            ((Holder)holder).StatusDetailChild_Layout.setVisibility(View.GONE);
+            ((StatusSenderDetailsAdapter.Holder)holder).StatusDetailChild_Layout.setVisibility(View.GONE);
 
         }
 

@@ -34,7 +34,7 @@ public class StatusSenderSubChildAdapterDetails extends RecyclerView.Adapter<Rec
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_sender_details_subchild1, parent, false);
-        return new Holder(v);
+        return new StatusSenderSubChildAdapterDetails.Holder(v);
     }
 
 
@@ -44,9 +44,9 @@ public class StatusSenderSubChildAdapterDetails extends RecyclerView.Adapter<Rec
         Log.e("TAG", "On Detail child: "+position );
 
 
-        ((Holder)holder).StatusSubchild_size.setText(list.get(PrePosition).get(position).getLevel());
-        ((Holder)holder).StatusSubchild_reqQty.setText(""+Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested()));
-        ((Holder)holder).StatusSubchild_scanQty.setText(""+Math.round(list.get(PrePosition).get(position).getStkOnhandQtyAcpt()));
+        ((StatusSenderSubChildAdapterDetails.Holder)holder).StatusSubchild_size.setText(list.get(PrePosition).get(position).getLevel());
+        ((StatusSenderSubChildAdapterDetails.Holder)holder).StatusSubchild_reqQty.setText(""+Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested()));
+        ((StatusSenderSubChildAdapterDetails.Holder)holder).StatusSubchild_scanQty.setText(""+Math.round(list.get(PrePosition).get(position).getStkOnhandQtyAcpt()));
 
 
 

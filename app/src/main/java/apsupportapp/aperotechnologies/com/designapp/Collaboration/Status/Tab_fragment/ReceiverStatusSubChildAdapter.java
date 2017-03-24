@@ -38,14 +38,14 @@ public class ReceiverStatusSubChildAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_receiver_details_subchild, parent, false);
-        return new Holder(v);
+        return new ReceiverStatusSubChildAdapter.Holder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((Holder)holder).Rec_StatusSubchild_size.setText(subchild_list.get(Rec_PrePosition).get(position).getLevel());
-        ((Holder)holder).Rec_StatusSubchild_shortQty.setText(""+Math.round(subchild_list.get(Rec_PrePosition).get(position).getStkOnhandQtyRequested()));
-        ((Holder)holder).Rec_StatusSubchild_avlQty.setText(""+Math.round(subchild_list.get(Rec_PrePosition).get(position).getStkOnhandQtyAcpt()));
+        ((ReceiverStatusSubChildAdapter.Holder)holder).Rec_StatusSubchild_size.setText(subchild_list.get(Rec_PrePosition).get(position).getLevel());
+        ((ReceiverStatusSubChildAdapter.Holder)holder).Rec_StatusSubchild_shortQty.setText(""+Math.round(subchild_list.get(Rec_PrePosition).get(position).getStkOnhandQtyRequested()));
+        ((ReceiverStatusSubChildAdapter.Holder)holder).Rec_StatusSubchild_avlQty.setText(""+Math.round(subchild_list.get(Rec_PrePosition).get(position).getStkOnhandQtyAcpt()));
 
 
     }
@@ -62,9 +62,9 @@ public class ReceiverStatusSubChildAdapter extends RecyclerView.Adapter<Recycler
 
         public Holder(View itemView) {
             super(itemView);
-            Rec_StatusSubchild_size=(TextView)itemView.findViewById(R.id.statusSubchild_size);
-            Rec_StatusSubchild_shortQty=(TextView)itemView.findViewById(R.id.statusSubchild_reqQty);
-            Rec_StatusSubchild_avlQty=(TextView)itemView.findViewById(R.id.statusSubchild_scanQty);
+            Rec_StatusSubchild_size=(TextView)itemView.findViewById(R.id.status_receiver_subdetail_size);
+            Rec_StatusSubchild_shortQty=(TextView)itemView.findViewById(R.id.status_receiver_subdetail_shortQtyVal);
+            Rec_StatusSubchild_avlQty=(TextView)itemView.findViewById(R.id.status_receiver_subdetail_avlQtyVal);
 
 
         }

@@ -63,9 +63,11 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
     private int caseNo=0;
     private StatusModel rec_statusModel;
     private ReceiverStatusDetailsAdapter rec_details_Adapter;
-    private TextView rec_storeCode,rec_storeCase;
+    private TextView rec_storeCode,rec_storeCase,rec_storeDesc;
     public static HashMap<Integer, ArrayList<StatusModel>> Rec_StatusHashmapChildList;
     private String option="";
+    private String senderStoreCode = "";
+    private String recache;
 
 
     @Override
@@ -78,6 +80,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
 
         //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
+        recache = "true";
         Rec_Status_dtlList = new ArrayList<StatusModel>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -102,12 +105,15 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
         rec_detail_recycleView = (RecyclerView) findViewById(R.id.rec_statusDetail_list);
         rec_storeCase = (TextView) findViewById(R.id.rec_status_detailStoreCase);
         rec_storeCode = (TextView) findViewById(R.id.rec_status_detailStoreCode);
+        rec_storeDesc = (TextView) findViewById(R.id.rec_status_detailStoreDesc);
         status_receiverdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_receiverdetails_imageBtnBack);
         status_receiverdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
-        String data2 = getIntent().getExtras().getString("CODE");
+        senderStoreCode= getIntent().getExtras().getString("CODE");
+        String storeDesc = getIntent().getExtras().getString("storeDesc");
         rec_storeCase.setText(" " +"Case#"+data1);
-        rec_storeCode.setText(data2);
+        rec_storeCode.setText(senderStoreCode);
+        rec_storeDesc.setText(storeDesc);
         caseNo=data1;
     }
 
@@ -115,7 +121,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
     {
        // String receiver_status_detail_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level+"&senderStoreCode="+userId+"&caseNo="+caseNo;
 
-       String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level+"&senderStoreCode="+userId+"&caseNo="+caseNo;
+       String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level+"&senderStoreCode="+senderStoreCode+"&caseNo="+caseNo+"&recache="+recache;
 
 
         Log.e("Receiver Details Url :" , "" + url);
@@ -209,11 +215,12 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
             Rec_StatusHashmapChildList.put(i, listData);
         }
     }
-    public void StartActivity(Context context, int caseNo, String reqStoreCode) {
+    public void StartActivity(Context context, int caseNo, String senderStoreCode,String senderStoreDesc) {
 
         Intent intent = new Intent(context, ToBeReceiverDetails.class);
         intent.putExtra("CASE",caseNo);
-        intent.putExtra("CODE",reqStoreCode);
+        intent.putExtra("CODE",senderStoreCode);
+        intent.putExtra("storeDesc",senderStoreDesc);
         context.startActivity(intent);
 
     }
@@ -245,9 +252,8 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
 
     private void requestReceiverStatusSubDetails(final int position)
     {
-      //  String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level +"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level +"&senderStoreCode="+senderStoreCode+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20")+"&recache="+recache;
 
         Log.e(TAG, "SubDetails Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -287,9 +293,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
                                     StatusDetailChild.add(rec_statusModel);
 
                                 }
-                                count = 0;
-                                limit = 100;
-                                offsetvalue = 0;
+
                             }
 
                             Rec_StatusHashmapChildList.put(position, StatusDetailChild);

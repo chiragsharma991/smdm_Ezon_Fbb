@@ -69,19 +69,19 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_be_received_child, parent, false);
-        return new Holder(v);
+        return new ToBeSenderAdapter.Holder(v);
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        if(holder instanceof Holder) {
+        if(holder instanceof ToBeSenderAdapter.Holder) {
             if(position < list.size())
             {
                 HandlePositionOnSet(holder,position);
-                ((Holder)holder).Status_caseNumber.setText(""+"Case#"+list.get(position).getCaseNo());
-                ((Holder)holder).Status_storeCode.setText(list.get(position).getReqStoreCode());
-//                ((ToBeSenderAdapter.Holder)holder).Status_storedesc.setText(list.get(position).getCaseNo());
+                ((ToBeSenderAdapter.Holder)holder).Status_caseNumber.setText(""+"Case#"+list.get(position).getCaseNo());
+                ((ToBeSenderAdapter.Holder)holder).Status_storeCode.setText(list.get(position).getReqStoreCode());
+                ((ToBeSenderAdapter.Holder)holder).Status_storedesc.setText(list.get(position).getReqStoreDescription());
 //                ((ToBeSenderAdapter.Holder)holder).Status_docNumber.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_qty.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_date.setText(list.get(position).getCaseNo());
@@ -97,7 +97,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     @Override
                     public void onClick(View view) {
                         Log.e("TAG", "onClick: on Linear layout >>>>>>>> " );
-                        new ToBeSenderDetails().StartActivity(context,list.get(position).getCaseNo(),list.get(position).getReqStoreCode());
+                        new ToBeSenderDetails().StartActivity(context,list.get(position).getCaseNo(),list.get(position).getReqStoreCode(),list.get(position).getReqStoreDescription());
 
                     }
                 });
@@ -105,26 +105,26 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if(StatusInitiated.equals("Yes")&&StatusAccept.equals("No")&&StatusSto.equals("No")&&StatusGrn.equals("No"))
                 {
                     Case0(position,holder);
-                    ((Holder)holder).Status_case.setText("Pending");
-                    ((Holder)holder).Status_case.setTextColor(Color.parseColor("#ff7e00"));
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setText("Pending");
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setTextColor(Color.parseColor("#ff7e00"));
 
                 }else if(StatusInitiated.equals("Yes")&&StatusAccept.equals("Yes")&&StatusSto.equals("No")&&StatusGrn.equals("No"))
                 {
                     Case1(position,holder);
-                    ((Holder)holder).Status_case.setText("Pending");
-                    ((Holder)holder).Status_case.setTextColor(Color.parseColor("#ff7e00"));
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setText("Pending");
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setTextColor(Color.parseColor("#ff7e00"));
 
                 }else if(StatusInitiated.equals("Yes")&&StatusAccept.equals("Yes")&&StatusSto.equals("Yes")&&StatusGrn.equals("No"))
                 {
                     Case2(position,holder);
-                    ((Holder)holder).Status_case.setText("Pending");
-                    ((Holder)holder).Status_case.setTextColor(Color.parseColor("#ff7e00"));
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setText("Pending");
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setTextColor(Color.parseColor("#ff7e00"));
 
                 }else if(StatusInitiated.equals("Yes")&&StatusAccept.equals("Yes")&&StatusSto.equals("Yes")&&StatusGrn.equals("Yes"))
                 {
                     Case3(position,holder);
-                    ((Holder)holder).Status_case.setText("Completed");
-                    ((Holder)holder).Status_case.setTextColor(Color.parseColor("#70e503"));
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setText("Completed");
+                    ((ToBeSenderAdapter.Holder)holder).Status_case.setTextColor(Color.parseColor("#70e503"));
                 }
             }
         }
@@ -133,7 +133,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
         if(Toggle[position])
         {
-            ((Holder) holder).Status_layout.removeAllViewsInLayout();
+            ((ToBeSenderAdapter.Holder) holder).Status_layout.removeAllViewsInLayout();
             Log.e("TAG", "HandlePositionOnSet: get view... "+position );
             LayoutInflater layoutInflater1 = (LayoutInflater) context.getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -197,11 +197,11 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     Status_date.setText(grnStatusList.get(position).get(0).getGrnDate());
                 }
             }
-            ((Holder) holder).Status_layout.addView(view);
-            ((Holder)holder).Status_layout.setVisibility(View.VISIBLE);
+            ((ToBeSenderAdapter.Holder) holder).Status_layout.addView(view);
+            ((ToBeSenderAdapter.Holder)holder).Status_layout.setVisibility(View.VISIBLE);
         }else
         {
-            ((Holder)holder).Status_layout.setVisibility(View.GONE);
+            ((ToBeSenderAdapter.Holder)holder).Status_layout.setVisibility(View.GONE);
         }
     }
 
@@ -222,7 +222,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         SenderAcpt.setOnClickListener(this);
         STO.setOnClickListener(this);
         GRN.setOnClickListener(this);
-        ((Holder) holder).ProcessStatus.addView(view);
+        ((ToBeSenderAdapter.Holder) holder).ProcessStatus.addView(view);
     }
 
     private void Case2(final int position, RecyclerView.ViewHolder holder) {
@@ -242,7 +242,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         SenderAcpt.setOnClickListener(this);
         STO.setOnClickListener(this);
         GRN.setOnClickListener(this);
-        ((Holder) holder).ProcessStatus.addView(view);
+        ((ToBeSenderAdapter.Holder) holder).ProcessStatus.addView(view);
     }
 
     private void Case3(final int position, RecyclerView.ViewHolder holder) {
@@ -262,8 +262,8 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         SenderAcpt.setOnClickListener(this);
         STO.setOnClickListener(this);
         GRN.setOnClickListener(this);
-        ((Holder) holder).Status_case.setText("Completed");
-        ((Holder) holder).ProcessStatus.addView(view);
+        ((ToBeSenderAdapter.Holder) holder).Status_case.setText("Completed");
+        ((ToBeSenderAdapter.Holder) holder).ProcessStatus.addView(view);
     }
 
     private void Case0(final int position, RecyclerView.ViewHolder holder) {
@@ -283,7 +283,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         SenderAcpt.setOnClickListener(this);
         STO.setOnClickListener(this);
         GRN.setOnClickListener(this);
-        ((Holder) holder).ProcessStatus.addView(view);
+        ((ToBeSenderAdapter.Holder) holder).ProcessStatus.addView(view);
 
     }
 
@@ -309,10 +309,11 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 {
                     trackId[dublicatePosition]=1;
                     int caseNo=list.get(dublicatePosition).getCaseNo();
+                    String recSenderCode = list.get(dublicatePosition).getReqStoreCode();
                     String actionStatus ="RECVR_REQ";
                     if(initiatedStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1);
+                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1,recSenderCode);
                         Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -329,11 +330,12 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if(list.get(dublicatePosition).getStatusAccept().equals("Yes"))
                 {
                     trackId[dublicatePosition]=2;
+                    String recSenderCode = list.get(dublicatePosition).getReqStoreCode();
                     int caseNo = list.get(dublicatePosition).getCaseNo();
                     String actionStatus ="SENDER_ACPT";
                     if(senderAcpStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2);
+                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2,recSenderCode);
                         Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -349,9 +351,11 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 {
                     trackId[dublicatePosition]=3;
                     int caseNo1 = list.get(dublicatePosition).getCaseNo();
+                    String recSenderCode = list.get(dublicatePosition).getReqStoreCode();
+
                     if(stoStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo1,"",dublicatePosition,3);
+                        onclickStatus.Onclick(caseNo1,"",dublicatePosition,3,recSenderCode);
                         Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -367,9 +371,11 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                {
                     trackId[dublicatePosition]=4;
                     int caseNo2 = list.get(dublicatePosition).getCaseNo();
-                    if(grnStatusList.get(dublicatePosition).isEmpty())
+                    String recSenderCode = list.get(dublicatePosition).getReqStoreCode();
+
+                   if(grnStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo2,"",dublicatePosition,4);
+                        onclickStatus.Onclick(caseNo2,"",dublicatePosition,4,recSenderCode);
                         Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -377,8 +383,6 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         notifyDataSetChanged();
                     }
                 }
-
-
                 Log.e("TAG", "onClick: GRN  four ------- "+dublicatePosition );
                 break;
 

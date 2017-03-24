@@ -40,21 +40,21 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_receiver_details_child1, parent, false);
-        return new Holder(v);
+        return new ReceiverStatusDetailsAdapter.Holder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if(holder instanceof Holder) {
+        if(holder instanceof ReceiverStatusDetailsAdapter.Holder) {
             if(position < rec_status_dtllist.size()) {
 
                 Log.e(TAG,"position"+position);
                 HandlePositionOnSet(holder,position);
                // HandlePositionOnSet(holder,position);
-                ((Holder)holder).OptionLevel.setText(rec_status_dtllist.get(position).getLevel());
-                ((Holder)holder).ShortQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyRequested()));
-                ((Holder)holder).AvlQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyAcpt()));
-                ((Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
+                ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setText(rec_status_dtllist.get(position).getLevel());
+                ((ReceiverStatusDetailsAdapter.Holder)holder).ShortQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyRequested()));
+                ((ReceiverStatusDetailsAdapter.Holder)holder).AvlQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyAcpt()));
+                ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
@@ -81,8 +81,8 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
                     }
                 });
 
-               ReceiverStatusSubChildAdapter detailsHeaderChildAdapter=new ReceiverStatusSubChildAdapter(ToBeSenderDetails.StatusHashmapChildList,context,position,ReceiverStatusDetailsAdapter.this);
-                ((Holder)holder).receiverdetails_SubChild.setAdapter(detailsHeaderChildAdapter);
+               ReceiverStatusSubChildAdapter detailsHeaderChildAdapter=new ReceiverStatusSubChildAdapter(ToBeReceiverDetails.Rec_StatusHashmapChildList,context,position,ReceiverStatusDetailsAdapter.this);
+                ((ReceiverStatusDetailsAdapter.Holder)holder).receiverdetails_SubChild.setAdapter(detailsHeaderChildAdapter);
 
             }
         }
@@ -90,11 +90,11 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
         if(Rec_Toggle[position])
         {
-            ((Holder)holder).lin_receiver_dtlsubchild.setVisibility(View.VISIBLE);
+            ((ReceiverStatusDetailsAdapter.Holder)holder).lin_receiver_dtlsubchild.setVisibility(View.VISIBLE);
 
         }else
         {
-            ((Holder)holder).lin_receiver_dtlsubchild.setVisibility(View.GONE);
+            ((ReceiverStatusDetailsAdapter.Holder)holder).lin_receiver_dtlsubchild.setVisibility(View.GONE);
 
         }
 

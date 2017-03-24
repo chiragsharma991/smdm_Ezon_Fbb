@@ -53,20 +53,20 @@ dependencies {
     compile project(':gravitysnaphelper')
 
     compile 'com.github.bumptech.glide:glide:3.5.2'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
-    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:support-v4:25.1.1'
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile 'com.thefinestartist:ytpa:1.2.1'
     compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     compile 'com.google.zxing:core:3.2.1'
-    compile 'com.android.support:cardview-v7:25.1.0'
+    compile 'com.android.support:cardview-v7:25.1.1'
     compile 'info.hoang8f:android-segmented:1.0.6'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.daprlabs.aaron:cardstack:0.3.0'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
-    compile 'com.google.android.gms:play-services-appindexing:9.6.1'
-    compile 'com.google.firebase:firebase-core:9.6.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
+//    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
+   // compile 'com.google.firebase:firebase-core:10.2.0'
     testCompile 'junit:junit:4.12'
 }
 

@@ -139,8 +139,6 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 visual_report_progressBar.setVisibility(View.GONE);
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
-
-
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
 

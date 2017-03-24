@@ -60,9 +60,10 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private int caseNo=0;
     private StatusModel statusModel;
     private StatusSenderDetailsAdapter statusSenderDetails;
-    private TextView storeCode,storeCase;
+    private TextView storeCode,storeCase,storedesc;
     public static HashMap<Integer, ArrayList<StatusModel>> StatusHashmapChildList;
     private String option="";
+    private String recache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
         //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
+        recache ="true";
         StatusDetailsList = new ArrayList<StatusModel>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -96,8 +98,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     private void requestStatusReceiversDetails()
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo;
-
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&recache="+recache;
 
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -202,12 +203,15 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         recyclerView = (RecyclerView) findViewById(R.id.statusDetail_list);
         storeCase = (TextView) findViewById(R.id.status_detailStoreCase);
         storeCode = (TextView) findViewById(R.id.status_detailStoreCode);
+        storedesc = (TextView) findViewById(R.id.detailStoreDesc);
         status_senderdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_senderdetails_imageBtnBack);
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
         String data2 = getIntent().getExtras().getString("CODE");
+        String data3 = getIntent().getExtras().getString("DESC");
         storeCase.setText(" " +"Case#"+data1);
         storeCode.setText(data2);
+        storedesc.setText(" "+data3);
         caseNo=data1;
 
     }
@@ -235,7 +239,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     private void requestStatusReceiversSubDetails(final int position)
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20")+"&recache="+recache;
 
         Log.e(TAG, "SubDetails Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -322,10 +326,11 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     }
 
-    public void StartActivity(Context context, int data1 ,String data2) {
+    public void StartActivity(Context context, int data1 ,String data2,String data3) {
         Intent intent = new Intent(context, ToBeSenderDetails.class);
         intent.putExtra("CASE",data1);
         intent.putExtra("CODE",data2);
+        intent.putExtra("DESC",data3);
         context.startActivity(intent);
     }
 

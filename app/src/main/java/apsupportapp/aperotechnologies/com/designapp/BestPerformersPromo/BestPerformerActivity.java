@@ -58,6 +58,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
     String TAG = "BestPerformersActivity";
+
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
