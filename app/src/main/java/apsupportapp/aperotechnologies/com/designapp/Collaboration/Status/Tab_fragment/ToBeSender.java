@@ -72,7 +72,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private RecyclerView recyclerView;
     private HashMap<Integer,ArrayList<StatusModel>>initiatedStatusList,senderAcpStatusList,stoStatusList,grnStatusList;
     private ToBeSenderAdapter SenderAdapter;
-
+    private String recache;
 
     public ToBeSender() {
         // Required empty public constructor
@@ -104,6 +104,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         view = (ViewGroup) inflater.inflate(R.layout.fragment_to_be_received, container, false);
         SenderSummaryList = new ArrayList<>();
         gson = new Gson();
+        recache = "true";
         Sender_checkNetwkStatus = false;
         initialise();
         MainMethod();
@@ -141,7 +142,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private void requestSenderCaseStatusSummary()
     {
 //
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit + "&recache="+recache;
         Log.e(TAG, "Status Sender Summary Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -286,21 +287,31 @@ public class ToBeSender extends Fragment implements OnclickStatus {
 
     private void requestSenderCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position,final int Case)
     {
-        String url;
-        if(Case==3)
+        String url = "";
+        if(Case==1)
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/initiated/" + userId + "?offset=" + offsetvalue+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
 
-        }else if(Case==4)
+
+        }else if(Case == 2)
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
-
-        }else {
-             url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/action/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/senderacpt/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
 
         }
 
-        Log.e(TAG, "SenderCaseStatus Url" + "" + url);
+        else if(Case == 3 ){
+
+
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+
+        }
+        else if(Case==4)
+        {
+
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+
+        }
+       Log.e(TAG, "SenderCaseStatus Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -419,25 +430,30 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     }
 
     @Override
-    public void Onclick(int caseNo, String actionStatus, int dublicatePosition ,int Case) {
+    public void Onclick(int caseNo, String actionStatus, int dublicatePosition ,int Case,String sender_store_code) {
 // Case No. is from api and Case is for fill Arraylist in between 4 button
 
-        String senderStoreCode=userId;
+        String senderStoreCode=sender_store_code;
         StatusDocList=new ArrayList<StatusModel>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading....");
 
             // this case is for last two sto and grn
 
-            if(Case==3)
+            if(Case == 1)
             {
                 requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
 
-            }else if (Case==4)
+            }
+            if(Case == 2)
             {
                 requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
 
-            }else
+            }else if (Case==3)
+            {
+                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
+
+            }else if(Case == 4)
             {
                 requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
 

@@ -309,10 +309,11 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 {
                     trackId[dublicatePosition]=1;
                     int caseNo=list.get(dublicatePosition).getCaseNo();
+                    String recSenderCode = list.get(dublicatePosition).getReqStoreCode();
                     String actionStatus ="RECVR_REQ";
                     if(initiatedStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1);
+                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1,recSenderCode);
                         Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -329,11 +330,12 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if(list.get(dublicatePosition).getStatusAccept().equals("Yes"))
                 {
                     trackId[dublicatePosition]=2;
+                    String recSenderCode = list.get(dublicatePosition).getReqStoreCode();
                     int caseNo = list.get(dublicatePosition).getCaseNo();
                     String actionStatus ="SENDER_ACPT";
                     if(senderAcpStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2);
+                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2,recSenderCode);
                         Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -349,9 +351,11 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 {
                     trackId[dublicatePosition]=3;
                     int caseNo1 = list.get(dublicatePosition).getCaseNo();
+                    String recSenderCode = list.get(dublicatePosition).getReqStoreCode();
+
                     if(stoStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo1,"",dublicatePosition,3);
+                        onclickStatus.Onclick(caseNo1,"",dublicatePosition,3,recSenderCode);
                         Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -367,9 +371,11 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                {
                     trackId[dublicatePosition]=4;
                     int caseNo2 = list.get(dublicatePosition).getCaseNo();
-                    if(grnStatusList.get(dublicatePosition).isEmpty())
+                    String recSenderCode = list.get(dublicatePosition).getReqStoreCode();
+
+                   if(grnStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo2,"",dublicatePosition,4);
+                        onclickStatus.Onclick(caseNo2,"",dublicatePosition,4,recSenderCode);
                         Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -377,8 +383,6 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         notifyDataSetChanged();
                     }
                 }
-
-
                 Log.e("TAG", "onClick: GRN  four ------- "+dublicatePosition );
                 break;
 

@@ -22,6 +22,25 @@ public class StatusModel
     String stoDate;
     String grnDate;
 
+    public String getSenderStoreCode() {
+        return senderStoreCode;
+    }
+
+    public void setSenderStoreCode(String senderStoreCode) {
+        this.senderStoreCode = senderStoreCode;
+    }
+
+    public String getSenderStoreDesc() {
+        return senderStoreDesc;
+    }
+
+    public void setSenderStoreDesc(String senderStoreDesc) {
+        this.senderStoreDesc = senderStoreDesc;
+    }
+
+    String senderStoreCode;
+    String senderStoreDesc;
+
 
 
     public double getStkOnhandQtyRequested() {

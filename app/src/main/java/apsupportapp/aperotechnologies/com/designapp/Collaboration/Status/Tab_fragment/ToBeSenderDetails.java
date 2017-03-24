@@ -63,6 +63,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private TextView storeCode,storeCase;
     public static HashMap<Integer, ArrayList<StatusModel>> StatusHashmapChildList;
     private String option="";
+    private String recache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
         //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
+        recache ="true";
         StatusDetailsList = new ArrayList<StatusModel>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -96,8 +98,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     private void requestStatusReceiversDetails()
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo;
-
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&recache="+recache;
 
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -235,7 +236,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     private void requestStatusReceiversSubDetails(final int position)
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20")+"&recache="+recache;
 
         Log.e(TAG, "SubDetails Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

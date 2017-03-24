@@ -81,7 +81,7 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
                     }
                 });
 
-               ReceiverStatusSubChildAdapter detailsHeaderChildAdapter=new ReceiverStatusSubChildAdapter(ToBeSenderDetails.StatusHashmapChildList,context,position,ReceiverStatusDetailsAdapter.this);
+               ReceiverStatusSubChildAdapter detailsHeaderChildAdapter=new ReceiverStatusSubChildAdapter(ToBeReceiverDetails.Rec_StatusHashmapChildList,context,position,ReceiverStatusDetailsAdapter.this);
                 ((ReceiverStatusDetailsAdapter.Holder)holder).receiverdetails_SubChild.setAdapter(detailsHeaderChildAdapter);
 
             }

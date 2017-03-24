@@ -224,7 +224,8 @@ public class SalesFilterActivity extends Activity {
         btnS_Done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 StringBuilder build = new StringBuilder();
 
                 if (SalesFilterExpandableList.text1.length() != 0) {

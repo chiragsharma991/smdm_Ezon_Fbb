@@ -54,7 +54,7 @@
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/common_back_icon"
-                            android:clickable="false" />
+                            android:clickable="false"/>
 
                     </RelativeLayout>
 
@@ -67,87 +67,87 @@
                         android:layout_toRightOf="@+id/status_receiverdetails_imageBtnBack"
                         android:text="Details"
                         android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_header_title_large" />
-
+                        android:textSize="@dimen/smdm_header_title_large"/>
 
 
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
 
-
-
-
-
         </LinearLayout>
-
-
-
-
-
-
-
 
 
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/listviewLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linear_head"
-        android:id="@+id/listviewLayout"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linear_head">
+
         <RelativeLayout
+            android:id="@+id/storeDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/storeDesc"
             android:padding="5dp"
             >
-            <TextView
-                android:layout_width="wrap_content"
+
+            <RelativeLayout
+                android:id="@+id/rel_CaseLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rec_status_detailStoreCase"
-                android:textColor="@color/bg_store_code_text"
-                android:layout_alignParentLeft="true"
-                android:textSize="@dimen/stock_textsize_Title"
-                android:textStyle="bold"
-                android:text="Case :"
+                android:layout_toLeftOf="@+id/rec_status_detailStoreCode">
 
-                />
+                <TextView
+                    android:id="@+id/rec_status_detailStoreCase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Case :"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/stock_textsize_Title"
+                    android:textStyle="bold"
+
+                    />
+            </RelativeLayout>
 
             <TextView
+
+                android:id="@+id/rec_status_detailStoreCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/rec_status_detailStoreDesc"
-                android:id="@+id/rec_status_detailStoreCode"
+                android:text="Store Code "
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/stock_textsize_Title"
                 android:textStyle="bold"
-                android:text="Store Code "
 
                 />
+
             <TextView
+                android:id="@+id/rec_status_detailStoreDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/rec_status_detailStoreDesc"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="2dp"
+                android:text="Store Description"
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/stock_textsize_Title"
                 android:textStyle="bold"
-                android:text="Store Description"
 
                 />
 
 
         </RelativeLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rec_statusDetail_list"
-            android:scrollbars="vertical"
-            android:layout_below="@+id/storeDesc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/storeDesc"
+            android:scrollbars="vertical"
             />
 
     </RelativeLayout>

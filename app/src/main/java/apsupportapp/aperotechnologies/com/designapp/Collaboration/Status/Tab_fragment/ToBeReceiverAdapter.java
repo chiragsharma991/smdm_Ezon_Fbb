@@ -84,8 +84,8 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 HandlePositionOnSet(holder,position);
                 ((ToBeReceiverAdapter.Holder)holder).Rec_Status_caseNumber.setText(""+"Case#"+receiver_list.get(position).getCaseNo());
-                ((ToBeReceiverAdapter.Holder)holder).Rec_Status_storeCode.setText(receiver_list.get(position).getReqStoreCode());
-
+                ((ToBeReceiverAdapter.Holder)holder).Rec_Status_storeCode.setText(receiver_list.get(position).getSenderStoreCode());
+                ((ToBeReceiverAdapter.Holder)holder).Rec_Status_storedesc.setText(receiver_list.get(position).getSenderStoreDesc());
                 String Rec_StatusInitiated=receiver_list.get(position).getStatusInitiated();
                 String Rec_StatusAccept=receiver_list.get(position).getStatusAccept();
                 String Rec_StatusSto=receiver_list.get(position).getStatusSto();
@@ -95,11 +95,10 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     @Override
                     public void onClick(View view) {
                         Log.e( "onClick: on Receiver Linear layout >>>>>>>> " ,"");
-                        new ToBeReceiverDetails().StartActivity(context,receiver_list.get(position).getCaseNo(),receiver_list.get(position).getReqStoreCode());
+                        new ToBeReceiverDetails().StartActivity(context,receiver_list.get(position).getCaseNo(),receiver_list.get(position).getSenderStoreCode(),receiver_list.get(position).getSenderStoreDesc());
 
                     }
                 });
-
 
                 if(Rec_StatusInitiated.equals("Yes") && Rec_StatusAccept.equals("No") && Rec_StatusSto.equals("No") && Rec_StatusGrn.equals("No"))
                 {
@@ -307,10 +306,11 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 {
                     receiver_trackId[dublicatePosition]=1;
                     int caseNo=receiver_list.get(dublicatePosition).getCaseNo();
+                    String senderStoreCode = receiver_list.get(dublicatePosition).getSenderStoreCode();
                     String actionStatus ="RECVR_REQ";
                     if(receiver_initiatedStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1);
+                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1,senderStoreCode);
                         Receiver_Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -328,10 +328,12 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 {
                     receiver_trackId[dublicatePosition]=2;
                     int caseNo = receiver_list.get(dublicatePosition).getCaseNo();
+                    String senderStoreCode = receiver_list.get(dublicatePosition).getSenderStoreCode();
+
                     String actionStatus ="SENDER_ACPT";
                     if(receiver_senderAcpStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2);
+                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2,senderStoreCode);
                         Receiver_Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -347,9 +349,11 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 {
                     receiver_trackId[dublicatePosition]=3;
                     int caseNo1 = receiver_list.get(dublicatePosition).getCaseNo();
+                    String senderStoreCode = receiver_list.get(dublicatePosition).getSenderStoreCode();
+
                     if(receiver_stoStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo1,"",dublicatePosition,3);
+                        onclickStatus.Onclick(caseNo1,"",dublicatePosition,3,senderStoreCode);
                         Receiver_Toggle[dublicatePosition]=true;
                     }else
                     {
@@ -365,9 +369,11 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 {
                     receiver_trackId[dublicatePosition]=4;
                     int caseNo2 = receiver_list.get(dublicatePosition).getCaseNo();
+                    String senderStoreCode = receiver_list.get(dublicatePosition).getSenderStoreCode();
+
                     if(receiver_grnStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo2,"",dublicatePosition,4);
+                        onclickStatus.Onclick(caseNo2,"",dublicatePosition,4,senderStoreCode);
                         Receiver_Toggle[dublicatePosition]=true;
                     }else
                     {

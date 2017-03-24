@@ -70,7 +70,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     private RecyclerView recyclerView_receiver;
     private HashMap<Integer,ArrayList<StatusModel>> rec_initiatedStatusList,rec_senderAcpStatusList,rec_stoStatusList,rec_grnStatusList;
     private ToBeReceiverAdapter ReceiverAdapter;
-
+    private String recache;
 
     public ToBeReceiver() {
         // Required empty public constructor
@@ -103,6 +103,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         view = (ViewGroup) inflater.inflate(R.layout.fragment_to_be_transfer, container, false);
         ReceiverSummaryList = new ArrayList<>();
         gson = new Gson();
+        recache = "true";
         Receiver_checkNetwkstatus = false;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         initialise();
@@ -204,27 +205,34 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     }
 
     @Override
-    public void Onclick(int caseNo, String actionStatus, int dublicatePosition, int Case) {
-        String rec_senderStoreCode=userId;
+    public void Onclick(int caseNo, String actionStatus, int dublicatePosition, int Case,String sender_storcode) {
+        String rec_senderStoreCode= sender_storcode;
         ReceiverStatusList=new ArrayList<StatusModel>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading....");
 
             // this case is for last two sto and grn
 
-            if(Case==3)
-            {
-                requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
-
-            }else if (Case==4)
-            {
-                requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
-
-            }else
+            if(Case == 1)
             {
                 requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
 
             }
+            if(Case == 2)
+            {
+                requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
+
+            }else if (Case==3)
+            {
+                requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
+
+            }else if(Case == 4)
+            {
+                requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
+
+            }
+
+
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
@@ -238,12 +246,8 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     //---------------------------- API Declaration --------------------------//
     private void requestReceiverCaseStatusSummary()
     {
-       // String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
-
-      //  String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
-      //  Log.e(TAG, "Status Receiver Summary Url" + "" + receiver_case_url);
-        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
-        Log.e(TAG, "Status Sender Summary Url" + "" + receiver_case_url);
+        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache;
+        Log.e(TAG, "Status Receiver Summary Url" + "" + receiver_case_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -326,31 +330,36 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     }
     private void requestReceiverCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position,final int Case)
     {
-        String url;
-        if(Case==3)
+        String url = "";
+        if(Case==1)
         {
-           // url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/initiated/" + userId + "?offset=" + offsetval+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode +"&recache="+recache;
 
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/sto/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
 
-        }else if(Case==4)
+        }else if(Case == 2)
         {
-          //  url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
-
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode;
-
-        }else {
-          //  url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/action/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
-
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/action/" + userId + "?offset=" + offsetval+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/senderacpt/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
 
         }
 
-        Log.e(TAG, "SenderCaseStatus Url" + "" + url);
+        else if(Case == 3 ){
+
+
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/sto/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+
+        }
+        else if(Case==4)
+        {
+
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+
+        }
+        Log.e(TAG, "ReceiverCaseStatus Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONArray response)
+                    {
                         Log.e(TAG, "ReceiverCaseStatus api response : " + " " + response);
                         Log.e(TAG, "ReceiverCaseStatus api total length" + "" + response.length());
 

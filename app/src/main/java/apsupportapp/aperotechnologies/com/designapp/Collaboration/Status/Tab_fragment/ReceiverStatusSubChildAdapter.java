@@ -62,9 +62,9 @@ public class ReceiverStatusSubChildAdapter extends RecyclerView.Adapter<Recycler
 
         public Holder(View itemView) {
             super(itemView);
-            Rec_StatusSubchild_size=(TextView)itemView.findViewById(R.id.statusSubchild_size);
-            Rec_StatusSubchild_shortQty=(TextView)itemView.findViewById(R.id.statusSubchild_reqQty);
-            Rec_StatusSubchild_avlQty=(TextView)itemView.findViewById(R.id.statusSubchild_scanQty);
+            Rec_StatusSubchild_size=(TextView)itemView.findViewById(R.id.status_receiver_subdetail_size);
+            Rec_StatusSubchild_shortQty=(TextView)itemView.findViewById(R.id.status_receiver_subdetail_shortQtyVal);
+            Rec_StatusSubchild_avlQty=(TextView)itemView.findViewById(R.id.status_receiver_subdetail_avlQtyVal);
 
 
         }
