@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,7 +77,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private  int[] scanQty;
     private int ScanCount;
     ArrayList<Integer> childlist=new ArrayList<Integer>();
-
+    private Button btn_Submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -338,9 +339,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         tr_imageBtnBack = (RelativeLayout) findViewById(R.id.tr_details_imageBtnBack);
         txt_caseNo = (TextView) findViewById(R.id.txt_caseNo);
         txt_valtotalreqty = (TextView) findViewById(R.id.txt_valtotalreqty);
+        btn_Submit = (Button)findViewById(R.id.btn_trdetailSubmit);
         txt_caseNo.setText(caseNo);
         txt_valtotalreqty.setText("" + Math.round(data2));
         tr_imageBtnBack.setOnClickListener(this);
+        btn_Submit.setOnClickListener(this);
     }
 
     public void StartActivity(String CaseNo, double reqQty, Context context) {
@@ -370,6 +373,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             case R.id.tr_details_imageBtnBack:
                 onBackPressed();
                 break;
+            case R.id.btn_trdetailSubmit:
+
         }
     }
 

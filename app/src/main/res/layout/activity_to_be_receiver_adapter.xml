@@ -2,8 +2,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
-    >
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linear_receiver"
@@ -18,23 +17,20 @@
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
             app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true"
-            >
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
                 android:background="@android:color/white"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/rel_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    >
+                    android:padding="3dp">
 
                     <TextView
                         android:id="@+id/receiver_status_caseNumber"
@@ -44,8 +40,7 @@
                         android:text="C0001"
                         android:textStyle="bold"
                         android:textColor="@color/bg_store_code_text"
-                        android:textSize="@dimen/collaboration_stock_title"
-                        />
+                        android:textSize="@dimen/collaboration_stock_title"/>
 
                     <TextView
                         android:id="@+id/receiver_status_case"
@@ -53,8 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:text="Pending"
-                        android:textSize="@dimen/collaboration_stock_text"
-                        />
+                        android:textSize="@dimen/collaboration_stock_text"/>
 
 
                 </RelativeLayout>
@@ -65,8 +59,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
-                    android:background="@color/smdm_border"
-                    >
+                    android:background="@color/smdm_border">
 
                 </View>
 
@@ -112,15 +105,13 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:padding="3dp"
-                    android:weightSum="3"
-                    >
+                    android:weightSum="3">
 
                     <LinearLayout
                         android:id="@+id/lin_progressView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        >
+                        android:orientation="horizontal">
 
 
                     </LinearLayout>
@@ -134,8 +125,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/border2"
                     android:padding="4dp"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
 
                 </RelativeLayout>
 
@@ -143,7 +133,6 @@
             </LinearLayout>
 
             <!--ending border of card layout-->
-
 
         </android.support.v7.widget.CardView>
     </LinearLayout>

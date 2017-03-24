@@ -22,6 +22,16 @@ public class StatusModel
     String stoDate;
     String grnDate;
 
+    public String getReqStoreDescription() {
+        return reqStoreDescription;
+    }
+
+    public void setReqStoreDescription(String reqStoreDescription) {
+        this.reqStoreDescription = reqStoreDescription;
+    }
+
+    String reqStoreDescription;
+
     public String getSenderStoreCode() {
         return senderStoreCode;
     }

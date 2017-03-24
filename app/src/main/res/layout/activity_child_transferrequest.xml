@@ -157,7 +157,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Short Qty"
+                            android:text="Req Qty"
                             android:gravity="left"
                             android:textSize="@dimen/collaboration_stock_text"
                             android:textColor="@color/txt_color"

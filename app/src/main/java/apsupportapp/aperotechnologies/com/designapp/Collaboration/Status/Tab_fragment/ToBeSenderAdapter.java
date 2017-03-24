@@ -81,7 +81,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 HandlePositionOnSet(holder,position);
                 ((ToBeSenderAdapter.Holder)holder).Status_caseNumber.setText(""+"Case#"+list.get(position).getCaseNo());
                 ((ToBeSenderAdapter.Holder)holder).Status_storeCode.setText(list.get(position).getReqStoreCode());
-//                ((ToBeSenderAdapter.Holder)holder).Status_storedesc.setText(list.get(position).getCaseNo());
+                ((ToBeSenderAdapter.Holder)holder).Status_storedesc.setText(list.get(position).getReqStoreDescription());
 //                ((ToBeSenderAdapter.Holder)holder).Status_docNumber.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_qty.setText(list.get(position).getCaseNo());
 //                ((ToBeSenderAdapter.Holder)holder).Status_date.setText(list.get(position).getCaseNo());
@@ -97,7 +97,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     @Override
                     public void onClick(View view) {
                         Log.e("TAG", "onClick: on Linear layout >>>>>>>> " );
-                        new ToBeSenderDetails().StartActivity(context,list.get(position).getCaseNo(),list.get(position).getReqStoreCode());
+                        new ToBeSenderDetails().StartActivity(context,list.get(position).getCaseNo(),list.get(position).getReqStoreCode(),list.get(position).getReqStoreDescription());
 
                     }
                 });

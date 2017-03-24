@@ -86,7 +86,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store Description"
+                    android:hint="Store Description"
                     android:textStyle="bold"
                     android:textSize="@dimen/collaboration_stock_text"
                     android:layout_marginLeft="5dp"
