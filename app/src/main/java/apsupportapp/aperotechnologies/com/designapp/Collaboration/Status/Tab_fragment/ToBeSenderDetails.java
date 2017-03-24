@@ -60,7 +60,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private int caseNo=0;
     private StatusModel statusModel;
     private StatusSenderDetailsAdapter statusSenderDetails;
-    private TextView storeCode,storeCase,storedesc;
+    private TextView storeCode,storeCase,detailStoreDesc;
     public static HashMap<Integer, ArrayList<StatusModel>> StatusHashmapChildList;
     private String option="";
     private String recache;
@@ -203,21 +203,26 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         recyclerView = (RecyclerView) findViewById(R.id.statusDetail_list);
         storeCase = (TextView) findViewById(R.id.status_detailStoreCase);
         storeCode = (TextView) findViewById(R.id.status_detailStoreCode);
-        storedesc = (TextView) findViewById(R.id.detailStoreDesc);
+        detailStoreDesc = (TextView)findViewById(R.id.detailStoreDesc);
         status_senderdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_senderdetails_imageBtnBack);
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
         String data2 = getIntent().getExtras().getString("CODE");
-        String data3 = getIntent().getExtras().getString("DESC");
+        String str_desc = getIntent().getExtras().getString("storeDesc");
         storeCase.setText(" " +"Case#"+data1);
         storeCode.setText(data2);
-        storedesc.setText(" "+data3);
+        detailStoreDesc.setText(str_desc);
         caseNo=data1;
 
     }
 
-    public void StartActivity(Context context) {
-        context.startActivity(new Intent(context, ToBeSenderDetails.class));
+    public void StartActivity(Context context, int caseNo, String reqStoreCode, String reqStoreDescription) {
+
+        Intent intent = new Intent(context, ToBeSenderDetails.class);
+        intent.putExtra("CASE",caseNo);
+        intent.putExtra("CODE",reqStoreCode);
+        intent.putExtra("storeDesc",reqStoreDescription);
+        context.startActivity(intent);
     }
 
 
@@ -326,13 +331,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     }
 
-    public void StartActivity(Context context, int data1 ,String data2,String data3) {
-        Intent intent = new Intent(context, ToBeSenderDetails.class);
-        intent.putExtra("CASE",data1);
-        intent.putExtra("CODE",data2);
-        intent.putExtra("DESC",data3);
-        context.startActivity(intent);
-    }
 
     @Override
     public void onClick(View v) {

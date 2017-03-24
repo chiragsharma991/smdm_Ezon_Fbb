@@ -27,12 +27,10 @@ import apsupportapp.aperotechnologies.com.designapp.R;
     private static boolean check=false;
 
 
-    public StockPullAdapter(ArrayList<ToDo_Modal> list, Context context) {
+    public StockPullAdapter(ArrayList<ToDo_Modal> list, Context context)
+    {
         this.list=list;
         this.context=context;//
-
-
-
     }
 
     @Override
@@ -54,19 +52,14 @@ import apsupportapp.aperotechnologies.com.designapp.R;
                 ((StockPullAdapter.Holder)holder).SOH_Requested.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((StockPullAdapter.Holder)holder).QTY_Avi.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((StockPullAdapter.Holder)holder).NumberOfOption.setText(""+list.get(position).getNoOfOptions());
-                ((StockPullAdapter.Holder)holder).SOH.setText(""+list.get(position).getStkOnhandQty());
-                ((StockPullAdapter.Holder)holder).GIT_Qty.setText(""+list.get(position).getStkGitQty());
+                ((StockPullAdapter.Holder)holder).SOH.setText(""+Math.round(list.get(position).getStkOnhandQty()));
+                ((StockPullAdapter.Holder)holder).GIT_Qty.setText(""+Math.round(list.get(position).getStkGitQty()));
                 ((StockPullAdapter.Holder)holder).FWD.setText(""+String.format("%.1f",list.get(position).getFwdWeekCover()));
                 ((StockPullAdapter.Holder)holder).McCodeDescribtion.setText(list.get(position).getMccodeDesc());
 
-
-
             }
         }
-
-
-
-    }
+  }
 
     @Override
     public int getItemCount() {

@@ -53,7 +53,7 @@ public class TransferRequestAdapter  extends RecyclerView.Adapter<RecyclerView.V
                 ((TransferRequestAdapter.Holder) holder).transferRequest_reqty.setText("" + Math.round(sender_list.get(position).getStkOnhandQtyRequested()));
                 ((TransferRequestAdapter.Holder) holder).transferRequest_avlqty.setText("" + Math.round(sender_list.get(position).getStkQtyAvl()));
                 ((TransferRequestAdapter.Holder) holder).transferRequest_optreq.setText("" + Math.round(sender_list.get(position).getOptionCount()));
-                ((TransferRequestAdapter.Holder) holder).transferRequest_days.setText(sender_list.get(position).getNoOfDays());
+                ((TransferRequestAdapter.Holder) holder).transferRequest_days.setText("No of Days : "+sender_list.get(position).getNoOfDays());
             }
         }
    }

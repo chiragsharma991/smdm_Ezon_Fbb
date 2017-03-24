@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -77,8 +78,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private  int[] scanQty;
     private int ScanCount;
     ArrayList<Integer> childlist=new ArrayList<Integer>();
+    private Button btn_Submit;
     private ProgressBar TransferDetailProcess;
-    String recache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         ScanCount = 0;
         gson = new Gson();
         Sender_DetailsList = new ArrayList<Transfer_Request_Model>();
-        recache = "true";
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -111,7 +112,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestReceiversChildDetails(final int position)
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20")+"&recache="+recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20");
 
         Log.e(TAG, "Sender Details Child Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -154,11 +155,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             Reusable_Functions.hDialog();
                             TransferDetailProcess.setVisibility(View.GONE);
 
+
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
                             TransferDetailProcess.setVisibility(View.GONE);
+                            Reusable_Functions.hDialog();
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -169,8 +171,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-                        Reusable_Functions.hDialog();
                         TransferDetailProcess.setVisibility(View.GONE);
+                        Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
@@ -206,7 +208,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestSenderDetails() {
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&recache="+recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption;
 
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -344,11 +346,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         tr_imageBtnBack = (RelativeLayout) findViewById(R.id.tr_details_imageBtnBack);
         txt_caseNo = (TextView) findViewById(R.id.txt_caseNo);
         txt_valtotalreqty = (TextView) findViewById(R.id.txt_valtotalreqty);
+        btn_Submit = (Button)findViewById(R.id.btn_trdetailSubmit);
         TransferDetailProcess = (ProgressBar)findViewById(R.id.transferDetailProcess);
-
         txt_caseNo.setText("Case#"+caseNo);
         txt_valtotalreqty.setText("" + Math.round(data2));
         tr_imageBtnBack.setOnClickListener(this);
+        btn_Submit.setOnClickListener(this);
     }
 
     public void StartActivity(String CaseNo, double reqQty, Context context) {
@@ -379,6 +382,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             case R.id.tr_details_imageBtnBack:
                 onBackPressed();
                 break;
+            case R.id.btn_trdetailSubmit:
+
         }
     }
 

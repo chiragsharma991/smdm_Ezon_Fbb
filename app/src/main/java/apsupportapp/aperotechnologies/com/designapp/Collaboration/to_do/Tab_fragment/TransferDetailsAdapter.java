@@ -79,13 +79,14 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ((TransferDetailsAdapter.Holder)holder).txt_reqtyval.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((TransferDetailsAdapter.Holder)holder).txt_avlqtyval.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((TransferDetailsAdapter.Holder)holder).txt_sohval.setText(""+Math.round(list.get(position).getStkOnhandQty()));
-                ((TransferDetailsAdapter.Holder)holder).txt_gitval.setText(""+Math.round(list.get(position).getStkGitQty()));
+             //   ((TransferDetailsAdapter.Holder)holder).txt_gitval.setText(""+Math.round(list.get(position).getStkGitQty()));
                 ((TransferDetailsAdapter.Holder)holder).txt_optionval.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
                         if(transferDetailProcess.getVisibility()==View.GONE)
                         {
+
                             Log.e("TAG", "onClick:>>>> "+position );
                             if(Tr_HeaderToggle[position]==true)
                             {
@@ -107,7 +108,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                             }
                         }
-
 
                     }
                 });
@@ -219,11 +219,11 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             txt_reqtyval = (TextView)itemView.findViewById(R.id.txt_reqtyVal);
             txt_avlqtyval = (TextView)itemView.findViewById(R.id.txt_avlqtyVal);
             txt_sohval = (TextView)itemView.findViewById(R.id.txt_sohVal);
-            txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
+          //  txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
             btn_scan = (ImageView) itemView.findViewById(R.id.btn_scan);
             // lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
-           // et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
+            // et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
             recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.details_headerChild);
             SizesLinLayout = (LinearLayout)itemView.findViewById(R.id.detail_size);
 

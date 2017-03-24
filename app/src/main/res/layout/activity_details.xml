@@ -128,7 +128,7 @@
                 android:layout_toLeftOf="@+id/todo_detailStoreAvlQty"
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/collaboration_stock_storecode"
-                android:text="Total Avl Qty : "
+                android:text="Total Avl.Qty : "
                 android:textStyle="bold"
                 />
 

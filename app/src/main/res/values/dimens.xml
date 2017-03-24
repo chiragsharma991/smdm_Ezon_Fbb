@@ -71,13 +71,13 @@
     <dimen name="stock_textsize_large">13sp</dimen>
     <dimen name="stock_store_textsize">11sp</dimen>
     <dimen name="stock_textsize_normal">12sp</dimen>
-    <dimen name="stock_textsize_Title">15sp</dimen>
+    <dimen name="stock_textsize_Title">14sp</dimen>
     <dimen name="stock_status_textsize">10sp</dimen>
 
-    <dimen name="collaboration_stock_title">16sp</dimen>
+    <dimen name="collaboration_stock_title">15sp</dimen>
     <dimen name="collaboration_stock_title_xlarge">17sp</dimen>
     <dimen name="collaboration_stock_text">14sp</dimen>
-    <dimen name="collaboration_stock_storecode">15sp</dimen>
+    <dimen name="collaboration_stock_storecode">14sp</dimen>
 
 
 
