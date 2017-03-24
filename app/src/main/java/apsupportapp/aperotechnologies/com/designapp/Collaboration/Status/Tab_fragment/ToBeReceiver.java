@@ -64,6 +64,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     private String userId;
     private String bearertoken;
     private RequestQueue queue;
+    private boolean Receiver_checkNetwkstatus = false;
     private StatusModel recstatusModel;
     private ArrayList<StatusModel> ReceiverSummaryList,ReceiverStatusList;
     private RecyclerView recyclerView_receiver;
@@ -102,13 +103,24 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         view = (ViewGroup) inflater.inflate(R.layout.fragment_to_be_transfer, container, false);
         ReceiverSummaryList = new ArrayList<>();
         gson = new Gson();
+        Receiver_checkNetwkstatus = false;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         initialise();
         MainMethod();
 
         return view;
+    }
 
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            if (Receiver_checkNetwkstatus) {
+                Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+
+            }
+        }
     }
 
     private void MainMethod() {
@@ -228,6 +240,8 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     {
        // String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
 
+      //  String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
+      //  Log.e(TAG, "Status Receiver Summary Url" + "" + receiver_case_url);
         String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit;
         Log.e(TAG, "Status Sender Summary Url" + "" + receiver_case_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
@@ -235,14 +249,14 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.i(TAG, "Status Sender response : " + " " + response);
-                        Log.i(TAG, "Status Sender length" + "" + response.length());
+                        Log.i(TAG, "Status Receiver response : " + " " + response);
+                        Log.i(TAG, "Status Receiver length" + "" + response.length());
 
                         try
                         {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No data found from TO BE RECEIVED", Toast.LENGTH_SHORT).show();
+                                Receiver_checkNetwkstatus= true;
                                 return;
 
                             } else if (response.length() == limit) {

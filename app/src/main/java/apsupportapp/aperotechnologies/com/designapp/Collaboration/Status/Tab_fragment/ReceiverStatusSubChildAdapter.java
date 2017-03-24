@@ -38,14 +38,14 @@ public class ReceiverStatusSubChildAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_receiver_details_subchild, parent, false);
-        return new ReceiverStatusSubChildAdapter.Holder(v);
+        return new Holder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ReceiverStatusSubChildAdapter.Holder)holder).Rec_StatusSubchild_size.setText(subchild_list.get(Rec_PrePosition).get(position).getLevel());
-        ((ReceiverStatusSubChildAdapter.Holder)holder).Rec_StatusSubchild_shortQty.setText(""+Math.round(subchild_list.get(Rec_PrePosition).get(position).getStkOnhandQtyRequested()));
-        ((ReceiverStatusSubChildAdapter.Holder)holder).Rec_StatusSubchild_avlQty.setText(""+Math.round(subchild_list.get(Rec_PrePosition).get(position).getStkOnhandQtyAcpt()));
+        ((Holder)holder).Rec_StatusSubchild_size.setText(subchild_list.get(Rec_PrePosition).get(position).getLevel());
+        ((Holder)holder).Rec_StatusSubchild_shortQty.setText(""+Math.round(subchild_list.get(Rec_PrePosition).get(position).getStkOnhandQtyRequested()));
+        ((Holder)holder).Rec_StatusSubchild_avlQty.setText(""+Math.round(subchild_list.get(Rec_PrePosition).get(position).getStkOnhandQtyAcpt()));
 
 
     }

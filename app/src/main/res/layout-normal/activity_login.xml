@@ -41,7 +41,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:hint="@string/password"
-        android:inputType="textPassword|textCapCharacters"
+        android:inputType="textPassword"
         android:maxLines="1"
         android:textAllCaps="true"
         android:textColor="#ffffff"

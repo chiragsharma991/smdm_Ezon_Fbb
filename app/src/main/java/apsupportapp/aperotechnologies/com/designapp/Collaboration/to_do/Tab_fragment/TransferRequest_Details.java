@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,7 +77,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private  int[] scanQty;
     private int ScanCount;
     ArrayList<Integer> childlist=new ArrayList<Integer>();
-
+    private ProgressBar TransferDetailProcess;
+    String recache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +90,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         ScanCount = 0;
         gson = new Gson();
         Sender_DetailsList = new ArrayList<Transfer_Request_Model>();
-
+        recache = "true";
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -109,7 +111,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestReceiversChildDetails(final int position)
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20")+"&recache="+recache;
 
         Log.e(TAG, "Sender Details Child Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -122,6 +124,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                TransferDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -149,11 +152,13 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             PutScanQty(SenderChildDetailList,position);
                             transferDetailsAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
+                            TransferDetailProcess.setVisibility(View.GONE);
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
+                            TransferDetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -165,6 +170,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
+                        TransferDetailProcess.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }
@@ -200,7 +206,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestSenderDetails() {
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&recache="+recache;
 
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -239,7 +245,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             MakeChildScanList(Sender_DetailsList);
                             MakeScanList(Sender_DetailsList);
-                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,scanQty,TrchildScanQty);
+                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,scanQty,TrchildScanQty,TransferDetailProcess);
                             MakeHashMap(Sender_DetailsList);
                             // MakeSubChildScanQty(Sender_DetailsList);
 
@@ -338,7 +344,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         tr_imageBtnBack = (RelativeLayout) findViewById(R.id.tr_details_imageBtnBack);
         txt_caseNo = (TextView) findViewById(R.id.txt_caseNo);
         txt_valtotalreqty = (TextView) findViewById(R.id.txt_valtotalreqty);
-        txt_caseNo.setText(caseNo);
+        TransferDetailProcess = (ProgressBar)findViewById(R.id.transferDetailProcess);
+
+        txt_caseNo.setText("Case#"+caseNo);
         txt_valtotalreqty.setText("" + Math.round(data2));
         tr_imageBtnBack.setOnClickListener(this);
     }
@@ -358,6 +366,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         SenderChildDetailList = new ArrayList<Transfer_Request_Model>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(TransferRequest_Details.this, "Loading....");
+            TransferDetailProcess.setVisibility(View.VISIBLE);
             requestReceiversChildDetails(position);
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();

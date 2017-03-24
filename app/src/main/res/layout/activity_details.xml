@@ -75,9 +75,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="5dp"
                         android:id="@+id/detailProcess"
-                        android:indeterminate="true"
                         android:visibility="gone"
-                        style="?android:attr/progressBarStyleLarge"
                         android:indeterminateDrawable="@drawable/progress"
                         />
 

@@ -149,7 +149,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         }
 
         holder.BestInvent_SOH.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
-        holder.BestInvent_option.setText(arrayList.get(position).getArticleDesc());
+        holder.BestInvent_option.setText(arrayList.get(position).getOption());
 
 
         //Option Click event to get detail information

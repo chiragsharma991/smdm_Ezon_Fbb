@@ -23,7 +23,7 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
     private ArrayList<StatusModel> rec_status_dtllist;
     private static boolean check=false;
     private String TAG="ReceiverStatus_Detail_Fragment";
-    private static boolean[] Toggle;
+    private static boolean[] Rec_Toggle;
     public OnPress onPressInterface;
 
 
@@ -32,38 +32,40 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
     public ReceiverStatusDetailsAdapter(ArrayList<StatusModel> rec_status_List, Context context) {
         this.context = context;
         this.rec_status_dtllist = rec_status_List;
-        Toggle= new boolean[rec_status_dtllist.size()];
+        Rec_Toggle = new boolean[rec_status_dtllist.size()];
+        this.rec_status_dtllist = rec_status_List;
         onPressInterface=(OnPress)context;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_status_receiver_details_child1, parent, false);
-        return new ReceiverStatusDetailsAdapter.Holder(v);
+        return new Holder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if(holder instanceof ReceiverStatusDetailsAdapter.Holder) {
+        if(holder instanceof Holder) {
             if(position < rec_status_dtllist.size()) {
 
                 Log.e(TAG,"position"+position);
                 HandlePositionOnSet(holder,position);
-                ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setText(rec_status_dtllist.get(position).getLevel());
-                ((ReceiverStatusDetailsAdapter.Holder)holder).ShortQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyRequested()));
-                ((ReceiverStatusDetailsAdapter.Holder)holder).AvlQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyAcpt()));
-                ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
+               // HandlePositionOnSet(holder,position);
+                ((Holder)holder).OptionLevel.setText(rec_status_dtllist.get(position).getLevel());
+                ((Holder)holder).ShortQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyRequested()));
+                ((Holder)holder).AvlQty.setText(""+Math.round(rec_status_dtllist.get(position).getStkOnhandQtyAcpt()));
+                ((Holder)holder).OptionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        if(Toggle[position]==true)
+                        if(Rec_Toggle[position]==true)
                         {
-                            Toggle[position]=false;
+                            Rec_Toggle[position]=false;
                             notifyDataSetChanged();
 
                         }else
                         {
-                            Toggle[position]=true;
+                            Rec_Toggle[position]=true;
 
                             if(ToBeReceiverDetails.Rec_StatusHashmapChildList.get(position).isEmpty())
                             {
@@ -80,19 +82,19 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
                 });
 
                ReceiverStatusSubChildAdapter detailsHeaderChildAdapter=new ReceiverStatusSubChildAdapter(ToBeSenderDetails.StatusHashmapChildList,context,position,ReceiverStatusDetailsAdapter.this);
-                ((ReceiverStatusDetailsAdapter.Holder)holder).receiverdetails_SubChild.setAdapter(detailsHeaderChildAdapter);
+                ((Holder)holder).receiverdetails_SubChild.setAdapter(detailsHeaderChildAdapter);
 
             }
         }
     }
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
-        if(Toggle[position])
+        if(Rec_Toggle[position])
         {
-            ((ReceiverStatusDetailsAdapter.Holder)holder).lin_receiver_dtlsubchild.setVisibility(View.VISIBLE);
+            ((Holder)holder).lin_receiver_dtlsubchild.setVisibility(View.VISIBLE);
 
         }else
         {
-            ((ReceiverStatusDetailsAdapter.Holder)holder).lin_receiver_dtlsubchild.setVisibility(View.GONE);
+            ((Holder)holder).lin_receiver_dtlsubchild.setVisibility(View.GONE);
 
         }
 

@@ -98,6 +98,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
+
             Reusable_Functions.sDialog(context, "Loading data...");
             requestReceiversDetails();
         } else {
@@ -123,6 +124,8 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
+                                DetailProcess.setVisibility(View.GONE);
+
                                 return;
 
                             } else if (response.length() == limit) {
@@ -154,13 +157,15 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                             HashmapList.put(position, ChildDetailList);
                             stockPullAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
+                            DetailProcess.setVisibility(View.GONE);
+
 
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
+                            DetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -172,6 +177,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
+                        DetailProcess.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }
@@ -247,7 +253,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                             recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             MakeHashMap(DetailsList);
-                            stockPullAdapter = new StockDetailsAdapter(DetailsList,HashmapList, context);
+                            stockPullAdapter = new StockDetailsAdapter(DetailsList,HashmapList, context,DetailProcess);
                             recyclerView.setAdapter(stockPullAdapter);
 
                             Reusable_Functions.hDialog();
@@ -364,7 +370,9 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         ChildDetailList = new ArrayList<ToDo_Modal>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(Details.this, "Loading....");
-          //  DetailProcess.setVisibility(View.VISIBLE);
+            DetailProcess.setVisibility(View.VISIBLE);
+
+
 
 
             requestReceiversChildDetails(position);

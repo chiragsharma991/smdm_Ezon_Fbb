@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,28 +73,28 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_to_be_receiver_adapter, parent, false);
-        return new ToBeReceiverAdapter.Holder(v);
+        return new Holder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if(holder instanceof ToBeReceiverAdapter.Holder) {
+        if(holder instanceof Holder) {
             if(position < receiver_list.size())
             {
 
                 HandlePositionOnSet(holder,position);
-                ((ToBeReceiverAdapter.Holder)holder).Rec_Status_caseNumber.setText(""+receiver_list.get(position).getCaseNo());
-                ((ToBeReceiverAdapter.Holder)holder).Rec_Status_storeCode.setText(receiver_list.get(position).getReqStoreCode());
+                ((Holder)holder).Rec_Status_caseNumber.setText(""+"Case#"+receiver_list.get(position).getCaseNo());
+                ((Holder)holder).Rec_Status_storeCode.setText(receiver_list.get(position).getReqStoreCode());
 
                 String Rec_StatusInitiated=receiver_list.get(position).getStatusInitiated();
                 String Rec_StatusAccept=receiver_list.get(position).getStatusAccept();
                 String Rec_StatusSto=receiver_list.get(position).getStatusSto();
                 String Rec_StatusGrn=receiver_list.get(position).getStatusGrn();
                 ((Holder) holder).Lin_ProcessStatus.removeAllViewsInLayout();
-                ((ToBeReceiverAdapter.Holder) holder).Rec_Lin_trCard.setOnClickListener(new View.OnClickListener() {
+                ((Holder) holder).Rec_Lin_trCard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.e("TAG", "onClick: on Linear layout >>>>>>>> " );
+                        Log.e( "onClick: on Receiver Linear layout >>>>>>>> " ,"");
                         new ToBeReceiverDetails().StartActivity(context,receiver_list.get(position).getCaseNo(),receiver_list.get(position).getReqStoreCode());
 
                     }
@@ -103,18 +104,30 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 if(Rec_StatusInitiated.equals("Yes") && Rec_StatusAccept.equals("No") && Rec_StatusSto.equals("No") && Rec_StatusGrn.equals("No"))
                 {
                     Rec_Case0(position,holder);
+                    ((Holder) holder).Rec_Status_case.setText("Pending");
+                    ((Holder) holder).Rec_Status_case.setTextColor(Color.parseColor("#ff7e00"));
+
 
                 }else if(Rec_StatusInitiated.equals("Yes") && Rec_StatusAccept.equals("Yes") && Rec_StatusSto.equals("No") && Rec_StatusGrn.equals("No"))
                 {
                     Rec_Case1(position,holder);
+                    ((Holder) holder).Rec_Status_case.setText("Pending");
+                    ((Holder) holder).Rec_Status_case.setTextColor(Color.parseColor("#ff7e00"));
+
 
                 }else if(Rec_StatusInitiated.equals("Yes") && Rec_StatusAccept.equals("Yes") && Rec_StatusSto.equals("Yes") && Rec_StatusGrn.equals("No"))
                 {
                     Rec_Case2(position,holder);
+                    ((Holder) holder).Rec_Status_case.setText("Pending");
+                    ((Holder) holder).Rec_Status_case.setTextColor(Color.parseColor("#ff7e00"));
+
 
                 }else if(Rec_StatusInitiated.equals("Yes") && Rec_StatusAccept.equals("Yes") && Rec_StatusSto.equals("Yes") && Rec_StatusGrn.equals("Yes"))
                 {
                     Rec_Case3(position,holder);
+                    ((Holder) holder).Rec_Status_case.setText("Completed");
+                    ((Holder) holder).Rec_Status_case.setTextColor(Color.parseColor("#70e503"));
+
 
                 }
             }
@@ -138,7 +151,7 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         SenderAcpt.setOnClickListener(this);
         STO.setOnClickListener(this);
         GRN.setOnClickListener(this);
-        ((ToBeReceiverAdapter.Holder) holder).Lin_ProcessStatus.addView(view);
+        ((Holder) holder).Lin_ProcessStatus.addView(view);
 
     }
     private void Rec_Case1(final int position, RecyclerView.ViewHolder holder) {
@@ -158,7 +171,7 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         SenderAcpt.setOnClickListener(this);
         STO.setOnClickListener(this);
         GRN.setOnClickListener(this);
-        ((ToBeReceiverAdapter.Holder) holder).Lin_ProcessStatus.addView(view);
+        ((Holder) holder).Lin_ProcessStatus.addView(view);
     }
 
     private void Rec_Case2(final int position, RecyclerView.ViewHolder holder) {
@@ -178,7 +191,7 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         SenderAcpt.setOnClickListener(this);
         STO.setOnClickListener(this);
         GRN.setOnClickListener(this);
-        ((ToBeReceiverAdapter.Holder) holder).Lin_ProcessStatus.addView(view);
+        ((Holder) holder).Lin_ProcessStatus.addView(view);
     }
 
     private void Rec_Case3(final int position, RecyclerView.ViewHolder holder) {
@@ -198,14 +211,14 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         SenderAcpt.setOnClickListener(this);
         STO.setOnClickListener(this);
         GRN.setOnClickListener(this);
-        ((ToBeReceiverAdapter.Holder) holder).Lin_ProcessStatus.addView(view);
+        ((Holder) holder).Lin_ProcessStatus.addView(view);
     }
 
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
 
         if(Receiver_Toggle[position])
         {
-            ((ToBeReceiverAdapter.Holder) holder).Rec_Status_layout.removeAllViewsInLayout();
+            ((Holder) holder).Rec_Status_layout.removeAllViewsInLayout();
             Log.e( "Receiver : HandlePositionOnSet: get view... ",""+position );
             LayoutInflater layoutInflater1 = (LayoutInflater) context.getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -270,11 +283,11 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 
 
-            ((ToBeReceiverAdapter.Holder) holder).Rec_Status_layout.addView(view);
-            ((ToBeReceiverAdapter.Holder)holder).Rec_Status_layout.setVisibility(View.VISIBLE);
+            ((Holder) holder).Rec_Status_layout.addView(view);
+            ((Holder)holder).Rec_Status_layout.setVisibility(View.VISIBLE);
         }else
         {
-            ((ToBeReceiverAdapter.Holder)holder).Rec_Status_layout.setVisibility(View.GONE);
+            ((Holder)holder).Rec_Status_layout.setVisibility(View.GONE);
         }
     }
 

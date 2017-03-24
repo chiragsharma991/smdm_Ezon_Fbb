@@ -215,7 +215,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="YTD" />
+                android:text="STD" />
 
         </info.hoang8f.android.segmented.SegmentedGroup>
 

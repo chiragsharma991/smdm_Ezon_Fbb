@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/bg_screen_color"
-                tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.StyleActivity">
 
 
     <LinearLayout
@@ -94,8 +94,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/linear_head"
         android:id="@+id/listviewLayout"
-
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
         <RelativeLayout

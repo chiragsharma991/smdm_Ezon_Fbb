@@ -206,7 +206,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
         String data2 = getIntent().getExtras().getString("CODE");
-        storeCase.setText(" " + data1);
+        storeCase.setText(" " +"Case#"+data1);
         storeCode.setText(data2);
         caseNo=data1;
 
