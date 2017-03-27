@@ -79,7 +79,8 @@ public class SwipeDeckAdapter extends BaseAdapter {
     StyleDetailsBean styleDetailsBean;
     int offset , limit;
 
-    public SwipeDeckAdapter(ArrayList<VisualAssort> visualassortmentlist, Context context, SwipeDeck cardStack) {
+    public SwipeDeckAdapter(ArrayList<VisualAssort> visualassortmentlist, Context context, SwipeDeck cardStack)
+    {
         this.visualassortmentlist = visualassortmentlist;
         this.context = context;
         this.cardStack = cardStack;
@@ -329,6 +330,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                 btn2.setBackgroundResource(R.mipmap.dislike_unselected);
                 rel2.setBackgroundColor(Color.parseColor("#2277b1"));
                 cardStack.swipeTopCardLeft(180);
+
             }
         });
 
@@ -423,9 +425,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
                         relbuy.setEnabled(false);
                         visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
-
                     }
-
                 }
 
                 InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);

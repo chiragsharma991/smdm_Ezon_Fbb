@@ -41,27 +41,23 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public OnPress onPressInterface;
     private Set<Pair<Integer, Integer>> CheckedItems ;
     private final boolean[] visibleItems;
+    public OnSelectedItem onSelectedInterface;
 
 
-
-
-
-    public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess) {
+    public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess)
+    {
         this.list=list;
         this.context=context;//
         Toggle= new boolean[list.size()];
         HeadercheckList= new boolean[list.size()];
         onPressInterface=(OnPress)context;
+        onSelectedInterface = (OnSelectedItem)context;
         HashMapSubChild=hashmapList;
         CheckedItems=new HashSet<Pair<Integer,Integer>>();
         visibleItems=new boolean[list.size()];
         this.detailProcess=detailProcess;
         Log.e("TAG", "StockDetailsAdapter:  constructor");
-
     }
-
-
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -72,13 +68,12 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        Log.e("TAG", "Stock detail: "+position );
+        Log.e("TAG", "Stock detail : "+position );
 
         if(holder instanceof StockDetailsAdapter.Holder) {
             if(position < list.size()) {
 
                 HandlePositionOnSet(holder,position);
-
                 ((StockDetailsAdapter.Holder)holder).Detail_Soh.setText(""+Math.round(list.get(position).getStkOnhandQty()));
                 ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setText(list.get(position).getLevel());
                 ((StockDetailsAdapter.Holder)holder).Detail_reqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
@@ -91,29 +86,27 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         if(((CheckBox)view).isChecked())
                         {
                             //Header check is enable when view is open
-                            //  if(Toggle[position]){
+                            //if(Toggle[position]){
                             HeadercheckList[position]=true;
                             visibleItems[position]=true;
                             //SetChangeInChild(position);
-
                             //  }else{
                             // HeadercheckList[position]=false;
-
+                            //
                             // }
                             notifyItemChanged(position);
-                        }else
+                            //SetUpCheckHeader(position);
+                            onSelectedInterface.onSelected(position);
+                        }
+                        else
                         {
                             HeadercheckList[position]=false;
                             // SetUncheckInChild(position);
                             visibleItems[position]=true;
                             notifyItemChanged(position);
-
                             Log.e("TAG","uncheck notifyDataset changed..." );
-
                         }
                     }
-
-
                 });
                 ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -137,17 +130,9 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                 }else
                                 {
                                     notifyDataSetChanged();
-
                                 }
-
                             }
-
                         }
-
-
-
-
-
                     }
                 });
                 DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(visibleItems,HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
@@ -155,6 +140,17 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             }
         }
+    }
+
+    private  void  SetUpCheckHeader(int position) {
+
+
+            ToDo_Modal toDo_modal = list.get(position);
+            String option = toDo_modal.getOption();
+            String prodAttr = "";
+            String mccodeDesc = toDo_modal.getMccodeDesc();
+            Log.e("========", "option" + option + "mcDesc :" + mccodeDesc);
+
     }
 
     private void SetUncheckInChild(int position) {
@@ -166,10 +162,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             {
                 CheckedItems.remove(Tag);
             }
-
         }
         notifyItemChanged(position);
-
     }
 
     private void SetChangeInChild(int position) {
@@ -180,7 +174,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             {
                 CheckedItems.add(Tag);
             }
-
         }
         notifyItemChanged(position);
     }
@@ -203,10 +196,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }else
         {
             ((StockDetailsAdapter.Holder)holder).Detail_headerCheck.setChecked(false);
-
         }
     }
-
 
     @Override
     public int getItemCount() {
@@ -232,8 +223,5 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             detailsLinear=(RecyclerView)itemView.findViewById(R.id.details_headerChild);
             Detail_headerCheck=(CheckBox) itemView.findViewById(R.id.detail_headerCheck);
         }
-
     }
-
-
 }

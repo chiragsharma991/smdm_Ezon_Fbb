@@ -275,7 +275,6 @@ public class StockPullFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onDetach()
     {

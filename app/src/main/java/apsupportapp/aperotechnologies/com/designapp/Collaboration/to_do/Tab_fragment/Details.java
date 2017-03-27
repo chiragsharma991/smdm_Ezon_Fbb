@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -32,22 +33,27 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
 
 
-public class Details extends AppCompatActivity implements OnPress,View.OnClickListener {
+public class Details extends AppCompatActivity implements OnPress,View.OnClickListener,OnSelectedItem {
 
     private Gson gson;
     private SharedPreferences sharedPreferences;
@@ -74,6 +80,9 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     private TextView Todo_detailStoreCode;
     private TextView Todo_detailStoreAvlQty;
     private ProgressBar DetailProcess;
+    private Button btn_receiver_submit;
+    String option_header,mcCodeDesc_header,prodAttr_header;
+    private int selectedPosition;
 
 
     @Override
@@ -125,7 +134,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 DetailProcess.setVisibility(View.GONE);
-
                                 return;
 
                             } else if (response.length() == limit) {
@@ -139,7 +147,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                //
+
 
                                 requestReceiversChildDetails(position);
 
@@ -158,8 +166,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                             stockPullAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             DetailProcess.setVisibility(View.GONE);
-
-
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -197,16 +203,12 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
         Reusable_Functions.hDialog();
-
-
     }
 
 
     private void requestReceiversDetails() {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20");
-
-
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -217,6 +219,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
 
                         try {
+                            int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
@@ -224,29 +227,25 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
                             } else if (response.length() == limit) {
                                 Log.e(TAG, "promo eql limit");
-                                for (int i = 0; i < response.length(); i++) {
+                                for (i = 0; i < response.length(); i++) {
 
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                     DetailsList.add(toDo_modal);
-
-
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                //
+
 
                                 requestReceiversDetails();
 
                             } else if (response.length() < limit) {
                                 Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
+                                for ( i = 0; i < response.length(); i++) {
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                     DetailsList.add(toDo_modal);
-                                }
-                                count = 0;
-                                limit = 100;
-                                offsetvalue = 0;
 
+
+                                }
 
                             }
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
@@ -257,8 +256,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                             recyclerView.setAdapter(stockPullAdapter);
 
                             Reusable_Functions.hDialog();
-
-
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
@@ -278,7 +275,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -319,10 +315,12 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         details_imageBtnBack = (RelativeLayout)findViewById(R.id.details_imageBtnBack);
         Todo_detailStoreCode = (TextView)findViewById(R.id.todo_detailStoreCode);
         Todo_detailStoreAvlQty = (TextView)findViewById(R.id.todo_detailStoreAvlQty);
+        btn_receiver_submit = (Button)findViewById(R.id.stock_detailSubmit);
         DetailProcess = (ProgressBar)findViewById(R.id.detailProcess);
         Todo_detailStoreCode.setText(MCCodeDesc);
         Todo_detailStoreAvlQty.setText(MCCode);
         details_imageBtnBack.setOnClickListener(this);
+        btn_receiver_submit.setOnClickListener(this);
 //        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(View view, int position) {
@@ -371,10 +369,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(Details.this, "Loading....");
             DetailProcess.setVisibility(View.VISIBLE);
-
-
-
-
             requestReceiversChildDetails(position);
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
@@ -385,10 +379,94 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.details_imageBtnBack :
+
+            case R.id.details_imageBtnBack:
                 onBackPressed();
                 break;
+
+            case R.id.stock_detailSubmit:
+
+                onSelected(selectedPosition);
+
+//                JSONArray jsonarray =  new JSONArray();
+//                try {
+////            for (int i = position; i < DetailsList.size(); i++) {
+//                    JSONObject obj = new JSONObject();
+//
+//                    obj.put("option", DetailsList.get(selectedPosition).getOption());
+//                    obj.put("prodAttribute4", "");
+//                    obj.put("prodLevel6Code",  DetailsList.get(selectedPosition).getMccodeDesc());
+//                    jsonarray.put(selectedPosition, obj);
+//
+////            }
+//                    if (Reusable_Functions.chkStatus(context))
+//                    {
+//                        Reusable_Functions.sDialog(Details.this, "Loading...");
+//                        requestReceiverSubmitAPI(context, jsonarray);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+
+                    break;
         }
+
+    }
+
+
+    private void requestReceiverSubmitAPI(final Context mcontext, JSONArray object)
+    {
+        String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId;
+        Log.e("url", " post Request " + url + " ==== " + object.toString());
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("Submit Click Response :", response.toString());
+                        try {
+                            if (response == null || response.equals(null)) {
+                                Reusable_Functions.hDialog();
+                            } else {
+                                  Toast.makeText(mcontext, "Data is saved successfully", Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
+                            }
+                        } catch (Exception e) {
+                            Log.e("Exception e", e.toString() + "");
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", bearertoken);
+              //  params.put("Content-Type", "application/json");
+                return params;
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
     }
 
     @Override
@@ -398,4 +476,10 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     }
 
 
+    @Override
+    public void onSelected(int position) {
+        selectedPosition = position;
+        Log.e("Selected Position :",""+selectedPosition);
+
+    }
 }
