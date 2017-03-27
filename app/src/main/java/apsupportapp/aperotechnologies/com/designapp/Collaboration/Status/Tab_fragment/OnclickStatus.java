@@ -7,5 +7,5 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fr
 public interface OnclickStatus
 {
     void Onclick(int caseNo,String actionStatus,int dublicatePosition,int Case ,String senderStoreCode);
-
+//test Commit 27-3-17
 }
