@@ -140,9 +140,9 @@ public class StatusModel
     public void setReceiver_requested_date(String receiver_requested_date) {
         this.receiver_requested_date = receiver_requested_date;
 
-     }
+    }
 
-    
+
 
     public double getStoQty() {
         return stoQty;

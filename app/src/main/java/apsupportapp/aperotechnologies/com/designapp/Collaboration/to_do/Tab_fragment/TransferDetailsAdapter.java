@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
     public static int[] headeradapter_scanQty;
+    private final ProgressBar transferDetailProcess;
 
     private Context context;
     private ArrayList<Transfer_Request_Model> list;
@@ -45,7 +47,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
 
-    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> list, Context context, int[] scanQty, HashMap<Integer, ArrayList<Integer>> trchildScanQty) {
+    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> list, Context context, int[] scanQty, HashMap<Integer, ArrayList<Integer>> trchildScanQty, ProgressBar transferDetailProcess) {
         this.list=list;
         this.context=context;//
         Tr_HeaderToggle= new boolean[list.size()];
@@ -54,6 +56,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         scan=new int[list.size()];
         this.childScanCount = trchildScanQty;
         this.headeradapter_scanQty=scanQty;
+        this.transferDetailProcess=transferDetailProcess;
         checkStr = "";
     }
 
@@ -76,30 +79,36 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ((TransferDetailsAdapter.Holder)holder).txt_reqtyval.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((TransferDetailsAdapter.Holder)holder).txt_avlqtyval.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((TransferDetailsAdapter.Holder)holder).txt_sohval.setText(""+Math.round(list.get(position).getStkOnhandQty()));
-                ((TransferDetailsAdapter.Holder)holder).txt_gitval.setText(""+Math.round(list.get(position).getStkGitQty()));
+             //   ((TransferDetailsAdapter.Holder)holder).txt_gitval.setText(""+Math.round(list.get(position).getStkGitQty()));
                 ((TransferDetailsAdapter.Holder)holder).txt_optionval.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.e("TAG", "onClick:>>>> "+position );
-                        if(Tr_HeaderToggle[position]==true)
-                        {
-                            Tr_HeaderToggle[position]=false;
-                            notifyDataSetChanged();
 
-                        }else
+                        if(transferDetailProcess.getVisibility()==View.GONE)
                         {
-                            Tr_HeaderToggle[position]=true;
-                            if(TransferRequest_Details.TransferReqHashmapList.get(position).isEmpty())
+
+                            Log.e("TAG", "onClick:>>>> "+position );
+                            if(Tr_HeaderToggle[position]==true)
                             {
-                                onPressInterface.OnPress(position);
+                                Tr_HeaderToggle[position]=false;
+                                notifyDataSetChanged();
 
                             }else
                             {
-                                notifyDataSetChanged();
+                                Tr_HeaderToggle[position]=true;
+                                if(TransferRequest_Details.TransferReqHashmapList.get(position).isEmpty())
+                                {
+                                    onPressInterface.OnPress(position);
+
+                                }else
+                                {
+                                    notifyDataSetChanged();
+
+                                }
 
                             }
-
                         }
+
                     }
                 });
 
@@ -210,11 +219,11 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             txt_reqtyval = (TextView)itemView.findViewById(R.id.txt_reqtyVal);
             txt_avlqtyval = (TextView)itemView.findViewById(R.id.txt_avlqtyVal);
             txt_sohval = (TextView)itemView.findViewById(R.id.txt_sohVal);
-            txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
+          //  txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
             btn_scan = (ImageView) itemView.findViewById(R.id.btn_scan);
             // lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
-           // et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
+            // et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
             recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.details_headerChild);
             SizesLinLayout = (LinearLayout)itemView.findViewById(R.id.detail_size);
 

@@ -142,7 +142,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Avl. Qty"
+                                android:text="Avl.Qty"
                                 android:gravity="center"
                                 android:textSize="@dimen/collaboration_stock_text"
                                 android:textColor="@color/txt_color"

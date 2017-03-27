@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,6 +79,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private int ScanCount;
     ArrayList<Integer> childlist=new ArrayList<Integer>();
     private Button btn_Submit;
+    private ProgressBar TransferDetailProcess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +125,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                TransferDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -150,10 +153,13 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             PutScanQty(SenderChildDetailList,position);
                             transferDetailsAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
+                            TransferDetailProcess.setVisibility(View.GONE);
+
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            TransferDetailProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
@@ -165,6 +171,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        TransferDetailProcess.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -240,7 +247,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             MakeChildScanList(Sender_DetailsList);
                             MakeScanList(Sender_DetailsList);
-                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,scanQty,TrchildScanQty);
+                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,scanQty,TrchildScanQty,TransferDetailProcess);
                             MakeHashMap(Sender_DetailsList);
                             // MakeSubChildScanQty(Sender_DetailsList);
 
@@ -340,7 +347,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         txt_caseNo = (TextView) findViewById(R.id.txt_caseNo);
         txt_valtotalreqty = (TextView) findViewById(R.id.txt_valtotalreqty);
         btn_Submit = (Button)findViewById(R.id.btn_trdetailSubmit);
-        txt_caseNo.setText(caseNo);
+        TransferDetailProcess = (ProgressBar)findViewById(R.id.transferDetailProcess);
+        txt_caseNo.setText("Case#"+caseNo);
         txt_valtotalreqty.setText("" + Math.round(data2));
         tr_imageBtnBack.setOnClickListener(this);
         btn_Submit.setOnClickListener(this);
@@ -361,6 +369,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         SenderChildDetailList = new ArrayList<Transfer_Request_Model>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(TransferRequest_Details.this, "Loading....");
+            TransferDetailProcess.setVisibility(View.VISIBLE);
             requestReceiversChildDetails(position);
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();

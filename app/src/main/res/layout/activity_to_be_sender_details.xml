@@ -110,37 +110,71 @@
             android:id="@+id/storeDesc"
             android:padding="5dp"
             >
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/status_detailStoreCase"
-                android:textColor="@color/bg_store_code_text"
-                android:layout_alignParentLeft="true"
-                android:textStyle="bold"
-                android:textSize="@dimen/collaboration_stock_storecode"
-                android:text="Case :"
-                />
+                android:orientation="horizontal"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="3.8"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/status_detailStoreCase"
+                        android:textColor="@color/bg_store_code_text"
+                        android:layout_alignParentLeft="true"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:textSize="@dimen/collaboration_stock_storecode"
+                        android:text="Case :"
+                        />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/detailStoreDesc"
-                android:id="@+id/status_detailStoreCode"
-                android:textColor="@color/bg_store_code_text"
-                android:textStyle="bold"
-                android:textSize="@dimen/collaboration_stock_storecode"
-                android:text="Store Code "
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/detailStoreDesc"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/bg_store_code_text"
-                android:textSize="@dimen/collaboration_stock_storecode"
-                android:textStyle="bold"
-                android:text=" Store Description"
-                />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/detailStoreDesc"
+                        android:id="@+id/status_detailStoreCode"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:textSize="@dimen/collaboration_stock_storecode"
+                        android:text="Store Code "
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailStoreDesc"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/collaboration_stock_storecode"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:text=" Store Description"
+                        />
+
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
 
 
         </RelativeLayout>

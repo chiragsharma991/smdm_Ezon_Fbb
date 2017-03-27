@@ -698,8 +698,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
 
         if (firstVisibleItem < freshnessIndexDetailsArrayList.size() && OnItemClick == false) {
-          Log.e("freshness Index getItem Count ",""+freshnessIndexSnapAdapter.getItemCount()+"array size"+freshnessIndexDetailsArrayList.size());
-           //10<10 where footer is call then it goes else condition
+            Log.e("freshness Index getItem Count ",""+freshnessIndexSnapAdapter.getItemCount()+"array size"+freshnessIndexDetailsArrayList.size());
+            //10<10 where footer is call then it goes else condition
             if (txtFIndexClass.getText().toString().equals("Department")) {
                 level = 1;
                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
@@ -1909,7 +1909,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     llm.scrollToPosition(firstVisibleItem);
                     //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
                     llm.scrollToPosition(firstVisibleItem);
-                 //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
 
                 }
             }
@@ -1923,7 +1923,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     llm.scrollToPosition(firstVisibleItem);
                     //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
                     llm.scrollToPosition(firstVisibleItem);
-                 //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
                 }
             }
         } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
@@ -1935,7 +1935,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     llm.scrollToPosition(firstVisibleItem);
                     // fIndexFirstVisibleItem = fIndexFirstVisibleItem;
                     llm.scrollToPosition(firstVisibleItem);
-                   // fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    // fIndexFirstVisibleItem = fIndexFirstVisibleItem;
 
                 }
             }
@@ -1949,7 +1949,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     llm.scrollToPosition(firstVisibleItem);
                     //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
                     llm.scrollToPosition(firstVisibleItem);
-                 //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
 
                 }
             }

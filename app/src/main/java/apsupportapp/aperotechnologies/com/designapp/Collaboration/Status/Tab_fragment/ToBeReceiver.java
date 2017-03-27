@@ -420,7 +420,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
+                            ReceiverAdapter .notifyDataSetChanged();
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -431,6 +431,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        ReceiverAdapter .notifyDataSetChanged();
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }

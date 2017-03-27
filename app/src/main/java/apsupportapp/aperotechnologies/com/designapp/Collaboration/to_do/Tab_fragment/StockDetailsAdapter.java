@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
@@ -31,6 +32,7 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
+    private final ProgressBar detailProcess;
     private  HashMap<Integer, ArrayList<ToDo_Modal>> HashMapSubChild;
     private  Context context;
     private  ArrayList<ToDo_Modal> list;
@@ -44,7 +46,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
 
-    public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context) {
+    public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess) {
         this.list=list;
         this.context=context;//
         Toggle= new boolean[list.size()];
@@ -53,6 +55,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         HashMapSubChild=hashmapList;
         CheckedItems=new HashSet<Pair<Integer,Integer>>();
         visibleItems=new boolean[list.size()];
+        this.detailProcess=detailProcess;
         Log.e("TAG", "StockDetailsAdapter:  constructor");
 
     }
@@ -115,26 +118,34 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.e("TAG", "onClick:>>>> "+position );
-                        if(Toggle[position]==true)
+                        if(detailProcess.getVisibility()==View.GONE)
                         {
-                            Toggle[position]=false;
-                            notifyDataSetChanged();
+                            Log.e("TAG", "onClick:>>>> "+position );
 
-                        }else
-                        {
-                            Toggle[position]=true;
-                            if(HashMapSubChild.get(position).isEmpty())
+                            if(Toggle[position]==true)
                             {
-                                onPressInterface.OnPress(position);
+                                Toggle[position]=false;
+                                notifyDataSetChanged();
 
                             }else
                             {
-                                notifyDataSetChanged();
+                                Toggle[position]=true;
+                                if(HashMapSubChild.get(position).isEmpty())
+                                {
+                                    onPressInterface.OnPress(position);
+
+                                }else
+                                {
+                                    notifyDataSetChanged();
+
+                                }
 
                             }
 
                         }
+
+
+
 
 
                     }
