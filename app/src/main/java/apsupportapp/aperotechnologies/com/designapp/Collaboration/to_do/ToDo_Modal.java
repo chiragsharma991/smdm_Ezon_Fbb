@@ -18,6 +18,7 @@ public class ToDo_Modal {
     String mccodeDesc;
     String level;
 
+
     public String getOption() {
         return option;
     }
@@ -27,11 +28,6 @@ public class ToDo_Modal {
     }
 
     String option;
-
-
-
-
-
 
     public String getStoreCode() {
         return storeCode;

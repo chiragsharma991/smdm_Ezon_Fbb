@@ -31,6 +31,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
     private Set<Pair<Integer, Integer>> CheckedItems;
     private final StockDetailsAdapter stockDetailsAdapter;
     private final boolean[] headercheckList;
+    public OnSelectedItem onSelectedInterface;
 
 
     public DetailsHeaderChildAdapter(boolean[] visibleItems, HashMap<Integer, ArrayList<ToDo_Modal>> list, boolean[] headercheckList, Set<Pair<Integer, Integer>> checkedItems, Context context, int position, StockDetailsAdapter stockDetailsAdapter) {
@@ -41,7 +42,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         this.stockDetailsAdapter = stockDetailsAdapter;
         this.headercheckList = headercheckList;
         CheckedItems = checkedItems;
-
+        onSelectedInterface = (OnSelectedItem)context;
     }
 
     @Override
@@ -70,14 +71,15 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         {
             if (headercheckList[PrePosition]) {
                 CheckedItems.add(Childtag);
-            } else {
-                CheckedItems.remove(Childtag);
+                Log.e("Checkitems :",""+CheckedItems);
+                onSelectedInterface.onSelected(PrePosition);
 
+            } else
+            {
+                CheckedItems.remove(Childtag);
+                onSelectedInterface.onSelected(PrePosition);
             }
         }
-
-
-
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_checkBox.setChecked(CheckedItems.contains(Childtag));
 
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_checkBox.setOnClickListener(new View.OnClickListener() {
@@ -89,21 +91,20 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
                 final Pair<Integer, Integer> tagFlag = (Pair<Integer, Integer>) view.getTag();
 
                 //this is check and uncheked method to remove and add flag ...
-
                 // before uncheck you have to calculate past things like :
                 // 1. child list are selected to all
                 // 2. one is not selected to all
 
-                if (cb.isChecked()) {
+                if (cb.isChecked())
+                {
                     CheckCondition(tagFlag);
-
-                } else {
+                }
+                else
+                {
                     UnCheckCondition(tagFlag);
                 }
                 Log.e("TAG", "data has been notified.... ");
-
                 stockDetailsAdapter.notifyDataSetChanged();
-
             }
         });
 
@@ -111,11 +112,8 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
 
     private void CheckCondition(Pair<Integer, Integer> tagFlag) {
         CheckedItems.add(tagFlag);
-
         boolean[] CheckChild = new boolean[list.get(PrePosition).size()];
         for (int i = 0; i < list.get(PrePosition).size(); i++) {
-
-
             Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(PrePosition, i);
             if (CheckedItems.contains(Tag)) {
                 CheckChild[i] = true;
@@ -123,18 +121,15 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
                 CheckChild[i] = false;
             }
         }
-        // if all list are true from all list child then header check will be enable.
+        //if all list are true from all list child then header check will be enable.
         if (containsTrue(CheckChild)) {
             headercheckList[PrePosition] = true;
         }
     }
 
-
     private void UnCheckCondition(Pair<Integer, Integer> tagFlag) {
         boolean[] CheckChild = new boolean[list.get(PrePosition).size()];
         for (int i = 0; i < list.get(PrePosition).size(); i++) {
-
-
             Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(PrePosition, i);
             if (CheckedItems.contains(Tag)) {
                 CheckChild[i] = true;
@@ -150,11 +145,9 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         CheckedItems.remove(tagFlag);
     }
 
-
     public boolean containsTrue(boolean[] array) {
 
         boolean AllItems = false;
-
         for (int i = 0; i < array.length; i++) {
             if (array[i]) {
                 AllItems = true;
@@ -167,7 +160,6 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         return AllItems;
     }
 
-
     @Override
     public int getItemCount() {
         return list.get(PrePosition).size();
@@ -175,10 +167,8 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
 
     private static class Holder extends RecyclerView.ViewHolder {
 
-
         private final TextView DetailChild_size, DetailChild_requiredQty, DetailChild_aviQty, DetailChild_git, DetailChild_soh;
         private CheckBox DetailChild_checkBox;
-
         public Holder(View itemView) {
             super(itemView);
             DetailChild_size = (TextView) itemView.findViewById(R.id.detailChild_size);

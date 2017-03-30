@@ -42,6 +42,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Set<Pair<Integer, Integer>> CheckedItems ;
     private final boolean[] visibleItems;
     public OnSelectedItem onSelectedInterface;
+    public static boolean isheaderCheck;
+    public static boolean isOptionCheck;
 
 
     public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess)
@@ -56,7 +58,9 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         CheckedItems=new HashSet<Pair<Integer,Integer>>();
         visibleItems=new boolean[list.size()];
         this.detailProcess=detailProcess;
-        Log.e("TAG", "StockDetailsAdapter:  constructor");
+        isheaderCheck = false;
+        isOptionCheck = false;
+
     }
 
     @Override
@@ -68,7 +72,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        Log.e("TAG", "Stock detail : "+position );
 
         if(holder instanceof StockDetailsAdapter.Holder) {
             if(position < list.size()) {
@@ -94,15 +97,19 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             // HeadercheckList[position]=false;
                             //
                             // }
-                            notifyItemChanged(position);
+                            isheaderCheck = true;
                             //SetUpCheckHeader(position);
+                            Log.e("Checked position :",""+position);
                             onSelectedInterface.onSelected(position);
+                            notifyItemChanged(position);
+
                         }
                         else
                         {
                             HeadercheckList[position]=false;
                             // SetUncheckInChild(position);
                             visibleItems[position]=true;
+                            onSelectedInterface.onSelected(position);
                             notifyItemChanged(position);
                             Log.e("TAG","uncheck notifyDataset changed..." );
                         }
@@ -119,13 +126,16 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             {
                                 Toggle[position]=false;
                                 notifyDataSetChanged();
-
                             }else
                             {
                                 Toggle[position]=true;
                                 if(HashMapSubChild.get(position).isEmpty())
                                 {
+                                    Log.e("Position before :",""+position);
+                                    isOptionCheck = true;
                                     onPressInterface.OnPress(position);
+                                    Log.e("Position after :",""+position);
+//                                    onSelectedInterface.onSelected(position);
 
                                 }else
                                 {
@@ -137,7 +147,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 });
                 DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(visibleItems,HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
                 ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
-
             }
         }
     }
@@ -179,6 +188,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position)
+
     {
         if(Toggle[position])
         {

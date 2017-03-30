@@ -1,9 +1,11 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,7 +43,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
@@ -81,8 +85,10 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     private TextView Todo_detailStoreAvlQty;
     private ProgressBar DetailProcess;
     private Button btn_receiver_submit;
-    String option_header,mcCodeDesc_header,prodAttr_header;
     private int selectedPosition;
+    String recache;
+    List<Integer> myList = new ArrayList<Integer>();
+
 
 
     @Override
@@ -91,11 +97,12 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         setContentView(R.layout.activity_details);
         getSupportActionBar().hide();
         context = this;
+        recache = "true";
         initalise();
-
-        //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
+        //PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         DetailsList = new ArrayList<ToDo_Modal>();
+        myList = new ArrayList<Integer>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -107,7 +114,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
-
             Reusable_Functions.sDialog(context, "Loading data...");
             requestReceiversDetails();
         } else {
@@ -118,7 +124,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
     private void requestReceiversChildDetails(final int position) {
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") + "&option=" + option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") + "&option=" + option.replaceAll(" ", "%20")+"&recache="+recache;
 
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -127,7 +133,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                     public void onResponse(JSONArray response) {
                         Log.i(TAG, "Detail api response : " + " " + response);
                         Log.i(TAG, "Detail api total length" + "" + response.length());
-
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -142,13 +147,9 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                     ChildDetailList.add(toDo_modal);
-
-
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-
-
                                 requestReceiversChildDetails(position);
 
                             } else if (response.length() < limit) {
@@ -161,7 +162,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                                 limit = 100;
                                 offsetvalue = 0;
                             }
-
                             HashmapList.put(position, ChildDetailList);
                             stockPullAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
@@ -187,7 +187,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -208,15 +207,15 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
     private void requestReceiversDetails() {
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&recache="+recache;
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONArray response)
+                    {
                         Log.i(TAG, "Detail api response : " + " " + response);
                         Log.i(TAG, "Detail api total length" + "" + response.length());
-
 
                         try {
                             int i;
@@ -234,8 +233,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-
-
                                 requestReceiversDetails();
 
                             } else if (response.length() < limit) {
@@ -243,10 +240,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                                 for ( i = 0; i < response.length(); i++) {
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                     DetailsList.add(toDo_modal);
-
-
                                 }
-
                             }
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
@@ -291,7 +285,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         queue.add(postRequest);
         Reusable_Functions.hDialog();
 
-
     }
 
     private void MakeHashMap(ArrayList<ToDo_Modal> detailsList) {
@@ -321,6 +314,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         Todo_detailStoreAvlQty.setText(MCCode);
         details_imageBtnBack.setOnClickListener(this);
         btn_receiver_submit.setOnClickListener(this);
+
 //        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(View view, int position) {
@@ -342,8 +336,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 //                    }
 //
 //                }
-//
-//            }
+////            }
 //        }));
 
     }
@@ -385,34 +378,43 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                 break;
 
             case R.id.stock_detailSubmit:
+               // onSelected(selectedPosition);
+                JSONArray jsonarray =  new JSONArray();
+                try {
+                    if(StockDetailsAdapter.isheaderCheck)
+                    {
+                        Log.e("isHeaderCheck in if ===",""+StockDetailsAdapter.isheaderCheck);
+                        for (int i = 0; i < myList.size(); i++)
+                       {
+                           JSONObject obj = new JSONObject();
+                               obj.put("option", DetailsList.get(myList.get(i)).getOption());
+                             //  obj.put("prodAttribute4", "");
+                               obj.put("prodLevel6Code", DetailsList.get(myList.get(i)).getMccodeDesc());
+                               jsonarray.put(i, obj);
+                        }
 
-                onSelected(selectedPosition);
+                        if (Reusable_Functions.chkStatus(context))
+                        {
+                            Reusable_Functions.sDialog(Details.this, "Loading...");
+                            requestReceiverSubmitAPI(context, jsonarray);
 
-//                JSONArray jsonarray =  new JSONArray();
-//                try {
-////            for (int i = position; i < DetailsList.size(); i++) {
-//                    JSONObject obj = new JSONObject();
-//
-//                    obj.put("option", DetailsList.get(selectedPosition).getOption());
-//                    obj.put("prodAttribute4", "");
-//                    obj.put("prodLevel6Code",  DetailsList.get(selectedPosition).getMccodeDesc());
-//                    jsonarray.put(selectedPosition, obj);
-//
-////            }
-//                    if (Reusable_Functions.chkStatus(context))
-//                    {
-//                        Reusable_Functions.sDialog(Details.this, "Loading...");
-//                        requestReceiverSubmitAPI(context, jsonarray);
-//                    }
-//                    else
-//                    {
-//                        Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+                        } else
+                        {
+                            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else
+                  //  if(StockDetailsAdapter.isOptionCheck == false && StockDetailsAdapter.isheaderCheck == false)
+                    {
+                        Log.e("isHeaderCheck in else ===",""+StockDetailsAdapter.isheaderCheck);
+                        View view = findViewById(android.R.id.content);
+                        Snackbar.make(view,"Please select option...", Snackbar.LENGTH_LONG).show();
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                     break;
         }
@@ -422,7 +424,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
     private void requestReceiverSubmitAPI(final Context mcontext, JSONArray object)
     {
-        String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId;
+        String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId ;//+"?recache="+recache
         Log.e("url", " post Request " + url + " ==== " + object.toString());
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                 new Response.Listener<JSONObject>() {
@@ -432,9 +434,13 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                         try {
                             if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();
-                            } else {
-                                  Toast.makeText(mcontext, "Data is saved successfully", Toast.LENGTH_SHORT).show();
-                                Reusable_Functions.hDialog();
+                            } else
+                            {
+                                  Toast.makeText(mcontext, "Stock Transfer receiver submit details saved successfully...", Toast.LENGTH_SHORT).show();
+                                  Intent intent = new Intent(Details.this,To_Do.class);
+                                  startActivity(intent);
+
+                                  Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -472,14 +478,35 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        StockDetailsAdapter.isheaderCheck = false;
+        StockDetailsAdapter.isOptionCheck = false;
         finish();
     }
-
 
     @Override
     public void onSelected(int position) {
         selectedPosition = position;
-        Log.e("Selected Position :",""+selectedPosition);
+        Log.e("pos ====",""+position+"\tselectedpos :"+selectedPosition);
+        if(myList.contains(position))
+        {
+//            if(StockDetailsAdapter.isOptionCheck)
+//            {
+//                Log.e("isOptionCheck in if condition :",""+StockDetailsAdapter.isOptionCheck);
+//            }
+//            else
+//            {
+//                Log.e("isOptionCheck in else condition :",""+StockDetailsAdapter.isOptionCheck);
+                myList.remove(myList.indexOf(position));
+
+           // }
+        }
+        else
+        {
+            myList.add(position);
+        }
+
+         Log.e("Selected Position :", "" + myList + "\tSize :" + myList.size());
+
 
     }
 }
