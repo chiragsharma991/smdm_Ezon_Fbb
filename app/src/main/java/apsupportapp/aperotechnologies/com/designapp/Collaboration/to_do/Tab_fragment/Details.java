@@ -404,7 +404,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                     JSONArray jsonArray=stockPullAdapter.OnSubmit(MCCodeDesc);
                    if(jsonArray.length()==0)
                    {
-                       Toast.makeText(Details.this,"Please Select Option First...",Toast.LENGTH_SHORT).show();
+                       Toast.makeText(Details.this,"Please select at least one option.",Toast.LENGTH_SHORT).show();
                    }else
                    {
                       // Toast.makeText(Details.this,"Submit is okay!",Toast.LENGTH_SHORT).show();
@@ -431,7 +431,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(mcontext, "Loading data...");
+            Reusable_Functions.sDialog(mcontext, "Submitting data…");
 
             String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId ;//+"?recache="+recache
             Log.e("url", " post Request " + url + " ==== " + object.toString());
@@ -450,8 +450,9 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                                     String result=response.getString("status");
                                     Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Details.this,To_Do.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                     startActivity(intent);
-                                    finish();
+                                    //Details.this.finish();
                                     Reusable_Functions.hDialog();
                                 }
                             } catch (Exception e) {
