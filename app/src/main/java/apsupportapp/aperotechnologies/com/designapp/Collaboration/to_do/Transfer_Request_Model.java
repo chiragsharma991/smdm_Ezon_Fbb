@@ -8,7 +8,34 @@ public class Transfer_Request_Model {
     String caseNo;
     String reqStoreCode;
     String reqStoreDesc;
+    String productCode;
 
+    public String getProdAttribute2() {
+        return prodAttribute2;
+    }
+
+    public void setProdAttribute2(String prodAttribute2) {
+        this.prodAttribute2 = prodAttribute2;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getProdAttribute4() {
+        return prodAttribute4;
+    }
+
+    public void setProdAttribute4(String prodAttribute4) {
+        this.prodAttribute4 = prodAttribute4;
+    }
+
+    String prodAttribute2;
+    String prodAttribute4;
 
     public String getCaseNo() {
         return caseNo;

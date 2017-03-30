@@ -62,7 +62,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         trDetailsHeaderChildAdapter = this;
         countList = new ArrayList<Integer>();
 
-
     }
 
     @Override
@@ -126,7 +125,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                 notifyDataSetChanged();
             }
         });
-        ((TrDetailsHeaderChildAdapter.Holder) holder).tr_DetailChild_scanqty.setText(""+childScanCount.get(PrePosition).get(position));
+        ((TrDetailsHeaderChildAdapter.Holder) holder).tr_DetailChild_scanqty.setText(""+childScanCount.get(0).get(0));
 
     }
 

@@ -112,47 +112,47 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     }
                 });
 
-                ((TransferDetailsAdapter.Holder)holder).btn_scan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Log.e("TAG", "Header Scan onClick:>>>> "+position );
-
-                        if (isAMobileModel()) {
-
-                            Intent intent_barcode = new Intent();
-                            intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
-                            intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
-                            context.sendBroadcast(intent_barcode);
-                            ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
-                            barcode = " ";
-
-
-                            android.os.Handler h = new android.os.Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
-
-                                    Intent i1 =((Activity) context).getIntent();
-                                    Log.e("getIntent : ", "" + ((Activity) context).getIntent());
-                                    Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString());
-                                    barcode =   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString();
-                                    if(!barcode.equals(" ")) {
-                                        Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                        //  TimeUP();
-                                    }
-                                    else{
-                                        View view=((Activity)context).findViewById(android.R.id.content);
-                                        Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
-                                    }
-                                }
-                            }, 1500);
-
-                        } else if (!isAMobileModel()) {
-                            Log.e("regular device", "");
-                            checkStr = "HeaderAdapter";
-                            onBarcodeScan.onScan(view,position,checkStr, TransferDetailsAdapter.this);
-                        }
-                    }
-                });
+//                ((TransferDetailsAdapter.Holder)holder).btn_scan.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Log.e("TAG", "Header Scan onClick:>>>> "+position );
+//
+//                        if (isAMobileModel()) {
+//
+//                            Intent intent_barcode = new Intent();
+//                            intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
+//                            intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
+//                            context.sendBroadcast(intent_barcode);
+//                            ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
+//                            barcode = " ";
+//
+//
+//                            android.os.Handler h = new android.os.Handler();
+//                            h.postDelayed(new Runnable() {
+//                                public void run() {
+//
+//                                    Intent i1 =((Activity) context).getIntent();
+//                                    Log.e("getIntent : ", "" + ((Activity) context).getIntent());
+//                                    Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString());
+//                                    barcode =   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString();
+//                                    if(!barcode.equals(" ")) {
+//                                        Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
+//                                        //  TimeUP();
+//                                    }
+//                                    else{
+//                                        View view=((Activity)context).findViewById(android.R.id.content);
+//                                        Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
+//                                    }
+//                                }
+//                            }, 1500);
+//
+//                        } else if (!isAMobileModel()) {
+//                            Log.e("regular device", "");
+//                            checkStr = "HeaderAdapter";
+//                            onBarcodeScan.onScan(view,position,checkStr, TransferDetailsAdapter.this);
+//                        }
+//                    }
+//                });
                 ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(""+headeradapter_scanQty[position]);
                 TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(TransferRequest_Details.TransferReqHashmapList,context,position,TransferDetailsAdapter.this,childScanCount);
                 ((TransferDetailsAdapter.Holder)holder).recycleview_transferreq_detailChild.setAdapter(detailsHeaderChildAdapter);
@@ -221,7 +221,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             txt_sohval = (TextView)itemView.findViewById(R.id.txt_sohVal);
           //  txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
-            btn_scan = (ImageView) itemView.findViewById(R.id.btn_scan);
+         //   btn_scan = (ImageView) itemView.findViewById(R.id.btn_scan);
             // lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
             // et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
             recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.details_headerChild);
