@@ -16,6 +16,10 @@ import android.widget.TextView;
 
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,7 +33,7 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
  * Created by csuthar on 06/03/17.
  */
 
-public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
 
     private final ProgressBar detailProcess;
@@ -37,7 +41,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private  Context context;
     private  ArrayList<ToDo_Modal> list;
     private  boolean[] Toggle;
-    private  boolean[] HeadercheckList;
+    private  boolean[] HeadercheckList;  //list for check header
     public OnPress onPressInterface;
     private Set<Pair<Integer, Integer>> CheckedItems ;
     private final boolean[] visibleItems;
@@ -213,6 +217,9 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return list.size();
     }
 
+
+
+
     public static class Holder extends RecyclerView.ViewHolder {
 
         private final TextView Detail_Soh,Detail_reqQty,Detail_Git,Detail_AviQty;
@@ -234,6 +241,63 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
     }
+
+
+
+
+    public JSONArray OnSubmit(String MCCodeDesc)
+    {
+        int count=0;  //count is for add one by one in Jsonarray.
+
+        JSONArray jsonarray=new JSONArray();
+        try
+        {
+            for (int i = 0; i <list.size(); i++) {
+
+                if(!HashMapSubChild.get(i).isEmpty())   //fst start with subchild if no one select in subchild then it will go header selection.
+                {
+                  //  Log.i("Onsubmit",+i+"HashMapSubChild "+HashMapSubChild.get(i).size());
+                    for (int j = 0; j <HashMapSubChild.get(i).size(); j++)
+                    {
+                        Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
+                        if(CheckedItems.contains(Tag)){
+                            JSONObject obj = new JSONObject();
+                            obj.put("option",list.get(i).getLevel());
+                            obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
+                            obj.put("prodLevel6Code",MCCodeDesc);
+                            jsonarray.put(count,obj);
+                            count++;
+                        }
+                    }
+
+                }else
+                {
+                    if(HeadercheckList[i]) {
+                      //  Log.i("Onsubmit", +i + "HeadercheckList" + HeadercheckList);
+                        JSONObject obj = new JSONObject();
+                        obj.put("option",list.get(i).getLevel());
+                       // obj.put("prodAttribute4","");
+                        obj.put("prodLevel6Code",MCCodeDesc);
+                        jsonarray.put(count,obj);
+                        count++;
+
+                    }
+                }
+            }
+            Log.e("OnSubmit: ",""+jsonarray.toString());
+
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+            Log.e("OnSubmit:  error",""+e.getMessage() );
+        }
+
+
+        return jsonarray;
+    }
+
+
+
 
 
 }

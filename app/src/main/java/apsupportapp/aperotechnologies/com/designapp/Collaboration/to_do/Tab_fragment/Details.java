@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -32,15 +34,19 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
@@ -74,6 +80,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     private TextView Todo_detailStoreCode;
     private TextView Todo_detailStoreAvlQty;
     private ProgressBar DetailProcess;
+    private Button btn_receiver_submit;
 
 
     @Override
@@ -255,7 +262,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                             MakeHashMap(DetailsList);
                             stockPullAdapter = new StockDetailsAdapter(DetailsList,HashmapList, context,DetailProcess);
                             recyclerView.setAdapter(stockPullAdapter);
-
                             Reusable_Functions.hDialog();
 
 
@@ -273,7 +279,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -317,12 +323,14 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         MCCode=String.valueOf(Math.round(data2));
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
         details_imageBtnBack = (RelativeLayout)findViewById(R.id.details_imageBtnBack);
+        btn_receiver_submit = (Button)findViewById(R.id.stock_detailSubmit);
         Todo_detailStoreCode = (TextView)findViewById(R.id.todo_detailStoreCode);
         Todo_detailStoreAvlQty = (TextView)findViewById(R.id.todo_detailStoreAvlQty);
         DetailProcess = (ProgressBar)findViewById(R.id.detailProcess);
         Todo_detailStoreCode.setText(MCCodeDesc);
         Todo_detailStoreAvlQty.setText(MCCode);
         details_imageBtnBack.setOnClickListener(this);
+        btn_receiver_submit.setOnClickListener(this);
 //        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(View view, int position) {
@@ -388,8 +396,29 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
             case R.id.details_imageBtnBack :
                 onBackPressed();
                 break;
+
+            case R.id.stock_detailSubmit:
+                Log.e(TAG, "onClick:  submit button" );
+                //
+                if(!(DetailsList.size() ==0)){
+                    JSONArray jsonArray=stockPullAdapter.OnSubmit(MCCodeDesc);
+                   if(jsonArray.length()==0)
+                   {
+                       Toast.makeText(Details.this,"Please Select Option First...",Toast.LENGTH_SHORT).show();
+                   }else
+                   {
+                      // Toast.makeText(Details.this,"Submit is okay!",Toast.LENGTH_SHORT).show();
+                       requestReceiverSubmitAPI(context,jsonArray);
+                   }
+                }
+
+
+                break;
         }
     }
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -398,4 +427,74 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     }
 
 
+    private void requestReceiverSubmitAPI(final Context mcontext, JSONArray object) {
+
+        if (Reusable_Functions.chkStatus(mcontext)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(mcontext, "Loading data...");
+
+            String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId ;//+"?recache="+recache
+            Log.e("url", " post Request " + url + " ==== " + object.toString());
+            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.e("Submit Click Response :", response.toString());
+                            try {
+                                if (response == null || response.equals(null)) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
+
+                                } else
+                                {
+                                    String result=response.getString("status");
+                                    Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(Details.this,To_Do.class);
+                                    startActivity(intent);
+                                    finish();
+                                    Reusable_Functions.hDialog();
+                                }
+                            } catch (Exception e) {
+                                Log.e("Exception e", e.toString() + "");
+                                e.printStackTrace();
+                                Reusable_Functions.hDialog();
+
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
+                            error.printStackTrace();
+                        }
+                    }
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", bearertoken);
+                    //  params.put("Content-Type", "application/json");
+                    return params;
+                }
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+            };
+            int socketTimeout = 60000;//5 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+
+
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+    }
 }
