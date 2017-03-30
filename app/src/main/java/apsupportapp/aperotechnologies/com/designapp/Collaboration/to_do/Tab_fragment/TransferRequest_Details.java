@@ -81,7 +81,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private int ScanCount;
     private Button btn_Submit;
     private ProgressBar TransferDetailProcess;
-    private String recache;
+    private String recache,detail_CaseNo,detl_reqStoreCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +94,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         recache = "true";
         gson = new Gson();
         Sender_DetailsList = new ArrayList<Transfer_Request_Model>();
-       ScanList = new ArrayList<Transfer_Request_Model>();
+        ScanList = new ArrayList<Transfer_Request_Model>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -115,7 +115,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestReceiversChildDetails(final int position)
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20")+"&recache="+recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20") +"&caseNo="+detail_CaseNo+"&reqStoreCode="+detl_reqStoreCode+"&recache="+recache;
 
         Log.e(TAG, "Sender Details Child Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -211,7 +211,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestSenderDetails() {
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&recache=" + recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption +"&caseNo="+detail_CaseNo+"&reqStoreCode="+detl_reqStoreCode+"&recache=" + recache;
 
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -299,6 +299,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void MakeChildScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
 
+        // This is for child scan count
         TrchildScanQty = new HashMap<Integer, ArrayList<Integer>>();
 
         for (int i = 0; i <sender_detailsList.size() ; i++) {
@@ -342,8 +343,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void initalise()
     {
-        String caseNo = getIntent().getExtras().getString("caseNo");
+        detail_CaseNo = getIntent().getExtras().getString("caseNo");
         double data2 = getIntent().getExtras().getDouble("reqQty");
+        detl_reqStoreCode = getIntent().getExtras().getString("reqStoreCode");
         //  MCCodeDesc = data;
         tr_recyclerView = (RecyclerView) findViewById(R.id.trasnsferreq_detail_list);
         tr_imageBtnBack = (RelativeLayout) findViewById(R.id.tr_details_imageBtnBack);
@@ -351,17 +353,18 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         txt_valtotalreqty = (TextView) findViewById(R.id.txt_valtotalreqty);
         btn_Submit = (Button)findViewById(R.id.btn_trdetailSubmit);
         TransferDetailProcess = (ProgressBar)findViewById(R.id.transferDetailProcess);
-        txt_caseNo.setText("Case#"+caseNo);
+        txt_caseNo.setText("Case#"+detail_CaseNo);
         txt_valtotalreqty.setText("" + Math.round(data2));
         tr_imageBtnBack.setOnClickListener(this);
         btn_Submit.setOnClickListener(this);
     }
 
-    public void StartActivity(String CaseNo, double reqQty, Context context)
+    public void StartActivity(String CaseNo, double reqQty,String reqStoreCode, Context context)
     {
         Intent intent = new Intent(context, TransferRequest_Details.class);
         intent.putExtra("caseNo", CaseNo);
         intent.putExtra("reqQty", reqQty);
+        intent.putExtra("reqStoreCode",reqStoreCode);
         context.startActivity(intent);
     }
 
@@ -411,15 +414,15 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             } else
             {
                 Toast.makeText(this, "Barcode Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                if(check_adapter_str.equals("HeaderAdapter"))
-                {
-                    ScanCount++;
-                    TransferDetailsAdapter.headeradapter_scanQty[headerAdapterPos]=ScanCount;
-                    transferDetailsAdapter.notifyDataSetChanged();
-                    Log.e("Scan Count ",""+ ScanCount);
-                }
-                else if(check_adapter_str.equals("ChildAdapter"))
-                {
+//                if(check_adapter_str.equals("HeaderAdapter"))
+//                {
+//                    ScanCount++;
+//                    TransferDetailsAdapter.headeradapter_scanQty[headerAdapterPos]=ScanCount;
+//                    transferDetailsAdapter.notifyDataSetChanged();
+//                    Log.e("Scan Count ",""+ ScanCount);
+//                }
+//                else if(check_adapter_str.equals("ChildAdapter"))
+//                {
 
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
@@ -429,14 +432,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     } else {
                         Toast.makeText(TransferRequest_Details.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
-
-                }
+              //  }
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment
             super.onActivityResult(requestCode, resultCode, data);
         }
-
     }
 
     @Override
@@ -444,18 +445,18 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     {
         Log.e("Check :",""+check);
 
-        if(check.equals("HeaderAdapter"))
-        {
-            check_adapter_str = check;
-            headerAdapterPos = position;
-        }
-        else
-        {
+//        if(check.equals("HeaderAdapter"))
+//        {
+//            check_adapter_str = check;
+//            headerAdapterPos = position;
+//        }
+//        else
+//        {
             check_adapter_str = check;
             childAdapterPos = position;
             Log.e("String check :",""+check +"\tchildAdapterPos:"+position);
 
-        }
+      //  }
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(AnyOrientationCaptureActivity.class);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
@@ -469,7 +470,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private void requestScanDetailsAPI(String contents) {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderscan/scan/" + userId + "?eanNumber="+contents +"&recache=" + recache;
-
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -495,12 +495,13 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 count++;
                                 requestSenderDetails();
 
-                            } else if (response.length() < limit) {
+                            } else if (response.length() < limit)
+                            {
                                 for (int i = 0; i < response.length(); i++) {
                                     transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
                                     ScanList.add(transfer_request_model);
                                 }
-                                if(SenderChildDetailList.get(childAdapterPos).getLevel().equals("36"))
+                                if(SenderChildDetailList.get(childAdapterPos).getLevel().equals("L"))
                                 {
                                     Log.e("Level :",""+SenderChildDetailList.get(childAdapterPos).getLevel()+"\tProdAttribute4:"+ScanList.get(childAdapterPos).getProdAttribute4());
                                     ScanCount++;
@@ -517,7 +518,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 {
                                     Log.e("Came","here");
                                 }
-
                             }
 
                             Reusable_Functions.hDialog();
@@ -526,7 +526,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -557,9 +556,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
         Reusable_Functions.hDialog();
-
-
-
 
     }
 

@@ -16,6 +16,10 @@ import android.widget.TextView;
 
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,7 +33,7 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
  * Created by csuthar on 06/03/17.
  */
 
-public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
 
     private final ProgressBar detailProcess;
@@ -37,51 +41,53 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private  Context context;
     private  ArrayList<ToDo_Modal> list;
     private  boolean[] Toggle;
-    private  boolean[] HeadercheckList;
+    private  boolean[] HeadercheckList;  //list for check header
     public OnPress onPressInterface;
     private Set<Pair<Integer, Integer>> CheckedItems ;
     private final boolean[] visibleItems;
-    public OnSelectedItem onSelectedInterface;
-    public static boolean isheaderCheck;
-    public static boolean isOptionCheck;
 
 
-    public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess)
-    {
+
+
+
+    public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess) {
         this.list=list;
         this.context=context;//
         Toggle= new boolean[list.size()];
         HeadercheckList= new boolean[list.size()];
         onPressInterface=(OnPress)context;
-        onSelectedInterface = (OnSelectedItem)context;
         HashMapSubChild=hashmapList;
         CheckedItems=new HashSet<Pair<Integer,Integer>>();
         visibleItems=new boolean[list.size()];
         this.detailProcess=detailProcess;
-        isheaderCheck = false;
-        isOptionCheck = false;
+        Log.e("TAG", "StockDetailsAdapter:  constructor");
 
     }
+
+
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_stock_details_child, parent, false);
-        return new StockDetailsAdapter.Holder(v);
+        return new Holder(v);
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
+        Log.e("TAG", "Stock detail: "+position );
 
-        if(holder instanceof StockDetailsAdapter.Holder) {
+        if(holder instanceof Holder) {
             if(position < list.size()) {
 
                 HandlePositionOnSet(holder,position);
-                ((StockDetailsAdapter.Holder)holder).Detail_Soh.setText(""+Math.round(list.get(position).getStkOnhandQty()));
-                ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setText(list.get(position).getLevel());
-                ((StockDetailsAdapter.Holder)holder).Detail_reqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
-                ((StockDetailsAdapter.Holder)holder).Detail_Git.setText(""+Math.round(list.get(position).getStkGitQty()));
-                ((StockDetailsAdapter.Holder)holder).Detail_AviQty.setText(""+Math.round(list.get(position).getStkQtyAvl()));
+
+                ((Holder)holder).Detail_Soh.setText(""+Math.round(list.get(position).getStkOnhandQty()));
+                ((Holder)holder).Detail_optionLevel.setText(list.get(position).getLevel());
+                ((Holder)holder).Detail_reqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
+                ((Holder)holder).Detail_Git.setText(""+Math.round(list.get(position).getStkGitQty()));
+                ((Holder)holder).Detail_AviQty.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((Holder)holder).Detail_headerCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -89,33 +95,31 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         if(((CheckBox)view).isChecked())
                         {
                             //Header check is enable when view is open
-                            //if(Toggle[position]){
+                            //  if(Toggle[position]){
                             HeadercheckList[position]=true;
                             visibleItems[position]=true;
                             //SetChangeInChild(position);
+
                             //  }else{
                             // HeadercheckList[position]=false;
-                            //
-                            // }
-                            isheaderCheck = true;
-                            //SetUpCheckHeader(position);
-                            Log.e("Checked position :",""+position);
-                            onSelectedInterface.onSelected(position);
-                            notifyItemChanged(position);
 
-                        }
-                        else
+                            // }
+                            notifyItemChanged(position);
+                        }else
                         {
                             HeadercheckList[position]=false;
                             // SetUncheckInChild(position);
                             visibleItems[position]=true;
-                            onSelectedInterface.onSelected(position);
                             notifyItemChanged(position);
+
                             Log.e("TAG","uncheck notifyDataset changed..." );
+
                         }
                     }
+
+
                 });
-                ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
+                ((Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if(detailProcess.getVisibility()==View.GONE)
@@ -126,40 +130,35 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             {
                                 Toggle[position]=false;
                                 notifyDataSetChanged();
+
                             }else
                             {
                                 Toggle[position]=true;
                                 if(HashMapSubChild.get(position).isEmpty())
                                 {
-                                    Log.e("Position before :",""+position);
-                                    isOptionCheck = true;
                                     onPressInterface.OnPress(position);
-                                    Log.e("Position after :",""+position);
-//                                    onSelectedInterface.onSelected(position);
 
                                 }else
                                 {
                                     notifyDataSetChanged();
+
                                 }
+
                             }
+
                         }
+
+
+
+
+
                     }
                 });
                 DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(visibleItems,HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
-                ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
+                ((Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
+
             }
         }
-    }
-
-    private  void  SetUpCheckHeader(int position) {
-
-
-            ToDo_Modal toDo_modal = list.get(position);
-            String option = toDo_modal.getOption();
-            String prodAttr = "";
-            String mccodeDesc = toDo_modal.getMccodeDesc();
-            Log.e("========", "option" + option + "mcDesc :" + mccodeDesc);
-
     }
 
     private void SetUncheckInChild(int position) {
@@ -171,8 +170,10 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             {
                 CheckedItems.remove(Tag);
             }
+
         }
         notifyItemChanged(position);
+
     }
 
     private void SetChangeInChild(int position) {
@@ -183,36 +184,41 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             {
                 CheckedItems.add(Tag);
             }
+
         }
         notifyItemChanged(position);
     }
 
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position)
-
     {
         if(Toggle[position])
         {
-            ((StockDetailsAdapter.Holder)holder).Sizeslayout.setVisibility(View.VISIBLE);
+            ((Holder)holder).Sizeslayout.setVisibility(View.VISIBLE);
 
         }else
         {
-            ((StockDetailsAdapter.Holder)holder).Sizeslayout.setVisibility(View.GONE);
+            ((Holder)holder).Sizeslayout.setVisibility(View.GONE);
 
         }
         if(HeadercheckList[position])
         {
-            ((StockDetailsAdapter.Holder)holder).Detail_headerCheck.setChecked(true);
+            ((Holder)holder).Detail_headerCheck.setChecked(true);
 
         }else
         {
-            ((StockDetailsAdapter.Holder)holder).Detail_headerCheck.setChecked(false);
+            ((Holder)holder).Detail_headerCheck.setChecked(false);
+
         }
     }
+
 
     @Override
     public int getItemCount() {
         return list.size();
     }
+
+
+
 
     public static class Holder extends RecyclerView.ViewHolder {
 
@@ -233,5 +239,62 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             detailsLinear=(RecyclerView)itemView.findViewById(R.id.details_headerChild);
             Detail_headerCheck=(CheckBox) itemView.findViewById(R.id.detail_headerCheck);
         }
+
     }
+
+    public JSONArray OnSubmit(String MCCodeDesc)
+    {
+        int count=0;  //count is for add one by one in Jsonarray.
+
+        JSONArray jsonarray=new JSONArray();
+        try
+        {
+            for (int i = 0; i <list.size(); i++) {
+
+                if(!HashMapSubChild.get(i).isEmpty())   //fst start with subchild if no one select in subchild then it will go header selection.
+                {
+                  //  Log.i("Onsubmit",+i+"HashMapSubChild "+HashMapSubChild.get(i).size());
+                    for (int j = 0; j <HashMapSubChild.get(i).size(); j++)
+                    {
+                        Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
+                        if(CheckedItems.contains(Tag)){
+                            JSONObject obj = new JSONObject();
+                            obj.put("option",list.get(i).getLevel());
+                            obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
+                            obj.put("prodLevel6Code",MCCodeDesc);
+                            jsonarray.put(count,obj);
+                            count++;
+                        }
+                    }
+
+                }else
+                {
+                    if(HeadercheckList[i]) {
+                      //  Log.i("Onsubmit", +i + "HeadercheckList" + HeadercheckList);
+                        JSONObject obj = new JSONObject();
+                        obj.put("option",list.get(i).getLevel());
+                       // obj.put("prodAttribute4","");
+                        obj.put("prodLevel6Code",MCCodeDesc);
+                        jsonarray.put(count,obj);
+                        count++;
+
+                    }
+                }
+            }
+            Log.e("OnSubmit: ",""+jsonarray.toString());
+
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+            Log.e("OnSubmit:  error",""+e.getMessage() );
+        }
+
+
+        return jsonarray;
+    }
+
+
+
+
+
 }

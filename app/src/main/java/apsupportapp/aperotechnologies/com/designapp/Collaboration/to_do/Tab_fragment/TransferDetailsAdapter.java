@@ -30,7 +30,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    public static int[] headeradapter_scanQty;
+    public  int[] headeradapter_scanQty;
     private final ProgressBar transferDetailProcess;
 
     private Context context;

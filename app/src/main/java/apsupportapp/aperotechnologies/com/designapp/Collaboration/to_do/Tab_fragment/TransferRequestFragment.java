@@ -142,7 +142,7 @@ public class TransferRequestFragment extends Fragment {
         senderSummary_recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                new TransferRequest_Details().StartActivity(SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getStkOnhandQtyRequested(),context);
+                new TransferRequest_Details().StartActivity(SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getStkOnhandQtyRequested(),SenderSummaryList.get(position).getReqStoreCode(),context);
             }
         }));
     }

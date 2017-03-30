@@ -42,7 +42,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         this.stockDetailsAdapter = stockDetailsAdapter;
         this.headercheckList = headercheckList;
         CheckedItems = checkedItems;
-        onSelectedInterface = (OnSelectedItem)context;
+      //  onSelectedInterface = (OnSelectedItem)context;
     }
 
     @Override
@@ -72,12 +72,12 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
             {
                 CheckedItems.add(Childtag);
                 Log.e("Checkitems :",""+CheckedItems);
-                onSelectedInterface.onSelected(PrePosition);
+              //  onSelectedInterface.onSelected(PrePosition);
             }
             else
             {
                 CheckedItems.remove(Childtag);
-                onSelectedInterface.onSelected(PrePosition);
+             //   onSelectedInterface.onSelected(PrePosition);
             }
         }
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_checkBox.setChecked(CheckedItems.contains(Childtag));

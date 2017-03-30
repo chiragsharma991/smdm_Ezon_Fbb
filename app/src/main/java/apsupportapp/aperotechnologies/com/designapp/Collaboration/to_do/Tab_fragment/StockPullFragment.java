@@ -45,7 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
 public class StockPullFragment extends Fragment {
-   
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Gson gson;
@@ -148,7 +148,7 @@ public class StockPullFragment extends Fragment {
         }));
     }
 
-    private void MainMethod() 
+    private void MainMethod()
     {
         NetworkProcess();
         Reusable_Functions.sDialog(context, "Loading.......");
@@ -163,6 +163,7 @@ public class StockPullFragment extends Fragment {
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiversummary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit +"&recache="+recache;
             Log.e(TAG, "To_DO Summary Url" + "" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response)
@@ -256,7 +257,7 @@ public class StockPullFragment extends Fragment {
 
     }
 
-    private void NetworkProcess() 
+    private void NetworkProcess()
     {
         gson = new Gson();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
