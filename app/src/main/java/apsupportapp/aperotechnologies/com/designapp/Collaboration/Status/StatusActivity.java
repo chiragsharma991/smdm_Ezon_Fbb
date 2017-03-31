@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment.ToBeReceiver;
@@ -22,6 +23,7 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
     private ViewPager viewPager;
     private TabLayout tab;
     RelativeLayout status_imageBtnBack;
+    public static ProgressBar StatusProcess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,9 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initialise() {
         status_imageBtnBack = (RelativeLayout)findViewById(R.id.status_imageBtnBack);
+        StatusProcess = (ProgressBar)findViewById(R.id.statusProcess);
+        StatusProcess.setVisibility(View.GONE);
+
         status_imageBtnBack.setOnClickListener(this);
     }
 

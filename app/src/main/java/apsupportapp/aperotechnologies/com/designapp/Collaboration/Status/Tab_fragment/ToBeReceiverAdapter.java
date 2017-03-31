@@ -16,6 +16,7 @@ import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -298,6 +299,7 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onClick(View v) {
 
+
         switch (v.getId())
         {
             case R.id.rec_status_track_position_Initiated:
@@ -310,8 +312,13 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     String actionStatus ="RECVR_REQ";
                     if(receiver_initiatedStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1,senderStoreCode);
-                        Receiver_Toggle[dublicatePosition]=true;
+                        if(StatusActivity.StatusProcess.getVisibility()==View.GONE)
+                        {
+                            StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
+                            onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1,senderStoreCode);
+                            Receiver_Toggle[dublicatePosition]=true;
+                        }
+
                     }else
                     {
                         Receiver_Toggle[dublicatePosition]=true;
@@ -333,8 +340,13 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     String actionStatus ="SENDER_ACPT";
                     if(receiver_senderAcpStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2,senderStoreCode);
-                        Receiver_Toggle[dublicatePosition]=true;
+                        if(StatusActivity.StatusProcess.getVisibility()==View.GONE)
+                        {
+                            StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
+                            onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2,senderStoreCode);
+                            Receiver_Toggle[dublicatePosition]=true;
+                        }
+
                     }else
                     {
                         Receiver_Toggle[dublicatePosition]=true;
@@ -353,8 +365,13 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                     if(receiver_stoStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo1,"",dublicatePosition,3,senderStoreCode);
-                        Receiver_Toggle[dublicatePosition]=true;
+                        if(StatusActivity.StatusProcess.getVisibility()==View.GONE)
+                        {
+                            StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
+                            onclickStatus.Onclick(caseNo1,"",dublicatePosition,3,senderStoreCode);
+                            Receiver_Toggle[dublicatePosition]=true;
+                        }
+
                     }else
                     {
                         Receiver_Toggle[dublicatePosition]=true;
@@ -373,8 +390,13 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                     if(receiver_grnStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo2,"",dublicatePosition,4,senderStoreCode);
-                        Receiver_Toggle[dublicatePosition]=true;
+                        if(StatusActivity.StatusProcess.getVisibility()==View.GONE)
+                        {
+                            StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
+                            onclickStatus.Onclick(caseNo2,"",dublicatePosition,4,senderStoreCode);
+                            Receiver_Toggle[dublicatePosition]=true;
+                        }
+
                     }else
                     {
                         Receiver_Toggle[dublicatePosition]=true;

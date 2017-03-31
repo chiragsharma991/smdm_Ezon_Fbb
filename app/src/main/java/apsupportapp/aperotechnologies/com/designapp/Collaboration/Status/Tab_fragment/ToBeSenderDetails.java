@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,6 +65,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     public static HashMap<Integer, ArrayList<StatusModel>> StatusHashmapChildList;
     private String option="";
     private String recache;
+    private ProgressBar SenderDetailProcess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +146,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                             recyclerView.setOnFlingListener(null);
                             Log.e(TAG, "data  "+StatusDetailsList.get(0).getLevel() );
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                            statusSenderDetails = new StatusSenderDetailsAdapter(StatusDetailsList, context);
+                            statusSenderDetails = new StatusSenderDetailsAdapter(StatusDetailsList, context,SenderDetailProcess);
                             MakeHashMap(StatusDetailsList);
                             recyclerView.setAdapter(statusSenderDetails);
 
@@ -204,6 +206,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         storeCase = (TextView) findViewById(R.id.status_detailStoreCase);
         storeCode = (TextView) findViewById(R.id.status_detailStoreCode);
         detailStoreDesc = (TextView)findViewById(R.id.detailStoreDesc);
+        SenderDetailProcess = (ProgressBar)findViewById(R.id.senderDetailProcess);
+        SenderDetailProcess.setVisibility(View.GONE);
         status_senderdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_senderdetails_imageBtnBack);
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
@@ -258,6 +262,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                SenderDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(ToBeSenderDetails.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -290,13 +295,14 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                             StatusHashmapChildList.put(position, StatusDetailChild);
                             statusSenderDetails.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
+                            SenderDetailProcess.setVisibility(View.GONE);
 
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
+                            SenderDetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -308,6 +314,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
+                        SenderDetailProcess.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }

@@ -760,6 +760,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
     private void TimeUP() {
 
+        Log.e("TimeUP", ""+firstVisibleItem+"and array size is"+salesAnalysisClassArrayList.size());
+
         if (firstVisibleItem < salesAnalysisClassArrayList.size() && onClickFlag == false) {
 
             if (txtheaderplanclass.getText().toString().equals("Department")) {
@@ -806,7 +808,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             // }
             //  selFirstPositionValue = firstVisibleItem;
         } else {
-            firstVisibleItem = salesAnalysisClassArrayList.size() - 1;
+            firstVisibleItem = salesAnalysisClassArrayList.size()-1;
             LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
             llm.scrollToPosition(firstVisibleItem);
 

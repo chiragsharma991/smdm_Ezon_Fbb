@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -276,6 +277,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private void initialise() {
 
         recyclerView=(RecyclerView)view.findViewById(R.id.to_be_received_list);
+
       /*  recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -290,25 +292,25 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         String url = "";
         if(Case==1)
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/initiated/" + userId + "?offset=" + offsetvalue+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/initiated/" + userId + "?offset=" + offsetvalue+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+userId+"&recache="+recache;
 
 
         }else if(Case == 2)
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/senderacpt/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/senderacpt/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+userId+"&recache="+recache;
 
         }
 
         else if(Case == 3 ){
 
 
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+userId+"&recache="+recache;
 
         }
         else if(Case==4)
         {
 
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+userId+"&recache="+recache;
 
         }
        Log.e(TAG, "SenderCaseStatus Url" + "" + url);
@@ -322,7 +324,8 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                               // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                StatusActivity.StatusProcess.setVisibility(View.GONE);
+                                // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 SenderAdapter.notifyDataSetChanged();
                                 return;
 
@@ -368,12 +371,14 @@ public class ToBeSender extends Fragment implements OnclickStatus {
 
                             SenderAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
+                            StatusActivity.StatusProcess.setVisibility(View.GONE);
 
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
+                            StatusActivity.StatusProcess.setVisibility(View.GONE);
                             SenderAdapter.notifyDataSetChanged();
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
@@ -387,6 +392,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         SenderAdapter.notifyDataSetChanged();
                         Reusable_Functions.hDialog();
+                        StatusActivity.StatusProcess.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }

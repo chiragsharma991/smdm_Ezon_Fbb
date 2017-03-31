@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 
 public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private final ProgressBar senderDetailProcess;
     private Context context;
     private ArrayList<StatusModel> list;
     private static boolean check=false;
@@ -32,11 +34,12 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
 
 
 
-    public StatusSenderDetailsAdapter(ArrayList<StatusModel> list, Context context) {
+    public StatusSenderDetailsAdapter(ArrayList<StatusModel> list, Context context, ProgressBar senderDetailProcess) {
         this.list=list;
         this.context=context;//
         Toggle= new boolean[list.size()];
         onPressInterface=(OnPress)context;
+        this.senderDetailProcess=senderDetailProcess;
 
 
     }
@@ -75,7 +78,11 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
 
                             if(ToBeSenderDetails.StatusHashmapChildList.get(position).isEmpty())
                             {
-                                onPressInterface.OnPress(position);
+                                if(senderDetailProcess.getVisibility()==View.GONE)
+                                {
+                                    senderDetailProcess.setVisibility(View.VISIBLE);
+                                    onPressInterface.OnPress(position);
+                                }
 
                             }
                             else

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
  */
 public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private final ProgressBar receiverDetailProcess;
     private Context context;
     private ArrayList<StatusModel> rec_status_dtllist;
     private static boolean check=false;
@@ -29,12 +31,13 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
 
 
 
-    public ReceiverStatusDetailsAdapter(ArrayList<StatusModel> rec_status_List, Context context) {
+    public ReceiverStatusDetailsAdapter(ArrayList<StatusModel> rec_status_List, Context context, ProgressBar receiverDetailProcess) {
         this.context = context;
         this.rec_status_dtllist = rec_status_List;
         Rec_Toggle = new boolean[rec_status_dtllist.size()];
         this.rec_status_dtllist = rec_status_List;
         onPressInterface=(OnPress)context;
+        this.receiverDetailProcess=receiverDetailProcess;
     }
 
     @Override
@@ -69,7 +72,11 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
 
                             if(ToBeReceiverDetails.Rec_StatusHashmapChildList.get(position).isEmpty())
                             {
-                                onPressInterface.OnPress(position);
+                                if(receiverDetailProcess.getVisibility()==View.GONE)
+                                {
+                                    receiverDetailProcess.setVisibility(View.VISIBLE);
+                                    onPressInterface.OnPress(position);
+                                }
 
                             }
                             else
