@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -366,6 +367,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                StatusActivity.StatusProcess.setVisibility(View.GONE);
                                 // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 ReceiverAdapter .notifyDataSetChanged();
                                 return;
@@ -413,6 +415,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                             }
 
                            ReceiverAdapter.notifyDataSetChanged();
+                            StatusActivity.StatusProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
 
 
@@ -420,6 +423,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
+                            StatusActivity.StatusProcess.setVisibility(View.GONE);
                             ReceiverAdapter .notifyDataSetChanged();
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
@@ -432,6 +436,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         ReceiverAdapter .notifyDataSetChanged();
+                        StatusActivity.StatusProcess.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }

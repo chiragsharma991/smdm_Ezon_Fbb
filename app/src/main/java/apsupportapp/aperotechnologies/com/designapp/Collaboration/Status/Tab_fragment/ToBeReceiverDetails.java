@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +69,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
     private String option="";
     private String senderStoreCode = "";
     private String recache;
+    private ProgressBar ReceiverDetailProcess;
 
 
     @Override
@@ -106,6 +108,8 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
         rec_storeCase = (TextView) findViewById(R.id.rec_status_detailStoreCase);
         rec_storeCode = (TextView) findViewById(R.id.rec_status_detailStoreCode);
         rec_storeDesc = (TextView) findViewById(R.id.rec_status_detailStoreDesc);
+        ReceiverDetailProcess = (ProgressBar)findViewById(R.id.receiverDetailProcess);
+        ReceiverDetailProcess.setVisibility(View.GONE);
         status_receiverdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_receiverdetails_imageBtnBack);
         status_receiverdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
@@ -164,7 +168,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
                             rec_detail_recycleView.setOnFlingListener(null);
                             Log.e(TAG, "data  "+Rec_Status_dtlList.get(0).getLevel() );
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                            rec_details_Adapter = new ReceiverStatusDetailsAdapter(Rec_Status_dtlList, context);
+                            rec_details_Adapter = new ReceiverStatusDetailsAdapter(Rec_Status_dtlList, context,ReceiverDetailProcess);
                             MakeHashMap(Rec_Status_dtlList);
                             rec_detail_recycleView.setAdapter(rec_details_Adapter);
                             Reusable_Functions.hDialog();
@@ -267,6 +271,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                ReceiverDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(ToBeReceiverDetails.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -299,13 +304,14 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
                             Rec_StatusHashmapChildList.put(position, StatusDetailChild);
                             rec_details_Adapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
+                            ReceiverDetailProcess.setVisibility(View.GONE);
 
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
+                            ReceiverDetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -317,6 +323,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
+                        ReceiverDetailProcess.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }

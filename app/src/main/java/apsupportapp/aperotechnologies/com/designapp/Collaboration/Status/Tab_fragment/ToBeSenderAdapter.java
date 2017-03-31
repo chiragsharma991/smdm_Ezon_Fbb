@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.OnPress;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -301,6 +302,7 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId())
         {
             case R.id.status_track_position_Initiated:
@@ -313,8 +315,13 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     String actionStatus ="RECVR_REQ";
                     if(initiatedStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1,recSenderCode);
-                        Toggle[dublicatePosition]=true;
+                        if(StatusActivity.StatusProcess.getVisibility()==View.GONE)
+                        {
+                            StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
+                            onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,1,recSenderCode);
+                            Toggle[dublicatePosition]=true;
+                        }
+
                     }else
                     {
                         Toggle[dublicatePosition]=true;
@@ -335,8 +342,12 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     String actionStatus ="SENDER_ACPT";
                     if(senderAcpStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2,recSenderCode);
-                        Toggle[dublicatePosition]=true;
+                        if(StatusActivity.StatusProcess.getVisibility()==View.GONE)
+                        {
+                            StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
+                            onclickStatus.Onclick(caseNo,actionStatus,dublicatePosition,2,recSenderCode);
+                            Toggle[dublicatePosition]=true;
+                        }
                     }else
                     {
                         Toggle[dublicatePosition]=true;
@@ -355,8 +366,13 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     if(stoStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo1,"",dublicatePosition,3,recSenderCode);
-                        Toggle[dublicatePosition]=true;
+                        if(StatusActivity.StatusProcess.getVisibility()==View.GONE)
+                        {
+                            StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
+                            onclickStatus.Onclick(caseNo1,"",dublicatePosition,3,recSenderCode);
+                            Toggle[dublicatePosition]=true;
+                        }
+
                     }else
                     {
                         Toggle[dublicatePosition]=true;
@@ -375,8 +391,13 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                    if(grnStatusList.get(dublicatePosition).isEmpty())
                     {
-                        onclickStatus.Onclick(caseNo2,"",dublicatePosition,4,recSenderCode);
-                        Toggle[dublicatePosition]=true;
+                        if(StatusActivity.StatusProcess.getVisibility()==View.GONE)
+                        {
+                            StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
+                            onclickStatus.Onclick(caseNo2,"",dublicatePosition,4,recSenderCode);
+                            Toggle[dublicatePosition]=true;
+                        }
+
                     }else
                     {
                         Toggle[dublicatePosition]=true;
