@@ -82,20 +82,19 @@ public class TransferRequestFragment extends Fragment {
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser)
         {
             if(checkNetworkFalse)
             {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-
             }
         }
     }
 
-
-    // TODO: Rename and change types and number of parameters
+    //TODO: Rename and change types and number of parameters
     public static StockPullFragment newInstance(String param1, String param2) {
         StockPullFragment fragment = new StockPullFragment();
         Bundle args = new Bundle();
@@ -168,7 +167,6 @@ public class TransferRequestFragment extends Fragment {
                         {
                             Log.e(TAG, "Transfer Request response : " + " " + response);
                             Log.e(TAG, "TTransfer Request response length" + "" + response.length());
-
                             try
                             {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -177,21 +175,21 @@ public class TransferRequestFragment extends Fragment {
                                  //   Toast.makeText(context, "No data found from REQUEST FROM STORES", Toast.LENGTH_SHORT).show();
                                     return;
 
-                                } else if (response.length() == limit) {
+                                }
+                                else if (response.length() == limit)
+                                {
                                     Log.e(TAG, "promo eql limit");
-                                    for (int i = 0; i < response.length(); i++) {
-
+                                    for (int i = 0; i < response.length(); i++)
+                                    {
                                         transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
                                         SenderSummaryList.add(transfer_request_model);
-
                                     }
                                     offsetvalue = (limit * count) + limit;
                                     count++;
-                                    //
-
                                     requestTransferRequestsummary();
 
-                                } else if (response.length() < limit)
+                                }
+                                else if (response.length() < limit)
                                 {
                                     Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++)
@@ -200,7 +198,7 @@ public class TransferRequestFragment extends Fragment {
                                         SenderSummaryList.add(transfer_request_model);
                                     }
                                 }
-                                senderSummary_recyclerView.setLayoutManager(new LinearLayoutManager( senderSummary_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                senderSummary_recyclerView.setLayoutManager(new LinearLayoutManager(senderSummary_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 senderSummary_recyclerView.setOnFlingListener(null);
                                 // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                                 TransferRequestAdapter transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,getActivity());
@@ -226,7 +224,6 @@ public class TransferRequestFragment extends Fragment {
                             error.printStackTrace();
                         }
                     }
-
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
@@ -244,7 +241,6 @@ public class TransferRequestFragment extends Fragment {
         else
         {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
-
             Reusable_Functions.hDialog();
         }
 
@@ -270,7 +266,6 @@ public class TransferRequestFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
 
     @Override
     public void onDetach()

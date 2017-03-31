@@ -46,12 +46,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
     private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
     private ArrayList<Integer> countList;
 
-
-
-
-
     public TrDetailsHeaderChildAdapter(HashMap<Integer, ArrayList<Transfer_Request_Model>> transferReqHashmapList, Context context, int position, TransferDetailsAdapter transferDetailsAdapter, HashMap<Integer, ArrayList<Integer>> childScanCount) {
-
         this.list=transferReqHashmapList;
         this.context=context;//
         this.childScanCount=childScanCount;//
@@ -61,7 +56,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         checkChildStr = "";
         trDetailsHeaderChildAdapter = this;
         countList = new ArrayList<Integer>();
-
     }
 
     @Override
@@ -81,55 +75,57 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         ((TrDetailsHeaderChildAdapter.Holder)holder).tr_DetailChild_size.setText(list.get(PrePosition).get(position).getLevel());
         ((TrDetailsHeaderChildAdapter.Holder)holder).tr_DetailChild_requiredQty.setText(""+Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested()));
 
-        ((TrDetailsHeaderChildAdapter.Holder) holder).imgbtn_detailchild_scan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("TAG", "Detail Child Scan onClick:>>>> "+position );
-
-                if (isAMobileModel()) {
-
-                    Intent intent_barcode = new Intent();
-                    intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
-                    intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
-                    context.sendBroadcast(intent_barcode);
-                    //  ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
-                    barcode = " ";
-                    android.os.Handler h = new android.os.Handler();
-                    h.postDelayed(new Runnable() {
-                        public void run() {
-
-                            Intent i1 =((Activity) context).getIntent();
-                            Log.e("getIntent : ", "" + ((Activity) context).getIntent());
-                            Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString());
-                            barcode =   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString();
-                            if(!barcode.equals(" "))
-                            {
-                                Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                //  TimeUP();
-                            }
-                            else
-                            {
-                                View view=((Activity)context).findViewById(android.R.id.content);
-                                Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
-                    }, 1500);
-
-                } else if (!isAMobileModel()) {
-
-                    checkChildStr = "ChildAdapter";
-                    onBarcodeScan.onScan(v,position,checkChildStr,transferDetailsAdapter);
-//                     for(int i = 0;i )
-//                     countList.add(1);
-                }
-                notifyDataSetChanged();
-            }
-        });
+//        ((TrDetailsHeaderChildAdapter.Holder) holder).imgbtn_detailchild_scan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.e("TAG", "Detail Child Scan onClick:>>>> "+position );
+//
+//                if (isAMobileModel()) {
+//
+//                    Intent intent_barcode = new Intent();
+//                    intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
+//                    intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
+//                    context.sendBroadcast(intent_barcode);
+//                    //  ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
+//                    barcode = " ";
+//                    android.os.Handler h = new android.os.Handler();
+//                    h.postDelayed(new Runnable()
+//                    {
+//                        public void run()
+//                        {
+//                            Intent i1 =((Activity) context).getIntent();
+//                            Log.e("getIntent : ", "" + ((Activity) context).getIntent());
+//                            Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString());
+//                            barcode =   ((TrDetailsHeaderChildAdapter.Holder)holder).et_trcdetailchildBarcode.getText().toString();
+//                            if(!barcode.equals(" "))
+//                            {
+//                                Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
+//                                //TimeUP();
+//                            }
+//                            else
+//                            {
+//                                View view=((Activity)context).findViewById(android.R.id.content);
+//                                Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
+//                            }
+//                        }
+//                    }, 1500);
+//
+//                } else if (!isAMobileModel())
+//                {
+//                    checkChildStr = "ChildAdapter";
+//                    onBarcodeScan.onScan(v,position,checkChildStr,transferDetailsAdapter);
+////                     for(int i = 0;i )
+////                     countList.add(1);
+//                }
+//                notifyDataSetChanged();
+//            }
+//        });
+//
         ((TrDetailsHeaderChildAdapter.Holder) holder).tr_DetailChild_scanqty.setText(""+childScanCount.get(PrePosition).get(position));
-
     }
 
-    private boolean isAMobileModel() {
+    private boolean isAMobileModel()
+    {
         Log.e("checking model", "");
         getDeviceInfo();
         Log.e("cmodel is ", "" + Build.MODEL);
@@ -146,6 +142,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
             return capitalize(manufacturer) + " " + model;
         }
     }
+
     private String capitalize(String s) {
         if (s == null || s.length() == 0) {
             return "";
@@ -164,9 +161,8 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         return list.get(PrePosition).size();
     }
 
-    private static class Holder extends RecyclerView.ViewHolder {
-
-
+    private static class Holder extends RecyclerView.ViewHolder
+    {
         private final TextView tr_DetailChild_size,tr_DetailChild_requiredQty;
         public TextView tr_DetailChild_scanqty;
         //  private CheckBox cb_trDetailChild;
@@ -174,12 +170,13 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         EditText et_trcdetailchildBarcode;
         LinearLayout lin_childimgbtnScan;
 
-        public Holder(View itemView) {
+        public Holder(View itemView)
+        {
             super(itemView);
             tr_DetailChild_size=(TextView)itemView.findViewById(R.id.txt_trdetailChild_size);
             tr_DetailChild_requiredQty=(TextView)itemView.findViewById(R.id.txt_trdetailchild_reqty);
             tr_DetailChild_scanqty=(TextView)itemView.findViewById(R.id.txt_trdetailchild_scanqty);
-            imgbtn_detailchild_scan = (ImageView)itemView.findViewById(R.id.btn_scan);
+           // imgbtn_detailchild_scan = (ImageView)itemView.findViewById(R.id.btn_scan);
            // lin_childimgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_childimgbtnScan);
            // et_trcdetailchildBarcode = (EditText)itemView.findViewById(R.id.et_trcdetailchildBarcode);
         }
