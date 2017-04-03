@@ -70,7 +70,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_stock_details_child, parent, false);
-        return new StockDetailsAdapter.Holder(v);
+        return new Holder(v);
     }
 
     @Override
@@ -78,16 +78,16 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         Log.e("TAG", "Stock detail: "+position );
 
-        if(holder instanceof StockDetailsAdapter.Holder) {
+        if(holder instanceof Holder) {
             if(position < list.size()) {
 
                 HandlePositionOnSet(holder,position);
 
-                ((StockDetailsAdapter.Holder)holder).Detail_Soh.setText(""+Math.round(list.get(position).getStkOnhandQty()));
-                ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setText(list.get(position).getLevel());
-                ((StockDetailsAdapter.Holder)holder).Detail_reqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
-                ((StockDetailsAdapter.Holder)holder).Detail_Git.setText(""+Math.round(list.get(position).getStkGitQty()));
-                ((StockDetailsAdapter.Holder)holder).Detail_AviQty.setText(""+Math.round(list.get(position).getStkQtyAvl()));
+                ((Holder)holder).Detail_Soh.setText(""+Math.round(list.get(position).getStkOnhandQty()));
+                ((Holder)holder).Detail_optionLevel.setText(list.get(position).getLevel());
+                ((Holder)holder).Detail_reqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
+                ((Holder)holder).Detail_Git.setText(""+Math.round(list.get(position).getStkGitQty()));
+                ((Holder)holder).Detail_AviQty.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((Holder)holder).Detail_headerCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -119,7 +119,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
                 });
-                ((StockDetailsAdapter.Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
+                ((Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if(detailProcess.getVisibility()==View.GONE)
@@ -155,7 +155,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 });
                 DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(visibleItems,HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
-                ((StockDetailsAdapter.Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
+                ((Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
 
             }
         }
@@ -193,20 +193,20 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     {
         if(Toggle[position])
         {
-            ((StockDetailsAdapter.Holder)holder).Sizeslayout.setVisibility(View.VISIBLE);
+            ((Holder)holder).Sizeslayout.setVisibility(View.VISIBLE);
 
         }else
         {
-            ((StockDetailsAdapter.Holder)holder).Sizeslayout.setVisibility(View.GONE);
+            ((Holder)holder).Sizeslayout.setVisibility(View.GONE);
 
         }
         if(HeadercheckList[position])
         {
-            ((StockDetailsAdapter.Holder)holder).Detail_headerCheck.setChecked(true);
+            ((Holder)holder).Detail_headerCheck.setChecked(true);
 
         }else
         {
-            ((StockDetailsAdapter.Holder)holder).Detail_headerCheck.setChecked(false);
+            ((Holder)holder).Detail_headerCheck.setChecked(false);
 
         }
     }
@@ -241,9 +241,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
     }
-
-
-
 
     public JSONArray OnSubmit(String MCCodeDesc)
     {

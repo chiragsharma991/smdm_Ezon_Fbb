@@ -11,10 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +30,13 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    public static int[] headeradapter_scanQty;
+    private final HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty;   //sub child list
     private final ProgressBar transferDetailProcess;
+    private final HashMap<Integer, ArrayList<Integer>> subchildCount;
+    private final HashMap<Integer, ArrayList<Integer>> headerScancount;
 
     private Context context;
     private ArrayList<Transfer_Request_Model> list;
-    private HashMap<Integer,ArrayList<Integer>> childScanCount;
-    private int[]scan;
     public  boolean[] Tr_HeaderToggle;
     public OnPress onPressInterface;
     public OnScanBarcode onBarcodeScan;
@@ -47,18 +47,21 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
 
-    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> list, Context context, int[] scanQty, HashMap<Integer, ArrayList<Integer>> trchildScanQty, ProgressBar transferDetailProcess) {
-        this.list=list;
+    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> sender_detailsList, Context context, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty, HashMap<Integer, ArrayList<Integer>> subchildCount, ProgressBar transferDetailProcess, HashMap<Integer, ArrayList<Integer>> headerScancount)
+    {
+        this.list=sender_detailsList;  //main option adapter
         this.context=context;//
         Tr_HeaderToggle= new boolean[list.size()];
         onPressInterface=(OnPress)context;
         onBarcodeScan = (OnScanBarcode)context;
-        scan=new int[list.size()];
-        this.childScanCount = trchildScanQty;
-        this.headeradapter_scanQty=scanQty;
+        this.subchildqty=subchildqty;  //total sub child details
+        this.subchildCount=subchildCount;  //only sub child scan qty
         this.transferDetailProcess=transferDetailProcess;
+        this.headerScancount=headerScancount;
         checkStr = "";
     }
+
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -71,10 +74,9 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         //  Log.e("TAG", "Stock detail: "+position );
 
         if(holder instanceof TransferDetailsAdapter.Holder) {
-            if(position < list.size()) {
-
+            if(position < list.size())
+            {
                 HandlePositionOnSet(holder,position);
-
                 ((TransferDetailsAdapter.Holder)holder).txt_optionval.setText(list.get(position).getLevel());
                 ((TransferDetailsAdapter.Holder)holder).txt_reqtyval.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((TransferDetailsAdapter.Holder)holder).txt_avlqtyval.setText(""+Math.round(list.get(position).getStkQtyAvl()));
@@ -83,7 +85,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ((TransferDetailsAdapter.Holder)holder).txt_optionval.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         if(transferDetailProcess.getVisibility()==View.GONE)
                         {
 
@@ -93,22 +94,20 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                                 Tr_HeaderToggle[position]=false;
                                 notifyDataSetChanged();
 
-                            }else
+                            }
+                            else
                             {
                                 Tr_HeaderToggle[position]=true;
-                                if(TransferRequest_Details.TransferReqHashmapList.get(position).isEmpty())
+                               if(subchildqty.get(position).isEmpty())
                                 {
                                     onPressInterface.OnPress(position);
-
-                                }else
+                                }
+                                else
                                 {
                                     notifyDataSetChanged();
-
                                 }
-
                             }
                         }
-
                     }
                 });
 
@@ -116,6 +115,41 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     @Override
                     public void onClick(View view) {
                         Log.e("TAG", "Header Scan onClick:>>>> "+position );
+
+                             if (isAMobileModel()) {
+
+                            Intent intent_barcode = new Intent();
+                            intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
+                            intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
+                            context.sendBroadcast(intent_barcode);
+                            ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
+                            barcode = " ";
+                            android.os.Handler h = new android.os.Handler();
+                            h.postDelayed(new Runnable() {
+                                public void run() {
+
+                                    Intent i1 =((Activity) context).getIntent();
+                                    Log.e("getIntent : ", "" + ((Activity) context).getIntent());
+                                    Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString());
+                                    barcode =   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString();
+                                    if(!barcode.equals(" "))
+                                    {
+                                        Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
+                                        //  TimeUP();
+                                    }
+                                    else
+                                    {
+                                        View view=((Activity)context).findViewById(android.R.id.content);
+                                        Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
+                                    }
+                                }
+                            }, 1500);
+
+                        } else if (!isAMobileModel()) {
+                            Log.e("regular device", "");
+                           // checkStr = "HeaderAdapter";
+                            onBarcodeScan.onScan(view, position, TransferDetailsAdapter.this);
+                        }
 
                         if (isAMobileModel()) {
 
@@ -125,8 +159,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             context.sendBroadcast(intent_barcode);
                             ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
                             barcode = " ";
-
-
                             android.os.Handler h = new android.os.Handler();
                             h.postDelayed(new Runnable() {
                                 public void run() {
@@ -135,11 +167,13 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                                     Log.e("getIntent : ", "" + ((Activity) context).getIntent());
                                     Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString());
                                     barcode =   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString();
-                                    if(!barcode.equals(" ")) {
+                                    if(!barcode.equals(" "))
+                                    {
                                         Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
                                         //  TimeUP();
                                     }
-                                    else{
+                                    else
+                                    {
                                         View view=((Activity)context).findViewById(android.R.id.content);
                                         Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
                                     }
@@ -148,18 +182,22 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                         } else if (!isAMobileModel()) {
                             Log.e("regular device", "");
-                            checkStr = "HeaderAdapter";
-                            onBarcodeScan.onScan(view,position,checkStr, TransferDetailsAdapter.this);
+                           // checkStr = "HeaderAdapter";
+                            onBarcodeScan.onScan(view,position, TransferDetailsAdapter.this);
+
                         }
                     }
                 });
-                ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(""+headeradapter_scanQty[position]);
-                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(TransferRequest_Details.TransferReqHashmapList,context,position,TransferDetailsAdapter.this,childScanCount);
+
+                ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(""+headerScancount.get(position).get(0));  // header total scan qty
+                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(context,position,TransferDetailsAdapter.this,subchildqty,subchildCount);
                 ((TransferDetailsAdapter.Holder)holder).recycleview_transferreq_detailChild.setAdapter(detailsHeaderChildAdapter);
                 detailsHeaderChildAdapter.notifyDataSetChanged();
             }
         }
     }
+
+
 
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
         if (Tr_HeaderToggle[position]) {
@@ -205,10 +243,11 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public static class Holder extends RecyclerView.ViewHolder {
 
         private TextView txt_caseNo,txt_optionval,txt_reqtyval,txt_avlqtyval,txt_sohval,txt_gitval,txt_scanqtyVal;
-        ImageView btn_scan;
+
         private EditText et_trBarcode;
-        private LinearLayout SizesLinLayout;
+        private RelativeLayout SizesLinLayout;
         private LinearLayout lin_imgbtnScan;
+        private ImageView btn_scan;
         //   private CheckBox Detail_headerCheck;
         protected RecyclerView recycleview_transferreq_detailChild;
 
@@ -221,11 +260,11 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             txt_sohval = (TextView)itemView.findViewById(R.id.txt_sohVal);
           //  txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
-            btn_scan = (ImageView) itemView.findViewById(R.id.btn_scan);
+            btn_scan = (ImageView) itemView.findViewById(R.id.imageView_scan);
             // lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
             // et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
             recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.details_headerChild);
-            SizesLinLayout = (LinearLayout)itemView.findViewById(R.id.detail_size);
+            SizesLinLayout = (RelativeLayout)itemView.findViewById(R.id.detail_size);
 
         }
 

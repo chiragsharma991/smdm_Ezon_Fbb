@@ -808,7 +808,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
             }
 
         } else {
-            focusposition = salesAnalysisClassArrayList.size() - 1;
+            focusposition = salesAnalysisClassArrayList.size()-1 ;
             LinearLayoutManager llm = (LinearLayoutManager) listViewSalesPvA.getLayoutManager();
             llm.scrollToPosition(focusposition);
 

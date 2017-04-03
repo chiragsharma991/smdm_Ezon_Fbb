@@ -20,7 +20,15 @@ public class ToDo_Modal {
 
 
 
+    public String getOption() {
+        return option;
+    }
 
+    public void setOption(String option) {
+        this.option = option;
+    }
+
+    String option;
 
     public String getStoreCode() {
         return storeCode;

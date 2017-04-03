@@ -3,158 +3,125 @@
               android:layout_height="wrap_content"
               android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="3dp"
-        >
 
         <LinearLayout
+            android:weightSum="3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="0.95"
-            android:gravity="center_horizontal"
-            >
+            android:layout_marginTop="3dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="19"
-                android:id="@+id/txt_trdetailChild_size"
-                android:textSize="@dimen/normallayout_storesize"
-                android:textColor="@color/smdm_default_color"
-                />
+                android:layout_weight="0.7"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal">
 
+                <CheckBox
+                    android:id="@+id/tr_detailChild_checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
+                <TextView
+                    android:id="@+id/txt_trdetailChild_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19"
+                    android:textColor="@color/smdm_default_color"
+                    android:textSize="@dimen/normallayout_storesize"/>
 
+            </LinearLayout>
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="0.95"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="19"
-                android:textSize="@dimen/normallayout_storesize"
-                android:id="@+id/txt_trdetailchild_reqty"
-                android:textColor="@color/smdm_default_color"
-                />
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txt_trdetailchild_reqty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19"
+                    android:textColor="@color/smdm_default_color"
+                    android:textSize="@dimen/normallayout_storesize"
+                    />
 
 
+            </LinearLayout>
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="-"
-                android:textSize="@dimen/normallayout_storesize"
-                android:textColor="@color/smdm_default_color"
-                />
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textColor="@color/smdm_default_color"
+                    android:textSize="@dimen/normallayout_storesize"
+                    />
 
 
+            </LinearLayout>
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1.05"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="-"
-                android:textSize="@dimen/normallayout_storesize"
-                android:textColor="@color/smdm_default_color"
-                />
+                android:layout_weight="0.4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textColor="@color/smdm_default_color"
+                    android:textSize="@dimen/normallayout_storesize"
+                    />
 
 
+            </LinearLayout>
 
-        </LinearLayout>
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_weight="1.07"-->
-            <!--&gt;-->
-
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="-"-->
-                <!--android:textSize="@dimen/normallayout_storesize"-->
-                <!--android:textColor="@color/smdm_default_color"-->
-                <!--/>-->
-
-
-
-        <!--</LinearLayout>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="0.95"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="19"
-                android:textSize="@dimen/normallayout_storesize"
-                android:id="@+id/txt_trdetailchild_scanqty"
-                android:textColor="@color/smdm_default_color"
-                />
+                android:layout_weight="0.6"
+                android:orientation="vertical">
 
+                <EditText
+                    android:id="@+id/txt_trdetailchild_scanqty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19"
+                    android:textColor="@color/smdm_default_color"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:orientation="vertical">
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/btn_scan"-->
+                    <!--android:layout_width="18dp"-->
+                    <!--android:layout_height="18dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@mipmap/scan_icon">-->
+                <!--</ImageView>-->
+            </LinearLayout>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1.09"
-            android:gravity="left"
-            >
-
-
-            <ImageView
-                android:id="@+id/btn_scan"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:gravity="center_horizontal"
-                android:src="@mipmap/scan_icon"
-                android:scaleType="fitXY"
-                />
-
-
-
-
-
-
-        </LinearLayout>
-
-
-
-
-    </LinearLayout>
-
 
 </LinearLayout>

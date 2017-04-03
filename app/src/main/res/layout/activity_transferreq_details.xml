@@ -81,21 +81,11 @@
                         android:indeterminateDrawable="@drawable/progress"
                         />
 
-
-
-
-
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
-
-
-
-
-
         </LinearLayout>
     </LinearLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -103,7 +93,6 @@
         android:id="@+id/listviewLayout"
         android:layout_below="@+id/linear_head"
         android:layout_above="@+id/btn_trdetailSubmit">
-
 
     <RelativeLayout
 
@@ -137,9 +126,7 @@
             android:textStyle="bold"
             android:textColor="@color/bg_store_code_text"
 
-
             />
-
         <TextView
             android:id="@+id/txt_valtotalreqty"
             android:layout_width="wrap_content"
@@ -155,7 +142,7 @@
 
 
 
-        >
+
         <android.support.v7.widget.RecyclerView
             android:layout_below="@+id/lin_caselayout"
             android:id="@+id/trasnsferreq_detail_list"
