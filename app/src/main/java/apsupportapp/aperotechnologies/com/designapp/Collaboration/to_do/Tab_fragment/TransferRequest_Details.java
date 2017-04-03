@@ -31,7 +31,6 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
-import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -46,7 +45,6 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Transfer
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.StyleActivity;
 
 /**
  * Created by pamrutkar on 08/03/17.
@@ -60,7 +58,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private String userId;
     private String bearertoken;
     private String check_adapter_str;
-    private int headerAdapterPos, childAdapterPos;
     private Transfer_Request_Model transfer_request_model;
     Context context;
     private int count = 0;
@@ -73,15 +70,18 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private RecyclerView tr_recyclerView;
     private int levelOfOption = 1;  //  1 is for option and 2 is for size
     private String option = "";    // code and description
+    private ArrayList<Integer> totalScanQty;
     private TransferDetailsAdapter transferDetailsAdapter;
     private HashMap<Integer,ArrayList<Integer>> TrchildScanQty;
-    public static HashMap<Integer, ArrayList<Transfer_Request_Model>> TransferReqHashmapList;
     private TextView txt_caseNo, txt_valtotalreqty;
-    private  int[] scanQty;
-    private int ScanCount;
+//    private  int[] scanQty;
+//    private int ScanCount;
     private Button btn_Submit;
     private ProgressBar TransferDetailProcess;
     private String recache,detail_CaseNo,detl_reqStoreCode;
+    private HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty;    //for sub child list
+    private HashMap<Integer, ArrayList<Integer>> subchildcount;    //for sub child qty
+    private HashMap<Integer, ArrayList<Integer>> headerScancount;    //for Header scan qty
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +90,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         getSupportActionBar().hide();
         context = this;
         initalise();
-        ScanCount = 0;
+       // ScanCount = 0;
         recache = "true";
         gson = new Gson();
         Sender_DetailsList = new ArrayList<Transfer_Request_Model>();
@@ -125,8 +125,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.i(TAG, "Sender Details Child  api response : " + " " + response);
-                        Log.i(TAG, "Sender Details Child  total length" + "" + response.length());
+                        Log.e(TAG, "Sender Details Child  api response : " + " " + response);
+                        Log.e(TAG, "Sender Details Child  total length" + "" + response.length());
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -156,8 +156,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 }
                             }
 
-                            TransferReqHashmapList.put(position,SenderChildDetailList);
-                            PutScanQty(SenderChildDetailList,position);
+                            addScanCount(SenderChildDetailList,position);
+                            subchildqty.put(position,SenderChildDetailList);
+                          //  PutScanQty(SenderChildDetailList,position);
                             transferDetailsAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             TransferDetailProcess.setVisibility(View.GONE);
@@ -196,6 +197,15 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
         Reusable_Functions.hDialog();
+    }
+
+    private void addScanCount(ArrayList<Transfer_Request_Model> senderChildDetailList, int position)
+    {
+        ArrayList<Integer> scanCount = new ArrayList<Integer>();
+        for (int i = 0; i <senderChildDetailList.size() ; i++) {
+            scanCount.add(0);
+        }
+        subchildcount.put(position,scanCount);
     }
 
     private void PutScanQty(ArrayList<Transfer_Request_Model> senderChildDetailList, int position)
@@ -250,10 +260,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             tr_recyclerView.setLayoutManager(new LinearLayoutManager(tr_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             tr_recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                            MakeChildScanList(Sender_DetailsList);
-                            MakeScanList(Sender_DetailsList);
-                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,scanQty,TrchildScanQty,TransferDetailProcess);
-                            MakeHashMap(Sender_DetailsList);
+                            MakeChildScanList(Sender_DetailsList);   //child all list
+                            MakeSubChildScanCount(Sender_DetailsList);  //only child scan count
+                            MakeHeaderScanCount(Sender_DetailsList);  // Top Header scan count
+                          //  MakeScanList(Sender_DetailsList);
+                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,subchildqty,subchildcount,TransferDetailProcess,headerScancount);
                             //MakeSubChildScanQty(Sender_DetailsList);
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
                             Reusable_Functions.hDialog();
@@ -295,7 +306,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         Reusable_Functions.hDialog();
     }
 
-    private void MakeChildScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
+    private void MakeScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
 
         // This is for child scan count
         TrchildScanQty = new HashMap<Integer, ArrayList<Integer>>();
@@ -307,35 +318,40 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         Log.e("sender list size",""+sender_detailsList.size());
     }
 
-//    private void MakeSubChildScanQty(ArrayList<Transfer_Request_Model> sender_detailsList)
-//    {
-//        childadapter_scanQty=new int[sender_detailsList.size()];
-//        for (int i = 0; i <sender_detailsList.size() ; i++) {
-//
-//            childadapter_scanQty[i]=0;
-//        }
-//
-//    }
+    private void MakeSubChildScanCount(ArrayList<Transfer_Request_Model> sender_detailsList)
+    {
+        subchildcount=new HashMap<>();
+        for (int i = 0; i <sender_detailsList.size() ; i++)
+        {
+            ArrayList<Integer> list=new ArrayList<Integer>();
+            subchildcount.put(i,list);
 
-    private void MakeScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
-
-        //   TransReqTotalScanQty = new HashMap<Integer, ArrayList<Transfer_Request_Model>>();
-
-        scanQty=new int[sender_detailsList.size()];
-        for (int i = 0; i <sender_detailsList.size() ; i++) {
-            scanQty[i]=0;
-            //       TransReqTotalScanQty.put(i,sender_detailsList);
         }
+
+    }
+    private void MakeHeaderScanCount(ArrayList<Transfer_Request_Model> sender_detailsList)
+    {
+        headerScancount=new HashMap<>();
+        for (int i = 0; i <sender_detailsList.size() ; i++)
+        {
+            ArrayList<Integer> list=new ArrayList<Integer>();
+            list.add(0);
+            headerScancount.put(i,list);
+
+        }
+
     }
 
-    private void MakeHashMap(ArrayList<Transfer_Request_Model> detailsList)
-    {
-        TransferReqHashmapList = new HashMap<Integer, ArrayList<Transfer_Request_Model>>();
-        for (int i = 0; i < detailsList.size(); i++)
+    private void MakeChildScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
+
+     subchildqty=new HashMap<>();
+        for (int i = 0; i <sender_detailsList.size() ; i++)
         {
-            ArrayList<Transfer_Request_Model> listData = new ArrayList<Transfer_Request_Model>();
-            TransferReqHashmapList.put(i, listData);
+            ArrayList<Transfer_Request_Model> list=new ArrayList<Transfer_Request_Model>();
+            subchildqty.put(i,list);
+
         }
+
     }
 
     private void initalise()
@@ -401,19 +417,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
 
     @Override
-    public void onScan(View view, TransferDetailsAdapter transferDetailsAdapter) {
-//        if(check.equals("HeaderAdapter"))
-////        {
-////            check_adapter_str = check;
-////            headerAdapterPos = position;
-////        }
-////        else
-////        {
-//            check_adapter_str = check;
-//        //childAdapterPos = position;
-//        // Log.e("String check :",""+check +"\tchildAdapterPos:"+position);
-//
-//        //  }
+    public void onScan(View view, int position, TransferDetailsAdapter transferDetailsAdapter) {
+
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(AnyOrientationCaptureActivity.class);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
@@ -431,19 +436,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         if (result != null) {
             if (result.getContents() == null)
             {
-                Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
+               // Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
             } else
             {
                 Toast.makeText(this, "Barcode Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-//                if(check_adapter_str.equals("HeaderAdapter"))
-//                {
-//                    ScanCount++;
-//                    TransferDetailsAdapter.headeradapter_scanQty[headerAdapterPos]=ScanCount;
-//                    transferDetailsAdapter.notifyDataSetChanged();
-//                    Log.e("Scan Count ",""+ ScanCount);
-//                }
-//                else if(check_adapter_str.equals("ChildAdapter"))
-//                {
 
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
@@ -453,7 +449,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     } else {
                         Toast.makeText(TransferRequest_Details.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
-              //  }
+
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment
@@ -473,7 +469,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         Log.e(TAG,"Scan api total length :" + "" + response.length());
                         try
                         {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
@@ -496,37 +493,32 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                     transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
                                     ScanList.add(transfer_request_model);
                                 }
+
                                 String size= ScanList.get(0).getProdAttribute4();
                                 int size_pos = 0;
 
-                                for(int i = 0;i < SenderChildDetailList.size();i++)
+                                for(int i = 0;i < SenderChildDetailList.size();i++) //find sizeitem  position from child list
                                 {
                                     if(SenderChildDetailList.get(i).getLevel().equals("4-5"))
                                     {
-
                                         size_pos=i;
                                         Log.e("position :",""+i+"\tsize_pos :"+size_pos);
-                                        ScanCount++;
-                                        scanQty[size_pos] = ScanCount;
-                                        Log.e("Child Scan Count ---", "" + ScanCount);
-                                        ArrayList<Integer> childlist = new ArrayList<Integer>();
-                                        childlist.add(ScanCount);
-                                        TrchildScanQty.put(size_pos, childlist);
-                                        Log.e("childAdapterPos", "" + TrchildScanQty.get(size_pos));
+                                        int totalCount=subchildcount.get(i).get(0)+1;  //pre count + next count
+                                        ArrayList<Integer>total=new ArrayList<Integer>();
+                                        total.add(totalCount);  //total sub count
+                                        subchildcount.put(i,total);
+                                        Log.e("i position :",""+i);
                                         transferDetailsAdapter.notifyDataSetChanged();
-                                        Log.e("list size -----",""+childlist.size());
+                                        addtotalIn_headerScanqty(subchildcount,i);
                                         break;
                                     }
                                     else
                                     {
+                                        Toast.makeText(context,"Barcode does not match sizes...",Toast.LENGTH_SHORT).show();
                                         Log.e("Came","here");
                                     }
                                 }
-//                                if(SenderChildDetailList.get(childAdapterPos).getLevel().equals(ScanList.get(childAdapterPos).getProdAttribute4()))
-//                                {
-//                                    Log.e("Level :",""+SenderChildDetailList.get(childAdapterPos).getLevel()+"\tProdAttribute4:"+ScanList.get(childAdapterPos).getProdAttribute4());
-//
-//                                }
+
 
                             }
                             Reusable_Functions.hDialog();
@@ -560,7 +552,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             }
         };
         int socketTimeout = 60000;//5 seconds
-
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
@@ -568,6 +559,13 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     }
 
-
-
+    private void addtotalIn_headerScanqty(HashMap<Integer, ArrayList<Integer>> subchildCount, int position) {
+        int totalHeaderCount=0;
+        for (int i = 0; i <subchildCount.size() ; i++) {
+            totalHeaderCount += subchildCount.get(position).get(i);
+        }
+        ArrayList<Integer>count=new ArrayList<Integer>();
+        count.add(totalHeaderCount);
+        headerScancount.put(position,count);
+    }
 }
