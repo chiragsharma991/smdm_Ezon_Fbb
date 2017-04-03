@@ -132,7 +132,8 @@
             segmentedgroup:contentInsetLeft="0dp"
             segmentedgroup:contentInsetStart="0dp"
             segmentedgroup:contentInsetRight="0dp"
-            segmentedgroup:contentInsetEnd="0dp">
+            segmentedgroup:contentInsetEnd="0dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"

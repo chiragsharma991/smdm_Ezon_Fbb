@@ -6,8 +6,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
- <!--   <Protected-broadcast android:name="android.location.BOOT_COMPLETED" />
-    <Protected-broadcast android:name="android.location.USER_PRESENT" />-->
+    <!--
+    <Protected-broadcast android:name="android.location.BOOT_COMPLETED" />
+    <Protected-broadcast android:name="android.location.USER_PRESENT" />
+    -->
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -218,15 +220,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Collaboration.to_do.Tab_fragment.Details"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Collaboration.Status.Tab_fragment.ToBeSenderDetails"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".Collaboration.Status.Tab_fragment.ToBeReceiverDetails"
-                  android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Collaboration.Status.Tab_fragment.ToBeReceiverDetails"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Feedback.Feedback"></activity>
     </application>
 
 </manifest>
