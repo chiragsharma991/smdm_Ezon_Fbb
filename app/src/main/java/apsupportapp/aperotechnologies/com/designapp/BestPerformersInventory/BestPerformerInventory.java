@@ -124,7 +124,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_best_performer_inventory);
-        getSupportActionBar().hide();//
+        getSupportActionBar().hide();  //
         initalise();
         BstInventory_salesThru_chk.setChecked(true);
         BaseLayoutInventory.setVisibility(View.GONE);

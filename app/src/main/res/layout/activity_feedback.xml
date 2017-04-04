@@ -79,25 +79,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/feedback_storeCode"
+                    android:id="@+id/feedback_option"
                     android:padding="5dp"
                     android:textSize="@dimen/collaboration_stock_storecode"
-                    android:text="Store Code"
+                    android:text="Option Name"
                     android:textColor="@color/bg_store_code_text"
                     android:textStyle="bold"
                     />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/feedback_storeDes"
-                    android:padding="5dp"
-                    android:textSize="@dimen/collaboration_stock_storecode"
-                    android:text="Store description"
-                    android:textColor="@color/bg_store_code_text"
-                    android:textStyle="bold"
-                    android:layout_toRightOf="@+id/feedback_storeCode"
-                    />
+
                 
                 
                 <ImageView
@@ -105,7 +95,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:padding="5dp"
-                    android:layout_below="@+id/feedback_storeCode"
+                    android:layout_below="@+id/feedback_option"
                     android:id="@+id/feedback_image"
                     android:src="@mipmap/img_placeholder"
                     />
@@ -117,11 +107,22 @@
                     android:id="@+id/feedback_question"
                     android:padding="15dp"
                     android:textSize="@dimen/collaboration_stock_storecode"
-                    android:text="Why Sales is slow?"
                     android:textColor="@color/white"
                     android:textStyle="normal"
                     android:layout_alignParentBottom="true"
                     />
+
+
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageLoader_feedback"
+                        android:visibility="visible"
+                        android:layout_centerInParent="true"
+                        android:indeterminateDrawable="@drawable/progress"
+                        />
+
 
 
 
@@ -142,10 +143,16 @@
                 android:layout_height="wrap_content"
 
                 >
+
+                <!--first layout-->
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:id="@+id/replaceView"
+                    android:visibility="visible"
                     >
                     <Button
                         android:layout_width="match_parent"
@@ -221,7 +228,7 @@
                 </LinearLayout>
 
 
-
+             <!--another layout -->
 
 
             </ScrollView>
