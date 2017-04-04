@@ -80,9 +80,9 @@
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="colorAccent">#000000</item>
-    <item name="android:textColorPrimary">#ffffff</item>
-    <item name="android:background">#666666</item>
+        <item name="colorAccent">#000000</item>
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:background">#f8f6f6</item>
         <item name="android:colorBackground">@color/cardview_light_background</item>
     </style>
 
@@ -102,6 +102,8 @@
         <item name="android:background">#666666</item>
 
     </style>
+
+
 
 
 </resources>
