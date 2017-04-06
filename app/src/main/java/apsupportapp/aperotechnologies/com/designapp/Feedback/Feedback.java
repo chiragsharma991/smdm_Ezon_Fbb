@@ -70,8 +70,11 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
     ArrayList<Feedback_model> feedbackList;
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
-    private Button Pricing,Fitting,Colours,Prints,Styling,Fabric_quality,Garment_quality;
+    private Button Pricing,Fitting,Colours,Prints,Styling,Fabric_quality,Garment_quality,FeedbackNext;
     private TextView Feedback_option;
+    private AlertDialog dialog;
+    private LinearLayout firstView;
+    private RelativeLayout secondView;
     //  private Feedback_details feedbackAdapter;
 
 
@@ -108,6 +111,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
         Feedback_option=(TextView)findViewById(R.id.feedback_option);
         ImageLoader_feedback=(ProgressBar)findViewById(R.id.imageLoader_feedback);
 
+        firstView=(LinearLayout)findViewById(R.id.replaceView_first);
+        secondView=(RelativeLayout)findViewById(R.id.replaceView_two);
+        FeedbackNext=(Button)findViewById(R.id.feedbackNext);
+
         Pricing=(Button)findViewById(R.id.pricing);
         Fitting=(Button)findViewById(R.id.fitting);
         Colours=(Button)findViewById(R.id.colours);
@@ -123,6 +130,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
         Colours.setOnClickListener(this);
         Prints.setOnClickListener(this);
         Styling.setOnClickListener(this);
+        FeedbackNext.setOnClickListener(this);
         Fabric_quality.setOnClickListener(this);
         Garment_quality.setOnClickListener(this);
     }
@@ -272,6 +280,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
             case R.id.feedback_BtnBack:
                 finish();
                 break;
+            case R.id.feedbackNext:
+                firstView.setVisibility(View.VISIBLE);
+                secondView.setVisibility(View.GONE);
+                break;
             default:
                 commentDialog();
                 break;
@@ -283,25 +295,35 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
     private void commentDialog() {
 
         Log.e(TAG, "commentDialog: true...." );
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.AppCompatAlertDialogStyle);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.comment_dialog, null))
-                // Add action buttons
-                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        // sign in the user ...
-                    }
-                })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-        AlertDialog dialog = builder.create();
+        View v=inflater.inflate(R.layout.comment_dialog, null);
+        LinearLayout skip =(LinearLayout) v.findViewById(R.id.comment_skip);
+        LinearLayout ok =(LinearLayout)v.findViewById(R.id.comment_ok);
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               dialog.dismiss();
+            }
+        });
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                firstView.setVisibility(View.GONE);
+                secondView.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        builder.setView(v);
+
+        dialog = builder.create();
         dialog.show();
     }
 

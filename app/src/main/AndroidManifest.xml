@@ -223,11 +223,20 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Collaboration.Status.Tab_fragment.ToBeSenderDetails"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
         <activity
             android:name=".Collaboration.Status.Tab_fragment.ToBeReceiverDetails"
             android:screenOrientation="portrait" />
-        <activity android:name=".Feedback.Feedback"></activity>
+        <activity android:name=".Feedback.Feedback"
+            android:screenOrientation="portrait"
+
+            >
+
+
+        </activity>
     </application>
 
 </manifest>
