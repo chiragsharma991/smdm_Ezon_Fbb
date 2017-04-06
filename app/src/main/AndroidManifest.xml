@@ -11,7 +11,7 @@
     <Protected-broadcast android:name="android.location.USER_PRESENT" />
     -->
 
-    <uses-permission android:name="android.permission.CAMERA" />
+
 
     <application
         android:name=".MyApplication"
@@ -229,5 +229,5 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Feedback.Feedback"></activity>
     </application>
-
+    <uses-permission android:name="android.permission.CAMERA" />
 </manifest>

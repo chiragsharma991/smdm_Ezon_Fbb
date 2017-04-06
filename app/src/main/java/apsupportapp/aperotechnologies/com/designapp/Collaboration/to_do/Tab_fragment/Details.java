@@ -411,8 +411,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                        requestReceiverSubmitAPI(context,jsonArray);
                    }
                 }
-
-
                 break;
         }
     }

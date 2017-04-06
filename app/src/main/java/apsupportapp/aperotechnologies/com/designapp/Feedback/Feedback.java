@@ -273,7 +273,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
                 finish();
                 break;
             default:
-                commentDialog();
+                //commentDialog();
                 break;
 
 

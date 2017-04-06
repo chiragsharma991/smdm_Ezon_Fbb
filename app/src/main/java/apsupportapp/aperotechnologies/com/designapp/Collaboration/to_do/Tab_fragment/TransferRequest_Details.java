@@ -1,10 +1,20 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.util.Pair;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,19 +41,27 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.logging.Logger;
 
 import apsupportapp.aperotechnologies.com.designapp.AnyOrientationCaptureActivity;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Transfer_Request_Model;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -77,13 +95,20 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private TextView txt_caseNo, txt_valtotalreqty;
 //    private  int[] scanQty;
 //    private int ScanCount;
+    private boolean scanDone=false;
     private Button btn_Submit;
     private ProgressBar TransferDetailProcess;
     private String recache,detail_CaseNo,detl_reqStoreCode;
     private HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty;    //for sub child list
-    private HashMap<Integer, ArrayList<Integer>> subchildcount;    //for sub child qty
+    private HashMap<Integer, ArrayList<Integer>> subchildcount;    //for sub child count
     private HashMap<Integer, ArrayList<Integer>> headerScancount;    //for Header scan qty
-
+    private HashSet<Pair<Integer, Integer>> CheckedItems;
+    private static final int CAMERA_PERMISSION = 100;
+    private static final int REQUEST_PERMISSION_SETTING = 101;
+    String[] permissionsRequired = new String[]{Manifest.permission.CAMERA,
+          };
+    private boolean sentToSettings = false;
+    private SharedPreferences permissionStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +122,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         Sender_DetailsList = new ArrayList<Transfer_Request_Model>();
         ScanList = new ArrayList<Transfer_Request_Model>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        permissionStatus = getSharedPreferences("permissionStatus",MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
@@ -115,6 +141,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
+
+
+
     }
 
     private void requestReceiversChildDetails(final int position)
@@ -200,12 +229,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         Reusable_Functions.hDialog();
     }
 
-    public void hideKeyboard()
-    {
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
-    }
+
 
     private void addScanCount(ArrayList<Transfer_Request_Model> senderChildDetailList, int position)
     {
@@ -271,8 +295,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             MakeChildScanList(Sender_DetailsList);   //child all list
                             MakeSubChildScanCount(Sender_DetailsList);  //only child scan count
                             MakeHeaderScanCount(Sender_DetailsList);  // Top Header scan count
+                            MakeCheckPair();  // Top Header scan count
                           //  MakeScanList(Sender_DetailsList);
-                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,subchildqty,subchildcount,TransferDetailProcess,headerScancount,TransferRequest_Details.class);
+                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,subchildqty,subchildcount,TransferDetailProcess,headerScancount,TransferRequest_Details.this,CheckedItems);
                             //MakeSubChildScanQty(Sender_DetailsList);
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
                             Reusable_Functions.hDialog();
@@ -312,6 +337,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
         Reusable_Functions.hDialog();
+    }
+
+    private void MakeCheckPair()
+    {
+        CheckedItems=new HashSet<Pair<Integer, Integer>>();
+
     }
 
     private void MakeScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
@@ -411,7 +442,48 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 onBackPressed();
                 break;
             case R.id.btn_trdetailSubmit:
+                putMethod();
                 break;
+
+        }
+    }
+
+    private void putMethod()
+    {
+        JSONArray jsonarray=new JSONArray();
+        int count=0;
+
+        for (int i = 0; i <Sender_DetailsList.size(); i++)  //all list of details
+        {
+            for (int j = 0; j <subchildqty.get(i).size() ; j++)  // all sizes of one option
+            {
+                Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);  //check if any check box is check another wise it will not proceed.
+                if(CheckedItems.contains(Tag))
+                {
+                    JSONObject obj = new JSONObject();
+                    try {
+                        obj.put("option",Sender_DetailsList.get(i).getLevel());
+                        obj.put("prodAttribute4",subchildqty.get(i).get(j).getLevel());
+                        obj.put("caseNo",detail_CaseNo);
+                        jsonarray.put(count,obj);
+                        count++;
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+        }
+        }
+        Log.e(TAG, "putMethod: Json Array is:"+jsonarray.toString() );
+        if(jsonarray.length()==0)
+        {
+            Toast.makeText(context,"Please select at least one size.",Toast.LENGTH_SHORT).show();
+
+        }else
+        {
+            requestSenderSubmitAPI(context,jsonarray);
+
+            // Toast.makeText(context,"Data submission successfully",Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -422,11 +494,68 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         finish();
     }
 
-
-
     @Override
-    public void onScan(View view, int position, TransferDetailsAdapter transferDetailsAdapter) {
+    public void onScan(View view, int position, TransferDetailsAdapter transferDetailsAdapter)
+    {
+        if (ActivityCompat.checkSelfPermission(TransferRequest_Details.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(TransferRequest_Details.this, Manifest.permission.CAMERA)) {
+                //Show Information about why you need the permission
+                AlertDialog.Builder builder = new AlertDialog.Builder(TransferRequest_Details.this);
+                builder.setTitle("Need Storage Permission");
+                builder.setMessage("This app needs storage permission.");
+                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        ActivityCompat.requestPermissions(TransferRequest_Details.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+            } else if (permissionStatus.getBoolean(Manifest.permission.CAMERA,false)) {
+                //Previously Permission Request was cancelled with 'Dont Ask Again',
+                // Redirect to Settings after showing Information about why you need the permission
+                AlertDialog.Builder builder = new AlertDialog.Builder(TransferRequest_Details.this,R.style.AppCompatAlertDialogStyle);
+                builder.setTitle("Camera Permission");
+                builder.setMessage("This app needs camera permission.");
+                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.cancel();
+                        sentToSettings = true;
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
+                        Toast.makeText(getBaseContext(), "Go to Permissions to Grant Storage", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+            } else
+            {
+                //just request the permission
+                ActivityCompat.requestPermissions(TransferRequest_Details.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
+            }
+            SharedPreferences.Editor editor = permissionStatus.edit();
+            editor.putBoolean(Manifest.permission.CAMERA,true);
+            editor.commit();
 
+        } else
+        {
+            //You already have the permission, just go ahead.
+        }
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(AnyOrientationCaptureActivity.class);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
@@ -435,13 +564,21 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         integrator.setBeepEnabled(false);
         integrator.initiateScan();
         transferDetailsAdapter.notifyDataSetChanged();
+
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        if(requestCode == CAMERA_PERMISSION)
+        {
+
+        }
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
+        if (result != null)
+        {
             if (result.getContents() == null)
             {
                // Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
@@ -463,6 +600,43 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             // This is important, otherwise the result will not be passed to the fragment
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //The External Storage Write Permission is granted to you... Continue your left job...
+               // proceedAfterPermission();
+            } else {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(TransferRequest_Details.this, Manifest.permission.CAMERA)) {
+                    //Show Information about why you need the permission
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TransferRequest_Details.this);
+                    builder.setTitle("Need Camera Permission");
+                    builder.setMessage("This app needs camera permission");
+                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.cancel();
+                            ActivityCompat.requestPermissions(TransferRequest_Details.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                } else {
+                    Toast.makeText(getBaseContext(),"Unable to get Permission",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+
     }
 
     private void requestScanDetailsAPI(String contents) {
@@ -505,26 +679,48 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 String size= ScanList.get(0).getProdAttribute4();
                                 int size_pos = 0;
 
+                                ArrayList<Integer>addQty=new ArrayList<>();
+
                                 for(int i = 0;i < SenderChildDetailList.size();i++) //find sizeitem  position from child list
                                 {
-                                    if(SenderChildDetailList.get(i).getLevel().equals("36"))//add size instead of 4-5 value
+                                    if(SenderChildDetailList.get(i).getLevel().equals("15-16"))//add size instead of 4-5 value
                                     {
-                                        size_pos=i;
-                                        Log.e("position :",""+i+"\tsize_pos :"+size_pos);
-                                        int totalCount=subchildcount.get(i).get(0)+1;  //pre count + next count
-                                        ArrayList<Integer>total=new ArrayList<Integer>();
-                                        total.add(totalCount);  //total sub count
-                                        subchildcount.put(i,total);
-                                        Log.e("i position :",""+i);
-                                        transferDetailsAdapter.notifyDataSetChanged();
-                                        addtotalIn_headerScanqty(subchildcount,i);
+                                        //        maxScanQty = (int) Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested());
+
+                                        scanDone=true;
+                                        if(subchildqty.get(0).get(i).getStkOnhandQtyRequested() > subchildcount.get(0).get(i))   //"0"is for Pre position
+                                        {
+                                            size_pos=i;
+                                            Log.e("position :",""+i+"\tsize_pos :"+size_pos);
+                                            int count=subchildcount.get(0).get(i)+1;  //pre count + next count  && "0"is pre position you have to change
+                                            addQty.add(count);  //total sub count
+                                            // subchildcount.put(i,total);
+                                            Log.e("i position :",""+i);
+
+                                        }else
+                                        {
+                                            int count=subchildcount.get(0).get(i);
+                                            addQty.add(count);
+                                            Toast.makeText(context,"Scan Qty should be less than Req.Qty",Toast.LENGTH_LONG).show();
+
+                                        }
                                         break;
                                     }
                                     else
                                     {
-                                        Toast.makeText(context,"Barcode does not match sizes...",Toast.LENGTH_SHORT).show();
-                                        Log.e("Came","here");
+                                        int count=subchildcount.get(0).get(i);
+                                        addQty.add(count);
                                     }
+                                }
+
+                                subchildcount.put(0,addQty);//0 is pre position
+                                addtotalIn_headerScanqty(0);
+                                transferDetailsAdapter.notifyDataSetChanged();
+
+                                if(scanDone==false){
+                                    Toast.makeText(context,"Barcode does not match sizes...",Toast.LENGTH_SHORT).show();
+                                }else {
+                                    scanDone=false;
                                 }
 
 
@@ -567,13 +763,85 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     }
 
-    private void addtotalIn_headerScanqty(HashMap<Integer, ArrayList<Integer>> subchildCount, int position) {
-        int totalHeaderCount=0;
-        for (int i = 0; i <subchildCount.size() ; i++) {
-            totalHeaderCount += subchildCount.get(position).get(i);
-        }
+    public void addtotalIn_headerScanqty(int position) {
         ArrayList<Integer>count=new ArrayList<Integer>();
-        count.add(totalHeaderCount);
+        int totalHeaderqty=0;
+        for (int i = 0; i <subchildqty.get(position).size(); i++) {
+             totalHeaderqty +=subchildcount.get(position).get(i);   // position is Preposition
+        }
+        count.add(totalHeaderqty);
         headerScancount.put(position,count);
+    }
+
+    private void requestSenderSubmitAPI(final Context mcontext, JSONArray object)  // Sender Submit Api call
+    {
+
+        if (Reusable_Functions.chkStatus(mcontext)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(mcontext, "Submitting data…");
+
+            String url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId ;//+"?recache="+recache
+            Log.e("url", " put Request " + url + " ==== " + object.toString());
+            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, object.toString(),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.e("Sender Submit Click Response :", response.toString());
+                            try {
+                                if (response == null || response.equals(null)) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
+
+                                } else
+                                {
+                                    String result=response.getString("status");
+                                    Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(TransferRequest_Details.this,To_Do.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                    startActivity(intent);
+                                    //Details.this.finish();
+                                    Reusable_Functions.hDialog();
+                                }
+                            } catch (Exception e)
+                            {
+                                Log.e("Exception e", e.toString() + "");
+                                e.printStackTrace();
+                                Reusable_Functions.hDialog();
+
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
+                            error.printStackTrace();
+                        }
+                    }
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", bearertoken);
+                    //  params.put("Content-Type", "application/json");
+                    return params;
+                }
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+            };
+            int socketTimeout = 60000;//5 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+
+        } else
+        {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
+        }
     }
 }
