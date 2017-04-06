@@ -73,7 +73,8 @@
                 <TextView
                     android:id= "@+id/txtPlan"
                     android:layout_width="wrap_content"
-                    android:layout_height="10dp" />
+                    android:layout_height="10dp"
+                    />
 
                 <TextView
                     android:layout_marginBottom="2dp"
@@ -81,7 +82,8 @@
                     android:id= "@+id/txtAchieve"
                     android:background="@color/txt_color"
                     android:layout_width="5dp"
-                    android:layout_height="29dp" />
+                    android:layout_height="29dp"
+                    />
             </RelativeLayout>
 
 

@@ -39,7 +39,8 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="0dp"
-                    android:background="@drawable/button_red_effect">
+                    android:background="@drawable/button_red_effect"
+                    >
 
                     <Button
                         android:layout_width="20dp"
@@ -136,15 +137,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
+            android:layout_marginTop="5dp"
             >
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
 
-                >
 
-                <!--first layout-->
 
 
                 <LinearLayout
@@ -152,86 +149,443 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:id="@+id/replaceView"
-                    android:visibility="visible"
                     >
-                    <Button
+
+                    <!--first layout-->
+
+                    <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border1"
-                        android:layout_margin="5dp"
-                        android:text="Fitting"
-                        android:id="@+id/fitting"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textAllCaps="false"
-                        />
-                    <Button
+
+                        >
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border1"
-                        android:layout_margin="5dp"
-                        android:text="Pricing"
-                        android:id="@+id/pricing"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textAllCaps="false"
-                        />
-                    <Button
+                        android:orientation="vertical"
+                        android:id="@+id/replaceView_first"
+                        android:visibility="gone"
+                        >
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:background="@drawable/border1"
+                            android:layout_margin="5dp"
+                            android:text="Fitting"
+                            android:id="@+id/fitting"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textAllCaps="false"
+                            />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:background="@drawable/border1"
+                            android:layout_margin="5dp"
+                            android:text="Pricing"
+                            android:id="@+id/pricing"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textAllCaps="false"
+                            />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:background="@drawable/border1"
+                            android:layout_margin="5dp"
+                            android:text="Colours"
+                            android:id="@+id/colours"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textAllCaps="false"
+                            />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:background="@drawable/border1"
+                            android:layout_margin="5dp"
+                            android:text="Prints"
+                            android:id="@+id/prints"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textAllCaps="false"
+                            />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border1"
+                            android:layout_margin="5dp"
+                            android:text="Styling"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textAllCaps="false"
+                            android:id="@+id/styling"
+                            />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border1"
+                            android:layout_margin="5dp"
+                            android:text="Fabric Quality"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textAllCaps="false"
+                            android:id="@+id/fabric_quality"
+                            />
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border1"
+                            android:layout_margin="5dp"
+                            android:text="Garment Quality"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textAllCaps="false"
+                            android:id="@+id/garment_quality"
+                            />
+
+                    </LinearLayout>
+
+                    </ScrollView>
+
+
+                    <!--another layout -->
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border1"
-                        android:layout_margin="5dp"
-                        android:text="Colours"
-                        android:id="@+id/colours"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textAllCaps="false"
-                        />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/border1"
-                        android:layout_margin="5dp"
-                        android:text="Prints"
-                        android:id="@+id/prints"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textAllCaps="false"
-                        />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/border1"
-                        android:layout_margin="5dp"
-                        android:text="Styling"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textAllCaps="false"
-                        android:id="@+id/styling"
-                        />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/border1"
-                        android:layout_margin="5dp"
-                        android:text="Fabric Quality"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textAllCaps="false"
-                        android:id="@+id/fabric_quality"
-                        />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/border1"
-                        android:layout_margin="5dp"
-                        android:text="Garment Quality"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textAllCaps="false"
-                        android:id="@+id/garment_quality"
-                        />
+                        android:id="@+id/replaceView_two"
+                        android:visibility="visible"
+
+                        >
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_alignTop="@+id/x"
+                            >
+
+                        </RelativeLayout>
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="@+id/x"
+
+                            >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="47dp"
+                                android:layout_margin="5dp"
+                                >
+                                <View
+                                    android:layout_width="180dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/fitting_score"
+                                    android:background="@color/edit_border_color">
+
+                                </View>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Fitting"
+                                    android:layout_marginLeft="5dp"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:layout_centerVertical="true"
+                                    android:id="@+id/fitting_percent"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="50%"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:id="@+id/fitting_percent_result"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    />
+
+
+
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="47dp"
+                                android:layout_margin="5dp"
+
+                                >
+                                <View
+                                    android:layout_width="30dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/pricing_score"
+                                    android:background="@color/edit_border_color">
+
+                                </View>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pricing"
+                                    android:layout_marginLeft="5dp"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:layout_centerVertical="true"
+                                    android:id="@+id/pricing_percent"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="10%"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:id="@+id/pricing_percent_result"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    />
+
+
+
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="47dp"
+                                android:layout_margin="5dp"
+
+                                >
+                                <View
+                                    android:layout_width="150dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/colours_score"
+                                    android:background="@color/edit_border_color">
+
+                                </View>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Colours"
+                                    android:layout_marginLeft="5dp"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:layout_centerVertical="true"
+                                    android:id="@+id/colours_percent"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="40%"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:id="@+id/colours_percent_result"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    />
+
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="47dp"
+                                android:layout_margin="5dp"
+
+                                >
+                                <View
+                                    android:layout_width="280dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/prints_score"
+                                    android:background="@color/edit_border_color">
+
+                                </View>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Prints"
+                                    android:layout_marginLeft="5dp"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:layout_centerVertical="true"
+                                    android:id="@+id/prints_percent"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="70%"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:id="@+id/prints_percent_result"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    />
+
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="47dp"
+                                android:layout_margin="5dp"
+
+                                >
+                                <View
+                                    android:layout_width="200dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/styling_score"
+                                    android:background="@color/edit_border_color">
+
+                                </View>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Styling"
+                                    android:layout_marginLeft="5dp"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:layout_centerVertical="true"
+                                    android:id="@+id/styling_percent"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="55%"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:id="@+id/styling_percent_result"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    />
+
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="47dp"
+                                android:layout_margin="5dp"
+
+                                >
+                                <View
+                                    android:layout_width="80dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/fabricQuality_score"
+                                    android:background="@color/edit_border_color">
+
+                                </View>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Fabric Quality"
+                                    android:layout_marginLeft="5dp"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:layout_centerVertical="true"
+                                    android:id="@+id/fabricQuality_percent"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="80%"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:id="@+id/fabricQuality_percent_result"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    />
+
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="47dp"
+                                android:layout_margin="5dp"
+
+                                >
+                                <View
+                                    android:layout_width="10dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/garmentQuality_score"
+                                    android:background="@color/edit_border_color">
+
+                                </View>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Garment Quality"
+                                    android:layout_marginLeft="5dp"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:layout_centerVertical="true"
+                                    android:id="@+id/garmentQuality_percent"
+
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="7%"
+                                    android:textColor="@color/bg_store_code_text"
+                                    android:id="@+id/garmentQuality_percent_result"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    />
+
+
+
+                            </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+                        </LinearLayout>
+
+                        </ScrollView>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:id="@+id/x"
+                            android:layout_alignParentBottom="true"
+                            >
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:text="Next"
+                                android:layout_margin="5dp"
+                                android:id="@+id/feedbackNext"
+                                android:layout_alignParentBottom="true"
+                                android:textColor="@android:color/white"
+                                android:background="@color/colorPrimary"/>
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+
 
                 </LinearLayout>
 
 
-             <!--another layout -->
 
 
-            </ScrollView>
+
+
+
 
 
 
