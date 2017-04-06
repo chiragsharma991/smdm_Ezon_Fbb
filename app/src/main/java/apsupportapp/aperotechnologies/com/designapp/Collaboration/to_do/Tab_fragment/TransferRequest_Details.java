@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -199,6 +200,13 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         Reusable_Functions.hDialog();
     }
 
+    public void hideKeyboard()
+    {
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+    }
+
     private void addScanCount(ArrayList<Transfer_Request_Model> senderChildDetailList, int position)
     {
         ArrayList<Integer> scanCount = new ArrayList<Integer>();
@@ -264,7 +272,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             MakeSubChildScanCount(Sender_DetailsList);  //only child scan count
                             MakeHeaderScanCount(Sender_DetailsList);  // Top Header scan count
                           //  MakeScanList(Sender_DetailsList);
-                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,subchildqty,subchildcount,TransferDetailProcess,headerScancount);
+                            transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,subchildqty,subchildcount,TransferDetailProcess,headerScancount,TransferRequest_Details.class);
                             //MakeSubChildScanQty(Sender_DetailsList);
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
                             Reusable_Functions.hDialog();
@@ -499,7 +507,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
                                 for(int i = 0;i < SenderChildDetailList.size();i++) //find sizeitem  position from child list
                                 {
-                                    if(SenderChildDetailList.get(i).getLevel().equals("4-5"))
+                                    if(SenderChildDetailList.get(i).getLevel().equals("36"))//add size instead of 4-5 value
                                     {
                                         size_pos=i;
                                         Log.e("position :",""+i+"\tsize_pos :"+size_pos);

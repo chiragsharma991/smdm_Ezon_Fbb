@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Transfer_Request_Model;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -34,12 +37,14 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private final ProgressBar transferDetailProcess;
     private final HashMap<Integer, ArrayList<Integer>> subchildCount;
     private final HashMap<Integer, ArrayList<Integer>> headerScancount;
+    private final Class<TransferRequest_Details> transferRequest_detailsClass;
 
     private Context context;
     private ArrayList<Transfer_Request_Model> list;
     public  boolean[] Tr_HeaderToggle;
     public OnPress onPressInterface;
     public OnScanBarcode onBarcodeScan;
+    private Set<Pair<Integer, Integer>> CheckedItems ;
     String barcode,checkStr;
     private static final String ACTION_SOFTSCANTRIGGER = "com.motorolasolutions.emdk.datawedge.api.ACTION_SOFTSCANTRIGGER";
     private static final String EXTRA_PARAM = "com.motorolasolutions.emdk.datawedge.api.EXTRA_PARAMETER";
@@ -47,7 +52,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
 
-    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> sender_detailsList, Context context, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty, HashMap<Integer, ArrayList<Integer>> subchildCount, ProgressBar transferDetailProcess, HashMap<Integer, ArrayList<Integer>> headerScancount)
+    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> sender_detailsList, Context context, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty, HashMap<Integer, ArrayList<Integer>> subchildCount, ProgressBar transferDetailProcess, HashMap<Integer, ArrayList<Integer>> headerScancount, Class<TransferRequest_Details> transferRequest_detailsClass)
     {
         this.list=sender_detailsList;  //main option adapter
         this.context=context;//
@@ -58,6 +63,8 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.subchildCount=subchildCount;  //only sub child scan qty
         this.transferDetailProcess=transferDetailProcess;
         this.headerScancount=headerScancount;
+        CheckedItems=new HashSet<Pair<Integer,Integer>>();
+        this.transferRequest_detailsClass=transferRequest_detailsClass;
         checkStr = "";
     }
 
@@ -190,7 +197,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 });
 
                 ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(""+headerScancount.get(position).get(0));  // header total scan qty
-                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(context,position,TransferDetailsAdapter.this,subchildqty,subchildCount);
+                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(context,position,TransferDetailsAdapter.this,subchildqty,subchildCount,transferRequest_detailsClass,CheckedItems);
                 ((TransferDetailsAdapter.Holder)holder).recycleview_transferreq_detailChild.setAdapter(detailsHeaderChildAdapter);
                 detailsHeaderChildAdapter.notifyDataSetChanged();
             }
