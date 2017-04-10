@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +16,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -65,6 +70,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
+    private int listCount = 1;  //when you click on next then
     private int top = 10;
     private Feedback_model feedback_model;
     ArrayList<Feedback_model> feedbackList;
@@ -75,6 +81,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
     private AlertDialog dialog;
     private LinearLayout firstView;
     private RelativeLayout secondView;
+    private RelativeLayout Fitting_relative;
+    private ListView FeedbackDetailList;
     //  private Feedback_details feedbackAdapter;
 
 
@@ -110,6 +118,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
         Feedback_image=(ImageView)findViewById(R.id.feedback_image);
         Feedback_option=(TextView)findViewById(R.id.feedback_option);
         ImageLoader_feedback=(ProgressBar)findViewById(R.id.imageLoader_feedback);
+        FeedbackDetailList=(ListView)findViewById(R.id.feedbackDetailList);
+
 
         firstView=(LinearLayout)findViewById(R.id.replaceView_first);
         secondView=(RelativeLayout)findViewById(R.id.replaceView_two);
@@ -124,6 +134,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
         Garment_quality=(Button)findViewById(R.id.garment_quality);
 
         ImageLoader_feedback.setVisibility(View.GONE);
+        firstView.setVisibility(View.VISIBLE);
+        secondView.setVisibility(View.GONE);
+
         Feedback_BtnBack.setOnClickListener(this);
         Pricing.setOnClickListener(this);
         Fitting.setOnClickListener(this);
@@ -189,40 +202,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
                                 // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                                // feedbackAdapter = new Feedback_details(feedbackList,Feedback.this);
                                 Reusable_Functions.hDialog();
-                                Feedback_option.setText(feedbackList.get(3).getOption());
-                                Log.e(TAG, "array list size : "+feedbackList.size() );
-                                ImageLoader_feedback.setVisibility(View.VISIBLE);
+                                nextList(0);
 
-                                if(!feedbackList.get(3).getProdImageUrl().equals(""))
-                                {
-                                    Glide.
-                                            with(context)
-                                            .load(feedbackList.get(3).getProdImageUrl())
-                                            .listener(new RequestListener<String, GlideDrawable>() {
-                                                @Override
-                                                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                                    ImageLoader_feedback.setVisibility(View.GONE);
-                                                    return false;
-                                                }
-
-                                                @Override
-                                                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                                                    ImageLoader_feedback.setVisibility(View.GONE);
-                                                    return false;
-                                                }
-                                            })
-                                            .into(Feedback_image);
-
-                                }else {
-                                    ImageLoader_feedback.setVisibility(View.GONE);
-
-                                    Glide.with(context).
-                                            load(R.mipmap.placeholder).
-                                            into(Feedback_image);
-
-
-
-                                }
 
 
                             } catch (Exception e) {
@@ -281,12 +262,58 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.feedbackNext:
+                if(listCount<feedbackList.size()){
                 firstView.setVisibility(View.VISIBLE);
                 secondView.setVisibility(View.GONE);
+                nextList(listCount);
+                    listCount++;
+                }else
+                {
+                    Toast.makeText(context,"Data is not available",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             default:
                 commentDialog();
                 break;
+
+
+        }
+    }
+
+    private void nextList(int position)
+    {
+        Feedback_option.setText(feedbackList.get(position).getOption());
+        Log.e(TAG, "array list size : "+feedbackList.size() );
+        ImageLoader_feedback.setVisibility(View.VISIBLE);
+
+        if(!feedbackList.get(position).getProdImageUrl().equals(""))
+        {
+            Glide.
+                    with(context)
+                    .load(feedbackList.get(position).getProdImageUrl())
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            ImageLoader_feedback.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            ImageLoader_feedback.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .into(Feedback_image);
+
+        }else {
+            ImageLoader_feedback.setVisibility(View.GONE);
+
+            Glide.with(context).
+                    load(R.mipmap.placeholder).
+                    into(Feedback_image);
+
 
 
         }
@@ -304,19 +331,27 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
         View v=inflater.inflate(R.layout.comment_dialog, null);
         LinearLayout skip =(LinearLayout) v.findViewById(R.id.comment_skip);
         LinearLayout ok =(LinearLayout)v.findViewById(R.id.comment_ok);
+        final EditText feedback_comment =(EditText)v.findViewById(R.id.feedback_comment);
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               dialog.dismiss();
+                dialog.dismiss();
+                feedbackDetails();
+
             }
         });
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                firstView.setVisibility(View.GONE);
-                secondView.setVisibility(View.VISIBLE);
+                if(!(feedback_comment.getText().length() ==0)) {
+                    feedbackDetails();
+                }
+                else{
+                    Toast.makeText(context,"Please enter your comment",Toast.LENGTH_SHORT);
+                }
+
 
             }
         });
@@ -325,6 +360,28 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
 
         dialog = builder.create();
         dialog.show();
+    }
+
+    private void feedbackDetails() {
+
+        firstView.setVisibility(View.GONE);
+        secondView.setVisibility(View.VISIBLE);
+
+        ArrayList<String>optionList=new ArrayList<>();
+        ArrayList<Integer>optionPercentageList=new ArrayList<>();
+
+        optionList.add("Fitting");          optionPercentageList.add(30);
+        optionList.add("Pricing");          optionPercentageList.add(70);
+        optionList.add("Colours");          optionPercentageList.add(90);
+        optionList.add("Prints");           optionPercentageList.add(10);
+        optionList.add("Styling");          optionPercentageList.add(40);
+        optionList.add("Fabric Quality");   optionPercentageList.add(80);
+        optionList.add("Garment Quality");  optionPercentageList.add(0);
+
+        FeedbackDetailsAdapter adapter=new FeedbackDetailsAdapter(optionList,optionPercentageList,context);
+        FeedbackDetailList.setAdapter(adapter);
+
+
     }
 
     @Override

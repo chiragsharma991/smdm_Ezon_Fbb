@@ -13,8 +13,6 @@
     tools:showIn="@layout/app_bar_dash_board">
 
 
-
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -1614,6 +1612,7 @@
                         <TextView
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
+                            android:textColor="@color/smdm_light_Black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
@@ -1781,6 +1780,7 @@
                         <TextView
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
+                            android:textColor="@color/smdm_light_Black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"

@@ -48,6 +48,7 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusA
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
+import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
@@ -334,12 +335,11 @@ public class DashBoardActivity extends AppCompatActivity
         FeedbackList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  new Feedback().StartIntent(DashBoardActivity.this);
-               // if(timer != null)
-              //  {
-              //      timer.cancel();
-             //   }
-                // finish();
+                new FeedbackList().StartIntent(DashBoardActivity.this);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
             }
         });
 

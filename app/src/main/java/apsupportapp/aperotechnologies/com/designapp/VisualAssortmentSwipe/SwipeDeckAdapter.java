@@ -116,7 +116,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         layoutView = inflater.inflate(R.layout.fragment_visualassortment, parent, false);
-        fragmentLayout = (LinearLayout)layoutView.findViewById(R.id.fragmentLayout);
+       // fragmentLayout = (LinearLayout)layoutView.findViewById(R.id.fragmentLayout);
         rellike = (RelativeLayout) layoutView.findViewById(R.id.imgrellike);
         reldislike = (RelativeLayout) layoutView.findViewById(R.id.imgreldislike);
         relbuy = (RelativeLayout) layoutView.findViewById(R.id.imgrelbuy);
@@ -211,7 +211,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                          visualprogressPicaso.setVisibility(View.GONE);
+                            visualprogressPicaso.setVisibility(View.GONE);
                             return false;
                         }
                     })
@@ -219,7 +219,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
             ;
 
         }else {
-          visualprogressPicaso.setVisibility(View.GONE);
+            visualprogressPicaso.setVisibility(View.GONE);
 
             Glide.with(this.context).
                     load(R.mipmap.img_placeholder).
@@ -478,7 +478,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                 if (VisualAssortmentActivity.edtTextComment.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Enter some value", Toast.LENGTH_SHORT).show();
                 } else {
-                  //  Reusable_Functions.sDialog(context, "Loading..");
+                    //  Reusable_Functions.sDialog(context, "Loading..");
                     String articleOption = visualAssort1.getArticleOption();
                     String checkLikedislike = visualAssort1.getLikeDislikeFlg();
                     if(checkLikedislike == null)
