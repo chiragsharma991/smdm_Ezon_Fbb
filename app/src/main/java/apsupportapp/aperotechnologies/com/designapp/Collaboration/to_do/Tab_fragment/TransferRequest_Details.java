@@ -497,65 +497,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     @Override
     public void onScan(View view, int position, TransferDetailsAdapter transferDetailsAdapter)
     {
-        if (ActivityCompat.checkSelfPermission(TransferRequest_Details.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(TransferRequest_Details.this, Manifest.permission.CAMERA)) {
-                //Show Information about why you need the permission
-                AlertDialog.Builder builder = new AlertDialog.Builder(TransferRequest_Details.this);
-                builder.setTitle("Need Storage Permission");
-                builder.setMessage("This app needs storage permission.");
-                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        ActivityCompat.requestPermissions(TransferRequest_Details.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
-            } else if (permissionStatus.getBoolean(Manifest.permission.CAMERA,false)) {
-                //Previously Permission Request was cancelled with 'Dont Ask Again',
-                // Redirect to Settings after showing Information about why you need the permission
-                AlertDialog.Builder builder = new AlertDialog.Builder(TransferRequest_Details.this,R.style.AppCompatAlertDialogStyle);
-                builder.setTitle("Camera Permission");
-                builder.setMessage("This app needs camera permission.");
-                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        dialog.cancel();
-                        sentToSettings = true;
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", getPackageName(), null);
-                        intent.setData(uri);
-                        startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
-                        Toast.makeText(getBaseContext(), "Go to Permissions to Grant Storage", Toast.LENGTH_LONG).show();
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
-            } else
-            {
-                //just request the permission
-                ActivityCompat.requestPermissions(TransferRequest_Details.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
-            }
-            SharedPreferences.Editor editor = permissionStatus.edit();
-            editor.putBoolean(Manifest.permission.CAMERA,true);
-            editor.commit();
 
-        } else
-        {
-            //You already have the permission, just go ahead.
-        }
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(AnyOrientationCaptureActivity.class);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
@@ -572,10 +514,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if(requestCode == CAMERA_PERMISSION)
-        {
 
-        }
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null)
         {
@@ -606,10 +545,13 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
                 //The External Storage Write Permission is granted to you... Continue your left job...
-               // proceedAfterPermission();
-            } else {
+                // proceedAfterPermission();
+
+            } else
+            {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(TransferRequest_Details.this, Manifest.permission.CAMERA)) {
                     //Show Information about why you need the permission
                     AlertDialog.Builder builder = new AlertDialog.Builder(TransferRequest_Details.this);
@@ -635,7 +577,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 }
             }
         }
-
 
     }
 

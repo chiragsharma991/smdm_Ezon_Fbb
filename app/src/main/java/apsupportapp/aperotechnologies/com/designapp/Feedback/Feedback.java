@@ -285,7 +285,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
                 secondView.setVisibility(View.GONE);
                 break;
             default:
-                //commentDialog();
+                commentDialog();
                 break;
 
 

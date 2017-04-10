@@ -36,6 +36,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -81,10 +82,10 @@ public class Option_Fragment extends Fragment {
     public static RelativeLayout rel;
     // set the header titles
     String headers[] = {
-            "                  Option                  ",
-            "     L2H Sls     ",
-            "     Day Sls     ",
-            "     WTD Sls     ",
+            "        Option        ",
+            "    L2H\n\t\t\tSls    ",
+            "    Day\n\t\t\tSls    ",
+            "    WTD\n\t\tSls    ",
             "     SOH    ",
             "     GIT    ",
 
@@ -255,13 +256,15 @@ public class Option_Fragment extends Fragment {
     TableRow componentATableRow() {
 
         TableRow componentATableRow = new TableRow(this.context);
+        componentATableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT, 80);
+                TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
 
         TextView textView = this.headerTextView(headers[0]);
         textView.setBackgroundColor(Color.parseColor("#2277b1"));
         textView.setTextColor(Color.parseColor("#ffffff"));
+        textView.setGravity(Gravity.CENTER);
         componentATableRow.addView(textView);
 
         return componentATableRow;
@@ -272,10 +275,11 @@ public class Option_Fragment extends Fragment {
 
         TableRow componentBTableRow = new TableRow(this.context);
 
+        componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         int headerFieldCount = headers.length;
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT, 80);
+                TableRow.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
@@ -283,6 +287,7 @@ public class Option_Fragment extends Fragment {
             textView.setBackgroundColor(Color.parseColor("#2277b1"));
             textView.setTextColor(Color.parseColor("#ffffff"));
             textView.setLayoutParams(params);
+            textView.setGravity(Gravity.CENTER);
             componentBTableRow.addView(textView);
         }
 
@@ -403,6 +408,7 @@ public class Option_Fragment extends Fragment {
         TextView bodyTextView = new TextView(this.context);
         bodyTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         bodyTextView.setText(label);
+        bodyTextView.setTextSize(12f);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);
 

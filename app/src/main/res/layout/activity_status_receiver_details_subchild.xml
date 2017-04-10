@@ -6,7 +6,6 @@
 
 
     <LinearLayout
-        android:padding="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -31,13 +30,13 @@
 
 
         </LinearLayout>
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.01"
-            android:gravity="left">
+            android:layout_weight="1.01">
 
             <TextView
+                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="10"
@@ -46,17 +45,15 @@
                 android:textColor="@color/txt_color"
                 android:id="@+id/status_receiver_subdetail_shortQtyVal"/>
 
-
-        </LinearLayout>
-        <LinearLayout
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginLeft="15dp"
-            android:gravity="left"
-            >
+            android:layout_marginLeft="15dp">
 
             <TextView
+                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="10"
@@ -64,7 +61,7 @@
                 android:textSize="@dimen/normallayout_storesize"
                 android:textColor="@color/txt_color"/>
 
-        </LinearLayout>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,8 +75,7 @@
                 android:text=""
                 android:textSize="@dimen/normallayout_storesize"
                 android:singleLine="true"
-                android:textColor="@color/txt_color"
-                />
+                android:textColor="@color/txt_color"/>
 
         </LinearLayout>
 

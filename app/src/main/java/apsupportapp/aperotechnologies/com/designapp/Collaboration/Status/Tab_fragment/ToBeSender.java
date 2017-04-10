@@ -119,7 +119,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
             if (Sender_checkNetwkStatus) {
-                Toast.makeText(context, "No data found from TO BE TRANSFERRED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "No data found ", Toast.LENGTH_SHORT).show();
 
             }
         }

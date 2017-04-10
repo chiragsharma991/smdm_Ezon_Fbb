@@ -225,6 +225,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                     dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
+                            Log.e("On Diglog dismiss","------------");
                             InputMethodManager imm = (InputMethodManager) context
                                     .getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(edt.getWindowToken(), 0);
@@ -233,28 +234,20 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
 
                     final AlertDialog b = dialogBuilder.create();
                     b.show();
-//                    edt.setOnFocusChangeListener(new View.OnFocusChangeListener()
-//                    {
-//                        @Override
-//                        public void onFocusChange(View view, boolean hasFocus) {
-//                            if (hasFocus) {
-//                                Log.e("hasfocus:", "" + hasFocus);
-//
-//                                b.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-////                                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-////                                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-//                            }
-//                            else if(!hasFocus)
-//                            {
-////                                edt.clearFocus();
-////                                Log.e("hasfocus in else:",""+hasFocus);
-////                                b.dismiss();
-////                                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-////                                imm.hideSoftInputFromWindow(view.getWindowToken(),0);
-//                            }
-//
-//                        }
-//                    });
+                    edt.setOnFocusChangeListener(new View.OnFocusChangeListener()
+                    {
+                        @Override
+                        public void onFocusChange(View view, boolean hasFocus) {
+                            if (hasFocus) {
+                                Log.e("hasfocus:", "" + hasFocus);
+
+                                b.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
+                            }
+
+
+                        }
+                    });
                 }
             });
         }

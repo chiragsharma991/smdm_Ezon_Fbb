@@ -82,12 +82,12 @@ public class ProductName_Fragment extends Fragment {
     public static RelativeLayout relProd_Frag;
     // set the header titles
     String headers[] = {
-            "              Product Name            ",
-            "    L2H Sls    ",
-            "    Day Sls    ",
-            "    WTD Sls    ",
-            "    Day PvA %    ",
-            "    WTD PvA %    ",
+            "    Product Name   ",
+            "  L2H\n\t\tSls  ",
+            "  Day\n\t\tSls  ",
+            "    WTD\n\t\tSls    ",
+            "  Day\n\t\tPvA %  ",
+            "  WTD\n\t\tPvA %  ",
             "    SOH    ",
             "    GIT    ",
 
@@ -575,10 +575,8 @@ public class ProductName_Fragment extends Fragment {
                                     productNameBean.setSoh(SOH);
                                     productNameBean.setGit(GIT);
                                     productNameBean.setStoreCode(Storecode);
-
                                     Log.e("StoreCode", productNameBean.getStoreCode());
                                     productNameBean.setStoreDesc(storeDesc);
-
                                     Log.e("Response Lenght", "" + response.length());
                                     productNameBeanArrayList.add(productNameBean);
                                     Log.e("Array List After----", "" + productNameBeanArrayList.size());
@@ -607,13 +605,12 @@ public class ProductName_Fragment extends Fragment {
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
                         Reusable_Functions.hDialog();
-
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -703,12 +700,14 @@ public class ProductName_Fragment extends Fragment {
     // generate table row of table A
     TableRow componentATableRow() {
         TableRow componentATableRow = new TableRow(this.context);
+        componentATableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT, 80);
+                TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
         TextView textView = this.headerTextView(headers[0]);
         textView.setBackgroundColor(Color.parseColor("#2277b1"));
         textView.setTextColor(Color.parseColor("#ffffff"));
+        textView.setGravity(Gravity.CENTER);
         componentATableRow.addView(textView);
         return componentATableRow;
     }
@@ -717,11 +716,11 @@ public class ProductName_Fragment extends Fragment {
     TableRow componentBTableRow() {
 
         TableRow componentBTableRow = new TableRow(this.context);
-
+        componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         int headerFieldCount = headers.length;
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT, 80);
+                TableRow.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
@@ -729,6 +728,7 @@ public class ProductName_Fragment extends Fragment {
             textView.setBackgroundColor(Color.parseColor("#2277b1"));
             textView.setTextColor(Color.parseColor("#ffffff"));
             textView.setLayoutParams(params);
+            textView.setGravity(Gravity.CENTER);
             componentBTableRow.addView(textView);
         }
         return componentBTableRow;
@@ -852,6 +852,7 @@ public class ProductName_Fragment extends Fragment {
         TextView bodyTextView = new TextView(this.context);
         bodyTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         bodyTextView.setText(label);
+        bodyTextView.setTextSize(12f);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);
         return bodyTextView;
@@ -869,7 +870,8 @@ public class ProductName_Fragment extends Fragment {
     }
 
     // resizing TableRow height starts here
-    void resizeHeaderHeight() {
+    void resizeHeaderHeight()
+    {
         TableRow productNameHeaderTableRow = (TableRow) this.tableAProd_Frag.getChildAt(0);
         TableRow productInfoTableRow = (TableRow) this.tableBProd_Frag.getChildAt(0);
         int rowAHeight = this.viewHeight(productNameHeaderTableRow);
