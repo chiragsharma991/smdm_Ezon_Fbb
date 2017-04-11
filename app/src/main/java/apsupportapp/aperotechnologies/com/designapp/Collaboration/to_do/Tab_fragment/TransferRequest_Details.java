@@ -497,7 +497,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     @Override
     public void onScan(View view, int position, TransferDetailsAdapter transferDetailsAdapter)
     {
-
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(AnyOrientationCaptureActivity.class);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
@@ -508,9 +507,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         transferDetailsAdapter.notifyDataSetChanged();
 
     }
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -541,46 +537,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
-                //The External Storage Write Permission is granted to you... Continue your left job...
-                // proceedAfterPermission();
-
-            } else
-            {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(TransferRequest_Details.this, Manifest.permission.CAMERA)) {
-                    //Show Information about why you need the permission
-                    AlertDialog.Builder builder = new AlertDialog.Builder(TransferRequest_Details.this);
-                    builder.setTitle("Need Camera Permission");
-                    builder.setMessage("This app needs camera permission");
-                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which)
-                        {
-                            dialog.cancel();
-                            ActivityCompat.requestPermissions(TransferRequest_Details.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    builder.show();
-                } else {
-                    Toast.makeText(getBaseContext(),"Unable to get Permission",Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-
-    }
-
-    private void requestScanDetailsAPI(String contents) {
+     private void requestScanDetailsAPI(String contents) {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderscan/scan/" + userId + "?eanNumber="+contents +"&recache=" + recache;
         Log.e(TAG, "Details Url" + "" + url);
@@ -619,7 +576,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
                                 String size= ScanList.get(0).getProdAttribute4();
                                 int size_pos = 0;
-
                                 ArrayList<Integer>addQty=new ArrayList<>();
 
                                 for(int i = 0;i < SenderChildDetailList.size();i++) //find sizeitem  position from child list
@@ -643,7 +599,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                             int count=subchildcount.get(0).get(i);
                                             addQty.add(count);
                                             Toast.makeText(context,"Scan Qty should be less than Req.Qty",Toast.LENGTH_LONG).show();
-
                                         }
                                         break;
                                     }
@@ -663,8 +618,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 }else {
                                     scanDone=false;
                                 }
-
-
                             }
                             Reusable_Functions.hDialog();
 

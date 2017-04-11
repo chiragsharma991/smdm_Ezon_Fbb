@@ -683,13 +683,13 @@
 
 
             <!--<TextView-->
-                <!--android:layout_below="@+id/headerpromo"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:background="@color/smdm_divider_Black"-->
-                <!--android:id="@+id/textView5" />-->
+            <!--android:layout_below="@+id/headerpromo"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:background="@color/smdm_divider_Black"-->
+            <!--android:id="@+id/textView5" />-->
 
             <LinearLayout
                 android:layout_below="@+id/headerpromo"
@@ -1354,13 +1354,10 @@
 
             </LinearLayout>
 
-
             <!---->
-
-
             <TextView
                 android:id="@+id/headermarketing"
-                android:layout_below="@+id/feedback_linear"
+                android:layout_below="@+id/storeInspection_linear"
                 android:visibility="visible"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -1369,29 +1366,22 @@
                 android:layout_height="wrap_content"
                 android:text="Marketing Events"
                 android:textSize="20sp"
-                android:layout_marginTop="30dp"
-                />
-
+                android:layout_marginTop="30dp"/>
 
             <!--starting view pager and dots layout-->
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/headermarketing"
-                >
+                android:layout_below="@+id/headermarketing">
 
 
                 <android.support.v4.view.ViewPager
-
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:layout_marginTop="5dp" >
-
-
-
-                </android.support.v4.view.ViewPager>
+                    android:layout_marginTop="5dp">
+               </android.support.v4.view.ViewPager>
 
 
 
@@ -1403,8 +1393,7 @@
                     android:gravity="center"
                     android:layout_marginBottom="15dp"
                     android:orientation="horizontal"
-                    android:id="@+id/lill"
-                    >
+                    android:id="@+id/lill">
 
                 </LinearLayout>
 
@@ -1415,14 +1404,11 @@
                     android:layout_gravity="bottom"
                     segmentedgroup:tabBackground="@drawable/tab_selection"
                     segmentedgroup:tabGravity="center"
-                    segmentedgroup:tabIndicatorHeight="0dp"
-                    >
+                    segmentedgroup:tabIndicatorHeight="0dp">
 
                 </android.support.design.widget.TabLayout>
 
-
             </FrameLayout>
-
 
             <View
                 android:layout_width="match_parent"
@@ -1442,6 +1428,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentStart="true" />
+
             <TextView
                 android:layout_below="@+id/headerplanactual"
                 android:layout_width="match_parent"
@@ -1614,6 +1601,7 @@
                         <TextView
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
+                            android:textColor="@color/smdm_light_Black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
@@ -1681,10 +1669,6 @@
             </LinearLayout>
 
 
-
-
-
-
             <TextView
                 android:id="@+id/feedback"
                 android:gravity="center_vertical"
@@ -1711,8 +1695,159 @@
                 />
 
 
-            <!--Feedback sub views-->
+            <!--Store Inspection layout-->
+            <TextView
+                android:id="@+id/storeInspection"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/store_inspection"
+                android:textColor="@color/smdm_dark_Black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/feedback_linear"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true" />
 
+            <TextView
+                android:layout_below="@+id/storeInspection"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/smdm_divider_Black"/>
+
+
+            <!--Store Inspection sub views-->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/storeInspection_linear"
+                android:orientation="vertical"
+                android:layout_below="@+id/storeInspection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btn_inspection_begin"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/inspection_begin"/>
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/inspection_begin"
+                            android:textColor="@color/smdm_light_Black"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="visible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btn_inspection_history"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/inspection_history" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:textColor="@color/smdm_light_Black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/inspection_history"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/cut_size_report"/>
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cut-Size Report"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/skewed_size"/>
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!--Feedback sub views-->
             <LinearLayout
                 android:visibility="gone"
                 android:id="@+id/feedback_linear"
@@ -1722,11 +1857,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                >
+                android:layout_marginRight="10dp">
 
 
-                <LinearLayout
+               <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -1745,8 +1879,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
-                            android:src="@mipmap/feedback"
-                            />
+                            android:src="@mipmap/feedback"/>
 
 
                         <TextView
@@ -1756,8 +1889,7 @@
                             android:text="Feedback"
                             android:textColor="@color/smdm_light_Black"
                             android:layout_gravity="center_horizontal"
-                            android:textSize="13sp"
-                            />
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
 
@@ -1781,11 +1913,11 @@
                         <TextView
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"
+                            android:textColor="@color/smdm_light_Black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="Feedback List"
-                            />
+                            android:text="Feedback List"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -1801,8 +1933,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
-                            android:src="@mipmap/cut_size_report"
-                            />
+                            android:src="@mipmap/cut_size_report"/>
 
                         <TextView
                             android:layout_gravity="center_horizontal"
@@ -1810,7 +1941,7 @@
                             android:layout_height="wrap_content"
                             android:text="Cut-Size Report"
                             android:gravity="center_horizontal"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"/>
 
 
                     </LinearLayout>
@@ -1827,9 +1958,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
-                            android:src="@mipmap/skewed_size"
-                            />
-
+                            android:src="@mipmap/skewed_size"/>
 
                         <TextView
                             android:gravity="center_horizontal"
@@ -1837,13 +1966,11 @@
                             android:layout_height="wrap_content"
                             android:text="SkewedSize"
                             android:textSize="13sp"
-                            android:layout_gravity="center_horizontal" />
+                            android:layout_gravity="center_horizontal"/>
+
                     </LinearLayout>
 
-
-
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -1861,9 +1988,6 @@
                 android:layout_height="40dp"
                 android:layout_alignParentStart="true" />
 
-
         </RelativeLayout>
-
-
     </ScrollView>
 </LinearLayout>

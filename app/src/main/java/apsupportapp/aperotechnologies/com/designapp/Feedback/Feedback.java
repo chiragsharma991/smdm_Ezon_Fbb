@@ -243,7 +243,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
 
                         }
 
-
                     }
             ) {
                 @Override
@@ -262,8 +261,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
 
 
 //---------------seton Click list listener------------------//
-
-
         }
     }
 
