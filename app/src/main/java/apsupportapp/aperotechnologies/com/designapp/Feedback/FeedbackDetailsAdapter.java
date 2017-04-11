@@ -41,7 +41,7 @@ public class FeedbackDetailsAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -62,8 +62,7 @@ public class FeedbackDetailsAdapter extends BaseAdapter{
         {
             holder=new Holder();
             convertView= inflator.inflate(R.layout.feedback_details_child,null);
-            holder.Addviewchild=(RelativeLayout)convertView.findViewById(R.id.addViewChild);
-            LineBar(position);
+            holder.Addviewchild=(LinearLayout) convertView.findViewById(R.id.addViewChild);
 
             convertView.setTag(holder);
         }else
@@ -71,6 +70,7 @@ public class FeedbackDetailsAdapter extends BaseAdapter{
             holder=(FeedbackDetailsAdapter.Holder)convertView.getTag();
         }
 
+        LineBar(position);
 
 
         return convertView;
@@ -155,7 +155,7 @@ public class FeedbackDetailsAdapter extends BaseAdapter{
 
     public class Holder
     {
-        RelativeLayout Addviewchild;
+        LinearLayout Addviewchild;
 
 
 

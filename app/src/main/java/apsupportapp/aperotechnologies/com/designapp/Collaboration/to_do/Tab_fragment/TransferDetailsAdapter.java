@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -37,7 +39,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private final ProgressBar transferDetailProcess;
     private final HashMap<Integer, ArrayList<Integer>> subchildCount;
     private final HashMap<Integer, ArrayList<Integer>> headerScancount;
-    private final Class<TransferRequest_Details> transferRequest_detailsClass;
+    private final TransferRequest_Details transferRequest_detailsClass;
 
     private Context context;
     private ArrayList<Transfer_Request_Model> list;
@@ -52,7 +54,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
 
-    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> sender_detailsList, Context context, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty, HashMap<Integer, ArrayList<Integer>> subchildCount, ProgressBar transferDetailProcess, HashMap<Integer, ArrayList<Integer>> headerScancount, Class<TransferRequest_Details> transferRequest_detailsClass)
+    public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> sender_detailsList, Context context, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty, HashMap<Integer, ArrayList<Integer>> subchildCount, ProgressBar transferDetailProcess, HashMap<Integer, ArrayList<Integer>> headerScancount, TransferRequest_Details transferRequest_detailsClass, HashSet<Pair<Integer, Integer>> checkedItems)
     {
         this.list=sender_detailsList;  //main option adapter
         this.context=context;//
@@ -63,12 +65,10 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.subchildCount=subchildCount;  //only sub child scan qty
         this.transferDetailProcess=transferDetailProcess;
         this.headerScancount=headerScancount;
-        CheckedItems=new HashSet<Pair<Integer,Integer>>();
+        CheckedItems=checkedItems;
         this.transferRequest_detailsClass=transferRequest_detailsClass;
         checkStr = "";
     }
-
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -125,6 +125,9 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                              if (isAMobileModel()) {
 
+
+
+
                             Intent intent_barcode = new Intent();
                             intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
                             intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
@@ -168,8 +171,8 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             barcode = " ";
                             android.os.Handler h = new android.os.Handler();
                             h.postDelayed(new Runnable() {
-                                public void run() {
-
+                                public void run()
+                                {
                                     Intent i1 =((Activity) context).getIntent();
                                     Log.e("getIntent : ", "" + ((Activity) context).getIntent());
                                     Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString());
@@ -177,7 +180,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                                     if(!barcode.equals(" "))
                                     {
                                         Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                        //  TimeUP();
+                                        //TimeUP();
                                     }
                                     else
                                     {
@@ -187,8 +190,10 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                                 }
                             }, 1500);
 
-                        } else if (!isAMobileModel()) {
+                        } else if (!isAMobileModel())
+                        {
                             Log.e("regular device", "");
+
                            // checkStr = "HeaderAdapter";
                             onBarcodeScan.onScan(view,position, TransferDetailsAdapter.this);
 
@@ -197,14 +202,12 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 });
 
                 ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(""+headerScancount.get(position).get(0));  // header total scan qty
-                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(context,position,TransferDetailsAdapter.this,subchildqty,subchildCount,transferRequest_detailsClass,CheckedItems);
+                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(context,position,TransferDetailsAdapter.this,subchildqty,subchildCount,transferRequest_detailsClass,CheckedItems,headerScancount);
                 ((TransferDetailsAdapter.Holder)holder).recycleview_transferreq_detailChild.setAdapter(detailsHeaderChildAdapter);
                 detailsHeaderChildAdapter.notifyDataSetChanged();
             }
         }
     }
-
-
 
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
         if (Tr_HeaderToggle[position]) {
@@ -214,6 +217,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             ((TransferDetailsAdapter.Holder) holder).SizesLinLayout.setVisibility(View.GONE);
         }
     }
+
     private boolean isAMobileModel() {
         Log.e("checking model", "");
         getDeviceInfo();
@@ -221,7 +225,8 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         return Build.MODEL.contains("TC75");
     }
 
-    public String getDeviceInfo() {
+    public String getDeviceInfo()
+    {
         String manufacturer = Build.MANUFACTURER;
         String model = Build.MODEL;
         if (model.startsWith(manufacturer)) {
@@ -255,7 +260,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         private RelativeLayout SizesLinLayout;
         private LinearLayout lin_imgbtnScan;
         private ImageView btn_scan;
-        //   private CheckBox Detail_headerCheck;
+        //private CheckBox Detail_headerCheck;
         protected RecyclerView recycleview_transferreq_detailChild;
 
         public Holder(View itemView) {
@@ -265,17 +270,15 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             txt_reqtyval = (TextView)itemView.findViewById(R.id.txt_reqtyVal);
             txt_avlqtyval = (TextView)itemView.findViewById(R.id.txt_avlqtyVal);
             txt_sohval = (TextView)itemView.findViewById(R.id.txt_sohVal);
-          //  txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
+          //txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
             btn_scan = (ImageView) itemView.findViewById(R.id.imageView_scan);
-            // lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
-            // et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
+            //lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
+            //et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
             recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.details_headerChild);
             SizesLinLayout = (RelativeLayout)itemView.findViewById(R.id.detail_size);
 
         }
 
     }
-
-
 }

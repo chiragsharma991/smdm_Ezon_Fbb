@@ -72,16 +72,16 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    int nextCount=1;  // when you press next then
+    private int nextCount=1;  // when you press next then
     private Feedback_model feedback_model;
     ArrayList<Feedback_model> feedbackListData;
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
-    private Button Pricing,Fitting,Colours,Prints,Styling,Fabric_quality,Garment_quality,FeedbackNext,FeedbackPre;
+    private Button Pricing,Fitting,Colours,Prints,Styling,Fabric_quality,Garment_quality;
     private TextView Feedback_option;
     private AlertDialog dialog;
     private LinearLayout firstView;
-    private RelativeLayout secondView;
+    private RelativeLayout secondView,FeedbackNext,FeedbackPre;
     private RelativeLayout Fitting_relative,Pricing_relative,colours_relative,prints_relative,styling_relative,fabric_relative,garment_relative;
     private ListView FeedbackDetailList;
     private ArrayList<String> optionList;
@@ -134,8 +134,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         ImageLoader_feedback=(ProgressBar)findViewById(R.id.imageLoader_feedbackList);
 
 
-        FeedbackNext=(Button)findViewById(R.id.feedbackList_next);
-        FeedbackPre=(Button)findViewById(R.id.feedbackList_pre);
+        FeedbackNext=(RelativeLayout)findViewById(R.id.feedbackList_next);
+        FeedbackPre=(RelativeLayout)findViewById(R.id.feedbackList_pre);
         FeedbackPre.setVisibility(View.GONE);
 
       /*  Pricing=(Button)findViewById(R.id.pricing);
@@ -310,6 +310,15 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
 
     private void feedbackReport(final int position, final int Listposition) {
 
+
+
+        Fitting_relative.removeAllViewsInLayout();
+        Pricing_relative.removeAllViewsInLayout();
+        colours_relative.removeAllViewsInLayout();
+        prints_relative.removeAllViewsInLayout();
+        styling_relative.removeAllViewsInLayout();
+        fabric_relative.removeAllViewsInLayout();
+        garment_relative.removeAllViewsInLayout();
 
         // set image per list
 

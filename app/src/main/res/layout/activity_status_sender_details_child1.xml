@@ -64,13 +64,14 @@
 
 
                     </LinearLayout>
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.01"
-                        android:gravity="left">
+                       >
 
                         <TextView
+                            android:layout_centerHorizontal="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Req Qty"
@@ -82,16 +83,16 @@
                            />
 
 
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:layout_marginLeft="15dp"
-                        android:gravity="left"
                         android:visibility="visible">
 
                         <TextView
+                            android:layout_centerHorizontal="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Scanned Qty"
@@ -100,7 +101,7 @@
                             android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/bg_store_code_text"/>
 
-                    </LinearLayout>
+                    </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -147,13 +148,14 @@
 
 
                     </LinearLayout>
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.01"
-                        android:gravity="left">
+                       >
 
                         <TextView
+                            android:layout_centerHorizontal="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10"
@@ -163,23 +165,25 @@
                             android:id="@+id/status_sender_detail_reqQty"/>
 
 
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="15dp"
-                        android:gravity="left">
+                        android:layout_weight="0.9"
+
+                        >
 
                         <TextView
+                            android:layout_centerHorizontal="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10"
+                            android:layout_marginLeft="15dp"
                             android:id="@+id/status_sender_detail_ScanedQty"
                             android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/txt_color"/>
 
-                    </LinearLayout>
+                    </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -52,7 +52,7 @@
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/common_back_icon"
-                            android:clickable="false" />
+                            android:clickable="false"/>
 
                     </RelativeLayout>
 
@@ -65,20 +65,19 @@
                         android:layout_toRightOf="@+id/details_imageBtnBack"
                         android:text="Details"
                         android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_header_title_large" />
+                        android:textSize="@dimen/smdm_header_title_large"/>
 
 
                     <ProgressBar
+                        android:id="@+id/detailProcess"
                         android:layout_width="20dp"
                         android:layout_height="40dp"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
-                        android:id="@+id/detailProcess"
-                        android:visibility="gone"
                         android:indeterminateDrawable="@drawable/progress"
+                        android:visibility="gone"
                         />
-
 
 
                 </RelativeLayout>
@@ -88,71 +87,82 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Submit"
-        android:id="@+id/stock_detailSubmit"
-        android:layout_margin="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"/>
 
     <RelativeLayout
+        android:id="@+id/listviewLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listviewLayout"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/linear_head"
-        android:layout_alignParentStart="true">
+        android:layout_above="@+id/stock_detailSubmit">
+
         <RelativeLayout
+            android:id="@+id/storeDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/storeDesc"
             android:padding="5dp"
             >
+
             <TextView
+                android:id="@+id/todo_detailStoreCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/todo_detailStoreCode"
-                android:textColor="@color/bg_store_code_text"
                 android:layout_alignParentLeft="true"
-                android:textSize="@dimen/collaboration_stock_storecode"
                 android:text="Store Code"
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/collaboration_stock_storecode"
                 android:textStyle="bold"
                 />
 
             <TextView
+                android:id="@+id/todo_detailStoreAvlQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/todo_detailStoreAvlQty"
-                android:textColor="@color/bg_store_code_text"
                 android:layout_alignParentRight="true"
+                android:text="100"
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/collaboration_stock_storecode"
                 android:textStyle="bold"
-                android:text="100"
                 />
+
             <TextView
+                android:id="@+id/detailStoreAvlQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/detailStoreAvlQty"
                 android:layout_toLeftOf="@+id/todo_detailStoreAvlQty"
+                android:text="Total Avl.Qty : "
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/collaboration_stock_storecode"
-                android:text="Total Avl.Qty : "
                 android:textStyle="bold"
                 />
 
 
         </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/stockDetail_list"
-            android:scrollbars="vertical"
-            android:layout_marginTop="3dp"
-            android:layout_below="@+id/storeDesc"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
+
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@+id/storeDesc"
+                android:id="@+id/stockDetail_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:scrollbars="vertical"/>
     </RelativeLayout>
+
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/stock_detailSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAllCaps="false"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_red_effect"
+            android:text="Submit"
+            android:textSize="@dimen/smdm_header_title_large"
+            android:textColor="@android:color/white"/>
+
 
 </RelativeLayout>

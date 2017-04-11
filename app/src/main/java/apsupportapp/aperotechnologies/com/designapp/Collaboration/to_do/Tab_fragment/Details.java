@@ -103,15 +103,16 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         queue = new RequestQueue(cache, network);
         queue.start();
 
-        if (Reusable_Functions.chkStatus(context)) {
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.hDialog();
-
             Reusable_Functions.sDialog(context, "Loading data...");
             requestReceiversDetails();
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void requestReceiversChildDetails(final int position) {
@@ -126,7 +127,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                         Log.i(TAG, "Detail api response : " + " " + response);
                         Log.i(TAG, "Detail api total length" + "" + response.length());
 
-
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -135,9 +135,11 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
                                 return;
 
-                            } else if (response.length() == limit) {
+                            }
+                            else if (response.length() == limit) {
                                 Log.e(TAG, "promo eql limit");
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
 
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                     ChildDetailList.add(toDo_modal);
@@ -150,7 +152,8 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
 
                                 requestReceiversChildDetails(position);
 
-                            } else if (response.length() < limit) {
+                            }
+                            else if (response.length() < limit) {
                                 Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
@@ -166,9 +169,9 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                             Reusable_Functions.hDialog();
                             DetailProcess.setVisibility(View.GONE);
 
-
-
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
@@ -205,14 +208,12 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         queue.add(postRequest);
         Reusable_Functions.hDialog();
 
-
     }
 
 
     private void requestReceiversDetails() {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20");
-
 
         Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -222,14 +223,14 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                         Log.i(TAG, "Detail api response : " + " " + response);
                         Log.i(TAG, "Detail api total length" + "" + response.length());
 
-
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
-                            } else if (response.length() == limit) {
+                            }
+                            else if (response.length() == limit) {
                                 Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -241,10 +242,11 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 //
-
                                 requestReceiversDetails();
 
-                            } else if (response.length() < limit) {
+                            }
+                            else if (response.length() < limit)
+                            {
                                 Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
@@ -254,8 +256,8 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                                 limit = 100;
                                 offsetvalue = 0;
 
-
                             }
+
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
@@ -264,12 +266,12 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                             recyclerView.setAdapter(stockPullAdapter);
                             Reusable_Functions.hDialog();
 
-
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
                             e.printStackTrace();
                             Log.e(TAG, "catch...Error" + e.toString());
                         }
@@ -381,8 +383,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
             DetailProcess.setVisibility(View.VISIBLE);
 
 
-
-
             requestReceiversChildDetails(position);
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
@@ -411,8 +411,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                        requestReceiverSubmitAPI(context,jsonArray);
                    }
                 }
-
-
                 break;
         }
     }

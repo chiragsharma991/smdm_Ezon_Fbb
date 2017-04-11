@@ -60,7 +60,8 @@
                     android:layout_toRightOf="@+id/feedback_BtnBack"
                     android:text="Feedback"
                     android:textColor="@color/divider_salescard1"
-                    android:textSize="@dimen/smdm_header_title_large" />
+                    android:textSize="@dimen/smdm_header_title_large"
+                    />
 
 
             </RelativeLayout>
@@ -89,17 +90,21 @@
                     />
 
 
-                
-                
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:padding="5dp"
-                    android:layout_below="@+id/feedback_option"
-                    android:id="@+id/feedback_image"
-                    android:src="@mipmap/placeholder"
-                    />
+
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:padding="5dp"
+                        android:layout_below="@+id/feedback_option"
+                        android:id="@+id/feedback_image"
+                        android:src="@mipmap/placeholder"
+                        />
+
+
+
+
 
 
                 <TextView
@@ -242,29 +247,368 @@
                 android:visibility="visible"
                 >
 
-                <ListView
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="60dp"
-                    android:id="@+id/feedbackDetailList"
-                    android:divider="@null"
 
                     >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
 
-                </ListView>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:layout_margin="5dp"
+                            android:id="@+id/fitting_relative"
+                            >
+                            <!--     <View
+                                     android:layout_width="180dp"
+                                     android:layout_height="match_parent"
+                                     android:id="@+id/fitting_score"
+                                     android:background="@color/edit_border_color">
+
+                                 </View>
+
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:text="Fitting"
+                                     android:layout_marginLeft="5dp"
+                                     android:textColor="@color/bg_store_code_text"
+                                     android:layout_centerVertical="true"
+                                     android:id="@+id/fitting_percent"
+
+                                     />
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:text="50%"
+                                     android:textColor="@color/bg_store_code_text"
+                                     android:id="@+id/fitting_percent_result"
+                                     android:layout_alignParentRight="true"
+                                     android:layout_centerVertical="true"
+                                     />-->
+
+
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:layout_margin="5dp"
+                            android:id="@+id/pricing_relative"
+
+                            >
+                            <!-- <View
+                                 android:layout_width="30dp"
+                                 android:layout_height="match_parent"
+                                 android:id="@+id/pricing_score"
+                                 android:background="@color/edit_border_color">
+
+                             </View>
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="Pricing"
+                                 android:layout_marginLeft="5dp"
+                                 android:textColor="@color/bg_store_code_text"
+                                 android:layout_centerVertical="true"
+                                 android:id="@+id/pricing_percent"
+
+                                 />
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="10%"
+                                 android:textColor="@color/bg_store_code_text"
+                                 android:id="@+id/pricing_percent_result"
+                                 android:layout_alignParentRight="true"
+                                 android:layout_centerVertical="true"
+                                 />-->
+
+
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:layout_margin="5dp"
+                            android:id="@+id/colours_relative"
+
+                            >
+                            <!--  <View
+                                  android:layout_width="150dp"
+                                  android:layout_height="match_parent"
+                                  android:id="@+id/colours_score"
+                                  android:background="@color/edit_border_color">
+
+                              </View>
+
+                              <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="Colours"
+                                  android:layout_marginLeft="5dp"
+                                  android:textColor="@color/bg_store_code_text"
+                                  android:layout_centerVertical="true"
+                                  android:id="@+id/colours_percent"
+
+                                  />
+                              <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="40%"
+                                  android:textColor="@color/bg_store_code_text"
+                                  android:id="@+id/colours_percent_result"
+                                  android:layout_alignParentRight="true"
+                                  android:layout_centerVertical="true"
+                                  />
+-->
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:layout_margin="5dp"
+                            android:id="@+id/prints_relative"
+
+                            >
+                            <!--     <View
+                                     android:layout_width="280dp"
+                                     android:layout_height="match_parent"
+                                     android:id="@+id/prints_score"
+                                     android:background="@color/edit_border_color">
+
+                                 </View>
+
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:text="Prints"
+                                     android:layout_marginLeft="5dp"
+                                     android:textColor="@color/bg_store_code_text"
+                                     android:layout_centerVertical="true"
+                                     android:id="@+id/prints_percent"
+
+                                     />
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:text="70%"
+                                     android:textColor="@color/bg_store_code_text"
+                                     android:id="@+id/prints_percent_result"
+                                     android:layout_alignParentRight="true"
+                                     android:layout_centerVertical="true"
+                                     />-->
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:layout_margin="5dp"
+                            android:id="@+id/styling_relative"
+
+                            >
+                            <!--     <View
+                                     android:layout_width="200dp"
+                                     android:layout_height="match_parent"
+                                     android:id="@+id/styling_score"
+                                     android:background="@color/edit_border_color"
+                                     android:layout_alignParentTop="true"
+                                     android:layout_alignParentStart="true">
+
+                                 </View>
+
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:text="Styling"
+                                     android:layout_marginLeft="5dp"
+                                     android:textColor="@color/bg_store_code_text"
+                                     android:layout_centerVertical="true"
+                                     android:id="@+id/styling_percent"
+
+                                     />
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:text="55%"
+                                     android:textColor="@color/bg_store_code_text"
+                                     android:id="@+id/styling_percent_result"
+                                     android:layout_alignParentRight="true"
+                                     android:layout_centerVertical="true"
+                                     />-->
 
 
 
 
-                <Button
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:layout_margin="5dp"
+                            android:id="@+id/fabric_relative"
+
+                            >
+                            <!--      <View
+                                      android:layout_width="80dp"
+                                      android:layout_height="match_parent"
+                                      android:id="@+id/fabricQuality_score"
+                                      android:background="@color/edit_border_color">
+
+                                  </View>
+
+                                  <TextView
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:text="Fabric Quality"
+                                      android:layout_marginLeft="5dp"
+                                      android:textColor="@color/bg_store_code_text"
+                                      android:layout_centerVertical="true"
+                                      android:id="@+id/fabricQuality_percent"
+
+                                      />
+                                  <TextView
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:text="80%"
+                                      android:textColor="@color/bg_store_code_text"
+                                      android:id="@+id/fabricQuality_percent_result"
+                                      android:layout_alignParentRight="true"
+                                      android:layout_centerVertical="true"
+                                      />-->
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="47dp"
+                            android:layout_margin="5dp"
+                            android:id="@+id/garment_relative"
+
+                            >
+                            <!--        <View
+                                        android:layout_width="10dp"
+                                        android:layout_height="match_parent"
+                                        android:id="@+id/garmentQuality_score"
+                                        android:background="@color/edit_border_color">
+
+                                    </View>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Garment Quality"
+                                        android:layout_marginLeft="5dp"
+                                        android:textColor="@color/bg_store_code_text"
+                                        android:layout_centerVertical="true"
+                                        android:id="@+id/garmentQuality_percent"
+
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="7%"
+                                        android:textColor="@color/bg_store_code_text"
+                                        android:id="@+id/garmentQuality_percent_result"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        />-->
+
+
+
+                        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+
+
+
+
+
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="Next"
+                    android:src="@drawable/arrow_right_black_24dp"
                     android:layout_margin="5dp"
                     android:layout_alignParentBottom="true"
-                    android:id="@+id/feedbackNext"
-                    android:textColor="@android:color/white"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/feedbackNext"
+                        android:background="@drawable/button_red_effect"
+
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:id="@+id/next_txt"
+                            android:text="Next"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/smdm_header_title_large"
+
+
+                            />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/next_txt"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_marginLeft="30dp"
+
+                            />
+
+
+                    </RelativeLayout>
+
+
+
+
+
+
+
+
+                    </RelativeLayout>
+
+
+
+
 
 
 

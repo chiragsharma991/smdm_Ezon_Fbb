@@ -57,7 +57,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-public class Feedback extends AppCompatActivity implements View.OnClickListener{
+public class Feedback extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout Feedback_BtnBack;
     Context context = this;
@@ -65,24 +65,25 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
     private SharedPreferences sharedPreferences;
     private String userId;
     private String bearertoken;
-    private String TAG="Feedback";
+    private String TAG = "Feedback";
     private RequestQueue queue;
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
-    private int listCount = 1;  //when you click on next then
+    private int listCount = 0;  //when you click on next then
     private int top = 10;
     private Feedback_model feedback_model;
-    ArrayList<Feedback_model> feedbackList;
+    ArrayList<Feedback_model> feedbackList, feedbackListData;
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
-    private Button Pricing,Fitting,Colours,Prints,Styling,Fabric_quality,Garment_quality,FeedbackNext;
+    private Button Pricing, Fitting, Colours, Prints, Styling, Fabric_quality, Garment_quality;
     private TextView Feedback_option;
     private AlertDialog dialog;
     private LinearLayout firstView;
-    private RelativeLayout secondView;
-    private RelativeLayout Fitting_relative;
+    private RelativeLayout secondView,FeedbackNext;
+    private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
+    private ArrayList<String> optionList;
     //  private Feedback_details feedbackAdapter;
 
 
@@ -95,16 +96,15 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
         gson = new Gson();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
-        bearertoken = sharedPreferences.getString("bearerToken","");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
         Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        feedbackList=new ArrayList<>();
+        feedbackList = new ArrayList<>();
 
-        if (Reusable_Functions.chkStatus(context))
-    {
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             requestFeedbackApi();
@@ -114,24 +114,45 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void initalise() {
-        Feedback_BtnBack=(RelativeLayout)findViewById(R.id.feedback_BtnBack);
-        Feedback_image=(ImageView)findViewById(R.id.feedback_image);
-        Feedback_option=(TextView)findViewById(R.id.feedback_option);
-        ImageLoader_feedback=(ProgressBar)findViewById(R.id.imageLoader_feedback);
-        FeedbackDetailList=(ListView)findViewById(R.id.feedbackDetailList);
 
 
-        firstView=(LinearLayout)findViewById(R.id.replaceView_first);
-        secondView=(RelativeLayout)findViewById(R.id.replaceView_two);
-        FeedbackNext=(Button)findViewById(R.id.feedbackNext);
+        optionList = new ArrayList<>();
+        optionList.add("Fitting");
+        optionList.add("Pricing");
+        optionList.add("Colours");
+        optionList.add("Prints");
+        optionList.add("Styling");
+        optionList.add("Fabric Quality");
+        optionList.add("Garment Quality");
 
-        Pricing=(Button)findViewById(R.id.pricing);
-        Fitting=(Button)findViewById(R.id.fitting);
-        Colours=(Button)findViewById(R.id.colours);
-        Prints=(Button)findViewById(R.id.prints);
-        Styling=(Button)findViewById(R.id.styling);
-        Fabric_quality=(Button)findViewById(R.id.fabric_quality);
-        Garment_quality=(Button)findViewById(R.id.garment_quality);
+        Feedback_BtnBack = (RelativeLayout) findViewById(R.id.feedback_BtnBack);
+        Feedback_image = (ImageView) findViewById(R.id.feedback_image);
+        Feedback_option = (TextView) findViewById(R.id.feedback_option);
+        ImageLoader_feedback = (ProgressBar) findViewById(R.id.imageLoader_feedback);
+        // FeedbackDetailList=(ListView)findViewById(R.id.feedbackDetailList);
+
+
+        firstView = (LinearLayout) findViewById(R.id.replaceView_first);
+        secondView = (RelativeLayout) findViewById(R.id.replaceView_two);
+        FeedbackNext = (RelativeLayout) findViewById(R.id.feedbackNext);
+
+        Pricing = (Button) findViewById(R.id.pricing);
+        Fitting = (Button) findViewById(R.id.fitting);
+        Colours = (Button) findViewById(R.id.colours);
+        Prints = (Button) findViewById(R.id.prints);
+        Styling = (Button) findViewById(R.id.styling);
+        Fabric_quality = (Button) findViewById(R.id.fabric_quality);
+        Garment_quality = (Button) findViewById(R.id.garment_quality);
+
+
+        Fitting_relative = (RelativeLayout) findViewById(R.id.fitting_relative);
+        Pricing_relative = (RelativeLayout) findViewById(R.id.pricing_relative);
+        colours_relative = (RelativeLayout) findViewById(R.id.colours_relative);
+        prints_relative = (RelativeLayout) findViewById(R.id.prints_relative);
+        styling_relative = (RelativeLayout) findViewById(R.id.styling_relative);
+        fabric_relative = (RelativeLayout) findViewById(R.id.fabric_relative);
+        garment_relative = (RelativeLayout) findViewById(R.id.garment_relative);
+
 
         ImageLoader_feedback.setVisibility(View.GONE);
         firstView.setVisibility(View.VISIBLE);
@@ -148,7 +169,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
         Garment_quality.setOnClickListener(this);
     }
 
-    private void requestFeedbackApi( ) {
+    private void requestFeedbackApi() {
 
 
         if (Reusable_Functions.chkStatus(context)) {
@@ -200,10 +221,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
 
 
                                 // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                               // feedbackAdapter = new Feedback_details(feedbackList,Feedback.this);
+                                // feedbackAdapter = new Feedback_details(feedbackList,Feedback.this);
                                 Reusable_Functions.hDialog();
-                                nextList(0);
-
+                                nextList(listCount);
 
 
                             } catch (Exception e) {
@@ -249,27 +269,25 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
     }
 
 
-
     public static void StartIntent(Context c) {
         c.startActivity(new Intent(c, Feedback.class));
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.feedback_BtnBack:
                 finish();
                 break;
             case R.id.feedbackNext:
-                if(listCount<feedbackList.size()){
-                firstView.setVisibility(View.VISIBLE);
-                secondView.setVisibility(View.GONE);
-                nextList(listCount);
+
+                if (listCount + 1 < feedbackList.size()) {
+                    Reusable_Functions.ViewVisible(firstView);
+                    Reusable_Functions.ViewGone(secondView);
                     listCount++;
-                }else
-                {
-                    Toast.makeText(context,"Data is not available",Toast.LENGTH_SHORT).show();
+                    nextList(listCount);
+                } else {
+                    Toast.makeText(context, "Data is not available", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -281,14 +299,12 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    private void nextList(int position)
-    {
+    private void nextList(int position) {
         Feedback_option.setText(feedbackList.get(position).getOption());
-        Log.e(TAG, "array list size : "+feedbackList.size() );
+        Log.e(TAG, "array list size : " + feedbackList.size());
         ImageLoader_feedback.setVisibility(View.VISIBLE);
 
-        if(!feedbackList.get(position).getProdImageUrl().equals(""))
-        {
+        if (!feedbackList.get(position).getProdImageUrl().equals("")) {
             Glide.
                     with(context)
                     .load(feedbackList.get(position).getProdImageUrl())
@@ -307,7 +323,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
                     })
                     .into(Feedback_image);
 
-        }else {
+        } else {
             ImageLoader_feedback.setVisibility(View.GONE);
 
             Glide.with(context).
@@ -315,41 +331,61 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
                     into(Feedback_image);
 
 
-
         }
     }
 
     private void commentDialog() {
 
-        Log.e(TAG, "commentDialog: true...." );
-        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.AppCompatAlertDialogStyle);
+        Log.e(TAG, "commentDialog: true....");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        View v=inflater.inflate(R.layout.comment_dialog, null);
-        LinearLayout skip =(LinearLayout) v.findViewById(R.id.comment_skip);
-        LinearLayout ok =(LinearLayout)v.findViewById(R.id.comment_ok);
-        final EditText feedback_comment =(EditText)v.findViewById(R.id.feedback_comment);
+        View v = inflater.inflate(R.layout.comment_dialog, null);
+        LinearLayout skip = (LinearLayout) v.findViewById(R.id.comment_skip);
+        LinearLayout ok = (LinearLayout) v.findViewById(R.id.comment_ok);
+        final EditText feedback_comment = (EditText) v.findViewById(R.id.feedback_comment);
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                feedbackListData = new ArrayList<Feedback_model>();
+                Feedback_model feedback_model = new Feedback_model();
+                feedback_model.setFittingCntPer(30);
+                feedback_model.setPricingCntPer(70);
+                feedbackListData.add(feedback_model);
+
+                for (int i = 0; i < 2; i++) {
+
+                    feedbackDetails(i, 0);
+                }
+
                 dialog.dismiss();
-                feedbackDetails();
 
             }
         });
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
-                if(!(feedback_comment.getText().length() ==0)) {
-                    feedbackDetails();
-                }
-                else{
-                    Toast.makeText(context,"Please enter your comment",Toast.LENGTH_SHORT);
+
+                if (!(feedback_comment.getText().length() == 0)) {
+                    feedbackListData = new ArrayList<Feedback_model>();
+                    Feedback_model feedback_model = new Feedback_model();
+                    feedback_model.setFittingCntPer(20);
+                    feedback_model.setPricingCntPer(49);
+                    feedbackListData.add(feedback_model);
+
+                    for (int i = 0; i < 2; i++) {
+
+                        feedbackDetails(i, 0);
+                    }
+                    dialog.dismiss();
+
+                } else {
+                    Toast.makeText(context, "Please enter your comment", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -362,24 +398,170 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
         dialog.show();
     }
 
-    private void feedbackDetails() {
+    private void feedbackDetails(final int position, final int Listposition) {
 
-        firstView.setVisibility(View.GONE);
-        secondView.setVisibility(View.VISIBLE);
+       // firstView.setVisibility(View.GONE);
+       // secondView.setVisibility(View.VISIBLE);
+        Reusable_Functions.ViewGone(firstView);
+        Reusable_Functions.ViewVisible(secondView);
+        Fitting_relative.removeAllViewsInLayout();
+        Pricing_relative.removeAllViewsInLayout();
+        colours_relative.removeAllViewsInLayout();
+        prints_relative.removeAllViewsInLayout();
+        styling_relative.removeAllViewsInLayout();
+        fabric_relative.removeAllViewsInLayout();
+        garment_relative.removeAllViewsInLayout();
 
-        ArrayList<String>optionList=new ArrayList<>();
-        ArrayList<Integer>optionPercentageList=new ArrayList<>();
+        //calculate screen view size and add line bar process.
 
-        optionList.add("Fitting");          optionPercentageList.add(30);
-        optionList.add("Pricing");          optionPercentageList.add(70);
-        optionList.add("Colours");          optionPercentageList.add(90);
-        optionList.add("Prints");           optionPercentageList.add(10);
-        optionList.add("Styling");          optionPercentageList.add(40);
-        optionList.add("Fabric Quality");   optionPercentageList.add(80);
-        optionList.add("Garment Quality");  optionPercentageList.add(0);
+        ViewTreeObserver vto = Fitting_relative.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    Fitting_relative.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                } else {
+                    Fitting_relative.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+                int width = Fitting_relative.getMeasuredWidth();
+                int height = Fitting_relative.getMeasuredHeight();
 
-        FeedbackDetailsAdapter adapter=new FeedbackDetailsAdapter(optionList,optionPercentageList,context);
-        FeedbackDetailList.setAdapter(adapter);
+                // Calculation width acording to size of phone
+
+                double x = 0;  // x is result of calculation.
+                if (position == 0)
+                //get 0 is depend on next and pre button
+                {
+                    x = ((double) feedbackListData.get(Listposition).getFittingCntPer() / 100) * width;
+                } else if (position == 1) {
+                    x = ((double) feedbackListData.get(Listposition).getPricingCntPer() / 100) * width;
+                } else if (position == 2) {
+                    x = ((double) feedbackListData.get(Listposition).getColorsCntPer() / 100) * width;
+                } else if (position == 3) {
+                    x = ((double) feedbackListData.get(Listposition).getPrintCntPer() / 100) * width;
+                } else if (position == 4) {
+                    x = ((double) feedbackListData.get(Listposition).getStylingCntPer() / 100) * width;
+                } else if (position == 5) {
+                    x = ((double) feedbackListData.get(Listposition).getFabricQualityCntPer() / 100) * width;
+                } else if (position == 6) {
+                    x = ((double) feedbackListData.get(Listposition).getGarmentQualityCntPer() / 100) * width;
+                }
+
+                int percentage = (int) x;
+                Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackListData.get(0).getFittingCntPer() + "and values are" + percentage);
+                View lp = new View(context);
+                // LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(400,LinearLayout.LayoutParams.MATCH_PARENT);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
+                lp.setLayoutParams(layoutParams);
+                lp.setBackgroundColor(Color.parseColor("#e3e2e3"));
+                if (position == 0) {
+                    Fitting_relative.addView(lp);
+                } else if (position == 1) {
+                    Pricing_relative.addView(lp);
+                } else if (position == 2) {
+                    colours_relative.addView(lp);
+                } else if (position == 3) {
+                    prints_relative.addView(lp);
+                } else if (position == 4) {
+                    styling_relative.addView(lp);
+                } else if (position == 5) {
+                    fabric_relative.addView(lp);
+                } else if (position == 6) {
+                    garment_relative.addView(lp);
+                }
+
+                AddText(position, Listposition);
+
+            }
+        });
+
+
+    }
+
+    private void AddText(int position, int Listposition) {
+
+
+        // starting title text
+
+
+        final TextView textView1 = new TextView(context);
+        textView1.setText("" + optionList.get(position));
+        textView1.setTextColor(Color.parseColor("#404040"));
+
+        final RelativeLayout.LayoutParams params1 =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+        params1.addRule(RelativeLayout.CENTER_VERTICAL);
+        params1.setMargins(5, 0, 0, 0);
+        textView1.setLayoutParams(params1);
+
+        // add text in list
+
+        if (position == 0) {
+            Fitting_relative.addView(textView1, params1);
+        } else if (position == 1) {
+            Pricing_relative.addView(textView1, params1);
+        } else if (position == 2) {
+            colours_relative.addView(textView1, params1);
+        } else if (position == 3) {
+            prints_relative.addView(textView1, params1);
+        } else if (position == 4) {
+            styling_relative.addView(textView1, params1);
+        } else if (position == 5) {
+            fabric_relative.addView(textView1, params1);
+        } else if (position == 6) {
+            garment_relative.addView(textView1, params1);
+        }
+
+
+        // another text
+
+        final TextView textView2 = new TextView(context);
+
+        // get percentage for all list & 0 will be change according to next pre button
+        if (position == 0) {
+            textView2.setText("" + feedbackListData.get(Listposition).getFittingCntPer() + "%");
+        } else if (position == 1) {
+            textView2.setText("" + feedbackListData.get(Listposition).getPricingCntPer() + "%");
+        } else if (position == 2) {
+            textView2.setText("" + feedbackListData.get(Listposition).getColorsCntPer() + "%");
+        } else if (position == 3) {
+            textView2.setText("" + feedbackListData.get(Listposition).getPrintCntPer() + "%");
+        } else if (position == 4) {
+            textView2.setText("" + feedbackListData.get(Listposition).getStylingCntPer() + "%");
+        } else if (position == 5) {
+            textView2.setText("" + feedbackListData.get(Listposition).getFabricQualityCntPer() + "%");
+        } else if (position == 6) {
+            textView2.setText("" + feedbackListData.get(Listposition).getGarmentQualityCntPer() + "%");
+        }
+
+        textView2.setTextColor(Color.parseColor("#404040"));
+
+        final RelativeLayout.LayoutParams params2 =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+        params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        params2.addRule(RelativeLayout.CENTER_VERTICAL);
+        textView2.setLayoutParams(params2);
+
+        // add text in all list
+        if (position == 0) {
+            Fitting_relative.addView(textView2, params2);
+        } else if (position == 1) {
+            Pricing_relative.addView(textView2, params2);
+        } else if (position == 2) {
+            colours_relative.addView(textView2, params2);
+        } else if (position == 3) {
+            prints_relative.addView(textView2, params2);
+        } else if (position == 4) {
+            styling_relative.addView(textView2, params2);
+        } else if (position == 5) {
+            fabric_relative.addView(textView2, params2);
+        } else if (position == 6) {
+            garment_relative.addView(textView2, params2);
+        }
 
 
     }

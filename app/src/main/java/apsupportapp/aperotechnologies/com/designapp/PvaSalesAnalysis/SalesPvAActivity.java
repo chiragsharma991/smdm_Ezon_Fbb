@@ -710,11 +710,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 }
                             }
                         }, 700);
-
-
                     }
                 }));
-
 
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -723,9 +720,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                /* Intent intent = new Intent(SalesPvAActivity.this, DashBoardActivity.class);
                 startActivity(intent);*/
              onBackPressed();
-
-
-
             }
         });
 

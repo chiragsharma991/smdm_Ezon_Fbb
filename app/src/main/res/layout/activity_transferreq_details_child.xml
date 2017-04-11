@@ -60,71 +60,78 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:orientation="vertical"
                 >
 
                 <TextView
+                    android:id="@+id/txt_req"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:text="Req.Qty"
+                    android:layout_centerHorizontal="true"
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize"
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:layout_below="@+id/txt_req"
                     android:id="@+id/txt_reqtyVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
+                    android:layout_centerHorizontal="true"
                     android:text="19"
                     android:textColor="@color/smdm_default_color"
                     android:textSize="@dimen/normallayout_storesize"
                     />
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:orientation="vertical"
                 >
 
                 <TextView
+                    android:id="@+id/txt_avl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Avl.Qty"
+                    android:layout_centerHorizontal="true"
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize"
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:layout_below="@+id/txt_avl"
                     android:id="@+id/txt_avlqtyVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
                     android:text="19"
+                    android:layout_centerHorizontal="true"
                     android:textColor="@color/smdm_default_color"
                     android:textSize="@dimen/normallayout_storesize"
                     />
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
-                android:orientation="vertical"
                 >
 
                 <TextView
+                    android:id="@+id/txt_soh"
+                    android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SOH"
@@ -133,7 +140,9 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:layout_below="@+id/txt_soh"
                     android:id="@+id/txt_sohVal"
+                    android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
@@ -143,25 +152,28 @@
                     />
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
-                android:orientation="vertical"
                 >
 
                 <TextView
+                    android:id="@+id/txt_scanqty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
+                    android:layout_centerHorizontal="true"
                     android:text="Scan Qty"
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize"
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:layout_below="@+id/txt_scanqty"
+                    android:layout_centerHorizontal="true"
                     android:id="@+id/txt_scanqtyVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -172,7 +184,7 @@
                     />
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="0dp"

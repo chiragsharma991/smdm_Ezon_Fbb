@@ -77,7 +77,6 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         // Required empty public constructor
     }
 
-
     // TODO: Rename and change types and number of parameters
     public static ToBeReceiver newInstance(String param1, String param2) {
         ToBeReceiver fragment = new ToBeReceiver();
@@ -119,7 +118,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
             if (Receiver_checkNetwkstatus) {
-                Toast.makeText(context, "No data found from TO BE RECEIVED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "No data found ", Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -181,10 +180,12 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     }
     private void MakeReceiver_StatusHashMap(ArrayList<StatusModel> senderSummaryList) {
         rec_initiatedStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
-        for (int i = 0; i <senderSummaryList.size() ; i++) {
+        for (int i = 0; i <senderSummaryList.size() ; i++)
+        {
             ArrayList<StatusModel>list=new ArrayList<>();
             rec_initiatedStatusList.put(i,list);
         }
+
         rec_senderAcpStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
         for (int i = 0; i <senderSummaryList.size() ; i++) {
             ArrayList<StatusModel>list=new ArrayList<>();
@@ -202,7 +203,6 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
             ArrayList<StatusModel>list=new ArrayList<>();
             rec_grnStatusList.put(i,list);
         }
-
     }
 
     @Override

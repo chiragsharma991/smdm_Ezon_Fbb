@@ -20,6 +20,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
+                    android:gravity="left"
                     android:id="@+id/tr_detailChild_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -34,14 +35,14 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:orientation="vertical"
                 >
 
                 <TextView
+                    android:layout_centerHorizontal="true"
                     android:id="@+id/txt_trdetailchild_reqty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,16 +52,17 @@
                     />
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:orientation="vertical"
                 >
 
                 <TextView
+                    android:id="@+id/txt_trdetailchild_avlqty"
+                    android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
@@ -69,15 +71,17 @@
                     />
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
-                android:orientation="vertical">
+               >
 
                 <TextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/txt_trdetailchild_soh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
@@ -86,15 +90,16 @@
                     />
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
-                android:orientation="vertical">
+               >
 
                 <EditText
+                    android:layout_centerHorizontal="true"
                     android:id="@+id/txt_trdetailchild_scanqty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,7 +110,7 @@
                     android:singleLine="true"
                     />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="0dp"

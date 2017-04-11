@@ -147,11 +147,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             }
 
                         }
-
-
-
-
-
                     }
                 });
                 DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(visibleItems,HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
