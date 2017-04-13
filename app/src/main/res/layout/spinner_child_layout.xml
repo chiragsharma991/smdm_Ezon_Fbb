@@ -6,7 +6,7 @@
         android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
         android:singleLine="true"
         android:text="sdfsdf"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_store_code_text"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:ellipsize="marquee" />
