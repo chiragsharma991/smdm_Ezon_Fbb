@@ -59,6 +59,18 @@
     <string name="pending">Pending</string>
     <string name="key_product_plan">Plan vs Actual </string>
     <string name="plan_actual">Key Products</string>
+    <string name="store_inspection">Store Inspection</string>
+    <string name="inspection_history">Inspection History</string>
+    <string name="inspection_begin">Inspection Begin</string>
+    <string name="insp_criteria_1">Fashion Quotient(display looks fashionable)</string>
+    <string name="insp_criteria_2">Merchandise Display(by size/ full size sets)</string>
+    <string name="insp_criteria_3">Merchandise Presentation Standards</string>
+    <string name="insp_criteria_4">Suggestive Selling by staff</string>
+    <string name="insp_criteria_5">Overall Cleanliness</string>
+    <string name="insp_criteria_6">Signage(clear &amp; visible)</string>
+    <string name="insp_criteria_7">MPM Execution</string>
+    <string name="insp_criteria_8">Window &amp; cluster Mannequins Displays</string>
+    <string name="dummy_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
 
     <string-array name="colour_name">
         <item>Blue</item>

@@ -125,9 +125,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                              if (isAMobileModel()) {
 
-
-
-
                             Intent intent_barcode = new Intent();
                             intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
                             intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
