@@ -156,10 +156,12 @@
             android:id="@+id/stock_detailSubmit"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textAllCaps="false"
             android:layout_alignParentBottom="true"
             android:layout_margin="5dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_red_effect"
             android:text="Submit"
+            android:textSize="@dimen/smdm_header_title_large"
             android:textColor="@android:color/white"/>
 
 

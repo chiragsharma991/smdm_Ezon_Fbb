@@ -26,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
+        android:id="@+id/feedback_comment"
         android:lines="6"
         android:background="@android:color/transparent"
         android:minLines="6"

@@ -1063,7 +1063,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 onClickFlag = false;
                                 progressBar1.setVisibility(View.GONE);
-                            } else if (response.length() == limit) {
+                            } else if (response.length() == limit)
+                            {
                                 for (i = 0; i < response.length(); i++) {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
@@ -1207,7 +1208,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                 {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);

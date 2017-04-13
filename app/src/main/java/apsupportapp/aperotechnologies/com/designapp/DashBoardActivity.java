@@ -48,6 +48,7 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusA
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
+import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
@@ -332,12 +333,11 @@ public class DashBoardActivity extends AppCompatActivity
         FeedbackList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  new Feedback().StartIntent(DashBoardActivity.this);
-               // if(timer != null)
-              //  {
-              //      timer.cancel();
-             //   }
-                // finish();
+                new FeedbackList().StartIntent(DashBoardActivity.this);
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
             }
         });
 
@@ -1511,6 +1511,8 @@ public class DashBoardActivity extends AppCompatActivity
                     Feedback_linear.setVisibility(View.VISIBLE);
                     linplanactual.setVisibility(View.GONE);
                     Collaboration_subView.setVisibility(View.GONE);
+                    inspection_linear.setVisibility(View.GONE);
+
                     hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1520,6 +1522,7 @@ public class DashBoardActivity extends AppCompatActivity
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_store_Inspection.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
 
                     planActual = "NO";
                     inVENtory="NO";
@@ -1531,6 +1534,7 @@ public class DashBoardActivity extends AppCompatActivity
                     pmAnalysis="NO";
                     Collab="NO";
                     store_inspection = "NO";
+
                     Collab_bool=false;
                     HourlyFlash=false;
                     Promo=false;

@@ -33,7 +33,7 @@
                 android:layout_height="match_parent">
 
                 <RelativeLayout
-                    android:id="@+id/feedback_BtnBack"
+                    android:id="@+id/feedbackList_BtnBack"
                     android:layout_width="@dimen/header_clickable_width"
                     android:layout_height="@dimen/header_clickable_height"
                     android:layout_alignParentLeft="true"
@@ -57,8 +57,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/feedback_BtnBack"
-                    android:text="Feedback"
+                    android:layout_toRightOf="@+id/feedbackList_BtnBack"
+                    android:text="Feedback List"
                     android:textColor="@color/divider_salescard1"
                     android:textSize="@dimen/smdm_header_title_large" />
 
@@ -80,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/feedback_option"
+                    android:id="@+id/feedbackList_option"
                     android:padding="5dp"
                     android:textSize="@dimen/collaboration_stock_storecode"
                     android:text="Option Name"
@@ -96,16 +96,16 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:padding="5dp"
-                    android:layout_below="@+id/feedback_option"
-                    android:id="@+id/feedback_image"
-                    android:src="@mipmap/img_placeholder"
+                    android:layout_below="@+id/feedbackList_option"
+                    android:id="@+id/feedbackList_image"
+                    android:src="@mipmap/placeholder"
                     />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/feedback_question"
+                    android:id="@+id/feedbackList_question"
                     android:padding="15dp"
                     android:textSize="@dimen/collaboration_stock_storecode"
                     android:textColor="@color/white"
@@ -118,7 +118,7 @@
                 <ProgressBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageLoader_feedback"
+                    android:id="@+id/imageLoader_feedbackList"
                     android:visibility="visible"
                     android:layout_centerInParent="true"
                     android:indeterminateDrawable="@drawable/progress"
@@ -151,99 +151,7 @@
                 android:id="@+id/replaceView"
                 >
 
-                <!--first layout-->
 
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:id="@+id/replaceView_first"
-                        android:visibility="gone"
-                        >
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="47dp"
-                            android:background="@drawable/border1"
-                            android:layout_margin="5dp"
-                            android:text="Fitting"
-                            android:id="@+id/fitting"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textAllCaps="false"
-                            />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="47dp"
-                            android:background="@drawable/border1"
-                            android:layout_margin="5dp"
-                            android:text="Pricing"
-                            android:id="@+id/pricing"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textAllCaps="false"
-                            />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="47dp"
-                            android:background="@drawable/border1"
-                            android:layout_margin="5dp"
-                            android:text="Colours"
-                            android:id="@+id/colours"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textAllCaps="false"
-                            />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="47dp"
-                            android:background="@drawable/border1"
-                            android:layout_margin="5dp"
-                            android:text="Prints"
-                            android:id="@+id/prints"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textAllCaps="false"
-                            />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/border1"
-                            android:layout_margin="5dp"
-                            android:text="Styling"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textAllCaps="false"
-                            android:id="@+id/styling"
-                            />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/border1"
-                            android:layout_margin="5dp"
-                            android:text="Fabric Quality"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textAllCaps="false"
-                            android:id="@+id/fabric_quality"
-                            />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/border1"
-                            android:layout_margin="5dp"
-                            android:text="Garment Quality"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textAllCaps="false"
-                            android:id="@+id/garment_quality"
-                            />
-
-                    </LinearLayout>
-
-                </ScrollView>
-
-
-                <!--another layout -->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -252,14 +160,6 @@
                     android:visibility="visible"
 
                     >
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_alignTop="@+id/x"
-                        >
-
-                    </RelativeLayout>
 
                     <ScrollView
                         android:layout_width="match_parent"
@@ -280,7 +180,7 @@
                                 android:layout_margin="5dp"
                                 android:id="@+id/fitting_relative"
                                 >
-                                <!-- <View
+                            <!--     <View
                                      android:layout_width="180dp"
                                      android:layout_height="match_parent"
                                      android:id="@+id/fitting_score"
@@ -317,9 +217,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="47dp"
                                 android:layout_margin="5dp"
+                                android:id="@+id/pricing_relative"
 
                                 >
-                                <View
+                               <!-- <View
                                     android:layout_width="30dp"
                                     android:layout_height="match_parent"
                                     android:id="@+id/pricing_score"
@@ -345,7 +246,7 @@
                                     android:id="@+id/pricing_percent_result"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
-                                    />
+                                    />-->
 
 
 
@@ -356,9 +257,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="47dp"
                                 android:layout_margin="5dp"
+                                android:id="@+id/colours_relative"
 
                                 >
-                                <View
+                              <!--  <View
                                     android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:id="@+id/colours_score"
@@ -385,7 +287,7 @@
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
                                     />
-
+-->
 
 
                             </RelativeLayout>
@@ -394,9 +296,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="47dp"
                                 android:layout_margin="5dp"
+                                android:id="@+id/prints_relative"
 
                                 >
-                                <View
+                           <!--     <View
                                     android:layout_width="280dp"
                                     android:layout_height="match_parent"
                                     android:id="@+id/prints_score"
@@ -422,7 +325,7 @@
                                     android:id="@+id/prints_percent_result"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
-                                    />
+                                    />-->
 
 
 
@@ -432,8 +335,18 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="47dp"
                                 android:layout_margin="5dp"
+                                android:id="@+id/styling_relative"
 
                                 >
+                           <!--     <View
+                                    android:layout_width="200dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/styling_score"
+                                    android:background="@color/edit_border_color"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true">
+
+                                </View>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -453,17 +366,9 @@
                                     android:id="@+id/styling_percent_result"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
-                                    />
+                                    />-->
 
-                                <View
-                                    android:layout_width="200dp"
-                                    android:layout_height="match_parent"
-                                    android:id="@+id/styling_score"
-                                    android:background="@color/edit_border_color"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true">
 
-                                </View>
 
 
                             </RelativeLayout>
@@ -472,9 +377,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="47dp"
                                 android:layout_margin="5dp"
+                                android:id="@+id/fabric_relative"
 
                                 >
-                                <View
+                          <!--      <View
                                     android:layout_width="80dp"
                                     android:layout_height="match_parent"
                                     android:id="@+id/fabricQuality_score"
@@ -500,7 +406,7 @@
                                     android:id="@+id/fabricQuality_percent_result"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
-                                    />
+                                    />-->
 
 
 
@@ -510,9 +416,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="47dp"
                                 android:layout_margin="5dp"
+                                android:id="@+id/garment_relative"
 
                                 >
-                                <View
+                        <!--        <View
                                     android:layout_width="10dp"
                                     android:layout_height="match_parent"
                                     android:id="@+id/garmentQuality_score"
@@ -538,7 +445,7 @@
                                     android:id="@+id/garmentQuality_percent_result"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
-                                    />
+                                    />-->
 
 
 
@@ -558,23 +465,113 @@
                     </ScrollView>
 
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:id="@+id/x"
+                        android:gravity="center_vertical"
                         android:layout_alignParentBottom="true"
                         >
-                        <Button
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="Previous"
+                            android:visibility="visible"
+                            android:layout_weight="1"
+                            android:id="@+id/feedbackList_pre"
+                            android:textAllCaps="false"
+                            android:layout_margin="5dp"
+                            android:layout_alignParentBottom="true"
+                            android:textColor="@android:color/white"
+                            android:background="@color/colorPrimary"
+                            >
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/button_red_effect"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/next_txt"
+                                    android:text="Previous"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="@dimen/smdm_header_title_large"
+
+
+                                    />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toLeftOf="@+id/next_txt"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_arrow_back_black_24dp"
+                                    android:layout_marginRight="15dp"
+
+                                    />
+
+                            </RelativeLayout>
+
+
+
+                            </RelativeLayout>>
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:text="Next"
+                            android:visibility="visible"
+                            android:layout_weight="1"
+                            android:id="@+id/feedbackList_next"
                             android:layout_margin="5dp"
-                            android:id="@+id/feedbackNext"
+                            android:textAllCaps="false"
                             android:layout_alignParentBottom="true"
                             android:textColor="@android:color/white"
-                            android:background="@color/colorPrimary"/>
+                            android:background="@color/colorPrimary">
 
-                    </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/button_red_effect"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/pre_txt"
+                                    android:text="Next"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="@dimen/smdm_header_title_large"
+
+
+                                    />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@+id/pre_txt"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_arrow_forward_black_24dp"
+                                    android:layout_marginLeft="15dp"
+
+                                    />
+
+
+                            </RelativeLayout>
+
+
+
+
+                        </RelativeLayout>
+
+
+
+
+
+
+                    </LinearLayout>
 
 
                 </RelativeLayout>
@@ -600,3 +597,4 @@
 
 
 </RelativeLayout>
+

@@ -164,7 +164,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
         android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"
+        android:textSize="@dimen/smdm_header_title_large"
+        android:background="@drawable/button_red_effect"
+        android:textAllCaps="false"
         />
 
 
