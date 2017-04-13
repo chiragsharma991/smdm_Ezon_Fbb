@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.widget.Toast;
 
 
 public class Reusable_Functions {
@@ -100,6 +101,12 @@ public class Reusable_Functions {
 // start the animation
         anim.start();
 
+
+    }
+
+    public static void  MakeToast(Context context,String info){
+
+        Toast.makeText(context,info, Toast.LENGTH_LONG).show();
 
     }
 

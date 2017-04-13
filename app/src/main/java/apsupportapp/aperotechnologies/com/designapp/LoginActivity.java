@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -15,13 +17,18 @@ import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -36,10 +43,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.JsonArray;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +68,11 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private LinearLayout LinearLogin;
     private Snackbar snackbar;
+    private Spinner storeList;
+    private ArrayList<String> storelist_data;
+    private ArrayAdapter<String> spinnerArrayAdapter;
+    private String SelectedStoreCode;
+    private boolean firstLogin=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +92,41 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         chkKeepMeLogin = (CheckBox) findViewById(R.id.chkKeepMeLogin);
         LinearLogin = (LinearLayout) findViewById(R.id.linearLogin);
-
+        storeList = (Spinner) findViewById(R.id.spin_storecode);
+        create_spinner();
         checkToken();
 
+
+
+
+        storeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                if(position > 0)
+                {
+                    if (Reusable_Functions.chkStatus(context) ) {
+                        Reusable_Functions.sDialog(context, "Authenticating user...");
+                        SelectedStoreCode=(String)adapterView.getItemAtPosition(position);
+                        firstLogin=true;
+                        requestLoginWithStoreAPI();
+
+
+                    } else {
+
+                        Toast.makeText(LoginActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         chkKeepMeLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,9 +159,20 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.sDialog(context, "Authenticating user...");
-                        requestLoginAPI();
+                    if (Reusable_Functions.chkStatus(context) ) {
+
+                      //  if(!SelectedItem.equals(""))
+                      //  {
+                            Reusable_Functions.sDialog(context, "Fetching store code...");
+                            SelectedStoreCode=uname;
+                            firstLogin=false;
+                            requestLoginWithStoreAPI();                    //  }else
+                      //  {
+                        //    Toast.makeText(LoginActivity.this, "Please select store code", Toast.LENGTH_LONG).show();
+
+                       // }
+
+
                     } else {
 
                         Toast.makeText(LoginActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -122,6 +181,54 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }//onCreate
+
+    private void create_spinner()
+    {
+        storelist_data=new ArrayList<String>();
+        storelist_data.add("Store Code");
+
+
+
+
+        // Creating adapter for spinner
+
+                spinnerArrayAdapter = new ArrayAdapter<String>(
+                this,R.layout.spinner_child_layout,storelist_data){
+            @Override
+            public boolean isEnabled(int position){
+                if(position == 0)
+                {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+        // Drop down layout style - list view with radio button
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        storeList.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);  //change icon colour of spinner.
+        storeList.setAdapter(spinnerArrayAdapter);
+    }
+
+
 
     private void checkToken()
     {
@@ -147,8 +254,98 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void requestLoginAPI() {
-        String url = ConstsCore.web_url + "/v1/login"; //ConstsCore.web_url+ + "/v1/login/userId";
+    private void requestLoginAPI(final String bearerToken, String userId)
+    {
+        String url = ConstsCore.web_url + "/v1/login/userstores/"+userId; //ConstsCore.web_url+ + "/v1/login/userId";
+
+
+        Log.e("url", " requestLoginAPI for store code "+url);
+
+        JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.i("Login   Response   ", response.toString());
+                        Log.i("Login   Response length   ",""+response.length());
+
+
+                        try
+
+                        {
+
+                            if (response.equals(null) || response == null )
+                            {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(LoginActivity.this, "Invalid user", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+
+
+                            storelist_data.clear();
+                            storelist_data.add("Store Code");
+
+
+
+                            for (int i = 0; i <response.length() ; i++)
+                            {
+                                storelist_data.add(response.getString(i));
+
+                            }
+                            Log.e("TAG", "storelist_data size: "+storelist_data.size()+"store code is  "+storelist_data.get(1) );
+                            spinnerArrayAdapter.notifyDataSetChanged();
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.MakeToast(context,"Success: please select store code");
+
+
+
+
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Log.e("TAG", "onResponse error: "+e.getMessage() );
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(LoginActivity.this, "Invalid user", Toast.LENGTH_LONG).show();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearerToken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void requestLoginWithStoreAPI() {
+
+        String url = ConstsCore.web_url + "/v1/login?storeCode="+SelectedStoreCode; //ConstsCore.web_url+ + "/v1/login/userId";
 
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
@@ -158,40 +355,69 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();
+                                Toast.makeText(LoginActivity.this, "Invalid user", Toast.LENGTH_LONG).show();
+                                return;
 
                             }
-                            Long notificationTime = System.currentTimeMillis() + 18000000; //300 minutes
-                            Log.e("notificationTime", "onResponse: "+notificationTime );
-                            setLocalnotification(context, notificationTime);
-                            String username = response.getString("loginName");
-                            String password = response.getString("password");
-                            String userId = response.getString("userId");
-                            String bearerToken = response.getString("bearerToken");
 
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("username", username);
-                            editor.putString("password", password);
-                            editor.putString("userId", userId);
-                            editor.putString("bearerToken", bearerToken);
-                            editor.apply();
-                            if (log_flag) {
-                                editor.putBoolean("log_flag", true);
-                                editor.putString("authcode", auth_code);
+                            // when store code fetched it will go second condition.
 
-                                Log.e("authcode ", " --- " + username + " " + password + " " + auth_code);
+                            if(firstLogin==false)
+                            {
+                                String username = response.getString("loginName");
+                                String password = response.getString("password");
+                                String userId = response.getString("userId");
+                                userId=userId+"-"+userId;   //format to get store code list.
+                                String bearerToken = response.getString("bearerToken");
+                                requestLoginAPI(bearerToken,userId);
+                            }else
+                            {
+                                Long notificationTime = System.currentTimeMillis() + 18000000; //300 minutes
+                                Log.e("notificationTime", "onResponse: "+notificationTime );
+                                setLocalnotification(context, notificationTime);
+                                String username = response.getString("loginName");
+                                String password = response.getString("password");
+                                String userId = response.getString("userId");
+                                String storecode = response.getString("storeCode");
+                                userId=userId+"-"+storecode;
+                                String bearerToken = response.getString("bearerToken");
+
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                // editor.putString("username", username+"-"+SelectedItem);
+                                editor.putString("username",username);
+                                editor.putString("password", password);
+                                editor.putString("userId", userId);
+                                editor.putString("bearerToken", bearerToken);
                                 editor.apply();
+                                if (log_flag) {
+                                    editor.putBoolean("log_flag", true);
+                                    editor.putString("authcode", auth_code);
+
+                                    Log.e("authcode ", " --- " + username + " " + password + " " + auth_code);
+                                    editor.apply();
+
+                                }
+                                Reusable_Functions.hDialog();
+                                Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
+                                intent.putExtra("from", "login");
+                                intent.putExtra("BACKTO", "login");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                startActivity(intent);
+
 
                             }
-                            Reusable_Functions.hDialog();
-                            Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
-                            intent.putExtra("from", "login");
-                            intent.putExtra("BACKTO", "login");
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                            startActivity(intent);
+
+
+
+
+
+
+
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -221,14 +447,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
 
     public void setLocalnotification(Context cont, Long notificationTime) {
         AlarmManager alarmManager = (AlarmManager) cont.getSystemService(Context.ALARM_SERVICE);
