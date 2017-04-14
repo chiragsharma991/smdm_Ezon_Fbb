@@ -72,7 +72,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    private int nextCount=1;  // when you press next then
+    private int nextCount=0;  // when you press next then
     private Feedback_model feedback_model;
     ArrayList<Feedback_model> feedbackListData;
     private ImageView Feedback_image;
@@ -170,7 +170,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         if (Reusable_Functions.chkStatus(context)) {
 
             //https://smdm.manthan.com/v1/display/worstperformerfeedback/displayreports/4813
-            String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+            String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?offset=" + offsetvalue + "&limit=" + limit+"&recache=true";
 
 
             Log.e(TAG, "URL" + url);
@@ -282,23 +282,43 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.feedbackList_next:
 
-                if(nextCount<feedbackListData.size()){
+                nextCount++;
+                if(nextCount != feedbackListData.size()-1){
                     for (int i = 0; i <optionList.size() ; i++) {
 
                         feedbackReport(i,nextCount);
                     }
                     FeedbackPre.setVisibility(View.VISIBLE);
-                    nextCount++;
+
                 }else
                 {
-                    Toast.makeText(context,"Data is not available",Toast.LENGTH_SHORT).show();
+                    for (int i = 0; i <optionList.size() ; i++) {
+
+                        feedbackReport(i,nextCount);
+                    }
+                    FeedbackNext.setVisibility(View.GONE);
                 }
-
-
                 break;
             case R.id.feedbackList_pre:
+                nextCount--;
+                if(nextCount!=0){
+                    for (int i = 0; i < optionList.size() ; i++) {
+
+                        feedbackReport(i,nextCount);
+                    }
+                    FeedbackNext.setVisibility(View.VISIBLE);
+
+                }else
+                {
+                    for (int i = 0; i < optionList.size() ; i++) {
+
+                        feedbackReport(i,nextCount);
+                    }
+                    FeedbackPre.setVisibility(View.GONE);
+                }
 
                 break;
+
 
             default:
                 break;
@@ -442,14 +462,16 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
 
         final TextView textView2 = new TextView(context);
 
+
+
         // get percentage for all list & 0 will be change according to next pre button
-        if(position==0) {textView2.setText(""+feedbackListData.get(Listposition).getFittingCntPer()+"%");}
-        else if(position==1){textView2.setText(""+feedbackListData.get(Listposition).getPricingCntPer()+"%");}
-        else if(position==2){textView2.setText(""+feedbackListData.get(Listposition).getColorsCntPer()+"%");}
-        else if(position==3){textView2.setText(""+feedbackListData.get(Listposition).getPrintCntPer()+"%");}
-        else if(position==4){textView2.setText(""+feedbackListData.get(Listposition).getStylingCntPer()+"%");}
-        else if(position==5){textView2.setText(""+feedbackListData.get(Listposition).getFabricQualityCntPer()+"%");}
-        else if(position==6){textView2.setText(""+feedbackListData.get(Listposition).getGarmentQualityCntPer()+"%");}
+        if(position==0) {textView2.setText(""+String.format("%.1f",+feedbackListData.get(Listposition).getFittingCntPer())+"%");}
+        else if(position==1){textView2.setText(""+String.format("%.1f",+feedbackListData.get(Listposition).getPricingCntPer())+"%");}
+        else if(position==2){textView2.setText(""+String.format("%.1f",+feedbackListData.get(Listposition).getColorsCntPer())+"%");}
+        else if(position==3){textView2.setText(""+String.format("%.1f",+feedbackListData.get(Listposition).getPrintCntPer())+"%");}
+        else if(position==4){textView2.setText(""+String.format("%.1f",+feedbackListData.get(Listposition).getStylingCntPer())+"%");}
+        else if(position==5){textView2.setText(""+String.format("%.1f",+feedbackListData.get(Listposition).getFabricQualityCntPer())+"%");}
+        else if(position==6){textView2.setText(""+String.format("%.1f",+feedbackListData.get(Listposition).getGarmentQualityCntPer())+"%");}
 
         textView2.setTextColor(Color.parseColor("#404040"));
 

@@ -10,27 +10,10 @@ public class Feedback_model
     String storeDesc;
     String option;
     String prodImageUrl;
-    int fittingCnt;
-    int fittingCntPer;
-    int pricingCnt;
-    int pricingCntPer;
-    int colorsCnt;
-    int colorsCntPer;
-    int printCnt;
-    int printCntPer;
-    int stylingCnt;
-    int stylingCntPer;
-    int fabricQualityCnt;
-    int fabricQualityCntPer;
-    int garmentQualityCnt;
-    int garmentQualityCntPer;
-
-
-
-
-
-
-
+    double fittingCnt;
+    double fittingCntPer;
+    double pricingCnt;
+    double pricingCntPer;
 
     public String getStoreCode() {
         return storeCode;
@@ -64,116 +47,130 @@ public class Feedback_model
         this.prodImageUrl = prodImageUrl;
     }
 
-
-    public int getFittingCnt() {
+    public double getFittingCnt() {
         return fittingCnt;
     }
 
-    public void setFittingCnt(int fittingCnt) {
+    public void setFittingCnt(double fittingCnt) {
         this.fittingCnt = fittingCnt;
     }
 
-    public int getFittingCntPer() {
+    public double getFittingCntPer() {
         return fittingCntPer;
     }
 
-    public void setFittingCntPer(int fittingCntPer) {
+    public void setFittingCntPer(double fittingCntPer) {
         this.fittingCntPer = fittingCntPer;
     }
 
-    public int getPricingCnt() {
+    public double getPricingCnt() {
         return pricingCnt;
     }
 
-    public void setPricingCnt(int pricingCnt) {
+    public void setPricingCnt(double pricingCnt) {
         this.pricingCnt = pricingCnt;
     }
 
-    public int getPricingCntPer() {
+    public double getPricingCntPer() {
         return pricingCntPer;
     }
 
-    public void setPricingCntPer(int pricingCntPer) {
+    public void setPricingCntPer(double pricingCntPer) {
         this.pricingCntPer = pricingCntPer;
     }
 
-    public int getColorsCnt() {
+    public double getColorsCnt() {
         return colorsCnt;
     }
 
-    public void setColorsCnt(int colorsCnt) {
+    public void setColorsCnt(double colorsCnt) {
         this.colorsCnt = colorsCnt;
     }
 
-    public int getColorsCntPer() {
+    public double getColorsCntPer() {
         return colorsCntPer;
     }
 
-    public void setColorsCntPer(int colorsCntPer) {
+    public void setColorsCntPer(double colorsCntPer) {
         this.colorsCntPer = colorsCntPer;
     }
 
-    public int getPrintCnt() {
+    public double getPrintCnt() {
         return printCnt;
     }
 
-    public void setPrintCnt(int printCnt) {
+    public void setPrintCnt(double printCnt) {
         this.printCnt = printCnt;
     }
 
-    public int getPrintCntPer() {
+    public double getPrintCntPer() {
         return printCntPer;
     }
 
-    public void setPrintCntPer(int printCntPer) {
+    public void setPrintCntPer(double printCntPer) {
         this.printCntPer = printCntPer;
     }
 
-    public int getStylingCnt() {
+    public double getStylingCnt() {
         return stylingCnt;
     }
 
-    public void setStylingCnt(int stylingCnt) {
+    public void setStylingCnt(double stylingCnt) {
         this.stylingCnt = stylingCnt;
     }
 
-    public int getStylingCntPer() {
+    public double getStylingCntPer() {
         return stylingCntPer;
     }
 
-    public void setStylingCntPer(int stylingCntPer) {
+    public void setStylingCntPer(double stylingCntPer) {
         this.stylingCntPer = stylingCntPer;
     }
 
-    public int getFabricQualityCnt() {
+    public double getFabricQualityCnt() {
         return fabricQualityCnt;
     }
 
-    public void setFabricQualityCnt(int fabricQualityCnt) {
+    public void setFabricQualityCnt(double fabricQualityCnt) {
         this.fabricQualityCnt = fabricQualityCnt;
     }
 
-    public int getFabricQualityCntPer() {
+    public double getFabricQualityCntPer() {
         return fabricQualityCntPer;
     }
 
-    public void setFabricQualityCntPer(int fabricQualityCntPer) {
+    public void setFabricQualityCntPer(double fabricQualityCntPer) {
         this.fabricQualityCntPer = fabricQualityCntPer;
     }
 
-    public int getGarmentQualityCnt() {
+    public double getGarmentQualityCnt() {
         return garmentQualityCnt;
     }
 
-    public void setGarmentQualityCnt(int garmentQualityCnt) {
+    public void setGarmentQualityCnt(double garmentQualityCnt) {
         this.garmentQualityCnt = garmentQualityCnt;
     }
 
-    public int getGarmentQualityCntPer() {
+    public double getGarmentQualityCntPer() {
         return garmentQualityCntPer;
     }
 
-    public void setGarmentQualityCntPer(int garmentQualityCntPer) {
+    public void setGarmentQualityCntPer(double garmentQualityCntPer) {
         this.garmentQualityCntPer = garmentQualityCntPer;
     }
+
+    double colorsCnt;
+    double colorsCntPer;
+    double printCnt;
+    double printCntPer;
+    double stylingCnt;
+    double stylingCntPer;
+    double fabricQualityCnt;
+    double fabricQualityCntPer;
+    double garmentQualityCnt;
+    double garmentQualityCntPer;
+
+
+
+
 }

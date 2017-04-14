@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -48,11 +50,16 @@ import com.google.android.gms.playlog.internal.LogEvent;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -73,17 +80,21 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private int listCount = 0;  //when you click on next then
     private int top = 10;
     private Feedback_model feedback_model;
-    ArrayList<Feedback_model> feedbackList, feedbackListData;
+    private ArrayList<Feedback_model> feedbackList, feedbackReportList;
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
     private Button Pricing, Fitting, Colours, Prints, Styling, Fabric_quality, Garment_quality;
     private TextView Feedback_option;
+    private EditText feedback_comment;
     private AlertDialog dialog;
     private LinearLayout firstView;
-    private RelativeLayout secondView,FeedbackNext;
+    private RelativeLayout secondView, FeedbackNext;
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
     private ArrayList<String> optionList;
+    private boolean feedbackReport = false;
+    private Feedback_model feedback_model_report;
+    private String selectCategory;
     //  private Feedback_details feedbackAdapter;
 
 
@@ -103,6 +114,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         queue = new RequestQueue(cache, network);
         queue.start();
         feedbackList = new ArrayList<>();
+        feedbackReportList = new ArrayList<>();
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
@@ -174,10 +186,18 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            //https://smdm.manthan.com/v1/display/worstperformerfeedback/displayoptions/4813
-            String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
 
 
+            String url;
+            if (feedbackReport == false) {
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+
+            } else {
+
+                String option=Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" +option + "&offset=" + offsetvalue + "&limit=" + limit;
+
+            }
             Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
@@ -188,48 +208,91 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
+                                    feedbackReport = false;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     return;
 
 
                                 } else if (response.length() == limit) {
 
-                                    Log.e(TAG, "Top eql limit");
-                                    for (int i = 0; i < response.length(); i++) {
-                                        feedback_model = gson.fromJson(response.get(i).toString(), Feedback_model.class);
-                                        feedbackList.add(feedback_model);
+                                    // if api call for report then it will true
+                                    if (feedbackReport) {
+
+                                        Log.e(TAG, "Top eql limit");
+                                        for (int i = 0; i < response.length(); i++) {
+                                            feedback_model_report = gson.fromJson(response.get(i).toString(), Feedback_model.class);
+                                            feedbackReportList.add(feedback_model_report);
+                                        }
+                                        offsetvalue = (limit * count) + limit;
+                                        count++;
+                                        requestFeedbackApi();
+
+                                    } else {
+                                        Log.e(TAG, "Top eql limit");
+                                        for (int i = 0; i < response.length(); i++) {
+                                            feedback_model = gson.fromJson(response.get(i).toString(), Feedback_model.class);
+                                            feedbackList.add(feedback_model);
+                                        }
+                                        offsetvalue = (limit * count) + limit;
+                                        count++;
+                                        requestFeedbackApi();
+
                                     }
-                                    offsetvalue = (limit * count) + limit;
-                                    count++;
 
-                                    //  count++ ;
 
-                                    requestFeedbackApi();
+                                    // if api call for last entry.
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
-                                    for (int i = 0; i < response.length(); i++) {
 
-                                        feedback_model = gson.fromJson(response.get(i).toString(), Feedback_model.class);
-                                        feedbackList.add(feedback_model);
+                                    // if api call for report then it will true
 
+                                    if (feedbackReport) {
+
+                                        Log.e(TAG, "promo /= limit");
+                                        for (int i = 0; i < response.length(); i++) {
+
+                                            feedback_model_report = gson.fromJson(response.get(i).toString(), Feedback_model.class);
+                                            feedbackReportList.add(feedback_model_report);
+
+                                        }
+                                        count = 0;
+                                        limit = 10;
+                                        offsetvalue = 0;
+
+                                        for (int i = 0; i < optionList.size(); i++) {
+
+                                            feedbackDetails(i, 0);
+                                        }
+                                        feedbackReport = false;
+                                        Reusable_Functions.hDialog();
+
+
+                                    } else {
+                                        Log.e(TAG, "promo /= limit");
+                                        for (int i = 0; i < response.length(); i++) {
+
+                                            feedback_model = gson.fromJson(response.get(i).toString(), Feedback_model.class);
+                                            feedbackList.add(feedback_model);
+
+                                        }
+                                        count = 0;
+                                        limit = 10;
+                                        offsetvalue = 0;
+                                        Reusable_Functions.hDialog();
+                                        nextList(listCount);
                                     }
-                                    count = 0;
-                                    limit = 10;
-                                    offsetvalue = 0;
                                 }
 
 
                                 // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                                 // feedbackAdapter = new Feedback_details(feedbackList,Feedback.this);
-                                Reusable_Functions.hDialog();
-                                nextList(listCount);
 
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
+                                feedbackReport = false;
                                 e.printStackTrace();
                             }
                         }
@@ -240,6 +303,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
+                            feedbackReport = false;
                             error.printStackTrace();
 
                         }
@@ -289,6 +353,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
                 break;
             default:
+                Button button = (Button) view;
+                selectCategory = button.getText().toString();
+                Log.e(TAG, "onClick:  selectCategory"+selectCategory);
                 commentDialog();
                 break;
 
@@ -343,23 +410,21 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         View v = inflater.inflate(R.layout.comment_dialog, null);
         LinearLayout skip = (LinearLayout) v.findViewById(R.id.comment_skip);
         LinearLayout ok = (LinearLayout) v.findViewById(R.id.comment_ok);
-        final EditText feedback_comment = (EditText) v.findViewById(R.id.feedback_comment);
+        feedback_comment = (EditText) v.findViewById(R.id.feedback_comment);
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                feedbackListData = new ArrayList<Feedback_model>();
-                Feedback_model feedback_model = new Feedback_model();
-                feedback_model.setFittingCntPer(30);
-                feedback_model.setPricingCntPer(70);
-                feedbackListData.add(feedback_model);
-
-                for (int i = 0; i < 2; i++) {
-
-                    feedbackDetails(i, 0);
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Submitting data…");
+                    JSONObject jsonObject = OnSubmit();
+                    Log.e(TAG, "jsonObject: "+jsonObject.toString() );
+                    requestReceiverSubmitAPI(context, jsonObject);
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
-
                 dialog.dismiss();
 
             }
@@ -369,15 +434,16 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             public void onClick(View view) {
 
                 if (!(feedback_comment.getText().length() == 0)) {
-                    feedbackListData = new ArrayList<Feedback_model>();
-                    Feedback_model feedback_model = new Feedback_model();
-                    feedback_model.setFittingCntPer(20);
-                    feedback_model.setPricingCntPer(49);
-                    feedbackListData.add(feedback_model);
 
-                    for (int i = 0; i < 2; i++) {
 
-                        feedbackDetails(i, 0);
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Submitting data…");
+                        JSONObject jsonObject = OnSubmit();
+                        Log.e(TAG, "jsonObject: "+jsonObject.toString() );
+                        requestReceiverSubmitAPI(context, jsonObject);
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
                     dialog.dismiss();
 
@@ -397,8 +463,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void feedbackDetails(final int position, final int Listposition) {
 
-       // firstView.setVisibility(View.GONE);
-       // secondView.setVisibility(View.VISIBLE);
+        // firstView.setVisibility(View.GONE);
+        // secondView.setVisibility(View.VISIBLE);
         Reusable_Functions.ViewGone(firstView);
         Reusable_Functions.ViewVisible(secondView);
         Fitting_relative.removeAllViewsInLayout();
@@ -429,23 +495,23 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 if (position == 0)
                 //get 0 is depend on next and pre button
                 {
-                    x = ((double) feedbackListData.get(Listposition).getFittingCntPer() / 100) * width;
+                    x = ((double) feedbackReportList.get(Listposition).getFittingCntPer() / 100) * width;
                 } else if (position == 1) {
-                    x = ((double) feedbackListData.get(Listposition).getPricingCntPer() / 100) * width;
+                    x = ((double) feedbackReportList.get(Listposition).getPricingCntPer() / 100) * width;
                 } else if (position == 2) {
-                    x = ((double) feedbackListData.get(Listposition).getColorsCntPer() / 100) * width;
+                    x = ((double) feedbackReportList.get(Listposition).getColorsCntPer() / 100) * width;
                 } else if (position == 3) {
-                    x = ((double) feedbackListData.get(Listposition).getPrintCntPer() / 100) * width;
+                    x = ((double) feedbackReportList.get(Listposition).getPrintCntPer() / 100) * width;
                 } else if (position == 4) {
-                    x = ((double) feedbackListData.get(Listposition).getStylingCntPer() / 100) * width;
+                    x = ((double) feedbackReportList.get(Listposition).getStylingCntPer() / 100) * width;
                 } else if (position == 5) {
-                    x = ((double) feedbackListData.get(Listposition).getFabricQualityCntPer() / 100) * width;
+                    x = ((double) feedbackReportList.get(Listposition).getFabricQualityCntPer() / 100) * width;
                 } else if (position == 6) {
-                    x = ((double) feedbackListData.get(Listposition).getGarmentQualityCntPer() / 100) * width;
+                    x = ((double) feedbackReportList.get(Listposition).getGarmentQualityCntPer() / 100) * width;
                 }
 
                 int percentage = (int) x;
-                Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackListData.get(0).getFittingCntPer() + "and values are" + percentage);
+                Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackReportList.get(0).getFittingCntPer() + "and values are" + percentage);
                 View lp = new View(context);
                 // LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(400,LinearLayout.LayoutParams.MATCH_PARENT);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -518,19 +584,19 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         // get percentage for all list & 0 will be change according to next pre button
         if (position == 0) {
-            textView2.setText("" + feedbackListData.get(Listposition).getFittingCntPer() + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getFittingCntPer()) + "%");
         } else if (position == 1) {
-            textView2.setText("" + feedbackListData.get(Listposition).getPricingCntPer() + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getPricingCntPer()) + "%");
         } else if (position == 2) {
-            textView2.setText("" + feedbackListData.get(Listposition).getColorsCntPer() + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getColorsCntPer()) + "%");
         } else if (position == 3) {
-            textView2.setText("" + feedbackListData.get(Listposition).getPrintCntPer() + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getPrintCntPer()) + "%");
         } else if (position == 4) {
-            textView2.setText("" + feedbackListData.get(Listposition).getStylingCntPer() + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getStylingCntPer()) + "%");
         } else if (position == 5) {
-            textView2.setText("" + feedbackListData.get(Listposition).getFabricQualityCntPer() + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getFabricQualityCntPer()) + "%");
         } else if (position == 6) {
-            textView2.setText("" + feedbackListData.get(Listposition).getGarmentQualityCntPer() + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getGarmentQualityCntPer()) + "%");
         }
 
         textView2.setTextColor(Color.parseColor("#404040"));
@@ -568,4 +634,125 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         super.onBackPressed();
         finish();
     }
+
+
+    public JSONObject OnSubmit() {
+
+
+        // do not change this section because this is only hardcoded and case sensitive.
+        int fitting = selectCategory.equals("Fitting") ? 1 : 0;
+        int pricing = selectCategory.equals("Pricing")  ? 1 : 0;
+        int colours = selectCategory.equals("Colours")  ? 1 : 0;
+        int prints = selectCategory.equals("Prints")  ? 1 : 0;
+        int styling = selectCategory.equals("Styling")  ? 1 : 0;
+        int fabric = selectCategory.equals("Fabric Quality")  ? 1 : 0;
+        int fabricQuality = selectCategory.equals("Garment Quality")  ? 1 : 0;
+
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("option", Feedback_option.getText().toString());
+            jsonObject.put("userId", userId);
+            jsonObject.put("prodImageUrl", feedbackList.get(listCount).getProdImageUrl());
+            jsonObject.put("comments", feedback_comment.getText().toString());
+            jsonObject.put("fitting", fitting);
+            jsonObject.put("pricing", pricing);
+            jsonObject.put("colors", colours);
+            jsonObject.put("print", prints);
+            jsonObject.put("styling", styling);
+            jsonObject.put("fabricQuality", fabric);
+            jsonObject.put("garmentQuality", fabricQuality);
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e(TAG, "OnSubmit: catch error " + e.getMessage());
+        }
+
+
+        return jsonObject;
+    }
+
+    private void requestReceiverSubmitAPI(final Context mcontext, JSONObject object) {
+
+        if (Reusable_Functions.chkStatus(mcontext)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(mcontext, "Submitting data…");
+
+            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId;//+"?recache="+recache
+            Log.e("url", " post Request " + url + " ==== " + object.toString());
+            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.e("Submit Click Response :", response.toString());
+                            try {
+                                if (response == null || response.equals(null)) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(mcontext, "Sending data failed...", Toast.LENGTH_LONG).show();
+
+                                } else {
+                                    String result = response.getString("status");
+                                    Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
+                                    Reusable_Functions.hDialog();
+
+
+                                    if (Reusable_Functions.chkStatus(context)) {
+                                        feedbackReport = true;
+                                        Reusable_Functions.hDialog();
+                                        Reusable_Functions.sDialog(context, "Loading....");
+                                        requestFeedbackApi();   //call api again for showing report acording to option.
+
+                                    } else {
+                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            } catch (Exception e) {
+                                Log.e("Exception e", e.toString() + "");
+                                e.printStackTrace();
+                                Reusable_Functions.hDialog();
+
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
+                            error.printStackTrace();
+                        }
+                    }
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", bearertoken);
+                    //  params.put("Content-Type", "application/json");
+                    return params;
+                }
+
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+            };
+            int socketTimeout = 60000;//5 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+
+
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+    }
+
 }
