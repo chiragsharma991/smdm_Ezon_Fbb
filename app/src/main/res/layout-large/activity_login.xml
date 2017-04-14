@@ -42,7 +42,7 @@
         android:gravity="center"
         android:hint="@string/password"
         android:inputType="textPassword"
-       android:maxLines="1"
+        android:maxLines="1"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
         android:textCursorDrawable="@drawable/cursor_color" />
