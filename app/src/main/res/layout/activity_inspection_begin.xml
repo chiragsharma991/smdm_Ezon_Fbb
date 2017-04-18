@@ -7,7 +7,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/bg_screen_color"
-                tools:context="apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback">
+                tools:context="apsupportapp.aperotechnologies.com.designapp.StoreInspection.InspectionBeginActivity">
 
 
     <android.support.v7.widget.Toolbar
