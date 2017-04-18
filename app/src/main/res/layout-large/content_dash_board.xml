@@ -1795,22 +1795,24 @@
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         android:layout_height="wrap_content">
 
                         <ImageButton
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
+                            android:id="@+id/btn_mpm"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
-                            android:src="@mipmap/cut_size_report"/>
+                            android:src="@mipmap/departmenticon"/>
 
                         <TextView
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cut-Size Report"
+                            android:textColor="@color/smdm_light_Black"
+                            android:text="MPM"
                             android:gravity="center_horizontal"
                             android:textSize="13sp"/>
 

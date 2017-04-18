@@ -164,7 +164,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
     private void baseclick()
     {
-        if (checkSeasonGpVal == null && checkAgeingVal == null) {
+        if (checkSeasonGpVal == null && checkAgeingVal == null)
+        {
+
             checkCurrent.setChecked(true);
             checkPrevious.setChecked(false);
             checkOld.setChecked(false);
@@ -173,14 +175,16 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             checkAgeing2.setChecked(false);
             checkAgeing3.setChecked(false);
 
-        } else {
-            switch (checkSeasonGpVal.toString()) {
+        }
+        else
+        {
+            switch (checkSeasonGpVal.toString())
+            {
                 case "Current":
                     checkCurrent.setChecked(true);
                     checkPrevious.setChecked(false);
                     checkOld.setChecked(false);
                     checkUpcoming.setChecked(false);
-
                     Log.e("Current checked", "" + checkCurrent.isChecked());
                     break;
 
@@ -190,6 +194,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     checkOld.setChecked(false);
                     checkUpcoming.setChecked(false);
                     Log.e("Previous checked", "" + checkPrevious.isChecked());
+
                     break;
                 case "Old":
                     checkOld.setChecked(true);
@@ -205,7 +210,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     checkPrevious.setChecked(false);
                     Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
                     break;
-            }
+         }
 
                  /*   switch (checkAgeingVal.toString()) {
                         case "CheckAgeing1":
@@ -315,27 +320,23 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                             }*/
 
-                                if (lazyScroll.equals("ON")) {
+                                if (lazyScroll.equals("ON"))
+                                {
                                     Log.i(TAG, "Set Lazy scroll and notify are ON : ");
                                     stockAgeingAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                     footer.setVisibility(View.GONE);
-
-
-                                } else {
+                                }
+                                else
+                                {
                                     stockAgeingAdapter = new StockAgeingAdapter(StockAgeingList, context);
                                     StockAgListView.setAdapter(stockAgeingAdapter);
                                     Log.i(TAG, "Set Adapter calling: ");
                                     stock_txtStoreCode.setText(StockAgeingList.get(0).getStoreCode());
                                     stock_txtStoreName.setText(StockAgeingList.get(0).getStoreDescription());
-
-
                                 }
-
-
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {
-
 
                                 StockAgeingList.clear();
                                 stockAgeingAdapter.notifyDataSetChanged();

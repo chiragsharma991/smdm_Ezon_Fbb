@@ -240,9 +240,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                         public void onFocusChange(View view, boolean hasFocus) {
                             if (hasFocus) {
                                 Log.e("hasfocus:", "" + hasFocus);
-
                                 b.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-
                             }
 
 

@@ -63,7 +63,8 @@ public class SplashActivity extends AppCompatActivity {
         Log.e("---", " " + getResources().getDisplayMetrics().density);
 
         if (sharedPreferences.getBoolean("log_flag", false) == true) {
-            if (Reusable_Functions.chkStatus(context)) {
+            if (Reusable_Functions.chkStatus(context))
+            {
                 if (progressbar != null) {
                     progressbar.setVisibility(View.VISIBLE);
                     progressbar.setIndeterminate(true);
@@ -81,18 +82,18 @@ public class SplashActivity extends AppCompatActivity {
                     // Thread will sleep for 5 seconds
                     sleep(3 * 1000);
                     Log.e("chk", " " + (sharedPreferences.getBoolean("log_flag", false) == true));
-//                    if (sharedPreferences.getBoolean("log_flag", false) == true) {
-//                        if (Reusable_Functions.chkStatus(context)) {
-//                            requestLoginAPI();
-//                        } else {
-//
-//                            //Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-//                        }
-//                    } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
-                        Intent i = new Intent(SplashActivity.this, InspectionBeginActivity.class);
+                    if (sharedPreferences.getBoolean("log_flag", false) == true) {
+                        if (Reusable_Functions.chkStatus(context)) {
+                            requestLoginAPI();
+                        } else
+                        {
+                            //Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                        }
+                    } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
+                        Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(i);
                         finish();
-                //    }
+                    }
                 } catch (Exception e) {
                 }
             }

@@ -62,6 +62,7 @@ import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruI
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
 import apsupportapp.aperotechnologies.com.designapp.StoreInspection.InspectionBeginActivity;
+import apsupportapp.aperotechnologies.com.designapp.StoreInspection.InspectionHistoryActivity;
 import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.TargetStockExceptionActivity;
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
@@ -87,7 +88,7 @@ public class DashBoardActivity extends AppCompatActivity
     ImageButton btnFloorAvailability,btnTargetStockExcep,btnSellThruExcep,btnVisualReport;
     ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnBestPerformersInv;
     ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,To_do_image_button,Status_image_button,
-            btnSkewedSize,btnCutSize,btnStockAgeing,BtnWorstPerformers,FeedbackList_btn,Feedback_btn,btn_inspection_begin,btn_inspection_history;
+            btnSkewedSize,btnCutSize,btnStockAgeing,BtnWorstPerformers,FeedbackList_btn,Feedback_btn,btn_inspection_begin,btn_inspection_history,btn_mpm;
 
 
     LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory,linplanactual,Collaboration_subView,Feedback_linear,inspection_linear;
@@ -270,6 +271,21 @@ public class DashBoardActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(DashBoardActivity.this, BestPerformerActivity.class);
+                startActivity(intent);
+                Log.e(TAG, "btn best: log " );
+
+                if(timer != null)
+                {
+                    timer.cancel();
+                }
+                // finish();
+            }
+        });
+
+        btn_mpm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DashBoardActivity.this, test.class);
                 startActivity(intent);
                 Log.e(TAG, "btn best: log " );
 
@@ -567,6 +583,17 @@ public class DashBoardActivity extends AppCompatActivity
                 }
             }
         });
+        btn_inspection_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this,InspectionHistoryActivity.class);
+                startActivity(intent);
+                if(timer!= null)
+                {
+                    timer.cancel();
+                }
+            }
+        });
 
         RefreshTimeAPI();
 
@@ -819,6 +846,7 @@ public class DashBoardActivity extends AppCompatActivity
         FeedbackList_btn = (ImageButton)findViewById(R.id.feedbackList_btn);
         btn_inspection_history = (ImageButton)findViewById(R.id.btn_inspection_history);
         btn_inspection_begin = (ImageButton)findViewById(R.id.btn_inspection_begin);
+        btn_mpm = (ImageButton)findViewById(R.id.btn_mpm);
 //        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
 //        style_grid.setExpanded(true);
 

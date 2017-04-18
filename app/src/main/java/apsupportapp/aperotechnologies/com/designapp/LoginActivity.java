@@ -121,8 +121,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                uname = edtUserName.getText().toString().trim();
+                Log.e("getCurrentFocus :",""+getCurrentFocus().getWindowToken());
+                uname = edtUserName.getText().toString().trim().toUpperCase();
                 password = edtPassword.getText().toString().trim().toUpperCase();
+                Log.e(TAG, "uname & pass: "+uname+"and pass"+password );
 
                 if ((uname.equals("") || uname.length() == 0) || (password.equals("") || password.length() == 0)) {
                     if (uname.equals("") || uname.length() == 0) {
@@ -134,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(context, "Fetching store code...");
+                        Log.e("User name :",""+uname);
                         SelectedStoreCode = uname;
                         firstLogin = false;
                         requestLoginWithStoreAPI();
@@ -372,12 +375,10 @@ public class LoginActivity extends AppCompatActivity {
                     Reusable_Functions.sDialog(context, "Authenticating user...");
                     SelectedStoreCode = (String) adapterView.getItemAtPosition(position);
                     Log.e(TAG, "onItemSelected: " + SelectedStoreCode);
-
                     firstLogin = true;
                     requestLoginWithStoreAPI();
-
-                } else {
-
+                } else
+                {
                     Toast.makeText(LoginActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
 
