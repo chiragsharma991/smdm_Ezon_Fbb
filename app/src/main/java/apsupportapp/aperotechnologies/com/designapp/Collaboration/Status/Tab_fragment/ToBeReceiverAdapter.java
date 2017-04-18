@@ -20,7 +20,6 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusA
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static apsupportapp.aperotechnologies.com.designapp.RunningPromo.VM.list;
 
 /**
  * Created by pamrutkar on 15/03/17.
@@ -82,7 +81,6 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(holder instanceof ToBeReceiverAdapter.Holder) {
             if(position < receiver_list.size())
             {
-
                 HandlePositionOnSet(holder,position);
                 ((ToBeReceiverAdapter.Holder)holder).Rec_Status_caseNumber.setText(""+"Case#"+receiver_list.get(position).getCaseNo());
                 ((ToBeReceiverAdapter.Holder)holder).Rec_Status_storeCode.setText(receiver_list.get(position).getSenderStoreCode());

@@ -69,6 +69,7 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 
+import apsupportapp.aperotechnologies.com.designapp.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -1281,15 +1282,12 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     private void OnSubmit() {
         JSONArray jsonarray=new JSONArray();
         int count=0;
-        String insp_comment, inspected_name;
+        String insp_comment = "", inspected_name = "";
                     JSONObject obj = new JSONObject();
                     try {
-                        if(et_inspected_by.getText().toString().equals(""))
-                        {
-                            InputMethodManager imm = (InputMethodManager) et_inspected_by.getContext()
-                                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), 0);
-                            return;
+                        if(et_inspected_by.equals("") || et_inspected_by.length() == 0) {
+                            Toast.makeText(InspectionBeginActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
+
                         }
                         else {
                           inspected_name = et_inspected_by.getText().toString();
@@ -1297,12 +1295,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                                     .getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), 0);
                         }
-                        if(et_comment.getText().toString().equals(""))
+                        if(et_comment.equals("") || et_comment.length() == 0)
                         {
-                            InputMethodManager imm = (InputMethodManager) et_comment.getContext()
-                                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
-                            return;
+                            Toast.makeText(InspectionBeginActivity.this, "Please enter comment", Toast.LENGTH_LONG).show();
+
                         }
                         else {
                             insp_comment = et_comment.getText().toString();

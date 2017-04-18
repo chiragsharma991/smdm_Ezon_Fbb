@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/activity_insp_history"
                 android:layout_width="match_parent"
@@ -19,10 +18,10 @@
         android:contentInsetLeft="0dp"
         android:contentInsetRight="0dp"
         android:contentInsetStart="0dp"
-        segmentedgroup:contentInsetEnd="0dp"
-        segmentedgroup:contentInsetLeft="0dp"
-        segmentedgroup:contentInsetRight="0dp"
-        segmentedgroup:contentInsetStart="0dp">
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -69,7 +68,6 @@
             android:id="@+id/rv_insp_history"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
 
         </android.support.v7.widget.RecyclerView>
 

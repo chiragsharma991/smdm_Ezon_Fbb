@@ -113,7 +113,6 @@ public class LoginActivity extends AppCompatActivity {
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,10 +125,14 @@ public class LoginActivity extends AppCompatActivity {
                 password = edtPassword.getText().toString().trim().toUpperCase();
                 Log.e(TAG, "uname & pass: "+uname+"and pass"+password );
 
-                if ((uname.equals("") || uname.length() == 0) || (password.equals("") || password.length() == 0)) {
-                    if (uname.equals("") || uname.length() == 0) {
+                if ((uname.equals("") || uname.length() == 0) || (password.equals("") || password.length() == 0))
+                {
+                    if (uname.equals("") || uname.length() == 0)
+                    {
                         Toast.makeText(LoginActivity.this, "Please enter username", Toast.LENGTH_LONG).show();
-                    } else if (password.equals("") || password.length() == 0) {
+                    }
+                    else if (password.equals("") || password.length() == 0)
+                    {
                         Toast.makeText(LoginActivity.this, "Please enter password", Toast.LENGTH_LONG).show();
                     }
 
@@ -142,7 +145,6 @@ public class LoginActivity extends AppCompatActivity {
                         requestLoginWithStoreAPI();
 
                     } else {
-
                         Toast.makeText(LoginActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -258,9 +260,7 @@ public class LoginActivity extends AppCompatActivity {
                                 return;
 
                             }
-
                             // when store code fetched it will go second condition.
-
                             if (firstLogin == false) {
                                 String username = response.getString("loginName");
                                 String password = response.getString("password");

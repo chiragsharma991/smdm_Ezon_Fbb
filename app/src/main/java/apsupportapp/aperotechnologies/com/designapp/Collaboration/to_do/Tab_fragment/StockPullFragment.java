@@ -85,10 +85,7 @@ public class StockPullFragment extends Fragment {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
             }
-
         }
-
-
     }
 
 

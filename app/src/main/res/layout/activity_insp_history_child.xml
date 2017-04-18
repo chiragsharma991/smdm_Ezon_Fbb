@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              android:orientation="vertical"
+                android:padding="3dp">
+
+    <RelativeLayout
+        android:id="@+id/relative_insp_summary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_layout"
+        android:padding="5dp"
+
+        >
+
+        <!--  ListRow Left sied Thumbnail image -->
+        <LinearLayout
+            android:id="@+id/linear_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="5dip"
+           >
+
+            <ImageView
+                android:id="@+id/image_insphistory_1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@mipmap/excellentemojiunselected"/>
+
+        </LinearLayout>
+
+        <!-- Title Of Song-->
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/txt_store_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linear_img"
+            android:layout_toRightOf="@+id/linear_img"
+            android:text="Store_Code"
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/stock_textsize_normal"
+            android:textStyle="normal"/>
+
+        <!-- Artist Name -->
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginBottom="12dip"
+            android:id="@+id/txt_inspection_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/txt_color"
+            android:layout_above="@+id/txt_inspected_by"
+            android:textSize="@dimen/stock_status_textsize"
+            android:layout_toRightOf="@+id/linear_img"
+            android:layout_alignBottom="@+id/txt_date"
+            android:layout_alignEnd="@+id/txt_store_code"/>
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginBottom="5dip"
+            android:id="@+id/txt_inspected_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/txt_color"
+            android:textSize="@dimen/stock_status_textsize"
+            android:layout_alignBaseline="@+id/txt_date"
+            android:layout_toRightOf="@+id/linear_img"
+            android:layout_alignBottom="@+id/txt_date"
+            android:layout_alignEnd="@+id/txt_store_code"/>
+
+
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true"
+            android:id="@+id/image_emoji"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/goodemojiselected"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_emoji"
+            android:text="10 April 2017"
+            android:textColor="@color/txt_color"
+            android:textSize="@dimen/stock_textsize_normal"
+            android:textStyle="bold"/>
+
+   </RelativeLayout>
+</RelativeLayout>
