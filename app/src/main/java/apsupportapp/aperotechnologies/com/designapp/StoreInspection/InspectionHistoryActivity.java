@@ -55,7 +55,7 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
     private String bearertoken;
     private RequestQueue queue;
     private SharedPreferences sharedPreferences;
-    private Context context;
+    Context context;
     private int offset =0, limit = 50, count = 0;
     private InspectionBeanClass inspectionBeanClass;
     private ArrayList<InspectionBeanClass> inspectionArrayList;
@@ -80,15 +80,12 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
         queue.start();
         gson = new Gson();
         inspectionArrayList = new ArrayList<InspectionBeanClass>();
-        if (Reusable_Functions.chkStatus(context))
-        {
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             requestInspectionSummary();
-        }
-        else
-        {
-            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -124,54 +121,39 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
                         Log.e("Inspection History total length :" , "" +response.length());
                         try
                         {
-//                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-//                                Reusable_Functions.hDialog();
-//                                Toast.makeText(InspectionHistoryActivity.this, "no data found", Toast.LENGTH_SHORT).show();
-//                               // return;
-//
-//                            } else if (response.length() == limit) {
-//                                Log.e("", "promo eql limit");
-//                                for (int i = 0; i < 1; i++) {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(InspectionHistoryActivity.this, "no data found", Toast.LENGTH_SHORT).show();
+                               // return;
 
-//                                    inspectionBeanClass = gson.fromJson(response.get(i).toString(), InspectionBeanClass.class);
-//                                    inspectionArrayList.add(inspectionBeanClass);
+                            } else if (response.length() == limit) {
+                                Log.e("", "promo eql limit");
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    inspectionBeanClass = gson.fromJson(response.get(i).toString(), InspectionBeanClass.class);
+                                    inspectionArrayList.add(inspectionBeanClass);
 //                                    JSONObject productName1 = response.getJSONObject(i);
 //                                    String inspectorName = productName1.getString("inspectorName");
 //                                    String comment = productName1.getString("comments");
 //                                    String storeCode = productName1.getString("storeCode");
 //                                    int inspectionId = productName1.getInt("inspectionId");
 
-                                    inspectionBeanClass = new InspectionBeanClass();
-                                    inspectionBeanClass.setInspectorName("Rohit");
-                                    inspectionBeanClass.setStoreCode("4813");
-                                    inspectionBeanClass.setInspectionId(14212);
+
+                                }
+                                offset = (limit * count) + limit;
+                                count++;
+
+                                requestInspectionSummary();
+
+                            } else if (response.length() < limit) {
+                                Log.e("", "promo /= limit");
+                                for (int i = 0; i < response.length(); i++) {
+                                    inspectionBeanClass = gson.fromJson(response.get(i).toString(), InspectionBeanClass.class);
                                     inspectionArrayList.add(inspectionBeanClass);
 
-                           //     }
-//                                offset = (limit * count) + limit;
-//                                count++;
 //
-//                                requestInspectionSummary();
-//
-//                            } else if (response.length() < limit) {
-//                                Log.e("", "promo /= limit");
-//                                for (int i = 0; i < response.length(); i++) {
-//                                    inspectionBeanClass = gson.fromJson(response.get(i).toString(), InspectionBeanClass.class);
-//                                    inspectionArrayList.add(inspectionBeanClass);
-//
-//                                    JSONObject productName1 = response.getJSONObject(i);
-//                                    String inspectorName = productName1.getString("inspectorName");
-//                                    String comment = productName1.getString("comments");
-//                                    String storeCode = productName1.getString("storeCode");
-//                                    int inspectionId = productName1.getInt("inspectionId");
-//
-//                                    inspectionBeanClass = new InspectionBeanClass();
-//                                    inspectionBeanClass.setInspectorName("Rohit");
-//                                    inspectionBeanClass.setStoreCode("4813");
-//                                    inspectionBeanClass.setInspectionId(14212);
-//                                    inspectionArrayList.add(inspectionBeanClass);
-//                                }
-//                            }
+                                }
+                            }
                             rv_insp_history.setLayoutManager(new LinearLayoutManager(rv_insp_history.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             rv_insp_history.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
@@ -221,9 +203,6 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
         finish();
     }
 
-//    public void StartActivity(Context context)
-//    {
-//        Intent intent = new Intent(context, InspectionDetailsActivity.class);
-//        context.startActivity(intent);
-//    }
+
+
 }

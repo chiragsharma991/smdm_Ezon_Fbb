@@ -3,9 +3,32 @@ package apsupportapp.aperotechnologies.com.designapp.StoreInspection;
 /**
  * Created by pamrutkar on 18/04/17.
  */
-public class InspectionBeanClass {
-
+public class InspectionBeanClass
+{
+    int inspectionId;
+    String inspectionDate;
     String inspectorName;
+    String storeCode;
+    String storeDesc;
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    String comments;
+    String status;
     int fashionQuot;
     int merchDisplay;
     int merchPresentationStd;
@@ -13,18 +36,9 @@ public class InspectionBeanClass {
     int overallCleanliness;
     int signage;
     int winClusterMannequinsDisp;
+    String rating;
     int mpmExecution;
-    int comments;
 
-    public String getStoreCode() {
-        return storeCode;
-    }
-
-    public void setStoreCode(String storeCode) {
-        this.storeCode = storeCode;
-    }
-
-    String storeCode;
 
     public int getInspectionId() {
         return inspectionId;
@@ -34,7 +48,13 @@ public class InspectionBeanClass {
         this.inspectionId = inspectionId;
     }
 
-    int inspectionId;
+    public String getInspectionDate() {
+        return inspectionDate;
+    }
+
+    public void setInspectionDate(String inspectionDate) {
+        this.inspectionDate = inspectionDate;
+    }
 
     public String getInspectorName() {
         return inspectorName;
@@ -42,6 +62,22 @@ public class InspectionBeanClass {
 
     public void setInspectorName(String inspectorName) {
         this.inspectorName = inspectorName;
+    }
+
+    public String getStoreCode() {
+        return storeCode;
+    }
+
+    public void setStoreCode(String storeCode) {
+        this.storeCode = storeCode;
+    }
+
+    public String getStoreDesc() {
+        return storeDesc;
+    }
+
+    public void setStoreDesc(String storeDesc) {
+        this.storeDesc = storeDesc;
     }
 
     public int getFashionQuot() {
@@ -100,6 +136,14 @@ public class InspectionBeanClass {
         this.winClusterMannequinsDisp = winClusterMannequinsDisp;
     }
 
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     public int getMpmExecution() {
         return mpmExecution;
     }
@@ -108,13 +152,7 @@ public class InspectionBeanClass {
         this.mpmExecution = mpmExecution;
     }
 
-    public int getComments() {
-        return comments;
-    }
 
-    public void setComments(int comments) {
-        this.comments = comments;
-    }
 
 
 

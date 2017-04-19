@@ -91,9 +91,9 @@ public class DashBoardActivity extends AppCompatActivity
             btnSkewedSize,btnCutSize,btnStockAgeing,BtnWorstPerformers,FeedbackList_btn,Feedback_btn,btn_inspection_begin,btn_inspection_history,btn_mpm;
 
 
-    LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory,linplanactual,Collaboration_subView,Feedback_linear,inspection_linear;
+    LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory,linplanactual,Collaboration_subView,Feedback_linear,inspection_linear,Mpm_linear;
     TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt,RefreshTime,planvsActualtxt,Collaboration,Feedback,
-            txt_store_Inspection;
+            txt_store_Inspection,txt_mpm;
 
     //ExpandableHeightGridView style_grid;
     EventAdapter eventAdapter;
@@ -108,6 +108,7 @@ public class DashBoardActivity extends AppCompatActivity
     String Collab="NO";
     String feedback_flag="NO";
     String store_inspection = "NO";
+    String mpm = "NO";
     RequestQueue queue;
     boolean flag=true;
     String userId, bearertoken;
@@ -143,6 +144,7 @@ public class DashBoardActivity extends AppCompatActivity
     private boolean Collab_bool=false;
     private boolean feedback_bool=false;
     private boolean inspection_flag = false;
+    private boolean mpm_flag = false;
     private Gson gson;
     private EtlStatus etlStatus;
     private ArrayList<EtlStatus>etlStatusList;
@@ -690,6 +692,14 @@ public class DashBoardActivity extends AppCompatActivity
         {
             inspection_linear.setVisibility(View.GONE);
         }
+        if(mpm_flag)
+        {
+           Mpm_linear.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Mpm_linear.setVisibility(View.GONE);
+        }
 
     }
 
@@ -781,6 +791,7 @@ public class DashBoardActivity extends AppCompatActivity
         Collaboration=(TextView)findViewById(R.id.collaboration);
         Feedback=(TextView)findViewById(R.id.feedback);
         txt_store_Inspection = (TextView)findViewById(R.id.storeInspection);
+        txt_mpm = (TextView)findViewById(R.id.mpm);
 
         hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
         productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -794,6 +805,7 @@ public class DashBoardActivity extends AppCompatActivity
         Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
         Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
         txt_store_Inspection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.downlist,0);
+        txt_mpm.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.downlist,0);
 
         hourlyFlashTxt.setOnClickListener(this);
         productInfoTxt.setOnClickListener(this);
@@ -804,6 +816,7 @@ public class DashBoardActivity extends AppCompatActivity
         Collaboration.setOnClickListener(this);
         Feedback.setOnClickListener(this);
         txt_store_Inspection.setOnClickListener(this);
+        txt_mpm.setOnClickListener(this);
 
         planvsActualtxt.setOnClickListener(this);
 
@@ -817,6 +830,7 @@ public class DashBoardActivity extends AppCompatActivity
         Feedback_linear=(LinearLayout)findViewById(R.id.feedback_linear);
         linplanactual = (LinearLayout)findViewById(R.id.linplanactual);
         inspection_linear = (LinearLayout)findViewById(R.id.storeInspection_linear);
+        Mpm_linear = (LinearLayout)findViewById(R.id.mpm_linear);
 
         imageBtnStyle=(ImageButton)findViewById(R.id.imageBtnStyle);
         imageBtnKeyProducts=(ImageButton)findViewById(R.id.imageBtnKeyProducts);
@@ -1090,6 +1104,7 @@ public class DashBoardActivity extends AppCompatActivity
                     promoAnalysis.setVisibility(View.GONE);
                     inventory.setVisibility(View.GONE);
                     linplanactual.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     Collaboration_subView.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
                     inspection_linear.setVisibility(View.GONE);
@@ -1102,6 +1117,7 @@ public class DashBoardActivity extends AppCompatActivity
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_store_Inspection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1111,6 +1127,7 @@ public class DashBoardActivity extends AppCompatActivity
                     sAles="NO";
                     pmAnalysis="NO";
                     inVENtory="NO";
+                    mpm="NO";
                     planActual = "NO";
                     feedback_flag="NO";
                     store_inspection = "NO";
@@ -1123,6 +1140,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Sales=false;
                     Inventory=false;
                     Collab_bool=false;
+                    mpm_flag=false;
                     feedback_bool=false;
                     PlanActual = false;
                     inspection_flag = false;
@@ -1146,6 +1164,7 @@ public class DashBoardActivity extends AppCompatActivity
                     promoAnalysis.setVisibility(View.GONE);
                     inventory.setVisibility(View.GONE);
                     linplanactual.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
                     Collaboration_subView.setVisibility(View.GONE);
                     inspection_linear.setVisibility(View.GONE);
@@ -1158,6 +1177,7 @@ public class DashBoardActivity extends AppCompatActivity
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_store_Inspection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Log.e(TAG, "onClick:  productinfo" );
@@ -1169,6 +1189,7 @@ public class DashBoardActivity extends AppCompatActivity
                     sAles="NO";
                     pmAnalysis="NO";
                     inVENtory="NO";
+                    mpm="NO";
                     planActual="NO";
                     feedback_flag="NO";
                     store_inspection= "NO";
@@ -1181,6 +1202,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Inventory=false;
                     PlanActual=false;
                     feedback_bool=false;
+                    mpm_flag=false;
                     Collab_bool=false;
                     inspection_flag = false;
                     Collab="NO";
@@ -1206,6 +1228,7 @@ public class DashBoardActivity extends AppCompatActivity
                     inventory.setVisibility(View.GONE);
                     linplanactual.setVisibility(View.GONE);
                     Collaboration_subView.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
                     inspection_linear.setVisibility(View.GONE);
                     Log.e(TAG, "onClick:  visualAssort" );
@@ -1218,6 +1241,7 @@ public class DashBoardActivity extends AppCompatActivity
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_store_Inspection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,R.drawable.downlist,0);
 
@@ -1227,6 +1251,7 @@ public class DashBoardActivity extends AppCompatActivity
                     sAles="No";
                     pmAnalysis="NO";
                     inVENtory="NO";
+                    mpm="NO";
                     planActual = "NO";
                     feedback_flag = "NO";
                     store_inspection = "NO";
@@ -1238,6 +1263,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Sales=false;
                     Inventory=false;
                     Collab_bool=false;
+                    mpm_flag=false;
                     feedback_bool=false;
                     Collab="NO";
                     inspection_flag = false;
@@ -1260,6 +1286,7 @@ public class DashBoardActivity extends AppCompatActivity
                     promoAnalysis.setVisibility(View.GONE);
                     inventory.setVisibility(View.GONE);
                     linplanactual.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
                     inspection_linear.setVisibility(View.GONE);
 
@@ -1272,6 +1299,7 @@ public class DashBoardActivity extends AppCompatActivity
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_store_Inspection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1281,6 +1309,7 @@ public class DashBoardActivity extends AppCompatActivity
                     vsAssort="NO";
                     pmAnalysis="NO";
                     inVENtory="NO";
+                    mpm="NO";
                     planActual="NO";
                     feedback_flag="NO";
                     store_inspection = "NO";
@@ -1293,6 +1322,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Inventory=false;
                     Collab_bool=false;
                     feedback_bool=false;
+                    mpm_flag=false;
                     Collab="NO";
                     PlanActual=false;
                     inspection_flag = false;
@@ -1313,6 +1343,7 @@ public class DashBoardActivity extends AppCompatActivity
                     sales.setVisibility(View.GONE);
                     promoAnalysis.setVisibility(View.VISIBLE);
                     inventory.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     Collaboration_subView.setVisibility(View.GONE);
                     linplanactual.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
@@ -1325,6 +1356,7 @@ public class DashBoardActivity extends AppCompatActivity
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_store_Inspection.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1334,6 +1366,7 @@ public class DashBoardActivity extends AppCompatActivity
                     pdInfo="NO";
                     vsAssort="NO";
                     sAles="NO";
+                    mpm="NO";
                     inVENtory="NO";
                     feedback_flag="NO";
                     planActual="NO";
@@ -1346,6 +1379,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Sales=false;
                     Inventory=false;
                     feedback_bool=false;
+                    mpm_flag=false;
                     Collab_bool=false;
                     Collab="NO";
                     inspection_flag = false;
@@ -1370,6 +1404,7 @@ public class DashBoardActivity extends AppCompatActivity
                     inventory.setVisibility(View.VISIBLE);
                     linplanactual.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     Collaboration_subView.setVisibility(View.GONE);
                     inspection_linear.setVisibility(View.GONE);
 
@@ -1380,6 +1415,7 @@ public class DashBoardActivity extends AppCompatActivity
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_store_Inspection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1389,6 +1425,7 @@ public class DashBoardActivity extends AppCompatActivity
                     vsAssort="NO";
                     Collab="NO";
                     sAles="NO";
+                    mpm="NO";
                     feedback_flag="NO";
                     pmAnalysis="NO";
                     planActual="NO";
@@ -1398,6 +1435,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Promo=false;
                     ProductInfo=false;
                     VisualAssort=false;
+                    mpm_flag=false;
                     Sales=false;
                     Inventory=true;
                     Collab_bool=false;
@@ -1425,6 +1463,7 @@ public class DashBoardActivity extends AppCompatActivity
                     inventory.setVisibility(View.GONE);
                     linplanactual.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     Collaboration_subView.setVisibility(View.VISIBLE);
                     inspection_linear.setVisibility(View.GONE);
 
@@ -1432,6 +1471,7 @@ public class DashBoardActivity extends AppCompatActivity
                     productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1446,6 +1486,7 @@ public class DashBoardActivity extends AppCompatActivity
                     sAles="NO";
                     feedback_flag="NO";
                     pmAnalysis="NO";
+                    mpm="NO";
                     Collab="YES";
                     planActual = "NO";
                     store_inspection="NO";
@@ -1454,6 +1495,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Promo=false;
                     ProductInfo=false;
                     VisualAssort=false;
+                    mpm_flag=false;
                     Sales=false;
                     Inventory=false;
                     feedback_bool=false;
@@ -1481,6 +1523,7 @@ public class DashBoardActivity extends AppCompatActivity
                     sales.setVisibility(View.GONE);
                     promoAnalysis.setVisibility(View.GONE);
                     inventory.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
                     linplanactual.setVisibility(View.VISIBLE);
                     Collaboration_subView.setVisibility(View.GONE);
@@ -1492,6 +1535,7 @@ public class DashBoardActivity extends AppCompatActivity
                     salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1503,6 +1547,7 @@ public class DashBoardActivity extends AppCompatActivity
                     vsAssort="NO";
                     feedback_flag="NO";
                     sAles="NO";
+                    mpm="NO";
                     pmAnalysis="NO";
                     Collab="NO";
                     store_inspection = "NO";
@@ -1511,6 +1556,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Promo=false;
                     ProductInfo=false;
                     VisualAssort=false;
+                    mpm_flag=false;
                     feedback_bool=false;
                     Sales=false;
                     Inventory=false;
@@ -1539,6 +1585,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Feedback_linear.setVisibility(View.VISIBLE);
                     linplanactual.setVisibility(View.GONE);
                     Collaboration_subView.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     inspection_linear.setVisibility(View.GONE);
 
                     hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1549,6 +1596,7 @@ public class DashBoardActivity extends AppCompatActivity
                     promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_store_Inspection.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
 
@@ -1556,6 +1604,7 @@ public class DashBoardActivity extends AppCompatActivity
                     inVENtory="NO";
                     hrflash="NO";
                     pdInfo="NO";
+                    mpm="NO";
                     vsAssort="NO";
                     feedback_flag="YES";
                     sAles="NO";
@@ -1567,6 +1616,7 @@ public class DashBoardActivity extends AppCompatActivity
                     HourlyFlash=false;
                     Promo=false;
                     ProductInfo=false;
+                    mpm_flag=false;
                     VisualAssort=false;
                     feedback_bool=true;
                     Sales=false;
@@ -1594,6 +1644,7 @@ public class DashBoardActivity extends AppCompatActivity
                     Feedback_linear.setVisibility(View.GONE);
                     linplanactual.setVisibility(View.GONE);
                     Collaboration_subView.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.GONE);
                     inspection_linear.setVisibility(View.VISIBLE);
 
                     hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1605,6 +1656,7 @@ public class DashBoardActivity extends AppCompatActivity
                     inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_store_Inspection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.uplist,0);
 
                     planActual = "NO";
@@ -1612,6 +1664,7 @@ public class DashBoardActivity extends AppCompatActivity
                     hrflash="NO";
                     pdInfo="NO";
                     vsAssort="NO";
+                    mpm="NO";
                     feedback_flag="NO";
                     sAles="NO";
                     pmAnalysis="NO";
@@ -1619,6 +1672,7 @@ public class DashBoardActivity extends AppCompatActivity
                     store_inspection = "YES";
                     Collab_bool=false;
                     HourlyFlash=false;
+                    mpm_flag=false;
                     Promo=false;
                     ProductInfo=false;
                     VisualAssort=false;
@@ -1635,6 +1689,64 @@ public class DashBoardActivity extends AppCompatActivity
                     txt_store_Inspection.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     store_inspection="NO";
                     inspection_flag=false;
+                }
+                break;
+            case R.id.mpm:
+                if(mpm.equals("NO")){
+                    hourlyFlash.setVisibility(View.GONE);
+                    productInfo.setVisibility(View.GONE);
+                    visualAssort.setVisibility(View.GONE);
+                    sales.setVisibility(View.GONE);
+                    promoAnalysis.setVisibility(View.GONE);
+                    inventory.setVisibility(View.GONE);
+                    Feedback_linear.setVisibility(View.GONE);
+                    linplanactual.setVisibility(View.GONE);
+                    Collaboration_subView.setVisibility(View.GONE);
+                    inspection_linear.setVisibility(View.GONE);
+                    Mpm_linear.setVisibility(View.VISIBLE);
+
+                    hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    salesTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    promoAnalysisTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    inventoryTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    planvsActualtxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    Collaboration.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    txt_store_Inspection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.downlist,0);
+                    txt_mpm.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.uplist,0);
+
+                    planActual = "NO";
+                    inVENtory="NO";
+                    hrflash="NO";
+                    pdInfo="NO";
+                    vsAssort="NO";
+                    feedback_flag="NO";
+                    sAles="NO";
+                    pmAnalysis="NO";
+                    Collab="NO";
+                    store_inspection = "NO";
+                    mpm = "YES";
+                    Collab_bool=false;
+                    HourlyFlash=false;
+                    Promo=false;
+                    ProductInfo=false;
+                    VisualAssort=false;
+                    feedback_bool=false;
+                    inspection_flag = false;
+                    mpm_flag = true;
+                    Sales=false;
+                    Inventory=false;
+                    PlanActual = false;
+                    Log.e(TAG, "onClick:  headerplanActual" );
+
+                }else
+                {
+                    Mpm_linear.setVisibility(View.GONE);
+                    txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    mpm="NO";
+                    mpm_flag=false;
                 }
                 break;
         }

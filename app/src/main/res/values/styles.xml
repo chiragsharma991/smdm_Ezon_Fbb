@@ -84,6 +84,9 @@
         <item name="android:textColorPrimary">#000000</item>
         <item name="android:background">#f8f6f6</item>
         <item name="android:colorBackground">@color/cardview_light_background</item>
+        <item name="colorControlNormal">#000</item>
+        <item name="colorControlActivated">#2277b1</item>
+
     </style>
 
 
