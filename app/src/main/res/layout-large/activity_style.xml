@@ -256,7 +256,7 @@
 
 
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:background="#80000000"
         android:id="@+id/collectionLayout"
         android:layout_width="match_parent"
@@ -289,7 +289,6 @@
             android:textColor="#666666"
             android:textCursorDrawable="@null"
             android:background="@color/bg_screen_color"
-            android:drawablePadding="5dp"
             android:drawableLeft="@mipmap/key_product_search_icon"
            android:maxLines="1"
             android:hint="Search"

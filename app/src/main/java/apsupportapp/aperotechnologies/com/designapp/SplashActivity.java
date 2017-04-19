@@ -63,7 +63,8 @@ public class SplashActivity extends AppCompatActivity {
         Log.e("---", " " + getResources().getDisplayMetrics().density);
 
         if (sharedPreferences.getBoolean("log_flag", false) == true) {
-            if (Reusable_Functions.chkStatus(context)) {
+            if (Reusable_Functions.chkStatus(context))
+            {
                 if (progressbar != null) {
                     progressbar.setVisibility(View.VISIBLE);
                     progressbar.setIndeterminate(true);
@@ -84,8 +85,8 @@ public class SplashActivity extends AppCompatActivity {
                     if (sharedPreferences.getBoolean("log_flag", false) == true) {
                         if (Reusable_Functions.chkStatus(context)) {
                             requestLoginAPI();
-                        } else {
-
+                        } else
+                        {
                             //Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                         }
                     } else if (sharedPreferences.getBoolean("log_flag", false) == false) {

@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,7 +15,9 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,6 +58,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback_model;
@@ -121,8 +125,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                uname = edtUserName.getText().toString().trim();
+                Log.e("getCurrentFocus :",""+getCurrentFocus().getWindowToken());
+                uname = edtUserName.getText().toString().trim().toUpperCase();
                 password = edtPassword.getText().toString().trim().toUpperCase();
+                Log.e(TAG, "uname & pass: "+uname+"and pass"+password );
 
                 if ((uname.equals("") || uname.length() == 0) || (password.equals("") || password.length() == 0)) {
                     if (uname.equals("") || uname.length() == 0) {
@@ -134,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(context, "Fetching store code...");
+                        Log.e("User name :",""+uname);
                         SelectedStoreCode = uname;
                         firstLogin = false;
                         requestLoginWithStoreAPI();
@@ -194,6 +201,8 @@ public class LoginActivity extends AppCompatActivity {
                                 storelist_data.add(response.getString(i));
 
                             }
+
+
                             Log.e("TAG", "storelist_data size: " + storelist_data.size() + "store code is  " + storelist_data.get(0));
                             Reusable_Functions.hDialog();
                             commentDialog();
@@ -359,25 +368,56 @@ public class LoginActivity extends AppCompatActivity {
         // Pass null as the parent view because its going in the dialog layout
         View v = inflater.inflate(R.layout.storecode_list, null);
         ListView select_storeList = (ListView) v.findViewById(R.id.select_storeList);
+
+        // search function for search store code from list.
+        final EditText search=(EditText)v.findViewById(R.id.search_store);
+
+        final ArrayList<String> dublicateStoreList=new ArrayList<>();
+        dublicateStoreList.addAll(storelist_data);
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.e(TAG, "onTextChanged: "+charSequence );
+                String searchData = search.getText().toString();
+                filterData(searchData,storelist_data,dublicateStoreList);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         spinnerArrayAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, storelist_data);
+                this, android.R.layout.simple_list_item_1, storelist_data)
+        {
+
+
+        };
         select_storeList.setAdapter(spinnerArrayAdapter);
 
 
         select_storeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 dialog.dismiss();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Authenticating user...");
                     SelectedStoreCode = (String) adapterView.getItemAtPosition(position);
                     Log.e(TAG, "onItemSelected: " + SelectedStoreCode);
-
                     firstLogin = true;
                     requestLoginWithStoreAPI();
-
-                } else {
-
+                } else
+                {
                     Toast.makeText(LoginActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
 
@@ -388,5 +428,29 @@ public class LoginActivity extends AppCompatActivity {
 
         dialog = builder.create();
         dialog.show();
+    }
+
+    public void filterData(String query, ArrayList<String> storelist_data, ArrayList<String> dublicateStoreList)
+    {
+
+
+        storelist_data.clear();
+        String charText = query.toLowerCase(Locale.getDefault());
+        if (charText.length() == 0) {
+
+            storelist_data.addAll(dublicateStoreList);
+            spinnerArrayAdapter.notifyDataSetChanged();
+        }else
+        {
+            for (int i = 0; i <dublicateStoreList.size() ; i++) {
+
+                if (dublicateStoreList.get(i).toLowerCase(Locale.getDefault()).replace(" ","").contains(charText)) {
+                    storelist_data.add(dublicateStoreList.get(i));
+                }
+            }
+            spinnerArrayAdapter.notifyDataSetChanged();
+
+        }
+
     }
 }

@@ -25,6 +25,7 @@
         android:layout_marginTop="60dp"
         android:gravity="center"
         android:hint="@string/username"
+        android:textAllCaps="true"
         android:maxLines="1"
         android:inputType="text"
         android:textColor="#ffffff"
@@ -37,7 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:hint="@string/password"
@@ -93,4 +93,5 @@
     <!--android:text="Forgot Password?"-->
     <!--android:textColor="#ffffff"-->
     <!--android:background="#920609"/>-->
+
 </LinearLayout>

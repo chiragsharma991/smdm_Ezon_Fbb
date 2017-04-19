@@ -25,6 +25,7 @@
         android:layout_marginTop="60dp"
         android:gravity="center"
         android:hint="@string/username"
+        android:textAllCaps="true"
         android:maxLines="1"
         android:inputType="text"
         android:textColor="#ffffff"
