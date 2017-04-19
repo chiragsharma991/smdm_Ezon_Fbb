@@ -61,7 +61,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SplashActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
-public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener, GravitySnapHelper.SnapListener,clickChild,HttpResponse {
+public class RunningPromoActivity extends AppCompatActivity implements View.OnClickListener, GravitySnapHelper.SnapListener,clickChild {
 
     TextView storecode, storedesc, promoval1, promoval2;
     RelativeLayout imageback, imagefilter;
@@ -115,12 +115,6 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    private void check() {
-
-        String url = ConstsCore.web_url + "/v1/display/runningpromosummary/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
-
-        ApiRequest request=new ApiRequest(context,bearertoken,url,TAG);
-    }
 
     private void requestRunningPromosummary() {
 
@@ -530,9 +524,5 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    @Override
-    public void response(JSONArray response) {
-        Log.e(TAG, "response: "+response );
-        Reusable_Functions.hDialog();
-    }
+
 }

@@ -121,15 +121,17 @@
                     />
 
 
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:id="@+id/imageLoader_feedback"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:theme="@style/ProgressBar">
 
-                    <ProgressBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/imageLoader_feedback"
-                        android:visibility="visible"
-                        android:layout_centerInParent="true"
-                        android:indeterminateDrawable="@drawable/progress"
-                        />
+                </ProgressBar>
 
 
 
