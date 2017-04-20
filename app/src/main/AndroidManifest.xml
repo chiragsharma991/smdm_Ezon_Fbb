@@ -246,15 +246,13 @@
 
         <activity android:name=".MPM.mpm_activity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"></activity>
 
-            android:windowSoftInputMode="stateHidden"/>
 
         <activity android:name=".StoreInspection.InspectionDetailsActivity"
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".test">
-        </activity>
+
 
     </application>
 

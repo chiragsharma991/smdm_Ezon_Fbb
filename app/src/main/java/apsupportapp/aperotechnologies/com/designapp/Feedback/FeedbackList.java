@@ -112,6 +112,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
             requestFeedbackApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+            FeedbackNext.setEnabled(false);
         }
     }
 
