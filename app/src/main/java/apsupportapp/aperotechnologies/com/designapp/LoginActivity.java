@@ -63,7 +63,7 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback_model;
 
-public class LoginActivity extends AppCompatActivity {
+public class  LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText edtUserName, edtPassword;
     String uname, password;

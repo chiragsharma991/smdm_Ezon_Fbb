@@ -404,7 +404,7 @@
                                     <!--ending part-->
                                     <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="25dp"
+                                    android:layout_height="30dp"
                                     android:background="@color/smdm_divider_Black_light"
                                     android:orientation="horizontal"
                                     android:padding="3dp"
@@ -419,6 +419,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_improvement_criteria_1"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
@@ -436,6 +437,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_okay_criteria_1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -453,6 +455,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_good_criteria_1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -469,6 +472,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_excellent_criteria_1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -697,7 +701,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -712,6 +716,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_improvement_criteria_2"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
@@ -729,6 +734,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_okay_criteria_2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -746,6 +752,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_good_criteria_2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -762,6 +769,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_excellent_criteria_2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -949,7 +957,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -964,6 +972,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_improvement_criteria_3"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
@@ -981,6 +990,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_okay_criteria_3"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -998,6 +1008,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_good_criteria_3"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1014,6 +1025,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_excellent_criteria_3"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1201,7 +1213,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1216,6 +1228,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_improvement_criteria_4"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
@@ -1233,6 +1246,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_okay_criteria_4"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1250,6 +1264,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_good_criteria_4"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1266,6 +1281,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_excellent_criteria_4"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1454,7 +1470,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1469,6 +1485,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_improvement_criteria_5"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
@@ -1486,6 +1503,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_okay_criteria_5"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1503,6 +1521,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_good_criteria_5"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1519,6 +1538,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_excellent_criteria_5"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1623,6 +1643,7 @@
                                             >
 
                                             <ImageView
+
                                                 android:id="@+id/image_improvement_criteria_6"
                                                 android:layout_width="30dp"
                                                 android:layout_height="30dp"
@@ -1698,7 +1719,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1713,6 +1734,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_improvement_criteria_6"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
@@ -1730,6 +1752,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_okay_criteria_6"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1747,6 +1770,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_good_criteria_6"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1763,6 +1787,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_excellent_criteria_6"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1949,7 +1974,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1964,6 +1989,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_improvement_criteria_7"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
@@ -1981,6 +2007,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_okay_criteria_7"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -1998,6 +2025,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_good_criteria_7"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -2014,6 +2042,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_excellent_criteria_7"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -2179,7 +2208,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -2194,6 +2223,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_improvement_criteria_8"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
@@ -2211,6 +2241,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_okay_criteria_8"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -2228,6 +2259,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_good_criteria_8"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -2244,6 +2276,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:textSize="10sp"
                                                 android:id="@+id/txt_excellent_criteria_8"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
@@ -2294,6 +2327,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white"
+                        android:singleLine="true"
                         android:hint="Rohit Shetty"
                         android:textSize="12sp"/>
 
@@ -2307,7 +2341,7 @@
                 android:layout_below="@+id/linear_insp_criteria"
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="3dp"
-                android:text="Comment : "
+                android:text="Comments : "
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="14sp"/>
 
