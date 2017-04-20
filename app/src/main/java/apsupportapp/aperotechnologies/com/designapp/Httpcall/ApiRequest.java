@@ -21,16 +21,20 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
@@ -40,30 +44,50 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 
 public class ApiRequest  {
 
+    private final Cache cache;
+    private final Network network;
+    private final RequestQueue queue;
+    private int limit=100;
+    private int offsetvalue=0;
+    private final ArrayList<mpm_model> list;
+    private mpm_model mpm_modelClass;
     private HttpResponse ResposeInterface;
     private Context context;
     private String bearertoken;
     private String Url;
     private String TAG;
+    private int count = 0;
+    private Gson gson;
 
 
-    public ApiRequest(Context context,String token,String Url,String TAG)
+    public ApiRequest(Context context, String token, String Url, String TAG, Cache cache, Network network, RequestQueue queue , mpm_model mpm_modelClass)
     {
        ResposeInterface= (HttpResponse)context;
         this.context=context;
         bearertoken=token;
         this.Url=Url;
         this.TAG=TAG;
-        setApi(this.context);
+        this.cache=cache;
+        this.network=network;
+        this.queue=queue;
+        this.list=new ArrayList<>();
+        this.mpm_modelClass=mpm_modelClass;
+        gson=new Gson();
+        setApi(context);
+
 
     }
 
+
+
     public void setApi(final Context context) {
 
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        Network network = new BasicNetwork(new HurlStack());
 
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, Url,
+        Reusable_Functions.sDialog(context, "Loading data...");
+
+        String URL=Url+ "?offset=" + offsetvalue + "&limit=" +limit;
+        Log.e(TAG, "setApi: URL "+URL );
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -72,17 +96,47 @@ public class ApiRequest  {
                         try {
 
                             if (response.equals(null) || response == null || response.length() == 0 ) {
+                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
 
-                            }else
+                            }
+                            else if (response.length() == limit) {
+                            Log.e(TAG, "promo eql limit");
+                            for (int i = 0; i < response.length(); i++) {
+
+                                mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
+                                list.add(mpm_modelClass);
+
+                            }
+                            offsetvalue = (limit * count) + limit;
+                            count++;
+                            //
+
+                                setApi(context);
+
+                        } else if (response.length() < limit) {
+                            Log.e(TAG, "promo /= limit");
+                            for (int i = 0; i < response.length(); i++)
                             {
-                                ResposeInterface.response(response);
+                                mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
+                                list.add(mpm_modelClass);
+                            }
+                                ResposeInterface.response(list);
+                                count = 0;
+                                limit = 100;
+                                offsetvalue = 0;
+                                Reusable_Functions.hDialog();
+
+
                             }
 
 
 
                         } catch (Exception e) {
                             Log.e(TAG, "onResponse: "+e.getMessage() );
+                            Reusable_Functions.hDialog();
+
 
                         }
                     }
@@ -92,8 +146,7 @@ public class ApiRequest  {
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
-
-
+                        Log.e(TAG, "Server not found...: " );
                         error.printStackTrace();
                     }
 
@@ -112,10 +165,9 @@ public class ApiRequest  {
         int socketTimeout = 60000;//5 seconds
 
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        RequestQueue queue = new RequestQueue(cache, network);
-
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
+
 
 
     }
