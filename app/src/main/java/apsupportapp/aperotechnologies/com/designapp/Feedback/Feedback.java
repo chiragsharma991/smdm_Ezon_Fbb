@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.util.Pair;
@@ -52,6 +53,7 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -83,8 +85,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private ArrayList<Feedback_model> feedbackList, feedbackReportList;
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
-    private Button Pricing, Fitting, Colours, Prints, Styling, Fabric_quality, Garment_quality;
-    private TextView Feedback_option;
+    private TextView Pricing, Colours, Prints, Styling, Fabric_quality, Garment_quality;
+    private TextView Feedback_option,Fitting;
     private EditText feedback_comment;
     private AlertDialog dialog;
     private LinearLayout firstView;
@@ -148,13 +150,13 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         secondView = (RelativeLayout) findViewById(R.id.replaceView_two);
         FeedbackNext = (RelativeLayout) findViewById(R.id.feedbackNext);
 
-        Pricing = (Button) findViewById(R.id.pricing);
-        Fitting = (Button) findViewById(R.id.fitting);
-        Colours = (Button) findViewById(R.id.colours);
-        Prints = (Button) findViewById(R.id.prints);
-        Styling = (Button) findViewById(R.id.styling);
-        Fabric_quality = (Button) findViewById(R.id.fabric_quality);
-        Garment_quality = (Button) findViewById(R.id.garment_quality);
+        Pricing = (TextView) findViewById(R.id.pricing);
+        Fitting = (TextView) findViewById(R.id.fitting);
+        Colours = (TextView) findViewById(R.id.colours);
+        Prints = (TextView) findViewById(R.id.prints);
+        Styling = (TextView) findViewById(R.id.styling);
+        Fabric_quality = (TextView) findViewById(R.id.fabric_quality);
+        Garment_quality = (TextView) findViewById(R.id.garment_quality);
 
 
         Fitting_relative = (RelativeLayout) findViewById(R.id.fitting_relative);
@@ -353,7 +355,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
                 break;
             default:
-                Button button = (Button) view;
+                TextView button = (TextView) view;
                 selectCategory = button.getText().toString();
                 Log.e(TAG, "onClick:  selectCategory"+selectCategory);
                 commentDialog();
@@ -453,11 +455,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
             }
         });
-
         builder.setView(v);
-
         dialog = builder.create();
         dialog.show();
+
     }
 
     private void feedbackDetails(final int position, final int Listposition) {
@@ -583,19 +584,19 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         // get percentage for all list & 0 will be change according to next pre button
         if (position == 0) {
-            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getFittingCntPer()) + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getFittingCntPer()) + " %");
         } else if (position == 1) {
-            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getPricingCntPer()) + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getPricingCntPer()) + " %");
         } else if (position == 2) {
-            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getColorsCntPer()) + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getColorsCntPer()) + " %");
         } else if (position == 3) {
-            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getPrintCntPer()) + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getPrintCntPer()) + " %");
         } else if (position == 4) {
-            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getStylingCntPer()) + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getStylingCntPer()) + " %");
         } else if (position == 5) {
-            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getFabricQualityCntPer()) + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getFabricQualityCntPer()) + " %");
         } else if (position == 6) {
-            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getGarmentQualityCntPer()) + "%");
+            textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getGarmentQualityCntPer()) + " %");
         }
 
         textView2.setTextColor(Color.parseColor("#404040"));

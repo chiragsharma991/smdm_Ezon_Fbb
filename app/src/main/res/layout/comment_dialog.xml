@@ -3,92 +3,104 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/bg_store_code_text"
-        android:textSize="18sp"
-        android:padding="5dp"
-        android:text="Comment"
-        android:textStyle="bold"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-       android:layout_marginTop="3dp"
-        android:background="@color/smdm_border"
-        >
-
-    </View>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:id="@+id/feedback_comment"
-        android:lines="6"
-        android:background="@android:color/transparent"
-        android:minLines="6"
-        android:gravity="top|left"
-        android:scrollbars="vertical"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
-        android:textColor="@color/smdm_default_color"
-        android:textSize="@dimen/collaboration_stock_storecode"
-        android:textStyle="normal"
-        android:textCursorDrawable="@null"
-        android:hint="Please enter your comments"
-        />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/alertdialog_rectangle"
+
         >
-        <LinearLayout
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="18sp"
+            android:padding="5dp"
+            android:text="Comment"
+            android:textStyle="bold"
+            />
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/comment_skip"
-            android:background="@drawable/border4"
-            android:gravity="center_horizontal|center_vertical"
+            android:layout_height="1dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/smdm_border"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/bg_store_code_text"
-                android:textSize="13dp"
-                android:text="SKIP"
-                />
+        </View>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:id="@+id/feedback_comment"
+            android:lines="6"
+            android:background="@android:color/transparent"
+            android:minLines="6"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/collaboration_stock_storecode"
+            android:textStyle="normal"
+            android:textCursorDrawable="@null"
+            android:hint="Please enter your comments"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/comment_skip"
+                android:background="@drawable/border4"
+                android:gravity="center_horizontal|center_vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="13dp"
+                    android:text="SKIP"
+                    android:textStyle="bold"
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border4"
+                android:id="@+id/comment_ok"
+                android:gravity="center_horizontal|center_vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="13dp"
+                    android:text="OK"
+                    android:textStyle="bold"
+                    />
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/border4"
-            android:id="@+id/comment_ok"
-            android:gravity="center_horizontal|center_vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/bg_store_code_text"
-                android:textSize="13dp"
-                android:text="OK"
-                />
-
-
-        </LinearLayout>
-
-
     </LinearLayout>
+
+
 
 
 </LinearLayout>

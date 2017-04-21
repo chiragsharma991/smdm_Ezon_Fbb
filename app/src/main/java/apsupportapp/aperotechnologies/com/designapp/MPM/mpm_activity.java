@@ -227,6 +227,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         }else
         {
             Log.e(TAG, "onBackPressed: OUT" );
+            clickPosition=0;
             finish();
         }
     }

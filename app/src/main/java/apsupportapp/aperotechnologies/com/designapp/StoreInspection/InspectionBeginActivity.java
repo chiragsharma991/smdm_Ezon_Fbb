@@ -52,6 +52,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,6 +68,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity;
@@ -78,51 +80,51 @@ import static apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.Option_
 /**
  * Created by pamrutkar on 11/04/17.
  */
-public class InspectionBeginActivity extends AppCompatActivity implements View.OnClickListener
-{
+public class InspectionBeginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA=15; //1
-    public static final int MY_PERMISSIONS_REQUEST_R=30; //2
-    public static final int MY_PERMISSIONS_REQUEST_RWFRMCAM=60; //3
-    Context context;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 15; //1
+    public static final int MY_PERMISSIONS_REQUEST_R = 30; //2
+    public static final int MY_PERMISSIONS_REQUEST_RWFRMCAM = 60; //3
     // Emoji Declaration
-    ImageView image_improvement_criteria_1,image_okay_criteria_1,image_good_criteria_1,image_excellent_criteria_1;
-    ImageView image_improvement_criteria_2,image_okay_criteria_2,image_good_criteria_2,image_excellent_criteria_2;
-    ImageView image_improvement_criteria_3,image_okay_criteria_3,image_good_criteria_3,image_excellent_criteria_3;
-    ImageView image_improvement_criteria_4,image_okay_criteria_4,image_good_criteria_4,image_excellent_criteria_4;
-    ImageView image_improvement_criteria_5,image_okay_criteria_5,image_good_criteria_5,image_excellent_criteria_5;
-    ImageView image_improvement_criteria_6,image_okay_criteria_6,image_good_criteria_6,image_excellent_criteria_6;
-    ImageView image_improvement_criteria_7,image_okay_criteria_7,image_good_criteria_7,image_excellent_criteria_7;
-    ImageView image_improvement_criteria_8,image_okay_criteria_8,image_good_criteria_8,image_excellent_criteria_8;
-    ImageView image_camera , image_upload;
+    ImageView image_improvement_criteria_1, image_okay_criteria_1, image_good_criteria_1, image_excellent_criteria_1;
+    ImageView image_improvement_criteria_2, image_okay_criteria_2, image_good_criteria_2, image_excellent_criteria_2;
+    ImageView image_improvement_criteria_3, image_okay_criteria_3, image_good_criteria_3, image_excellent_criteria_3;
+    ImageView image_improvement_criteria_4, image_okay_criteria_4, image_good_criteria_4, image_excellent_criteria_4;
+    ImageView image_improvement_criteria_5, image_okay_criteria_5, image_good_criteria_5, image_excellent_criteria_5;
+    ImageView image_improvement_criteria_6, image_okay_criteria_6, image_good_criteria_6, image_excellent_criteria_6;
+    ImageView image_improvement_criteria_7, image_okay_criteria_7, image_good_criteria_7, image_excellent_criteria_7;
+    ImageView image_improvement_criteria_8, image_okay_criteria_8, image_good_criteria_8, image_excellent_criteria_8;
+    ImageView image_camera, image_upload;
 
     // Emoji Text Declaration
-    TextView txt_improvement_criteria_1,txt_okay_criteria_1,txt_good_criteria_1,txt_excellent_criteria_1;
-    TextView txt_improvement_criteria_2,txt_okay_criteria_2,txt_good_criteria_2,txt_excellent_criteria_2;
-    TextView txt_improvement_criteria_3,txt_okay_criteria_3,txt_good_criteria_3,txt_excellent_criteria_3;
-    TextView txt_improvement_criteria_4,txt_okay_criteria_4,txt_good_criteria_4,txt_excellent_criteria_4;
-    TextView txt_improvement_criteria_5,txt_okay_criteria_5,txt_good_criteria_5,txt_excellent_criteria_5;
-    TextView txt_improvement_criteria_6,txt_okay_criteria_6,txt_good_criteria_6,txt_excellent_criteria_6;
-    TextView txt_improvement_criteria_7,txt_okay_criteria_7,txt_good_criteria_7,txt_excellent_criteria_7;
-    TextView txt_improvement_criteria_8,txt_okay_criteria_8,txt_good_criteria_8,txt_excellent_criteria_8;
+    TextView txt_improvement_criteria_1, txt_okay_criteria_1, txt_good_criteria_1, txt_excellent_criteria_1;
+    TextView txt_improvement_criteria_2, txt_okay_criteria_2, txt_good_criteria_2, txt_excellent_criteria_2;
+    TextView txt_improvement_criteria_3, txt_okay_criteria_3, txt_good_criteria_3, txt_excellent_criteria_3;
+    TextView txt_improvement_criteria_4, txt_okay_criteria_4, txt_good_criteria_4, txt_excellent_criteria_4;
+    TextView txt_improvement_criteria_5, txt_okay_criteria_5, txt_good_criteria_5, txt_excellent_criteria_5;
+    TextView txt_improvement_criteria_6, txt_okay_criteria_6, txt_good_criteria_6, txt_excellent_criteria_6;
+    TextView txt_improvement_criteria_7, txt_okay_criteria_7, txt_good_criteria_7, txt_excellent_criteria_7;
+    TextView txt_improvement_criteria_8, txt_okay_criteria_8, txt_good_criteria_8, txt_excellent_criteria_8;
 
-    EditText et_inspected_by,et_comment;
+    EditText et_inspected_by, et_comment;
     Button btn_insp_submit;
     private RelativeLayout rel_cam_image;
     Uri selectedImage;
     private TextView txt_insp_date_Val;
     private String picturePath;
     private RelativeLayout inspection_btnback;
-    private RequestQueue queue;
+    private String userId;
     private String bearertoken;
+    private RequestQueue queue;
     private SharedPreferences sharedPreferences;
-    private int fashionQuot,merchDisplay,merchPresentationStd,suggSellingByStaff,overallCleanliness,signage,winClusterMannequinsDisp;
-
+    private Gson gson;
+    String strDate;
+    Context context;
+    private int fashionQuot, merchDisplay, merchPresentationStd, suggSellingByStaff, overallCleanliness, signage, winClusterMannequinsDisp, mpmExecution;
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState)
-    {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inspection_begin);
         getSupportActionBar().hide();
@@ -130,12 +132,14 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         initialise();
         getCurrentDate(view);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        Log.e("", "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
+        gson = new Gson();
 
 //        et_inspected_by.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 //
@@ -173,106 +177,106 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 //        });
 
     }
+
     public void getCurrentDate(View view) {
         Calendar calendar = Calendar.getInstance(); //dd / MM /yyyy
-        SimpleDateFormat mdformat = new SimpleDateFormat("dd / MM /yyyy ");
-        String strDate = mdformat.format(calendar.getTime());
+        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
+        strDate = mdformat.format(calendar.getTime());
         txt_insp_date_Val.setText(strDate);
     }
 
-    private void initialise() 
-    {
+    private void initialise() {
         //Improvement emoji image
-        image_improvement_criteria_1 = (ImageView)findViewById(R.id.image_improvement_criteria_1);
-        image_improvement_criteria_2 = (ImageView)findViewById(R.id.image_improvement_criteria_2);
-        image_improvement_criteria_3 = (ImageView)findViewById(R.id.image_improvement_criteria_3);
-        image_improvement_criteria_4 = (ImageView)findViewById(R.id.image_improvement_criteria_4);
-        image_improvement_criteria_5 = (ImageView)findViewById(R.id.image_improvement_criteria_5);
-        image_improvement_criteria_6 = (ImageView)findViewById(R.id.image_improvement_criteria_6);
-        image_improvement_criteria_7 = (ImageView)findViewById(R.id.image_improvement_criteria_7);
-        image_improvement_criteria_8 = (ImageView)findViewById(R.id.image_improvement_criteria_8);
+        image_improvement_criteria_1 = (ImageView) findViewById(R.id.image_improvement_criteria_1);
+        image_improvement_criteria_2 = (ImageView) findViewById(R.id.image_improvement_criteria_2);
+        image_improvement_criteria_3 = (ImageView) findViewById(R.id.image_improvement_criteria_3);
+        image_improvement_criteria_4 = (ImageView) findViewById(R.id.image_improvement_criteria_4);
+        image_improvement_criteria_5 = (ImageView) findViewById(R.id.image_improvement_criteria_5);
+        image_improvement_criteria_6 = (ImageView) findViewById(R.id.image_improvement_criteria_6);
+        image_improvement_criteria_7 = (ImageView) findViewById(R.id.image_improvement_criteria_7);
+        image_improvement_criteria_8 = (ImageView) findViewById(R.id.image_improvement_criteria_8);
 
         //Okay emoji image
-        image_okay_criteria_1 = (ImageView)findViewById(R.id.image_okay_criteria_1);
-        image_okay_criteria_2 = (ImageView)findViewById(R.id.image_okay_criteria_2);
-        image_okay_criteria_3 = (ImageView)findViewById(R.id.image_okay_criteria_3);
-        image_okay_criteria_4 = (ImageView)findViewById(R.id.image_okay_criteria_4);
-        image_okay_criteria_5 = (ImageView)findViewById(R.id.image_okay_criteria_5);
-        image_okay_criteria_6 = (ImageView)findViewById(R.id.image_okay_criteria_6);
-        image_okay_criteria_7 = (ImageView)findViewById(R.id.image_okay_criteria_7);
-        image_okay_criteria_8 = (ImageView)findViewById(R.id.image_okay_criteria_8);
+        image_okay_criteria_1 = (ImageView) findViewById(R.id.image_okay_criteria_1);
+        image_okay_criteria_2 = (ImageView) findViewById(R.id.image_okay_criteria_2);
+        image_okay_criteria_3 = (ImageView) findViewById(R.id.image_okay_criteria_3);
+        image_okay_criteria_4 = (ImageView) findViewById(R.id.image_okay_criteria_4);
+        image_okay_criteria_5 = (ImageView) findViewById(R.id.image_okay_criteria_5);
+        image_okay_criteria_6 = (ImageView) findViewById(R.id.image_okay_criteria_6);
+        image_okay_criteria_7 = (ImageView) findViewById(R.id.image_okay_criteria_7);
+        image_okay_criteria_8 = (ImageView) findViewById(R.id.image_okay_criteria_8);
 
         //Good Emoji image
-        image_good_criteria_1 = (ImageView)findViewById(R.id.image_good_criteria_1);
-        image_good_criteria_2 = (ImageView)findViewById(R.id.image_good_criteria_2);
-        image_good_criteria_3 = (ImageView)findViewById(R.id.image_good_criteria_3);
-        image_good_criteria_4 = (ImageView)findViewById(R.id.image_good_criteria_4);
-        image_good_criteria_5 = (ImageView)findViewById(R.id.image_good_criteria_5);
-        image_good_criteria_6 = (ImageView)findViewById(R.id.image_good_criteria_6);
-        image_good_criteria_7 = (ImageView)findViewById(R.id.image_good_criteria_7);
-        image_good_criteria_8 = (ImageView)findViewById(R.id.image_good_criteria_8);
+        image_good_criteria_1 = (ImageView) findViewById(R.id.image_good_criteria_1);
+        image_good_criteria_2 = (ImageView) findViewById(R.id.image_good_criteria_2);
+        image_good_criteria_3 = (ImageView) findViewById(R.id.image_good_criteria_3);
+        image_good_criteria_4 = (ImageView) findViewById(R.id.image_good_criteria_4);
+        image_good_criteria_5 = (ImageView) findViewById(R.id.image_good_criteria_5);
+        image_good_criteria_6 = (ImageView) findViewById(R.id.image_good_criteria_6);
+        image_good_criteria_7 = (ImageView) findViewById(R.id.image_good_criteria_7);
+        image_good_criteria_8 = (ImageView) findViewById(R.id.image_good_criteria_8);
 
         //excellent emoji image
-        image_excellent_criteria_1 = (ImageView)findViewById(R.id.image_excellent_criteria_1);
-        image_excellent_criteria_2 = (ImageView)findViewById(R.id.image_excellent_criteria_2);
-        image_excellent_criteria_3 = (ImageView)findViewById(R.id.image_excellent_criteria_3);
-        image_excellent_criteria_4 = (ImageView)findViewById(R.id.image_excellent_criteria_4);
-        image_excellent_criteria_5 = (ImageView)findViewById(R.id.image_excellent_criteria_5);
-        image_excellent_criteria_6 = (ImageView)findViewById(R.id.image_excellent_criteria_6);
-        image_excellent_criteria_7 = (ImageView)findViewById(R.id.image_excellent_criteria_7);
-        image_excellent_criteria_8 = (ImageView)findViewById(R.id.image_excellent_criteria_8);
+        image_excellent_criteria_1 = (ImageView) findViewById(R.id.image_excellent_criteria_1);
+        image_excellent_criteria_2 = (ImageView) findViewById(R.id.image_excellent_criteria_2);
+        image_excellent_criteria_3 = (ImageView) findViewById(R.id.image_excellent_criteria_3);
+        image_excellent_criteria_4 = (ImageView) findViewById(R.id.image_excellent_criteria_4);
+        image_excellent_criteria_5 = (ImageView) findViewById(R.id.image_excellent_criteria_5);
+        image_excellent_criteria_6 = (ImageView) findViewById(R.id.image_excellent_criteria_6);
+        image_excellent_criteria_7 = (ImageView) findViewById(R.id.image_excellent_criteria_7);
+        image_excellent_criteria_8 = (ImageView) findViewById(R.id.image_excellent_criteria_8);
 
         //Improvement emoji text
-        txt_improvement_criteria_1 = (TextView)findViewById(R.id.txt_improvement_criteria_1);
-        txt_improvement_criteria_2 = (TextView)findViewById(R.id.txt_improvement_criteria_2);
-        txt_improvement_criteria_3 = (TextView)findViewById(R.id.txt_improvement_criteria_3);
-        txt_improvement_criteria_4 = (TextView)findViewById(R.id.txt_improvement_criteria_4);
-        txt_improvement_criteria_5 = (TextView)findViewById(R.id.txt_improvement_criteria_5);
-        txt_improvement_criteria_6 = (TextView)findViewById(R.id.txt_improvement_criteria_6);
-        txt_improvement_criteria_7 = (TextView)findViewById(R.id.txt_improvement_criteria_7);
-        txt_improvement_criteria_8 = (TextView)findViewById(R.id.txt_improvement_criteria_8);
+        txt_improvement_criteria_1 = (TextView) findViewById(R.id.txt_improvement_criteria_1);
+        txt_improvement_criteria_2 = (TextView) findViewById(R.id.txt_improvement_criteria_2);
+        txt_improvement_criteria_3 = (TextView) findViewById(R.id.txt_improvement_criteria_3);
+        txt_improvement_criteria_4 = (TextView) findViewById(R.id.txt_improvement_criteria_4);
+        txt_improvement_criteria_5 = (TextView) findViewById(R.id.txt_improvement_criteria_5);
+        txt_improvement_criteria_6 = (TextView) findViewById(R.id.txt_improvement_criteria_6);
+        txt_improvement_criteria_7 = (TextView) findViewById(R.id.txt_improvement_criteria_7);
+        txt_improvement_criteria_8 = (TextView) findViewById(R.id.txt_improvement_criteria_8);
 
         //Okay emoji text
-        txt_okay_criteria_1 = (TextView)findViewById(R.id.txt_okay_criteria_1);
-        txt_okay_criteria_2 = (TextView)findViewById(R.id.txt_okay_criteria_2);
-        txt_okay_criteria_3 = (TextView)findViewById(R.id.txt_okay_criteria_3);
-        txt_okay_criteria_4 = (TextView)findViewById(R.id.txt_okay_criteria_4);
-        txt_okay_criteria_5 = (TextView)findViewById(R.id.txt_okay_criteria_5);
-        txt_okay_criteria_6 = (TextView)findViewById(R.id.txt_okay_criteria_6);
-        txt_okay_criteria_7 = (TextView)findViewById(R.id.txt_okay_criteria_7);
-        txt_okay_criteria_8 = (TextView)findViewById(R.id.txt_okay_criteria_8);
+        txt_okay_criteria_1 = (TextView) findViewById(R.id.txt_okay_criteria_1);
+        txt_okay_criteria_2 = (TextView) findViewById(R.id.txt_okay_criteria_2);
+        txt_okay_criteria_3 = (TextView) findViewById(R.id.txt_okay_criteria_3);
+        txt_okay_criteria_4 = (TextView) findViewById(R.id.txt_okay_criteria_4);
+        txt_okay_criteria_5 = (TextView) findViewById(R.id.txt_okay_criteria_5);
+        txt_okay_criteria_6 = (TextView) findViewById(R.id.txt_okay_criteria_6);
+        txt_okay_criteria_7 = (TextView) findViewById(R.id.txt_okay_criteria_7);
+        txt_okay_criteria_8 = (TextView) findViewById(R.id.txt_okay_criteria_8);
 
         //Good Emoji text
-        txt_good_criteria_1 = (TextView)findViewById(R.id.txt_good_criteria_1);
-        txt_good_criteria_2 = (TextView)findViewById(R.id.txt_good_criteria_2);
-        txt_good_criteria_3 = (TextView)findViewById(R.id.txt_good_criteria_3);
-        txt_good_criteria_4 = (TextView)findViewById(R.id.txt_good_criteria_4);
-        txt_good_criteria_5 = (TextView)findViewById(R.id.txt_good_criteria_5);
-        txt_good_criteria_6 = (TextView)findViewById(R.id.txt_good_criteria_6);
-        txt_good_criteria_7 = (TextView)findViewById(R.id.txt_good_criteria_7);
-        txt_good_criteria_8 = (TextView)findViewById(R.id.txt_good_criteria_8);
+        txt_good_criteria_1 = (TextView) findViewById(R.id.txt_good_criteria_1);
+        txt_good_criteria_2 = (TextView) findViewById(R.id.txt_good_criteria_2);
+        txt_good_criteria_3 = (TextView) findViewById(R.id.txt_good_criteria_3);
+        txt_good_criteria_4 = (TextView) findViewById(R.id.txt_good_criteria_4);
+        txt_good_criteria_5 = (TextView) findViewById(R.id.txt_good_criteria_5);
+        txt_good_criteria_6 = (TextView) findViewById(R.id.txt_good_criteria_6);
+        txt_good_criteria_7 = (TextView) findViewById(R.id.txt_good_criteria_7);
+        txt_good_criteria_8 = (TextView) findViewById(R.id.txt_good_criteria_8);
 
         //excellent emoji text
-        txt_excellent_criteria_1 = (TextView)findViewById(R.id.txt_excellent_criteria_1);
-        txt_excellent_criteria_2 = (TextView)findViewById(R.id.txt_excellent_criteria_2);
-        txt_excellent_criteria_3 = (TextView)findViewById(R.id.txt_excellent_criteria_3);
-        txt_excellent_criteria_4 = (TextView)findViewById(R.id.txt_excellent_criteria_4);
-        txt_excellent_criteria_5 = (TextView)findViewById(R.id.txt_excellent_criteria_5);
-        txt_excellent_criteria_6 = (TextView)findViewById(R.id.txt_excellent_criteria_6);
-        txt_excellent_criteria_7 = (TextView)findViewById(R.id.txt_excellent_criteria_7);
-        txt_excellent_criteria_8 = (TextView)findViewById(R.id.txt_excellent_criteria_8);
+        txt_excellent_criteria_1 = (TextView) findViewById(R.id.txt_excellent_criteria_1);
+        txt_excellent_criteria_2 = (TextView) findViewById(R.id.txt_excellent_criteria_2);
+        txt_excellent_criteria_3 = (TextView) findViewById(R.id.txt_excellent_criteria_3);
+        txt_excellent_criteria_4 = (TextView) findViewById(R.id.txt_excellent_criteria_4);
+        txt_excellent_criteria_5 = (TextView) findViewById(R.id.txt_excellent_criteria_5);
+        txt_excellent_criteria_6 = (TextView) findViewById(R.id.txt_excellent_criteria_6);
+        txt_excellent_criteria_7 = (TextView) findViewById(R.id.txt_excellent_criteria_7);
+        txt_excellent_criteria_8 = (TextView) findViewById(R.id.txt_excellent_criteria_8);
 
         //Edittext
-        et_inspected_by = (EditText)findViewById(R.id.et_inspected_by);
-        et_comment = (EditText)findViewById(R.id.et_comment);
-        rel_cam_image = (RelativeLayout)findViewById(R.id.rel_cam_image);
-        image_camera = (ImageView)findViewById(R.id.camera_imageView);
-        image_upload = (ImageView)findViewById(R.id.camera_imageView1);
+        et_inspected_by = (EditText) findViewById(R.id.et_inspected_by);
+        et_comment = (EditText) findViewById(R.id.et_comment);
+        rel_cam_image = (RelativeLayout) findViewById(R.id.rel_cam_image);
+        image_camera = (ImageView) findViewById(R.id.camera_imageView);
+        image_upload = (ImageView) findViewById(R.id.camera_imageView1);
         image_upload.setVisibility(View.INVISIBLE);
-        txt_insp_date_Val = (TextView)findViewById(R.id.txt_insp_date_Val);
-        inspection_btnback = (RelativeLayout)findViewById(R.id.inspection_btnback);
+        txt_insp_date_Val = (TextView) findViewById(R.id.txt_insp_date_Val);
+        inspection_btnback = (RelativeLayout) findViewById(R.id.inspection_btnback);
 
-        btn_insp_submit = (Button)findViewById(R.id.btn_insp_submit);
+        btn_insp_submit = (Button) findViewById(R.id.btn_insp_submit);
 
         image_improvement_criteria_1.setOnClickListener(this);
         image_improvement_criteria_2.setOnClickListener(this);
@@ -315,13 +319,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.image_improvement_criteria_1:
-                if(image_improvement_criteria_1.isClickable())
-                {
+                if (image_improvement_criteria_1.isClickable()) {
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiselected);
                     txt_improvement_criteria_1.setText("Need Improvement");
                     YoYo.with(Techniques.ZoomIn)
@@ -341,17 +342,14 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_1.setText("");
                     fashionQuot = 1;
 
-                }
-                else
-                {
+                } else {
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_1.setText("");
                 }
                 break;
 
             case R.id.image_improvement_criteria_2:
-                if(image_improvement_criteria_2.isClickable())
-                {
+                if (image_improvement_criteria_2.isClickable()) {
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiselected);
                     txt_improvement_criteria_2.setText("Need Improvement");
                     YoYo.with(Techniques.ZoomIn)
@@ -367,17 +365,14 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_2.setText("");
                     txt_okay_criteria_2.setText("");
                     merchDisplay = 1;
-                }
-                else
-                {
+                } else {
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_2.setText("");
                 }
                 break;
 
             case R.id.image_improvement_criteria_3:
-                if(image_improvement_criteria_3.isClickable())
-                {
+                if (image_improvement_criteria_3.isClickable()) {
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiselected);
                     txt_improvement_criteria_3.setText("Need Improvement");
                     YoYo.with(Techniques.ZoomIn)
@@ -393,9 +388,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_3.setText("");
                     txt_okay_criteria_3.setText("");
                     merchPresentationStd = 3;
-                }
-                else
-                {
+                } else {
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_3.setText("");
                 }
@@ -404,8 +397,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_improvement_criteria_4:
 
-                if(image_improvement_criteria_4.isClickable())
-                {
+                if (image_improvement_criteria_4.isClickable()) {
 
                     image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiselected);
                     txt_improvement_criteria_4.setText("Need Improvement");
@@ -423,10 +415,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_4.setText("");
                     suggSellingByStaff = 1;
 
-                }
-                else
-                {
-                  //  image_improvement_criteria_4.setClickable(false);
+                } else {
+                    //  image_improvement_criteria_4.setClickable(false);
                     image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_4.setText("");
                 }
@@ -435,8 +425,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_improvement_criteria_5:
 
-                if(image_improvement_criteria_5.isClickable())
-                {
+                if (image_improvement_criteria_5.isClickable()) {
 
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiselected);
                     txt_improvement_criteria_5.setText("Need Improvement");
@@ -454,10 +443,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_5.setText("");
                     txt_okay_criteria_5.setText("");
                     overallCleanliness = 1;
-                }
-                else
-                {
-                  //  image_improvement_criteria_5.setClickable(false);
+                } else {
+                    //  image_improvement_criteria_5.setClickable(false);
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_5.setText("");
                 }
@@ -466,8 +453,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_improvement_criteria_6:
 
-                if(image_improvement_criteria_6.isClickable())
-                {
+                if (image_improvement_criteria_6.isClickable()) {
 
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiselected);
                     txt_improvement_criteria_6.setText("Need Improvement");
@@ -485,10 +471,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_6.setText("");
                     txt_okay_criteria_6.setText("");
                     signage = 1;
-                }
-                else
-                {
-                   // image_improvement_criteria_6.setClickable(false);
+                } else {
+                    // image_improvement_criteria_6.setClickable(false);
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_6.setText("");
                 }
@@ -497,8 +481,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_improvement_criteria_7:
 
-                if(image_improvement_criteria_7.isClickable())
-                {
+                if (image_improvement_criteria_7.isClickable()) {
 
                     image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiselected);
                     txt_improvement_criteria_7.setText("Need Improvement");
@@ -514,11 +497,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_7.setText("");
                     txt_excellent_criteria_7.setText("");
                     txt_okay_criteria_7.setText("");
+                    mpmExecution = 1;
 
-                }
-                else
-                {
-                   // image_improvement_criteria_7.setClickable(false);
+                } else {
+                    // image_improvement_criteria_7.setClickable(false);
                     image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_7.setText("");
                 }
@@ -528,8 +510,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_improvement_criteria_8:
 
-                if(image_improvement_criteria_8.isClickable())
-                {
+                if (image_improvement_criteria_8.isClickable()) {
 
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiselected);
                     txt_improvement_criteria_8.setText("Need Improvement");
@@ -546,10 +527,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_8.setText("");
                     txt_okay_criteria_8.setText("");
                     winClusterMannequinsDisp = 1;
-                }
-                else
-                {
-                  //  image_improvement_criteria_8.setClickable(false);
+                } else {
+                    //  image_improvement_criteria_8.setClickable(false);
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_8.setText("");
                 }
@@ -558,8 +537,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_okay_criteria_1:
 
-                if(image_okay_criteria_1.isClickable())
-                {
+                if (image_okay_criteria_1.isClickable()) {
 
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_1.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -575,21 +553,18 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_1.setText("");
                     txt_excellent_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
-                    fashionQuot =2;
+                    fashionQuot = 2;
 
-                }
-                else
-                {
-                  //  image_okay_criteria_1.setClickable(false);
+                } else {
+                    //  image_okay_criteria_1.setClickable(false);
                     image_okay_criteria_1.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_1.setText("");
                 }
 
-               break;
+                break;
 
             case R.id.image_okay_criteria_2:
-                if(image_okay_criteria_2.isClickable())
-                {
+                if (image_okay_criteria_2.isClickable()) {
 
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -605,11 +580,9 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_2.setText("");
                     txt_excellent_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
-                     merchDisplay = 2;
-                }
-                else
-                {
-                   // image_okay_criteria_2.setClickable(false);
+                    merchDisplay = 2;
+                } else {
+                    // image_okay_criteria_2.setClickable(false);
                     image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_2.setText("");
                 }
@@ -618,8 +591,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 break;
 
             case R.id.image_okay_criteria_3:
-                if(image_okay_criteria_3.isClickable())
-                {
+                if (image_okay_criteria_3.isClickable()) {
 
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -637,10 +609,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_improvement_criteria_3.setText("");
                     merchPresentationStd = 2;
 
-                }
-                else
-                {
-                  //  image_okay_criteria_3.setClickable(false);
+                } else {
+                    //  image_okay_criteria_3.setClickable(false);
                     image_okay_criteria_3.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_3.setText("");
                 }
@@ -649,8 +619,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_okay_criteria_4:
 
-                if(image_okay_criteria_4.isClickable())
-                {
+                if (image_okay_criteria_4.isClickable()) {
 
                     image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_4.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -668,10 +637,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_improvement_criteria_4.setText("");
                     suggSellingByStaff = 2;
 
-                }
-                else
-                {
-                   // image_okay_criteria_4.setClickable(false);
+                } else {
+                    // image_okay_criteria_4.setClickable(false);
                     image_okay_criteria_4.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_4.setText("");
                 }
@@ -679,8 +646,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_okay_criteria_5:
 
-                if(image_okay_criteria_5.isClickable())
-                {
+                if (image_okay_criteria_5.isClickable()) {
 
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_5.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -697,10 +663,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
                     overallCleanliness = 2;
-                }
-                else
-                {
-                   // image_okay_criteria_5.setClickable(false);
+                } else {
+                    // image_okay_criteria_5.setClickable(false);
                     image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_5.setText("");
                 }
@@ -709,8 +673,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 break;
 
             case R.id.image_okay_criteria_6:
-                if(image_okay_criteria_6.isClickable())
-                {
+                if (image_okay_criteria_6.isClickable()) {
 
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -728,20 +691,17 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_improvement_criteria_6.setText("");
                     signage = 2;
 
-                }
-                else {
-                   // image_okay_criteria_6.setClickable(false);
+                } else {
+                    // image_okay_criteria_6.setClickable(false);
                     image_okay_criteria_6.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_6.setText("");
                 }
 
 
-
                 break;
 
             case R.id.image_okay_criteria_7:
-                if(image_okay_criteria_7.isClickable())
-                {
+                if (image_okay_criteria_7.isClickable()) {
 
                     image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -757,10 +717,9 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_7.setText("");
                     txt_excellent_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
-                }
-                else
-                {
-                   // image_okay_criteria_7.setClickable(false);
+                    mpmExecution = 2;
+                } else {
+                    // image_okay_criteria_7.setClickable(false);
                     image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_7.setText("");
                 }
@@ -770,8 +729,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_okay_criteria_8:
 
-                if(image_okay_criteria_8.isClickable())
-                {
+                if (image_okay_criteria_8.isClickable()) {
 
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_8.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -789,10 +747,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_improvement_criteria_8.setText("");
                     winClusterMannequinsDisp = 2;
 
-                }
-                else
-                {
-                   // image_okay_criteria_8.setClickable(false);
+                } else {
+                    // image_okay_criteria_8.setClickable(false);
                     image_okay_criteria_8.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_8.setText("");
                 }
@@ -802,8 +758,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_good_criteria_1:
 
-                if(image_good_criteria_1.isClickable())
-                {
+                if (image_good_criteria_1.isClickable()) {
 
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_1.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -821,10 +776,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_improvement_criteria_1.setText("");
                     fashionQuot = 3;
 
-                }
-                else
-                {
-                   // image_good_criteria_1.setClickable(false);
+                } else {
+                    // image_good_criteria_1.setClickable(false);
                     image_good_criteria_1.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_1.setText("");
 
@@ -833,8 +786,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 break;
 
             case R.id.image_good_criteria_2:
-                if(image_good_criteria_2.isClickable())
-                {
+                if (image_good_criteria_2.isClickable()) {
 
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -851,10 +803,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
                     merchDisplay = 3;
-                }
-                else
-                {
-                   // image_good_criteria_2.setClickable(false);
+                } else {
+                    // image_good_criteria_2.setClickable(false);
                     image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_2.setText("");
                 }
@@ -863,8 +813,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.image_good_criteria_3:
 
-                if(image_good_criteria_3.isClickable())
-                {
+                if (image_good_criteria_3.isClickable()) {
 
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_3.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -881,10 +830,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");
                     merchPresentationStd = 3;
-                }
-                else
-                {
-                   // image_good_criteria_3.setClickable(false);
+                } else {
+                    // image_good_criteria_3.setClickable(false);
                     image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_3.setText("");
                 }
@@ -893,8 +840,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_good_criteria_4:
 
-                if(image_good_criteria_4.isClickable())
-                {
+                if (image_good_criteria_4.isClickable()) {
 
                     image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_4.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -911,10 +857,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
                     suggSellingByStaff = 3;
-                }
-                else
-                {
-                   // image_good_criteria_4.setClickable(false);
+                } else {
+                    // image_good_criteria_4.setClickable(false);
                     image_good_criteria_4.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_4.setText("");
                 }
@@ -923,8 +867,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_good_criteria_5:
 
-                if(image_good_criteria_5.isClickable())
-                {
+                if (image_good_criteria_5.isClickable()) {
 
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -943,10 +886,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     overallCleanliness = 3;
 
 
-                }
-                else
-                {
-                  //  image_good_criteria_5.setClickable(false);
+                } else {
+                    //  image_good_criteria_5.setClickable(false);
                     image_good_criteria_5.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_5.setText("");
                 }
@@ -955,8 +896,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_good_criteria_6:
 
-                if(image_good_criteria_6.isClickable())
-                {
+                if (image_good_criteria_6.isClickable()) {
 
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_6.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -973,10 +913,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
                     signage = 3;
-                }
-                else
-                {
-                   // image_good_criteria_6.setClickable(false);
+                } else {
+                    // image_good_criteria_6.setClickable(false);
                     image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_6.setText("");
                 }
@@ -985,8 +923,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_good_criteria_7:
 
-                if(image_good_criteria_7.isClickable())
-                {
+                if (image_good_criteria_7.isClickable()) {
 
                     image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -1002,12 +939,11 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_7.setText("");
                     txt_excellent_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
+                    mpmExecution = 3;
 
 
-                }
-                else
-                {
-                   // image_good_criteria_7.setClickable(false);
+                } else {
+                    // image_good_criteria_7.setClickable(false);
                     image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_7.setText("");
                 }
@@ -1016,8 +952,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_good_criteria_8:
 
-                if(image_good_criteria_8.isClickable())
-                {
+                if (image_good_criteria_8.isClickable()) {
 
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_8.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -1036,10 +971,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     winClusterMannequinsDisp = 3;
 
 
-                }
-                else
-                {
-                   // image_good_criteria_8.setClickable(false);
+                } else {
+                    // image_good_criteria_8.setClickable(false);
                     image_good_criteria_8.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_8.setText("");
                 }
@@ -1049,8 +982,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_excellent_criteria_1:
 
-                if(image_excellent_criteria_1.isClickable())
-                {
+                if (image_excellent_criteria_1.isClickable()) {
 
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_1.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -1066,10 +998,9 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_1.setText("");
                     txt_good_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
-                }
-                else
-                {
-                  //  image_excellent_criteria_1.setClickable(false);
+                    fashionQuot = 4;
+                } else {
+                    //  image_excellent_criteria_1.setClickable(false);
                     image_excellent_criteria_1.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_1.setText("");
                 }
@@ -1077,8 +1008,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_excellent_criteria_2:
 
-                if(image_excellent_criteria_2.isClickable())
-                {
+                if (image_excellent_criteria_2.isClickable()) {
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -1093,10 +1023,9 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_2.setText("");
                     txt_good_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
-                }
-                else
-                {
-                  //  image_excellent_criteria_2.setClickable(false);
+                    merchDisplay = 4;
+                } else {
+                    //  image_excellent_criteria_2.setClickable(false);
                     image_excellent_criteria_2.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_2.setText("");
                 }
@@ -1104,8 +1033,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_excellent_criteria_3:
 
-                if(image_excellent_criteria_3.isClickable())
-                {
+                if (image_excellent_criteria_3.isClickable()) {
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_3.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -1120,18 +1048,17 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_3.setText("");
                     txt_good_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");
-                }
-                else
-                {
-                  //  image_excellent_criteria_3.setClickable(false);
+                    merchPresentationStd = 4;
+                } else {
+                    //  image_excellent_criteria_3.setClickable(false);
                     image_excellent_criteria_3.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_3.setText("");
+
                 }
                 break;
 
             case R.id.image_excellent_criteria_4:
-                if(image_excellent_criteria_4.isClickable())
-                {
+                if (image_excellent_criteria_4.isClickable()) {
 
                     image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_4.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -1147,11 +1074,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_4.setText("");
                     txt_good_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
+                    suggSellingByStaff = 4;
 
-                }
-                else
-                {
-                  //  image_excellent_criteria_4.setClickable(false);
+                } else {
+                    //  image_excellent_criteria_4.setClickable(false);
                     image_excellent_criteria_4.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_4.setText("");
                 }
@@ -1159,8 +1085,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_excellent_criteria_5:
 
-                if(image_excellent_criteria_5.isClickable())
-                {
+                if (image_excellent_criteria_5.isClickable()) {
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_5.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -1175,10 +1100,9 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_5.setText("");
                     txt_good_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
-                }
-                else
-                {
-                   // image_excellent_criteria_5.setClickable(false);
+                    overallCleanliness = 4;
+                } else {
+                    // image_excellent_criteria_5.setClickable(false);
                     image_excellent_criteria_5.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_5.setText("");
                 }
@@ -1186,8 +1110,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_excellent_criteria_6:
 
-                if(image_excellent_criteria_6.isClickable())
-                {
+                if (image_excellent_criteria_6.isClickable()) {
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_6.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -1202,10 +1125,9 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_6.setText("");
                     txt_good_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
-                }
-                else
-                {
-                  //  image_excellent_criteria_6.setClickable(false);
+                    signage = 4;
+                } else {
+                    //  image_excellent_criteria_6.setClickable(false);
                     image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_6.setText("");
                 }
@@ -1214,8 +1136,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_excellent_criteria_7:
 
-                if(image_excellent_criteria_7.isClickable())
-                {
+                if (image_excellent_criteria_7.isClickable()) {
                     image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -1230,11 +1151,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_7.setText("");
                     txt_good_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
+                    mpmExecution = 4;
 
-                }
-                else
-                {
-                  //  image_excellent_criteria_7.setClickable(false);
+                } else {
+                    //  image_excellent_criteria_7.setClickable(false);
                     image_excellent_criteria_7.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_7.setText("");
                 }
@@ -1242,8 +1162,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_excellent_criteria_8:
 
-                if(image_excellent_criteria_8.isClickable())
-                {
+                if (image_excellent_criteria_8.isClickable()) {
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_8.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_8.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -1258,88 +1177,192 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_okay_criteria_8.setText("");
                     txt_good_criteria_8.setText("");
                     txt_improvement_criteria_8.setText("");
-                }
-                else
-                {
-                   // image_excellent_criteria_8.setClickable(false);
+                    winClusterMannequinsDisp = 4;
+                } else {
+                    // image_excellent_criteria_8.setClickable(false);
                     image_excellent_criteria_8.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_8.setText("");
                 }
                 break;
-            case R.id.camera_imageView :
+            case R.id.camera_imageView:
                 selectImage();
                 break;
-            case R.id.inspection_btnback :
+            case R.id.inspection_btnback:
                 onBackPressed();
                 break;
-            case R.id.btn_insp_submit :
+            case R.id.btn_insp_submit:
                 OnSubmit();
                 break;
 
-          }
+        }
     }
 
     private void OnSubmit() {
-        JSONArray jsonarray=new JSONArray();
-        int count=0;
+        //  JSONArray jsonarray=new JSONArray();
+        // int count=0;
         String insp_comment = "", inspected_name = "";
-                    JSONObject obj = new JSONObject();
-                    try {
-                        if(et_inspected_by.equals("") || et_inspected_by.length() == 0) {
-                            Toast.makeText(InspectionBeginActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
+        JSONObject obj = new JSONObject();
+        try {
 
-                        }
-                        else {
-                          inspected_name = et_inspected_by.getText().toString();
-                            InputMethodManager imm = (InputMethodManager) et_inspected_by.getContext()
-                                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), 0);
-                        }
-                        if(et_comment.equals("") || et_comment.length() == 0)
-                        {
-                            Toast.makeText(InspectionBeginActivity.this, "Please enter comment", Toast.LENGTH_LONG).show();
+             if(et_inspected_by.equals("") || et_inspected_by.length() == 0 || et_comment.equals("") || et_comment.length() == 0 || fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
+                     || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0)
+             {
+                 //For Inspected By -- Inspector Name
+                 if (et_inspected_by.equals("") || et_inspected_by.length() == 0) {
+                     Toast.makeText(InspectionBeginActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
 
-                        }
-                        else {
-                            insp_comment = et_comment.getText().toString();
-                            InputMethodManager imm = (InputMethodManager) et_comment.getContext()
-                                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
-                        }
-                        obj.put("inspectorName",inspected_name);
-                        obj.put("comments",insp_comment);
-                        obj.put("inspectionDate",txt_insp_date_Val.getText().toString());
+                 }
+                 //For Comment
+                 else if (et_comment.equals("") || et_comment.length() == 0) {
+                     Toast.makeText(InspectionBeginActivity.this, "Please enter comment", Toast.LENGTH_LONG).show();
 
-                        jsonarray.put(count,obj);
-                        count++;
+                 }
+//
+                 // Inspection Criteria...
+                else  if (fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
+                         || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0)
+                 {
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                     Toast.makeText(InspectionBeginActivity.this, "Please Select Value", Toast.LENGTH_LONG).show();
 
-        Log.e("TAG", "onSubmit : Json Array is:"+jsonarray.toString() );
-        if(jsonarray.length()==0)
-        {
-            Toast.makeText(context,"Please select at least one size.",Toast.LENGTH_SHORT).show();
+                 }
+             }
+            else {
 
-        }else
-        {
-         //   requestInspectionSubmitAPI(context,jsonarray);
-        // Toast.makeText(context,"Data submission successfully",Toast.LENGTH_SHORT).show();
+                 inspected_name = et_inspected_by.getText().toString();
+                 InputMethodManager imm = (InputMethodManager) et_inspected_by.getContext()
+                         .getSystemService(Context.INPUT_METHOD_SERVICE);
+                 imm.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), 0);
+                 obj.put("inspectorName", inspected_name);
+                 obj.put("inspectionDate", txt_insp_date_Val.getText().toString());
+                 insp_comment = et_comment.getText().toString();
+                 //Comment
+                 obj.put("comments", insp_comment);
+                 InputMethodManager imm1 = (InputMethodManager) et_comment.getContext()
+                         .getSystemService(Context.INPUT_METHOD_SERVICE);
+                 imm1.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
+                 if (fashionQuot != 0) // Condition for Inspection Criteria 1
+                 {
+                     if (fashionQuot == 1) {
+                         obj.put("fashionQuot", 1); //Need Improvement is selected
+                     } else if (fashionQuot == 2) {
+                         obj.put("fashionQuot", 2); //Okay is selected
+                     } else if (fashionQuot == 3) {
+                         obj.put("fashionQuot", 3); //Good is selected
+                     } else if (fashionQuot == 4) {
+                         obj.put("fashionQuot", 4); //Excellent is selected
+                     }
+                 }
+                 if (merchDisplay != 0) // Condition for Inspection Criteria 2
+                 {
+                     if (merchDisplay == 1) {
+                         obj.put("merchDisplay", 1); //Need Improvement is selected
+                     } else if (merchDisplay == 2) {
+                         obj.put("merchDisplay", 2); //Okay is selected
+                     } else if (merchDisplay == 3) {
+                         obj.put("merchDisplay", 3); //Good is selected
+                     } else if (merchDisplay == 4) {
+                         obj.put("merchDisplay", 4); //Excellent is selected
+                     }
+                 }
+                 if (merchPresentationStd != 0) // Condition for Inspection Criteria 3
+                 {
+                     if (merchPresentationStd == 1) {
+                         obj.put("merchPresentationStd", 1); //Need Improvement is selected
+                     } else if (merchPresentationStd == 2) {
+                         obj.put("merchPresentationStd", 2); //Okay is selected
+                     } else if (merchPresentationStd == 3) {
+                         obj.put("merchPresentationStd", 3); //Good is selected
+                     } else if (merchPresentationStd == 4) {
+                         obj.put("merchPresentationStd", 4); //Excellent is selected
+                     }
+                 }
+                 if (suggSellingByStaff != 0) // Condition for Inspection Criteria 4
+                 {
+                     if (suggSellingByStaff == 1) {
+                         obj.put("suggSellingByStaff", 1); //Need Improvement is selected
+                     } else if (suggSellingByStaff == 2) {
+                         obj.put("suggSellingByStaff", 2); //Okay is selected
+                     } else if (suggSellingByStaff == 3) {
+                         obj.put("merchPresentationStd", 3); //Good is selected
+                     } else if (merchPresentationStd == 4) {
+                         obj.put("suggSellingByStaff", 4); //Excellent is selected
+                     }
+                 }
+                 if (overallCleanliness != 0) // Condition for Inspection Criteria 5
+                 {
+                     if (overallCleanliness == 1) {
+                         obj.put("overallCleanliness", 1); //Need Improvement is selected
+                     } else if (merchPresentationStd == 2) {
+                         obj.put("merchPresentationStd", 2); //Okay is selected
+                     } else if (overallCleanliness == 3) {
+                         obj.put("overallCleanliness", 3); //Good is selected
+                     } else if (overallCleanliness == 4) {
+                         obj.put("overallCleanliness", 4); //Excellent is selected
+                     }
+                 }
+                 if (signage != 0) // Condition for Inspection Criteria 6
+                 {
+                     if (signage == 1) {
+                         obj.put("signage", 1); //Need Improvement is selected
+                     } else if (signage == 2) {
+                         obj.put("signage", 2); //Okay is selected
+                     } else if (signage == 3) {
+                         obj.put("signage", 3); //Good is selected
+                     } else if (signage == 4) {
+                         obj.put("signage", 4); //Excellent is selected
+                     }
+                 }
+                 if (mpmExecution != 0) // Condition for Inspection Criteria 7
+                 {
+                     if (mpmExecution == 1) {
+                         obj.put("mpmExecution", 1); //Need Improvement is selected
+                     } else if (mpmExecution == 2) {
+                         obj.put("mpmExecution", 2); //Okay is selected
+                     } else if (mpmExecution == 3) {
+                         obj.put("mpmExecution", 3); //Good is selected
+                     } else if (mpmExecution == 4) {
+                         obj.put("mpmExecution", 4); //Excellent is selected
+                     }
+                 }
+                 if (winClusterMannequinsDisp != 0) // Condition for Inspection Criteria 8
+                 {
+                     if (winClusterMannequinsDisp == 1) {
+                         obj.put("winClusterMannequinsDisp", 1); //Need Improvement is selected
+                     } else if (winClusterMannequinsDisp == 2) {
+                         obj.put("winClusterMannequinsDisp", 2); //Okay is selected
+                     } else if (winClusterMannequinsDisp == 3) {
+                         obj.put("winClusterMannequinsDisp", 3); //Good is selected
+                     } else if (winClusterMannequinsDisp == 4) {
+                         obj.put("winClusterMannequinsDisp", 4); //Excellent is selected
+                     }
+                 }
 
+                 Log.e("Object Length :", "" + obj.length());
+                     requestInspectionSubmitAPI(context, obj);
+                     // Toast.makeText(context,"Data submission successfully",Toast.LENGTH_SHORT).show();
+
+             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+
+        Log.e("TAG", "onSubmit : Json Array is:" + obj.toString());
+
+
     }
+
     //Inspection Submit API
-    private void requestInspectionSubmitAPI(Context context1, JSONArray jsonarray) {
+    private void requestInspectionSubmitAPI(Context context1, JSONObject jsonarray) {
         {
 
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Submitting data…");
                 String url = "";
-              //  String url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId ;//+"?recache="+recache
-            //    Log.e("url", " put Request " + url + " ==== " + object.toString());
-                JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, jsonarray.toString(),
+                url = ConstsCore.web_url + "/v1/save/storeinspection/submit/" + userId;//+"?recache="+recache
+                //    Log.e("url", " put Request " + url + " ==== " + object.toString());
+                JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonarray.toString(),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
@@ -1347,20 +1370,18 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                                 try {
                                     if (response == null || response.equals(null)) {
                                         Reusable_Functions.hDialog();
-                                        Toast.makeText(context,"Sending data failed...", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "Sending data failed...", Toast.LENGTH_LONG).show();
 
-                                    } else
-                                    {
-                                        String result=response.getString("status");
-                                        Toast.makeText(context,""+result, Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(InspectionBeginActivity.this,DashBoardActivity.class);
+                                    } else {
+                                        String result = response.getString("status");
+                                        Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(InspectionBeginActivity.this, DashBoardActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                         startActivity(intent);
                                         //Details.this.finish();
                                         Reusable_Functions.hDialog();
                                     }
-                                } catch (Exception e)
-                                {
+                                } catch (Exception e) {
                                     Log.e("Exception e", e.toString() + "");
                                     e.printStackTrace();
                                     Reusable_Functions.hDialog();
@@ -1384,6 +1405,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                         //  params.put("Content-Type", "application/json");
                         return params;
                     }
+
                     @Override
                     public String getBodyContentType() {
                         return "application/json";
@@ -1395,8 +1417,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 postRequest.setRetryPolicy(policy);
                 queue.add(postRequest);
 
-            } else
-            {
+            } else {
                 Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
 
             }
@@ -1404,23 +1425,18 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     }
 
     private void selectImage() {
-        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel"};
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(InspectionBeginActivity.this,R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(InspectionBeginActivity.this, R.style.AppCompatAlertDialogStyle);
         builder.setTitle("Add Photo!");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo"))
-                {
+                if (options[item].equals("Take Photo")) {
                     startCamera();
-                }
-                else if (options[item].equals("Choose from Gallery"))
-                {
+                } else if (options[item].equals("Choose from Gallery")) {
                     openGallery();
-                }
-                else if (options[item].equals("Cancel"))
-                {
+                } else if (options[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
             }
@@ -1428,26 +1444,20 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         builder.show();
     }
 
-    public void openGallery(){
-        if ((int) Build.VERSION.SDK_INT < 23)
-        {
-            Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+    public void openGallery() {
+        if ((int) Build.VERSION.SDK_INT < 23) {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 2);
-        }
-        else
-        {
+        } else {
             int permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE);
-            Log.e("Read Permission Check"," "+permissionCheck);
-            if(permissionCheck== PackageManager.PERMISSION_GRANTED)
-            {
-                Log.i("Read Permission granted","");
+            Log.e("Read Permission Check", " " + permissionCheck);
+            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                Log.i("Read Permission granted", "");
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 2);
-            }
-            else
-            {
-                Log.i("Read Permission not granted","");
+            } else {
+                Log.i("Read Permission not granted", "");
                 ActivityCompat.requestPermissions(InspectionBeginActivity.this,
                         new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_R);
@@ -1455,46 +1465,37 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         }
     }
 
-    public void startCamera(){
-        if ((int) Build.VERSION.SDK_INT < 23)
-        {
+    public void startCamera() {
+        if ((int) Build.VERSION.SDK_INT < 23) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 1);
-        }
-        else
-        {
+        } else {
             int permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                     android.Manifest.permission.CAMERA);
-            Log.e("Camera permission Check"," "+permissionCheck);
-            if(permissionCheck == PackageManager.PERMISSION_GRANTED)
-            {
+            Log.e("Camera permission Check", " " + permissionCheck);
+            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
                 Log.i("Have Camera Permission", "Yes");
                 permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 //here
                 int permissioncheckRead = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                         android.Manifest.permission.READ_EXTERNAL_STORAGE);
-                Log.e("Read and Write permission check",permissionCheck +"   " +permissioncheckRead );
-                if(permissionCheck == PackageManager.PERMISSION_GRANTED && permissioncheckRead == PackageManager.PERMISSION_GRANTED)
-                {
-                    Log.i("Have Camera, Read and Write Permission","Yes");
+                Log.e("Read and Write permission check", permissionCheck + "   " + permissioncheckRead);
+                if (permissionCheck == PackageManager.PERMISSION_GRANTED && permissioncheckRead == PackageManager.PERMISSION_GRANTED) {
+                    Log.i("Have Camera, Read and Write Permission", "Yes");
                     //Open Camera Here
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
 //                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
                     startActivityForResult(intent, 1);
-                }
-                else
-                {
+                } else {
                     //Get Permission for read and write
-                    Log.e("Camera permission approved ","But No RW permision");
-                    Log.e("Ask for camera Read,Write permission","");
-                    ActivityCompat.requestPermissions(InspectionBeginActivity.this,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                    Log.e("Camera permission approved ", "But No RW permision");
+                    Log.e("Ask for camera Read,Write permission", "");
+                    ActivityCompat.requestPermissions(InspectionBeginActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE},
                             MY_PERMISSIONS_REQUEST_RWFRMCAM);
                 }
-            }
-            else
-            {
+            } else {
                 Log.e("Dont have camera permission", "Else block");
                 ActivityCompat.requestPermissions(InspectionBeginActivity.this,
                         new String[]{android.Manifest.permission.CAMERA},
@@ -1506,16 +1507,13 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1)
-        {
+        if (requestCode == 1) {
             onCaptureImageResult(data);
-        }
-        else if(requestCode == 2)
-        {
-            if(data != null){
+        } else if (requestCode == 2) {
+            if (data != null) {
                 selectedImage = data.getData();
-                String[] filePath1 = { MediaStore.Images.Media.DATA };
-                Cursor c = getContentResolver().query(selectedImage,filePath1, null, null, null);
+                String[] filePath1 = {MediaStore.Images.Media.DATA};
+                Cursor c = getContentResolver().query(selectedImage, filePath1, null, null, null);
                 c.moveToFirst();
                 int columnIndex = c.getColumnIndex(filePath1[0]);
                 picturePath = c.getString(columnIndex);
@@ -1531,37 +1529,36 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         }
     }
 
-    private void onCaptureImageResult(Intent data)
-    {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
-        FileOutputStream fo;
-        try
-        {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            picturePath = destination.getAbsolutePath();
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        image_upload.setVisibility(View.VISIBLE);
-        image_upload.setImageBitmap(thumbnail);
+    private void onCaptureImageResult(Intent data) {
+        if(data != null) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+            File destination = new File(Environment.getExternalStorageDirectory(),
+                    System.currentTimeMillis() + ".jpg");
+            FileOutputStream fo;
+            try {
+                destination.createNewFile();
+                fo = new FileOutputStream(destination);
+                fo.write(bytes.toByteArray());
+                picturePath = destination.getAbsolutePath();
+                fo.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            image_upload.setVisibility(View.VISIBLE);
+            image_upload.setImageBitmap(thumbnail);
 //        image_camera.setImageBitmap(thumbnail);
 //        image_camera.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
 //        image_camera.getLayoutParams().width = RelativeLayout.LayoutParams.MATCH_PARENT;
 //        image_camera.setAdjustViewBounds(true);
+        }
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         super.onBackPressed();
         finish();
     }

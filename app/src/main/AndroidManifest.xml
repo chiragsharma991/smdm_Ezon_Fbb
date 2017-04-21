@@ -249,9 +249,15 @@
             android:screenOrientation="portrait"></activity>
 
 
+
+
+
+
+
         <activity android:name=".StoreInspection.InspectionDetailsActivity"
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="stateHidden"/>
+
 
 
     </application>
