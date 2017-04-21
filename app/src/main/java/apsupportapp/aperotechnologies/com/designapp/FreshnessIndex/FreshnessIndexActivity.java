@@ -196,6 +196,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
+                if(processBar.getVisibility() == View.VISIBLE)
+                {
+                    return;
+                }
                 FreshnessIndexValue="";
 
                 switch (txtFIndexClass.getText().toString()) {
@@ -333,6 +337,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 firstVisibleItem = 0;
                 if (postRequest != null) {
                     postRequest.cancel();
+                }
+                if(processBar.getVisibility() == View.VISIBLE)
+                {
+                    return;
                 }
                 FreshnessIndexValue="";
                 switch (txtFIndexClass.getText().toString()) {
@@ -477,152 +485,157 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                     @Override
                     public void onItemClick(View v, final int position) {
-
-                        OnItemClick = true;
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        processBar.setVisibility(View.GONE);
-
-
-                        Handler h = new Handler();
-                        h.postDelayed(new Runnable() {
-                            public void run() {
-
-
-                                if (position < freshnessIndexDetailsArrayList.size()) {
-                                    // TestItem();
-                                    switch (txtFIndexClass.getText().toString()) {
+                        if(processBar.getVisibility() == View.VISIBLE)
+                        {
+                            return;
+                        }
+                        else {
+                            OnItemClick = true;
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            processBar.setVisibility(View.GONE);
 
 
-                                        case "Department":
-                                            btnFIndexPrev.setVisibility(View.VISIBLE);
-                                            txtFIndexClass.setText("Subdept");
-                                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanDept();
-                                            Log.e(TAG, "onItemClick: " + position + "and item is " + freshnessIndex_ClickedVal);
-                                            //llfIndexhierarchy.setVisibility(View.GONE);
-                                            //llfreshnessIndex.setVisibility(View.GONE);
-                                            fromWhere = "Subdept";
-                                            level = 2;
-                                            if (Reusable_Functions.chkStatus(context)) {
-                                                if (postRequest != null) {
-                                                    postRequest.cancel();
+                            Handler h = new Handler();
+                            h.postDelayed(new Runnable() {
+                                public void run() {
+
+
+                                    if (position < freshnessIndexDetailsArrayList.size()) {
+                                        // TestItem();
+                                        switch (txtFIndexClass.getText().toString()) {
+
+
+                                            case "Department":
+                                                btnFIndexPrev.setVisibility(View.VISIBLE);
+                                                txtFIndexClass.setText("Subdept");
+                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanDept();
+                                                Log.e(TAG, "onItemClick: " + position + "and item is " + freshnessIndex_ClickedVal);
+                                                //llfIndexhierarchy.setVisibility(View.GONE);
+                                                //llfreshnessIndex.setVisibility(View.GONE);
+                                                fromWhere = "Subdept";
+                                                level = 2;
+                                                if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
+                                                    //  Reusable_Functions.hDialog();
+                                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                                    processBar.setVisibility(View.GONE);
+                                                    offsetvalue = 0;
+                                                    limit = 100;
+                                                    count = 0;
+                                                    freshnessIndexDetailsArrayList.clear();
+                                                    request_FreshnessIndex_CategoryList(freshnessIndex_ClickedVal);
+
+                                                    fIndexPlanDept = freshnessIndex_ClickedVal;
+
+                                                } else {
+                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                    Reusable_Functions.hDialog();
+
                                                 }
-                                                //  Reusable_Functions.hDialog();
-                                                Reusable_Functions.sDialog(context, "Loading data...");
-                                                processBar.setVisibility(View.GONE);
-                                                offsetvalue = 0;
-                                                limit = 100;
-                                                count = 0;
-                                                freshnessIndexDetailsArrayList.clear();
-                                                request_FreshnessIndex_CategoryList(freshnessIndex_ClickedVal);
 
-                                                fIndexPlanDept = freshnessIndex_ClickedVal;
+                                                break;
 
-                                            } else {
-                                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                Reusable_Functions.hDialog();
+                                            case "Subdept":
+                                                txtFIndexClass.setText("Class");
+                                                // llfIndexhierarchy.setVisibility(View.GONE);
+                                                // llfreshnessIndex.setVisibility(View.GONE);
+                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanCategory();
+                                                fromWhere = "Class";
+                                                level = 3;
+                                                if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
+                                                    //   Reusable_Functions.hDialog();
+                                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                                    processBar.setVisibility(View.GONE);
 
-                                            }
+                                                    offsetvalue = 0;
+                                                    limit = 100;
+                                                    count = 0;
+                                                    freshnessIndexDetailsArrayList.clear();
+                                                    fIndexCategory = freshnessIndex_ClickedVal;
+                                                    request_FreshnessIndex_PlanClassList(fIndexPlanDept, fIndexCategory);
+                                                } else {
+                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                    Reusable_Functions.hDialog();
 
-                                            break;
-
-                                        case "Subdept":
-                                            txtFIndexClass.setText("Class");
-                                            // llfIndexhierarchy.setVisibility(View.GONE);
-                                            // llfreshnessIndex.setVisibility(View.GONE);
-                                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanCategory();
-                                            fromWhere = "Class";
-                                            level = 3;
-                                            if (Reusable_Functions.chkStatus(context)) {
-                                                if (postRequest != null) {
-                                                    postRequest.cancel();
                                                 }
-                                                //   Reusable_Functions.hDialog();
-                                                Reusable_Functions.sDialog(context, "Loading data...");
-                                                processBar.setVisibility(View.GONE);
-
-                                                offsetvalue = 0;
-                                                limit = 100;
-                                                count = 0;
-                                                freshnessIndexDetailsArrayList.clear();
-                                                fIndexCategory = freshnessIndex_ClickedVal;
-                                                request_FreshnessIndex_PlanClassList(fIndexPlanDept, fIndexCategory);
-                                            } else {
-                                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                Reusable_Functions.hDialog();
-
-                                            }
 
 
-                                            break;
-                                        case "Class":
-                                            txtFIndexClass.setText("Subclass");
-                                            //  llfIndexhierarchy.setVisibility(View.GONE);
-                                            //  llfreshnessIndex.setVisibility(View.GONE);
-                                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanClass();
-                                            fromWhere = "Subclass";
-                                            level = 4;
-                                            if (Reusable_Functions.chkStatus(context)) {
-                                                if (postRequest != null) {
-                                                    postRequest.cancel();
+                                                break;
+                                            case "Class":
+                                                txtFIndexClass.setText("Subclass");
+                                                //  llfIndexhierarchy.setVisibility(View.GONE);
+                                                //  llfreshnessIndex.setVisibility(View.GONE);
+                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanClass();
+                                                fromWhere = "Subclass";
+                                                level = 4;
+                                                if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
+                                                    //  Reusable_Functions.hDialog();
+                                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                                    processBar.setVisibility(View.GONE);
+
+                                                    offsetvalue = 0;
+                                                    limit = 100;
+                                                    count = 0;
+                                                    freshnessIndexDetailsArrayList.clear();
+                                                    fIndexPlanClass = freshnessIndex_ClickedVal;
+                                                    request_FreshnessIndex_BrandList(fIndexPlanDept, fIndexCategory, fIndexPlanClass);
+
+                                                } else {
+                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                    Reusable_Functions.hDialog();
                                                 }
-                                                //  Reusable_Functions.hDialog();
-                                                Reusable_Functions.sDialog(context, "Loading data...");
-                                                processBar.setVisibility(View.GONE);
+                                                break;
 
-                                                offsetvalue = 0;
-                                                limit = 100;
-                                                count = 0;
-                                                freshnessIndexDetailsArrayList.clear();
-                                                fIndexPlanClass = freshnessIndex_ClickedVal;
-                                                request_FreshnessIndex_BrandList(fIndexPlanDept, fIndexCategory, fIndexPlanClass);
+                                            case "Subclass":
+                                                btnFIndexNext.setVisibility(View.INVISIBLE);
+                                                txtFIndexClass.setText("MC");
+                                                //    llfIndexhierarchy.setVisibility(View.GONE);
+                                                //    llfreshnessIndex.setVisibility(View.GONE);
+                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getBrandName();
+                                                fromWhere = "MC";
+                                                level = 5;
+                                                if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
+                                                    //  Reusable_Functions.hDialog();
+                                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                                    processBar.setVisibility(View.GONE);
 
-                                            } else {
-                                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                Reusable_Functions.hDialog();
-                                            }
-                                            break;
-
-                                        case "Subclass":
-                                            btnFIndexNext.setVisibility(View.INVISIBLE);
-                                            txtFIndexClass.setText("MC");
-                                            //    llfIndexhierarchy.setVisibility(View.GONE);
-                                            //    llfreshnessIndex.setVisibility(View.GONE);
-                                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getBrandName();
-                                            fromWhere = "MC";
-                                            level = 5;
-                                            if (Reusable_Functions.chkStatus(context)) {
-                                                if (postRequest != null) {
-                                                    postRequest.cancel();
+                                                    offsetvalue = 0;
+                                                    limit = 100;
+                                                    count = 0;
+                                                    freshnessIndexDetailsArrayList.clear();
+                                                    fIndexBrand = freshnessIndex_ClickedVal;
+                                                    request_FreshnessIndex_BrandPlanList(fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand);
+                                                } else {
+                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                    Reusable_Functions.hDialog();
                                                 }
-                                                //  Reusable_Functions.hDialog();
-                                                Reusable_Functions.sDialog(context, "Loading data...");
-                                                processBar.setVisibility(View.GONE);
+                                                break;
 
-                                                offsetvalue = 0;
-                                                limit = 100;
-                                                count = 0;
-                                                freshnessIndexDetailsArrayList.clear();
-                                                fIndexBrand = freshnessIndex_ClickedVal;
-                                                request_FreshnessIndex_BrandPlanList(fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand);
-                                            } else {
-                                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                            default:
                                                 Reusable_Functions.hDialog();
-                                            }
-                                            break;
+                                                Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
+                                                OnItemClick = false;
+                                                break;
 
-                                        default:
-                                            Reusable_Functions.hDialog();
-                                            Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
-                                            OnItemClick = false;
-                                            break;
-
+                                        }
+                                    } else {
+                                        Reusable_Functions.hDialog();
+                                        Log.e(TAG, "position problem is: " + position + "size is " + freshnessIndexDetailsArrayList.size());
                                     }
-                                } else {
-                                    Reusable_Functions.hDialog();
-                                    Log.e(TAG, "position problem is: " + position + "size is " + freshnessIndexDetailsArrayList.size());
                                 }
-                            }
-                        }, 700);
+                            }, 700);
+                        }
                     }
                 })
         );
@@ -696,86 +709,87 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         Log.e(TAG, "select scroll item position: " + firstVisibleItem);
 
+       if(freshnessIndexDetailsArrayList.size() != 0) {
+           if (firstVisibleItem < freshnessIndexDetailsArrayList.size() && OnItemClick == false) {
+               Log.e("freshness Index getItem Count ", "" + freshnessIndexSnapAdapter.getItemCount() + "array size" + freshnessIndexDetailsArrayList.size());
+               //10<10 where footer is call then it goes else condition
+               if (txtFIndexClass.getText().toString().equals("Department")) {
+                   level = 1;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
+               } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
+                   level = 2;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
+               } else if (txtFIndexClass.getText().toString().equals("Class")) {
+                   level = 3;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
+               } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
+                   level = 4;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
+               } else if (txtFIndexClass.getText().toString().equals("MC")) {
+                   level = 5;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
+               }
+               //  if (firstVisibleItem != selFirstPositionValue) {
+               if (Reusable_Functions.chkStatus(context)) {
+                   Reusable_Functions.hDialog();
+                   offsetvalue = 0;
+                   limit = 100;
+                   count = 0;
+                   fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
 
-        if (firstVisibleItem < freshnessIndexDetailsArrayList.size() && OnItemClick == false) {
-            Log.e("freshness Index getItem Count ",""+freshnessIndexSnapAdapter.getItemCount()+"array size"+freshnessIndexDetailsArrayList.size());
-            //10<10 where footer is call then it goes else condition
-            if (txtFIndexClass.getText().toString().equals("Department")) {
-                level = 1;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
-            } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
-                level = 2;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
-            } else if (txtFIndexClass.getText().toString().equals("Class")) {
-                level = 3;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
-            } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
-                level = 4;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
-            } else if (txtFIndexClass.getText().toString().equals("MC")) {
-                level = 5;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
-            }
-            //  if (firstVisibleItem != selFirstPositionValue) {
-            if (Reusable_Functions.chkStatus(context)) {
-                Reusable_Functions.hDialog();
-                offsetvalue = 0;
-                limit = 100;
-                count = 0;
-                fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
+                   if (firstVisibleItem != OveridePositionValue) {
+                       if (postRequest != null) {
+                           postRequest.cancel();
+                       }
+                       processBar.setVisibility(View.VISIBLE);
+                       requestFIndexPieChart();
+                       OveridePositionValue = firstVisibleItem;
+                   }
+               } else {
+                   Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+               }
+           } else {
 
-                if (firstVisibleItem != OveridePositionValue) {
-                    if (postRequest != null) {
-                        postRequest.cancel();
-                    }
-                    processBar.setVisibility(View.VISIBLE);
-                    requestFIndexPieChart();
-                    OveridePositionValue = firstVisibleItem;
-                }
-            } else {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            }
-        } else {
+               firstVisibleItem = freshnessIndexDetailsArrayList.size() - 1;
+               LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
+               llm.scrollToPosition(firstVisibleItem);
 
-            firstVisibleItem = freshnessIndexDetailsArrayList.size() - 1;
-            LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
-            llm.scrollToPosition(firstVisibleItem);
-
-            if (txtFIndexClass.getText().toString().equals("Department")) {
-                level = 1;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
-            } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
-                level = 2;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
-            } else if (txtFIndexClass.getText().toString().equals("Class")) {
-                level = 3;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
-            } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
-                level = 4;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
-            } else if (txtFIndexClass.getText().toString().equals("MC")) {
-                level = 5;
-                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
-            }
-            //  if (firstVisibleItem != selFirstPositionValue) {
-            if (Reusable_Functions.chkStatus(context)) {
-                Reusable_Functions.hDialog();
-                offsetvalue = 0;
-                limit = 100;
-                count = 0;
-                fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
-                if (firstVisibleItem != OveridePositionValue) {
-                    if (postRequest != null) {
-                        postRequest.cancel();
-                    }
-                    processBar.setVisibility(View.VISIBLE);
-                    requestFIndexPieChart();
-                    OveridePositionValue = firstVisibleItem;
-                }
-            } else {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            }
-        }
+               if (txtFIndexClass.getText().toString().equals("Department")) {
+                   level = 1;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
+               } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
+                   level = 2;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
+               } else if (txtFIndexClass.getText().toString().equals("Class")) {
+                   level = 3;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
+               } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
+                   level = 4;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
+               } else if (txtFIndexClass.getText().toString().equals("MC")) {
+                   level = 5;
+                   fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
+               }
+               //  if (firstVisibleItem != selFirstPositionValue) {
+               if (Reusable_Functions.chkStatus(context)) {
+                   Reusable_Functions.hDialog();
+                   offsetvalue = 0;
+                   limit = 100;
+                   count = 0;
+                   fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
+                   if (firstVisibleItem != OveridePositionValue) {
+                       if (postRequest != null) {
+                           postRequest.cancel();
+                       }
+                       processBar.setVisibility(View.VISIBLE);
+                       requestFIndexPieChart();
+                       OveridePositionValue = firstVisibleItem;
+                   }
+               } else {
+                   Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+               }
+           }
+       }
     }
 
     private void initializeUI() {
@@ -844,7 +858,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         count = 0;
                         if (getIntent().getStringExtra("selectedDept") == null) {
                             requestFreshnessIndexDetails();
-                        } else if (getIntent().getStringExtra("selectedDept") != null) {
+                        }
+                        else if (getIntent().getStringExtra("selectedDept") != null) {
                             String selectedString = getIntent().getStringExtra("selectedDept");
                             requestFreshnessIndexFilterVal(selectedString);
 

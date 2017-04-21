@@ -440,7 +440,7 @@
                                     <!--ending part-->
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -732,7 +732,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -984,7 +984,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1236,7 +1236,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1489,7 +1489,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1733,7 +1733,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1984,7 +1984,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -2214,7 +2214,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
+                                        android:layout_height="30dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"

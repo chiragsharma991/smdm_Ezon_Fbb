@@ -246,6 +246,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
+                if(processBar.getVisibility() == View.VISIBLE)
+                {
+                    return;
+                }
                 OptionefficiencyValue="";
 
                 switch (oe_txtHeaderClass.getText().toString()) {
@@ -392,6 +396,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
+                if(processBar.getVisibility() == View.VISIBLE)
+                {
+                    return;
+                }
                 OptionefficiencyValue="";
                 switch (oe_txtHeaderClass.getText().toString()) {
 
@@ -455,9 +463,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
-
-
                         break;
+
                     case "Class":
                         oe_txtHeaderClass.setText("Subclass");
                         fromWhere = "Subclass";
@@ -571,150 +578,153 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         // hierarchy level drill down on selected item click
         oe_listView.addOnItemTouchListener(new RecyclerItemClickListener (context,new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position)
-            {
-                OnItemClick=true;
+            public void onItemClick(View view, int position) {
+                if (processBar.getVisibility() == View.VISIBLE) {
+                    return;
+                } else {
 
-                if(position < optionEfficiencyDetailsArrayList.size()) {
-                    switch (oe_txtHeaderClass.getText().toString()) {
+                    OnItemClick = true;
 
-                        case "Department":
-                            oe_btnPrev.setVisibility(View.VISIBLE);
+                            if (position < optionEfficiencyDetailsArrayList.size()) {
+                                switch (oe_txtHeaderClass.getText().toString()) {
 
-                            oe_txtHeaderClass.setText("Subdept");
-                            oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanDept();
-                            // oe_llayouthierarchy.setVisibility(View.GONE);
-                            // llayoutOEfficiency.setVisibility(View.GONE);
-                            fromWhere = "Subdept";
-                            level = 2;
-                            seasonGroup = "Current";
-                            if (Reusable_Functions.chkStatus(context)) {
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                processBar.setVisibility(View.GONE);
-                                if (postRequest != null) {
-                                    postRequest.cancel();
+                                    case "Department":
+                                        oe_btnPrev.setVisibility(View.VISIBLE);
+
+                                        oe_txtHeaderClass.setText("Subdept");
+                                        oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanDept();
+                                        // oe_llayouthierarchy.setVisibility(View.GONE);
+                                        // llayoutOEfficiency.setVisibility(View.GONE);
+                                        fromWhere = "Subdept";
+                                        level = 2;
+                                        seasonGroup = "Current";
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            processBar.setVisibility(View.GONE);
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+
+                                            request_OE_CategoryList(oe_ClickedVal);
+                                            oe_PlanDept = oe_ClickedVal;
+
+                                        } else {
+
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                        break;
+
+                                    case "Subdept":
+
+                                        oe_txtHeaderClass.setText("Class");
+                                        //  oe_llayouthierarchy.setVisibility(View.GONE);
+                                        //   llayoutOEfficiency.setVisibility(View.GONE);
+                                        oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanCategory();
+
+                                        fromWhere = "Class";
+                                        level = 3;
+                                        seasonGroup = "Current";
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            processBar.setVisibility(View.GONE);
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+                                            request_OE_PlanClassList(oe_PlanDept, oe_ClickedVal);
+                                            oe_Category = oe_ClickedVal;
+
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+
+
+                                        break;
+                                    case "Class":
+                                        oe_txtHeaderClass.setText("Subclass");
+                                        //   oe_llayouthierarchy.setVisibility(View.GONE);
+                                        //    llayoutOEfficiency.setVisibility(View.GONE);
+                                        oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanClass();
+                                        fromWhere = "Subclass";
+                                        seasonGroup = "Current";
+                                        level = 4;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            processBar.setVisibility(View.GONE);
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+
+                                            request_OE_BrandList(oe_PlanDept, oe_Category, oe_ClickedVal);
+
+                                            oe_PlanClass = oe_ClickedVal;
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+
+
+                                        break;
+
+                                    case "Subclass":
+                                        oe_btnNext.setVisibility(View.INVISIBLE);
+                                        oe_txtHeaderClass.setText("MC");
+                                        //     oe_llayouthierarchy.setVisibility(View.GONE);
+                                        //     llayoutOEfficiency.setVisibility(View.GONE);
+                                        oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getBrandName();
+                                        fromWhere = "MC";
+                                        seasonGroup = "Current";
+                                        level = 5;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            processBar.setVisibility(View.GONE);
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+
+                                            request_OE_BrandPlanList(oe_PlanDept, oe_Category, oe_PlanClass, oe_ClickedVal);
+
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        break;
+
+                                    default:
+                                        Reusable_Functions.hDialog();
+                                        Toast.makeText(context, "You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
+                                        processBar.setVisibility(View.GONE);
+                                        OnItemClick = false;
+
+                                        break;
+
                                 }
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-
-                                request_OE_CategoryList(oe_ClickedVal);
-                                oe_PlanDept = oe_ClickedVal;
-
-                            } else {
-
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
                             }
-                            break;
-
-                        case "Subdept":
-
-                            oe_txtHeaderClass.setText("Class");
-                            //  oe_llayouthierarchy.setVisibility(View.GONE);
-                            //   llayoutOEfficiency.setVisibility(View.GONE);
-                            oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanCategory();
-
-                            fromWhere = "Class";
-                            level = 3;
-                            seasonGroup = "Current";
-                            if (Reusable_Functions.chkStatus(context)) {
-                                if (postRequest != null) {
-                                    postRequest.cancel();
-                                }
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                processBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                                request_OE_PlanClassList(oe_PlanDept, oe_ClickedVal);
-                                oe_Category = oe_ClickedVal;
-
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
+                        }
 
 
-                            break;
-                        case "Class":
-                            oe_txtHeaderClass.setText("Subclass");
-                            //   oe_llayouthierarchy.setVisibility(View.GONE);
-                            //    llayoutOEfficiency.setVisibility(View.GONE);
-                            oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanClass();
-                            fromWhere = "Subclass";
-                            seasonGroup = "Current";
-                            level = 4;
-                            if (Reusable_Functions.chkStatus(context)) {
-                                if (postRequest != null) {
-                                    postRequest.cancel();
-                                }
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                processBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-
-                                request_OE_BrandList(oe_PlanDept, oe_Category, oe_ClickedVal);
-
-                                oe_PlanClass = oe_ClickedVal;
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-
-
-                            break;
-
-                        case "Subclass":
-                            oe_btnNext.setVisibility(View.INVISIBLE);
-                            oe_txtHeaderClass.setText("MC");
-                            //     oe_llayouthierarchy.setVisibility(View.GONE);
-                            //     llayoutOEfficiency.setVisibility(View.GONE);
-                            oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getBrandName();
-                            fromWhere = "MC";
-                            seasonGroup = "Current";
-                            level = 5;
-                            if (Reusable_Functions.chkStatus(context)) {
-                                if (postRequest != null) {
-                                    postRequest.cancel();
-                                }
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                processBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-
-                                request_OE_BrandPlanList(oe_PlanDept, oe_Category, oe_PlanClass, oe_ClickedVal);
-
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-
-                            break;
-
-                        default:
-                            Reusable_Functions.hDialog();
-                            Toast.makeText(context, "You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
-                            processBar.setVisibility(View.GONE);
-                            OnItemClick=false;
-
-                            break;
-
-                    }
                 }
-
-            }
-
-
-
-        }));
+          }));
     }
 
     private void maintainQuickFilterValues() {
@@ -792,120 +802,108 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
         quickFilterPopup.setVisibility(View.GONE);
     }
-
-
     private void TimeUP() {
 
         Log.e(TAG, "focus position on scroll: "+focusposition);
 
-        if (focusposition < optionEfficiencyDetailsArrayList.size()  && OnItemClick==false) {
-
-            if (oe_txtHeaderClass.getText().toString().equals("Department")) {
-                level = 1;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanDept().toString();
-            } else if (oe_txtHeaderClass.getText().toString().equals("Subdept")) {
-                level = 2;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanCategory().toString();
-            } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
-                level = 3;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanClass().toString();
-            } else if (oe_txtHeaderClass.getText().toString().equals("Subclass")) {
-                level = 4;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandName().toString();
-            } else if (oe_txtHeaderClass.getText().toString().equals("MC")) {
-                level = 5;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
-            }
-            //  if (firstVisibleItem != selFirstPositionValue) {
-            if (Reusable_Functions.chkStatus(context)) {
-                Reusable_Functions.hDialog();
-                offsetvalue = 0;
-                limit = 100;
-                count = 0;
-                //optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-
-                if(focusposition!=OveridePositionValue ) {
-
-                    if (postRequest != null) {
-                        postRequest.cancel();
-                    }
-                    processBar.setVisibility(View.VISIBLE);
-                    if(oe_FirstVisibleItem.equals("All"))
-                    {
-                        oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
-                        requestHeaderPieChart();
-                    }
-                    else {
-                        optionArrayList = new ArrayList<OptionEfficiencyDetails>();
-                        requestOEPieChart();
-                    }
-                    OveridePositionValue=focusposition;
-                }
+      if(optionEfficiencyDetailsArrayList.size() != 0) {
 
 
-            } else {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            }
-        }
+          if (focusposition < optionEfficiencyDetailsArrayList.size() && OnItemClick == false) {
+
+              if (oe_txtHeaderClass.getText().toString().equals("Department")) {
+                  level = 1;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanDept().toString();
+              } else if (oe_txtHeaderClass.getText().toString().equals("Subdept")) {
+                  level = 2;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanCategory().toString();
+              } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
+                  level = 3;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanClass().toString();
+              } else if (oe_txtHeaderClass.getText().toString().equals("Subclass")) {
+                  level = 4;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandName().toString();
+              } else if (oe_txtHeaderClass.getText().toString().equals("MC")) {
+                  level = 5;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
+              }
+              //  if (firstVisibleItem != selFirstPositionValue) {
+              if (Reusable_Functions.chkStatus(context)) {
+                  Reusable_Functions.hDialog();
+                  offsetvalue = 0;
+                  limit = 100;
+                  count = 0;
+                  //optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+
+                  if (focusposition != OveridePositionValue) {
+
+                      if (postRequest != null) {
+                          postRequest.cancel();
+                      }
+                      processBar.setVisibility(View.VISIBLE);
+                      if (oe_FirstVisibleItem.equals("All")) {
+                          oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
+                          requestHeaderPieChart();
+                      } else {
+                          optionArrayList = new ArrayList<OptionEfficiencyDetails>();
+                          requestOEPieChart();
+                      }
+                      OveridePositionValue = focusposition;
+                  }
 
 
+              } else {
+                  Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+              }
+          } else {
 
+              focusposition = optionEfficiencyDetailsArrayList.size() - 1;
+              LinearLayoutManager llm = (LinearLayoutManager) oe_listView.getLayoutManager();
+              llm.scrollToPosition(focusposition);
 
+              if (oe_txtHeaderClass.getText().toString().equals("Department")) {
+                  level = 1;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanDept().toString();
+              } else if (oe_txtHeaderClass.getText().toString().equals("Subdept")) {
+                  level = 2;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanCategory().toString();
+              } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
+                  level = 3;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanClass().toString();
+              } else if (oe_txtHeaderClass.getText().toString().equals("Subclass")) {
+                  level = 4;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandName().toString();
+              } else if (oe_txtHeaderClass.getText().toString().equals("MC")) {
+                  level = 5;
+                  oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
+              }
+              //  if (firstVisibleItem != selFirstPositionValue) {
+              if (Reusable_Functions.chkStatus(context)) {
+                  Reusable_Functions.hDialog();
+                  offsetvalue = 0;
+                  limit = 100;
+                  count = 0;
+                  //  optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
 
-        else {
-
-            focusposition = optionEfficiencyDetailsArrayList.size() - 1;
-            LinearLayoutManager llm = (LinearLayoutManager) oe_listView.getLayoutManager();
-            llm.scrollToPosition(focusposition);
-
-            if (oe_txtHeaderClass.getText().toString().equals("Department")) {
-                level = 1;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanDept().toString();
-            } else if (oe_txtHeaderClass.getText().toString().equals("Subdept")) {
-                level = 2;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanCategory().toString();
-            } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
-                level = 3;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanClass().toString();
-            } else if (oe_txtHeaderClass.getText().toString().equals("Subclass")) {
-                level = 4;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandName().toString();
-            } else if (oe_txtHeaderClass.getText().toString().equals("MC")) {
-                level = 5;
-                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
-            }
-            //  if (firstVisibleItem != selFirstPositionValue) {
-            if (Reusable_Functions.chkStatus(context)) {
-                Reusable_Functions.hDialog();
-                offsetvalue = 0;
-                limit = 100;
-                count = 0;
-                //  optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-
-                if(focusposition!=OveridePositionValue) {
-
-                    if (postRequest != null) {
-                        postRequest.cancel();
-                    }
-                    processBar.setVisibility(View.VISIBLE);
-                    if(oe_FirstVisibleItem.equals("All"))
-                    {
-                        oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
-                        requestHeaderPieChart();
-                    }
-                    else {
-                        optionArrayList = new ArrayList<OptionEfficiencyDetails>();
-                        requestOEPieChart();
-                    }
-                    OveridePositionValue=focusposition;
-                }
-
-
-            } else {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            }
-        }
-
+                  if (focusposition != OveridePositionValue) {
+                      if (postRequest != null) {
+                          postRequest.cancel();
+                      }
+                      processBar.setVisibility(View.VISIBLE);
+                      if (oe_FirstVisibleItem.equals("All")) {
+                          oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
+                          requestHeaderPieChart();
+                      } else {
+                          optionArrayList = new ArrayList<OptionEfficiencyDetails>();
+                          requestOEPieChart();
+                      }
+                      OveridePositionValue = focusposition;
+                  }
+              } else {
+                  Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+              }
+          }
+      }
     }
 
 
@@ -1402,6 +1400,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
                                     optionEfficiencyDetailsArrayList.add(optionEfficiencyDetails);
+
+
                                 }
                                 optionEfficiencyDetails = new OptionEfficiencyDetails();
 
@@ -2051,6 +2051,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                OnItemClick = false;
                                 Toast.makeText(context, "No Subdept data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
 
@@ -2102,6 +2103,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
+                            OnItemClick = false;
                             Toast.makeText(context, "No Subdept data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
@@ -2111,6 +2113,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
+                        OnItemClick = false;
                         Toast.makeText(context, "No Subdept data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
@@ -2155,6 +2158,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                OnItemClick = false;
                                 Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -2204,6 +2208,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
+                            OnItemClick = false;
                             Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
@@ -2213,6 +2218,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
+                        OnItemClick = false;
                         Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
@@ -2255,6 +2261,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                OnItemClick = false;
                                 Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -2305,6 +2312,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
+                            OnItemClick = false;
                             Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
@@ -2314,6 +2322,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
+                        OnItemClick = false;
                         Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
@@ -2356,6 +2365,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                OnItemClick = false;
                                 Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
@@ -2405,6 +2415,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
+                            OnItemClick = false;
                             Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
@@ -2414,6 +2425,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
+                        OnItemClick = false;
                         Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }

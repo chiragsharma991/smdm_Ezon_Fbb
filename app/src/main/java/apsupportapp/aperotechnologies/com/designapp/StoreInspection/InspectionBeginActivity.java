@@ -20,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -85,6 +86,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 15; //1
     public static final int MY_PERMISSIONS_REQUEST_R = 30; //2
     public static final int MY_PERMISSIONS_REQUEST_RWFRMCAM = 60; //3
+    private Bitmap bitmap;
+
     // Emoji Declaration
     ImageView image_improvement_criteria_1, image_okay_criteria_1, image_good_criteria_1, image_excellent_criteria_1;
     ImageView image_improvement_criteria_2, image_okay_criteria_2, image_good_criteria_2, image_excellent_criteria_2;
@@ -118,6 +121,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     private RequestQueue queue;
     private SharedPreferences sharedPreferences;
     private Gson gson;
+    private String insp_imagePath;
     String strDate;
     Context context;
     private int fashionQuot, merchDisplay, merchPresentationStd, suggSellingByStaff, overallCleanliness, signage, winClusterMannequinsDisp, mpmExecution;
@@ -1204,150 +1208,150 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         JSONObject obj = new JSONObject();
         try {
 
-             if(et_inspected_by.equals("") || et_inspected_by.length() == 0 || et_comment.equals("") || et_comment.length() == 0 || fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
-                     || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0)
-             {
-                 //For Inspected By -- Inspector Name
-                 if (et_inspected_by.equals("") || et_inspected_by.length() == 0) {
-                     Toast.makeText(InspectionBeginActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
+            if (et_inspected_by.equals("") || et_inspected_by.length() == 0 || et_comment.equals("") || et_comment.length() == 0 || insp_imagePath.equals("") ||
+                    fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
+                    || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {
+                //For Inspected By -- Inspector Name
+                if (et_inspected_by.equals("") || et_inspected_by.length() == 0) {
+                    Toast.makeText(InspectionBeginActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
 
-                 } else {
-                     inspected_name = et_inspected_by.getText().toString();
-                     InputMethodManager imm = (InputMethodManager) et_inspected_by.getContext()
-                             .getSystemService(Context.INPUT_METHOD_SERVICE);
-                     imm.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), 0);
-                     obj.put("inspectorName", inspected_name);
-                     obj.put("inspectionDate", txt_insp_date_Val.getText().toString());
+                }
+                //For Comment
+                else if (et_comment.equals("") || et_comment.length() == 0) {
+                    Toast.makeText(InspectionBeginActivity.this, "Please enter comment", Toast.LENGTH_LONG).show();
 
-                 }
-                 //For Comment
-                 if (et_comment.equals("") || et_comment.length() == 0) {
-                     Toast.makeText(InspectionBeginActivity.this, "Please enter comment", Toast.LENGTH_LONG).show();
-
-                 } else {
-                     insp_comment = et_comment.getText().toString();
-                     obj.put("comments", insp_comment);
-                     InputMethodManager imm = (InputMethodManager) et_comment.getContext()
-                             .getSystemService(Context.INPUT_METHOD_SERVICE);
-                     imm.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
-                 }
-//                // For Date
-//                if (txt_insp_date_Val.getText().equals("") || txt_insp_date_Val.getText().equals(null)) {
-//                    Toast.makeText(InspectionBeginActivity.this, "Please get current date", Toast.LENGTH_SHORT).show();
-//                } else {
+                }
+                // For Image
+                else if (insp_imagePath.equals("")) {
+                    Toast.makeText(InspectionBeginActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
+                }
 //
-//
-//                }
-                 // Inspection Criteria...
-                 if (fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
-                         || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {
-                     Toast.makeText(InspectionBeginActivity.this, "Please Select Value", Toast.LENGTH_LONG).show();
-                 } else {
-                     if (fashionQuot != 0) // Condition for Inspection Criteria 1
-                     {
-                         if (fashionQuot == 1) {
-                             obj.put("fashionQuot", 1); //Need Improvement is selected
-                         } else if (fashionQuot == 2) {
-                             obj.put("fashionQuot", 2); //Okay is selected
-                         } else if (fashionQuot == 3) {
-                             obj.put("fashionQuot", 3); //Good is selected
-                         } else if (fashionQuot == 4) {
-                             obj.put("fashionQuot", 4); //Excellent is selected
-                         }
-                     }
-                     if (merchDisplay != 0) // Condition for Inspection Criteria 2
-                     {
-                         if (merchDisplay == 1) {
-                             obj.put("merchDisplay", 1); //Need Improvement is selected
-                         } else if (merchDisplay == 2) {
-                             obj.put("merchDisplay", 2); //Okay is selected
-                         } else if (merchDisplay == 3) {
-                             obj.put("merchDisplay", 3); //Good is selected
-                         } else if (merchDisplay == 4) {
-                             obj.put("merchDisplay", 4); //Excellent is selected
-                         }
-                     }
-                     if (merchPresentationStd != 0) // Condition for Inspection Criteria 3
-                     {
-                         if (merchPresentationStd == 1) {
-                             obj.put("merchPresentationStd", 1); //Need Improvement is selected
-                         } else if (merchPresentationStd == 2) {
-                             obj.put("merchPresentationStd", 2); //Okay is selected
-                         } else if (merchPresentationStd == 3) {
-                             obj.put("merchPresentationStd", 3); //Good is selected
-                         } else if (merchPresentationStd == 4) {
-                             obj.put("merchPresentationStd", 4); //Excellent is selected
-                         }
-                     }
-                     if (suggSellingByStaff != 0) // Condition for Inspection Criteria 4
-                     {
-                         if (suggSellingByStaff == 1) {
-                             obj.put("suggSellingByStaff", 1); //Need Improvement is selected
-                         } else if (suggSellingByStaff == 2) {
-                             obj.put("suggSellingByStaff", 2); //Okay is selected
-                         } else if (suggSellingByStaff == 3) {
-                             obj.put("merchPresentationStd", 3); //Good is selected
-                         } else if (merchPresentationStd == 4) {
-                             obj.put("suggSellingByStaff", 4); //Excellent is selected
-                         }
-                     }
-                     if (overallCleanliness != 0) // Condition for Inspection Criteria 5
-                     {
-                         if (overallCleanliness == 1) {
-                             obj.put("overallCleanliness", 1); //Need Improvement is selected
-                         } else if (merchPresentationStd == 2) {
-                             obj.put("merchPresentationStd", 2); //Okay is selected
-                         } else if (overallCleanliness == 3) {
-                             obj.put("overallCleanliness", 3); //Good is selected
-                         } else if (overallCleanliness == 4) {
-                             obj.put("overallCleanliness", 4); //Excellent is selected
-                         }
-                     }
-                     if (signage != 0) // Condition for Inspection Criteria 6
-                     {
-                         if (signage == 1) {
-                             obj.put("signage", 1); //Need Improvement is selected
-                         } else if (signage == 2) {
-                             obj.put("signage", 2); //Okay is selected
-                         } else if (signage == 3) {
-                             obj.put("signage", 3); //Good is selected
-                         } else if (signage == 4) {
-                             obj.put("signage", 4); //Excellent is selected
-                         }
-                     }
-                     if (mpmExecution != 0) // Condition for Inspection Criteria 7
-                     {
-                         if (mpmExecution == 1) {
-                             obj.put("mpmExecution", 1); //Need Improvement is selected
-                         } else if (mpmExecution == 2) {
-                             obj.put("mpmExecution", 2); //Okay is selected
-                         } else if (mpmExecution == 3) {
-                             obj.put("mpmExecution", 3); //Good is selected
-                         } else if (mpmExecution == 4) {
-                             obj.put("mpmExecution", 4); //Excellent is selected
-                         }
-                     }
-                     if (winClusterMannequinsDisp != 0) // Condition for Inspection Criteria 8
-                     {
-                         if (winClusterMannequinsDisp == 1) {
-                             obj.put("winClusterMannequinsDisp", 1); //Need Improvement is selected
-                         } else if (winClusterMannequinsDisp == 2) {
-                             obj.put("winClusterMannequinsDisp", 2); //Okay is selected
-                         } else if (winClusterMannequinsDisp == 3) {
-                             obj.put("winClusterMannequinsDisp", 3); //Good is selected
-                         } else if (winClusterMannequinsDisp == 4) {
-                             obj.put("winClusterMannequinsDisp", 4); //Excellent is selected
-                         }
-                     }
-                 }
-             }
-            else {
+                // Inspection Criteria...
+                else if (fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
+                        || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {
 
-                     Log.e("Object Length :", "" + obj.length());
-                     requestInspectionSubmitAPI(context, obj);
-                     // Toast.makeText(context,"Data submission successfully",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InspectionBeginActivity.this, "Please Select Value", Toast.LENGTH_LONG).show();
 
-             }
+                }
+            } else {
+
+                inspected_name = et_inspected_by.getText().toString();
+                InputMethodManager imm = (InputMethodManager) et_inspected_by.getContext()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), 0);
+                obj.put("inspectorName", inspected_name);
+                obj.put("inspectionDate", txt_insp_date_Val.getText().toString());
+                insp_comment = et_comment.getText().toString();
+                //Comment
+                obj.put("comments", insp_comment);
+                InputMethodManager imm1 = (InputMethodManager) et_comment.getContext()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm1.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
+                //For Image
+                insp_imagePath = getStringImage(bitmap);
+                obj.put("storeImg", insp_imagePath);
+                if (fashionQuot != 0) // Condition for Inspection Criteria 1
+                {
+                    if (fashionQuot == 1) {
+                        obj.put("fashionQuot", 1); //Need Improvement is selected
+                    } else if (fashionQuot == 2) {
+                        obj.put("fashionQuot", 2); //Okay is selected
+                    } else if (fashionQuot == 3) {
+                        obj.put("fashionQuot", 3); //Good is selected
+                    } else if (fashionQuot == 4) {
+                        obj.put("fashionQuot", 4); //Excellent is selected
+                    }
+                }
+                if (merchDisplay != 0) // Condition for Inspection Criteria 2
+                {
+                    if (merchDisplay == 1) {
+                        obj.put("merchDisplay", 1); //Need Improvement is selected
+                    } else if (merchDisplay == 2) {
+                        obj.put("merchDisplay", 2); //Okay is selected
+                    } else if (merchDisplay == 3) {
+                        obj.put("merchDisplay", 3); //Good is selected
+                    } else if (merchDisplay == 4) {
+                        obj.put("merchDisplay", 4); //Excellent is selected
+                    }
+                }
+                if (merchPresentationStd != 0) // Condition for Inspection Criteria 3
+                {
+                    if (merchPresentationStd == 1) {
+                        obj.put("merchPresentationStd", 1); //Need Improvement is selected
+                    } else if (merchPresentationStd == 2) {
+                        obj.put("merchPresentationStd", 2); //Okay is selected
+                    } else if (merchPresentationStd == 3) {
+                        obj.put("merchPresentationStd", 3); //Good is selected
+                    } else if (merchPresentationStd == 4) {
+                        obj.put("merchPresentationStd", 4); //Excellent is selected
+                    }
+                }
+                if (suggSellingByStaff != 0) // Condition for Inspection Criteria 4
+                {
+                    if (suggSellingByStaff == 1) {
+                        obj.put("suggSellingByStaff", 1); //Need Improvement is selected
+                    } else if (suggSellingByStaff == 2) {
+                        obj.put("suggSellingByStaff", 2); //Okay is selected
+                    } else if (suggSellingByStaff == 3) {
+                        obj.put("merchPresentationStd", 3); //Good is selected
+                    } else if (merchPresentationStd == 4) {
+                        obj.put("suggSellingByStaff", 4); //Excellent is selected
+                    }
+                }
+                if (overallCleanliness != 0) // Condition for Inspection Criteria 5
+                {
+                    if (overallCleanliness == 1) {
+                        obj.put("overallCleanliness", 1); //Need Improvement is selected
+                    } else if (merchPresentationStd == 2) {
+                        obj.put("merchPresentationStd", 2); //Okay is selected
+                    } else if (overallCleanliness == 3) {
+                        obj.put("overallCleanliness", 3); //Good is selected
+                    } else if (overallCleanliness == 4) {
+                        obj.put("overallCleanliness", 4); //Excellent is selected
+                    }
+                }
+                if (signage != 0) // Condition for Inspection Criteria 6
+                {
+                    if (signage == 1) {
+                        obj.put("signage", 1); //Need Improvement is selected
+                    } else if (signage == 2) {
+                        obj.put("signage", 2); //Okay is selected
+                    } else if (signage == 3) {
+                        obj.put("signage", 3); //Good is selected
+                    } else if (signage == 4) {
+                        obj.put("signage", 4); //Excellent is selected
+                    }
+                }
+                if (mpmExecution != 0) // Condition for Inspection Criteria 7
+                {
+                    if (mpmExecution == 1) {
+                        obj.put("mpmExecution", 1); //Need Improvement is selected
+                    } else if (mpmExecution == 2) {
+                        obj.put("mpmExecution", 2); //Okay is selected
+                    } else if (mpmExecution == 3) {
+                        obj.put("mpmExecution", 3); //Good is selected
+                    } else if (mpmExecution == 4) {
+                        obj.put("mpmExecution", 4); //Excellent is selected
+                    }
+                }
+                if (winClusterMannequinsDisp != 0) // Condition for Inspection Criteria 8
+                {
+                    if (winClusterMannequinsDisp == 1) {
+                        obj.put("winClusterMannequinsDisp", 1); //Need Improvement is selected
+                    } else if (winClusterMannequinsDisp == 2) {
+                        obj.put("winClusterMannequinsDisp", 2); //Okay is selected
+                    } else if (winClusterMannequinsDisp == 3) {
+                        obj.put("winClusterMannequinsDisp", 3); //Good is selected
+                    } else if (winClusterMannequinsDisp == 4) {
+                        obj.put("winClusterMannequinsDisp", 4); //Excellent is selected
+                    }
+                }
+
+                Log.e("Object Length :", "" + obj.length());
+                requestInspectionSubmitAPI(context, obj);
+                // Toast.makeText(context,"Data submission successfully",Toast.LENGTH_SHORT).show();
+
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1355,6 +1359,14 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         Log.e("TAG", "onSubmit : Json Array is:" + obj.toString());
 
 
+    }
+
+    private String getStringImage(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
     //Inspection Submit API
@@ -1367,7 +1379,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 String url = "";
                 url = ConstsCore.web_url + "/v1/save/storeinspection/submit/" + userId;//+"?recache="+recache
                 //    Log.e("url", " put Request " + url + " ==== " + object.toString());
-                JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, jsonarray.toString(),
+                JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonarray.toString(),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
@@ -1472,20 +1484,28 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
     public void startCamera() {
         if ((int) Build.VERSION.SDK_INT < 23) {
+
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 1);
         } else {
+//
             int permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                     android.Manifest.permission.CAMERA);
+
             Log.e("Camera permission Check", " " + permissionCheck);
+
             if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
                 Log.i("Have Camera Permission", "Yes");
+
                 permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
                 //here
                 int permissioncheckRead = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                         android.Manifest.permission.READ_EXTERNAL_STORAGE);
-                Log.e("Read and Write permission check", permissionCheck + "   " + permissioncheckRead);
+
+                Log.i("Read and Write permission check", permissionCheck + "   " + permissioncheckRead);
+
                 if (permissionCheck == PackageManager.PERMISSION_GRANTED && permissioncheckRead == PackageManager.PERMISSION_GRANTED) {
                     Log.i("Have Camera, Read and Write Permission", "Yes");
                     //Open Camera Here
@@ -1495,9 +1515,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     startActivityForResult(intent, 1);
                 } else {
                     //Get Permission for read and write
-                    Log.e("Camera permission approved ", "But No RW permision");
-                    Log.e("Ask for camera Read,Write permission", "");
-                    ActivityCompat.requestPermissions(InspectionBeginActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                    Log.i("Camera permission approved ", "But No RW permision");
+                    Log.i("Ask for camera Read,Write permission", "");
+                    ActivityCompat.requestPermissions(InspectionBeginActivity.this,
+                            new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE},
                             MY_PERMISSIONS_REQUEST_RWFRMCAM);
                 }
             } else {
@@ -1507,6 +1528,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                         MY_PERMISSIONS_REQUEST_CAMERA);
             }
         }
+
     }
 
     @Override
@@ -1535,29 +1557,31 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     }
 
     private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            picturePath = destination.getAbsolutePath();
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        image_upload.setVisibility(View.VISIBLE);
-        image_upload.setImageBitmap(thumbnail);
+        if (data != null) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+            File destination = new File(Environment.getExternalStorageDirectory(),
+                    System.currentTimeMillis() + ".jpg");
+            FileOutputStream fo;
+            try {
+                destination.createNewFile();
+                fo = new FileOutputStream(destination);
+                fo.write(bytes.toByteArray());
+                picturePath = destination.getAbsolutePath();
+                fo.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            image_upload.setVisibility(View.VISIBLE);
+            image_upload.setImageBitmap(thumbnail);
 //        image_camera.setImageBitmap(thumbnail);
 //        image_camera.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
 //        image_camera.getLayoutParams().width = RelativeLayout.LayoutParams.MATCH_PARENT;
 //        image_camera.setAdjustViewBounds(true);
+        }
     }
 
     @Override

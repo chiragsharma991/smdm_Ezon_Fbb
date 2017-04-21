@@ -766,7 +766,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     }
 
 
-    private void TimeUP() {
+    private void TimeUP()
+    {
         if(salesAnalysisClassArrayList.size() != 0) {
 
             if (firstVisibleItem < salesAnalysisClassArrayList.size() && onClickFlag == false) {
@@ -1042,11 +1043,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         } else {
             filter_toggleClick = false;
         }
-
     }
 
     //Api to display class level values(Api 1.20)
-
     private void requestSalesListDisplayAPI() {
         String url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url", " " + url);
@@ -1065,7 +1064,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 progressBar1.setVisibility(View.GONE);
                             } else if (response.length() == limit)
                             {
-                                for (i = 0; i < response.length(); i++) {
+                                for (i = 0; i < response.length(); i++)
+                                {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
                                     salesadapter.addSnap(salesAnalysisClass);
@@ -1076,11 +1076,11 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 requestSalesListDisplayAPI();
 
                             } else if (response.length() < limit) {
-                                for (i = 0; i < response.length(); i++) {
+                                for (i = 0; i < response.length(); i++)
+                                {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
                                     salesadapter.addSnap(salesAnalysisClass);
-
                                 }
 
                                 for (i = 0; i < 3; i++) {
@@ -1101,19 +1101,24 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                {
                                     salesAnalysisClass.setPlanDept("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subdept"))
+                                {
                                     salesAnalysisClass.setPlanCategory("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Class"))
+                                {
                                     salesAnalysisClass.setPlanClass("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subclass"))
+                                {
                                     salesAnalysisClass.setBrandName("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("MC"))
+                                {
                                     salesAnalysisClass.setBrandplanClass("All");
 
                                 }
@@ -1414,7 +1419,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 vwpagersales.setAdapter(pageradapter);
                                 vwpagersales.setCurrentItem(currentVmPos);
                                 pageradapter.notifyDataSetChanged();
-                                onClickFlag = false;
                                 Log.e("Focus position on scroll ", "" + firstVisibleItem);
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
