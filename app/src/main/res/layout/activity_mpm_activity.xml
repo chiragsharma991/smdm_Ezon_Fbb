@@ -82,6 +82,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible"
+        android:id="@+id/webView_wrap_layout"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
         >
@@ -121,11 +122,21 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#99000000"
+                    android:background="#464646"
                     android:id="@+id/webview_process"
                     >
 
+                    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:id="@+id/imageLoader_feedback"
+                        android:layout_centerInParent="true"
+                        android:background="#0000"
+                        android:keepScreenOn="true"
+                        android:theme="@style/ProgressBar">
 
+                    </ProgressBar>
 
 
 
@@ -156,6 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:gravity="center_vertical"
+                android:background="#f8f6f6"
                 >
 
                 <TextView
@@ -222,11 +234,13 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:visibility="gone"
+        android:id="@+id/webView_match_layout"
         >
 
         <WebView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/webview_match"
 
             >
 

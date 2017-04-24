@@ -36,7 +36,7 @@ public class mpm_adapter extends BaseAdapter {
     private Holder holder;
 
 
-    public mpm_adapter(Context context, ArrayList<mpm_model> list) {
+    public mpm_adapter(Context context, ArrayList<mpm_model> list ) {
         this.context=context;
         this.list=list;
         inflator=LayoutInflater.from(this.context);
@@ -61,7 +61,6 @@ public class mpm_adapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
-
         if(convertView==null)
         {
             holder=new Holder();
@@ -73,11 +72,20 @@ public class mpm_adapter extends BaseAdapter {
             holder=(Holder)convertView.getTag();
         }
         holder.department.setText(list.get(position).getProductName());
+        convertView.setBackgroundColor((position == mpm_activity.clickPosition) ?
+                Color.parseColor("#e8e8e8") : Color.parseColor("#f8f6f6"));
+
+
+
 
 
 
         return convertView;
     }
+
+
+
+
 
 
 
@@ -89,6 +97,9 @@ public class mpm_adapter extends BaseAdapter {
 
 
     }
+
+
+
 
 
 

@@ -1208,7 +1208,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         JSONObject obj = new JSONObject();
         try {
 
-            if (et_inspected_by.equals("") || et_inspected_by.length() == 0 || et_comment.equals("") || et_comment.length() == 0 || insp_imagePath.equals("") ||
+          //  Log.e("TAG", "OnSubmit: "+insp_imagePath.toString());
+            //Log.e("TAG", "OnSubmit: "+et_inspected_by.toString()+" "+et_inspected_by.length()+" "+et_comment.toString()+" "+et_comment.length()+" "+insp_imagePath.toString() );
+
+            if (et_inspected_by.equals("") || et_inspected_by.length() == 0 || et_comment.equals("") || et_comment.length() == 0 || picturePath==null ||
                     fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
                     || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {
                 //For Inspected By -- Inspector Name
@@ -1222,7 +1225,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 }
                 // For Image
-                else if (insp_imagePath.equals("")) {
+                else if (insp_imagePath ==null) {
                     Toast.makeText(InspectionBeginActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
                 }
 //
@@ -1248,8 +1251,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                         .getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm1.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
                 //For Image
-                insp_imagePath = getStringImage(bitmap);
-                obj.put("storeImg", insp_imagePath);
+               // insp_imagePath = getStringImage(bitmap);
+                insp_imagePath = picturePath;
+                Log.e("TAG", "insp_imagePath: "+insp_imagePath );
+               // obj.put("storeImg", insp_imagePath);
                 if (fashionQuot != 0) // Condition for Inspection Criteria 1
                 {
                     if (fashionQuot == 1) {
@@ -1347,16 +1352,18 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     }
                 }
 
-                Log.e("Object Length :", "" + obj.length());
-                requestInspectionSubmitAPI(context, obj);
-                // Toast.makeText(context,"Data submission successfully",Toast.LENGTH_SHORT).show();
+
+                Log.e("TAG", "onSubmit : Json Array is:" + obj.toString());
+                requestInspectionSubmitAPI(context,obj);
+
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
+            Toast.makeText(InspectionBeginActivity.this,e.getMessage(), Toast.LENGTH_LONG).show();
+
         }
 
-        Log.e("TAG", "onSubmit : Json Array is:" + obj.toString());
 
 
     }
@@ -1463,7 +1470,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
     public void openGallery() {
         if ((int) Build.VERSION.SDK_INT < 23) {
-            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 2);
         } else {
             int permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
@@ -1577,6 +1584,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             }
             image_upload.setVisibility(View.VISIBLE);
             image_upload.setImageBitmap(thumbnail);
+
 //        image_camera.setImageBitmap(thumbnail);
 //        image_camera.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
 //        image_camera.getLayoutParams().width = RelativeLayout.LayoutParams.MATCH_PARENT;

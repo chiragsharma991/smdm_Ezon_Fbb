@@ -165,71 +165,78 @@
                     android:visibility="visible"
                     >
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="47dp"
                         android:background="@drawable/border1"
                         android:layout_margin="5dp"
+                        android:gravity="center_horizontal|center_vertical"
                         android:text="Fitting"
                         android:id="@+id/fitting"
                         android:textColor="@color/bg_store_code_text"
                         android:textAllCaps="false"
                         />
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="47dp"
                         android:background="@drawable/border1"
                         android:layout_margin="5dp"
+                        android:gravity="center_horizontal|center_vertical"
                         android:text="Pricing"
                         android:id="@+id/pricing"
                         android:textColor="@color/bg_store_code_text"
                         android:textAllCaps="false"
                         />
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="47dp"
                         android:background="@drawable/border1"
                         android:layout_margin="5dp"
                         android:text="Colours"
+                        android:gravity="center_horizontal|center_vertical"
                         android:id="@+id/colours"
                         android:textColor="@color/bg_store_code_text"
                         android:textAllCaps="false"
                         />
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="47dp"
                         android:background="@drawable/border1"
                         android:layout_margin="5dp"
                         android:text="Prints"
+                        android:gravity="center_horizontal|center_vertical"
                         android:id="@+id/prints"
                         android:textColor="@color/bg_store_code_text"
                         android:textAllCaps="false"
                         />
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="47dp"
                         android:background="@drawable/border1"
                         android:layout_margin="5dp"
                         android:text="Styling"
+                        android:gravity="center_horizontal|center_vertical"
                         android:textColor="@color/bg_store_code_text"
                         android:textAllCaps="false"
                         android:id="@+id/styling"
                         />
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="47dp"
                         android:background="@drawable/border1"
                         android:layout_margin="5dp"
                         android:text="Fabric Quality"
+                        android:gravity="center_horizontal|center_vertical"
                         android:textColor="@color/bg_store_code_text"
                         android:textAllCaps="false"
                         android:id="@+id/fabric_quality"
                         />
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="47dp"
                         android:background="@drawable/border1"
                         android:layout_margin="5dp"
+                        android:gravity="center_horizontal|center_vertical"
                         android:text="Garment Quality"
                         android:textColor="@color/bg_store_code_text"
                         android:textAllCaps="false"

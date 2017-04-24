@@ -100,6 +100,8 @@ public class  LoginActivity extends AppCompatActivity {
 
         edtUserName = (EditText) findViewById(R.id.edtUserName);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
+
+        edtUserName.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         edtPassword.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         chkKeepMeLogin = (CheckBox) findViewById(R.id.chkKeepMeLogin);
         LinearLogin = (LinearLayout) findViewById(R.id.linearLogin);
@@ -125,6 +127,7 @@ public class  LoginActivity extends AppCompatActivity {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 Log.e("getCurrentFocus :",""+getCurrentFocus().getWindowToken());
+                edtUserName.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
                 uname = edtUserName.getText().toString().trim().toUpperCase();
                 password = edtPassword.getText().toString().trim().toUpperCase();
                 Log.e(TAG, "uname & pass: "+uname+"and pass"+password );
