@@ -145,41 +145,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         queue.start();
         gson = new Gson();
 
-//        et_inspected_by.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//
-//            Boolean handled = false;
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_NONE)) {
-//                    et_inspected_by.clearFocus();
-//                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    if(inputManager != null){
-//                        inputManager.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
-//                    }
-//                    handled = true;
-//                }
-//                return handled;
-//            }
-//
-//        });
-//        et_comment.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//
-//            Boolean handled = false;
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_NONE) ) {
-//                    et_comment.clearFocus();
-//                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    if(inputManager != null){
-//                        inputManager.hideSoftInputFromWindow(et_comment.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
-//                    }
-//                    handled = true;
-//                }
-//                return handled;
-//            }
-//
-//        });
-
     }
 
     public void getCurrentDate(View view) {
@@ -1123,16 +1088,13 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     YoYo.with(Techniques.ZoomIn)
                             .duration(500)
                             .playOn(findViewById(R.id.image_excellent_criteria_6));
-//                    LinearLayout.LayoutParams layoutParams6 = (LinearLayout.LayoutParams) image_excellent_criteria_6.getLayoutParams();
-//                    layoutParams6.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    layoutParams6.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+
                     txt_okay_criteria_6.setText("");
                     txt_good_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
                     signage = 4;
                 } else {
-                    //  image_excellent_criteria_6.setClickable(false);
-                    image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
+                     image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_6.setText("");
                 }
 
@@ -1213,7 +1175,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             if (et_inspected_by.equals("") || et_inspected_by.length() == 0 || et_comment.equals("") || et_comment.length() == 0 || picturePath==null ||
                     fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
-                    || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {
+                    || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0)
+            {
                 //For Inspected By -- Inspector Name
                 if (et_inspected_by.equals("") || et_inspected_by.length() == 0) {
                     Toast.makeText(InspectionBeginActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
@@ -1228,7 +1191,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 else if (insp_imagePath ==null) {
                     Toast.makeText(InspectionBeginActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
                 }
-//
+
                 // Inspection Criteria...
                 else if (fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
                         || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {
@@ -1352,7 +1315,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     }
                 }
 
-
                 Log.e("TAG", "onSubmit : Json Array is:" + obj.toString());
                 requestInspectionSubmitAPI(context,obj);
 
@@ -1363,9 +1325,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             Toast.makeText(InspectionBeginActivity.this,e.getMessage(), Toast.LENGTH_LONG).show();
 
         }
-
-
-
     }
 
     private String getStringImage(Bitmap bmp) {
