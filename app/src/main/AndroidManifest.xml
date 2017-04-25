@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_LOGS"></uses-permission>
 
     <!--
     <Protected-broadcast android:name="android.location.BOOT_COMPLETED" />
@@ -109,7 +110,8 @@
         <activity
             android:name=".ExpiringPromo.ExpiringPromoActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            />
         <activity
             android:name=".UpcomingPromo.UpcomingPromo"
             android:screenOrientation="portrait"
@@ -245,8 +247,11 @@
         <activity android:name=".test"></activity>
 
         <activity android:name=".MPM.mpm_activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"></activity>
+
+            ></activity>
 
 
 

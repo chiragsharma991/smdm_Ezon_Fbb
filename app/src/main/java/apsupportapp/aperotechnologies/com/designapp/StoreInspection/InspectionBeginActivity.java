@@ -20,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -273,6 +274,9 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         //Edittext
         et_inspected_by = (EditText) findViewById(R.id.et_inspected_by);
         et_comment = (EditText) findViewById(R.id.et_comment);
+        //et_inspected_by.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        et_comment.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+
         rel_cam_image = (RelativeLayout) findViewById(R.id.rel_cam_image);
         image_camera = (ImageView) findViewById(R.id.camera_imageView);
         image_upload = (ImageView) findViewById(R.id.camera_imageView1);
@@ -1211,23 +1215,27 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
           //  Log.e("TAG", "OnSubmit: "+insp_imagePath.toString());
             //Log.e("TAG", "OnSubmit: "+et_inspected_by.toString()+" "+et_inspected_by.length()+" "+et_comment.toString()+" "+et_comment.length()+" "+insp_imagePath.toString() );
 
-            if (et_inspected_by.equals("") || et_inspected_by.length() == 0 || et_comment.equals("") || et_comment.length() == 0 || picturePath==null ||
+            if (et_inspected_by.equals("") || et_inspected_by.length() == 0 ||
                     fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
                     || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {
+
+        /*    if (et_inspected_by.equals("") || et_inspected_by.length() == 0 || et_comment.equals("") || et_comment.length() == 0 || picturePath==null ||
+                    fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
+                    || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {*/
                 //For Inspected By -- Inspector Name
                 if (et_inspected_by.equals("") || et_inspected_by.length() == 0) {
                     Toast.makeText(InspectionBeginActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
 
                 }
                 //For Comment
-                else if (et_comment.equals("") || et_comment.length() == 0) {
+              /*  else if (et_comment.equals("") || et_comment.length() == 0) {
                     Toast.makeText(InspectionBeginActivity.this, "Please enter comment", Toast.LENGTH_LONG).show();
 
-                }
+                }*/
                 // For Image
-                else if (insp_imagePath ==null) {
+             /*   else if (picturePath ==null) {
                     Toast.makeText(InspectionBeginActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
-                }
+                }*/
 //
                 // Inspection Criteria...
                 else if (fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0

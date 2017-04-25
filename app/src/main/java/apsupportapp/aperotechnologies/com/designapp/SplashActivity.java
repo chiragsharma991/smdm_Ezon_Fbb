@@ -32,6 +32,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.crashlytics.android.Crashlytics;
+import com.testfairy.TestFairy;
 
 import apsupportapp.aperotechnologies.com.designapp.StoreInspection.InspectionBeginActivity;
 import io.fabric.sdk.android.Fabric;
@@ -56,6 +57,8 @@ public class SplashActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+        TestFairy.begin(this, "a83cce4a55db17b7603166d893edca31f89b6427");
+
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
         context = this;
 
