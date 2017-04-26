@@ -1,42 +1,27 @@
 package apsupportapp.aperotechnologies.com.designapp.Httpcall;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.AbsListView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Network;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
-import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
 /**
  * Created by csuthar on 10/01/17.
@@ -44,8 +29,6 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 
 public class ApiRequest  {
 
-    private final Cache cache;
-    private final Network network;
     private final RequestQueue queue;
     private int limit=100;
     private int offsetvalue=0;
@@ -60,15 +43,13 @@ public class ApiRequest  {
     private Gson gson;
 
 
-    public ApiRequest(Context context, String token, String Url, String TAG, Cache cache, Network network, RequestQueue queue , mpm_model mpm_modelClass)
+    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass)
     {
        ResposeInterface= (HttpResponse)context;
         this.context=context;
         bearertoken=token;
         this.Url=Url;
         this.TAG=TAG;
-        this.cache=cache;
-        this.network=network;
         this.queue=queue;
         this.list=new ArrayList<>();
         this.mpm_modelClass=mpm_modelClass;
@@ -127,6 +108,7 @@ public class ApiRequest  {
                                 limit = 100;
                                 offsetvalue = 0;
                                 Reusable_Functions.hDialog();
+
 
 
                             }

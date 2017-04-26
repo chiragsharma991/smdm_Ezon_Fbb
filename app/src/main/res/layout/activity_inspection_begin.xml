@@ -2328,7 +2328,8 @@
                         android:layout_height="match_parent"
                         android:background="@color/white"
                         android:singleLine="true"
-                        android:hint="Rohit Shetty"
+                        android:inputType="textPersonName|textCapWords"
+                        android:hint="Inspector name"
                         android:textSize="12sp"/>
 
                 </android.support.v7.widget.CardView>

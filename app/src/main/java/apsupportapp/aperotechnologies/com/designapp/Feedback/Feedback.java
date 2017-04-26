@@ -345,8 +345,15 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             case R.id.feedbackNext:
 
                 if (listCount + 1 < feedbackList.size()) {
-                    Reusable_Functions.ViewVisible(firstView);
-                    Reusable_Functions.ViewGone(secondView);
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        Reusable_Functions.ViewVisible(firstView);
+                        Reusable_Functions.ViewGone(secondView);
+                    }else {
+                        firstView.setVisibility(View.VISIBLE);
+                        secondView.setVisibility(View.GONE);
+                    }
+
+
                     listCount++;
                     nextList(listCount);
                 } else {
@@ -465,8 +472,15 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         // firstView.setVisibility(View.GONE);
         // secondView.setVisibility(View.VISIBLE);
-        Reusable_Functions.ViewGone(firstView);
-        Reusable_Functions.ViewVisible(secondView);
+        if (Build.VERSION.SDK_INT >= 21) {
+            Reusable_Functions.ViewGone(firstView);
+            Reusable_Functions.ViewVisible(secondView);
+        }else{
+            firstView.setVisibility(View.GONE);
+            secondView.setVisibility(View.VISIBLE);
+        }
+
+
         Fitting_relative.removeAllViewsInLayout();
         Pricing_relative.removeAllViewsInLayout();
         colours_relative.removeAllViewsInLayout();

@@ -67,6 +67,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     public mpm_activity pre_activity;
     private LinearLayout WebView_match_layout,WebView_wrap_layout;
     private TextView Toolbar_title;
+    private int dublicatePosition=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,8 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
-            ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, cache, network, queue, model_mpm);
+            mpm_model model=new mpm_model();
+            ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue,model);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -122,6 +124,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
+                dublicatePosition=position;
                 if (WebViewProcess.getVisibility() == View.VISIBLE) {
                     Toast.makeText(context, "Please wait file is working above...", Toast.LENGTH_SHORT).show();
                 } else {
@@ -241,13 +244,25 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
             Log.e(TAG, "shouldOverrideUrlLoading: Webview Wrap" + url);
+            String clickurl="http://docs.google.com/viewerng/viewer?url="+list.get(dublicatePosition).getMpmPath();
 
+            if(clickurl.equals(url)){
+                if (Build.VERSION.SDK_INT >= 21) {
 
-            Reusable_Functions.ViewVisible(WebView_match_layout);
-            Reusable_Functions.ViewGone(WebView_wrap_layout);
-            Toolbar_title.setText("Mens Party Wear Shirt");
+                    Reusable_Functions.ViewVisible(WebView_match_layout);
+                    Reusable_Functions.ViewGone(WebView_wrap_layout);
 
-            return true;
+                }else{
+                    WebView_match_layout.setVisibility(View.VISIBLE);
+                    WebView_wrap_layout.setVisibility(View.GONE);
+                }
+
+                Toolbar_title.setText("Mens Party Wear Shirt");
+                return true;
+            }else{
+                return true;
+
+            }
 
         }
 
@@ -278,11 +293,30 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
             Log.e(TAG, "shouldOverrideUrlLoading: Webview Match " + url);
-            Reusable_Functions.ViewVisible(WebView_wrap_layout);
-            Reusable_Functions.ViewGone(WebView_match_layout);
-            Toolbar_title.setText("MPM");
+            String clickurl="http://docs.google.com/viewerng/viewer?url="+list.get(dublicatePosition).getMpmPath();
+            if(clickurl.equals(url)){
+                if (Build.VERSION.SDK_INT >= 21) {
 
-            return true;
+                    Reusable_Functions.ViewVisible(WebView_wrap_layout);
+                    Reusable_Functions.ViewGone(WebView_match_layout);
+
+                }else{
+                    WebView_wrap_layout.setVisibility(View.VISIBLE);
+                    WebView_match_layout.setVisibility(View.GONE);
+                }
+
+
+
+                Toolbar_title.setText("MPM");
+                return true;
+
+
+            }else{
+                return true;
+
+            }
+
+
 
         }
     }

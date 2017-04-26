@@ -60,6 +60,7 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
     private InspectionBeanClass inspectionBeanClass;
     private ArrayList<InspectionBeanClass> inspectionArrayList;
     private Gson gson;
+    private String recache ;
     private Insp_History_Adapter insp_history_adapter;
 
 
@@ -68,6 +69,7 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inspection_history);
         context = this;
+        recache = "true";
         getSupportActionBar().hide();
         initialise();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -110,7 +112,7 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
 
     private void requestInspectionSummary()
     {
-        String url = ConstsCore.web_url + "/v1/display/storeinspectionsummary/" + userId  ;
+        String url = ConstsCore.web_url + "/v1/display/storeinspectionsummary/" + userId +"?recache="+recache ;
         Log.e("Inspection History Url" ,"" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

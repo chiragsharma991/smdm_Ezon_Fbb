@@ -210,7 +210,18 @@ public class  LoginActivity extends AppCompatActivity {
 
                             Log.e("TAG", "storelist_data size: " + storelist_data.size() + "store code is  " + storelist_data.get(0));
                             Reusable_Functions.hDialog();
-                            commentDialog();
+
+                            if(storelist_data.size()==1) {
+                                String value=storelist_data.get(0);
+                                SelectedStoreCode = value.trim().substring(0,4);
+                                Log.e(TAG, "onItemSelected: without dialog " + SelectedStoreCode);
+                                firstLogin = true;
+                                requestLoginWithStoreAPI();
+                            }
+                            else{
+                                commentDialog();
+                            }
+
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
@@ -257,6 +268,7 @@ public class  LoginActivity extends AppCompatActivity {
 
         String url = ConstsCore.web_url + "/v1/login?storeCode=" + SelectedStoreCode.replace(" ","%20"); //ConstsCore.web_url+ + "/v1/login/userId";
 
+        Log.e(TAG, "requestLoginWithStoreAPI: "+url );
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -415,7 +427,8 @@ public class  LoginActivity extends AppCompatActivity {
                 dialog.dismiss();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Authenticating user...");
-                    SelectedStoreCode = (String) adapterView.getItemAtPosition(position);
+                    String value= (String) adapterView.getItemAtPosition(position);
+                    SelectedStoreCode = value.trim().substring(0,4);
                     Log.e(TAG, "onItemSelected: " + SelectedStoreCode);
                     firstLogin = true;
                     requestLoginWithStoreAPI();

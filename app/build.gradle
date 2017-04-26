@@ -27,7 +27,7 @@ android {
                 applicationId "apsupportapp.aperotechnologies.com.designapp"
                 minSdkVersion 17
                 targetSdkVersion 25
-                versionCode 24
+                versionCode 28
                 versionName "1.5"
             }
     buildTypes
@@ -75,6 +75,7 @@ dependencies
             //    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
             // compile 'com.google.firebase:firebase-core:10.2.0'
             testCompile 'junit:junit:4.12'
+            compile 'testfairy:testfairy-android-sdk:1.+@aar'
             compile 'com.android.support.constraint:constraint-layout:1.0.2'
         }
 
