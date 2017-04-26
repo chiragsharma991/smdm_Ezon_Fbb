@@ -3,7 +3,10 @@ package apsupportapp.aperotechnologies.com.designapp.MPM;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -31,9 +34,20 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 
 import org.json.JSONArray;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -43,7 +57,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 
-public class mpm_activity extends AppCompatActivity implements HttpResponse, View.OnClickListener {
+public class mpm_activity extends AppCompatActivity implements HttpResponse, View.OnClickListener, OnPageChangeListener, OnLoadCompleteListener {
 
     private SharedPreferences sharedPreferences;
     private String userId;
@@ -61,13 +75,16 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     private ListView listView;
     private ArrayList<mpm_model> list;
     private RelativeLayout WebViewProcess;
-    private WebView WebViewWrap,WebViewMatch;
+    private PDFView WebViewWrap;
     private RelativeLayout mpm_imageBtnBack;
     private mpm_adapter mpmAdapter;
     public mpm_activity pre_activity;
     private LinearLayout WebView_match_layout,WebView_wrap_layout;
     private TextView Toolbar_title;
     private int dublicatePosition=0;
+    private int total;
+    private TextView Process_count,Pages_count,Pages_total;
+    private LinearLayout Bottom_listItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,18 +121,18 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         queue.start();
 
         Toolbar_title=(TextView)findViewById(R.id.toolbar_title);
-        WebView_match_layout = (LinearLayout) findViewById(R.id.webView_match_layout);
-        WebView_wrap_layout = (LinearLayout) findViewById(R.id.webView_wrap_layout);
-        WebView_wrap_layout.setVisibility(View.GONE);
-        WebView_match_layout.setVisibility(View.GONE);
-
+        Process_count = (TextView) findViewById(R.id.process_count);
+        Pages_count = (TextView) findViewById(R.id.pages_count);
+        Pages_total = (TextView) findViewById(R.id.pages_total);
         WebViewProcess = (RelativeLayout) findViewById(R.id.webview_process);
         mpm_imageBtnBack = (RelativeLayout) findViewById(R.id.mpm_imageBtnBack);
+        Bottom_listItem = (LinearLayout) findViewById(R.id.bottom_listItem);
+
+        Bottom_listItem.setVisibility(View.VISIBLE);
         WebViewProcess.setVisibility(View.GONE);
         WebViewProcess.setOnClickListener(this);
 
-        WebViewWrap = (WebView) findViewById(R.id.webview_wrap);
-        WebViewMatch = (WebView) findViewById(R.id.webview_match);
+        WebViewWrap = (PDFView) findViewById(R.id.webview_wrap);
 
         url = ConstsCore.web_url + "/v1/display/mpmproducts/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
         Log.e(TAG, "web_url: " + url);
@@ -124,13 +141,13 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                dublicatePosition=position;
                 if (WebViewProcess.getVisibility() == View.VISIBLE) {
                     Toast.makeText(context, "Please wait file is working above...", Toast.LENGTH_SHORT).show();
                 } else {
-                    setWebView(position);
                     clickPosition=position;
                     mpmAdapter.notifyDataSetChanged();
+                    WebViewProcess.setVisibility(View.VISIBLE);
+                    new GetbytesFrompdf().execute(list.get(position).getMpmPath());
                     Log.e(TAG, "clickPosition: in Activity "+clickPosition );
 
                 }
@@ -162,50 +179,18 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     public void response(ArrayList<mpm_model> list) {
 
         Log.e(TAG, "response: " + list.size());
-        WebView_wrap_layout.setVisibility(View.VISIBLE);
         this.list = list;
         mpmAdapter = new mpm_adapter(context, list);
         listView.setAdapter(mpmAdapter);
         // set web view for read pdf...
         WebViewProcess.setVisibility(View.VISIBLE);
+        new GetbytesFrompdf().execute(list.get(0).getMpmPath());
+        Log.e(TAG, "GetbytesFrompdf: " );
 
-        WebViewWrap.getSettings().setAppCacheMaxSize(5 * 1024 * 1024); // 5MB  /data/user/0/com.project.nat.test123/cache
-        WebViewWrap.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
-        Log.e(TAG, "setAppCachePath: Wrap " + getApplicationContext().getCacheDir().getAbsolutePath());
-        WebViewWrap.getSettings().setAllowFileAccess(true);
-        WebViewWrap.getSettings().setBuiltInZoomControls(true);
-        WebViewWrap.getSettings().setDisplayZoomControls(false);
-        WebViewWrap.getSettings().setAppCacheEnabled(true);
-        WebViewWrap.getSettings().setJavaScriptEnabled(true);
-        WebViewWrap.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
-        WebViewWrap.setWebViewClient(new Webview_wrap());
-
-
-        WebViewMatch.getSettings().setAppCacheMaxSize(5 * 1024 * 1024); // 5MB  /data/user/0/com.project.nat.test123/cache
-        WebViewMatch.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
-        Log.e(TAG, "setAppCachePath: Match " + getApplicationContext().getCacheDir().getAbsolutePath());
-        WebViewMatch.getSettings().setAllowFileAccess(true);
-        WebViewMatch.getSettings().setBuiltInZoomControls(true);
-        WebViewMatch.getSettings().setDisplayZoomControls(false);
-        WebViewMatch.getSettings().setAppCacheEnabled(true);
-        WebViewMatch.getSettings().setJavaScriptEnabled(true);
-        WebViewMatch.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
-        WebViewMatch.setWebViewClient(new Webview_Match());
-
-
-        setWebView(0);
 
 
     }
 
-    private void setWebView(int position) {
-
-
-        Log.e(TAG, "setWebView: " + "http://docs.google.com/gview?embedded=true&url=" + list.get(position).getMpmPath());
-        WebViewWrap.loadUrl("http://docs.google.com/gview?embedded=true&url=" + list.get(position).getMpmPath());
-        WebViewMatch.loadUrl("http://docs.google.com/gview?embedded=true&url=" + list.get(position).getMpmPath());
-
-    }
 
     @Override
     public void onClick(View view) {
@@ -220,7 +205,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
     @Override
     public void onBackPressed() {
-        if(WebView_match_layout.getVisibility()==View.VISIBLE)
+     /*   if(WebView_match_layout.getVisibility()==View.VISIBLE)
         {
             Log.e(TAG, "onBackPressed: IN" );
             WebView_wrap_layout.setVisibility(View.VISIBLE);
@@ -232,92 +217,143 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
             Log.e(TAG, "onBackPressed: OUT" );
             clickPosition=0;
             finish();
-        }
+        }*/
+        finish();
     }
 
-    private class Webview_wrap extends WebViewClient
+    @Override
+    public void onPageChanged(int page, int pageCount) {
+        Log.e(TAG, "onPageChanged: "+page+"and page count"+pageCount );
+        int count=page+1;
+        Pages_total.setText(""+pageCount);
+        Pages_count.setText(""+count);
+    }
 
-    {
+    @Override
+    public void loadComplete(int nbPages) {
+        Log.e(TAG, "loadComplete: "+nbPages );
+    }
 
+
+    public class GetbytesFrompdf extends AsyncTask<String,String,String> {
+
+
+        private URL PdfUrl;
 
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.e(TAG, "onPreExecute: >>>>>>>" );
+            Process_count.setText("0");
+        }
 
-            Log.e(TAG, "shouldOverrideUrlLoading: Webview Wrap" + url);
-            String clickurl="http://docs.google.com/viewerng/viewer?url="+list.get(dublicatePosition).getMpmPath();
+        @Override
+        protected String doInBackground(String... strings) {
+            String path=strings[0];
+            Log.e(TAG, "doInBackground: path "+path );
+            URI uri = null;
+            URLConnection connection = null;
+            try {
+                uri = new URI(path);
+                PdfUrl=uri.toURL();
+                connection = PdfUrl.openConnection();
+                connection.connect();
+                InputStream in = connection.getInputStream();
 
-            if(clickurl.equals(url)){
-                if (Build.VERSION.SDK_INT >= 21) {
 
-                    Reusable_Functions.ViewVisible(WebView_match_layout);
-                    Reusable_Functions.ViewGone(WebView_wrap_layout);
+                // Since you get a URLConnection, use it to get the InputStream
+                // Now that the InputStream is open, get the content length
+                int contentLength = connection.getContentLength();
 
-                }else{
-                    WebView_match_layout.setVisibility(View.VISIBLE);
-                    WebView_wrap_layout.setVisibility(View.GONE);
+                // To avoid having to resize the array over and over and over as
+                // bytes are written to the array, provide an accurate estimate of
+                // the ultimate size of the byte array
+                ByteArrayOutputStream tmpOut;
+                if (contentLength != -1) {
+                    tmpOut = new ByteArrayOutputStream(contentLength);
+                } else {
+                    tmpOut = new ByteArrayOutputStream(16384); // Pick some appropriate size
                 }
 
-                Toolbar_title.setText("Mens Party Wear Shirt");
-                return true;
-            }else{
-                return true;
+                byte[] buf = new byte[512];
+                while (true) {
+                    int len = in.read(buf);
+                    if (len == -1) {
+                        break;
+                    }
+                    total += len;
+                    // publishing the progress....
+                    // After this onProgressUpdate will be called
+                    publishProgress(""+(int)((total*100)/contentLength));
+                    Log.e(TAG, "doInBackground: "+contentLength+"and total is "+total );
+                    tmpOut.write(buf, 0, len);
+                }
+                in.close();
+                tmpOut.close(); // No effect, but good to do anyway to keep the metaphor alive
 
+                byte[] array = tmpOut.toByteArray();
+
+                handle(array);
+
+            } catch (IOException e1) {
+                Log.e(TAG, "IOException: "+e1.getMessage() );
+                OnBackgrounderror(e1);
+                e1.printStackTrace();
+            } catch (URISyntaxException e2) {
+                Log.e(TAG, "URISyntaxException: "+e2.getMessage());
+                e2.printStackTrace();
             }
 
+
+            return null;
         }
 
         @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            super.onPageStarted(view, url, favicon);
-            WebViewProcess.setVisibility(View.VISIBLE);
-
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            super.onPageFinished(view, url);
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e(TAG, "onPostExecute: >>>>>>>" );
             WebViewProcess.setVisibility(View.GONE);
 
         }
 
         @Override
-        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            Toast.makeText(context, description, Toast.LENGTH_SHORT).show();
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            Process_count.setText(""+Integer.parseInt(values[0]));
+
         }
     }
 
+    private void OnBackgrounderror(IOException e) {
 
-    private class Webview_Match extends WebViewClient {
+        WebViewProcess.setVisibility(View.GONE);
+        Toast.makeText(context,e.getMessage(), Toast.LENGTH_SHORT).show();
 
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+    }
 
-            Log.e(TAG, "shouldOverrideUrlLoading: Webview Match " + url);
-            String clickurl="http://docs.google.com/viewerng/viewer?url="+list.get(dublicatePosition).getMpmPath();
-            if(clickurl.equals(url)){
-                if (Build.VERSION.SDK_INT >= 21) {
+    private void handle(final byte[] array) {
+        Handler handler = new Handler(Looper.getMainLooper());
 
-                    Reusable_Functions.ViewVisible(WebView_wrap_layout);
-                    Reusable_Functions.ViewGone(WebView_match_layout);
-
-                }else{
-                    WebView_wrap_layout.setVisibility(View.VISIBLE);
-                    WebView_match_layout.setVisibility(View.GONE);
-                }
-
-
-
-                Toolbar_title.setText("MPM");
-                return true;
-
-
-            }else{
-                return true;
-
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // Run your task here
+                loadpdf(array);
             }
-
-
-
-        }
+        }, 1000 );
     }
+
+    private void loadpdf(byte[] array) {
+
+        WebViewWrap.fromBytes(array)
+
+                //  .pages(0, 2, 1, 3, 3, 3) // all pages are displayed by default
+                .defaultPage(0)
+                .onPageChange(this)
+                .enableAnnotationRendering(true)
+                .onLoad(this)
+                .scrollHandle(new DefaultScrollHandle(this))
+                .load();
+    }
+
+
 }

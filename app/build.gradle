@@ -77,6 +77,8 @@ dependencies
             testCompile 'junit:junit:4.12'
             compile 'testfairy:testfairy-android-sdk:1.+@aar'
             compile 'com.android.support.constraint:constraint-layout:1.0.2'
+            compile 'com.github.barteksc:android-pdf-viewer:2.5.1'
+
         }
 
 apply plugin: 'com.google.gms.google-services'
