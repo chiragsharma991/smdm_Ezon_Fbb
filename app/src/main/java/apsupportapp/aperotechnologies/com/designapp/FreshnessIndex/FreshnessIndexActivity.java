@@ -1909,7 +1909,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             level = 1;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
-                if (freshnessIndexDetailsArrayList.get(j).getPlanDept().equals(fIndexFirstVisibleItem)) {
+                Log.e(TAG, "equals: "+freshnessIndexDetailsArrayList.get(j).getPlanDept()+"and index position"+fIndexFirstVisibleItem );
+                if (freshnessIndexDetailsArrayList.get(j).getPlanDept().contentEquals(fIndexFirstVisibleItem)) {
 
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                     llm.scrollToPosition(firstVisibleItem);

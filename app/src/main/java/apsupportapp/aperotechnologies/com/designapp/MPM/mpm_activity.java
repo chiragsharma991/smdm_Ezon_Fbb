@@ -62,6 +62,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     private SharedPreferences sharedPreferences;
     private String userId;
     private String bearertoken;
+    private String departmentName;
     private RequestQueue queue;
     private Context context;
     private int limit = 100;
@@ -76,15 +77,15 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     private ArrayList<mpm_model> list;
     private RelativeLayout WebViewProcess;
     private PDFView WebViewWrap;
-    private RelativeLayout mpm_imageBtnBack;
+    private RelativeLayout mpm_imageBtnBack,Pdf_zoom_btn;
     private mpm_adapter mpmAdapter;
     public mpm_activity pre_activity;
     private LinearLayout WebView_match_layout,WebView_wrap_layout;
     private TextView Toolbar_title;
     private int dublicatePosition=0;
-    private int total;
     private TextView Process_count,Pages_count,Pages_total;
-    private LinearLayout Bottom_listItem;
+    private LinearLayout Bottom_listItem,BaseLayout;
+    private boolean error=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         context = this;
         checkCollapsing();
         intialise();
+
 
 
         if (Reusable_Functions.chkStatus(context)) {
@@ -126,11 +128,15 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         Pages_total = (TextView) findViewById(R.id.pages_total);
         WebViewProcess = (RelativeLayout) findViewById(R.id.webview_process);
         mpm_imageBtnBack = (RelativeLayout) findViewById(R.id.mpm_imageBtnBack);
+        Pdf_zoom_btn = (RelativeLayout) findViewById(R.id.pdf_zoom_btn);
         Bottom_listItem = (LinearLayout) findViewById(R.id.bottom_listItem);
+        BaseLayout = (LinearLayout) findViewById(R.id.baseLayout);
+        BaseLayout.setVisibility(View.GONE);
 
         Bottom_listItem.setVisibility(View.VISIBLE);
         WebViewProcess.setVisibility(View.GONE);
         WebViewProcess.setOnClickListener(this);
+        Pdf_zoom_btn.setOnClickListener(this);
 
         WebViewWrap = (PDFView) findViewById(R.id.webview_wrap);
 
@@ -145,6 +151,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
                     Toast.makeText(context, "Please wait file is working above...", Toast.LENGTH_SHORT).show();
                 } else {
                     clickPosition=position;
+                    departmentName=list.get(position).getProductName();
                     mpmAdapter.notifyDataSetChanged();
                     WebViewProcess.setVisibility(View.VISIBLE);
                     new GetbytesFrompdf().execute(list.get(position).getMpmPath());
@@ -182,6 +189,8 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         this.list = list;
         mpmAdapter = new mpm_adapter(context, list);
         listView.setAdapter(mpmAdapter);
+        BaseLayout.setVisibility(View.VISIBLE);
+        departmentName=list.get(0).getProductName();
         // set web view for read pdf...
         WebViewProcess.setVisibility(View.VISIBLE);
         new GetbytesFrompdf().execute(list.get(0).getMpmPath());
@@ -198,6 +207,16 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
             case R.id.mpm_imageBtnBack:
                 onBackPressed();
                 break;
+            case R.id.pdf_zoom_btn:
+                if(Bottom_listItem.getVisibility()==View.VISIBLE){
+                    Reusable_Functions.ViewGone(Bottom_listItem);
+                    Toolbar_title.setText(departmentName);
+                }else{
+                    Reusable_Functions.ViewVisible(Bottom_listItem);
+                    Toolbar_title.setText("Season Catalogue");
+
+                }
+                break;
             case R.id.webview_process:
                 break;
         }
@@ -205,20 +224,16 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
     @Override
     public void onBackPressed() {
-     /*   if(WebView_match_layout.getVisibility()==View.VISIBLE)
-        {
-            Log.e(TAG, "onBackPressed: IN" );
-            WebView_wrap_layout.setVisibility(View.VISIBLE);
-            WebView_match_layout.setVisibility(View.GONE);
-            Toolbar_title.setText("MPM");
-
-        }else
-        {
-            Log.e(TAG, "onBackPressed: OUT" );
+        if(Bottom_listItem.getVisibility()==View.VISIBLE){
+            error=true;
             clickPosition=0;
             finish();
-        }*/
-        finish();
+        }else{
+            Reusable_Functions.ViewVisible(Bottom_listItem);
+            Toolbar_title.setText("MPM");
+
+        }
+
     }
 
     @Override
@@ -232,13 +247,15 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     @Override
     public void loadComplete(int nbPages) {
         Log.e(TAG, "loadComplete: "+nbPages );
+        WebViewProcess.setVisibility(View.GONE);
+
     }
 
 
     public class GetbytesFrompdf extends AsyncTask<String,String,String> {
 
-
         private URL PdfUrl;
+        private int total=0;
 
         @Override
         protected void onPreExecute() {
@@ -249,6 +266,10 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
         @Override
         protected String doInBackground(String... strings) {
+            Log.e(TAG, "doInBackground: start" );
+
+
+
             String path=strings[0];
             Log.e(TAG, "doInBackground: path "+path );
             URI uri = null;
@@ -277,6 +298,11 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
                 byte[] buf = new byte[512];
                 while (true) {
+                    if(error==true)  // error is when you press back then it will intrupt and stop.
+                    {
+                        Log.e(TAG, "doInBackground: process has been interrupted !");
+                        break;
+                    }
                     int len = in.read(buf);
                     if (len == -1) {
                         break;
@@ -297,10 +323,11 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
             } catch (IOException e1) {
                 Log.e(TAG, "IOException: "+e1.getMessage() );
-                OnBackgrounderror(e1);
+                Reusable_Functions.MakeToast(context,"data failed....");
                 e1.printStackTrace();
             } catch (URISyntaxException e2) {
                 Log.e(TAG, "URISyntaxException: "+e2.getMessage());
+                Reusable_Functions.MakeToast(context,"data failed....");
                 e2.printStackTrace();
             }
 
@@ -312,24 +339,21 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.e(TAG, "onPostExecute: >>>>>>>" );
-            WebViewProcess.setVisibility(View.GONE);
+            total=0;
 
         }
 
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-            Process_count.setText(""+Integer.parseInt(values[0]));
+                Process_count.setText(""+Integer.parseInt(values[0]));
+
+
 
         }
     }
 
-    private void OnBackgrounderror(IOException e) {
 
-        WebViewProcess.setVisibility(View.GONE);
-        Toast.makeText(context,e.getMessage(), Toast.LENGTH_SHORT).show();
-
-    }
 
     private void handle(final byte[] array) {
         Handler handler = new Handler(Looper.getMainLooper());
