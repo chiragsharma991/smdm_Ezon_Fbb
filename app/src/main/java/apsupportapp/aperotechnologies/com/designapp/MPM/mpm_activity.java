@@ -218,6 +218,8 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
             clickPosition=0;
             finish();
         }*/
+        clickPosition=0;
+
         finish();
     }
 
@@ -319,7 +321,11 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-            Process_count.setText(""+Integer.parseInt(values[0]));
+            int count=Integer.parseInt(values[0]);
+            if(count<=99){
+                Process_count.setText(""+Integer.parseInt(values[0]));
+
+            }
 
         }
     }
@@ -351,7 +357,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
                 .onPageChange(this)
                 .enableAnnotationRendering(true)
                 .onLoad(this)
-                .scrollHandle(new DefaultScrollHandle(this))
+                //.scrollHandle(new DefaultScrollHandle(this))
                 .load();
     }
 

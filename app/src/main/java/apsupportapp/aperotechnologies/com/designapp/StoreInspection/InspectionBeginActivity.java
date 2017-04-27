@@ -98,7 +98,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     ImageView image_improvement_criteria_6, image_okay_criteria_6, image_good_criteria_6, image_excellent_criteria_6;
     ImageView image_improvement_criteria_7, image_okay_criteria_7, image_good_criteria_7, image_excellent_criteria_7;
     ImageView image_improvement_criteria_8, image_okay_criteria_8, image_good_criteria_8, image_excellent_criteria_8;
-    ImageView image_camera, image_upload;
+    ImageView image_camera, image_upload ,emoji_image;
 
     // Emoji Text Declaration
     TextView txt_improvement_criteria_1, txt_okay_criteria_1, txt_good_criteria_1, txt_excellent_criteria_1;
@@ -125,6 +125,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     private String insp_imagePath;
     String strDate;
     Context context;
+    private int overallRating;
     private int fashionQuot, merchDisplay, merchPresentationStd, suggSellingByStaff, overallCleanliness, signage, winClusterMannequinsDisp, mpmExecution;
 
 
@@ -150,7 +151,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
     public void getCurrentDate(View view) {
         Calendar calendar = Calendar.getInstance(); //dd / MM /yyyy
-        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd-MM-yyyy");
         strDate = mdformat.format(calendar.getTime());
         txt_insp_date_Val.setText(strDate);
     }
@@ -245,6 +246,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         rel_cam_image = (RelativeLayout) findViewById(R.id.rel_cam_image);
         image_camera = (ImageView) findViewById(R.id.camera_imageView);
         image_upload = (ImageView) findViewById(R.id.camera_imageView1);
+        emoji_image = (ImageView)findViewById(R.id.emoji_image);
         image_upload.setVisibility(View.INVISIBLE);
         txt_insp_date_Val = (TextView) findViewById(R.id.txt_insp_date_Val);
         inspection_btnback = (RelativeLayout) findViewById(R.id.inspection_btnback);
@@ -314,7 +316,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_1.setText("");
                     txt_okay_criteria_1.setText("");
                     fashionQuot = 1;
-
+                    emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
                 } else {
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_1.setText("");
@@ -338,6 +340,32 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_2.setText("");
                     txt_okay_criteria_2.setText("");
                     merchDisplay = 1;
+                    if(fashionQuot == 1)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    }
+                    else if(fashionQuot == 2)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+                    }
+                    else if(fashionQuot == 3)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                    }
+                    else if(fashionQuot == 4)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                    }
+
+
                 } else {
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_2.setText("");
@@ -527,6 +555,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
                     fashionQuot = 2;
+                    emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
 
                 } else {
                     //  image_okay_criteria_1.setClickable(false);
@@ -554,6 +583,30 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
                     merchDisplay = 2;
+                    if(fashionQuot == 1)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+                    }
+                    else if(fashionQuot == 2)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+                    }
+                    else if(fashionQuot == 3)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                    }
+                    else if(fashionQuot == 4)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                    }
                 } else {
                     // image_okay_criteria_2.setClickable(false);
                     image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -748,6 +801,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
                     fashionQuot = 3;
+                    emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
 
                 } else {
                     // image_good_criteria_1.setClickable(false);
@@ -776,6 +830,30 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
                     merchDisplay = 3;
+                    if(fashionQuot == 1)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+                    }
+                    else if(fashionQuot == 2)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                    }
+                    else if(fashionQuot == 3)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                    }
+                    else if(fashionQuot == 4)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    }
                 } else {
                     // image_good_criteria_2.setClickable(false);
                     image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -914,7 +992,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_improvement_criteria_7.setText("");
                     mpmExecution = 3;
 
-
                 } else {
                     // image_good_criteria_7.setClickable(false);
                     image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -972,6 +1049,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
                     fashionQuot = 4;
+                    emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
                 } else {
                     //  image_excellent_criteria_1.setClickable(false);
                     image_excellent_criteria_1.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -997,6 +1075,30 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
                     merchDisplay = 4;
+                    if(fashionQuot == 1)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                    }
+                    else if(fashionQuot == 2)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                    }
+                    else if(fashionQuot == 3)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    }
+                    else if(fashionQuot == 4)
+                    {
+                        overallRating = (fashionQuot + merchDisplay)/2;
+                        Log.e("overallRatings :",""+overallRating);
+                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    }
                 } else {
                     //  image_excellent_criteria_2.setClickable(false);
                     image_excellent_criteria_2.setBackgroundResource(R.mipmap.excellentemojiunselected);
