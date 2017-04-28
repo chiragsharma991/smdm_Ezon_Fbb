@@ -28,6 +28,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -66,7 +67,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
     ImageView image_improvement_inspdetls_cri_6,image_okay_inspdetls_cri_6,image_good_inspdetls_cri_6,image_excellent_inspdetls_cri_6;
     ImageView image_improvement_inspdetls_cri_7,image_okay_inspdetls_cri_7,image_good_inspdetls_cri_7,image_excellent_inspdetls_cri_7;
     ImageView image_improvement_inspdetls_cri_8,image_okay_inspdetls_cri_8,image_good_inspdetls_cri_8,image_excellent_inspdetls_cri_8;
-
+    ImageView camera_imageView1,emoji_image;
     // Emoji Text Declaration
     TextView txt_improvement_inspdetls_cri_1,txt_okay_inspdetls_cri_1,txt_good_inspdetls_cri_1,txt_excellent_inspdetls_cri_1;
     TextView txt_improvement_inspdetls_cri_2,txt_okay_inspdetls_cri_2,txt_good_inspdetls_cri_2,txt_excellent_inspdetls_cri_2;
@@ -96,10 +97,11 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
         gson = new Gson();
         inspectn_Id = getIntent().getIntExtra("inspectionId",0);
         inspdetls_ArrayList = new ArrayList<InspectionBeanClass>();
+
         Log.e("Inspection Id in Details",""+inspectn_Id);
-        if (Reusable_Functions.chkStatus(context)) {
+        if (Reusable_Functions.chkStatus(InspectionDetailsActivity.this)) {
             Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
+            Reusable_Functions.sDialog(InspectionDetailsActivity.this, "Loading data...");
             requestInspectionDetails(inspectn_Id);
         }
         else
@@ -117,6 +119,8 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
         inspection_txtStoreName = (TextView)findViewById(R.id.inspection_txtStoreName);
         inspection_txtStoreCode = (TextView)findViewById(R.id.inspection_txtStoreCode);
         txt_comment_val = (TextView)findViewById(R.id.txt_comment_val);
+        camera_imageView1 = (ImageView)findViewById(R.id.camera_imageView1);
+        emoji_image = (ImageView)findViewById(R.id.emoji_image);
         insp_detls_btnback.setOnClickListener(this);
         //Improvement emoji image
         image_improvement_inspdetls_cri_1 = (ImageView)findViewById(R.id.image_improvement_criteria_1);
@@ -271,9 +275,35 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                         int id = inspdetls_ArrayList.get(i).getInspectionId();
                                         String name = inspdetls_ArrayList.get(i).getInspectorName();
                                         String date = inspdetls_ArrayList.get(i).getInspectionDate();
+                                        String storeImg = inspdetls_ArrayList.get(i).getStoreImg();
+                                        String rating = inspdetls_ArrayList.get(i).getRating();
+
                                         txt_inspdetls_name_Val.setText(name);
                                         txt_inspdetls_id_Val.setText(""+id);
                                         txt_inspdetls_date_Val.setText(date);
+                                        //Rating
+                                        if(rating.equals("Need Improvement"))
+                                        {
+                                            emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+                                        }
+                                        else if(rating.equals("Okay"))
+                                        {
+                                            emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+                                        }
+                                        else if(rating.equals("Good"))
+                                        {
+                                            emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                                        }
+                                        else if(rating.equals("Excellent"))
+                                        {
+                                            emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+                                        }
+
+                                        Glide.with(context)
+                                                .load(storeImg)
+                                                .fitCenter()
+                                                .into(camera_imageView1);
+
 
                                         inspection_txtStoreCode.setText(inspdetls_ArrayList.get(i).getStoreCode());
                                         inspection_txtStoreName.setText(inspdetls_ArrayList.get(i).getStoreDesc());

@@ -11,6 +11,16 @@ public class InspectionBeanClass
     String storeCode;
     String storeDesc;
 
+    public String getStoreImg() {
+        return storeImg;
+    }
+
+    public void setStoreImg(String storeImg) {
+        this.storeImg = storeImg;
+    }
+
+    String storeImg;
+
     public String getComments() {
         return comments;
     }

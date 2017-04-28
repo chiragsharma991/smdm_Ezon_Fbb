@@ -52,6 +52,11 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
                 ((Insp_History_Adapter.Holder) holder).txt_inspection_id.setText(""+"Inspection Id : " +list.get(position).getInspectionId());
                 ((Insp_History_Adapter.Holder) holder).txt_store_code.setText("" + list.get(position).getStoreCode()+" "+list.get(position).getStoreDesc());
                 ((Insp_History_Adapter.Holder) holder).txt_date.setText("" + list.get(position).getInspectionDate());
+                Glide.with(context)
+                        .load(list.get(position).getStoreImg())
+                        .fitCenter()
+                        .into(((Insp_History_Adapter.Holder) holder).image_insphistory_1);
+
                 if(list.get(position).getRating().equals("Okay"))
                 {
                     Glide.with(context)
@@ -112,11 +117,12 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
     public static class Holder extends RecyclerView.ViewHolder
     {
         private TextView txt_store_code, txt_inspected_by, txt_inspection_id, txt_date;
-        private ImageView image_insp_store, image_emoji;
+        private ImageView image_insp_store, image_emoji,image_insphistory_1;
         RelativeLayout relative_insp_summary;
         public Holder(View itemView)
         {
             super(itemView);
+            image_insphistory_1 =(ImageView)itemView.findViewById(R.id.image_insphistory_1);
             txt_store_code = (TextView) itemView.findViewById(R.id.txt_store_code);
             txt_inspected_by = (TextView) itemView.findViewById(R.id.txt_inspected_name);
             txt_inspection_id = (TextView) itemView.findViewById(R.id.txt_inspection_id);
