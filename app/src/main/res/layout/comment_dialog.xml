@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="0dp"
         android:background="@drawable/alertdialog_rectangle"
 
         >
@@ -16,7 +17,9 @@
             android:layout_height="wrap_content"
             android:textColor="@color/bg_store_code_text"
             android:textSize="18sp"
-            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Comment"
             android:textStyle="bold"
             />
@@ -32,15 +35,16 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/feedback_comment"
             android:lines="6"
             android:background="@android:color/transparent"
             android:minLines="6"
             android:gravity="top|left"
             android:scrollbars="vertical"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:textColor="@color/bg_store_code_text"
             android:textSize="@dimen/collaboration_stock_storecode"
             android:textStyle="normal"
@@ -48,18 +52,25 @@
             android:hint="Please enter your comments"
             />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/smdm_border"
+            >
+
+        </View>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/comment_skip"
-                android:background="@drawable/border4"
                 android:gravity="center_horizontal|center_vertical"
                 >
 
@@ -75,11 +86,20 @@
 
 
             </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/smdm_border"
+                >
+
+            </View>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/border4"
                 android:id="@+id/comment_ok"
                 android:gravity="center_horizontal|center_vertical"
                 >

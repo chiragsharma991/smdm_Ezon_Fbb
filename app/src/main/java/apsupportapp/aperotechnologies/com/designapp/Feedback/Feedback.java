@@ -89,8 +89,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private TextView Feedback_option,Fitting;
     private EditText feedback_comment;
     private AlertDialog dialog;
-    private LinearLayout firstView;
-    private RelativeLayout secondView, FeedbackNext;
+    private LinearLayout firstView,FeedbackNext;
+    private RelativeLayout secondView;
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
     private ArrayList<String> optionList;
@@ -149,7 +149,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         firstView = (LinearLayout) findViewById(R.id.replaceView_first);
         secondView = (RelativeLayout) findViewById(R.id.replaceView_two);
-        FeedbackNext = (RelativeLayout) findViewById(R.id.feedbackNext);
+        FeedbackNext = (LinearLayout) findViewById(R.id.feedbackNext);
 
         Pricing = (TextView) findViewById(R.id.pricing);
         Fitting = (TextView) findViewById(R.id.fitting);
@@ -403,7 +403,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             ImageLoader_feedback.setVisibility(View.GONE);
 
             Glide.with(context).
-                    load(R.mipmap.placeholder).
+                    load(R.drawable.placeholder).
                     into(Feedback_image);
 
         }
