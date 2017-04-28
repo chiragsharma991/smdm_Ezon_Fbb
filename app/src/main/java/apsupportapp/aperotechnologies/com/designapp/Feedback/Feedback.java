@@ -97,6 +97,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private boolean feedbackReport = false;
     private Feedback_model feedback_model_report;
     private String selectCategory;
+    private String storecode,storeDes;
     //  private Feedback_details feedbackAdapter;
 
 
@@ -292,7 +293,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 feedbackReport = false;
                                 e.printStackTrace();
@@ -374,6 +375,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void nextList(int position) {
         Feedback_option.setText(feedbackList.get(position).getOption());
+        storecode=feedbackList.get(position).getStoreCode();
+        storeDes=feedbackList.get(position).getStoreDesc();
         Log.e(TAG, "array list size : " + feedbackList.size());
         ImageLoader_feedback.setVisibility(View.VISIBLE);
 
@@ -667,6 +670,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         try {
             jsonObject.put("option", Feedback_option.getText().toString());
             jsonObject.put("userId", userId);
+            // jsonObject.put("storeCode", storecode);
             jsonObject.put("prodImageUrl", feedbackList.get(listCount).getProdImageUrl());
             jsonObject.put("comments", feedback_comment.getText().toString());
             jsonObject.put("fitting", fitting);

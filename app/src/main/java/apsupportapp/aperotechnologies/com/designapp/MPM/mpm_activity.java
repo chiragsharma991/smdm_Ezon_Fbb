@@ -323,11 +323,11 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
             } catch (IOException e1) {
                 Log.e(TAG, "IOException: "+e1.getMessage() );
-                Reusable_Functions.MakeToast(context,"data failed....");
+                OnMainThread();
                 e1.printStackTrace();
             } catch (URISyntaxException e2) {
                 Log.e(TAG, "URISyntaxException: "+e2.getMessage());
-                Reusable_Functions.MakeToast(context,"data failed....");
+                OnMainThread();
                 e2.printStackTrace();
             }
 
@@ -346,13 +346,23 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-                Process_count.setText(""+Integer.parseInt(values[0]));
+            Process_count.setText(""+Integer.parseInt(values[0]));
 
 
 
         }
     }
 
+    private void OnMainThread()
+    {
+        mpm_activity.this.runOnUiThread(new Runnable() {
+            public void run() {
+                Reusable_Functions.MakeToast(mpm_activity.this,"data failed...");
+                WebViewProcess.setVisibility(View.GONE);
+
+            }
+        });
+    }
 
 
     private void handle(final byte[] array) {
