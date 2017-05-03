@@ -1913,7 +1913,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/smdm_light_Black"
-                            android:text="MPM"
+                            android:text="Season Catalogue"
                             android:gravity="center_horizontal"
                             android:textSize="13sp"/>
                     </LinearLayout>

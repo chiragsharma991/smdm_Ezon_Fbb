@@ -34,7 +34,11 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +71,17 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
     ImageView image_improvement_inspdetls_cri_6,image_okay_inspdetls_cri_6,image_good_inspdetls_cri_6,image_excellent_inspdetls_cri_6;
     ImageView image_improvement_inspdetls_cri_7,image_okay_inspdetls_cri_7,image_good_inspdetls_cri_7,image_excellent_inspdetls_cri_7;
     ImageView image_improvement_inspdetls_cri_8,image_okay_inspdetls_cri_8,image_good_inspdetls_cri_8,image_excellent_inspdetls_cri_8;
+    //Image View
+    ImageView image_improvement_inspdetls_criteria_1,image_okay_inspdetls_criteria_1,image_good_inspdetls_criteria_1,image_excellent_inspdetls_criteria_1;
+    ImageView image_improvement_inspdetls_criteria_2,image_okay_inspdetls_criteria_2,image_good_inspdetls_criteria_2,image_excellent_inspdetls_criteria_2;
+    ImageView image_improvement_inspdetls_criteria_3,image_okay_inspdetls_criteria_3,image_good_inspdetls_criteria_3,image_excellent_inspdetls_criteria_3;
+    ImageView image_improvement_inspdetls_criteria_4,image_okay_inspdetls_criteria_4,image_good_inspdetls_criteria_4,image_excellent_inspdetls_criteria_4;
+    ImageView image_improvement_inspdetls_criteria_5,image_okay_inspdetls_criteria_5,image_good_inspdetls_criteria_5,image_excellent_inspdetls_criteria_5;
+    ImageView image_improvement_inspdetls_criteria_6,image_okay_inspdetls_criteria_6,image_good_inspdetls_criteria_6,image_excellent_inspdetls_criteria_6;
+    ImageView image_improvement_inspdetls_criteria_7,image_okay_inspdetls_criteria_7,image_good_inspdetls_criteria_7,image_excellent_inspdetls_criteria_7;
+    ImageView image_improvement_inspdetls_criteria_8,image_okay_inspdetls_criteria_8,image_good_inspdetls_criteria_8,image_excellent_inspdetls_criteria_8;
+
+
     ImageView camera_imageView1,emoji_image;
     // Emoji Text Declaration
     TextView txt_improvement_inspdetls_cri_1,txt_okay_inspdetls_cri_1,txt_good_inspdetls_cri_1,txt_excellent_inspdetls_cri_1;
@@ -123,41 +138,77 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
         emoji_image = (ImageView)findViewById(R.id.emoji_image);
         insp_detls_btnback.setOnClickListener(this);
         //Improvement emoji image
-        image_improvement_inspdetls_cri_1 = (ImageView)findViewById(R.id.image_improvement_criteria_1);
-        image_improvement_inspdetls_cri_2 = (ImageView)findViewById(R.id.image_improvement_criteria_2);
-        image_improvement_inspdetls_cri_3 = (ImageView)findViewById(R.id.image_improvement_criteria_3);
-        image_improvement_inspdetls_cri_4 = (ImageView)findViewById(R.id.image_improvement_criteria_4);
-        image_improvement_inspdetls_cri_5 = (ImageView)findViewById(R.id.image_improvement_criteria_5);
-        image_improvement_inspdetls_cri_6 = (ImageView)findViewById(R.id.image_improvement_criteria_6);
-        image_improvement_inspdetls_cri_7 = (ImageView)findViewById(R.id.image_improvement_criteria_7);
-        image_improvement_inspdetls_cri_8 = (ImageView)findViewById(R.id.image_improvement_criteria_8);
+        image_improvement_inspdetls_cri_1 = (ImageView)findViewById(R.id.image_improvement_cri_1);
+        image_improvement_inspdetls_cri_2 = (ImageView)findViewById(R.id.image_improvement_cri_2);
+        image_improvement_inspdetls_cri_3 = (ImageView)findViewById(R.id.image_improvement_cri_3);
+        image_improvement_inspdetls_cri_4 = (ImageView)findViewById(R.id.image_improvement_cri_4);
+        image_improvement_inspdetls_cri_5 = (ImageView)findViewById(R.id.image_improvement_cri_5);
+        image_improvement_inspdetls_cri_6 = (ImageView)findViewById(R.id.image_improvement_cri_6);
+        image_improvement_inspdetls_cri_7 = (ImageView)findViewById(R.id.image_improvement_cri_7);
+        image_improvement_inspdetls_cri_8 = (ImageView)findViewById(R.id.image_improvement_cri_8);
         //Okay emoji image
-        image_okay_inspdetls_cri_1 = (ImageView)findViewById(R.id.image_okay_criteria_1);
-        image_okay_inspdetls_cri_2 = (ImageView)findViewById(R.id.image_okay_criteria_2);
-        image_okay_inspdetls_cri_3 = (ImageView)findViewById(R.id.image_okay_criteria_3);
-        image_okay_inspdetls_cri_4 = (ImageView)findViewById(R.id.image_okay_criteria_4);
-        image_okay_inspdetls_cri_5 = (ImageView)findViewById(R.id.image_okay_criteria_5);
-        image_okay_inspdetls_cri_6 = (ImageView)findViewById(R.id.image_okay_criteria_6);
-        image_okay_inspdetls_cri_7 = (ImageView)findViewById(R.id.image_okay_criteria_7);
-        image_okay_inspdetls_cri_8 = (ImageView)findViewById(R.id.image_okay_criteria_8);
+        image_okay_inspdetls_cri_1 = (ImageView)findViewById(R.id.image_okay_cri_1);
+        image_okay_inspdetls_cri_2 = (ImageView)findViewById(R.id.image_okay_cri_2);
+        image_okay_inspdetls_cri_3 = (ImageView)findViewById(R.id.image_okay_cri_3);
+        image_okay_inspdetls_cri_4 = (ImageView)findViewById(R.id.image_okay_cri_4);
+        image_okay_inspdetls_cri_5 = (ImageView)findViewById(R.id.image_okay_cri_5);
+        image_okay_inspdetls_cri_6 = (ImageView)findViewById(R.id.image_okay_cri_6);
+        image_okay_inspdetls_cri_7 = (ImageView)findViewById(R.id.image_okay_cri_7);
+        image_okay_inspdetls_cri_8 = (ImageView)findViewById(R.id.image_okay_cri_8);
         //Good Emoji image
-        image_good_inspdetls_cri_1 = (ImageView)findViewById(R.id.image_good_criteria_1);
-        image_good_inspdetls_cri_2 = (ImageView)findViewById(R.id.image_good_criteria_2);
-        image_good_inspdetls_cri_3 = (ImageView)findViewById(R.id.image_good_criteria_3);
-        image_good_inspdetls_cri_4 = (ImageView)findViewById(R.id.image_good_criteria_4);
-        image_good_inspdetls_cri_5 = (ImageView)findViewById(R.id.image_good_criteria_5);
-        image_good_inspdetls_cri_6 = (ImageView)findViewById(R.id.image_good_criteria_6);
-        image_good_inspdetls_cri_7 = (ImageView)findViewById(R.id.image_good_criteria_7);
-        image_good_inspdetls_cri_8 = (ImageView)findViewById(R.id.image_good_criteria_8);
+        image_good_inspdetls_cri_1 = (ImageView)findViewById(R.id.image_good_cri_1);
+        image_good_inspdetls_cri_2 = (ImageView)findViewById(R.id.image_good_cri_2);
+        image_good_inspdetls_cri_3 = (ImageView)findViewById(R.id.image_good_cri_3);
+        image_good_inspdetls_cri_4 = (ImageView)findViewById(R.id.image_good_cri_4);
+        image_good_inspdetls_cri_5 = (ImageView)findViewById(R.id.image_good_cri_5);
+        image_good_inspdetls_cri_6 = (ImageView)findViewById(R.id.image_good_cri_6);
+        image_good_inspdetls_cri_7 = (ImageView)findViewById(R.id.image_good_cri_7);
+        image_good_inspdetls_cri_8 = (ImageView)findViewById(R.id.image_good_cri_8);
         //excellent emoji image
-        image_excellent_inspdetls_cri_1 = (ImageView)findViewById(R.id.image_excellent_criteria_1);
-        image_excellent_inspdetls_cri_2 = (ImageView)findViewById(R.id.image_excellent_criteria_2);
-        image_excellent_inspdetls_cri_3 = (ImageView)findViewById(R.id.image_excellent_criteria_3);
-        image_excellent_inspdetls_cri_4 = (ImageView)findViewById(R.id.image_excellent_criteria_4);
-        image_excellent_inspdetls_cri_5 = (ImageView)findViewById(R.id.image_excellent_criteria_5);
-        image_excellent_inspdetls_cri_6 = (ImageView)findViewById(R.id.image_excellent_criteria_6);
-        image_excellent_inspdetls_cri_7 = (ImageView)findViewById(R.id.image_excellent_criteria_7);
-        image_excellent_inspdetls_cri_8 = (ImageView)findViewById(R.id.image_excellent_criteria_8);
+        image_excellent_inspdetls_cri_1 = (ImageView)findViewById(R.id.image_excellent_cri_1);
+        image_excellent_inspdetls_cri_2 = (ImageView)findViewById(R.id.image_excellent_cri_2);
+        image_excellent_inspdetls_cri_3 = (ImageView)findViewById(R.id.image_excellent_cri_3);
+        image_excellent_inspdetls_cri_4 = (ImageView)findViewById(R.id.image_excellent_cri_4);
+        image_excellent_inspdetls_cri_5 = (ImageView)findViewById(R.id.image_excellent_cri_5);
+        image_excellent_inspdetls_cri_6 = (ImageView)findViewById(R.id.image_excellent_cri_6);
+        image_excellent_inspdetls_cri_7 = (ImageView)findViewById(R.id.image_excellent_cri_7);
+        image_excellent_inspdetls_cri_8 = (ImageView)findViewById(R.id.image_excellent_cri_8);
+        //Improvement Emoji default
+        image_improvement_inspdetls_criteria_1 = (ImageView)findViewById(R.id.image_improvement_criteria_1);
+        image_improvement_inspdetls_criteria_2 = (ImageView)findViewById(R.id.image_improvement_criteria_2);
+        image_improvement_inspdetls_criteria_3 = (ImageView)findViewById(R.id.image_improvement_criteria_3);
+        image_improvement_inspdetls_criteria_4 = (ImageView)findViewById(R.id.image_improvement_criteria_4);
+        image_improvement_inspdetls_criteria_5 = (ImageView)findViewById(R.id.image_improvement_criteria_5);
+        image_improvement_inspdetls_criteria_6 = (ImageView)findViewById(R.id.image_improvement_criteria_6);
+        image_improvement_inspdetls_criteria_7 = (ImageView)findViewById(R.id.image_improvement_criteria_7);
+        image_improvement_inspdetls_criteria_8 = (ImageView)findViewById(R.id.image_improvement_criteria_8);
+        //Okay emoji image default
+        image_okay_inspdetls_criteria_1 = (ImageView)findViewById(R.id.image_okay_criteria_1);
+        image_okay_inspdetls_criteria_2 = (ImageView)findViewById(R.id.image_okay_criteria_2);
+        image_okay_inspdetls_criteria_3 = (ImageView)findViewById(R.id.image_okay_criteria_3);
+        image_okay_inspdetls_criteria_4 = (ImageView)findViewById(R.id.image_okay_criteria_4);
+        image_okay_inspdetls_criteria_5 = (ImageView)findViewById(R.id.image_okay_criteria_5);
+        image_okay_inspdetls_criteria_6 = (ImageView)findViewById(R.id.image_okay_criteria_6);
+        image_okay_inspdetls_criteria_7 = (ImageView)findViewById(R.id.image_okay_criteria_7);
+        image_okay_inspdetls_criteria_8 = (ImageView)findViewById(R.id.image_okay_criteria_8);
+        //Good Emoji image default
+        image_good_inspdetls_criteria_1 = (ImageView)findViewById(R.id.image_good_criteria_1);
+        image_good_inspdetls_criteria_2 = (ImageView)findViewById(R.id.image_good_criteria_2);
+        image_good_inspdetls_criteria_3 = (ImageView)findViewById(R.id.image_good_criteria_3);
+        image_good_inspdetls_criteria_4 = (ImageView)findViewById(R.id.image_good_criteria_4);
+        image_good_inspdetls_criteria_5 = (ImageView)findViewById(R.id.image_good_criteria_5);
+        image_good_inspdetls_criteria_6 = (ImageView)findViewById(R.id.image_good_criteria_6);
+        image_good_inspdetls_criteria_7 = (ImageView)findViewById(R.id.image_good_criteria_7);
+        image_good_inspdetls_criteria_8 = (ImageView)findViewById(R.id.image_good_criteria_8);
+        //excellent emoji image default
+        image_excellent_inspdetls_criteria_1 = (ImageView)findViewById(R.id.image_excellent_criteria_1);
+        image_excellent_inspdetls_criteria_2 = (ImageView)findViewById(R.id.image_excellent_criteria_2);
+        image_excellent_inspdetls_criteria_3 = (ImageView)findViewById(R.id.image_excellent_criteria_3);
+        image_excellent_inspdetls_criteria_4 = (ImageView)findViewById(R.id.image_excellent_criteria_4);
+        image_excellent_inspdetls_criteria_5 = (ImageView)findViewById(R.id.image_excellent_criteria_5);
+        image_excellent_inspdetls_criteria_6 = (ImageView)findViewById(R.id.image_excellent_criteria_6);
+        image_excellent_inspdetls_criteria_7 = (ImageView)findViewById(R.id.image_excellent_criteria_7);
+        image_excellent_inspdetls_criteria_8 = (ImageView)findViewById(R.id.image_excellent_criteria_8);
         //Improvement emoji text
         txt_improvement_inspdetls_cri_1 = (TextView)findViewById(R.id.txt_improvement_criteria_1);
         txt_improvement_inspdetls_cri_2 = (TextView)findViewById(R.id.txt_improvement_criteria_2);
@@ -244,7 +295,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
     //-------------------------- API Declaration --------------------------//
     private void requestInspectionDetails(final int inspectn_id)
     {
-        {
+
             String url = ConstsCore.web_url + "/v1/display/storeinspection/" + userId+"?inspectionId="+inspectn_id;
             Log.e("Inspection History Url" ,"" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -280,7 +331,19 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
 
                                         txt_inspdetls_name_Val.setText(name);
                                         txt_inspdetls_id_Val.setText(""+id);
-                                        txt_inspdetls_date_Val.setText(date);
+                                        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                        DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                                        Date update_date = null;
+                                        try {
+                                            update_date = inputFormat.parse(date);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                        String outputDateStr = outputFormat.format(update_date);
+                                        Log.e("updated date :",""+outputDateStr);
+
+
+                                        txt_inspdetls_date_Val.setText(outputDateStr);
                                         //Rating
                                         if(rating.equals("Need Improvement"))
                                         {
@@ -312,24 +375,32 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                         // Fashion Quient
                                         if(inspdetls_ArrayList.get(i).getFashionQuot() == 1)
                                         {
+                                            image_improvement_inspdetls_criteria_1.setVisibility(View.GONE);
+                                            image_improvement_inspdetls_cri_1.setVisibility(View.VISIBLE);
                                             image_improvement_inspdetls_cri_1.setBackgroundResource(R.mipmap.improvementemojiselected);
                                             txt_improvement_inspdetls_cri_1.setText("Need Improvement");
                                             txt_improvement_inspdetls_cri_1.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getFashionQuot() == 2)
                                         {
+                                            image_okay_inspdetls_criteria_1.setVisibility(View.GONE);
+                                            image_okay_inspdetls_cri_1.setVisibility(View.VISIBLE);
                                             image_okay_inspdetls_cri_1.setBackgroundResource(R.mipmap.okayemojiselected);
                                             txt_okay_inspdetls_cri_1.setText("Okay");
                                             txt_okay_inspdetls_cri_1.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getFashionQuot() == 3)
                                         {
+                                            image_good_inspdetls_criteria_1.setVisibility(View.GONE);
+                                            image_good_inspdetls_cri_1.setVisibility(View.VISIBLE);
                                             image_good_inspdetls_cri_1.setBackgroundResource(R.mipmap.goodemojiselected);
                                             txt_good_inspdetls_cri_1.setText("Good");
                                             txt_good_inspdetls_cri_1.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getFashionQuot() == 4)
                                         {
+                                            image_excellent_inspdetls_criteria_1.setVisibility(View.GONE);
+                                            image_excellent_inspdetls_cri_1.setVisibility(View.VISIBLE);
                                             image_excellent_inspdetls_cri_1.setBackgroundResource(R.mipmap.excellentemojiselected);
                                             txt_excellent_inspdetls_cri_1.setText("Excellent");
                                             txt_excellent_inspdetls_cri_1.setTextSize(11f);
@@ -337,24 +408,32 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                         //merchDisplay
                                         if(inspdetls_ArrayList.get(i).getMerchDisplay() == 1)
                                         {
+                                            image_improvement_inspdetls_criteria_2.setVisibility(View.GONE);
+                                            image_improvement_inspdetls_cri_2.setVisibility(View.VISIBLE);
                                             image_improvement_inspdetls_cri_2.setBackgroundResource(R.mipmap.improvementemojiselected);
                                             txt_improvement_inspdetls_cri_2.setText("Need Improvement");
                                             txt_improvement_inspdetls_cri_2.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getMerchDisplay() == 2)
                                         {
+                                            image_okay_inspdetls_criteria_2.setVisibility(View.GONE);
+                                            image_okay_inspdetls_cri_2.setVisibility(View.VISIBLE);
                                             image_okay_inspdetls_cri_2.setBackgroundResource(R.mipmap.okayemojiselected);
                                             txt_okay_inspdetls_cri_2.setText("Okay");
                                             txt_okay_inspdetls_cri_2.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getMerchDisplay() == 3)
                                         {
+                                            image_good_inspdetls_criteria_2.setVisibility(View.GONE);
+                                            image_good_inspdetls_cri_2.setVisibility(View.VISIBLE);
                                             image_good_inspdetls_cri_2.setBackgroundResource(R.mipmap.goodemojiselected);
                                             txt_good_inspdetls_cri_2.setText("Good");
                                             txt_good_inspdetls_cri_2.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getMerchDisplay() == 4)
                                         {
+                                            image_excellent_inspdetls_criteria_2.setVisibility(View.GONE);
+                                            image_excellent_inspdetls_cri_2.setVisibility(View.VISIBLE);
                                             image_excellent_inspdetls_cri_2.setBackgroundResource(R.mipmap.excellentemojiselected);
                                             txt_excellent_inspdetls_cri_2.setText("Excellent");
                                             txt_excellent_inspdetls_cri_2.setTextSize(11f);
@@ -362,24 +441,32 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                         //Merchandise Presentation Display
                                         if(inspdetls_ArrayList.get(i).getMerchPresentationStd() == 1)
                                         {
+                                            image_improvement_inspdetls_criteria_3.setVisibility(View.GONE);
+                                            image_improvement_inspdetls_cri_3.setVisibility(View.VISIBLE);
                                             image_improvement_inspdetls_cri_3.setBackgroundResource(R.mipmap.improvementemojiselected);
                                             txt_improvement_inspdetls_cri_3.setText("Need Improvement");
                                             txt_improvement_inspdetls_cri_3.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getMerchPresentationStd() == 2)
                                         {
+                                            image_okay_inspdetls_criteria_3.setVisibility(View.GONE);
+                                            image_okay_inspdetls_cri_3.setVisibility(View.VISIBLE);
                                             image_okay_inspdetls_cri_3.setBackgroundResource(R.mipmap.okayemojiselected);
                                             txt_okay_inspdetls_cri_3.setText("Okay");
                                             txt_okay_inspdetls_cri_3.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getMerchPresentationStd() == 3)
                                         {
+                                            image_good_inspdetls_criteria_3.setVisibility(View.GONE);
+                                            image_good_inspdetls_cri_3.setVisibility(View.VISIBLE);
                                             image_good_inspdetls_cri_3.setBackgroundResource(R.mipmap.goodemojiselected);
                                             txt_good_inspdetls_cri_3.setText("Good");
                                             txt_good_inspdetls_cri_3.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getMerchPresentationStd() == 4)
                                         {
+                                            image_excellent_inspdetls_criteria_3.setVisibility(View.GONE);
+                                            image_excellent_inspdetls_cri_3.setVisibility(View.VISIBLE);
                                             image_excellent_inspdetls_cri_3.setBackgroundResource(R.mipmap.excellentemojiselected);
                                             txt_excellent_inspdetls_cri_3.setText("Excellent");
                                             txt_excellent_inspdetls_cri_3.setTextSize(11f);
@@ -387,24 +474,32 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                         //Suggestive Selling By Staff
                                         if(inspdetls_ArrayList.get(i).getSuggSellingByStaff() == 1)
                                         {
+                                            image_improvement_inspdetls_criteria_4.setVisibility(View.GONE);
+                                            image_improvement_inspdetls_cri_4.setVisibility(View.VISIBLE);
                                             image_improvement_inspdetls_cri_4.setBackgroundResource(R.mipmap.improvementemojiselected);
                                             txt_improvement_inspdetls_cri_4.setText("Need Improvement");
                                             txt_improvement_inspdetls_cri_4.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getSuggSellingByStaff() == 2)
                                         {
+                                            image_okay_inspdetls_criteria_4.setVisibility(View.GONE);
+                                            image_okay_inspdetls_cri_4.setVisibility(View.VISIBLE);
                                             image_okay_inspdetls_cri_4.setBackgroundResource(R.mipmap.okayemojiselected);
                                             txt_okay_inspdetls_cri_4.setText("Okay");
                                             txt_okay_inspdetls_cri_4.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getSuggSellingByStaff() == 3)
                                         {
+                                            image_good_inspdetls_criteria_4.setVisibility(View.GONE);
+                                            image_good_inspdetls_cri_4.setVisibility(View.VISIBLE);
                                             image_good_inspdetls_cri_4.setBackgroundResource(R.mipmap.goodemojiselected);
                                             txt_good_inspdetls_cri_4.setText("Good");
                                             txt_good_inspdetls_cri_4.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getSuggSellingByStaff() == 4)
                                         {
+                                            image_excellent_inspdetls_criteria_4.setVisibility(View.GONE);
+                                            image_excellent_inspdetls_cri_4.setVisibility(View.VISIBLE);
                                             image_excellent_inspdetls_cri_4.setBackgroundResource(R.mipmap.excellentemojiselected);
                                             txt_excellent_inspdetls_cri_4.setText("Excellent");
                                             txt_excellent_inspdetls_cri_4.setTextSize(11f);
@@ -412,24 +507,32 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                         //Overall Cleanliness
                                         if(inspdetls_ArrayList.get(i).getOverallCleanliness() == 1)
                                         {
+                                            image_improvement_inspdetls_criteria_5.setVisibility(View.GONE);
+                                            image_improvement_inspdetls_cri_5.setVisibility(View.VISIBLE);
                                             image_improvement_inspdetls_cri_5.setBackgroundResource(R.mipmap.improvementemojiselected);
                                             txt_improvement_inspdetls_cri_5.setText("Need Improvement");
                                             txt_improvement_inspdetls_cri_5.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getOverallCleanliness() == 2)
                                         {
+                                            image_okay_inspdetls_criteria_5.setVisibility(View.GONE);
+                                            image_okay_inspdetls_cri_5.setVisibility(View.VISIBLE);
                                             image_okay_inspdetls_cri_5.setBackgroundResource(R.mipmap.okayemojiselected);
                                             txt_okay_inspdetls_cri_5.setText("Okay");
                                             txt_okay_inspdetls_cri_5.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getOverallCleanliness() == 3)
                                         {
+                                            image_good_inspdetls_criteria_5.setVisibility(View.GONE);
+                                            image_good_inspdetls_cri_5.setVisibility(View.VISIBLE);
                                             image_good_inspdetls_cri_5.setBackgroundResource(R.mipmap.goodemojiselected);
                                             txt_good_inspdetls_cri_5.setText("Good");
                                             txt_good_inspdetls_cri_5.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getOverallCleanliness() == 4)
                                         {
+                                            image_excellent_inspdetls_criteria_5.setVisibility(View.GONE);
+                                            image_excellent_inspdetls_cri_5.setVisibility(View.VISIBLE);
                                             image_excellent_inspdetls_cri_5.setBackgroundResource(R.mipmap.excellentemojiselected);
                                             txt_excellent_inspdetls_cri_5.setText("Excellent");
                                             txt_excellent_inspdetls_cri_5.setTextSize(11f);
@@ -437,24 +540,32 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                         //Signage
                                         if(inspdetls_ArrayList.get(i).getSignage() == 1)
                                         {
+                                            image_improvement_inspdetls_criteria_6.setVisibility(View.GONE);
+                                            image_improvement_inspdetls_cri_6.setVisibility(View.VISIBLE);
                                             image_improvement_inspdetls_cri_6.setBackgroundResource(R.mipmap.improvementemojiselected);
                                             txt_improvement_inspdetls_cri_6.setText("Need Improvement");
                                             txt_improvement_inspdetls_cri_6.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getSignage() == 2)
                                         {
+                                            image_okay_inspdetls_criteria_6.setVisibility(View.GONE);
+                                            image_okay_inspdetls_cri_6.setVisibility(View.VISIBLE);
                                             image_okay_inspdetls_cri_6.setBackgroundResource(R.mipmap.okayemojiselected);
                                             txt_okay_inspdetls_cri_6.setText("Okay");
                                             txt_okay_inspdetls_cri_6.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getSignage() == 3)
                                         {
+                                            image_good_inspdetls_criteria_6.setVisibility(View.GONE);
+                                            image_good_inspdetls_cri_6.setVisibility(View.VISIBLE);
                                             image_good_inspdetls_cri_6.setBackgroundResource(R.mipmap.goodemojiselected);
                                             txt_good_inspdetls_cri_6.setText("Good");
                                             txt_good_inspdetls_cri_6.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getSignage() == 4)
                                         {
+                                            image_excellent_inspdetls_criteria_6.setVisibility(View.GONE);
+                                            image_excellent_inspdetls_cri_6.setVisibility(View.VISIBLE);
                                             image_excellent_inspdetls_cri_6.setBackgroundResource(R.mipmap.excellentemojiselected);
                                             txt_excellent_inspdetls_cri_6.setText("Excellent");
                                             txt_excellent_inspdetls_cri_6.setTextSize(11f);
@@ -462,24 +573,32 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                         //MPM Execution
                                         if(inspdetls_ArrayList.get(i).getMpmExecution() == 1)
                                         {
+                                            image_improvement_inspdetls_criteria_7.setVisibility(View.GONE);
+                                            image_improvement_inspdetls_cri_7.setVisibility(View.VISIBLE);
                                             image_improvement_inspdetls_cri_7.setBackgroundResource(R.mipmap.improvementemojiselected);
                                             txt_improvement_inspdetls_cri_7.setText("Need Improvement");
                                             txt_improvement_inspdetls_cri_7.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getMpmExecution() == 2)
                                         {
+                                            image_okay_inspdetls_criteria_7.setVisibility(View.GONE);
+                                            image_okay_inspdetls_cri_7.setVisibility(View.VISIBLE);
                                             image_okay_inspdetls_cri_7.setBackgroundResource(R.mipmap.okayemojiselected);
                                             txt_okay_inspdetls_cri_7.setText("Okay");
                                             txt_okay_inspdetls_cri_7.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getMpmExecution() == 3)
                                         {
+                                            image_good_inspdetls_criteria_7.setVisibility(View.GONE);
+                                            image_good_inspdetls_cri_7.setVisibility(View.VISIBLE);
                                             image_good_inspdetls_cri_7.setBackgroundResource(R.mipmap.goodemojiselected);
                                             txt_good_inspdetls_cri_7.setText("Good");
                                             txt_good_inspdetls_cri_7.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getMpmExecution() == 4)
                                         {
+                                            image_excellent_inspdetls_criteria_7.setVisibility(View.GONE);
+                                            image_excellent_inspdetls_cri_7.setVisibility(View.VISIBLE);
                                             image_excellent_inspdetls_cri_7.setBackgroundResource(R.mipmap.excellentemojiselected);
                                             txt_excellent_inspdetls_cri_7.setText("Excellent");
                                             txt_excellent_inspdetls_cri_7.setTextSize(11f);
@@ -487,29 +606,38 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                         //Window and cluster Mannequins Displays
                                         if(inspdetls_ArrayList.get(i).getWinClusterMannequinsDisp() == 1)
                                         {
+                                            image_improvement_inspdetls_criteria_8.setVisibility(View.GONE);
+                                            image_improvement_inspdetls_cri_8.setVisibility(View.VISIBLE);
                                             image_improvement_inspdetls_cri_8.setBackgroundResource(R.mipmap.improvementemojiselected);
                                             txt_improvement_inspdetls_cri_8.setText("Need Improvement");
                                             txt_improvement_inspdetls_cri_8.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getWinClusterMannequinsDisp() == 2)
                                         {
+                                            image_okay_inspdetls_criteria_8.setVisibility(View.GONE);
+                                            image_okay_inspdetls_cri_8.setVisibility(View.VISIBLE);
                                             image_okay_inspdetls_cri_8.setBackgroundResource(R.mipmap.okayemojiselected);
                                             txt_okay_inspdetls_cri_8.setText("Okay");
                                             txt_okay_inspdetls_cri_8.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getWinClusterMannequinsDisp() == 3)
                                         {
+                                            image_good_inspdetls_criteria_8.setVisibility(View.GONE);
+                                            image_good_inspdetls_cri_8.setVisibility(View.VISIBLE);
                                             image_good_inspdetls_cri_8.setBackgroundResource(R.mipmap.goodemojiselected);
                                             txt_good_inspdetls_cri_8.setText("Good");
                                             txt_good_inspdetls_cri_8.setTextSize(11f);
                                         }
                                         else if(inspdetls_ArrayList.get(i).getWinClusterMannequinsDisp() == 4)
                                         {
+                                            image_excellent_inspdetls_criteria_8.setVisibility(View.GONE);
+                                            image_excellent_inspdetls_cri_8.setVisibility(View.VISIBLE);
                                             image_excellent_inspdetls_cri_8.setBackgroundResource(R.mipmap.excellentemojiselected);
                                             txt_excellent_inspdetls_cri_8.setText("Excellent");
                                             txt_excellent_inspdetls_cri_8.setTextSize(11f);
                                         }
                                     }
+                                    Reusable_Functions.hDialog();
                                 }
                             }
                             catch (Exception e)
@@ -527,7 +655,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
                             error.printStackTrace();
                         }
                     }
@@ -544,8 +671,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
-            Reusable_Functions.hDialog();
-        }
+
     }
 
     @Override

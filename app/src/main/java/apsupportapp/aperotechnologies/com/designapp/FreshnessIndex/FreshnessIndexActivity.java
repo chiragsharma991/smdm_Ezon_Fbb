@@ -931,7 +931,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, " FI details onResponse:"+response +"length :"+response.length());
+                        Log.i(TAG, "onResponse:"+response);
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -1801,7 +1801,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     public void onResponse(JSONArray response) {
                         Log.i(TAG, "onResponse:"+response);
 
-
+                        int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1814,7 +1814,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                             } else {
                                 freshnessIndexDetail = new FreshnessIndexDetails();
-                                for (int i = 0; i < response.length(); i++)
+                                for (i = 0; i < response.length(); i++)
                                 {
                                     freshnessIndexDetail = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                 }
@@ -1843,90 +1843,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             }
 
                             freshnessIndexDetailsArrayList.add(0, freshnessIndexDetail);
-                            //setAdapter();
-                            listViewFIndex.setLayoutManager(new LinearLayoutManager(context));
-
-                            listViewFIndex.setLayoutManager(new LinearLayoutManager(
-                                    listViewFIndex.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
-                                    LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                            listViewFIndex.setOnFlingListener(null);
-                            new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
-
-                            freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
-                            // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
-                            listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
-                            Log.e(TAG, " freshnessIndexDetailsArrayList size is " + freshnessIndexDetailsArrayList.size());
-                            //fIndexAdapter.notifyDataSetChanged();
-                            txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
-                            txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-
-                            if (txtFIndexClass.getText().toString().equals("Department")) {
-                                level = 1;
-                                for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
-                                    Log.e("Array Size :",""+freshnessIndexDetailsArrayList.size());
-                                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
-                                    Log.e("firstVisibleItem :",""+fIndexFirstVisibleItem +"Plan Dept :"+freshnessIndexDetailsArrayList.get(j).getPlanDept());
-                                    if(freshnessIndexDetailsArrayList.get(j).getPlanDept().contentEquals(fIndexFirstVisibleItem))
-                                    {
-                                        LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
-                                        llm.scrollToPosition(firstVisibleItem);
-                                    }
-                                }
-                            } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
-                                level = 2;
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
-                                for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
-                                    if (freshnessIndexDetailsArrayList.get(j).getPlanCategory().contentEquals(fIndexFirstVisibleItem))
-                                    {
-                                        LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
-                                        llm.scrollToPosition(firstVisibleItem);
-                                        //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
-                                        //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
-                                    }
-                                }
-                            } else if (txtFIndexClass.getText().toString().equals("Class")) {
-                                level = 3;
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
-                                for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
-                                    if (freshnessIndexDetailsArrayList.get(j).getPlanClass().contentEquals(fIndexFirstVisibleItem)) {
-                                        LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
-                                        llm.scrollToPosition(firstVisibleItem);
-                                        //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
-                                        //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
-                                    }
-                                }
-
-                            } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
-                                level = 4;
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
-                                for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
-                                    if (freshnessIndexDetailsArrayList.get(j).getBrandName().contentEquals(fIndexFirstVisibleItem)) {
-                                        LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
-                                        llm.scrollToPosition(firstVisibleItem);
-                                        // fIndexFirstVisibleItem = fIndexFirstVisibleItem;
-                                        // fIndexFirstVisibleItem = fIndexFirstVisibleItem;
-
-                                    }
-                                }
-
-                            } else if (txtFIndexClass.getText().toString().equals("MC")) {
-                                level = 5;
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
-                                for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
-                                    if (freshnessIndexDetailsArrayList.get(j).getBrandplanClass().contentEquals(fIndexFirstVisibleItem)) {
-                                        LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
-                                        llm.scrollToPosition(firstVisibleItem);
-                                        //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
-                                        //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
-
-                                    }
-                                }
-                            }
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            llfIndexhierarchy.setVisibility(View.GONE);
-                            requestFIndexPieChart();
+                            setAdapter();
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1972,7 +1889,92 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     private void setAdapter() {
 
+        listViewFIndex.setLayoutManager(new LinearLayoutManager(context));
 
+        listViewFIndex.setLayoutManager(new LinearLayoutManager(
+                listViewFIndex.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+        listViewFIndex.setOnFlingListener(null);
+        new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
+
+        freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
+        // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
+        listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
+        Log.e(TAG, " freshnessIndexDetailsArrayList size is " + freshnessIndexDetailsArrayList.size());
+        //fIndexAdapter.notifyDataSetChanged();
+        txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
+        txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
+
+        if (txtFIndexClass.getText().toString().equals("Department")) {
+            level = 1;
+            fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
+            for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
+                Log.e(TAG, "equals: "+freshnessIndexDetailsArrayList.get(j).getPlanDept()+"and index position"+fIndexFirstVisibleItem );
+                if (freshnessIndexDetailsArrayList.get(j).getPlanDept().contentEquals(fIndexFirstVisibleItem)) {
+
+                    LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
+                    llm.scrollToPosition(firstVisibleItem);
+                }
+            }
+        } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
+            level = 2;
+            fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
+            for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
+                if (freshnessIndexDetailsArrayList.get(j).getPlanCategory().contentEquals(fIndexFirstVisibleItem)) {
+                    LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
+                    llm.scrollToPosition(firstVisibleItem);
+                    //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    llm.scrollToPosition(firstVisibleItem);
+                    //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+
+                }
+            }
+
+        } else if (txtFIndexClass.getText().toString().equals("Class")) {
+            level = 3;
+            fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
+            for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
+                if (freshnessIndexDetailsArrayList.get(j).getPlanClass().contentEquals(fIndexFirstVisibleItem)) {
+                    LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
+                    llm.scrollToPosition(firstVisibleItem);
+                    //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    llm.scrollToPosition(firstVisibleItem);
+                    //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                }
+            }
+        } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
+            level = 4;
+            fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
+            for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
+                if (freshnessIndexDetailsArrayList.get(j).getBrandName().contentEquals(fIndexFirstVisibleItem)) {
+                    LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
+                    llm.scrollToPosition(firstVisibleItem);
+                    // fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    llm.scrollToPosition(firstVisibleItem);
+                    // fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+
+                }
+            }
+
+        } else if (txtFIndexClass.getText().toString().equals("MC")) {
+            level = 5;
+            fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
+            for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
+                if (freshnessIndexDetailsArrayList.get(j).getBrandplanClass().contentEquals(fIndexFirstVisibleItem)) {
+                    LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
+                    llm.scrollToPosition(firstVisibleItem);
+                    //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+                    llm.scrollToPosition(firstVisibleItem);
+                    //   fIndexFirstVisibleItem = fIndexFirstVisibleItem;
+
+                }
+            }
+        }
+        offsetvalue = 0;
+        limit = 100;
+        count = 0;
+        llfIndexhierarchy.setVisibility(View.GONE);
+        requestFIndexPieChart();
     }
 
     private void requestFreshnessIndexFilterVal(final String selectedString) {

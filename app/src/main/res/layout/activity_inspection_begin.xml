@@ -63,11 +63,11 @@
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
-        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,40 +79,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/toolbar"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/bg_screen_color">
 
 
                 <!--<TextView-->
-                    <!--android:id="@+id/tstoreCode"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Store : "-->
-                    <!--android:textColor="@color/colorPrimary"-->
-                    <!--android:textSize="@dimen/boldlayout_storesize"/>-->
+                <!--android:id="@+id/tstoreCode"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Store : "-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:textSize="@dimen/boldlayout_storesize"/>-->
 
                 <TextView
                     android:id="@+id/inspection_txtStoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="5dp"
                     android:hint=""
-                    android:textStyle="bold"
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/stock_textsize_Title"/>
+                    android:textSize="@dimen/stock_textsize_Title"
+                    android:textStyle="normal"/>
 
                 <TextView
                     android:id="@+id/inspection_txtStoreName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_toRightOf="@id/inspection_txtStoreCode"
                     android:hint=""
-                    android:textStyle="bold"
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/stock_textsize_Title"/>
+                    android:textSize="@dimen/stock_textsize_Title"
+                    android:textStyle="normal"/>
 
             </RelativeLayout>
 
@@ -127,58 +126,63 @@
             <LinearLayout
                 android:id="@+id/lin_insp_head"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="138dp"
                 android:layout_below="@+id/view1"
+                android:background="@color/white"
                 android:orientation="horizontal">
 
-
                 <RelativeLayout
-                    android:layout_marginLeft="3dp"
                     android:id="@+id/rel_cam_image"
-                    android:background="@drawable/rounded_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.65">
+                    android:layout_margin="4dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="0.55"
+                    android:background="@drawable/rounded_edt">
 
                     <ImageView
                         android:id="@+id/camera_imageView"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="50dp"
+                        android:layout_height="38dp"
                         android:layout_centerInParent="true"
                         android:scaleType="fitXY"
                         android:src="@mipmap/inspectioncameraicon"/>
 
                     <ImageView
-                        android:visibility="invisible"
                         android:id="@+id/camera_imageView1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:scaleType="fitXY"
-                       />
+                        android:visibility="invisible"/>
                 </RelativeLayout>
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:layout_weight="0.5">
 
                     <TextView
                         android:id="@+id/txt_insp_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="5dp"
                         android:text="Inspection Date : "
                         android:textColor="@color/bg_store_code_text"
-                        android:textSize="@dimen/normallayout_storesize"/>
+                        android:textSize="@dimen/normallayout_storesize"
+                        android:textStyle="bold"/>
+
 
                     <TextView
                         android:id="@+id/txt_insp_date_Val"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
+                        android:layout_marginTop="5dp"
                         android:layout_toRightOf="@+id/txt_insp_date"
                         android:hint=""
                         android:textColor="@color/bg_store_code_text"
@@ -187,11 +191,11 @@
 
                     <ImageView
                         android:id="@+id/emoji_image"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_below="@+id/txt_insp_date"
-                        android:layout_centerInParent="true"
-                        android:layout_marginTop="25dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_above="@+id/txt_overall_ratings"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="3dp"
                         android:background="@mipmap/defaultemojiunselected"/>
 
 
@@ -199,13 +203,13 @@
                         android:id="@+id/txt_overall_ratings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/emoji_image"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="10dp"
-                        android:hint="Overall Ratings"
+                        android:layout_marginBottom="5dp"
+                        android:text="Overall Rating"
                         android:textColor="@color/bg_store_code_text"
                         android:textSize="@dimen/normallayout_storesize"/>
+
 
                 </RelativeLayout>
             </LinearLayout>
@@ -222,13 +226,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view2"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="3dp"
-                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
                 android:text="Inspection Item (all the fields are mandatory)"
                 android:textColor="@color/bg_store_code_text"
-                android:textSize="14sp"/>
-
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:id="@+id/linear_insp_criteria"
@@ -247,6 +250,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -277,7 +281,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp">
+                                        android:layout_margin="2dp">
 
                                         <TextView
                                             android:id="@+id/txt_insp_criteria_1"
@@ -285,22 +289,21 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_1"
                                             android:textColor="@color/bg_store_code_text"
                                             android:textSize="@dimen/stock_textsize_large"
-                                            android:textStyle="bold"/>
-
+                                            android:textStyle="normal"/>
 
                                     </RelativeLayout>
 
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border">
-
                                     </View>
 
 
@@ -309,8 +312,8 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
@@ -321,64 +324,84 @@
                                             android:layout_marginLeft="5dp"
                                             android:layout_weight="1"
                                             android:gravity="left"
-                                            android:orientation="vertical"
-                                            >
+                                            android:orientation="vertical">
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_1"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
-                                                android:gravity="left"
-                                                />
+                                                android:gravity="left"/>
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_1"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
 
                                         </RelativeLayout>
 
-
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
                                             android:layout_weight="1"
                                             android:gravity="center"
-                                            android:orientation="vertical"
-                                            >
+                                            android:orientation="vertical">
+
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_1"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_1"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
 
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
-                                            android:gravity="center_horizontal"
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
                                             android:layout_weight="1"
+                                            android:gravity="center_horizontal"
                                             android:orientation="vertical"
                                             >
 
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_1"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_1"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerInParent="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
+
+
+                                        </RelativeLayout>
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
@@ -392,12 +415,21 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_1"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
+
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_1"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
+
 
                                         </LinearLayout>
 
@@ -405,29 +437,29 @@
 
                                     <!--ending part-->
                                     <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="23dp"
-                                    android:background="@color/smdm_divider_Black_light"
-                                    android:orientation="horizontal"
-                                    android:padding="3dp"
-                                    android:weightSum="4">
+                                        android:layout_width="match_parent"
+                                        android:layout_height="23dp"
+                                        android:background="@color/smdm_divider_Black_light"
+                                        android:orientation="horizontal"
+                                        android:padding="3dp"
+                                        android:weightSum="4">
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_improvement_criteria_1"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:singleLine="true"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -435,16 +467,17 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
+                                                android:text=""
                                                 android:id="@+id/txt_okay_criteria_1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -453,16 +486,17 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
+                                                android:text=""
                                                 android:id="@+id/txt_good_criteria_1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -470,71 +504,25 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
+                                                android:text=""
                                                 android:id="@+id/txt_excellent_criteria_1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
                                     </LinearLayout>
 
-                                    <!--<LinearLayout-->
-                                    <!--android:layout_width="match_parent"-->
-                                    <!--android:layout_height="23dp"-->
-                                    <!--android:background="@color/smdm_divider_Black_light"-->
-                                    <!--android:orientation="horizontal"-->
-                                    <!--android:padding="3dp"-->
-                                    <!--android:weightSum="4">-->
-
-                                    <!--<TextView-->
-                                    <!--android:id="@+id/txt_improvement_criteria_1"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="match_parent"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:text="Need Improvement"/>-->
-
-                                    <!--<TextView-->
-                                    <!--android:id="@+id/txt_okay_criteria_1"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="match_parent"-->
-                                    <!--android:layout_marginRight="15dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Okay"/>-->
-
-                                    <!--<TextView-->
-                                    <!--android:id="@+id/txt_good_criteria_1"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="match_parent"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:layout_marginLeft="15dp"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Good"/>-->
-
-                                    <!--<TextView-->
-                                    <!--android:id="@+id/txt_excellent_criteria_1"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="match_parent"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="right"-->
-                                    <!--android:text="Excellent"/>-->
-
-
-                                    <!--</LinearLayout>-->
-
 
                                 </LinearLayout>
-
-
                             </android.support.v7.widget.CardView>
-
                         </android.support.v7.widget.CardView>
 
                     </LinearLayout>
@@ -543,6 +531,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -574,7 +563,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -583,11 +572,12 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_2"
                                             android:textColor="@color/bg_store_code_text"
                                             android:textSize="@dimen/stock_textsize_large"
-                                            android:textStyle="bold"
+                                            android:textStyle="normal"
                                             />
 
 
@@ -596,8 +586,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border">
 
                                     </View>
@@ -608,13 +598,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -624,17 +614,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_2"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"/>
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_2"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
 
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -645,18 +642,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_2"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_2"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -668,16 +672,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_2"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_2"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"/>
 
-                                        <LinearLayout
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -689,14 +700,21 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_2"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_2"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"/>
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -714,18 +732,18 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_improvement_criteria_2"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:singleLine="true"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -733,16 +751,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_okay_criteria_2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -751,16 +769,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_good_criteria_2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -768,16 +786,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_excellent_criteria_2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -796,6 +814,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -827,7 +846,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -836,11 +855,12 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_3"
                                             android:textColor="@color/bg_store_code_text"
                                             android:textSize="@dimen/stock_textsize_large"
-                                            android:textStyle="bold"
+                                            android:textStyle="normal"
                                             />
 
 
@@ -849,8 +869,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -862,13 +882,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -879,19 +899,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_3"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
+                                                android:gravity="left"/>
+
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_3"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
                                                 android:gravity="left"
+                                                android:visibility="gone"/>
 
-                                                />
-
-
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -902,18 +927,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_3"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_3"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -925,16 +958,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_3"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_3"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        <LinearLayout
+                                                />
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -946,14 +989,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_3"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_3"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -971,18 +1024,18 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_improvement_criteria_3"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
                                                 android:singleLine="true"
-                                                android:text=""/>
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -990,16 +1043,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_okay_criteria_3"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1008,16 +1061,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_good_criteria_3"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1025,16 +1078,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_excellent_criteria_3"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1054,6 +1107,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -1085,7 +1139,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp">
+                                        android:layout_margin="2dp">
 
                                         <TextView
                                             android:id="@+id/txt_insp_criteria_4"
@@ -1093,11 +1147,12 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_4"
                                             android:textColor="@color/bg_store_code_text"
                                             android:textSize="@dimen/stock_textsize_large"
-                                            android:textStyle="bold"
+                                            android:textStyle="normal"
                                             />
 
 
@@ -1106,8 +1161,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border">
 
                                     </View>
@@ -1118,13 +1173,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -1135,19 +1190,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_4"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
-
-
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_4"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
 
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -1158,18 +1218,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_4"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_4"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -1181,16 +1249,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_4"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_4"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        <LinearLayout
+                                                />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -1202,14 +1279,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_4"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_4"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -1227,18 +1313,18 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_improvement_criteria_4"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:singleLine="true"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1246,16 +1332,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_okay_criteria_4"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1264,16 +1350,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_good_criteria_4"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1281,16 +1367,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_excellent_criteria_4"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1310,6 +1396,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -1341,7 +1428,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -1350,11 +1437,12 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_5"
                                             android:textColor="@color/bg_store_code_text"
                                             android:textSize="@dimen/stock_textsize_large"
-                                            android:textStyle="bold"
+                                            android:textStyle="normal"
                                             />
 
 
@@ -1363,8 +1451,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -1376,13 +1464,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -1393,19 +1481,29 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_5"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_5"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
 
 
-                                        <LinearLayout
+                                        </RelativeLayout>
+
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -1416,18 +1514,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_5"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_5"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -1439,16 +1545,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_5"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_5"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        <LinearLayout
+                                                />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -1460,14 +1575,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_5"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_5"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -1485,18 +1609,18 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_improvement_criteria_5"
                                                 android:layout_width="match_parent"
-                                                android:singleLine="true"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1504,16 +1628,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_okay_criteria_5"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1522,16 +1646,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_good_criteria_5"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1539,16 +1663,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_excellent_criteria_5"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1567,6 +1691,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -1598,7 +1723,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -1607,11 +1732,12 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_6"
                                             android:textColor="@color/bg_store_code_text"
                                             android:textSize="@dimen/stock_textsize_large"
-                                            android:textStyle="bold"
+                                            android:textStyle="normal"
                                             />
 
 
@@ -1620,8 +1746,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -1633,13 +1759,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -1651,17 +1777,24 @@
                                             <ImageView
 
                                                 android:id="@+id/image_improvement_criteria_6"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"/>
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_6"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
 
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -1672,15 +1805,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_6"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"/>
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_6"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
 
-                                        </LinearLayout>
 
-                                        <LinearLayout
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -1691,14 +1832,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_6"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"/>
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_6"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
 
-                                        <LinearLayout
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -1710,14 +1860,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_6"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_6"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -1735,18 +1895,18 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_improvement_criteria_6"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
                                                 android:singleLine="true"
-                                                android:text=""/>
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1754,16 +1914,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_okay_criteria_6"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1772,16 +1932,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_good_criteria_6"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1789,16 +1949,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_excellent_criteria_6"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1818,6 +1978,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -1849,7 +2010,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -1858,11 +2019,12 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_7"
                                             android:textColor="@color/bg_store_code_text"
                                             android:textSize="@dimen/stock_textsize_large"
-                                            android:textStyle="bold"
+                                            android:textStyle="normal"
                                             />
 
 
@@ -1871,8 +2033,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -1884,13 +2046,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -1901,17 +2063,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_7"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"/>
 
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_7"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -1922,18 +2092,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_7"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_7"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -1945,16 +2123,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_7"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_7"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        <LinearLayout
+                                                />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -1966,14 +2153,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_7"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_7"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -1991,18 +2187,18 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_improvement_criteria_7"
                                                 android:layout_width="match_parent"
-                                                android:singleLine="true"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2010,16 +2206,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_okay_criteria_7"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2028,16 +2224,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_good_criteria_7"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2045,16 +2241,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_excellent_criteria_7"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2074,6 +2270,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -2105,7 +2302,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -2114,11 +2311,12 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_8"
                                             android:textColor="@color/bg_store_code_text"
                                             android:textSize="@dimen/stock_textsize_large"
-                                            android:textStyle="bold"/>
+                                            android:textStyle="normal"/>
 
 
                                     </RelativeLayout>
@@ -2126,8 +2324,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -2143,7 +2341,7 @@
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -2153,14 +2351,22 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_8"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"/>
-                                        </LinearLayout>
 
-                                        <LinearLayout
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_8"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -2170,14 +2376,22 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_8"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"/>
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_8"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
 
-                                        <LinearLayout
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -2187,14 +2401,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_8"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"/>
 
-                                        </LinearLayout>
+                                            <ImageView
 
-                                        <LinearLayout
+                                                android:id="@+id/image_good_cri_8"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -2204,11 +2428,19 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_8"
-                                                android:layout_width="23dp"
-                                                android:layout_height="23dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"/>
-                                        </LinearLayout>
+
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_8"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -2226,18 +2458,18 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_improvement_criteria_8"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
                                                 android:singleLine="true"
-                                                android:text=""/>
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2245,16 +2477,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_okay_criteria_8"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2263,16 +2495,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_good_criteria_8"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2280,16 +2512,16 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:textSize="@dimen/stock_store_textsize"
                                                 android:id="@+id/txt_excellent_criteria_8"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2306,118 +2538,136 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linear_insp_criteria"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6dp"
                 android:text="Inspected By : "
                 android:textColor="@color/bg_store_code_text"
-                android:textSize="14sp"/>
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
-            <android.support.v7.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="23dp"
-                app:cardBackgroundColor="@color/smdm_border"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:contentPadding="1dp">
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                >
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
+                    app:cardBackgroundColor="@color/smdm_border"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="0dp"
                     app:cardPreventCornerOverlap="false"
-                    app:cardUseCompatPadding="false"
-                    app:contentPadding="0dp">
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="1dp">
 
-                    <EditText
-                        android:id="@+id/et_inspected_by"
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:singleLine="true"
-                        android:inputType="textPersonName|textCapWords"
-                        android:hint="Inspector name"
-                        android:textSize="12sp"/>
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="0dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="false"
+                        app:contentPadding="0dp">
 
+                        <EditText
+                            android:id="@+id/et_inspected_by"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:layout_marginLeft="5dp"
+                            android:hint="Inspector name"
+                            android:inputType="textPersonName|textCapWords"
+                            android:singleLine="true"
+                            android:textSize="12sp"/>
+
+                    </android.support.v7.widget.CardView>
                 </android.support.v7.widget.CardView>
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txt_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linear_insp_criteria"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="3dp"
-                android:text="Comments : "
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6dp"
+                android:text="Comment : "
                 android:textColor="@color/bg_store_code_text"
-                android:textSize="14sp"/>
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
-            <android.support.v7.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:cardBackgroundColor="@color/smdm_border"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:contentPadding="1dp">
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                >
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="55dp"
+                    app:cardBackgroundColor="@color/smdm_border"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="0dp"
                     app:cardPreventCornerOverlap="false"
-                    app:cardUseCompatPadding="false"
-                    app:contentPadding="0dp">
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="1dp">
 
-                    <EditText
-                        android:id="@+id/et_comment"
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="start"
-                        android:hint="@string/dummy_text"
-                        android:maxLines="3"
-                        android:textSize="12sp"/>
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="0dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="false"
+                        app:contentPadding="0dp">
 
+                        <EditText
+                            android:id="@+id/et_comment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="start"
+                            android:layout_marginLeft="5dp"
+                            android:hint="@string/dummy_text"
+                            android:maxLines="3"
+                            android:textSize="12sp"/>
+
+                    </android.support.v7.widget.CardView>
                 </android.support.v7.widget.CardView>
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_margin="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_alignParentBottom="true"
-                android:weightSum="2"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal">
+                android:layout_alignParentBottom="true"
+                android:layout_margin="5dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <Button
-                    android:layout_weight="1"
                     android:id="@+id/btn_insp_reset"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:background="@drawable/button_red_effect"
                     android:text="Reset"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/smdm_header_title_large"/>
 
-            <Button
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:id="@+id/btn_insp_submit"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_red_effect"
-                android:text="Submit"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/smdm_header_title_large"/>
+                <Button
+                    android:id="@+id/btn_insp_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_red_effect"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/smdm_header_title_large"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
