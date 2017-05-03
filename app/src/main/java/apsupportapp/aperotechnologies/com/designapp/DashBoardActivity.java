@@ -53,6 +53,7 @@ import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvail
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
+import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_activity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
@@ -287,8 +288,8 @@ public class DashBoardActivity extends AppCompatActivity
         btn_mpm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent=new Intent(DashBoardActivity.this, mpm_activity.class);
-               // startActivity(intent);
+                Intent intent=new Intent(DashBoardActivity.this, mpm_activity.class);
+                startActivity(intent);
                 Log.e(TAG, "btn best: log " );
 
                 if(timer != null)

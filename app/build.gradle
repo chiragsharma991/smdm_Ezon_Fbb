@@ -78,7 +78,10 @@ dependencies
             compile 'testfairy:testfairy-android-sdk:1.+@aar'
             compile 'com.android.support.constraint:constraint-layout:1.0.2'
             //compile 'com.github.barteksc:android-pdf-viewer:2.5.1'
+            compile 'es.voghdev.pdfviewpager:library:1.0.1'
 
+
+            compile project(path: ':library')
         }
 
 apply plugin: 'com.google.gms.google-services'

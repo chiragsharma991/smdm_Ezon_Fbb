@@ -1,4 +1,4 @@
-/*
+
 package apsupportapp.aperotechnologies.com.designapp.MPM;
 
 import android.content.Context;
@@ -35,10 +35,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.squareup.picasso.Downloader;
+
 
 import org.json.JSONArray;
 
@@ -57,8 +55,12 @@ import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
+import es.voghdev.pdfviewpager.library.RemotePDFViewPager;
+import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
+import es.voghdev.pdfviewpager.library.remote.DownloadFile;
+import es.voghdev.pdfviewpager.library.util.FileUtil;
 
-public class mpm_activity extends AppCompatActivity implements HttpResponse, View.OnClickListener, OnPageChangeListener, OnLoadCompleteListener {
+public class mpm_activity extends AppCompatActivity implements HttpResponse,View.OnClickListener,DownloadFile.Listener {
 
     private SharedPreferences sharedPreferences;
     private String userId;
@@ -77,9 +79,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     private ListView listView;
     private ArrayList<mpm_model> list;
     private RelativeLayout WebViewProcess;
-    private PDFView WebViewWrap;
     private RelativeLayout mpm_imageBtnBack,Pdf_zoom_btn;
-    private mpm_adapter mpmAdapter;
     public mpm_activity pre_activity;
     private LinearLayout WebView_match_layout,WebView_wrap_layout;
     private TextView Toolbar_title;
@@ -87,6 +87,11 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     private TextView Process_count,Pages_count,Pages_total;
     private LinearLayout Bottom_listItem,BaseLayout;
     private boolean error=false;
+    private LinearLayout WebViewWrap;
+    private mpm_adapter mpmAdapter;
+    private RemotePDFViewPager remotePDFViewPager;
+    private PDFPagerAdapter adapter;
+    private DownloadFile.Listener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +144,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         WebViewProcess.setOnClickListener(this);
         Pdf_zoom_btn.setOnClickListener(this);
 
-        WebViewWrap = (PDFView) findViewById(R.id.webview_wrap);
+        WebViewWrap = (LinearLayout) findViewById(R.id.webview_wrap);
 
         url = ConstsCore.web_url + "/v1/display/mpmproducts/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
         Log.e(TAG, "web_url: " + url);
@@ -155,7 +160,8 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
                     departmentName=list.get(position).getProductName();
                     mpmAdapter.notifyDataSetChanged();
                     WebViewProcess.setVisibility(View.VISIBLE);
-                    new GetbytesFrompdf().execute(list.get(position).getMpmPath());
+                  //  new GetbytesFrompdf().execute(list.get(position).getMpmPath());
+                    callPdf(position);
                     Log.e(TAG, "clickPosition: in Activity "+clickPosition );
 
                 }
@@ -185,7 +191,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
     @Override
     public void response(ArrayList<mpm_model> list) {
-
+        listener = (DownloadFile.Listener) context;
         Log.e(TAG, "response: " + list.size());
         this.list = list;
         mpmAdapter = new mpm_adapter(context, list);
@@ -194,10 +200,36 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         departmentName=list.get(0).getProductName();
         // set web view for read pdf...
         WebViewProcess.setVisibility(View.VISIBLE);
-        new GetbytesFrompdf().execute(list.get(0).getMpmPath());
-        Log.e(TAG, "GetbytesFrompdf: " );
+       // new GetbytesFrompdf().execute(list.get(0).getMpmPath());
+        callPdf(0);
 
 
+
+
+
+    }
+
+    private void callPdf(int position) {
+        remotePDFViewPager = new RemotePDFViewPager(context,list.get(position).getMpmPath(), listener);
+        remotePDFViewPager.setId(R.id.pdfViewPager);
+        remotePDFViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //Log.e(TAG, "onPageScrolled: "+position+"total count is" );
+                int count=position+1;
+                Pages_count.setText(""+count);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
@@ -237,7 +269,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
     }
 
-    @Override
+/*    @Override
     public void onPageChanged(int page, int pageCount) {
         Log.e(TAG, "onPageChanged: "+page+"and page count"+pageCount );
         int count=page+1;
@@ -249,6 +281,47 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     public void loadComplete(int nbPages) {
         Log.e(TAG, "loadComplete: "+nbPages );
         WebViewProcess.setVisibility(View.GONE);
+
+    }*/
+
+
+
+
+    @Override
+    public void onSuccess(final String url, String destinationPath) {
+        Log.e(TAG, "onSuccess: "+url+" and "+destinationPath );
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // Run your task here
+                adapter = new PDFPagerAdapter(context, FileUtil.extractFileNameFromURL(url));
+                remotePDFViewPager.setAdapter(adapter);
+                WebViewProcess.setVisibility(View.GONE);
+                WebViewWrap.removeAllViewsInLayout();
+                WebViewWrap.addView(remotePDFViewPager,
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                Pages_total.setText(""+adapter.getCount());
+                Process_count.setText(""+(int)0);
+                Log.e(TAG, "run: Total count is>>>>>>"+adapter.getCount() );
+
+            }
+        }, 1000 );
+
+    }
+
+    @Override
+    public void onFailure(Exception e) {
+        WebViewProcess.setVisibility(View.GONE);
+        Log.e(TAG, "onFailure: "+e.getMessage() );
+    }
+
+    @Override
+    public void onProgressUpdate(int progress, int total) {
+        Log.e(TAG, "onProgressUpdate: "+progress+" and "+total );
+        Process_count.setText(""+(int)((progress*100)/total));
+
+
 
     }
 
@@ -372,12 +445,12 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         handler.postDelayed(new Runnable() {
             public void run() {
                 // Run your task here
-                loadpdf(array);
+              //  loadpdf(array);
             }
         }, 1000 );
     }
 
-    private void loadpdf(byte[] array) {
+ /*   private void loadpdf(byte[] array) {
 
         WebViewWrap.fromBytes(array)
 
@@ -388,8 +461,8 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
                 .onLoad(this)
                 .scrollHandle(new DefaultScrollHandle(this))
                 .load();
-    }
+    }*/
 
 
 }
-*/
+
