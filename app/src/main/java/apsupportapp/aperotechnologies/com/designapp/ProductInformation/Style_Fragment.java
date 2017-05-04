@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,16 +86,14 @@ public class Style_Fragment extends Fragment {
 
     // set the header titles
     String headers[] =
-            {
+    {
             "             Color            ",
             "   Size   ",
             "    TW Sales\n\t\t\t(U)    ",
             "  SOH\n\t\t\t(U)    ",
             "    FWC   "
-
     };
 
-    List<SampleObject> sampleObjects = sampleObjects();
     int headerCellsWidth[] = new int[headers.length];
     private String TAG="StyleActivity";
     private LinearLayout LinearTable;
@@ -110,7 +108,6 @@ public class Style_Fragment extends Fragment {
         Bundle bundle = getActivity().getIntent().getExtras();
         articleCode = bundle.getString("articleCode");
         articleOption = bundle.getString("articleOption");
-        Log.e("Option in Style Fragment"," "+articleOption);
         context = getContext();
         styleColorBeanList = new ArrayList<>();
         m_config = MySingleton.getInstance(context);
@@ -136,13 +133,10 @@ public class Style_Fragment extends Fragment {
     private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
 
         String url = ConstsCore.web_url + "/v1/display/sizes/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e(TAG,"requestStyleColorDetailsAPI   "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG,"requestStyleColorDetailsAPI :   "+response.toString());
-                        Log.e("Response lenght ", String.valueOf(response.length()));
                         try {
                             if (response.equals(null) || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
@@ -175,7 +169,6 @@ public class Style_Fragment extends Fragment {
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestStyleColorDetailsAPI(offsetvalue, limit);
-                                Log.e("styleColorBeanList", styleColorBeanList.size() + "");
 
                             } else if (response.length() < limit) {
 
@@ -197,12 +190,8 @@ public class Style_Fragment extends Fragment {
                                     styleColorBean.setStkOnhandQty(stkOnhandQty);
                                     styleColorBean.setArticleCode(articleCode);
                                     styleColorBean.setArticleOption(articleOption);
-                                    Log.e("style bean", color + size);
                                     styleColorBeanList.add(styleColorBean);
-                                    Log.e("added to array", "value: " + i);
                                 }
-
-                                Log.e("array size", "value: " + styleColorBeanList.size());
                                 addTableRowToTableA();
                                 addTableRowToTableB();
                                 resizeHeaderHeight();
@@ -215,7 +204,6 @@ public class Style_Fragment extends Fragment {
                                 // Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             Style_loadingBar.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
@@ -226,8 +214,6 @@ public class Style_Fragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Style_loadingBar.setVisibility(View.GONE);
-
-                        // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
@@ -289,13 +275,11 @@ public class Style_Fragment extends Fragment {
     private void requestStyleSizeDetailsAPI() {
 
         String url = ConstsCore.web_url + "/v1/display/styles/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26");
-        Log.e(TAG,"requestStyleSizeDetailsAPI   "+url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG,"requestStyleSizeDetailsAPI :   "+response.toString());
                         try {
                             if (response.equals(null) || response == null) {
                                 Reusable_Functions.hDialog();
@@ -326,7 +310,6 @@ public class Style_Fragment extends Fragment {
                                 }
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -335,7 +318,6 @@ public class Style_Fragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
@@ -358,7 +340,6 @@ public class Style_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.style_fragment, container, false);
-        Log.e(TA, "Style fragment onCreateView: ");
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));  //dfdedf
@@ -389,30 +370,9 @@ public class Style_Fragment extends Fragment {
 
         // add the components to be part of the main layout
         addComponentToMainLayout();
-       // relativeLayout.setBackgroundColor(Color.WHITE);
-
-        int headerCellsWidth[] = new int[headers.length];
-
         return view;
     }
 
-    List<SampleObject> sampleObjects() {
-
-        List<SampleObject> sampleObjects = new ArrayList<SampleObject>();
-        for (int x = 1; x <= 20; x++) {
-
-            SampleObject sampleObject = new SampleObject(
-                    "1 ", "2 ", "3 ", "4 ",
-                    " 5"
-            );
-
-
-            sampleObjects.add(sampleObject);
-        }
-
-        return sampleObjects;
-
-    }
 
     // initalized components
     private void initComponents() {
@@ -528,13 +488,9 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
     private void generateTableC_AndTable_B() {
 
 
-        //  int cnt=0;
         // just seeing some header cell width
         for (int x = 0; x < this.headerCellsWidth.length; x++) {
-            Log.v("Product Data", this.headerCellsWidth[x] + "");
         }
-        int size = styleColorBeanList.size() - 2;
-        //  int size1=styleColorBeanList.size()-1;
 
 
         for (int k = 0; k < styleColorBeanList.size(); k++) {
@@ -619,7 +575,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
 
             } else if (k >= 1) {    //If current color equal to previous color & last entry in array, then add the row & total row
                 if (styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim()) && k == styleColorBeanList.size() - 1) {
-                    Log.e("same color k=", k + "size" + styleColorBeanList.size());
 
                     TableRow tableRowForTableC = this.tableRowForTableC("");
                     tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
@@ -661,7 +616,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                     fwdweekTotal = 0;
 
                     TableRow tableRowForTableC1 = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                    //TableRow tableRowForTableC = this.tableRowForTableC("");
                     tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC1);
 
@@ -708,8 +662,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 }
                 //If current color equal to previous color & last entry in array, then add the row
                 else if (styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim())) {
-                    Log.e("same color k less than size k=", k + "size" + styleColorBeanList.size());
-                    //TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
                     TableRow tableRowForTableC = this.tableRowForTableC("");
                     tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC);
@@ -726,7 +678,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 }
                 //If current color not equal to previous color, then add total row & current row
                 else if (!styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim())) {
-                    Log.e("else loop add to table k=", k + "size" + styleColorBeanList.size());
 
                     TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
                     tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
@@ -742,7 +693,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                     fwdweekTotal = 0;
 
                     TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                    //TableRow tableRowForTableC = this.tableRowForTableC("");
                     tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC);
 
@@ -775,48 +725,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 }
             }
 
-            //           if(styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k+1).getColor().trim()))
-//            {
-//                TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-//                tableRowForTableC.setBackgroundColor(Color.WHITE);
-//                this.tableC.addView(tableRowForTableC);
-//
-//                salesUnitTotal=salesUnitTotal+styleColorBeanList.get(k).getTwSaleTotQty();
-//                sohTotal=sohTotal+styleColorBeanList.get(k).getStkOnhandQty();
-//                fwdweekTotal=fwdweekTotal+styleColorBeanList.get(k).getFwdWeekCover();
-//
-//                TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
-//                taleRowForTableD.setBackgroundColor(Color.LTGRAY);
-//                this.tableD.addView(taleRowForTableD);
-//            }else
-//            {
-//                cnt++;
-//                TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-//                tableRowForTableC1.setBackgroundColor(Color.WHITE);
-//                this.tableC.addView(tableRowForTableC1);
-//
-//                TableRow taleRowForTableD = this.taleRowForTableDtotal();
-//                taleRowForTableD.setBackgroundColor(Color.parseColor("#B73020"));
-//                this.tableD.addView(taleRowForTableD);
-//
-//           }
-//
-//
-//            if (k==size)
-//            {
-//               if (cnt==1)
-//                   break;
-//
-//                TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-//                tableRowForTableC1.setBackgroundColor(Color.WHITE);
-//                this.tableC.addView(tableRowForTableC1);
-//
-//                TableRow taleRowForTableD = this.taleRowForTableDtotal();
-//                taleRowForTableD.setBackgroundColor(Color.parseColor("#B73020"));
-//                this.tableD.addView(taleRowForTableD);
-//
-//
-//            }
 
 
         }
@@ -841,9 +749,8 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
         params.setMargins(0, 2, 0, 0);
 
-        Log.e("style color ", styleDetails);
         TableRow tableRowForTableC = new TableRow(this.context);
-//        TextView textView = this.bodyTextView(sampleObject.header1);
+
         TextView textView = this.bodyTextView(styleDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         tableRowForTableC.addView(textView, params);
@@ -852,55 +759,11 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
 
     }
 
-
-//    TableRow tableRowForTableC(SampleObject sampleObject) {
-//
-//        TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
-//        params.setMargins(0, 2, 0, 0);
-//
-//
-//             TableRow tableRowForTableC = new TableRow(this.context);
-////        TextView textView = this.bodyTextView(sampleObject.header1);
-//             TextView textView = this.bodyTextView(styleDetailsBean.getProductName());
-//             tableRowForTableC.addView(textView, params);
-//
-//             return tableRowForTableC;
-//
-//    }
-
-
-//    TableRow taleRowForTableD(SampleObject sampleObject) {
-//
-//        TableRow taleRowForTableD = new TableRow(this.context);
-//
-//        int loopCount = ((TableRow) this.tableB.getChildAt(0)).getChildCount();
-//        String info[] = {
-//                styleDetailsBeanList.get(0).getCollectionName(),
-//                styleDetailsBeanList.get(0).getProductFabricDesc(),
-//                styleDetailsBeanList.get(0).getProductFitDesc(),
-//                styleDetailsBeanList.get(0).getProductFinishDesc()
-//
-//        };
-//
-//        for (int x = 0; x < loopCount; x++) {
-//            TableRow.LayoutParams params = new TableRow.LayoutParams(headerCellsWidth[x + 1], TableRow.LayoutParams.MATCH_PARENT);
-//            params.setMargins(2, 2, 0, 0);
-//
-//            TextView textViewB = this.bodyTextView(info[x]);
-//            taleRowForTableD.addView(textViewB, params);
-//        }
-//
-//        return taleRowForTableD;
-//
-//    }
-
-
     TableRow taleRowForTableDtotal() {
 
         TableRow taleRowForTableD = new TableRow(this.context);
 
         int loopCount = ((TableRow) this.tableB.getChildAt(0)).getChildCount();
-        // String info[] = { "   Total   ", String.valueOf(salesUnitTotal), String.valueOf(sohTotal), String.valueOf(fwdweekTotal)};
         String info[] = {"   Total   ", String.valueOf(salesUnitTotal), String.valueOf(sohTotal), "-"};
         for (int x = 0; x < loopCount; x++) {
             TableRow.LayoutParams params = new TableRow.LayoutParams(headerCellsWidth[x + 1], TableRow.LayoutParams.MATCH_PARENT);
@@ -1132,14 +995,10 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
     private void requestStyleDetailsAPI(final Context context, String articleOption) {
         String url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26");
 
-
-        Log.i("URL style  ", "" + url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Style details :   ", response.toString());
                         try {
 
                             if (response.equals(null) || response == null || response.length() == 0) {
@@ -1181,9 +1040,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
 
                                 String articleCode = styleDetails.getString("articleCode");
                                 String productImageURL = styleDetails.getString("productImageURL");
-                                Log.e("row4:===", productImageURL);
-                                //   int usp = styleDetails.getInt("usp");
-
                                 styleDetailsBean = new StyleDetailsBean();
                                 styleDetailsBean.setProductName(productName);
                                 styleDetailsBean.setCollectionName(collectionName);
@@ -1223,7 +1079,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                                 SwitchingTabActivity.switchingTabActivity.finish();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -1232,7 +1087,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e("", "" + error.networkResponse + "");
                         Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }

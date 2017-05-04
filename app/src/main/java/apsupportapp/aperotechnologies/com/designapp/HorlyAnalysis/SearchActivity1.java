@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
+package apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,8 +39,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ValueAdapter;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -58,22 +56,18 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
     ListView listView, listView1;
     RequestQueue queue;
     RadioButton radioButton;
-
     ArrayList<String> productsubdeptList, productNameList, productArticleList;
-
     ValueAdapter adapter;
     Context context;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
     int offsetvalue = 0, limit = 100, offsetvalue1 = 0, limit1 = 100;
     int count = 0, count1 = 0;
-
     public static String searchSubDept = "", searchProductName = "", searchArticleOption = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_search1);
         getSupportActionBar().hide();
         m_config = MySingleton.getInstance(context);

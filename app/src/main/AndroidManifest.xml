@@ -63,7 +63,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".ProductInformation.SearchActivity1"
+            android:name=".HorlyAnalysis.SearchActivity1"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -181,10 +181,6 @@
 
         <activity
             android:name=".RunningPromo.RunningPromoDetails"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".SalesAnalysis.SalesFilter"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

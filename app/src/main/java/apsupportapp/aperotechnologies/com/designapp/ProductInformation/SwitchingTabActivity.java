@@ -137,9 +137,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
         }
         else if(getIntent().getStringExtra("checkFrom").equals("bestInventory"))
         {
-           // Intent intent = new Intent(SwitchingTabActivity.this, VisualAssortmentActivity.class);
-           // startActivity(intent);
-            finish();
+          finish();
         }
         else if(getIntent().getStringExtra("checkFrom").equals("styleActivity")){
             Intent intent = new Intent(SwitchingTabActivity.this, StyleActivity.class);
