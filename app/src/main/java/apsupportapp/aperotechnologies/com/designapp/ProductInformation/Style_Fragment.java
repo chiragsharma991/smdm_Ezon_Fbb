@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp;
+package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +43,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.MySingleton;
+import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SampleObject;
+
+
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 
@@ -78,7 +85,8 @@ public class Style_Fragment extends Fragment {
     String TA="StyleActivity";
 
     // set the header titles
-    String headers[] = {
+    String headers[] =
+            {
             "             Color            ",
             "   Size   ",
             "    TW Sales\n\t\t\t(U)    ",
@@ -112,15 +120,16 @@ public class Style_Fragment extends Fragment {
         queue = new RequestQueue(cache, network);
         queue.start();
 
-        if (Reusable_Functions.chkStatus(context)) {
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.hDialog();
-           // Reusable_Functions.sDialog(context, "Loading data...");
             requestStyleSizeDetailsAPI();
             requestStyleColorDetailsAPI(offsetvalue, limit);
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
             Style_loadingBar.setVisibility(View.GONE);
-
         }
     }
 
@@ -142,7 +151,8 @@ public class Style_Fragment extends Fragment {
 
                             } else if (response.length() == limit) {
 
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject styleDetails = response.getJSONObject(i);
                                     String color = styleDetails.getString("color");
                                     String size = styleDetails.getString("size");
@@ -151,18 +161,14 @@ public class Style_Fragment extends Fragment {
                                     int twSaleTotQty = styleDetails.getInt("twSaleTotQty");
                                     int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
                                     double fwdWeekCover = styleDetails.getDouble("fwdWeekCover");
-
                                     styleColorBean = new StyleColorBean();
-
                                     styleColorBean.setColor(color);
                                     styleColorBean.setSize(size);
                                     styleColorBean.setTwSaleTotQty(twSaleTotQty);
                                     styleColorBean.setFwdWeekCover(fwdWeekCover);
                                     styleColorBean.setStkOnhandQty(stkOnhandQty);
-
                                     styleColorBean.setArticleCode(articleCode);
                                     styleColorBean.setArticleOption(articleOption);
-
                                     styleColorBeanList.add(styleColorBean);
                                 }
 
@@ -173,7 +179,8 @@ public class Style_Fragment extends Fragment {
 
                             } else if (response.length() < limit) {
 
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject styleDetails = response.getJSONObject(i);
                                     String color = styleDetails.getString("color");
                                     String size = styleDetails.getString("size");
@@ -182,9 +189,7 @@ public class Style_Fragment extends Fragment {
                                     int twSaleTotQty = styleDetails.getInt("twSaleTotQty");
                                     int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
                                     double fwdWeekCover = styleDetails.getDouble("fwdWeekCover");
-
                                     styleColorBean = new StyleColorBean();
-
                                     styleColorBean.setColor(color);
                                     styleColorBean.setSize(size);
                                     styleColorBean.setTwSaleTotQty(twSaleTotQty);
@@ -192,13 +197,9 @@ public class Style_Fragment extends Fragment {
                                     styleColorBean.setStkOnhandQty(stkOnhandQty);
                                     styleColorBean.setArticleCode(articleCode);
                                     styleColorBean.setArticleOption(articleOption);
-
                                     Log.e("style bean", color + size);
-
                                     styleColorBeanList.add(styleColorBean);
-
                                     Log.e("added to array", "value: " + i);
-
                                 }
 
                                 Log.e("array size", "value: " + styleColorBeanList.size());

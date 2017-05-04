@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.Details_Fragment;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.Style_Fragment;
+
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
 
