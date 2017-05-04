@@ -1,4 +1,4 @@
-/*
+
 package apsupportapp.aperotechnologies.com.designapp.MPM;
 
 import android.content.Context;
@@ -35,10 +35,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.squareup.picasso.Downloader;
+
 
 import org.json.JSONArray;
 
@@ -57,8 +55,12 @@ import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
+import es.voghdev.pdfviewpager.library.RemotePDFViewPager;
+import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
+import es.voghdev.pdfviewpager.library.remote.DownloadFile;
+import es.voghdev.pdfviewpager.library.util.FileUtil;
 
-public class mpm_activity extends AppCompatActivity implements HttpResponse, View.OnClickListener, OnPageChangeListener, OnLoadCompleteListener {
+public class mpm_activity extends AppCompatActivity implements HttpResponse,View.OnClickListener,DownloadFile.Listener {
 
     private SharedPreferences sharedPreferences;
     private String userId;
@@ -77,16 +79,19 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
     private ListView listView;
     private ArrayList<mpm_model> list;
     private RelativeLayout WebViewProcess;
-    private PDFView WebViewWrap;
     private RelativeLayout mpm_imageBtnBack,Pdf_zoom_btn;
-    private mpm_adapter mpmAdapter;
     public mpm_activity pre_activity;
     private LinearLayout WebView_match_layout,WebView_wrap_layout;
     private TextView Toolbar_title;
     private int dublicatePosition=0;
     private TextView Process_count,Pages_count,Pages_total;
     private LinearLayout Bottom_listItem,BaseLayout;
-    private boolean error=false;
+    public boolean error=false;
+    private LinearLayout WebViewWrap;
+    private mpm_adapter mpmAdapter;
+    private RemotePDFViewPager remotePDFViewPager;
+    private PDFPagerAdapter adapter;
+    private DownloadFile.Listener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +144,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         WebViewProcess.setOnClickListener(this);
         Pdf_zoom_btn.setOnClickListener(this);
 
-        WebViewWrap = (PDFView) findViewById(R.id.webview_wrap);
+        WebViewWrap = (LinearLayout) findViewById(R.id.webview_wrap);
 
         url = ConstsCore.web_url + "/v1/display/mpmproducts/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
         Log.e(TAG, "web_url: " + url);
@@ -155,7 +160,8 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
                     departmentName=list.get(position).getProductName();
                     mpmAdapter.notifyDataSetChanged();
                     WebViewProcess.setVisibility(View.VISIBLE);
-                    new GetbytesFrompdf().execute(list.get(position).getMpmPath());
+                    //  new GetbytesFrompdf().execute(list.get(position).getMpmPath());
+                    callPdf(position);
                     Log.e(TAG, "clickPosition: in Activity "+clickPosition );
 
                 }
@@ -185,7 +191,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
     @Override
     public void response(ArrayList<mpm_model> list) {
-
+        listener = (DownloadFile.Listener) context;
         Log.e(TAG, "response: " + list.size());
         this.list = list;
         mpmAdapter = new mpm_adapter(context, list);
@@ -194,10 +200,36 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         departmentName=list.get(0).getProductName();
         // set web view for read pdf...
         WebViewProcess.setVisibility(View.VISIBLE);
-        new GetbytesFrompdf().execute(list.get(0).getMpmPath());
-        Log.e(TAG, "GetbytesFrompdf: " );
+        // new GetbytesFrompdf().execute(list.get(0).getMpmPath());
+        callPdf(0);
 
 
+
+
+
+    }
+
+    private void callPdf(int position) {
+        remotePDFViewPager = new RemotePDFViewPager(context,list.get(position).getMpmPath(), listener);
+        remotePDFViewPager.setId(R.id.pdfViewPager);
+        remotePDFViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //Log.e(TAG, "onPageScrolled: "+position+"total count is" );
+                int count=position+1;
+                Pages_count.setText(""+count);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
@@ -237,7 +269,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
 
     }
 
-    @Override
+/*    @Override
     public void onPageChanged(int page, int pageCount) {
         Log.e(TAG, "onPageChanged: "+page+"and page count"+pageCount );
         int count=page+1;
@@ -250,109 +282,61 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         Log.e(TAG, "loadComplete: "+nbPages );
         WebViewProcess.setVisibility(View.GONE);
 
-    }
-
-
-    public class GetbytesFrompdf extends AsyncTask<String,String,String> {
-
-        private URL PdfUrl;
-        private int total=0;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Log.e(TAG, "onPreExecute: >>>>>>>" );
-            Process_count.setText("0");
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            Log.e(TAG, "doInBackground: start" );
+    }*/
 
 
 
-            String path=strings[0];
-            Log.e(TAG, "doInBackground: path "+path );
-            URI uri = null;
-            URLConnection connection = null;
-            try {
-                uri = new URI(path);
-                PdfUrl=uri.toURL();
-                connection = PdfUrl.openConnection();
-                connection.connect();
-                InputStream in = connection.getInputStream();
+
+    @Override
+    public void onSuccess(final String url, String destinationPath) {
+        Log.e(TAG, "onSuccess: "+url+" and "+destinationPath );
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if(!error==true){
+
+                    // Run your task here
+                    adapter = new PDFPagerAdapter(context, FileUtil.extractFileNameFromURL(url));
+                    remotePDFViewPager.setAdapter(adapter);
+                    WebViewProcess.setVisibility(View.GONE);
+                    WebViewWrap.removeAllViewsInLayout();
+                    WebViewWrap.addView(remotePDFViewPager,
+                            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    Pages_total.setText(""+adapter.getCount());
+                    Process_count.setText(""+(int)0);
+                    Log.e(TAG, "run: Total count is>>>>>>"+adapter.getCount() );
+           }else{
+                    error=false;
+                    WebViewProcess.setVisibility(View.GONE);
 
 
-                // Since you get a URLConnection, use it to get the InputStream
-                // Now that the InputStream is open, get the content length
-                int contentLength = connection.getContentLength();
-
-                // To avoid having to resize the array over and over and over as
-                // bytes are written to the array, provide an accurate estimate of
-                // the ultimate size of the byte array
-                ByteArrayOutputStream tmpOut;
-                if (contentLength != -1) {
-                    tmpOut = new ByteArrayOutputStream(contentLength);
-                } else {
-                    tmpOut = new ByteArrayOutputStream(16384); // Pick some appropriate size
                 }
 
-                byte[] buf = new byte[512];
-                while (true) {
-                    if(error==true)  // error is when you press back then it will intrupt and stop.
-                    {
-                        Log.e(TAG, "doInBackground: process has been interrupted !");
-                        break;
-                    }
-                    int len = in.read(buf);
-                    if (len == -1) {
-                        break;
-                    }
-                    total += len;
-                    // publishing the progress....
-                    // After this onProgressUpdate will be called
-                    publishProgress(""+(int)((total*100)/contentLength));
-                    Log.e(TAG, "doInBackground: "+contentLength+"and total is "+total );
-                    tmpOut.write(buf, 0, len);
-                }
-                in.close();
-                tmpOut.close(); // No effect, but good to do anyway to keep the metaphor alive
 
-                byte[] array = tmpOut.toByteArray();
-
-                handle(array);
-
-            } catch (IOException e1) {
-                Log.e(TAG, "IOException: "+e1.getMessage() );
-                OnMainThread();
-                e1.printStackTrace();
-            } catch (URISyntaxException e2) {
-                Log.e(TAG, "URISyntaxException: "+e2.getMessage());
-                OnMainThread();
-                e2.printStackTrace();
             }
+        }, 1000 );
 
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Log.e(TAG, "onPostExecute: >>>>>>>" );
-            total=0;
-
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-            Process_count.setText(""+Integer.parseInt(values[0]));
-
-
-
-        }
     }
+
+    @Override
+    public void onFailure(Exception e) {
+        error=true;
+        WebViewProcess.setVisibility(View.GONE);
+        Log.e(TAG, "onFailure: "+e.getMessage() );
+        Reusable_Functions.MakeToast(context,""+e.getMessage());
+    }
+
+    @Override
+    public void onProgressUpdate(int progress, int total) {
+        Log.e(TAG, "onProgressUpdate: "+progress+" and "+total );
+        Process_count.setText(""+(int)((progress*100)/total));
+
+
+
+    }
+
+
 
     private void OnMainThread()
     {
@@ -372,24 +356,15 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse, Vie
         handler.postDelayed(new Runnable() {
             public void run() {
                 // Run your task here
-                loadpdf(array);
+                //  loadpdf(array);
             }
         }, 1000 );
     }
 
-    private void loadpdf(byte[] array) {
 
-        WebViewWrap.fromBytes(array)
 
-                //  .pages(0, 2, 1, 3, 3, 3) // all pages are displayed by default
-                .defaultPage(0)
-                .onPageChange(this)
-                .enableAnnotationRendering(true)
-                .onLoad(this)
-                .scrollHandle(new DefaultScrollHandle(this))
-                .load();
-    }
+
 
 
 }
-*/
+

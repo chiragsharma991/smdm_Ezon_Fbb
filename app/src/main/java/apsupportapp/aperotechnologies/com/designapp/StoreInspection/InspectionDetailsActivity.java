@@ -114,7 +114,8 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
         inspdetls_ArrayList = new ArrayList<InspectionBeanClass>();
 
         Log.e("Inspection Id in Details",""+inspectn_Id);
-        if (Reusable_Functions.chkStatus(InspectionDetailsActivity.this)) {
+        if (Reusable_Functions.chkStatus(InspectionDetailsActivity.this))
+        {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(InspectionDetailsActivity.this, "Loading data...");
             requestInspectionDetails(inspectn_Id);
@@ -245,46 +246,11 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
         txt_excellent_inspdetls_cri_6 = (TextView)findViewById(R.id.txt_excellent_criteria_6);
         txt_excellent_inspdetls_cri_7 = (TextView)findViewById(R.id.txt_excellent_criteria_7);
         txt_excellent_inspdetls_cri_8 = (TextView)findViewById(R.id.txt_excellent_criteria_8);
-
-//        image_good_inspdetls_cri_1.setTag(1);
-//        image_good_inspdetls_cri_2.setTag(1);
-//        image_good_inspdetls_cri_3.setTag(1);
-//        image_good_inspdetls_cri_4.setTag(1);
-//        image_good_inspdetls_cri_5.setTag(1);
-//        image_good_inspdetls_cri_6.setTag(1);
-//        image_good_inspdetls_cri_7.setTag(1);
-//        image_good_inspdetls_cri_8.setTag(1);
-//        //okay image
-//        image_okay_inspdetls_cri_1.setTag(2);
-//        image_okay_inspdetls_cri_2.setTag(2);
-//        image_okay_inspdetls_cri_3.setTag(2);
-//        image_okay_inspdetls_cri_4.setTag(2);
-//        image_okay_inspdetls_cri_5.setTag(2);
-//        image_okay_inspdetls_cri_6.setTag(2);
-//        image_okay_inspdetls_cri_7.setTag(2);
-//        image_okay_inspdetls_cri_8.setTag(2);
-//        //goood image
-//        image_good_inspdetls_cri_1.setTag(3);
-//        image_good_inspdetls_cri_2.setTag(3);
-//        image_good_inspdetls_cri_3.setTag(3);
-//        image_good_inspdetls_cri_4.setTag(3);
-//        image_good_inspdetls_cri_5.setTag(3);
-//        image_good_inspdetls_cri_6.setTag(3);
-//        image_good_inspdetls_cri_7.setTag(3);
-//        image_good_inspdetls_cri_8.setTag(3);
-//        //excellent image
-//        image_excellent_inspdetls_cri_1.setTag(4);
-//        image_excellent_inspdetls_cri_2.setTag(4);
-//        image_excellent_inspdetls_cri_3.setTag(4);
-//        image_excellent_inspdetls_cri_4.setTag(4);
-//        image_excellent_inspdetls_cri_5.setTag(4);
-//        image_excellent_inspdetls_cri_6.setTag(4);
-//        image_excellent_inspdetls_cri_7.setTag(4);
-//        image_excellent_inspdetls_cri_8.setTag(4);
     }
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()){
             case R.id.insp_detls_btnback:
                 onBackPressed();
@@ -295,7 +261,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
     //-------------------------- API Declaration --------------------------//
     private void requestInspectionDetails(final int inspectn_id)
     {
-
             String url = ConstsCore.web_url + "/v1/display/storeinspection/" + userId+"?inspectionId="+inspectn_id;
             Log.e("Inspection History Url" ,"" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -650,7 +615,8 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                             }
                         }
                     },
-                    new Response.ErrorListener() {
+                    new Response.ErrorListener()
+                    {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();

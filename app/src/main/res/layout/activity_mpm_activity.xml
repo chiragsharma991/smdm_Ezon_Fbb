@@ -104,14 +104,14 @@
                     android:layout_height="match_parent"
                     >
 
-                    <com.github.barteksc.pdfviewer.PDFView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/webview_wrap"
-                        >
+                        android:orientation="vertical">
 
 
-                    </com.github.barteksc.pdfviewer.PDFView>
+                    </LinearLayout>
 
 
                     <RelativeLayout
