@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,10 +46,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.OnRowPressListener;
-import apsupportapp.aperotechnologies.com.designapp.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -127,7 +125,6 @@ public class Sku_Fragment extends Fragment {
         scrollViewD.addView(horizontalScrollViewD);
         horizontalScrollViewD.addView(tableD);
         addComponentToMainLayout();
-        int headerCellsWidth[] = new int[headers.length];
         return view;
     }
 
@@ -144,12 +141,12 @@ public class Sku_Fragment extends Fragment {
 
     public void fragmentCommunication1(String productName, String articlOption) {
 
-
         productName1 = productName;
         articleOption = articlOption;
         if (Reusable_Functions.chkStatus(context)) {
             LinearLayout layout = (LinearLayout) KeyProductActivity.viewPager.getParent();
             TabLayout tab = (TabLayout) layout.getChildAt(1);
+            // Remove option tab when seen product and sku tab
             if (tab.getTabCount() == 3) {
                 tab.removeTabAt(1);
             }
@@ -171,17 +168,12 @@ public class Sku_Fragment extends Fragment {
 
 
     public void requestProductArticleSkuAPI(int offsetvalue1, int limit1) {
-        String pname = "";
-
-
         String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?view=productDesc&articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&productName=" + productName1.replaceAll(" ", "%20").replaceAll("&", "%26");
-        Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("ProdArticleSku Response", response.toString());
                         try {
 
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -189,7 +181,6 @@ public class Sku_Fragment extends Fragment {
                                 Toast.makeText(getContext(), "no sku data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
-
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
 
@@ -431,7 +422,6 @@ public class Sku_Fragment extends Fragment {
 
         // just seeing some header cell width
         for (int x = 0; x < this.headerCellsWidth.length; x++) {
-            Log.v("Product Data", this.headerCellsWidth[x] + "");
         }
 
         for (int k = 0; k < productNameBeanArrayList.size(); k++) {

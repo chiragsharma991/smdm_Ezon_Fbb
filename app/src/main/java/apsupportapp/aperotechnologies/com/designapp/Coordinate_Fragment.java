@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.Details_Fragment;
 
 import java.util.ArrayList;
 

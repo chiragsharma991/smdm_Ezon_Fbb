@@ -815,7 +815,6 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                                             drillDownList.add(listValueBrandClass);
 
                                         }
-
                                     }
 
                                     //this is for remove dublicate values in arraylist.

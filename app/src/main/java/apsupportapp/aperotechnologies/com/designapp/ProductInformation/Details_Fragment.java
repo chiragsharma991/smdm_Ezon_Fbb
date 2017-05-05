@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp;
+package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +15,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
 import java.util.Locale;
+
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleDetailsBean;
+import apsupportapp.aperotechnologies.com.designapp.R;
 
 
 public class Details_Fragment extends Fragment {

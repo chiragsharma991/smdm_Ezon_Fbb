@@ -4,13 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +34,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -53,11 +51,10 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.OnRowPressListener;
-import apsupportapp.aperotechnologies.com.designapp.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.StyleDetailsBean;
-import apsupportapp.aperotechnologies.com.designapp.SwitchingTabActivity;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleDetailsBean;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.SwitchingTabActivity;
 
 public class Option_Fragment extends Fragment {
     public static TableLayout tableAOpt_Frag;
@@ -90,27 +87,24 @@ public class Option_Fragment extends Fragment {
             "     GIT    ",
 
     };
-    boolean flag_Click = false;
     int headerCellsWidth[] = new int[headers.length];
     ProductNameBean productNameBean;
     TextView txtStoreCode, txtStoreDesc;
     MySingleton m_config;
-    String prodName,strVal;
+    String prodName;
     int offsetvalue = 0, limit = 100, limit1 = 10;
     int count = 0;
-    int clickFlag = 0;
     SharedPreferences sharedPreferences;
     TextView txtOptionName;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         m_config = MySingleton.getInstance(getActivity());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-
-        Log.e("onCreate ", "Opt Fragment");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -139,8 +133,7 @@ public class Option_Fragment extends Fragment {
         horizontalScrollViewD.addView(tableDOpt_Frag);
         // add the components to be part of the main layout
         addComponentToMainLayout();
-        //int headerCellsWidth[] = new int[headers.length];
-        // option tab click
+        // option tab click without selection of product name
         if (KeyProductActivity.viewPager.getCurrentItem() == 1 && KeyProductActivity.prodName.equals("")) {
             Toast.makeText(getContext(), "Please select product to view options", Toast.LENGTH_LONG).show();
         }
@@ -161,9 +154,7 @@ public class Option_Fragment extends Fragment {
 
     public void fragmentCommunication(String productName) {
 
-        Log.e("productName ====>> ", " " + productName);
         prodName = productName;
-       // strVal = str;
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
@@ -298,7 +289,6 @@ public class Option_Fragment extends Fragment {
 
         // just seeing some header cell width
         for (int x = 0; x < this.headerCellsWidth.length; x++) {
-            Log.v("Product Data", this.headerCellsWidth[x] + "");
         }
 
         for (int k = 0; k <= productNameBeanArrayList.size() - 1; k++) {
@@ -312,7 +302,6 @@ public class Option_Fragment extends Fragment {
 
                 @Override
                 public void onClick(View v) {
-                   // Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
                     tableAOpt_Frag.removeAllViews();
                     tableBOpt_Frag.removeAllViews();
                     tableRowForTableC.removeAllViews();
@@ -337,7 +326,6 @@ public class Option_Fragment extends Fragment {
                         @Override
                         public boolean onLongClick(View v) {
                             // TODO Auto-generated method stub
-                          //  Toast.makeText(context, "Long Clicked", Toast.LENGTH_SHORT).show();
                             optionDetailsList = new ArrayList<StyleDetailsBean>();
                             offsetvalue = 0;
                             limit1 = 10;
@@ -346,7 +334,6 @@ public class Option_Fragment extends Fragment {
                             if (Reusable_Functions.chkStatus(context)) {
                                 Reusable_Functions.hDialog();
                                 Reusable_Functions.sDialog(context, "Loading  data...");
-                                Log.e("select item", productNameBeanArrayList.get(i).getArticleOption());
                                 requestOptionDetailsAPI(productNameBeanArrayList.get(i).getArticleOption());
                             } else {
                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -592,14 +579,10 @@ public class Option_Fragment extends Fragment {
         String url = " ";
 
         url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit1;
-
-        Log.e(" ", "requestStyleDetailsAPI  " + url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(" ", " requestStyleDetailsAPI :   " + response.toString());
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0) {
@@ -613,19 +596,15 @@ public class Option_Fragment extends Fragment {
                                     optionDetailsList.add(styleDetailsBean);
 
                                 }
-
-                                Log.e("------ ", "intent calling: ");
                                 Intent intent = new Intent(context, SwitchingTabActivity.class);
                                 intent.putExtra("checkFrom", "option_fragment");
                                 intent.putExtra("articleCode", styleDetailsBean.getArticleCode());
                                 intent.putExtra("articleOption", styleDetailsBean.getArticleOption());
-                                Log.e("Article Option :", "" + styleDetailsBean.getArticleOption());
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 context.startActivity(intent);
                                 KeyProductActivity.key_product_activity.finish();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -634,7 +613,6 @@ public class Option_Fragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e("", "" + error.networkResponse + "");
                         Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
@@ -675,7 +653,6 @@ public class Option_Fragment extends Fragment {
                                     for (int i = 0; i < response.length(); i++) {
                                         JSONObject productName1 = response.getJSONObject(i);
                                         String ProductName = productName1.getString("productName");
-
                                         String articleOption = productName1.getString("articleOption");
                                         String articleCode = productName1.getString("articleCode");
                                         int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
@@ -683,16 +660,12 @@ public class Option_Fragment extends Fragment {
                                         int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
                                         double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
                                         double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
-                                        //int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
-                                        //int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
                                         int SOH = productName1.getInt("stkOnhandQty");
                                         int GIT = productName1.getInt("stkGitQty");
                                         String Storecode = productName1.getString("storeCode");
                                         String storeDesc = productName1.getString("storeDesc");
-
                                         productNameBean = new ProductNameBean();
                                         productNameBean.setProductName(ProductName);
-
                                         productNameBean.setArticleOption(articleOption);
                                         productNameBean.setArtileCode(articleCode);
                                         productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
@@ -703,10 +676,7 @@ public class Option_Fragment extends Fragment {
                                         productNameBean.setSoh(SOH);
                                         productNameBean.setGit(GIT);
                                         productNameBean.setStoreCode(Storecode);
-
                                         productNameBean.setStoreDesc(storeDesc);
-
-                                        Log.e("Response Lenght", "" + response.length());
                                         productNameBeanArrayList.add(productNameBean);
                                         txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                         txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
@@ -718,7 +688,6 @@ public class Option_Fragment extends Fragment {
                                     for (int i = 0; i < response.length(); i++) {
                                         JSONObject productName1 = response.getJSONObject(i);
                                         String ProductName = productName1.getString("productName");
-
                                         String articleOption = productName1.getString("articleOption");
                                         String articleCode = productName1.getString("articleCode");
                                         int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
@@ -726,16 +695,12 @@ public class Option_Fragment extends Fragment {
                                         int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
                                         double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
                                         double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
-                                        //int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
-                                        //int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
                                         int SOH = productName1.getInt("stkOnhandQty");
                                         int GIT = productName1.getInt("stkGitQty");
                                         String Storecode = productName1.getString("storeCode");
                                         String storeDesc = productName1.getString("storeDesc");
-
                                         productNameBean = new ProductNameBean();
                                         productNameBean.setProductName(ProductName);
-
                                         productNameBean.setArticleOption(articleOption);
                                         productNameBean.setArtileCode(articleCode);
                                         productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
@@ -746,12 +711,8 @@ public class Option_Fragment extends Fragment {
                                         productNameBean.setSoh(SOH);
                                         productNameBean.setGit(GIT);
                                         productNameBean.setStoreCode(Storecode);
-
                                         productNameBean.setStoreDesc(storeDesc);
-
-                                        Log.e("Response Lenght-------", "" + response.length());
                                         productNameBeanArrayList.add(productNameBean);
-
                                         txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                         txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
                                     }
@@ -766,7 +727,6 @@ public class Option_Fragment extends Fragment {
                                     addTableRowToTableB();
                                     resizeHeaderHeight();
                                     getTableRowHeaderCellWidth();
-                                    Log.e("view childcount", " " + view.getChildCount());
                                     if (view.getChildCount() == 1) {
                                         scrollViewC.scrollTo(0, 0);
                                         scrollViewD.scrollTo(0, 0);

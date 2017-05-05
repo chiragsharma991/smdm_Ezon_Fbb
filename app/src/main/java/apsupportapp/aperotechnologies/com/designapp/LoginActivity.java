@@ -266,7 +266,7 @@ public class  LoginActivity extends AppCompatActivity {
 
     private void requestLoginWithStoreAPI() {
 
-        String url = ConstsCore.web_url + "/v1/login?storeCode=" + SelectedStoreCode; //ConstsCore.web_url+ + "/v1/login/userId";
+        String url = ConstsCore.web_url + "/v1/login?storeCode=" + SelectedStoreCode.replace(" ","%20"); //ConstsCore.web_url+ + "/v1/login/userId";
 
         Log.e(TAG, "requestLoginWithStoreAPI: "+url );
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,

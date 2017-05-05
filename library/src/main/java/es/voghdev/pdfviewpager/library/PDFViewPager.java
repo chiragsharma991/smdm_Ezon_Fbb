@@ -19,7 +19,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
+
+import javax.security.auth.login.LoginException;
 
 import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
 
@@ -43,6 +46,7 @@ public class PDFViewPager extends ViewPager {
     }
 
     protected void init(AttributeSet attrs) {
+        Log.e("TAG", "AttributeSet: "+attrs);
         if (isInEditMode()) {
             setBackgroundResource(R.drawable.flaticon_pdf_dummy);
             return;

@@ -18,6 +18,7 @@ package es.voghdev.pdfviewpager.library;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
@@ -52,7 +53,7 @@ public class PDFViewPagerZoom extends PDFViewPager {
             a = context.obtainStyledAttributes(attrs, R.styleable.PDFViewPager);
             String assetFileName = a.getString(R.styleable.PDFViewPager_assetFileName);
             float scale = a.getFloat(R.styleable.PDFViewPager_scale, PdfScale.DEFAULT_SCALE);
-
+            Log.e("TAG", "init:scale "+scale );
             if (assetFileName != null && assetFileName.length() > 0) {
                 setAdapter(new PDFPagerAdapter.Builder(context)
                         .setPdfPath(assetFileName)

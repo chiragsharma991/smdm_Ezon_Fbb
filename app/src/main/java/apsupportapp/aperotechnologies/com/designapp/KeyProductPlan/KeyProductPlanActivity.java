@@ -2,9 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.KeyProductPlan;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,43 +10,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Network;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.CustomViewPager;
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.Option_Fragment;
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductName_Fragment;
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.Sku_Fragment;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
-import apsupportapp.aperotechnologies.com.designapp.OnRowPressListener;
-import apsupportapp.aperotechnologies.com.designapp.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.SearchActivity1;
-import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
 
 public class KeyProductPlanActivity extends AppCompatActivity implements View.OnClickListener,OnRowPressListener1 {

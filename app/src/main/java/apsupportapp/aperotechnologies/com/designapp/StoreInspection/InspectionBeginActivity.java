@@ -88,6 +88,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     public static final int MY_PERMISSIONS_REQUEST_R = 30; //2
     public static final int MY_PERMISSIONS_REQUEST_RWFRMCAM = 60; //3
     private Bitmap bitmap;
+    private int ratting_size[]=new int[8];
 
     // Emoji Declaration
     ImageView image_improvement_criteria_1, image_okay_criteria_1, image_good_criteria_1, image_excellent_criteria_1;
@@ -98,7 +99,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     ImageView image_improvement_criteria_6, image_okay_criteria_6, image_good_criteria_6, image_excellent_criteria_6;
     ImageView image_improvement_criteria_7, image_okay_criteria_7, image_good_criteria_7, image_excellent_criteria_7;
     ImageView image_improvement_criteria_8, image_okay_criteria_8, image_good_criteria_8, image_excellent_criteria_8;
-    ImageView image_camera, image_upload;
+    ImageView image_camera, image_upload ,emoji_image;
 
     // Emoji Text Declaration
     TextView txt_improvement_criteria_1, txt_okay_criteria_1, txt_good_criteria_1, txt_excellent_criteria_1;
@@ -111,7 +112,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     TextView txt_improvement_criteria_8, txt_okay_criteria_8, txt_good_criteria_8, txt_excellent_criteria_8;
 
     EditText et_inspected_by, et_comment;
-    Button btn_insp_submit;
+    Button btn_insp_submit,btn_insp_reset;
     private RelativeLayout rel_cam_image;
     Uri selectedImage;
     private TextView txt_insp_date_Val;
@@ -125,7 +126,9 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     private String insp_imagePath;
     String strDate;
     Context context;
+    private double overallRating = 0.0;
     private int fashionQuot, merchDisplay, merchPresentationStd, suggSellingByStaff, overallCleanliness, signage, winClusterMannequinsDisp, mpmExecution;
+    private double sumofRatting, cal_result;
 
 
     @Override
@@ -146,46 +149,49 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         queue.start();
         gson = new Gson();
 
-//        et_inspected_by.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//
-//            Boolean handled = false;
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_NONE)) {
-//                    et_inspected_by.clearFocus();
-//                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    if(inputManager != null){
-//                        inputManager.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
-//                    }
-//                    handled = true;
-//                }
-//                return handled;
-//            }
-//
-//        });
-//        et_comment.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//
-//            Boolean handled = false;
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_NONE) ) {
-//                    et_comment.clearFocus();
-//                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    if(inputManager != null){
-//                        inputManager.hideSoftInputFromWindow(et_comment.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
-//                    }
-//                    handled = true;
-//                }
-//                return handled;
-//            }
-//
-//        });
+    }
+    //field means -0,1,2..
+    //inx means= selected value
+    public double calculation(int x,int field){
+        int div_by=0;
+        sumofRatting=0;
+        ratting_size[field]=x;
 
+        //sum of all values
+        for (int i = 0; i <8 ; i++) {
+            if(ratting_size[i]!=0){
+                div_by+=1;
+            }
+            sumofRatting+=ratting_size[i];
+        }
+
+        //sum divide by ..
+        cal_result = sumofRatting/div_by;
+        Log.e("Cal_result :",""+cal_result +"\tsumofRatting :"+sumofRatting +"\tdiv_by :"+div_by);
+        //emoji image set
+        if(Math.round(cal_result) < 2)
+        {
+            emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+        }
+        else  if(Math.round(cal_result)< 3)
+        {
+            emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+        }
+        else  if(Math.round(cal_result) < 4)
+        {
+            emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+        }
+        else  if(Math.round(cal_result) >= 4)
+        {
+            emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+        }
+
+        return cal_result;
     }
 
     public void getCurrentDate(View view) {
         Calendar calendar = Calendar.getInstance(); //dd / MM /yyyy
-        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd-MM-yyyy");
         strDate = mdformat.format(calendar.getTime());
         txt_insp_date_Val.setText(strDate);
     }
@@ -271,6 +277,11 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         txt_excellent_criteria_7 = (TextView) findViewById(R.id.txt_excellent_criteria_7);
         txt_excellent_criteria_8 = (TextView) findViewById(R.id.txt_excellent_criteria_8);
 
+        for (int i = 0; i < 8 ; i++) {
+            ratting_size[i]=0;
+
+        }
+
         //Edittext
         et_inspected_by = (EditText) findViewById(R.id.et_inspected_by);
         et_comment = (EditText) findViewById(R.id.et_comment);
@@ -280,11 +291,13 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         rel_cam_image = (RelativeLayout) findViewById(R.id.rel_cam_image);
         image_camera = (ImageView) findViewById(R.id.camera_imageView);
         image_upload = (ImageView) findViewById(R.id.camera_imageView1);
+        emoji_image = (ImageView)findViewById(R.id.emoji_image);
         image_upload.setVisibility(View.INVISIBLE);
         txt_insp_date_Val = (TextView) findViewById(R.id.txt_insp_date_Val);
         inspection_btnback = (RelativeLayout) findViewById(R.id.inspection_btnback);
 
         btn_insp_submit = (Button) findViewById(R.id.btn_insp_submit);
+        btn_insp_reset = (Button)findViewById(R.id.btn_insp_reset);
 
         image_improvement_criteria_1.setOnClickListener(this);
         image_improvement_criteria_2.setOnClickListener(this);
@@ -324,6 +337,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         image_camera.setOnClickListener(this);
         inspection_btnback.setOnClickListener(this);
         btn_insp_submit.setOnClickListener(this);
+        btn_insp_reset.setOnClickListener(this);
     }
 
     @Override
@@ -349,6 +363,23 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_1.setText("");
                     txt_okay_criteria_1.setText("");
                     fashionQuot = 1;
+                   // ratting_size[0] = fashionQuot;
+                    calculation(fashionQuot,0);
+
+//                    Log.e("OverallRatings in insp imp 1 :",""+ratting_size[0]);
+//                    if(overallRating < 2) {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
@@ -373,6 +404,32 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_2.setText("");
                     txt_okay_criteria_2.setText("");
                     merchDisplay = 1;
+                    Log.e("OverallRating in insp imp 2 before:",""+overallRating);
+                    //ratting_size[1] = merchDisplay;
+                    calculation(merchDisplay,1);
+
+//                    overallRating = (overallRating + merchDisplay) / 2;
+//                    Log.e("OverallRating in insp imp 2 after :",""+overallRating);
+//
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
+
+
                 } else {
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_2.setText("");
@@ -395,7 +452,33 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_3.setText("");
                     txt_excellent_criteria_3.setText("");
                     txt_okay_criteria_3.setText("");
-                    merchPresentationStd = 3;
+                    merchPresentationStd = 1;
+                    ratting_size[2]=merchPresentationStd;
+                    calculation(merchPresentationStd,2);
+
+//                    Log.e("OverallRating in insp imp 3 before:",""+overallRating);
+//
+//                    overallRating = (overallRating + merchPresentationStd) / 3;
+//                    Log.e("OverallRating in insp imp 3 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
+
+
                 } else {
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_3.setText("");
@@ -422,6 +505,28 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_4.setText("");
                     txt_okay_criteria_4.setText("");
                     suggSellingByStaff = 1;
+                    ratting_size[3] = suggSellingByStaff;
+                    calculation(suggSellingByStaff,3);
+
+//                    overallRating = (overallRating + suggSellingByStaff) / 4;
+//                    Log.e("OverallRating in insp imp 4 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     //  image_improvement_criteria_4.setClickable(false);
@@ -451,6 +556,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_5.setText("");
                     txt_okay_criteria_5.setText("");
                     overallCleanliness = 1;
+                    ratting_size[4]= overallCleanliness;
+                    calculation(overallCleanliness,4);
+//                    Log.e("OverallRating in insp imp 5 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + overallCleanliness) / 5;
+//                    Log.e("OverallRating in insp imp 5 after :",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     //  image_improvement_criteria_5.setClickable(false);
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
@@ -479,6 +607,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_6.setText("");
                     txt_okay_criteria_6.setText("");
                     signage = 1;
+                    ratting_size[5]= signage;
+                    calculation(signage,5);
+//                    Log.e("OverallRating in insp imp 6 before:",""+overallRating);
+//
+//                    overallRating = (overallRating + signage) / 6;
+//                    Log.e("OverallRating in insp imp 6 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_improvement_criteria_6.setClickable(false);
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
@@ -506,6 +657,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_7.setText("");
                     txt_okay_criteria_7.setText("");
                     mpmExecution = 1;
+                    ratting_size[6]=mpmExecution;
+                    calculation(mpmExecution,6);
+//                    Log.e("OverallRating in insp imp 7 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + mpmExecution) / 7;
+//                    Log.e("OverallRating in insp imp 7 after :",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     // image_improvement_criteria_7.setClickable(false);
@@ -535,6 +709,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_8.setText("");
                     txt_okay_criteria_8.setText("");
                     winClusterMannequinsDisp = 1;
+                    ratting_size[7]= winClusterMannequinsDisp;
+                    calculation(winClusterMannequinsDisp,7);
+//                    Log.e("OverallRating in insp imp 8 before:",""+overallRating);
+//
+//                    overallRating = (overallRating + winClusterMannequinsDisp) / 8;
+//                    Log.e("OverallRating in insp imp 8 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     //  image_improvement_criteria_8.setClickable(false);
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
@@ -562,6 +759,31 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
                     fashionQuot = 2;
+                    ratting_size[0] = fashionQuot;
+                    calculation(fashionQuot,0);
+//                    Log.e("OverallRating in insp okay 1 before :",""+overallRating);
+//
+//                    overallRating = fashionQuot;
+//                    Log.e("OverallRating in insp okay 1 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
+//                    Log.e("overallRatings in insp okay 1:",""+overallRating);
+//                    emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
 
                 } else {
                     //  image_okay_criteria_1.setClickable(false);
@@ -589,6 +811,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
                     merchDisplay = 2;
+                    ratting_size[1] = merchDisplay;
+                    calculation(merchDisplay,1);
+//                    Log.e("OverallRating in insp okay 2 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + merchDisplay) / 2;
+//                    Log.e("OverallRating in insp okay 2 after :",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_okay_criteria_2.setClickable(false);
                     image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -616,6 +861,28 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");
                     merchPresentationStd = 2;
+                    ratting_size[2]=merchPresentationStd;
+                    calculation(merchPresentationStd,2);
+//                    Log.e("OverallRating in insp okay 3 before :",""+overallRating);
+//                    overallRating = (overallRating + merchPresentationStd) / 3;
+//                    Log.e("OverallRating in insp okay 3 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     //  image_okay_criteria_3.setClickable(false);
@@ -644,6 +911,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
                     suggSellingByStaff = 2;
+                    ratting_size[3]=suggSellingByStaff;
+                    calculation(suggSellingByStaff,3);
+//                    Log.e("OverallRating in insp okay 4 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + suggSellingByStaff) / 4;
+//                    Log.e("OverallRating in insp okay 4 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     // image_okay_criteria_4.setClickable(false);
@@ -671,6 +961,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
                     overallCleanliness = 2;
+                    ratting_size[4]=overallCleanliness;
+                    calculation(overallCleanliness,4);
+//                    Log.e("OverallRating in insp okay 5 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + overallCleanliness) / 5;
+//                    Log.e("OverallRating in insp okay 5 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_okay_criteria_5.setClickable(false);
                     image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -698,6 +1011,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
                     signage = 2;
+                    ratting_size[5]=signage;
+                    calculation(signage,5);
+//                    Log.e("OverallRating in insp okay 6 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + signage) / 6;
+//                    Log.e("OverallRating in insp okay 4 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     // image_okay_criteria_6.setClickable(false);
@@ -726,6 +1062,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
                     mpmExecution = 2;
+                    ratting_size[6]=mpmExecution;
+                    calculation(mpmExecution,6);
+//                    Log.e("OverallRating in insp okay 7 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + mpmExecution) / 7;
+//                    Log.e("OverallRating in insp okay 7 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_okay_criteria_7.setClickable(false);
                     image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiunselected);
@@ -754,6 +1113,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_8.setText("");
                     txt_improvement_criteria_8.setText("");
                     winClusterMannequinsDisp = 2;
+                    ratting_size[7]= winClusterMannequinsDisp;
+                    calculation(winClusterMannequinsDisp,7);
+//                    Log.e("OverallRating in insp okay 8 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + winClusterMannequinsDisp) / 8;
+//                    Log.e("OverallRating in insp okay 8 :",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     // image_okay_criteria_8.setClickable(false);
@@ -783,12 +1165,35 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
                     fashionQuot = 3;
+                    ratting_size[0]= fashionQuot;
+                    calculation(fashionQuot,0);
+//                    Log.e("OverallRating in insp good 1 before :",""+overallRating);
+//
+//                    overallRating = fashionQuot;
+//                    Log.e("OverallRating in insp good 1 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
-                } else {
+                } else
+                {
                     // image_good_criteria_1.setClickable(false);
                     image_good_criteria_1.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_1.setText("");
-
                 }
 
                 break;
@@ -811,6 +1216,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
                     merchDisplay = 3;
+                    ratting_size[1]= merchDisplay;
+                    calculation(merchDisplay,1);
+//                    Log.e("OverallRating in insp good 2 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + merchDisplay) / 2;
+//                    Log.e("OverallRating in insp good 2 after :",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_good_criteria_2.setClickable(false);
                     image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -838,6 +1266,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");
                     merchPresentationStd = 3;
+                    ratting_size[2]=merchPresentationStd;
+                    calculation(merchPresentationStd,2);
+//                    Log.e("OverallRating in insp good 3 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + merchPresentationStd) / 3;
+//                    Log.e("OverallRating in insp good 3 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_good_criteria_3.setClickable(false);
                     image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -865,6 +1316,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
                     suggSellingByStaff = 3;
+                    ratting_size[3]=suggSellingByStaff;
+                    calculation(suggSellingByStaff,3);
+//                    Log.e("OverallRating in insp good 4 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + suggSellingByStaff) / 4;
+//                    Log.e("OverallRating in insp good 4 after :",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_good_criteria_4.setClickable(false);
                     image_good_criteria_4.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -892,6 +1366,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
                     overallCleanliness = 3;
+                    ratting_size[4]=overallCleanliness;
+                    calculation(overallCleanliness,4);
+//                    Log.e("OverallRating in insp good 5 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + overallCleanliness) / 5;
+//                    Log.e("OverallRating in insp good 5 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
 
                 } else {
@@ -921,6 +1418,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
                     signage = 3;
+                    ratting_size[5]=signage;
+                    calculation(signage,5);
+//                    Log.e("OverallRating in insp good 6 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + signage) / 6;
+//                    Log.e("OverallRating in insp good 6 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_good_criteria_6.setClickable(false);
                     image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiunselected);
@@ -948,7 +1468,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
                     mpmExecution = 3;
-
+                    ratting_size[6]=mpmExecution;
+                    calculation(mpmExecution,6);
+//                    Log.e("OverallRating in insp good 7 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + mpmExecution) / 7;
+//                    Log.e("OverallRating in insp good 7 after :",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     // image_good_criteria_7.setClickable(false);
@@ -977,6 +1519,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_8.setText("");
                     txt_improvement_criteria_8.setText("");
                     winClusterMannequinsDisp = 3;
+                    ratting_size[7]=winClusterMannequinsDisp;
+                    calculation(winClusterMannequinsDisp,7);
+//                    Log.e("OverallRating in insp good 8 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + winClusterMannequinsDisp) / 8;
+//                    Log.e("OverallRating in insp good 8 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
 
                 } else {
@@ -1007,6 +1572,31 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
                     fashionQuot = 4;
+                    ratting_size[0]=fashionQuot;
+                    calculation(fashionQuot,0);
+//                    Log.e("OverallRating in insp excellent 1 before:",""+overallRating);
+//
+//                    overallRating = fashionQuot;
+//                    Log.e("OverallRating in insp excellent 1 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
+//
+
                 } else {
                     //  image_excellent_criteria_1.setClickable(false);
                     image_excellent_criteria_1.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -1032,6 +1622,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
                     merchDisplay = 4;
+                    ratting_size[1]=merchDisplay;
+                    calculation(merchDisplay,1);
+//                    Log.e("OverallRating in insp excellent 2 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + merchDisplay) / 2;
+//                    Log.e("OverallRating in insp excellent 2 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     //  image_excellent_criteria_2.setClickable(false);
                     image_excellent_criteria_2.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -1057,6 +1670,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");
                     merchPresentationStd = 4;
+                    ratting_size[2]=merchPresentationStd;
+                    calculation(merchPresentationStd,2);
+//                    Log.e("OverallRating in insp excellent 3 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + merchPresentationStd) / 3;
+//                    Log.e("OverallRating in insp excellent 3 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     //  image_excellent_criteria_3.setClickable(false);
                     image_excellent_criteria_3.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -1083,6 +1719,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
                     suggSellingByStaff = 4;
+                    ratting_size[3]=suggSellingByStaff;
+                    calculation(suggSellingByStaff,3);
+//                    Log.e("OverallRating in insp excellent 4 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + suggSellingByStaff) / 4;
+//                    Log.e("OverallRating in insp excellent 4 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     //  image_excellent_criteria_4.setClickable(false);
@@ -1109,6 +1768,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
                     overallCleanliness = 4;
+                    ratting_size[4]=overallCleanliness;
+                    calculation(overallCleanliness,4);
+//                    Log.e("OverallRating in insp excellent 5 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + overallCleanliness) / 5;
+//                    Log.e("OverallRating in insp excellent 5 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_excellent_criteria_5.setClickable(false);
                     image_excellent_criteria_5.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -1127,16 +1809,35 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     YoYo.with(Techniques.ZoomIn)
                             .duration(500)
                             .playOn(findViewById(R.id.image_excellent_criteria_6));
-//                    LinearLayout.LayoutParams layoutParams6 = (LinearLayout.LayoutParams) image_excellent_criteria_6.getLayoutParams();
-//                    layoutParams6.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    layoutParams6.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+
                     txt_okay_criteria_6.setText("");
                     txt_good_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
                     signage = 4;
+                    ratting_size[5]=signage;
+                    calculation(signage,5);
+//                    Log.e("OverallRating in insp excellent 6 before :",""+overallRating);
+//                    overallRating = (overallRating + signage) / 6;
+//                    Log.e("OverallRating in insp excellent 6 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
-                    //  image_excellent_criteria_6.setClickable(false);
-                    image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
+                     image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_6.setText("");
                 }
 
@@ -1160,6 +1861,28 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
                     mpmExecution = 4;
+                    ratting_size[6]=mpmExecution;
+                    calculation(mpmExecution,6);
+//                    Log.e("OverallRating in insp excellent 7 before :",""+overallRating);
+//                    overallRating = (overallRating + mpmExecution) / 7;
+//                    Log.e("OverallRating in insp excellent 7 after:",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
 
                 } else {
                     //  image_excellent_criteria_7.setClickable(false);
@@ -1186,6 +1909,29 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_good_criteria_8.setText("");
                     txt_improvement_criteria_8.setText("");
                     winClusterMannequinsDisp = 4;
+                    ratting_size[7]=winClusterMannequinsDisp;
+                    calculation(winClusterMannequinsDisp,7);
+//                    Log.e("OverallRating in insp excellent 8 before :",""+overallRating);
+//
+//                    overallRating = (overallRating + winClusterMannequinsDisp) / 8;
+//                    Log.e("OverallRating in insp excellent 8 after :",""+overallRating);
+//                    // image set
+//                    if(overallRating < 2)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+//                    }
+//                    else if(overallRating < 3)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//                    }
+//                    else if(overallRating < 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//                    }
+//                    else if(overallRating >= 4)
+//                    {
+//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//                    }
                 } else {
                     // image_excellent_criteria_8.setClickable(false);
                     image_excellent_criteria_8.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -1201,8 +1947,89 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.btn_insp_submit:
                 OnSubmit();
                 break;
+            case R.id.btn_insp_reset:
+                OnReset();
+                break;
 
         }
+    }
+
+    private void OnReset() {
+        //default emoji
+        emoji_image.setBackgroundResource(R.mipmap.defaultemojiunselected);
+        image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
+        image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
+        image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
+        image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiunselected);
+        image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
+        image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
+        image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiunselected);
+        image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
+        //Okay Emoji
+        image_okay_criteria_1.setBackgroundResource(R.mipmap.okayemojiunselected);
+        image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
+        image_okay_criteria_3.setBackgroundResource(R.mipmap.okayemojiunselected);
+        image_okay_criteria_4.setBackgroundResource(R.mipmap.okayemojiunselected);
+        image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiunselected);
+        image_okay_criteria_6.setBackgroundResource(R.mipmap.okayemojiunselected);
+        image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiunselected);
+        image_okay_criteria_8.setBackgroundResource(R.mipmap.okayemojiunselected);
+        //Good Emoji
+        image_good_criteria_1.setBackgroundResource(R.mipmap.goodemojiunselected);
+        image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
+        image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiunselected);
+        image_good_criteria_4.setBackgroundResource(R.mipmap.goodemojiunselected);
+        image_good_criteria_5.setBackgroundResource(R.mipmap.goodemojiunselected);
+        image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiunselected);
+        image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiunselected);
+        image_good_criteria_8.setBackgroundResource(R.mipmap.goodemojiunselected);
+        //Excellent Emoji
+        image_excellent_criteria_1.setBackgroundResource(R.mipmap.excellentemojiunselected);
+        image_excellent_criteria_2.setBackgroundResource(R.mipmap.excellentemojiunselected);
+        image_excellent_criteria_3.setBackgroundResource(R.mipmap.excellentemojiunselected);
+        image_excellent_criteria_4.setBackgroundResource(R.mipmap.excellentemojiunselected);
+        image_excellent_criteria_5.setBackgroundResource(R.mipmap.excellentemojiunselected);
+        image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
+        image_excellent_criteria_7.setBackgroundResource(R.mipmap.excellentemojiunselected);
+        image_excellent_criteria_8.setBackgroundResource(R.mipmap.excellentemojiunselected);
+         //Text improvement
+        txt_improvement_criteria_1.setText("");
+        txt_improvement_criteria_2.setText("");
+        txt_improvement_criteria_3.setText("");
+        txt_improvement_criteria_4.setText("");
+        txt_improvement_criteria_5.setText("");
+        txt_improvement_criteria_6.setText("");
+        txt_improvement_criteria_7.setText("");
+        txt_improvement_criteria_8.setText("");
+        //Text okay
+        txt_okay_criteria_1.setText("");
+        txt_okay_criteria_2.setText("");
+        txt_okay_criteria_3.setText("");
+        txt_okay_criteria_4.setText("");
+        txt_okay_criteria_5.setText("");
+        txt_okay_criteria_6.setText("");
+        txt_okay_criteria_7.setText("");
+        txt_okay_criteria_8.setText("");
+        //Text good
+        txt_good_criteria_1.setText("");
+        txt_good_criteria_2.setText("");
+        txt_good_criteria_3.setText("");
+        txt_good_criteria_4.setText("");
+        txt_good_criteria_5.setText("");
+        txt_good_criteria_6.setText("");
+        txt_good_criteria_7.setText("");
+        txt_good_criteria_8.setText("");
+        //Text excellent
+        txt_excellent_criteria_1.setText("");
+        txt_excellent_criteria_2.setText("");
+        txt_excellent_criteria_3.setText("");
+        txt_excellent_criteria_4.setText("");
+        txt_excellent_criteria_5.setText("");
+        txt_excellent_criteria_6.setText("");
+        txt_excellent_criteria_7.setText("");
+        txt_excellent_criteria_8.setText("");
+        et_inspected_by.setText("");
+        et_comment.setText("");
     }
 
     private void OnSubmit() {
@@ -1217,52 +2044,67 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             if (et_inspected_by.equals("") || et_inspected_by.length() == 0 ||
                     fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
-                    || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {
-
-        /*    if (et_inspected_by.equals("") || et_inspected_by.length() == 0 || et_comment.equals("") || et_comment.length() == 0 || picturePath==null ||
-                    fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
-                    || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {*/
-                //For Inspected By -- Inspector Name
-                if (et_inspected_by.equals("") || et_inspected_by.length() == 0) {
-                    Toast.makeText(InspectionBeginActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
-
-                }
-                //For Comment
-              /*  else if (et_comment.equals("") || et_comment.length() == 0) {
-                    Toast.makeText(InspectionBeginActivity.this, "Please enter comment", Toast.LENGTH_LONG).show();
-
-                }*/
-                // For Image
+                    || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0)
+            {
+               // For Image
              /*   else if (picturePath ==null) {
                     Toast.makeText(InspectionBeginActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
                 }*/
 //
                 // Inspection Criteria...
-                else if (fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
-                        || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0) {
+                if (fashionQuot == 0 )
+                {
 
-                    Toast.makeText(InspectionBeginActivity.this, "Please Select Value", Toast.LENGTH_LONG).show();
+                    Toast.makeText(InspectionBeginActivity.this, "Please select value of Fashion Quotient", Toast.LENGTH_LONG).show();
+
+                }
+                else if( merchDisplay == 0 )
+                {
+                    Toast.makeText(InspectionBeginActivity.this, "Please select value of Merchant Display", Toast.LENGTH_LONG).show();
+
+                }
+                else if(merchPresentationStd == 0 )
+                {
+                    Toast.makeText(InspectionBeginActivity.this, "Please select value of Merchandise Presentation Standards", Toast.LENGTH_LONG).show();
+
+                }
+                else if(suggSellingByStaff == 0 )
+                {
+                    Toast.makeText(InspectionBeginActivity.this, "Please select value of Suggestive Selling by Staff", Toast.LENGTH_LONG).show();
+
+                }
+                else if( overallCleanliness == 0)
+                {
+                    Toast.makeText(InspectionBeginActivity.this, "Please select value of Overall Cleanliness", Toast.LENGTH_LONG).show();
+
+                }
+                else if( signage == 0)
+                {
+                    Toast.makeText(InspectionBeginActivity.this, "Please select value of Signage", Toast.LENGTH_LONG).show();
+
+                }
+                else if( mpmExecution == 0)
+                {
+                    Toast.makeText(InspectionBeginActivity.this, "Please select value of MPM Execution", Toast.LENGTH_LONG).show();
+
+                }
+                else if( winClusterMannequinsDisp == 0)
+                {
+                    Toast.makeText(InspectionBeginActivity.this, "Please select value of WinClusterMannequinsDisp", Toast.LENGTH_LONG).show();
+
+                }
+                //For Inspected By -- Inspector Name
+                else if (et_inspected_by.equals("") || et_inspected_by.length() == 0) {
+                    Toast.makeText(InspectionBeginActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
+
+                }
+                //For Comment
+                else if (et_comment.equals("") || et_comment.length() == 0) {
+                    Toast.makeText(InspectionBeginActivity.this, "Please enter comment", Toast.LENGTH_LONG).show();
 
                 }
             } else {
-
-                inspected_name = et_inspected_by.getText().toString();
-                InputMethodManager imm = (InputMethodManager) et_inspected_by.getContext()
-                        .getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), 0);
-                obj.put("inspectorName", inspected_name);
                 obj.put("inspectionDate", txt_insp_date_Val.getText().toString());
-                insp_comment = et_comment.getText().toString();
-                //Comment
-                obj.put("comments", insp_comment);
-                InputMethodManager imm1 = (InputMethodManager) et_comment.getContext()
-                        .getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm1.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
-                //For Image
-               // insp_imagePath = getStringImage(bitmap);
-                insp_imagePath = picturePath;
-                Log.e("TAG", "insp_imagePath: "+insp_imagePath );
-               // obj.put("storeImg", insp_imagePath);
                 if (fashionQuot != 0) // Condition for Inspection Criteria 1
                 {
                     if (fashionQuot == 1) {
@@ -1299,7 +2141,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                         obj.put("merchPresentationStd", 4); //Excellent is selected
                     }
                 }
-                if (suggSellingByStaff != 0) // Condition for Inspection Criteria 4
+                if (suggSellingByStaff != 0) //Condition for Inspection Criteria 4
                 {
                     if (suggSellingByStaff == 1) {
                         obj.put("suggSellingByStaff", 1); //Need Improvement is selected
@@ -1359,21 +2201,51 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                         obj.put("winClusterMannequinsDisp", 4); //Excellent is selected
                     }
                 }
+                inspected_name = et_inspected_by.getText().toString();
+                InputMethodManager imm = (InputMethodManager) et_inspected_by.getContext()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(et_inspected_by.getWindowToken(), 0);
+                obj.put("inspectorName", inspected_name);
+                insp_comment = et_comment.getText().toString();
 
+                //Comment
+                obj.put("comments", insp_comment);
+                InputMethodManager imm1 = (InputMethodManager) et_comment.getContext()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm1.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
 
+                //Rating
+                if(Math.round(cal_result) == 1)
+                {
+                    obj.put("rating","Need Improvement");
+                }
+                else if(Math.round(cal_result) == 2)
+                {
+                    obj.put("rating","Okay");
+                }
+                else if(Math.round(cal_result) == 3)
+                {
+                    obj.put("rating","Good");
+                }
+                else if(Math.round(cal_result) == 4)
+                {
+                    obj.put("rating","Excellent");
+                }
+//               // For Image
+//              //  insp_imagePath = getStringImage(bitmap);
+//                insp_imagePath = picturePath;
+//                Log.e("TAG", "insp_imagePath: "+insp_imagePath );
+//                obj.put("storeImg", insp_imagePath);
                 Log.e("TAG", "onSubmit : Json Array is:" + obj.toString());
                 requestInspectionSubmitAPI(context,obj);
-
-
             }
-        } catch (JSONException e) {
+
+        } catch (JSONException e)
+        {
             e.printStackTrace();
             Toast.makeText(InspectionBeginActivity.this,e.getMessage(), Toast.LENGTH_LONG).show();
 
         }
-
-
-
     }
 
     private String getStringImage(Bitmap bmp) {
@@ -1386,14 +2258,14 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
     //Inspection Submit API
     private void requestInspectionSubmitAPI(Context context1, JSONObject jsonarray) {
-        {
+    {
 
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Submitting data…");
                 String url = "";
                 url = ConstsCore.web_url + "/v1/save/storeinspection/submit/" + userId;//+"?recache="+recache
-                //    Log.e("url", " put Request " + url + " ==== " + object.toString());
+                //Log.e("url", " put Request " + url + " ==== " + object.toString());
                 JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonarray.toString(),
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -1449,7 +2321,9 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 postRequest.setRetryPolicy(policy);
                 queue.add(postRequest);
 
-            } else {
+            }
+            else
+            {
                 Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
 
             }
@@ -1478,7 +2352,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
     public void openGallery() {
         if ((int) Build.VERSION.SDK_INT < 23) {
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 2);
         } else {
             int permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
@@ -1486,7 +2360,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             Log.e("Read Permission Check", " " + permissionCheck);
             if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
                 Log.i("Read Permission granted", "");
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 2);
             } else {
                 Log.i("Read Permission not granted", "");
@@ -1592,7 +2466,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             }
             image_upload.setVisibility(View.VISIBLE);
             image_upload.setImageBitmap(thumbnail);
-
 //        image_camera.setImageBitmap(thumbnail);
 //        image_camera.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
 //        image_camera.getLayoutParams().width = RelativeLayout.LayoutParams.MATCH_PARENT;
@@ -1605,5 +2478,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         super.onBackPressed();
         finish();
     }
+
+
 }
 
