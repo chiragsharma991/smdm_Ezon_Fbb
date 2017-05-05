@@ -78,39 +78,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/toolbar"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/bg_screen_color">
 
 
-                <TextView
-                    android:id="@+id/tstoreCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Store : "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/normallayout_storesize"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/tstoreCode"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Store : "-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="@dimen/normallayout_storesize"/>-->
 
                 <TextView
+                    android:textStyle="normal"
                     android:id="@+id/inspection_txtStoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_toRightOf="@+id/tstoreCode"
+                    android:layout_marginLeft="5dp"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/normallayout_storesize"/>
+                    android:textSize="@dimen/collaboration_stock_title"/>
 
                 <TextView
+                    android:textStyle="normal"
                     android:id="@+id/inspection_txtStoreName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_toRightOf="@id/inspection_txtStoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/normallayout_storesize"/>
+                    android:textSize="@dimen/collaboration_stock_title"/>
 
             </RelativeLayout>
 
@@ -123,19 +123,21 @@
                 android:background="@color/border_round_edittext"/>
 
             <LinearLayout
+                android:background="@color/white"
                 android:id="@+id/lin_insp_head"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="138dp"
                 android:layout_below="@+id/view1"
                 android:orientation="horizontal">
 
                 <RelativeLayout
-                    android:layout_marginLeft="3dp"
                     android:id="@+id/rel_cam_image"
+                    android:layout_margin="4dp"
+                    android:layout_marginLeft="3dp"
                     android:background="@drawable/rounded_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.65">
+                    android:layout_weight="0.55">
 
                     <!--<ImageView-->
                         <!--android:id="@+id/camera_imageView"-->
@@ -145,6 +147,7 @@
                         <!--android:scaleType="fitXY"/>-->
 
                     <ImageView
+                        android:layout_margin="2dp"
                         android:id="@+id/camera_imageView1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -160,15 +163,18 @@
                     android:layout_weight="0.5">
 
                     <TextView
+                        android:layout_marginTop="5dp"
                         android:id="@+id/txt_inspdetls_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
+                        android:textStyle="bold"
                         android:text="Inspection Id : "
                         android:textColor="@color/bg_store_code_text"
                         android:textSize="@dimen/normallayout_storesize"/>
 
                     <TextView
+                        android:layout_marginTop="5dp"
                         android:id="@+id/txt_inspdetls_id_Val"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -184,6 +190,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txt_inspdetls_id"
                         android:layout_marginLeft="2dp"
+                        android:textStyle="bold"
                         android:text="Inspection Date : "
                         android:textColor="@color/bg_store_code_text"
                         android:textSize="@dimen/normallayout_storesize"/>
@@ -204,6 +211,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
+                        android:textStyle="bold"
                         android:layout_below="@+id/txt_inspdetls_date"
                         android:text="Inspected By : "
                         android:textColor="@color/bg_store_code_text"
@@ -222,22 +230,21 @@
 
                     <ImageView
                         android:id="@+id/emoji_image"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_below="@+id/txt_inspdetls_name"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_above="@+id/txt_overall_ratings"
                         android:layout_centerInParent="true"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="3dp"
                         android:background="@mipmap/defaultemojiunselected"/>
 
                     <TextView
                         android:id="@+id/txt_overall_ratings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/emoji_image"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="8dp"
-                        android:hint="Overall Ratings"
+                        android:layout_marginBottom="5dp"
+                        android:text="Overall Rating"
                         android:textColor="@color/bg_store_code_text"
                         android:textSize="@dimen/normallayout_storesize"/>
 
@@ -256,12 +263,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view2"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="3dp"
-                android:text="Inspection Criteria"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
+                android:text="Inspection Item (all the fields are mandatory)"
                 android:textColor="@color/bg_store_code_text"
-                android:textSize="14sp"/>
-
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:id="@+id/linear_insp_criteria"
@@ -269,7 +276,6 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/txt_insp_criteria"
                 android:orientation="vertical">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -280,6 +286,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -310,7 +317,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp">
+                                        android:layout_margin="2dp">
 
                                         <TextView
                                             android:id="@+id/txt_insp_criteria_1"
@@ -318,22 +325,21 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_1"
                                             android:textColor="@color/bg_store_code_text"
-                                            android:textSize="@dimen/collaboration_stock_title"
+                                            android:textSize="@dimen/stock_textsize_large"
                                             android:textStyle="normal"/>
-
 
                                     </RelativeLayout>
 
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border">
-
                                     </View>
 
 
@@ -342,8 +348,8 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
@@ -354,64 +360,84 @@
                                             android:layout_marginLeft="5dp"
                                             android:layout_weight="1"
                                             android:gravity="left"
-                                            android:orientation="vertical"
-                                            >
+                                            android:orientation="vertical">
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_1"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
-                                                android:gravity="left"
-                                                />
+                                                android:gravity="left"/>
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_1"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
 
                                         </RelativeLayout>
 
-
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
                                             android:layout_weight="1"
                                             android:gravity="center"
-                                            android:orientation="vertical"
-                                            >
+                                            android:orientation="vertical">
+
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_1"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_1"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
 
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
-                                            android:gravity="center_horizontal"
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
                                             android:layout_weight="1"
+                                            android:gravity="center_horizontal"
                                             android:orientation="vertical"
                                             >
 
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_1"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_1"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerInParent="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
+
+
+                                        </RelativeLayout>
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
@@ -425,12 +451,21 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_1"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
+
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_1"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
+
 
                                         </LinearLayout>
 
@@ -439,7 +474,7 @@
                                     <!--ending part-->
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="23dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -449,7 +484,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
@@ -458,7 +493,9 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -466,15 +503,17 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:text=""
                                                 android:id="@+id/txt_okay_criteria_1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -483,15 +522,17 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:text=""
                                                 android:id="@+id/txt_good_criteria_1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -499,70 +540,25 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:text=""
                                                 android:id="@+id/txt_excellent_criteria_1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
                                     </LinearLayout>
 
-                                    <!--<LinearLayout-->
-                                    <!--android:layout_width="match_parent"-->
-                                    <!--android:layout_height="25dp"-->
-                                    <!--android:background="@color/smdm_divider_Black_light"-->
-                                    <!--android:orientation="horizontal"-->
-                                    <!--android:padding="3dp"-->
-                                    <!--android:weightSum="4">-->
-
-                                    <!--<TextView-->
-                                    <!--android:id="@+id/txt_improvement_criteria_1"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="match_parent"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:text="Need Improvement"/>-->
-
-                                    <!--<TextView-->
-                                    <!--android:id="@+id/txt_okay_criteria_1"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="match_parent"-->
-                                    <!--android:layout_marginRight="15dp"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Okay"/>-->
-
-                                    <!--<TextView-->
-                                    <!--android:id="@+id/txt_good_criteria_1"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="match_parent"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:layout_marginLeft="15dp"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:text="Good"/>-->
-
-                                    <!--<TextView-->
-                                    <!--android:id="@+id/txt_excellent_criteria_1"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="match_parent"-->
-                                    <!--android:layout_weight="1"-->
-                                    <!--android:gravity="right"-->
-                                    <!--android:text="Excellent"/>-->
-
-
-                                    <!--</LinearLayout>-->
-
 
                                 </LinearLayout>
-
-
                             </android.support.v7.widget.CardView>
-
                         </android.support.v7.widget.CardView>
 
                     </LinearLayout>
@@ -571,6 +567,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -602,7 +599,8 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp">
+                                        android:layout_margin="2dp"
+                                        >
 
                                         <TextView
                                             android:id="@+id/txt_insp_criteria_2"
@@ -610,10 +608,11 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_2"
                                             android:textColor="@color/bg_store_code_text"
-                                            android:textSize="@dimen/collaboration_stock_title"
+                                            android:textSize="@dimen/stock_textsize_large"
                                             android:textStyle="normal"
                                             />
 
@@ -623,8 +622,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border">
 
                                     </View>
@@ -635,13 +634,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -651,17 +650,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_2"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"/>
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_2"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
 
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -672,18 +678,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_2"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_2"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -695,16 +708,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_2"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_2"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"/>
 
-                                        <LinearLayout
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -716,14 +736,21 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_2"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_2"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"/>
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -731,7 +758,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="23dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -741,7 +768,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
@@ -750,7 +777,9 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -758,7 +787,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -766,7 +795,8 @@
                                                 android:id="@+id/txt_okay_criteria_2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -775,7 +805,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -783,7 +813,8 @@
                                                 android:id="@+id/txt_good_criteria_2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -791,7 +822,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
@@ -799,7 +830,8 @@
                                                 android:id="@+id/txt_excellent_criteria_2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -818,6 +850,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -849,7 +882,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -858,10 +891,11 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_3"
                                             android:textColor="@color/bg_store_code_text"
-                                            android:textSize="@dimen/collaboration_stock_title"
+                                            android:textSize="@dimen/stock_textsize_large"
                                             android:textStyle="normal"
                                             />
 
@@ -871,8 +905,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -884,13 +918,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -901,19 +935,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_3"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
+                                                android:gravity="left"/>
+
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_3"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
                                                 android:gravity="left"
+                                                android:visibility="gone"/>
 
-                                                />
-
-
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -924,18 +963,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_3"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_3"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -947,16 +994,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_3"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_3"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        <LinearLayout
+                                                />
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -968,14 +1025,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_3"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_3"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -983,7 +1050,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="23dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -993,7 +1060,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
@@ -1002,7 +1069,9 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1010,7 +1079,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -1018,7 +1087,8 @@
                                                 android:id="@+id/txt_okay_criteria_3"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1027,7 +1097,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -1035,7 +1105,8 @@
                                                 android:id="@+id/txt_good_criteria_3"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1043,7 +1114,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
@@ -1051,7 +1122,8 @@
                                                 android:id="@+id/txt_excellent_criteria_3"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1071,6 +1143,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -1102,8 +1175,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
-                                        >
+                                        android:layout_margin="2dp">
 
                                         <TextView
                                             android:id="@+id/txt_insp_criteria_4"
@@ -1111,10 +1183,11 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_4"
                                             android:textColor="@color/bg_store_code_text"
-                                            android:textSize="@dimen/collaboration_stock_title"
+                                            android:textSize="@dimen/stock_textsize_large"
                                             android:textStyle="normal"
                                             />
 
@@ -1124,8 +1197,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border">
 
                                     </View>
@@ -1136,13 +1209,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -1153,19 +1226,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_4"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
-
-
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_4"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
 
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -1176,18 +1254,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_4"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_4"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -1199,16 +1285,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_4"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_4"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        <LinearLayout
+                                                />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -1220,14 +1315,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_4"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_4"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -1235,7 +1339,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="23dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1245,7 +1349,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
@@ -1254,7 +1358,9 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1262,7 +1368,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -1270,7 +1376,8 @@
                                                 android:id="@+id/txt_okay_criteria_4"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1279,7 +1386,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -1287,7 +1394,8 @@
                                                 android:id="@+id/txt_good_criteria_4"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1295,7 +1403,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
@@ -1303,7 +1411,8 @@
                                                 android:id="@+id/txt_excellent_criteria_4"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1323,6 +1432,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -1354,7 +1464,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -1363,10 +1473,11 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_5"
                                             android:textColor="@color/bg_store_code_text"
-                                            android:textSize="@dimen/collaboration_stock_title"
+                                            android:textSize="@dimen/stock_textsize_large"
                                             android:textStyle="normal"
                                             />
 
@@ -1376,8 +1487,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -1389,13 +1500,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -1406,19 +1517,29 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_5"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_5"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
 
 
-                                        <LinearLayout
+                                        </RelativeLayout>
+
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -1429,18 +1550,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_5"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_5"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -1452,16 +1581,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_5"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_5"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        <LinearLayout
+                                                />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -1473,14 +1611,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_5"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_5"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -1488,7 +1635,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="23dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1498,7 +1645,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
@@ -1507,7 +1654,9 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1515,7 +1664,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -1523,7 +1672,8 @@
                                                 android:id="@+id/txt_okay_criteria_5"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1532,7 +1682,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -1540,7 +1690,8 @@
                                                 android:id="@+id/txt_good_criteria_5"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1548,7 +1699,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
@@ -1556,7 +1707,8 @@
                                                 android:id="@+id/txt_excellent_criteria_5"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1575,6 +1727,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -1606,7 +1759,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -1615,10 +1768,11 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_6"
                                             android:textColor="@color/bg_store_code_text"
-                                            android:textSize="@dimen/collaboration_stock_title"
+                                            android:textSize="@dimen/stock_textsize_large"
                                             android:textStyle="normal"
                                             />
 
@@ -1628,8 +1782,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -1641,13 +1795,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -1657,18 +1811,26 @@
                                             >
 
                                             <ImageView
+
                                                 android:id="@+id/image_improvement_criteria_6"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"/>
 
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_6"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
 
-                                        </LinearLayout>
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -1679,15 +1841,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_6"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"/>
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_6"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
 
-                                        </LinearLayout>
 
-                                        <LinearLayout
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -1698,14 +1868,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_6"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"/>
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_6"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
 
-                                        <LinearLayout
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -1717,14 +1896,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_6"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_6"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -1732,7 +1921,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="23dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1742,7 +1931,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
@@ -1751,7 +1940,9 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1759,7 +1950,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -1767,7 +1958,8 @@
                                                 android:id="@+id/txt_okay_criteria_6"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1776,7 +1968,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -1784,7 +1976,8 @@
                                                 android:id="@+id/txt_good_criteria_6"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1792,7 +1985,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
@@ -1800,7 +1993,8 @@
                                                 android:id="@+id/txt_excellent_criteria_6"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -1820,6 +2014,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -1851,7 +2046,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -1860,10 +2055,11 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_7"
                                             android:textColor="@color/bg_store_code_text"
-                                            android:textSize="@dimen/collaboration_stock_title"
+                                            android:textSize="@dimen/stock_textsize_large"
                                             android:textStyle="normal"
                                             />
 
@@ -1873,8 +2069,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -1886,13 +2082,13 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="5dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:layout_marginTop="8dp"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -1903,17 +2099,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_7"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"/>
 
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_7"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -1924,18 +2128,26 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_7"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"
 
                                                 />
 
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_7"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        </LinearLayout>
+                                                />
+
+                                        </RelativeLayout>
 
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -1947,16 +2159,25 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_7"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_good_cri_7"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
 
-                                        <LinearLayout
+                                                />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -1968,14 +2189,23 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_7"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"
 
                                                 />
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_7"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+
+                                                />
+
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -1983,7 +2213,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="23dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -1993,7 +2223,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
@@ -2002,7 +2232,9 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2010,7 +2242,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -2018,7 +2250,8 @@
                                                 android:id="@+id/txt_okay_criteria_7"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2027,7 +2260,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -2035,7 +2268,8 @@
                                                 android:id="@+id/txt_good_criteria_7"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2043,7 +2277,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
@@ -2051,7 +2285,8 @@
                                                 android:id="@+id/txt_excellent_criteria_7"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2071,6 +2306,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1">
 
                         <android.support.v7.widget.CardView
@@ -2102,7 +2338,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="2dp"
+                                        android:layout_margin="2dp"
                                         >
 
                                         <TextView
@@ -2111,10 +2347,11 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_marginBottom="5dp"
+                                            android:layout_marginLeft="4dp"
                                             android:layout_marginTop="5dp"
                                             android:text="@string/insp_criteria_8"
                                             android:textColor="@color/bg_store_code_text"
-                                            android:textSize="@dimen/collaboration_stock_title"
+                                            android:textSize="@dimen/stock_textsize_large"
                                             android:textStyle="normal"/>
 
 
@@ -2123,8 +2360,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="2dp"
+                                        android:layout_marginLeft="4dp"
+                                        android:layout_marginRight="4dp"
                                         android:background="@color/smdm_border"
                                         >
 
@@ -2140,7 +2377,7 @@
                                         android:padding="3dp"
                                         android:weightSum="4">
 
-                                        <LinearLayout
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
@@ -2150,14 +2387,22 @@
 
                                             <ImageView
                                                 android:id="@+id/image_improvement_criteria_8"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/improvementemojiunselected"
                                                 android:gravity="left"/>
-                                        </LinearLayout>
 
-                                        <LinearLayout
+                                            <ImageView
+                                                android:id="@+id/image_improvement_cri_8"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="left"
+                                                android:visibility="gone"/>
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
@@ -2167,14 +2412,22 @@
 
                                             <ImageView
                                                 android:id="@+id/image_okay_criteria_8"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/okayemojiunselected"/>
 
-                                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/image_okay_cri_8"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
 
-                                        <LinearLayout
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
@@ -2184,14 +2437,24 @@
 
                                             <ImageView
                                                 android:id="@+id/image_good_criteria_8"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/goodemojiunselected"/>
 
-                                        </LinearLayout>
+                                            <ImageView
 
-                                        <LinearLayout
+                                                android:id="@+id/image_good_cri_8"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
@@ -2201,11 +2464,19 @@
 
                                             <ImageView
                                                 android:id="@+id/image_excellent_criteria_8"
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:layout_centerInParent="true"
+                                                android:layout_width="35dp"
+                                                android:layout_height="35dp"
+                                                android:layout_centerVertical="true"
                                                 android:background="@mipmap/excellentemojiunselected"/>
-                                        </LinearLayout>
+
+                                            <ImageView
+                                                android:id="@+id/image_excellent_cri_8"
+                                                android:layout_width="45dp"
+                                                android:layout_height="45dp"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone"
+                                                />
+                                        </RelativeLayout>
 
                                     </LinearLayout>
 
@@ -2213,7 +2484,7 @@
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="23dp"
                                         android:background="@color/smdm_divider_Black_light"
                                         android:orientation="horizontal"
                                         android:padding="3dp"
@@ -2223,7 +2494,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="left"
                                             android:orientation="vertical">
 
@@ -2232,7 +2503,9 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerInParent="true"
-                                                android:text=""/>
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2240,7 +2513,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.18"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -2248,7 +2521,8 @@
                                                 android:id="@+id/txt_okay_criteria_8"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2257,7 +2531,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="15dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.85"
                                             android:gravity="center"
                                             android:orientation="vertical">
 
@@ -2265,7 +2539,8 @@
                                                 android:id="@+id/txt_good_criteria_8"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2273,7 +2548,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="5dp"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.085"
                                             android:gravity="right"
                                             android:orientation="vertical">
 
@@ -2281,7 +2556,8 @@
                                                 android:id="@+id/txt_excellent_criteria_8"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_centerInParent="true"/>
+                                                android:layout_centerInParent="true"
+                                                android:textSize="@dimen/stock_store_textsize"/>
 
                                         </LinearLayout>
 
@@ -2291,59 +2567,27 @@
                         </android.support.v7.widget.CardView>
                     </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
 
-            <!--<TextView-->
-                <!--android:id="@+id/txt_inspected_by"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/linear_insp_criteria"-->
-                <!--android:layout_marginLeft="2dp"-->
-                <!--android:layout_marginTop="3dp"-->
-                <!--android:text="Inspected By : "-->
-                <!--android:textColor="@color/bg_store_code_text"-->
-                <!--android:textSize="14sp"/>-->
-
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="30dp"-->
-                <!--app:cardBackgroundColor="@color/smdm_border"-->
-                <!--app:cardCornerRadius="5dp"-->
-                <!--app:cardElevation="0dp"-->
-                <!--app:cardPreventCornerOverlap="false"-->
-                <!--app:cardUseCompatPadding="true"-->
-                <!--app:contentPadding="1dp">-->
-
-                <!--<android.support.v7.widget.CardView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--app:cardCornerRadius="5dp"-->
-                    <!--app:cardElevation="0dp"-->
-                    <!--app:cardPreventCornerOverlap="false"-->
-                    <!--app:cardUseCompatPadding="false"-->
-                    <!--app:contentPadding="0dp">-->
-
-                    <!--<EditText-->
-                        <!--android:id="@+id/et_inspected_by"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:background="@color/white"-->
-                        <!--android:hint="Rohit Shetty"-->
-                        <!--android:textSize="12sp"/>-->
-
-                <!--</android.support.v7.widget.CardView>-->
-            <!--</android.support.v7.widget.CardView>-->
 
             <TextView
                 android:id="@+id/txt_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linear_insp_criteria"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="3dp"
-                android:text="Comments : "
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6dp"
+                android:text="Comment : "
                 android:textColor="@color/bg_store_code_text"
-                android:textSize="14sp"/>
+                android:textSize="15sp"
+                android:textStyle="bold"
+               />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            >
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -2370,13 +2614,14 @@
                         android:layout_height="match_parent"
                         android:background="@color/white"
                         android:gravity="start"
-                        android:hint="@string/dummy_text"
+                        android:layout_marginLeft="5dp"
+                        android:hint=""
                         android:maxLines="2"
                         android:textSize="12sp"/>
 
                 </android.support.v7.widget.CardView>
             </android.support.v7.widget.CardView>
-
+</LinearLayout>
 
         </LinearLayout>
     </ScrollView>

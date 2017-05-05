@@ -213,7 +213,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading..");
+            Reusable_Functions.sDialog(context, "Loading...");
             progressBar1.setVisibility(View.GONE);
             llhierarchy.setVisibility(View.GONE);
             //llayoutSalesAnalysis.setVisibility(View.GONE);

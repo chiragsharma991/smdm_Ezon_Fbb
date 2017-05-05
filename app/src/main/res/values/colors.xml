@@ -51,6 +51,8 @@
     <color name="smdm_status_pending_color">#9c9c9c</color>
 
 
+    <color name="zoom_button_color_primary">#99464646</color>
+    <color name="zoom_button_color">#40464646</color>
 
 
 </resources>

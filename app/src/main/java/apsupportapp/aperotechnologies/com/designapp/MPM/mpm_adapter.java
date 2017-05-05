@@ -15,17 +15,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackDetailsAdapter;import apsupportapp.aperotechnologies.com.designapp.R;
-
-/**
- * Created by csuthar on 19/04/17.
- */
+import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackDetailsAdapter;
+import apsupportapp.aperotechnologies.com.designapp.R;
 
 
 
-/**
- * Created by csuthar on 10/04/17.
- */
+
+
+
 
 public class mpm_adapter extends BaseAdapter {
 
