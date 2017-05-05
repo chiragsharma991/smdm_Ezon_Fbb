@@ -51,7 +51,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 public class KeyProductActivity extends AppCompatActivity implements View.OnClickListener,OnRowPressListener {
     RelativeLayout btnBack;
     RelativeLayout btnSearch;
-    public static String prodName = "",segClk = "";
+    public static String prodName = "";
     private final String LOG_TAG = "MainActivity";
     KeyProductAdapter adapter;
     TabLayout tabLayout;
@@ -71,14 +71,12 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
     private ArrayList<EtlStatus> etlStatusList;
     private Gson gson;
     public static Activity key_product_activity;
-    //git tese 10/1/2017
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_key_product);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
         context = this;
         key_product_activity = this;
