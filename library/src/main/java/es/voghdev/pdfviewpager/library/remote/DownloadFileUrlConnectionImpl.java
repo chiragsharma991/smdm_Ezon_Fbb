@@ -27,7 +27,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DownloadFileUrlConnectionImpl implements DownloadFile {
+
+
+ public class DownloadFileUrlConnectionImpl   implements DownloadFile {
     private static final int KILOBYTE = 1024;
 
     private static final int BUFFER_LEN = 1 * KILOBYTE;

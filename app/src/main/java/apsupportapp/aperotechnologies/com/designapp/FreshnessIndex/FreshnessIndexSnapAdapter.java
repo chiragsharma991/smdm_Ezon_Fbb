@@ -5,30 +5,20 @@ package apsupportapp.aperotechnologies.com.designapp.FreshnessIndex;
  */
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisSnapAdapter;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesPagerAdapter;
-import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
-
-
 
 
 public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements GravitySnapHelper.SnapListener {
@@ -37,7 +27,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     public static final int HORIZONTAL = 1;
     private final ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList;
 
-      RecyclerView listViewFIndex;
+    RecyclerView listViewFIndex;
     ArrayList<SalesAnalysisViewPagerValue> analysisArrayList;
 
     private final int VIEW_ITEM = 1;
@@ -46,7 +36,6 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     String fromWhere;
 
     Gson gson;
-    // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -54,51 +43,22 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
             return false;
         }
     };
-
-  /*  public FreshnessIndexSnapAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, RecyclerView listView_SalesAnalysis) {
-
-       // mSnaps = new ArrayList<>();
-        Log.e("in sales analysis adapter"," ");
-        this.mSnaps = arrayList;
-        this.context = context;
-        this.fromwhere = fromwhere;
-        this.listView_SalesAnalysis = listView_SalesAnalysis;
-        mInflater = LayoutInflater.from(context);
-        this.currentIndex = currentIndex;
-        level = 1;
-        focusposition = 0;
-        selFirstPositionValue = 0;
-        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-        gson = new Gson();
-
-        //getFilter();
-    }
-*/
     public FreshnessIndexSnapAdapter(ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, RecyclerView listViewFIndex) {
 
         this.context = context;
         this.freshnessIndexDetailsArrayList = freshnessIndexDetailsArrayList;
         this.fromWhere = fromWhere;
         this.listViewFIndex = listViewFIndex;
-
         gson = new Gson();
     }
-
-
-
-
-//    public void addSnap(SalesAnalysisListDisplay snap) {
-//        mSnaps.add(snap);
-//    }
 
     @Override
     public int getItemViewType(int position) {
 
-        if (isPositionItem(position)){
+        if (isPositionItem(position)) {
             return VIEW_ITEM;
 
-        }
-        else {
+        } else {
             return VIEW_PROG;
         }
     }
@@ -122,9 +82,9 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         if (viewType == VIEW_ITEM) {
-            View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.findex_list_row, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.findex_list_row, parent, false);
             return new FreshnessIndexSnapAdapter.FreshnessHolder(v);
-        } else if (viewType == VIEW_PROG){
+        } else if (viewType == VIEW_PROG) {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_footer, parent, false);
             return new ProgressViewHolder(v);
@@ -138,7 +98,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
         if (viewHolder instanceof FreshnessHolder) {
-            if(position < freshnessIndexDetailsArrayList.size()) {
+            if (position < freshnessIndexDetailsArrayList.size()) {
                 FreshnessIndexDetails freshnessIndexDetails = freshnessIndexDetailsArrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
@@ -169,7 +129,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                 } else if (fromWhere.equals("Subclass")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandName());
-                    ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" +  formatter.format(freshnessIndexDetails.getStkOnhandQty()));
+                    ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
                     ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
 
@@ -177,14 +137,12 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                 } else if (fromWhere.equals("MC")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandplanClass());
-                    ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" +  formatter.format(freshnessIndexDetails.getStkOnhandQty()));
+                    ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
                     ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
                 }
             }
-        }
-        else
-        {
+        } else {
 
         }
 
@@ -209,15 +167,11 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     public static class ProgressViewHolder extends RecyclerView.ViewHolder {
-        //        Button loadButton;
-//        ProgressBar progressBar;
         TextView txtView;
 
-        public ProgressViewHolder(View footerView){
+        public ProgressViewHolder(View footerView) {
             super(footerView);
-//            loadButton = (Button) footerView.findViewById(R.id.reload_button);
-//            progressBar = (ProgressBar) footerView.findViewById(R.id.progress_load);
-              txtView = (TextView)footerView.findViewById(R.id.txtView);
+            txtView = (TextView) footerView.findViewById(R.id.txtView);
         }
     }
 
