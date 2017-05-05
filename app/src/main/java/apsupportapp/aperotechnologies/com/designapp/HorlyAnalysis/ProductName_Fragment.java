@@ -52,7 +52,6 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.OnRowPressListener;
-import apsupportapp.aperotechnologies.com.designapp.ProductInformation.SearchActivity1;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 

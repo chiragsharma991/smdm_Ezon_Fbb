@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +21,11 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 
 
-/**
- * Created by hasai on 20/09/16.
- */
+
 public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
     Context context;
     SalesAnalysisListDisplay analysisClass;
@@ -38,7 +34,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     SalesAnalysisViewPagerValue salesAnalysis;
     ViewPager vwpagersales;
     LinearLayout lldots;
-    int currentIndex;
     SalesAnalysisSnapAdapter salesadapter;
     RecyclerView listView_SalesAnalysis;
     LayoutInflater inflater;
@@ -80,19 +75,12 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
         this.context = context;
         this.arrayList = arrayList;
-        // Log.i("size", "" + arrayList.size());
-       // Log.i("size", "" + arrayList.size());
         this.focusposition = focusposition;
         this.vwpagersales = vwpagersales;
         this.lldots = lldots;
         this.salesAnalysisClassArrayList = salesAnalysisClassArrayList;
         this.fromWhere = fromWhere;
         this.pagerAdapter = pagerAdapter;
-
-
-
-//       Log.i("size",""+arrayList.size());
-
         this.salesadapter = salesadapter;
         this.listView_SalesAnalysis = listView_SalesAnalysis;
         if (arrayList.size() != 0) {
@@ -100,9 +88,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
         }
 
         currentPage = vwpagersales.getCurrentItem();
-     //   Log.e("currentPage "," "+currentPage);
-
-
     }
 
     public SalesPagerAdapter() {
@@ -123,8 +108,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     public Object instantiateItem(final ViewGroup container, final int position) {
 
         // Declare Variables
-        // Log.e("in sales adapter", " 0");
-
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = null;
 
@@ -147,10 +130,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             txtNetSalesUPerc = (TextView) itemView.findViewById(R.id.txtNetSalesUPerc);
             txtSohUVal = (TextView) itemView.findViewById(R.id.txtSoHUVal);
             txtSohU = (TextView) itemView.findViewById(R.id.txtSoHU);
-//            txtRosVal0 = (TextView) itemView.findViewById(R.id.txtRosVal0);
-//            txtRos0 = (TextView) itemView.findViewById(R.id.txtRos0);
-//            txtFwdWkCoverVal0 = (TextView) itemView.findViewById(R.id.txtFwdWkCoverVal0);
-//            txtFwdWkCover0 = (TextView) itemView.findViewById(R.id.txtFwdWkCover0);
+
             txtNetSalesPerc = (TextView) itemView.findViewById(R.id.txtNetSalesPerc);
             txtPlanSalesPerc = (TextView) itemView.findViewById(R.id.txtPlanSalesPerc);
             txtNetSalesUPerc = (TextView) itemView.findViewById(R.id.txtNetSalesUPerc);
@@ -164,8 +144,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 txtPlanSales.setText("Plan Sales");
                 txtNetSalesU.setText("Net Sales(U)");
                 txtSohU.setText("SOH(U)");
-//                txtRos0.setText("ROS");
-//                txtFwdWkCover0.setText("Fwd Wk Cover");
+
                 txtNetSalesName.setText("WOW Gr%");
                 txtPlanSalesName.setText("PvA%");
                 txtNetSalesUName.setText("WOW Gr%");
@@ -177,8 +156,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 txtPlanSales.setText("Plan Sales");
                 txtNetSalesU.setText("Net Sales(U)");
                 txtSohU.setText("SOH(U)");
-//                txtRos0.setText("Inv Turn");
-//                txtFwdWkCover0.setText("Velocity");
+
                 txtNetSalesName.setText("YOY Gr%");
                 txtPlanSalesName.setText("PvA%");
                 txtNetSalesUName.setText("YOY Gr%");
@@ -189,27 +167,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             itemView = inflater.inflate(R.layout.child_sales_viewpager1, container,
                     false);
 
-//            txtStoreVal_PvASales = (TextView) itemView.findViewById(R.id.txtStoreVal_PvASales);
-//            txtZonalVal_PvASales = (TextView) itemView.findViewById(R.id.txtZonalVal_PvASales);
-//            txtNationalVal_PvASales = (TextView) itemView.findViewById(R.id.txtNationalVal_PvASales);
-//            txtStoreVal_YOYSales = (TextView) itemView.findViewById(R.id.txtStoreVal_YOYSales);
-//            txtZonalVal_YOYSales = (TextView) itemView.findViewById(R.id.txtZonalVal_YOYSales);
-//            txtNationalVal_YOYSales = (TextView) itemView.findViewById(R.id.txtNationalVal_YOYSales);
-//            txtStoreVal_SellThro = (TextView) itemView.findViewById(R.id.txtStoreVal_SellThro);
-//            txtZonalVal_SellThro = (TextView) itemView.findViewById(R.id.txtZonalVal_SellThro);
-//            txtNationalVal_SellThro = (TextView) itemView.findViewById(R.id.txtNationalVal_SellThro);
-//            txtStoreVal_MixSales = (TextView) itemView.findViewById(R.id.txtStoreVal_MixSales);
-//            txtZonalVal_MixSales = (TextView) itemView.findViewById(R.id.txtZonalVal_MixSales);
-//            txtNationalVal_MixSales = (TextView) itemView.findViewById(R.id.txtNationalVal_MixSales);
-//            txtPvASales = (TextView) itemView.findViewById(R.id.txtPvASales);
-//            txtYoySales = (TextView) itemView.findViewById(R.id.txtYoySales);
-//            txtSellThro = (TextView) itemView.findViewById(R.id.txtSellThro);
-//            txtMixSales = (TextView) itemView.findViewById(R.id.txtMixSales);
-//
-//            txtPvASales.setText("PvA Sales% ");
-//            txtYoySales.setText("YOY Sales% ");
-//            txtSellThro.setText("Sell Thru(U)% ");
-//            txtMixSales.setText(" Mix(Sales%)");
+
 
             txtStoreVal_PvASales1 = (TextView) itemView.findViewById(R.id.txtStoreVal_PvASales1);
             txtZonalSalesVal = (TextView) itemView.findViewById(R.id.txtZonalSalesVal);
@@ -261,19 +219,15 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             if (SalesAnalysisActivity1.selectedsegValue.equals("WTD") || SalesAnalysisActivity1.selectedsegValue.equals("LW")) {
 
                 if (salesAnalysis != null) {
-               //     Log.e("Round val", "" + Math.round(salesAnalysis.getSaleNetVal()));
                     txtNetSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getSaleNetVal())));
                     txtPlanSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getPlanSaleNetVal())));
                     txtNetSalesUVal.setText("" + format.format(Math.round(salesAnalysis.getSaleTotQty())));
                     txtSohUVal.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-//                    txtRosVal0.setText("" + String.format("%.1f",salesAnalysis.getRos()));
-//                    txtFwdWkCoverVal0.setText("" + String.format("%.1f",salesAnalysis.getFwdWeekCover()));
                     txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
 
-
-                    //
+                    // Color Condition for Wow Net Sale, Pva Achieved , Wow net sale Growth
                     if (salesAnalysis.getWowNetSalesGrowthPct() <= 0) {
                         txtNetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                         txtNetSalesVal.setTextColor(Color.parseColor("#fe0000"));
@@ -281,8 +235,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         txtNetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
                         txtNetSalesVal.setTextColor(Color.parseColor("#70e503"));
                     }
-                    //
-                    ///
                     if (salesAnalysis.getPvaAchieved() < 70) {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                         txtPlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
@@ -293,9 +245,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
                         txtPlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
                     }
-                    ///
-
-                    ////
                     if (salesAnalysis.getWowNetSalesUnitsGrowthPct() <= 0) {
                         txtNetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
                         txtNetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
@@ -303,9 +252,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         txtNetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
                         txtNetSalesUVal.setTextColor(Color.parseColor("#70e503"));
                     }
-                    ////
-
-                }
+            }
 
 
             } else if (SalesAnalysisActivity1.selectedsegValue.equals("L4W") || SalesAnalysisActivity1.selectedsegValue.equals("STD")) {
@@ -316,18 +263,11 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                     txtPlanSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getPlanSaleNetVal())));
                     txtNetSalesUVal.setText(" " + format.format(Math.round(salesAnalysis.getSaleTotQty())));
                     txtSohUVal.setText(" " + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-//                    txtRosVal0.setText(" " + String.format("%.1f",salesAnalysis.getInvTurns()));
-//                    txtFwdWkCoverVal0.setText(" " +String.format("%.1f", salesAnalysis.getVelocity()));
-
 
                     txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
-                 //   Log.i("saleNetVal IN L4W", "" + salesAnalysis.getSaleNetVal());
                 }
-                //           txtNetSalesPerc.setText(salesAnalysis.);
-
-                //
                 if (salesAnalysis.getWowNetSalesGrowthPct() <= 0) {
                     txtNetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                     txtNetSalesVal.setTextColor(Color.parseColor("#fe0000"));
@@ -335,8 +275,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                     txtNetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
                     txtNetSalesVal.setTextColor(Color.parseColor("#70e503"));
                 }
-                //
-                ///
+
                 if (salesAnalysis.getPvaAchieved() < 70) {
                     txtPlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                     txtPlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
@@ -347,9 +286,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                     txtPlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
                     txtPlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
                 }
-                ///
 
-                ////
                 if (salesAnalysis.getWowNetSalesUnitsGrowthPct() <= 0) {
                     txtNetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
                     txtNetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
@@ -362,29 +299,19 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             }
             if(salesAnalysisClassArrayList.size()!=0){
             SalesAnalysisListDisplay salesAnalysisListDisplay = salesAnalysisClassArrayList.get(position);
-           // LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
-           // int firstVisibleItemPosition = llm.findFirstVisibleItemPosition();
-           // Log.e("instantiateItem: ", "" + firstVisibleItemPosition);
 
-            //if (firstVisibleItemPosition == 0) {
             if (salesAnalysisListDisplay.getPlanDept() != null) {
                 if (salesAnalysisListDisplay.getPlanDept().equals("All")) {
-                  //  Log.e("-----", "All");
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                   // listView_SalesAnalysis.setAdapter(salesadapter);
                     salesadapter.notifyDataSetChanged();
 
                 }
             }
             if (salesAnalysisListDisplay.getPlanCategory() != null) {
                 if (salesAnalysisListDisplay.getPlanCategory().equals("All")) {
-                 //   Log.e("-----", "All");
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                    // listView_SalesAnalysis.setAdapter(salesadapter);
                     salesadapter.notifyDataSetChanged();
 
                 }
@@ -392,33 +319,27 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
             if (salesAnalysisListDisplay.getPlanClass() != null) {
                 if (salesAnalysisListDisplay.getPlanClass().equals("All")) {
-                 //   Log.e("-----", "All");
+
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                    // listView_SalesAnalysis.setAdapter(salesadapter);
                     salesadapter.notifyDataSetChanged();
 
                 }
             }
             if (salesAnalysisListDisplay.getBrandName() != null) {
                 if (salesAnalysisListDisplay.getBrandName().equals("All")) {
-                 //   Log.e("-----", "All");
+
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                    // listView_SalesAnalysis.setAdapter(salesadapter);
                     salesadapter.notifyDataSetChanged();
 
                 }
             }
             if (salesAnalysisListDisplay.getBrandplanClass() != null) {
                 if (salesAnalysisListDisplay.getBrandplanClass().equals("All")) {
-                 //   Log.e("-----", "All");
+
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
-                    // salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listView_SalesAnalysis);
-                    // listView_SalesAnalysis.setAdapter(salesadapter);
                     salesadapter.notifyDataSetChanged();
                 }
             }
@@ -437,20 +358,20 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                 relPvASales.setBackgroundResource(R.drawable.rounded_edittext2);
                 if (Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                    txtStoreVal_PvASales.setTextColor(Color.GREEN);
+
                     storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                     zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                     nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
 
                 } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                    txtZonalVal_PvASales.setTextColor(Color.GREEN);
+
                     zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                     storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                     nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                 } else if (Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchievedZonal())) {
-//                    txtNationalVal_PvASales.setTextColor(Color.GREEN);
+
                     nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                     storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                     zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -458,13 +379,13 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedNational())
                         && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchieved())
                         && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchievedZonal())) {
-//                    txtStoreVal_PvASales.setTextColor(Color.GREEN);
+
                     storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                     nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                     zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                 } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                    txtZonalVal_PvASales.setTextColor(Color.GREEN);
+
                     zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                     storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                     nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -491,20 +412,20 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         txtNationalSalesVal.setText("" + Math.round(salesAnalysis.getPvaAchievedNational()) + "%");
 
                         if (Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                        txtStoreVal_PvASales.setTextColor(Color.GREEN);
+
                             storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
 
                         } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                        txtZonalVal_PvASales.setTextColor(Color.GREEN);)
+
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                         } else if (Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchievedZonal())) {
-//                        txtNationalVal_PvASales.setTextColor(Color.GREEN);
+
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -512,13 +433,13 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedNational())
                                 && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchieved())
                                 && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchievedZonal())) {
-//                        txtStoreVal_PvASales.setTextColor(Color.GREEN);
+
                             storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                         } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedNational())) {
-//                       txtZonalVal_PvASales.setTextColor(Color.GREEN);
+
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -548,19 +469,19 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                         //YOY Sales
                         if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
-//                    txtStoreVal_YOYSales.setTextColor(Color.GREEN);
+
                             storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                         } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
-//                    txtZonalVal_YOYSales.setTextColor(Color.GREEN);
+
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                         } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
-//                    txtNationalVal_YOYSales.setTextColor(Color.GREEN);
+
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -568,13 +489,13 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())
                                 && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct())
                                 && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
-//                    txtStoreVal_YOYSales.setTextColor(Color.GREEN);
+
                             storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                         } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
-//                    txtZonalVal_YOYSales.setTextColor(Color.GREEN);
+
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -609,19 +530,19 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         //Sell Thro
 
                         if (Math.round(salesAnalysis.getSellThruUnits()) > Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnits()) > Math.round(salesAnalysis.getSellThruUnitsNational())) {
-//                    txtStoreVal_SellThro.setTextColor(Color.GREEN);
+
                             storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                         } else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnitsNational())) {
-//                    txtZonalVal_SellThro.setTextColor(Color.GREEN);
+
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                         } else if (Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnitsZonal())) {
-//                    txtNationalVal_SellThro.setTextColor(Color.GREEN);
+
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -629,13 +550,13 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         } else if (Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsZonal())
                                 && Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnitsNational())
                                 && Math.round(salesAnalysis.getSellThruUnitsNational()) == Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) == Math.round(salesAnalysis.getSellThruUnitsZonal())) {
-//                    txtStoreVal_SellThro.setTextColor(Color.GREEN);
+
                             storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                         } else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsNational())) {
-//                    txtZonalVal_SellThro.setTextColor(Color.GREEN);
+
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -668,20 +589,20 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                         //Mix Sales
                         if (Math.round(salesAnalysis.getMixSales()) > Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) > Math.round(salesAnalysis.getMixsalesNational())) {
-//                    txtStoreVal_MixSales.setTextColor(Color.GREEN);
+
                             storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
                         } else if (Math.round(salesAnalysis.getMixSalesZonal()) > Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixSalesZonal()) > Math.round(salesAnalysis.getMixsalesNational())) {
-//                    txtZonalVal_MixSales.setTextColor(Color.GREEN);
+
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
 
                         } else if (Math.round(salesAnalysis.getMixsalesNational()) > Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) > Math.round(salesAnalysis.getMixSalesZonal())) {
-//                    txtNationalVal_MixSales.setTextColor(Color.GREEN);
+
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -689,14 +610,14 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         } else if (Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixsalesNational())
                                 && Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixsalesNational()) && Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixSales())
                                 && Math.round(salesAnalysis.getMixsalesNational()) == Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) == Math.round(salesAnalysis.getMixSalesZonal())) {
-//                    txtStoreVal_MixSales.setTextColor(Color.GREEN);
+
                             storesales.setBackgroundResource(R.drawable.rounded_edittext1);
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
 
 
                         } else if (Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixsalesNational()) && Math.round(salesAnalysis.getMixSales()) < Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) < Math.round(salesAnalysis.getMixsalesNational())) {
-//                    txtZonalVal_MixSales.setTextColor(Color.GREEN);
+
                             zonalsales.setBackgroundResource(R.drawable.rounded_edittext1);
                             storesales.setBackgroundResource(R.drawable.rounded_edittext4);
                             nationalsales.setBackgroundResource(R.drawable.rounded_edittext4);
@@ -732,7 +653,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         if (salesAnalysis.getZonalSalesRank() > salesAnalysis.getNationalSalesRank())
 
                         {
-                            Log.e("Rank Condition", "" + salesAnalysis.getZonalSalesRank());
                             linPvAZonalRank.setBackgroundResource(R.color.smdm_green);
                             linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
                         } else if (salesAnalysis.getNationalSalesRank() > salesAnalysis.getZonalSalesRank()) {
@@ -763,9 +683,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
         } else if (position == 2) {
             if (salesAnalysis != null) {
                 double ros = Double.parseDouble(String.format("%.1f", salesAnalysis.getRos()));
-                Log.e("ros", "" + ros);
                 double fwdwkcover = Double.parseDouble(String.format("%.1f", salesAnalysis.getFwdWeekCover()));
-                Log.e("fwdwkcover", "" + fwdwkcover);
 
                 txtSOHVal2.setText(" " + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
                 txtGITVal.setText(" " + format.format(Math.round(salesAnalysis.getStkGitQty())));
@@ -774,14 +692,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             }
 
         }
-
-
-
-
-
-
-
-
         vwpagersales.setOnPageChangeListener(this);
         // Add viewpager_item.xml to ViewPager
         vwpagersales.addView(itemView);
@@ -791,7 +701,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        // Log.e("Scroll Pos",""+position);
 
     }
 
