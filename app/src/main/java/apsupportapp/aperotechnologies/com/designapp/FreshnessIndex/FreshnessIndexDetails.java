@@ -6,6 +6,7 @@ package apsupportapp.aperotechnologies.com.designapp.FreshnessIndex;
 
 public class FreshnessIndexDetails {
 
+
     String storeCode;
     String storeDescription;
     String planDept;

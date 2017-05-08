@@ -1379,7 +1379,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:layout_marginTop="5dp">
-               </android.support.v4.view.ViewPager>
+                </android.support.v4.view.ViewPager>
 
 
 
@@ -1913,7 +1913,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/smdm_light_Black"
-                            android:text="MPM"
+                            android:text="Season Catalogue"
                             android:gravity="center_horizontal"
                             android:textSize="13sp"/>
                     </LinearLayout>
@@ -2026,7 +2026,7 @@
                 android:layout_marginRight="10dp">
 
 
-               <LinearLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

@@ -89,14 +89,15 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private TextView Feedback_option,Fitting;
     private EditText feedback_comment;
     private AlertDialog dialog;
-    private LinearLayout firstView;
-    private RelativeLayout secondView, FeedbackNext;
+    private LinearLayout firstView,FeedbackNext;
+    private RelativeLayout secondView;
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
     private ArrayList<String> optionList;
     private boolean feedbackReport = false;
     private Feedback_model feedback_model_report;
     private String selectCategory;
+    private String storecode,storeDes;
     //  private Feedback_details feedbackAdapter;
 
 
@@ -148,7 +149,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         firstView = (LinearLayout) findViewById(R.id.replaceView_first);
         secondView = (RelativeLayout) findViewById(R.id.replaceView_two);
-        FeedbackNext = (RelativeLayout) findViewById(R.id.feedbackNext);
+        FeedbackNext = (LinearLayout) findViewById(R.id.feedbackNext);
 
         Pricing = (TextView) findViewById(R.id.pricing);
         Fitting = (TextView) findViewById(R.id.fitting);
@@ -292,7 +293,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 feedbackReport = false;
                                 e.printStackTrace();
@@ -374,6 +375,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void nextList(int position) {
         Feedback_option.setText(feedbackList.get(position).getOption());
+        storecode=feedbackList.get(position).getStoreCode();
+        storeDes=feedbackList.get(position).getStoreDesc();
         Log.e(TAG, "array list size : " + feedbackList.size());
         ImageLoader_feedback.setVisibility(View.VISIBLE);
 
@@ -400,7 +403,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             ImageLoader_feedback.setVisibility(View.GONE);
 
             Glide.with(context).
-                    load(R.mipmap.placeholder).
+                    load(R.drawable.placeholder).
                     into(Feedback_image);
 
         }
@@ -667,6 +670,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         try {
             jsonObject.put("option", Feedback_option.getText().toString());
             jsonObject.put("userId", userId);
+            // jsonObject.put("storeCode", storecode);
             jsonObject.put("prodImageUrl", feedbackList.get(listCount).getProdImageUrl());
             jsonObject.put("comments", feedback_comment.getText().toString());
             jsonObject.put("fitting", fitting);

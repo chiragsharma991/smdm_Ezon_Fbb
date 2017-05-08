@@ -27,8 +27,6 @@ import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPager
 
 
 public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
-
-
     Context context;
     SalesAnalysisListDisplay analysisClass;
     ArrayList<SalesAnalysisViewPagerValue> arrayList;
@@ -343,7 +341,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysis.getPvaAchieved());
                     salesAnalysisClassArrayList.set(0, salesAnalysisListDisplay);
                     salesadapter.notifyDataSetChanged();
-
                 }
             }
          }

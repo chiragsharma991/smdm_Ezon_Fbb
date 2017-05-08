@@ -145,10 +145,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".FreshnessIndex.InventoryFilterActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
             android:name=".StockAgeing.StockAgeingActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />

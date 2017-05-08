@@ -5,15 +5,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -44,21 +40,15 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
-import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 

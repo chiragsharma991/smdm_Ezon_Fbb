@@ -46,8 +46,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
  * Created by pamrutkar on 17/04/17.
  */
 
-public class InspectionHistoryActivity extends AppCompatActivity implements View.OnClickListener
-{
+public class InspectionHistoryActivity extends AppCompatActivity implements View.OnClickListener {
     RelativeLayout rel_insp_history_btnBack;
     RecyclerView rv_insp_history;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -55,46 +54,50 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
     private String bearertoken;
     private RequestQueue queue;
     private SharedPreferences sharedPreferences;
-    Context context;
-    private int offset =0, limit = 50, count = 0;
+    Context context = this;
+    private int offset = 0, limit = 50, count = 0;
     private InspectionBeanClass inspectionBeanClass;
     private ArrayList<InspectionBeanClass> inspectionArrayList;
     private Gson gson;
-    private String recache ;
+    private String recache;
     private Insp_History_Adapter insp_history_adapter;
+    JsonArrayRequest postRequest;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inspection_history);
-        context = this;
+
         recache = "true";
         getSupportActionBar().hide();
         initialise();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e("" ,"userID and token" + userId + "and this is" + bearertoken);
+        Log.e("", "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
         inspectionArrayList = new ArrayList<InspectionBeanClass>();
-        if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
-            requestInspectionSummary();
-        } else {
+
+        if (Reusable_Functions.chkStatus(context))
+        {
+           Reusable_Functions.hDialog();
+           Reusable_Functions.sDialog(context, "Loading data...");
+           requestInspectionSummary();
+        }
+        else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void initialise()
     {
-        rel_insp_history_btnBack = (RelativeLayout)findViewById(R.id.insp_history_btnback);
-        rv_insp_history = (RecyclerView)findViewById(R.id.rv_insp_history);
+        rel_insp_history_btnBack = (RelativeLayout) findViewById(R.id.insp_history_btnback);
+        rv_insp_history = (RecyclerView) findViewById(R.id.rv_insp_history);
         mLayoutManager = new LinearLayoutManager(this);
         rv_insp_history.setLayoutManager(mLayoutManager);
         rel_insp_history_btnBack.setOnClickListener(this);
@@ -102,31 +105,26 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.insp_history_btnback :
+        switch (v.getId()) {
+            case R.id.insp_history_btnback:
                 onBackPressed();
                 break;
         }
     }
 
-    private void requestInspectionSummary()
-    {
-        String url = ConstsCore.web_url + "/v1/display/storeinspectionsummary/" + userId +"?recache="+recache ;
-        Log.e("Inspection History Url" ,"" + url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+    private void requestInspectionSummary() {
+        String url = ConstsCore.web_url + "/v1/display/storeinspectionsummary/" + userId + "?recache=" + recache;
+        Log.e("Inspection History Url", "" + url);
+      postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
-                        Log.e("Inspection History api response : " , "" +response);
-                        Log.e("Inspection History total length :" , "" +response.length());
-                        try
-                        {
+                    public void onResponse(JSONArray response) {
+                        Log.e("Inspection History api response : ", "" + response);
+                        Log.e("Inspection History total length :", "" + response.length());
+                        try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(InspectionHistoryActivity.this, "no data found", Toast.LENGTH_SHORT).show();
-                               // return;
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
                                 Log.e("", "promo eql limit");
@@ -134,12 +132,6 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
 
                                     inspectionBeanClass = gson.fromJson(response.get(i).toString(), InspectionBeanClass.class);
                                     inspectionArrayList.add(inspectionBeanClass);
-//                                    JSONObject productName1 = response.getJSONObject(i);
-//                                    String inspectorName = productName1.getString("inspectorName");
-//                                    String comment = productName1.getString("comments");
-//                                    String storeCode = productName1.getString("storeCode");
-//                                    int inspectionId = productName1.getInt("inspectionId");
-
 
                                 }
                                 offset = (limit * count) + limit;
@@ -153,7 +145,6 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
                                     inspectionBeanClass = gson.fromJson(response.get(i).toString(), InspectionBeanClass.class);
                                     inspectionArrayList.add(inspectionBeanClass);
 
-//
                                 }
                             }
                             rv_insp_history.setLayoutManager(new LinearLayoutManager(rv_insp_history.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
@@ -161,13 +152,11 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             insp_history_adapter = new Insp_History_Adapter(inspectionArrayList, context);
                             rv_insp_history.setAdapter(insp_history_adapter);
+                            Reusable_Functions.hDialog();
 
-                        }
-                        catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
                             e.printStackTrace();
                             Log.e("", "catch...Error" + e.toString());
                         }
@@ -195,16 +184,12 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-        Reusable_Functions.hDialog();
+
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         super.onBackPressed();
         finish();
     }
-
-
-
 }

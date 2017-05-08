@@ -101,6 +101,15 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     ImageView image_improvement_criteria_8, image_okay_criteria_8, image_good_criteria_8, image_excellent_criteria_8;
     ImageView image_camera, image_upload ,emoji_image;
 
+    ImageView image_improvement_cri_1,image_okay_cri_1,image_good_cri_1,image_excellent_cri_1;
+    ImageView image_improvement_cri_2,image_okay_cri_2,image_good_cri_2,image_excellent_cri_2;
+    ImageView image_improvement_cri_3,image_okay_cri_3,image_good_cri_3,image_excellent_cri_3;
+    ImageView image_improvement_cri_4,image_okay_cri_4,image_good_cri_4,image_excellent_cri_4;
+    ImageView image_improvement_cri_5,image_okay_cri_5,image_good_cri_5,image_excellent_cri_5;
+    ImageView image_improvement_cri_6,image_okay_cri_6,image_good_cri_6,image_excellent_cri_6;
+    ImageView image_improvement_cri_7,image_okay_cri_7,image_good_cri_7,image_excellent_cri_7;
+    ImageView image_improvement_cri_8,image_okay_cri_8,image_good_cri_8,image_excellent_cri_8;
+
     // Emoji Text Declaration
     TextView txt_improvement_criteria_1, txt_okay_criteria_1, txt_good_criteria_1, txt_excellent_criteria_1;
     TextView txt_improvement_criteria_2, txt_okay_criteria_2, txt_good_criteria_2, txt_excellent_criteria_2;
@@ -115,7 +124,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     Button btn_insp_submit,btn_insp_reset;
     private RelativeLayout rel_cam_image;
     Uri selectedImage;
-    private TextView txt_insp_date_Val;
+    private TextView txt_insp_date_Val,txt_overall_ratings;
     private String picturePath;
     private RelativeLayout inspection_btnback;
     private String userId;
@@ -172,31 +181,115 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         if(Math.round(cal_result) < 2)
         {
             emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+          //  txt_overall_ratings.setText("Need Improvement");
         }
         else  if(Math.round(cal_result)< 3)
         {
             emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+//            txt_overall_ratings.setText("Okay");
+//            txt_overall_ratings.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
         }
         else  if(Math.round(cal_result) < 4)
         {
             emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+//            txt_overall_ratings.setText("Good");
+//            txt_overall_ratings.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
+
         }
         else  if(Math.round(cal_result) >= 4)
         {
             emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+//            txt_overall_ratings.setText("Excellent");
+//            txt_overall_ratings.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
+
         }
 
         return cal_result;
     }
 
     public void getCurrentDate(View view) {
-        Calendar calendar = Calendar.getInstance(); //dd / MM /yyyy
-        SimpleDateFormat mdformat = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar calendar = Calendar.getInstance(); //dd / MMM /yyyy
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd-MMM-yyyy");
         strDate = mdformat.format(calendar.getTime());
         txt_insp_date_Val.setText(strDate);
     }
 
-    private void initialise() {
+    private void initialise()
+    {
+        image_improvement_cri_1 = (ImageView)findViewById(R.id.image_improvement_cri_1);
+        image_improvement_cri_1.setVisibility(View.GONE);
+        image_okay_cri_1 = (ImageView)findViewById(R.id.image_okay_cri_1);
+        image_okay_cri_1.setVisibility(View.GONE);
+        image_good_cri_1 = (ImageView)findViewById(R.id.image_good_cri_1);
+        image_good_cri_1.setVisibility(View.GONE);
+        image_excellent_cri_1 = (ImageView)findViewById(R.id.image_excellent_cri_1);
+        image_excellent_cri_1.setVisibility(View.GONE);
+        //for insp 2
+        image_improvement_cri_2 = (ImageView)findViewById(R.id.image_improvement_cri_2);
+        image_improvement_cri_2.setVisibility(View.GONE);
+        image_okay_cri_2 = (ImageView)findViewById(R.id.image_okay_cri_2);
+        image_okay_cri_2.setVisibility(View.GONE);
+        image_good_cri_2 = (ImageView)findViewById(R.id.image_good_cri_2);
+        image_good_cri_2.setVisibility(View.GONE);
+        image_excellent_cri_2 = (ImageView)findViewById(R.id.image_excellent_cri_2);
+        image_excellent_cri_2.setVisibility(View.GONE);
+        //for insp 3
+        image_improvement_cri_3 = (ImageView)findViewById(R.id.image_improvement_cri_3);
+        image_improvement_cri_3.setVisibility(View.GONE);
+        image_okay_cri_3 = (ImageView)findViewById(R.id.image_okay_cri_3);
+        image_okay_cri_3.setVisibility(View.GONE);
+        image_good_cri_3 = (ImageView)findViewById(R.id.image_good_cri_3);
+        image_good_cri_3.setVisibility(View.GONE);
+        image_excellent_cri_3 = (ImageView)findViewById(R.id.image_excellent_cri_3);
+        image_excellent_cri_3.setVisibility(View.GONE);
+        //for insp 4
+        image_improvement_cri_4 = (ImageView)findViewById(R.id.image_improvement_cri_4);
+        image_improvement_cri_4.setVisibility(View.GONE);
+        image_okay_cri_4 = (ImageView)findViewById(R.id.image_okay_cri_4);
+        image_okay_cri_4.setVisibility(View.GONE);
+        image_good_cri_4 = (ImageView)findViewById(R.id.image_good_cri_4);
+        image_good_cri_4.setVisibility(View.GONE);
+        image_excellent_cri_4 = (ImageView)findViewById(R.id.image_excellent_cri_4);
+        image_excellent_cri_4.setVisibility(View.GONE);
+        //for insp 5
+        image_improvement_cri_5 = (ImageView)findViewById(R.id.image_improvement_cri_5);
+        image_improvement_cri_5.setVisibility(View.GONE);
+        image_okay_cri_5 = (ImageView)findViewById(R.id.image_okay_cri_5);
+        image_okay_cri_5.setVisibility(View.GONE);
+        image_good_cri_5 = (ImageView)findViewById(R.id.image_good_cri_5);
+        image_good_cri_5.setVisibility(View.GONE);
+        image_excellent_cri_5 = (ImageView)findViewById(R.id.image_excellent_cri_5);
+        image_excellent_cri_5.setVisibility(View.GONE);
+        //for insp 6
+        image_improvement_cri_6 = (ImageView)findViewById(R.id.image_improvement_cri_6);
+        image_improvement_cri_6.setVisibility(View.GONE);
+        image_okay_cri_6 = (ImageView)findViewById(R.id.image_okay_cri_6);
+        image_okay_cri_6.setVisibility(View.GONE);
+        image_good_cri_6 = (ImageView)findViewById(R.id.image_good_cri_6);
+        image_good_cri_6.setVisibility(View.GONE);
+        image_excellent_cri_6 = (ImageView)findViewById(R.id.image_excellent_cri_6);
+        image_excellent_cri_6.setVisibility(View.GONE);
+        //for insp 7
+        image_improvement_cri_7 = (ImageView)findViewById(R.id.image_improvement_cri_7);
+        image_improvement_cri_7.setVisibility(View.GONE);
+        image_okay_cri_7 = (ImageView)findViewById(R.id.image_okay_cri_7);
+        image_okay_cri_7.setVisibility(View.GONE);
+        image_good_cri_7 = (ImageView)findViewById(R.id.image_good_cri_7);
+        image_good_cri_7.setVisibility(View.GONE);
+        image_excellent_cri_7 = (ImageView)findViewById(R.id.image_excellent_cri_7);
+        image_excellent_cri_7.setVisibility(View.GONE);
+        //for insp 8
+        image_improvement_cri_8 = (ImageView)findViewById(R.id.image_improvement_cri_8);
+        image_improvement_cri_8.setVisibility(View.GONE);
+        image_okay_cri_8 = (ImageView)findViewById(R.id.image_okay_cri_8);
+        image_okay_cri_8.setVisibility(View.GONE);
+        image_good_cri_8 = (ImageView)findViewById(R.id.image_good_cri_8);
+        image_good_cri_8.setVisibility(View.GONE);
+        image_excellent_cri_8 = (ImageView)findViewById(R.id.image_excellent_cri_8);
+        image_excellent_cri_8.setVisibility(View.GONE);
         //Improvement emoji image
         image_improvement_criteria_1 = (ImageView) findViewById(R.id.image_improvement_criteria_1);
         image_improvement_criteria_2 = (ImageView) findViewById(R.id.image_improvement_criteria_2);
@@ -294,6 +387,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         emoji_image = (ImageView)findViewById(R.id.emoji_image);
         image_upload.setVisibility(View.INVISIBLE);
         txt_insp_date_Val = (TextView) findViewById(R.id.txt_insp_date_Val);
+        txt_overall_ratings = (TextView)findViewById(R.id.txt_overall_ratings);
         inspection_btnback = (RelativeLayout) findViewById(R.id.inspection_btnback);
 
         btn_insp_submit = (Button) findViewById(R.id.btn_insp_submit);
@@ -344,18 +438,21 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.image_improvement_criteria_1:
-                if (image_improvement_criteria_1.isClickable()) {
-                    image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiselected);
+                if (image_improvement_criteria_1.isClickable())
+                {
+                    image_good_cri_1.setVisibility(View.GONE);
+                    image_excellent_cri_1.setVisibility(View.GONE);
+                    image_okay_cri_1.setVisibility(View.GONE);
+                    image_improvement_cri_1.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_improvement_cri_1.setVisibility(View.VISIBLE);
+                    image_improvement_criteria_1.setVisibility(View.GONE);
                     txt_improvement_criteria_1.setText("Need Improvement");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_improvement_criteria_1));
-//                    image_improvement_criteria_1.getLayoutParams().height = 80;
-//                    image_improvement_criteria_1.getLayoutParams().width = 80;
-
-//                    LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) image_improvement_criteria_1.getLayoutParams();
-//                    params1.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params1.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_improvement_cri_1));
+                    image_excellent_criteria_1.setVisibility(View.VISIBLE);
+                    image_good_criteria_1.setVisibility(View.VISIBLE);
+                    image_okay_criteria_1.setVisibility(View.VISIBLE);
                     image_good_criteria_1.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_okay_criteria_1.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_1.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -366,37 +463,31 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                    // ratting_size[0] = fashionQuot;
                     calculation(fashionQuot,0);
 
-//                    Log.e("OverallRatings in insp imp 1 :",""+ratting_size[0]);
-//                    if(overallRating < 2) {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
 
                 } else {
+
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
+                    image_improvement_criteria_1.setVisibility(View.VISIBLE);
+                    image_improvement_cri_1.setVisibility(View.GONE);
                     txt_improvement_criteria_1.setText("");
                 }
                 break;
 
             case R.id.image_improvement_criteria_2:
                 if (image_improvement_criteria_2.isClickable()) {
-                    image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_good_cri_2.setVisibility(View.GONE);
+                    image_excellent_cri_2.setVisibility(View.GONE);
+                    image_okay_cri_2.setVisibility(View.GONE);
+                    image_improvement_cri_2.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_improvement_cri_2.setVisibility(View.VISIBLE);
+                    image_improvement_criteria_2.setVisibility(View.GONE);
                     txt_improvement_criteria_2.setText("Need Improvement");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_improvement_criteria_2));
-//                    LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) image_improvement_criteria_1.getLayoutParams();
-//                    params1.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params1.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_improvement_cri_2));
+                    image_excellent_criteria_2.setVisibility(View.VISIBLE);
+                    image_good_criteria_2.setVisibility(View.VISIBLE);
+                    image_okay_criteria_2.setVisibility(View.VISIBLE);
                     image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_2.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -408,44 +499,32 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     //ratting_size[1] = merchDisplay;
                     calculation(merchDisplay,1);
 
-//                    overallRating = (overallRating + merchDisplay) / 2;
-//                    Log.e("OverallRating in insp imp 2 after :",""+overallRating);
-//
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
 
 
                 } else {
+                    image_improvement_criteria_2.setVisibility(View.VISIBLE);
+                    image_improvement_cri_2.setVisibility(View.GONE);
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_2.setText("");
                 }
                 break;
 
             case R.id.image_improvement_criteria_3:
-                if (image_improvement_criteria_3.isClickable()) {
-                    image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiselected);
+                if (image_improvement_criteria_3.isClickable())
+                {
+                    image_good_cri_3.setVisibility(View.GONE);
+                    image_excellent_cri_3.setVisibility(View.GONE);
+                    image_okay_cri_3.setVisibility(View.GONE);
+                    image_improvement_cri_3.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_improvement_cri_3.setVisibility(View.VISIBLE);
+                    image_improvement_criteria_3.setVisibility(View.GONE);
                     txt_improvement_criteria_3.setText("Need Improvement");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_improvement_criteria_3));
-//                    LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) image_improvement_criteria_1.getLayoutParams();
-//                    params1.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params1.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_improvement_cri_3));
+                    image_excellent_criteria_3.setVisibility(View.VISIBLE);
+                    image_good_criteria_3.setVisibility(View.VISIBLE);
+                    image_okay_criteria_3.setVisibility(View.VISIBLE);
                     image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_okay_criteria_3.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_3.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -456,30 +535,11 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     ratting_size[2]=merchPresentationStd;
                     calculation(merchPresentationStd,2);
 
-//                    Log.e("OverallRating in insp imp 3 before:",""+overallRating);
-//
-//                    overallRating = (overallRating + merchPresentationStd) / 3;
-//                    Log.e("OverallRating in insp imp 3 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
 
 
                 } else {
+                    image_improvement_criteria_3.setVisibility(View.VISIBLE);
+                    image_improvement_cri_3.setVisibility(View.GONE);
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_3.setText("");
                 }
@@ -490,46 +550,35 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_improvement_criteria_4.isClickable()) {
 
-                    image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_good_cri_4.setVisibility(View.GONE);
+                    image_excellent_cri_4.setVisibility(View.GONE);
+                    image_okay_cri_4.setVisibility(View.GONE);
+                    image_improvement_cri_4.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_improvement_cri_4.setVisibility(View.VISIBLE);
+                    image_improvement_criteria_4.setVisibility(View.GONE);
                     txt_improvement_criteria_4.setText("Need Improvement");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_improvement_criteria_4));
-//                  LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) image_improvement_criteria_1.getLayoutParams();
-//                  params4.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                  params4.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_improvement_cri_4));
+                    image_excellent_criteria_4.setVisibility(View.VISIBLE);
+                    image_good_criteria_4.setVisibility(View.VISIBLE);
+                    image_okay_criteria_4.setVisibility(View.VISIBLE);
                     image_good_criteria_4.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_okay_criteria_4.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_4.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_good_criteria_4.setText("");
                     txt_excellent_criteria_4.setText("");
                     txt_okay_criteria_4.setText("");
+
                     suggSellingByStaff = 1;
                     ratting_size[3] = suggSellingByStaff;
                     calculation(suggSellingByStaff,3);
 
-//                    overallRating = (overallRating + suggSellingByStaff) / 4;
-//                    Log.e("OverallRating in insp imp 4 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
 
                 } else {
-                    //  image_improvement_criteria_4.setClickable(false);
+                      image_improvement_criteria_4.setVisibility(View.VISIBLE);
+                    image_improvement_cri_4.setVisibility(View.GONE);
                     image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_4.setText("");
                 }
@@ -540,15 +589,19 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_improvement_criteria_5.isClickable()) {
 
-                    image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_good_cri_5.setVisibility(View.GONE);
+                    image_excellent_cri_5.setVisibility(View.GONE);
+                    image_okay_cri_5.setVisibility(View.GONE);
+                    image_improvement_cri_5.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_improvement_cri_5.setVisibility(View.VISIBLE);
+                    image_improvement_criteria_5.setVisibility(View.GONE);
                     txt_improvement_criteria_5.setText("Need Improvement");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_improvement_criteria_5));
-//                  LinearLayout.LayoutParams params5 = (LinearLayout.LayoutParams) image_improvement_criteria_1.getLayoutParams();
-//                  params5.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                  params5.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
-
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_improvement_cri_5));
+                    image_excellent_criteria_5.setVisibility(View.VISIBLE);
+                    image_good_criteria_5.setVisibility(View.VISIBLE);
+                    image_okay_criteria_5.setVisibility(View.VISIBLE);
                     image_good_criteria_5.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_5.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -558,29 +611,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     overallCleanliness = 1;
                     ratting_size[4]= overallCleanliness;
                     calculation(overallCleanliness,4);
-//                    Log.e("OverallRating in insp imp 5 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + overallCleanliness) / 5;
-//                    Log.e("OverallRating in insp imp 5 after :",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    //  image_improvement_criteria_5.setClickable(false);
+                    image_improvement_criteria_5.setVisibility(View.VISIBLE);
+                    image_improvement_cri_5.setVisibility(View.GONE);
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_5.setText("");
                 }
@@ -591,15 +625,19 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_improvement_criteria_6.isClickable()) {
 
-                    image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_good_cri_6.setVisibility(View.GONE);
+                    image_excellent_cri_6.setVisibility(View.GONE);
+                    image_okay_cri_6.setVisibility(View.GONE);
+                    image_improvement_cri_6.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_improvement_cri_6.setVisibility(View.VISIBLE);
+                    image_improvement_criteria_6.setVisibility(View.GONE);
                     txt_improvement_criteria_6.setText("Need Improvement");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_improvement_criteria_6));
-//                LinearLayout.LayoutParams params6 = (LinearLayout.LayoutParams) image_improvement_criteria_1.getLayoutParams();
-//                params6.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                params6.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
-
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_improvement_cri_6));
+                    image_excellent_criteria_6.setVisibility(View.VISIBLE);
+                    image_good_criteria_6.setVisibility(View.VISIBLE);
+                    image_okay_criteria_6.setVisibility(View.VISIBLE);
                     image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_okay_criteria_6.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
@@ -609,29 +647,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     signage = 1;
                     ratting_size[5]= signage;
                     calculation(signage,5);
-//                    Log.e("OverallRating in insp imp 6 before:",""+overallRating);
-//
-//                    overallRating = (overallRating + signage) / 6;
-//                    Log.e("OverallRating in insp imp 6 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    // image_improvement_criteria_6.setClickable(false);
+                    image_improvement_criteria_6.setVisibility(View.VISIBLE);
+                    image_improvement_cri_6.setVisibility(View.GONE);
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_6.setText("");
                 }
@@ -640,49 +659,36 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_improvement_criteria_7:
 
-                if (image_improvement_criteria_7.isClickable()) {
-
-                    image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiselected);
+                if (image_improvement_criteria_7.isClickable())
+                {
+                    image_good_cri_7.setVisibility(View.GONE);
+                    image_excellent_cri_7.setVisibility(View.GONE);
+                    image_okay_cri_7.setVisibility(View.GONE);
+                    image_improvement_cri_7.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_improvement_cri_7.setVisibility(View.VISIBLE);
+                    image_improvement_criteria_7.setVisibility(View.GONE);
                     txt_improvement_criteria_7.setText("Need Improvement");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_improvement_criteria_7));
-//                LinearLayout.LayoutParams params7 = (LinearLayout.LayoutParams) image_improvement_criteria_1.getLayoutParams();
-//                params7.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                params7.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_improvement_cri_7));
+                    image_excellent_criteria_7.setVisibility(View.VISIBLE);
+                    image_good_criteria_7.setVisibility(View.VISIBLE);
+                    image_okay_criteria_7.setVisibility(View.VISIBLE);
                     image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_7.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_good_criteria_7.setText("");
                     txt_excellent_criteria_7.setText("");
                     txt_okay_criteria_7.setText("");
+
                     mpmExecution = 1;
                     ratting_size[6]=mpmExecution;
                     calculation(mpmExecution,6);
-//                    Log.e("OverallRating in insp imp 7 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + mpmExecution) / 7;
-//                    Log.e("OverallRating in insp imp 7 after :",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
 
-                } else {
-                    // image_improvement_criteria_7.setClickable(false);
+                } else
+                {
+                    image_improvement_criteria_7.setVisibility(View.VISIBLE);
+                    image_improvement_cri_7.setVisibility(View.GONE);
                     image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_7.setText("");
                 }
@@ -694,46 +700,33 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_improvement_criteria_8.isClickable()) {
 
-                    image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_good_cri_8.setVisibility(View.GONE);
+                    image_excellent_cri_8.setVisibility(View.GONE);
+                    image_okay_cri_8.setVisibility(View.GONE);
+                    image_improvement_cri_8.setBackgroundResource(R.mipmap.improvementemojiselected);
+                    image_improvement_cri_8.setVisibility(View.VISIBLE);
+                    image_improvement_criteria_8.setVisibility(View.GONE);
                     txt_improvement_criteria_8.setText("Need Improvement");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_improvement_criteria_8));
-//                  LinearLayout.LayoutParams params8 = (LinearLayout.LayoutParams) image_improvement_criteria_1.getLayoutParams();
-//                  params8.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                  params8.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_improvement_cri_8));
+                    image_excellent_criteria_8.setVisibility(View.VISIBLE);
+                    image_good_criteria_8.setVisibility(View.VISIBLE);
+                    image_okay_criteria_8.setVisibility(View.VISIBLE);
                     image_good_criteria_8.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_okay_criteria_8.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_8.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_good_criteria_8.setText("");
                     txt_excellent_criteria_8.setText("");
                     txt_okay_criteria_8.setText("");
+
                     winClusterMannequinsDisp = 1;
                     ratting_size[7]= winClusterMannequinsDisp;
                     calculation(winClusterMannequinsDisp,7);
-//                    Log.e("OverallRating in insp imp 8 before:",""+overallRating);
-//
-//                    overallRating = (overallRating + winClusterMannequinsDisp) / 8;
-//                    Log.e("OverallRating in insp imp 8 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    //  image_improvement_criteria_8.setClickable(false);
+                    image_improvement_criteria_8.setVisibility(View.VISIBLE);
+                    image_improvement_cri_8.setVisibility(View.GONE);
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     txt_improvement_criteria_8.setText("");
                 }
@@ -744,98 +737,71 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_okay_criteria_1.isClickable()) {
 
+                    image_improvement_cri_1.setVisibility(View.GONE);
+                    image_excellent_cri_1.setVisibility(View.GONE);
+                    image_good_cri_1.setVisibility(View.GONE);
+                    image_improvement_criteria_1.setVisibility(View.VISIBLE);
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_1.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_excellent_criteria_1.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_okay_criteria_1.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_1.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_1.setVisibility(View.VISIBLE);
+                    image_good_criteria_1.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_1.setVisibility(View.VISIBLE);
+                    image_okay_criteria_1.setVisibility(View.GONE);
                     txt_okay_criteria_1.setText("Okay");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_okay_criteria_1));
-//                    LinearLayout.LayoutParams params_1 = (LinearLayout.LayoutParams) image_okay_criteria_1.getLayoutParams();
-//                    params_1.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params_1.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_okay_cri_1));
+
                     txt_good_criteria_1.setText("");
                     txt_excellent_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
+
                     fashionQuot = 2;
                     ratting_size[0] = fashionQuot;
                     calculation(fashionQuot,0);
-//                    Log.e("OverallRating in insp okay 1 before :",""+overallRating);
-//
-//                    overallRating = fashionQuot;
-//                    Log.e("OverallRating in insp okay 1 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
-//                    Log.e("overallRatings in insp okay 1:",""+overallRating);
-//                    emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
 
                 } else {
-                    //  image_okay_criteria_1.setClickable(false);
                     image_okay_criteria_1.setBackgroundResource(R.mipmap.okayemojiunselected);
+                    image_okay_criteria_1.setVisibility(View.VISIBLE);
+                    image_okay_cri_1.setVisibility(View.GONE);
                     txt_okay_criteria_1.setText("");
                 }
 
                 break;
 
             case R.id.image_okay_criteria_2:
-                if (image_okay_criteria_2.isClickable()) {
-
+                if (image_okay_criteria_2.isClickable())
+                {
+                    image_improvement_cri_2.setVisibility(View.GONE);
+                    image_excellent_cri_2.setVisibility(View.GONE);
+                    image_good_cri_2.setVisibility(View.GONE);
+                    image_improvement_criteria_2.setVisibility(View.VISIBLE);
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_excellent_criteria_2.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_2.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_2.setVisibility(View.VISIBLE);
+                    image_good_criteria_2.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_2.setVisibility(View.VISIBLE);
+                    image_okay_criteria_2.setVisibility(View.GONE);
                     txt_okay_criteria_2.setText("Okay");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_okay_criteria_2));
-//                    LinearLayout.LayoutParams params_2 = (LinearLayout.LayoutParams) image_okay_criteria_2.getLayoutParams();
-//                    params_2.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params_2.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_okay_cri_2));
+
                     txt_good_criteria_2.setText("");
                     txt_excellent_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
+
                     merchDisplay = 2;
                     ratting_size[1] = merchDisplay;
                     calculation(merchDisplay,1);
-//                    Log.e("OverallRating in insp okay 2 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + merchDisplay) / 2;
-//                    Log.e("OverallRating in insp okay 2 after :",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    // image_okay_criteria_2.setClickable(false);
+                     image_okay_criteria_2.setVisibility(View.VISIBLE);
+                    image_okay_cri_2.setVisibility(View.GONE);
                     image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_2.setText("");
                 }
@@ -846,46 +812,33 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_okay_criteria_3:
                 if (image_okay_criteria_3.isClickable()) {
 
+                    image_improvement_cri_3.setVisibility(View.GONE);
+                    image_excellent_cri_3.setVisibility(View.GONE);
+                    image_good_cri_3.setVisibility(View.GONE);
+                    image_improvement_criteria_3.setVisibility(View.VISIBLE);
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_excellent_criteria_3.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_okay_criteria_3.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_3.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_3.setVisibility(View.VISIBLE);
+                    image_good_criteria_3.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_3.setVisibility(View.VISIBLE);
+                    image_okay_criteria_3.setVisibility(View.GONE);
                     txt_okay_criteria_3.setText("Okay");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_okay_criteria_3));
-//                    LinearLayout.LayoutParams params_3 = (LinearLayout.LayoutParams) image_okay_criteria_3.getLayoutParams();
-//                    params_3.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params_3.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_okay_cri_3));
+
                     txt_good_criteria_3.setText("");
                     txt_excellent_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");
                     merchPresentationStd = 2;
                     ratting_size[2]=merchPresentationStd;
                     calculation(merchPresentationStd,2);
-//                    Log.e("OverallRating in insp okay 3 before :",""+overallRating);
-//                    overallRating = (overallRating + merchPresentationStd) / 3;
-//                    Log.e("OverallRating in insp okay 3 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
 
                 } else {
-                    //  image_okay_criteria_3.setClickable(false);
+                    image_okay_cri_3.setVisibility(View.GONE);
+                    image_okay_criteria_3.setVisibility(View.VISIBLE);
                     image_okay_criteria_3.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_3.setText("");
                 }
@@ -895,48 +848,35 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_okay_criteria_4:
 
                 if (image_okay_criteria_4.isClickable()) {
-
+                    image_improvement_cri_4.setVisibility(View.GONE);
+                    image_excellent_cri_4.setVisibility(View.GONE);
+                    image_good_cri_4.setVisibility(View.GONE);
+                    image_improvement_criteria_4.setVisibility(View.VISIBLE);
                     image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_4.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_excellent_criteria_4.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_okay_criteria_4.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_4.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_4.setVisibility(View.VISIBLE);
+                    image_good_criteria_4.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_4.setVisibility(View.VISIBLE);
+                    image_okay_criteria_4.setVisibility(View.GONE);
                     txt_okay_criteria_4.setText("Okay");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_okay_criteria_4));
-//                    LinearLayout.LayoutParams params_4 = (LinearLayout.LayoutParams) image_okay_criteria_4.getLayoutParams();
-//                    params_4.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params_4.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_okay_cri_4));
+
                     txt_good_criteria_4.setText("");
                     txt_excellent_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
+
                     suggSellingByStaff = 2;
                     ratting_size[3]=suggSellingByStaff;
                     calculation(suggSellingByStaff,3);
-//                    Log.e("OverallRating in insp okay 4 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + suggSellingByStaff) / 4;
-//                    Log.e("OverallRating in insp okay 4 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
 
                 } else {
-                    // image_okay_criteria_4.setClickable(false);
+                    image_okay_criteria_4.setVisibility(View.VISIBLE);
+                    image_okay_cri_4.setVisibility(View.GONE);
                     image_okay_criteria_4.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_4.setText("");
                 }
@@ -946,46 +886,34 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_okay_criteria_5.isClickable()) {
 
+                    image_improvement_cri_5.setVisibility(View.GONE);
+                    image_excellent_cri_5.setVisibility(View.GONE);
+                    image_good_cri_5.setVisibility(View.GONE);
+                    image_improvement_criteria_5.setVisibility(View.VISIBLE);
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_5.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_excellent_criteria_5.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_5.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_5.setVisibility(View.VISIBLE);
+                    image_good_criteria_5.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_5.setVisibility(View.VISIBLE);
+                    image_okay_criteria_5.setVisibility(View.GONE);
                     txt_okay_criteria_5.setText("Okay");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_okay_criteria_5));
-//                    LinearLayout.LayoutParams params_5 = (LinearLayout.LayoutParams) image_okay_criteria_5.getLayoutParams();
-//                    params_5.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params_5.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_okay_cri_5));
+
                     txt_good_criteria_5.setText("");
                     txt_excellent_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
+
                     overallCleanliness = 2;
                     ratting_size[4]=overallCleanliness;
                     calculation(overallCleanliness,4);
-//                    Log.e("OverallRating in insp okay 5 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + overallCleanliness) / 5;
-//                    Log.e("OverallRating in insp okay 5 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    // image_okay_criteria_5.setClickable(false);
+                    image_okay_cri_5.setVisibility(View.GONE);
+                    image_okay_criteria_5.setVisibility(View.VISIBLE);
                     image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_5.setText("");
                 }
@@ -996,47 +924,35 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_okay_criteria_6:
                 if (image_okay_criteria_6.isClickable()) {
 
+                    image_improvement_cri_6.setVisibility(View.GONE);
+                    image_excellent_cri_6.setVisibility(View.GONE);
+                    image_good_cri_6.setVisibility(View.GONE);
+                    image_improvement_criteria_6.setVisibility(View.VISIBLE);
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_okay_criteria_6.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_6.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_6.setVisibility(View.VISIBLE);
+                    image_good_criteria_6.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_6.setVisibility(View.VISIBLE);
+                    image_okay_criteria_6.setVisibility(View.GONE);
                     txt_okay_criteria_6.setText("Okay");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_okay_criteria_6));
-//                    LinearLayout.LayoutParams params_6 = (LinearLayout.LayoutParams) image_okay_criteria_6.getLayoutParams();
-//                    params_6.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params_6.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_okay_cri_6));
+
                     txt_good_criteria_6.setText("");
                     txt_excellent_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
+
                     signage = 2;
                     ratting_size[5]=signage;
                     calculation(signage,5);
-//                    Log.e("OverallRating in insp okay 6 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + signage) / 6;
-//                    Log.e("OverallRating in insp okay 4 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
 
                 } else {
-                    // image_okay_criteria_6.setClickable(false);
+                    image_okay_cri_6.setVisibility(View.GONE);
+                    image_okay_criteria_6.setVisibility(View.VISIBLE);
                     image_okay_criteria_6.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_6.setText("");
                 }
@@ -1047,46 +963,34 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_okay_criteria_7:
                 if (image_okay_criteria_7.isClickable()) {
 
+                    image_improvement_cri_7.setVisibility(View.GONE);
+                    image_excellent_cri_7.setVisibility(View.GONE);
+                    image_good_cri_7.setVisibility(View.GONE);
+                    image_improvement_criteria_7.setVisibility(View.VISIBLE);
                     image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_excellent_criteria_7.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_7.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_7.setVisibility(View.VISIBLE);
+                    image_good_criteria_7.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_7.setVisibility(View.VISIBLE);
+                    image_okay_criteria_7.setVisibility(View.GONE);
                     txt_okay_criteria_7.setText("Okay");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_okay_criteria_7));
-//                    LinearLayout.LayoutParams params_7 = (LinearLayout.LayoutParams) image_okay_criteria_7.getLayoutParams();
-//                    params_7.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params_7.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_okay_cri_7));
+
                     txt_good_criteria_7.setText("");
                     txt_excellent_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
+
                     mpmExecution = 2;
                     ratting_size[6]=mpmExecution;
                     calculation(mpmExecution,6);
-//                    Log.e("OverallRating in insp okay 7 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + mpmExecution) / 7;
-//                    Log.e("OverallRating in insp okay 7 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    // image_okay_criteria_7.setClickable(false);
+                    image_okay_cri_7.setVisibility(View.GONE);
+                    image_okay_criteria_7.setVisibility(View.VISIBLE);
                     image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_7.setText("");
                 }
@@ -1098,47 +1002,34 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_okay_criteria_8.isClickable()) {
 
+                    image_improvement_cri_8.setVisibility(View.GONE);
+                    image_excellent_cri_8.setVisibility(View.GONE);
+                    image_good_cri_8.setVisibility(View.GONE);
+                    image_improvement_criteria_8.setVisibility(View.VISIBLE);
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_good_criteria_8.setBackgroundResource(R.mipmap.goodemojiunselected);
                     image_excellent_criteria_8.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_okay_criteria_8.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_8.setBackgroundResource(R.mipmap.okayemojiselected);
+                    image_okay_cri_8.setVisibility(View.VISIBLE);
+                    image_good_criteria_8.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_8.setVisibility(View.VISIBLE);
+                    image_okay_criteria_8.setVisibility(View.GONE);
                     txt_okay_criteria_8.setText("Okay");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_okay_criteria_8));
-//                    LinearLayout.LayoutParams params_8 = (LinearLayout.LayoutParams) image_okay_criteria_8.getLayoutParams();
-//                    params_8.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    params_8.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_okay_cri_8));
+
                     txt_good_criteria_8.setText("");
                     txt_excellent_criteria_8.setText("");
                     txt_improvement_criteria_8.setText("");
+
                     winClusterMannequinsDisp = 2;
                     ratting_size[7]= winClusterMannequinsDisp;
                     calculation(winClusterMannequinsDisp,7);
-//                    Log.e("OverallRating in insp okay 8 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + winClusterMannequinsDisp) / 8;
-//                    Log.e("OverallRating in insp okay 8 :",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
 
                 } else {
-                    // image_okay_criteria_8.setClickable(false);
+                    image_okay_cri_8.setVisibility(View.GONE);
+                    image_okay_criteria_8.setVisibility(View.VISIBLE);
                     image_okay_criteria_8.setBackgroundResource(R.mipmap.okayemojiunselected);
                     txt_okay_criteria_8.setText("");
                 }
@@ -1148,100 +1039,73 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_good_criteria_1:
 
-                if (image_good_criteria_1.isClickable()) {
-
+                if (image_good_criteria_1.isClickable())
+                {
+                    image_improvement_cri_1.setVisibility(View.GONE);
+                    image_excellent_cri_1.setVisibility(View.GONE);
+                    image_okay_cri_1.setVisibility(View.GONE);
+                    image_improvement_criteria_1.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_1.setVisibility(View.VISIBLE);
+                    image_okay_criteria_1.setVisibility(View.VISIBLE);
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_1.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_1.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_good_criteria_1.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_1.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_1.setVisibility(View.VISIBLE);
+                    image_good_criteria_1.setVisibility(View.GONE);
                     txt_good_criteria_1.setText("Good");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_good_criteria_1));
-//                    LinearLayout.LayoutParams param1 = (LinearLayout.LayoutParams) image_good_criteria_1.getLayoutParams();
-//                    param1.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    param1.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_good_cri_1));
                     txt_okay_criteria_1.setText("");
                     txt_excellent_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
                     fashionQuot = 3;
                     ratting_size[0]= fashionQuot;
                     calculation(fashionQuot,0);
-//                    Log.e("OverallRating in insp good 1 before :",""+overallRating);
-//
-//                    overallRating = fashionQuot;
-//                    Log.e("OverallRating in insp good 1 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
 
                 } else
                 {
-                    // image_good_criteria_1.setClickable(false);
                     image_good_criteria_1.setBackgroundResource(R.mipmap.goodemojiunselected);
+                    image_good_criteria_1.setVisibility(View.VISIBLE);
+                    image_good_cri_1.setVisibility(View.GONE);
                     txt_good_criteria_1.setText("");
                 }
 
                 break;
 
             case R.id.image_good_criteria_2:
-                if (image_good_criteria_2.isClickable()) {
-
+                if (image_good_criteria_2.isClickable())
+                {
+                    image_improvement_cri_2.setVisibility(View.GONE);
+                    image_excellent_cri_2.setVisibility(View.GONE);
+                    image_okay_cri_2.setVisibility(View.GONE);
+                    image_improvement_criteria_2.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_2.setVisibility(View.VISIBLE);
+                    image_okay_criteria_2.setVisibility(View.VISIBLE);
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_2.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_2.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_2.setVisibility(View.VISIBLE);
+                    image_good_criteria_2.setVisibility(View.GONE);
                     txt_good_criteria_2.setText("Good");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_good_criteria_2));
-//                    LinearLayout.LayoutParams param2 = (LinearLayout.LayoutParams) image_good_criteria_2.getLayoutParams();
-//                    param2.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    param2.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_good_cri_1));
                     txt_okay_criteria_2.setText("");
                     txt_excellent_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
                     merchDisplay = 3;
                     ratting_size[1]= merchDisplay;
                     calculation(merchDisplay,1);
-//                    Log.e("OverallRating in insp good 2 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + merchDisplay) / 2;
-//                    Log.e("OverallRating in insp good 2 after :",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
-                } else {
-                    // image_good_criteria_2.setClickable(false);
+
+                } else
+                {
                     image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
+                    image_good_criteria_2.setVisibility(View.VISIBLE);
+                    image_good_cri_2.setVisibility(View.GONE);
                     txt_good_criteria_2.setText("");
                 }
 
@@ -1250,47 +1114,33 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_good_criteria_3:
 
                 if (image_good_criteria_3.isClickable()) {
-
+                    image_improvement_cri_3.setVisibility(View.GONE);
+                    image_excellent_cri_3.setVisibility(View.GONE);
+                    image_okay_cri_3.setVisibility(View.GONE);
+                    image_improvement_criteria_3.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_3.setVisibility(View.VISIBLE);
+                    image_okay_criteria_3.setVisibility(View.VISIBLE);
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_3.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_3.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_3.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_3.setVisibility(View.VISIBLE);
+                    image_good_criteria_3.setVisibility(View.GONE);
                     txt_good_criteria_3.setText("Good");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_good_criteria_3));
-//                    LinearLayout.LayoutParams param3 = (LinearLayout.LayoutParams) image_good_criteria_3.getLayoutParams();
-//                    param3.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    param3.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_good_cri_3));
                     txt_okay_criteria_3.setText("");
                     txt_excellent_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");
+
                     merchPresentationStd = 3;
                     ratting_size[2]=merchPresentationStd;
                     calculation(merchPresentationStd,2);
-//                    Log.e("OverallRating in insp good 3 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + merchPresentationStd) / 3;
-//                    Log.e("OverallRating in insp good 3 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    // image_good_criteria_3.setClickable(false);
+                    image_good_criteria_3.setVisibility(View.VISIBLE);
+                    image_good_cri_3.setVisibility(View.GONE);
                     image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_3.setText("");
                 }
@@ -1301,46 +1151,32 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_good_criteria_4.isClickable()) {
 
+                    image_improvement_cri_4.setVisibility(View.GONE);
+                    image_excellent_cri_4.setVisibility(View.GONE);
+                    image_okay_cri_4.setVisibility(View.GONE);
+                    image_improvement_criteria_4.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_4.setVisibility(View.VISIBLE);
+                    image_okay_criteria_4.setVisibility(View.VISIBLE);
                     image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_4.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_4.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_good_criteria_4.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_4.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_4.setVisibility(View.VISIBLE);
+                    image_good_criteria_4.setVisibility(View.GONE);
                     txt_good_criteria_4.setText("Good");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_good_criteria_4));
-//                    LinearLayout.LayoutParams param4 = (LinearLayout.LayoutParams) image_good_criteria_4.getLayoutParams();
-//                    param4.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    param4.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_good_cri_4));
                     txt_okay_criteria_4.setText("");
                     txt_excellent_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
                     suggSellingByStaff = 3;
                     ratting_size[3]=suggSellingByStaff;
                     calculation(suggSellingByStaff,3);
-//                    Log.e("OverallRating in insp good 4 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + suggSellingByStaff) / 4;
-//                    Log.e("OverallRating in insp good 4 after :",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    // image_good_criteria_4.setClickable(false);
+                    image_good_criteria_4.setVisibility(View.VISIBLE);
+                    image_good_cri_4.setVisibility(View.GONE);
                     image_good_criteria_4.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_4.setText("");
                 }
@@ -1351,48 +1187,33 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_good_criteria_5.isClickable()) {
 
+                    image_improvement_cri_5.setVisibility(View.GONE);
+                    image_excellent_cri_5.setVisibility(View.GONE);
+                    image_okay_cri_5.setVisibility(View.GONE);
+                    image_improvement_criteria_5.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_5.setVisibility(View.VISIBLE);
+                    image_okay_criteria_5.setVisibility(View.VISIBLE);
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_5.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_good_criteria_5.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_5.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_5.setVisibility(View.VISIBLE);
+                    image_good_criteria_5.setVisibility(View.GONE);
                     txt_good_criteria_5.setText("Good");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_good_criteria_5));
-//                    LinearLayout.LayoutParams param5 = (LinearLayout.LayoutParams) image_good_criteria_5.getLayoutParams();
-//                    param5.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    param5.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_good_cri_5));
                     txt_okay_criteria_5.setText("");
                     txt_excellent_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
                     overallCleanliness = 3;
                     ratting_size[4]=overallCleanliness;
                     calculation(overallCleanliness,4);
-//                    Log.e("OverallRating in insp good 5 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + overallCleanliness) / 5;
-//                    Log.e("OverallRating in insp good 5 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
 
 
                 } else {
-                    //  image_good_criteria_5.setClickable(false);
+                    image_good_cri_5.setVisibility(View.GONE);
+                    image_good_criteria_5.setVisibility(View.VISIBLE);
                     image_good_criteria_5.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_5.setText("");
                 }
@@ -1403,46 +1224,32 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_good_criteria_6.isClickable()) {
 
+                    image_improvement_cri_6.setVisibility(View.GONE);
+                    image_excellent_cri_6.setVisibility(View.GONE);
+                    image_okay_cri_6.setVisibility(View.GONE);
+                    image_improvement_criteria_6.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_6.setVisibility(View.VISIBLE);
+                    image_okay_criteria_6.setVisibility(View.VISIBLE);
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_6.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_6.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_6.setVisibility(View.VISIBLE);
+                    image_good_criteria_6.setVisibility(View.GONE);
                     txt_good_criteria_6.setText("Good");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_good_criteria_6));
-//                    LinearLayout.LayoutParams param6 = (LinearLayout.LayoutParams) image_good_criteria_6.getLayoutParams();
-//                    param6.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    param6.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_good_cri_6));
                     txt_okay_criteria_6.setText("");
                     txt_excellent_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
                     signage = 3;
                     ratting_size[5]=signage;
                     calculation(signage,5);
-//                    Log.e("OverallRating in insp good 6 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + signage) / 6;
-//                    Log.e("OverallRating in insp good 6 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    // image_good_criteria_6.setClickable(false);
+                     image_good_criteria_6.setVisibility(View.VISIBLE);
+                    image_good_cri_6.setVisibility(View.GONE);
                     image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_6.setText("");
                 }
@@ -1453,47 +1260,33 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                 if (image_good_criteria_7.isClickable()) {
 
+                    image_improvement_cri_7.setVisibility(View.GONE);
+                    image_excellent_cri_7.setVisibility(View.GONE);
+                    image_okay_cri_7.setVisibility(View.GONE);
+                    image_improvement_criteria_7.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_7.setVisibility(View.VISIBLE);
+                    image_okay_criteria_7.setVisibility(View.VISIBLE);
                     image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_7.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_7.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_7.setVisibility(View.VISIBLE);
+                    image_good_criteria_7.setVisibility(View.GONE);
                     txt_good_criteria_7.setText("Good");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_good_criteria_7));
-//                    LinearLayout.LayoutParams param7 = (LinearLayout.LayoutParams) image_good_criteria_7.getLayoutParams();
-//                    param7.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    param7.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_good_cri_7));
                     txt_okay_criteria_7.setText("");
                     txt_excellent_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
                     mpmExecution = 3;
                     ratting_size[6]=mpmExecution;
                     calculation(mpmExecution,6);
-//                    Log.e("OverallRating in insp good 7 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + mpmExecution) / 7;
-//                    Log.e("OverallRating in insp good 7 after :",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
 
                 } else {
-                    // image_good_criteria_7.setClickable(false);
+                    image_good_criteria_7.setVisibility(View.VISIBLE);
+                    image_good_cri_8.setVisibility(View.GONE);
                     image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_7.setText("");
                 }
@@ -1503,49 +1296,34 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_good_criteria_8:
 
                 if (image_good_criteria_8.isClickable()) {
-
+                    image_improvement_cri_8.setVisibility(View.GONE);
+                    image_excellent_cri_8.setVisibility(View.GONE);
+                    image_okay_cri_8.setVisibility(View.GONE);
+                    image_improvement_criteria_8.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_8.setVisibility(View.VISIBLE);
+                    image_okay_criteria_8.setVisibility(View.VISIBLE);
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_8.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_excellent_criteria_8.setBackgroundResource(R.mipmap.excellentemojiunselected);
-                    image_good_criteria_8.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_8.setBackgroundResource(R.mipmap.goodemojiselected);
+                    image_good_cri_8.setVisibility(View.VISIBLE);
+                    image_good_criteria_8.setVisibility(View.GONE);
                     txt_good_criteria_8.setText("Good");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_good_criteria_8));
-//                    LinearLayout.LayoutParams param8 = (LinearLayout.LayoutParams) image_good_criteria_8.getLayoutParams();
-//                    param8.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    param8.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_good_cri_8));
                     txt_okay_criteria_8.setText("");
                     txt_excellent_criteria_8.setText("");
                     txt_improvement_criteria_8.setText("");
                     winClusterMannequinsDisp = 3;
                     ratting_size[7]=winClusterMannequinsDisp;
                     calculation(winClusterMannequinsDisp,7);
-//                    Log.e("OverallRating in insp good 8 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + winClusterMannequinsDisp) / 8;
-//                    Log.e("OverallRating in insp good 8 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
 
 
                 } else {
-                    // image_good_criteria_8.setClickable(false);
+                    image_good_cri_8.setVisibility(View.GONE);
+                    image_good_criteria_8.setVisibility(View.VISIBLE);
                     image_good_criteria_8.setBackgroundResource(R.mipmap.goodemojiunselected);
                     txt_good_criteria_8.setText("");
                 }
@@ -1555,50 +1333,36 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_excellent_criteria_1:
 
-                if (image_excellent_criteria_1.isClickable()) {
-
+                if (image_excellent_criteria_1.isClickable())
+                {
+                    image_good_cri_1.setVisibility(View.GONE);
+                    image_okay_cri_1.setVisibility(View.GONE);
+                    image_improvement_cri_1.setVisibility(View.GONE);
+                    image_improvement_criteria_1.setVisibility(View.VISIBLE);
+                    image_okay_criteria_1.setVisibility(View.VISIBLE);
+                    image_good_criteria_1.setVisibility(View.VISIBLE);
                     image_improvement_criteria_1.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_1.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_1.setBackgroundResource(R.mipmap.goodemojiunselected);
-                    image_excellent_criteria_1.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_1.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_1.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_1.setVisibility(View.GONE);
                     txt_excellent_criteria_1.setText("Excellent");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_excellent_criteria_1));
-//                    LinearLayout.LayoutParams layoutParams1 = (LinearLayout.LayoutParams) image_excellent_criteria_1.getLayoutParams();
-//                    layoutParams1.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    layoutParams1.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_excellent_cri_1));
+
                     txt_okay_criteria_1.setText("");
                     txt_good_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
                     fashionQuot = 4;
                     ratting_size[0]=fashionQuot;
                     calculation(fashionQuot,0);
-//                    Log.e("OverallRating in insp excellent 1 before:",""+overallRating);
-//
-//                    overallRating = fashionQuot;
-//                    Log.e("OverallRating in insp excellent 1 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
-//
+
 
                 } else {
-                    //  image_excellent_criteria_1.setClickable(false);
+                    image_excellent_criteria_1.setVisibility(View.VISIBLE);
+                    image_excellent_cri_1.setVisibility(View.GONE);
                     image_excellent_criteria_1.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_1.setText("");
                 }
@@ -1607,46 +1371,34 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_excellent_criteria_2:
 
                 if (image_excellent_criteria_2.isClickable()) {
+
+                    image_good_cri_2.setVisibility(View.GONE);
+                    image_okay_cri_2.setVisibility(View.GONE);
+                    image_improvement_cri_2.setVisibility(View.GONE);
+                    image_improvement_criteria_2.setVisibility(View.VISIBLE);
+                    image_okay_criteria_2.setVisibility(View.VISIBLE);
+                    image_good_criteria_2.setVisibility(View.VISIBLE);
                     image_improvement_criteria_2.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_2.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_2.setBackgroundResource(R.mipmap.goodemojiunselected);
-                    image_excellent_criteria_2.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_2.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_2.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_2.setVisibility(View.GONE);
                     txt_excellent_criteria_2.setText("Excellent");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_excellent_criteria_2));
-//                    LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) image_excellent_criteria_2.getLayoutParams();
-//                    layoutParams2.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    layoutParams2.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_excellent_cri_2));
+
                     txt_okay_criteria_2.setText("");
                     txt_good_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
                     merchDisplay = 4;
                     ratting_size[1]=merchDisplay;
                     calculation(merchDisplay,1);
-//                    Log.e("OverallRating in insp excellent 2 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + merchDisplay) / 2;
-//                    Log.e("OverallRating in insp excellent 2 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    //  image_excellent_criteria_2.setClickable(false);
+                    image_excellent_criteria_2.setVisibility(View.VISIBLE);
+                    image_excellent_cri_2.setVisibility(View.GONE);
                     image_excellent_criteria_2.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_2.setText("");
                 }
@@ -1655,46 +1407,34 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_excellent_criteria_3:
 
                 if (image_excellent_criteria_3.isClickable()) {
+
+                    image_good_cri_3.setVisibility(View.GONE);
+                    image_okay_cri_3.setVisibility(View.GONE);
+                    image_improvement_cri_3.setVisibility(View.GONE);
+                    image_improvement_criteria_3.setVisibility(View.VISIBLE);
+                    image_okay_criteria_3.setVisibility(View.VISIBLE);
+                    image_good_criteria_3.setVisibility(View.VISIBLE);
                     image_improvement_criteria_3.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_3.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_3.setBackgroundResource(R.mipmap.goodemojiunselected);
-                    image_excellent_criteria_3.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_3.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_3.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_3.setVisibility(View.GONE);
                     txt_excellent_criteria_3.setText("Excellent");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_excellent_criteria_3));
-//                    LinearLayout.LayoutParams layoutParams3 = (LinearLayout.LayoutParams) image_excellent_criteria_3.getLayoutParams();
-//                    layoutParams3.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    layoutParams3.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_excellent_cri_3));
+
                     txt_okay_criteria_3.setText("");
                     txt_good_criteria_3.setText("");
-                    txt_improvement_criteria_3.setText("");
+                    txt_improvement_criteria_3.setText("");;
                     merchPresentationStd = 4;
                     ratting_size[2]=merchPresentationStd;
                     calculation(merchPresentationStd,2);
-//                    Log.e("OverallRating in insp excellent 3 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + merchPresentationStd) / 3;
-//                    Log.e("OverallRating in insp excellent 3 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    //  image_excellent_criteria_3.setClickable(false);
+                    image_excellent_criteria_3.setVisibility(View.VISIBLE);
+                    image_excellent_cri_3.setVisibility(View.GONE);
                     image_excellent_criteria_3.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_3.setText("");
 
@@ -1704,47 +1444,35 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_excellent_criteria_4:
                 if (image_excellent_criteria_4.isClickable()) {
 
+
+                    image_good_cri_4.setVisibility(View.GONE);
+                    image_okay_cri_4.setVisibility(View.GONE);
+                    image_improvement_cri_4.setVisibility(View.GONE);
+                    image_improvement_criteria_4.setVisibility(View.VISIBLE);
+                    image_okay_criteria_4.setVisibility(View.VISIBLE);
+                    image_good_criteria_4.setVisibility(View.VISIBLE);
                     image_improvement_criteria_4.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_4.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_4.setBackgroundResource(R.mipmap.goodemojiunselected);
-                    image_excellent_criteria_4.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_4.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_4.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_4.setVisibility(View.GONE);
                     txt_excellent_criteria_4.setText("Excellent");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_excellent_criteria_4));
-//                    LinearLayout.LayoutParams layoutParams4 = (LinearLayout.LayoutParams) image_excellent_criteria_4.getLayoutParams();
-//                    layoutParams4.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    layoutParams4.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_excellent_cri_4));
+
                     txt_okay_criteria_4.setText("");
                     txt_good_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
                     suggSellingByStaff = 4;
                     ratting_size[3]=suggSellingByStaff;
                     calculation(suggSellingByStaff,3);
-//                    Log.e("OverallRating in insp excellent 4 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + suggSellingByStaff) / 4;
-//                    Log.e("OverallRating in insp excellent 4 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
 
                 } else {
-                    //  image_excellent_criteria_4.setClickable(false);
+                      image_excellent_criteria_4.setVisibility(View.VISIBLE);
+                    image_excellent_cri_4.setVisibility(View.GONE);
                     image_excellent_criteria_4.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_4.setText("");
                 }
@@ -1752,47 +1480,36 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
             case R.id.image_excellent_criteria_5:
 
-                if (image_excellent_criteria_5.isClickable()) {
+                if (image_excellent_criteria_5.isClickable())
+                {
+
+                    image_good_cri_5.setVisibility(View.GONE);
+                    image_okay_cri_5.setVisibility(View.GONE);
+                    image_improvement_cri_5.setVisibility(View.GONE);
+                    image_improvement_criteria_5.setVisibility(View.VISIBLE);
+                    image_okay_criteria_5.setVisibility(View.VISIBLE);
+                    image_good_criteria_5.setVisibility(View.VISIBLE);
                     image_improvement_criteria_5.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_5.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_5.setBackgroundResource(R.mipmap.goodemojiunselected);
-                    image_excellent_criteria_5.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_5.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_5.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_5.setVisibility(View.GONE);
                     txt_excellent_criteria_5.setText("Excellent");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_excellent_criteria_5));
-//                    LinearLayout.LayoutParams layoutParams5 = (LinearLayout.LayoutParams) image_excellent_criteria_4.getLayoutParams();
-//                    layoutParams5.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    layoutParams5.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_excellent_criteria_5));
+
                     txt_okay_criteria_5.setText("");
                     txt_good_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
                     overallCleanliness = 4;
                     ratting_size[4]=overallCleanliness;
                     calculation(overallCleanliness,4);
-//                    Log.e("OverallRating in insp excellent 5 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + overallCleanliness) / 5;
-//                    Log.e("OverallRating in insp excellent 5 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    // image_excellent_criteria_5.setClickable(false);
+                     image_excellent_criteria_5.setVisibility(View.VISIBLE);
+                    image_excellent_cri_5.setVisibility(View.GONE);
                     image_excellent_criteria_5.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_5.setText("");
                 }
@@ -1801,14 +1518,23 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_excellent_criteria_6:
 
                 if (image_excellent_criteria_6.isClickable()) {
+
+                    image_good_cri_6.setVisibility(View.GONE);
+                    image_okay_cri_6.setVisibility(View.GONE);
+                    image_improvement_cri_6.setVisibility(View.GONE);
+                    image_improvement_criteria_6.setVisibility(View.VISIBLE);
+                    image_okay_criteria_6.setVisibility(View.VISIBLE);
+                    image_good_criteria_6.setVisibility(View.VISIBLE);
                     image_improvement_criteria_6.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_6.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_6.setBackgroundResource(R.mipmap.goodemojiunselected);
-                    image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiselected);
-                    txt_excellent_criteria_6.setText("Excellent");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_excellent_criteria_6));
+                    image_excellent_cri_6.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_6.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_6.setVisibility(View.GONE);
+                    txt_excellent_criteria_1.setText("Excellent");
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_excellent_cri_6));
 
                     txt_okay_criteria_6.setText("");
                     txt_good_criteria_6.setText("");
@@ -1816,27 +1542,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     signage = 4;
                     ratting_size[5]=signage;
                     calculation(signage,5);
-//                    Log.e("OverallRating in insp excellent 6 before :",""+overallRating);
-//                    overallRating = (overallRating + signage) / 6;
-//                    Log.e("OverallRating in insp excellent 6 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
+                    image_excellent_cri_6.setVisibility(View.GONE);
+                    image_excellent_criteria_6.setVisibility(View.VISIBLE);
                      image_excellent_criteria_6.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_6.setText("");
                 }
@@ -1846,46 +1555,34 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_excellent_criteria_7:
 
                 if (image_excellent_criteria_7.isClickable()) {
+
+                    image_good_cri_7.setVisibility(View.GONE);
+                    image_okay_cri_7.setVisibility(View.GONE);
+                    image_improvement_cri_7.setVisibility(View.GONE);
+                    image_improvement_criteria_7.setVisibility(View.VISIBLE);
+                    image_okay_criteria_7.setVisibility(View.VISIBLE);
+                    image_good_criteria_7.setVisibility(View.VISIBLE);
                     image_improvement_criteria_7.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_7.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_7.setBackgroundResource(R.mipmap.goodemojiunselected);
-                    image_excellent_criteria_7.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_7.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_7.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_7.setVisibility(View.GONE);
                     txt_excellent_criteria_7.setText("Excellent");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_excellent_criteria_7));
-//                    LinearLayout.LayoutParams layoutParams7 = (LinearLayout.LayoutParams) image_excellent_criteria_7.getLayoutParams();
-//                    layoutParams7.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    layoutParams7.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_excellent_cri_7));
+
                     txt_okay_criteria_7.setText("");
                     txt_good_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
                     mpmExecution = 4;
                     ratting_size[6]=mpmExecution;
                     calculation(mpmExecution,6);
-//                    Log.e("OverallRating in insp excellent 7 before :",""+overallRating);
-//                    overallRating = (overallRating + mpmExecution) / 7;
-//                    Log.e("OverallRating in insp excellent 7 after:",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
 
                 } else {
-                    //  image_excellent_criteria_7.setClickable(false);
+                      image_excellent_criteria_7.setVisibility(View.VISIBLE);
+                    image_excellent_cri_7.setVisibility(View.GONE);
                     image_excellent_criteria_7.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_7.setText("");
                 }
@@ -1894,46 +1591,34 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             case R.id.image_excellent_criteria_8:
 
                 if (image_excellent_criteria_8.isClickable()) {
+
+                    image_good_cri_8.setVisibility(View.GONE);
+                    image_okay_cri_8.setVisibility(View.GONE);
+                    image_improvement_cri_8.setVisibility(View.GONE);
+                    image_improvement_criteria_8.setVisibility(View.VISIBLE);
+                    image_okay_criteria_8.setVisibility(View.VISIBLE);
+                    image_good_criteria_8.setVisibility(View.VISIBLE);
                     image_improvement_criteria_8.setBackgroundResource(R.mipmap.improvementemojiunselected);
                     image_okay_criteria_8.setBackgroundResource(R.mipmap.okayemojiunselected);
                     image_good_criteria_8.setBackgroundResource(R.mipmap.goodemojiunselected);
-                    image_excellent_criteria_8.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_8.setBackgroundResource(R.mipmap.excellentemojiselected);
+                    image_excellent_cri_8.setVisibility(View.VISIBLE);
+                    image_excellent_criteria_8.setVisibility(View.GONE);
                     txt_excellent_criteria_8.setText("Excellent");
-                    YoYo.with(Techniques.ZoomIn)
-                            .duration(500)
-                            .playOn(findViewById(R.id.image_excellent_criteria_8));
-//                    LinearLayout.LayoutParams layoutParams8 = (LinearLayout.LayoutParams) image_excellent_criteria_8.getLayoutParams();
-//                    layoutParams8.height = this.getResources().getDimensionPixelSize(R.dimen.item_height);
-//                    layoutParams8.width = this.getResources().getDimensionPixelSize(R.dimen.item_width);
+//                    YoYo.with(Techniques.ZoomIn)
+//                            .duration(500)
+//                            .playOn(findViewById(R.id.image_excellent_cri_8));
+
                     txt_okay_criteria_8.setText("");
                     txt_good_criteria_8.setText("");
                     txt_improvement_criteria_8.setText("");
                     winClusterMannequinsDisp = 4;
                     ratting_size[7]=winClusterMannequinsDisp;
                     calculation(winClusterMannequinsDisp,7);
-//                    Log.e("OverallRating in insp excellent 8 before :",""+overallRating);
-//
-//                    overallRating = (overallRating + winClusterMannequinsDisp) / 8;
-//                    Log.e("OverallRating in insp excellent 8 after :",""+overallRating);
-//                    // image set
-//                    if(overallRating < 2)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-//                    }
-//                    else if(overallRating < 3)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//                    }
-//                    else if(overallRating < 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//                    }
-//                    else if(overallRating >= 4)
-//                    {
-//                        emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//                    }
+
                 } else {
-                    // image_excellent_criteria_8.setClickable(false);
+                     image_excellent_criteria_8.setVisibility(View.VISIBLE);
+                    image_excellent_cri_8.setVisibility(View.GONE);
                     image_excellent_criteria_8.setBackgroundResource(R.mipmap.excellentemojiunselected);
                     txt_excellent_criteria_8.setText("");
                 }

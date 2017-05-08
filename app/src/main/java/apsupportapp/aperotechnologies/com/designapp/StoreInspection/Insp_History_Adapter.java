@@ -2,7 +2,13 @@ package apsupportapp.aperotechnologies.com.designapp.StoreInspection;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +19,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
+
+import static android.icu.lang.UProperty.INT_START;
 
 /**
  * Created by pamrutkar on 18/04/17.
@@ -48,10 +62,23 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof Insp_History_Adapter.Holder) {
             if (position < list.size())
             {
-                ((Insp_History_Adapter.Holder) holder).txt_inspected_by.setText(""+"Inspected By : " + list.get(position).getInspectorName());
-                ((Insp_History_Adapter.Holder) holder).txt_inspection_id.setText(""+"Inspection Id : " +list.get(position).getInspectionId());
+                ((Insp_History_Adapter.Holder) holder).txt_inspected_by.setText( list.get(position).getInspectorName());
+                ((Insp_History_Adapter.Holder) holder).txt_inspection_id.setText(""+list.get(position).getInspectionId());
                 ((Insp_History_Adapter.Holder) holder).txt_store_code.setText("" + list.get(position).getStoreCode()+" "+list.get(position).getStoreDesc());
-                ((Insp_History_Adapter.Holder) holder).txt_date.setText("" + list.get(position).getInspectionDate());
+
+                DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                String inputDateStr=list.get(position).getInspectionDate();
+                Date date = null;
+                try {
+                    date = inputFormat.parse(inputDateStr);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                String outputDateStr = outputFormat.format(date);
+                Log.e("updated date :",""+outputDateStr);
+
+                ((Insp_History_Adapter.Holder) holder).txt_date.setText("" + outputDateStr);
                 Glide.with(context)
                         .load(list.get(position).getStoreImg())
                         .fitCenter()
@@ -94,11 +121,10 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
                     @Override
                     public void onClick(View view)
                     {
-                       // new InspectionHistoryActivity().StartActivity(context,list.get(position).getInspectionId());
-
+                        //new InspectionHistoryActivity().StartActivity(context,list.get(position).getInspectionId());
                         Log.e( "OnClick Rel Layout " ,"");
                         Intent intent = new Intent(context ,InspectionDetailsActivity.class);
-                      //  onSendId.onSend_Id(list.get(position).getInspectionId());
+                        //onSendId.onSend_Id(list.get(position).getInspectionId());
                         intent.putExtra("inspectionId",list.get(position).getInspectionId());
                         Log.e("Inspection Id",""+list.get(position).getInspectionId());
                         context.startActivity(intent);
@@ -124,8 +150,8 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
             super(itemView);
             image_insphistory_1 =(ImageView)itemView.findViewById(R.id.image_insphistory_1);
             txt_store_code = (TextView) itemView.findViewById(R.id.txt_store_code);
-            txt_inspected_by = (TextView) itemView.findViewById(R.id.txt_inspected_name);
-            txt_inspection_id = (TextView) itemView.findViewById(R.id.txt_inspection_id);
+            txt_inspected_by = (TextView) itemView.findViewById(R.id.txt_inspected_by_val);
+            txt_inspection_id = (TextView) itemView.findViewById(R.id.txt_inspection_id_val);
             txt_date = (TextView) itemView.findViewById(R.id.txt_date);
             image_insp_store = (ImageView) itemView.findViewById(R.id.image_insphistory_1);
             image_emoji = (ImageView) itemView.findViewById(R.id.image_emoji);

@@ -1,24 +1,18 @@
 package apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory;
 
 import android.app.Activity;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPromoAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -58,13 +52,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
-import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
-import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizeAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 

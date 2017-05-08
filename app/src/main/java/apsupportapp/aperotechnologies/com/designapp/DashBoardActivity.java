@@ -70,7 +70,6 @@ import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.Target
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualReportActivity;
-import apsupportapp.aperotechnologies.com.designapp.WorstPerformersInventory.WorstPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
 import org.json.JSONArray;
@@ -249,12 +248,12 @@ public class DashBoardActivity extends AppCompatActivity
         BtnWorstPerformers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashBoardActivity.this, WorstPerformerInventory.class);
-                startActivity(intent);
-                if(timer != null)
-                {
-                    timer.cancel();
-                }
+              //  Intent intent = new Intent(DashBoardActivity.this, WorstPerformerInventory.class);
+              //  startActivity(intent);
+              //  if(timer != null)
+              //  {
+              //      timer.cancel();
+             //   }
                 //  finish();
             }
         });
