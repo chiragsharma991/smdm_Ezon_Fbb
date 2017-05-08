@@ -61,28 +61,26 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class BestPerformerInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
 
-    static TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
-    RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
-            quickFilter_baseLayout, BestQfDoneLayout, BestQuickFilterBorder;
-    RunningPromoListDisplay BestInventSizeListDisplay;
+    public static TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
+    private RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
+             BestQfDoneLayout, BestQuickFilterBorder;
+    private RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
-    RadioButton CheckWTD, CheckL4W, CheckSTD;
-    String userId, bearertoken;
+    private RadioButton CheckWTD, CheckL4W, CheckSTD;
+    private String userId, bearertoken;
     private TextView Toolbar_title;
-    String TAG = "BestPerformerInventory";
+    private String TAG = "BestPerformerInventory";
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
     private int popPromo = 0;
-    Context context = this;
+    private Context context = this;
     private static String title="Best";
     private RequestQueue queue;
     private Gson gson;
-    ListView BestInventListview;
-    ArrayList<RunningPromoListDisplay> BestInventList;
-    private int focusposition = 0;
-    private boolean userScrolled;
+    private ListView BestInventListview;
+    private ArrayList<RunningPromoListDisplay> BestInventList;
     private BestPerformerInventoryAdapter bestPerformerInventoryAdapter;
     private View footer;
     private String lazyScroll = "OFF";
@@ -91,7 +89,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private RadioButton BestInvent_core, BestInvent_fashion;
     private ToggleButton Toggle_bestInvent_fav;
     private static String corefashion = "Fashion";
-    private ImageView Skewed_quickFilter;
     private static String orderbycol = "10";
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU, BstInventory_salesThru, BstInventory_Fwd, BstInventory_coverNsell;
@@ -823,7 +820,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void BestAndWorstToggle() {
 
-        if(worstToggle==false) {
+        if(!worstToggle) {
             if (BestAndWorst.isChecked()) {
                 limit = 10;
                 offsetvalue = 0;
@@ -1159,7 +1156,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        if(toggleClick==false) {
+        if(!toggleClick) {
 
             switch (checkedId) {
                 case R.id.bestInvent_core:

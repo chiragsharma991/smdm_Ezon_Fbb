@@ -52,30 +52,28 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class BestPerformerActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    TextView Bst_storecode, Bst_txtStoreName, PopPromo, PopPromoU, PopSort, Bst_txtStoreCode;
-    RelativeLayout Bst_imageBtnBack, Bst_sort, Bst_imgfilter, BestPromo_footer, SortPopup, BaseLayout;
-    RunningPromoListDisplay BestPromoListDisplay;
+    private TextView Bst_storecode, Bst_txtStoreName, PopPromo, PopPromoU, PopSort, Bst_txtStoreCode;
+    private RelativeLayout Bst_imageBtnBack, Bst_sort, Bst_imgfilter, BestPromo_footer, SortPopup, BaseLayout;
+    private RunningPromoListDisplay BestPromoListDisplay;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken;
-    String TAG = "BestPerformersActivity";
+    private String userId, bearertoken;
+    private String TAG = "BestPerformersActivity";
 
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
     private int popPromo = 0;
-    int orderbycol = 1;
-    Context context = this;
+    private int orderbycol = 1;
+    private Context context = this;
     private RequestQueue queue;
     private Gson gson;
-    ListView BestPerformanceListView;
-    ArrayList<RunningPromoListDisplay> BestpromoList;
+    private ListView BestPerformanceListView;
+    private ArrayList<RunningPromoListDisplay> BestpromoList;
     private int focusposition = 0;
     private boolean userScrolled;
     private BestPromoAdapter bestPromoAdapter;
     private View footer;
-    int index = 0;
-    int iterations = 0;
     private RadioButton CheckBstSale, CheckBstSaleU;
     private String lazyScroll = "OFF";
     private SegmentedGroup segmentedGroup;

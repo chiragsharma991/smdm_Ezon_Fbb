@@ -249,7 +249,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                                                TextView txtView = (TextView) rel.getChildAt(0);
                                                txtClickedVal = txtView.getText().toString();
                                                level = groupPosition + 2;
-                                               if (cb.isChecked() == false) {
+                                               if (!cb.isChecked()) {
 
                                                    salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(true);
@@ -261,7 +261,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                                                    }
                                                    BuildUP(level);
 
-                                               } else if(cb.isChecked() == true)
+                                               } else if(cb.isChecked())
                                                {
                                                    salesList.remove(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(false);
@@ -404,7 +404,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     private void BuildUP(int level) {
 
         if (level == 2) {
-            if (l1 == false) {
+            if (!l1) {
 
                 myList1.add(txtClickedVal.trim());
                 l1 = true;
@@ -438,7 +438,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             }
         }
         if (level == 3) {
-            if (l2 == false) {
+            if (!l2) {
                 myList2.add(txtClickedVal.trim());
                 l1 = false;
                 l2 = true;
@@ -467,7 +467,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             }
         }
         if (level == 4) {
-            if (l3 == false) {
+            if (!l3) {
                 myList3.add(txtClickedVal.trim());
 
                 l1 = false;
@@ -497,7 +497,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             }
         }
         if (level == 5) {
-            if (l4 == false) {
+            if (!l4) {
 
                 myList4.add(txtClickedVal.trim());
                 l1 = false;
@@ -527,7 +527,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             }
         }
         if (level == 6) {
-            if (l5 == false) {
+            if (!l5 ) {
                 myList5.add(txtClickedVal.trim());
                 l1 = false;
                 l2 = false;

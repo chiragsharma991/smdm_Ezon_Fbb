@@ -40,8 +40,8 @@ public class BasePDFPagerAdapter extends PagerAdapter {
     protected static final float DEFAULT_QUALITY = 2.0f;
     protected static final int DEFAULT_OFFSCREENSIZE = 1;
 
-    String pdfPath;
-    Context context;
+    private String pdfPath;
+    private Context context;
     PdfRenderer renderer;
     BitmapContainer bitmapContainer;
     LayoutInflater inflater;

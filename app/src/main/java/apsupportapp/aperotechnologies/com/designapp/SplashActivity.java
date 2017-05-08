@@ -65,7 +65,7 @@ public class SplashActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         Log.e("---", " " + getResources().getDisplayMetrics().density);
 
-        if (sharedPreferences.getBoolean("log_flag", false) == true) {
+        if (sharedPreferences.getBoolean("log_flag", false)) {
             if (Reusable_Functions.chkStatus(context))
             {
                 if (progressbar != null) {
@@ -84,15 +84,15 @@ public class SplashActivity extends AppCompatActivity {
                 try {
                     // Thread will sleep for 5 seconds
                     sleep(3 * 1000);
-                    Log.e("chk", " " + (sharedPreferences.getBoolean("log_flag", false) == true));
-                    if (sharedPreferences.getBoolean("log_flag", false) == true) {
+                    Log.e("chk", " " + (sharedPreferences.getBoolean("log_flag", false)));
+                    if (sharedPreferences.getBoolean("log_flag", false)) {
                         if (Reusable_Functions.chkStatus(context)) {
                             requestLoginAPI();
                         } else
                         {
                             //Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                         }
-                    } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
+                    } else if (!sharedPreferences.getBoolean("log_flag", false)) {
                         Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(i);
                         finish();
@@ -204,8 +204,4 @@ public class SplashActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-   @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }

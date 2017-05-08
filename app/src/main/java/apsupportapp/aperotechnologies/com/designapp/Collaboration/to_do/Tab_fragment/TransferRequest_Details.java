@@ -613,7 +613,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 addtotalIn_headerScanqty(0);
                                 transferDetailsAdapter.notifyDataSetChanged();
 
-                                if(scanDone==false){
+                                if(!scanDone){
                                     Toast.makeText(context,"Barcode does not match sizes...",Toast.LENGTH_SHORT).show();
                                 }else {
                                     scanDone=false;

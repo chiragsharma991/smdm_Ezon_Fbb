@@ -22,7 +22,7 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         cont = context;
         Boolean isApplicationForeGround = BaseLifeCycleCallbacks.applicationStatus();
-        if (isApplicationForeGround == true)
+        if (isApplicationForeGround)
         {
         Log.e("LocalNotificationReceiver", "onReceive: IF "+isApplicationForeGround);
 

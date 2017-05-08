@@ -132,10 +132,8 @@ public class RunningPromoDetail extends AppCompatActivity {
         }
 
 
-        tableRow();
     }
-    private void tableRow() {
-    }
+
 
     private void findview()
     {

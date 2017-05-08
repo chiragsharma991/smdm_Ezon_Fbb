@@ -606,7 +606,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        if(toggleClick==false){
+        if(!toggleClick){
         switch (checkedId) {
             case R.id.floor_core:
                 if (floor_core.isChecked()) {

@@ -116,12 +116,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         for (int i = 0; i < list.get(PrePosition).size(); i++)
         {
             Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(PrePosition, i);
-            if (CheckedItems.contains(Tag)) {
-                CheckChild[i] = true;
-            } else
-            {
-                CheckChild[i] = false;
-            }
+            CheckChild[i] = CheckedItems.contains(Tag) ? true : false;
         }
         //if all list are true from all list child then header check will be enable.
         if (containsTrue(CheckChild)) {

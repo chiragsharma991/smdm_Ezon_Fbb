@@ -669,7 +669,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        if(toggleClick==false) {
+        if(!toggleClick) {
 
             switch (checkedId) {
                 case R.id.stock_core:

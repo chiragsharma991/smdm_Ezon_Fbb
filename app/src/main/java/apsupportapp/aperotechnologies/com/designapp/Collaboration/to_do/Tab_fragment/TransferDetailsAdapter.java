@@ -96,7 +96,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         {
 
                             Log.e("TAG", "onClick:>>>> "+position );
-                            if(Tr_HeaderToggle[position]==true)
+                            if(Tr_HeaderToggle[position])
                             {
                                 Tr_HeaderToggle[position]=false;
                                 notifyDataSetChanged();

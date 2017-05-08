@@ -684,7 +684,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         //change core fashion according to chnage in xml layout
-        if (filter_toggleClick == false) {
+        if (!filter_toggleClick) {
             switch (checkedId) {
                 case R.id.skewed_core:
                     if (Skewed_core.isChecked()) {

@@ -210,5 +210,6 @@ public class FreshnessIndexDetails {
 
     public void setPreviousGrpCount(double previousGrpCount) {
         this.previousGrpCount = previousGrpCount;
+
     }
 }

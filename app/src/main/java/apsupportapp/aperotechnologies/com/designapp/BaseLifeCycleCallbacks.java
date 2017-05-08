@@ -10,11 +10,11 @@ import android.util.Log;
 import java.util.HashMap;
 
 
-public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCallbacks {
+ public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCallbacks {
 
-    static HashMap<String, Integer> activities;
-    SharedPreferences sharedPreferences;
-    Activity activity;
+    private static HashMap<String, Integer> activities;
+    private SharedPreferences sharedPreferences;
+    private Activity activity;
     BaseLifeCycleCallbacks() {
         activities = new HashMap<String, Integer>();
     }

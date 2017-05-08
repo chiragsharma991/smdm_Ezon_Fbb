@@ -556,7 +556,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
-                            if(onItemClickFlag == false) {
+                            if(!onItemClickFlag) {
                                 TimeUP();
                             }
                         }
@@ -764,7 +764,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     private void TimeUP() {
 
        if(salesAnalysisClassArrayList.size() != 0) {
-           if (focusposition < salesAnalysisClassArrayList.size() && onItemClickFlag == false) {
+           if (focusposition < salesAnalysisClassArrayList.size() && !onItemClickFlag) {
 
                if (txtheaderplanclass.getText().toString().equals("Department")) {
                    level = 1;
@@ -898,7 +898,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-       if(filter_toggleClick == false) {
+       if(!filter_toggleClick) {
            switch (checkedId) {
 
                case R.id.btn_wtd:

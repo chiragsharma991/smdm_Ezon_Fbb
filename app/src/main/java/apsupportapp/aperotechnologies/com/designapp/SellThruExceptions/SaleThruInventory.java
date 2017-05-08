@@ -910,7 +910,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        if(filter_toggleClick == false) {
+        if(!filter_toggleClick) {
             switch (checkedId) {
                 case R.id.bestInvent_core:
                     if (BestInvent_core.isChecked()) {

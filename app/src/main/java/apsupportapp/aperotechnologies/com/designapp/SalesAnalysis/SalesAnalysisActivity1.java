@@ -491,12 +491,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 super.onScrollStateChanged(recyclerView, newState);
 
                 currentState = newState;
-                if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE && onClickFlag == false) {
+                if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE && !onClickFlag) {
 
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
-                            if (onClickFlag == false) {
+                            if (!onClickFlag) {
                                 TimeUP();
                             }
                         }
@@ -680,7 +680,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     {
         if(salesAnalysisClassArrayList.size() != 0) {
 
-            if (firstVisibleItem < salesAnalysisClassArrayList.size() && onClickFlag == false) {
+            if (firstVisibleItem < salesAnalysisClassArrayList.size() && !onClickFlag) {
 
                 if (txtheaderplanclass.getText().toString().equals("Department")) {
                     level = 1;
@@ -777,7 +777,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     // on Check change listener on Segment Listener(WTD, YTD,LW and L4W)
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (filter_toggleClick == false) {
+        if (!filter_toggleClick ) {
             switch (checkedId) {
 
                 case R.id.btnWTD:

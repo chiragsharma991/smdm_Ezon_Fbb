@@ -64,13 +64,13 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
     //private List mStringFilterList;
 
     private LayoutInflater mInflater;
-    Context context;
+    private Context context;
     private int Position;
-    ArrayList<StyleDetailsBean> optionList;
-    StyleDetailsBean styleDetailsBean;
-    Gson gson;
-    String TAG = "BestPerfomerInventory";
-    int offset , limit;
+    private ArrayList<StyleDetailsBean> optionList;
+    private StyleDetailsBean styleDetailsBean;
+    private Gson gson;
+    private String TAG = "BestPerfomerInventory";
+    private int offset , limit;
 
     //private ValueFilter valueFilter;
 
@@ -287,8 +287,8 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
     private class Holder {
 
         TextView BestInvent_SOH,BestInvent_option,BestInvent_sellThru,BestInvent_FWC,
-                BestInvent_RosU,BestInvent_GIT,BestInvent_Sale,BestInventTable_SOH,
-                BestInventTable_ProdAttribute;
+                BestInvent_RosU,BestInvent_GIT,BestInvent_Sale;
+
         ImageView BestInvent_image_child;
         ProgressBar ProgressPicaso;
 

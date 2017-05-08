@@ -532,7 +532,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         // Id is changed so that we have change core in fashion
-        if(filter_toggleClick == false) {
+        if(!filter_toggleClick ) {
             switch (checkedId) {
                 case R.id.top_core:
                     if (Top_core.isChecked()) {

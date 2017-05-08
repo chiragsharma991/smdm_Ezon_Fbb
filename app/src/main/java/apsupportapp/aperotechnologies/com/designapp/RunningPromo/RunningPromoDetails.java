@@ -143,15 +143,10 @@ public class RunningPromoDetails extends AppCompatActivity {
             Toast.makeText(RunningPromoDetails.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
-       tableRow();
 
 
     }
 
-    private void tableRow() {
-
-
-    }
 
     private void findview() {
         backButton = (RelativeLayout) findViewById(R.id.rpd_ImageBtnBack);

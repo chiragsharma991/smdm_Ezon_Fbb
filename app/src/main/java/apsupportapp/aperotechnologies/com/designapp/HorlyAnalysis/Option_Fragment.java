@@ -329,7 +329,7 @@ public class Option_Fragment extends Fragment {
                             optionDetailsList = new ArrayList<StyleDetailsBean>();
                             offsetvalue = 0;
                             limit1 = 10;
-                            tableRowForTableC.setBackgroundColor(R.color.colorPrimary);
+                            tableRowForTableC.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
                             if (Reusable_Functions.chkStatus(context)) {
                                 Reusable_Functions.hDialog();

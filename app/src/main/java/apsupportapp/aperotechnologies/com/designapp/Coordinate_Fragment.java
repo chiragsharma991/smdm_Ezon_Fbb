@@ -19,9 +19,9 @@ import java.util.ArrayList;
 public class Coordinate_Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    GridView gridView;
-    ArrayList arrayList;
-    Context context;
+    private GridView gridView;
+    private ArrayList arrayList;
+    private Context context;
 
     public Coordinate_Fragment() {
         // Required empty public constructor

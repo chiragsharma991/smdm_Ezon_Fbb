@@ -53,10 +53,7 @@ public class TransparentActivity extends Activity {
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        return;
-    }
+
 
     @Override
     protected void onStop() {

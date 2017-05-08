@@ -262,7 +262,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       handler.postDelayed(new Runnable() {
 
           public void run() {
-              if(!error==true){
+              if(!error){
 
                   // Run your task here
               adapter = new PDFPagerAdapter(context, FileUtil.extractFileNameFromURL(url));

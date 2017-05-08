@@ -1427,7 +1427,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
                     txt_okay_criteria_3.setText("");
                     txt_good_criteria_3.setText("");
-                    txt_improvement_criteria_3.setText("");;
+                    txt_improvement_criteria_3.setText("");
                     merchPresentationStd = 4;
                     ratting_size[2]=merchPresentationStd;
                     calculation(merchPresentationStd,2);

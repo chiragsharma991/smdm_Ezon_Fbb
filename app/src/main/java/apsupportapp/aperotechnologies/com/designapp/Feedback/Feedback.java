@@ -66,6 +66,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+@SuppressWarnings("deprecation")
 public class Feedback extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout Feedback_BtnBack;
@@ -192,7 +193,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
 
             String url;
-            if (feedbackReport == false) {
+            if (!feedbackReport) {
                 url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
 
             } else {
@@ -496,9 +497,11 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         ViewTreeObserver vto = Fitting_relative.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void onGlobalLayout() {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    //noinspection deprecation,deprecation,deprecation,deprecation
                     Fitting_relative.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 } else {
                     Fitting_relative.getViewTreeObserver().removeOnGlobalLayoutListener(this);

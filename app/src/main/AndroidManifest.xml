@@ -152,10 +152,7 @@
             android:name=".BestPerformersInventory.BestPerformerInventory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".WorstPerformersInventory.WorstPerformerInventory"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".FloorAvailability.FloorAvailabilityActivity"
             android:screenOrientation="portrait"

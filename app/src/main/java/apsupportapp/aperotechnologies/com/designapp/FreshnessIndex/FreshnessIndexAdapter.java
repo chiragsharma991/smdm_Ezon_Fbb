@@ -2,15 +2,17 @@ package apsupportapp.aperotechnologies.com.designapp.FreshnessIndex;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
+
 import java.util.ArrayList;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
@@ -30,7 +32,6 @@ public class FreshnessIndexAdapter extends BaseAdapter {
         this.freshnessIndexDetailsArrayList = freshnessIndexDetailsArrayList;
         this.fromWhere = fromWhere;
         this.listViewFIndex = listViewFIndex;
-
         gson = new Gson();
     }
 

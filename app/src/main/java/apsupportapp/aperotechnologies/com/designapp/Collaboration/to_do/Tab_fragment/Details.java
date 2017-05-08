@@ -60,15 +60,14 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     private SharedPreferences sharedPreferences;
     private String userId;
     private String bearertoken;
-    private ToDo_Modal toDo_Modal;
-    Context context ;
+    private Context context ;
     private int count = 0;
     private int limit = 100;
     private int offsetvalue = 0;
     private RequestQueue queue;
     private String TAG = "ToDo_Fregment";
     private ArrayList<ToDo_Modal> DetailsList, ChildDetailList;
-    RelativeLayout details_imageBtnBack;
+    private RelativeLayout details_imageBtnBack;
     private ToDo_Modal toDo_modal;
     private RecyclerView recyclerView;
     private int levelOfOption = 1;  //  1 is for option and 2 is for size
@@ -76,7 +75,6 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
     private String MCCode = "";    // code and description
     private String option = "";    // code and description
     private StockDetailsAdapter stockPullAdapter;
-    private LinearLayout detailsLinear;
     public  HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
     private TextView Todo_detailStoreCode;
     private TextView Todo_detailStoreAvlQty;

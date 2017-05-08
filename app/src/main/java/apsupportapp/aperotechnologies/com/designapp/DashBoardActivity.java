@@ -86,52 +86,50 @@ import java.util.TimerTask;
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
-    ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment,ActualKeyProduct;
-    ImageButton btnFloorAvailability,btnTargetStockExcep,btnSellThruExcep,btnVisualReport;
-    ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnBestPerformersInv;
-    ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,To_do_image_button,Status_image_button,
-            btnSkewedSize,btnCutSize,btnStockAgeing,BtnWorstPerformers,FeedbackList_btn,Feedback_btn,btn_inspection_begin,btn_inspection_history,btn_mpm;
+    private ImageButton imageBtnStyle, imageBtnKeyProducts, imgBtnSales, imgBtnVisualAssortment,ActualKeyProduct;
+    private ImageButton btnFloorAvailability,btnTargetStockExcep,btnSellThruExcep,btnVisualReport;
+    private ImageButton imgBtnPvaAnalysis,imgBtnRunningPromo,BtnUpcomingpromo,BtnExpiringpromo,BtnBestWorstpromo,btnBestPerformersInv;
+    private ImageButton btnFeshnessindex,btnOptionEfficiency,To_do_image_button,Status_image_button,
+            btnSkewedSize,btnStockAgeing,BtnWorstPerformers,FeedbackList_btn,Feedback_btn,btn_inspection_begin,btn_inspection_history,btn_mpm;
 
 
-    LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory,linplanactual,Collaboration_subView,Feedback_linear,inspection_linear,Mpm_linear;
-    TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt,RefreshTime,planvsActualtxt,Collaboration,Feedback,
+    private LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory,linplanactual,Collaboration_subView,Feedback_linear,inspection_linear,Mpm_linear;
+    private TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt,RefreshTime,planvsActualtxt,Collaboration,Feedback,
             txt_store_Inspection,txt_mpm;
 
     //ExpandableHeightGridView style_grid;
-    EventAdapter eventAdapter;
-    String hrflash="NO";
-    String pdInfo="NO";
-    String TAG="DashBoardActivity";
-    String vsAssort="NO";
-    String sAles="NO";
-    String pmAnalysis="NO";
-    String inVENtory="NO";
-    String planActual= "NO";
-    String Collab="NO";
-    String feedback_flag="NO";
-    String store_inspection = "NO";
-    String mpm = "NO";
-    RequestQueue queue;
-    boolean flag=true;
-    String userId, bearertoken;
-    SharedPreferences sharedPreferences;
+    private String hrflash="NO";
+    private String pdInfo="NO";
+    private String TAG="DashBoardActivity";
+    private String vsAssort="NO";
+    private String sAles="NO";
+    private String pmAnalysis="NO";
+    private String inVENtory="NO";
+    private String planActual= "NO";
+    private String Collab="NO";
+    private String feedback_flag="NO";
+    private String store_inspection = "NO";
+    private String mpm = "NO";
+    private RequestQueue queue;
+    private String userId, bearertoken;
+    private SharedPreferences sharedPreferences;
     //private Boolean exit = false;
-    ArrayList<String> arrayList,eventUrlList;
-    Context context;
-    MySingleton m_config;
+    private ArrayList<String> arrayList,eventUrlList;
+    private Context context;
+    private MySingleton m_config;
 
 
-    ArrayList<ProductNameBean> productNameBeanArrayList;
+    private ArrayList<ProductNameBean> productNameBeanArrayList;
 
 
     //Event ViewPager
 
-    ViewPager pager;
-    PagerAdapter adapter;
-    ImageView imgdot;
-    LinearLayout li;
-    Timer timer;
-    int page = 0;
+    private ViewPager pager;
+    private PagerAdapter adapter;
+    private ImageView imgdot;
+    private LinearLayout li;
+    private Timer timer;
+    private int page = 0;
 
 
     //variable for storing collection list in style activity in searchable spinner

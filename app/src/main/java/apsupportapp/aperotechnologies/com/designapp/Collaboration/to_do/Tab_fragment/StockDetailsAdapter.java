@@ -126,7 +126,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         {
                             Log.e("TAG", "onClick:>>>> "+position );
 
-                            if(Toggle[position]==true)
+                            if(Toggle[position])
                             {
                                 Toggle[position]=false;
                                 notifyDataSetChanged();

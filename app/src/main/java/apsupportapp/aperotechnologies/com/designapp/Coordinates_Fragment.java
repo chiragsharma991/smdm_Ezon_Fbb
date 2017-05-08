@@ -18,9 +18,9 @@ import java.util.ArrayList;
  * Created by hp1 on 21-01-2015.
  */
 public class Coordinates_Fragment extends Fragment {
-  GridView gridView;
-    ArrayList arrayList;
-    Context context;
+    private GridView gridView;
+    private ArrayList arrayList;
+    private Context context;
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.coordinate_fragment,container,false);
