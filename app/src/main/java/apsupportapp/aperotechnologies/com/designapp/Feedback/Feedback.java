@@ -1,25 +1,24 @@
 package apsupportapp.aperotechnologies.com.designapp.Feedback;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
+
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.v4.util.Pair;
+
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
+
 import android.view.ViewTreeObserver;
-import android.widget.Button;
+
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,21 +46,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.playlog.internal.LogEvent;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -209,7 +200,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                             Log.i(TAG, "feedback response: " + " " + response);
                             Log.i(TAG, "feedback response length" + "" + response.length());
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     feedbackReport = false;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -504,7 +495,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                     Fitting_relative.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
                 int width = Fitting_relative.getMeasuredWidth();
-                int height = Fitting_relative.getMeasuredHeight();
 
                 // Calculation width acording to size of phone
 
@@ -512,19 +502,19 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 if (position == 0)
                 //get 0 is depend on next and pre button
                 {
-                    x = ((double) feedbackReportList.get(Listposition).getFittingCntPer() / 100) * width;
+                    x = (feedbackReportList.get(Listposition).getFittingCntPer() / 100) * width;
                 } else if (position == 1) {
-                    x = ((double) feedbackReportList.get(Listposition).getPricingCntPer() / 100) * width;
+                    x = ( feedbackReportList.get(Listposition).getPricingCntPer() / 100) * width;
                 } else if (position == 2) {
-                    x = ((double) feedbackReportList.get(Listposition).getColorsCntPer() / 100) * width;
+                    x = (feedbackReportList.get(Listposition).getColorsCntPer() / 100) * width;
                 } else if (position == 3) {
-                    x = ((double) feedbackReportList.get(Listposition).getPrintCntPer() / 100) * width;
+                    x = (feedbackReportList.get(Listposition).getPrintCntPer() / 100) * width;
                 } else if (position == 4) {
-                    x = ((double) feedbackReportList.get(Listposition).getStylingCntPer() / 100) * width;
+                    x = (feedbackReportList.get(Listposition).getStylingCntPer() / 100) * width;
                 } else if (position == 5) {
-                    x = ((double) feedbackReportList.get(Listposition).getFabricQualityCntPer() / 100) * width;
+                    x = (feedbackReportList.get(Listposition).getFabricQualityCntPer() / 100) * width;
                 } else if (position == 6) {
-                    x = ((double) feedbackReportList.get(Listposition).getGarmentQualityCntPer() / 100) * width;
+                    x = (feedbackReportList.get(Listposition).getGarmentQualityCntPer() / 100) * width;
                 }
 
                 int percentage = (int) x;
@@ -707,7 +697,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                         public void onResponse(JSONObject response) {
                             Log.e("Submit Click Response :", response.toString());
                             try {
-                                if (response == null || response.equals(null)) {
+                                if (response == null || response.equals("")) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(mcontext, "Sending data failed...", Toast.LENGTH_LONG).show();
 

@@ -18,9 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,7 +37,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private final HashMap<Integer, ArrayList<Integer>> subchildCount;
     private final HashMap<Integer, ArrayList<Integer>> headerScancount;
     private final TransferRequest_Details transferRequest_detailsClass;
-
     private Context context;
     private ArrayList<Transfer_Request_Model> list;
     public  boolean[] Tr_HeaderToggle;
@@ -51,8 +47,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private static final String ACTION_SOFTSCANTRIGGER = "com.motorolasolutions.emdk.datawedge.api.ACTION_SOFTSCANTRIGGER";
     private static final String EXTRA_PARAM = "com.motorolasolutions.emdk.datawedge.api.EXTRA_PARAMETER";
     private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
-
-
 
     public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> sender_detailsList, Context context, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty, HashMap<Integer, ArrayList<Integer>> subchildCount, ProgressBar transferDetailProcess, HashMap<Integer, ArrayList<Integer>> headerScancount, TransferRequest_Details transferRequest_detailsClass, HashSet<Pair<Integer, Integer>> checkedItems)
     {
@@ -88,26 +82,23 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ((TransferDetailsAdapter.Holder)holder).txt_reqtyval.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((TransferDetailsAdapter.Holder)holder).txt_avlqtyval.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((TransferDetailsAdapter.Holder)holder).txt_sohval.setText(""+Math.round(list.get(position).getStkOnhandQty()));
-             //   ((TransferDetailsAdapter.Holder)holder).txt_gitval.setText(""+Math.round(list.get(position).getStkGitQty()));
                 ((TransferDetailsAdapter.Holder)holder).txt_optionval.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if(transferDetailProcess.getVisibility()==View.GONE)
                         {
-
                             Log.e("TAG", "onClick:>>>> "+position );
                             if(Tr_HeaderToggle[position]==true)
                             {
                                 Tr_HeaderToggle[position]=false;
                                 notifyDataSetChanged();
-
                             }
                             else
                             {
                                 Tr_HeaderToggle[position]=true;
                                if(subchildqty.get(position).isEmpty())
                                 {
-                                    onPressInterface.OnPress(position);
+                                    onPressInterface.onPress(position);
                                 }
                                 else
                                 {
@@ -117,13 +108,13 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         }
                     }
                 });
-
                 ((TransferDetailsAdapter.Holder)holder).btn_scan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Log.e("TAG", "Header Scan onClick:>>>> "+position );
 
-                             if (isAMobileModel()) {
+                            if (isAMobileModel())
+                            {
 
                             Intent intent_barcode = new Intent();
                             intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
@@ -257,7 +248,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         private RelativeLayout SizesLinLayout;
         private LinearLayout lin_imgbtnScan;
         private ImageView btn_scan;
-        //private CheckBox Detail_headerCheck;
         protected RecyclerView recycleview_transferreq_detailChild;
 
         public Holder(View itemView) {
@@ -267,11 +257,8 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             txt_reqtyval = (TextView)itemView.findViewById(R.id.txt_reqtyVal);
             txt_avlqtyval = (TextView)itemView.findViewById(R.id.txt_avlqtyVal);
             txt_sohval = (TextView)itemView.findViewById(R.id.txt_sohVal);
-          //txt_gitval = (TextView)itemView.findViewById(R.id.txt_gitVal);
             txt_scanqtyVal= (TextView)itemView.findViewById(R.id.txt_scanqtyVal);
             btn_scan = (ImageView) itemView.findViewById(R.id.imageView_scan);
-            //lin_imgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_imgbtnScan);
-            //et_trBarcode = (EditText)itemView.findViewById(R.id.et_trBarcode);
             recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.details_headerChild);
             SizesLinLayout = (RelativeLayout)itemView.findViewById(R.id.detail_size);
 

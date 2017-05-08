@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +36,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.daprlabs.cardstack.SwipeDeck;
 import com.google.gson.Gson;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,10 +48,8 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
-import apsupportapp.aperotechnologies.com.designapp.StyleDetailsBean;
-import apsupportapp.aperotechnologies.com.designapp.SwitchingTabActivity;
-import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.*;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleDetailsBean;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.SwitchingTabActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
 
 
@@ -116,7 +111,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         layoutView = inflater.inflate(R.layout.fragment_visualassortment, parent, false);
-       // fragmentLayout = (LinearLayout)layoutView.findViewById(R.id.fragmentLayout);
         rellike = (RelativeLayout) layoutView.findViewById(R.id.imgrellike);
         reldislike = (RelativeLayout) layoutView.findViewById(R.id.imgreldislike);
         relbuy = (RelativeLayout) layoutView.findViewById(R.id.imgrelbuy);
@@ -125,12 +119,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
         btndislike = (ImageButton) layoutView.findViewById(R.id.imgbtndislike);
         btnbuy = (ImageButton) layoutView.findViewById(R.id.imgbtnbuy);
         btncomment = (ImageButton) layoutView.findViewById(R.id.imgbtncomment);
-//        layoutBuy = (LinearLayout) layoutView.findViewById(R.id.layoutBuy);
-//        layoutComment = (LinearLayout) layoutView.findViewById(R.id.layoutComment);
-//        btnBuyDone = (Button) layoutView.findViewById(R.id.btnBuyDone);
-//        btnCommentDone = (Button) layoutView.findViewById(R.id.btnCommentDone);
-//        edtTextSets = (EditText) layoutView.findViewById(R.id.edtTextSets);
-//        edtTextComment = (EditText) layoutView.findViewById(R.id.edtTextComment);
 
         img_VisualAssortment = (ImageView) layoutView.findViewById(R.id.card_image);
         visualprogressPicaso= (ProgressBar)layoutView.findViewById(R.id.visualprogressPicaso);
@@ -146,9 +134,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
         relbuy.setTag(position);
         relcomment.setTag(position);
-
-        //img_VisualAssortment.setImageResource(R.drawable.faces1);
-
         final VisualAssort visualAssort = visualassortmentlist.get(position);
         txtName.setText(visualAssort.getArticleOption());
         //Option Click event to get detail information
@@ -156,11 +141,9 @@ public class SwipeDeckAdapter extends BaseAdapter {
             @Override
             public void onClick(View v)
             {
-                //  Toast.makeText(context,"Option Click...",Toast.LENGTH_SHORT).show();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
-                    Log.e("select item",visualAssort.getArticleOption());
                     requestOptionDetailsAPI(visualAssort.getArticleOption());
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -174,30 +157,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
         txtCollection.setText("Collection : " + visualAssort.getCollectionName());
         txtAmount.setText("\u20B9 " + visualAssort.getUnitGrossPrice());
         txtSizeRatio.setText("Size Ratio : " + visualAssort.getSize());
-//        if(!visualAssort.getProdImageURL().equals("")) {
-//            Picasso.with(this.context).
-//
-//                    load(visualAssort.getProdImageURL()).
-//                    into(img_VisualAssortment, new Callback() {
-//                        @Override
-//                        public void onSuccess() {
-//                            visualprogressPicaso.setVisibility(View.GONE);
-//                        }
-//
-//                        @Override
-//                        public void onError() {
-//                            visualprogressPicaso.setVisibility(View.GONE);
-//
-//                        }
-//                    });
-//        }else {
-//            visualprogressPicaso.setVisibility(View.GONE);
-//
-//            Picasso.with(this.context).
-//                    load(R.mipmap.placeholder).
-//                    into(img_VisualAssortment);
-//
-//        }
+
         if(!visualAssort.getProdImageURL().equals(""))
         {
             Glide.with(this.context)
@@ -228,30 +188,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
 
         }
-
-
-
-//        if(visualAssort.getLikeDislikeFlg() == null)
-//        {
-//            btnlike.setBackgroundResource(R.mipmap.like_unselected);
-//            btndislike.setBackgroundResource(R.mipmap.dislike_unselected);
-//        }
-//        else if(visualAssort.getLikeDislikeFlg().equals("1"))
-//        {
-//            btnlike.setBackgroundResource(R.mipmap.like_selected);
-//            btndislike.setBackgroundResource(R.mipmap.dislike_unselected);
-//        }
-//        else if(visualAssort.getLikeDislikeFlg().equals("0"))
-//        {
-//            btnlike.setBackgroundResource(R.mipmap.like_unselected);
-//            btndislike.setBackgroundResource(R.mipmap.dislike_selected);
-//        }
-//        else
-//        {
-//            btnlike.setBackgroundResource(R.mipmap.like_unselected);
-//            btndislike.setBackgroundResource(R.mipmap.dislike_unselected);
-//        }
-
 
         if (visualAssort.getLikeDislikeFlg() == null) {
             btnlike.setBackgroundResource(R.mipmap.like_selected);
@@ -345,7 +281,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
                 VisualAssortmentActivity.txtSize.setText(visualAssort1.getSize());
                 VisualAssortmentActivity.edtTextSets.setText(String.valueOf(visualAssort1.getSizeSet()));
                 pos = position;
-                Log.e("articleOption", " " + visualAssort1.getArticleOption());
 
                 if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE) {
                     VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
@@ -383,7 +318,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         checkFeedback = "";
                     }
                     int checkSizeSet = visualAssort1.getSizeSet();
-                    Log.i("", "order set done click: position " + position + " articleOption " + articleOption + " checkLikedislike " + checkLikedislike + " checkSizeSet " + checkSizeSet);
 
                     JSONObject obj = new JSONObject();
                     try {
@@ -395,19 +329,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         e.printStackTrace();
                     }
 
-//                    if (!checkLikedislike.equals("") || checkSizeSet != 0 || (!checkFeedback.equals(""))) {
-//                        //GO FOR PUT METHOD
-//                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
-//                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
-//                        relbuy.setEnabled(false);
-//                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
-//                    } else {
-//                        //GO FOR POST METHOD
-//                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
-//                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
-//                        relbuy.setEnabled(false);
-//                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
-//                    }
 
                     if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
                     {
@@ -450,9 +371,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
                 VisualAssortmentActivity.edtTextComment.setText(visualAssort1.getFeedback());
 
                 pos = position;
-
-                Log.e("articleOption", " " + visualAssort1.getArticleOption());
-
                 if (VisualAssortmentActivity.layoutBuy.getVisibility() == View.VISIBLE) {
                     VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
                 }
@@ -469,7 +387,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                Log.e("click of comment done button", "");
 
                 int position = pos;
 
@@ -478,7 +395,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
                 if (VisualAssortmentActivity.edtTextComment.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Enter some value", Toast.LENGTH_SHORT).show();
                 } else {
-                    //  Reusable_Functions.sDialog(context, "Loading..");
                     String articleOption = visualAssort1.getArticleOption();
                     String checkLikedislike = visualAssort1.getLikeDislikeFlg();
                     if(checkLikedislike == null)
@@ -491,7 +407,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         checkFeedback = "";
                     }
                     int checkSizeSet = visualAssort1.getSizeSet();
-                    Log.e("", "comment done click: position " + position + " articleOption " + articleOption + " checkLikedislike " + checkLikedislike + " checkSizeSet " + checkSizeSet + " checkFeedback " + checkFeedback);
 
                     JSONObject obj = new JSONObject();
                     try {
@@ -503,19 +418,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         e.printStackTrace();
                     }
 
-//                    if (!checkLikedislike.equals("") || checkSizeSet != 0 || (!checkFeedback.equals(""))) {
-//                        //GO FOR PUT METHOD
-//                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
-//                        VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
-//                        relcomment.setEnabled(false);
-//                        visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
-//                    } else {
-//                        //GO FOR POST METHOD
-//                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
-//                        VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
-//                        relcomment.setEnabled(false);
-//                        visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
-//                    }
 
                     if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
                     {
@@ -538,9 +440,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
                 }
 
-                //layoutComment.setVisibility(View.GONE);
-                //edtTextComment.setText("");
-                //btncomment.setEnabled(false);
                 InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputManager != null) {
                     inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
@@ -563,20 +462,17 @@ public class SwipeDeckAdapter extends BaseAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = " ";
+        String url;
 
         url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
-
-        Log.e(TAG, "requestStyleDetailsAPI  " + url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
                             } else if(response.length() < limit){
@@ -587,19 +483,15 @@ public class SwipeDeckAdapter extends BaseAdapter {
                                     optionList.add(styleDetailsBean);
 
                                 }
-
-                                Log.e(TAG, "intent calling: ");
                                 Intent intent = new Intent(context, SwitchingTabActivity.class);
                                 intent.putExtra("checkFrom","visualAssortment");
                                 intent.putExtra("articleCode",styleDetailsBean.getArticleCode());
                                 intent.putExtra("articleOption",styleDetailsBean.getArticleOption());
-                                Log.e("Article Option :",""+styleDetailsBean.getArticleOption());
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 context.startActivity(intent);
                                 VisualAssortmentActivity.Visual_Assortment_Activity.finish();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -608,7 +500,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e("", "" + error.networkResponse + "");
                         Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }

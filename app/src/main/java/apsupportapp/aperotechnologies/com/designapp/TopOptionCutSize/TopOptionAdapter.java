@@ -32,8 +32,6 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 
@@ -44,9 +42,8 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
-import apsupportapp.aperotechnologies.com.designapp.StyleDetailsBean;
-import apsupportapp.aperotechnologies.com.designapp.SwitchingTabActivity;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleDetailsBean;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.SwitchingTabActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
 
@@ -157,7 +154,7 @@ public class TopOptionAdapter extends BaseAdapter {
 
 
         holder.Top_SOHU.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
-        holder.Top_bstStockU.setText(""+(int)arrayList.get(position).getTargetStock());
+        holder.Top_bstStockU.setText(""+ arrayList.get(position).getTargetStock());
         holder.Top_RosU.setText(""+String.format("%.1f",arrayList.get(position).getRos()));
 
         if(!arrayList.get(position).getProdImageURL().equals("")) {
@@ -205,7 +202,7 @@ public class TopOptionAdapter extends BaseAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = " ";
+        String url;
 
         url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
 
@@ -218,7 +215,7 @@ public class TopOptionAdapter extends BaseAdapter {
                         Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
                             } else if(response.length() < limit){

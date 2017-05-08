@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,11 +52,8 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.OnRowPressListener;
-import apsupportapp.aperotechnologies.com.designapp.Prod_FilterActivity;
-import apsupportapp.aperotechnologies.com.designapp.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.SearchActivity1;
 
 
 /**
@@ -133,28 +129,24 @@ public class ProductName_Fragment extends Fragment {
         relProd_Frag.setVisibility(View.VISIBLE);
         btnProdFilter = (Button) view.findViewById(R.id.imageBtnFilter);
         txt_subdepName = (TextView) view.findViewById(R.id.txtSubDeptName);
-        Log.e("parent", " " + KeyProductActivity.viewPager.getParent());
         LinearLayout layout = (LinearLayout) KeyProductActivity.viewPager.getParent();
         TabLayout tab = (TabLayout) layout.getChildAt(1);
+        // Remove option tab
         if (tab.getTabCount() == 3) {
             tab.removeTabAt(2);
         }
+        // Remove sku tab
         if(tab.getTabCount() == 2)
         {
             tab.removeTabAt(1);
         }
-        if (Reusable_Functions.chkStatus(context)) {
-
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;
             limit = 100;
             count = 0;
-            Log.e("SearchActivity1.searchProductName", " " + SearchActivity1.searchSubDept + " === " + SearchActivity1.searchProductName + " === " + SearchActivity1.searchArticleOption);
-            Log.e("--- ", " " + (!SearchActivity1.searchSubDept.equals("")));
-            Log.e("--- ", " " + (!SearchActivity1.searchProductName.equals("")));
-            Log.e("--- ", " " + (!SearchActivity1.searchArticleOption.equals("")));
-
             // this condition is checked because when we click on option tab from SKU this gets called
             if (SearchActivity1.searchSubDept.equals("") && SearchActivity1.searchProductName.equals("") && f_productName == null)// && SearchActivity1.searchArticleOption.equals(""))
             {
@@ -169,7 +161,6 @@ public class ProductName_Fragment extends Fragment {
                 txt_subdepName.setText(f_productName.replaceAll("%20", " ").replaceAll("%26", "&"));
                 txt_subdepName.setVisibility(View.VISIBLE);
             }
-
             if (!SearchActivity1.searchSubDept.equals(""))
             {
                 productNameBeanArrayList = new ArrayList<ProductNameBean>();
@@ -177,19 +168,15 @@ public class ProductName_Fragment extends Fragment {
                 txt_subdepName.setText(SearchActivity1.searchSubDept.replaceAll("%20", " ").replaceAll("%26", "&"));
                 txt_subdepName.setVisibility(View.VISIBLE);
             }
-
             if (!SearchActivity1.searchProductName.equals(""))
             {
                 productNameBeanArrayList = new ArrayList<ProductNameBean>();
                 requestSearchProductName(offsetvalue, limit);
                 txt_subdepName.setVisibility(View.GONE);
-
             }
         } else {
             Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
-
         initComponents();
         setComponentsId();
         setScrollViewAndHorizontalScrollViewTag();
@@ -211,17 +198,13 @@ public class ProductName_Fragment extends Fragment {
         return view;
     }
 
-
-    private void requestFilterProductName(int offsetvalue1, int limit1) {
-
+    private void requestFilterProductName(int offsetvalue1, int limit1)
+    {
         String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?productName=" + f_productName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset" + offsetvalue + "&limit" + limit;
-        Log.i(" Filter Prod URL----------   ", url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Filter Product :", response.toString());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -231,7 +214,6 @@ public class ProductName_Fragment extends Fragment {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
-
                                     int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
                                     int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
@@ -245,7 +227,6 @@ public class ProductName_Fragment extends Fragment {
                                     String storeDesc = productName1.getString("storeDesc");
                                     productNameBean = new ProductNameBean();
                                     productNameBean.setProductName(ProductName);
-                                    Log.e("Product Name:", ProductName);
                                     productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
                                     productNameBean.setDayNetSales(Day_Net_Sales);
                                     productNameBean.setWtdNetSales(WTD_Net_Sales);
@@ -254,13 +235,8 @@ public class ProductName_Fragment extends Fragment {
                                     productNameBean.setSoh(SOH);
                                     productNameBean.setGit(GIT);
                                     productNameBean.setStoreCode(Storecode);
-
                                     productNameBean.setStoreDesc(storeDesc);
-
-                                    Log.e("Response Lenght", "" + response.length());
-
                                     productNameBeanArrayList.add(productNameBean);
-
                                     txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                     txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
                                 }
@@ -271,7 +247,6 @@ public class ProductName_Fragment extends Fragment {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
-
                                     int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
                                     int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
@@ -283,10 +258,8 @@ public class ProductName_Fragment extends Fragment {
                                     int GIT = productName1.getInt("stkGitQty");
                                     String Storecode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
-
                                     productNameBean = new ProductNameBean();
                                     productNameBean.setProductName(ProductName);
-
                                     productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
                                     productNameBean.setDayNetSales(Day_Net_Sales);
                                     productNameBean.setWtdNetSales(WTD_Net_Sales);
@@ -295,14 +268,8 @@ public class ProductName_Fragment extends Fragment {
                                     productNameBean.setSoh(SOH);
                                     productNameBean.setGit(GIT);
                                     productNameBean.setStoreCode(Storecode);
-
-                                    Log.e("StoreCode", productNameBean.getStoreCode());
                                     productNameBean.setStoreDesc(storeDesc);
-
-                                    Log.e("Response Lenght", "" + response.length());
                                     productNameBeanArrayList.add(productNameBean);
-                                    Log.e("Array List After----", "" + productNameBeanArrayList.size());
-
                                     txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                     txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
                                 }
@@ -318,11 +285,9 @@ public class ProductName_Fragment extends Fragment {
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
-
                             }
 
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -355,13 +320,11 @@ public class ProductName_Fragment extends Fragment {
     private void requestSearchSubDeptAPI(int offsetvalue1, int limit1) {
 
         String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?view=productName&prodLevel3Desc=" + SearchActivity1.searchSubDept + "&offset" + offsetvalue + "&limit" + limit;
-        Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Sub Dept Response", response.toString());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -371,7 +334,6 @@ public class ProductName_Fragment extends Fragment {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
-                                    Log.e("Product Name:", ProductName);
                                     int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
                                     int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
@@ -383,10 +345,8 @@ public class ProductName_Fragment extends Fragment {
                                     int GIT = productName1.getInt("stkGitQty");
                                     String Storecode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
-
                                     productNameBean = new ProductNameBean();
                                     productNameBean.setProductName(ProductName);
-                                    Log.e("Product Name:", ProductName);
                                     productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
                                     productNameBean.setDayNetSales(Day_Net_Sales);
                                     productNameBean.setWtdNetSales(WTD_Net_Sales);
@@ -395,25 +355,20 @@ public class ProductName_Fragment extends Fragment {
                                     productNameBean.setSoh(SOH);
                                     productNameBean.setGit(GIT);
                                     productNameBean.setStoreCode(Storecode);
-
-                                    Log.e("StoreCode", productNameBean.getStoreCode());
                                     productNameBean.setStoreDesc(storeDesc);
-
-                                    Log.e("Response Lenght", "" + response.length());
-
                                     productNameBeanArrayList.add(productNameBean);
-
                                     txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                     txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestSearchSubDeptAPI(offsetvalue, limit);
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                            } else if (response.length() < limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
-                                    Log.e("Product Name:", ProductName);
                                     int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
                                     int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
@@ -425,10 +380,8 @@ public class ProductName_Fragment extends Fragment {
                                     int GIT = productName1.getInt("stkGitQty");
                                     String Storecode = productName1.getString("storeCode");
                                     String storeDesc = productName1.getString("storeDesc");
-
                                     productNameBean = new ProductNameBean();
                                     productNameBean.setProductName(ProductName);
-                                    Log.e("Product Name:", ProductName);
                                     productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
                                     productNameBean.setDayNetSales(Day_Net_Sales);
                                     productNameBean.setWtdNetSales(WTD_Net_Sales);
@@ -437,15 +390,8 @@ public class ProductName_Fragment extends Fragment {
                                     productNameBean.setSoh(SOH);
                                     productNameBean.setGit(GIT);
                                     productNameBean.setStoreCode(Storecode);
-
-                                    Log.e("StoreCode", productNameBean.getStoreCode());
                                     productNameBean.setStoreDesc(storeDesc);
-
-                                    Log.e("Response Lenght", "" + response.length());
-
                                     productNameBeanArrayList.add(productNameBean);
-                                    Log.e("Array List After----", "" + productNameBeanArrayList.size());
-
                                     txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                     txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
                                 }
@@ -464,7 +410,6 @@ public class ProductName_Fragment extends Fragment {
                                 resizeBodyTableRowHeight();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -496,13 +441,11 @@ public class ProductName_Fragment extends Fragment {
     private void requestSearchProductName(int offsetvalue1, int limit1) {
 
         String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?productName=" + SearchActivity1.searchProductName + "&offset" + offsetvalue + "&limit" + limit;
-        Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Sub Dept Response", response.toString());
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -512,7 +455,6 @@ public class ProductName_Fragment extends Fragment {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
-                                    Log.e("Product Name:", ProductName);
                                     int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
                                     int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
@@ -527,7 +469,6 @@ public class ProductName_Fragment extends Fragment {
 
                                     productNameBean = new ProductNameBean();
                                     productNameBean.setProductName(ProductName);
-                                    Log.e("Product Name:", ProductName);
                                     productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
                                     productNameBean.setDayNetSales(Day_Net_Sales);
                                     productNameBean.setWtdNetSales(WTD_Net_Sales);
@@ -536,10 +477,7 @@ public class ProductName_Fragment extends Fragment {
                                     productNameBean.setSoh(SOH);
                                     productNameBean.setGit(GIT);
                                     productNameBean.setStoreCode(Storecode);
-
-                                    Log.e("StoreCode", productNameBean.getStoreCode());
                                     productNameBean.setStoreDesc(storeDesc);
-                                    Log.e("Response Lenght", "" + response.length());
                                     productNameBeanArrayList.add(productNameBean);
                                     txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                     txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
@@ -551,7 +489,6 @@ public class ProductName_Fragment extends Fragment {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String ProductName = productName1.getString("productName");
-                                    Log.e("Product Name:", ProductName);
                                     int L2Hrs_Net_Sales = productName1.getInt("last2HourSaleTotQty");
                                     int Day_Net_Sales = productName1.getInt("fordaySaleTotQty");
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
@@ -566,7 +503,6 @@ public class ProductName_Fragment extends Fragment {
 
                                     productNameBean = new ProductNameBean();
                                     productNameBean.setProductName(ProductName);
-                                    Log.e("Product Name:", ProductName);
                                     productNameBean.setL2hrsNetSales(L2Hrs_Net_Sales);
                                     productNameBean.setDayNetSales(Day_Net_Sales);
                                     productNameBean.setWtdNetSales(WTD_Net_Sales);
@@ -575,11 +511,8 @@ public class ProductName_Fragment extends Fragment {
                                     productNameBean.setSoh(SOH);
                                     productNameBean.setGit(GIT);
                                     productNameBean.setStoreCode(Storecode);
-                                    Log.e("StoreCode", productNameBean.getStoreCode());
                                     productNameBean.setStoreDesc(storeDesc);
-                                    Log.e("Response Lenght", "" + response.length());
                                     productNameBeanArrayList.add(productNameBean);
-                                    Log.e("Array List After----", "" + productNameBeanArrayList.size());
                                     txtStoreCode.setText(productNameBeanArrayList.get(i).getStoreCode());
                                     txtStoreDesc.setText(productNameBeanArrayList.get(i).getStoreDesc());
                                 }
@@ -598,7 +531,6 @@ public class ProductName_Fragment extends Fragment {
                                 resizeBodyTableRowHeight();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -738,7 +670,6 @@ public class ProductName_Fragment extends Fragment {
 
         // just seeing some header cell width
         for (int x = 0; x < this.headerCellsWidth.length; x++) {
-            Log.v("Product Data", this.headerCellsWidth[x] + "");
         }
 
         for (int k = 0; k < productNameBeanArrayList.size(); k++) {
@@ -786,19 +717,18 @@ public class ProductName_Fragment extends Fragment {
         TableRow tableRowForTableCProd_Frag = new TableRow(this.context);
         TextView textView = this.bodyTextView(productNameDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-        Log.e("Value", textView.getText().toString());
         tableRowForTableCProd_Frag.addView(textView, params);
         return tableRowForTableCProd_Frag;
     }
 
-    TableRow tableRowForTableDProd_Frag(ProductNameBean productDetails) {
-
-
+    TableRow tableRowForTableDProd_Frag(ProductNameBean productDetails)
+    {
         TableRow tableRowForTableDProd_Frag = new TableRow(this.context);
         int loopCount = ((TableRow) this.tableBProd_Frag.getChildAt(0)).getChildCount();
         NetPercent = String.valueOf(productDetails.getDayNetSalesPercent()).concat("%");
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("","in"));
-        String info[] = {
+        String info[] =
+                {
                 String.valueOf(productDetails.getL2hrsNetSales()),
                 String.valueOf(productDetails.getDayNetSales()),
                 String.valueOf(format.format(productDetails.getWtdNetSales())),
@@ -1011,13 +941,11 @@ public class ProductName_Fragment extends Fragment {
 
     private void requestProductAPI(int offsetvalue1, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
-        Log.i("URL   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("ProductName Response", response.toString());
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -1117,20 +1045,16 @@ public class ProductName_Fragment extends Fragment {
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
-
-                Log.e("params ", " " + params);
                 return params;
             }
         };
         int socketTimeout = 60000;//5 seconds
-
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);

@@ -3,15 +3,14 @@ package apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.data.CombinedData;
+
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
@@ -21,7 +20,7 @@ import java.util.Locale;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
-import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
+
 
 
 /**
@@ -74,7 +73,6 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private boolean isPositionItem(int position) {
-        // return position == 0;
         return position !=mSnaps.size();
     }
 
@@ -85,7 +83,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onSnap(int position) {
-        Log.d("Snapped: ", position + "");
+
     }
 
     @Override
@@ -154,10 +152,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 float density = context.getResources().getDisplayMetrics().density;
 
                 int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
-                //Log.e("", "==finalCalplanVal= " + finalCalplanVal);
                 int finalCalachieveVal = (int) (density * calachieveVal); //converting value from px to dp
-                // Log.e("", "==finalCalachieveVal= " + finalCalachieveVal);
-
 
                 ((PvAViewHolder) viewHolder).txtPlan.setWidth(finalCalachieveVal);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, 24);
@@ -174,8 +169,6 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             }
 
-            } else {
-                // ((ProgressViewHolder) viewHolder).txtView.setText(" ");
             }
 
         }

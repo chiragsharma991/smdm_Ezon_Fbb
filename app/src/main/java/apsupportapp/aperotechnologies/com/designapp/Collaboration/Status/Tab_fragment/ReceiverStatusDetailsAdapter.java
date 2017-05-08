@@ -75,7 +75,7 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
                                 if(receiverDetailProcess.getVisibility()==View.GONE)
                                 {
                                     receiverDetailProcess.setVisibility(View.VISIBLE);
-                                    onPressInterface.OnPress(position);
+                                    onPressInterface.onPress(position);
                                 }
 
                             }

@@ -5,8 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
@@ -50,7 +49,7 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
         notId = myRandom.nextInt();
         logoutAlarm = true;
 
-        NotificationCompat.Builder mBuilder = null;
+        NotificationCompat.Builder mBuilder;
         // application is in background or close
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, 0);
         mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(context)

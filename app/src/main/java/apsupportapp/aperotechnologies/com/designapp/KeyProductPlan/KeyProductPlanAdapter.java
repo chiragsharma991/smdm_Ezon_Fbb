@@ -1,17 +1,19 @@
 package apsupportapp.aperotechnologies.com.designapp.KeyProductPlan;
 
-import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
+
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
 
 
-public class KeyProductPlanAdapter extends FragmentStatePagerAdapter {
+public class
+
+KeyProductPlanAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
     private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray<>();
 
@@ -45,7 +47,8 @@ public class KeyProductPlanAdapter extends FragmentStatePagerAdapter {
         return fragment;
     }
 
-    @Nullable
+
+
     public Fragment getFragment(final int position) {
         final WeakReference<Fragment> wr = instantiatedFragments.get(position);
         if (wr != null) {

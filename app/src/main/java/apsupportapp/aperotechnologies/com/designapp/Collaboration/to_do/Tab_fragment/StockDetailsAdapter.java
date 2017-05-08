@@ -2,24 +2,18 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fra
 
 import android.content.Context;
 import android.support.v4.util.Pair;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,7 +21,6 @@ import java.util.Set;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 
 /**
  * Created by csuthar on 06/03/17.
@@ -136,7 +129,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                 Toggle[position]=true;
                                 if(HashMapSubChild.get(position).isEmpty())
                                 {
-                                    onPressInterface.OnPress(position);
+                                    onPressInterface.onPress(position);
 
                                 }else
                                 {

@@ -1,12 +1,10 @@
-package apsupportapp.aperotechnologies.com.designapp;
+package apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
-
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
@@ -34,14 +32,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
+import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.ExpandableListAdapter;
+import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 /**
  * Created by pamrutkar on 07/09/16.
  */
 @SuppressWarnings("ALL")
 public class Prod_FilterActivity extends Activity {
-
 
     RelativeLayout btnP_Filterback;
     ExpandableListAdapter listAdapter;
@@ -62,7 +62,6 @@ public class Prod_FilterActivity extends Activity {
         setContentView(R.layout.activity_prod_filter);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         filterActivity = this;
-        Log.e("came here", "");
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
@@ -72,26 +71,23 @@ public class Prod_FilterActivity extends Activity {
         pf_prodName = " ";
         subdept = new ArrayList<String>();
         btnP_Filterback = (RelativeLayout) findViewById(R.id.imageBtnBack);
-
         pfilter_list = (ExpandableListView) findViewById(R.id.expandableListView_subdept);
         //noinspection deprecation,deprecation
         pfilter_list.setDivider(getResources().getDrawable(R.color.grey));
         pfilter_list.setDividerHeight(2);
         prepareListData();
-
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild, pfilter_list);
-
         pfilter_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
         // setting list adapter
         pfilter_list.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
-
         // Listview Group click listener
-        pfilter_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
+        pfilter_list.setOnGroupClickListener(
+                new ExpandableListView.OnGroupClickListener()
+                {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
+            public boolean onGroupClick(ExpandableListView parent, View v,int groupPosition, long id)
+            {
                 return false;
             }
         });
@@ -113,86 +109,85 @@ public class Prod_FilterActivity extends Activity {
 
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
-
         // Adding group name data
         listDataHeader.add("Sub Dept");
         listDataHeader.add("Product");
-
-        if (Reusable_Functions.chkStatus(Prod_FilterActivity.this)) {
+        if (Reusable_Functions.chkStatus(Prod_FilterActivity.this))
+        {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(Prod_FilterActivity.this, "Loading  data...");
             offsetvalue = 0;
             count = 0;
             requestSubDeptAPI(offsetvalue, limit);
-        } else {
-
+        }
+        else
+        {
             Toast.makeText(Prod_FilterActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
     }
 
-    public void requestSubDeptAPI(int offsetvalue1, int limit1) {
-
+    public void requestSubDeptAPI(int offsetvalue1, int limit1)
+    {
         String url = ConstsCore.web_url + "/v1/display/hourlyfilterproducts/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1;
-
-        Log.i("URL   ", url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i("SubDept Response", response.toString());
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                    public void onResponse(JSONArray response)
+                    {
+                        try
+                        {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(Prod_FilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
-
+                            }
+                            else if (response.length() == limit)
+                            {
                                 Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject productName1 = response.getJSONObject(i);
-
                                     String prodLevel3Code = productName1.getString("prodLevel3Code");
                                     String prodLevel3Desc = productName1.getString("prodLevel3Desc");
-//
                                     subdept.add(prodLevel3Desc);
-
-
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestSubDeptAPI(offsetvalue, limit);
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() < limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String prodLevel3Code = productName1.getString("prodLevel3Code");
                                     String prodLevel3Desc = productName1.getString("prodLevel3Desc");
                                     subdept.add(prodLevel3Desc);
-
                                 }
-
                                 Collections.sort(subdept);
                                 listDataChild.put(listDataHeader.get(0), subdept);
                                 Reusable_Functions.hDialog();
-
                             }
-
-                        } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
+                        }
+                        catch (Exception e)
+                        {
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
@@ -206,7 +201,8 @@ public class Prod_FilterActivity extends Activity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent i = new Intent(Prod_FilterActivity.this, KeyProductActivity.class);
         startActivity(i);
         finish();

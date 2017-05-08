@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -41,13 +40,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.FloorAvailabilityDetails;
-import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 /**
@@ -159,7 +154,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             Log.i(TAG, "response" + "" + response.length());
                             targetListView.setVisibility(View.VISIBLE);
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     targetListView.removeFooterView(footer);
@@ -454,7 +449,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                 } else {
 
-                    switch (checkSeasonGpVal.toString()) {
+                    switch (checkSeasonGpVal) {
                         case "Current":
                             checkCurrent.setChecked(true);
                             checkPrevious.setChecked(false);
@@ -489,7 +484,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             break;
                     }
 
-                    switch (checkTimeVal.toString()) {
+                    switch (checkTimeVal) {
                         case "CheckWTD":
                             checkWTD.setChecked(true);
                             checkL4W.setChecked(false);
@@ -507,7 +502,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkL4W.setChecked(false);
                             break;
                     }
-                    switch (checkTitleVal.toString()) {
+                    switch (checkTitleVal) {
                         case "CheckDept":
                             checkDept.setChecked(true);
                             checkPlanClass.setChecked(false);

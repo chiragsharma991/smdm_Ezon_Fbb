@@ -6,7 +6,7 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fra
 
 public interface OnPress
 {
-    void OnPress(int  Position);
+    void onPress(int  Position);
 
 
 

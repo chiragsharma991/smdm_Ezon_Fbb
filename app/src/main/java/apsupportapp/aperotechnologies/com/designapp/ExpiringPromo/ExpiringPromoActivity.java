@@ -16,9 +16,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AbsListView;
+
 import android.widget.LinearLayout;
-import android.widget.ListView;
+
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,21 +38,18 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
+
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSnapAdapter;
+
+
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSummaryAdapter;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.clickChild;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
@@ -121,7 +118,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
 
 
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(ExpiringPromoActivity.this, "no data found", Toast.LENGTH_SHORT).show();
                                     return;
@@ -232,7 +229,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                             Log.i(TAG, " response" + "" + response.length());
 
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     return;
@@ -341,7 +338,6 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                     super.onScrolled(recyclerView, dx, dy);
 
                     RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
-                    int visibleItemCount = recyclerView.getChildCount();
                     totalItemCount = mRecyclerViewHelper.getItemCount();
                     focusposition = mRecyclerViewHelper.findFirstVisibleItemPosition();
 

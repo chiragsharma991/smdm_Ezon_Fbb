@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
+
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
-import android.view.Gravity;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -30,10 +28,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -96,7 +91,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
    TextView txt_inspdetls_id_Val,txt_inspdetls_date_Val,txt_inspdetls_name_Val,txt_comment_val,inspection_txtStoreCode,inspection_txtStoreName;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insp_details);
         getSupportActionBar().hide();
@@ -104,7 +99,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e("" ,"userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -113,7 +107,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
         inspectn_Id = getIntent().getIntExtra("inspectionId",0);
         inspdetls_ArrayList = new ArrayList<InspectionBeanClass>();
 
-        Log.e("Inspection Id in Details",""+inspectn_Id);
         if (Reusable_Functions.chkStatus(InspectionDetailsActivity.this))
         {
             Reusable_Functions.hDialog();
@@ -262,18 +255,15 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
     private void requestInspectionDetails(final int inspectn_id)
     {
             String url = ConstsCore.web_url + "/v1/display/storeinspection/" + userId+"?inspectionId="+inspectn_id;
-            Log.e("Inspection History Url" ,"" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response)
                         {
-                            Log.e("Inspection History api response : " , "" +response);
-                            Log.e("Inspection History total length :" , "" +response.length());
                             try
                             {
 
-                                if (response.equals(null) || response == null || response.length() == 0 ) {
+                                if (response.equals("") || response == null || response.length() == 0 ) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(InspectionDetailsActivity.this, "no data found", Toast.LENGTH_SHORT).show();
                                     // return;
@@ -284,9 +274,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                     {
                                         beanClass = gson.fromJson(response.get(i).toString(), InspectionBeanClass.class);
                                         inspdetls_ArrayList.add(beanClass);
-
-                                        Log.e("Array Size :",""+inspdetls_ArrayList.size());
-                                        Log.e("Id :",""+inspdetls_ArrayList.get(i).getInspectionId()+"\nName :"+inspdetls_ArrayList.get(i).getInspectorName()+"\n Date :"+inspdetls_ArrayList.get(i).getInspectionDate());
 
                                         int id = inspdetls_ArrayList.get(i).getInspectionId();
                                         String name = inspdetls_ArrayList.get(i).getInspectorName();
@@ -305,26 +292,21 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                             e.printStackTrace();
                                         }
                                         String outputDateStr = outputFormat.format(update_date);
-                                        Log.e("updated date :",""+outputDateStr);
-
-
                                         txt_inspdetls_date_Val.setText(outputDateStr);
                                         //Rating
-                                        if(rating.equals("Need Improvement"))
-                                        {
-                                            emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-                                        }
-                                        else if(rating.equals("Okay"))
-                                        {
-                                            emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-                                        }
-                                        else if(rating.equals("Good"))
-                                        {
-                                            emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-                                        }
-                                        else if(rating.equals("Excellent"))
-                                        {
-                                            emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+                                        switch (rating) {
+                                            case "Need Improvement":
+                                                emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
+                                                break;
+                                            case "Okay":
+                                                emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
+                                                break;
+                                            case "Good":
+                                                emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
+                                                break;
+                                            case "Excellent":
+                                                emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
+                                                break;
                                         }
 
                                         Glide.with(context)
@@ -611,7 +593,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 e.printStackTrace();
-                                Log.e("", "catch...Error" + e.toString());
                             }
                         }
                     },

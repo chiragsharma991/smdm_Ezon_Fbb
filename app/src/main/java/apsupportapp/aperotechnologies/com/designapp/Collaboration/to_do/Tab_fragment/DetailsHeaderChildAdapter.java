@@ -8,14 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
-
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
@@ -153,14 +149,10 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
     public boolean containsTrue(boolean[] array) {
 
         boolean AllItems = false;
-        for (int i = 0; i < array.length; i++)
-        {
-            if (array[i])
-            {
+        for (boolean anArray : array) {
+            if (anArray) {
                 AllItems = true;
-            }
-            else
-            {
+            } else {
                 AllItems = false;
                 break;
             }

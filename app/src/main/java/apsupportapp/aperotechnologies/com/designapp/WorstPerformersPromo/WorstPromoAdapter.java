@@ -88,72 +88,12 @@ public class WorstPromoAdapter extends BaseAdapter {
         }
         holder.PromotionName.setText(arrayList.get(position).getPromoDesc());
         holder.Bst_PromoValues_child.setText("₹\t"+(int)arrayList.get(position).getDurSaleNetVal());
-        holder.Bst_PromoValuesU_child.setText(""+(int)arrayList.get(position).getDurSaleTotQty());
+        holder.Bst_PromoValuesU_child.setText(""+arrayList.get(position).getDurSaleTotQty());
 
 
         // ---------------------click listener -------------------------
 
-
-
-     /*   holder.PromotionName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(context,RunningPromoDetail.class);
-
-                context.startActivity(i);
-
-            }
-        });*/
-
-
-   /*     holder.StartDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(context,RunningPromoDetail.class);
-                context.startActivity(i);
-
-            }
-        });
-
-        holder.EndDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(context,RunningPromoDetail.class);
-                context.startActivity(i);
-
-            }
-        });
-
-        holder.Days.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(context,RunningPromoDetail.class);
-                context.startActivity(i);
-
-            }
-        });
-
-
-
-        holder.Vm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context,VM.class);
-                context.startActivity(intent);
-            }
-        });*/
-
-
-
-
-
-
-
-
-
-
-
-        return convertView;
+          return convertView;
     }
 
 

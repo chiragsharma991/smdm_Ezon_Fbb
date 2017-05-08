@@ -7,9 +7,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
 
-import com.squareup.picasso.Transformation;
-
-import java.util.List;
 
 /**
  * Created by pamrutkar on 07/12/16.

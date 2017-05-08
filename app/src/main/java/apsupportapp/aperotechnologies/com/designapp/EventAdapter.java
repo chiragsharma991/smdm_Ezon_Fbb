@@ -71,17 +71,7 @@ public class EventAdapter extends BaseAdapter{
 
 
 
-//        view.imgView.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//
-//                notifyDataSetChanged();
-//
-//
-//            }
-//        });
+
 
         Log.d("count:  "," "+position);
         return participentView;

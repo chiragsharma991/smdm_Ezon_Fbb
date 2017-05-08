@@ -2,13 +2,9 @@ package apsupportapp.aperotechnologies.com.designapp.StoreInspection;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
+
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.style.StyleSpan;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +19,12 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.Date;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-import static android.icu.lang.UProperty.INT_START;
+
 
 /**
  * Created by pamrutkar on 18/04/17.
@@ -38,14 +34,12 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
 
     private Context context;
     private ArrayList<InspectionBeanClass> list;
-   // public OnSendId onSendId;
 
 
     public Insp_History_Adapter(ArrayList<InspectionBeanClass> list, Context context)
     {
         this.list = list;  //main adapter
         this.context = context;//
-     //   onSendId = (OnSendId) context;
     }
 
     @Override
@@ -57,9 +51,7 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        //  Log.e("TAG", "Stock detail: "+position );
-
-        if (holder instanceof Insp_History_Adapter.Holder) {
+         if (holder instanceof Insp_History_Adapter.Holder) {
             if (position < list.size())
             {
                 ((Insp_History_Adapter.Holder) holder).txt_inspected_by.setText( list.get(position).getInspectorName());
@@ -76,7 +68,6 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
                     e.printStackTrace();
                 }
                 String outputDateStr = outputFormat.format(date);
-                Log.e("updated date :",""+outputDateStr);
 
                 ((Insp_History_Adapter.Holder) holder).txt_date.setText("" + outputDateStr);
                 Glide.with(context)
@@ -121,12 +112,9 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
                     @Override
                     public void onClick(View view)
                     {
-                        //new InspectionHistoryActivity().StartActivity(context,list.get(position).getInspectionId());
-                        Log.e( "OnClick Rel Layout " ,"");
+
                         Intent intent = new Intent(context ,InspectionDetailsActivity.class);
-                        //onSendId.onSend_Id(list.get(position).getInspectionId());
                         intent.putExtra("inspectionId",list.get(position).getInspectionId());
-                        Log.e("Inspection Id",""+list.get(position).getInspectionId());
                         context.startActivity(intent);
                     }
                 });

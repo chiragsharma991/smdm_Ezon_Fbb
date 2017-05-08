@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp;
+package apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-
 import android.view.View;
-
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -21,9 +18,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -36,17 +31,17 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
+import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.MySingleton;
+import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
@@ -58,29 +53,22 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
     MySingleton m_config;
     String searchData;
     String activeId;
-    ListView listView, listView1, listView2;
+    ListView listView, listView1;
     RequestQueue queue;
     RadioButton radioButton;
-
     ArrayList<String> productsubdeptList, productNameList, productArticleList;
-
     ValueAdapter adapter;
-    ProductLevelBean productLevelBean;
     Context context;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
-    TextWatcher mSearchTw;
-    int offsetvalue = 0, limit = 100, offsetvalue1 = 0, limit1 = 100, offsetvalue2 = 0, limit2 = 100;
-    int count = 0, count1 = 0, count2 = 0;
-
+    int offsetvalue = 0, limit = 100, offsetvalue1 = 0, limit1 = 100;
+    int count = 0, count1 = 0;
     public static String searchSubDept = "", searchProductName = "", searchArticleOption = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_search1);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
         m_config = MySingleton.getInstance(context);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -90,7 +78,6 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
         context = this;
         searchSubDept = "";
         searchProductName = "";
@@ -105,8 +92,8 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
             offsetvalue = 0;
             count = 0;
             requestSubDeptAPI(offsetvalue, limit);
-        } else {
-
+        } else
+        {
             Toast.makeText(SearchActivity1.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
@@ -155,8 +142,6 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
             case R.id.btnSeatchList:
 
                 searchData = editSearch.getText().toString();
-
-                Log.e("list", searchData);
                 editSearch.clearFocus();
                 InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
@@ -168,20 +153,15 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
     }
     /*-------------------------API Declaration ----------------------------*/
 
-
-    public void requestSubDeptAPI(int offsetvalue1, int limit1) {
-
+    public void requestSubDeptAPI(int offsetvalue1, int limit1)
+    {
         String url = ConstsCore.web_url + "/v1/display/hourlyfilterproducts/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1;
-
-        Log.i("URL   ", url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("SubDept Response", response.toString());
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SearchActivity1.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -189,9 +169,7 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
-                                    //String prodLevel3Code = productName1.getString("prodLevel3Code");
                                     String prodLevel3Desc = productName1.getString("prodLevel3Desc");
-
                                     productsubdeptList.add(prodLevel3Desc);
 
                                 }
@@ -201,11 +179,8 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
-                                    //String prodLevel3Code = productName1.getString("prodLevel3Code");
                                     String prodLevel3Desc = productName1.getString("prodLevel3Desc");
-
                                     productsubdeptList.add(prodLevel3Desc);
-                                    Log.e("ArrayList", "" + productsubdeptList.size());
                                 }
 
                                 Collections.sort(productsubdeptList);
@@ -218,23 +193,16 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                         String productSubDeptItem = (String) parent.getItemAtPosition(position);
-
                                         searchSubDept = productSubDeptItem.replaceAll(" ", "%20").replaceAll("&", "%26");
-
                                         Intent intent = new Intent(SearchActivity1.this, KeyProductActivity.class);
-
-                                        Log.e("productSubDeptItem", productSubDeptItem + " ==== " + searchSubDept);
                                         startActivity(intent);
                                         finish();
-
-                                    }
+                                     }
                                 });
-
                             }
 
 
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -262,61 +230,54 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
         queue.add(postRequest);
     }
 
-    private void requestProductListAPI(int offsetvalue2, final int limit2) {
-
+    private void requestProductListAPI(int offsetvalue2, final int limit2)
+    {
         String url = ConstsCore.web_url + "/v1/display/hourlyfilterproducts/" + userId + "?view=PNF&offset=" + offsetvalue1 + "&limit=" + limit1;
-        Log.i("URL   ", url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("ProduName Response", response.toString());
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count1 == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count1 == 0)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SearchActivity1.this, "no data found", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit1) {
+                            }
+                            else if (response.length() == limit1)
+                            {
                                 Reusable_Functions.hDialog();
-
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String productName = productName1.getString("productName");
-
                                     productNameList.add(productName);
-                                    Log.e("ArrayList-----", "" + productNameList.size());
                                 }
                                 offsetvalue1 = (limit1 * count1) + limit1;
                                 count1++;
                                 requestProductListAPI(offsetvalue1, limit1);
-
-                            } else if (response.length() < limit1) {
+                            }
+                            else if (response.length() < limit1)
+                            {
                                 Reusable_Functions.hDialog();
-
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String productName = productName1.getString("productName");
-
                                     productNameList.add(productName);
-                                    Log.e("ArrayList-----", "" + productNameList.size());
                                 }
-
                                 Collections.sort(productNameList);
                                 adapter = new ValueAdapter(productNameList, getApplicationContext());
                                 listView1.setAdapter(adapter);
                                 listView1.setTextFilterEnabled(true);
                                 Reusable_Functions.hDialog();
-
-                                listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                listView1.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                                {
                                     @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                    {
                                         String productNameItem = (String) parent.getItemAtPosition(position);
-
                                         searchProductName = productNameItem.replaceAll(" ", "%20").replaceAll("&", "%26");
-
                                         Intent intent = new Intent(SearchActivity1.this, KeyProductActivity.class);
-
-                                        Log.e("productNameItem", productNameItem + " ==== " + searchProductName);
                                         startActivity(intent);
                                         finish();
                                     }
@@ -324,7 +285,6 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
                             }
 
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -336,7 +296,6 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -353,49 +312,53 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId) {
-
+    public void onCheckedChanged(RadioGroup group, int checkedId)
+    {
+        switch (checkedId)
+        {
             case R.id.button31:
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+                {
                     if (Objects.equals(activeId, "SubDept"))
                         break;
                 }
-
                 activeId = "SubDept";
                 productsubdeptList.clear();
                 listView = (ListView) findViewById(R.id.list);
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
                     offsetvalue = 0;
                     count = 0;
                     requestSubDeptAPI(offsetvalue, limit);
-                } else {
-
+                }
+                else
+                {
                     Toast.makeText(SearchActivity1.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
 
                 break;
             case R.id.button32:
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+                {
                     if (Objects.equals(activeId, "ProductName"))
-                        break;
+                    break;
                 }
 
                 activeId = "ProductName";
                 productNameList.clear();
                 listView1 = (ListView) findViewById(R.id.list);
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
                     offsetvalue1 = 0;
                     count1 = 0;
                     requestProductListAPI(offsetvalue1, limit1);
-                } else {
-
+                }
+                else
+                {
                     Toast.makeText(SearchActivity1.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
 

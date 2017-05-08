@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -35,21 +33,15 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
-import apsupportapp.aperotechnologies.com.designapp.StyleDetailsBean;
-import apsupportapp.aperotechnologies.com.designapp.SwitchingTabActivity;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleDetailsBean;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.SwitchingTabActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
 
@@ -58,27 +50,21 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
  */
 
 
-
-
 public class SaleThruInventoryAdapter extends BaseAdapter {
 
     private ArrayList<RunningPromoListDisplay> arrayList;
     ArrayList<StyleDetailsBean> styleDetailsBeanArrayList;
     StyleDetailsBean styleDetailsBean;
-    int offset , limit;
+    int offset, limit;
     Gson gson;
     String TAG = "Sell Thru Exceptions";
-    //private List mStringFilterList;
-
     private LayoutInflater mInflater;
     Context context;
     private int Position;
 
-    //private ValueFilter valueFilter;
 
     public SaleThruInventoryAdapter(ArrayList<RunningPromoListDisplay> arrayList, Context context) {
 
-        // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         styleDetailsBeanArrayList = new ArrayList<StyleDetailsBean>();
         gson = new Gson();
@@ -86,14 +72,11 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
         limit = 10;
         this.context = context;
         mInflater = LayoutInflater.from(context);
-
-        //getFilter();
     }
 
     //How many items are in the data set represented by this Adapter.
     @Override
     public int getCount() {
-
 
         return arrayList.size();
     }
@@ -116,12 +99,10 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        //Log.e("in ","getview");
-
-        Position=position;
+        Position = position;
         final Holder holder;
         if (convertView == null) {
-            holder=new Holder();
+            holder = new Holder();
             convertView = mInflater.inflate(R.layout.activity_salethru_inventory_child, null);
             holder.BestInvent_SOH = (TextView) convertView.findViewById(R.id.bestInvent_SOH);
             holder.BestInvent_sellThru = (TextView) convertView.findViewById(R.id.bestInvent_sellThru);
@@ -131,54 +112,40 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
             holder.bestInvent_zonalSell = (TextView) convertView.findViewById(R.id.bestInvent_zonalSell);
             holder.bestInvent_wks = (TextView) convertView.findViewById(R.id.bestInvent_wks);
             holder.BestInvent_option = (TextView) convertView.findViewById(R.id.bestInvent_option);
-           // holder.BestInventTable_SOH = (TextView) convertView.findViewById(R.id.bestInventTable_SOH);
-          //  holder.BestInventTable_ProdAttribute = (TextView) convertView.findViewById(R.id.bestInventTable_ProdAttribute);
             holder.BestInvent_image_child = (ImageView) convertView.findViewById(R.id.bestInvent_image_child);
-
-
-
-
             convertView.setTag(holder);
-
         } else {
-            holder=(Holder)convertView.getTag();
+            holder = (Holder) convertView.getTag();
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
 
 
         }
-        holder.BestInvent_SOH.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
-        holder.BestInvent_sellThru.setText(String.format("%.1f",arrayList.get(position).getSellthruUnits()));
+        holder.BestInvent_SOH.setText("" + Math.round(arrayList.get(position).getStkOnhandQty()));
+        holder.BestInvent_sellThru.setText(String.format("%.1f", arrayList.get(position).getSellthruUnits()));
 
-        holder.bestInvent_zonalSell.setText(String.format("%.1f",arrayList.get(position).getSellthruUnitsZonal()));
-        holder.BestInvent_Sale.setText(""+(int)arrayList.get(position).getSaleTotQty());
-       // holder.bestInvent_wks.setText(""+(int)arrayList.get(position).getFwdWeekCover());
+        holder.bestInvent_zonalSell.setText(String.format("%.1f", arrayList.get(position).getSellthruUnitsZonal()));
+        holder.BestInvent_Sale.setText("" + arrayList.get(position).getSaleTotQty());
         holder.BestInvent_option.setText(arrayList.get(position).getOption());
         //Option Click event to get detail information
         holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //  Toast.makeText(context,"Option Click...",Toast.LENGTH_SHORT).show();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
-                    Log.e("select item", arrayList.get(position).getOption());
                     requestOptionDetailsAPI(arrayList.get(position).getOption());
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
 
-
             }
         });
 
-
-        //holder.BestInventTable_SOH.setText(""+(int)arrayList.get(position).getStkOnhandQty());
-       // holder.BestInventTable_ProdAttribute.setText(arrayList.get(position).getProdAttribute2());
         SaleThruInventory.BestInvent_txtStoreCode.setText(arrayList.get(position).getStoreCode());
         SaleThruInventory.BestInvent_txtStoreName.setText(arrayList.get(position).getStoreDesc());
 
-        if(!arrayList.get(position).getProdImageURL().equals("")) {
+        if (!arrayList.get(position).getProdImageURL().equals("")) {
 
             Glide.with(this.context)
                     .load(arrayList.get(position).getProdImageURL())
@@ -197,7 +164,7 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
                     })
                     .into(holder.BestInvent_image_child);
 
-        }else {
+        } else {
             holder.ProgressPicaso.setVisibility(View.GONE);
 
             Glide.with(this.context).
@@ -207,15 +174,12 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
 
         }
 
-
-
         // ---------------------click listener -------------------------
 
         return convertView;
     }
 
-    private void requestOptionDetailsAPI(String option)
-    {
+    private void requestOptionDetailsAPI(String option) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
         String userId = sharedPreferences.getString("userId", "");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -224,43 +188,37 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = " ";
+        String url;
 
-        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
-
-        Log.e(TAG, "requestStyleDetailsAPI  " + url);
+        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offset + "&limit=" + limit;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
-                            } else if(response.length() < limit){
+                            } else if (response.length() < limit) {
                                 Reusable_Functions.hDialog();
-                                for ( i = 0; i < response.length(); i++) {
+                                for (i = 0; i < response.length(); i++) {
 
                                     styleDetailsBean = gson.fromJson(response.get(i).toString(), StyleDetailsBean.class);
                                     styleDetailsBeanArrayList.add(styleDetailsBean);
 
                                 }
 
-                                Log.e(TAG, "intent calling: ");
                                 Intent intent = new Intent(context, SwitchingTabActivity.class);
-                                intent.putExtra("checkFrom","sell_thru_exception");
-                                intent.putExtra("articleCode",styleDetailsBean.getArticleCode());
-                                intent.putExtra("articleOption",styleDetailsBean.getArticleOption());
-                                Log.e("Article Option :",""+styleDetailsBean.getArticleOption());
+                                intent.putExtra("checkFrom", "sell_thru_exception");
+                                intent.putExtra("articleCode", styleDetailsBean.getArticleCode());
+                                intent.putExtra("articleOption", styleDetailsBean.getArticleOption());
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 context.startActivity(intent);
                                 SaleThruInventory.saleThru.finish();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -269,7 +227,6 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e("", "" + error.networkResponse + "");
                         Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
@@ -291,19 +248,16 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
     }
 
 
-
     private class Holder {
 
-        TextView BestInvent_SOH,BestInvent_sellThru,
-                BestInvent_Sale,bestInvent_zonalSell,bestInvent_thru,bestInvent_wks,BestInvent_option;
+        TextView BestInvent_SOH, BestInvent_sellThru,
+                BestInvent_Sale, bestInvent_zonalSell, bestInvent_thru, bestInvent_wks, BestInvent_option;
 
         ImageView BestInvent_image_child;
 
 
         public ProgressBar ProgressPicaso;
     }
-
-
 
 
 }

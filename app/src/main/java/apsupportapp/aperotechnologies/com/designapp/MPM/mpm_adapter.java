@@ -2,26 +2,13 @@ package apsupportapp.aperotechnologies.com.designapp.MPM;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
-import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackDetailsAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
-
-
-
-
-
 
 
 public class mpm_adapter extends BaseAdapter {

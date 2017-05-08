@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp;
+package apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import apsupportapp.aperotechnologies.com.designapp.R;
 
 
 public class ValueAdapter extends BaseAdapter implements Filterable {
@@ -60,7 +62,7 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
         } else {
             viewHolder = (Holder) convertView.getTag();
         }
-        viewHolder.nameTv.setText(mStringList.get(position).toString());
+        viewHolder.nameTv.setText(mStringList.get(position));
         return convertView;
     }
 
@@ -86,16 +88,19 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
 
             FilterResults results = new FilterResults();
-            if (constraint != null && constraint.length() > 0) {
+            if (constraint != null && constraint.length() > 0)
+            {
                 ArrayList<String> filterList = new ArrayList<String>();
                 for (int i = 0; i < mStringFilterList.size(); i++) {
-                    if (mStringFilterList.get(i).toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                    if (mStringFilterList.get(i).toLowerCase().contains(constraint.toString().toLowerCase())) {
                         filterList.add(mStringFilterList.get(i));
                     }
                 }
                 results.count = filterList.size();
                 results.values = filterList;
-            } else {
+            }
+            else
+            {
                 results.count = mStringFilterList.size();
                 results.values = mStringFilterList;
             }
@@ -107,8 +112,8 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint,
-                                      FilterResults results) {
-
+                                      FilterResults results)
+        {
             mStringList = (ArrayList<String>) results.values;
             notifyDataSetChanged();
         }

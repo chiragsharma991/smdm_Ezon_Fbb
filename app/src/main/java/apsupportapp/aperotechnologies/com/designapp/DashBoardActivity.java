@@ -52,9 +52,11 @@ import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
+import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_activity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 
@@ -68,7 +70,6 @@ import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.Target
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualReportActivity;
-import apsupportapp.aperotechnologies.com.designapp.WorstPerformersInventory.WorstPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
 import org.json.JSONArray;
@@ -181,7 +182,6 @@ public class DashBoardActivity extends AppCompatActivity
         arrayList = new ArrayList<>();
         eventUrlList = new ArrayList<>();
         productNameBeanArrayList=new ArrayList<>();
-        Bundle data=getIntent().getExtras();
         gson = new Gson();
 
 
@@ -247,12 +247,12 @@ public class DashBoardActivity extends AppCompatActivity
         BtnWorstPerformers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashBoardActivity.this, WorstPerformerInventory.class);
-                startActivity(intent);
-                if(timer != null)
-                {
-                    timer.cancel();
-                }
+              //  Intent intent = new Intent(DashBoardActivity.this, WorstPerformerInventory.class);
+              //  startActivity(intent);
+              //  if(timer != null)
+              //  {
+              //      timer.cancel();
+             //   }
                 //  finish();
             }
         });
@@ -719,7 +719,7 @@ public class DashBoardActivity extends AppCompatActivity
                         try {
 
 
-                            if (response.equals(null) || response == null) {
+                            if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(DashBoardActivity.this, "No data found", Toast.LENGTH_LONG).show();
                             } else {
@@ -987,7 +987,7 @@ public class DashBoardActivity extends AppCompatActivity
                         Log.i(TAG,"Login   Response   "+response.toString()+"\n length is"+response.length());
                         try
                         {
-                            if(response == null || response.equals(null))
+                            if(response == null || response.equals(""))
                             {
                                 RefreshTime.setText("N/A");
                             }else

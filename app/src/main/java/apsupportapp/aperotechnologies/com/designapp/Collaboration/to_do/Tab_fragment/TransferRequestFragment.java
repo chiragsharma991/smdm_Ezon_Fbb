@@ -35,8 +35,6 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Transfer_Request_Model;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -169,7 +167,7 @@ public class TransferRequestFragment extends Fragment {
                             Log.e(TAG, "TTransfer Request response length" + "" + response.length());
                             try
                             {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     checkNetworkFalse=true;
                                  //   Toast.makeText(context, "No data found from REQUEST FROM STORES", Toast.LENGTH_SHORT).show();

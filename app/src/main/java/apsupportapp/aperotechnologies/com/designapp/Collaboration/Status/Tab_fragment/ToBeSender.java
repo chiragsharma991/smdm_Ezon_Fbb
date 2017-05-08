@@ -1,6 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.Tab_fragment;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -38,11 +38,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
@@ -155,7 +152,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
 
                         try
                         {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Sender_checkNetwkStatus = true;
                                 return;
@@ -322,7 +319,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                         Log.i(TAG, "SenderCaseStatus api total length" + "" + response.length());
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 StatusActivity.StatusProcess.setVisibility(View.GONE);
                                 // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();

@@ -6,21 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.FloorAvailabilityDetails;
-import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
+
 
 /**
  * Created by pamrutkar on 08/12/16.

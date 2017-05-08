@@ -1,24 +1,21 @@
-package apsupportapp.aperotechnologies.com.designapp;
+package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.squareup.picasso.Picasso;
-
 import java.text.NumberFormat;
 import java.util.Locale;
+import apsupportapp.aperotechnologies.com.designapp.R;
 
 
 public class Details_Fragment extends Fragment {
@@ -26,7 +23,6 @@ public class Details_Fragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     StyleDetailsBean styleDetailsBean;
     String articleOption;
-    String TAG="StyleActivity";
     TextView txtProductName, txtCollcetion, txtFabric, txtFit, txtFinish, txtSeason, txtfirstReceiteDate, txtlastReceiteDate,
             txtFwdWeekCover, txtTwSalesUnit, txtLwSalesUnit, txtYtdSalesUnit, txtSOH, txtGIT, txtBaseStock, txtPrice, txtsalesThruUnit,
             txtROS, txtBenefit, txtArticleOption,txtStoreDesc, txtStoreCode;
@@ -43,13 +39,11 @@ public class Details_Fragment extends Fragment {
         styleDetailsBean = (StyleDetailsBean) i.getSerializableExtra("styleDetailsBean");
         Bundle bundle = getActivity().getIntent().getExtras();
         articleOption = bundle.getString("articleOption");
-        Log.d("userId", "  " + articleOption);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.details_fragment, container, false);
-        Log.e(TAG, "Details_Fragment onCreateView: ");
         txtStoreCode =(TextView)view.findViewById(R.id.txtStoreCode);
         txtStoreDesc =(TextView)view.findViewById(R.id.txtStoreName);
         txtArticleOption = (TextView) view.findViewById(R.id.txtArticle);
@@ -84,22 +78,6 @@ public class Details_Fragment extends Fragment {
         imgProfile = (ImageView) view.findViewById(R.id.imgProfile);
 
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
-
-
-        Log.e("productImageURL", styleDetailsBean.getProductImageURL());
-
-//        if (!styleDetailsBean.getProductImageURL().equals("")) {
-//
-//            Picasso.with(getActivity()).load(styleDetailsBean.getProductImageURL()).centerInside().fit()
-//                    .error(R.mipmap.placeholder)
-//                    .into(imgProfile);
-//        } else {
-//            Picasso.with(getActivity()).load(R.mipmap.placeholder).centerInside().fit()
-//                  //  .resize(110, 150)
-//                    .into(imgProfile);
-//
-//        }
-
         if(!styleDetailsBean.getProductImageURL().equals(""))
         {
             Glide.
@@ -126,9 +104,6 @@ public class Details_Fragment extends Fragment {
             Glide.with(getActivity()).
                     load(R.mipmap.placeholder).
                     into(imgProfile);
-
-
-
         }
 
         if (styleDetailsBean.getPromoFlg().equals("N") || styleDetailsBean.getPromoFlg().equals("")) {

@@ -1,14 +1,12 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
-import android.app.Activity;
+
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,7 +20,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -33,8 +30,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -51,17 +46,14 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.JsonArray;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback_model;
+
 
 public class  LoginActivity extends AppCompatActivity {
     Button btnLogin;
@@ -196,7 +188,7 @@ public class  LoginActivity extends AppCompatActivity {
                         Log.i("Login   Response length   ", "" + response.length());
                         try
                         {
-                            if (response.equals(null) || response == null) {
+                            if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(LoginActivity.this, "Invalid user", Toast.LENGTH_LONG).show();
                                 return;
@@ -275,7 +267,7 @@ public class  LoginActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.i("Login   Response   ", response.toString());
                         try {
-                            if (response == null || response.equals(null)) {
+                            if (response == null || response.equals("")) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(LoginActivity.this, "Invalid user", Toast.LENGTH_LONG).show();
                                 return;

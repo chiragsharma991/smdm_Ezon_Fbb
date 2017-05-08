@@ -1,24 +1,18 @@
 package apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory;
 
 import android.app.Activity;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPromoAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -58,13 +52,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.InventoryFilterActivity;
-import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
-import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizeAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -203,7 +193,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void sortRetain()
     {
-        switch (orderbycol.toString())
+        switch (orderbycol)
         {
             case "7":
                 Log.e(TAG, "sortRetain: 7");
@@ -253,7 +243,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 //in this checkvalueIs  save the previous done condition params and call to true or false
 
 
-            switch (checkValueIs.toString()) {
+            switch (checkValueIs) {
                 case "BestCheckCurrent":
                     BestCheckCurrent.setChecked(true);
                     BestCheckPrevious.setChecked(false);
@@ -286,7 +276,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                     break;
 
             }
-            switch (checkTimeValueIs.toString()) {
+            switch (checkTimeValueIs) {
                 case "CheckWTD":
                     CheckWTD.setChecked(true);
                     CheckL4W.setChecked(false);
@@ -355,7 +345,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                             Log.i(TAG, "response" + "" + response.length());
                             BestInventListview.setVisibility(View.VISIBLE);
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     BestInventListview.removeFooterView(footer);
@@ -439,9 +429,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                             BestInventListview.removeFooterView(footer);
                             BestInventListview.setTag("FOOTER_REMOVE");
                             BestInventListview.setVisibility(View.GONE);
-                     //       Log.e(TAG, "onErrorResponse  " + error.getMessage().toString());
-
-                            String json = null;
+                            String json;
                             NetworkResponse response = error.networkResponse;
                             if(response != null && response.data != null){
                                 switch(response.statusCode){
@@ -456,7 +444,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                            error.printStackTrace();
                         }
                         public String trimMessage(String json, String key){
-                            String trimmedString = null;
+                            String trimmedString;
                             try{
                                 JSONObject obj = new JSONObject(json);
                                 trimmedString = obj.getString(key);

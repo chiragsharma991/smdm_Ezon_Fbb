@@ -173,7 +173,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         }
         else
         {
-            switch (checkSeasonGpVal.toString())
+            switch (checkSeasonGpVal)
             {
                 case "Current":
                     checkCurrent.setChecked(true);
@@ -269,7 +269,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             Log.i(TAG, "response" + "" + response.length());
                             StockAgListView.setVisibility(View.VISIBLE);
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     StockAgListView.removeFooterView(footer);

@@ -12,21 +12,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexDetails;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
-import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
-
-
-
 
 
 public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements GravitySnapHelper.SnapListener {
@@ -34,14 +26,11 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
     private final ArrayList<OptionEfficiencyDetails> OptionIndexDetailsArrayList;
-
     RecyclerView listViewFIndex;
-
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 2;
     Context context;
     String fromWhere;
-
     Gson gson;
     // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
@@ -52,25 +41,6 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     };
 
-    /*  public FreshnessIndexSnapAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, RecyclerView listView_SalesAnalysis) {
-
-         // mSnaps = new ArrayList<>();
-          Log.e("in sales analysis adapter"," ");
-          this.mSnaps = arrayList;
-          this.context = context;
-          this.fromwhere = fromwhere;
-          this.listView_SalesAnalysis = listView_SalesAnalysis;
-          mInflater = LayoutInflater.from(context);
-          this.currentIndex = currentIndex;
-          level = 1;
-          focusposition = 0;
-          selFirstPositionValue = 0;
-          analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-          gson = new Gson();
-
-          //getFilter();
-      }
-  */
     public OptionIndexSnapAdapter(ArrayList<OptionEfficiencyDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, RecyclerView listViewFIndex) {
 
         this.context = context;
@@ -82,20 +52,13 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
 
-
-
-//    public void addSnap(SalesAnalysisListDisplay snap) {
-//        mSnaps.add(snap);
-//    }
-
     @Override
     public int getItemViewType(int position) {
 
-        if (isPositionItem(position)){
+        if (isPositionItem(position)) {
             return VIEW_ITEM;
 
-        }
-        else {
+        } else {
             return VIEW_PROG;
         }
     }
@@ -106,7 +69,7 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public int getItemCount() {
-        return OptionIndexDetailsArrayList.size()+1;
+        return OptionIndexDetailsArrayList.size() + 1;
     }
 
     @Override
@@ -118,9 +81,9 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         if (viewType == VIEW_ITEM) {
-            View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.oefficiency_list_row, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.oefficiency_list_row, parent, false);
             return new OptionHolder(v);
-        } else if (viewType == VIEW_PROG){
+        } else if (viewType == VIEW_PROG) {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_footer, parent, false);
             return new ProgressViewHolder(v);
@@ -134,59 +97,61 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
         if (viewHolder instanceof OptionHolder) {
-            if(position < OptionIndexDetailsArrayList.size()) {
+            if (position < OptionIndexDetailsArrayList.size()) {
                 OptionEfficiencyDetails optionEfficiencyDetails = OptionIndexDetailsArrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
                 //  fromWhere = "Department";
-                if (fromWhere.equals("Department")) {
+                switch (fromWhere) {
+                    case "Department":
 
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanDept());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
-
-
-                } else if (fromWhere.equals("Subdept")) {
-
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanCategory());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
-
-                } else if (fromWhere.equals("Class")) {
-
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanClass());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanDept());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
 
 
-                } else if (fromWhere.equals("Subclass")) {
+                        break;
+                    case "Subdept":
 
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandName());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanCategory());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
+
+                        break;
+                    case "Class":
+
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanClass());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
 
 
-                } else if (fromWhere.equals("MC")) {
+                        break;
+                    case "Subclass":
 
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandplanClass());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText(""+formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText(""+ String.format("%.1f",optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText(""+formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" "+String.format("%.1f",optionEfficiencyDetails.getSohCountFullSize()));
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandName());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
+
+
+                        break;
+                    case "MC":
+
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandplanClass());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
+                        break;
                 }
             }
-        }
-        else
-        {
-
         }
 
     }
@@ -195,7 +160,7 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public static class OptionHolder extends RecyclerView.ViewHolder {
 
 
-        TextView oe_txtPlanClass, oe_txtSOH_U, oe_txtSOH_Prec, oe_txtOption,oe_txtOption_Perc;
+        TextView oe_txtPlanClass, oe_txtSOH_U, oe_txtSOH_Prec, oe_txtOption, oe_txtOption_Perc;
 
 
         public OptionHolder(View itemView) {
@@ -211,15 +176,12 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     public static class ProgressViewHolder extends RecyclerView.ViewHolder {
-        //        Button loadButton;
-//        ProgressBar progressBar;
+
         TextView txtView;
 
-        public ProgressViewHolder(View footerView){
+        public ProgressViewHolder(View footerView) {
             super(footerView);
-//            loadButton = (Button) footerView.findViewById(R.id.reload_button);
-//            progressBar = (ProgressBar) footerView.findViewById(R.id.progress_load);
-            txtView = (TextView)footerView.findViewById(R.id.txtView);
+            txtView = (TextView) footerView.findViewById(R.id.txtView);
         }
     }
 

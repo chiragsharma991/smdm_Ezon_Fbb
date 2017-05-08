@@ -12,11 +12,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
+
 import android.widget.EditText;
-import android.widget.ImageButton;
+
 import android.widget.ListView;
-import android.widget.RadioButton;
+
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -34,11 +34,11 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,8 +55,6 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
     RelativeLayout btnBack,btnProd_Done;
     EditText keyprod_editSearch;
     MySingleton m_config;
-    String keyprd_searchData;
-    String activeId;
     ListView keyprod_listView;
     RequestQueue queue;
 
@@ -104,7 +102,6 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 search_data =  keyprod_editSearch.getText().toString();
 
-                Log.e("list", search_data);
                 keyprod_editSearch.clearFocus();
                 InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 in.hideSoftInputFromWindow( keyprod_editSearch.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
@@ -115,7 +112,6 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 search_data =  keyprod_editSearch.getText().toString();
 
-                Log.e("list", search_data);
                 keyprod_editSearch.clearFocus();
                 InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 in.hideSoftInputFromWindow( keyprod_editSearch.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
@@ -126,8 +122,6 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
             public void afterTextChanged(Editable s)
             {
                 search_data =  keyprod_editSearch.getText().toString();
-
-                Log.e("list", search_data);
                 keyprod_editSearch.clearFocus();
                 InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 in.hideSoftInputFromWindow( keyprod_editSearch.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
@@ -160,7 +154,6 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
                 filtervalue = filtervalue.replace("[","");
                 String updatedfilterValue = filtervalue.replace("]","");
                 updatedfilterValue = updatedfilterValue.replace(", ",",");
-                Log.e("checkval array :",""+KeyProdFilterAdapter.checkedValue +"\nfiltervalue:"+updatedfilterValue);
                 intent.putExtra("productfilterValue",updatedfilterValue);
                 startActivity(intent);
                 finish();
@@ -171,14 +164,12 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
     private void requestProductListAPI(int offsetvalue2, final int limit2) {
 
         String url = ConstsCore.web_url + "/v1/display/keyproducts/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("URL   ", url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("ProduName Response", response.toString() +"response length :"+response.length());
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(KeyProductFilterActivity.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -186,7 +177,6 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
                                 for (int i = 0; i < response.length(); i++) {
                                    String prodName= response.getString(i);
                                     keyPlanProductList.add(prodName);
-                                   // Log.e("product name",""+prodName);
                                 }
 
                                 offsetvalue = (limit * count) + limit;
@@ -198,20 +188,17 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
 
                                 for (int i = 0; i < response.length(); i++) {
                                     String prodName= response.getString(i);
-                                 //   Log.e("product name",""+prodName);
+
                                     keyPlanProductList.add(prodName);
                                 }
-                               // Collections.sort(productNameList);
                                 adapter = new KeyProdFilterAdapter(keyPlanProductList, getApplicationContext());
                                 keyprod_listView.setAdapter(adapter);
-//                                listView1.setTextFilterEnabled(true);
                                 Reusable_Functions.hDialog();
 
 
                             }
 
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }

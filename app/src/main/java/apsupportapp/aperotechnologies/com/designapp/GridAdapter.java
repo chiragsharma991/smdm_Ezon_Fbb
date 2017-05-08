@@ -41,7 +41,7 @@ public class GridAdapter extends BaseAdapter {
     @SuppressLint("InflateParams")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder view = null;
+
         LayoutInflater lf = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = lf.inflate(R.layout.coordinate_gridview, null);
 
