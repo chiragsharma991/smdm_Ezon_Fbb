@@ -313,7 +313,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         fromWhere = "Department";
                         level = 1;
                         pvaVal = " ";
-                        //  flag = false;
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
