@@ -2,32 +2,22 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fra
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.util.Pair;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -54,9 +44,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.logging.Logger;
-
 import apsupportapp.aperotechnologies.com.designapp.AnyOrientationCaptureActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Transfer_Request_Model;
@@ -159,7 +146,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         Log.e(TAG, "Sender Details Child  total length" + "" + response.length());
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 TransferDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
@@ -263,7 +250,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         Log.i(TAG, "Detail api total length" + "" + response.length());
                         try
                         {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
@@ -420,9 +407,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         context.startActivity(intent);
     }
 
-    @Override
-    public void OnPress(int position) {
-//        MCCodeDesc = DetailsList.get(position).getMccodeDesc();
+
+    public void onPress(int position) {
+
         option = Sender_DetailsList.get(position).getLevel();
         levelOfOption = 2;
         SenderChildDetailList = new ArrayList<Transfer_Request_Model>();
@@ -482,9 +469,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         }else
         {
             requestSenderSubmitAPI(context,jsonarray);
-
-            // Toast.makeText(context,"Data submission successfully",Toast.LENGTH_SHORT).show();
-
         }
     }
 
@@ -549,7 +533,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         Log.e(TAG,"Scan api total length :" + "" + response.length());
                         try
                         {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0)
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
@@ -575,12 +559,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 }
 
                                 String size= ScanList.get(0).getProdAttribute4();
-                                int size_pos = 0;
+                                int size_pos;
                                 ArrayList<Integer>addQty=new ArrayList<>();
 
                                 for(int i = 0;i < SenderChildDetailList.size();i++) //find sizeitem  position from child list
                                 {
-                                    if(SenderChildDetailList.get(i).getLevel().equals("15-16"))//add size instead of 4-5 value
+                                    if(SenderChildDetailList.get(i).getLevel().equals(size))//add size instead of 4-5 value
                                     {
                                         //        maxScanQty = (int) Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested());
 
@@ -682,7 +666,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         public void onResponse(JSONObject response) {
                             Log.e("Sender Submit Click Response :", response.toString());
                             try {
-                                if (response == null || response.equals(null)) {
+                                if (response == null || response.equals("")) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
 

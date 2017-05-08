@@ -7,34 +7,28 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.util.Pair;
+
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Base64;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
+
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,11 +46,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,12 +58,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
-
-import apsupportapp.aperotechnologies.com.designapp.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -151,7 +137,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e("", "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -176,35 +161,23 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
         //sum divide by ..
         cal_result = sumofRatting/div_by;
-        Log.e("Cal_result :",""+cal_result +"\tsumofRatting :"+sumofRatting +"\tdiv_by :"+div_by);
         //emoji image set
         if(Math.round(cal_result) < 2)
         {
             emoji_image.setBackgroundResource(R.mipmap.improvementemojiselected);
-          //  txt_overall_ratings.setText("Need Improvement");
         }
         else  if(Math.round(cal_result)< 3)
         {
             emoji_image.setBackgroundResource(R.mipmap.okayemojiselected);
-//            txt_overall_ratings.setText("Okay");
-//            txt_overall_ratings.setGravity(View.TEXT_ALIGNMENT_CENTER);
 
         }
         else  if(Math.round(cal_result) < 4)
         {
             emoji_image.setBackgroundResource(R.mipmap.goodemojiselected);
-//            txt_overall_ratings.setText("Good");
-//            txt_overall_ratings.setGravity(View.TEXT_ALIGNMENT_CENTER);
-
-
         }
         else  if(Math.round(cal_result) >= 4)
         {
             emoji_image.setBackgroundResource(R.mipmap.excellentemojiselected);
-//            txt_overall_ratings.setText("Excellent");
-//            txt_overall_ratings.setGravity(View.TEXT_ALIGNMENT_CENTER);
-
-
         }
 
         return cal_result;
@@ -378,7 +351,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
         //Edittext
         et_inspected_by = (EditText) findViewById(R.id.et_inspected_by);
         et_comment = (EditText) findViewById(R.id.et_comment);
-        //et_inspected_by.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         et_comment.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         rel_cam_image = (RelativeLayout) findViewById(R.id.rel_cam_image);
@@ -447,9 +419,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_improvement_cri_1.setVisibility(View.VISIBLE);
                     image_improvement_criteria_1.setVisibility(View.GONE);
                     txt_improvement_criteria_1.setText("Need Improvement");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_improvement_cri_1));
+
                     image_excellent_criteria_1.setVisibility(View.VISIBLE);
                     image_good_criteria_1.setVisibility(View.VISIBLE);
                     image_okay_criteria_1.setVisibility(View.VISIBLE);
@@ -460,7 +430,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_1.setText("");
                     txt_okay_criteria_1.setText("");
                     fashionQuot = 1;
-                   // ratting_size[0] = fashionQuot;
                     calculation(fashionQuot,0);
 
 
@@ -482,9 +451,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_improvement_cri_2.setVisibility(View.VISIBLE);
                     image_improvement_criteria_2.setVisibility(View.GONE);
                     txt_improvement_criteria_2.setText("Need Improvement");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_improvement_cri_2));
+
                     image_excellent_criteria_2.setVisibility(View.VISIBLE);
                     image_good_criteria_2.setVisibility(View.VISIBLE);
                     image_okay_criteria_2.setVisibility(View.VISIBLE);
@@ -495,8 +462,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     txt_excellent_criteria_2.setText("");
                     txt_okay_criteria_2.setText("");
                     merchDisplay = 1;
-                    Log.e("OverallRating in insp imp 2 before:",""+overallRating);
-                    //ratting_size[1] = merchDisplay;
                     calculation(merchDisplay,1);
 
 
@@ -519,9 +484,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_improvement_cri_3.setVisibility(View.VISIBLE);
                     image_improvement_criteria_3.setVisibility(View.GONE);
                     txt_improvement_criteria_3.setText("Need Improvement");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_improvement_cri_3));
                     image_excellent_criteria_3.setVisibility(View.VISIBLE);
                     image_good_criteria_3.setVisibility(View.VISIBLE);
                     image_okay_criteria_3.setVisibility(View.VISIBLE);
@@ -557,9 +519,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_improvement_cri_4.setVisibility(View.VISIBLE);
                     image_improvement_criteria_4.setVisibility(View.GONE);
                     txt_improvement_criteria_4.setText("Need Improvement");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_improvement_cri_4));
                     image_excellent_criteria_4.setVisibility(View.VISIBLE);
                     image_good_criteria_4.setVisibility(View.VISIBLE);
                     image_okay_criteria_4.setVisibility(View.VISIBLE);
@@ -573,8 +532,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     suggSellingByStaff = 1;
                     ratting_size[3] = suggSellingByStaff;
                     calculation(suggSellingByStaff,3);
-
-
 
                 } else {
                       image_improvement_criteria_4.setVisibility(View.VISIBLE);
@@ -596,9 +553,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_improvement_cri_5.setVisibility(View.VISIBLE);
                     image_improvement_criteria_5.setVisibility(View.GONE);
                     txt_improvement_criteria_5.setText("Need Improvement");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_improvement_cri_5));
                     image_excellent_criteria_5.setVisibility(View.VISIBLE);
                     image_good_criteria_5.setVisibility(View.VISIBLE);
                     image_okay_criteria_5.setVisibility(View.VISIBLE);
@@ -632,9 +586,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_improvement_cri_6.setVisibility(View.VISIBLE);
                     image_improvement_criteria_6.setVisibility(View.GONE);
                     txt_improvement_criteria_6.setText("Need Improvement");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_improvement_cri_6));
+
                     image_excellent_criteria_6.setVisibility(View.VISIBLE);
                     image_good_criteria_6.setVisibility(View.VISIBLE);
                     image_okay_criteria_6.setVisibility(View.VISIBLE);
@@ -668,9 +620,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_improvement_cri_7.setVisibility(View.VISIBLE);
                     image_improvement_criteria_7.setVisibility(View.GONE);
                     txt_improvement_criteria_7.setText("Need Improvement");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_improvement_cri_7));
                     image_excellent_criteria_7.setVisibility(View.VISIBLE);
                     image_good_criteria_7.setVisibility(View.VISIBLE);
                     image_okay_criteria_7.setVisibility(View.VISIBLE);
@@ -707,9 +656,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_improvement_cri_8.setVisibility(View.VISIBLE);
                     image_improvement_criteria_8.setVisibility(View.GONE);
                     txt_improvement_criteria_8.setText("Need Improvement");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_improvement_cri_8));
                     image_excellent_criteria_8.setVisibility(View.VISIBLE);
                     image_good_criteria_8.setVisibility(View.VISIBLE);
                     image_okay_criteria_8.setVisibility(View.VISIBLE);
@@ -750,10 +696,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_criteria_1.setVisibility(View.VISIBLE);
                     image_okay_criteria_1.setVisibility(View.GONE);
                     txt_okay_criteria_1.setText("Okay");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_okay_cri_1));
-
                     txt_good_criteria_1.setText("");
                     txt_excellent_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
@@ -787,9 +729,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_criteria_2.setVisibility(View.VISIBLE);
                     image_okay_criteria_2.setVisibility(View.GONE);
                     txt_okay_criteria_2.setText("Okay");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_okay_cri_2));
 
                     txt_good_criteria_2.setText("");
                     txt_excellent_criteria_2.setText("");
@@ -825,10 +764,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_criteria_3.setVisibility(View.VISIBLE);
                     image_okay_criteria_3.setVisibility(View.GONE);
                     txt_okay_criteria_3.setText("Okay");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_okay_cri_3));
-
                     txt_good_criteria_3.setText("");
                     txt_excellent_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");
@@ -861,10 +796,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_criteria_4.setVisibility(View.VISIBLE);
                     image_okay_criteria_4.setVisibility(View.GONE);
                     txt_okay_criteria_4.setText("Okay");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_okay_cri_4));
-
                     txt_good_criteria_4.setText("");
                     txt_excellent_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
@@ -899,10 +830,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_criteria_5.setVisibility(View.VISIBLE);
                     image_okay_criteria_5.setVisibility(View.GONE);
                     txt_okay_criteria_5.setText("Okay");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_okay_cri_5));
-
                     txt_good_criteria_5.setText("");
                     txt_excellent_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
@@ -937,10 +864,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_criteria_6.setVisibility(View.VISIBLE);
                     image_okay_criteria_6.setVisibility(View.GONE);
                     txt_okay_criteria_6.setText("Okay");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_okay_cri_6));
-
                     txt_good_criteria_6.setText("");
                     txt_excellent_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
@@ -976,10 +899,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_criteria_7.setVisibility(View.VISIBLE);
                     image_okay_criteria_7.setVisibility(View.GONE);
                     txt_okay_criteria_7.setText("Okay");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_okay_cri_7));
-
                     txt_good_criteria_7.setText("");
                     txt_excellent_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
@@ -1015,10 +934,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_criteria_8.setVisibility(View.VISIBLE);
                     image_okay_criteria_8.setVisibility(View.GONE);
                     txt_okay_criteria_8.setText("Okay");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_okay_cri_8));
-
                     txt_good_criteria_8.setText("");
                     txt_excellent_criteria_8.setText("");
                     txt_improvement_criteria_8.setText("");
@@ -1054,9 +969,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_good_cri_1.setVisibility(View.VISIBLE);
                     image_good_criteria_1.setVisibility(View.GONE);
                     txt_good_criteria_1.setText("Good");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_good_cri_1));
                     txt_okay_criteria_1.setText("");
                     txt_excellent_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
@@ -1091,9 +1003,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_good_cri_2.setVisibility(View.VISIBLE);
                     image_good_criteria_2.setVisibility(View.GONE);
                     txt_good_criteria_2.setText("Good");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_good_cri_1));
                     txt_okay_criteria_2.setText("");
                     txt_excellent_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
@@ -1127,9 +1036,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_good_cri_3.setVisibility(View.VISIBLE);
                     image_good_criteria_3.setVisibility(View.GONE);
                     txt_good_criteria_3.setText("Good");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_good_cri_3));
+
                     txt_okay_criteria_3.setText("");
                     txt_excellent_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");
@@ -1164,9 +1071,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_good_cri_4.setVisibility(View.VISIBLE);
                     image_good_criteria_4.setVisibility(View.GONE);
                     txt_good_criteria_4.setText("Good");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_good_cri_4));
                     txt_okay_criteria_4.setText("");
                     txt_excellent_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
@@ -1200,9 +1104,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_good_cri_5.setVisibility(View.VISIBLE);
                     image_good_criteria_5.setVisibility(View.GONE);
                     txt_good_criteria_5.setText("Good");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_good_cri_5));
                     txt_okay_criteria_5.setText("");
                     txt_excellent_criteria_5.setText("");
                     txt_improvement_criteria_5.setText("");
@@ -1237,9 +1138,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_good_cri_6.setVisibility(View.VISIBLE);
                     image_good_criteria_6.setVisibility(View.GONE);
                     txt_good_criteria_6.setText("Good");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_good_cri_6));
                     txt_okay_criteria_6.setText("");
                     txt_excellent_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
@@ -1273,9 +1171,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_good_cri_7.setVisibility(View.VISIBLE);
                     image_good_criteria_7.setVisibility(View.GONE);
                     txt_good_criteria_7.setText("Good");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_good_cri_7));
                     txt_okay_criteria_7.setText("");
                     txt_excellent_criteria_7.setText("");
                     txt_improvement_criteria_7.setText("");
@@ -1309,9 +1204,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_good_cri_8.setVisibility(View.VISIBLE);
                     image_good_criteria_8.setVisibility(View.GONE);
                     txt_good_criteria_8.setText("Good");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_good_cri_8));
                     txt_okay_criteria_8.setText("");
                     txt_excellent_criteria_8.setText("");
                     txt_improvement_criteria_8.setText("");
@@ -1348,10 +1240,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_cri_1.setVisibility(View.VISIBLE);
                     image_excellent_criteria_1.setVisibility(View.GONE);
                     txt_excellent_criteria_1.setText("Excellent");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_excellent_cri_1));
-
                     txt_okay_criteria_1.setText("");
                     txt_good_criteria_1.setText("");
                     txt_improvement_criteria_1.setText("");
@@ -1385,10 +1273,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_cri_2.setVisibility(View.VISIBLE);
                     image_excellent_criteria_2.setVisibility(View.GONE);
                     txt_excellent_criteria_2.setText("Excellent");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_excellent_cri_2));
-
                     txt_okay_criteria_2.setText("");
                     txt_good_criteria_2.setText("");
                     txt_improvement_criteria_2.setText("");
@@ -1421,10 +1305,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_cri_3.setVisibility(View.VISIBLE);
                     image_excellent_criteria_3.setVisibility(View.GONE);
                     txt_excellent_criteria_3.setText("Excellent");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_excellent_cri_3));
-
                     txt_okay_criteria_3.setText("");
                     txt_good_criteria_3.setText("");
                     txt_improvement_criteria_3.setText("");;
@@ -1458,10 +1338,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_cri_4.setVisibility(View.VISIBLE);
                     image_excellent_criteria_4.setVisibility(View.GONE);
                     txt_excellent_criteria_4.setText("Excellent");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_excellent_cri_4));
-
                     txt_okay_criteria_4.setText("");
                     txt_good_criteria_4.setText("");
                     txt_improvement_criteria_4.setText("");
@@ -1496,9 +1372,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_cri_5.setVisibility(View.VISIBLE);
                     image_excellent_criteria_5.setVisibility(View.GONE);
                     txt_excellent_criteria_5.setText("Excellent");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_excellent_criteria_5));
 
                     txt_okay_criteria_5.setText("");
                     txt_good_criteria_5.setText("");
@@ -1532,10 +1405,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_cri_6.setVisibility(View.VISIBLE);
                     image_excellent_criteria_6.setVisibility(View.GONE);
                     txt_excellent_criteria_1.setText("Excellent");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_excellent_cri_6));
-
                     txt_okay_criteria_6.setText("");
                     txt_good_criteria_6.setText("");
                     txt_improvement_criteria_6.setText("");
@@ -1569,9 +1438,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_cri_7.setVisibility(View.VISIBLE);
                     image_excellent_criteria_7.setVisibility(View.GONE);
                     txt_excellent_criteria_7.setText("Excellent");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_excellent_cri_7));
 
                     txt_okay_criteria_7.setText("");
                     txt_good_criteria_7.setText("");
@@ -1605,9 +1471,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     image_excellent_cri_8.setVisibility(View.VISIBLE);
                     image_excellent_criteria_8.setVisibility(View.GONE);
                     txt_excellent_criteria_8.setText("Excellent");
-//                    YoYo.with(Techniques.ZoomIn)
-//                            .duration(500)
-//                            .playOn(findViewById(R.id.image_excellent_cri_8));
 
                     txt_okay_criteria_8.setText("");
                     txt_good_criteria_8.setText("");
@@ -1720,22 +1583,15 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     private void OnSubmit() {
         //  JSONArray jsonarray=new JSONArray();
         // int count=0;
-        String insp_comment = "", inspected_name = "";
+        String insp_comment , inspected_name ;
         JSONObject obj = new JSONObject();
         try {
 
-          //  Log.e("TAG", "OnSubmit: "+insp_imagePath.toString());
-            //Log.e("TAG", "OnSubmit: "+et_inspected_by.toString()+" "+et_inspected_by.length()+" "+et_comment.toString()+" "+et_comment.length()+" "+insp_imagePath.toString() );
-
-            if (et_inspected_by.equals("") || et_inspected_by.length() == 0 ||
+        if (et_inspected_by.equals("") || et_inspected_by.length() == 0 ||
                     fashionQuot == 0 || merchDisplay == 0 || merchPresentationStd == 0 || suggSellingByStaff == 0
                     || overallCleanliness == 0 || signage == 0 || mpmExecution == 0 || winClusterMannequinsDisp == 0)
             {
-               // For Image
-             /*   else if (picturePath ==null) {
-                    Toast.makeText(InspectionBeginActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
-                }*/
-//
+
                 // Inspection Criteria...
                 if (fashionQuot == 0 )
                 {
@@ -1919,9 +1775,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 //               // For Image
 //              //  insp_imagePath = getStringImage(bitmap);
 //                insp_imagePath = picturePath;
-//                Log.e("TAG", "insp_imagePath: "+insp_imagePath );
+
 //                obj.put("storeImg", insp_imagePath);
-                Log.e("TAG", "onSubmit : Json Array is:" + obj.toString());
                 requestInspectionSubmitAPI(context,obj);
             }
 
@@ -1948,16 +1803,14 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Submitting data…");
-                String url = "";
+                String url;
                 url = ConstsCore.web_url + "/v1/save/storeinspection/submit/" + userId;//+"?recache="+recache
-                //Log.e("url", " put Request " + url + " ==== " + object.toString());
                 JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonarray.toString(),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Log.e("Sender Submit Click Response :", response.toString());
                                 try {
-                                    if (response == null || response.equals(null)) {
+                                    if (response == null || response.equals("")) {
                                         Reusable_Functions.hDialog();
                                         Toast.makeText(context, "Sending data failed...", Toast.LENGTH_LONG).show();
 
@@ -1971,7 +1824,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                                         Reusable_Functions.hDialog();
                                     }
                                 } catch (Exception e) {
-                                    Log.e("Exception e", e.toString() + "");
                                     e.printStackTrace();
                                     Reusable_Functions.hDialog();
 
@@ -1991,7 +1843,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
                         params.put("Authorization", bearertoken);
-                        //  params.put("Content-Type", "application/json");
                         return params;
                     }
 
@@ -2036,19 +1887,16 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     }
 
     public void openGallery() {
-        if ((int) Build.VERSION.SDK_INT < 23) {
+        if (Build.VERSION.SDK_INT < 23) {
             Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 2);
         } else {
             int permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE);
-            Log.e("Read Permission Check", " " + permissionCheck);
             if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-                Log.i("Read Permission granted", "");
                 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 2);
             } else {
-                Log.i("Read Permission not granted", "");
                 ActivityCompat.requestPermissions(InspectionBeginActivity.this,
                         new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_R);
@@ -2057,19 +1905,17 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     }
 
     public void startCamera() {
-        if ((int) Build.VERSION.SDK_INT < 23) {
+        if (Build.VERSION.SDK_INT < 23) {
 
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 1);
         } else {
-//
+
             int permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                     android.Manifest.permission.CAMERA);
 
-            Log.e("Camera permission Check", " " + permissionCheck);
 
             if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-                Log.i("Have Camera Permission", "Yes");
 
                 permissionCheck = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -2078,10 +1924,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 int permissioncheckRead = ContextCompat.checkSelfPermission(InspectionBeginActivity.this,
                         android.Manifest.permission.READ_EXTERNAL_STORAGE);
 
-                Log.i("Read and Write permission check", permissionCheck + "   " + permissioncheckRead);
 
                 if (permissionCheck == PackageManager.PERMISSION_GRANTED && permissioncheckRead == PackageManager.PERMISSION_GRANTED) {
-                    Log.i("Have Camera, Read and Write Permission", "Yes");
                     //Open Camera Here
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
@@ -2089,14 +1933,11 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     startActivityForResult(intent, 1);
                 } else {
                     //Get Permission for read and write
-                    Log.i("Camera permission approved ", "But No RW permision");
-                    Log.i("Ask for camera Read,Write permission", "");
                     ActivityCompat.requestPermissions(InspectionBeginActivity.this,
                             new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE},
                             MY_PERMISSIONS_REQUEST_RWFRMCAM);
                 }
             } else {
-                Log.e("Dont have camera permission", "Else block");
                 ActivityCompat.requestPermissions(InspectionBeginActivity.this,
                         new String[]{android.Manifest.permission.CAMERA},
                         MY_PERMISSIONS_REQUEST_CAMERA);
@@ -2119,7 +1960,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 int columnIndex = c.getColumnIndex(filePath1[0]);
                 picturePath = c.getString(columnIndex);
                 c.close();
-                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+               // Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
                 image_upload.setVisibility(View.VISIBLE);
                 Glide.with(InspectionBeginActivity.this)
                         .load(selectedImage)
@@ -2151,10 +1992,6 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             }
             image_upload.setVisibility(View.VISIBLE);
             image_upload.setImageBitmap(thumbnail);
-//        image_camera.setImageBitmap(thumbnail);
-//        image_camera.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-//        image_camera.getLayoutParams().width = RelativeLayout.LayoutParams.MATCH_PARENT;
-//        image_camera.setAdjustViewBounds(true);
         }
     }
 

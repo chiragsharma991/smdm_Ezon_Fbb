@@ -425,7 +425,7 @@ public class StyleActivity extends AppCompatActivity
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No data found", Toast.LENGTH_LONG).show();
                             } else {
@@ -527,7 +527,7 @@ public class StyleActivity extends AppCompatActivity
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && collectioncount == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && collectioncount == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No collection data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == collectionlimit) {
@@ -549,7 +549,7 @@ public class StyleActivity extends AppCompatActivity
                                 }
                                 Collections.sort(arrayList);
                                 arrayList.add(0, "Select Collection");
-                                if (selcollectionName == null || selcollectionName.equals(null)) {
+                                if (selcollectionName == null || selcollectionName.equals("")) {
                                     collection.setText("Select Collection");
                                 } else {
                                     if (arrayList.contains(selcollectionName)) {
@@ -578,7 +578,7 @@ public class StyleActivity extends AppCompatActivity
                                         collectionNM = (String) collectionAdapter.getItem(position);
                                         collection.setText(collectionNM.trim());
 
-                                        if (selcollectionName == null || selcollectionName.equals(null))
+                                        if (selcollectionName == null || selcollectionName.equals(" "))
                                         {
 
                                         }
@@ -651,7 +651,7 @@ public class StyleActivity extends AppCompatActivity
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 articleOptionList.add(0, "Select Option");
                                 style.setEnabled(false);
                                 Reusable_Functions.hDialog();
@@ -677,9 +677,8 @@ public class StyleActivity extends AppCompatActivity
                                 style.setEnabled(true);
                                 DashBoardActivity._collectionitems = new ArrayList();
                                 DashBoardActivity._collectionitems.addAll(articleOptionList);
-                                if (seloptionName == null || seloptionName.equals(null)) {
+                                if (seloptionName == null || seloptionName.equals("")) {
                                     style.setText("Select Option");
-                                } else {
                                 }
                                 optionAdapter.notifyDataSetChanged();
                             }

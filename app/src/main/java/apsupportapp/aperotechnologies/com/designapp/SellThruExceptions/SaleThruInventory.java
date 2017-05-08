@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
@@ -20,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -35,13 +33,10 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -60,7 +55,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     CheckBox BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming;
     RadioButton CheckWTD, CheckL4W, CheckSTD;
     String userId, bearertoken;
-    String TAG = "SaleThruInventory";
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -70,16 +64,14 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private Gson gson;
     ListView BestInventListview;
     ArrayList<RunningPromoListDisplay> BestInventList;
-    private int focusposition = 0;
-    private boolean userScrolled;
     private SaleThruInventoryAdapter bestPerformerInventoryAdapter;
     private View footer;
     private String lazyScroll = "OFF";
-    private static String seasonGroup = "Current" ;
+    private static String seasonGroup = "Current";
     private SegmentedGroup BestInvent_segmented;
     private RadioButton BestInvent_core, BestInvent_fashion;
     private ToggleButton Toggle_bestInvent_fav;
-    private static String corefashion = "Fashion" ;
+    private static String corefashion = "Fashion";
     private ImageView Skewed_quickFilter;
     private int orderbycol = 1;
     Context context;
@@ -88,12 +80,12 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private RadioButton BstInventory_salesU_chk, BstInventory_salesThru_chk, BstInventory_Fwd_chk, BstInventory_coverNsell_chk;
     private RelativeLayout BaseLayoutInventory;
     private static String checkValueIs = null, checkTimeValueIs = null;
-    private static String view = "STD" ;
+    private static String view = "STD";
     private TextView Toolbar_title;
-    private boolean coreSelection=false,filter_toggleClick = false;
+    private boolean coreSelection = false, filter_toggleClick = false;
     public static Activity saleThru;
-    private boolean from_filter=false;
-    private String selectedString="";
+    private boolean from_filter = false;
+    private String selectedString = "";
 
 
     @Override
@@ -108,15 +100,11 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         Bst_sortInventory.setVisibility(View.GONE);
         gson = new Gson();
         context = this;
-        saleThru=this;
-//        corefashion = "Fashion";
-//        seasonGroup = "Current";
-//        view = "STD";
+        saleThru = this;
         BestInventList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -139,8 +127,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         requestRunningPromoApi(selectedString);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
         BestInventListview.addFooterView(footer);
-     }
-
+    }
 
 
     private void requestRunningPromoApi(final String selectedString) {
@@ -176,18 +163,16 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                 }
             }
 
-            Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "SaleThruInventory Option : " + " " + response);
-                            Log.i(TAG, "response" + "" + response.length());
+
                             BestInventListview.setVisibility(View.VISIBLE);
 
 
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     BestInventListview.removeFooterView(footer);
@@ -199,8 +184,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
                                 } else if (response.length() == limit) {
 
-
-                                    Log.e(TAG, "Top eql limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -209,14 +192,8 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                                     }
                                     offsetvalue = offsetvalue + 10;
                                     top = top + 10;
-                                    Log.e(TAG, "list size is" + BestInventList.size());
-
-                                    //  count++;
-
-                                    // requestRunningPromoApi();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -230,47 +207,26 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
 
                                 footer.setVisibility(View.GONE);
-                           /* if(popPromo==10)
-                            {
-                                topOptionAdapter = new TopOptionAdapter(TopOptionList,context);
-                                TopOptionListView.setAdapter(topOptionAdapter);
-                                popPromo=0;
 
-                            }*/
-
-                                Log.e(TAG, "set adapter start");
 
                                 if (lazyScroll.equals("ON")) {
                                     bestPerformerInventoryAdapter.notifyDataSetChanged();
-                                    // BestInvent_fashion.setEnabled(true);
-                                    // BestInvent_core.setEnabled(true);
                                     lazyScroll = "OFF";
                                 } else {
                                     bestPerformerInventoryAdapter = new SaleThruInventoryAdapter(BestInventList, context);
                                     BestInventListview.setAdapter(bestPerformerInventoryAdapter);
-                                    //   BestInvent_fashion.setEnabled(true);
-                                    //   BestInvent_core.setEnabled(true);
-
-
                                 }
-
-
                                 Reusable_Functions.hDialog();
-
-
                             } catch (Exception e) {
                                 BestInventList.clear();
                                 bestPerformerInventoryAdapter.notifyDataSetChanged();
                                 BestInventListview.setVisibility(View.GONE);
-                                //    BestInvent_fashion.setEnabled(true);
-                                //   BestInvent_core.setEnabled(true);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
                                 BestInventListview.removeFooterView(footer);
                                 BestInventListview.setTag("FOOTER_REMOVE");
                                 footer.setVisibility(View.GONE);
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -319,11 +275,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
                         }
                         footer.setVisibility(View.VISIBLE);
-
                         lazyScroll = "ON";
-                        //BestInvent_fashion.setEnabled(false);
-                        //BestInvent_core.setEnabled(false);
-
                         requestRunningPromoApi(selectedString);
                     }
 
@@ -369,7 +321,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
         BestInvent_core = (RadioButton) findViewById(R.id.bestInvent_core);
         BestInvent_fashion = (RadioButton) findViewById(R.id.bestInvent_fashion);
-       // BestInvent_fashion.toggle();
+        // BestInvent_fashion.toggle();
         Bst_sortInventory = (RelativeLayout) findViewById(R.id.bst_sortInventory);
         BaseLayoutInventory = (RelativeLayout) findViewById(R.id.baseLayoutInventory);
         BstInventory_salesU = (LinearLayout) findViewById(R.id.bstInventory_salesU);
@@ -384,7 +336,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
 
         quickFilterPopup = (RelativeLayout) findViewById(R.id.baseQuickFilterPopup);
-        //quickFilter_baseLayout = (RelativeLayout)findViewById(R.id.bestQuickFilterPopup);
         BestQfDoneLayout = (RelativeLayout) findViewById(R.id.bestQfDoneLayout);
         quickFilterPopup.setVisibility(View.GONE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
@@ -401,7 +352,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         BestInvent_BtnBack.setOnClickListener(this);
         BestInvent_imgfilter.setOnClickListener(this);
         BestInvent_quickFilter.setOnClickListener(this);
-        //  quickFilter_baseLayout.setOnClickListener(this);
         Bst_sortInventory.setOnClickListener(this);
         BaseLayoutInventory.setOnClickListener(this);
         BestQfDoneLayout.setOnClickListener(this);
@@ -424,13 +374,10 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
     public void retainSegmentVal() {
         filter_toggleClick = true;
-        if(corefashion.equals("Fashion"))
-        {
+        if (corefashion.equals("Fashion")) {
             BestInvent_fashion.toggle();
             coreSelection = false;
-        }
-        else
-        {
+        } else {
             BestInvent_core.toggle();
             coreSelection = true;
         }
@@ -480,7 +427,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(this, SalesFilterActivity.class);
                 intent.putExtra("checkfrom", "sellThruExceptions");
                 startActivity(intent);
-                //finish();
                 break;
 
 
@@ -505,25 +451,14 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                     if (CheckWTD.isChecked()) {
                         checkTimeValueIs = "CheckWTD";
                         view = "WTD";
-             /*       BestCheckCurrent.setChecked(false);
-                    BestCheckPrevious.setChecked(false);
-                    BestCheckOld.setChecked(false);*/
-
                     } else if (CheckL4W.isChecked()) {
                         checkTimeValueIs = "CheckL4W";
                         view = "L4W";
 
-             /*       BestCheckCurrent.setChecked(false);
-                    BestCheckPrevious.setChecked(false);
-                    BestCheckOld.setChecked(false);*/
 
                     } else if (CheckSTD.isChecked()) {
                         checkTimeValueIs = "CheckSTD";
                         view = "STD";
-             /*       BestCheckCurrent.setChecked(false);
-                    BestCheckPrevious.setChecked(false);
-                    BestCheckOld.setChecked(false);*/
-
                     }
 
 
@@ -532,34 +467,24 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                     if (BestCheckCurrent.isChecked()) {
                         checkValueIs = "BestCheckCurrent";
                         popupCurrent();
-                    /*popupCurrent();
-                    BestCheckPrevious.setChecked(false);
-                    BestCheckOld.setChecked(false);
-                    BestCheckUpcoming.setChecked(false);*/
                         quickFilterPopup.setVisibility(View.GONE);
 
                     } else if (BestCheckPrevious.isChecked()) {
                         checkValueIs = "BestCheckPrevious";
                         popupPrevious();
-                   /* BestCheckOld.setChecked(false);
-                    BestCheckUpcoming.setChecked(false);
-                    BestCheckCurrent.setChecked(false);*/
+
                         quickFilterPopup.setVisibility(View.GONE);
 
                     } else if (BestCheckOld.isChecked()) {
                         checkValueIs = "BestCheckOld";
                         popupOld();
-                /*    BestCheckUpcoming.setChecked(false);
-                    BestCheckCurrent.setChecked(false);
-                    BestCheckPrevious.setChecked(false);*/
+
                         quickFilterPopup.setVisibility(View.GONE);
 
                     } else if (BestCheckUpcoming.isChecked()) {
                         checkValueIs = "BestCheckUpcoming";
                         popupUpcoming();
-             /*       BestCheckCurrent.setChecked(false);
-                    BestCheckPrevious.setChecked(false);
-                    BestCheckOld.setChecked(false);*/
+
                         quickFilterPopup.setVisibility(View.GONE);
 
                     } else {
@@ -629,64 +554,54 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             CheckL4W.setChecked(false);
             CheckSTD.setChecked(true);
 
-
         } else {
-            switch (checkValueIs.toString()) {
+            switch (checkValueIs) {
                 case "BestCheckCurrent":
                     BestCheckCurrent.setChecked(true);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);
                     BestCheckUpcoming.setChecked(false);
-                    Log.i(TAG, "BestCheckCurrent is checked");
                     break;
                 case "BestCheckPrevious":
                     BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(true);
                     BestCheckOld.setChecked(false);
                     BestCheckUpcoming.setChecked(false);
-                    Log.i(TAG, "BestCheckPrevious is checked");
                     break;
                 case "BestCheckOld":
                     BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(true);
                     BestCheckUpcoming.setChecked(false);
-                    Log.i(TAG, "BestCheckOld is checked");
                     break;
                 case "BestCheckUpcoming":
                     BestCheckCurrent.setChecked(false);
                     BestCheckPrevious.setChecked(false);
                     BestCheckOld.setChecked(false);
                     BestCheckUpcoming.setChecked(true);
-                    Log.i(TAG, "BestCheckUpcoming is checked");
                     break;
                 default:
                     break;
 
             }
-            switch (checkTimeValueIs.toString()) {
+            switch (checkTimeValueIs) {
                 case "CheckWTD":
                     CheckWTD.setChecked(true);
                     CheckL4W.setChecked(false);
                     CheckSTD.setChecked(false);
-                    Log.i(TAG, "CheckWTD is checked");
                     break;
                 case "CheckL4W":
                     CheckWTD.setChecked(false);
                     CheckL4W.setChecked(true);
                     CheckSTD.setChecked(false);
-                    Log.i(TAG, "CheckL4W is checked");
                     break;
                 case "CheckSTD":
                     CheckWTD.setChecked(false);
                     CheckL4W.setChecked(false);
                     CheckSTD.setChecked(true);
-                    Log.i(TAG, "CheckSTD is checked");
                     break;
                 default:
                     break;
-
-
             }
         }
 
@@ -700,9 +615,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         if (BstInventory_Fwd_chk.isChecked()) {
             BstInventory_Fwd_chk.setChecked(false);
             BaseLayoutInventory.setVisibility(View.GONE);
-            Log.e(TAG, "FWD pop up if");
-
-
         } else {
             BstInventory_salesU_chk.setChecked(false);
             BstInventory_salesThru_chk.setChecked(false);
@@ -710,7 +622,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             BstInventory_coverNsell_chk.setChecked(false);
             orderbycol = 3;
             BestInventList.clear();
-            Log.e(TAG, "FWD pop up else");
             Reusable_Functions.sDialog(this, "Loading.......");
             popPromo = 10;
             limit = 10;
@@ -718,20 +629,13 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             top = 10;
             requestRunningPromoApi(selectedString);
             BaseLayoutInventory.setVisibility(View.GONE);
-
-
         }
-
-
     }
 
     private void coverNsellPopUp() {
         if (BstInventory_coverNsell_chk.isChecked()) {
             BstInventory_coverNsell_chk.setChecked(false);
             BaseLayoutInventory.setVisibility(View.GONE);
-            Log.e(TAG, "coverNsell pop up if");
-
-
         } else {
             BstInventory_salesU_chk.setChecked(false);
             BstInventory_salesThru_chk.setChecked(false);
@@ -739,7 +643,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             BstInventory_coverNsell_chk.setChecked(true);
             orderbycol = 4;
             BestInventList.clear();
-            Log.e(TAG, "coverNsell pop up else");
             Reusable_Functions.sDialog(this, "Loading.......");
             popPromo = 10;
             limit = 10;
@@ -756,17 +659,13 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         if (BstInventory_salesThru_chk.isChecked()) {
             BstInventory_salesThru_chk.setChecked(false);
             BaseLayoutInventory.setVisibility(View.GONE);
-            Log.e(TAG, "salesThru pop up if");
-
         } else {
-
             BstInventory_salesU_chk.setChecked(false);
             BstInventory_salesThru_chk.setChecked(true);
             BstInventory_Fwd_chk.setChecked(false);
             BstInventory_coverNsell_chk.setChecked(false);
             orderbycol = 2;
             BestInventList.clear();
-            Log.e(TAG, "salesThru pop up else");
             Reusable_Functions.sDialog(this, "Loading.......");
             popPromo = 10;
             limit = 10;
@@ -783,7 +682,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
             BstInventory_salesU_chk.setChecked(false);
             BaseLayoutInventory.setVisibility(View.GONE);
-            Log.e(TAG, "salesUpopUp pop up if");
         } else {
 
             BstInventory_salesU_chk.setChecked(true);
@@ -792,7 +690,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             BstInventory_coverNsell_chk.setChecked(false);
             orderbycol = 1;
             BestInventList.clear();
-            Log.e(TAG, "salesUpopUp pop up else");
             Reusable_Functions.sDialog(this, "Loading.......");
             popPromo = 10;
             limit = 10;
@@ -896,7 +793,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        corefashion  = null;
+        corefashion = null;
         view = null;
         seasonGroup = null;
         checkTimeValueIs = null;
@@ -910,7 +807,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        if(filter_toggleClick == false) {
+        if (filter_toggleClick == false) {
             switch (checkedId) {
                 case R.id.bestInvent_core:
                     if (BestInvent_core.isChecked()) {
@@ -920,7 +817,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                         corefashion = "Core";
                         if (Reusable_Functions.chkStatus(context)) {
                             BestInventList.clear();
-                            //bestPerformerInventoryAdapter.notifyDataSetChanged();
                             BestInventListview.setVisibility(View.GONE);
                             Reusable_Functions.sDialog(this, "Loading.......");
                             coreSelection = true;
@@ -938,7 +834,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                         corefashion = "Fashion";
                         if (Reusable_Functions.chkStatus(context)) {
                             BestInventList.clear();
-                            //bestPerformerInventoryAdapter.notifyDataSetChanged();
                             BestInventListview.setVisibility(View.GONE);
                             Reusable_Functions.sDialog(this, "Loading.......");
                             coreSelection = false;
@@ -950,8 +845,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                     }
                     break;
             }
-        }
-        else {
+        } else {
             filter_toggleClick = false;
         }
 

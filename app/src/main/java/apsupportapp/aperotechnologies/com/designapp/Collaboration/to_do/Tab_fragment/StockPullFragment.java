@@ -170,7 +170,7 @@ public class StockPullFragment extends Fragment {
 
                             try
                             {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     checkNetworkFalse=true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();

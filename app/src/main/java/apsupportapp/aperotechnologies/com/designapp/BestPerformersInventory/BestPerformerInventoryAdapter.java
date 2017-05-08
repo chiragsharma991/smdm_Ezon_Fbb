@@ -166,10 +166,8 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         holder.BestInvent_sellThru.setText(""+Math.round(arrayList.get(position).getSellThruUnits()));
         holder.BestInvent_FWC.setText(""+Math.round(arrayList.get(position).getFwdWeekCover()));
         holder.BestInvent_RosU.setText(""+Math.round(arrayList.get(position).getRos()));
-        holder.BestInvent_GIT.setText(""+(int)arrayList.get(position).getStkGitQty());
-        holder.BestInvent_Sale.setText(""+(int)arrayList.get(position).getSaleTotQty());
-        //holder.BestInventTable_SOH.setText(""+(int)arrayList.get(position).getStkOnhandQty());
-        // holder.BestInventTable_ProdAttribute.setText(arrayList.get(position).getProdAttribute2());
+        holder.BestInvent_GIT.setText(""+arrayList.get(position).getStkGitQty());
+        holder.BestInvent_Sale.setText(""+arrayList.get(position).getSaleTotQty());
         BestPerformerInventory.BestInvent_txtStoreCode.setText(arrayList.get(position).getStoreCode());
         BestPerformerInventory.BestInvent_txtStoreName.setText(arrayList.get(position).getStoreDesc());
 
@@ -217,7 +215,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = " ";
+        String url ;
 
         url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
 
@@ -230,7 +228,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
                         Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
                             } else if(response.length() < limit){

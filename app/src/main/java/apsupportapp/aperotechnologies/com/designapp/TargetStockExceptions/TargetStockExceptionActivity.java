@@ -154,7 +154,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             Log.i(TAG, "response" + "" + response.length());
                             targetListView.setVisibility(View.VISIBLE);
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     targetListView.removeFooterView(footer);
@@ -449,7 +449,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                 } else {
 
-                    switch (checkSeasonGpVal.toString()) {
+                    switch (checkSeasonGpVal) {
                         case "Current":
                             checkCurrent.setChecked(true);
                             checkPrevious.setChecked(false);
@@ -484,7 +484,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             break;
                     }
 
-                    switch (checkTimeVal.toString()) {
+                    switch (checkTimeVal) {
                         case "CheckWTD":
                             checkWTD.setChecked(true);
                             checkL4W.setChecked(false);
@@ -502,7 +502,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkL4W.setChecked(false);
                             break;
                     }
-                    switch (checkTitleVal.toString()) {
+                    switch (checkTitleVal) {
                         case "CheckDept":
                             checkDept.setChecked(true);
                             checkPlanClass.setChecked(false);

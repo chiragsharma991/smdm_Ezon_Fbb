@@ -38,8 +38,6 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Handler;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.LocalNotificationReceiver;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity;
@@ -187,7 +185,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
 
 
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                    // Reusable_Functions.hDialog();
                                     dissmiss_progress();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -472,7 +470,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
             Topfull_checkSTD.setChecked(true);
         } else {
 
-            switch (checkTimeValueIs.toString()) {
+            switch (checkTimeValueIs) {
                 case "CheckWTD":
                     Topfull_checkWTD.setChecked(true);
                     Topfull_checkL4W.setChecked(false);

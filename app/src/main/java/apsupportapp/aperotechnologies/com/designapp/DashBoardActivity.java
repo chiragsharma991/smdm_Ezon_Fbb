@@ -182,7 +182,6 @@ public class DashBoardActivity extends AppCompatActivity
         arrayList = new ArrayList<>();
         eventUrlList = new ArrayList<>();
         productNameBeanArrayList=new ArrayList<>();
-        Bundle data=getIntent().getExtras();
         gson = new Gson();
 
 
@@ -720,7 +719,7 @@ public class DashBoardActivity extends AppCompatActivity
                         try {
 
 
-                            if (response.equals(null) || response == null) {
+                            if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(DashBoardActivity.this, "No data found", Toast.LENGTH_LONG).show();
                             } else {
@@ -988,7 +987,7 @@ public class DashBoardActivity extends AppCompatActivity
                         Log.i(TAG,"Login   Response   "+response.toString()+"\n length is"+response.length());
                         try
                         {
-                            if(response == null || response.equals(null))
+                            if(response == null || response.equals(""))
                             {
                                 RefreshTime.setText("N/A");
                             }else

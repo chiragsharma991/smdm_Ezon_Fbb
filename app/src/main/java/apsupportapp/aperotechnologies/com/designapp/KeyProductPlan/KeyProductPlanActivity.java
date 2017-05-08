@@ -35,7 +35,6 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
     static String productName = "";
     RequestQueue queue;
     public static CustomViewPager plan_pager;
-    private Gson gson;
 
 
 
@@ -44,12 +43,8 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_actual_product);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         context = this;
         m_config = MySingleton.getInstance(context);
-        Log.e("here ", "onCreate");
-
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -60,7 +55,6 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         btnFilter = (RelativeLayout) findViewById(R.id.planactual_BtnFilter);
         btnFilter.setOnClickListener(this);
 
-        gson = new Gson();
         tabLayout = (TabLayout) findViewById(R.id.planactual_tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Product Name "));
         tabLayout.addTab(tabLayout.newTab().setText("Option"));
@@ -114,16 +108,11 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
 
     public void communicateToFragment2(String productName, String segClick) {
 
-        Log.e("product ==== ", " " + productName +"\tsegClick :"+segClick);
-        Log.e("adapter.getFragment(1) ", " " + adapter);
-        KeyProductPlanActivity.productName = productName;
-     //   KeyProductPlanActivity.segClick = segClick;
 
+        KeyProductPlanActivity.productName = productName;
         Plan_Option_Fragment fragment = (Plan_Option_Fragment) adapter.getFragment(1);
         if (fragment != null) {
             fragment.fragmentCommunication(productName,segClick);
-        } else {
-
         }
     }
 
@@ -135,8 +124,6 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         Plan_SKU_Fragment fragment = ( Plan_SKU_Fragment) adapter.getFragment(2);
         if (fragment != null) {
             fragment.fragment_Communication(level,optsegmentclick);
-        } else {
-
         }
     }
 
@@ -172,7 +159,6 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
        KeyProdFilterAdapter.checkedValue = new ArrayList<String>();
         Plan_Product.prodsegClick = "";
         Plan_Product.prodsegClick = "WTD";
-       // KeyProductPlanActivity.plan_pager.setCurrentItem(0);
         finish();
     }
 }

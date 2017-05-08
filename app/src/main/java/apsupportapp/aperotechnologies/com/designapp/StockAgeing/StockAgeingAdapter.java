@@ -199,7 +199,7 @@ public class StockAgeingAdapter extends BaseAdapter{
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = " ";
+        String url;
 
         url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
 
@@ -212,7 +212,7 @@ public class StockAgeingAdapter extends BaseAdapter{
                         Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
                             } else if(response.length() < limit){

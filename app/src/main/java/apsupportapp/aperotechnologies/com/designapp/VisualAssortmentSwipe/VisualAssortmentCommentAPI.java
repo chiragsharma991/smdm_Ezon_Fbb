@@ -1,10 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -18,7 +15,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -36,6 +32,7 @@ public class VisualAssortmentCommentAPI {
      RequestQueue queue;
     Gson gson;
 
+    // Api for post method
     public static void requestSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context) {
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -48,21 +45,17 @@ public class VisualAssortmentCommentAPI {
             queue.start();
         }
         String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId;
-        Log.e("url", " post VASSORT " + url + " ==== " + obj.toString());
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, obj.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("Login   Response   ", response.toString());
                         try {
-                            if (response == null || response.equals(null)) {
+                            if (response == null || response.equals("")) {
                                 Reusable_Functions.hDialog();
                             } else {
-                                //  Toast.makeText(context, "Data is saved successfully", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -89,6 +82,7 @@ public class VisualAssortmentCommentAPI {
         queue.add(postRequest);
     }
 
+    //Api call for put method
     public static void requestUpdateSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context) {
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -101,21 +95,17 @@ public class VisualAssortmentCommentAPI {
             queue.start();
         }
         String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId;
-        Log.e("url", " put VASSORT " + url + " ==== " + obj.toString());
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, obj.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Login   Response   ", response.toString());
                         try {
-                            if (response == null || response.equals(null)) {
+                            if (response == null || response.equals("")) {
                                 Reusable_Functions.hDialog();
                             } else {
-                                //  Toast.makeText(context, "Data is updated successfully", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -147,7 +137,6 @@ public class VisualAssortmentCommentAPI {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 1);
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-        //System.out.println(cal.getTime());
         String formatted = format1.format(cal.getTime());
         System.out.println(formatted);
 

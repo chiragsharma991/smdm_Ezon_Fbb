@@ -169,7 +169,7 @@ public class RunningPromoDetail extends AppCompatActivity {
                         Log.i(TAG, "Sales View Pager response" + "" + response.length());
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(RunningPromoDetail.this, "no product data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -253,8 +253,8 @@ public class RunningPromoDetail extends AppCompatActivity {
             TextView SoH=(TextView)view.findViewById(R.id.soH);
             Mc.setText(promoList.get(i).getProdLevel6Desc());
             Prodsale.setText("\u20B9\t"+(int)promoList.get(i).getDurSaleNetVal());
-            ProdSaleU.setText(""+(int)promoList.get(i).getDurSaleTotQty());
-            SoH.setText(""+(int)promoList.get(i).getStkOnhandQty());
+            ProdSaleU.setText(""+promoList.get(i).getDurSaleTotQty());
+            SoH.setText(""+promoList.get(i).getStkOnhandQty());
             Reusable_Functions.hDialog();
             linearLayout.addView(view);
 

@@ -176,7 +176,7 @@ public class Sku_Fragment extends Fragment {
                     public void onResponse(JSONArray response) {
                         try {
 
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(getContext(), "no sku data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -193,8 +193,8 @@ public class Sku_Fragment extends Fragment {
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
                                     double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
                                     double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
-                                    int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
-                                    int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
+//                                    int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
+//                                    int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
                                     int SOH = productName1.getInt("stkOnhandQty");
                                     int GIT = productName1.getInt("stkGitQty");
                                     String Storecode = productName1.getString("storeCode");
@@ -240,8 +240,8 @@ public class Sku_Fragment extends Fragment {
                                     int WTD_Net_Sales = productName1.getInt("wtdSaleTotQty");
                                     double Day_Net_Sales_Percent = productName1.getDouble("fordayPvaSalesUnitsPercent");
                                     double WTD_Net_Sales_Percent = productName1.getDouble("wtdPvaSalesUnitsPercent");
-                                    int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
-                                    int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
+//                                    int Forday_Plan_Sale_Tot_Qty = productName1.getInt("fordayPlanSaleTotQty");
+//                                    int Wtd_Plan_Sale_Tot_Qty = productName1.getInt("wtdPlanSaleTotQty");
                                     int SOH = productName1.getInt("stkOnhandQty");
                                     int GIT = productName1.getInt("stkGitQty");
                                     String Storecode = productName1.getString("storeCode");
@@ -272,7 +272,7 @@ public class Sku_Fragment extends Fragment {
 
                                 Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
                                     public int compare(ProductNameBean one, ProductNameBean other) {
-                                        return new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
+                                        return new Integer(one.getWtdNetSales()).compareTo(other.getWtdNetSales());
                                     }
                                 });
                                 Collections.reverse(productNameBeanArrayList);
@@ -421,8 +421,6 @@ public class Sku_Fragment extends Fragment {
     private void generateTableC_AndTable_B() {
 
         // just seeing some header cell width
-        for (int x = 0; x < this.headerCellsWidth.length; x++) {
-        }
 
         for (int k = 0; k < productNameBeanArrayList.size(); k++) {
             TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getSize());

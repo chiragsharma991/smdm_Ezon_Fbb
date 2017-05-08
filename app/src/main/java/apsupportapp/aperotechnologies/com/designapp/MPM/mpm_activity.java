@@ -272,7 +272,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
               WebViewWrap.addView(remotePDFViewPager,
                       LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
               Pages_total.setText(""+adapter.getCount());
-              Process_count.setText(""+(int)0);
+              Process_count.setText(""+0);
               Log.e(TAG, "run: Total count is>>>>>>"+adapter.getCount() );
               }else{
                   error=false;
@@ -292,14 +292,14 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       error=true;
       WebViewProcess.setVisibility(View.GONE);
       Log.e(TAG, "onFailure: "+e.getMessage() );
-      Process_count.setText(""+(int)0);
+      Process_count.setText(""+0);
       Reusable_Functions.MakeToast(context,""+e.getMessage());
   }
 
   @Override
   public void onProgressUpdate(int progress, int total) {
       Log.e(TAG, "onProgressUpdate: "+progress+" and "+total );
-      Process_count.setText(""+(int)((progress*100)/total));
+      Process_count.setText(""+((progress*100)/total));
 
 
 

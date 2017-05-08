@@ -2,10 +2,9 @@ package apsupportapp.aperotechnologies.com.designapp.Feedback;
 
 
 
-        import android.animation.Animator;
-        import android.animation.AnimatorListenerAdapter;
+
         import android.content.Context;
-        import android.content.DialogInterface;
+
         import android.content.Intent;
         import android.content.SharedPreferences;
         import android.graphics.Color;
@@ -15,9 +14,9 @@ package apsupportapp.aperotechnologies.com.designapp.Feedback;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.util.Log;
-        import android.view.LayoutInflater;
+
         import android.view.View;
-        import android.view.ViewAnimationUtils;
+
         import android.view.ViewTreeObserver;
         import android.widget.Button;
         import android.widget.ImageView;
@@ -45,7 +44,7 @@ package apsupportapp.aperotechnologies.com.designapp.Feedback;
         import com.bumptech.glide.load.resource.drawable.GlideDrawable;
         import com.bumptech.glide.request.RequestListener;
         import com.bumptech.glide.request.target.Target;
-        import com.google.android.gms.playlog.internal.LogEvent;
+
         import com.google.gson.Gson;
 
         import org.json.JSONArray;
@@ -182,7 +181,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                             Log.i(TAG, "feedback response: " + " " + response);
                             Log.i(TAG, "feedback response length" + "" + response.length());
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     return;
@@ -390,20 +389,19 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                     Fitting_relative.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
                 int width  = Fitting_relative.getMeasuredWidth();
-                int height = Fitting_relative.getMeasuredHeight();
 
                 // Calculation width acording to size of phone
 
                 double x = 0;
                 if(position==0)
                     //get 0 is depend on next and pre button
-                { x= ((double) feedbackListData.get(Listposition).getFittingCntPer()/100)*width;  }
-                else if(position==1){ x= ((double) feedbackListData.get(Listposition).getPricingCntPer()/100)*width; }
-                else if(position==2){ x= ((double) feedbackListData.get(Listposition).getColorsCntPer()/100)*width; }
-                else if(position==3){ x= ((double) feedbackListData.get(Listposition).getPrintCntPer()/100)*width; }
-                else if(position==4){ x= ((double) feedbackListData.get(Listposition).getStylingCntPer()/100)*width; }
-                else if(position==5){ x= ((double) feedbackListData.get(Listposition).getFabricQualityCntPer()/100)*width; }
-                else if(position==6){ x= ((double) feedbackListData.get(Listposition).getGarmentQualityCntPer()/100)*width; }
+                { x= (feedbackListData.get(Listposition).getFittingCntPer()/100)*width;  }
+                else if(position==1){ x= (feedbackListData.get(Listposition).getPricingCntPer()/100)*width; }
+                else if(position==2){ x= (feedbackListData.get(Listposition).getColorsCntPer()/100)*width; }
+                else if(position==3){ x= (feedbackListData.get(Listposition).getPrintCntPer()/100)*width; }
+                else if(position==4){ x= (feedbackListData.get(Listposition).getStylingCntPer()/100)*width; }
+                else if(position==5){ x= (feedbackListData.get(Listposition).getFabricQualityCntPer()/100)*width; }
+                else if(position==6){ x= (feedbackListData.get(Listposition).getGarmentQualityCntPer()/100)*width; }
 
                 int percentage=(int)x;
                 Log.e("TAG", "view width:................ "+width+"and percentage is "+feedbackListData.get(0).getFittingCntPer()+"and values are"+percentage);

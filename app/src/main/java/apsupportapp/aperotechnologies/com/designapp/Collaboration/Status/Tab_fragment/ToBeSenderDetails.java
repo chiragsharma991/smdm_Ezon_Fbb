@@ -74,7 +74,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         getSupportActionBar().hide();
         context = this;
         initalise();
-
         //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         recache ="true";
@@ -112,7 +111,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(ToBeSenderDetails.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
@@ -149,10 +148,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                             statusSenderDetails = new StatusSenderDetailsAdapter(StatusDetailsList, context,SenderDetailProcess);
                             MakeHashMap(StatusDetailsList);
                             recyclerView.setAdapter(statusSenderDetails);
-
                             Reusable_Functions.hDialog();
-
-
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
@@ -230,22 +226,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     }
 
 
-    @Override
-    public void OnPress(int position) {
-
-        levelOfOption=2;
-        StatusDetailChild = new ArrayList<StatusModel>();
-        option=StatusDetailsList.get(position).getLevel();
-
-        if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading....");
-            requestStatusReceiversSubDetails(position);
-
-        } else {
-            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void requestStatusReceiversSubDetails(final int position)
     {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20")+"&recache="+recache;
@@ -260,7 +240,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 SenderDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(ToBeSenderDetails.this, "no data found", Toast.LENGTH_SHORT).show();
@@ -353,5 +333,23 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    public void onPress(int Position)
+    {
+        levelOfOption=2;
+        StatusDetailChild = new ArrayList<StatusModel>();
+        option=StatusDetailsList.get(Position).getLevel();
+
+        if (Reusable_Functions.chkStatus(context))
+        {
+            Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading....");
+            requestStatusReceiversSubDetails(Position);
+        }
+        else
+        {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+        }
     }
 }

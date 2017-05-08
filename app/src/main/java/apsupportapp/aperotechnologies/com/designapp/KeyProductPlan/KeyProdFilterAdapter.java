@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.KeyProductPlan;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -73,7 +71,7 @@ public class KeyProdFilterAdapter extends BaseAdapter implements Filterable {
         } else {
             viewHolder = (Holder) convertView.getTag();
         }
-        viewHolder.txt_product.setText(mProdStringList.get(position).toString());
+        viewHolder.txt_product.setText(mProdStringList.get(position));
 
         viewHolder.check_product.setChecked(false);
 
@@ -89,13 +87,11 @@ public class KeyProdFilterAdapter extends BaseAdapter implements Filterable {
                 if (viewHolder.check_product.isChecked()) {
                     itemChecked[position] = true;
                     checkedValue.add(viewHolder.txt_product.getText().toString());
-                    Log.e("check :",""+itemChecked[position] + "check position name :"+checkedValue);
                 }
                 else
                 {
                     itemChecked[position] = false;
                     checkedValue.remove(viewHolder.txt_product.getText().toString());
-                    Log.e("uncheck :", "" + itemChecked[position] +" uncheck position name :"+  checkedValue);
                 }
             }
         });
@@ -129,7 +125,7 @@ public class KeyProdFilterAdapter extends BaseAdapter implements Filterable {
             if (constraint != null && constraint.length() > 0) {
                 ArrayList<String> filterList = new ArrayList<String>();
                 for (int i = 0; i < mProdStringFilterList.size(); i++) {
-                    if (mProdStringFilterList.get(i).toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                    if (mProdStringFilterList.get(i).toLowerCase().contains(constraint.toString().toLowerCase())) {
                         filterList.add(mProdStringFilterList.get(i));
                     }
                 }

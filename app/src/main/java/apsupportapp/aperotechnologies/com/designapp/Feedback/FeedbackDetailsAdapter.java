@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityAdapter;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSnapAdapter;
+
 
 /**
  * Created by csuthar on 10/04/17.
@@ -90,7 +90,7 @@ public class FeedbackDetailsAdapter extends BaseAdapter{
                     holder.Addviewchild.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
                 int width  = holder.Addviewchild.getMeasuredWidth();
-                int height = holder.Addviewchild.getMeasuredHeight();
+
 
                 // Calculation width acording to size of phone
 

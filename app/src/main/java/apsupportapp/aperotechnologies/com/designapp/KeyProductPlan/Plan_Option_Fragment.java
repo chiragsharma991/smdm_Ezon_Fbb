@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,14 +114,9 @@ public class Plan_Option_Fragment extends Fragment {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-
-        Log.e("onCreate ", "Opt Fragment");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
-        Log.e("TAG", "onCreateView: OptionFragment>>>>>" );
 
         optionview = (ViewGroup) inflater.inflate(R.layout.plan_option_fragment, container, false);
         context = optionview.getContext();
@@ -138,7 +133,6 @@ public class Plan_Option_Fragment extends Fragment {
         optrel = (RelativeLayout) optionview.findViewById(R.id.planoptactual_rel);
         segmentedGroupOption = (SegmentedGroup) optionview.findViewById(R.id.segmentedGrpOption);
         opt_btnWTD = (RadioButton) optionview.findViewById(R.id.planactual_optbtnWTD);
-       // opt_btnWTD.toggle();
         opt_btnLW = (RadioButton) optionview.findViewById(R.id.planactual_optbtnLW);
         txtOptionGreen = (Button)optionview.findViewById(R.id.txtOptionGreen);
         txtOptionRed = (Button)optionview.findViewById(R.id.txtOptionRed);
@@ -304,9 +298,6 @@ public class Plan_Option_Fragment extends Fragment {
         horizontalScrollViewD.addView(tableDPlanOpt_Frag);
         // add the components to be part of the main layout
         addComponentToMainLayout();
-        //int headerCellsWidth[] = new int[headers.length];
-
-
         return optionview;
     }
 
@@ -323,7 +314,6 @@ public class Plan_Option_Fragment extends Fragment {
 
     public void fragmentCommunication(String productName,String segmentClick) {
 
-        Log.e("productName ====>> ", " " + productName);
         prod_Name = productName;
         option_seg_clk = segmentClick;
         if (Reusable_Functions.chkStatus(context)) {
@@ -469,9 +459,7 @@ public class Plan_Option_Fragment extends Fragment {
     private void generateTableC_AndTable_B() {
 
         // just seeing some header cell width
-        for (int x = 0; x < this.headerCellsWidth.length; x++) {
-          //  Log.v("Product Data", this.headerCellsWidth[x] + "");
-        }
+
 
         for (int k = 0; k < productNameBeanArrayList.size(); k++) {
 
@@ -484,8 +472,7 @@ public class Plan_Option_Fragment extends Fragment {
 
                 @Override
                 public void onClick(View v) {
-                 //   Log.e( "Option name: ",""+productNameBeanArrayList.get(i).getLevel() );
-                   // Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+
                     tableAPlanOpt_Frag.removeAllViews();
                     tableBPlanOpt_Frag.removeAllViews();
                     tableRowForTableC.removeAllViews();
@@ -517,7 +504,6 @@ public class Plan_Option_Fragment extends Fragment {
         TableRow tableRowForTableC = new TableRow(this.context);
         TextView textView = this.bodyTextView(productNameDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-        //  textView.setBackgroundResource(R.drawable.bg_pressed_text_color);
         tableRowForTableC.addView(textView, params);
         return tableRowForTableC;
 
@@ -742,16 +728,14 @@ public class Plan_Option_Fragment extends Fragment {
 
     private void requestPlanOptionAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("URL   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("PlanProductName Response", " " + response.toString() + "\nlength: " + response.length());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(getActivity(), "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -823,7 +807,6 @@ public class Plan_Option_Fragment extends Fragment {
                                 addTableRowToTableB();
                                 resizeHeaderHeight();
                                 getTableRowHeaderCellWidth();
-                                Log.e("view childcount", " " + optionview.getChildCount());
                                 if (optionview.getChildCount() == 1) {
                                     scrollViewC.scrollTo(0, 0);
                                     scrollViewD.scrollTo(0, 0);
@@ -854,7 +837,6 @@ public class Plan_Option_Fragment extends Fragment {
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
 
-                Log.e("params ", " " + params);
                 return params;
             }
         };
@@ -868,16 +850,14 @@ public class Plan_Option_Fragment extends Fragment {
     private void requestPlanOptionAchColorAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26")+"&achColor="+achColor+
                 "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("URL   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("PlanProductName Response", " " + response.toString() + "\nlength: " + response.length());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(getActivity(), "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -950,7 +930,6 @@ public class Plan_Option_Fragment extends Fragment {
                                 addTableRowToTableB();
                                 resizeHeaderHeight();
                                 getTableRowHeaderCellWidth();
-                                Log.e("view childcount", " " + optionview.getChildCount());
                                 if (optionview.getChildCount() == 1) {
                                     scrollViewC.scrollTo(0, 0);
                                     scrollViewD.scrollTo(0, 0);
@@ -982,7 +961,6 @@ public class Plan_Option_Fragment extends Fragment {
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
 
-                Log.e("params ", " " + params);
                 return params;
             }
         };

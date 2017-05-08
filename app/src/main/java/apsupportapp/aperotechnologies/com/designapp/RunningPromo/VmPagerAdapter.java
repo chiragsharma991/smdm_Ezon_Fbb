@@ -45,7 +45,7 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((LinearLayout) object);
+        return view == (object);
     }
 
     @Override
@@ -56,7 +56,6 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
         View itemView = mLayoutInflater.inflate(R.layout.activity_vm_pageritem, container, false);
 
         ImageView imageView = (ImageView) itemView.findViewById(R.id.pagerImageView);
-       // imageView.setImageResource(mResources[position]);
         Picasso.with(mContext)
                 .load(VM.list.get(position))
                 .into(imageView);

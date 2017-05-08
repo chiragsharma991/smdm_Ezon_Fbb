@@ -46,7 +46,8 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 /**
  * Created by pamrutkar on 15/03/17.
  */
-public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnClickListener,OnPress {
+public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnClickListener,OnPress
+{
     private Context context;
     private RecyclerView rec_detail_recycleView;
     private Gson gson;
@@ -79,8 +80,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
         getSupportActionBar().hide();
         context = this;
         initalise();
-
-        //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
+        //PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         recache = "true";
         Rec_Status_dtlList = new ArrayList<StatusModel>();
@@ -97,7 +97,8 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             requestReceiverStatusDetails();
-        } else {
+        } else
+        {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
     }
@@ -138,7 +139,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
 
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(ToBeReceiverDetails.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
@@ -239,8 +240,8 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
         }
     }
 
-    @Override
-    public void OnPress(int position) {
+
+    public void onPress(int position) {
         option_level=2;
         StatusDetailChild = new ArrayList<StatusModel>();
         option=Rec_Status_dtlList.get(position).getLevel();
@@ -269,7 +270,7 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
 
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 ReceiverDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(ToBeReceiverDetails.this, "no data found", Toast.LENGTH_SHORT).show();
@@ -346,11 +347,11 @@ public class ToBeReceiverDetails  extends AppCompatActivity implements View.OnCl
 
 
     }
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
     }
+
+
 }

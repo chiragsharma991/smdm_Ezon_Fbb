@@ -64,8 +64,7 @@ public class GravitySnapHelper extends LinearSnapHelper {
     public GravitySnapHelper(int gravity, boolean enableSnapLastItem, SnapListener snapListener) {
         if (gravity != Gravity.START && gravity != Gravity.END
                 && gravity != Gravity.BOTTOM && gravity != Gravity.TOP) {
-//            throw new IllegalArgumentException("Invalid gravity value. Use START " +
-//                    "| END | BOTTOM | TOP constants");
+
         }
         mSnapListener = snapListener;
         mGravity = gravity;

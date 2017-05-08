@@ -288,8 +288,6 @@ public class Option_Fragment extends Fragment {
     private void generateTableC_AndTable_B() {
 
         // just seeing some header cell width
-        for (int x = 0; x < this.headerCellsWidth.length; x++) {
-        }
 
         for (int k = 0; k <= productNameBeanArrayList.size() - 1; k++) {
 
@@ -576,7 +574,7 @@ public class Option_Fragment extends Fragment {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = " ";
+        String url ;
 
         url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit1;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -585,7 +583,7 @@ public class Option_Fragment extends Fragment {
                     public void onResponse(JSONArray response) {
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() < limit) {
@@ -644,7 +642,7 @@ public class Option_Fragment extends Fragment {
                     public void onResponse(JSONArray response) {
                         try {
 
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(getContext(), "no article data found", Toast.LENGTH_LONG).show();
                             } else {
@@ -718,7 +716,7 @@ public class Option_Fragment extends Fragment {
                                     }
                                     Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
                                         public int compare(ProductNameBean one, ProductNameBean other) {
-                                            return new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
+                                            return new Integer(one.getWtdNetSales()).compareTo(other.getWtdNetSales());
                                         }
                                     });
                                     Collections.reverse(productNameBeanArrayList);

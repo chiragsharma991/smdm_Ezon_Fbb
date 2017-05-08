@@ -2,7 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
+
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,18 +11,16 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
-import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
-import apsupportapp.aperotechnologies.com.designapp.WorstPerformersPromo.WorstPerformerActivity;
+
+
+
 
 public class FilterActivity extends AppCompatActivity implements View.OnClickListener {
 

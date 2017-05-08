@@ -184,7 +184,7 @@ public class RunningPromoDetails extends AppCompatActivity {
                             Log.i(TAG, "Sales View Pager response" + "" + response.length());
 
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(RunningPromoDetails.this, "no product data found", Toast.LENGTH_LONG).show();
                                 } else if (response.length() == limit) {

@@ -4,17 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -39,7 +35,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -50,7 +46,7 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Mod
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
+
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
@@ -129,7 +125,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                         Log.i(TAG, "Detail api total length" + "" + response.length());
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 DetailProcess.setVisibility(View.GONE);
@@ -225,7 +221,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                         Log.i(TAG, "Detail api total length" + "" + response.length());
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
@@ -373,22 +369,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         context.startActivity(intent);
     }
 
-    @Override
-    public void OnPress(int position) {
-        MCCodeDesc = DetailsList.get(position).getMccodeDesc();
-        option = DetailsList.get(position).getLevel();
-        levelOfOption = 2;
-        ChildDetailList = new ArrayList<ToDo_Modal>();
-        if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.sDialog(Details.this, "Loading....");
-            DetailProcess.setVisibility(View.VISIBLE);
 
-
-            requestReceiversChildDetails(position);
-        } else {
-            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -442,7 +423,7 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
                         public void onResponse(JSONObject response) {
                             Log.e("Submit Click Response :", response.toString());
                             try {
-                                if (response == null || response.equals(null)) {
+                                if (response == null || response.equals("")) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
 
@@ -498,5 +479,22 @@ public class Details extends AppCompatActivity implements OnPress,View.OnClickLi
         }
 
 
+    }
+
+    @Override
+    public void onPress(int Position) {
+        MCCodeDesc = DetailsList.get(Position).getMccodeDesc();
+        option = DetailsList.get(Position).getLevel();
+        levelOfOption = 2;
+        ChildDetailList = new ArrayList<ToDo_Modal>();
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.sDialog(Details.this, "Loading....");
+            DetailProcess.setVisibility(View.VISIBLE);
+
+
+            requestReceiversChildDetails(Position);
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+        }
     }
 }

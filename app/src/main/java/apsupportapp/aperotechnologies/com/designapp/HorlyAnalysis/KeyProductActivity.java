@@ -44,6 +44,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
     RelativeLayout btnBack;
     RelativeLayout btnSearch;
     public static String prodName = "";
+    private final String LOG_TAG = "MainActivity";
     KeyProductAdapter adapter;
     TabLayout tabLayout;
     MySingleton m_config;
@@ -57,6 +58,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
     private ArrayList<EtlStatus> etlStatusList;
     private Gson gson;
     public static Activity key_product_activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +137,7 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response == null || response.equals(null)) {
+                            if (response == null || response.equals("")) {
                                 RefreshTime.setText("N/A");
                             } else {
 
@@ -223,9 +225,6 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         Option_Fragment fragment = (Option_Fragment) adapter.getFragment(1);
         if (fragment != null) {
             fragment.fragmentCommunication(productName);
-        } else
-        {
-
         }
     }
 
@@ -235,9 +234,6 @@ public class KeyProductActivity extends AppCompatActivity implements View.OnClic
         Sku_Fragment sku_fragment = (Sku_Fragment) adapter.getFragment(2);
         if (sku_fragment != null) {
             sku_fragment.fragmentCommunication1(productName, articleOption);
-        } else
-        {
-
         }
     }
 

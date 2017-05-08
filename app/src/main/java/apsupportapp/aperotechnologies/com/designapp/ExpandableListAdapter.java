@@ -63,9 +63,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     // Hashmap for keeping track of our checkbox check states
     private HashMap<Integer, boolean[]> mChildCheckStates;
-    private HashMap<Integer, boolean[]> mProductChildCheckStates;
-
-    // Our getChildView & getGroupView use the viewholder patter
+     // Our getChildView & getGroupView use the viewholder patter
     // Here are the viewholders defined, the inner classes are
     // at the bottom
     private ChildViewHolder childViewHolder;
@@ -85,7 +83,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         // Initialize our hashmap containing our check states here
         mChildCheckStates = new HashMap<Integer, boolean[]>();
-        mProductChildCheckStates = new HashMap<Integer, boolean[]>();
     }
 
     @Override
@@ -195,7 +192,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             // boolean value of getChecked[position]
 
             if (mChildPosition >= getChildrenCount(mGroupPosition)) {
-            } else {
+            }
+            else {
                 try {
                     if (mGroupPosition == 1) {
                         childViewHolder.mCheckBox.setChecked(false);
@@ -319,7 +317,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     public void onResponse(JSONArray response) {
                         Log.i("Sub Dept Response", response.toString());
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(mContext, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {

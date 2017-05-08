@@ -32,7 +32,7 @@ import java.net.URL;
  public class DownloadFileUrlConnectionImpl   implements DownloadFile {
     private static final int KILOBYTE = 1024;
 
-    private static final int BUFFER_LEN = 1 * KILOBYTE;
+    private static final int BUFFER_LEN = KILOBYTE;
     private static final int NOTIFY_PERIOD = 150 * KILOBYTE;
 
     Context context;
@@ -53,14 +53,14 @@ import java.net.URL;
                 try {
                     File file = new File(destinationPath);
                     FileOutputStream fileOutput = new FileOutputStream(file);
-                    HttpURLConnection urlConnection = null;
+                    HttpURLConnection urlConnection;
                     URL urlObj = new URL(url);
                     urlConnection = (HttpURLConnection) urlObj.openConnection();
                     int totalSize = urlConnection.getContentLength();
                     int downloadedSize = 0;
                     int counter = 0;
                     byte[] buffer = new byte[BUFFER_LEN];
-                    int bufferLength = 0;
+                    int bufferLength;
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 
                     while ((bufferLength = in.read(buffer)) > 0) {

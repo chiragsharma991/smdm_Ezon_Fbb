@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +37,6 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -117,12 +115,9 @@ public class Plan_SKU_Fragment extends Fragment {
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
 
-        Log.e("onCreate ", "Opt Fragment");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        Log.e("TAG", "onCreateView: Plan SKU >>>>>" );
 
         skuview = (ViewGroup) inflater.inflate(R.layout.planactual_sku_fragment, container, false);
         context = skuview.getContext();
@@ -141,12 +136,7 @@ public class Plan_SKU_Fragment extends Fragment {
         queue = new RequestQueue(cache, network);
         queue.start();
         prodnm = KeyProductPlanActivity.productName;
-       // KeyProductPlanActivity.segClick = "";
         skurel = (RelativeLayout) skuview.findViewById(R.id.planskuactual_rel);
-
-
-
-        Log.e("Current Item :",""+KeyProductPlanActivity.plan_pager.getCurrentItem());
         segmentedGroupSku = (SegmentedGroup) skuview.findViewById(R.id.segmentedGrpSku);
         sku_btnWTD = (RadioButton) skuview.findViewById(R.id.planactual_skubtnWTD);
 
@@ -154,7 +144,6 @@ public class Plan_SKU_Fragment extends Fragment {
         segmentedGroupSku.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-             //   if(skutoggleClick==false) {
                     switch (checkedId) {
                         case R.id.planactual_skubtnWTD:
                             if (sku_seg_clk.equals("WTD"))
@@ -205,11 +194,7 @@ public class Plan_SKU_Fragment extends Fragment {
                             }
                             break;
                     }
-//                }
-//                else
-//                {
-//                    skutoggleClick = false;
-//                }
+
             }
         });
 
@@ -232,7 +217,7 @@ public class Plan_SKU_Fragment extends Fragment {
                     planlevel = 3;
                     achColor = "Green";
                     productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
-                 retainSegmntVal();
+                    retainSegmntVal();
                     requestPlanSkuAchColorAPI(offsetvalue, limit);
 
                 }
@@ -321,8 +306,6 @@ public class Plan_SKU_Fragment extends Fragment {
 
         optionName = level;
         sku_seg_clk = optionsegmentclick;
-        Log.e("fragment_Communication:"," " +level +"\tsegmentclk :"+optionsegmentclick +"Curnt Item :"+KeyProductPlanActivity.plan_pager.getChildCount()+"Child Cnt :"+KeyProductPlanActivity.plan_pager.getChildCount());
-      //  KeyProductPlanActivity.segClick = "";
         txtOptionName.setText(level);
         if (Reusable_Functions.chkStatus(context)) {
             LinearLayout layout = (LinearLayout) KeyProductPlanActivity.plan_pager.getParent();
@@ -345,9 +328,7 @@ public class Plan_SKU_Fragment extends Fragment {
     }
 
     private void retainSegmntVal() {
-       // skutoggleClick=true;
-
-        if(sku_seg_clk.equals("WTD"))
+       if(sku_seg_clk.equals("WTD"))
         {
            sku_btnWTD.toggle();
 
@@ -359,8 +340,6 @@ public class Plan_SKU_Fragment extends Fragment {
         }
 
     }
-
-
     // initalized components
     private void initComponents() {
 
@@ -471,13 +450,11 @@ public class Plan_SKU_Fragment extends Fragment {
     private void generateTableC_AndTable_B() {
 
         // just seeing some header cell width
-        for (int x = 0; x < this.headerCellsWidth.length; x++) {
-        }
 
-        for (int k = 0; k < productNameBeanArrayList.size(); k++) {
-            Log.e("Came","here" );
-            final TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getLevel());
-            final TableRow taleRowForTableD = this.taleRowForTableD(productNameBeanArrayList.get(k));
+
+        for (KeyPlanProductBean aProductNameBeanArrayList : productNameBeanArrayList) {
+            final TableRow tableRowForTableC = this.tableRowForTableC(aProductNameBeanArrayList.getLevel());
+            final TableRow taleRowForTableD = this.taleRowForTableD(aProductNameBeanArrayList);
             tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
             taleRowForTableD.setBackgroundColor(Color.parseColor("#dfdedf"));
             this.tableCPlanSku.addView(tableRowForTableC);
@@ -494,7 +471,6 @@ public class Plan_SKU_Fragment extends Fragment {
         TableRow tableRowForTableC = new TableRow(this.context);
         TextView textView = this.bodyTextView(productNameDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-        //  textView.setBackgroundResource(R.drawable.bg_pressed_text_color);
         tableRowForTableC.addView(textView, params);
         return tableRowForTableC;
 
@@ -718,16 +694,14 @@ public class Plan_SKU_Fragment extends Fragment {
 
     private void requestPlanSkuAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + sku_seg_clk + "&level=" + planlevel +"&option=" + optionName.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("URL   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("PlanProductName Response", " " + response.toString() + "\nlength: " + response.length());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(getActivity(), "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -803,12 +777,6 @@ public class Plan_SKU_Fragment extends Fragment {
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
-                                Log.e(" sku view childcount", " " + skuview.getChildCount());
-//                                if (skuview.getChildCount() == 2) {
-//                                    scrollViewC.scrollTo(0, 0);
-//                                    scrollViewD.scrollTo(0, 0);
-//                                    skuview.addView(sku_relativeLayout);
-//                                }
                                 Plan_Product.relPlanProd_Frag.removeAllViews();
 
                             }
@@ -832,8 +800,6 @@ public class Plan_SKU_Fragment extends Fragment {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
-
-                Log.e("params ", " " + params);
                 return params;
             }
         };
@@ -846,16 +812,14 @@ public class Plan_SKU_Fragment extends Fragment {
 
     private void requestPlanSkuAchColorAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + sku_seg_clk + "&level=" + planlevel +"&option=" + optionName.replaceAll(" ", "%20").replaceAll("&", "%26")+ "&achColor="+ achColor +"&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("URL   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("PlanSkuAchColorName Response", " " + response.toString() + "\nlength: " + response.length());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(getActivity(), "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -956,8 +920,7 @@ public class Plan_SKU_Fragment extends Fragment {
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
 
-                Log.e("params ", " " + params);
-                return params;
+               return params;
             }
         };
         int socketTimeout = 60000;//5 seconds

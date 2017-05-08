@@ -5,7 +5,7 @@ import android.content.Context;
         import android.content.Intent;
         import android.support.v7.widget.RecyclerView;
         import android.util.Log;
-        import android.view.Gravity;
+
         import android.view.LayoutInflater;
         import android.view.MotionEvent;
         import android.view.View;
@@ -17,7 +17,6 @@ import android.content.Context;
 
         import java.util.ArrayList;
 
-        import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexSnapAdapter;
         import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.VM;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
@@ -106,10 +105,7 @@ public class ExpiringPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 });
             }
         }
-        else
-        {
 
-        }
 
     }
 

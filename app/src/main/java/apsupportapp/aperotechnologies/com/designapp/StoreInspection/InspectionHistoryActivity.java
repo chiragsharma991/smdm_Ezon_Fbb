@@ -1,15 +1,15 @@
 package apsupportapp.aperotechnologies.com.designapp.StoreInspection;
 
-import android.app.Activity;
+
 import android.content.Context;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -31,7 +31,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,7 +75,6 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e("", "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -114,20 +113,16 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
 
     private void requestInspectionSummary() {
         String url = ConstsCore.web_url + "/v1/display/storeinspectionsummary/" + userId + "?recache=" + recache;
-        Log.e("Inspection History Url", "" + url);
       postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("Inspection History api response : ", "" + response);
-                        Log.e("Inspection History total length :", "" + response.length());
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
-                                Log.e("", "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
                                     inspectionBeanClass = gson.fromJson(response.get(i).toString(), InspectionBeanClass.class);
@@ -140,7 +135,6 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
                                 requestInspectionSummary();
 
                             } else if (response.length() < limit) {
-                                Log.e("", "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
                                     inspectionBeanClass = gson.fromJson(response.get(i).toString(), InspectionBeanClass.class);
                                     inspectionArrayList.add(inspectionBeanClass);
@@ -158,7 +152,6 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
-                            Log.e("", "catch...Error" + e.toString());
                         }
                     }
                 },

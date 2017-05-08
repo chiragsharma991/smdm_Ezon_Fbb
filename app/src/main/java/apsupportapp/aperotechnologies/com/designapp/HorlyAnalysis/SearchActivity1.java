@@ -161,7 +161,7 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SearchActivity1.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -238,7 +238,7 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count1 == 0)
+                            if (response.equals("") || response == null || response.length() == 0 && count1 == 0)
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SearchActivity1.this, "no data found", Toast.LENGTH_LONG).show();

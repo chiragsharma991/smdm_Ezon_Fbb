@@ -193,7 +193,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void sortRetain()
     {
-        switch (orderbycol.toString())
+        switch (orderbycol)
         {
             case "7":
                 Log.e(TAG, "sortRetain: 7");
@@ -243,7 +243,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 //in this checkvalueIs  save the previous done condition params and call to true or false
 
 
-            switch (checkValueIs.toString()) {
+            switch (checkValueIs) {
                 case "BestCheckCurrent":
                     BestCheckCurrent.setChecked(true);
                     BestCheckPrevious.setChecked(false);
@@ -276,7 +276,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                     break;
 
             }
-            switch (checkTimeValueIs.toString()) {
+            switch (checkTimeValueIs) {
                 case "CheckWTD":
                     CheckWTD.setChecked(true);
                     CheckL4W.setChecked(false);
@@ -345,7 +345,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                             Log.i(TAG, "response" + "" + response.length());
                             BestInventListview.setVisibility(View.VISIBLE);
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     BestInventListview.removeFooterView(footer);
@@ -429,9 +429,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                             BestInventListview.removeFooterView(footer);
                             BestInventListview.setTag("FOOTER_REMOVE");
                             BestInventListview.setVisibility(View.GONE);
-                     //       Log.e(TAG, "onErrorResponse  " + error.getMessage().toString());
-
-                            String json = null;
+                            String json;
                             NetworkResponse response = error.networkResponse;
                             if(response != null && response.data != null){
                                 switch(response.statusCode){
@@ -446,7 +444,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                            error.printStackTrace();
                         }
                         public String trimMessage(String json, String key){
-                            String trimmedString = null;
+                            String trimmedString;
                             try{
                                 JSONObject obj = new JSONObject(json);
                                 trimmedString = obj.getString(key);

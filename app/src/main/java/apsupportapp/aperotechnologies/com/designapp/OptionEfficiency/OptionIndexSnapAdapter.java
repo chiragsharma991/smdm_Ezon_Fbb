@@ -102,52 +102,56 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
                 //  fromWhere = "Department";
-                if (fromWhere.equals("Department")) {
+                switch (fromWhere) {
+                    case "Department":
 
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanDept());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
-
-
-                } else if (fromWhere.equals("Subdept")) {
-
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanCategory());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
-
-                } else if (fromWhere.equals("Class")) {
-
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanClass());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanDept());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
 
 
-                } else if (fromWhere.equals("Subclass")) {
+                        break;
+                    case "Subdept":
 
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandName());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanCategory());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
+
+                        break;
+                    case "Class":
+
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanClass());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
 
 
-                } else if (fromWhere.equals("MC")) {
+                        break;
+                    case "Subclass":
 
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandplanClass());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandName());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
+
+
+                        break;
+                    case "MC":
+
+                        ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandplanClass());
+                        ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
+                        ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
+                        ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
+                        ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
+                        break;
                 }
             }
-        } else {
-
         }
 
     }

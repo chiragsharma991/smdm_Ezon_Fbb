@@ -193,7 +193,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
 
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     SkewedSizeListview.removeFooterView(footer);
@@ -541,7 +541,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             Skewed_checkL4W.setChecked(false);
             Skewed_checkSTD.setChecked(true);
         } else {
-            switch (qfButton.toString()) {
+            switch (qfButton) {
                 case "checkCurrent":
                     checkCurrent.setChecked(true);
                     checkPrevious.setChecked(false);
@@ -569,7 +569,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
             }
 
-            switch (checkTimeValueIs.toString()) {
+            switch (checkTimeValueIs) {
                 case "CheckWTD":
                     Skewed_checkWTD.setChecked(true);
                     Skewed_checkL4W.setChecked(false);

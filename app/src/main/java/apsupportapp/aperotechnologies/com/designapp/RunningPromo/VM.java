@@ -1,18 +1,15 @@
 package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
-import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
-import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
+
 
 public class VM extends AppCompatActivity {
     public static ArrayList<String>list;

@@ -7,11 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.text.TextWatcher;
-import android.util.Log;
+
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -23,7 +21,6 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -39,15 +36,12 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.daprlabs.cardstack.SwipeDeck;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -137,31 +131,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         edtTextComment = (EditText) findViewById(R.id.edtTextComment);
         txtSize = (TextView) findViewById(R.id.txtSize);
 
-//        edtTextSets.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                String strEnteredVal = edtTextSets.getText().toString();
-//
-//                if(!strEnteredVal.equals("")){
-//                    int num=Integer.parseInt(strEnteredVal);
-//                    if(num<10000){
-//                        edtTextSets.setText(""+num);
-//                    }else{
-//                        Toast.makeText(context,"Please Enter Valid Number",Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
+
         maxCharactes = 500;
         edtTextComment.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxCharactes)});
 
@@ -250,10 +220,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.e("click of buy done button","");
                 layoutBuy.setVisibility(View.GONE);
-                //edtTextSets.setText("0");
-                //btnbuy.setEnabled(false);
+
                 InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 if(inputManager != null){
                     inputManager.hideSoftInputFromWindow(edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
@@ -262,16 +230,13 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
         });
 
-//
+
         btnCommentDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Log.e("click of comment done button","");
-
                 layoutComment.setVisibility(View.GONE);
-                //edtTextComment.setText("");
-                //btncomment.setEnabled(false);
+
                 InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 if(inputManager != null){
                     inputManager.hideSoftInputFromWindow(edtTextComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
@@ -325,7 +290,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             limit = 100;
             count = 0;
             recache = "true";
-          //  flag = false;
             likeDislikeFlg = "Pending";
             if (postRequest != null) {
                 postRequest.cancel();
@@ -366,7 +330,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                     checkFeedback = "";
                 }
                 int checkSizeSet = visualAssort1.getSizeSet();
-                Log.i("MainActivity", "card was swiped left: position " + position+" articleOption "+articleOption+" checkLikedislike "+checkLikedislike+" checkSizeSet "+checkSizeSet+" checkFeedback "+checkFeedback);
 
                 JSONObject obj = new JSONObject();
                 try
@@ -381,20 +344,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-//                if(checkLikedislike != null || checkFeedback != null || !checkLikedislike.equals("") || checkSizeSet != 0 ||(!checkFeedback.equals("")))
-//                {
-//                    //GO FOR PUT METHOD
-//
-//                    VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
-//                    visualAssort1.setLikeDislikeFlg("0");
-//                }
-//                else
-//                {
-//                    //GO FOR POST METHOD
-//
-//                    VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
-//                    visualAssort1.setLikeDislikeFlg("0");
-//                }
 
                 if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
                 {
@@ -437,7 +386,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                     checkFeedback = "";
                 }
                 int checkSizeSet = visualAssort1.getSizeSet();
-                Log.i("MainActivity", "card was swiped right: position " + position+" articleOption "+articleOption+" checkLikedislike "+checkLikedislike+" checkSizeSet "+checkSizeSet+" checkFeedback "+checkFeedback);
 
                 JSONObject obj = new JSONObject();
                 try
@@ -451,19 +399,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 {
                     e.printStackTrace();
                 }
-
-//                if(checkLikedislike != null || checkFeedback != null ||  !checkLikedislike.equals("") || checkSizeSet != 0 ||(!checkFeedback.equals("")))
-//                {
-//                    //GO FOR PUT METHOD
-//                    VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
-//                    visualAssort1.setLikeDislikeFlg("1");
-//                }
-//                else
-//                {
-//                    //GO FOR POST METHOD
-//                    VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
-//                    visualAssort1.setLikeDislikeFlg("1");
-//                }
 
                 if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
                 {
@@ -491,39 +426,19 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
             @Override
             public void cardsDepleted() {
-                Log.i("MainActivity", "no more cards");
                 Toast.makeText(context, "No more data", Toast.LENGTH_LONG).show();
-//                if (flag == false) {
-//                    if (Reusable_Functions.chkStatus(context)) {
-//                        visualassortmentlist = new ArrayList<VisualAssort>();
-//                        Reusable_Functions.sDialog(context, "Loading data...");
-//                        requestdisplayVisualAssortment(selectedString);
-//
-//
-//                    } else {
-//                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-//                    }
-//                } else {
-//                    Toast.makeText(context, "No more data", Toast.LENGTH_LONG).show();
-//
-//                }
             }
-
 
             @Override
             public void cardActionDown() {
-                Log.i(TAG, "cardActionDown");
             }
 
             @Override
             public void cardActionUp() {
-                Log.i(TAG, "cardActionUp");
             }
 
         });
 
-//        cardStack.setLeftImage(R.id.left_image);
-//        cardStack.setRightImage(R.id.right_image);
 
  }
 
@@ -533,7 +448,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             visualAssort_CompletedChk.setChecked(true);
             visualAssort_PendingChk.setChecked(false);
             visualAssortSortLayout.setVisibility(View.GONE);
-            Log.e(TAG, "Completed");
 
 
         } else if (!visualAssort_CompletedChk.isChecked()) {
@@ -542,16 +456,13 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
             if (Reusable_Functions.chkStatus(context)) {
 
-                // reloverlay.setVisibility(View.VISIBLE);
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Loading data...");
                 offsetvalue = 0;
                 limit = 100;
                 count = 0;
                 recache = "true";
-             //   flag = false;
                 cardStack.setVisibility(View.GONE);
-               // visualassortmentlist = new ArrayList<VisualAssort>();
                 likeDislikeFlg = "Completed";
                 requestdisplayVisualAssortment(selectedString);
                 visualAssortSortLayout.setVisibility(View.GONE);
@@ -568,9 +479,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             visualAssort_CompletedChk.setChecked(false);
             visualAssort_PendingChk.setChecked(true);
             visualAssortSortLayout.setVisibility(View.GONE);
-            Log.e(TAG, "Pending");
-
-
         } else if (!visualAssort_PendingChk.isChecked()) {
             visualAssort_CompletedChk.setChecked(false);
             visualAssort_PendingChk.setChecked(true);
@@ -583,9 +491,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 limit = 100;
                 count = 0;
                 recache = "true";
-               // flag = false;
                 cardStack.setVisibility(View.GONE);
-              //  visualassortmentlist = new ArrayList<VisualAssort>();
                 likeDislikeFlg = "Pending";
                 requestdisplayVisualAssortment(selectedString);
                 visualAssortSortLayout.setVisibility(View.GONE);
@@ -607,7 +513,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
     private void requestdisplayVisualAssortment(String selectedString) {
 
-        String url = " ";
+        String url;
         if (vassort_from_filter) {
             url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString +"&recache="+ recache;
         }
@@ -617,21 +523,13 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         }
 
 
-
-        Log.e("url", " URL VASSORT "+url);
-
       postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response visualassortment: ", " "+response.length());
-                        Log.e("response",""+response);
-
-                        try
-
+                       try
                         {
-
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0)
+                           if (response.equals("") || response == null || response.length() == 0 && count == 0)
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
@@ -649,10 +547,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                               // visualassortmentlist.clear();
                                 if(visualassortmentlist.size() == 0)
                                 {
-                                    Log.e(TAG, "onResponse: "+visualassortmentlist.size());
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     cardStack.setVisibility(View.GONE);
                                     Reusable_Functions.hDialog();
@@ -663,7 +559,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                     cardStack.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
                                     cardStack.setVisibility(View.VISIBLE);
-                                 //   flag = true;
                                     Reusable_Functions.hDialog();
                                 }
                             }
@@ -674,10 +569,9 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                     visualAssort = gson.fromJson(response.get(i).toString(), VisualAssort.class);
                                     visualassortmentlist.add(visualAssort);
                                 }
-                               // visualassortmentlist.clear();
+
                                 if(visualassortmentlist.size() == 0)
                                 {
-                                    Log.e(TAG, "onResponse1111: "+visualassortmentlist.size());
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     cardStack.setVisibility(View.GONE);
                                     Reusable_Functions.hDialog();
@@ -688,19 +582,9 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                     cardStack.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
                                     cardStack.setVisibility(View.VISIBLE);
-                                   // flag = true;
                                     Reusable_Functions.hDialog();
                                 }
                             }
-//                            for(int i = 0; i < visualassortmentlist.size(); i++)
-//                            {
-//                                Log.e("size"," "+visualassortmentlist.size());
-//                                Log.e("--ArticleOpt--"," "+visualassortmentlist.get(i).getArticleOption());
-//                                Log.e("--isLikeDislike--"," "+visualassortmentlist.get(i).getLikeDislikeFlg());
-//                                Log.e("--isFeedBack--"," "+visualassortmentlist.get(i).getFeedback());
-//                            }
-
-
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -738,7 +622,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-       // Toast.makeText(context," onBack pressed",Toast.LENGTH_SHORT).show();
         onBackClick();
     }
 
@@ -765,8 +648,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         }
         else
         {
-           /* Intent i = new Intent(VisualAssortmentActivity.this, DashBoardActivity.class);
-            startActivity(i);*/
+
            finish();
         }
     }

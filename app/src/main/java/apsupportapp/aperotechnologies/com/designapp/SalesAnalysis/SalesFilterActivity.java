@@ -205,7 +205,7 @@ public class SalesFilterActivity extends Activity {
                 StringBuilder build = new StringBuilder();
                  //Send selected hierarchy level sales activity
                 if (SalesFilterExpandableList.text1.length() != 0) {
-                    String deptmnt = SalesFilterExpandableList.text1.toString().replace("%", "%25");
+                    String deptmnt = SalesFilterExpandableList.text1.replace("%", "%25");
                     String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
                     String Department;
 
@@ -228,7 +228,7 @@ public class SalesFilterActivity extends Activity {
                 }
 
                 if (SalesFilterExpandableList.text2.length() != 0) {
-                    String categry = SalesFilterExpandableList.text2.toString().replace("%", "%25");
+                    String categry = SalesFilterExpandableList.text2.replace("%", "%25");
                     String updateCategory = categry.replace(" ", "%20").replace("&", "%26");
                     String Categary = "category=" + updateCategory;
                     build.append("&");
@@ -237,8 +237,8 @@ public class SalesFilterActivity extends Activity {
 
                 }
 
-                if (SalesFilterExpandableList.text3.toString().length() != 0) {
-                    String plancls = SalesFilterExpandableList.text3.toString().replace("%", "%25");
+                if (SalesFilterExpandableList.text3.length() != 0) {
+                    String plancls = SalesFilterExpandableList.text3.replace("%", "%25");
                     String updatePlanClass = plancls.replace(" ", "%20").replace("&", "%26");
                     String planclass = "class=" + updatePlanClass;
                     build.append("&");
@@ -248,7 +248,7 @@ public class SalesFilterActivity extends Activity {
                 }
 
                 if (SalesFilterExpandableList.text4.length() != 0) {
-                    String brand = SalesFilterExpandableList.text4.toString().replace("%", "%25");
+                    String brand = SalesFilterExpandableList.text4.replace("%", "%25");
                     String updateBrand = brand.replace(" ", "%20").replace("&", "%26");
                     String Brand = "brand=" + updateBrand;
                     build.append("&");
@@ -258,7 +258,7 @@ public class SalesFilterActivity extends Activity {
                 }
 
                 if (SalesFilterExpandableList.text5.length() != 0) {
-                    String brandcls = SalesFilterExpandableList.text5.toString().replace("%", "%25");
+                    String brandcls = SalesFilterExpandableList.text5.replace("%", "%25");
                     String updateBrandCls = brandcls.replace(" ", "%20").replace("&", "%26");
                     String Brandclass = "brandclass=" + updateBrandCls;
                     build.append("&");
@@ -416,7 +416,7 @@ public class SalesFilterActivity extends Activity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SalesFilterActivity.this, "no data found in department", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -495,7 +495,7 @@ public class SalesFilterActivity extends Activity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SalesFilterActivity.this, "no data found in subdept", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -573,7 +573,7 @@ public class SalesFilterActivity extends Activity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SalesFilterActivity.this, "no data found in class", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -649,7 +649,7 @@ public class SalesFilterActivity extends Activity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SalesFilterActivity.this, "no data found in subclass", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -728,7 +728,7 @@ public class SalesFilterActivity extends Activity {
                     {
                         try
                         {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0)
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(SalesFilterActivity.this, "no data found in mc", Toast.LENGTH_LONG).show();

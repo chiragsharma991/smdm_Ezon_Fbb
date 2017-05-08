@@ -42,6 +42,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
+@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public class ToBeReceiver extends Fragment  implements OnclickStatus{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -178,11 +179,13 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         super.onDetach();
         mListener = null;
     }
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private void MakeReceiver_StatusHashMap(ArrayList<StatusModel> senderSummaryList) {
         rec_initiatedStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
         for (int i = 0; i <senderSummaryList.size() ; i++)
         {
-            ArrayList<StatusModel>list=new ArrayList<>();
+            //noinspection MismatchedQueryAndUpdateOfCollection
+            @SuppressWarnings("MismatchedQueryAndUpdateOfCollection") ArrayList<StatusModel>list=new ArrayList<>();
             rec_initiatedStatusList.put(i,list);
         }
 
@@ -259,7 +262,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
 
                         try
                         {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Receiver_checkNetwkstatus= true;
                                 return;
@@ -365,7 +368,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                         Log.e(TAG, "ReceiverCaseStatus api total length" + "" + response.length());
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 StatusActivity.StatusProcess.setVisibility(View.GONE);
                                 // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();

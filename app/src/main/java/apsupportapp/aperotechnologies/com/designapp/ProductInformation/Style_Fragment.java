@@ -34,20 +34,16 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.SampleObject;
+
 
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -138,7 +134,7 @@ public class Style_Fragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No size data found", Toast.LENGTH_LONG).show();
                                 Style_loadingBar.setVisibility(View.GONE);
@@ -240,7 +236,7 @@ public class Style_Fragment extends Fragment {
 
             LayoutInflater layoutInflater = (LayoutInflater)getActivity()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
-            view = (ViewGroup) layoutInflater.inflate(R.layout.activity_stylefragment_child, null);
+            view = layoutInflater.inflate(R.layout.activity_stylefragment_child, null);
             TextView StyleColorName = (TextView) view.findViewById(R.id.styleColorName);
             TextView StyleFwd = (TextView) view.findViewById(R.id.styleFwd);
             TextView StyleSize = (TextView) view.findViewById(R.id.styleSize);
@@ -259,7 +255,7 @@ public class Style_Fragment extends Fragment {
         }
         LayoutInflater layoutInflater = (LayoutInflater)getActivity()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
-        view = (ViewGroup) layoutInflater.inflate(R.layout.activity_style_totalchild, null);
+        view = layoutInflater.inflate(R.layout.activity_style_totalchild, null);
         TextView StyleTW_total = (TextView) view.findViewById(R.id.styleTW_total);
         TextView StyleSOH_total = (TextView) view.findViewById(R.id.styleSOH_total);
         StyleTW_total.setText(""+sumTW);
@@ -281,7 +277,7 @@ public class Style_Fragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            if (response.equals(null) || response == null) {
+                            if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data Found", Toast.LENGTH_LONG).show();
 
@@ -488,12 +484,7 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
     private void generateTableC_AndTable_B() {
 
 
-        // just seeing some header cell width
-        for (int x = 0; x < this.headerCellsWidth.length; x++) {
-        }
-
-
-        for (int k = 0; k < styleColorBeanList.size(); k++) {
+       for (int k = 0; k < styleColorBeanList.size(); k++) {
             if (k == 0 && styleColorBeanList.size() == 1) {
                 TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
                 tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
@@ -1001,7 +992,7 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                     public void onResponse(JSONArray response) {
                         try {
 
-                            if (response.equals(null) || response == null || response.length() == 0) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
 

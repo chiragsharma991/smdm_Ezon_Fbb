@@ -119,30 +119,36 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
                 SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
 
-                if (fromwhere.equals("Department")) {
+                switch (fromwhere) {
+                    case "Department":
 
-                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
-                    ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
+                        ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-                } else if (fromwhere.equals("Subdept")) {
+                        break;
+                    case "Subdept":
 
-                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
-                    ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
+                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-                } else if (fromwhere.equals("Class")) {
+                        break;
+                    case "Class":
 
-                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
-                    ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
+                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-                } else if (fromwhere.equals("Subclass")) {
+                        break;
+                    case "Subclass":
 
-                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
-                    ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
+                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
-                } else if (fromwhere.equals("MC")) {
+                        break;
+                    case "MC":
 
-                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
-                    ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
+                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        break;
                 }
 
                 double singlePercVal = 0.5;//50/100;// width divide by 100 perc
@@ -169,8 +175,6 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                     ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
                 }
             }
-        } else {
-
         }
 
     }

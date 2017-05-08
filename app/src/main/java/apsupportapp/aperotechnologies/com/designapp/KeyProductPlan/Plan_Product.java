@@ -2,7 +2,6 @@ package apsupportapp.aperotechnologies.com.designapp.KeyProductPlan;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,25 +38,15 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.security.Key;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
-import apsupportapp.aperotechnologies.com.designapp.OnRowPressListener;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -123,7 +111,6 @@ public class Plan_Product extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        Log.e("TAG", "onCreateView: Productview>>>>>" );
 
         view = (ViewGroup) inflater.inflate(R.layout.planactual_product_fragment, container, false);
         context = view.getContext();
@@ -135,7 +122,6 @@ public class Plan_Product extends Fragment {
         queue.start();
         planlevel = 1;
         filterProductValues = getActivity().getIntent().getStringExtra("productfilterValue");
-        Log.e("filterProductValues :",""+filterProductValues);
         relPlanProd_Frag = (RelativeLayout) view.findViewById(R.id.planactual_rel);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.planactual_productrelLayout);
         relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));  //dfdedf
@@ -153,15 +139,11 @@ public class Plan_Product extends Fragment {
 
         segmentedGroupProduct = (SegmentedGroup) view.findViewById(R.id.segmentedGrpProduct);
         plan_btnWTD = (RadioButton) view.findViewById(R.id.planactual_prodbtnWTD);
-       // plan_btnWTD.toggle();
+
         plan_btnLW = (RadioButton) view.findViewById(R.id.planactual_prodbtnLW);
-        Log.e( "onCreateView: ","" +prodsegClick );
         txtProdGreen = (Button)view.findViewById(R.id.txtProdGreen);
         txtProdRed = (Button) view.findViewById(R.id.txtProdRed);
         txtProdAmber = (Button) view.findViewById(R.id.txtProdAmber);
-
-        Log.e("TAG", "onCreateView: Productview>>>>>" );
-
         if (Reusable_Functions.chkStatus(context)) {
 
             Reusable_Functions.hDialog();
@@ -171,8 +153,6 @@ public class Plan_Product extends Fragment {
             count = 0;
             planlevel = 1;
             productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
-
-            Log.e("Segment Val in Api ",""+prodsegClick);
 
             if(filterProductValues == null || filterProductValues == "") {
                 plantoggleClick = false;
@@ -490,9 +470,7 @@ public class Plan_Product extends Fragment {
     private void generateTableC_AndTable_B() {
 
         // just seeing some header cell width
-        for (int x = 0; x < this.headerCellsWidth.length; x++) {
-         //   Log.v("Product Data", this.headerCellsWidth[x] + "");
-        }
+
 
         for (int k = 0; k < productNameBeanArrayList.size(); k++) {
             final TableRow tableRowForTableCProd_Frag;
@@ -511,8 +489,6 @@ public class Plan_Product extends Fragment {
                 @Override
                 public void onClick(View v) {
                     KeyProductPlanActivity.productName = productNameBeanArrayList.get(i).getLevel();
-                   // KeyProductPlanActivity.segClick = prodsegClick;
-                    Log.e("segmt click",""+prodsegClick);
                     relPlanProd_Frag.setVisibility(View.GONE);
                     ViewPager viewPager = (ViewPager) view.getParent();
                     LinearLayout layout = (LinearLayout) viewPager.getParent();
@@ -541,7 +517,6 @@ public class Plan_Product extends Fragment {
         TableRow tableRowForTableCProd_Frag = new TableRow(this.context);
         TextView textView = this.bodyTextView(productNameDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-     //   Log.e("Value", textView.getText().toString());
         tableRowForTableCProd_Frag.addView(textView, params);
         return tableRowForTableCProd_Frag;
     }
@@ -754,16 +729,14 @@ public class Plan_Product extends Fragment {
 
     private void requestFilterProductAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&productName="+filterProductValues.replace(" ","%20").replaceAll("&", "%26") +"&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("filtre product Url   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("PlanProductFilter Response", " " + response.toString() + "\nlength: " + response.length());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no product data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -864,8 +837,6 @@ public class Plan_Product extends Fragment {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
-
-                Log.e("params ", " " + params);
                 return params;
             }
         };
@@ -878,16 +849,14 @@ public class Plan_Product extends Fragment {
 
     private void requestPlanProductAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("URL   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("PlanProductName Response", " " + response.toString() + "\nlength: " + response.length());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no product data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -987,8 +956,6 @@ public class Plan_Product extends Fragment {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
-
-                Log.e("params ", " " + params);
                 return params;
             }
         };
@@ -1001,16 +968,14 @@ public class Plan_Product extends Fragment {
 
     private void requestPlanProductAchColorAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&achColor=" + achColor +"&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("URL   ", url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("PlanProduct Ach Color Response", " " + response.toString() + "\nlength: " + response.length());
                         try {
                             int i;
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no product data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
@@ -1112,8 +1077,6 @@ public class Plan_Product extends Fragment {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
-
-                Log.e("params ", " " + params);
                 return params;
             }
         };

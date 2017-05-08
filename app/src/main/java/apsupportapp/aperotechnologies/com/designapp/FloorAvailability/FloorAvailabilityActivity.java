@@ -178,7 +178,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                             floorListView.setVisibility(View.VISIBLE);
 
                             try {
-                                if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     floorListView.removeFooterView(footer);
@@ -497,7 +497,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
 
         } else {
-            switch (floorcheckSeasonGpVal.toString()) {
+            switch (floorcheckSeasonGpVal) {
                 case "Current":
                     checkCurrent.setChecked(true);
                     checkPrevious.setChecked(false);

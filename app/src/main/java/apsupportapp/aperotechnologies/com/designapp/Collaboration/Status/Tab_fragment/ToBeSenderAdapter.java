@@ -10,18 +10,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.android.volley.Response;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
-
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.OnPress;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;

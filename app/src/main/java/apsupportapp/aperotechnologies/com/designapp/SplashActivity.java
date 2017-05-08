@@ -1,6 +1,5 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -30,15 +27,9 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-
 import com.crashlytics.android.Crashlytics;
-import com.testfairy.TestFairy;
-
-import apsupportapp.aperotechnologies.com.designapp.StoreInspection.InspectionBeginActivity;
 import io.fabric.sdk.android.Fabric;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,9 +79,6 @@ public class SplashActivity extends AppCompatActivity {
                     if (sharedPreferences.getBoolean("log_flag", false) == true) {
                         if (Reusable_Functions.chkStatus(context)) {
                             requestLoginAPI();
-                        } else
-                        {
-                            //Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                         }
                     } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
                         Intent i = new Intent(SplashActivity.this, LoginActivity.class);
@@ -157,7 +145,7 @@ public class SplashActivity extends AppCompatActivity {
                         Log.i("Login   Response   ", response.toString());
                         try
                         {
-                            if (response == null || response.equals(null))
+                            if (response == null || response.equals(""))
                             {
                                 Reusable_Functions.hDialog();
                             }

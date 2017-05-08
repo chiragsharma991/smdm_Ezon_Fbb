@@ -62,7 +62,7 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
         } else {
             viewHolder = (Holder) convertView.getTag();
         }
-        viewHolder.nameTv.setText(mStringList.get(position).toString());
+        viewHolder.nameTv.setText(mStringList.get(position));
         return convertView;
     }
 
@@ -92,7 +92,7 @@ public class ValueAdapter extends BaseAdapter implements Filterable {
             {
                 ArrayList<String> filterList = new ArrayList<String>();
                 for (int i = 0; i < mStringFilterList.size(); i++) {
-                    if (mStringFilterList.get(i).toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                    if (mStringFilterList.get(i).toLowerCase().contains(constraint.toString().toLowerCase())) {
                         filterList.add(mStringFilterList.get(i));
                     }
                 }

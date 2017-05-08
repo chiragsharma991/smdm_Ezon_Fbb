@@ -1,28 +1,20 @@
 package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 
 
-import android.annotation.SuppressLint;
+
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.preference.PreferenceManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
-
-
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -35,11 +27,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-
-
 import org.json.JSONArray;
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,7 +37,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -58,14 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.ListBrandClass;
 import apsupportapp.aperotechnologies.com.designapp.model.ListCategory;
 import apsupportapp.aperotechnologies.com.designapp.model.ListPlanClass;
 
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity.level_filter;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity.subBrandPlanClass;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity.subBrandnm;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity.subCategory;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity.subPlanClass;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity.subdept;
-import static com.crashlytics.android.Crashlytics.TAG;
-import static com.crashlytics.android.Crashlytics.log;
+
 
 
 public class SalesFilterExpandableList extends BaseExpandableListAdapter {
@@ -649,7 +629,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                     public void onResponse(JSONArray response) {
 
                         try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
 
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(mContext, "no data found", Toast.LENGTH_LONG).show();

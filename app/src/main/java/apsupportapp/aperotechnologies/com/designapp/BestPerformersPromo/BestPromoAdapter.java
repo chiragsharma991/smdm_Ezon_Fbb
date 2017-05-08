@@ -12,10 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
