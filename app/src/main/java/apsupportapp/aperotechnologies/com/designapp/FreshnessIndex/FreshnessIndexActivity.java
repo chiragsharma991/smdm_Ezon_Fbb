@@ -537,7 +537,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         //list view on Scroll event
 
         listViewFIndex.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
+         
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

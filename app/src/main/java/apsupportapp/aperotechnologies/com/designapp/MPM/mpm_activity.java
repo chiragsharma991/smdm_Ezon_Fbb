@@ -10,7 +10,6 @@ import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,16 +19,13 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Cache;
 import com.android.volley.Network;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-
 import java.util.ArrayList;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
@@ -80,9 +76,6 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       context = this;
       checkCollapsing();
       intialise();
-
-
-
       if (Reusable_Functions.chkStatus(context)) {
           Reusable_Functions.hDialog();
           mpm_model model=new mpm_model();
@@ -93,21 +86,15 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
 
 
   }
-
-
-
-
   private void intialise() {
 
       sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
       userId = sharedPreferences.getString("userId", "");
       bearertoken = sharedPreferences.getString("bearerToken", "");
-      Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
       cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
       network = new BasicNetwork(new HurlStack());
       queue = new RequestQueue(cache, network);
       queue.start();
-
       Toolbar_title=(TextView)findViewById(R.id.toolbar_title);
       Process_count = (TextView) findViewById(R.id.process_count);
       Pages_count = (TextView) findViewById(R.id.pages_count);
@@ -118,16 +105,12 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       Bottom_listItem = (LinearLayout) findViewById(R.id.bottom_listItem);
       BaseLayout = (LinearLayout) findViewById(R.id.baseLayout);
       BaseLayout.setVisibility(View.GONE);
-
       Bottom_listItem.setVisibility(View.VISIBLE);
       WebViewProcess.setVisibility(View.GONE);
       WebViewProcess.setOnClickListener(this);
       Pdf_zoom_btn.setOnClickListener(this);
-
       WebViewWrap = (LinearLayout) findViewById(R.id.webview_wrap);
-
       url = ConstsCore.web_url + "/v1/display/mpmproducts/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
-      Log.e(TAG, "web_url: " + url);
       listView = (ListView) findViewById(R.id.department_list);
       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
@@ -140,9 +123,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
                   departmentName=list.get(position).getProductName();
                   mpmAdapter.notifyDataSetChanged();
                   WebViewProcess.setVisibility(View.VISIBLE);
-                //  new GetbytesFrompdf().execute(list.get(position).getMpmPath());
                   callPdf(position);
-                  Log.e(TAG, "clickPosition: in Activity "+clickPosition );
 
               }
           }
@@ -155,13 +136,10 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   private void checkCollapsing() {
       if (Build.VERSION.SDK_INT >= 21) {
           Window window = getWindow();
-
           // clear FLAG_TRANSLUCENT_STATUS flag:
           window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
           // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
           window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
 // finally change the color
           window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
       }
@@ -172,7 +150,6 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   @Override
   public void response(ArrayList<mpm_model> list) {
       listener = (DownloadFile.Listener) context;
-      Log.e(TAG, "response: " + list.size());
       this.list = list;
       mpmAdapter = new mpm_adapter(context, list);
       listView.setAdapter(mpmAdapter);
@@ -180,7 +157,6 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       departmentName=list.get(0).getProductName();
       // set web view for read pdf...
       WebViewProcess.setVisibility(View.VISIBLE);
-     // new GetbytesFrompdf().execute(list.get(0).getMpmPath());
       callPdf(0);
 
 
@@ -195,7 +171,6 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       remotePDFViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
           @Override
           public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-              //Log.e(TAG, "onPageScrolled: "+position+"total count is" );
               int count=position+1;
               Pages_count.setText(""+count);
           }
@@ -256,9 +231,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
 
   @Override
   public void onSuccess(final String url, String destinationPath) {
-      Log.e(TAG, "onSuccess: "+url+" and "+destinationPath );
       Handler handler = new Handler(Looper.getMainLooper());
-
       handler.postDelayed(new Runnable() {
 
           public void run() {
@@ -273,14 +246,10 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
                       LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
               Pages_total.setText(""+adapter.getCount());
               Process_count.setText(""+(int)0);
-              Log.e(TAG, "run: Total count is>>>>>>"+adapter.getCount() );
               }else{
                   error=false;
                   WebViewProcess.setVisibility(View.GONE);
-
-
               }
-
 
           }
       }, 1000 );
@@ -291,41 +260,22 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   public void onFailure(Exception e) {
       error=true;
       WebViewProcess.setVisibility(View.GONE);
-      Log.e(TAG, "onFailure: "+e.getMessage() );
       Process_count.setText(""+(int)0);
       Reusable_Functions.MakeToast(context,""+e.getMessage());
   }
 
   @Override
   public void onProgressUpdate(int progress, int total) {
-      Log.e(TAG, "onProgressUpdate: "+progress+" and "+total );
       Process_count.setText(""+(int)((progress*100)/total));
-
-
-
   }
 
 
-
-  private void OnMainThread()
-  {
-      mpm_activity.this.runOnUiThread(new Runnable() {
-          public void run() {
-              Reusable_Functions.MakeToast(mpm_activity.this,"data failed...");
-              WebViewProcess.setVisibility(View.GONE);
-
-          }
-      });
-  }
 
 
   private void handle(final byte[] array) {
       Handler handler = new Handler(Looper.getMainLooper());
-
       handler.postDelayed(new Runnable() {
           public void run() {
-              // Run your task here
-            //  loadpdf(array);
           }
       }, 1000 );
   }

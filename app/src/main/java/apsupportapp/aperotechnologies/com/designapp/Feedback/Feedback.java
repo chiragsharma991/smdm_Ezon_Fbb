@@ -1,25 +1,18 @@
 package apsupportapp.aperotechnologies.com.designapp.Feedback;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,7 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -47,26 +39,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.playlog.internal.LogEvent;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.Details;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-@SuppressWarnings("deprecation")
 public class Feedback extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout Feedback_BtnBack;
@@ -87,10 +70,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
     private TextView Pricing, Colours, Prints, Styling, Fabric_quality, Garment_quality;
-    private TextView Feedback_option,Fitting;
+    private TextView Feedback_option, Fitting;
     private EditText feedback_comment;
     private AlertDialog dialog;
-    private LinearLayout firstView,FeedbackNext;
+    private LinearLayout firstView, FeedbackNext;
     private RelativeLayout secondView;
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
@@ -98,8 +81,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private boolean feedbackReport = false;
     private Feedback_model feedback_model_report;
     private String selectCategory;
-    private String storecode,storeDes;
-    //  private Feedback_details feedbackAdapter;
+    private String storecode, storeDes;
 
 
     @Override
@@ -140,18 +122,13 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         optionList.add("Styling");
         optionList.add("Fabric Quality");
         optionList.add("Garment Quality");
-
         Feedback_BtnBack = (RelativeLayout) findViewById(R.id.feedback_BtnBack);
         Feedback_image = (ImageView) findViewById(R.id.feedback_image);
         Feedback_option = (TextView) findViewById(R.id.feedback_option);
         ImageLoader_feedback = (ProgressBar) findViewById(R.id.imageLoader_feedback);
-        // FeedbackDetailList=(ListView)findViewById(R.id.feedbackDetailList);
-
-
         firstView = (LinearLayout) findViewById(R.id.replaceView_first);
         secondView = (RelativeLayout) findViewById(R.id.replaceView_two);
         FeedbackNext = (LinearLayout) findViewById(R.id.feedbackNext);
-
         Pricing = (TextView) findViewById(R.id.pricing);
         Fitting = (TextView) findViewById(R.id.fitting);
         Colours = (TextView) findViewById(R.id.colours);
@@ -159,8 +136,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         Styling = (TextView) findViewById(R.id.styling);
         Fabric_quality = (TextView) findViewById(R.id.fabric_quality);
         Garment_quality = (TextView) findViewById(R.id.garment_quality);
-
-
         Fitting_relative = (RelativeLayout) findViewById(R.id.fitting_relative);
         Pricing_relative = (RelativeLayout) findViewById(R.id.pricing_relative);
         colours_relative = (RelativeLayout) findViewById(R.id.colours_relative);
@@ -168,12 +143,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         styling_relative = (RelativeLayout) findViewById(R.id.styling_relative);
         fabric_relative = (RelativeLayout) findViewById(R.id.fabric_relative);
         garment_relative = (RelativeLayout) findViewById(R.id.garment_relative);
-
-
         ImageLoader_feedback.setVisibility(View.GONE);
         firstView.setVisibility(View.VISIBLE);
         secondView.setVisibility(View.GONE);
-
         Feedback_BtnBack.setOnClickListener(this);
         Pricing.setOnClickListener(this);
         Fitting.setOnClickListener(this);
@@ -189,26 +161,21 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
 
         if (Reusable_Functions.chkStatus(context)) {
-
-
-
             String url;
+
             if (!feedbackReport) {
                 url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
 
             } else {
 
-                String option=Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" +option + "&offset=" + offsetvalue + "&limit=" + limit;
+                String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
-            Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "feedback response: " + " " + response);
-                            Log.i(TAG, "feedback response length" + "" + response.length());
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -222,7 +189,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                     // if api call for report then it will true
                                     if (feedbackReport) {
 
-                                        Log.e(TAG, "Top eql limit");
                                         for (int i = 0; i < response.length(); i++) {
                                             feedback_model_report = gson.fromJson(response.get(i).toString(), Feedback_model.class);
                                             feedbackReportList.add(feedback_model_report);
@@ -232,7 +198,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                         requestFeedbackApi();
 
                                     } else {
-                                        Log.e(TAG, "Top eql limit");
                                         for (int i = 0; i < response.length(); i++) {
                                             feedback_model = gson.fromJson(response.get(i).toString(), Feedback_model.class);
                                             feedbackList.add(feedback_model);
@@ -252,7 +217,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
                                     if (feedbackReport) {
 
-                                        Log.e(TAG, "promo /= limit");
                                         for (int i = 0; i < response.length(); i++) {
 
                                             feedback_model_report = gson.fromJson(response.get(i).toString(), Feedback_model.class);
@@ -272,7 +236,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
 
                                     } else {
-                                        Log.e(TAG, "promo /= limit");
                                         for (int i = 0; i < response.length(); i++) {
 
                                             feedback_model = gson.fromJson(response.get(i).toString(), Feedback_model.class);
@@ -286,11 +249,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                         nextList(listCount);
                                     }
                                 }
-
-
-                                // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                                // feedbackAdapter = new Feedback_details(feedbackList,Feedback.this);
-
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
@@ -323,7 +281,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 }
             };
             int socketTimeout = 60000;//5 seconds
-
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
@@ -345,17 +302,14 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.feedbackNext:
-
                 if (listCount + 1 < feedbackList.size()) {
                     if (Build.VERSION.SDK_INT >= 21) {
                         Reusable_Functions.ViewVisible(firstView);
                         Reusable_Functions.ViewGone(secondView);
-                    }else {
+                    } else {
                         firstView.setVisibility(View.VISIBLE);
                         secondView.setVisibility(View.GONE);
                     }
-
-
                     listCount++;
                     nextList(listCount);
                 } else {
@@ -363,22 +317,20 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 }
 
                 break;
+
             default:
+
                 TextView button = (TextView) view;
                 selectCategory = button.getText().toString();
-                Log.e(TAG, "onClick:  selectCategory"+selectCategory);
                 commentDialog();
                 break;
-
-
         }
     }
 
     private void nextList(int position) {
         Feedback_option.setText(feedbackList.get(position).getOption());
-        storecode=feedbackList.get(position).getStoreCode();
-        storeDes=feedbackList.get(position).getStoreDesc();
-        Log.e(TAG, "array list size : " + feedbackList.size());
+        storecode = feedbackList.get(position).getStoreCode();
+        storeDes = feedbackList.get(position).getStoreDesc();
         ImageLoader_feedback.setVisibility(View.VISIBLE);
 
         if (!feedbackList.get(position).getProdImageUrl().equals("")) {
@@ -412,18 +364,15 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void commentDialog() {
 
-        Log.e(TAG, "commentDialog: true....");
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
-
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         View v = inflater.inflate(R.layout.comment_dialog, null);
         LinearLayout skip = (LinearLayout) v.findViewById(R.id.comment_skip);
         LinearLayout ok = (LinearLayout) v.findViewById(R.id.comment_ok);
         feedback_comment = (EditText) v.findViewById(R.id.feedback_comment);
-
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -432,7 +381,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Submitting data…");
                     JSONObject jsonObject = OnSubmit();
-                    Log.e(TAG, "jsonObject: "+jsonObject.toString() );
                     requestReceiverSubmitAPI(context, jsonObject);
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -447,12 +395,11 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
                 if (!(feedback_comment.getText().length() == 0)) {
 
-
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Submitting data…");
                         JSONObject jsonObject = OnSubmit();
-                        Log.e(TAG, "jsonObject: "+jsonObject.toString() );
+                        Log.e(TAG, "jsonObject: " + jsonObject.toString());
                         requestReceiverSubmitAPI(context, jsonObject);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -479,12 +426,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if (Build.VERSION.SDK_INT >= 21) {
             Reusable_Functions.ViewGone(firstView);
             Reusable_Functions.ViewVisible(secondView);
-        }else{
+        } else {
             firstView.setVisibility(View.GONE);
             secondView.setVisibility(View.VISIBLE);
         }
-
-
         Fitting_relative.removeAllViewsInLayout();
         Pricing_relative.removeAllViewsInLayout();
         colours_relative.removeAllViewsInLayout();
@@ -494,14 +439,12 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         garment_relative.removeAllViewsInLayout();
 
         //calculate screen view size and add line bar process.
-
         ViewTreeObserver vto = Fitting_relative.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @SuppressWarnings("deprecation")
             @Override
             public void onGlobalLayout() {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    //noinspection deprecation,deprecation,deprecation,deprecation
                     Fitting_relative.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 } else {
                     Fitting_relative.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -509,8 +452,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 int width = Fitting_relative.getMeasuredWidth();
                 int height = Fitting_relative.getMeasuredHeight();
 
-                // Calculation width acording to size of phone
 
+                // Calculation width acording to size of phone
                 double x = 0;  // x is result of calculation.
                 if (position == 0)
                 //get 0 is depend on next and pre button
@@ -533,7 +476,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 int percentage = (int) x;
                 Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackReportList.get(0).getFittingCntPer() + "and values are" + percentage);
                 View lp = new View(context);
-                // LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(400,LinearLayout.LayoutParams.MATCH_PARENT);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setLayoutParams(layoutParams);
                 lp.setBackgroundColor(Color.parseColor("#e3e2e3"));
@@ -624,7 +566,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         final RelativeLayout.LayoutParams params2 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
-
         params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         params2.addRule(RelativeLayout.CENTER_VERTICAL);
         textView2.setLayoutParams(params2);
@@ -661,19 +602,18 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         // do not change this section because this is only hardcoded and case sensitive.
         int fitting = selectCategory.equals("Fitting") ? 1 : 0;
-        int pricing = selectCategory.equals("Pricing")  ? 1 : 0;
-        int colours = selectCategory.equals("Colours")  ? 1 : 0;
-        int prints = selectCategory.equals("Prints")  ? 1 : 0;
-        int styling = selectCategory.equals("Styling")  ? 1 : 0;
-        int fabric = selectCategory.equals("Fabric Quality")  ? 1 : 0;
-        int fabricQuality = selectCategory.equals("Garment Quality")  ? 1 : 0;
+        int pricing = selectCategory.equals("Pricing") ? 1 : 0;
+        int colours = selectCategory.equals("Colours") ? 1 : 0;
+        int prints = selectCategory.equals("Prints") ? 1 : 0;
+        int styling = selectCategory.equals("Styling") ? 1 : 0;
+        int fabric = selectCategory.equals("Fabric Quality") ? 1 : 0;
+        int fabricQuality = selectCategory.equals("Garment Quality") ? 1 : 0;
 
 
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("option", Feedback_option.getText().toString());
             jsonObject.put("userId", userId);
-            // jsonObject.put("storeCode", storecode);
             jsonObject.put("prodImageUrl", feedbackList.get(listCount).getProdImageUrl());
             jsonObject.put("comments", feedback_comment.getText().toString());
             jsonObject.put("fitting", fitting);
@@ -684,12 +624,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             jsonObject.put("fabricQuality", fabric);
             jsonObject.put("garmentQuality", fabricQuality);
 
-
-
-
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.e(TAG, "OnSubmit: catch error " + e.getMessage());
         }
 
 
@@ -701,14 +637,11 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
-
             String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId;//+"?recache="+recache
-            Log.e("url", " post Request " + url + " ==== " + object.toString());
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.e("Submit Click Response :", response.toString());
                             try {
                                 if (response == null || response.equals(null)) {
                                     Reusable_Functions.hDialog();
