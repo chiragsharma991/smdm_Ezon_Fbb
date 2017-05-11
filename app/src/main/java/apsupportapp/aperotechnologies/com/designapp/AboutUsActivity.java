@@ -6,14 +6,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 public class AboutUsActivity extends AppCompatActivity {
-//
+
     RelativeLayout btnBack;
     TextView txtversioncode;
     Context context;
@@ -26,8 +25,6 @@ public class AboutUsActivity extends AppCompatActivity {
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         txtversioncode = (TextView) findViewById(R.id.versioncode);
         context = this;
-        Log.e("About us ","");
-
         PackageInfo pInfo = null;
         try {
             pInfo = context.getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -47,7 +44,6 @@ public class AboutUsActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public void onBackPressed() {
 

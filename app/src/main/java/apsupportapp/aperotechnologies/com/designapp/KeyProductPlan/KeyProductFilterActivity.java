@@ -194,8 +194,6 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
                                 adapter = new KeyProdFilterAdapter(keyPlanProductList, getApplicationContext());
                                 keyprod_listView.setAdapter(adapter);
                                 Reusable_Functions.hDialog();
-
-
                             }
 
                         } catch (Exception e) {
@@ -225,7 +223,6 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
-
 
     @Override
     public void onBackPressed() {

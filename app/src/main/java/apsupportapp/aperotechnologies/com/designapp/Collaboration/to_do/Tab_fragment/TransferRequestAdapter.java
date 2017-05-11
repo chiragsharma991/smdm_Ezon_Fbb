@@ -23,14 +23,12 @@ public class TransferRequestAdapter  extends RecyclerView.Adapter<RecyclerView.V
 
     private final Context context;
     private final ArrayList<Transfer_Request_Model> sender_list;
-    private static boolean check = false;
+
 
 
     public TransferRequestAdapter(ArrayList<Transfer_Request_Model> list, Context context) {
         this.sender_list = list;
         this.context = context;//
-
-
     }
 
     @Override
@@ -46,7 +44,6 @@ public class TransferRequestAdapter  extends RecyclerView.Adapter<RecyclerView.V
         if (holder instanceof TransferRequestAdapter.Holder) {
             if (position < sender_list.size()) {
 
-                // holder.snapTextView.setText(snap.getText());
                 ((TransferRequestAdapter.Holder) holder).transferRequest_stockCode.setText(sender_list.get(position).getReqStoreCode());
                 ((TransferRequestAdapter.Holder) holder).transferRequest_stockdesc.setText(sender_list.get(position).getReqStoreDesc());
                 ((TransferRequestAdapter.Holder) holder).transferRequest_case.setText(sender_list.get(position).getCaseNo());
@@ -68,13 +65,11 @@ public class TransferRequestAdapter  extends RecyclerView.Adapter<RecyclerView.V
 
     }
 
-
     private static class Holder extends RecyclerView.ViewHolder {
 
 
         TextView transferRequest_stockCode, transferRequest_case, transferRequest_stockdesc, transferRequest_reqty,
                 transferRequest_avlqty, transferRequest_optreq, transferRequest_days;
-        CardView transferRequest_cardView;
 
         public Holder(View itemView) {
             super(itemView);
@@ -85,10 +80,6 @@ public class TransferRequestAdapter  extends RecyclerView.Adapter<RecyclerView.V
             transferRequest_reqty = (TextView) itemView.findViewById(R.id.stock_sohRequested);
             transferRequest_optreq = (TextView) itemView.findViewById(R.id.stock_numberOfOption);
             transferRequest_days = (TextView) itemView.findViewById(R.id.transferRequest_days);
-          //  transferRequest_cardView = (CardView) itemView.findViewById(R.id.transferRequest_cardView);
-
-
         }
-
     }
 }

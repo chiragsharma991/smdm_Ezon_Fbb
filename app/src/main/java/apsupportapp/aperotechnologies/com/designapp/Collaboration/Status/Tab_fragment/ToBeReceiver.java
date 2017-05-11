@@ -8,13 +8,11 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -29,33 +27,26 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
-@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+
 public class ToBeReceiver extends Fragment  implements OnclickStatus{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
-    private String TAG="StatusReceiver_Fragment";
     private ViewGroup view;
     Context context;
     private Gson gson;
@@ -109,10 +100,8 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         initialise();
         MainMethod();
-
         return view;
     }
-
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -127,7 +116,6 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
 
     private void MainMethod() {
         NetworkProcess();
-
         if(Reusable_Functions.chkStatus(context))
         {
             Reusable_Functions.sDialog(context, "Loading...");
@@ -143,16 +131,12 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     private void initialise() {
 
         recyclerView_receiver=(RecyclerView)view.findViewById(R.id.to_be_sender_list);
-
-
     }
 
     private void NetworkProcess()
     {
-
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -166,12 +150,10 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
             mListener.onFragmentInteraction(uri);
         }
     }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-
     }
 
     @Override
@@ -179,7 +161,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         super.onDetach();
         mListener = null;
     }
-    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+
     private void MakeReceiver_StatusHashMap(ArrayList<StatusModel> senderSummaryList) {
         rec_initiatedStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
         for (int i = 0; i <senderSummaryList.size() ; i++)
@@ -217,25 +199,24 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
 
             // this case is for last two sto and grn
 
-            if(Case == 1)
+            if(Case == 1) // initiated status
             {
                 requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
 
             }
-            if(Case == 2)
+            if(Case == 2) // Sender Acpt status
             {
                 requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
 
-            }else if (Case==3)
+            }else if (Case==3) // STO status
             {
                 requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
 
-            }else if(Case == 4)
+            }else if(Case == 4) // GRN status
             {
                 requestReceiverCaseStatus(caseNo,actionStatus,rec_senderStoreCode,dublicatePosition,Case);
 
             }
-
 
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
@@ -251,16 +232,12 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     private void requestReceiverCaseStatusSummary()
     {
         String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache;
-        Log.e(TAG, "Status Receiver Summary Url" + "" + receiver_case_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.i(TAG, "Status Receiver response : " + " " + response);
-                        Log.i(TAG, "Status Receiver length" + "" + response.length());
-
-                        try
+                    try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -268,7 +245,6 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                                 return;
 
                             } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++)
                                 {
 
@@ -281,15 +257,12 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                                 requestReceiverCaseStatusSummary();
 
                             } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     recstatusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     ReceiverSummaryList.add(recstatusModel);
-
                                 }
                           }
-
                             recyclerView_receiver.setLayoutManager(new LinearLayoutManager(recyclerView_receiver.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView_receiver.setOnFlingListener(null);
                             MakeReceiver_StatusHashMap(ReceiverSummaryList);
@@ -301,9 +274,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },
@@ -334,65 +305,52 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     }
     private void requestReceiverCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position,final int Case)
     {
-        String url = "";
-        if(Case==1)
+        String url="" ;
+        if(Case==1) // initiated status
         {
             url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/initiated/" + userId + "?offset=" + offsetval+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode +"&recache="+recache;
 
 
-        }else if(Case == 2)
+        }else if(Case == 2) // Sender Acpt status
         {
             url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/senderacpt/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
 
         }
-
-        else if(Case == 3 ){
-
-
+        else if(Case == 3 ) // STO status
+        {
             url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/sto/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
 
         }
-        else if(Case==4)
+        else if(Case==4) // GRN status
         {
-
             url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
-
         }
-        Log.e(TAG, "ReceiverCaseStatus Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e(TAG, "ReceiverCaseStatus api response : " + " " + response);
-                        Log.e(TAG, "ReceiverCaseStatus api total length" + "" + response.length());
-
-                        try {
+                    try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 StatusActivity.StatusProcess.setVisibility(View.GONE);
-                                // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 ReceiverAdapter .notifyDataSetChanged();
                                 return;
 
                             } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
-                                for (int i = 0; i < response.length(); i++) {
-
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     recstatusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     ReceiverStatusList.add(recstatusModel);
-
-
                                 }
                                 offsetval = (limit * count) + limit;
                                 count++;
-                                //
-
                                 requestReceiverCaseStatus(caseNo,actionStatus,senderStoreCode,position,Case);
 
-                            } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++) {
+                            } else if (response.length() < limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     recstatusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     ReceiverStatusList.add(recstatusModel);
 
@@ -417,11 +375,9 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                                 rec_grnStatusList.put(position,ReceiverStatusList);
                             }
 
-                           ReceiverAdapter.notifyDataSetChanged();
+                            ReceiverAdapter.notifyDataSetChanged();
                             StatusActivity.StatusProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
-
-
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
@@ -429,7 +385,6 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                             StatusActivity.StatusProcess.setVisibility(View.GONE);
                             ReceiverAdapter .notifyDataSetChanged();
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },
@@ -438,7 +393,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-                        ReceiverAdapter .notifyDataSetChanged();
+                        ReceiverAdapter.notifyDataSetChanged();
                         StatusActivity.StatusProcess.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
@@ -455,13 +410,9 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
             }
         };
         int socketTimeout = 60000;//5 seconds
-
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
         Reusable_Functions.hDialog();
-
     }
-
-
 }

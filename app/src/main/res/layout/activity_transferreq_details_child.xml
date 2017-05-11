@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text="Req.Qty"
+                    android:text="@string/req_qty"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize"
@@ -101,7 +101,7 @@
                     android:id="@+id/txt_avl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Avl.Qty"
+                    android:text="@string/avl_qty"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize"
@@ -133,7 +133,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SOH"
+                    android:text="@string/soh"
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize"
                     android:textStyle="bold"/>
@@ -165,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:layout_centerHorizontal="true"
-                    android:text="Scan Qty"
+                    android:text="@string/sc_qty"
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize"
                     android:textStyle="bold"/>
@@ -199,16 +199,6 @@
                     android:textSize="@dimen/normallayout_storesize"
                     android:textStyle="bold"
                     android:visibility="invisible"/>
-
-
-                <!--<ImageView-->
-                <!--android:id="@+id/btn_scan"-->
-                <!--android:layout_width="18dp"-->
-                <!--android:layout_height="18dp"-->
-                <!--android:layout_marginTop="7dp"-->
-                <!--android:src="@mipmap/scan_icon"-->
-                <!--android:scaleType="fitXY"-->
-                <!--/>-->
 
 
             </LinearLayout>

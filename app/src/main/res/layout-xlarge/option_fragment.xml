@@ -78,17 +78,7 @@
 
             </RelativeLayout>
 
-            <!--<Button-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:id="@+id/imageBtnFilter"-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="25dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:background="@mipmap/key_product_filter" />-->
-
-
-        </RelativeLayout>
+          </RelativeLayout>
 
         <RelativeLayout
 
@@ -101,9 +91,5 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/child_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
 </RelativeLayout>
 

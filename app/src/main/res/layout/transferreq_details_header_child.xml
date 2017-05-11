@@ -118,13 +118,7 @@
                 android:layout_weight="0.2"
                 android:orientation="vertical">
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/btn_scan"-->
-                    <!--android:layout_width="18dp"-->
-                    <!--android:layout_height="18dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@mipmap/scan_icon">-->
-                <!--</ImageView>-->
+
             </LinearLayout>
 
         </LinearLayout>

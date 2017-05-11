@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
@@ -17,7 +16,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -99,7 +97,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -119,7 +116,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-        // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
         footer = getLayoutInflater().inflate(R.layout.target_exception_footer, null);
 
         targetListView.addFooterView(footer);
@@ -140,21 +136,16 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             } else {
 
                 // fashion select with season params
-
                 url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
             }
-
-
-            Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "Target Stock Exception : " + " " + response);
-                            Log.i(TAG, "response" + "" + response.length());
-                            targetListView.setVisibility(View.VISIBLE);
+                           targetListView.setVisibility(View.VISIBLE);
                             try {
-                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                                {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     targetListView.removeFooterView(footer);
@@ -166,7 +157,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                     return;
 
                                 } else if (response.length() == limit) {
-                                    Log.e(TAG, "Top eql limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         targetStockDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
@@ -175,12 +165,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                     }
                                     offsetvalue = offsetvalue + 10;
                                     top = top + 10;
-                                    //  count++;
-
-                                    // requestTargetStockExcepApi();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         targetStockDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
@@ -193,18 +179,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                     targetListView.removeFooterView(footer);
                                     targetListView.setTag("FOOTER_REMOVE");
                                 }
-
-
                                 footer.setVisibility(View.GONE);
-                           /* if(popPromo==10)
-                            {
-                                topOptionAdapter = new TopOptionAdapter(TopOptionList,context);
-                                TopOptionListView.setAdapter(topOptionAdapter);
-                                popPromo=0;
-
-                            }*/
-
-                                if (lazyScroll.equals("ON")) {
+                                  if (lazyScroll.equals("ON")) {
                                     targetAgeingAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                 } else {
@@ -214,8 +190,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                     target_txtStoreName.setText(targetStockList.get(0).getStoreDescription());
 
                                 }
-
-
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {
 
@@ -229,7 +203,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                 targetListView.removeFooterView(footer);
                                 targetListView.setTag("FOOTER_REMOVE");
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -241,11 +214,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             targetListView.removeFooterView(footer);
                             targetListView.setTag("FOOTER_REMOVE");
                             targetListView.setVisibility(View.GONE);
-
                             error.printStackTrace();
                         }
                     }
-
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
@@ -274,15 +245,10 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         if (targetListView.getTag().equals("FOOTER_REMOVE")) {
                             targetListView.addFooterView(footer);
                             targetListView.setTag("FOOTER_ADDED");
-
                         }
-
-
-                        Log.e(TAG, "onScrollStateChanged:  log");
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
                         requestTargetStockExcepApi();
-                        //Reusable_Functions.sDialog(context, "Loading data...");
                     }
                 }
 
@@ -341,18 +307,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         TargetSeek = (SeekBar) findViewById(R.id.targetSeek);
         targetMax = (TextView) findViewById(R.id.targetMax);
 
-
-        //Target ROS
-        /*checktwo = (CheckBox) findViewById(R.id.checktwo);
-        checkthree = (CheckBox) findViewById(R.id.checkthree);
-        checkfour = (CheckBox) findViewById(R.id.checkfour);
-        checkfive = (CheckBox) findViewById(R.id.checkfive);
-        checksix = (CheckBox) findViewById(R.id.checksix);
-        checkseven = (CheckBox) findViewById(R.id.checkseven);
-        checkeight = (CheckBox) findViewById(R.id.checkeight);
-        checknine = (CheckBox) findViewById(R.id.checknine);
-        checkten = (CheckBox) findViewById(R.id.checkten);*/
-
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
@@ -368,16 +322,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         checkPlanClass.setOnClickListener(this);
         checkSubClass.setOnClickListener(this);
         checkMc.setOnClickListener(this);
-/*
-        checktwo.setOnClickListener(this);
-        checkthree.setOnClickListener(this);
-        checkfour.setOnClickListener(this);
-        checkfive.setOnClickListener(this);
-        checksix.setOnClickListener(this);
-        checkseven.setOnClickListener(this);
-        checkeight.setOnClickListener(this);
-        checknine.setOnClickListener(this);
-        checkten.setOnClickListener(this);*/
 
         qfDoneLayout.setOnClickListener(this);
         target_segmented.setOnCheckedChangeListener(TargetStockExceptionActivity.this);
@@ -394,9 +338,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
         switch (v.getId()) {
             case R.id.target_imageBtnBack:
-               /* Intent intent = new Intent(TargetStockExceptionActivity.this, DashBoardActivity.class);
-                intent.putExtra("BACKTO","inventory");
-                startActivity(intent);*/
+
                 finish();
                 break;
             case R.id.toggle_target_fav:
@@ -408,11 +350,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
                 break;
             case R.id.target_imgfilter:
-
-//                Intent intent1 = new Intent(TargetStockExceptionActivity.this, SalesFilterActivity.class);
-//                intent1.putExtra("checkfrom", "targetStockException");
-//                startActivity(intent1);
-                //finish();
                 break;
             case R.id.target_quickFilter:
                 quickFilterPopup.setVisibility(View.VISIBLE);
@@ -433,30 +370,17 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     checkPlanClass.setChecked(false);
                     checkSubClass.setChecked(false);
                     checkMc.setChecked(false);
-
-
                     TargetSeek.setProgress(70);
 
-                 /*   checktwo.setChecked(false);
-                    checkthree.setChecked(false);
-                    checkfour.setChecked(false);
-                    checkfive.setChecked(false);
-                    checksix.setChecked(false);
-                    checkseven.setChecked(true);
-                    checkeight.setChecked(false);
-                    checknine.setChecked(false);
-                    checkten.setChecked(false);*/
 
                 } else {
-
+                   //condition for checking season group, time and title values
                     switch (checkSeasonGpVal) {
                         case "Current":
                             checkCurrent.setChecked(true);
                             checkPrevious.setChecked(false);
                             checkOld.setChecked(false);
                             checkUpcoming.setChecked(false);
-
-                            Log.e("Current checked", "" + checkCurrent.isChecked());
                             break;
 
                         case "Previous":
@@ -464,7 +388,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkCurrent.setChecked(false);
                             checkOld.setChecked(false);
                             checkUpcoming.setChecked(false);
-                            Log.e("Previous checked", "" + checkPrevious.isChecked());
                             break;
                         case "Old":
 
@@ -472,15 +395,12 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                             checkCurrent.setChecked(false);
                             checkPrevious.setChecked(false);
                             checkUpcoming.setChecked(false);
-                            Log.e("Old checked", "" + checkOld.isChecked());
                             break;
                         case "Upcoming":
-
                             checkUpcoming.setChecked(true);
                             checkCurrent.setChecked(false);
                             checkOld.setChecked(false);
                             checkPrevious.setChecked(false);
-                            Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
                             break;
                     }
 
@@ -542,112 +462,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         default:
                             break;
                     }
-                   /* switch (checkTargetROSVal) {
-                        case 2:
-                            checktwo.setChecked(true);
-                            checkthree.setChecked(false);
-                            checkfour.setChecked(false);
-                            checkfive.setChecked(false);
-                            checksix.setChecked(false);
-                            checkseven.setChecked(false);
-                            checkeight.setChecked(false);
-                            checknine.setChecked(false);
-                            checkten.setChecked(false);
-
-                            break;
-                        case 3:
-                            checktwo.setChecked(false);
-                            checkthree.setChecked(true);
-                            checkfour.setChecked(false);
-                            checkfive.setChecked(false);
-                            checksix.setChecked(false);
-                            checkseven.setChecked(false);
-                            checkeight.setChecked(false);
-                            checknine.setChecked(false);
-                            checkten.setChecked(false);
-
-                            break;
-                        case 4:
-                            checktwo.setChecked(false);
-                            checkthree.setChecked(false);
-                            checkfour.setChecked(true);
-                            checkfive.setChecked(false);
-                            checksix.setChecked(false);
-                            checkseven.setChecked(false);
-                            checkeight.setChecked(false);
-                            checknine.setChecked(false);
-                            checkten.setChecked(false);
-
-                            break;
-                        case 5:
-                            checktwo.setChecked(false);
-                            checkthree.setChecked(false);
-                            checkfour.setChecked(false);
-                            checkfive.setChecked(true);
-                            checksix.setChecked(false);
-                            checkseven.setChecked(false);
-                            checkeight.setChecked(false);
-                            checknine.setChecked(false);
-                            checkten.setChecked(false);
-                            break;
-                        case 6:
-                            checktwo.setChecked(false);
-                            checkthree.setChecked(false);
-                            checkfour.setChecked(false);
-                            checkfive.setChecked(false);
-                            checksix.setChecked(true);
-                            checkseven.setChecked(false);
-                            checkeight.setChecked(false);
-                            checknine.setChecked(false);
-                            checkten.setChecked(false);
-                            break;
-                        case 7:
-                            checktwo.setChecked(false);
-                            checkthree.setChecked(false);
-                            checkfour.setChecked(false);
-                            checkfive.setChecked(false);
-                            checksix.setChecked(false);
-                            checkseven.setChecked(true);
-                            checkeight.setChecked(false);
-                            checknine.setChecked(false);
-                            checkten.setChecked(false);
-                            break;
-                        case 8:
-                            checktwo.setChecked(false);
-                            checkthree.setChecked(false);
-                            checkfour.setChecked(false);
-                            checkfive.setChecked(false);
-                            checksix.setChecked(false);
-                            checkseven.setChecked(false);
-                            checkeight.setChecked(true);
-                            checknine.setChecked(false);
-                            checkten.setChecked(false);
-                            break;
-                        case 9:
-                            checktwo.setChecked(false);
-                            checkthree.setChecked(false);
-                            checkfour.setChecked(false);
-                            checkfive.setChecked(false);
-                            checksix.setChecked(false);
-                            checkseven.setChecked(false);
-                            checkeight.setChecked(false);
-                            checknine.setChecked(true);
-                            checkten.setChecked(false);
-                            break;
-                        case 10:
-                            checktwo.setChecked(false);
-                            checkthree.setChecked(false);
-                            checkfour.setChecked(false);
-                            checkfive.setChecked(false);
-                            checksix.setChecked(false);
-                            checkseven.setChecked(false);
-                            checkeight.setChecked(false);
-                            checknine.setChecked(false);
-                            checkten.setChecked(true);
-                            break;
-*/
-
-
                 }
                 quickFilterPopup.setVisibility(View.GONE);
                 break;
@@ -680,7 +494,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         checkSeasonGpVal = "Upcoming";
                         quickFilterPopup.setVisibility(View.GONE);
                     } else {
-                        Log.e("Uncheck1", "----" + checkSeasonGpVal);
                     }
                     //Time
                     if (checkWTD.isChecked()) {
@@ -697,7 +510,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         checkTimeVal = "CheckYTD";
                         quickFilterPopup.setVisibility(View.GONE);
                     } else {
-                        Log.e("Uncheck2", "----" + checkTimeVal);
                     }
                     //Title
                     if (checkDept.isChecked()) {
@@ -726,65 +538,12 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     }
 
                     else {
-                        Log.e("Uncheck3", "----" + checkTitleVal);
                     }
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
                 }
                 break;
-
-            //Targer ROS
-            /*    if (checktwo.isChecked()) {
-                    //popuptwo();
-                    checkTargetROSVal = 2;
-                    quickFilterPopup.setVisibility(View.GONE);
-                } else if (checkthree.isChecked()) {
-                    //popupthree();
-                     checkTargetROSVal = 3;
-                    quickFilterPopup.setVisibility(View.GONE);
-
-                } else if (checkfour.isChecked()) {
-                    //popupfour();
-                    checkTargetROSVal = 4;
-                    quickFilterPopup.setVisibility(View.GONE);
-                }
-                else if (checkfive.isChecked()) {
-                    //popupfive();
-                    checkTargetROSVal = 5;
-                    quickFilterPopup.setVisibility(View.GONE);
-                }
-                else if (checksix.isChecked()) {
-                    //popupsix();
-                    checkTargetROSVal = 6;
-                    quickFilterPopup.setVisibility(View.GONE);
-                }
-                else if (checkseven.isChecked()) {
-                    //popupseven();
-                    checkTargetROSVal =7;
-                    quickFilterPopup.setVisibility(View.GONE);
-                }
-                else if (checkeight.isChecked()) {
-                    //popupeight();
-                    checkTargetROSVal = 8;
-                    quickFilterPopup.setVisibility(View.GONE);
-                }
-                else if (checknine.isChecked()) {
-                    //popupfour();
-                    checkTargetROSVal = 9;
-                    quickFilterPopup.setVisibility(View.GONE);
-                }
-                else if (checkten.isChecked()) {
-                    //popupfour();
-                    checkTargetROSVal = 10;
-                    quickFilterPopup.setVisibility(View.GONE);
-                }
-
-
-                else {
-                    Log.e("Uncheck4","----"+checkTargetROSVal);
-                }*/
-
 
             case R.id.checkCurrent:
                 checkCurrent.setChecked(true);
@@ -861,119 +620,18 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checkSubClass.setChecked(false);
                 checkMc.setChecked(true);
                 break;
-     /*       case R.id.checktwo:
-                checktwo.setChecked(true);
-                checkthree.setChecked(false);
-                checkfour.setChecked(false);
-                checkfive.setChecked(false);
-                checksix.setChecked(false);
-                checkseven.setChecked(false);
-                checkeight.setChecked(false);
-                checknine.setChecked(false);
-                checkten.setChecked(false);
-                break;
-            case R.id.checkthree:
-                checktwo.setChecked(false);
-                checkthree.setChecked(true);
-                checkfour.setChecked(false);
-                checkfive.setChecked(false);
-                checksix.setChecked(false);
-                checkseven.setChecked(false);
-                checkeight.setChecked(false);
-                checknine.setChecked(false);
-                checkten.setChecked(false);
-                break;
-            case R.id.checkfour:
-                checktwo.setChecked(false);
-                checkthree.setChecked(false);
-                checkfour.setChecked(true);
-                checkfive.setChecked(false);
-                checksix.setChecked(false);
-                checkseven.setChecked(false);
-                checkeight.setChecked(false);
-                checknine.setChecked(false);
-                checkten.setChecked(false);
-                break;
-            case R.id.checkfive:
-                checktwo.setChecked(false);
-                checkthree.setChecked(false);
-                checkfour.setChecked(false);
-                checkfive.setChecked(true);
-                checksix.setChecked(false);
-                checkseven.setChecked(false);
-                checkeight.setChecked(false);
-                checknine.setChecked(false);
-                checkten.setChecked(false);
-                break;
-            case R.id.checksix:
-                checktwo.setChecked(false);
-                checkthree.setChecked(false);
-                checkfour.setChecked(false);
-                checkfive.setChecked(false);
-                checksix.setChecked(true);
-                checkseven.setChecked(false);
-                checkeight.setChecked(false);
-                checknine.setChecked(false);
-                checkten.setChecked(false);
-                break;
-            case R.id.checkseven:
-                checktwo.setChecked(false);
-                checkthree.setChecked(false);
-                checkfour.setChecked(false);
-                checkfive.setChecked(false);
-                checksix.setChecked(false);
-                checkseven.setChecked(true);
-                checkeight.setChecked(false);
-                checknine.setChecked(false);
-                checkten.setChecked(false);
-                break;
-            case R.id.checkeight:
-                checktwo.setChecked(false);
-                checkthree.setChecked(false);
-                checkfour.setChecked(false);
-                checkfive.setChecked(false);
-                checksix.setChecked(false);
-                checkseven.setChecked(false);
-                checkeight.setChecked(true);
-                checknine.setChecked(false);
-                checkten.setChecked(false);
-                break;
-            case R.id.checknine:
-                checktwo.setChecked(false);
-                checkthree.setChecked(false);
-                checkfour.setChecked(false);
-                checkfive.setChecked(false);
-                checksix.setChecked(false);
-                checkseven.setChecked(false);
-                checkeight.setChecked(false);
-                checknine.setChecked(true);
-                checkten.setChecked(false);
-                break;
-            case R.id.checkten:
-                checktwo.setChecked(false);
-                checkthree.setChecked(false);
-                checkfour.setChecked(false);
-                checkfive.setChecked(false);
-                checksix.setChecked(false);
-                checkseven.setChecked(false);
-                checkeight.setChecked(false);
-                checknine.setChecked(false);
-                checkten.setChecked(true);
-                break;*/
+
         }
 
     }
 
     private void popupCurrent() {
         if (Reusable_Functions.chkStatus(context)) {
-            //Reusable_Functions.hDialog();
-           // Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             seasongroup = "Current";
             targetStockList.clear();
-           // requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -981,14 +639,11 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupPrevious() {
         if (Reusable_Functions.chkStatus(context)) {
-            //Reusable_Functions.hDialog();
-           // Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             seasongroup = "Previous";
             targetStockList.clear();
-            //requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -996,14 +651,11 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupOld() {
         if (Reusable_Functions.chkStatus(context)) {
-          //  Reusable_Functions.hDialog();
-            //Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             seasongroup = "Old";
             targetStockList.clear();
-            //requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1011,14 +663,11 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupUpcoming() {
         if (Reusable_Functions.chkStatus(context)) {
-           // Reusable_Functions.hDialog();
-           // Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             seasongroup = "Upcoming";
             targetStockList.clear();
-            //requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1027,14 +676,11 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupWTD() {
         if (Reusable_Functions.chkStatus(context)) {
-          //  Reusable_Functions.hDialog();
-          //  Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             view = "WTD";
             targetStockList.clear();
-           // requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1043,14 +689,11 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupL4W() {
         if (Reusable_Functions.chkStatus(context)) {
-           // Reusable_Functions.hDialog();
-          //  Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             view = "L4W";
             targetStockList.clear();
-          //  requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1059,14 +702,11 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     private void popupYTD() {
         if (Reusable_Functions.chkStatus(context)) {
-           // Reusable_Functions.hDialog();
-          //  Reusable_Functions.sDialog(context, "Loading data...");
             limit = 10;
             offsetvalue = 0;
             top = 10;
             view = "STD";
             targetStockList.clear();
-           // requestTargetStockExcepApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1198,9 +838,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-   /*     Intent intent = new Intent(TargetStockExceptionActivity.this, DashBoardActivity.class);
-        intent.putExtra("BACKTO","inventory");
-        startActivity(intent);*/
         finish();
     }
 
@@ -1231,7 +868,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        Log.e(TAG, "onStopTrackingTouch: " + seekBar.getMax());
 
     }
 }

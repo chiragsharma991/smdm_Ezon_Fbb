@@ -10,8 +10,6 @@
     tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
 
-
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -67,49 +65,7 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--android:orientation="horizontal">-->
-
-
-    <!--<Button-->
-    <!--style="?android:attr/buttonStyleSmall"-->
-    <!--android:layout_width="90dp"-->
-    <!--android:layout_height="40dp"-->
-    <!--android:background="@mipmap/key_product_search_sub_dept_selected_button"-->
-    <!--android:id="@+id/btnSubDept"-->
-    <!--android:layout_gravity="center_horizontal" />-->
-    <!--&lt;!&ndash;-->
-    <!--<Button-->
-    <!--style="?android:attr/buttonStyleSmall"-->
-    <!--android:layout_width="90dp"-->
-    <!--android:layout_height="40dp"-->
-    <!--android:layout_toRightOf="@+id/btn"-->
-    <!--android:background="@mipmap/key_product_search_mc_unselected_button"-->
-    <!--android:id="@+id/btnMC" />&ndash;&gt;-->
-    <!--<Button-->
-    <!--style="?android:attr/buttonStyleSmall"-->
-    <!--android:layout_width="90dp"-->
-    <!--android:layout_height="40dp"-->
-    <!--android:layout_toRightOf="@+id/btnSubDept"-->
-    <!--android:background="@mipmap/key_product_search_product_name_unselected_button"-->
-    <!--android:id="@+id/btnProductName"-->
-    <!--android:layout_gravity="center_horizontal" />-->
-
-    <!--<Button-->
-    <!--style="?android:attr/buttonStyleSmall"-->
-    <!--android:layout_width="90dp"-->
-    <!--android:layout_height="40dp"-->
-    <!--android:layout_toRightOf="@+id/btnProductName"-->
-    <!--android:background="@mipmap/key_product_search_article_unselected_button"-->
-    <!--android:id="@+id/btnArticle" />-->
-
-    <!--</RelativeLayout>-->
-    <info.hoang8f.android.segmented.SegmentedGroup
+  <info.hoang8f.android.segmented.SegmentedGroup
         android:id="@+id/segmented3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -139,15 +95,7 @@
             android:backgroundTint="@color/smdm_border"
             style="@style/RadioButton" />
 
-        <!--<RadioButton-->
-        <!--android:id="@+id/button33"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:text="Article"-->
-        <!--android:layout_weight="1"-->
-        <!--style="@style/RadioButton" />-->
-
-    </info.hoang8f.android.segmented.SegmentedGroup>
+  </info.hoang8f.android.segmented.SegmentedGroup>
 
 
     <RelativeLayout
@@ -190,7 +138,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/colorPrimary"
-
         ></LinearLayout>
 
     <LinearLayout
@@ -206,7 +153,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </ListView>
-
 
     </LinearLayout>
 

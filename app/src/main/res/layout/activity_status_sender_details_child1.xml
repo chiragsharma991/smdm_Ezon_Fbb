@@ -74,7 +74,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Req Qty"
+                            android:text="@string/req_qty"
                             android:typeface="normal"
                             android:textStyle="bold"
                             android:layout_marginLeft="10dp"
@@ -95,7 +95,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Scanned Qty"
+                            android:text="@string/scan_qty"
                             android:textStyle="bold"
                             android:typeface="normal"
                             android:textSize="@dimen/normallayout_storesize"
@@ -119,8 +119,6 @@
                             />
 
                     </LinearLayout>
-
-
 
                 </LinearLayout>
                 <!--Second Linear layout row-->

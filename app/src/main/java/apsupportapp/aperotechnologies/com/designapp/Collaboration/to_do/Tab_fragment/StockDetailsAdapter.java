@@ -3,7 +3,6 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fra
 import android.content.Context;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +39,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private final boolean[] visibleItems;
 
 
-
-
-
     public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess) {
         this.list=list;
         this.context=context;//
@@ -53,12 +49,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         CheckedItems=new HashSet<Pair<Integer,Integer>>();
         visibleItems=new boolean[list.size()];
         this.detailProcess=detailProcess;
-        Log.e("TAG", "StockDetailsAdapter:  constructor");
 
     }
-
-
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -69,7 +61,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        Log.e("TAG", "Stock detail: "+position );
 
         if(holder instanceof Holder) {
             if(position < list.size()) {
@@ -88,25 +79,15 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         if(((CheckBox)view).isChecked())
                         {
                             //Header check is enable when view is open
-                            //  if(Toggle[position]){
                             HeadercheckList[position]=true;
                             visibleItems[position]=true;
-                            //SetChangeInChild(position);
 
-                            //  }else{
-                            // HeadercheckList[position]=false;
-
-                            // }
                             notifyItemChanged(position);
                         }else
                         {
                             HeadercheckList[position]=false;
-                            // SetUncheckInChild(position);
                             visibleItems[position]=true;
                             notifyItemChanged(position);
-
-                            Log.e("TAG","uncheck notifyDataset changed..." );
-
                         }
                     }
 
@@ -117,8 +98,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     public void onClick(View view) {
                         if(detailProcess.getVisibility()==View.GONE)
                         {
-                            Log.e("TAG", "onClick:>>>> "+position );
-
                             if(Toggle[position]==true)
                             {
                                 Toggle[position]=false;
@@ -136,45 +115,14 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                     notifyDataSetChanged();
 
                                 }
-
                             }
-
                         }
                     }
                 });
                 DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(visibleItems,HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
                 ((Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
-
             }
         }
-    }
-
-    private void SetUncheckInChild(int position) {
-
-        for (int i = 0; i <HashMapSubChild.get(position).size(); i++)
-        {
-            Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(position,i);
-            if(CheckedItems.contains(Tag))
-            {
-                CheckedItems.remove(Tag);
-            }
-
-        }
-        notifyItemChanged(position);
-
-    }
-
-    private void SetChangeInChild(int position) {
-        for (int i = 0; i <HashMapSubChild.get(position).size(); i++)
-        {
-            Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(position,i);
-            if(!CheckedItems.contains(Tag))
-            {
-                CheckedItems.add(Tag);
-            }
-
-        }
-        notifyItemChanged(position);
     }
 
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position)
@@ -205,9 +153,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return list.size();
     }
 
-
-
-
     public static class Holder extends RecyclerView.ViewHolder {
 
         private final TextView Detail_Soh,Detail_reqQty,Detail_Git,Detail_AviQty;
@@ -227,7 +172,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             detailsLinear=(RecyclerView)itemView.findViewById(R.id.details_headerChild);
             Detail_headerCheck=(CheckBox) itemView.findViewById(R.id.detail_headerCheck);
         }
-
     }
 
     public JSONArray OnSubmit(String MCCodeDesc)
@@ -241,7 +185,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 if(!HashMapSubChild.get(i).isEmpty())   //fst start with subchild if no one select in subchild then it will go header selection.
                 {
-                  //  Log.i("Onsubmit",+i+"HashMapSubChild "+HashMapSubChild.get(i).size());
                     for (int j = 0; j <HashMapSubChild.get(i).size(); j++)
                     {
                         Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
@@ -254,14 +197,12 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             count++;
                         }
                     }
-
-                }else
+                }
+                else
                 {
                     if(HeadercheckList[i]) {
-                      //  Log.i("Onsubmit", +i + "HeadercheckList" + HeadercheckList);
                         JSONObject obj = new JSONObject();
                         obj.put("option",list.get(i).getLevel());
-                       // obj.put("prodAttribute4","");
                         obj.put("prodLevel6Code",MCCodeDesc);
                         jsonarray.put(count,obj);
                         count++;
@@ -269,20 +210,11 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 }
             }
-            Log.e("OnSubmit: ",""+jsonarray.toString());
-
-        }catch (JSONException e)
+        }
+        catch (JSONException e)
         {
             e.printStackTrace();
-            Log.e("OnSubmit:  error",""+e.getMessage() );
         }
-
-
         return jsonarray;
     }
-
-
-
-
-
 }

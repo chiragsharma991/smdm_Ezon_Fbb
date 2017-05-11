@@ -43,8 +43,6 @@ public class ExpiringPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     {
         this.context=context;
         this.expireList=expireList;
-
-
     }
 
 
@@ -60,7 +58,6 @@ public class ExpiringPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
     private boolean isPositionItem(int position) {
-        // return position == 0;
         return position != expireList.size();
     }
 
@@ -75,7 +72,6 @@ public class ExpiringPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                     .inflate(R.layout.list_footer, parent, false);
             return new FooterView(v);
         }
-
         return null;
 
     }
@@ -86,9 +82,6 @@ public class ExpiringPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.
             if(position < expireList.size()) {
 
                 RunningPromoListDisplay snap = expireList.get(position);
-                // holder.snapTextView.setText(snap.getText());
-
-
                 ((ExpireHolder)holder).PromotionName.setText(snap.getPromoDesc());
                 ((ExpireHolder)holder).StartDate.setText(snap.getPromoStartDate());
                 ((ExpireHolder)holder).EndDate.setText(snap.getPromoEndDate());
@@ -105,8 +98,6 @@ public class ExpiringPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 });
             }
         }
-
-
     }
 
 
@@ -131,8 +122,6 @@ public class ExpiringPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
         public ExpireHolder(View itemView) {
             super(itemView);
-            // snapTextView = (TextView) itemView.findViewById(R.id.snapTextView);
-            // recyclerView = (RecyclerView) itemView.findViewById(R.id.recyclerView);
             PromotionName = (TextView) itemView.findViewById(R.id.txtPromoExpName);
             StartDate = (TextView) itemView.findViewById(R.id.txtstartExpDate);
             EndDate = (TextView) itemView.findViewById(R.id.txtEndExpDate);
@@ -141,7 +130,6 @@ public class ExpiringPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.
         }
 
     }
-
 
     public static class FooterView extends RecyclerView.ViewHolder {
 

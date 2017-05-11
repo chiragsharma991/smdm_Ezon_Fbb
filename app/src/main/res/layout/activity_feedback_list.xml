@@ -113,10 +113,6 @@
                     android:layout_alignParentBottom="true"
                     />
 
-
-
-
-
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -129,13 +125,7 @@
 
                 </ProgressBar>
 
-
-
-
             </RelativeLayout>
-
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -145,25 +135,17 @@
             android:layout_marginTop="5dp"
             >
 
-
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/replaceView"
                 >
-
-
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/replaceView_two"
                     android:visibility="visible"
-
                     >
 
                     <ScrollView
@@ -185,18 +167,11 @@
                                 android:layout_margin="5dp"
                                 android:id="@+id/fitting_relative"
                                 >
-                            <!--     <View
-                                     android:layout_width="180dp"
-                                     android:layout_height="match_parent"
-                                     android:id="@+id/fitting_score"
-                                     android:background="@color/edit_border_color">
-
-                                 </View>
 
                                  <TextView
                                      android:layout_width="wrap_content"
                                      android:layout_height="wrap_content"
-                                     android:text="Fitting"
+                                     android:text="@string/fitting"
                                      android:layout_marginLeft="5dp"
                                      android:textColor="@color/bg_store_code_text"
                                      android:layout_centerVertical="true"
@@ -225,33 +200,6 @@
                                 android:id="@+id/pricing_relative"
 
                                 >
-                               <!-- <View
-                                    android:layout_width="30dp"
-                                    android:layout_height="match_parent"
-                                    android:id="@+id/pricing_score"
-                                    android:background="@color/edit_border_color">
-
-                                </View>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Pricing"
-                                    android:layout_marginLeft="5dp"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:layout_centerVertical="true"
-                                    android:id="@+id/pricing_percent"
-
-                                    />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="10%"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:id="@+id/pricing_percent_result"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    />-->
 
 
 
@@ -265,34 +213,7 @@
                                 android:id="@+id/colours_relative"
 
                                 >
-                              <!--  <View
-                                    android:layout_width="150dp"
-                                    android:layout_height="match_parent"
-                                    android:id="@+id/colours_score"
-                                    android:background="@color/edit_border_color">
 
-                                </View>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Colours"
-                                    android:layout_marginLeft="5dp"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:layout_centerVertical="true"
-                                    android:id="@+id/colours_percent"
-
-                                    />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="40%"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:id="@+id/colours_percent_result"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    />
--->
 
 
                             </RelativeLayout>
@@ -304,33 +225,6 @@
                                 android:id="@+id/prints_relative"
 
                                 >
-                           <!--     <View
-                                    android:layout_width="280dp"
-                                    android:layout_height="match_parent"
-                                    android:id="@+id/prints_score"
-                                    android:background="@color/edit_border_color">
-
-                                </View>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Prints"
-                                    android:layout_marginLeft="5dp"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:layout_centerVertical="true"
-                                    android:id="@+id/prints_percent"
-
-                                    />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="70%"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:id="@+id/prints_percent_result"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    />-->
 
 
 
@@ -343,35 +237,6 @@
                                 android:id="@+id/styling_relative"
 
                                 >
-                           <!--     <View
-                                    android:layout_width="200dp"
-                                    android:layout_height="match_parent"
-                                    android:id="@+id/styling_score"
-                                    android:background="@color/edit_border_color"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentStart="true">
-
-                                </View>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Styling"
-                                    android:layout_marginLeft="5dp"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:layout_centerVertical="true"
-                                    android:id="@+id/styling_percent"
-
-                                    />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="55%"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:id="@+id/styling_percent_result"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    />-->
 
 
 
@@ -385,34 +250,6 @@
                                 android:id="@+id/fabric_relative"
 
                                 >
-                          <!--      <View
-                                    android:layout_width="80dp"
-                                    android:layout_height="match_parent"
-                                    android:id="@+id/fabricQuality_score"
-                                    android:background="@color/edit_border_color">
-
-                                </View>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Fabric Quality"
-                                    android:layout_marginLeft="5dp"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:layout_centerVertical="true"
-                                    android:id="@+id/fabricQuality_percent"
-
-                                    />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="80%"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:id="@+id/fabricQuality_percent_result"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    />-->
-
 
 
                             </RelativeLayout>
@@ -424,46 +261,8 @@
                                 android:id="@+id/garment_relative"
 
                                 >
-                        <!--        <View
-                                    android:layout_width="10dp"
-                                    android:layout_height="match_parent"
-                                    android:id="@+id/garmentQuality_score"
-                                    android:background="@color/edit_border_color">
-
-                                </View>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Garment Quality"
-                                    android:layout_marginLeft="5dp"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:layout_centerVertical="true"
-                                    android:id="@+id/garmentQuality_percent"
-
-                                    />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="7%"
-                                    android:textColor="@color/bg_store_code_text"
-                                    android:id="@+id/garmentQuality_percent_result"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    />-->
-
-
 
                             </RelativeLayout>
-
-
-
-
-
-
-
-
-
 
                         </LinearLayout>
 
@@ -517,7 +316,7 @@
                                         android:layout_centerInParent="true"
                                         android:gravity="center_vertical"
                                         android:id="@+id/next_txt"
-                                        android:text="Previous"
+                                        android:text="@string/f_previous"
                                         android:layout_marginLeft="15dp"
                                         android:textColor="@android:color/white"
                                         android:textSize="@dimen/smdm_header_title_large"
@@ -525,14 +324,9 @@
 
                                         />
 
-
-
                                 </LinearLayout>
 
                             </LinearLayout>
-
-
-
 
                             </RelativeLayout>
 
@@ -566,7 +360,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerInParent="true"
                                         android:id="@+id/pre_txt"
-                                        android:text="Next"
+                                        android:text="@string/f_next"
                                         android:gravity="center_vertical"
                                         android:textColor="@android:color/white"
                                         android:textSize="@dimen/smdm_header_title_large"
@@ -590,41 +384,12 @@
 
                             </LinearLayout>
 
-
-
-
-
                         </RelativeLayout>
 
-
-
-
-
-
                     </LinearLayout>
-
-
                 </RelativeLayout>
-
-
-
             </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
         </LinearLayout>
-
-
     </LinearLayout>
-
-
 </RelativeLayout>
 

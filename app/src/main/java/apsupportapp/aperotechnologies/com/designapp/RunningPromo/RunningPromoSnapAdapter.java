@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
 
-
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
+
 import java.util.ArrayList;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 
@@ -36,24 +38,23 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public RunningPromoSnapAdapter(ArrayList<RunningPromoListDisplay> promoList, RunningPromoActivity runningPromoActivity) {
 
-        this.promoList=promoList;
-        this.Context=runningPromoActivity;
+        this.promoList = promoList;
+        this.Context = runningPromoActivity;
     }
 
 
     @Override
     public int getItemViewType(int position) {
 
-        if (isPositionItem(position)){
+        if (isPositionItem(position)) {
             return VIEW_ITEM;
 
-        }
-        else {
+        } else {
             return VIEW_PROG;
         }
     }
+
     private boolean isPositionItem(int position) {
-        // return position == 0;
         return position != promoList.size();
     }
 
@@ -61,36 +62,34 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         if (viewType == VIEW_ITEM) {
-            View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_running_promo_child, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_running_promo_child, parent, false);
             return new Holder(v);
-        } else if (viewType == VIEW_PROG){
+        } else if (viewType == VIEW_PROG) {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_footer, parent, false);
             return new FooterView(v);
         }
-
         return null;
 
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if(holder instanceof Holder) {
-            if(position < promoList.size()) {
+        if (holder instanceof Holder) {
+            if (position < promoList.size()) {
 
                 RunningPromoListDisplay snap = promoList.get(position);
-            // holder.snapTextView.setText(snap.getText());
 
-            ((Holder)holder).PromotionName.setText(snap.getPromoDesc());
+                ((Holder) holder).PromotionName.setText(snap.getPromoDesc());
                 ((Holder) holder).PromotionName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent i = new Intent(Context, RunningPromoDetails.class);
-                                i.putExtra("VM", promoList.get(position).getPromoDesc());
-                                Context.startActivity(i);
+                        i.putExtra("VM", promoList.get(position).getPromoDesc());
+                        Context.startActivity(i);
                     }
                 });
-            ((Holder)holder).StartDate.setText(snap.getPromoStartDate());
+                ((Holder) holder).StartDate.setText(snap.getPromoStartDate());
 
                 ((Holder) holder).StartDate.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -102,7 +101,7 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
                 });
 
 
-             ((Holder)holder).EndDate.setText(snap.getPromoEndDate());
+                ((Holder) holder).EndDate.setText(snap.getPromoEndDate());
                 ((Holder) holder).EndDate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -111,7 +110,7 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
                         Context.startActivity(i);
                     }
                 });
-                ((Holder)holder).Days.setText("" + snap.getPromoDays());
+                ((Holder) holder).Days.setText("" + snap.getPromoDays());
                 ((Holder) holder).Days.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -120,28 +119,24 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
                         Context.startActivity(i);
                     }
                 });
-                ((Holder)holder).Vm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent=new Intent(Context,VM.class);
-                    intent.putExtra("VM",promoList.get(position).getPromoDesc());
-                    intent.putExtra("FROM","RunningPromo");
-                    Context.startActivity(intent);
+                ((Holder) holder).Vm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Context, VM.class);
+                        intent.putExtra("VM", promoList.get(position).getPromoDesc());
+                        intent.putExtra("FROM", "RunningPromo");
+                        Context.startActivity(intent);
 
-                }
-            });
+                    }
+                });
+            }
         }
-        }
-
 
     }
 
-
-
-
     @Override
     public int getItemCount() {
-       return promoList.size()+1;
+        return promoList.size() + 1;
     }
 
     @Override
@@ -151,17 +146,11 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public static class Holder extends RecyclerView.ViewHolder {
 
-     //   public TextView snapTextView;
-     //   public RecyclerView recyclerView;
-
-        TextView PromotionName,StartDate,EndDate,Days;
+        TextView PromotionName, StartDate, EndDate, Days;
         ImageView Vm;
 
         public Holder(View itemView) {
             super(itemView);
-           // snapTextView = (TextView) itemView.findViewById(R.id.snapTextView);
-            // recyclerView = (RecyclerView) itemView.findViewById(R.id.recyclerView);
-
             PromotionName = (TextView) itemView.findViewById(R.id.txtPromoName);
             StartDate = (TextView) itemView.findViewById(R.id.txtstartDate);
             EndDate = (TextView) itemView.findViewById(R.id.txtEndDate);
@@ -171,17 +160,13 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     }
 
-
     public static class FooterView extends RecyclerView.ViewHolder {
-        //        Button loadButton;
-//        ProgressBar progressBar;
+
         TextView txtView;
 
-        public FooterView(View footerView){
+        public FooterView(View footerView) {
             super(footerView);
-//            loadButton = (Button) footerView.findViewById(R.id.reload_button);
-//            progressBar = (ProgressBar) footerView.findViewById(R.id.progress_load);
-            txtView = (TextView)footerView.findViewById(R.id.txtView);
+            txtView = (TextView) footerView.findViewById(R.id.txtView);
         }
     }
 }

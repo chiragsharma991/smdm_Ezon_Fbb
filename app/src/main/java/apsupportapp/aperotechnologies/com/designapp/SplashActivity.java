@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -52,9 +50,7 @@ public class SplashActivity extends AppCompatActivity {
 
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
         context = this;
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        Log.e("---", " " + getResources().getDisplayMetrics().density);
 
         if (sharedPreferences.getBoolean("log_flag", false) == true) {
             if (Reusable_Functions.chkStatus(context))
@@ -67,7 +63,6 @@ public class SplashActivity extends AppCompatActivity {
             } else {
                 progressbar.setVisibility(View.GONE);
                 checkNetwork();
-              //  Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
             }
         }
         Thread background = new Thread() {
@@ -75,7 +70,6 @@ public class SplashActivity extends AppCompatActivity {
                 try {
                     // Thread will sleep for 5 seconds
                     sleep(3 * 1000);
-                    Log.e("chk", " " + (sharedPreferences.getBoolean("log_flag", false) == true));
                     if (sharedPreferences.getBoolean("log_flag", false) == true) {
                         if (Reusable_Functions.chkStatus(context)) {
                             requestLoginAPI();
@@ -93,36 +87,26 @@ public class SplashActivity extends AppCompatActivity {
         background.start();
     }
 
-    private void checkNetwork() {
-        Log.e("TAG", "Check Network: ");
-//        if(LocalNotificationReceiver.logoutAlarm)
-//        {
-            View v=findViewById(android.R.id.content);
+    private void checkNetwork()
+    {
+        View v=findViewById(android.R.id.content);
         snackbar = Snackbar.make(v,"Check your network ", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     if(Reusable_Functions.chkStatus(context))
                     {
-                        Log.e("", "onClick: "+"in dismiss condition" );
                         progressbar.setVisibility(View.VISIBLE);
                         requestLoginAPI();
                     }else
                     {
-                        Log.e("", "onClick: "+"in if  condition" );
                         checkNetwork();
-
                     }
                 }
             });
             snackbar.setActionTextColor(getResources().getColor(R.color.smdm_actionbar));
             snackbar.show();
-//            LocalNotificationReceiver.logoutAlarm=false;
-//            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-//            notificationManager.cancel(LocalNotificationReceiver.notId);
 
-
-       // }
     }
 
     private void requestLoginAPI() {
@@ -135,14 +119,10 @@ public class SplashActivity extends AppCompatActivity {
         final String username = sharedPreferences.getString("username", "");
         final String password = sharedPreferences.getString("password", "");
         final String auth_code = sharedPreferences.getString("authcode", "");
-
-        Log.e("auth---code ", " --- " + username + " " + password + " " + auth_code);
-
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Login   Response   ", response.toString());
                         try
                         {
                             if (response == null || response.equals(""))
@@ -153,7 +133,6 @@ public class SplashActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("bearerToken", bearerToken);
                             editor.apply();
-                            Log.i("bearerToken   ", bearerToken);
                             Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
                             i.putExtra("from", "splash");
                             startActivity(i);
@@ -162,7 +141,6 @@ public class SplashActivity extends AppCompatActivity {
                         }
                         catch (Exception e)
                         {
-                            Log.e("Exception e", e.toString() + " ");
                             e.printStackTrace();
                             Reusable_Functions.hDialog();
                         }
@@ -179,11 +157,9 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
 
-                Log.i("Auth Code", auth_code);
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", auth_code);
                 return params;
-
             }
         };
         int socketTimeout = 60000;//5 seconds

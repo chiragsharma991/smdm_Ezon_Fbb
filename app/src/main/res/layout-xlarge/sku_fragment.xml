@@ -54,13 +54,7 @@
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/largelayout_storesize" />
 
-                <!-- <TextView
-                     android:id="@+id/txt_Sku_Product_Name"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_below="@+id/txtStoreName"
-                     android:layout_marginTop="5dp" />
-     -->
+
                 <TextView
                     android:id="@+id/txt_Sku_article_Option_Name"
                     android:layout_width="wrap_content"
@@ -81,10 +75,7 @@
                     android:textSize="@dimen/largelayout_storesize"
                     android:text="@string/number_in_units" />
 
-
             </RelativeLayout>
-
-
 
         </RelativeLayout>
         <RelativeLayout
@@ -97,12 +88,6 @@
 
         </RelativeLayout>
 
-        <FrameLayout
-            android:id="@+id/child_fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"></FrameLayout>
     </RelativeLayout>
 
 </RelativeLayout>

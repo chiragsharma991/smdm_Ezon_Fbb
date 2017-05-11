@@ -4,7 +4,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,29 +29,14 @@ public class VmPreview extends AppCompatActivity {
         dotIntialize();
 
         VmPagerAdapter vmPagerAdapter = new VmPagerAdapter(this,VM.list,lldots,mViewPager);
-    /*    for (int i = 0; i < VM.list.size(); i++) {
-
-            ImageView imgdot = new ImageView(this);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
-            layoutParams.setMargins(3, 3, 3, 3);
-            imgdot.setLayoutParams(layoutParams);
-            imgdot.setImageResource(R.mipmap.dots_unselected);
-            lldots.addView(imgdot);
-            ImageView img = (ImageView) lldots.getChildAt(0);
-            img.setImageResource(R.mipmap.dots_selected);
-        }*/
 
         mViewPager.setAdapter(vmPagerAdapter);
-        //mViewPager.setCurrentItem(data.getInt("VM_ADP"));
         vm_imageBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "onClick: ");
-
                 finish();
             }
         });
-
     }
 
     private void dotIntialize() {
@@ -78,17 +62,12 @@ public class VmPreview extends AppCompatActivity {
         lldots = (LinearLayout) findViewById(R.id.dotIndicator);
         TabLayout tab=(TabLayout)findViewById(R.id.dotTab);
         tab.setupWithViewPager(mViewPager, true);
-
-        //lldots.setOrientation(LinearLayout.HORIZONTAL);
         data=getIntent().getExtras();
-
 
     }
 
     @Override
     public void onBackPressed() {
-        Log.e(TAG, "onBack: ");
-
         this.finish();
     }
 }

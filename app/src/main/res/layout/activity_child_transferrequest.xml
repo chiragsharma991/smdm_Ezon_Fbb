@@ -157,7 +157,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Req.Qty"
+                            android:text="@string/req_qty"
                             android:gravity="left"
                             android:textSize="@dimen/collaboration_stock_text"
                             android:textColor="@color/txt_color"
@@ -196,7 +196,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Avl.Qty"
+                                android:text="@string/avl_qty"
                                 android:gravity="center"
                                 android:textSize="@dimen/collaboration_stock_text"
                                 android:textColor="@color/txt_color"
@@ -217,14 +217,6 @@
 
                         </LinearLayout>
 
-
-
-
-
-
-
-
-
                     </LinearLayout>
 
 
@@ -235,8 +227,6 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         >
-
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -246,7 +236,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="# Options"
+                                android:text="@string/coll_options"
                                 android:textSize="@dimen/collaboration_stock_text"
                                 android:singleLine="true"
                                 android:textColor="@color/txt_color"
@@ -272,10 +262,6 @@
 
                 </LinearLayout>
 
-
-
-
-
                 <!--ending part-->
 
                 <LinearLayout
@@ -286,8 +272,7 @@
                     android:background="@color/smdm_divider_Black_light"
                     android:padding="3dp"
                     >
-
-                    <LinearLayout
+                   <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -307,11 +292,7 @@
 
                             />
 
-
-
                     </LinearLayout>
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -327,18 +308,9 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             >
-
-
-
-
                         </LinearLayout>
 
-
-
-
-
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -350,43 +322,19 @@
                         android:layout_marginBottom="5dp"
                         >
 
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             >
-
-
-
                         </LinearLayout>
-
-
-
                     </LinearLayout>
-
-
-
-
-
                 </LinearLayout>
 
-
-
-
-
-
-
-
-
             </LinearLayout>
-
-
-
 
         </android.support.v7.widget.CardView>
 
     </android.support.v7.widget.CardView>
-
 
 </LinearLayout>

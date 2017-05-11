@@ -7,15 +7,6 @@
    >
 
 
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_height="@dimen/toolbar_header_height"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:elevation="6dp"-->
-        <!--android:minHeight="?attr/actionBarSize"-->
-        <!--android:background="@color/colorPrimary">-->
-
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -142,28 +133,4 @@
         android:background="@color/bg_screen_color"
 
         />
-    <!--<LinearLayout
-        android:id="@+id/linearlayout01"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#ccc"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <fragment android:name="apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductName_Fragment"
-            android:id="@+id/frag_1"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearlayout02"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:background="#eee"
-        android:orientation="vertical">
-        <fragment android:name="apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.Option_Fragment"
-            android:id="@+id/frag_2"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
-    </LinearLayout>-->
-</LinearLayout>
+   </LinearLayout>

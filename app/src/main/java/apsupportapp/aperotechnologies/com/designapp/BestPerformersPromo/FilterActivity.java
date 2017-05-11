@@ -43,9 +43,6 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().hide();
         intialize();
         main();
-
-
-
     }
 
     private void main()
@@ -60,29 +57,21 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         McList.add("L123-Lace Party Top Grey");
         FilterAdapter filterAdapter=new FilterAdapter(McList,this);
         McListView.setAdapter(filterAdapter);
-
-
-
     }
 
     private void intialize()
     {
         EdtPromoEndDate=(TextView)findViewById(R.id.edtPromoEndDate);
         EdtPromoStartDate=(TextView)findViewById(R.id.edtPromoStartDate);
-
         PromostartDate=(TextView)findViewById(R.id.promostartDate);
         PromoEndDate=(TextView)findViewById(R.id.promoEndDate);
         Mc=(TextView)findViewById(R.id.mc);
-
         linear_PromostartDate=(LinearLayout)findViewById(R.id.linear_PromostartDate);
         linear_PromoEndDate=(LinearLayout)findViewById(R.id.linear_PromoEndDate);
         linear_Mc=(LinearLayout)findViewById(R.id.linear_Mc);
-
         Filter_imageBtnBack=(RelativeLayout)findViewById(R.id.filter_imageBtnBack);
         FilterOk=(RelativeLayout)findViewById(R.id.filterOk);
-
         McListView=(ListView)findViewById(R.id.mcList);
-
         PromostartDate.setOnClickListener(this);
         PromoEndDate.setOnClickListener(this);
         Filter_imageBtnBack.setOnClickListener(this);
@@ -90,8 +79,6 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         Mc.setOnClickListener(this);
         EdtPromoStartDate.setOnClickListener(this);
         EdtPromoEndDate.setOnClickListener(this);
-
-
     }
 
 
@@ -114,54 +101,36 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.edtPromoEndDate:
                 EndDatePicker(v);
                 break;
-
             case R.id.filter_imageBtnBack:
                 filterBack();
                 break;
             case R.id.filterOk:
                 Toast.makeText(this,"Activity is still in process",Toast.LENGTH_LONG).show();
                 break;
-
-
-
-
         }
-
-
     }
 
     private void filterBack() {
 
         if(getIntent().getStringExtra("from").equals("bestPromo"))
         {
-            //Intent intent=new Intent(this, BestPerformerActivity.class);
-            //startActivity(intent);
-            finish();
+           finish();
         }
         else if(getIntent().getStringExtra("from").equals("worstPromo"))
         {
-           // Intent intent=new Intent(this, WorstPerformerActivity.class);
-            //startActivity(intent);
             finish();
-
         }
         else if(getIntent().getStringExtra("from").equals("upComingPromo"))
         {
-          //  Intent intent=new Intent(this, UpcomingPromo.class);
-           // startActivity(intent);
-            finish();
+           finish();
         }
         else if(getIntent().getStringExtra("from").equals("runningPromo"))
         {
-            //Intent intent=new Intent(this, RunningPromoActivity.class);
-            //startActivity(intent);
-            finish();
+           finish();
         }
         else if(getIntent().getStringExtra("from").equals("expiringPromo"))
         {
-           // Intent intent=new Intent(this, ExpiringPromoActivity.class);
-           // startActivity(intent);
-            finish();
+          finish();
         }
    }
 
@@ -229,16 +198,13 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-
             // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
-
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             EdtPromoStartDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-
         }
     }
 
@@ -257,13 +223,11 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
-
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             EdtPromoEndDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
 
         }
-
     }
 
     @Override

@@ -8,13 +8,11 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -58,11 +56,8 @@ public class StockPullFragment extends Fragment {
     private int offsetvalue = 0;
     private boolean checkNetworkFalse=false;
     private RequestQueue queue;
-    private String TAG="ToDo_Fregment";
     private ArrayList<ToDo_Modal>ReceiverSummaryList;
     private String recache;
-
-
     private String mParam1;
     private String mParam2;
 
@@ -87,9 +82,6 @@ public class StockPullFragment extends Fragment {
             }
         }
     }
-
-
-
 
 
     // TODO: Rename and change types and number of parameters
@@ -123,7 +115,6 @@ public class StockPullFragment extends Fragment {
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        Log.e(TAG, "onCreateView: -- StockPullFragment" );
         view = (ViewGroup) inflater.inflate(R.layout.fragment_stock_pull, container, false);
         ReceiverSummaryList=new ArrayList<>();
         recache = "true";
@@ -158,16 +149,12 @@ public class StockPullFragment extends Fragment {
         if (Reusable_Functions.chkStatus(context)) {
 
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiversummary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit +"&recache="+recache;
-            Log.e(TAG, "To_DO Summary Url" + "" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
 
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response)
                         {
-                            Log.i(TAG, "To_DO response : " + " " + response);
-                            Log.i(TAG, "To_DO response length" + "" + response.length());
-
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -177,7 +164,6 @@ public class StockPullFragment extends Fragment {
                                     return;
 
                                 } else if (response.length() == limit) {
-                                    Log.e(TAG, "promo eql limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
@@ -186,12 +172,9 @@ public class StockPullFragment extends Fragment {
                                     }
                                     offsetvalue = (limit * count) + limit;
                                     count++;
-                                    //
-
                                     requestTransferRequestsummary();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++)
                                     {
                                         toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
@@ -205,7 +188,6 @@ public class StockPullFragment extends Fragment {
 
                                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 recyclerView.setOnFlingListener(null);
-                                // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                                 StockPullAdapter stockPullAdapter;
                                 stockPullAdapter = new StockPullAdapter(ReceiverSummaryList,getActivity());
                                 recyclerView.setAdapter(stockPullAdapter);
@@ -217,7 +199,6 @@ public class StockPullFragment extends Fragment {
                                 Reusable_Functions.hDialog();
 
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -260,7 +241,6 @@ public class StockPullFragment extends Fragment {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);

@@ -7,7 +7,6 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,11 +41,10 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
     private final TransferRequest_Details transferRequest_detailsClass;
     TrDetailsHeaderChildAdapter trDetailsHeaderChildAdapter;
     int maxScanQty;
-    String scanQty, updatedScanQty;
-
+    String scanQty;
     private TransferDetailsAdapter transferDetailsAdapter;
     public OnScanBarcode onBarcodeScan;
-    String barcode, checkChildStr;
+    String checkChildStr;
     private static final String ACTION_SOFTSCANTRIGGER = "com.motorolasolutions.emdk.datawedge.api.ACTION_SOFTSCANTRIGGER";
     private static final String EXTRA_PARAM = "com.motorolasolutions.emdk.datawedge.api.EXTRA_PARAMETER";
     private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
@@ -75,8 +73,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-
-        Log.e("TAG", "On Detail child: " + position);
 
         final Pair<Integer, Integer> Childtag = new Pair<Integer, Integer>(PrePosition, position);
         ((TrDetailsHeaderChildAdapter.Holder) holder).tr_DetailChild_size.setText(list.get(PrePosition).get(position).getLevel());
@@ -115,13 +111,12 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                 } else {
                     UnCheckCondition(tagFlag);
                 }
-                Log.e("TAG", "data has been notified....and size is  " + checkedItems.size());
                 transferDetailsAdapter.notifyDataSetChanged();
 
             }
         });
 
-        //maxScanQty for scanQty is less than or equal to reqQty
+
         maxScanQty = (int) Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested());
         scanQty = ((TrDetailsHeaderChildAdapter.Holder) holder).tr_DetailChild_scanqty.getText().toString();
 
@@ -145,7 +140,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                 public void onClick(final View v) {
                     final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(v.getContext(), R.style.AppCompatAlertDialogStyle);
                     View dialogView = LayoutInflater.from(context).inflate(R.layout.sender_alert_dialog, null);
-                    //  dialogView.setBackgroundResource(Color.parseColor("#f8f6f6"));
                     dialogBuilder.setView(dialogView);
                     final EditText edt = (EditText) dialogView.findViewById(R.id.edit_scanQty);
                     dialogBuilder.setTitle("");
@@ -153,7 +147,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                     dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             //do something with edt.getText().toString();
-                            Log.e("dialogBuilder", "onClick: " + edt.getText().toString());
                             if (edt.getText().toString().equals("")) {
                                 InputMethodManager imm = (InputMethodManager) edt.getContext()
                                         .getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -165,9 +158,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                                     Toast.makeText(context, "Scan Qty cannot be 0", Toast.LENGTH_LONG).show();
 
                                 } else {
-                                    Log.e("TAG", "enter values: " + maxScanQty);
                                     ArrayList<Integer> total = new ArrayList<Integer>();
-                                    //((TrDetailsHeaderChildAdapter.Holder)holder).tr_DetailChild_scanqty.setText(edt.getText().toString());
                                     int positionOfAdd = position;
                                     for (int i = 0; i < list.size(); i++)
                                     {
@@ -210,7 +201,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                     dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
-                            Log.e("On Diglog dismiss","------------");
                             InputMethodManager imm = (InputMethodManager) context
                                     .getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(edt.getWindowToken(), 0);
@@ -224,11 +214,8 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
                         @Override
                         public void onFocusChange(View view, boolean hasFocus) {
                             if (hasFocus) {
-                                Log.e("hasfocus:", "" + hasFocus);
                                 b.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                             }
-
-
                         }
                     });
                 }
@@ -265,9 +252,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
             tr_DetailChild_requiredQty = (TextView) itemView.findViewById(R.id.txt_trdetailchild_reqty);
             tr_DetailChild_scanqty = (EditText) itemView.findViewById(R.id.txt_trdetailchild_scanqty);
             Tr_detailChild_checkBox = (CheckBox) itemView.findViewById(R.id.tr_detailChild_checkBox);
-            // imgbtn_detailchild_scan = (ImageView)itemView.findViewById(R.id.btn_scan);
-            // lin_childimgbtnScan = (LinearLayout)itemView.findViewById(R.id.lin_childimgbtnScan);
-            // et_trcdetailchildBarcode = (EditText)itemView.findViewById(R.id.et_trcdetailchildBarcode);
+
         }
     }
 }

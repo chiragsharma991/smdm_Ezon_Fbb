@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -48,7 +47,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private RecyclerView recyclerView;
     private Gson gson;
     private ArrayList<StatusModel> StatusDetailsList,StatusDetailChild;
-    private String TAG="StatusSender_Fragment";
     private SharedPreferences sharedPreferences;
     private String userId;
     private String bearertoken;
@@ -74,14 +72,12 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         getSupportActionBar().hide();
         context = this;
         initalise();
-        //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         recache ="true";
         StatusDetailsList = new ArrayList<StatusModel>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -100,15 +96,10 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private void requestStatusReceiversDetails()
     {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&recache="+recache;
-
-        Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Detail api response : " + " " + response);
-                        Log.i(TAG, "Detail api total length" + "" + response.length());
-
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -117,7 +108,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                                 return;
 
                             } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
@@ -129,7 +119,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                                 requestStatusReceiversDetails();
 
                             } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
@@ -143,7 +132,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                             }
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
-                            Log.e(TAG, "data  "+StatusDetailsList.get(0).getLevel() );
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             statusSenderDetails = new StatusSenderDetailsAdapter(StatusDetailsList, context,SenderDetailProcess);
                             MakeHashMap(StatusDetailsList);
@@ -155,7 +143,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                             Reusable_Functions.hDialog();
 
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },
@@ -230,16 +217,11 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20")+"&recache="+recache;
 
-        Log.e(TAG, "SubDetails Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "SubDetails api response : " + " " + response);
-                        Log.i(TAG, "SubDetails api total length" + "" + response.length());
-
-
-                        try {
+                       try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 SenderDetailProcess.setVisibility(View.GONE);
@@ -247,7 +229,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                                 return;
 
                             } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
@@ -257,12 +238,9 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                //
-
                                 requestStatusReceiversSubDetails(position);
 
                             } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     StatusDetailChild.add(statusModel);
@@ -284,7 +262,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                             Reusable_Functions.hDialog();
                             SenderDetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },

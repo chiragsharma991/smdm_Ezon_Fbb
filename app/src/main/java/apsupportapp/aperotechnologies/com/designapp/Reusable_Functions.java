@@ -24,7 +24,6 @@ public class Reusable_Functions {
         //noinspection deprecation,deprecation
         final NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         return wifi.isConnectedOrConnecting() || mobile.isConnectedOrConnecting();
-
     }
 
     public static void hDialog() {
@@ -51,7 +50,6 @@ public class Reusable_Functions {
         }
     }
 
-
     public static void ViewVisible (View view)
     {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -71,8 +69,6 @@ public class Reusable_Functions {
             view.setVisibility(View.VISIBLE);
 
         }
-
-
     }
 
     public static void ViewGone (final View view)
@@ -102,9 +98,6 @@ public class Reusable_Functions {
 
         }
 
-
-
-
     }
 
     public static void  MakeToast(Context context,String info){
@@ -112,8 +105,4 @@ public class Reusable_Functions {
         Toast.makeText(context,info, Toast.LENGTH_SHORT).show();
 
     }
-
-
-
-
 }

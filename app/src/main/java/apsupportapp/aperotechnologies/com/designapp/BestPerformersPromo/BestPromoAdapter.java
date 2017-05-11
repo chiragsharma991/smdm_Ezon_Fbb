@@ -23,29 +23,23 @@ public class BestPromoAdapter extends BaseAdapter {
 
     private ArrayList<RunningPromoListDisplay> arrayList;
 
-    //private List mStringFilterList;
-
     private LayoutInflater mInflater;
     Context context;
     private int Position;
 
-    //private ValueFilter valueFilter;
+
 
     public BestPromoAdapter(ArrayList<RunningPromoListDisplay> arrayList, Context context) {
 
-        // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         this.context = context;
         mInflater = LayoutInflater.from(context);
 
-        //getFilter();
     }
 
     //How many items are in the data set represented by this Adapter.
     @Override
     public int getCount() {
-
-
         return arrayList.size();
     }
 
@@ -67,8 +61,6 @@ public class BestPromoAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        //Log.e("in ","getview");
-
         Position=position;
         final Holder holder;
         if (convertView == null) {
@@ -77,88 +69,26 @@ public class BestPromoAdapter extends BaseAdapter {
             holder.PromotionName = (TextView) convertView.findViewById(R.id.bst_head_child);
             holder.Bst_PromoValues_child = (TextView) convertView.findViewById(R.id.bst_PromoValues_child);
             holder.Bst_PromoValuesU_child = (TextView) convertView.findViewById(R.id.bst_PromoValuesU_child);
-           // holder.Bst_txtStoreCode = (TextView)convertView.findViewById(R.id.bst_storecode);
-          //  holder.Bst_txtStoreName = (TextView)convertView.findViewById(R.id.bst_txtStoreName);
             holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
-           // holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.Bst_image_child = (ImageView) convertView.findViewById(R.id.bst_image_child);
-
-
-
             convertView.setTag(holder);
 
         } else {
             holder=(Holder)convertView.getTag();
-            //holder.ProgressPicaso.setVisibility(View.VISIBLE);
-
-
         }
         holder.PromotionName.setText(arrayList.get(position).getPromoDesc());
 
         NumberFormat format  = NumberFormat.getNumberInstance(new Locale("", "in"));
 
-        //holder.Bst_txtStoreCode.setText(arrayList.get(0).getStoreCode().toString());
-        //holder.Bst_txtStoreName.setText(arrayList.get(0).getStoreDesc().toString());
         holder.Bst_PromoValues_child.setText("₹\t"+format.format(Math.round(arrayList.get(position).getDurSaleNetVal())));
         holder.Bst_PromoValuesU_child.setText(""+arrayList.get(position).getDurSaleTotQty());
-
-
-
-
-
-
-
-
-     /*   if(!arrayList.get(position).getProdImageURL().equals("")) {
-            Picasso.with(this.context).
-
-                    load(arrayList.get(position).getProdImageURL()).
-                    into(holder.Bst_image_child, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            holder.ProgressPicaso.setVisibility(View.GONE);
-                        }
-
-                        @Override
-                        public void onError() {
-                            holder.ProgressPicaso.setVisibility(View.GONE);
-
-                        }
-                    });
-        }else {
-            holder.ProgressPicaso.setVisibility(View.GONE);
-
-            Picasso.with(this.context).
-                    load(R.mipmap.placeholder).
-                    into(holder.Bst_image_child);
-                    }
-                    */
-
-
-
-
-
-
-
-
-
-
-
-
         return convertView;
     }
-
-
 
     private class Holder {
 
         TextView PromotionName,Bst_PromoValues_child,Bst_PromoValuesU_child,Bst_txtStoreCode,Bst_txtStoreName;
         ImageView Bst_image_child;
-
         public ProgressBar ProgressPicaso;
     }
-
-
-
-
 }

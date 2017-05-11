@@ -82,28 +82,9 @@
                         android:indeterminateDrawable="@drawable/progress"
                         />
 
-
-
-
-
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
-
-
-
-
-
-
         </LinearLayout>
-
-
-
-
-
-
-
-
-
     </LinearLayout>
 
     <RelativeLayout
@@ -140,7 +121,7 @@
                         android:textStyle="bold"
                         android:singleLine="true"
                         android:textSize="@dimen/collaboration_stock_storecode"
-                        android:text="Case :"
+                        android:text="@string/case_nm"
                         />
 
                 </LinearLayout>
@@ -178,15 +159,7 @@
                         />
 
                 </LinearLayout>
-
-
-
-
-
             </LinearLayout>
-
-
-
         </RelativeLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/statusDetail_list"
@@ -197,11 +170,5 @@
             />
 
     </RelativeLayout>
-
-
-
-
-
-
 
 </RelativeLayout>

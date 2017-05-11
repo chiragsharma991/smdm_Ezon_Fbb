@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
@@ -60,7 +59,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
     private static String seasongroup = "Current";
-    String TAG = "FloorAvailabilty";
     private int count = 0;
     private boolean coreSelection = false;
     private int limit = 10;
@@ -72,8 +70,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private Gson gson;
     ListView floorListView;
     ArrayList<FloorAvailabilityDetails> FloorList;
-    private int focusposition = 0;
-    private boolean userScrolled;
     FloorAvailabilityAdapter floorAvailabilityAdapter;
     private View footer;
     private String lazyScroll = "OFF";
@@ -82,11 +78,10 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private ToggleButton Toggle_floor_fav;
     private static String corefashion = "Fashion";
     private static String floorcheckSeasonGpVal = null;
-    private RadioButton Skewed_checkWTD,Skewed_checkL4W,Skewed_checkSTD;
     public static Activity floorAvailability;
-    private boolean from_filter=false;
-    private String selectedString="";
-    private boolean toggleClick=false;
+    private boolean from_filter = false;
+    private String selectedString = "";
+    private boolean toggleClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,12 +90,11 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         getSupportActionBar().hide();
         initalise();
         gson = new Gson();
-        floorAvailability=this;
+        floorAvailability = this;
         FloorList = new ArrayList<FloorAvailabilityDetails>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -119,64 +113,44 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 from_filter = false;
             } else if (getIntent().getStringExtra("selectedDept") != null) {
                 selectedString = getIntent().getStringExtra("selectedDept");
-                //   selectedString = selectedString.replace(" ","%20");
                 from_filter = true;
-
             }
             RetainFromMain_filter();
             requestFloorAvailabilityApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-        // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
-
         floorListView.addFooterView(footer);
-
     }
 
-    private void requestFloorAvailabilityApi( final String selectedString) {
+    private void requestFloorAvailabilityApi(final String selectedString) {
 
         if (Reusable_Functions.chkStatus(context)) {
 
             String url;
             if (from_filter) {
                 if (coreSelection) {
-
                     //core selection without season params
-
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion ;
+                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion;
                 } else {
-
-                    // fashion select with season params
-
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup ;
+                    //fashion select with season params
+                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
                 }
             } else {
                 if (coreSelection) {
-
                     //core selection without season params
-
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion ;
+                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
                 } else {
-
                     // fashion select with season params
-
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup ;
+                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
                 }
             }
-
-           // String url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
-
-            Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.e(TAG, "Floor Availability: " + " " + response);
-                            Log.e(TAG, "response" + "" + response.length());
                             floorListView.setVisibility(View.VISIBLE);
-
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -185,59 +159,34 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                                     floorListView.setTag("FOOTER_REMOVE");
                                     if (FloorList.size() == 0) {
                                         floorListView.setVisibility(View.GONE);
-
                                     }
                                     return;
 
                                 } else if (response.length() == limit) {
-                                    Log.e(TAG, "Top eql limit");
                                     for (int i = 0; i < response.length(); i++) {
-
                                         floorAvailabilityDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
                                         FloorList.add(floorAvailabilityDetails);
-
                                     }
                                     offsetvalue = offsetvalue + 10;
                                     top = top + 10;
-                                    //  count++;
-
-                                    // requestStockAgeingApi();
-
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++) {
-
                                         floorAvailabilityDetails = gson.fromJson(response.get(i).toString(), FloorAvailabilityDetails.class);
                                         FloorList.add(floorAvailabilityDetails);
-
                                     }
                                     offsetvalue = offsetvalue + 10;
                                     top = top + 10;
                                 }
-
-
-                           /* if(popPromo==10)
-                            {
-                                topOptionAdapter = new TopOptionAdapter(TopOptionList,context);
-                                TopOptionListView.setAdapter(topOptionAdapter);
-                                popPromo=0;
-
-                            }*/
-
                                 if (lazyScroll.equals("ON")) {
                                     floorAvailabilityAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                     footer.setVisibility(View.GONE);
-
                                 } else {
                                     floorAvailabilityAdapter = new FloorAvailabilityAdapter(FloorList, context);
                                     floorListView.setAdapter(floorAvailabilityAdapter);
                                     floor_txtStoreCode.setText(FloorList.get(0).getStoreCode());
                                     floor_txtStoreName.setText(FloorList.get(0).getStoreDescription());
-
                                 }
-
-
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {
 
@@ -247,9 +196,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                                 Reusable_Functions.hDialog();
                                 footer.setVisibility(View.GONE);
                                 Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                                //Toast.makeText(context, "no data found in catch" + e.toString(), Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -261,7 +208,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                             floorListView.removeFooterView(footer);
                             floorListView.setTag("FOOTER_REMOVE");
                             floorListView.setVisibility(View.GONE);
-
                             error.printStackTrace();
                         }
                     }
@@ -281,7 +227,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
 
-
 //---------------seton Click list listener------------------//
 
             floorListView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -297,12 +242,9 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                             floorListView.setTag("FOOTER_ADDED");
 
                         }
-
-
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
                         requestFloorAvailabilityApi(selectedString);
-                        //Reusable_Functions.sDialog(context, "Loading data...");
                     }
                 }
 
@@ -323,7 +265,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         }
     }
 
-
     private void initalise() {
         floor_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         floor_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
@@ -331,7 +272,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         floor_BtnFilter = (RelativeLayout) findViewById(R.id.fa_imgfilter);
         floor_quickFilter = (RelativeLayout) findViewById(R.id.floor_quickFilter);
         quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
-       // quickFilterPopup.setVisibility(View.GONE);
         quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
         qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
         quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
@@ -348,19 +288,10 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         checkOld = (CheckBox) findViewById(R.id.checkOld);
         checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
 
-      //  Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
-     //   Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);
-      //  Skewed_checkSTD = (RadioButton) findViewById(R.id.skewed_checkSTD);
-
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
-
-     //   Skewed_checkWTD.setOnClickListener(this);
-    //    Skewed_checkL4W.setOnClickListener(this);
-      //  Skewed_checkSTD.setOnClickListener(this);
-
 
         qfDoneLayout.setOnClickListener(this);
         floor_segmented.setOnCheckedChangeListener(this);
@@ -371,19 +302,16 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         quickFilter_BorderLayout.setOnClickListener(this);
     }
 
-    private void RetainFromMain_filter()
-    {
-        toggleClick=true;
+    private void RetainFromMain_filter() {
+        toggleClick = true;
 
-        if(corefashion.equals("Fashion"))
-        {
+        if (corefashion.equals("Fashion")) {
             floor_fashion.toggle();
-            coreSelection=false;
+            coreSelection = false;
 
-        }else
-        {
+        } else {
             floor_core.toggle();
-            coreSelection=true;
+            coreSelection = true;
         }
         baseclick();
     }
@@ -394,9 +322,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
         switch (v.getId()) {
             case R.id.fa_imageBtnBack:
-             /*   Intent intent1 = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
-                intent1.putExtra("BACKTO","inventory");
-                startActivity(intent1);*/
                 onBackPressed();
                 break;
             case R.id.toggle_stock_fav:
@@ -411,7 +336,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 Intent intent = new Intent(FloorAvailabilityActivity.this, SalesFilterActivity.class);
                 intent.putExtra("checkfrom", "floorAvailability");
                 startActivity(intent);
-                // finish();
                 break;
             case R.id.floor_quickFilter:
 
@@ -482,20 +406,15 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 checkPrevious.setChecked(false);
 
                 break;
-
         }
-
     }
 
-    private void baseclick()
-    {
+    private void baseclick() {
         if (floorcheckSeasonGpVal == null) {
             checkCurrent.setChecked(true);
             checkPrevious.setChecked(false);
             checkOld.setChecked(false);
             checkUpcoming.setChecked(false);
-
-
         } else {
             switch (floorcheckSeasonGpVal) {
                 case "Current":
@@ -503,40 +422,30 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                     checkPrevious.setChecked(false);
                     checkOld.setChecked(false);
                     checkUpcoming.setChecked(false);
-
-                    Log.e("Current checked", "" + checkCurrent.isChecked());
                     break;
-
                 case "Previous":
                     checkPrevious.setChecked(true);
                     checkCurrent.setChecked(false);
                     checkOld.setChecked(false);
                     checkUpcoming.setChecked(false);
-                    Log.e("Previous checked", "" + checkPrevious.isChecked());
                     break;
                 case "Old":
                     checkOld.setChecked(true);
                     checkCurrent.setChecked(false);
                     checkPrevious.setChecked(false);
                     checkUpcoming.setChecked(false);
-                    Log.e("Old checked", "" + checkOld.isChecked());
                     break;
                 case "Upcoming":
                     checkUpcoming.setChecked(true);
                     checkCurrent.setChecked(false);
                     checkOld.setChecked(false);
                     checkPrevious.setChecked(false);
-                    Log.e("Upcoming checked", "" + checkUpcoming.isChecked());
                     break;
             }
-
-
         }
     }
 
     private void popupCurrent() {
-
-
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
@@ -566,7 +475,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void popupOld() {
@@ -583,7 +491,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void popupUpcoming() {
@@ -600,62 +507,59 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        if(toggleClick==false){
-        switch (checkedId) {
-            case R.id.floor_core:
-                if (floor_core.isChecked()) {
+        if (toggleClick == false) {
+            switch (checkedId) {
+                case R.id.floor_core:
+                    if (floor_core.isChecked()) {
 
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Core";
-                        lazyScroll = "OFF";
-                        FloorList.clear();
-                        floorListView.setVisibility(View.GONE);
-                        coreSelection = true;
-                        requestFloorAvailabilityApi(selectedString);
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        floorListView.setVisibility(View.GONE);
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            limit = 10;
+                            offsetvalue = 0;
+                            top = 10;
+                            corefashion = "Core";
+                            lazyScroll = "OFF";
+                            FloorList.clear();
+                            floorListView.setVisibility(View.GONE);
+                            coreSelection = true;
+                            requestFloorAvailabilityApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            floorListView.setVisibility(View.GONE);
 
+                        }
                     }
-                }
-                break;
-            case R.id.floor_fashion:
-                if (floor_fashion.isChecked()) {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Fashion";
-                        lazyScroll = "OFF";
-                        FloorList.clear();
-                        floorListView.setVisibility(View.GONE);
-                        coreSelection = false;
-                        requestFloorAvailabilityApi(selectedString);
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        floorListView.setVisibility(View.GONE);
+                    break;
+                case R.id.floor_fashion:
+                    if (floor_fashion.isChecked()) {
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            limit = 10;
+                            offsetvalue = 0;
+                            top = 10;
+                            corefashion = "Fashion";
+                            lazyScroll = "OFF";
+                            FloorList.clear();
+                            floorListView.setVisibility(View.GONE);
+                            coreSelection = false;
+                            requestFloorAvailabilityApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            floorListView.setVisibility(View.GONE);
 
+                        }
                     }
-                }
-                break;
-
-        }
-    }else
-        {
-            toggleClick=false;
+                    break;
+            }
+        } else {
+            toggleClick = false;
         }
     }
 
@@ -663,18 +567,11 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       /* Intent intent = new Intent(FloorAvailabilityActivity.this, DashBoardActivity.class);
-        intent.putExtra("BACKTO","inventory");
-        startActivity(intent);*/
         seasongroup = null;
-        corefashion=null;
-        floorcheckSeasonGpVal=null;
-
+        corefashion = null;
+        floorcheckSeasonGpVal = null;
         seasongroup = "Current";
-        corefashion="Fashion";
-
+        corefashion = "Fashion";
         finish();
     }
-
-
 }

@@ -19,6 +19,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="0dp">
+
             <RelativeLayout
                 android:id="@+id/innerrellay"
                 android:layout_width="match_parent"
@@ -29,7 +30,7 @@
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store : "
+                    android:text="@string/store"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/normallayout_storesize" />
 
@@ -60,7 +61,7 @@
                 android:id="@+id/opt_name_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Option :"
+                android:text="@string/plan_option"
                 android:textColor ="@color/colorPrimary"
                 android:textSize="@dimen/normallayout_storesize" />
 
@@ -172,9 +173,6 @@
             android:layout_below="@+id/innerrelLayout">
         </RelativeLayout>
     </RelativeLayout>
-    <FrameLayout
-        android:id="@+id/child_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+
 </RelativeLayout>
 

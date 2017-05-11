@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -21,7 +20,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -34,12 +32,9 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,7 +42,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.OnRowPressListener;
@@ -69,7 +63,7 @@ public class Option_Fragment extends Fragment {
     ArrayList<StyleDetailsBean> optionDetailsList;
     StyleDetailsBean styleDetailsBean;
     Gson gson;
-    String userId, productName, bearertoken;
+    String userId, bearertoken;
     ScrollView scrollViewC;
     ScrollView scrollViewD;
     RequestQueue queue;
@@ -78,7 +72,8 @@ public class Option_Fragment extends Fragment {
     RelativeLayout relativeLayout;
     public static RelativeLayout rel;
     // set the header titles
-    String headers[] = {
+    String headers[] =
+    {
             "        Option        ",
             "    L2H\n\t\t\tSls    ",
             "    Day\n\t\t\tSls    ",
@@ -137,7 +132,6 @@ public class Option_Fragment extends Fragment {
         if (KeyProductActivity.viewPager.getCurrentItem() == 1 && KeyProductActivity.prodName.equals("")) {
             Toast.makeText(getContext(), "Please select product to view options", Toast.LENGTH_LONG).show();
         }
-
         return view;
     }
 
@@ -158,12 +152,10 @@ public class Option_Fragment extends Fragment {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
-
             offsetvalue = 0;
             limit = 100;
             count = 0;
             txtOptionName.setText(productName);
-
             productNameBeanArrayList = new ArrayList<>();
 
             if (!KeyProductActivity.prodName.equals("")) {
@@ -281,14 +273,12 @@ public class Option_Fragment extends Fragment {
             textView.setGravity(Gravity.CENTER);
             componentBTableRow.addView(textView);
         }
-
         return componentBTableRow;
     }
 
     private void generateTableC_AndTable_B() {
 
         // just seeing some header cell width
-
         for (int k = 0; k <= productNameBeanArrayList.size() - 1; k++) {
 
             final TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getArticleOption());
@@ -528,8 +518,8 @@ public class Option_Fragment extends Fragment {
     }
 
     // horizontal scroll view custom class
-    class MyHorizontalScrollView extends HorizontalScrollView {
-
+    class MyHorizontalScrollView extends HorizontalScrollView
+    {
         public MyHorizontalScrollView(Context context) {
             super(context);
         }

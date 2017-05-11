@@ -31,33 +31,31 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_status);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_status);
         setSupportActionBar(toolbar);
-       initialise();
-        if(Build.VERSION.SDK_INT>=21)
-        {
-                    Window window = getWindow();
+        initialise();
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
 
-// clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            // clear FLAG_TRANSLUCENT_STATUS flag:
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-// finally change the color
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+            // finally change the color
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
 
         }
 
 
-
-        viewPager=(ViewPager)findViewById(R.id.status_viewpager);
+        viewPager = (ViewPager) findViewById(R.id.status_viewpager);
         setupViewPager(viewPager);
         tab = (TabLayout) findViewById(R.id.tabs_toDo);
         tab.setupWithViewPager(viewPager);
     }
 
     private void initialise() {
-        status_imageBtnBack = (RelativeLayout)findViewById(R.id.status_imageBtnBack);
-        StatusProcess = (ProgressBar)findViewById(R.id.statusProcess);
+        status_imageBtnBack = (RelativeLayout) findViewById(R.id.status_imageBtnBack);
+        StatusProcess = (ProgressBar) findViewById(R.id.statusProcess);
         StatusProcess.setVisibility(View.GONE);
 
         status_imageBtnBack.setOnClickListener(this);
@@ -67,18 +65,17 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         c.startActivity(new Intent(c, StatusActivity.class));
     }
 
-    private void setupViewPager(ViewPager viewPager)
-    {
+    private void setupViewPager(ViewPager viewPager) {
         StatusViewPagerAdapter adapter = new StatusViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ToBeSender(), "Transfer Status");
         adapter.addFragment(new ToBeReceiver(), "Receive Status");
         viewPager.setAdapter(adapter);
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.status_imageBtnBack :
+        switch (v.getId()) {
+            case R.id.status_imageBtnBack:
                 onBackPressed();
                 break;
         }

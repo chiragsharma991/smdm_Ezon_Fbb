@@ -89,7 +89,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private Feedback_model feedback_model_report;
     private String selectCategory;
     private String storecode,storeDes;
-    //  private Feedback_details feedbackAdapter;
 
 
     @Override

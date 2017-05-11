@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import java.util.HashMap;
 
 
@@ -24,7 +23,6 @@ public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCall
 
         this.activity = activity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
-        Log.e("onActivityCreated", "onRestart: ");
 
     }
 
@@ -38,7 +36,6 @@ public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCall
     @Override
     public void onActivityResumed(Activity activity) {
 
-        Log.e("onActivityResumed", "onRestart: ");
         if (LocalNotificationReceiver.logoutAlarm) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
@@ -59,8 +56,6 @@ public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCall
     @Override
     public void onActivityStopped(Activity activity) {
         //map Activity unique class name with 0 on foreground
-        Log.e("onActivityStopped", "onStop: ");
-
         activities.put(activity.getLocalClassName(), 0);
         applicationStatus();
     }
@@ -90,9 +85,6 @@ public class BaseLifeCycleCallbacks implements Application.ActivityLifecycleCall
      * Log application status.
      */
     public static boolean applicationStatus() {
-
-
-        Log.e("ApplicationStatus", "Is application background " + isBackGround());
         return !isBackGround();
     }
 }
