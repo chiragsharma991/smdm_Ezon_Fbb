@@ -334,22 +334,12 @@
                         android:id="@+id/sohDetails"
                         >
 
-
-
                     </LinearLayout>
 
 
                 </LinearLayout>
 
-
-
-
             </HorizontalScrollView>
-
-
-
-
-
 
         </LinearLayout>
 

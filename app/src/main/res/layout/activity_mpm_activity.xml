@@ -13,8 +13,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
         >
-
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -59,19 +57,13 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/mpm_imageBtnBack"
-                    android:text="Season Catalogue"
+                    android:text="@string/mpm_title"
                     android:textColor="@color/divider_salescard1"
                     android:textSize="@dimen/smdm_header_title_large" />
-
-
-
             </RelativeLayout>
 
 
         </android.support.v7.widget.Toolbar>
-
-
-
 
     </android.support.design.widget.AppBarLayout>
 
@@ -84,7 +76,6 @@
         android:orientation="vertical"
         android:visibility="visible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
         >
 
         <LinearLayout
@@ -109,11 +100,7 @@
                         android:layout_height="match_parent"
                         android:id="@+id/webview_wrap"
                         android:orientation="vertical">
-
-
                     </LinearLayout>
-
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -137,9 +124,7 @@
                                 android:layout_marginRight="3dp"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/smdm_departmentTitleLarge"
-
-
-                                />
+                               />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -149,8 +134,6 @@
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/smdm_departmentTitleLarge"
 
-
-
                                 />
                             <TextView
                                 android:layout_width="wrap_content"
@@ -159,9 +142,6 @@
                                 android:layout_marginRight="3dp"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/smdm_departmentTitleLarge"
-
-
-
                                 />
                             <TextView
                                 android:layout_width="wrap_content"
@@ -170,15 +150,9 @@
                                 android:id="@+id/pages_total"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/smdm_departmentTitleLarge"
-
-
                                 />
 
                         </LinearLayout>
-
-
-
-
 
                     </RelativeLayout>
 
@@ -197,7 +171,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/zoom_in_out_map_black_24dp"
-
                             >
 
                         </RelativeLayout>
@@ -215,7 +188,6 @@
                     android:visibility="gone"
                     android:id="@+id/webview_process"
                     >
-
                     <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                                  android:layout_width="match_parent"
                                  android:layout_height="wrap_content"
@@ -235,17 +207,16 @@
                         android:visibility="visible"
                         android:layout_centerHorizontal="true"
                         android:layout_below="@+id/imageLoader_feedback"
-
-
                         >
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="PDF: "
                             android:textColor="@color/white"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
-
                             />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -253,35 +224,21 @@
                             android:id="@+id/process_count"
                             android:textColor="@color/white"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
-
                             />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="/100"
                             android:textColor="@color/white"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
-
                             />
 
                     </LinearLayout>
 
-
-
-
-
-
                 </RelativeLayout>
 
-
-
-
-
-
             </RelativeLayout>
-
-
-
 
         </LinearLayout>
 
@@ -299,13 +256,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:gravity="center_vertical"
-                android:background="#f8f6f6"
-                >
+                android:background="#f8f6f6">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="Department"
                     android:textSize="@dimen/smdm_departmentTitleLarge"
                     android:textColor="@color/bg_store_code_text"
@@ -320,60 +275,12 @@
                 android:layout_height="match_parent"
                 android:id="@+id/department_list"
                 android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                >
+                android:paddingRight="3dp">
 
             </ListView>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </LinearLayout>
 
-
-
-
-
-
-
-
-
-
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </android.support.design.widget.CoordinatorLayout>

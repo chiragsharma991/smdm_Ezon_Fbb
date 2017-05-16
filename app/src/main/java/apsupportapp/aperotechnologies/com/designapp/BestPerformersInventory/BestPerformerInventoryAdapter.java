@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -35,13 +34,10 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -55,28 +51,21 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
  */
 
 
-
-
 public class BestPerformerInventoryAdapter extends BaseAdapter {
 
     private ArrayList<RunningPromoListDisplay> arrayList;
-
-    //private List mStringFilterList;
-
     private LayoutInflater mInflater;
-    Context context;
+    private Context context;
     private int Position;
-    ArrayList<StyleDetailsBean> optionList;
-    StyleDetailsBean styleDetailsBean;
-    Gson gson;
-    String TAG = "BestPerfomerInventory";
-    int offset , limit;
+    private ArrayList<StyleDetailsBean> optionList;
+    private StyleDetailsBean styleDetailsBean;
+    private Gson gson;
+    private String TAG = "BestPerfomerInventory";
+    private int offset, limit;
 
-    //private ValueFilter valueFilter;
 
     public BestPerformerInventoryAdapter(ArrayList<RunningPromoListDisplay> arrayList, Context context) {
 
-        // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         this.context = context;
         mInflater = LayoutInflater.from(context);
@@ -84,28 +73,23 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         optionList = new ArrayList<StyleDetailsBean>();
         offset = 0;
         limit = 10;
-        //getFilter();
     }
 
     //How many items are in the data set represented by this Adapter.
     @Override
     public int getCount() {
-
-
         return arrayList.size();
     }
 
     //Get the data item associated with the specified position in the data set.
     @Override
     public Object getItem(int position) {
-
         return arrayList.get(position);
     }
 
     //Get the row id associated with the specified position in the list.
     @Override
     public long getItemId(int position) {
-
         return position;
     }
 
@@ -113,45 +97,36 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        //Log.e("in ","getview");
-
-        Position=position;
+        Position = position;
         final Holder holder;
         if (convertView == null) {
-            holder=new Holder();
+            holder = new Holder();
             convertView = mInflater.inflate(R.layout.activity_bestperformer_inventory_child, null);
             holder.BestInvent_SOH = (TextView) convertView.findViewById(R.id.bestInvent_SOH);
             holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
-
-            // holder.ProgressPicaso.getIndeterminateDrawable().setColorFilter(Color.BLACK, PorterDuff.Mode.MULTIPLY);
-
             holder.BestInvent_option = (TextView) convertView.findViewById(R.id.bestInvent_option);
             holder.BestInvent_sellThru = (TextView) convertView.findViewById(R.id.bestInvent_sellThru);
             holder.BestInvent_FWC = (TextView) convertView.findViewById(R.id.bestInvent_FWC);
             holder.BestInvent_RosU = (TextView) convertView.findViewById(R.id.bestInvent_RosU);
             holder.BestInvent_GIT = (TextView) convertView.findViewById(R.id.bestInvent_GIT);
             holder.BestInvent_Sale = (TextView) convertView.findViewById(R.id.bestInvent_Sale);
-           // holder.BestInventTable_SOH = (TextView) convertView.findViewById(R.id.bestInventTable_SOH);
-          //  holder.BestInventTable_ProdAttribute = (TextView) convertView.findViewById(R.id.bestInventTable_ProdAttribute);
             holder.BestInvent_image_child = (ImageView) convertView.findViewById(R.id.bestInvent_image_child);
             convertView.setTag(holder);
 
         } else {
-            holder=(Holder)convertView.getTag();
+            holder = (Holder) convertView.getTag();
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
         }
 
-        holder.BestInvent_SOH.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
+        holder.BestInvent_SOH.setText("" + Math.round(arrayList.get(position).getStkOnhandQty()));
         holder.BestInvent_option.setText(arrayList.get(position).getOption());
 
 
         //Option Click event to get detail information
         holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                //  Toast.makeText(context,"Option Click...",Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
@@ -163,15 +138,15 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
             }
         });
 
-        holder.BestInvent_sellThru.setText(""+Math.round(arrayList.get(position).getSellThruUnits()));
-        holder.BestInvent_FWC.setText(""+Math.round(arrayList.get(position).getFwdWeekCover()));
-        holder.BestInvent_RosU.setText(""+Math.round(arrayList.get(position).getRos()));
-        holder.BestInvent_GIT.setText(""+arrayList.get(position).getStkGitQty());
-        holder.BestInvent_Sale.setText(""+arrayList.get(position).getSaleTotQty());
+        holder.BestInvent_sellThru.setText("" + Math.round(arrayList.get(position).getSellThruUnits()));
+        holder.BestInvent_FWC.setText("" + Math.round(arrayList.get(position).getFwdWeekCover()));
+        holder.BestInvent_RosU.setText("" + Math.round(arrayList.get(position).getRos()));
+        holder.BestInvent_GIT.setText("" + (int) arrayList.get(position).getStkGitQty());
+        holder.BestInvent_Sale.setText("" + (int) arrayList.get(position).getSaleTotQty());
         BestPerformerInventory.BestInvent_txtStoreCode.setText(arrayList.get(position).getStoreCode());
         BestPerformerInventory.BestInvent_txtStoreName.setText(arrayList.get(position).getStoreDesc());
 
-        if(!arrayList.get(position).getProdImageURL().equals("")) {
+        if (!arrayList.get(position).getProdImageURL().equals("")) {
 
             Glide.with(this.context)
                     .load(arrayList.get(position).getProdImageURL())
@@ -190,7 +165,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
                     })
                     .into(holder.BestInvent_image_child);
 
-        }else {
+        } else {
 
             holder.ProgressPicaso.setVisibility(View.GONE);
             Glide.with(this.context).
@@ -205,8 +180,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void requestOptionDetailsAPI(String option)
-    {
+    private void requestOptionDetailsAPI(String option) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
         String userId = sharedPreferences.getString("userId", "");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -214,13 +188,9 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         BasicNetwork network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
-
-        String url ;
-
-        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
-
+        String url = " ";
+        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offset + "&limit=" + limit;
         Log.e(TAG, "requestStyleDetailsAPI  " + url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -228,12 +198,12 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
                         Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
                         try {
                             int i;
-                            if (response.equals("") || response == null || response.length() == 0) {
+                            if (response.equals(null) || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
-                            } else if(response.length() < limit){
+                            } else if (response.length() < limit) {
                                 Reusable_Functions.hDialog();
-                                for ( i = 0; i < response.length(); i++) {
+                                for (i = 0; i < response.length(); i++) {
 
                                     styleDetailsBean = gson.fromJson(response.get(i).toString(), StyleDetailsBean.class);
                                     optionList.add(styleDetailsBean);
@@ -242,13 +212,12 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
 
                                 Log.e(TAG, "intent calling: ");
                                 Intent intent = new Intent(context, SwitchingTabActivity.class);
-                                intent.putExtra("checkFrom","bestInventory");
-                                intent.putExtra("articleCode",styleDetailsBean.getArticleCode());
-                                intent.putExtra("articleOption",styleDetailsBean.getArticleOption());
-                                Log.e("Article Option :",""+styleDetailsBean.getArticleOption());
+                                intent.putExtra("checkFrom", "bestInventory");
+                                intent.putExtra("articleCode", styleDetailsBean.getArticleCode());
+                                intent.putExtra("articleOption", styleDetailsBean.getArticleOption());
+                                Log.e("Article Option :", "" + styleDetailsBean.getArticleOption());
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 context.startActivity(intent);
-                                //BestPerformerInventory.bestperoformer.finish();
                             }
                         } catch (Exception e) {
                             Log.e("Exception e", e.toString() + "");
@@ -284,21 +253,13 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
 
     private class Holder {
 
-        TextView BestInvent_SOH,BestInvent_option,BestInvent_sellThru,BestInvent_FWC,
-                BestInvent_RosU,BestInvent_GIT,BestInvent_Sale,BestInventTable_SOH,
-                BestInventTable_ProdAttribute;
+        TextView BestInvent_SOH, BestInvent_option, BestInvent_sellThru, BestInvent_FWC,
+                BestInvent_RosU, BestInvent_GIT, BestInvent_Sale;
         ImageView BestInvent_image_child;
         ProgressBar ProgressPicaso;
 
 
-
-
-
-
-
     }
-
-
 
 
 }

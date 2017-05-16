@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +56,6 @@ public class TopOptionAdapter extends BaseAdapter {
 
     private ArrayList<RunningPromoListDisplay> arrayList;
 
-    //private List mStringFilterList;
-
     private LayoutInflater mInflater;
     Context context;
     private int Position;
@@ -67,11 +65,9 @@ public class TopOptionAdapter extends BaseAdapter {
     Gson gson;
     int offset,limit;
 
-    //private ValueFilter valueFilter;
 
     public TopOptionAdapter(ArrayList<RunningPromoListDisplay> arrayList, Context context) {
 
-        // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         this.context = context;
         mInflater = LayoutInflater.from(context);
@@ -79,7 +75,6 @@ public class TopOptionAdapter extends BaseAdapter {
         gson = new Gson();
         offset = 0;
         limit = 10;
-        //getFilter();
     }
 
     //How many items are in the data set represented by this Adapter.
@@ -108,8 +103,6 @@ public class TopOptionAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        //Log.e("in ","getview");
-
         Position=position;
         final Holder holder;
         if (convertView == null) {
@@ -123,10 +116,7 @@ public class TopOptionAdapter extends BaseAdapter {
             holder.Top_RosU = (TextView) convertView.findViewById(R.id.top_RosU);
             holder.Top_image_child = (ImageView) convertView.findViewById(R.id.top_image_child);
             holder.Top_fav = (RelativeLayout) convertView.findViewById(R.id.top_fav);
-
-
-
-            convertView.setTag(holder);
+           convertView.setTag(holder);
 
         } else {
             holder=(Holder)convertView.getTag();
@@ -144,7 +134,6 @@ public class TopOptionAdapter extends BaseAdapter {
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
-                    Log.e("select item", arrayList.get(position).getOption());
                     requestOptionDetailsAPI(arrayList.get(position).getOption());
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -206,13 +195,10 @@ public class TopOptionAdapter extends BaseAdapter {
 
         url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
 
-        Log.e(TAG, "requestStyleDetailsAPI  " + url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
                         try {
                             int i;
                             if (response.equals("") || response == null || response.length() == 0) {
@@ -227,18 +213,15 @@ public class TopOptionAdapter extends BaseAdapter {
 
                                 }
 
-                                Log.e(TAG, "intent calling: ");
                                 Intent intent = new Intent(context, SwitchingTabActivity.class);
                                 intent.putExtra("checkFrom","topCut");
                                 intent.putExtra("articleCode",styleDetailsBean.getArticleCode());
                                 intent.putExtra("articleOption",styleDetailsBean.getArticleOption());
-                                Log.e("Article Option :",""+styleDetailsBean.getArticleOption());
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 context.startActivity(intent);
                                 TopFullCut.topFullcut.finish();
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -247,7 +230,6 @@ public class TopOptionAdapter extends BaseAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e("", "" + error.networkResponse + "");
                         Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }

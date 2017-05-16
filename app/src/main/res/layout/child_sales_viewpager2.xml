@@ -32,7 +32,7 @@
                 android:gravity="left"
                 android:textColor="@color/smdm_default_color"
                 android:layout_marginLeft="8dp"
-                android:text="SOH(U)"
+                android:text="@string/soh_u"
                 android:textSize="12sp" />
 
 
@@ -45,7 +45,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="17sp" />
 
@@ -71,7 +71,7 @@
                 android:layout_marginTop="2dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="GIT(U)"
+                android:text="@string/git_u"
                 android:textColor="@color/smdm_default_color"
                 android:textSize="12sp" />
 
@@ -85,7 +85,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="17sp"
                  />
@@ -118,7 +118,7 @@
                 android:layout_marginTop="2dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="ROS(U)"
+                android:text="@string/ros_u"
                 android:textColor="@color/smdm_default_color"
                 android:textSize="12sp" />
 
@@ -129,7 +129,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="17sp"
                />
@@ -154,7 +154,7 @@
                 android:layout_marginTop="2dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="Fwd Wk Cover"
+                android:text="@string/fwd_wk_cover"
                 android:textColor="@color/smdm_default_color"
                 android:textSize="12sp" />
 
@@ -166,7 +166,7 @@
                  android:layout_alignParentLeft="true"
                  android:layout_marginLeft="8dp"
                  android:layout_marginTop="35dp"
-                 android:text="12,15,1215"
+                 android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="17sp"
                 />

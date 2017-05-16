@@ -356,22 +356,9 @@
 
                     >
 
-
-
-                </LinearLayout>
-
-
-
-
-
+               </LinearLayout>
 
             </LinearLayout>
-
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
-
-
+       </RelativeLayout>
+   </RelativeLayout>
 </RelativeLayout>

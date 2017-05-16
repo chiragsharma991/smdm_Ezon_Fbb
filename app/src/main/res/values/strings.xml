@@ -63,7 +63,7 @@
     <string name="key_product_plan">Plan vs Actual </string>
     <string name="plan_actual">Key Products</string>
     <string name="store_inspection">Store Inspection</string>
-    <string name="mpm_title">Season Catalogue</string>
+
     <!--Inspection Module-->
     <string name="inspection_history">Inspection History</string>
     <string name="inspection_begin">Begin Inspection</string>
@@ -76,6 +76,16 @@
     <string name="insp_criteria_7">MPM Execution</string>
     <string name="insp_criteria_8">Window &amp; cluster Mannequins Displays</string>
     <string name="dummy_text">Inspector comments</string>
+    <string name="inspection_id">Inspection Id :</string>
+    <string name="inspected_by">Inspected By :</string>
+    <string name="new_inspection">New Inspection</string>
+    <string name="insp_date">Inspection Date :</string>
+    <string name="insp_cri_title">Inspection Item (all the fields are mandatory)</string>
+    <string name="insp_comment">Comment :</string>
+    <string name="overall_rating">Overall Rating</string>
+    <string name="insp_detls_title">Inspection Details</string>
+    <string name="insp_history_title">Inspection History</string>
+
     <!--Collaboration Module-->
     <string name="plan_option">Option : </string>
     <string name="short_qty">Short Qty</string>
@@ -101,15 +111,51 @@
     <string name="fabric_quality">Fabric Quality</string>
     <string name="garment_quality">Garment Quality</string>
 
-    <!--Sales Analysis-->
+    <!--Sales -->
     <string name="sales_title">Sales</string>
+    <string name="net_sales">Net Sales</string>
+    <string name="plan_sales">Plan Sales</string>
+    <string name="net_sales_u">Net Sales(U)</string>
+    <string name="soh_u">SOH(U)</string>
+    <string name="zonal">ZONAL</string>
+    <string name="national">NATIONAL</string>
+    <string name="yoy_sales_grw">YOY Sales Grw %</string>
+    <string name="pva">PvA%</string>
+    <string name="yoy">YoY%</string>
+    <string name="sell_thru">Sell Thru(U)%</string>
+    <string name="mixsales">MixSales%</string>
+    <string name="rank">Rank</string>
+    <string name="git_u">GIT(U)</string>
+    <string name="ros_u">ROS(U)</string>
+    <string name="fwd_wk_cover">Fwd Wk Cover</string>
+    <string name="pva_sales">PvA Sales%</string>
+    <string name="pva_title">Sales PvA</string>
+
+    <!--MPM-->
+    <string name="mpm_title">Season Catalogue</string>
+
+    <!--Visual Assortment-->
+    <string name="visual_assort_title">Visual Assortment</string>
+    <string name="done">Done</string>
+    <string name="vs_comment">Comment</string>
+    <string name="fabric">Fabric</string>
+    <string name="season">Season</string>
+    <string name="colour">Colour</string>
+    <string name="fit">Fit</string>
+    <string name="size_ratio">Size Ratio : </string>
+    <string name="collection">Collection</string>
+    <string name="options_report">Options Report</string>
+
+    <!--Freshness Index-->
+    <string name="fi_title">Freshness Index</string>
+
+    <string name="oe_title">Option Efficiency</string>
 
     <string-array name="colour_name">
         <item>Blue</item>
         <item>Green</item>
         <item>Black</item>
         <item>Orange</item>
-
     </string-array>
 
 

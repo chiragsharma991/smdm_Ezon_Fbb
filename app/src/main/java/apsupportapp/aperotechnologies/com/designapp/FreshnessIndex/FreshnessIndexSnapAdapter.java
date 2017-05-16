@@ -12,11 +12,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 
@@ -26,15 +29,12 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
     private final ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList;
-
     RecyclerView listViewFIndex;
     ArrayList<SalesAnalysisViewPagerValue> analysisArrayList;
-
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 2;
     Context context;
     String fromWhere;
-
     Gson gson;
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
@@ -43,6 +43,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
             return false;
         }
     };
+
     public FreshnessIndexSnapAdapter(ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, RecyclerView listViewFIndex) {
 
         this.context = context;
@@ -64,7 +65,6 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     private boolean isPositionItem(int position) {
-        // return position == 0;
         return position != freshnessIndexDetailsArrayList.size();
     }
 
@@ -75,7 +75,6 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onSnap(int position) {
-        Log.d("Snapped: ", position + "");
     }
 
     @Override
@@ -102,52 +101,46 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                 FreshnessIndexDetails freshnessIndexDetails = freshnessIndexDetailsArrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
-                //  fromWhere = "Department";
-                switch (fromWhere) {
-                    case "Department":
-
-                        ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanDept());
-                        ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
-                        ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
-                        ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
+                if (fromWhere.equals("Department")) {
+                    ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanDept());
+                    ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
+                    ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
+                    ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
 
 
-                        break;
-                    case "Subdept":
+                } else if (fromWhere.equals("Subdept")) {
 
-                        ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanCategory());
-                        ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
-                        ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
-                        ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
+                    ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanCategory());
+                    ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
+                    ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
+                    ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
 
-                        break;
-                    case "Class":
+                } else if (fromWhere.equals("Class")) {
 
-                        ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanClass());
-                        ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
-                        ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
-                        ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
+                    ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanClass());
+                    ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
+                    ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
+                    ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
 
 
-                        break;
-                    case "Subclass":
+                } else if (fromWhere.equals("Subclass")) {
 
-                        ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandName());
-                        ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
-                        ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
-                        ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
+                    ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandName());
+                    ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
+                    ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
+                    ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
 
 
-                        break;
-                    case "MC":
+                } else if (fromWhere.equals("MC")) {
 
-                        ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandplanClass());
-                        ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
-                        ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
-                        ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
-                        break;
+                    ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandplanClass());
+                    ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
+                    ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
+                    ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(Math.round(freshnessIndexDetails.getStkGitQty())));
                 }
             }
+        } else {
+
         }
 
     }

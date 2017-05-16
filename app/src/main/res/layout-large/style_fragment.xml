@@ -3,15 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_screen_color"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
     <TextView
         android:id="@+id/txtarticleOption"
         android:text="@string/article_option"
         android:textSize="15sp"
-        android:padding="5dp"
         android:textColor="@color/bg_store_code_text"
         android:layout_marginTop="10dp"
+        android:padding="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
@@ -22,22 +21,20 @@
         android:orientation="vertical"
         android:layout_below="@+id/txtarticleOption"
         android:layout_marginTop="10dp"
+
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <!--<TextView-->
-            <!--android:layout_width="1dp"-->
-            <!--android:background="#DAD7D6"-->
-            <!--android:layout_height="wrap_content" />-->
+
             <TextView
                 android:text="Style Performance"
                 android:background="@color/smdm_divider_Black"
                 android:padding="5dp"
+                android:textSize="13sp"
                 android:textStyle="bold"
-                android:textSize="13dp"
                 android:textColor="@color/bg_store_code_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -45,235 +42,220 @@
             <View
                 android:layout_width="match_parent"
                 android:background="@color/smdm_divider_Black"
-                android:layout_height="1dp" />
+                android:layout_height="1dp"
+                />
 
         </LinearLayout>
-
-        <!--<android.support.v7.widget.CardView-->
-            <!--android:id="@+id/card_view"-->
-            <!--android:layout_below="@+id/linearLayout"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" >-->
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/smdm_divider_Black_light"
+            android:orientation="horizontal">
 
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/smdm_divider_Black_light"
-                android:orientation="horizontal">
+                android:layout_marginLeft="8dp"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:weightSum="4"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="8dp"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:weightSum="4"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:text="TW Sls"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_weight="1.3"
+                        android:text="TW Sls"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/smdm_default_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
 
 
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:id="@+id/txtSales"
-                            android:layout_width="0dp"
-                            android:textSize="12dp"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_weight="0.7"
+                        android:id="@+id/txtSales"
+                        android:layout_width="0dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/smdm_default_color"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content" />
 
 
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:text="SellThru%"
-                            android:layout_width="0dp"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_weight="1.1"
+                        android:text="SellThru%"
+                        android:layout_width="0dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/smdm_default_color"
+                        android:layout_height="wrap_content" />
 
-
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:id="@+id/txtSalesThruUnit"
-                            android:layout_width="0dp"
-                            android:textSize="12dp"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_marginRight="8dp"
-                        android:background="@color/smdm_divider_Black"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"/>
-
-                    <LinearLayout
-                        android:weightSum="4"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:text="TW Sls(U)"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content" />
-
-
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:id="@+id/txtSalesUnit"
-                            android:layout_width="0dp"
-                            android:textSize="12dp"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
-
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:text="ROS(U)"
-                            android:layout_width="0dp"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
-                        
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:id="@+id/txtRos"
-                            android:textSize="12dp"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_marginRight="8dp"
-                        android:background="@color/smdm_divider_Black"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"/>
-
-                    <LinearLayout
-                        android:weightSum="4"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:text="FWC"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:layout_width="0dp"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
-
-
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:id="@+id/txtFwdCover"
-                            android:layout_width="0dp"
-                            android:textSize="12dp"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:text="SOH(U)"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content" />
-
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:id="@+id/txtSOh"
-                            android:layout_width="0dp"
-                            android:textSize="12dp"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_marginRight="8dp"
-                        android:background="@color/smdm_divider_Black"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"/>
-
-                    <LinearLayout
-                        android:weightSum="4"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:text="GIT(U)"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:layout_width="0dp"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
-
-
-                        <TextView
-                            android:layout_weight="1.0"
-                            android:id="@+id/txtGit"
-                            android:layout_width="0dp"
-                            android:textSize="12dp"
-                            android:textColor="@color/smdm_default_color"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
+                    <TextView
+                        android:layout_weight="0.9"
+                        android:singleLine="true"
+                        android:textSize="12sp"
+                        android:textColor="@color/smdm_default_color"
+                        android:id="@+id/txtSalesThruUnit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
+                <View
+                    android:layout_marginRight="8dp"
+                    android:background="@color/smdm_divider_Black"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
 
+                <LinearLayout
+                    android:weightSum="4"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1.3"
+                        android:text="TW Sls(U)"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/smdm_default_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+
+
+                    <TextView
+                        android:layout_weight="0.7"
+                        android:id="@+id/txtSalesUnit"
+                        android:layout_width="0dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/smdm_default_color"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_weight="1.1"
+                        android:text="ROS(U)"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:textColor="@color/smdm_default_color"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_weight="0.9"
+                        android:id="@+id/txtRos"
+                        android:layout_width="0dp"
+                        android:textSize="12sp"
+                        android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_marginRight="8dp"
+                    android:background="@color/smdm_divider_Black"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <LinearLayout
+                    android:weightSum="4"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1.3"
+                        android:text="FWC"
+                        android:layout_width="0dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/smdm_default_color"
+                        android:layout_height="wrap_content" />
+
+
+
+                    <TextView
+                        android:layout_weight="0.7"
+                        android:id="@+id/txtFwdCover"
+                        android:layout_width="0dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/smdm_default_color"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_weight="1.1"
+                        android:text="SOH(U)"
+                        android:layout_width="0dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/smdm_default_color"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_weight="0.9"
+                        android:id="@+id/txtSOh"
+                        android:textSize="12sp"
+                        android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_marginRight="8dp"
+                    android:background="@color/smdm_divider_Black"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <LinearLayout
+                    android:weightSum="4"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1.3"
+                        android:text="GIT(U)"
+                        android:layout_width="0dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/smdm_default_color"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_weight="2.7"
+                        android:id="@+id/txtGit"
+                        android:layout_width="0dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/smdm_default_color"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
             </LinearLayout>
-
-
+        </LinearLayout>
         <!--</android.support.v7.widget.CardView>-->
-
         <TextView
             android:layout_width="match_parent"
             android:background="@color/smdm_divider_Black"
-            android:layout_height="1.5dp" />
-
+           android:layout_height="1.5dp" />
     </LinearLayout>
-
-
-
-<!--second layout starting    -->
-
+    <!--second layout starting    -->
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
@@ -292,88 +274,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-           <!-- <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tableRunningPromo"
-                android:background="@color/colorPrimary"
-
-
-                >
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    >
-                    <TextView
-                        android:layout_weight="3"
-                        android:layout_width="0dp"
-                        android:text="Color"
-                        android:textStyle="bold"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
-
-                        />
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="Size"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
-                        />
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:text="TW Sales(U)"
-                        android:textStyle="bold"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
-                        />
-                    <TextView
-                        android:layout_weight="2"
-                        android:text="SOH(U)"
-                        android:layout_width="0dp"
-                        android:textStyle="bold"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
-                        />
-
-                    <TextView
-                        android:layout_weight="2"
-                        android:text="FWD"
-                        android:layout_width="0dp"
-                        android:textStyle="bold"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:textSize="@dimen/smdm_rowInflaterLayout_large"
-                        android:textColor="@color/divider_salescard1"
-                        />
-
-
-
-                </TableRow>
-
-            </TableLayout>-->
-
-
-            <ScrollView
+          <ScrollView
                 android:layout_height="match_parent"
                 android:scrollbars="horizontal|vertical"
                 android:layout_width="match_parent"
@@ -388,30 +289,9 @@
                     android:id="@+id/linearTable"
                     android:orientation="vertical">
 
-
-
-
-
-
-
-
-
                 </LinearLayout>
-
-
             </ScrollView>
-
-
-
         </LinearLayout>
-
-
-
-
-
-
-
-
 
     </RelativeLayout>
 
@@ -432,11 +312,7 @@
             android:background="#0000"
             android:keepScreenOn="true"
             android:theme="@color/colorPrimary"
-
-
             >
-
-
 
         </ProgressBar>
 

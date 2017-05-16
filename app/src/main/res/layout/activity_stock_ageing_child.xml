@@ -166,15 +166,6 @@
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
-                    <!--<TextView-->
-                    <!--android:id="@+id/stock_ageing_days"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_weight="0.55"-->
-                    <!--android:singleLine="true"-->
-                    <!--android:text="Days"-->
-                    <!--android:textSize="12sp" />-->
 
                 </LinearLayout>
 
@@ -223,46 +214,7 @@
 
                 </LinearLayout>
 
-                <!--ROS(U)-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:weightSum="1">-->
-
-                <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_weight="0.3"-->
-                <!--android:singleLine="true"-->
-                <!--android:text="ROS(U)"-->
-                <!--android:textSize="11sp" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_weight="0.1"-->
-                <!--android:text=":"-->
-                <!--android:textSize="11sp" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/top_RosU"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_weight="0.6"-->
-                <!--android:singleLine="true"-->
-                <!--android:text="5"-->
-                <!--android:textSize="11sp" />-->
-
-                <!--</LinearLayout>-->
-
-
-            </LinearLayout>
+             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

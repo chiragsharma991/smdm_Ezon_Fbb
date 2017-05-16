@@ -30,7 +30,7 @@
                 android:layout_marginTop="2dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="Net Sales"
+                android:text="@string/net_sales"
                 android:textSize="14sp"
                 android:textColor="@color/smdm_default_color"
                 />
@@ -43,7 +43,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="19sp" />
 
@@ -75,7 +75,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/smdm_blue"
-                    android:text="djshjd"
+                    android:text=""
                     android:textSize="13sp" />
 
                 <TextView
@@ -85,7 +85,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/txtNetSalesName"
-                    android:text="20%"
+                    android:text=""
                     android:textColor="@color/smdm_blue"
                     android:textSize="13sp" />
 
@@ -110,7 +110,7 @@
                 android:layout_marginTop="2dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="Plan Sales"
+                android:text="@string/plan_sales"
                 android:textSize="14sp"
                 android:textColor="@color/smdm_default_color"
                 />
@@ -123,7 +123,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="19sp" />
 
@@ -154,7 +154,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/smdm_blue"
-                    android:text="djshjd"
+                    android:text=""
                     android:textSize="13sp" />
 
                 <TextView
@@ -164,7 +164,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/txtPlanSalesName"
-                    android:text="20%"
+                    android:text=""
                     android:textColor="@color/smdm_blue"
                     android:textSize="13sp" />
 
@@ -199,7 +199,7 @@
                 android:gravity="left"
                 android:textColor="@color/smdm_default_color"
                 android:layout_marginLeft="8dp"
-                android:text="Net Sales(U)"
+                android:text="@string/net_sales_u"
                 android:textSize="14sp" />
 
 
@@ -210,7 +210,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="19sp" />
 
@@ -246,7 +246,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/smdm_blue"
-                    android:text="djshjd"
+                    android:text=""
                     android:textSize="13sp" />
 
                 <TextView
@@ -256,7 +256,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/txtNetSalesUName"
-                    android:text="20%"
+                    android:text=""
 
                     android:textColor="@color/smdm_blue"
                     android:textSize="13sp"  />
@@ -282,7 +282,7 @@
                 android:gravity="left"
                 android:textColor="@color/smdm_default_color"
                 android:layout_marginLeft="8dp"
-                android:text="SOH(U)"
+                android:text="@string/soh_u"
                 android:textSize="14sp" />
 
 
@@ -293,7 +293,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="19sp" />
 
@@ -302,155 +302,4 @@
 
     </LinearLayout>
 
-    <!--<LinearLayout-->
-    <!--android:orientation="horizontal"-->
-    <!--android:weightSum="2"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="80dp">-->
-
-    <!--<RelativeLayout-->
-
-    <!--android:background="@drawable/salescard"-->
-    <!--android:id="@+id/ros"-->
-    <!--android:layout_marginLeft="10dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:layout_marginRight="5dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="70dp">-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/txtRosVal0"-->
-    <!--android:text="12,15,14,566"-->
-    <!--android:textStyle="bold"-->
-    <!--android:textSize="16sp"-->
-    <!--android:textColor="@android:color/black"-->
-    <!--android:layout_margin="8dp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content" />-->
-
-    <!--<TextView-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_marginBottom="31dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="1dp"-->
-    <!--android:background="@color/divider_salescard"-->
-    <!--/>-->
-
-    <!--<TextView-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_marginBottom="30dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="1dp"-->
-    <!--android:background="@android:color/white"-->
-    <!--/>-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/txtRos0"-->
-    <!--android:text="ROS"-->
-    <!--android:textSize="12sp"-->
-    <!--android:textColor="@color/colorPrimary"-->
-    <!--android:layout_margin="8dp"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentBottom="true"/>-->
-
-
-    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-    <!--&lt;!&ndash;android:gravity="right"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:background="@color/colorPrimary"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:id="@+id/txtRosPerc"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:text="20%"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:textSize="16sp"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:textColor="@android:color/white"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_marginBottom="8dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_alignParentRight="true" />&ndash;&gt;-->
-
-
-    <!--</RelativeLayout>-->
-
-
-    <!--<RelativeLayout-->
-
-    <!--android:background="@drawable/salescard"-->
-    <!--android:id="@+id/fwdwkcover0"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:layout_marginRight="10dp"-->
-    <!--android:layout_marginLeft="5dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="70dp">-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/txtFwdWkCoverVal0"-->
-    <!--android:text="15,15,00,000"-->
-    <!--android:textStyle="bold"-->
-    <!--android:textSize="16sp"-->
-    <!--android:textColor="@android:color/black"-->
-    <!--android:layout_margin="8dp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content" />-->
-
-
-    <!--<TextView-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_marginBottom="31dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="1dp"-->
-    <!--android:background="@color/divider_salescard"-->
-    <!--/>-->
-
-    <!--<TextView-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_marginBottom="30dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="1dp"-->
-    <!--android:background="@android:color/white"-->
-    <!--/>-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/txtFwdWkCover0"-->
-    <!--android:text="Fwd Wk Cover"-->
-    <!--android:textSize="12sp"-->
-    <!--android:textColor="@color/colorPrimary"-->
-    <!--android:layout_margin="8dp"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentBottom="true"/>-->
-
-
-    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-    <!--&lt;!&ndash;android:gravity="right"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:background="@color/colorPrimary"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:id="@+id/txtSOHUPerc"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:text="20%"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:textSize="16sp"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:textColor="@android:color/white"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_marginBottom="8dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_alignParentRight="true" />&ndash;&gt;-->
-
-
-    <!--</RelativeLayout>-->
-
-    <!--</LinearLayout>-->
-
-</LinearLayout>
+  </LinearLayout>

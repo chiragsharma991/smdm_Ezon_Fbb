@@ -58,7 +58,6 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
     private static String seasongroup = "Current";
-    String TAG = "StockAgeingActivity";
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;

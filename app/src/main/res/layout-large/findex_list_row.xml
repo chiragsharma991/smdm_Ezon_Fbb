@@ -71,8 +71,6 @@
             android:textColor="@color/txt_color"
             />
 
-
-
     </RelativeLayout>
 
 </LinearLayout>

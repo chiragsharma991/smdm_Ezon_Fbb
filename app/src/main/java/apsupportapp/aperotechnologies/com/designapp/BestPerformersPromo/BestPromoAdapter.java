@@ -24,7 +24,7 @@ public class BestPromoAdapter extends BaseAdapter {
     private ArrayList<RunningPromoListDisplay> arrayList;
 
     private LayoutInflater mInflater;
-    Context context;
+    private Context context;
     private int Position;
 
 
@@ -87,7 +87,7 @@ public class BestPromoAdapter extends BaseAdapter {
 
     private class Holder {
 
-        TextView PromotionName,Bst_PromoValues_child,Bst_PromoValuesU_child,Bst_txtStoreCode,Bst_txtStoreName;
+        TextView PromotionName,Bst_PromoValues_child,Bst_PromoValuesU_child;
         ImageView Bst_image_child;
         public ProgressBar ProgressPicaso;
     }

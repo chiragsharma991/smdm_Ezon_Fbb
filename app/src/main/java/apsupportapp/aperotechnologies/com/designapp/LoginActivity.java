@@ -89,7 +89,7 @@ public class  LoginActivity extends AppCompatActivity {
         edtUserName.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         edtPassword.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         chkKeepMeLogin = (CheckBox) findViewById(R.id.chkKeepMeLogin);
-        LinearLogin = (LinearLayout) findViewById(R.id.linearLogin);
+      //  LinearLogin = (LinearLayout) findViewById(R.id.linearLogin);
         checkToken();
 
         chkKeepMeLogin.setOnClickListener(new View.OnClickListener() {
@@ -241,7 +241,7 @@ public class  LoginActivity extends AppCompatActivity {
                                 return;
                             }
                             // when store code fetched it will go second condition.
-                            if (firstLogin == false) {
+                            if (!firstLogin) {
                                 String username = response.getString("loginName");
                                 String password = response.getString("password");
                                 String userId = response.getString("userId");

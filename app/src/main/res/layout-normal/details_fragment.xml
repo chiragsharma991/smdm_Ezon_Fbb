@@ -19,7 +19,7 @@
             android:id="@+id/tstoreCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Store : "
+            android:text="@string/store"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/normallayout_storesize" />
 
@@ -88,32 +88,33 @@
                     android:layout_height="wrap_content">
 
 
-                    <ImageView
-                        android:id="@+id/imgProfile"
-                        android:layout_width="110dp"
-                        android:layout_height="150dp"
-                        tools:ignore="ContentDescription"
-                        android:scaleType="fitCenter"
-                        />
+                <ImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="110dp"
+                    android:layout_height="150dp"
+                    tools:ignore="ContentDescription"
+                    android:scaleType="fitCenter"
+                    />
 
 
-                    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-                                 android:layout_width="wrap_content"
-                                 android:layout_height="wrap_content"
-                                 android:padding="10dp"
-                                 android:id="@+id/detail_progressPicaso"
-                                 android:layout_centerInParent="true"
-                                 android:background="#0000"
-                                 android:keepScreenOn="true"
-                                 android:theme="@style/ProgressBar"
-                        >
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:padding="10dp"
+                             android:id="@+id/detail_progressPicaso"
+                             android:layout_centerInParent="true"
+                             android:background="#0000"
+                             android:keepScreenOn="true"
+                             android:theme="@style/ProgressBar"
+                    >
 
 
 
-                    </ProgressBar>
+                </ProgressBar>
                 </RelativeLayout>
 
             </LinearLayout>
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -161,7 +162,7 @@
 
                     <TextView
                         android:layout_weight="0.4"
-                        android:text="Collection"
+                        android:text="@string/collection"
                         android:textColor="@color/bg_store_code_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -192,7 +193,7 @@
 
                     <TextView
                         android:layout_weight="0.4"
-                        android:text="Fabric"
+                        android:text="@string/fabric"
                         android:textColor="@color/bg_store_code_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -223,7 +224,7 @@
 
                     <TextView
                         android:layout_weight="0.4"
-                        android:text="Fit"
+                        android:text="@string/fit"
                         android:layout_width="0dp"
                         android:textColor="@color/bg_store_code_text"
                         android:layout_height="wrap_content" />
@@ -271,7 +272,7 @@
                     <TextView
                         android:layout_weight="0.5"
                         android:id="@+id/txtFinish"
-                        android:text="Finish  "
+                        android:text="  "
                         android:textColor="@color/smdm_default_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -302,7 +303,7 @@
                     <TextView
                         android:layout_weight="0.5"
                         android:id="@+id/txtSeason"
-                        android:text="Season  "
+                        android:text=" "
                         android:textColor="@color/smdm_default_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />

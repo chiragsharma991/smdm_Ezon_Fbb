@@ -10,8 +10,6 @@
         android:orientation="vertical"
         >
 
-
-
         <LinearLayout
             android:id="@+id/bst_cardView"
             android:layout_width="match_parent"
@@ -82,9 +80,6 @@
                             android:layout_marginBottom="5dp"
 
                             >
-
-
-
                             <TextView
                                 android:id="@+id/skewed_option"
                                 android:layout_width="match_parent"
@@ -95,20 +90,14 @@
                                 android:textColor="@color/bg_store_code_text"
                                 android:textSize="@dimen/smdm_inflator_title_large"
                                 android:textStyle="bold"
-
-
-
                                 />
                         </RelativeLayout>
-
-
 
                         <RelativeLayout
                             android:id="@+id/top_fav"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.8"
-
                             >
 
                             <ToggleButton
@@ -122,13 +111,9 @@
                                 android:focusableInTouchMode="false"
                                 android:textOff=""
                                 android:textOn=""
-
                                 />
 
-
                         </RelativeLayout>
-
-
 
                     </LinearLayout>
 
@@ -141,9 +126,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@color/divider_salescard" />
 
-
                     <!--Promo sales-->
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -187,8 +170,6 @@
                             />
 
                     </LinearLayout>
-
-
                     <!--Promo Sales(U)-->
 
                     <LinearLayout
@@ -342,18 +323,9 @@
 
                 </LinearLayout>
 
-
-
-
             </HorizontalScrollView>
 
-
-
-
-
-
         </LinearLayout>
-
 
         <View
             android:layout_width="match_parent"

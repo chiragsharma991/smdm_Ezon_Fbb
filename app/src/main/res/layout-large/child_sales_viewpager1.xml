@@ -176,7 +176,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="ZONAL"
+                            android:text="@string/zonal"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="14sp" />
 
@@ -186,7 +186,7 @@
                             android:layout_height="20dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="NATIONAL"
+                            android:text="@string/national"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -256,7 +256,7 @@
                         android:layout_below="@+id/pvaValLayout"
                         android:layout_margin="2dp"
                         android:gravity="center"
-                        android:text="Sales"
+                        android:text="@string/sales_title"
                         android:textColor="@color/bg_store_code_text" />
                 </RelativeLayout>
 
@@ -286,7 +286,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="ZONAL"
+                            android:text="@string/zonal"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="14sp" />
 
@@ -296,7 +296,7 @@
                             android:layout_height="20dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="NATIONAL"
+                            android:text="@string/national"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -367,7 +367,7 @@
                         android:layout_below="@+id/yoyValLayout"
                         android:layout_margin="2dp"
                         android:gravity="center"
-                        android:text="YOY Sales Grw %"
+                        android:text="@string/yoy_sales_grw"
                         android:textColor="@color/bg_store_code_text" />
                 </RelativeLayout>
 
@@ -389,7 +389,7 @@
                 android:layout_height="30dp"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="PvA%"
+                android:text="@string/pva"
                 android:textColor="@color/txt_color"
                 android:textSize="11sp" />
 
@@ -401,7 +401,7 @@
                 android:layout_toRightOf="@+id/relPvASales"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="YoY%"
+                android:text="@string/yoy"
                 android:textColor="@color/txt_color"
                 android:textSize="11sp" />
 
@@ -413,7 +413,7 @@
                 android:layout_toRightOf="@+id/relYoYSales"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="Sell Thru(U)%"
+                android:text="@string/sell_thru"
                 android:textColor="@color/txt_color"
                 android:textSize="11sp" />
 
@@ -426,7 +426,7 @@
                 android:layout_toRightOf="@+id/relSellThru"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="MixSales%"
+                android:text="@string/mixsales"
                 android:textColor="@color/txt_color"
                 android:textSize="11sp" />
 
@@ -438,7 +438,7 @@
                 android:layout_marginLeft="8dp"
                 android:background="@drawable/rounded_edittext3"
                 android:gravity="center"
-                android:text="Rank"
+                android:text="@string/rank"
                 android:textColor="@color/txt_color"
                 android:textSize="11sp" />
         </RelativeLayout>

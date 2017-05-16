@@ -41,10 +41,10 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     };
 
-    public OptionIndexSnapAdapter(ArrayList<OptionEfficiencyDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, RecyclerView listViewFIndex) {
+    public OptionIndexSnapAdapter(ArrayList<OptionEfficiencyDetails> OptionIndexDetailsArrayList, Context context, String fromWhere, RecyclerView listViewFIndex) {
 
         this.context = context;
-        this.OptionIndexDetailsArrayList = freshnessIndexDetailsArrayList;
+        this.OptionIndexDetailsArrayList = OptionIndexDetailsArrayList;
         this.fromWhere = fromWhere;
         this.listViewFIndex = listViewFIndex;
 
@@ -74,7 +74,6 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public void onSnap(int position) {
-        Log.d("Snapped: ", position + "");
     }
 
     @Override
@@ -101,7 +100,6 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 OptionEfficiencyDetails optionEfficiencyDetails = OptionIndexDetailsArrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
-                //  fromWhere = "Department";
                 switch (fromWhere) {
                     case "Department":
 

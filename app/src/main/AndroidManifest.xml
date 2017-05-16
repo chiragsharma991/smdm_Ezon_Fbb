@@ -120,10 +120,10 @@
             android:name=".BestPerformersPromo.BestPerformerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".WorstPerformersPromo.WorstPerformerActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+        <!--<activity-->
+            <!--android:name=".WorstPerformersPromo.WorstPerformerActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="stateHidden" />-->
         <activity
             android:name=".FreshnessIndex.FreshnessIndexActivity"
             android:screenOrientation="portrait"
@@ -152,10 +152,7 @@
             android:name=".BestPerformersInventory.BestPerformerInventory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".WorstPerformersInventory.WorstPerformerInventory"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".FloorAvailability.FloorAvailabilityActivity"
             android:screenOrientation="portrait"

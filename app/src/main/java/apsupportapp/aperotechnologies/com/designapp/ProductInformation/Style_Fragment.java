@@ -249,9 +249,7 @@ public class Style_Fragment extends Fragment {
             StyleTW.setText(""+styleColorBeanList.get(i).getTwSaleTotQty());
             sumTW+=styleColorBeanList.get(i).getTwSaleTotQty();
             sumSOH+=styleColorBeanList.get(i).getStkOnhandQty();
-
             LinearTable.addView(view);
-
         }
         LayoutInflater layoutInflater = (LayoutInflater)getActivity()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -263,9 +261,6 @@ public class Style_Fragment extends Fragment {
 
         LinearTable.addView(view);
         Reusable_Functions.hDialog();
-
-
-
     }
 
     private void requestStyleSizeDetailsAPI() {
@@ -368,8 +363,6 @@ public class Style_Fragment extends Fragment {
         addComponentToMainLayout();
         return view;
     }
-
-
     // initalized components
     private void initComponents() {
 
@@ -386,9 +379,7 @@ public class Style_Fragment extends Fragment {
 
         tableA.setBackgroundColor(Color.GREEN);
         horizontalScrollViewB.setBackgroundColor(Color.LTGRAY);
-
     }
-
     // set essential component IDs
     @SuppressWarnings("ResourceType")
     private void setComponentsId() {
@@ -715,12 +706,7 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                     fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
                 }
             }
-
-
-
         }
-
-
     }
 
     private TableRow tableRowForTableCSpace() {
@@ -728,7 +714,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         params.setMargins(0, 2, 0, 0);
 
         TableRow tableRowForTableC = new TableRow(this.context);
-//        TextView textView = this.bodyTextView(sampleObject.header1);
         TextView textView = this.bodyTextView("     ");
         textView.setBackgroundColor(Color.parseColor("#ffffff"));
         tableRowForTableC.addView(textView, params);

@@ -53,7 +53,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
     private SharedPreferences sharedPreferences;
     int inspectn_Id;
     private Gson gson;
-    private int offset =0, limit = 50, count = 0;
     private InspectionBeanClass beanClass;
     ArrayList<InspectionBeanClass> inspdetls_ArrayList;
 

@@ -107,8 +107,6 @@
 
         </View>
 
-
-
     </RelativeLayout>
 
     <LinearLayout
@@ -223,7 +221,7 @@
                 android:id="@+id/bestInvent_storeCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Store : "
+                android:text="@string/store"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/smdm_store_title_large"
                 />
@@ -255,9 +253,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="0dp"
-
-                >
+                android:layout_marginRight="0dp">
 
                 <Button
                     android:layout_width="16dp"
@@ -269,12 +265,9 @@
 
         </RelativeLayout>
 
-
-
     </LinearLayout>
     <include layout="@layout/activity_inventory_quickfilter_child"/>
     <include layout="@layout/activity_popup_inventory"></include>
-
 
 </RelativeLayout>
 

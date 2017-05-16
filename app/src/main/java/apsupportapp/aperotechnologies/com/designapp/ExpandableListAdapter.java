@@ -233,7 +233,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     Prod_FilterActivity.filterActivity.finish();
                     return;
                 }
-                if (cb.isChecked() == false) {
+                if (!cb.isChecked()) {
 
                     if (Reusable_Functions.chkStatus(mContext)) {
                         Prod_FilterActivity.pfilter_list.collapseGroup(1);

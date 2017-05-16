@@ -8,14 +8,12 @@
     android:background="@color/bg_screen_color"
     tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
-
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/bg_screen_color"
         >
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +68,6 @@
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
 
-
                     <RelativeLayout
                         android:id="@+id/imgfilter"
                         android:layout_width="@dimen/header_clickable_width"
@@ -99,7 +96,6 @@
                 android:background="@color/bg_screen_color"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="8dp">
-
 
                 <TextView
                     android:id="@+id/tstoreCode"
@@ -190,7 +186,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -229,7 +224,6 @@
 
             </android.support.design.widget.TabLayout>
 
-
             <LinearLayout
                 android:visibility="gone"
                 android:id="@+id/lldots"
@@ -256,7 +250,6 @@
 
             </LinearLayout>
 
-
             <RelativeLayout
                 android:id="@+id/relTablelayout"
                 android:layout_width="match_parent"
@@ -282,13 +275,11 @@
                         android:layout_height="40dp"
                         android:background="@color/smdm_divider_Black_light">
 
-
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_alignParentLeft="true"
                             >
-
 
                             <RelativeLayout
                                 android:id="@+id/prevplanclass"
@@ -443,7 +434,6 @@
         </ProgressBar>
 
     </RelativeLayout>
-
 
 </RelativeLayout>
 

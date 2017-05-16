@@ -7,16 +7,10 @@
     android:background="@color/bg_screen_color"
     tools:context="apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity">
 
-
-
-
-
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,7 +62,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/freshnessIndex_imageBtnBack"
-                        android:text="Freshness Index"
+                        android:text="@string/fi_title"
                         android:textColor="@color/divider_salescard1"
                         android:textSize="@dimen/smdm_header_title_large"
                         />
@@ -108,7 +102,7 @@
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store : "
+                    android:text="@string/store"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/smdm_store_title_large"
                     />
@@ -277,7 +271,6 @@
                                     android:clickable="false" />
                             </RelativeLayout>
 
-
                             <TextView
                                 android:layout_toRightOf="@+id/btnFIndexPrev"
                                 android:id="@+id/txtFIndexClass"
@@ -289,7 +282,6 @@
                                 android:textColor="@color/bg_store_code_text"
                                 android:textSize="@dimen/smdm_departmentTitleLarge"
                                 />
-
 
                             <RelativeLayout
                                 android:layout_centerVertical="true"
@@ -374,7 +366,6 @@
                             android:gravity="center_vertical"
                             android:textColor="@android:color/black" />
 
-
                         <EditText
                             android:editable="false"
                             android:paddingRight="2dp"
@@ -387,7 +378,6 @@
                             android:layout_toLeftOf="@+id/edt_FIndex_SOH_U"
                             android:background="@drawable/border"
                             android:gravity="center_vertical" />
-
 
                         <EditText
                             android:editable="false"
@@ -430,16 +420,9 @@
                         android:divider="@null"
                         android:dividerHeight="0dp"
                         android:smoothScrollbar="true" />
-
-
-
                 </LinearLayout>
 
-
-
             </RelativeLayout>
-
-
         </LinearLayout>
     </LinearLayout>
 

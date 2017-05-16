@@ -105,7 +105,7 @@
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store : "
+                    android:text="@string/store"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/smdm_store_title_large"
                     />
@@ -202,11 +202,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/floorListView"
                 android:layout_marginTop="10dp"
-                android:dividerHeight="1dp"
-
-
-                >
-
+                android:dividerHeight="1dp">
             </ListView>
             <View
                 android:layout_width="match_parent"
@@ -214,18 +210,10 @@
                 android:background="@color/divider_salescard"
                 android:layout_marginTop="9dp"
                 >
-
             </View>
-
-
-
         </RelativeLayout>
-
-
-
     </LinearLayout>
     <include layout="@layout/quick_filter_menu">
-
     </include>
 
 </RelativeLayout>

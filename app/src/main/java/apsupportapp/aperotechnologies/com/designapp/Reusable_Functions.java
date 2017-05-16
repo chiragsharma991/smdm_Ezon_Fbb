@@ -97,7 +97,6 @@ public class Reusable_Functions {
             view.setVisibility(View.GONE);
 
         }
-
     }
 
     public static void  MakeToast(Context context,String info){

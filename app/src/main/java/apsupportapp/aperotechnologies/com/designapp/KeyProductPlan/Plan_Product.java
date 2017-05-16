@@ -174,7 +174,7 @@ public class Plan_Product extends Fragment {
          segmentedGroupProduct.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
              @Override
              public void onCheckedChanged(RadioGroup group, int checkedId) {
-                 if(plantoggleClick==false) {
+                 if(!plantoggleClick) {
 
                     switch (checkedId) {
                         case R.id.planactual_prodbtnWTD:

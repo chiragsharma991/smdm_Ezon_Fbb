@@ -38,19 +38,12 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
     // ViewPager 0
     ImageView txtNetSalesImage, txtPlanSalesImage, txtNetSalesUImage;
-    TextView txtPvASales, txtYoySales, txtSellThro, txtMixSales;
     TextView txtNetSalesVal, txtNetSales, txtNetSalesPerc, txtNetSalesName;
     TextView txtPlanSalesVal, txtPlanSales, txtPlanSalesPerc, txtPlanSalesName;
     TextView txtNetSalesUVal, txtNetSalesU, txtNetSalesUPerc, txtNetSalesUName;
     TextView txtSohUVal, txtSohU;
-    TextView txtRosVal0, txtRos0;
-    TextView txtFwdWkCoverVal0, txtFwdWkCover0;
 
-    // ViewPager 1
-//    TextView txtStoreVal_PvASales, txtZonalVal_PvASales, txtNationalVal_PvASales;
-//    TextView txtStoreVal_YOYSales, txtZonalVal_YOYSales, txtNationalVal_YOYSales;
-//    TextView txtStoreVal_SellThro, txtZonalVal_SellThro, txtNationalVal_SellThro;
-//    TextView txtStoreVal_MixSales, txtZonalVal_MixSales, txtNationalVal_MixSales;
+
     TextView txtStoreVal_PvASales1, txtZonalSalesVal, txtNationalSalesVal;
     TextView relPvASales, relYoYSales, relSellThru, relMixSales, relRank;
     TextView txtPvAZonalRankVal, txtPvANationalRankVal, txtYoYZonalRankVal, txtYoYNationalRankVal;
@@ -81,7 +74,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
         if (arrayList.size() != 0) {
             salesAnalysis = arrayList.get(0);
         }
-
         currentPage = vwpagersales.getCurrentItem();
     }
 
@@ -161,9 +153,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
         } else if (position == 1) {
             itemView = inflater.inflate(R.layout.child_sales_viewpager1, container,
                     false);
-
-
-
             txtStoreVal_PvASales1 = (TextView) itemView.findViewById(R.id.txtStoreVal_PvASales1);
             txtZonalSalesVal = (TextView) itemView.findViewById(R.id.txtZonalSalesVal);
             txtNationalSalesVal = (TextView) itemView.findViewById(R.id.txtNationalSalesVal);

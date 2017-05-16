@@ -6,5 +6,5 @@ package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
 public interface clickChild
 {
-    public void onClick(String value);
+     void onClick(String value);
 }

@@ -18,7 +18,7 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         cont = context;
         Boolean isApplicationForeGround = BaseLifeCycleCallbacks.applicationStatus();
-        if (isApplicationForeGround == true)
+        if (isApplicationForeGround)
         {
         Intent i = new Intent(context, TransparentActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -57,7 +57,6 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
     StyleDetailsBean styleDetailsBean;
     int offset, limit;
     Gson gson;
-    String TAG = "Sell Thru Exceptions";
     private LayoutInflater mInflater;
     Context context;
     private int Position;
@@ -130,7 +129,6 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
         holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  Toast.makeText(context,"Option Click...",Toast.LENGTH_SHORT).show();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");

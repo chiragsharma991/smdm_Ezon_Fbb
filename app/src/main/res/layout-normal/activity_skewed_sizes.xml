@@ -161,7 +161,7 @@
                 android:id="@+id/tstoreCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Store : "
+                android:text="@string/store"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/smdm_store_title_normal" />
 

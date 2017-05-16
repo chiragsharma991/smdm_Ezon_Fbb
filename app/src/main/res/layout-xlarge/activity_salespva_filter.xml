@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filter"
+                android:text="@string/prod_filter"
                 android:textSize="20sp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageBtnSFilterBack"
@@ -104,20 +104,7 @@
             android:singleLine="true"
             android:textCursorDrawable="@drawable/color_cursor" />
 
-        <!--<ImageButton-->
-        <!--android:id="@+id/btnSeatchList"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:src="@drawable/ic_arrow_forward_white"-->
-        <!--android:tint="@color/colorPrimary" />-->
-
-
     </RelativeLayout>
-
-
 
     <RelativeLayout
         android:layout_below="@+id/relSearch"
@@ -134,10 +121,6 @@
             android:childDivider="@color/smdm_divider_Black"
 
             />
-
-
-
-
 
     </RelativeLayout>
 

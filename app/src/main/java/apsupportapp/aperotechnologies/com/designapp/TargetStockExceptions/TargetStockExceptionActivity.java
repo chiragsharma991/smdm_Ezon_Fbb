@@ -62,8 +62,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     int top = 10;
     static  int level = 1;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
-    CheckBox checktwo, checkthree, checkfour, checkfive;
-    CheckBox checksix, checkseven, checkeight, checknine, checkten;
+
     RadioButton checkDept, checkCategory, checkPlanClass, checkWTD, checkL4W, checkYTD,checkSubClass,checkMc;
     Context context = this;
     private RequestQueue queue;

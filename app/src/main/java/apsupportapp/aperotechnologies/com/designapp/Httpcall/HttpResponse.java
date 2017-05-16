@@ -12,5 +12,5 @@ import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 
 public interface HttpResponse
 {
-    public void response(ArrayList<mpm_model> list);
+     void response(ArrayList<mpm_model> list);
 }

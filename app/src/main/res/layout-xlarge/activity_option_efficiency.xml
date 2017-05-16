@@ -6,9 +6,6 @@
     android:background="@color/bg_screen_color"
     tools:context=".OptionEfficiency.OptionEfficiencyActivity">
 
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -66,7 +63,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/optionEfficiency_imageBtnBack"
-                        android:text="Option Efficiency"
+                        android:text="@string/oe_title"
                         android:textColor="@color/divider_salescard1"
                         android:textSize="@dimen/smdm_header_title_large"
                         />
@@ -105,7 +102,7 @@
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store : "
+                    android:text="@string/store"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/smdm_store_title_large"
                     />

@@ -7,16 +7,10 @@
     android:background="@color/bg_screen_color"
     tools:context="apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity">
 
-
-
-
-
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,8 +34,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
                     <RelativeLayout
                         android:id="@+id/freshnessIndex_imageBtnBack"
@@ -68,12 +61,10 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/freshnessIndex_imageBtnBack"
-                        android:text="Freshness Index"
+                        android:text="@string/fi_title"
                         android:textColor="@color/divider_salescard1"
                         android:textSize="@dimen/smdm_header_title_large"
                         />
-
-
 
                     <RelativeLayout
                         android:id="@+id/freshnessIndex_imgfilter"
@@ -92,7 +83,6 @@
                             android:clickable="false" />
 
                     </RelativeLayout>
-
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
@@ -103,12 +93,11 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="8dp">
 
-
                 <TextView
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store : "
+                    android:text="@string/store"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/smdm_store_title_large"
                     />
@@ -280,7 +269,6 @@
                                     android:clickable="false" />
                             </RelativeLayout>
 
-
                             <TextView
                                 android:layout_toRightOf="@+id/btnFIndexPrev"
                                 android:id="@+id/txtFIndexClass"
@@ -327,8 +315,7 @@
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             />
 
-
-                        <TextView
+                       <TextView
                             android:id="@+id/txtFIndexSOH_U"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
@@ -341,7 +328,6 @@
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal"/>
-
 
                         <TextView
                             android:id="@+id/txtFIndexGIT"
@@ -419,14 +405,6 @@
 
                 </LinearLayout>
 
-              <!--  <View
-                    android:layout_below="@+id/linear"
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />
-
--->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -441,20 +419,8 @@
                         android:dividerHeight="0dp"
                         android:smoothScrollbar="true" />
 
-
-
                 </LinearLayout>
-
-
-
             </RelativeLayout>
-
-
         </LinearLayout>
         </LinearLayout>
-
-
-
-
-
     </RelativeLayout>
