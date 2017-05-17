@@ -9,6 +9,16 @@ public class Transfer_Request_Model {
     String reqStoreCode;
     String reqStoreDesc;
     String productCode;
+    double stkOnhandQtyRequested;
+    double stkQtyAvl;
+    double optionCount;
+    String noOfDays;
+    String level;
+    String prodAttribute2;
+    String prodAttribute4;
+    double stkOnhandQty;
+    double stkGitQty;
+
 
     public String getProdAttribute2() {
         return prodAttribute2;
@@ -33,9 +43,6 @@ public class Transfer_Request_Model {
     public void setProdAttribute4(String prodAttribute4) {
         this.prodAttribute4 = prodAttribute4;
     }
-
-    String prodAttribute2;
-    String prodAttribute4;
 
     public String getCaseNo() {
         return caseNo;
@@ -92,16 +99,6 @@ public class Transfer_Request_Model {
     public void setStkOnhandQtyRequested(double stkOnhandQtyRequested) {
         this.stkOnhandQtyRequested = stkOnhandQtyRequested;
     }
-
-    double stkOnhandQtyRequested;
-    double stkQtyAvl;
-    double optionCount;
-    String noOfDays;
-
- //Test commit - 10-3-17
-
-        String level;
-
     public double getStkOnhandQty() {
         return stkOnhandQty;
     }
@@ -126,7 +123,5 @@ public class Transfer_Request_Model {
         this.stkGitQty = stkGitQty;
     }
 
-    double stkOnhandQty;
-    double stkGitQty;
 
 }

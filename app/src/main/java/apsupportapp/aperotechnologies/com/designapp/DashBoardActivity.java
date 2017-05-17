@@ -15,7 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -115,25 +114,17 @@ public class DashBoardActivity extends AppCompatActivity
     boolean flag=true;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
-    //private Boolean exit = false;
     ArrayList<String> arrayList,eventUrlList;
     Context context;
     MySingleton m_config;
-
-
     ArrayList<ProductNameBean> productNameBeanArrayList;
-
-
     //Event ViewPager
-
     ViewPager pager;
     PagerAdapter adapter;
     ImageView imgdot;
     LinearLayout li;
     Timer timer;
     int page = 0;
-
-
     //variable for storing collection list in style activity in searchable spinner
     public static List _collectionitems;
     private boolean Promo=false;
@@ -151,10 +142,7 @@ public class DashBoardActivity extends AppCompatActivity
     private EtlStatus etlStatus;
     private ArrayList<EtlStatus>etlStatusList;
 
-    //git tese 10/1/2017
-
-
-    @Override
+       @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
@@ -163,74 +151,28 @@ public class DashBoardActivity extends AppCompatActivity
         _collectionitems = new ArrayList();
 
         double val=0.3663;
-        Log.e("val",String.format("%.1f", val));
-
         context = this;
         m_config= MySingleton.getInstance(context);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken","");
-
-        Log.e(TAG,"userId"+userId);
-        Log.e(TAG,"bearertoken"+bearertoken);
-
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
         arrayList = new ArrayList<>();
         eventUrlList = new ArrayList<>();
         productNameBeanArrayList=new ArrayList<>();
         gson = new Gson();
-
-
-
-        //to call Collection API
-//        at merging
-//        Bundle bundle = getIntent().getExtras();
-//        userId = bundle.getString("userId");
-//        Log.d("userId", "  " + userId);
-
-
-
-
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
-
-
         initializeUI();
-
         //Marketing events API
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading events...");
             requestMarketingEventsAPI();
         } else {
-            // Reusable_Functions.hDialog();
             Toast.makeText(DashBoardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
-//        BtnOnlyWorstpromo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(DashBoardActivity.this, WorstPerformerActivity.class);
-//                startActivity(intent);
-//                if(timer != null)
-//                {
-//                    timer.cancel();
-//                }
-//               // finish();
-//            }
-//        });
 
         btnSkewedSize.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,47 +183,24 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                // finish();
             }
         });
         BtnWorstPerformers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent intent = new Intent(DashBoardActivity.this, WorstPerformerInventory.class);
-              //  startActivity(intent);
-              //  if(timer != null)
-              //  {
-              //      timer.cancel();
-             //   }
-                //  finish();
+
             }
         });
-//        btnCutSize.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(DashBoardActivity.this, TopFullCut.class);
-//                startActivity(intent);
-//                if(timer != null)
-//                {
-//                    timer.cancel();
-//                }
-//                // finish();
-//            }
-//        });
-
 
         BtnBestWorstpromo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(DashBoardActivity.this, BestPerformerActivity.class);
                 startActivity(intent);
-                Log.e(TAG, "btn best: log " );
-
                 if(timer != null)
                 {
                     timer.cancel();
                 }
-                // finish();
             }
         });
 
@@ -290,13 +209,10 @@ public class DashBoardActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent=new Intent(DashBoardActivity.this, mpm_activity.class);
                 startActivity(intent);
-                Log.e(TAG, "btn best: log " );
-
                 if(timer != null)
                 {
                     timer.cancel();
                 }
-                // finish();
             }
         });
 
@@ -309,7 +225,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                // finish();
             }
         });
 
@@ -321,7 +236,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                // finish();
             }
         });
 
@@ -333,7 +247,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                // finish();
             }
         });
 
@@ -345,7 +258,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                // finish();
             }
         });
 
@@ -369,7 +281,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                // finish();
             }
         });
 
@@ -383,27 +294,18 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                //  finish();
             }
         });
-
-
-
-
-
         imageBtnStyle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                requestArticleOptionsAPI();
                 Intent intent = new Intent(DashBoardActivity.this, StyleActivity.class);
                 startActivity(intent);
                 if(timer != null)
                 {
                     timer.cancel();
                 }
-                //   finish();
-
             }
         });
 
@@ -416,8 +318,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                //  finish();
-
             }
 
         });
@@ -432,7 +332,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                //  finish();
             }
         });
 
@@ -445,7 +344,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-                //   finish();
             }
         });
 
@@ -458,8 +356,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-
-                //  finish();
             }
         });
         btnFeshnessindex.setOnClickListener(new View.OnClickListener() {
@@ -471,8 +367,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-
-                //   finish();
             }
         });
         btnOptionEfficiency.setOnClickListener(new View.OnClickListener() {
@@ -484,8 +378,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-
-                //   finish();
             }
         });
         btnStockAgeing.setOnClickListener(new View.OnClickListener() {
@@ -497,8 +389,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-
-                //   finish();
             }
         });
         btnBestPerformersInv.setOnClickListener(new View.OnClickListener() {
@@ -510,8 +400,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-
-                //    finish();
             }
         });
         btnFloorAvailability.setOnClickListener(new View.OnClickListener() {
@@ -523,8 +411,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-
-                //  finish();
             }
         });
         btnTargetStockExcep.setOnClickListener(new View.OnClickListener() {
@@ -536,8 +422,6 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-
-                //   finish();
             }
         });
         btnSellThruExcep.setOnClickListener(new View.OnClickListener() {
@@ -549,9 +433,7 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     timer.cancel();
                 }
-
-                //    finish();
-            }
+          }
         });
         btnVisualReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -707,18 +589,11 @@ public class DashBoardActivity extends AppCompatActivity
     private void requestMarketingEventsAPI() {
 
         String url = ConstsCore.web_url + "/v1/display/dashboard/" + userId;
-
-        //String url = "https://ra.manthan.com/v1/display/dashboard/270389" ;
-        Log.i("URL   ", url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("MarketingEvent Response", response.toString());
                         try {
-
-
                             if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(DashBoardActivity.this, "No data found", Toast.LENGTH_LONG).show();
@@ -727,22 +602,13 @@ public class DashBoardActivity extends AppCompatActivity
                                 {
                                     JSONObject jsonOject = response.getJSONObject(i);
                                     String imageURL = jsonOject.getString("imageName");
-                                    // Log.e("imageURL", "\"+""+imageURL+""+\"");
                                     eventUrlList.add(imageURL);
-
                                 }
 
-                                //eventAdapter = new EventAdapter(DashBoardActivity.this, eventUrlList);
-                                //style_grid.setAdapter(eventAdapter);
                                 EventScroller();
-
-
-
-
                             }
 
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -761,8 +627,6 @@ public class DashBoardActivity extends AppCompatActivity
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer "+bearertoken);
-
-                Log.e("params "," "+params);
                 return params;
             }
         };
@@ -771,14 +635,10 @@ public class DashBoardActivity extends AppCompatActivity
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
-
-
     }
 
 
     private void initializeUI() {
-
 
         hourlyFlashTxt=(TextView)findViewById(R.id.headersmdm);
         productInfoTxt=(TextView)findViewById(R.id.productinfo);
@@ -843,11 +703,9 @@ public class DashBoardActivity extends AppCompatActivity
         BtnUpcomingpromo=(ImageButton)findViewById(R.id.btnUpcomingpromo);
         BtnExpiringpromo=(ImageButton)findViewById(R.id.btnExpiringpromo);
         BtnBestWorstpromo=(ImageButton)findViewById(R.id.btnBestWorstpromo);
-        //BtnOnlyWorstpromo=(ImageButton)findViewById(R.id.btnOnlyWorstpromo);
         BtnWorstPerformers=(ImageButton)findViewById(R.id.btnWorstPerformers);
         btnFeshnessindex=(ImageButton)findViewById(R.id.btnFeshnessindex);
         btnOptionEfficiency = (ImageButton)findViewById(R.id.btnOptionEfficiency);
-   //     btnCutSize = (ImageButton)findViewById(R.id.btnCutSize);
         btnSkewedSize =(ImageButton)findViewById(R.id.btnSkewedSize);
         btnStockAgeing = (ImageButton)findViewById(R.id.btnStockAgeing);
         btnBestPerformersInv = (ImageButton)findViewById(R.id.btnBestPerformers);
@@ -862,9 +720,6 @@ public class DashBoardActivity extends AppCompatActivity
         btn_inspection_history = (ImageButton)findViewById(R.id.btn_inspection_history);
         btn_inspection_begin = (ImageButton)findViewById(R.id.btn_inspection_begin);
         btn_mpm = (ImageButton)findViewById(R.id.btn_mpm);
-//        style_grid = (ExpandableHeightGridView) findViewById(R.id.spotsView);
-//        style_grid.setExpanded(true);
-
         pager = (ViewPager) findViewById(R.id.viewpager);
 
         TabLayout tab=(TabLayout)findViewById(R.id.dotTab_dashboard);
@@ -876,7 +731,6 @@ public class DashBoardActivity extends AppCompatActivity
 
             public void run() {
                 scrollview.fullScroll(View.FOCUS_UP);
-                //scrollview.pageScroll(View.FOCUS_UP);
             }
         });
     }
@@ -901,7 +755,6 @@ public class DashBoardActivity extends AppCompatActivity
         }
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -956,10 +809,6 @@ public class DashBoardActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -971,20 +820,13 @@ public class DashBoardActivity extends AppCompatActivity
     private void RefreshTimeAPI()
     {
         String url = ConstsCore.web_url+"/v1/display/etlstatus/"+userId;
-        Log.e(TAG, "requestLoginAPI: "+url);
         etlStatusList=new ArrayList<EtlStatus>();
-
-        // final String password = sharedPreferences.getString("password","");
-        //  final String auth_code = sharedPreferences.getString("authcode","");
-
-        // Log.e("authcode"," "+auth_code);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.i(TAG,"Login   Response   "+response.toString()+"\n length is"+response.length());
                         try
                         {
                             if(response == null || response.equals(""))
@@ -1002,22 +844,10 @@ public class DashBoardActivity extends AppCompatActivity
                                 RefreshTime.setText(etlStatusList.get(0).getLastETLDate());
                             }
 
-//                            String bearerToken = response.getString("bearerToken");
-//                            SharedPreferences.Editor editor = sharedPreferences.edit();
-//                            editor.putString("bearerToken",bearerToken);
-//                            editor.apply();
-//
-//                            //Marketing events API
-//                            requestMarketingEventsAPI();
-
-
-
                         }
                         catch(Exception e)
                         {
-                            Log.e(TAG,"Exception e =  "+e.getMessage());
                             RefreshTime.setText("N/A");
-
                             e.printStackTrace();
                         }
                     }
@@ -1028,19 +858,14 @@ public class DashBoardActivity extends AppCompatActivity
                     public void onErrorResponse(VolleyError error)
 
                     {
-                        Log.e(TAG,"Response.ErrorListener e"+error.getMessage());
                         RefreshTime.setText("N/A");
-
                         error.printStackTrace();
                     }
                 }
-
         ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError
             {
-                //String auth_code = "Basic " + Base64.encodeToString((uname+":"+password).getBytes(), Base64.NO_WRAP); //Base64.NO_WRAP flag
-                //  Log.i("Auth Code", auth_code);
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
@@ -1056,18 +881,15 @@ public class DashBoardActivity extends AppCompatActivity
 
     }
 
-
     private void EventScroller()
     {
 
-        Log.e("eventURLLIST"," "+eventUrlList);
         for (int i = 0; i < eventUrlList.size(); i++) {
 
             imgdot = new ImageView(this);//new View(DashBoardActivity.this);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
             layoutParams.setMargins(3, 3, 3, 3);
             imgdot.setLayoutParams(layoutParams);
-            //imgdot.setBackgroundColor(Color.parseColor("#666666"));
             imgdot.setImageResource(R.mipmap.dots_unselected);
             li.addView(imgdot);
 
@@ -1090,12 +912,8 @@ public class DashBoardActivity extends AppCompatActivity
     @Override
     public void onClick(View v)
     {
-        Log.e(TAG,"on click on log");
-
         switch (v.getId())
         {
-
-
             case R.id.headersmdm:
                 if(hrflash.equals("NO")){
                     hourlyFlash.setVisibility(View.VISIBLE);
@@ -1109,8 +927,6 @@ public class DashBoardActivity extends AppCompatActivity
                     Collaboration_subView.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
                     inspection_linear.setVisibility(View.GONE);
-                    Log.e(TAG, "onClick:  headersmdm" );
-
                     hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
                     productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1181,9 +997,6 @@ public class DashBoardActivity extends AppCompatActivity
                     txt_mpm.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     Feedback.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_store_Inspection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,R.drawable.downlist,0);
-                    Log.e(TAG, "onClick:  productinfo" );
-
-
                     pdInfo="YES";
                     hrflash="NO";
                     vsAssort="NO";
@@ -1214,8 +1027,6 @@ public class DashBoardActivity extends AppCompatActivity
                     productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     pdInfo="NO";
                     ProductInfo=false;
-
-
                 }
                 break;
 
@@ -1232,8 +1043,6 @@ public class DashBoardActivity extends AppCompatActivity
                     Mpm_linear.setVisibility(View.GONE);
                     Feedback_linear.setVisibility(View.GONE);
                     inspection_linear.setVisibility(View.GONE);
-                    Log.e(TAG, "onClick:  visualAssort" );
-
                     hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
@@ -1292,7 +1101,6 @@ public class DashBoardActivity extends AppCompatActivity
                     inspection_linear.setVisibility(View.GONE);
 
                     Collaboration_subView.setVisibility(View.GONE);
-                    Log.e(TAG, "onClick:  headersales" );
                     hourlyFlashTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     productInfoTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     visualAssortTxt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -1385,7 +1193,6 @@ public class DashBoardActivity extends AppCompatActivity
                     Collab="NO";
                     inspection_flag = false;
                     PlanActual=false;
-                    Log.e(TAG, "onClick:  headerpromo" );
 
                 }else
                 {
@@ -1443,7 +1250,6 @@ public class DashBoardActivity extends AppCompatActivity
                     feedback_bool=false;
                     PlanActual=false;
                     inspection_flag = false;
-                    Log.e(TAG, "onClick:  headerinvent" );
 
                 }else
                 {
@@ -1504,8 +1310,6 @@ public class DashBoardActivity extends AppCompatActivity
                     Collab_bool=true;
                     inspection_flag=false;
 
-                    Log.e(TAG, "onClick:  Collaboration event" );
-
                 }else
                 {
                     Collaboration_subView.setVisibility(View.GONE);
@@ -1513,8 +1317,6 @@ public class DashBoardActivity extends AppCompatActivity
                     Collab="NO";
                     Collab_bool=false;
                 } break;
-
-
 
             case R.id.headerplanactual:
                 if(planActual.equals("NO")){
@@ -1563,7 +1365,6 @@ public class DashBoardActivity extends AppCompatActivity
                     Inventory=false;
                     PlanActual = true;
                     inspection_flag = false;
-                    Log.e(TAG, "onClick:  headerplanActual" );
 
                 }else
                 {
@@ -1572,8 +1373,6 @@ public class DashBoardActivity extends AppCompatActivity
                     planActual="NO";
                     PlanActual=false;
                 } break;
-
-
 
             case R.id.feedback:
                 if(feedback_flag.equals("NO")){
@@ -1624,8 +1423,6 @@ public class DashBoardActivity extends AppCompatActivity
                     Inventory=false;
                     PlanActual = false;
                     inspection_flag = false;
-                    Log.e(TAG, "onClick:  headerplanActual" );
-
                 }else
                 {
                     Feedback_linear.setVisibility(View.GONE);
@@ -1682,7 +1479,6 @@ public class DashBoardActivity extends AppCompatActivity
                     Sales=false;
                     Inventory=false;
                     PlanActual = false;
-                    Log.e(TAG, "onClick:  headerplanActual" );
 
                 }else
                 {
@@ -1740,7 +1536,6 @@ public class DashBoardActivity extends AppCompatActivity
                     Sales=false;
                     Inventory=false;
                     PlanActual = false;
-                    Log.e(TAG, "onClick:  headerplanActual" );
 
                 }else
                 {
@@ -1751,10 +1546,6 @@ public class DashBoardActivity extends AppCompatActivity
                 }
                 break;
         }
-
-
-
-
 
     }
 
@@ -1782,5 +1573,4 @@ public class DashBoardActivity extends AppCompatActivity
 
         }
     }
-
 }

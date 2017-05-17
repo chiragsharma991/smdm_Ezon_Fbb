@@ -29,7 +29,6 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do);
-       // getSupportActionBar().hide();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_to_do);
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         ToDo_imageBtnBack.setOnClickListener(this);
@@ -50,7 +49,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
            // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-// finally change the color
+           // finally change the color
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
         viewPager=(ViewPager)findViewById(R.id.to_do_viewpager);
@@ -80,7 +79,6 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
                 break;
         }
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

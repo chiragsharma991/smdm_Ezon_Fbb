@@ -13,16 +13,12 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-
 import android.widget.LinearLayout;
-
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -85,7 +81,6 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_expiring_promo);
         getSupportActionBar().hide();
         initalise();
-       // ExpireListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         ExpireList = new ArrayList<RunningPromoListDisplay>();
         summary_list = new ArrayList<RunningPromoListDisplay>();
@@ -99,23 +94,17 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
         Expiring_promo.setVisibility(View.GONE);
         Expiring_summary.setVisibility(View.VISIBLE);
         Reusable_Functions.sDialog(this, "Loading.......");
-        //requestRunningPromoApi();
         requestExpiryPromosummary();
     }
 
     private void requestExpiryPromosummary() {
         if (Reusable_Functions.chkStatus(context)) {
-            //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
             String url = ConstsCore.web_url + "/v1/display/expiringpromosummary/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
 
-            Log.e(TAG, "expiry Summary Url" + "" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "Running promo : " + " " + response);
-                            Log.i(TAG, "Sales View Pager response" + "" + response.length());
-
 
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -124,22 +113,19 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                                     return;
 
                                 } else if (response.length() == limit) {
-                                    Log.e(TAG, "promo eql limit");
+
                                     for (int i = 0; i < response.length(); i++) {
 
                                         ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         summary_list.add(ExpiringPromoListDisplay);
-
-
                                     }
                                     offsetvalue = (limit * count) + limit;
                                     count++;
-                                    //
 
                                     requestExpiryPromosummary();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
+
                                     for (int i = 0; i < response.length(); i++)
                                     {
                                         ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -153,33 +139,20 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
 
                                 }
 
-                                //Hardcoding for testing
-                            /*  ExpiringPromoListDisplay=new RunningPromoListDisplay();
-                                ExpiringPromoListDisplay.setPlanDepartment("Testing");
-                                ExpiringPromoListDisplay.setNoOfPromotions(0);
-                                summary_list.add(ExpiringPromoListDisplay);*/
-
-                                //  RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
-                                // PromoListView.setAdapter(runningPromoAdapter);
                                 PromoList_summary.setLayoutManager(new LinearLayoutManager(PromoList_summary.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 PromoList_summary.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(PromoList_summary);
                                 runningPromoSummaryAdapter = new RunningPromoSummaryAdapter(summary_list, ExpiringPromoActivity.this);
                                 PromoList_summary.setAdapter(runningPromoSummaryAdapter);
 
-                                // PromoListView.setSelectionFromTop(3,0);
                                 Reusable_Functions.hDialog();
-
-                                // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
-
-
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
 
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
+
                             }
                         }
                     },
@@ -216,17 +189,11 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
             String url = ConstsCore.web_url + "/v1/display/expiringpromoheader/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
-
-            Log.e(TAG, "Url" + "" + url);
-
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "Expire promo : " + " " + response);
-                            Log.i(TAG, " response" + "" + response.length());
 
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -235,7 +202,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                                     return;
 
                                 } else if (response.length() == limit) {
-                                    Log.e(TAG, "promo eql limit");
+
                                     for (int i = 0; i < response.length(); i++) {
 
                                         ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -248,7 +215,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                                     requestRunningPromoApi();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
+
                                     for (int i = 0; i < response.length(); i++) {
 
                                         ExpiringPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -261,9 +228,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                                     promoval2.setText("" + ExpireList.get(0).getDurSaleTotQty());
                                     storecode.setText(ExpireList.get(0).getStoreCode());
                                     storedesc.setText(ExpireList.get(0).getStoreDesc());
-
                                 }
-
 
                                 ExpireListView.setLayoutManager(new LinearLayoutManager(ExpireListView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
@@ -273,21 +238,12 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                                 ExpireListView.setAdapter(expiringPromoSnapAdapter);
                                 Reusable_Functions.hDialog();
 
-/*
-                                ExpiringPromoAdapter runningPromoAdapter = new ExpiringPromoAdapter(ExpireList, context);
-                                ExpireListView.setAdapter(runningPromoAdapter);
-                                Reusable_Functions.hDialog();*/
-
-                                // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
-
-
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
-                            }
+                           }
                         }
                     },
                     new Response.ErrorListener() {
@@ -299,7 +255,6 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                             error.printStackTrace();
                         }
                     }
-
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
@@ -315,24 +270,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
 
-
-            //-----------------------------ON CLICK LISTENER-----------------------------//
-
-
-       /* ExpireListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e(TAG,"listview position"+position);
-                Intent i =  new Intent(context,RunningPromoDetail.class);
-                i.putExtra("VM",ExpireList.get(position).getPromoDesc());
-                context.startActivity(i);
-
-            }
-        });
-*/
-
-
-            ExpireListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+          ExpireListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
@@ -340,10 +278,7 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                     RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
                     totalItemCount = mRecyclerViewHelper.getItemCount();
                     focusposition = mRecyclerViewHelper.findFirstVisibleItemPosition();
-
-
                 }
-
 
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, final int newState) {
@@ -357,22 +292,12 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                         h.postDelayed(new Runnable() {
                             public void run() {
                                 TimeUP();
-                                Log.e(TAG, "run: position is"+focusposition );
-
                             }
                         }, 400);
-
-
                     }
                     prevState = currentState;
-
-
                 }
-
-
             });
-
-
         }
     }
 
@@ -384,13 +309,11 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
             promoval2.setText("" + ExpireList.get(focusposition).getDurSaleTotQty());
             storecode.setText(ExpireList.get(focusposition).getStoreCode());
             storedesc.setText(ExpireList.get(focusposition).getStoreDesc());
-
         }
         else {
             focusposition = ExpireList.size() - 1;
             LinearLayoutManager llm = (LinearLayoutManager)ExpireListView.getLayoutManager();
             llm.scrollToPosition(focusposition);
-
             promoval1.setText("\u20B9\t" + format.format(Math.round(ExpireList.get(focusposition).getDurSaleNetVal())));
             promoval2.setText("" + ExpireList.get(focusposition).getDurSaleTotQty());
             storecode.setText(ExpireList.get(focusposition).getStoreCode());
@@ -410,11 +333,8 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
         Expiring_promo = (LinearLayout) findViewById(R.id.expiring_promo);
         ExpireListView = (RecyclerView) findViewById(R.id.expirePromoListview);
         PromoList_summary = (RecyclerView) findViewById(R.id.promoList_summary);
-
-
         imageback.setOnClickListener(this);
         imagefilter.setOnClickListener(this);
-
     }
 
 
@@ -430,8 +350,6 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
                 Intent intent = new Intent(ExpiringPromoActivity.this, FilterActivity.class);
                 intent.putExtra("from","expiringPromo");
                 startActivity(intent);
-                //finish();
-
         }
 
     }
@@ -439,8 +357,6 @@ public class ExpiringPromoActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-    /*    Intent intent=new Intent(context, DashBoardActivity.class);
-        startActivity(intent);*/
         finish();
     }
 

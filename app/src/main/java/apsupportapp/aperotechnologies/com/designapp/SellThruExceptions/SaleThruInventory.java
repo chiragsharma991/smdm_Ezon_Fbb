@@ -72,7 +72,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private RadioButton BestInvent_core, BestInvent_fashion;
     private ToggleButton Toggle_bestInvent_fav;
     private static String corefashion = "Fashion";
-    private ImageView Skewed_quickFilter;
     private int orderbycol = 1;
     Context context;
     private RelativeLayout Bst_sortInventory;

@@ -101,7 +101,7 @@
                 android:id="@+id/top_storecode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Store : "
+                android:text="@string/store"
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/smdm_store_title_normal"
@@ -145,17 +145,7 @@
             </RelativeLayout>
 
         </RelativeLayout>
-
-
-
-
     </LinearLayout>
-
-
-
-
-
-
 
     <info.hoang8f.android.segmented.SegmentedGroup
         android:id="@+id/top_segmented"

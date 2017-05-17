@@ -2,7 +2,6 @@ package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,44 +50,30 @@ public class VmAdapter extends BaseAdapter {
         if (convertView == null) {
             holder=new ViewHolder();
             convertView = mInflater.inflate(R.layout.activity_vm_child, null);
-
-           // holder.text1 = (TextView) convertView.findViewById(R.id.txtDays);
             holder.imgView = (ImageView) convertView.findViewById(R.id.imageView1);
-
-
             convertView.setTag(holder);
 
         } else {
             holder=(ViewHolder)convertView.getTag();
 
         }
-        Log.e("position is", String.valueOf(+position));
 
         Picasso.with(context)
                 .load(arrayList.get(position))
                 .into(holder.imgView);
 
-
         holder.imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context,VmPreview.class);
-                Log.e("vm adapter position is", String.valueOf(+position));
                 intent.putExtra("VM_ADP",position);
                 context.startActivity(intent);
-
 
             }
         });
 
-
-
-
-        return convertView;
+     return convertView;
     }
-
-
-
     public class ViewHolder
 
     {

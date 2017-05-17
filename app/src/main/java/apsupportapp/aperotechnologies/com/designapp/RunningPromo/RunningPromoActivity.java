@@ -56,7 +56,6 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
     RunningPromoListDisplay runningPromoListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
-    String TAG = "RunningPromoactivity";
     private int count = 0;
     private int limit = 100;
     private int offsetvalue = 0;
@@ -82,14 +81,12 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_running_promo);
         getSupportActionBar().hide();
         initalise();
-        //  PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         promoList = new ArrayList<RunningPromoListDisplay>();
         summary_list = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -98,51 +95,36 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         Running_summary.setVisibility(View.VISIBLE);
         Reusable_Functions.sDialog(this, "Loading.......");
         requestRunningPromosummary();
-        //check();
-
-    }
+     }
 
 
     private void requestRunningPromosummary() {
 
 
         if (Reusable_Functions.chkStatus(context)) {
-
-            //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
             String url = ConstsCore.web_url + "/v1/display/runningpromosummary/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
-
-            Log.e(TAG, "Promo Summary Url" + "" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "Running promo : " + " " + response);
-                            Log.i(TAG, "Sales View Pager response" + "" + response.length());
-
-
-                            try {
+                           try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(RunningPromoActivity.this, "no data found", Toast.LENGTH_SHORT).show();
                                     return;
 
                                 } else if (response.length() == limit) {
-                                    Log.e(TAG, "promo eql limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         summary_list.add(runningPromoListDisplay);
 
-
                                     }
                                     offsetvalue = (limit * count) + limit;
                                     count++;
-                                    //
-
                                     requestRunningPromosummary();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++)
                                     {
                                         runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -151,28 +133,15 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                                     count = 0;
                                     limit = 100;
                                     offsetvalue = 0;
-
-
                                 }
 
-
-                                //  RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
-                                // PromoListView.setAdapter(runningPromoAdapter);
-
-
-                                // PromoListView.setSelectionFromTop(3,0);
                                 Reusable_Functions.hDialog();
-
-                                // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
-
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
-
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -185,7 +154,6 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                             error.printStackTrace();
                         }
                     }
-
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
@@ -200,14 +168,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
-
-
         }
-
-
-
-
-
     }
 
     private void requestRunningPromoApi() {
@@ -216,14 +177,10 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
             String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
 
-            Log.e(TAG, "Url" + "" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "Running promo : " + " " + response);
-                            Log.i(TAG, "Sales View Pager response" + "" + response.length());
-
 
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -232,22 +189,17 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                                     return;
 
                                 } else if (response.length() == limit) {
-                                    Log.e(TAG, "promo eql limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         promoList.add(runningPromoListDisplay);
 
-
                                     }
                                     offsetvalue = (limit * count) + limit;
                                     count++;
-                                    //
-
                                     requestRunningPromoApi();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++)
                                     {
                                         runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -255,17 +207,11 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                                     }
 
                                     NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("","in"));
-
-                                    Log.e(TAG, "promolistSize" + promoList.size());
                                     promoval1.setText("\u20B9\t" + formatter.format(Math.round(promoList.get(0).getDurSaleNetVal())));
                                     promoval2.setText("" + promoList.get(0).getDurSaleTotQty());
                                     storecode.setText(promoList.get(0).getStoreCode());
                                     storedesc.setText(promoList.get(0).getStoreDesc());
                                 }
-
-
-                                //  RunningPromoAdapter runningPromoAdapter = new RunningPromoAdapter(promoList, RunningPromoActivity.this);
-                                // PromoListView.setAdapter(runningPromoAdapter);
                                 PromoListView.setLayoutManager(new LinearLayoutManager(
                                         PromoListView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
@@ -274,19 +220,12 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                                 runningPromoSnapAdapter = new RunningPromoSnapAdapter(promoList, RunningPromoActivity.this);
                                 PromoListView.setAdapter(runningPromoSnapAdapter);
 
-                                // PromoListView.setSelectionFromTop(3,0);
                                 Reusable_Functions.hDialog();
-
-                                // txtNetSalesVal.setText("\u20B9 "+(int) salesAnalysis.getSaleNetVal());
-
-
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
-
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -299,7 +238,6 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                             error.printStackTrace();
                         }
                     }
-
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
@@ -327,73 +265,48 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
                     RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
                     totalItemCount = mRecyclerViewHelper.getItemCount();
                     firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
-
-
                 }
-
 
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, final int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
 
-
                     currentState = newState;
                     if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE) {
 
-                        Log.i(TAG, "" + "scroll state" + newState);
                         Handler h = new Handler();
                         h.postDelayed(new Runnable() {
                             public void run() {
-                                Log.e(TAG, "run: time out");
                                 TimeUP();
                             }
                         }, 400);
-
-
                     }
                     prevState = currentState;
-
-
                 }
-
-
             });
-
-
-
-
         }
     }
 
 
     private void TimeUP() {
-        // if (promoList.size() != 0 && newState== RecyclerView.SCROLL_STATE_IDLE) {
-        //check ideal condition then call .....
+
         NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("","in"));
         if (firstVisibleItem < runningPromoSnapAdapter.getItemCount() - 1) {
-            Log.i(TAG, "onScrollStateChanged: item " + firstVisibleItem + "getitem Count" + runningPromoSnapAdapter.getItemCount());
-            //10<10 where footer is call then it goes else condition
-
 
             promoval1.setText("\u20B9\t" + formatter.format(Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal())));
             promoval2.setText("" + promoList.get(firstVisibleItem).getDurSaleTotQty());
             storecode.setText(promoList.get(firstVisibleItem).getStoreCode());
             storedesc.setText(promoList.get(firstVisibleItem).getStoreDesc());
         } else {
-            Log.e(TAG, "onScrollStateChanged else conition: ");
             firstVisibleItem = promoList.size() - 1;
             LinearLayoutManager llm = (LinearLayoutManager) PromoListView.getLayoutManager();
             llm.scrollToPosition(firstVisibleItem);
-
             promoval1.setText("\u20B9\t" + formatter.format(Math.round(promoList.get(firstVisibleItem).getDurSaleNetVal())));
             promoval2.setText("" + promoList.get(firstVisibleItem).getDurSaleTotQty());
             storecode.setText(promoList.get(firstVisibleItem).getStoreCode());
             storedesc.setText(promoList.get(firstVisibleItem).getStoreDesc());
         }
-
-
     }
-
 
     private void initalise() {
         storecode = (TextView) findViewById(R.id.txtStoreCode);
@@ -404,61 +317,14 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
         imagefilter = (RelativeLayout) findViewById(R.id.rp_imgfilter);
         Running_promo = (LinearLayout) findViewById(R.id.running_promo);
         Running_summary = (LinearLayout) findViewById(R.id.running_summary);
-
         PromoListView = (RecyclerView) findViewById(R.id.promoListview);
         PromoList_summary = (RecyclerView) findViewById(R.id.promoList_summary);
         PromoListView.setLayoutManager(new LinearLayoutManager(this));
         PromoListView.setHasFixedSize(true);
-
         imageback.setOnClickListener(this);
         imagefilter.setOnClickListener(this);
 
-
     }
-
-    public static void smoothScrollToPositionFromTop(final AbsListView view, final int position) {
-        View child = getChildAtPosition(view, position);
-        // There's no need to scroll if child is already at top or view is already scrolled to its end
-        if ((child != null) && ((child.getTop() == 0) || ((child.getTop() > 0) && !view.canScrollVertically(1)))) {
-            Log.e("if condition Scroll", "-----");
-
-            return;
-        }
-
-        view.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(final AbsListView view, final int scrollState) {
-                if (scrollState == SCROLL_STATE_IDLE) {
-                    view.setOnScrollListener(null);
-
-                    // Fix for scrolling bug
-                    new Handler().post(new Runnable() {
-                        @Override
-                        public void run() {
-                            view.setSelection(position);
-                            Log.e("View Scroll", "-----");
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount,
-                                 final int totalItemCount) {
-            }
-        });
-
-        // Perform scrolling to position
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                view.smoothScrollToPositionFromTop(position, 0);
-                Log.e(" smoothScrollToPositionFromTop Scroll", "-----");
-
-            }
-        });
-    }
-
 
     public static View getChildAtPosition(final AdapterView view, final int position) {
         final int index = position - view.getFirstVisiblePosition();
@@ -490,8 +356,6 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       /* Intent intent=new Intent(context, DashBoardActivity.class);
-        startActivity(intent);*/
         finish();
     }
 
@@ -502,8 +366,7 @@ public class RunningPromoActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(String value) {
-
-          Reusable_Functions.sDialog(this, "Loading.......");
+          Reusable_Functions.sDialog(this, "Loading...");
           requestRunningPromoApi();
           Running_promo.setVisibility(View.VISIBLE);
           Running_summary.setVisibility(View.GONE);

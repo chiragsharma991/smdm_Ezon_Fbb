@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,14 +61,10 @@ public class TransferRequestFragment extends Fragment {
     private int offsetvalue = 0;
     private boolean checkNetworkFalse=false;
     private RequestQueue queue;
-    private String TAG="ToDo_Fregment";
     private ArrayList<Transfer_Request_Model> SenderSummaryList;
     private String recache;
-
-
     private String mParam1;
     private String mParam2;
-
     private StockPullFragment.OnFragmentInteractionListener mListener;
     private Context context;
     private ViewGroup view;
@@ -123,7 +118,6 @@ public class TransferRequestFragment extends Fragment {
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        Log.e(TAG, "onCreateView: -- StockPullFragment" );
         view = (ViewGroup) inflater.inflate(R.layout.fragment_transfer_request, container, false);
         context = view.getContext();
         SenderSummaryList=new ArrayList<Transfer_Request_Model>();
@@ -157,26 +151,20 @@ public class TransferRequestFragment extends Fragment {
         if (Reusable_Functions.chkStatus(context)) {
 
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendersummary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit +"&recache="+recache;
-            Log.e(TAG, "To_DO Summary Url" + "" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response)
                         {
-                            Log.e(TAG, "Transfer Request response : " + " " + response);
-                            Log.e(TAG, "TTransfer Request response length" + "" + response.length());
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     checkNetworkFalse=true;
-                                 //   Toast.makeText(context, "No data found from REQUEST FROM STORES", Toast.LENGTH_SHORT).show();
                                     return;
-
                                 }
                                 else if (response.length() == limit)
                                 {
-                                    Log.e(TAG, "promo eql limit");
                                     for (int i = 0; i < response.length(); i++)
                                     {
                                         transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
@@ -189,7 +177,6 @@ public class TransferRequestFragment extends Fragment {
                                 }
                                 else if (response.length() < limit)
                                 {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++)
                                     {
                                         transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
@@ -198,7 +185,6 @@ public class TransferRequestFragment extends Fragment {
                                 }
                                 senderSummary_recyclerView.setLayoutManager(new LinearLayoutManager(senderSummary_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 senderSummary_recyclerView.setOnFlingListener(null);
-                                // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                                 TransferRequestAdapter transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,getActivity());
                                 senderSummary_recyclerView.setAdapter(transferRequestAdapter );
                                 Reusable_Functions.hDialog();
@@ -209,7 +195,6 @@ public class TransferRequestFragment extends Fragment {
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -250,7 +235,6 @@ public class TransferRequestFragment extends Fragment {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);

@@ -141,79 +141,12 @@
                             />
                     </LinearLayout>
 
-                    <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:visibility="invisible"-->
-                    <!--android:layout_height="wrap_content">-->
-
-                    <!--<ImageButton-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:id="@+id/formal9"-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:background="@color/bg_screen_color"-->
-                    <!--android:src="@mipmap/cut_size_report"-->
-                    <!--/>-->
-
-                    <!--<TextView-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Cut-Size Report"-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:textSize="13sp" />-->
-
-
-                    <!--</LinearLayout>-->
-
-                    <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:visibility="invisible"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content">-->
-
-                    <!--<ImageButton-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:id="@+id/formal10"-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:background="@color/bg_screen_color"-->
-                    <!--android:src="@mipmap/skewed_size"-->
-                    <!--/>-->
-
-
-                    <!--<TextView-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="SkewedSize"-->
-                    <!--android:textSize="13sp"-->
-                    <!--android:layout_gravity="center_horizontal" />-->
-                    <!--</LinearLayout>-->
-
-
 
                 </LinearLayout>
-
-
-
-
-
-
-
 
             </LinearLayout>
 
             <!--one row-->
-
-
-
-
-
 
             <!--second-->
 
@@ -368,19 +301,9 @@
                             android:textSize="13sp"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
-
-
-
                 </LinearLayout>
 
-
-
-
-
-
-
             </LinearLayout>
-
 
 
 
@@ -395,121 +318,10 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 >
-
-
-                <!--
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="4">
-
-
-                                    <LinearLayout
-                                        android:orientation="vertical"
-                                        android:layout_weight="1"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content">
-
-                                        <ImageButton
-                                            android:layout_gravity="center_horizontal"
-                                            android:id="@+id/imageBtnKeyProducts"
-                                            android:layout_width="80dp"
-                                            android:layout_height="80dp"
-                                            android:background="@color/bg_screen_color"
-                                            android:src="@mipmap/hourly_analysis"
-                                            />
-
-
-                                        <TextView
-                                            android:gravity="center_horizontal"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="KeyProduct Hrly Info"
-                                            android:textColor="@color/smdm_light_Black"
-                                            android:layout_gravity="center_horizontal"
-                                            android:textSize="13sp"
-                                            />
-                                    </LinearLayout>
-
-
-
-
-                                    <LinearLayout
-                                        android:orientation="vertical"
-                                        android:layout_weight="1"
-                                        android:layout_width="0dp"
-                                        android:visibility="invisible"
-                                        android:layout_height="wrap_content">
-
-                                        <ImageButton
-                                            android:gravity="center_horizontal"
-                                            android:layout_gravity="center_horizontal"
-                                            android:id="@+id/formal9"
-                                            android:layout_width="80dp"
-                                            android:layout_height="80dp"
-                                            android:background="@color/bg_screen_color"
-                                            android:src="@mipmap/cut_size_report"
-                                            />
-
-                                        <TextView
-                                            android:layout_gravity="center_horizontal"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Cut-Size Report"
-                                            android:gravity="center_horizontal"
-                                            android:textSize="13sp" />
-
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:orientation="vertical"
-                                        android:layout_weight="1"
-                                        android:visibility="invisible"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content">
-
-                                        <ImageButton
-                                            android:layout_gravity="center_horizontal"
-                                            android:id="@+id/formal10"
-                                            android:layout_width="80dp"
-                                            android:layout_height="80dp"
-                                            android:background="@color/bg_screen_color"
-                                            android:src="@mipmap/skewed_size"
-                                            />
-
-
-                                        <TextView
-                                            android:gravity="center_horizontal"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="SkewedSize"
-                                            android:textSize="13sp"
-                                            android:layout_gravity="center_horizontal" />
-                                    </LinearLayout>
-
-
-
-                                </LinearLayout>
-                -->
-
-
-
-
-
-
-
-
             </LinearLayout>
 
 
             <!--second ending-->
-
-
-
-
-
             <!--third starting-->
 
             <TextView
@@ -667,27 +479,11 @@
 
                 </LinearLayout>
 
-
-
-
-
-
-
-
-
             </LinearLayout>
 
-            <!--thirld ending-->
+            <!--third ending-->
 
 
-            <!--<TextView-->
-            <!--android:layout_below="@+id/headerpromo"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:background="@color/smdm_divider_Black"-->
-            <!--android:id="@+id/textView5" />-->
 
             <LinearLayout
                 android:layout_below="@+id/headerpromo"
@@ -823,13 +619,6 @@
 
 
             </LinearLayout>
-
-
-
-
-
-
-
 
             <!---->
 
@@ -973,10 +762,6 @@
 
                 </LinearLayout>
 
-
-
-
-
             </LinearLayout>
 
 
@@ -1063,33 +848,6 @@
                             android:text="Option Efficiency" />
                     </LinearLayout>
 
-                    <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content">-->
-
-                    <!--<ImageButton-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:id="@+id/btnCutSize"-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:background="@color/bg_screen_color"-->
-                    <!--android:src="@mipmap/cut_size_report"-->
-                    <!--/>-->
-
-                    <!--<TextView-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Top Options by Full Cut"-->
-                    <!--android:textColor="@color/smdm_light_Black"-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:textSize="13sp" />-->
-
-
-                    <!--</LinearLayout>-->
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -1142,32 +900,6 @@
                             android:layout_gravity="center_horizontal"
                             android:textSize="13sp"/>
                     </LinearLayout>
-                    <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content">-->
-
-                    <!--<ImageButton-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:id="@+id/btnStockAgeing"-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:background="#ffffff"-->
-                    <!--android:src="@mipmap/skewed_size"-->
-                    <!--/>-->
-
-
-                    <!--<TextView-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Stock Ageing Excep"-->
-                    <!--android:textSize="13sp"-->
-                    <!--android:layout_gravity="center_horizontal" />-->
-                    <!--</LinearLayout>-->
-
-
 
                 </LinearLayout>
                 <LinearLayout
@@ -1192,7 +924,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@color/bg_screen_color"
-                            android:src="@mipmap/worst_promo" />
+                            android:src="@mipmap/best_worst_promo" />
 
 
                         <TextView
@@ -1311,43 +1043,7 @@
                             android:textColor="@color/smdm_light_Black"
                             android:text="Sell Thru Exceptions" />
                     </LinearLayout>
-
-                    <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content">-->
-
-                    <!--<ImageButton-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:id="@+id/btnStockAgeing"-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:background="#ffffff"-->
-                    <!--android:src="@mipmap/skewed_size"-->
-                    <!--/>-->
-
-
-                    <!--<TextView-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Stock Ageing Excep"-->
-                    <!--android:textSize="13sp"-->
-                    <!--android:layout_gravity="center_horizontal" />-->
-                    <!--</LinearLayout>-->
-
-
-
-                </LinearLayout>
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:weightSum="4">-->
-
-                <!--</LinearLayout>-->
-
+               </LinearLayout>
 
 
             </LinearLayout>
@@ -1483,27 +1179,7 @@
                 android:layout_below="@+id/linearthree"
                 android:layout_alignParentStart="true" />
 
-
-
-
-
-            <!--<apsupportapp.aperotechnologies.com.designapp.ExpandableHeightGridView-->
-            <!--android:id="@+id/spotsView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:layout_marginBottom="5dp"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:layout_marginRight="5dp"-->
-            <!--android:horizontalSpacing="10dp"-->
-            <!--android:isScrollContainer="false"-->
-            <!--android:numColumns="1"-->
-            <!--android:stretchMode="columnWidth"-->
-            <!--android:verticalSpacing="10dp" />-->
-
-
-
-            <TextView
+           <TextView
                 android:id="@+id/collaboration"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
@@ -1999,20 +1675,7 @@
 
             </LinearLayout>
 
-
-
-
-
-
-
-
-
-
             <!--MPM end-->
-
-
-
-
             <!--Feedback sub views-->
             <LinearLayout
                 android:visibility="gone"

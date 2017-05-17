@@ -147,7 +147,7 @@ public class Plan_Option_Fragment extends Fragment {
        segmentedGroupOption.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (opttoggleClick == false){
+                if (!opttoggleClick){
                     switch (checkedId) {
                         case R.id.planactual_optbtnWTD:
                             if (option_seg_clk.equals("WTD")) {

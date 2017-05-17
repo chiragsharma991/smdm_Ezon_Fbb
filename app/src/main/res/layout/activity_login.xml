@@ -4,96 +4,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:id="@+id/linearLogin"
     android:orientation="vertical"
     tools:context="apsupportapp.aperotechnologies.com.designapp.LoginActivity">
 
-    <ImageView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="150dp"
-        android:src="@mipmap/engage247_logo1"
-        tools:ignore="ContentDescription" />
+        android:layout_height="match_parent"
 
-    <EditText
-        android:id="@+id/edtUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="60dp"
-        android:gravity="center"
-        android:inputType="text"
-        android:hint="@string/username"
-        android:textAllCaps="true"
-        android:maxLines="1"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:textCursorDrawable="@drawable/cursor_color" />
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="150dp"
+                android:src="@mipmap/engage247_logo1"
+                tools:ignore="ContentDescription" />
 
-    <EditText
-        android:id="@+id/edtPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:textAllCaps="true"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:textCursorDrawable="@drawable/cursor_color" />
+            <EditText
+                android:id="@+id/edtUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="60dp"
+                android:gravity="center"
+                android:hint="@string/username"
+                android:textAllCaps="true"
+                android:maxLines="1"
+                android:inputType="text"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:textCursorDrawable="@drawable/cursor_color" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:textCursorDrawable="@drawable/cursor_color" />
 
-        <CheckBox
-            android:id="@+id/chkKeepMeLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/loggedin"
-            android:textColor="#ffffff"
-            />
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:textColor="#ffffff"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Keep me logged in"/>-->
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="25dp"
-        android:text="LOG IN"
-        android:textColor="#000000"
-        android:backgroundTint="@drawable/ripple_effect"
-        />
-    <!--<TextView-->
-    <!--android:id="@+id/btnForgetPassword"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="15dp"-->
-    <!--android:layout_marginLeft="40dp"-->
-    <!--android:layout_marginRight="40dp"-->
-    <!--android:gravity="center"-->
-    <!--android:text="Forgot Password?"-->
-    <!--android:textColor="#ffffff"-->
-    <!--android:background="#920609"/>-->
+                <CheckBox
+                    android:id="@+id/chkKeepMeLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/loggedin"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="25dp"
+                android:text="LOG IN"
+                android:textColor="#000000"
+                android:backgroundTint="@drawable/ripple_effect"
+                />
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
 </LinearLayout>

@@ -21,7 +21,12 @@ public class StatusModel
     String receiver_requested_date;
     String stoDate;
     String grnDate;
+    String senderStoreCode;
+    String senderStoreDesc;
+    String reqStoreDescription;
 
+
+       //Getter , setter declaration
     public String getReqStoreDescription() {
         return reqStoreDescription;
     }
@@ -29,8 +34,6 @@ public class StatusModel
     public void setReqStoreDescription(String reqStoreDescription) {
         this.reqStoreDescription = reqStoreDescription;
     }
-
-    String reqStoreDescription;
 
     public String getSenderStoreCode() {
         return senderStoreCode;
@@ -47,11 +50,6 @@ public class StatusModel
     public void setSenderStoreDesc(String senderStoreDesc) {
         this.senderStoreDesc = senderStoreDesc;
     }
-
-    String senderStoreCode;
-    String senderStoreDesc;
-
-
 
     public double getStkOnhandQtyRequested() {
         return stkOnhandQtyRequested;
@@ -141,9 +139,6 @@ public class StatusModel
         this.receiver_requested_date = receiver_requested_date;
 
     }
-
-
-
     public double getStoQty() {
         return stoQty;
     }

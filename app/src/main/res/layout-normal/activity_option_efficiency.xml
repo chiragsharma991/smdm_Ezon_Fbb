@@ -1,18 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_screen_color"
-    tools:context=".OptionEfficiency.OptionEfficiencyActivity">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_screen_color"
+                tools:context=".OptionEfficiency.OptionEfficiencyActivity">
 
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg_screen_color"
-        android:orientation="vertical">
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/bg_screen_color"
+                  android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/common_back_icon"
-                            android:clickable="false" />
+                            android:clickable="false"/>
 
                     </RelativeLayout>
 
@@ -63,11 +63,10 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/optionEfficiency_imageBtnBack"
-                        android:text="Option Efficiency"
+                        android:text="@string/oe_title"
                         android:textColor="@color/divider_salescard1"
                         android:textSize="@dimen/smdm_header_title_normal"
                         />
-
 
 
                     <RelativeLayout
@@ -84,7 +83,7 @@
                             android:layout_height="19dp"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/filter_icon_nav"
-                            android:clickable="false" />
+                            android:clickable="false"/>
 
                     </RelativeLayout>
 
@@ -102,7 +101,7 @@
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store : "
+                    android:text="@string/store"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/smdm_store_title_normal"
                     />
@@ -143,7 +142,7 @@
                         android:layout_height="29dp"
                         android:layout_centerInParent="true"
                         android:background="@mipmap/quick_filter"
-                        android:clickable="false" />
+                        android:clickable="false"/>
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -169,7 +168,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="Fashion" />
+                    android:text="Fashion"/>
 
                 <RadioButton
                     android:id="@+id/oe_btnCore"
@@ -178,14 +177,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="Core" />
-
-
+                    android:text="Core"/>
 
 
             </info.hoang8f.android.segmented.SegmentedGroup>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/llayoutOEfficiency"
             android:layout_width="match_parent"
@@ -199,32 +197,32 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
+                    android:id="@+id/noChartOption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/noChartOption"
-                    android:text="No Chart data available"
                     android:layout_centerInParent="true"
                     android:gravity="center"
-                    android:visibility="gone"
+                    android:text="No Chart data available"
                     android:textSize="@dimen/largelayout_storesize"
+                    android:visibility="gone"
 
                     />
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/oe_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="210dp" />
+                    android:layout_height="210dp"/>
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:visibility="gone"
-                    android:id="@+id/progressBar"
-                    android:layout_centerInParent="true"
-                    android:background="#0000"
-                    android:keepScreenOn="true"
-                    android:theme="@style/ProgressBar"
+                             android:id="@+id/progressBar"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_centerInParent="true"
+                             android:background="#0000"
+                             android:keepScreenOn="true"
+                             android:padding="10dp"
+                             android:theme="@style/ProgressBar"
+                             android:visibility="gone"
                     >
 
                 </ProgressBar>
@@ -244,7 +242,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="@color/txt_color"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
 
             </LinearLayout>
 
@@ -258,12 +256,13 @@
                     android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />
+                    android:background="@color/border_round_edittext"/>
+
                 <LinearLayout
-                    android:layout_below="@+id/view1"
                     android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
+                    android:layout_below="@+id/view1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -279,65 +278,65 @@
 
 
                             <RelativeLayout
-                                android:layout_centerVertical="true"
                                 android:id="@+id/oe_btnPrev"
                                 android:layout_width="20dp"
-                                android:layout_height="40dp">
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true">
 
                                 <Button
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/back_arrow"
-                                    android:clickable="false" />
+                                    android:clickable="false"/>
                             </RelativeLayout>
 
 
                             <TextView
-                                android:layout_toRightOf="@+id/oe_btnPrev"
                                 android:id="@+id/oe_txtHeaderClass"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
+                                android:layout_toRightOf="@+id/oe_btnPrev"
                                 android:text="Department"
-                                android:textStyle="normal"
                                 android:textColor="@color/bg_store_code_text"
                                 android:textSize="@dimen/smdm_departmentTitle"
+                                android:textStyle="normal"
                                 />
 
 
                             <RelativeLayout
-                                android:layout_centerVertical="true"
-                                android:layout_toRightOf="@+id/oe_txtHeaderClass"
                                 android:id="@+id/oe_btnNext"
                                 android:layout_width="20dp"
-                                android:layout_height="40dp">
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/oe_txtHeaderClass">
 
                                 <Button
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/next_arrow"
-                                    android:clickable="false" />
+                                    android:clickable="false"/>
                             </RelativeLayout>
 
                         </RelativeLayout>
 
                         <TextView
-                            android:textStyle="normal"
                             android:id="@+id/oe_txtOption"
                             android:layout_width="60dp"
-                            android:layout_marginLeft="5dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
                             android:layout_marginRight="180dp"
                             android:layout_toLeftOf="@+id/oe_txtOption_Perc"
                             android:gravity="center_vertical|center"
                             android:text="Option"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal"
                             />
 
 
@@ -362,8 +361,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/oe_txtSOH_U_Perc"
                             android:layout_marginRight="60dp"
+                            android:layout_toLeftOf="@+id/oe_txtSOH_U_Perc"
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)"
                             android:textColor="@color/bg_store_code_text"
@@ -383,7 +382,6 @@
                             android:textStyle="normal"/>
 
 
-
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -392,8 +390,6 @@
                         android:background="@color/bg_screen_color">
 
                         <EditText
-                            android:editable="false"
-                            android:padding="2dp"
                             android:id="@+id/edt_OEfficiency_Class"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
@@ -402,13 +398,13 @@
                             android:layout_marginRight="240dp"
                             android:layout_toLeftOf="@+id/edt_FIndex_SOH"
                             android:background="@drawable/border"
+                            android:editable="false"
                             android:gravity="center_vertical"
-                            android:textColor="@android:color/black" />
+                            android:padding="2dp"
+                            android:textColor="@android:color/black"/>
 
 
                         <EditText
-                            android:editable="false"
-                            android:paddingRight="2dp"
                             android:id="@+id/edt_OEfficiency_Option"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
@@ -417,11 +413,12 @@
                             android:layout_marginRight="180dp"
                             android:layout_toLeftOf="@+id/edt_OEfficiency_Option_Perc"
                             android:background="@drawable/border"
-                            android:gravity="center_vertical" />
+                            android:editable="false"
+                            android:gravity="center_vertical"
+                            android:paddingRight="2dp"/>
 
 
                         <EditText
-                            android:editable="false"
                             android:id="@+id/edt_OEfficiency_Option_Perc"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
@@ -430,43 +427,35 @@
                             android:layout_marginRight="120dp"
                             android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_U"
                             android:background="@drawable/border"
-                            android:textColor="@android:color/black" />
+                            android:editable="false"
+                            android:textColor="@android:color/black"/>
 
                         <EditText
-                            android:editable="false"
                             android:id="@+id/edt_OEfficiency_SOH_U"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
-                            android:layout_marginRight="60dp"
-                            android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_Perc"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="60dp"
+                            android:layout_toLeftOf="@+id/edt_OEfficiency_SOH_Perc"
                             android:background="@drawable/border"
-                            android:textColor="@android:color/black" />
+                            android:editable="false"
+                            android:textColor="@android:color/black"/>
 
                         <EditText
-                            android:editable="false"
                             android:id="@+id/edt_OEfficiency_SOH_Perc"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:background="@drawable/border"
-                            android:textColor="@android:color/black" />
+                            android:editable="false"
+                            android:textColor="@android:color/black"/>
 
 
                     </RelativeLayout>
 
                 </LinearLayout>
-
-<!--
-                <View
-                    android:layout_below="@+id/linear"
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />-->
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -478,16 +467,12 @@
                         android:id="@+id/oe_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:dividerHeight="0dp"
                         android:divider="@null"
+                        android:dividerHeight="0dp"
                         android:scrollbarFadeDuration="0"
-                        android:smoothScrollbar="true" />
-
-
+                        android:smoothScrollbar="true"/>
 
                 </LinearLayout>
-
-
 
             </RelativeLayout>
         </LinearLayout>
@@ -496,6 +481,5 @@
     <include layout="@layout/oe_quick_filter_menu">
 
     </include>
-
 
 </RelativeLayout>

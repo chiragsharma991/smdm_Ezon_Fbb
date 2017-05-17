@@ -9,7 +9,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +51,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private String TAG="StatusSender_Fragment";
+    private String TAG = "StatusSender_Fragment";
     private OnFragmentInteractionListener mListener;
     private ViewGroup view;
     Context context;
@@ -66,9 +65,9 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private String bearertoken;
     private RequestQueue queue;
     private StatusModel statusModel;
-    private ArrayList<StatusModel>SenderSummaryList,StatusDocList;
+    private ArrayList<StatusModel> SenderSummaryList, StatusDocList;
     private RecyclerView recyclerView;
-    private HashMap<Integer,ArrayList<StatusModel>>initiatedStatusList,senderAcpStatusList,stoStatusList,grnStatusList;
+    private HashMap<Integer, ArrayList<StatusModel>> initiatedStatusList, senderAcpStatusList, stoStatusList, grnStatusList;
     private ToBeSenderAdapter SenderAdapter;
     private String recache;
 
@@ -114,7 +113,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser) {
+        if (isVisibleToUser) {
             if (Sender_checkNetwkStatus) {
                 Toast.makeText(context, "No data found ", Toast.LENGTH_SHORT).show();
 
@@ -125,74 +124,49 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private void MainMethod() {
         NetworkProcess();
 
-        if(Reusable_Functions.chkStatus(context))
-        {
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading.......");
             requestSenderCaseStatusSummary();
 
-        }else
-        {
+        } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
             Reusable_Functions.hDialog();
         }
     }
 
-    private void requestSenderCaseStatusSummary()
-    {
-//
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit + "&recache="+recache;
-        Log.e(TAG, "Status Sender Summary Url" + "" + url);
+    private void requestSenderCaseStatusSummary() {
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
-                        Log.e(TAG, "Status Sender response : " + " " + response);
-                        Log.e(TAG, "Status Sender length" + "" + response.length());
-
-                        try
-                        {
+                    public void onResponse(JSONArray response) {
+                        try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Sender_checkNetwkStatus = true;
                                 return;
 
                             } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     SenderSummaryList.add(statusModel);
-//
+
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestSenderCaseStatusSummary();
 
                             } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     SenderSummaryList.add(statusModel);
-
-
                                 }
-
                             }
-//                            statusModel = new StatusModel();
-//                            statusModel.setCaseNo(10);
-//                            statusModel.setReqStoreCode("2668");
-//                            statusModel.setStatusInitiated("Yes");
-//        statusModel.setStatusAccept("Yes");
-//        statusModel.setStatusSto("No");
-//        statusModel.setStatusGrn("No");
-
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
                             MakeStatusHashMap(SenderSummaryList);
-                            SenderAdapter = new ToBeSenderAdapter(initiatedStatusList,senderAcpStatusList,stoStatusList,grnStatusList,SenderSummaryList,context,ToBeSender.this);
+                            SenderAdapter = new ToBeSenderAdapter(initiatedStatusList, senderAcpStatusList, stoStatusList, grnStatusList, SenderSummaryList, context, ToBeSender.this);
                             recyclerView.setAdapter(SenderAdapter);
                             Reusable_Functions.hDialog();
 
@@ -200,9 +174,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },
@@ -233,38 +205,36 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     }
 
     private void MakeStatusHashMap(ArrayList<StatusModel> senderSummaryList) {
-        initiatedStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
-        for (int i = 0; i <senderSummaryList.size() ; i++) {
-            ArrayList<StatusModel>list=new ArrayList<>();
-            initiatedStatusList.put(i,list);
+        initiatedStatusList = new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i < senderSummaryList.size(); i++) {
+            ArrayList<StatusModel> list = new ArrayList<>();
+            initiatedStatusList.put(i, list);
         }
 
-        senderAcpStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
-        for (int i = 0; i <senderSummaryList.size() ; i++) {
-            ArrayList<StatusModel>list=new ArrayList<>();
-            senderAcpStatusList.put(i,list);
+        senderAcpStatusList = new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i < senderSummaryList.size(); i++) {
+            ArrayList<StatusModel> list = new ArrayList<>();
+            senderAcpStatusList.put(i, list);
         }
 
-        stoStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
-        for (int i = 0; i <senderSummaryList.size() ; i++) {
-            ArrayList<StatusModel>list=new ArrayList<>();
-            stoStatusList.put(i,list);
+        stoStatusList = new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i < senderSummaryList.size(); i++) {
+            ArrayList<StatusModel> list = new ArrayList<>();
+            stoStatusList.put(i, list);
         }
 
-        grnStatusList=new HashMap<Integer, ArrayList<StatusModel>>();
-        for (int i = 0; i <senderSummaryList.size() ; i++) {
-            ArrayList<StatusModel>list=new ArrayList<>();
-            grnStatusList.put(i,list);
+        grnStatusList = new HashMap<Integer, ArrayList<StatusModel>>();
+        for (int i = 0; i < senderSummaryList.size(); i++) {
+            ArrayList<StatusModel> list = new ArrayList<>();
+            grnStatusList.put(i, list);
         }
     }
 
-    private void NetworkProcess()
-    {
+    private void NetworkProcess() {
         gson = new Gson();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -273,73 +243,46 @@ public class ToBeSender extends Fragment implements OnclickStatus {
 
     private void initialise() {
 
-        recyclerView=(RecyclerView)view.findViewById(R.id.to_be_received_list);
-
-      /*  recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-                new ToBeSenderDetails().StartActivity(context,SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getReqStoreCode());
-            }
-        }));*/
+        recyclerView = (RecyclerView) view.findViewById(R.id.to_be_received_list);
     }
 
-    private void requestSenderCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position,final int Case)
-    {
+    private void requestSenderCaseStatus(final int caseNo, final String actionStatus, final String senderStoreCode, final int position, final int Case) {
         String url = "";
-        if(Case==1)
+        if (Case == 1) //initiated status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/initiated/" + userId + "?offset=" + offsetvalue+ "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+userId+"&recache="+recache;
-
-
-        }else if(Case == 2)
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/initiated/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + userId + "&recache=" + recache;
+        } else if (Case == 2) //Sender Acpt Status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/senderacpt/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&actionStatus="+actionStatus+"&senderStoreCode="+userId+"&recache="+recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/senderacpt/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + userId + "&recache=" + recache;
 
-        }
-
-        else if(Case == 3 ){
-
-
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+userId+"&recache="+recache;
-
-        }
-        else if(Case==4)
+        } else if (Case == 3) // STO status
         {
-
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+userId+"&recache="+recache;
-
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + userId + "&recache=" + recache;
+        } else if (Case == 4) //GRN status
+        {
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + userId + "&recache=" + recache;
         }
-       Log.e(TAG, "SenderCaseStatus Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "SenderCaseStatus api response : " + " " + response);
-                        Log.i(TAG, "SenderCaseStatus api total length" + "" + response.length());
-
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 StatusActivity.StatusProcess.setVisibility(View.GONE);
-                                // Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 SenderAdapter.notifyDataSetChanged();
                                 return;
 
                             } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
-
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     StatusDocList.add(statusModel);
-
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,position,Case);
+                                requestSenderCaseStatus(caseNo, actionStatus, senderStoreCode, position, Case);
 
                             } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
                                     statusModel = gson.fromJson(response.get(i).toString(), StatusModel.class);
                                     StatusDocList.add(statusModel);
@@ -349,21 +292,15 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                                 offsetvalue = 0;
                             }
 
-                            if(Case==1)
-                            {
-                                initiatedStatusList.put(position,StatusDocList);
+                            if (Case == 1) {
+                                initiatedStatusList.put(position, StatusDocList);
 
-                            }else if(Case==2)
-                            {
-                                senderAcpStatusList.put(position,StatusDocList);
-                            }
-                            else if(Case==3)
-                            {
-                                stoStatusList.put(position,StatusDocList);
-                            }
-                            else if(Case==4)
-                            {
-                                grnStatusList.put(position,StatusDocList);
+                            } else if (Case == 2) {
+                                senderAcpStatusList.put(position, StatusDocList);
+                            } else if (Case == 3) {
+                                stoStatusList.put(position, StatusDocList);
+                            } else if (Case == 4) {
+                                grnStatusList.put(position, StatusDocList);
                             }
 
                             SenderAdapter.notifyDataSetChanged();
@@ -378,7 +315,6 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                             StatusActivity.StatusProcess.setVisibility(View.GONE);
                             SenderAdapter.notifyDataSetChanged();
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },
@@ -422,7 +358,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context=context;
+        this.context = context;
 
 
     }
@@ -434,32 +370,28 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     }
 
     @Override
-    public void Onclick(int caseNo, String actionStatus, int dublicatePosition ,int Case,String sender_store_code) {
-// Case No. is from api and Case is for fill Arraylist in between 4 button
+    public void Onclick(int caseNo, String actionStatus, int dublicatePosition, int Case, String sender_store_code) {
+        // Case No. is from api and Case is for fill Arraylist in between 4 button
 
-        String senderStoreCode=sender_store_code;
-        StatusDocList=new ArrayList<StatusModel>();
+        String senderStoreCode = sender_store_code;
+        StatusDocList = new ArrayList<StatusModel>();
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading....");
 
             // this case is for last two sto and grn
 
-            if(Case == 1)
-            {
-                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
+            if (Case == 1) {
+                requestSenderCaseStatus(caseNo, actionStatus, senderStoreCode, dublicatePosition, Case);
 
             }
-            if(Case == 2)
-            {
-                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
+            if (Case == 2) {
+                requestSenderCaseStatus(caseNo, actionStatus, senderStoreCode, dublicatePosition, Case);
 
-            }else if (Case==3)
-            {
-                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
+            } else if (Case == 3) {
+                requestSenderCaseStatus(caseNo, actionStatus, senderStoreCode, dublicatePosition, Case);
 
-            }else if(Case == 4)
-            {
-                requestSenderCaseStatus(caseNo,actionStatus,senderStoreCode,dublicatePosition,Case);
+            } else if (Case == 4) {
+                requestSenderCaseStatus(caseNo, actionStatus, senderStoreCode, dublicatePosition, Case);
 
             }
         } else {

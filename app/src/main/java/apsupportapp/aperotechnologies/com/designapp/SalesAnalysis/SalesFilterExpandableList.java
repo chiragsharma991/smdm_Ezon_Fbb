@@ -40,12 +40,6 @@ import java.util.Set;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.model.ListBrand;
-import apsupportapp.aperotechnologies.com.designapp.model.ListBrandClass;
-import apsupportapp.aperotechnologies.com.designapp.model.ListCategory;
-import apsupportapp.aperotechnologies.com.designapp.model.ListPlanClass;
-
-
 
 
 public class SalesFilterExpandableList extends BaseExpandableListAdapter {
@@ -59,10 +53,6 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     ExpandableListView expandableListView;
     List<String> salesList;
     String txtClickedVal;
-    List<ListCategory> categoryArray;
-    List<ListPlanClass> planclassArray;
-    List<ListBrand> brandArray;
-    List<ListBrandClass> brandclassArray;
 
     private HashMap<String, List<String>> mListDataChild;
     HashMap<String, List<String>> dublicate_listDataChild;
@@ -103,10 +93,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         salesList = new ArrayList<>();
         this.dublicate_listDataChild = new HashMap<String, List<String>>();
         this.dublicate_listDataChild.putAll(mListDataChild);
-        categoryArray = new ArrayList();
-        planclassArray = new ArrayList();
-        brandArray = new ArrayList();
-        brandclassArray = new ArrayList();
+
         flag = false;
 
         salesFilterActivity = new SalesFilterActivity();
@@ -229,7 +216,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                                                TextView txtView = (TextView) rel.getChildAt(0);
                                                txtClickedVal = txtView.getText().toString();
                                                level = groupPosition + 2;
-                                               if (cb.isChecked() == false) {
+                                               if (!cb.isChecked()) {
 
                                                    salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(true);
@@ -241,7 +228,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                                                    }
                                                    BuildUP(level);
 
-                                               } else if(cb.isChecked() == true)
+                                               } else if(cb.isChecked())
                                                {
                                                    salesList.remove(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(false);
@@ -384,7 +371,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     private void BuildUP(int level) {
 
         if (level == 2) {
-            if (l1 == false) {
+            if (!l1) {
 
                 myList1.add(txtClickedVal.trim());
                 l1 = true;
@@ -418,7 +405,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             }
         }
         if (level == 3) {
-            if (l2 == false) {
+            if (!l2) {
                 myList2.add(txtClickedVal.trim());
                 l1 = false;
                 l2 = true;
@@ -447,7 +434,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             }
         }
         if (level == 4) {
-            if (l3 == false) {
+            if (!l3) {
                 myList3.add(txtClickedVal.trim());
 
                 l1 = false;
@@ -477,7 +464,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             }
         }
         if (level == 5) {
-            if (l4 == false) {
+            if (!l4) {
 
                 myList4.add(txtClickedVal.trim());
                 l1 = false;
@@ -507,7 +494,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             }
         }
         if (level == 6) {
-            if (l5 == false) {
+            if (!l5 ) {
                 myList5.add(txtClickedVal.trim());
                 l1 = false;
                 l2 = false;
@@ -607,8 +594,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         String category_url = " ";
         if (level1 == 2) {
 
-
-            category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&dept=" + dept.replaceAll("&", "%26").replace(" ","%20");
+           category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&dept=" + dept.replaceAll("&", "%26").replace(" ","%20");
 
         } else if (level1 == 3) {
 

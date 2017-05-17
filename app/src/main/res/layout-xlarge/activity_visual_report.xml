@@ -60,7 +60,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/visualreport_imageBtnBack"
-                        android:text="Options Report"
+                        android:text="@string/options_report"
                         android:textColor="@color/divider_salescard1"
                         android:textSize="@dimen/smdm_header_title_normal" />
 

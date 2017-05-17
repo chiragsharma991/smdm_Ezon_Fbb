@@ -61,7 +61,7 @@ public class ApiRequest  {
 
 
 
-    public void setApi(final Context context) {
+    private void setApi(final Context context) {
 
 
         Reusable_Functions.sDialog(context, "Loading data...");

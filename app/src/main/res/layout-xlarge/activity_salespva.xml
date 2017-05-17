@@ -61,7 +61,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sales PvA"
+                        android:text="@string/pva_title"
                         android:textSize="20sp"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/imageBtnBack"
@@ -100,28 +100,6 @@
                             android:layout_centerInParent="true"/>
 
                     </RelativeLayout>
-
-
-
-                    <!--<RelativeLayout-->
-                    <!--android:id="@+id/imageBtnSearch"-->
-                    <!--android:background="@drawable/button_red_effect"-->
-                    <!--android:layout_width="@dimen/header_clickable_width"-->
-                    <!--android:layout_height="@dimen/header_clickable_height"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_centerVertical="true">-->
-
-                    <!--<Button-->
-                    <!--android:clickable="false"-->
-                    <!--android:background="@mipmap/key_product_search_icon1"-->
-                    <!--android:layout_width="20dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_centerInParent="true"/>-->
-
-                    <!--</RelativeLayout>-->
-
-
-
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
@@ -135,7 +113,7 @@
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store : "
+                    android:text="@string/store"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -212,6 +190,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp">
 
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -221,6 +200,7 @@
                     android:gravity="center"
                     android:visibility="gone"
                     android:textSize="@dimen/largelayout_storesize"/>
+
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/linechart"
@@ -361,7 +341,7 @@
                             android:layout_marginRight="190dp"
                             android:layout_toLeftOf="@+id/txtNetSales"
                             android:gravity="center_vertical|center"
-                            android:text="Plan Sales"
+                            android:text="@string/plan_sales"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="12sp" />
 
@@ -375,7 +355,7 @@
                             android:layout_marginRight="120dp"
                             android:layout_toLeftOf="@+id/rel"
                             android:gravity="center_vertical|center"
-                            android:text="Net Sales"
+                            android:text="@string/net_sales"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="12sp"
                             android:textStyle="normal"/>
@@ -388,7 +368,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:gravity="center_vertical|center"
-                            android:text="PvA Sales%"
+                            android:text="@string/pva_sales"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="12sp"
                             android:textStyle="normal"/>
@@ -455,26 +435,6 @@
                     </RelativeLayout>
 
                 </LinearLayout>
-               <!-- <View
-                    android:layout_below="@+id/linear"
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/border_round_edittext" />
--->
-                <!--<ListView-->
-                    <!--android:id="@+id/list"-->
-                    <!--android:dividerHeight="0dp"-->
-                    <!--android:divider="@null"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="45dp"-->
-                    <!--android:smoothScrollbar="true"></ListView>-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="45dp"-->
-                    <!--android:orientation="vertical">-->
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/list"
@@ -484,11 +444,6 @@
                         android:divider="@null"
                         android:dividerHeight="0dp"
                         android:smoothScrollbar="true" />
-
-
-                <!--</LinearLayout>-->
-
-
 
             </RelativeLayout>
 

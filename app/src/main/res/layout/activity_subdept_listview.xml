@@ -3,11 +3,9 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/bg_screen_color"
-
     >
 
-
-    <TextView
+  <TextView
         android:id="@+id/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -68,7 +68,7 @@
             android:layout_centerVertical="true"
             android:text="1234567"
             android:textSize="@dimen/smdm_rowInflaterLayout_normal"
-            android:textColor="@color/txt_color"            />
+            android:textColor="@color/txt_color"/>
 
         <TextView
             android:padding="2dp"
@@ -81,7 +81,7 @@
             android:layout_centerVertical="true"
             android:text="1234567"
             android:textSize="@dimen/smdm_rowInflaterLayout_normal"
-            android:textColor="@color/txt_color"            />
+            android:textColor="@color/txt_color"/>
 
 
     </RelativeLayout>

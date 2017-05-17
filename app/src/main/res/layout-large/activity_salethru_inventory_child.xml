@@ -297,10 +297,6 @@
                         />
 
                 </LinearLayout>
-
-
-
-
                 <!--ROS(U)-->
 
                 <LinearLayout
@@ -310,7 +306,6 @@
                     android:orientation="horizontal"
                     android:visibility="gone"
                     android:weightSum="1">
-
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -321,7 +316,6 @@
                         android:text="Wks on floor"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
-
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -331,7 +325,6 @@
                         android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                         />
-
                     <TextView
                         android:id="@+id/bestInvent_wks"
                         android:layout_width="0dp"
@@ -354,23 +347,9 @@
                     android:layout_marginTop="5dp"
 
                     >
-
-
-
                 </LinearLayout>
 
-
-
-
-
-
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
     </RelativeLayout>
-
-
 </RelativeLayout>

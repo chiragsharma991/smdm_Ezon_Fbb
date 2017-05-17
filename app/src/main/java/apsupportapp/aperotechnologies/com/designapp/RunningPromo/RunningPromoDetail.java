@@ -53,9 +53,7 @@ public class RunningPromoDetail extends AppCompatActivity {
     ViewGroup view;
     ArrayList<ProductNameBean> productNameBeanArrayList;
     RequestQueue queue;
-    //passData data;
     Context context;
-
     RelativeLayout relativeLayout;
     public static RelativeLayout relProd_Frag;
     String userId, bearertoken;
@@ -71,9 +69,6 @@ public class RunningPromoDetail extends AppCompatActivity {
     String productSubDeptItem;
     String f_productName;
     TextView txt_subdepName;
-    String TAG = "RunningPromoDetails";
-
-
     RunningPromoListDisplay runningPromoListDisplay;
     ArrayList<RunningPromoListDisplay> promoList;
     Gson gson;
@@ -91,12 +86,7 @@ public class RunningPromoDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running_promo_detail);
         getSupportActionBar().hide();
-        // getSupportActionBar().setTitle("Running Promo Details");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         context = this;
-
-
-        //Intent i = getActivity().getIntent();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RunningPromoDetail.this.getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -104,18 +94,10 @@ public class RunningPromoDetail extends AppCompatActivity {
         gson = new Gson();
         promoList = new ArrayList<>();
         findview();
-
         Cache cache = new DiskBasedCache(RunningPromoDetail.this.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
-
-        //relProd_Frag = (RelativeLayout) findViewById(R.id.rel);
-        // relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
-        //  relativeLayout.setBackgroundColor(Color.WHITE);
-        // relProd_Frag.setVisibility(View.VISIBLE);
-
 
         if (Reusable_Functions.chkStatus(context)) {
 
@@ -124,13 +106,11 @@ public class RunningPromoDetail extends AppCompatActivity {
             offsetvalue = 0;
             limit = 100;
             count = 0;
-
             requestProductAPI(offsetvalue, limit);
 
         } else {
             Toast.makeText(RunningPromoDetail.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
 
         tableRow();
     }
@@ -143,8 +123,6 @@ public class RunningPromoDetail extends AppCompatActivity {
         TextView textView=(TextView)findViewById(R.id.promoCat);
         data=getIntent().getExtras().getString("VM");
         textView.setText(data);
-        //tableLayout=(TableLayout)findViewById(R.id.tableRunningPromo);
-
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,32 +131,22 @@ public class RunningPromoDetail extends AppCompatActivity {
         });
     }
 
-
-
-    private void requestProductAPI(int offsetvalue1, int limit1) {
-
-
+    private void requestProductAPI(int offsetvalue1, int limit1)
+    {
         String url = ConstsCore.web_url + "/v1/display/runningpromodetails/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
-        Log.i(TAG,"URL   "+ url + " " + bearertoken);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Running promo : " + " " + response);
-                        Log.i(TAG, "Sales View Pager response" + "" + response.length());
-
-                        try {
+                      try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(RunningPromoDetail.this, "no product data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
-                                //Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++) {
                                     runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                     promoList.add(runningPromoListDisplay);
-                                    Log.e(TAG,"Promolist in limit");
-
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
@@ -187,28 +155,12 @@ public class RunningPromoDetail extends AppCompatActivity {
                                 for (int i = 0; i < response.length(); i++) {
                                     runningPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                     promoList.add(runningPromoListDisplay);
-                                    Log.e(TAG,"Promolist size"+promoList.size());
-
                                 }
-
-                                //   txtHeader.setText(data.getString("VM"));
-
-//                                Collections.sort(productNameBeanArrayList, new Comparator<ProductNameBean>() {
-//                                    public int compare(ProductNameBean one, ProductNameBean other) {
-//                                        return  new Integer(one.getWtdNetSales()).compareTo(new Integer(other.getWtdNetSales()));
-//                                    }
-//                                });
-//                                Collections.reverse(productNameBeanArrayList);
-
-                                //txtStoreCode.setText(promoList.get(0).getStoreCode());
-                                //txtStoreDesc.setText(promoList.get(0).getStoreDesc());
-                                addTexttoTable();
+                            addTexttoTable();
                             }
-
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" +e.toString());
                         }
                     }
                 },
@@ -216,18 +168,15 @@ public class RunningPromoDetail extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        // Toast.makeText(LoginActivity.this,"Invalid User",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
-
                 Log.e("params ", " " + params);
                 return params;
             }
@@ -259,11 +208,6 @@ public class RunningPromoDetail extends AppCompatActivity {
             linearLayout.addView(view);
 
         }
-
-
-
-
-
     }
 
     @Override

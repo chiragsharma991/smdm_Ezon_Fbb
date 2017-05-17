@@ -3,7 +3,6 @@ package apsupportapp.aperotechnologies.com.designapp.RunningPromo;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
     Context mContext;
     LayoutInflater mLayoutInflater;
     private int currentPage=0;
-    String TAG="VmPagerAdapter";
 
     public VmPagerAdapter(Context context, ArrayList<String> list, LinearLayout lldots, ViewPager mViewPager) {
         mContext = context;
@@ -35,7 +33,6 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
         this.lldots=lldots;
         this.mViewPager=mViewPager;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
 
     @Override
@@ -50,19 +47,13 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        Log.e(TAG, "instantiateItem: "+position);
         mViewPager.setOnPageChangeListener(this);
-
         View itemView = mLayoutInflater.inflate(R.layout.activity_vm_pageritem, container, false);
-
         ImageView imageView = (ImageView) itemView.findViewById(R.id.pagerImageView);
         Picasso.with(mContext)
                 .load(VM.list.get(position))
                 .into(imageView);
-
-
         container.addView(itemView);
-
         return itemView;
     }
 
@@ -74,22 +65,18 @@ class VmPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListe
     @Override
     public void onPageSelected(int position) {
 
-        Log.e(TAG, "onPageSelected: "+position);
         for (int i = 0; i <list.size() ; i++) {
             ImageView img = (ImageView) lldots.getChildAt(i);
             img.setImageResource(R.mipmap.dots_unselected);
         }
         ImageView img1 = (ImageView) lldots.getChildAt(position);
         img1.setImageResource(R.mipmap.dots_selected);
-
-
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
 
     }
-
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {

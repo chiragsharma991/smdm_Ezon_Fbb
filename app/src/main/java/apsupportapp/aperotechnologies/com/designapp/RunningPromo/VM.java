@@ -14,7 +14,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 public class VM extends AppCompatActivity {
     public static ArrayList<String>list;
     private GridView gridView;
-     RelativeLayout ImageBtnBack;
+    RelativeLayout ImageBtnBack;
     private TextView tool;
     Bundle data;
 
@@ -27,10 +27,6 @@ public class VM extends AppCompatActivity {
         intialize();
         tool.setText(data.getString("VM"));
         list=new ArrayList<String>();
-
-
-
-        //int picture[]={R.mipmap.dashboard_size_finder_icon,R.mipmap.dashboard_flash_hourly_icon,R.mipmap.dashboard_visual_assortment_icon,R.mipmap.dashboard_cross_selling_icon};
         list.add("http://lynnwoodtoday.com/wp-content/uploads/sites/4/2014/01/Jack-and-Jill-consignment-sale1.jpg");
         list.add("http://media.treehugger.com/assets/images/2014/08/clothes_761.jpg.662x0_q70_crop-scale.jpg");
         list.add("http://az616578.vo.msecnd.net/files/2016/04/16/6359636369325365532128639689_fashion2.jpg");
@@ -39,17 +35,7 @@ public class VM extends AppCompatActivity {
         VmAdapter vmAdapter=new VmAdapter(this,R.layout.activity_vm,list);
         gridView.setAdapter(vmAdapter);
 
-
-
-
-
-
-
     }
-
-
-
-
 
     private void intialize()
     {
@@ -61,48 +47,35 @@ public class VM extends AppCompatActivity {
              @Override
              public void onClick(View v) {
 
-                 if(data.getString("FROM").equals("RunningPromo")) {
-                    // Intent intent = new Intent(VM.this, RunningPromoActivity.class);
-                   //  startActivity(intent);
-                     finish();
+                 if(data.getString("FROM").equals("RunningPromo"))
+                 {
+                  finish();
                  }
                  else if(data.getString("FROM").equals("ExpirePromo"))
                  {
-                     //Intent intent = new Intent(VM.this, ExpiringPromoActivity.class);
-                     //startActivity(intent);
-                     finish();
+                   finish();
                  }
                  else {
-                     //Intent intent = new Intent(VM.this, UpcomingPromo.class);
-                     //startActivity(intent);
                      finish();
                  }
-
              }
          });
-
     }
-
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         if(data.getString("FROM").equals("RunningPromo")) {
-           // Intent intent = new Intent(VM.this, RunningPromoActivity.class);
-           // startActivity(intent);
+
             finish();
         }
         else if(data.getString("FROM").equals("ExpirePromo"))
         {
-            //Intent intent = new Intent(VM.this, ExpiringPromoActivity.class);
-            //startActivity(intent);
             finish();
         }
-
-        else {
-            //Intent intent = new Intent(VM.this, UpcomingPromo.class);
-            //startActivity(intent);
-            finish();
+        else
+        {
+          finish();
         }
     }
 }

@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -49,8 +47,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     RunningPromoListDisplay BestPromoListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
-    String TAG = "BestPerformersActivity";
-
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -62,12 +58,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     private Gson gson;
     ListView BestPerformanceListView;
     ArrayList<RunningPromoListDisplay> BestpromoList;
-    private int focusposition = 0;
-    private boolean userScrolled;
     private BestPromoAdapter bestPromoAdapter;
     private View footer;
-    int index = 0;
-    int iterations = 0;
     private RadioButton CheckBstSale, CheckBstSaleU;
     private String lazyScroll = "OFF";
     private SegmentedGroup segmentedGroup;
@@ -81,7 +73,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_best_performer);
         getSupportActionBar().hide();
         initalise();
-        //activity_status_track_one git 27dec
         CheckBstSale.setChecked(true);
         SortPopup.setVisibility(View.GONE);
         BestPerformanceListView.setVisibility(View.VISIBLE);
@@ -90,19 +81,13 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
         BestPerformanceListView.setTag("FOOTER");
-        // bestPromoAdapter = new BestPromoAdapter(BestpromoList,context);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
-
         BestPerformanceListView.addFooterView(footer);
-        // footer.setVisibility(View.GONE);
-        // BestPerformanceListView.setAdapter(bestPromoAdapter);
-
         Reusable_Functions.sDialog(this, "Loading.......");
         requestRunningPromoApi();
     }
@@ -113,16 +98,11 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
 
 
             String url = ConstsCore.web_url + "/v1/display/bestworstpromodetails/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&orderby=" + orderby + "&orderbycol=" + orderbycol;
-            Log.e(TAG, "requestRunningPromoApi: "+url );
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "Best promo : " + " " + response);
-                            Log.i(TAG, "response" + "" + response.length());
-                            BestPerformanceListView.setVisibility(View.VISIBLE);
-
-
+                          BestPerformanceListView.setVisibility(View.VISIBLE);
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -137,10 +117,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
 
                                 } else if (response.length() == limit) {
 
-
-                                    //BestPerformanceListView.removeFooterView(footer);
-                                    //bestPromoAdapter.notifyDataSetChanged();
-                                    Log.e(TAG, "promo eql limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         BestPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -149,12 +125,8 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                     }
                                     offsetvalue = offsetvalue + 10;
                                     top = top + 10;
-                                    //  count++;
-
-                                    // requestRunningPromoApi();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         BestPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -173,7 +145,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                     popPromo = 0;
 
                                 } else if (lazyScroll.equals("ON")) {
-                                    Log.i(TAG, "notifydatasetchanged" );
                                     bestPromoAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
 
@@ -182,14 +153,11 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                     BestPerformanceListView.setAdapter(bestPromoAdapter);
                                     Bst_txtStoreCode.setText(BestpromoList.get(0).getStoreCode());
                                     Bst_txtStoreName.setText(BestpromoList.get(0).getStoreDesc());
-                                    Log.i(TAG, "setAdapter" );
 
                                 }
-                                // BestPromo_footer.setVisibility(View.GONE);
+
                                 Reusable_Functions.hDialog();
-                                //  Bst_storecode.setText(BestpromoList.get(0).getStoreCode());
-                                // Bst_txtStoreName.setText(BestpromoList.get(0).getStoreDesc());
-                                Log.v(TAG, "set text on");
+
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 footer.setVisibility(View.GONE);
@@ -199,7 +167,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                                 BestPerformanceListView.removeFooterView(footer);
                                 BestPerformanceListView.setTag("FOOTER_REMOVE");
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -244,7 +211,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                         if (BestPerformanceListView.getTag().equals("FOOTER_REMOVE")) {
                             BestPerformanceListView.addFooterView(footer);
                             BestPerformanceListView.setTag("FOOTER_ADDED");
-                            Log.e(TAG, "FOOTER_ADDED: ");
 
                         }
 
@@ -282,7 +248,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
         segmentedGroup = (SegmentedGroup) findViewById(R.id.bestPromo_segmented);
         bestRadio = (RadioButton) findViewById(R.id.bestPromo);
         worstRadio = (RadioButton) findViewById(R.id.worstPromo);
-        Log.e(TAG, "---" + bestRadio);
         bestRadio.toggle();
 
         Bst_imageBtnBack = (RelativeLayout) findViewById(R.id.bst_imageBtnBack);
@@ -321,12 +286,10 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                 SortPopup.setVisibility(View.GONE);
                 break;
             case R.id.popPromo:
-                // popupPromo();
-                //SortPopup.setVisibility(View.GONE);
+
                 break;
             case R.id.popPromoU:
-                //popupPromoU();
-                //SortPopup.setVisibility(View.GONE);
+
                 break;
             case R.id.bst_imgfilter:
                 Intent intent = new Intent(this, FilterActivity.class);
@@ -363,7 +326,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     }
 
     private void popupPromo() {
-        Log.e(TAG, "bestPromolist size" + BestpromoList.size());
         popPromo = 10;
         limit = 10;
         offsetvalue = 0;
@@ -383,7 +345,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     }
 
     private void popupPromoU() {
-        Log.e(TAG, "bestPromolist size" + BestpromoList.size());
         popPromo = 10;
         limit = 10;
         offsetvalue = 0;
@@ -409,14 +370,11 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //Intent intent=new Intent(context, DashBoardActivity.class);
-        //startActivity(intent);
-        finish();
+               finish();
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        Log.e(TAG, "onCheckedChanged:");
 
         switch (checkedId) {
             case R.id.bestPromo:
@@ -427,7 +385,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                     orderby = "DESC";
                     lazyScroll = "OFF";
                     BestpromoList.clear();
-                    // bestPromoAdapter.notifyDataSetChanged();
                     BestPerformanceListView.setVisibility(View.GONE);
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(this, "Loading.......");
@@ -448,7 +405,6 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                     orderby = "ASC";
                     lazyScroll = "OFF";
                     BestpromoList.clear();
-                    //bestPromoAdapter.notifyDataSetChanged();
                     BestPerformanceListView.setVisibility(View.GONE);
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(this, "Loading.......");
@@ -459,13 +415,7 @@ public class BestPerformerActivity extends AppCompatActivity implements View.OnC
                         BestPerformanceListView.setVisibility(View.GONE);
                     }
                 }
-
-
                 break;
-
-
         }
-
-
     }
 }

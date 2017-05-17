@@ -10,7 +10,6 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -58,19 +57,16 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 public class TransferRequest_Details extends AppCompatActivity implements OnPress,View.OnClickListener,OnScanBarcode {
 
-    //Git activity_status_track_one
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
     private String bearertoken;
-    private String check_adapter_str;
     private Transfer_Request_Model transfer_request_model;
     Context context;
     private int count = 0;
     private int limit = 100;
     private int offsetvalue = 0;
     private RequestQueue queue;
-    private String TAG = "TransferRequest_Details";
     private ArrayList<Transfer_Request_Model> Sender_DetailsList, SenderChildDetailList,ScanList;
     RelativeLayout tr_imageBtnBack;
     private RecyclerView tr_recyclerView;
@@ -80,8 +76,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private TransferDetailsAdapter transferDetailsAdapter;
     private HashMap<Integer,ArrayList<Integer>> TrchildScanQty;
     private TextView txt_caseNo, txt_valtotalreqty;
-//    private  int[] scanQty;
-//    private int ScanCount;
     private boolean scanDone=false;
     private Button btn_Submit;
     private ProgressBar TransferDetailProcess;
@@ -94,7 +88,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private static final int REQUEST_PERMISSION_SETTING = 101;
     String[] permissionsRequired = new String[]{Manifest.permission.CAMERA,
           };
-    private boolean sentToSettings = false;
     private SharedPreferences permissionStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +96,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         getSupportActionBar().hide();
         context = this;
         initalise();
-       // ScanCount = 0;
         recache = "true";
         gson = new Gson();
         Sender_DetailsList = new ArrayList<Transfer_Request_Model>();
@@ -112,7 +104,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         permissionStatus = getSharedPreferences("permissionStatus",MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -128,24 +119,17 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
 
     private void requestReceiversChildDetails(final int position)
     {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20") +"&caseNo="+detail_CaseNo+"&reqStoreCode="+detl_reqStoreCode+"&recache="+recache;
-        Log.e(TAG, "Sender Details Child Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e(TAG, "Sender Details Child  api response : " + " " + response);
-                        Log.e(TAG, "Sender Details Child  total length" + "" + response.length());
-
-                        try {
+                       try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 TransferDetailProcess.setVisibility(View.GONE);
@@ -153,7 +137,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 return;
 
                             } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
                                     transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
@@ -162,11 +145,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-
                                 requestReceiversChildDetails(position);
 
                             } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
                                     transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
                                     SenderChildDetailList.add(transfer_request_model);
@@ -175,7 +156,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
                             addScanCount(SenderChildDetailList,position);
                             subchildqty.put(position,SenderChildDetailList);
-                          //  PutScanQty(SenderChildDetailList,position);
                             transferDetailsAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             TransferDetailProcess.setVisibility(View.GONE);
@@ -186,7 +166,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             TransferDetailProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },
@@ -227,28 +206,14 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         subchildcount.put(position,scanCount);
     }
 
-    private void PutScanQty(ArrayList<Transfer_Request_Model> senderChildDetailList, int position)
-    {
-        Log.e("child array list size :",""+senderChildDetailList.size());
-        ArrayList<Integer>list=new ArrayList<Integer>();
-
-        for (int i = 0; i <senderChildDetailList.size() ; i++) {
-            list.add(0);
-        }
-        TrchildScanQty.put(position,list);
-    }
-
     private void requestSenderDetails() {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption +"&caseNo="+detail_CaseNo+"&reqStoreCode="+detl_reqStoreCode+"&recache=" + recache;
-        Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Detail api response : " + " " + response);
-                        Log.i(TAG, "Detail api total length" + "" + response.length());
-                        try
+                      try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -257,7 +222,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
                             } else if (response.length() == limit)
                             {
-                                Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
@@ -269,7 +233,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
                             } else if (response.length() < limit)
                             {
-                                Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
@@ -278,14 +241,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             }
                             tr_recyclerView.setLayoutManager(new LinearLayoutManager(tr_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             tr_recyclerView.setOnFlingListener(null);
-                            // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
+
                             MakeChildScanList(Sender_DetailsList);   //child all list
                             MakeSubChildScanCount(Sender_DetailsList);  //only child scan count
                             MakeHeaderScanCount(Sender_DetailsList);  // Top Header scan count
                             MakeCheckPair();  // Top Header scan count
-                          //  MakeScanList(Sender_DetailsList);
                             transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,subchildqty,subchildcount,TransferDetailProcess,headerScancount,TransferRequest_Details.this,CheckedItems);
-                            //MakeSubChildScanQty(Sender_DetailsList);
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
                             Reusable_Functions.hDialog();
 
@@ -293,9 +254,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },
@@ -332,17 +291,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     }
 
-    private void MakeScanList(ArrayList<Transfer_Request_Model> sender_detailsList) {
-
-        // This is for child scan count
-        TrchildScanQty = new HashMap<Integer, ArrayList<Integer>>();
-
-        for (int i = 0; i <sender_detailsList.size() ; i++) {
-            ArrayList<Integer> list=new ArrayList<Integer>();
-            TrchildScanQty.put(i,list);
-        }
-        Log.e("sender list size",""+sender_detailsList.size());
-    }
 
     private void MakeSubChildScanCount(ArrayList<Transfer_Request_Model> sender_detailsList)
     {
@@ -377,7 +325,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             subchildqty.put(i,list);
 
         }
-
     }
 
     private void initalise()
@@ -385,7 +332,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         detail_CaseNo = getIntent().getExtras().getString("caseNo");
         double data2 = getIntent().getExtras().getDouble("reqQty");
         detl_reqStoreCode = getIntent().getExtras().getString("reqStoreCode");
-        //  MCCodeDesc = data;
         tr_recyclerView = (RecyclerView) findViewById(R.id.trasnsferreq_detail_list);
         tr_imageBtnBack = (RelativeLayout) findViewById(R.id.tr_details_imageBtnBack);
         txt_caseNo = (TextView) findViewById(R.id.txt_caseNo);
@@ -461,7 +407,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 }
         }
         }
-        Log.e(TAG, "putMethod: Json Array is:"+jsonarray.toString() );
         if(jsonarray.length()==0)
         {
             Toast.makeText(context,"Please select at least one size.",Toast.LENGTH_SHORT).show();
@@ -500,8 +445,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         {
             if (result.getContents() == null)
             {
-               // Toast.makeText(this, "Barcode not scanned", Toast.LENGTH_LONG).show();
-            } else
+            }
+            else
             {
                 Toast.makeText(this, "Barcode Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
 
@@ -524,13 +469,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
      private void requestScanDetailsAPI(String contents) {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderscan/scan/" + userId + "?eanNumber="+contents +"&recache=" + recache;
-        Log.e(TAG, "Details Url" + "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG,"Scan api response : " + " " + response);
-                        Log.e(TAG,"Scan api total length :" + "" + response.length());
+
                         try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0)
@@ -540,7 +483,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 return;
 
                             } else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
                                     transfer_request_model = gson.fromJson(response.get(i).toString(), Transfer_Request_Model.class);
@@ -566,17 +508,12 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 {
                                     if(SenderChildDetailList.get(i).getLevel().equals(size))//add size instead of 4-5 value
                                     {
-                                        //        maxScanQty = (int) Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested());
-
                                         scanDone=true;
                                         if(subchildqty.get(0).get(i).getStkOnhandQtyRequested() > subchildcount.get(0).get(i))   //"0"is for Pre position
                                         {
                                             size_pos=i;
-                                            Log.e("position :",""+i+"\tsize_pos :"+size_pos);
                                             int count=subchildcount.get(0).get(i)+1;  //pre count + next count  && "0"is pre position you have to change
                                             addQty.add(count);  //total sub count
-                                            // subchildcount.put(i,total);
-                                            Log.e("i position :",""+i);
 
                                         }else
                                         {
@@ -597,7 +534,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 addtotalIn_headerScanqty(0);
                                 transferDetailsAdapter.notifyDataSetChanged();
 
-                                if(scanDone==false){
+                                if(!scanDone){
                                     Toast.makeText(context,"Barcode does not match sizes...",Toast.LENGTH_SHORT).show();
                                 }else {
                                     scanDone=false;
@@ -610,7 +547,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
-                            Log.e(TAG, "catch...Error" + e.toString());
                         }
                     }
                 },
@@ -659,12 +595,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
 
             String url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId ;//+"?recache="+recache
-            Log.e("url", " put Request " + url + " ==== " + object.toString());
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.e("Sender Submit Click Response :", response.toString());
                             try {
                                 if (response == null || response.equals("")) {
                                     Reusable_Functions.hDialog();
@@ -677,12 +611,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                     Intent intent = new Intent(TransferRequest_Details.this,To_Do.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                     startActivity(intent);
-                                    //Details.this.finish();
                                     Reusable_Functions.hDialog();
                                 }
                             } catch (Exception e)
                             {
-                                Log.e("Exception e", e.toString() + "");
                                 e.printStackTrace();
                                 Reusable_Functions.hDialog();
 
@@ -702,7 +634,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
                     params.put("Authorization", bearertoken);
-                    //  params.put("Content-Type", "application/json");
                     return params;
                 }
                 @Override

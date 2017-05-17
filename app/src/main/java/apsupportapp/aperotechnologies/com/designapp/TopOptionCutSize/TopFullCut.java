@@ -55,7 +55,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     RunningPromoListDisplay TopOptionListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
-    String TAG = "TopOptionByFullCut";
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -94,7 +93,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -140,7 +138,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
         Thread mThread = new Thread() {
             @Override
             public void run() {
-                Log.e(TAG, "run: ----Thread" );
                 Reusable_Functions.hDialog();
             }
         };
@@ -174,13 +171,11 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                 url = ConstsCore.web_url + "/v1/display/topoptionsbyfullcut/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
             }
 
-            Log.e(TAG, "URL" + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "Top Option : " + " " + response);
-                            Log.i(TAG, "response" + "" + response.length());
+
                             TopOptionListView.setVisibility(View.VISIBLE);
 
 
@@ -200,7 +195,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                 } else if (response.length() == limit) {
 
 
-                                    Log.e(TAG, "Top eql limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         TopOptionListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -211,10 +205,8 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                     top = top + 10;
                                     //  count++;
 
-                                    // requestRunningPromoApi();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         TopOptionListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -225,13 +217,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                 }
 
 
-                           /* if(popPromo==10)
-                            {
-                                topOptionAdapter = new TopOptionAdapter(TopOptionList,context);
-                                TopOptionListView.setAdapter(topOptionAdapter);
-                                popPromo=0;
 
-                            }*/
 
                                 if (lazyScroll.equals("ON")) {
                                     topOptionAdapter.notifyDataSetChanged();
@@ -248,7 +234,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                 Top_txtStoreCode.setText(TopOptionList.get(0).getStoreCode());
                                 Top_txtStoreName.setText(TopOptionList.get(0).getStoreDesc());
 
-                               // Reusable_Functions.hDialog();
 
                                 dissmiss_progress();
 
@@ -261,7 +246,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                                 TopOptionListView.setTag("FOOTER_REMOVE");
                                 Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -271,7 +255,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                             //Reusable_Functions.hDialog();
                             dissmiss_progress();
                             Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
-                            //topOptionAdapter.notifyDataSetChanged();
                             TopOptionListView.removeFooterView(footer);
                             TopOptionListView.setTag("FOOTER_REMOVE");
                             TopOptionListView.setVisibility(View.GONE);
@@ -475,19 +458,16 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
                     Topfull_checkWTD.setChecked(true);
                     Topfull_checkL4W.setChecked(false);
                     Topfull_checkSTD.setChecked(false);
-                    Log.i(TAG, "CheckWTD is checked");
                     break;
                 case "CheckL4W":
                     Topfull_checkWTD.setChecked(false);
                     Topfull_checkL4W.setChecked(true);
                     Topfull_checkSTD.setChecked(false);
-                    Log.i(TAG, "CheckL4W is checked");
                     break;
                 case "CheckSTD":
                     Topfull_checkWTD.setChecked(false);
                     Topfull_checkL4W.setChecked(false);
                     Topfull_checkSTD.setChecked(true);
-                    Log.i(TAG, "CheckSTD is checked");
                     break;
                 default:
                     break;
@@ -515,9 +495,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       /* Intent intent=new Intent(context, DashBoardActivity.class);
-        intent.putExtra("BACKTO","inventory");
-        startActivity(intent);*/
+
         view = null;
         corefashion = null;
         checkTimeValueIs = null;
@@ -530,7 +508,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         // Id is changed so that we have change core in fashion
-        if(filter_toggleClick == false) {
+        if(!filter_toggleClick ) {
             switch (checkedId) {
                 case R.id.top_core:
                     if (Top_core.isChecked()) {
@@ -589,7 +567,6 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.e(TAG, "onRestart: ");
         if (LocalNotificationReceiver.logoutAlarm) {
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = sharedPreferences.edit();

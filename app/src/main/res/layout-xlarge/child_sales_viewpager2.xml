@@ -10,11 +10,12 @@
         android:orientation="horizontal"
         android:weightSum="2"
         android:layout_width="match_parent"
-        android:layout_height="95dp">
+        android:layout_height="90dp">
+
         <RelativeLayout
             android:id="@+id/soh"
             android:layout_width="0dp"
-            android:layout_height="90dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -29,24 +30,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="left"
-                android:layout_marginLeft="8dp"
-                android:text="SOH(U)"
-                android:textSize="14sp"
                 android:textColor="@color/smdm_default_color"
-                />
+                android:layout_marginLeft="8dp"
+                android:text="@string/soh_u"
+                android:textSize="14sp" />
 
 
-             <TextView
+
+
+            <TextView
                 android:id="@+id/txtSOHUVal2"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentLeft="true"
-                 android:layout_marginLeft="8dp"
-                 android:layout_marginTop="35dp"
-                 android:text="12,15,1215"
-                 android:textColor="@color/bg_store_code_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="35dp"
+                android:text=""
+                android:textColor="@color/bg_store_code_text"
                 android:textSize="19sp" />
-
 
 
         </RelativeLayout>
@@ -55,7 +56,7 @@
         <RelativeLayout
             android:id="@+id/git"
             android:layout_width="0dp"
-            android:layout_height="90dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -69,10 +70,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="left"
-                android:textColor="@color/smdm_default_color"
                 android:layout_marginLeft="8dp"
-                android:text="GIT(U)"
+                android:text="@string/git_u"
+                android:textColor="@color/smdm_default_color"
                 android:textSize="14sp" />
+
 
 
 
@@ -83,26 +85,25 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="19sp"
-                />
+                 />
 
-        </RelativeLayout>
+          </RelativeLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="95dp">
+        android:layout_height="90dp">
 
         <RelativeLayout
             android:id="@+id/ROS"
             android:layout_width="0dp"
-            android:layout_height="90dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -117,12 +118,9 @@
                 android:layout_marginTop="2dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="ROS(U)"
+                android:text="@string/ros_u"
                 android:textColor="@color/smdm_default_color"
                 android:textSize="14sp" />
-
-
-
 
             <TextView
                 android:id="@+id/txtROSVal2"
@@ -131,19 +129,17 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="19sp"
-                />
-
-
-        </RelativeLayout>
+               />
+         </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/fwdwkcover"
             android:layout_width="0dp"
-            android:layout_height="90dp"
+            android:layout_height="85dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -157,20 +153,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="left"
-                android:textColor="@color/smdm_default_color"
                 android:layout_marginLeft="8dp"
-                android:text="Fwd Wk Cover"
+                android:text="@string/fwd_wk_cover"
+                android:textColor="@color/smdm_default_color"
                 android:textSize="14sp" />
 
 
-            <TextView
+             <TextView
                 android:id="@+id/txtFwdWkCoverVal2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
-                android:text="12,15,1215"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentLeft="true"
+                 android:layout_marginLeft="8dp"
+                 android:layout_marginTop="35dp"
+                 android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="19sp"
                 />

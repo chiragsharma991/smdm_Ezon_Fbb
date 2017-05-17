@@ -1,6 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +15,12 @@ import java.util.ArrayList;
 
 public class EventAdapter extends BaseAdapter{
     DashBoardActivity dashBoardActivity;
-    Integer[] listItem;
     ArrayList<String> eventUrlList;
     public EventAdapter(DashBoardActivity dashBoardActivity, ArrayList<String> eventUrlList) {
         this.dashBoardActivity=dashBoardActivity;
         this.eventUrlList=eventUrlList;
 
     }
-
     @Override
     public int getCount() {
         return eventUrlList.size();
@@ -52,28 +50,16 @@ public class EventAdapter extends BaseAdapter{
             participentView = inflater.inflate(R.layout.list_row, null);
 
             view.imgView = (ImageView) participentView.findViewById(R.id.imageview);
-           // String url="\""+eventUrlList.get(position)+"\""
-            //Log.e("url",""+"\""+eventUrlList.get(position)+"\"");
-
-            Log.e("url"," "+eventUrlList.get(position));
             Glide.with(dashBoardActivity)
                     .load(eventUrlList.get(position))
                     .into(view.imgView);
 
             participentView.setTag(view);
-
-
         }
         else
         {
             view = (ViewHolder) participentView.getTag();
         }
-
-
-
-
-
-        Log.d("count:  "," "+position);
         return participentView;
     }
 

@@ -54,7 +54,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/inspection_btnback"
-                android:text="New Inspection"
+                android:text="@string/new_inspection"
                 android:textColor="@color/divider_salescard1"
                 android:textSize="@dimen/smdm_header_title_large"/>
 
@@ -171,7 +171,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="3dp"
                         android:layout_marginTop="5dp"
-                        android:text="Inspection Date : "
+                        android:text="@string/insp_date"
                         android:textColor="@color/bg_store_code_text"
                         android:textSize="@dimen/normallayout_storesize"
                         android:textStyle="bold"/>
@@ -206,7 +206,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="5dp"
-                        android:text="Overall Rating"
+                        android:text="@string/overall_rating"
                         android:textColor="@color/bg_store_code_text"
                         android:textSize="@dimen/normallayout_storesize"/>
 
@@ -228,7 +228,7 @@
                 android:layout_below="@+id/view2"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="8dp"
-                android:text="Inspection Item (all the fields are mandatory)"
+                android:text="@string/insp_cri_title"
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
@@ -2540,7 +2540,7 @@
                 android:layout_below="@+id/linear_insp_criteria"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="6dp"
-                android:text="Inspected By : "
+                android:text="@string/inspected_by"
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
@@ -2592,7 +2592,7 @@
                 android:layout_below="@+id/linear_insp_criteria"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="6dp"
-                android:text="Comment : "
+                android:text="@string/insp_comment"
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="15sp"
                 android:textStyle="bold"/>

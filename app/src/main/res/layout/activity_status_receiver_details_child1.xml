@@ -26,14 +26,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-              >
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Option"
                     android:textStyle="bold"
-                   android:typeface="normal"
+                    android:typeface="normal"
                     android:id="@+id/status_receiver_detail_optionLevel"
                     android:textSize="@dimen/normallayout_storesize"
                     android:textColor="@color/bg_store_code_text"/>
@@ -56,6 +56,7 @@
                         android:gravity="left"
                         android:visibility="visible"
                         >
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -65,25 +66,27 @@
 
 
                     </LinearLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.01"
-                       >
+                        >
 
                         <TextView
                             android:layout_centerHorizontal="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Short Qty"
+                            android:text="@string/short_qty"
                             android:textStyle="bold"
                             android:layout_marginLeft="10dp"
                             android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/bg_store_code_text"
-                          />
+                            />
 
 
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -95,12 +98,13 @@
                             android:layout_centerHorizontal="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Avl Qty"
+                            android:text="@string/avl_qty"
                             android:textStyle="bold"
                             android:textSize="@dimen/normallayout_storesize"
                             android:textColor="@color/bg_store_code_text"/>
 
                     </RelativeLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -118,7 +122,6 @@
                             />
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>
@@ -139,6 +142,7 @@
                         android:gravity="left"
                         android:visibility="visible"
                         >
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -148,6 +152,7 @@
 
 
                     </LinearLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -166,13 +171,14 @@
 
 
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginLeft="15dp"
 
-                       >
+                        >
 
                         <TextView
                             android:layout_centerHorizontal="true"
@@ -184,6 +190,7 @@
                             android:textColor="@color/txt_color"/>
 
                     </RelativeLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -201,7 +208,6 @@
                             />
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>
@@ -223,7 +229,6 @@
                         >
 
                     </View>
-
 
 
                     <LinearLayout

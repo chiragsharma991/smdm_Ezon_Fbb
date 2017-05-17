@@ -127,10 +127,7 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
+
 
     @Override
     public void onClick(View v) {

@@ -7,7 +7,6 @@ import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,6 @@ import apsupportapp.aperotechnologies.com.designapp.R;
  * Created by pamrutkar on 09/03/17.
  */
 public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
 
     private final HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty;   //sub child list
     private final ProgressBar transferDetailProcess;
@@ -72,8 +70,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        //  Log.e("TAG", "Stock detail: "+position );
-
         if(holder instanceof TransferDetailsAdapter.Holder) {
             if(position < list.size())
             {
@@ -87,7 +83,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     public void onClick(View view) {
                         if(transferDetailProcess.getVisibility()==View.GONE)
                         {
-                            Log.e("TAG", "onClick:>>>> "+position );
                             if(Tr_HeaderToggle[position]==true)
                             {
                                 Tr_HeaderToggle[position]=false;
@@ -111,7 +106,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ((TransferDetailsAdapter.Holder)holder).btn_scan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.e("TAG", "Header Scan onClick:>>>> "+position );
 
                             if (isAMobileModel())
                             {
@@ -127,13 +121,10 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                                 public void run() {
 
                                     Intent i1 =((Activity) context).getIntent();
-                                    Log.e("getIntent : ", "" + ((Activity) context).getIntent());
-                                    Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString());
                                     barcode =   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString();
                                     if(!barcode.equals(" "))
                                     {
                                         Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                        //  TimeUP();
                                     }
                                     else
                                     {
@@ -144,8 +135,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             }, 1500);
 
                         } else if (!isAMobileModel()) {
-                            Log.e("regular device", "");
-                           // checkStr = "HeaderAdapter";
+
                             onBarcodeScan.onScan(view, position, TransferDetailsAdapter.this);
                         }
 
@@ -162,13 +152,10 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                                 public void run()
                                 {
                                     Intent i1 =((Activity) context).getIntent();
-                                    Log.e("getIntent : ", "" + ((Activity) context).getIntent());
-                                    Log.e("barcode :", " " + i1 + "\ntxt :" +   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString());
                                     barcode =   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString();
                                     if(!barcode.equals(" "))
                                     {
                                         Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                        //TimeUP();
                                     }
                                     else
                                     {
@@ -180,11 +167,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                         } else if (!isAMobileModel())
                         {
-                            Log.e("regular device", "");
-
-                           // checkStr = "HeaderAdapter";
-                            onBarcodeScan.onScan(view,position, TransferDetailsAdapter.this);
-
+                           onBarcodeScan.onScan(view,position, TransferDetailsAdapter.this);
                         }
                     }
                 });
@@ -207,9 +190,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private boolean isAMobileModel() {
-        Log.e("checking model", "");
         getDeviceInfo();
-        Log.e("model is ", "" + Build.MODEL);
         return Build.MODEL.contains("TC75");
     }
 
@@ -243,10 +224,8 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public static class Holder extends RecyclerView.ViewHolder {
 
         private TextView txt_caseNo,txt_optionval,txt_reqtyval,txt_avlqtyval,txt_sohval,txt_gitval,txt_scanqtyVal;
-
         private EditText et_trBarcode;
         private RelativeLayout SizesLinLayout;
-        private LinearLayout lin_imgbtnScan;
         private ImageView btn_scan;
         protected RecyclerView recycleview_transferreq_detailChild;
 

@@ -39,17 +39,11 @@ public class RunningPromoSummaryAdapter extends RecyclerView.Adapter<RecyclerVie
         this.Interface_clickListner=(clickChild)context;
 
     }
-
-
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
             View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_running_promo_summary_child, parent, false);
             return new Holder(v);
-
-
-
 
     }
 
@@ -59,7 +53,6 @@ public class RunningPromoSummaryAdapter extends RecyclerView.Adapter<RecyclerVie
             if(position < promoList.size()) {
 
                 RunningPromoListDisplay snap = promoList.get(position);
-                // holder.snapTextView.setText(snap.getText());
 
                 ((Holder)holder).Department.setText(snap.getPlanDepartment());
                 ((Holder)holder).number_of_promo.setText(""+snap.getNoOfPromotions());
@@ -77,16 +70,9 @@ public class RunningPromoSummaryAdapter extends RecyclerView.Adapter<RecyclerVie
                         Interface_clickListner.onClick("PROMO");
                     }
                 });
-
-
             }
         }
-
-
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -97,20 +83,14 @@ public class RunningPromoSummaryAdapter extends RecyclerView.Adapter<RecyclerVie
     public void onSnap(int position) {
 
     }
-
-
     private static class Holder extends RecyclerView.ViewHolder {
 
-        //   public TextView snapTextView;
-        //   public RecyclerView recyclerView;
+
 
         TextView Department,number_of_promo;
 
         public Holder(View itemView) {
             super(itemView);
-            // snapTextView = (TextView) itemView.findViewById(R.id.snapTextView);
-            // recyclerView = (RecyclerView) itemView.findViewById(R.id.recyclerView);
-
             Department = (TextView) itemView.findViewById(R.id.summary_department);
             number_of_promo = (TextView) itemView.findViewById(R.id.summary_numberOfPromo);
 

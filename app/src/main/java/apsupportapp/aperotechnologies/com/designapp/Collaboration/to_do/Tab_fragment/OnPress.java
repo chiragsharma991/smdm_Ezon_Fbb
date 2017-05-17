@@ -8,6 +8,4 @@ public interface OnPress
 {
     void onPress(int  Position);
 
-
-
 }

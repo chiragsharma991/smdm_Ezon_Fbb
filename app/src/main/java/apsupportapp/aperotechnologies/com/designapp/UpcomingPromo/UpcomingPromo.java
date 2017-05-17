@@ -7,14 +7,12 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -46,7 +44,6 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
     RunningPromoListDisplay UpcomingPromoListDisplay;
     private SharedPreferences sharedPreferences;
     String userId, bearertoken;
-    String TAG = "UpcomingPromoactivity";
     private int count = 0;
     private int limit = 100;
     private int offsetvalue = 0;
@@ -63,13 +60,11 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_upcoming_promo);
         getSupportActionBar().hide();
         initalise();
-        //UP_PromoListView.addFooterView(getLayoutInflater().inflate(R.layout.list_footer, null));
         gson = new Gson();
         Up_promoList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -81,25 +76,17 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
     private void requestRunningPromoApi() {
 
         if (Reusable_Functions.chkStatus(context)) {
-
-            //String url = ConstsCore.web_url + "/v1/display/runningpromoheader/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit;
             String url = ConstsCore.web_url + "/v1/display/futurepromodetails/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
-
-            Log.e(TAG, "Url" + "" + url);
 
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.i(TAG, "UpcomingPromo  : " + " " + response);
-                            Log.i(TAG, "response" + "" + response.length());
-
-                            try {
+                                  try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 } else if (response.length() == limit) {
-                                    Log.e(TAG, "promo eql limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         UpcomingPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -108,26 +95,16 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
                                     }
                                     offsetvalue = (limit * count) + limit;
                                     count++;
-
                                     requestRunningPromoApi();
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++) {
-
                                         UpcomingPromoListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         Up_promoList.add(UpcomingPromoListDisplay);
-
                                     }
-                                    Log.e(TAG, "Up_promoListSize" + Up_promoList.size());
                                     UpcomingPromoAdapter runningPromoAdapter = new UpcomingPromoAdapter(Up_promoList, context);
                                     UP_PromoListView.setAdapter(runningPromoAdapter);
                                     UP_PromoListView.getParent().requestDisallowInterceptTouchEvent(false);
-
-                                    //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-                                    //promoval2.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleTotQty()));
-                                    //Log.e(TAG,"store code and desc"+Up_promoList.get(0).getStoreCode()+Up_promoList.get(0).getStoreDesc());
-
                                     Reusable_Functions.hDialog();
                                     Up_storecode.setText(Up_promoList.get(0).getStoreCode());
                                     Up_storedesc.setText(Up_promoList.get(0).getStoreDesc());
@@ -138,7 +115,6 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
                                 Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 e.printStackTrace();
-                                Log.e(TAG, "catch...Error" + e.toString());
                             }
                         }
                     },
@@ -151,6 +127,9 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
                             error.printStackTrace();
                         }
                     }
+
+
+
 
             ) {
                 @Override
@@ -167,21 +146,7 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
 
-
             //-----------------------------ON CLICK LISTENER-----------------------------//
-
-/*
-        UP_PromoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e(TAG,"listview position"+position);
-                Intent i =  new Intent(context,RunningPromoDetail.class);
-                i.putExtra("VM",promoList.get(position).getPromoDesc());
-                context.startActivity(i);
-
-            }
-        });*/
-
 
             UP_PromoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                 @Override
@@ -195,21 +160,14 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
                             focusposition = view.getFirstVisiblePosition();
 
                             UP_PromoListView.setSelection(view.getFirstVisiblePosition());
-                            Log.e(TAG, "firstVisibleItem" + " " + focusposition);
-                            //promoval1.setText(""+String.format("%.1f",promoList.get(focusposition).getDurSaleNetVal()));
-
                             Up_storecode.setText(Up_promoList.get(focusposition).getStoreCode());
                             Up_storedesc.setText(Up_promoList.get(focusposition).getStoreDesc());
-
 
                         } else {
                             focusposition = Up_promoList.size() - 1;
                             UP_PromoListView.setSelection(Up_promoList.size() - 1);
-
                         }
                     }
-
-
                 }
 
                 @Override
@@ -217,14 +175,12 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
 
                 }
             });
-
         }
         else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
         }
     }
-
 
     private void initalise() {
 
@@ -233,12 +189,9 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
         UP_PromoListView = (ListView) findViewById(R.id.up_promoListview);
         Up_storecode = (TextView) findViewById(R.id.txtStoreCode);
         Up_storedesc = (TextView) findViewById(R.id.txtStoreName);
-
         imageback.setOnClickListener(this);
         imagefilter.setOnClickListener(this);
-
     }
-
 
     @Override
     public void onClick(View v) {
@@ -246,25 +199,21 @@ public class UpcomingPromo extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.up_imageBtnBack:
-             /*   Intent intent=new Intent(context, DashBoardActivity.class);
-                startActivity(intent);*/
                 finish();
                 break;
             case R.id.up_imgfilter:
                 Intent intent1= new Intent(context, FilterActivity.class);
                 intent1.putExtra("from","upComingPromo");
                 startActivity(intent1);
-               // finish();
                 break;
 
         }
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         super.onBackPressed();
-      /*  Intent intent=new Intent(context, DashBoardActivity.class);
-        startActivity(intent);*/
         finish();
     }
 }

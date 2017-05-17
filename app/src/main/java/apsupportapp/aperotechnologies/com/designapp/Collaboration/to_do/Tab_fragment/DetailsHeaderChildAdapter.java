@@ -3,7 +3,6 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fra
 import android.content.Context;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
     private Set<Pair<Integer, Integer>> CheckedItems;
     private final StockDetailsAdapter stockDetailsAdapter;
     private final boolean[] headercheckList;
-    public OnSelectedItem onSelectedInterface;
+
 
 
     public DetailsHeaderChildAdapter(boolean[] visibleItems, HashMap<Integer, ArrayList<ToDo_Modal>> list, boolean[] headercheckList, Set<Pair<Integer, Integer>> checkedItems, Context context, int position, StockDetailsAdapter stockDetailsAdapter)
@@ -38,7 +37,6 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         this.stockDetailsAdapter = stockDetailsAdapter;
         this.headercheckList = headercheckList;
         CheckedItems = checkedItems;
-      //  onSelectedInterface = (OnSelectedItem)context;
     }
 
     @Override
@@ -47,12 +45,10 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         return new DetailsHeaderChildAdapter.Holder(v);
     }
 
-
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position)
     {
 
-        Log.e("TAG", "On Detail child: " + position);
         final Pair<Integer, Integer> Childtag = new Pair<Integer, Integer>(PrePosition, position);
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_size.setText(list.get(PrePosition).get(position).getLevel());
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_requiredQty.setText("" + Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested()));
@@ -67,13 +63,10 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
             if (headercheckList[PrePosition])
             {
                 CheckedItems.add(Childtag);
-                Log.e("Checkitems :",""+CheckedItems);
-              //  onSelectedInterface.onSelected(PrePosition);
             }
             else
             {
                 CheckedItems.remove(Childtag);
-             //   onSelectedInterface.onSelected(PrePosition);
             }
         }
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_checkBox.setChecked(CheckedItems.contains(Childtag));
@@ -98,11 +91,9 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
                 {
                     UnCheckCondition(tagFlag);
                 }
-                Log.e("TAG", "data has been notified.... ");
                 stockDetailsAdapter.notifyDataSetChanged();
             }
         });
-
     }
 
     private void CheckCondition(Pair<Integer, Integer> tagFlag)
@@ -112,12 +103,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         for (int i = 0; i < list.get(PrePosition).size(); i++)
         {
             Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(PrePosition, i);
-            if (CheckedItems.contains(Tag)) {
-                CheckChild[i] = true;
-            } else
-            {
-                CheckChild[i] = false;
-            }
+            CheckChild[i] = CheckedItems.contains(Tag) ? true : false;
         }
         //if all list are true from all list child then header check will be enable.
         if (containsTrue(CheckChild)) {
@@ -140,7 +126,6 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         // if one list is false from all list child then header check will be disable.
         if (containsTrue(CheckChild))
         {
-            Log.e("TAG", "containsTrue:   log... ");
             headercheckList[PrePosition] = false;
         }
         CheckedItems.remove(tagFlag);
@@ -157,7 +142,6 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
                 break;
             }
         }
-        Log.e("TAG", "containsTrue:---- " + AllItems);
         return AllItems;
     }
 
@@ -180,8 +164,5 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
             DetailChild_checkBox = (CheckBox) itemView.findViewById(R.id.detailChild_checkBox);
 
         }
-
     }
-
-
 }

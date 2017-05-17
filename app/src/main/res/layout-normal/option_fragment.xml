@@ -24,7 +24,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <TextView
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
@@ -53,7 +52,6 @@
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize" />
 
-
                 <TextView
                     android:id="@+id/txtArticleName"
                     android:layout_marginTop="5dp"
@@ -63,7 +61,6 @@
                     android:textSize="@dimen/normallayout_storesize"
                     android:textColor="@color/bg_store_code_text"
                     android:layout_height="wrap_content" />
-
 
                 <TextView
                     android:id="@+id/txtnounits"
@@ -77,17 +74,7 @@
 
             </RelativeLayout>
 
-            <!--<Button-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:id="@+id/imageBtnFilter"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:background="@mipmap/key_product_filter" />-->
-
-
-        </RelativeLayout>
+         </RelativeLayout>
 
         <RelativeLayout
 

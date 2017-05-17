@@ -19,7 +19,6 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
-import apsupportapp.aperotechnologies.com.designapp.ViewPagerAdapter;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 
 public class SwitchingTabActivity extends AppCompatActivity {
@@ -35,9 +34,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
         setContentView(R.layout.activity_switching_tab);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
-
         switchingTabActivity = this;
-
         backButton = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         imageBtnHomePage = (RelativeLayout) findViewById(R.id.imageBtnHomePage);
 

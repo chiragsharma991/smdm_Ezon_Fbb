@@ -20,10 +20,10 @@ public class mpm_adapter extends BaseAdapter {
     private Holder holder;
 
 
-    public mpm_adapter(Context context, ArrayList<mpm_model> list ) {
-        this.context=context;
-        this.list=list;
-        inflator=LayoutInflater.from(this.context);
+    public mpm_adapter(Context context, ArrayList<mpm_model> list) {
+        this.context = context;
+        this.list = list;
+        inflator = LayoutInflater.from(this.context);
 
     }
 
@@ -45,46 +45,25 @@ public class mpm_adapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
-        if(convertView==null)
-        {
-            holder=new Holder();
-            convertView= inflator.inflate(R.layout.mpm_details_child,null);
-            holder.department=(TextView) convertView.findViewById(R.id.mpm_department);
+        if (convertView == null) {
+            holder = new Holder();
+            convertView = inflator.inflate(R.layout.mpm_details_child, null);
+            holder.department = (TextView) convertView.findViewById(R.id.mpm_department);
             convertView.setTag(holder);
-        }else
-        {
-            holder=(Holder)convertView.getTag();
+        } else {
+            holder = (Holder) convertView.getTag();
         }
         holder.department.setText(list.get(position).getProductName());
         convertView.setBackgroundColor((position == mpm_activity.clickPosition) ?
                 Color.parseColor("#e8e8e8") : Color.parseColor("#f8f6f6"));
 
-
-
-
-
-
         return convertView;
     }
 
 
-
-
-
-
-
-
-
-    public class Holder
-    {
+    public class Holder {
         TextView department;
-
-
     }
-
-
-
-
 
 
 }

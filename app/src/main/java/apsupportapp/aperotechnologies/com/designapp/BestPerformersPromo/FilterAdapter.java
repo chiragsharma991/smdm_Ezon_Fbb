@@ -20,29 +20,23 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 public class FilterAdapter extends BaseAdapter {
 
     private ArrayList<String> arrayList;
-
-    //private List mStringFilterList;
-
     private LayoutInflater mInflater;
     Context context;
     private int Position;
 
-    //private ValueFilter valueFilter;
+
 
     public FilterAdapter(ArrayList<String> arrayList, Context context) {
 
-        // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         this.context = context;
         mInflater = LayoutInflater.from(context);
 
-        //getFilter();
     }
 
     //How many items are in the data set represented by this Adapter.
     @Override
     public int getCount() {
-
 
         return arrayList.size();
     }
@@ -65,8 +59,6 @@ public class FilterAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        //Log.e("in ","getview");
-
         Position=position;
         final Holder holder;
         if (convertView == null) {
@@ -74,9 +66,6 @@ public class FilterAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.activity_filter_child, null);
 
             holder.FilterMc=(TextView)convertView.findViewById(R.id.filterMc);
-
-
-
             convertView.setTag(holder);
 
         } else {
@@ -85,21 +74,13 @@ public class FilterAdapter extends BaseAdapter {
         }
         holder.FilterMc.setText(arrayList.get(position));
 
-
-
         // ---------------------click listener -------------------------
-
-
         return convertView;
     }
 
-
-
-    private class Holder {
-
+    private class Holder
+    {
         TextView FilterMc;
 
-
     }
-
 }

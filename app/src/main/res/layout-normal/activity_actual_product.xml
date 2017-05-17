@@ -7,15 +7,6 @@
               tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity"
     >
 
-    <!--<android.support.v7.widget.Toolbar-->
-    <!--android:id="@+id/toolbar"-->
-    <!--android:layout_height="@dimen/toolbar_header_height"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:elevation="6dp"-->
-    <!--android:minHeight="?attr/actionBarSize"-->
-    <!--android:background="@color/colorPrimary">-->
-
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/plan_toolbar"
         android:layout_width="match_parent"
@@ -65,8 +56,6 @@
                 android:textColor="#ffffff"
                 android:id="@+id/toolbar_title" />
 
-
-
             <RelativeLayout
                 android:id="@+id/planactual_BtnFilter"
                 android:background="@drawable/button_red_effect"
@@ -84,11 +73,8 @@
 
             </RelativeLayout>
 
-
-
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
-
 
     <android.support.design.widget.TabLayout
         android:id="@+id/planactual_tab_layout"
@@ -101,37 +87,6 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:background="@color/bg_screen_color"-->
-        <!--android:layout_marginTop="2dp"-->
-        <!--android:layout_marginLeft="10dp"-->
-
-
-        <!--&gt;-->
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Refresh Time :"-->
-            <!--android:textColor="@color/colorPrimary"-->
-            <!--android:textSize="@dimen/normallayout_storesize"-->
-            <!--/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/refreshTime"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:textColor="@color/bg_store_code_text"-->
-            <!--android:textSize="@dimen/normallayout_storesize"-->
-
-
-            <!--/>-->
-
-    <!--</LinearLayout>-->
 
     <apsupportapp.aperotechnologies.com.designapp.CustomViewPager
         android:id="@+id/planactual_pager"

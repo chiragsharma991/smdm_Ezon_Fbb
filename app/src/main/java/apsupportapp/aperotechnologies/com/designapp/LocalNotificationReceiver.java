@@ -5,10 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
-
 import java.util.Random;
 
 
@@ -21,25 +18,19 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         cont = context;
         Boolean isApplicationForeGround = BaseLifeCycleCallbacks.applicationStatus();
-        if (isApplicationForeGround == true)
+        if (isApplicationForeGround)
         {
-        Log.e("LocalNotificationReceiver", "onReceive: IF "+isApplicationForeGround);
-
         Intent i = new Intent(context, TransparentActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
         }
         else
         {
-            Log.e("LocalNotificationReceiver", "onReceive ELSE: "+isApplicationForeGround);
-
             Intent logoutIntent=new Intent(context,LoginActivity.class);
             logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             CreateNotification(logoutIntent, "Your session is about to expire. Please logout.", context);
         }
-
-
     }
 
     public static void CreateNotification(Intent intent, String message, Context context) {

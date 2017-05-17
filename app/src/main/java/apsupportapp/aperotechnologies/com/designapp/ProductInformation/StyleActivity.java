@@ -337,17 +337,9 @@ public class StyleActivity extends AppCompatActivity
         EditText et = (EditText) findViewById(R.id.editBarcode);
    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-    }
 
-    @Override
-    protected void onDestroy() {
 
-        super.onDestroy();
-    }
 
    private boolean isAMobileModel() {
         getDeviceInfo();

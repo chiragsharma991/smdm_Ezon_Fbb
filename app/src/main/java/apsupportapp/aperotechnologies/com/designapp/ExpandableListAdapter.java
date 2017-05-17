@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -225,8 +224,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 CheckBox cb = (CheckBox) rel.getChildAt(1);
                 TextView txtView = (TextView) rel.getChildAt(0);
                 String txtSubdept = txtView.getText().toString();//getChild(0,mChildPosition);
-                ////Log.e("txtSubDept"," "+txtSubdept);
-//
                 if (mGroupPosition == 1) {
                     cb.setChecked(true);
                     Prod_FilterActivity.pfilter_list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
@@ -236,7 +233,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     Prod_FilterActivity.filterActivity.finish();
                     return;
                 }
-                if (cb.isChecked() == false) {
+                if (!cb.isChecked()) {
 
                     if (Reusable_Functions.chkStatus(mContext)) {
                         Prod_FilterActivity.pfilter_list.collapseGroup(1);
@@ -253,8 +250,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     } else {
                         Toast.makeText(mContext, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
-
-
                 } else {
 
                     for (int i = 0; i < arrfilter.size(); i++) {
@@ -270,8 +265,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                             return;
                         }
                     }
-
-
                 }
             }
         });
@@ -309,13 +302,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
         String url = ConstsCore.web_url + "/v1/display/hourlytransproducts/" + userId + "?view=productName&prodLevel3Desc=" + subdeptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset" + offsetvalue + "&limit" + limit;
-        Log.i("URL   ", url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("Sub Dept Response", response.toString());
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -348,9 +339,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                 arrfilter.add(filterArray);
                                 Prod_FilterActivity.pfilter_list.expandGroup(1);
                                 Reusable_Functions.hDialog();
-
                             }
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -363,7 +352,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {

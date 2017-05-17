@@ -10,8 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.preference.PreferenceManager;
-import android.util.Log;
-
 
 public class TransparentActivity extends Activity {
 
@@ -22,9 +20,7 @@ public class TransparentActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
-        Log.e("TransparentActivity", "onCreate: ");
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder
                 .setTitle("Exit")
@@ -53,10 +49,7 @@ public class TransparentActivity extends Activity {
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        return;
-    }
+
 
     @Override
     protected void onStop() {

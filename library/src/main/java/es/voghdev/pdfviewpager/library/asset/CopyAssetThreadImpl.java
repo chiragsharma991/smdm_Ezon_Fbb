@@ -23,9 +23,9 @@ import java.io.IOException;
 import es.voghdev.pdfviewpager.library.util.FileUtil;
 
 public class CopyAssetThreadImpl implements CopyAsset {
-    Context context;
-    Handler uiThread;
-    CopyAsset.Listener listener = new NullListener();
+    private Context context;
+    private Handler uiThread;
+    private CopyAsset.Listener listener = new NullListener();
 
     public CopyAssetThreadImpl(Context context, Handler uiThread, Listener listener) {
         this.context = context;

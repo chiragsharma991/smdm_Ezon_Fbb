@@ -19,21 +19,21 @@
         app:cardUseCompatPadding="true"
         app:cardElevation="0dp"
         app:cardCornerRadius="10dp"
-        app:cardPreventCornerOverlap="true"
-        >
+        app:cardPreventCornerOverlap="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="0dp"
-            android:background="@android:color/white"
-            >
+            android:background="@android:color/white">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/header"
-                android:padding="3dp"
-                >
+                android:padding="3dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -42,27 +42,25 @@
                     android:textSize="@dimen/collaboration_stock_title"
                     android:id="@+id/status_caseNumber"
                     android:layout_alignParentLeft="true"
-                    android:textColor="@color/bg_store_code_text"
-                    />
+                    android:textColor="@color/bg_store_code_text"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pending"
                     android:textSize="@dimen/collaboration_stock_text"
                     android:id="@+id/status_case"
-                    android:layout_alignParentRight="true"
-                    />
-
+                    android:layout_alignParentRight="true"/>
 
             </RelativeLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/smdm_border"
-                >
+                android:background="@color/smdm_border">
 
             </View>
 
@@ -72,8 +70,8 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:padding="3dp"
-                >
+                android:padding="3dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,8 +79,8 @@
                     android:textStyle="bold"
                     android:textSize="@dimen/collaboration_stock_text"
                     android:id="@+id/status_storeCode"
-                    android:textColor="@color/smdm_default_color"
-                    />
+                    android:textColor="@color/smdm_default_color"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,9 +93,7 @@
 
             </LinearLayout>
 
-
-
-            <!--add layout views-->
+           <!--add layout views-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,8 +110,6 @@
                     android:orientation="horizontal"
                     android:id="@+id/progressView">
 
-
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -129,89 +123,11 @@
                 android:layout_marginTop="2dp"
                 android:visibility="gone"
                 android:id="@+id/status_layout"
-                android:background="@drawable/border2"
-                >
-
-              <!--  <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Doc No:"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:id="@+id/doc_number"
-                    android:layout_alignParentLeft="true"
-                    android:textColor="@color/smdm_default_color"
-
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="123"
-                    android:id="@+id/status_docNumber"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:layout_toRightOf="@+id/doc_number"
-                    android:textColor="@color/smdm_default_color"
-
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="QTY:"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:layout_toLeftOf="@+id/status_qty"
-                    android:textColor="@color/smdm_default_color"
-
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:id="@+id/status_qty"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/smdm_default_color"
-
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Date:"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:id="@+id/date"
-                    android:layout_toLeftOf="@+id/status_date"
-                    android:textColor="@color/smdm_default_color"
-
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="02/05/2017"
-                    android:textSize="@dimen/stock_textsize_normal"
-                    android:id="@+id/status_date"
-                    android:textColor="@color/smdm_default_color"
-                    android:layout_alignParentRight="true"
-
-                    />
-
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/arrow"
-                    >
-
-                </LinearLayout>-->
-
+                android:background="@drawable/border2">
 
             </RelativeLayout>
-
-
         </LinearLayout>
-
         <!--ending border of card layout-->
-
-
 
     </android.support.v7.widget.CardView>
 </LinearLayout>

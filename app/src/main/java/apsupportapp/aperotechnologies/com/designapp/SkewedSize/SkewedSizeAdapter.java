@@ -69,9 +69,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
     private final Resources resources;
     private ArrayList<SkewedSizeListDisplay> arrayList;
 
-    //private List mStringFilterList;
-    //git tese 10/1/2017
-
 
     private LayoutInflater mInflater;
     Context context;
@@ -91,7 +88,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
     public SkewedSizeAdapter(ArrayList<SkewedSizeListDisplay> arrayList, Context context, Resources resources) {
 
-        // Log.e("in sales analysis adapter"," ");
         this.arrayList = arrayList;
         this.context = context;
         mInflater = LayoutInflater.from(context);
@@ -140,8 +136,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
             holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.skewed_fwc = (TextView) convertView.findViewById(R.id.skewed_fwc);
-            // holder.Skewed_ProdAttribute = (TextView) convertView.findViewById(R.id.skewed_ProdAttribute);
-            // holder.Skewed_SOH = (TextView) convertView.findViewById(R.id.skewed_SOH);
             holder.skewed_option = (TextView) convertView.findViewById(R.id.skewed_option);
             holder.skewed_image_child = (ImageView) convertView.findViewById(R.id.skewed_image_child);
             holder.toggle_skewed_fav = (ToggleButton) convertView.findViewById(R.id.toggle_skewed_fav);
@@ -162,7 +156,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
             @Override
             public void onClick(View v)
             {
-              //  Toast.makeText(context,"Option Click...",Toast.LENGTH_SHORT).show();
+
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
@@ -181,27 +175,9 @@ public class SkewedSizeAdapter extends BaseAdapter {
         setFlag = Arrays.asList(arrayList.get(position).getSkewedFlag().split("\\s*,\\s*"));
         double fwc = Double.parseDouble(arrayList.get(position).getFwdWeekCoverTotal());
         holder.skewed_fwc.setText(String.format("%.1f",fwc));
-       /* setFwc = Arrays.asList(arrayList.get(position).getFwdWeekCover().split("\\s*,\\s*"));
-        // ArrayList<String>setNewFwc=new ArrayList<String>();
-        StringBuilder stringBuild=new StringBuilder();
-        for (int i = 0; i <setFwc.size() ; i++) {
-            Double x= Double.parseDouble(setFwc.get(i));
-            //setNewFwc.add(String.format("%.1f",x));
-            stringBuild.append(String.format("%.1f",x));
-            stringBuild.append(",");
-
-        }
-        stringBuild.deleteCharAt(stringBuild.length()-1);
-        holder.skewed_fwc.setText(stringBuild);*/
 
         createText();
         createSOH();
-
-        // holder.Skewed_ProdAttribute.setText(arrayList.get(position).getProdAttribute4());
-        // holder.Skewed_SOH.setText((arrayList.get(position).getStkOnhandQty()));
-        Log.e(TAG, "getView: "+calculation(arrayList.get(position).getStkOnhandQty()));
-
-
         if(!arrayList.get(position).getProdImageURL().equals("")) {
 
             Glide.with(this.context)
@@ -252,14 +228,10 @@ public class SkewedSizeAdapter extends BaseAdapter {
         String url ;
 
         url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
-
-        Log.e(TAG, "requestStyleDetailsAPI  " + url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
                         try {
                             int i;
                             if (response.equals("") || response == null || response.length() == 0) {
@@ -274,12 +246,10 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
                                 }
 
-                                Log.e(TAG, "intent calling: ");
                                 Intent intent = new Intent(context, SwitchingTabActivity.class);
                                 intent.putExtra("checkFrom","SkewedActivity");
                                 intent.putExtra("articleCode",styleDetailsBean.getArticleCode());
                                 intent.putExtra("articleOption",styleDetailsBean.getArticleOption());
-                                Log.e("Article Option :",""+styleDetailsBean.getArticleOption());
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 context.startActivity(intent);
                                 SkewedSizesActivity.SkewedSizes.finish();
@@ -326,17 +296,16 @@ public class SkewedSizeAdapter extends BaseAdapter {
             mType = new TextView(context);
 
             if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
-                //Log.e(TAG, "Normal sized screen:" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(120,50));
                 mType.setTextSize(12);
             }
             else if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
-               // Log.e(TAG, "Small sized screen :" );
+
                 mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
                 mType.setTextSize(12);
             }
             else {
-              //  Log.e(TAG, "Screen Size is neither large, normal or small :" );
+
                 mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
                 mType.setTextSize(12);
             }
@@ -363,25 +332,21 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
             mType = new TextView(context);
             if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
-               // Log.e(TAG, "Normal sized screen:" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(120,50));
                 mType.setTextSize(12);
-                //mType.setLayoutParams(new LinearLayout.LayoutParams(90,45));
-                //mType.setTextSize(7);
 
             }
             else if ((resources.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
-              //  Log.e(TAG, "Small sized screen :" );
                 mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
                 mType.setTextSize(12);
 
             }
             else {
-               // Log.e(TAG, "Screen Size is neither large, normal or small :" );
+
                 mType.setLayoutParams(new LinearLayout.LayoutParams(70,30));
                 mType.setTextSize(12);
             }
-            //  mType.setPadding(5, 3, 0, 3);
+
             if(setFlag.get(i).equals("Y")){
                 mType.setBackgroundResource(R.drawable.cell_shape_mark);
                 mType.setTextColor(Color.parseColor("#ffffff"));
@@ -415,7 +380,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
             sum += y;
         }
         return sum;
-        // Log.e(TAG, "sumof: "+sum );
     }
 
     private class Holder {

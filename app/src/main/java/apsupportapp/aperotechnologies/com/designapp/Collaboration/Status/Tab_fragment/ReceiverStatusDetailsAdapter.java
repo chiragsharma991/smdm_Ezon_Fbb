@@ -61,7 +61,7 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
                     @Override
                     public void onClick(View view) {
 
-                        if(Rec_Toggle[position]==true)
+                        if(Rec_Toggle[position])
                         {
                             Rec_Toggle[position]=false;
                             notifyDataSetChanged();

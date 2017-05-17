@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Inspection Id :"
+                android:text="@string/inspection_id"
                 android:textColor="@color/txt_color"
                 android:textSize="@dimen/stock_store_textsize"
                 android:textStyle="bold"/>
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Inspected By : "
+                android:text="@string/inspected_by"
                 android:textColor="@color/txt_color"
                 android:textSize="@dimen/stock_store_textsize"/>
 
