@@ -1,6 +1,5 @@
 
 package apsupportapp.aperotechnologies.com.designapp.MPM;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -56,7 +55,6 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   private RelativeLayout WebViewProcess;
   private RelativeLayout mpm_imageBtnBack,Pdf_zoom_btn;
   private TextView Toolbar_title;
-  private int dublicatePosition=0;
   private TextView Process_count,Pages_count,Pages_total;
   private LinearLayout Bottom_listItem,BaseLayout;
   public boolean error=false;
@@ -106,7 +104,9 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       WebViewProcess.setOnClickListener(this);
       Pdf_zoom_btn.setOnClickListener(this);
       WebViewWrap = (LinearLayout) findViewById(R.id.webview_wrap);
+
       url = ConstsCore.web_url + "/v1/display/mpmproducts/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+
       listView = (ListView) findViewById(R.id.department_list);
       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
@@ -184,13 +184,15 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
               onBackPressed();
               break;
           case R.id.pdf_zoom_btn:
-              if(Bottom_listItem.getVisibility()==View.VISIBLE){
+              if(Bottom_listItem.getVisibility()==View.VISIBLE)
+              {
                   Reusable_Functions.ViewGone(Bottom_listItem);
                   Toolbar_title.setText(departmentName);
-              }else{
+              }
+              else
+              {
                   Reusable_Functions.ViewVisible(Bottom_listItem);
                   Toolbar_title.setText("Season Catalogue");
-
               }
               break;
           case R.id.webview_process:
