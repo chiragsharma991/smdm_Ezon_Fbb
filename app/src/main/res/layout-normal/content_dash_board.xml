@@ -486,7 +486,7 @@
 
 
             <LinearLayout
-                android:layout_below="@+id/headerpromo"
+                android:layout_below="@+id/promo"
                 android:id="@+id/lin3"
                 android:visibility="gone"
                 android:layout_width="match_parent"
@@ -1152,7 +1152,7 @@
 
                 android:id="@+id/headerpromo"
                 android:gravity="center_vertical"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:textColor="@color/smdm_dark_Black"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -1163,6 +1163,17 @@
                 android:layout_height="40dp"
                 android:layout_below="@+id/lin4"
                 android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/promo"
+                android:layout_below="@+id/headerpromo"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/smdm_divider_Black"
+                />
+
 
             <TextView
                 android:id="@+id/headersales"

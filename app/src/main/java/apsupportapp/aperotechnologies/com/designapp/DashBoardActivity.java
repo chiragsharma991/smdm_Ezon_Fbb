@@ -57,6 +57,7 @@ import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_activity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
@@ -288,7 +289,7 @@ public class DashBoardActivity extends AppCompatActivity
         imgBtnRunningPromo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(DashBoardActivity.this, StatusActivity.class);
+                Intent intent=new Intent(DashBoardActivity.this, RunningPromoActivity.class);
                 startActivity(intent);
                 if(timer != null)
                 {
@@ -738,7 +739,8 @@ public class DashBoardActivity extends AppCompatActivity
 
     private Boolean exit = false;
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         if (exit) {
             finish(); // finish activity
         } else {
@@ -751,9 +753,7 @@ public class DashBoardActivity extends AppCompatActivity
                     exit = false;
                 }
             }, 3 * 1000);
-
         }
-
     }
 
     @Override
