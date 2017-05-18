@@ -129,6 +129,7 @@ public class  LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
+
                   if (Reusable_Functions.chkStatus(context))
                   {
                             Reusable_Functions.sDialog(context, "Fetching store code...");
