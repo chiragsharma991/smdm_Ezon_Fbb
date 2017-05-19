@@ -65,6 +65,7 @@ public class  LoginActivity extends AppCompatActivity {
     RequestQueue queue;
     MySingleton m_config;
     boolean log_flag = false;
+    private boolean isEzone = false;
     SharedPreferences sharedPreferences;
     private LinearLayout LinearLogin;
     private Snackbar snackbar;
@@ -107,11 +108,10 @@ public class  LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View v)
+            {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                Log.e("getCurrentFocus :",""+getCurrentFocus().getWindowToken());
                 edtUserName.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
                 uname = edtUserName.getText().toString().trim().toUpperCase();
                 password = edtPassword.getText().toString().trim().toUpperCase();
@@ -126,18 +126,19 @@ public class  LoginActivity extends AppCompatActivity {
                     {
                         Toast.makeText(LoginActivity.this, "Please enter password", Toast.LENGTH_LONG).show();
                     }
-
-                } else {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.sDialog(context, "Fetching store code...");
-                        SelectedStoreCode = uname;
-                        firstLogin = false;
-                        requestLoginWithStoreAPI();
-
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
-                    }
                 }
+                else
+                {
+                  if (Reusable_Functions.chkStatus(context))
+                  {
+                            Reusable_Functions.sDialog(context, "Fetching store code...");
+                            SelectedStoreCode = uname;
+                            firstLogin = false;
+                            requestLoginWithStoreAPI();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                        }
+                  }
             }
         });
     }
@@ -268,13 +269,16 @@ public class  LoginActivity extends AppCompatActivity {
                                     editor.apply();
                                 }
                                 Reusable_Functions.hDialog();
-                                Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
-                                intent.putExtra("from", "login");
-                                intent.putExtra("BACKTO", "login");
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                startActivity(intent);
+
+                                    Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
+                                    intent.putExtra("from", "login");
+                                    intent.putExtra("BACKTO", "login");
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                    startActivity(intent);
+
+
                             }
                         } catch (Exception e) {
                             Toast.makeText(context, "data failed....", Toast.LENGTH_SHORT).show();
