@@ -92,7 +92,6 @@ public class DashBoardActivity extends AppCompatActivity
     ImageButton btnFeshnessindex,BtnOnlyWorstpromo,btnOptionEfficiency,To_do_image_button,Status_image_button,
             btnSkewedSize,btnCutSize,btnStockAgeing,BtnWorstPerformers,FeedbackList_btn,Feedback_btn,btn_inspection_begin,btn_inspection_history,btn_mpm;
 
-
     LinearLayout hourlyFlash,productInfo,visualAssort,sales,promoAnalysis,inventory,linplanactual,Collaboration_subView,Feedback_linear,inspection_linear,Mpm_linear;
     TextView hourlyFlashTxt,productInfoTxt,visualAssortTxt,salesTxt,promoAnalysisTxt,inventoryTxt,RefreshTime,planvsActualtxt,Collaboration,Feedback,
             txt_store_Inspection,txt_mpm;
@@ -115,7 +114,7 @@ public class DashBoardActivity extends AppCompatActivity
     boolean flag=true;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
-    ArrayList<String> arrayList,eventUrlList;
+    ArrayList<String> eventUrlList;
     Context context;
     MySingleton m_config;
     ArrayList<ProductNameBean> productNameBeanArrayList;
@@ -161,7 +160,6 @@ public class DashBoardActivity extends AppCompatActivity
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        arrayList = new ArrayList<>();
         eventUrlList = new ArrayList<>();
         productNameBeanArrayList=new ArrayList<>();
         gson = new Gson();
@@ -528,16 +526,14 @@ public class DashBoardActivity extends AppCompatActivity
         if(Sales)
         {
             sales.setVisibility(View.VISIBLE);
-
-        }else
+        }
+        else
         {
             sales.setVisibility(View.GONE);
-
         }
         if(Inventory)
         {
             inventory.setVisibility(View.VISIBLE);
-
         }else
         {
             inventory.setVisibility(View.GONE);

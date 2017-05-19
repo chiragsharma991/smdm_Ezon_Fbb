@@ -28,17 +28,14 @@
                 android:id="@+id/time"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="5dp">
 
-                >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Refresh Time :"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/smdm_inflator_title_large"
-
-                    />
+                    android:textSize="@dimen/smdm_inflator_title_large"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -46,9 +43,7 @@
                     android:id="@+id/refreshTime"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/smdm_inflator_title_large"
-
-                    />
+                    android:textSize="@dimen/smdm_inflator_title_large"/>
 
             </LinearLayout>
 
@@ -62,7 +57,6 @@
                 android:background="@color/smdm_divider_Black"
                 />
 
-
             <!--one row starting-->
 
             <LinearLayout
@@ -74,9 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                >
-
+                android:layout_marginRight="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -108,8 +100,8 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:text="@string/key_product_plan"
-                            android:textColor="@color/smdm_light_Black"
-                            />
+                            android:textColor="@color/smdm_light_Black"/>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -147,20 +139,6 @@
             <!--one row-->
 
             <!--second-->
-
-            <TextView
-                android:id="@+id/productinfo"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="@color/smdm_dark_Black"
-                android:layout_below="@+id/time"
-                android:text="Product Information"
-                android:layout_marginTop="5dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="40dp" />
 
             <TextView
                 android:layout_below="@+id/productinfo"
@@ -1127,9 +1105,7 @@
                 android:layout_height="1dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@color/smdm_divider_Black"
-                />
-
+                android:background="@color/smdm_divider_Black"/>
 
             <TextView
                 android:id="@+id/headerinvent"
@@ -1147,7 +1123,6 @@
                 android:layout_alignParentStart="true" />
 
             <TextView
-
                 android:id="@+id/headerpromo"
                 android:gravity="center_vertical"
                 android:visibility="visible"
@@ -1171,7 +1146,6 @@
                 android:layout_marginLeft="10dp"
                 android:background="@color/smdm_divider_Black"
                 />
-
 
             <TextView
                 android:id="@+id/headersales"
@@ -1203,7 +1177,6 @@
                 android:layout_height="40dp"
                 android:layout_alignParentStart="true" />
 
-
             <TextView
                 android:layout_below="@+id/collaboration"
                 android:layout_width="match_parent"
@@ -1212,7 +1185,6 @@
                 android:layout_marginLeft="10dp"
                 android:background="@color/smdm_divider_Black"
                 />
-
 
             <!--collaboration sub views-->
 
@@ -1825,6 +1797,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/productinfo"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/smdm_dark_Black"
+                android:text="Product Information"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/time"
+                android:layout_alignParentStart="true"/>
 
         </RelativeLayout>
     </ScrollView>
