@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 
 public class EventAdapter extends BaseAdapter{
-    DashBoardActivity dashBoardActivity;
+    DashBoardActivity1 dashBoardActivity;
     ArrayList<String> eventUrlList;
-    public EventAdapter(DashBoardActivity dashBoardActivity, ArrayList<String> eventUrlList) {
+    public EventAdapter(DashBoardActivity1 dashBoardActivity, ArrayList<String> eventUrlList) {
         this.dashBoardActivity=dashBoardActivity;
         this.eventUrlList=eventUrlList;
 

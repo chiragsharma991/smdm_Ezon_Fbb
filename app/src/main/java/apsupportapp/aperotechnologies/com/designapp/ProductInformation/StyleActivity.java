@@ -48,7 +48,8 @@ import java.util.List;
 import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.AnyOrientationCaptureActivity;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
+
+import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity1;
 import apsupportapp.aperotechnologies.com.designapp.ListAdapter;
 import apsupportapp.aperotechnologies.com.designapp.ListAdapter1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
@@ -226,7 +227,7 @@ public class StyleActivity extends AppCompatActivity
             public void onClick(View v) {
                 selcollectionName = null;
                 seloptionName = null;
-                DashBoardActivity._collectionitems = new ArrayList();
+                DashBoardActivity1._collectionitems = new ArrayList();
                 finish();
 
             }
@@ -550,7 +551,7 @@ public class StyleActivity extends AppCompatActivity
                                         collection.setText(selcollectionName);
                                         style.setText(seloptionName);
                                         style.setEnabled(true);
-                                        articleOptionList.addAll(DashBoardActivity._collectionitems);
+                                        articleOptionList.addAll(DashBoardActivity1._collectionitems);
                                     } else {
                                         collection.setText("Select Collection");
                                     }
@@ -667,8 +668,8 @@ public class StyleActivity extends AppCompatActivity
                                 Collections.sort(articleOptionList);
                                 articleOptionList.add(0, "Select Option");
                                 style.setEnabled(true);
-                                DashBoardActivity._collectionitems = new ArrayList();
-                                DashBoardActivity._collectionitems.addAll(articleOptionList);
+                                DashBoardActivity1._collectionitems = new ArrayList();
+                                DashBoardActivity1._collectionitems.addAll(articleOptionList);
                                 if (seloptionName == null || seloptionName.equals("")) {
                                     style.setText("Select Option");
                                 }
@@ -722,7 +723,7 @@ public class StyleActivity extends AppCompatActivity
         } else {
             selcollectionName = null;
             seloptionName = null;
-            DashBoardActivity._collectionitems = new ArrayList();
+            DashBoardActivity1._collectionitems = new ArrayList();
             finish();
         }
     }

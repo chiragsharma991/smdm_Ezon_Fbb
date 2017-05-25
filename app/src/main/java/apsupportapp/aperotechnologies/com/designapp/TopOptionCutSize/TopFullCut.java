@@ -40,7 +40,8 @@ import java.util.HashMap;
 import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.LocalNotificationReceiver;
-import apsupportapp.aperotechnologies.com.designapp.LoginActivity;
+
+import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
@@ -573,7 +574,7 @@ public class TopFullCut extends AppCompatActivity implements View.OnClickListene
             editor.clear();
             editor.commit();
             finish();
-            Intent i = new Intent(context, LoginActivity.class);
+            Intent i = new Intent(context, LoginActivity1.class);
             // set the new task and clear flags
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);

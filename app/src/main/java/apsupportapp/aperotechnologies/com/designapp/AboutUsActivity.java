@@ -38,7 +38,7 @@ public class AboutUsActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity.class);
+                Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity1.class);
                 startActivity(intent);
                 finish();
             }
@@ -47,7 +47,7 @@ public class AboutUsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity.class);
+        Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity1.class);
         startActivity(intent);
         finish();
 

@@ -59,7 +59,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
+
+import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity1;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -1817,7 +1818,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                                     } else {
                                         String result = response.getString("status");
                                         Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(InspectionBeginActivity.this, DashBoardActivity.class);
+                                        Intent intent = new Intent(InspectionBeginActivity.this, DashBoardActivity1.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                         startActivity(intent);
                                         //Details.this.finish();

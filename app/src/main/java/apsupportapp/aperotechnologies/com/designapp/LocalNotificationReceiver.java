@@ -26,7 +26,7 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
         }
         else
         {
-            Intent logoutIntent=new Intent(context,LoginActivity.class);
+            Intent logoutIntent=new Intent(context,LoginActivity1.class);
             logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             CreateNotification(logoutIntent, "Your session is about to expire. Please logout.", context);
@@ -45,7 +45,7 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, 0);
         mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(context)
                 .setSmallIcon(R.mipmap.notification_logo)
-                .setContentTitle("SMDM")
+                .setContentTitle("Engage 24x7")
                 .setContentText(message);
 
         mBuilder.setDeleteIntent(contentIntent);

@@ -75,7 +75,7 @@ public class SplashActivity extends AppCompatActivity {
                             requestLoginAPI();
                         }
                     } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
-                        Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                        Intent i = new Intent(SplashActivity.this, LoginActivity1.class);
                         startActivity(i);
                         finish();
                     }
@@ -133,7 +133,7 @@ public class SplashActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("bearerToken", bearerToken);
                             editor.apply();
-                            Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
+                            Intent i = new Intent(SplashActivity.this, DashBoardActivity1.class);
                             i.putExtra("from", "splash");
                             startActivity(i);
                             progressbar.setVisibility(View.GONE);

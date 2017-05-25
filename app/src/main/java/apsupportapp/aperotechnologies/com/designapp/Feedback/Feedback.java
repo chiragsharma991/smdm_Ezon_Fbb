@@ -205,10 +205,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                         offsetvalue = (limit * count) + limit;
                                         count++;
                                         requestFeedbackApi();
-
                                     }
-
-
                                     // if api call for last entry.
 
                                 } else if (response.length() < limit) {

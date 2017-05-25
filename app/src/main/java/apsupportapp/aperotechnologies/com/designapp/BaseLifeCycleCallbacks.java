@@ -41,7 +41,7 @@ import java.util.HashMap;
             editor.clear();
             editor.commit();
             activity.finish();
-            Intent i = new Intent(activity, LoginActivity.class);
+            Intent i = new Intent(activity, LoginActivity1.class);
             // set the new task and clear flags
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             activity.startActivity(i);
