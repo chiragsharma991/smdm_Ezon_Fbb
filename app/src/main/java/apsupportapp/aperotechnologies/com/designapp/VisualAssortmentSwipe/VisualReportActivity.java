@@ -182,11 +182,16 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 pieData.setValueTextSize(12f);
                                 dataSet.setXValuePosition(null);
                                 dataSet.setValueLineWidth(0.6f);
-                                String yAxisValue = PieDataSet.ValuePosition.OUTSIDE_SLICE + "," + "10,000";
                                 dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE );
                                 pieChart.setEntryLabelColor(Color.WHITE);
                                 pieChart.setHoleRadius(65);
                                 pieChart.setHoleColor(Color.parseColor("#ffc65b"));
+                                pieChart.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                                    @Override
+                                    public void onFocusChange(View v, boolean hasFocus) {
+                                        v = pieChart.focusSearch(v.focusSearch(View.FOCUS_LEFT),View.FOCUS_LEFT);
+                                    }
+                                });
                                 pieChart.setCenterText(String.valueOf(format.format(Math.round(totalOptions)))+ "\nTotal");
                                 pieChart.setCenterTextSize(35f);
                                 pieChart.setExtraTopOffset(10f);
@@ -196,8 +201,9 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 pieChart.setNoDataText("");
                                 pieChart.setDescription(null);
                                 pieChart.invalidate();
+                                pieChart.setRotationAngle(270);
                                 pieChart.animateXY(1000,1000);
-                                pieChart.setTouchEnabled(false);
+                                pieChart.setTouchEnabled(true);
 
                                 Legend l = pieChart.getLegend();
 

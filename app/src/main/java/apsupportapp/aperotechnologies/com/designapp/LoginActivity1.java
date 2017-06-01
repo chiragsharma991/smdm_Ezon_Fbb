@@ -3,6 +3,7 @@ package apsupportapp.aperotechnologies.com.designapp;
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -57,7 +58,8 @@ import java.util.Map;
  * Created by pamrutkar on 25/05/17.
  */
 
-public class LoginActivity1 extends AppCompatActivity {
+public class LoginActivity1 extends AppCompatActivity
+{
     Button btnLogin;
     EditText edtUserName, edtPassword;
     String uname, password;
@@ -81,7 +83,7 @@ public class LoginActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
         context = this;
@@ -111,7 +113,8 @@ public class LoginActivity1 extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
@@ -127,7 +130,14 @@ public class LoginActivity1 extends AppCompatActivity {
 
                 } else {
                     if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.sDialog(context, "Authenticating user...");
+                        Reusable_Functions.progressDialog = new ProgressDialog(context);
+                        if(!Reusable_Functions.progressDialog.isShowing())
+                        {
+
+
+                            Reusable_Functions.progressDialog.show();
+                        }
+                        Reusable_Functions.progressDialog.setMessage("Authentication User...");
                         requestLoginAPI();
                     } else {
                         Toast.makeText(LoginActivity1.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -142,10 +152,9 @@ public class LoginActivity1 extends AppCompatActivity {
             View view = findViewById(android.R.id.content);
             snackbar = Snackbar.make(view, "Session has been Log out Please Retry", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-
+                public void onClick(View v)
+                {
                     snackbar.dismiss();
-
                 }
             });
             snackbar.setActionTextColor(getResources().getColor(R.color.smdm_actionbar));
@@ -441,7 +450,8 @@ public class LoginActivity1 extends AppCompatActivity {
         dublicateStoreList.addAll(storelist_data);
         search.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
 
             }
 
@@ -464,10 +474,11 @@ public class LoginActivity1 extends AppCompatActivity {
         select_storeList.setAdapter(spinnerArrayAdapter);
 
 
-        select_storeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        select_storeList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
+            {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 dialog.dismiss();
@@ -482,32 +493,30 @@ public class LoginActivity1 extends AppCompatActivity {
                 }
             }
         });
-
         builder.setView(v);
-
         dialog = builder.create();
         dialog.show();
     }
 
-    public void filterData(String query, ArrayList<String> storelist_data, ArrayList<String> dublicateStoreList) {
+    public void filterData(String query, ArrayList<String> storelist_data, ArrayList<String> dublicateStoreList)
+    {
         storelist_data.clear();
         String charText = query.toLowerCase(Locale.getDefault());
-        if (charText.length() == 0) {
-
+        if (charText.length() == 0)
+        {
             storelist_data.addAll(dublicateStoreList);
             spinnerArrayAdapter.notifyDataSetChanged();
-        } else {
-            for (int i = 0; i < dublicateStoreList.size(); i++) {
-
-                if (dublicateStoreList.get(i).toLowerCase(Locale.getDefault()).replace(" ", "").contains(charText)) {
+        }
+        else
+        {
+            for (int i = 0; i < dublicateStoreList.size(); i++)
+            {
+                if (dublicateStoreList.get(i).toLowerCase(Locale.getDefault()).replace(" ", "").contains(charText))
+                {
                     storelist_data.add(dublicateStoreList.get(i));
                 }
             }
             spinnerArrayAdapter.notifyDataSetChanged();
         }
-
     }
-    
-
-
 }

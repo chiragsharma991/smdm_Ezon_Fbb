@@ -975,19 +975,21 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
                                         }
                                     }
-                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subdept"))
+                                {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
                                         level = 2;
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
-                                        if (salesAnalysisClassArrayList.get(j).getPlanCategory().equals(pvaFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(focusposition).getPlanCategory().equals(pvaFirstVisibleItem)) {
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
                                         }
                                     }
-                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Class")) {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
                                         level = 3;
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
-                                        if (salesAnalysisClassArrayList.get(j).getPlanClass().equals(pvaFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(focusposition).getPlanClass().equals(pvaFirstVisibleItem)) {
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
 
                                         }
@@ -997,7 +999,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                         level = 4;
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
-                                        if (salesAnalysisClassArrayList.get(j).getBrandName().equals(pvaFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(focusposition).getBrandName().equals(pvaFirstVisibleItem)) {
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
 
                                         }
@@ -1007,7 +1009,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                                         level = 5;
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass();
-                                        if (salesAnalysisClassArrayList.get(j).getBrandplanClass().equals(pvaFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().equals(pvaFirstVisibleItem)) {
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
 
                                         }
