@@ -1,38 +1,36 @@
 package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 
-
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
-
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 
-
-public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements GravitySnapHelper.SnapListener {
+/**
+ * Created by pamrutkar on 30/05/17.
+ */
+public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements GravitySnapHelper.SnapListener {
 
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
-    ArrayList<SalesAnalysisViewPagerValue> analysisArrayList;
-    SalesPagerAdapter pageradapter;
-    SalesAnalysisListDisplay salesAnalysisListDisplay;
+    ArrayList<SalesAnalysisViewPagerValue> ez_sales_header_array;
+    EzoneSalesPagerAdapter ezone_pageradapter;
+    SalesAnalysisListDisplay ezone_sales_details;
     int focusposition, selFirstPositionValue;
-    RecyclerView listView_SalesAnalysis;
+    RecyclerView rv_ez_sales;
     int currentIndex;
-    SalesAnalysisSnapAdapter salesadapter;
     int offsetvalue = 0, count = 0, limit = 100;
     private LayoutInflater mInflater;
     private final int VIEW_ITEM = 1;
@@ -47,23 +45,23 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
 
 
-    public SalesAnalysisSnapAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, RecyclerView listView_SalesAnalysis) {
+    public EzoneSalesAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, RecyclerView listView_SalesAnalysis) {
 
         this.mSnaps = arrayList;
         this.context = context;
         this.fromwhere = fromwhere;
-        this.listView_SalesAnalysis = listView_SalesAnalysis;
+        this.rv_ez_sales = listView_SalesAnalysis;
         mInflater = LayoutInflater.from(context);
         this.currentIndex = currentIndex;
         level = 1;
         focusposition = 0;
         selFirstPositionValue = 0;
-        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
         gson = new Gson();
     }
 
 
-    public SalesAnalysisSnapAdapter() {
+    public EzoneSalesAdapter() {
         mSnaps = new ArrayList<>();
     }
 
@@ -99,12 +97,12 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.child_sales_listview, parent, false);
-            return new SalesViewHolder(v);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_ezone_sales_recycleview, parent, false);
+            return new EzoneSalesAdapter.EzoneSalesViewHolder(v);
         } else if (viewType == VIEW_PROG) {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_footer, parent, false);
-            return new ProgressViewHolder(v);
+            return new EzoneSalesAdapter.ProgressViewHolder(v);
         }
 
         return null;
@@ -114,7 +112,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
 
-        if (viewHolder instanceof SalesViewHolder) {
+        if (viewHolder instanceof EzoneSalesAdapter.EzoneSalesViewHolder) {
             if (position < mSnaps.size()) {
 
                 SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
@@ -122,32 +120,32 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 switch (fromwhere) {
                     case "Department":
 
-                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Subdept":
 
-                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Class":
 
-                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Subclass":
 
-                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "MC":
 
-                        ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
                         break;
                 }
 
@@ -161,42 +159,39 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 float density = context.getResources().getDisplayMetrics().density;
                 int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
                 int finalCalachieveVal = (int) (density * calachieveVal); //converting value from px to dp
-                ((SalesViewHolder) viewHolder).txtPlan.setWidth(finalCalachieveVal);
+                ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setWidth(finalCalachieveVal);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, 24);
                 params.setMargins(finalCalplanVal, 0, 0, 0);
-                ((SalesViewHolder) viewHolder).txtAchieve.setLayoutParams(params);
+                ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sAchieve.setLayoutParams(params);
 
 
                 if (achieveVal < 70) {
-                    ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.RED);
+                    ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.RED);
                 } else if (achieveVal > 90) {
-                    ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.GREEN);//yellow
+                    ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.GREEN);//yellow
                 } else {
-                    ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
                 }
             }
         }
 
     }
 
-    public class SalesViewHolder extends RecyclerView.ViewHolder {
+    public class EzoneSalesViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView nameTv;
-        RelativeLayout rel;
-        RelativeLayout innerrel, relValue;
-        TextView txtPlan, txtValue, txtPvAValue;
-        TextView txtAchieve;
+        TextView txt_ez_name,txt_ez_sPlan, txt_ez_sPvAValue,txt_ez_sAchieve;
+        RelativeLayout rel_ez_outer,rel_ez_inner;
 
-        public SalesViewHolder(View itemView) {
+        public EzoneSalesViewHolder(View itemView) {
             super(itemView);
 
-            nameTv = (TextView) itemView.findViewById(R.id.txtVal);
-            rel = (RelativeLayout) itemView.findViewById(R.id.rel);
-            innerrel = (RelativeLayout) itemView.findViewById(R.id.innerrellay);
-            txtPlan = (TextView) itemView.findViewById(R.id.txtPlan);
-            txtAchieve = (TextView) itemView.findViewById(R.id.txtAchieve);
-            txtPvAValue = (TextView) itemView.findViewById(R.id.txtPvAValue);
+            txt_ez_name = (TextView) itemView.findViewById(R.id.txt_ez_sName);
+            rel_ez_outer = (RelativeLayout) itemView.findViewById(R.id.rel_ez_outer);
+            rel_ez_inner = (RelativeLayout) itemView.findViewById(R.id.rel_ez_inner);
+            txt_ez_sPlan = (TextView) itemView.findViewById(R.id.txt_ez_sPlan);
+            txt_ez_sAchieve = (TextView) itemView.findViewById(R.id.txt_ez_sAchieve);
+            txt_ez_sPvAValue = (TextView) itemView.findViewById(R.id.txt_ez_sPvAValue);
 
         }
     }
@@ -210,5 +205,5 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-
 }
+

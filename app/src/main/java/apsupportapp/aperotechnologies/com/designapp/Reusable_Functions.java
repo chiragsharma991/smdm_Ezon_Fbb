@@ -37,67 +37,69 @@ public class Reusable_Functions {
         }
     }
 
-    public static void sDialog(Context cont, String message) {
+    public static void sDialog(Context cont, String message)
+    {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(cont);  //  R.style.AlertDialog_Theme);
             progressDialog.setIndeterminate(true);
             progressDialog.setMessage(message);
             progressDialog.setCancelable(false);
-            if (!progressDialog.isShowing()) {
+            if (!progressDialog.isShowing())
+            {
                 progressDialog.show();
 
             }
         }
     }
 
-    public static void ViewVisible (View view)
-    {
-        if (Build.VERSION.SDK_INT >= 21) {
+//    public static void ViewVisible (View view)
+//    {
+//        if (Build.VERSION.SDK_INT >= 21) {
+//
+//            int cx = view.getWidth() / 2;
+//            int cy = view.getHeight() / 2;
+//
+//            float finalRadius = (float) Math.hypot(cx, cy);
+//
+//            Animator anim =
+//                    ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadius);
+//
+//            view.setVisibility(View.VISIBLE);
+//            anim.start();
+//
+//        }else{
+//            view.setVisibility(View.VISIBLE);
+//
+//        }
+//    }
 
-            int cx = view.getWidth() / 2;
-            int cy = view.getHeight() / 2;
-
-            float finalRadius = (float) Math.hypot(cx, cy);
-
-            Animator anim =
-                    ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadius);
-
-            view.setVisibility(View.VISIBLE);
-            anim.start();
-
-        }else{
-            view.setVisibility(View.VISIBLE);
-
-        }
-    }
-
-    public static void ViewGone (final View view)
-    {
-        if (Build.VERSION.SDK_INT >= 21) {
-
-            int cx = view.getWidth() / 2;
-            int cy = view.getHeight() / 2;
-
-            float initialRadius = (float) Math.hypot(cx, cy);
-
-            Animator anim =
-                    ViewAnimationUtils.createCircularReveal(view, cx, cy, initialRadius, 0);
-
-            anim.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    view.setVisibility(View.GONE);
-                }
-            });
-
-            anim.start();
-
-        }else{
-            view.setVisibility(View.GONE);
-
-        }
-    }
+//    public static void ViewGone (final View view)
+//    {
+//        if (Build.VERSION.SDK_INT >= 21) {
+//
+//            int cx = view.getWidth() / 2;
+//            int cy = view.getHeight() / 2;
+//
+//            float initialRadius = (float) Math.hypot(cx, cy);
+//
+//            Animator anim =
+//                    ViewAnimationUtils.createCircularReveal(view, cx, cy, initialRadius, 0);
+//
+//            anim.addListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    super.onAnimationEnd(animation);
+//                    view.setVisibility(View.GONE);
+//                }
+//            });
+//
+//            anim.start();
+//
+//        }else{
+//            view.setVisibility(View.GONE);
+//
+//        }
+//    }
 
     public static void  MakeToast(Context context,String info){
 

@@ -4,7 +4,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="pie_chart_val">\n 8,11,235</string>
     <string name="action_settings">Logout</string>
     <string name="title_activity_switching_tab">Option</string>
     <string name="section_format">Hello World from section: %1$d</string>
@@ -163,6 +163,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="permission_camera_rationale">This App needs to access Camera to present you with the Demo.</string>
     <string name="prod_name">Product Name : </string>
+
+    <!--Ezone Module-->
+
+    <string name="ezone_sales_header">Sales</string>
+    <string name="ezone_inventory_header">Inventory</string>
+    <string name="ezone_best_worst">Best/Worst Performers</string>
+    <string name="ezone_assortment_analysis">Assortment Analysis</string>
 
 
 </resources>

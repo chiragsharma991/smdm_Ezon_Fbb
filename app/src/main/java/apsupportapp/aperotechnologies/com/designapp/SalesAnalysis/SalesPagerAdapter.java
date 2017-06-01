@@ -627,7 +627,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         relYoYSales.setBackgroundResource(R.drawable.rounded_edittext3);
                         relRank.setBackgroundResource(R.drawable.rounded_edittext2);
 
-
                         txtPvAZonalRankVal.setText("" + salesAnalysis.getZonalSalesRank());
                         txtPvANationalRankVal.setText("" + salesAnalysis.getNationalSalesRank());
                         txtYoYZonalRankVal.setText("" + salesAnalysis.getZonalYOYGrowthRank());
@@ -635,34 +634,40 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                         //Sales Rank Condtion
                         if (salesAnalysis.getZonalSalesRank() > salesAnalysis.getNationalSalesRank())
-
                         {
                             linPvAZonalRank.setBackgroundResource(R.color.smdm_green);
                             linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
-                        } else if (salesAnalysis.getNationalSalesRank() > salesAnalysis.getZonalSalesRank()) {
+                        }
+                        else if (salesAnalysis.getNationalSalesRank() > salesAnalysis.getZonalSalesRank())
+                        {
                             linPvAZonalRank.setBackgroundResource(R.color.smdm_amber);
                             linPvANationalRank.setBackgroundResource(R.color.smdm_green);
-                        } else if (salesAnalysis.getZonalSalesRank() == salesAnalysis.getNationalSalesRank()) {
+                        }
+                        else if (salesAnalysis.getZonalSalesRank() == salesAnalysis.getNationalSalesRank())
+                        {
                             linPvAZonalRank.setBackgroundResource(R.color.smdm_green);
                             linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
                         }
                         //YoY Rank Condition
-                        if (salesAnalysis.getZonalYOYGrowthRank() > salesAnalysis.getNationalYOYGrowthRank()) {
+                        if (salesAnalysis.getZonalYOYGrowthRank() > salesAnalysis.getNationalYOYGrowthRank())
+                        {
                             linYoYZonalRank.setBackgroundResource(R.color.smdm_green);
                             linYoYNationalRank.setBackgroundResource(R.color.smdm_amber);
-                        } else if (salesAnalysis.getNationalYOYGrowthRank() > salesAnalysis.getZonalYOYGrowthRank()) {
+                        }
+                        else if (salesAnalysis.getNationalYOYGrowthRank() > salesAnalysis.getZonalYOYGrowthRank())
+                        {
                             linYoYZonalRank.setBackgroundResource(R.color.smdm_amber);
                             linYoYNationalRank.setBackgroundResource(R.color.smdm_green);
-                        } else if (salesAnalysis.getZonalYOYGrowthRank() == salesAnalysis.getNationalYOYGrowthRank()) {
+                        }
+                        else if (salesAnalysis.getZonalYOYGrowthRank() == salesAnalysis.getNationalYOYGrowthRank())
+                        {
                             linYoYZonalRank.setBackgroundResource(R.color.smdm_green);
                             linYoYNationalRank.setBackgroundResource(R.color.smdm_amber);
 
                         }
                     }
                 });
-
             }
-
 
         } else if (position == 2) {
             if (salesAnalysis != null) {

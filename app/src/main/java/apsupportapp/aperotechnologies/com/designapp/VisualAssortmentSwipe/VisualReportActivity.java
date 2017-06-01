@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -30,6 +31,8 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.gson.Gson;
 import org.json.JSONArray;
@@ -103,8 +106,6 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     private void requestVisualReportAPI() {
@@ -143,8 +144,8 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 }
 
                                 ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
-                                for (VisualReport v_report : visualReportArrayList) {
-
+                                for (VisualReport v_report : visualReportArrayList)
+                                {
                                         totalOptions = (float) v_report.getTotalOptions();
                                         likedOptions = (float) v_report.getLikedOptions();
                                         dislikedOptions = (float) v_report.getDislikedOptions();
@@ -181,7 +182,8 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 pieData.setValueTextSize(12f);
                                 dataSet.setXValuePosition(null);
                                 dataSet.setValueLineWidth(0.6f);
-                                dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+                                String yAxisValue = PieDataSet.ValuePosition.OUTSIDE_SLICE + "," + "10,000";
+                                dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE );
                                 pieChart.setEntryLabelColor(Color.WHITE);
                                 pieChart.setHoleRadius(65);
                                 pieChart.setHoleColor(Color.parseColor("#ffc65b"));
@@ -196,6 +198,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 pieChart.invalidate();
                                 pieChart.animateXY(1000,1000);
                                 pieChart.setTouchEnabled(false);
+
                                 Legend l = pieChart.getLegend();
 
                                 l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
@@ -255,4 +258,6 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     public void onBackPressed() {
         finish();
     }
+
+
 }

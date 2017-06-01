@@ -27,7 +27,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -139,7 +138,6 @@ public class LoginActivity1 extends AppCompatActivity {
     }//onCreate
 
     private void checkToken() {
-        Log.e("TAG", "checkToken: ");
         if (LocalNotificationReceiver.logoutAlarm) {
             View view = findViewById(android.R.id.content);
             snackbar = Snackbar.make(view, "Session has been Log out Please Retry", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
@@ -170,7 +168,9 @@ public class LoginActivity1 extends AppCompatActivity {
                             if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();
                             }
-                            if (response.getString("geoLeveLDesc").equals("E ZONE")) {
+                            // Login condition check for Ezone
+                            if (response.getString("geoLeveLDesc").equals("E ZONE"))
+                            {
                                 Log.e("Ezone login....", "");
 
                                 Long notificationTime = System.currentTimeMillis() + 1800000; //30 minutes
@@ -178,18 +178,19 @@ public class LoginActivity1 extends AppCompatActivity {
                                 setLocalnotification(context, notificationTime);
                                 String username = response.getString("loginName");
                                 String password = response.getString("password");
-                                String userid = response.getString("userId");
+                                userId = response.getString("userId");
                                 String bearerToken = response.getString("bearerToken");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
 
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", username);
                                 editor.putString("password", password);
-                                editor.putString("userId", userid);
+                                editor.putString("userId", userId);
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
                                 editor.apply();
-                                if (log_flag) {
+                                if (log_flag)
+                                {
                                     editor.putBoolean("log_flag", true);
                                     editor.putString("authcode", auth_code);
 
@@ -197,15 +198,18 @@ public class LoginActivity1 extends AppCompatActivity {
                                     editor.apply();
 
                                 }
-                                Intent intent = new Intent(LoginActivity1.this, DashBoardActivity1.class);
+                                Intent intent = new Intent(LoginActivity1.this, DashBoardActivity.class);
                                 intent.putExtra("from", "login");
                                 intent.putExtra("BACKTO", "login");
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 startActivity(intent);
-
-                            } else {
+                                finish();
+                            }
+                            // Login condition check for Fashion At BB
+                            else
+                            {
                                 Log.e("Fashion At BB login...", "");
                                 if (Reusable_Functions.chkStatus(context)) {
                                     Reusable_Functions.sDialog(context, "Fetching store code...");
@@ -247,9 +251,9 @@ public class LoginActivity1 extends AppCompatActivity {
         queue.add(postRequest);
 
     }
-
-    private void requestLoginWithStoreAPI() {
-
+    // Login with store code list
+    private void requestLoginWithStoreAPI()
+    {
         String url = ConstsCore.web_url + "/v1/login?storeCode=" + SelectedStoreCode.replace(" ", "%20"); //ConstsCore.web_url+ + "/v1/login/userId";
         Log.e("url store :", "" + url);
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
@@ -258,26 +262,30 @@ public class LoginActivity1 extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.e("Store response :", "" + response);
                         try {
-                            if (response == null || response.equals("")) {
+                            if (response == null || response.equals(""))
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(LoginActivity1.this, "Invalid user", Toast.LENGTH_LONG).show();
                                 return;
                             }
 
                             // when store code fetched it will go second condition.
-                            if (!firstLogin) {
+                            if (!firstLogin)
+                            {
                                 String username = response.getString("loginName");
                                 String password = response.getString("password");
                                 String userId = response.getString("userId");
                                 String bearerToken = response.getString("bearerToken");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
                                 requestLoginFBBAPI(bearerToken, userId);
-                            } else {
+                            }
+                            else
+                            {
                                 Long notificationTime = System.currentTimeMillis() + 18000000; //300 minutes
                                 setLocalnotification(context, notificationTime);
                                 String username = response.getString("loginName");
                                 String password = response.getString("password");
-                                String userId = response.getString("userId");
+                                userId = response.getString("userId");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
                                 Log.e("geoLeveLDesc :", "" + geoLeveLDesc);
                                 String bearerToken = response.getString("bearerToken");
@@ -290,22 +298,24 @@ public class LoginActivity1 extends AppCompatActivity {
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
                                 editor.apply();
-                                if (log_flag) {
+                                if (log_flag)
+                                {
                                     editor.putBoolean("log_flag", true);
                                     editor.putString("authcode", auth_code);
                                     editor.apply();
                                 }
                                 Reusable_Functions.hDialog();
-
-                                Intent intent = new Intent(LoginActivity1.this, DashBoardActivity1.class);
+                                Intent intent = new Intent(LoginActivity1.this, DashBoardActivity.class);
                                 intent.putExtra("from", "login");
                                 intent.putExtra("BACKTO", "login");
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 startActivity(intent);
+                                finish();
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
                             Toast.makeText(context, "data failed...." + e.getMessage(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
@@ -335,7 +345,9 @@ public class LoginActivity1 extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    private void requestLoginFBBAPI(final String bearerToken, String userId) {
+    // APi for store code list
+    private void requestLoginFBBAPI(final String bearerToken, String userId)
+    {
         String url = ConstsCore.web_url + "/v1/login/userstores/" + userId; //ConstsCore.web_url+ + "/v1/login/userId";
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -495,6 +507,7 @@ public class LoginActivity1 extends AppCompatActivity {
         }
 
     }
+    
 
 
 }

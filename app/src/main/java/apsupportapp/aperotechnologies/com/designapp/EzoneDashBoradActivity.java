@@ -1,8 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -11,11 +9,11 @@ import android.widget.TextView;
 /**
  * Created by pamrutkar on 18/05/17.
  */
-public class EzoneDashBoradActivity extends DashBoardActivity1
+public class EzoneDashBoradActivity extends DashBoardActivity
 {
-        public void Ezone_DshBoard(ViewGroup view)
+        public void Ezone_DshBoard(View view)
         {
-            TextView textView = (TextView)findViewById(R.id.textView1);
+            TextView textView = (TextView)view.findViewById(R.id.textView1);
             textView.setText("Welcome");
         }
 }

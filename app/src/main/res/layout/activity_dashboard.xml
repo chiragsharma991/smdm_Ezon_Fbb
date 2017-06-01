@@ -8,10 +8,7 @@
               android:orientation="vertical"
               app:layout_behavior="@string/appbar_scrolling_view_behavior"
               tools:context="apsupportapp.aperotechnologies.com.designapp.DashBoardActivity">
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
        <ScrollView
         android:id="@+id/scrollView"
@@ -1825,5 +1822,4 @@
 
         </RelativeLayout>
     </ScrollView>
-    </LinearLayout>
 </LinearLayout>

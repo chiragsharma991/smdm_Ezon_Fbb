@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
 import org.json.JSONArray;
 
@@ -60,78 +62,381 @@ import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPager
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,View.OnClickListener {
 
-    SegmentedGroup segmentedGroupSales;
-    LinearLayout llayoutSalesAnalysis;
-    SalesAnalysisListDisplay salesAnalysisClass;
-    public static SalesAnalysisViewPagerValue salesAnalysis;
-    ArrayList<SalesAnalysisViewPagerValue> analysisArrayList, salesList;
-    ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList;
-    ViewPager vwpagersales;
-    LinearLayout lldots, llhierarchy;
-    RelativeLayout relLayoutSales;
-    RecyclerView listView_SalesAnalysis;
+
+    JsonArrayRequest postRequest,ez_postRequest;
+    ArrayList<SalesAnalysisViewPagerValue> analysisArrayList, salesList,ez_sales_header_array;
+    ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList,ez_sales_detalis_array;
+    SalesAnalysisListDisplay salesAnalysisClass,ez_sales_detail_model;
     SalesAnalysisSnapAdapter salesadapter;
-    Context context;
+    EzoneSalesAdapter ez_sales_adapter;
+    public static SalesAnalysisViewPagerValue salesAnalysis,ez_sales_header_model;
     SalesPagerAdapter pageradapter;
+    EzoneSalesPagerAdapter ez_sales_pager_adapter;
+    Gson gson;
+    public static Activity SalesAnalysisActivity;
+    Context context;
+
+    // Fashion At BB Elements Declaration
+    SegmentedGroup segmentedGroupSales;
+    ViewPager vwpagersales;
+    LinearLayout lldots, llhierarchy,llayoutSalesAnalysis;
+    RecyclerView listView_SalesAnalysis;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken;
+    String userId, bearertoken,geoLeveLDesc;
     EditText etListText;
-    RelativeLayout btnBack;
     RadioButton btnWTD, btnL4W, btnLW, btnYTD;
     public static String selectedsegValue ;
-    String saleFirstVisibleItem;
-    String fromWhere = "Department";
-    TextView txtStoreCode, txtStoreDesc;
-    int offsetvalue = 0, limit = 100;
-    int count = 0;
+    String saleFirstVisibleItem , fromWhere = "Department" , val , txtSalesClickedValue;
+    TextView txtStoreCode, txtStoreDesc, txtheaderplanclass, txthDeptName;;
     public static int level = 1;
     RequestQueue queue;
-    static String planDept, planCategory, planClass;
-    Gson gson;
-    RelativeLayout relimgrank, relimgfilter;
-    RelativeLayout Style_loadingBar;
-    RelativeLayout relprevbtn, relnextbtn, relimgclose;
-    TextView txtheaderplanclass;
-    TextView txtZonalSales, txtNationalSales;
-    TextView txtZonalYOY, txtNationalYOY;
-    TextView txthDeptName;
-    int selFirstPositionValue = 0;
-    String txtSalesClickedValue;
-    String val;
-    boolean flag = false, onClickFlag = false, filter_toggleClick = false;
-    int currentVmPos;
+    private String planDept, planCategory, planClass;
+    RelativeLayout relimgrank, relimgfilter , relprevbtn , relnextbtn ,relLayoutSales,btnBack;
+    int selFirstPositionValue = 0,currentVmPos,totalItemCount,firstVisibleItem,offsetvalue = 0,limit = 100, count = 0,currentState = RecyclerView.SCROLL_STATE_IDLE,prevState = RecyclerView.SCROLL_STATE_IDLE;
+    boolean  onClickFlag = false, filter_toggleClick = false;
     ProgressBar progressBar1;
-    JsonArrayRequest postRequest;
-    int firstVisibleItem ;
-    public int totalItemCount;
-    int prevState = RecyclerView.SCROLL_STATE_IDLE;
-    int currentState = RecyclerView.SCROLL_STATE_IDLE;
-    public static Activity SalesAnalysisActivity;
+
+    // Ezone Elements Declaration
+    public static String ez_segment_val;
+    SegmentedGroup ez_segmentgrp;
+    RelativeLayout rel_ez_back,rel_ez_sort,rel_ez_filter,rel_ez_next,rel_ez_prev;
+    RadioButton btn_ez_LD,btn_ez_WTD,btn_ez_MTD,btn_ez_YTD;
+    TextView txt_ez_header;
+    RecyclerView recyclevw_ez_sales;
+    String ez_sale_first_item,ez_fromWhere = "Department",val_hierarchy , ez_sclickedVal;
+    boolean ezone_onClickflg = false;
+    LinearLayout ez_linear_dots, ez_linear_hierarchy;
+    ViewPager ez_viewpager;
+    public static int ezone_level = 1;
+     int ez_firstVisible_no,ez_currentVmPos,ez_sFirstPosVal = 0, ez_totalItemCount;
+    ProgressBar ez_progessBar;
+
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sales_analysis1);
-        getSupportActionBar().hide();
+        context = this;
+        SalesAnalysisActivity = this;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        userId = sharedPreferences.getString("userId", "");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc","");
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        Network network = new BasicNetwork(new HurlStack());
+        queue = new RequestQueue(cache, network);
+        queue.start();
+        gson = new Gson();
+        if(geoLeveLDesc.equals("E ZONE")) {
+            //when geoLevelDesc is Ezone
+            setContentView(R.layout.activity_ezone_sales);
+            getSupportActionBar().hide();
+            initialize_ez_ui();
+            if (Reusable_Functions.chkStatus(context)) {
+                Reusable_Functions.sDialog(context, "Loading...");
+                ez_progessBar.setVisibility(View.GONE);
+                ez_linear_hierarchy.setVisibility(View.GONE);
+                offsetvalue = 0;
+                limit = 100;
+                count = 0;
+                ezone_level = 1;
+                requestEzoneSalesDetailAPI();
+            } else {
+                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                ez_progessBar.setVisibility(View.GONE);
+            }
+            // Scroll listener on Recycle View
+            recyclevw_ez_sales.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    currentState = newState;
+                    if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE && !ezone_onClickflg) {
+                        Handler h = new Handler();
+                        h.postDelayed(new Runnable()
+                        {
+                            public void run()
+                            {
+                                if (!ezone_onClickflg) {
+                                    TimeUP();
+                                }
+                            }
+                        }, 700);
+                    }
+                    prevState = currentState;
+                }
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+                {
+                    super.onScrolled(recyclerView, dx, dy);
+                    RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+                    ez_totalItemCount = mRecyclerViewHelper.getItemCount();
+                    ez_firstVisible_no = mRecyclerViewHelper.findFirstVisibleItemPosition();
+                }
+            });
+        }
+        else
+        {
+            // when geoLevelDesc is FBB
+            setContentView(R.layout.activity_sales_analysis1);
+            getSupportActionBar().hide();
+            initialize_fbb_ui();
+            if (Reusable_Functions.chkStatus(context)) {
+                Reusable_Functions.sDialog(context, "Loading...");
+                progressBar1.setVisibility(View.GONE);
+                llhierarchy.setVisibility(View.GONE);
+                offsetvalue = 0;
+                limit = 100;
+                count = 0;
+                level = 1;
+                if (getIntent().getStringExtra("selectedDept") == null) {
+                    filter_toggleClick = false;
+                    retainSegmentValuesFilter();
+                    requestSalesListDisplayAPI();
+                } else if (getIntent().getStringExtra("selectedDept") != null) {
+                    String selectedString = getIntent().getStringExtra("selectedDept");
+                    filter_toggleClick = true;
+                    retainSegmentValuesFilter();
+                    requestSalesSelectedFilterVal(selectedString);
+                }
+            }
+            else
+            {
+                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                progressBar1.setVisibility(View.GONE);
+            }
+
+            // scroll event on reccycle view (Fashion At BB)
+            listView_SalesAnalysis.addOnScrollListener(new RecyclerView.OnScrollListener()
+            {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+                {
+                    RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+                    totalItemCount = mRecyclerViewHelper.getItemCount();
+                    firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
+                }
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+                {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    currentState = newState;
+                    if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE && !onClickFlag) {
+                        Handler h = new Handler();
+                        h.postDelayed(new Runnable()
+                        {
+                            public void run()
+                            {
+                                if (!onClickFlag) {
+                                    TimeUP();
+                                }
+                            }
+                        }, 700);
+                    }
+                    prevState = currentState;
+
+                }
+            });
+
+            //Drill Down hierarchy
+            listView_SalesAnalysis.addOnItemTouchListener(
+                    new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, final int position) {
+                            if (progressBar1.getVisibility() == View.VISIBLE) {
+                                return;
+                            } else {
+                                onClickFlag = true;
+                                Handler h = new Handler();
+                                h.postDelayed(new Runnable() {
+                                    public void run()
+                                    {
+                                        if (position < salesAnalysisClassArrayList.size())
+                                        {
+                                            switch (txtheaderplanclass.getText().toString())
+                                            {
+                                                case "Department":
+                                                    relprevbtn.setVisibility(View.VISIBLE);
+                                                    txtheaderplanclass.setText("Subdept");
+                                                    txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
+                                                    fromWhere = "Subdept";
+                                                    if (lldots != null)
+                                                    {
+                                                        lldots.removeAllViews();
+                                                    }
+                                                    currentVmPos = vwpagersales.getCurrentItem();
+                                                    level = 2;
+                                                    if (Reusable_Functions.chkStatus(context)) {
+                                                        if (postRequest != null) {
+                                                            postRequest.cancel();
+                                                        }
+                                                        Reusable_Functions.hDialog();
+                                                        Reusable_Functions.sDialog(context, "Loading data...");
+                                                        progressBar1.setVisibility(View.GONE);
+                                                        offsetvalue = 0;
+                                                        limit = 100;
+                                                        count = 0;
+                                                        salesAnalysisClassArrayList.clear();
+                                                        requestSalesCategoryList(txtSalesClickedValue);
+                                                        planDept = txtSalesClickedValue;
+
+                                                    } else {
+                                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    break;
+
+                                                case "Subdept":
+                                                    txtheaderplanclass.setText("Class");
+                                                    txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
+                                                    fromWhere = "Class";
+                                                    if (lldots != null) {
+                                                        lldots.removeAllViews();
+                                                    }
+                                                    currentVmPos = vwpagersales.getCurrentItem();
+                                                    level = 3;
+                                                    if (Reusable_Functions.chkStatus(context)) {
+                                                        if (postRequest != null) {
+                                                            postRequest.cancel();
+                                                        }
+                                                        Reusable_Functions.hDialog();
+                                                        Reusable_Functions.sDialog(context, "Loading data...");
+                                                        progressBar1.setVisibility(View.GONE);
+                                                        offsetvalue = 0;
+                                                        limit = 100;
+                                                        count = 0;
+                                                        salesAnalysisClassArrayList.clear();
+                                                        requestSalesPlanClassListAPI(txtSalesClickedValue);
+                                                        planCategory = txtSalesClickedValue;
+                                                    } else {
+                                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                    break;
+
+                                                case "Class":
+                                                    txtheaderplanclass.setText("Subclass");
+                                                    txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
+                                                    fromWhere = "Subclass";
+                                                    if (lldots != null) {
+                                                        lldots.removeAllViews();
+                                                    }
+                                                    currentVmPos = vwpagersales.getCurrentItem();
+                                                    level = 4;
+                                                    if (Reusable_Functions.chkStatus(context)) {
+                                                        if (postRequest != null) {
+                                                            postRequest.cancel();
+                                                        }
+                                                        Reusable_Functions.hDialog();
+                                                        Reusable_Functions.sDialog(context, "Loading data...");
+                                                        progressBar1.setVisibility(View.GONE);
+                                                        offsetvalue = 0;
+                                                        limit = 100;
+                                                        count = 0;
+                                                        salesAnalysisClassArrayList.clear();
+                                                        requestSalesBrandListAPI(txtSalesClickedValue);
+                                                        planClass = txtSalesClickedValue;
+                                                    } else {
+                                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                    break;
+
+                                                case "Subclass":
+                                                    relnextbtn.setVisibility(View.INVISIBLE);
+                                                    txtheaderplanclass.setText("MC");
+                                                    txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
+                                                    fromWhere = "MC";
+                                                    if (lldots != null) {
+                                                        lldots.removeAllViews();
+                                                    }
+                                                    currentVmPos = vwpagersales.getCurrentItem();
+                                                    level = 5;
+                                                    if (Reusable_Functions.chkStatus(context)) {
+                                                        if (postRequest != null) {
+                                                            postRequest.cancel();
+                                                        }
+                                                        Reusable_Functions.hDialog();
+                                                        Reusable_Functions.sDialog(context, "Loading data...");
+                                                        progressBar1.setVisibility(View.GONE);
+                                                        offsetvalue = 0;
+                                                        limit = 100;
+                                                        count = 0;
+                                                        salesAnalysisClassArrayList.clear();
+                                                        requestSalesBrandPlanListAPI(txtSalesClickedValue);
+                                                    } else {
+                                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    break;
+                                                default:
+                                                    Reusable_Functions.hDialog();
+                                                    Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
+                                                    onClickFlag = false;
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                }, 700);
+                            }
+                        }
+                    }));
+        }
+    }
+
+    private void initialize_ez_ui()
+    {
+        ez_fromWhere = "Department";
+        ez_segment_val = "LD";
+        ez_firstVisible_no = 0;
+        ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+        ez_progessBar =(ProgressBar)findViewById(R.id.ez_progressBar);
+        ez_linear_dots = (LinearLayout)findViewById(R.id.ez_linear_dots);
+        ez_linear_dots.setOrientation(LinearLayout.HORIZONTAL);
+        ez_linear_hierarchy = (LinearLayout)findViewById(R.id.ez_linear_hierarchy);
+        ez_viewpager = (ViewPager)findViewById(R.id.ez_viewpager);
+        recyclevw_ez_sales = (RecyclerView)findViewById(R.id.recyclevw_ez_sales);
+        txt_ez_header = (TextView)findViewById(R.id.txt_ez_header);
+        ez_segmentgrp = (SegmentedGroup)findViewById(R.id.ez_segmentedGrp);
+        ez_segmentgrp.setOnCheckedChangeListener(this);
+        rel_ez_prev = (RelativeLayout)findViewById(R.id.rel_ez_prev);
+        rel_ez_next = (RelativeLayout)findViewById(R.id.rel_ez_next);
+        rel_ez_back = (RelativeLayout)findViewById(R.id.rel_ez_back);
+        rel_ez_filter =(RelativeLayout)findViewById(R.id.rel_ez_filter);
+        rel_ez_sort = (RelativeLayout)findViewById(R.id.rel_ez_sort);
+        btn_ez_LD = (RadioButton)findViewById(R.id.btn_ez_Ld);
+        btn_ez_LD.toggle();
+        btn_ez_MTD = (RadioButton)findViewById(R.id.btn_ez_Mtd);
+        btn_ez_WTD = (RadioButton)findViewById(R.id.btn_ez_Wtd);
+        btn_ez_YTD = (RadioButton)findViewById(R.id.btn_ez_Ytd);
+        TabLayout tab=(TabLayout)findViewById(R.id.ez_dotTab);
+        tab.setupWithViewPager(ez_viewpager, true);
+        ez_sales_pager_adapter = new EzoneSalesPagerAdapter();
+        ez_sales_pager_adapter.notifyDataSetChanged();
+        ez_sales_adapter = new EzoneSalesAdapter();
+        rel_ez_sort.setOnClickListener(this);
+        rel_ez_filter.setOnClickListener(this);
+        rel_ez_back.setOnClickListener(this);
+        rel_ez_next.setOnClickListener(this);
+        rel_ez_prev.setOnClickListener(this);
+
+    }
+
+    private void initialize_fbb_ui()
+    {
         fromWhere = "Department";
         txtSalesClickedValue = " ";
         selectedsegValue = "WTD";
         val = "";
-        context = this;
-        SalesAnalysisActivity = this;
         firstVisibleItem = 0;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        userId = sharedPreferences.getString("userId", "");
-        bearertoken = sharedPreferences.getString("bearerToken", "");
         etListText = (EditText) findViewById(R.id.etListText);
-        Style_loadingBar = (RelativeLayout) findViewById(R.id.style_loadingBar);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         //hierarchy header
         txthDeptName = (TextView) findViewById(R.id.txthDeptName);
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
+        btnBack.setOnClickListener(this);
         segmentedGroupSales = (SegmentedGroup) findViewById(R.id.segmentedGrp);
         segmentedGroupSales.setOnCheckedChangeListener(this);
         btnWTD = (RadioButton) findViewById(R.id.btnWTD);
@@ -140,33 +445,16 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         btnYTD = (RadioButton) findViewById(R.id.btnYTD);
         llayoutSalesAnalysis = (LinearLayout) findViewById(R.id.llayoutSalesAnalysis);
         relimgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
+        relimgfilter.setOnClickListener(this);
         relimgrank = (RelativeLayout) findViewById(R.id.imgrank);
         relprevbtn = (RelativeLayout) findViewById(R.id.prevplanclass);
+        relprevbtn.setOnClickListener(this);
         relprevbtn.setVisibility(View.INVISIBLE);
         relnextbtn = (RelativeLayout) findViewById(R.id.nextplanclass);
+        relnextbtn.setOnClickListener(this);
         txtheaderplanclass = (TextView) findViewById(R.id.headerplanclass);
         progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
-        txtZonalSales = (TextView) findViewById(R.id.txtZonalSales);
-        txtNationalSales = (TextView) findViewById(R.id.txtNationalSales);
-
         txtheaderplanclass.setText("Department");
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-
-            }
-        });
-        relimgfilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SalesAnalysisActivity1.this, SalesFilterActivity.class);
-                intent.putExtra("checkfrom", "SalesAnalysis");
-                startActivity(intent);
-
-            }
-        });
         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
         analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
         salesList = new ArrayList<SalesAnalysisViewPagerValue>();
@@ -175,56 +463,262 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         pageradapter.notifyDataSetChanged();
         lldots = (LinearLayout) findViewById(R.id.lldots);
         lldots.setOrientation(LinearLayout.HORIZONTAL);
-
         TabLayout tab=(TabLayout)findViewById(R.id.dotTab);
         tab.setupWithViewPager(vwpagersales, true);
-
         llhierarchy = (LinearLayout) findViewById(R.id.llhierarchy);
         llhierarchy.setOrientation(LinearLayout.HORIZONTAL);
         relLayoutSales = (RelativeLayout) findViewById(R.id.relTablelayout);
-
         listView_SalesAnalysis = (RecyclerView) findViewById(R.id.listView_SalesAnalysis);
-
         salesadapter = new SalesAnalysisSnapAdapter();
+    }
 
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        Network network = new BasicNetwork(new HurlStack());
-        queue = new RequestQueue(cache, network);
-        queue.start();
-        gson = new Gson();
-
-        if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading...");
-            progressBar1.setVisibility(View.GONE);
-            llhierarchy.setVisibility(View.GONE);
-            offsetvalue = 0;
-            limit = 100;
-            count = 0;
-            level = 1;
-            if (getIntent().getStringExtra("selectedDept") == null)
-            {
-                filter_toggleClick = false;
-                retainSegmentValuesFilter();
-                requestSalesListDisplayAPI();
-            }
-            else if (getIntent().getStringExtra("selectedDept") != null)
-            {
-                String selectedString = getIntent().getStringExtra("selectedDept");
-                filter_toggleClick = true;
-                retainSegmentValuesFilter();
-                requestSalesSelectedFilterVal(selectedString);
-            }
-        } else
-        {
-            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            progressBar1.setVisibility(View.GONE);
+    // Retain values for segment click
+    private void retainSegmentValuesFilter()
+    {
+        filter_toggleClick = true;
+        switch (selectedsegValue) {
+            case "WTD":
+                btnWTD.toggle();
+                break;
+            case "LW":
+                btnLW.toggle();
+                break;
+            case "L4W":
+                btnL4W.toggle();
+                break;
+            case "STD":
+                btnYTD.toggle();
+                break;
         }
+    }
 
-        // Previous button click
-        relprevbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+    private void TimeUP()
+    {
+        if(geoLeveLDesc.equals("E ZONE"))
+        {
+            if (ez_sales_detalis_array.size() != 0)
+            {
+                if (ez_firstVisible_no < ez_sales_detalis_array.size() && !ezone_onClickflg) {
+
+                    if (txt_ez_header.getText().toString().equals("Department"))
+                    {
+                        ezone_level = 1;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+
+                    } else if (txt_ez_header.getText().toString().equals("Subdept"))
+                    {
+                        ezone_level = 2;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                    }
+                    else if (txt_ez_header.getText().toString().equals("Class"))
+                    {
+                        ezone_level = 3;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                    }
+                    else if (txt_ez_header.getText().toString().equals("Subclass"))
+                    {
+                        ezone_level = 4;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                    }
+                    else if (txt_ez_header.getText().toString().equals("MC"))
+                    {
+                        ezone_level = 5;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                    }
+                    if (Reusable_Functions.chkStatus(context)) {
+//                        Reusable_Functions.hDialog();
+                        ez_currentVmPos = ez_viewpager.getCurrentItem();
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+
+                        if (ez_firstVisible_no != ez_sFirstPosVal) {
+                            if (ez_postRequest != null)
+                            {
+                                ez_postRequest.cancel();
+                            }
+                            ez_progessBar.setVisibility(View.VISIBLE);
+                            if (ez_sale_first_item.equals("All"))
+                            {
+                                requestEzoneSalesHeaderAPI();
+                            }
+                            else
+                            {
+                                requestEzoneSalesPagerOnScrollAPI();
+                            }
+                            ez_sFirstPosVal = ez_firstVisible_no;
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                } else
+                {
+                    ez_firstVisible_no = ez_sales_detalis_array.size() - 1;
+                    LinearLayoutManager llm = (LinearLayoutManager) recyclevw_ez_sales.getLayoutManager();
+                    llm.scrollToPosition(ez_firstVisible_no);
+
+                    if (txt_ez_header.getText().toString().equals("Department"))
+                    {
+                        ezone_level = 1;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+
+                    } else if (txt_ez_header.getText().toString().equals("Subdept"))
+                    {
+                        ezone_level = 2;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                    }
+                    else if (txt_ez_header.getText().toString().equals("Class"))
+                    {
+                        ezone_level = 3;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                    }
+                    else if (txt_ez_header.getText().toString().equals("Subclass"))
+                    {
+                        ezone_level = 4;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                    }
+                    else if (txt_ez_header.getText().toString().equals("MC"))
+                    {
+                        ezone_level = 5;
+                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                    }
+                    if (Reusable_Functions.chkStatus(context))
+                    {
+                      //  Reusable_Functions.hDialog();
+                        ez_currentVmPos = ez_viewpager.getCurrentItem();
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+
+                        if (ez_firstVisible_no != ez_sFirstPosVal) {
+                            if (ez_postRequest != null)
+                            {
+                                ez_postRequest.cancel();
+                            }
+                            ez_progessBar.setVisibility(View.VISIBLE);
+                            if (ez_sale_first_item.equals("All"))
+                            {
+                                requestEzoneSalesHeaderAPI();
+                            }
+                            else
+                            {
+                                requestEzoneSalesPagerOnScrollAPI();
+                            }
+                            ez_sFirstPosVal = ez_firstVisible_no;
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }// end of if loop
+        }
+        else   // condition for Fashion at BB
+        {
+            if (salesAnalysisClassArrayList.size() != 0)
+            {
+                if (firstVisibleItem < salesAnalysisClassArrayList.size() && !onClickFlag) {
+
+                    if (txtheaderplanclass.getText().toString().equals("Department")) {
+                        level = 1;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
+                    } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                        level = 2;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
+                    } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                        level = 3;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
+                    } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                        level = 4;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
+                    } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                        level = 5;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
+                    }
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+
+                        if (firstVisibleItem != selFirstPositionValue) {
+                            if (postRequest != null) {
+                                postRequest.cancel();
+                            }
+                            progressBar1.setVisibility(View.VISIBLE);
+                            if (saleFirstVisibleItem.equals("All")) {
+                                requestSalesViewPagerValueAPI();
+                            } else {
+                                requestSalesPagerOnScrollAPI();
+                            }
+                            selFirstPositionValue = firstVisibleItem;
+                        }
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    firstVisibleItem = salesAnalysisClassArrayList.size() - 1;
+                    LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
+                    llm.scrollToPosition(firstVisibleItem);
+                    if (txtheaderplanclass.getText().toString().equals("Department")) {
+                        level = 1;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
+                    } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                        level = 2;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
+                    } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                        level = 3;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
+                    } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                        level = 4;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
+                    } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                        level = 5;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
+                    }
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+
+                        if (firstVisibleItem != selFirstPositionValue) {
+                            if (postRequest != null) {
+                                postRequest.cancel();
+                            }
+                            progressBar1.setVisibility(View.VISIBLE);
+                            if (saleFirstVisibleItem.equals("All")) {
+                                requestSalesViewPagerValueAPI();
+
+                            } else {
+                                requestSalesPagerOnScrollAPI();
+                            }
+                            selFirstPositionValue = firstVisibleItem;
+                        }
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }// end of if loop
+        }// end of else loop
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId())
+        {
+            case R.id.prevplanclass :
                 if (postRequest != null)
                 {
                     postRequest.cancel();
@@ -342,14 +836,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             break;
                     }
                 }
-            }
-        });
-
-        // Next Button click
-        relnextbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (postRequest != null) {
+                break;
+            case R.id.nextplanclass :
+                if (postRequest != null)
+                {
                     postRequest.cancel();
                 }
                 if(progressBar1.getVisibility() == View.VISIBLE)
@@ -357,7 +847,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     return;
                 }
                 else {
-                    switch (txtheaderplanclass.getText().toString()) {
+                    switch (txtheaderplanclass.getText().toString())
+                    {
                         case "Department":
                             relprevbtn.setVisibility(View.VISIBLE);
                             txtheaderplanclass.setText("Subdept");
@@ -457,6 +948,141 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 requestSalesListDisplayAPI();
+                            } else
+                            {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                break;
+            case R.id.imgfilter :
+                Intent intent = new Intent(SalesAnalysisActivity1.this, SalesFilterActivity.class);
+                intent.putExtra("checkfrom", "SalesAnalysis");
+                startActivity(intent);
+                break;
+            case R.id.rel_ez_back :
+                onBackPressed();
+                break;
+            case R.id.imageBtnBack:
+                onBackPressed();
+                break;
+            case R.id.rel_ez_prev :
+                if (ez_postRequest != null)
+                {
+                    ez_postRequest.cancel();
+                }
+                if(ez_progessBar.getVisibility() == View.VISIBLE)
+                {
+                    return;
+                }
+                else {
+                    switch (txt_ez_header.getText().toString()) {
+
+                        case "MC":
+                            rel_ez_next.setVisibility(View.VISIBLE);
+                            if (ez_linear_dots != null)
+                            {
+                                ez_linear_dots.removeAllViews();
+                            }
+                            ez_currentVmPos = ez_viewpager.getCurrentItem();
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            txt_ez_header.setText("Subclass");
+                            ez_fromWhere = "Subclass";
+                            ezone_level = 4;
+                            val_hierarchy = "";
+                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                            if (Reusable_Functions.chkStatus(context)) {
+
+                               // Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                ez_progessBar.setVisibility(View.GONE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestEzoneSalesDetailAPI();
+                            } else {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+
+                        case "Subclass":
+
+                            if (ez_linear_dots != null) {
+                                ez_linear_dots.removeAllViews();
+                            }
+                            ez_currentVmPos = ez_viewpager.getCurrentItem();
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            txt_ez_header.setText("Class");
+                            ez_fromWhere = "Class";
+                            ezone_level = 3;
+                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                            recyclevw_ez_sales.removeAllViews();
+                            val_hierarchy = " ";
+                            if (Reusable_Functions.chkStatus(context)) {
+                               // Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                ez_progessBar.setVisibility(View.GONE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestEzoneSalesDetailAPI();
+                            }
+                            else
+                            {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+
+                        case "Class":
+                            if (ez_linear_dots != null) {
+                                ez_linear_dots.removeAllViews();
+                            }
+                            ez_currentVmPos = ez_viewpager.getCurrentItem();
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            txt_ez_header.setText("Subdept");
+                            ez_fromWhere = "Subdept";
+                            ezone_level = 2;
+                            val_hierarchy = " ";
+                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                            recyclevw_ez_sales.removeAllViews();
+                            if (Reusable_Functions.chkStatus(context)) {
+                               // Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                ez_progessBar.setVisibility(View.GONE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestEzoneSalesDetailAPI();
+                            } else {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+
+                        case "Subdept":
+                            rel_ez_prev.setVisibility(View.INVISIBLE);
+                            if (ez_linear_dots != null)
+                            {
+                                ez_linear_dots.removeAllViews();
+                            }
+                            ez_currentVmPos = ez_viewpager.getCurrentItem();
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            txt_ez_header.setText("Department");
+                            ez_fromWhere = "Department";
+                            ezone_level = 1;
+                            val_hierarchy = " ";
+                            ez_sales_detalis_array.clear();
+                            recyclevw_ez_sales.removeAllViews();
+                            if (Reusable_Functions.chkStatus(context)) {
+                               // Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                ez_progessBar.setVisibility(View.GONE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestEzoneSalesDetailAPI();
                             } else {
                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             }
@@ -465,318 +1091,145 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             break;
                     }
                 }
-            }
-        });
-
-
-        listView_SalesAnalysis.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
-                RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
-                totalItemCount = mRecyclerViewHelper.getItemCount();
-                firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
-            }
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                currentState = newState;
-                if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE && !onClickFlag) {
-
-                    Handler h = new Handler();
-                    h.postDelayed(new Runnable() {
-                        public void run() {
-                            if (!onClickFlag) {
-                                TimeUP();
+                break;
+            case R.id.rel_ez_next :
+                if (ez_postRequest != null)
+                {
+                    ez_postRequest.cancel();
+                }
+                if(ez_progessBar.getVisibility() == View.VISIBLE)
+                {
+                    return;
+                }
+                else {
+                    switch (txt_ez_header.getText().toString())
+                    {
+                        case "Department":
+                            rel_ez_prev.setVisibility(View.VISIBLE);
+                            txt_ez_header.setText("Subdept");
+                            if (ez_linear_dots != null) {
+                                ez_linear_dots.removeAllViews();
                             }
-                        }
-                    }, 700);
-                }
-                prevState = currentState;
+                            ez_currentVmPos = ez_viewpager.getCurrentItem();
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            ez_fromWhere = "Subdept";
+                            ezone_level = 2;
+                            val_hierarchy = " ";
+                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                            recyclevw_ez_sales.removeAllViews();
+                            if (Reusable_Functions.chkStatus(context)) {
+                              //  Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                ez_progessBar.setVisibility(View.GONE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestEzoneSalesDetailAPI();
+                            } else
+                            {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
 
-            }
-        });
+                        case "Subdept":
+                            ez_fromWhere = "Class";
+                            txt_ez_header.setText("Class");
+                            ezone_level = 3;
+                            val_hierarchy = " ";
+                            if (ez_linear_dots != null)
+                            {
+                                ez_linear_dots.removeAllViews();
+                            }
+                            ez_currentVmPos = ez_viewpager.getCurrentItem();
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                            recyclevw_ez_sales.removeAllViews();
+                            if (Reusable_Functions.chkStatus(context))
+                            {
+                               // Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                ez_progessBar.setVisibility(View.GONE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestEzoneSalesDetailAPI();
+                            }
+                            else
+                            {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
 
-        //Drill Down hierarchy
-        listView_SalesAnalysis.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, final int position) {
-                        if (progressBar1.getVisibility() == View.VISIBLE) {
-                            return;
-                        } else {
-                            onClickFlag = true;
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
+                        case "Class":
+                            txt_ez_header.setText("Subclass");
+                            ez_fromWhere = "Subclass";
+                            ezone_level = 4;
+                            val_hierarchy = " ";
+                            if (ez_linear_dots != null)
+                            {
+                                ez_linear_dots.removeAllViews();
+                            }
+                            ez_currentVmPos = ez_viewpager.getCurrentItem();
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                            recyclevw_ez_sales.removeAllViews();
+                            if (Reusable_Functions.chkStatus(context)) {
+                               // Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                progressBar1.setVisibility(View.GONE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestEzoneSalesDetailAPI();
+                            } else
+                            {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
 
-                                    if (position < salesAnalysisClassArrayList.size()) {
-                                        switch (txtheaderplanclass.getText().toString()) {
-
-                                            case "Department":
-                                                relprevbtn.setVisibility(View.VISIBLE);
-                                                txtheaderplanclass.setText("Subdept");
-                                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
-
-                                                fromWhere = "Subdept";
-                                                if (lldots != null) {
-                                                    lldots.removeAllViews();
-                                                }
-                                                currentVmPos = vwpagersales.getCurrentItem();
-                                                level = 2;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.hDialog();
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    progressBar1.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    salesAnalysisClassArrayList.clear();
-                                                    requestSalesCategoryList(txtSalesClickedValue);
-                                                    planDept = txtSalesClickedValue;
-
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-                                                break;
-
-                                            case "Subdept":
-                                                txtheaderplanclass.setText("Class");
-                                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
-                                                fromWhere = "Class";
-                                                if (lldots != null) {
-                                                    lldots.removeAllViews();
-                                                }
-                                                currentVmPos = vwpagersales.getCurrentItem();
-                                                level = 3;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.hDialog();
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    progressBar1.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    salesAnalysisClassArrayList.clear();
-                                                    requestSalesPlanClassListAPI(txtSalesClickedValue);
-                                                    planCategory = txtSalesClickedValue;
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-
-                                                break;
-
-                                            case "Class":
-
-                                                txtheaderplanclass.setText("Subclass");
-                                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
-                                                fromWhere = "Subclass";
-                                                if (lldots != null) {
-                                                    lldots.removeAllViews();
-                                                }
-                                                currentVmPos = vwpagersales.getCurrentItem();
-                                                level = 4;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.hDialog();
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    progressBar1.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    salesAnalysisClassArrayList.clear();
-                                                    requestSalesBrandListAPI(txtSalesClickedValue);
-                                                    planClass = txtSalesClickedValue;
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-
-                                                break;
-
-                                            case "Subclass":
-
-                                                relnextbtn.setVisibility(View.INVISIBLE);
-                                                txtheaderplanclass.setText("MC");
-                                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
-                                                fromWhere = "MC";
-                                                if (lldots != null) {
-                                                    lldots.removeAllViews();
-                                                }
-                                                currentVmPos = vwpagersales.getCurrentItem();
-                                                level = 5;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.hDialog();
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    progressBar1.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    salesAnalysisClassArrayList.clear();
-                                                    requestSalesBrandPlanListAPI(txtSalesClickedValue);
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-
-                                                break;
-
-
-                                            default:
-                                                Reusable_Functions.hDialog();
-                                                Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
-                                                onClickFlag = false;
-                                                break;
-
-                                        }
-
-                                    }
-                                }
-                            }, 700);
-                        }
+                        case "Subclass":
+                            txt_ez_header.setText("MC");
+                            rel_ez_next.setVisibility(View.INVISIBLE);
+                            if (ez_linear_dots != null)
+                            {
+                                ez_linear_dots.removeAllViews();
+                            }
+                            ez_currentVmPos = ez_viewpager.getCurrentItem();
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            ez_fromWhere = "MC";
+                            ezone_level = 5;
+                            val_hierarchy = " ";
+                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                            recyclevw_ez_sales.removeAllViews();
+                            if (Reusable_Functions.chkStatus(context)) {
+                               // Reusable_Functions.hDialog();
+                                Reusable_Functions.sDialog(context, "Loading data...");
+                                ez_progessBar.setVisibility(View.GONE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                requestEzoneSalesDetailAPI();
+                            }
+                            else
+                            {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                        default:
+                            break;
                     }
-                }));
-    }
-    // Retain values for segment click
-    private void retainSegmentValuesFilter() {
-        filter_toggleClick = true;
-        switch (selectedsegValue) {
-            case "WTD":
-                btnWTD.toggle();
-
-
-                break;
-            case "LW":
-                btnLW.toggle();
-
-                break;
-            case "L4W":
-                btnL4W.toggle();
-
-                break;
-            case "STD":
-                btnYTD.toggle();
-
-                break;
-        }
-
-    }
-
-
-    private void TimeUP()
-    {
-        if(salesAnalysisClassArrayList.size() != 0) {
-
-            if (firstVisibleItem < salesAnalysisClassArrayList.size() && !onClickFlag) {
-
-                if (txtheaderplanclass.getText().toString().equals("Department")) {
-                    level = 1;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
-                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
-                    level = 2;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
-                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
-                    level = 3;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
-                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
-                    level = 4;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
-                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
-                    level = 5;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
                 }
-                if (Reusable_Functions.chkStatus(context)) {
-                    Reusable_Functions.hDialog();
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    offsetvalue = 0;
-                    limit = 100;
-                    count = 0;
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-
-                    if (firstVisibleItem != selFirstPositionValue) {
-                        if (postRequest != null) {
-                            postRequest.cancel();
-                        }
-                        progressBar1.setVisibility(View.VISIBLE);
-                        if (saleFirstVisibleItem.equals("All")) {
-                            requestSalesViewPagerValueAPI();
-                        } else {
-                            requestSalesPagerOnScrollAPI();
-                        }
-                        selFirstPositionValue = firstVisibleItem;
-                    }
-                } else {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-            else
-            {
-                firstVisibleItem = salesAnalysisClassArrayList.size() - 1;
-                LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
-                llm.scrollToPosition(firstVisibleItem);
-                if (txtheaderplanclass.getText().toString().equals("Department")) {
-                    level = 1;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
-                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
-                    level = 2;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
-                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
-                    level = 3;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
-                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
-                    level = 4;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
-                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
-                    level = 5;
-                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
-                }
-                if (Reusable_Functions.chkStatus(context)) {
-                    Reusable_Functions.hDialog();
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    offsetvalue = 0;
-                    limit = 100;
-                    count = 0;
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-
-                    if (firstVisibleItem != selFirstPositionValue) {
-
-                        if (postRequest != null) {
-                            postRequest.cancel();
-                        }
-                        progressBar1.setVisibility(View.VISIBLE);
-                        if (saleFirstVisibleItem.equals("All")) {
-                            requestSalesViewPagerValueAPI();
-
-                        } else {
-                            requestSalesPagerOnScrollAPI();
-                        }
-                        selFirstPositionValue = firstVisibleItem;
-                    }
-                } else {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                }
-
-            }
+                break;
         }
     }
 
     // on Check change listener on Segment Listener(WTD, YTD,LW and L4W)
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (!filter_toggleClick ) {
-            switch (checkedId) {
-
+        if (!filter_toggleClick)
+        {
+            switch (checkedId)
+            {
                 case R.id.btnWTD:
                     if (selectedsegValue.equals("WTD"))
                         break;
@@ -789,7 +1242,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     currentVmPos = vwpagersales.getCurrentItem();
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                     analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                    if (Reusable_Functions.chkStatus(context)) {
+                    if (Reusable_Functions.chkStatus(context))
+                    {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading data...");
                         progressBar1.setVisibility(View.GONE);
@@ -806,21 +1260,24 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             String str = getIntent().getStringExtra("selectedDept");
                             requestSalesSelectedFilterVal(str);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
                     break;
 
-                case R.id.btnLW:
+                case R.id.btnLW :
                     if (selectedsegValue.equals("LW"))
                         break;
                     selectedsegValue = "LW";
-                    if (lldots != null) {
+                    if (lldots != null)
+                    {
                         lldots.removeAllViews();
                     }
                     currentVmPos = vwpagersales.getCurrentItem();
                     llhierarchy.setVisibility(View.GONE);
-                   salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                     analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
@@ -830,10 +1287,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         limit = 100;
                         count = 0;
                         val = "";
-                        if (getIntent().getStringExtra("selectedDept") == null) {
+                        if (getIntent().getStringExtra("selectedDept") == null)
+                        {
                             requestSalesListDisplayAPI();
 
-                        } else {
+                        } else
+                        {
                             String str = getIntent().getStringExtra("selectedDept");
                             requestSalesSelectedFilterVal(str);
                         }
@@ -843,7 +1302,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     }
                     break;
 
-                case R.id.btnL4W:
+                case R.id.btnL4W :
                     if (selectedsegValue.equals("L4W"))
                         break;
                     selectedsegValue = "L4W";
@@ -851,7 +1310,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     {
                         lldots.removeAllViews();
                     }
-
                     currentVmPos = vwpagersales.getCurrentItem();
                     llhierarchy.setVisibility(View.GONE);
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -883,7 +1341,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     if (selectedsegValue.equals("STD"))
                         break;
                     selectedsegValue = "STD";
-                    if (lldots != null) {
+                    if (lldots != null)
+                    {
                         lldots.removeAllViews();
                     }
                     currentVmPos = vwpagersales.getCurrentItem();
@@ -899,7 +1358,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         limit = 100;
                         count = 0;
                         val = "";
-
                         if (getIntent().getStringExtra("selectedDept") == null)
                         {
                             requestSalesListDisplayAPI();
@@ -909,25 +1367,144 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             String str = getIntent().getStringExtra("selectedDept");
                             requestSalesSelectedFilterVal(str);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
-
                     break;
                 default:
                     break;
-
             }
-        } else {
+        }
+        else
+        {
             filter_toggleClick = false;
         }
+        switch (checkedId)
+        {
+            case R.id.btn_ez_Ld:
+                if (ez_segment_val.equals("LD"))
+                    break;
+                ez_segment_val = "LD";
+                if (ez_linear_dots != null)
+                {
+                    ez_linear_dots.removeAllViews();
+                }
+                ez_linear_hierarchy.setVisibility(View.GONE);
+                ez_currentVmPos = ez_viewpager.getCurrentItem();
+                ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                if (Reusable_Functions.chkStatus(context))
+                {
+                   // Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    ez_progessBar.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    val_hierarchy = "";
+                    requestEzoneSalesDetailAPI();
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.btn_ez_Wtd:
+                if (ez_segment_val.equals("WTD"))
+                    break;
+                ez_segment_val = "WTD";
+                if (ez_linear_dots != null)
+                {
+                    ez_linear_dots.removeAllViews();
+                }
+                ez_linear_hierarchy.setVisibility(View.GONE);
+                ez_currentVmPos = ez_viewpager.getCurrentItem();
+                ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                if (Reusable_Functions.chkStatus(context))
+                {
+                   // Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    ez_progessBar.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    val_hierarchy = "";
+                    requestEzoneSalesDetailAPI();
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.btn_ez_Mtd:
+                if (ez_segment_val.equals("MTD"))
+                    break;
+                ez_segment_val = "MTD";
+                if (ez_linear_dots != null)
+                {
+                    ez_linear_dots.removeAllViews();
+                }
+                ez_linear_hierarchy.setVisibility(View.GONE);
+                ez_currentVmPos = ez_viewpager.getCurrentItem();
+                ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                if (Reusable_Functions.chkStatus(context))
+                {
+                  //  Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    ez_progessBar.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    val_hierarchy = "";
+                    requestEzoneSalesDetailAPI();
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.btn_ez_Ytd:
+                if (ez_segment_val.equals("YTD"))
+                    break;
+                ez_segment_val = "YTD";
+                if (ez_linear_dots != null)
+                {
+                    ez_linear_dots.removeAllViews();
+                }
+                ez_linear_hierarchy.setVisibility(View.GONE);
+                ez_currentVmPos = ez_viewpager.getCurrentItem();
+                ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                if (Reusable_Functions.chkStatus(context))
+                {
+                   // Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    ez_progessBar.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    val_hierarchy = "";
+                    requestEzoneSalesDetailAPI();
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
+    //------------------------------------- API Declaration -------------------------------------------//
 
+    // Api Calling for fashion at bb part.......
     //Api to display class level values(Api 1.20)
-    private void requestSalesListDisplayAPI() {
+    private void requestSalesListDisplayAPI()
+    {
         String url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
-        postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
@@ -1010,34 +1587,40 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 //Retain Values.....
                                 for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
 
-                                    if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                    if (txtheaderplanclass.getText().toString().equals("Department"))
+                                    {
                                         level = 1;
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
-                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().equals(saleFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().equals(saleFirstVisibleItem))
+                                        {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                         }
 
-                                    } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                                    }
+                                    else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
                                         level = 2;
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
-                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().equals(saleFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().equals(saleFirstVisibleItem))
+                                        {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                         }
 
-                                    } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                    }
+                                    else if (txtheaderplanclass.getText().toString().equals("Class")) {
 
                                         level = 3;
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
-                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().equals(saleFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass().equals(saleFirstVisibleItem))
+                                        {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
-
                                         }
 
                                     } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
 
                                         level = 4;
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
-                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().equals(saleFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName().equals(saleFirstVisibleItem))
+                                        {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                         }
 
@@ -1045,21 +1628,23 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                         level = 5;
                                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
-                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().equals(saleFirstVisibleItem)) {
+                                        if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().equals(saleFirstVisibleItem))
+                                        {
                                             listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                         }
                                     }
                                 }
-
-                                if (saleFirstVisibleItem.equals("All")) {
+                                if (saleFirstVisibleItem.equals("All"))
+                                {
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
                                     analysisArrayList.clear();
                                     llhierarchy.setVisibility(View.GONE);
                                     requestSalesViewPagerValueAPI();
-
-                                } else {
+                                }
+                                else
+                                {
                                     llhierarchy.setVisibility(View.GONE);
                                     offsetvalue = 0;
                                     limit = 100;
@@ -1189,8 +1774,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     }
 
     // APi to display view pager value on scroll
-    private void requestSalesPagerOnScrollAPI() {
-
+    private void requestSalesPagerOnScrollAPI()
+    {
         String url = " ";
         saleFirstVisibleItem = saleFirstVisibleItem.replace("%", "%25");
         saleFirstVisibleItem = saleFirstVisibleItem.replace(" ", "%20").replace("&", "%26");
@@ -1282,7 +1867,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
-
+     // hierarchy api calling for subdept , class ,subclass , MC
     private void requestSalesCategoryList(final String deptName) {
         String salespvacategory_listurl ;
         salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
@@ -1420,7 +2005,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
                                 }
 
-                                for (int i = 0; i < 3; i++) {
+                                for (int i = 0; i < 3; i++)
+                                {
                                     ImageView imgdot = new ImageView(context);
                                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
                                     layoutParams.setMargins(3, 3, 3, 3);
@@ -1674,10 +2260,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         }
                     }
                 }
-
-                ,
+               ,
                 new Response.ErrorListener()
-
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -1688,9 +2272,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         error.printStackTrace();
                     }
                 }
-
         )
-
         {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -1699,9 +2281,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
-        }
-
-        ;
+        };
         int socketTimeout = 60000;//5 seconds
 
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
@@ -1710,56 +2290,61 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     }
 
 
-    private void requestSalesSelectedFilterVal(final String str) {
-
+    private void requestSalesSelectedFilterVal(final String str)
+    {
         String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + SalesFilterActivity.level_filter + str + "&offset=" + offsetvalue + "&limit=" + limit;
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        if (SalesFilterActivity.level_filter == 2) {
+                        if (SalesFilterActivity.level_filter == 2)
+                        {
                             txtheaderplanclass.setText("Subdept");
                             fromWhere = "Subdept";
                             relprevbtn.setVisibility(View.VISIBLE);
-
-                        } else if (SalesFilterActivity.level_filter == 3) {
+                        }
+                        else if (SalesFilterActivity.level_filter == 3)
+                        {
                             txtheaderplanclass.setText("Class");
                             fromWhere = "Class";
                             relprevbtn.setVisibility(View.VISIBLE);
 
-
-                        } else if (SalesFilterActivity.level_filter == 4) {
+                        }
+                        else if (SalesFilterActivity.level_filter == 4)
+                        {
                             txtheaderplanclass.setText("Subclass");
                             fromWhere = "Subclass";
                             relprevbtn.setVisibility(View.VISIBLE);
 
-
-                        } else if (SalesFilterActivity.level_filter == 5) {
+                       }
+                        else if (SalesFilterActivity.level_filter == 5)
+                        {
                             txtheaderplanclass.setText("MC");
                             fromWhere = "MC";
                             relprevbtn.setVisibility(View.VISIBLE);
                             relnextbtn.setVisibility(View.INVISIBLE);
-
-
-                        } else if (SalesFilterActivity.level_filter == 6) {
-                            txtheaderplanclass.setText("MC");
-                            fromWhere = "MC";
-                            relprevbtn.setVisibility(View.VISIBLE);
-                            relnextbtn.setVisibility(View.INVISIBLE);
-
                         }
-
-                        try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-
+                        else if (SalesFilterActivity.level_filter == 6)
+                        {
+                            txtheaderplanclass.setText("MC");
+                            fromWhere = "MC";
+                            relprevbtn.setVisibility(View.VISIBLE);
+                            relnextbtn.setVisibility(View.INVISIBLE);
+                        }
+                        try
+                        {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
 
-                            } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                            } else if (response.length() == limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
 
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
@@ -1770,20 +2355,19 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 requestSalesSelectedFilterVal(str);
 
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
                                 }
-
-                                for (int i = 0; i < 3; i++) {
+                                for (int i = 0; i < 3; i++)
+                                {
                                     ImageView imgdot = new ImageView(context);
                                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
                                     layoutParams.setMargins(3, 3, 3, 3);
                                     imgdot.setLayoutParams(layoutParams);
                                     imgdot.setImageResource(R.mipmap.dots_unselected);
                                     lldots.addView(imgdot);
-
                                 }
                                 int currentItem = vwpagersales.getCurrentItem();
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
@@ -1841,7 +2425,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -1858,6 +2441,388 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         queue.add(postRequest);
     }
 
+    // Api calling functionality for E-zone module...
+    private void requestEzoneSalesDetailAPI()
+    {
+       String url = ConstsCore.web_url +"/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level  + "&offset=" + offsetvalue + "&limit=" + limit;
+       Log.e("Ezone Detail Url ",""+url);
+      //  String url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
+       ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.e("Ezone detail api response :",""+response);
+                try {
+                    int i;
+                    if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        ezone_onClickflg = false;
+                        ez_progessBar.setVisibility(View.GONE);
+                    } else if (response.length() == limit)
+                    {
+                        for (i = 0; i < response.length(); i++)
+                        {
+                            ez_sales_detail_model = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
+                            ez_sales_detalis_array.add(ez_sales_detail_model);
+                            ez_sales_adapter.addSnap(ez_sales_detail_model);
+
+                        }
+                        offsetvalue = (limit * count) + limit;
+                        count++;
+                        requestSalesListDisplayAPI();
+
+                    } else if (response.length() < limit) {
+                        for (i = 0; i < response.length(); i++)
+                        {
+                            ez_sales_detail_model = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
+                            ez_sales_detalis_array.add(ez_sales_detail_model);
+                            ez_sales_adapter.addSnap(ez_sales_detail_model);
+                        }
+                        for (i = 0; i < 3; i++)
+                        {
+                            ImageView imgdot = new ImageView(context);
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
+                            layoutParams.setMargins(3, 3, 3, 3);
+                            imgdot.setLayoutParams(layoutParams);
+                            imgdot.setImageResource(R.mipmap.dots_unselected);
+                            ez_linear_dots.addView(imgdot);
+                        }
+                        final int currentItem = ez_viewpager.getCurrentItem();
+                        ImageView img = (ImageView) ez_linear_dots.getChildAt(currentItem);
+                        img.setImageResource(R.mipmap.dots_selected);
+
+                        // For Add "All"
+                        ez_sales_detail_model = new SalesAnalysisListDisplay();
+                        if (txt_ez_header.getText().toString().equals("Department"))
+                        {
+                            ez_sales_detail_model.setLevel("All");
+
+                        } else if (txt_ez_header.getText().toString().equals("Subdept"))
+                        {
+                            ez_sales_detail_model.setLevel("All");
+
+                        } else if (txt_ez_header.getText().toString().equals("Class"))
+                        {
+                            ez_sales_detail_model.setLevel("All");
+
+                        } else if (txt_ez_header.getText().toString().equals("Subclass"))
+                        {
+                            ez_sales_detail_model.setLevel("All");
+
+                        } else if (txt_ez_header.getText().toString().equals("MC"))
+                        {
+                            ez_sales_detail_model.setLevel("All");
+                        }
+                        ez_sales_detalis_array.add(0, ez_sales_detail_model);
+                        recyclevw_ez_sales.setLayoutManager(new LinearLayoutManager(context));
+
+                        recyclevw_ez_sales.setLayoutManager(new LinearLayoutManager(recyclevw_ez_sales.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                        recyclevw_ez_sales.setOnFlingListener(null);
+                        new GravitySnapHelper(48).attachToRecyclerView(recyclevw_ez_sales);
+
+                        ez_sales_adapter = new EzoneSalesAdapter(ez_sales_detalis_array, context, ez_firstVisible_no, ez_fromWhere, recyclevw_ez_sales);
+                        recyclevw_ez_sales.setAdapter(ez_sales_adapter);
+
+                        //Retain Values.....
+                        for (int j = 0; j < ez_sales_detalis_array.size(); j++)
+                        {
+                            if (txt_ez_header.getText().toString().equals("Department"))
+                            {
+                                ezone_level = 1;
+                                ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                                if (ez_sales_detalis_array.get(ez_firstVisible_no).getLevel().equals(ez_sale_first_item))
+                                {
+                                    recyclevw_ez_sales.getLayoutManager().scrollToPosition(ez_firstVisible_no);
+                                }
+                            }
+                            else if (txt_ez_header.getText().toString().equals("Subdept"))
+                            {
+                                ezone_level = 2;
+                                ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                                if (ez_sales_detalis_array.get(ez_firstVisible_no).getLevel().equals(ez_sale_first_item))
+                                {
+                                    recyclevw_ez_sales.getLayoutManager().scrollToPosition(ez_firstVisible_no);
+                                }
+                            }
+                            else if (txt_ez_header.getText().toString().equals("Class"))
+                            {
+                                ezone_level = 3;
+                                ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                                if (ez_sales_detalis_array.get(ez_firstVisible_no).getLevel().equals(ez_sale_first_item))
+                                {
+                                    recyclevw_ez_sales.getLayoutManager().scrollToPosition(ez_firstVisible_no);
+                                }
+                            } else if (txt_ez_header.getText().toString().equals("Subclass"))
+                            {
+                                ezone_level = 4;
+                                ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                                if (ez_sales_detalis_array.get(ez_firstVisible_no).getLevel().equals(ez_sale_first_item))
+                                {
+                                    recyclevw_ez_sales.getLayoutManager().scrollToPosition(ez_firstVisible_no);
+                                }
+
+                            } else if (txt_ez_header.getText().toString().equals("MC"))
+                            {
+                                ezone_level = 5;
+                                ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+                                if (ez_sales_detalis_array.get(ez_firstVisible_no).getLevel().equals(ez_sale_first_item))
+                                {
+                                    recyclevw_ez_sales.getLayoutManager().scrollToPosition(ez_firstVisible_no);
+                                }
+                            }
+                        }// end of for loop
+//
+                   if (ez_sale_first_item.equals("All"))
+                   {
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            ez_sales_header_array.clear();
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            requestEzoneSalesHeaderAPI();
+                   }
+                   else
+                   {
+                            ez_linear_hierarchy.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            ez_sales_header_array.clear();
+                            requestEzoneSalesPagerOnScrollAPI();
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+//                    Reusable_Functions.hDialog();
+                    Toast.makeText(context, "no data found"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    ez_progessBar.setVisibility(View.GONE);
+                    ezone_onClickflg = false;
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        ez_progessBar.setVisibility(View.GONE);
+                        ezone_onClickflg = false;
+                        error.printStackTrace();
+                    }
+                }
+        )
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        ez_postRequest.setRetryPolicy(policy);
+        queue.add(ez_postRequest);
+    }
+
+    // Api for display All value - Api SalesheaderEz
+    private void requestEzoneSalesHeaderAPI()
+    {
+        String url = ConstsCore.web_url + "/v1/display/salesheaderEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e("Ezone Header url :",""+url);
+        ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response)
+                    {
+                        Log.e("Ezone Header response :",""+response);
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                ezone_onClickflg = false;
+                                ez_progessBar.setVisibility(View.GONE);
+                            }
+                            else if (response.length() == limit)
+                            {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    ez_sales_header_model = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
+                                    ez_sales_header_array.add(ez_sales_header_model);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+
+                                requestEzoneSalesHeaderAPI();
+
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    ez_sales_header_model = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
+                                    ez_sales_header_array.add(ez_sales_header_model);
+                                }
+                            }
+                            ez_sales_pager_adapter = new EzoneSalesPagerAdapter(context, ez_sales_header_array, ez_firstVisible_no, ez_viewpager, ez_linear_dots, ez_sales_adapter, recyclevw_ez_sales, ez_sales_detalis_array, ez_fromWhere,ez_sales_pager_adapter );
+                            ez_viewpager.setAdapter(ez_sales_pager_adapter);
+                            ez_viewpager.setCurrentItem(ez_currentVmPos);
+                            ez_sales_pager_adapter.notifyDataSetChanged();
+                            ezone_onClickflg = false;
+                          //  Reusable_Functions.hDialog();
+                            ez_progessBar.setVisibility(View.GONE);
+
+                        } catch (Exception e) {
+                            ezone_onClickflg = false;
+                          //  Reusable_Functions.hDialog();
+                            ez_progessBar.setVisibility(View.GONE);
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        ezone_onClickflg = false;
+                      //  Reusable_Functions.hDialog();
+                        ez_progessBar.setVisibility(View.GONE);
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        ez_postRequest.setRetryPolicy(policy);
+        queue.add(ez_postRequest);
+
+    }
+
+    // Api for change view pager value on scroll - Api SalesDetailEz
+    private void requestEzoneSalesPagerOnScrollAPI()
+    {
+        String url = " ";
+        ez_sale_first_item = ez_sale_first_item.replace("%", "%25");
+        ez_sale_first_item = ez_sale_first_item.replace(" ", "%20").replace("&", "%26");
+
+        if (txt_ez_header.getText().toString().equals("Department"))
+        {
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val +"&level=" + ezone_level +"&department=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+        }
+        else if (txt_ez_header.getText().toString().equals("Subdept"))
+        {
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val +"&level=" + ezone_level + "&category=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+        }
+        else if (txt_ez_header.getText().toString().equals("Class"))
+        {
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val +"&level="  + ezone_level +  "&class=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+        }
+        else if (txt_ez_header.getText().toString().equals("Subclass"))
+        {
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val +"&level=" + ezone_level + "&brand=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+        }
+        else if (txt_ez_header.getText().toString().equals("MC"))
+        {
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val +"&level=" + ezone_level + "&brandclass=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
+        }
+        Log.e("Ezone On Scroll Api :",""+url);
+          ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("Ezone On Scroll Response :",""+response);
+                        try
+                        {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
+                               // Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                ez_progessBar.setVisibility(View.GONE);
+                                ezone_onClickflg = false;
+                            }
+                            else if (response.length() == limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
+
+                                    ez_sales_header_model = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
+                                    ez_sales_header_array.add(ez_sales_header_model);
+
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                requestEzoneSalesPagerOnScrollAPI();
+
+
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    ez_sales_header_model = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
+                                    ez_sales_header_array.add(ez_sales_header_model);
+
+                                }
+
+                                ez_sales_pager_adapter = new EzoneSalesPagerAdapter(context, ez_sales_header_array, ez_firstVisible_no, ez_viewpager, ez_linear_dots, ez_sales_adapter, recyclevw_ez_sales, ez_sales_detalis_array, ez_fromWhere, ez_sales_pager_adapter);
+                                ez_viewpager.setAdapter(ez_sales_pager_adapter);
+                                ez_viewpager.setCurrentItem(ez_currentVmPos);
+                                ez_sales_pager_adapter.notifyDataSetChanged();
+                                ez_progessBar.setVisibility(View.GONE);
+                                ezone_onClickflg = false;
+                             //   Reusable_Functions.hDialog();
+                            }
+                        } catch (Exception e) {
+                         //   Reusable_Functions.hDialog();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            ez_progessBar.setVisibility(View.GONE);
+                            ezone_onClickflg = false;
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                       // Reusable_Functions.hDialog();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        ez_progessBar.setVisibility(View.GONE);
+                        ezone_onClickflg = false;
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        ez_postRequest.setRetryPolicy(policy);
+        queue.add(ez_postRequest);
+
+    }
+
+
 
     @Override
     public void onBackPressed() {
@@ -1871,6 +2836,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         level = 0;
         selectedsegValue = "WTD";
         level = 1;
+        ezone_level = 0;
+        ez_segment_val = "";
+        ezone_level = 1;
+        ez_segment_val = "LD";
         this.finish();
 
     }

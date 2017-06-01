@@ -37,6 +37,7 @@ public class SalesAnalysisViewPagerValue {
     double rgm;
     double marginPct;
     double velocity;
+    double yoyNetSalesUnitsGrowthPct;
 
     public double getYoyNetSalesUnitsGrowthPct() {
         return yoyNetSalesUnitsGrowthPct;
@@ -46,7 +47,7 @@ public class SalesAnalysisViewPagerValue {
         this.yoyNetSalesUnitsGrowthPct = yoyNetSalesUnitsGrowthPct;
     }
 
-    double yoyNetSalesUnitsGrowthPct;
+
 
 
     public String getStoreCode() {

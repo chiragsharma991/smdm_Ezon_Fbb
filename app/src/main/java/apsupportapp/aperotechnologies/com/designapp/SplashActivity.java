@@ -130,10 +130,12 @@ public class SplashActivity extends AppCompatActivity {
                                 Reusable_Functions.hDialog();
                             }
                             String bearerToken = response.getString("bearerToken");
+                            String geoLeveLDesc = response.getString("geoLeveLDesc");
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("bearerToken", bearerToken);
+                            editor.putString("geoLeveLDesc",geoLeveLDesc);
                             editor.apply();
-                            Intent i = new Intent(SplashActivity.this, DashBoardActivity1.class);
+                            Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
                             i.putExtra("from", "splash");
                             startActivity(i);
                             progressbar.setVisibility(View.GONE);

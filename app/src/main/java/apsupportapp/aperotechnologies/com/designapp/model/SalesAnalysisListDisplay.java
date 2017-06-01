@@ -39,6 +39,17 @@ public class SalesAnalysisListDisplay {
      double rgm;
      double marginPct;
      double velocity;
+     String level;
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+
 
     public void setStoreCode(String storeCode) {
         this.storeCode = storeCode;
