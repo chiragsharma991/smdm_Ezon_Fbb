@@ -133,8 +133,6 @@ public class LoginActivity1 extends AppCompatActivity
                         Reusable_Functions.progressDialog = new ProgressDialog(context);
                         if(!Reusable_Functions.progressDialog.isShowing())
                         {
-
-
                             Reusable_Functions.progressDialog.show();
                         }
                         Reusable_Functions.progressDialog.setMessage("Authentication User...");

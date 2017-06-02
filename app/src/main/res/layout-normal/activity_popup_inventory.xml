@@ -3,22 +3,18 @@
     android:id="@+id/baseLayoutInventory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <!--base layout for click anywhere-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="55dp"
-            android:visibility="visible">
+            >
 
             <LinearLayout
                 android:id="@+id/rankLayout"
@@ -57,12 +53,7 @@
                                 android:text="Sort By"
                                 android:textColor="@color/smdm_PopUptxt_color"
                                 android:textSize="@dimen/smdm_PopUp_subtitle_normal"
-
-
                                 />
-
-
-
 
                         </LinearLayout>
 
@@ -318,6 +309,6 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+
 
 </RelativeLayout>

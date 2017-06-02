@@ -125,9 +125,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             limit = 10;
             count = 0;
             top = 10;
-            if (getIntent().getStringExtra("selectedDept") == null) {
+            if (getIntent().getStringExtra("selectedDept") == null)
+            {
                 from_filter = false;
-            } else if (getIntent().getStringExtra("selectedDept") != null) {
+            }
+            else if (getIntent().getStringExtra("selectedDept") != null) {
                 selectedString = getIntent().getStringExtra("selectedDept");
                 from_filter = true;
 
@@ -588,46 +590,50 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         view = "L4W";
 
 
-                    } else if (CheckSTD.isChecked()) {
+                    } else if (CheckSTD.isChecked())
+                    {
                         checkTimeValueIs = "CheckSTD";
                         view = "STD";
 
                     }
-
-
                     //season group
 
-                    if (BestCheckCurrent.isChecked()) {
+                    if (BestCheckCurrent.isChecked())
+                    {
                         checkValueIs = "BestCheckCurrent";
                         popupCurrent();
                         quickFilterPopup.setVisibility(View.GONE);
 
-                    } else if (BestCheckPrevious.isChecked()) {
+                    }
+                    else if (BestCheckPrevious.isChecked())
+                    {
                         checkValueIs = "BestCheckPrevious";
                         popupPrevious();
                         quickFilterPopup.setVisibility(View.GONE);
 
-                    } else if (BestCheckOld.isChecked()) {
+                    }
+                    else if (BestCheckOld.isChecked())
+                    {
                         checkValueIs = "BestCheckOld";
                         popupOld();
                         quickFilterPopup.setVisibility(View.GONE);
 
-                    } else if (BestCheckUpcoming.isChecked()) {
+                    }
+                    else if (BestCheckUpcoming.isChecked())
+                    {
                         checkValueIs = "BestCheckUpcoming";
                         popupUpcoming();
 
-                    } else {
-
+                    }
+                    else
+                    {
                         CheckTimeDone();
                         quickFilterPopup.setVisibility(View.GONE);
-
                     }
-                } else {
+                } else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-
                 }
-
-
                 break;
             case R.id.bestCheckCurrent:
                 BestCheckCurrent.setChecked(true);
@@ -750,12 +756,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 top = 10;
                 requestRunningPromoApi(selectedString);
                 BaseLayoutInventory.setVisibility(View.GONE);
-
-
             }
-
-
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
     }
@@ -841,7 +845,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_coverNsell_chk.setChecked(false);
                 orderbycol = "7";
                 BestInventList.clear();
-                Reusable_Functions.sDialog(this, "Loading.......");
+                Reusable_Functions.sDialog(this, "Loading...");
                 popPromo = 10;
                 limit = 10;
                 offsetvalue = 0;
@@ -868,7 +872,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             top = 10;
             seasonGroup = "Current";
             BestInventList.clear();
-            Reusable_Functions.sDialog(this, "Loading.......");
+            Reusable_Functions.sDialog(this, "Loading...");
             requestRunningPromoApi(selectedString);
 
         } else {

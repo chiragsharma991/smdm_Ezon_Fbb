@@ -147,6 +147,16 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
                         break;
+                    case "Region":
+
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        break;
+                    case "Store":
+
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                        break;
                 }
 
                 double singlePercVal = 0.5;//50/100;// width divide by 100 perc

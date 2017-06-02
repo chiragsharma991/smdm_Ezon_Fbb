@@ -71,7 +71,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/smdm_blue"
-                    android:text=""
+                    android:text="sdfdgfg"
                     android:textSize="11sp" />
 
               <TextView
@@ -240,7 +240,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/smdm_blue"
-                    android:text=""
+                    android:text="Wowow"
                     android:textSize="11sp" />
 
                 <TextView
@@ -290,6 +290,41 @@
                 android:text=""
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="17sp" />
+
+
+            <RelativeLayout
+                android:id="@+id/rel_ez_MarginPerc"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/txt_ez_SoHUVal">
+
+                <TextView
+                    android:id="@+id/txt_ez_MarginName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/smdm_blue"
+                    android:text="Margin"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/txt_ez_MarginPerc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/txt_ez_MarginName"
+                    android:text=""
+                    android:textColor="@color/smdm_blue"
+                    android:textSize="11sp"  />
+
+
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
