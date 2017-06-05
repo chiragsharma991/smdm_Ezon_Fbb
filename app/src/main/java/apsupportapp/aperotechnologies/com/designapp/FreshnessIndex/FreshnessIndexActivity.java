@@ -126,7 +126,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         queue.start();
         gson = new Gson();
 
-        // login define: ezone/ Fbb
+        // login define: ezone/ Fbb..
 
         if (geoLeveLDesc.equals("E ZONE")) {
             setContentView(R.layout.activity_ezone_freshness_index);
