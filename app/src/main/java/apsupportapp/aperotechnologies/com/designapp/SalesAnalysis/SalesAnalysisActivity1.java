@@ -65,6 +65,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,View.OnClickListener {
 
+    public String str;
 
     JsonArrayRequest postRequest,ez_postRequest;
     ArrayList<SalesAnalysisViewPagerValue> analysisArrayList, salesList,ez_sales_header_array;
