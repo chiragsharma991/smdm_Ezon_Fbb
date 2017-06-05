@@ -75,7 +75,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       if (Reusable_Functions.chkStatus(context)) {
           Reusable_Functions.hDialog();
           mpm_model model=new mpm_model();
-          ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue,model);
+          ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue,model,0);
       } else {
           Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
       }
@@ -129,8 +129,10 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       mpm_imageBtnBack.setOnClickListener(this);
   }
 
-  private void checkCollapsing() {
-      if (Build.VERSION.SDK_INT >= 21) {
+  private void checkCollapsing()
+  {
+      if (Build.VERSION.SDK_INT >= 21)
+      {
           Window window = getWindow();
           // clear FLAG_TRANSLUCENT_STATUS flag:
           window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -142,7 +144,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   }
 
   @Override
-  public void response(ArrayList<mpm_model> list) {
+  public void response(ArrayList<mpm_model> list,int id) {
       listener = (DownloadFile.Listener) context;
       this.list = list;
       mpmAdapter = new mpm_adapter(context, list);

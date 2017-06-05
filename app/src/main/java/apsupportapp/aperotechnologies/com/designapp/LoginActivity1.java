@@ -97,7 +97,8 @@ public class LoginActivity1 extends AppCompatActivity
         edtPassword.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         chkKeepMeLogin = (CheckBox) findViewById(R.id.chkKeepMeLogin);
         checkToken();
-        chkKeepMeLogin.setOnClickListener(new View.OnClickListener() {
+        chkKeepMeLogin.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 log_flag = ((CheckBox) v).isChecked();
@@ -111,31 +112,33 @@ public class LoginActivity1 extends AppCompatActivity
         queue.start();
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
-
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 uname = edtUserName.getText().toString().trim();
                 password = edtPassword.getText().toString().trim();
 
-                if ((uname.equals("") || uname.length() == 0) || (password.equals("") || password.length() == 0)) {
+                if ((uname.equals("") || uname.length() == 0) || (password.equals("") || password.length() == 0))
+                {
                     if (uname.equals("") || uname.length() == 0) {
                         Toast.makeText(LoginActivity1.this, "Please enter username", Toast.LENGTH_LONG).show();
                     } else if (password.equals("") || password.length() == 0) {
                         Toast.makeText(LoginActivity1.this, "Please enter password", Toast.LENGTH_LONG).show();
                     }
-
-                } else {
+                }
+                else
+                {
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.progressDialog = new ProgressDialog(context);
                         if(!Reusable_Functions.progressDialog.isShowing())
                         {
                             Reusable_Functions.progressDialog.show();
                         }
-                        Reusable_Functions.progressDialog.setMessage("Authentication User...");
+                        Reusable_Functions.progressDialog.setMessage("Authenticating User...");
                         requestLoginAPI();
                     } else {
                         Toast.makeText(LoginActivity1.this, "Check your network connectivity", Toast.LENGTH_LONG).show();

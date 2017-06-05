@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.Httpcall;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 public class ApiRequest  {
 
     private final RequestQueue queue;
+    private final int id;
     private int limit=100;
     private int offsetvalue=0;
     private final ArrayList<mpm_model> list;
@@ -43,14 +45,15 @@ public class ApiRequest  {
     private Gson gson;
 
 
-    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass)
+    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass,int id)
     {
-       ResposeInterface= (HttpResponse)context;
+        ResposeInterface= (HttpResponse)context;
         this.context=context;
         bearertoken=token;
         this.Url=Url;
         this.TAG=TAG;
         this.queue=queue;
+        this.id=id;
         this.list=new ArrayList<>();
         this.mpm_modelClass=mpm_modelClass;
         gson=new Gson();
@@ -64,10 +67,24 @@ public class ApiRequest  {
     private void setApi(final Context context) {
 
 
-        Reusable_Functions.sDialog(context, "Loading data...");
+        Reusable_Functions.progressDialog = new ProgressDialog(context);
+        if(!Reusable_Functions.progressDialog.isShowing())
+        {
+            Reusable_Functions.progressDialog.show();
+        }
+        Reusable_Functions.progressDialog.setMessage("Loading...");
 
-        String URL=Url+ "?offset=" + offsetvalue + "&limit=" +limit;
-        Log.e(TAG, "setApi: URL "+URL );
+        String URL = "";
+        if(TAG.equals("FreshnessIndex_Ez_Activity")){
+
+            URL=Url+ "&offset=" + offsetvalue + "&limit=" +limit;
+
+        }else{
+
+            URL=Url+ "?offset=" + offsetvalue + "&limit=" +limit;
+
+        }
+        Log.e(TAG, "final_setApi: URL "+URL );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, URL,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -83,27 +100,27 @@ public class ApiRequest  {
 
                             }
                             else if (response.length() == limit) {
-                            Log.e(TAG, "promo eql limit");
-                            for (int i = 0; i < response.length(); i++) {
+                                Log.e(TAG, "promo eql limit");
+                                for (int i = 0; i < response.length(); i++) {
 
-                                mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
-                                list.add(mpm_modelClass);
+                                    mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
+                                    list.add(mpm_modelClass);
 
-                            }
-                            offsetvalue = (limit * count) + limit;
-                            count++;
-                            //
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                //
 
                                 setApi(context);
 
-                        } else if (response.length() < limit) {
-                            Log.e(TAG, "promo /= limit");
-                            for (int i = 0; i < response.length(); i++)
-                            {
-                                mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
-                                list.add(mpm_modelClass);
-                            }
-                                ResposeInterface.response(list);
+                            } else if (response.length() < limit) {
+                                Log.e(TAG, "promo /= limit");
+                                for (int i = 0; i < response.length(); i++)
+                                {
+                                    mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
+                                    list.add(mpm_modelClass);
+                                }
+                                ResposeInterface.response(list,id);
                                 count = 0;
                                 limit = 100;
                                 offsetvalue = 0;
