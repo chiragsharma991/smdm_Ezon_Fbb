@@ -1,10 +1,12 @@
 package apsupportapp.aperotechnologies.com.designapp.MPM;
 
+import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndex_Ez_Model;
+
 /**
  * Created by csuthar on 19/04/17.
  */
 
-public class mpm_model {
+public class mpm_model extends FreshnessIndex_Ez_Model{
 
     String productName;
     String mpmPath;

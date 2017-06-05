@@ -706,7 +706,6 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
     public void onPageSelected(int position) {
 
         ImageView img = (ImageView) ez_linear_dots.getChildAt(ez_currentPage);
-
         img.setImageResource(R.mipmap.dots_unselected);
         ez_currentPage = position;
         ImageView img1 = (ImageView) ez_linear_dots.getChildAt(ez_currentPage);
