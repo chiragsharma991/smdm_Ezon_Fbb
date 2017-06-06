@@ -42,7 +42,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     String str_filter_location = "NO", str_filter_prod = "NO";
     private boolean loction_flag = false, prod_flag = false;
     static EzoneFilterAdapter locatn_list_adapter,prod_list_adapter;
-
+    // Git 6-6-17
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
