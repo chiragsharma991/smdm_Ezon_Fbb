@@ -52,7 +52,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
@@ -65,7 +67,6 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,View.OnClickListener {
 
-    public String str;
 
     JsonArrayRequest postRequest,ez_postRequest;
     ArrayList<SalesAnalysisViewPagerValue> analysisArrayList, salesList,ez_sales_header_array;
@@ -139,6 +140,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             initialize_ez_ui();
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                Reusable_Functions.progressDialog.setCancelable(false);
                 if(!Reusable_Functions.progressDialog.isShowing())
                 {
                     Reusable_Functions.progressDialog.show();
@@ -399,10 +401,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             }
                         }
                     }));
-
-
-
-
         }
         else
         {
@@ -888,19 +886,28 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             {
                 if (firstVisibleItem < salesAnalysisClassArrayList.size() && !onClickFlag) {
 
-                    if (txtheaderplanclass.getText().toString().equals("Department")) {
+                    if (txtheaderplanclass.getText().toString().equals("Department"))
+                    {
                         level = 1;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
-                    } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                    }
+                    else if (txtheaderplanclass.getText().toString().equals("Subdept"))
+                    {
                         level = 2;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
-                    } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                    }
+                    else if (txtheaderplanclass.getText().toString().equals("Class"))
+                    {
                         level = 3;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
-                    } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                    }
+                    else if (txtheaderplanclass.getText().toString().equals("Subclass"))
+                    {
                         level = 4;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
-                    } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                    }
+                    else if (txtheaderplanclass.getText().toString().equals("MC"))
+                    {
                         level = 5;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
                     }
@@ -1115,7 +1122,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         case "Department":
                             relprevbtn.setVisibility(View.VISIBLE);
                             txtheaderplanclass.setText("Subdept");
-                            if (lldots != null) {
+                            if (lldots != null)
+                            {
                                 lldots.removeAllViews();
                             }
                             currentVmPos = vwpagersales.getCurrentItem();
@@ -1261,6 +1269,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                // Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1293,6 +1302,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (Reusable_Functions.chkStatus(context)) {
                                // Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1326,6 +1336,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (Reusable_Functions.chkStatus(context)) {
                                // Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1359,6 +1370,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (Reusable_Functions.chkStatus(context)) {
                                // Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1392,6 +1404,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (Reusable_Functions.chkStatus(context)) {
                                 // Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1440,6 +1453,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (Reusable_Functions.chkStatus(context)) {
                                 //  Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1473,6 +1487,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (Reusable_Functions.chkStatus(context)) {
                               //  Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1507,6 +1522,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             {
                                // Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1541,6 +1557,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (Reusable_Functions.chkStatus(context)) {
                                // Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1575,6 +1592,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (Reusable_Functions.chkStatus(context)) {
                                // Reusable_Functions.hDialog();
                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                                Reusable_Functions.progressDialog.setCancelable(false);
                                 if(!Reusable_Functions.progressDialog.isShowing())
                                 {
                                     Reusable_Functions.progressDialog.show();
@@ -1603,19 +1621,15 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             case R.id.rel_ez_viewBy :
                 rel_ez_viewBy.setVisibility(View.GONE);
                 break;
-//            case R.id.rb_ez_viewBy_ProductChk :
-//                rb_ez_viewBy_ProductChk.setChecked(true);
-//                rb_ez_viewBy_LocatnChk.setChecked(false);
-//                break;
-//            case R.id.rb_ez_viewBy_LocatnChk :
-//                rb_ez_viewBy_LocatnChk.setChecked(true);
-//                rb_ez_viewBy_ProductChk.setChecked(false);
-//                break;
             case R.id.lin_ez_location :
                 viewBy_Location();
                 break;
             case R.id.lin_ez_Product:
                 viewBy_Product();
+                break;
+            case R.id.rel_ez_filter:
+                new EzoneSalesFilter().StartIntent(SalesAnalysisActivity1.this);
+                finish();
                 break;
 
         }
@@ -1641,6 +1655,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 txt_ez_header.setText("Department");
                 ez_sales_detalis_array= new ArrayList<SalesAnalysisListDisplay>();
                 Reusable_Functions.progressDialog = new ProgressDialog(context);
+                Reusable_Functions.progressDialog.setCancelable(false);
                 if(!Reusable_Functions.progressDialog.isShowing())
                 {
                     Reusable_Functions.progressDialog.show();
@@ -1682,7 +1697,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 txt_ez_header.setText("Region");
                 ez_sales_detalis_array= new ArrayList<SalesAnalysisListDisplay>();
                 Reusable_Functions.progressDialog = new ProgressDialog(context);
-                if(!Reusable_Functions.progressDialog.isShowing())
+                Reusable_Functions.progressDialog.setCancelable(false);
+
+            if(!Reusable_Functions.progressDialog.isShowing())
                 {
                     Reusable_Functions.progressDialog.show();
                 }
@@ -1865,6 +1882,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         switch (checkedId)
         {
             case R.id.btn_ez_Ld:
+
                 if (ez_segment_val.equals("LD"))
                     break;
                 ez_segment_val = "LD";
@@ -1881,6 +1899,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                    // Reusable_Functions.hDialog();
                    // Reusable_Functions.sDialog(context, "Loading data...");
                     Reusable_Functions.progressDialog = new ProgressDialog(context);
+                    Reusable_Functions.progressDialog.setCancelable(false);
                     if(!Reusable_Functions.progressDialog.isShowing())
                     {
                         Reusable_Functions.progressDialog.show();
@@ -1914,6 +1933,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 {
                    // Reusable_Functions.hDialog();
                     Reusable_Functions.progressDialog = new ProgressDialog(context);
+                    Reusable_Functions.progressDialog.setCancelable(false);
+
                     if(!Reusable_Functions.progressDialog.isShowing())
                     {
                         Reusable_Functions.progressDialog.show();
@@ -1948,6 +1969,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 {
                   //  Reusable_Functions.hDialog();
                     Reusable_Functions.progressDialog = new ProgressDialog(context);
+                    Reusable_Functions.progressDialog.setCancelable(false);
+
                     if(!Reusable_Functions.progressDialog.isShowing())
                     {
                         Reusable_Functions.progressDialog.show();
@@ -1982,6 +2005,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 {
                    // Reusable_Functions.hDialog();
                     Reusable_Functions.progressDialog = new ProgressDialog(context);
+                    Reusable_Functions.progressDialog.setCancelable(false);
+
                     if(!Reusable_Functions.progressDialog.isShowing())
                     {
                         Reusable_Functions.progressDialog.show();
@@ -2935,12 +2960,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             {
                                 for (int i = 0; i < response.length(); i++)
                                 {
-
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
                                     txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
                                     txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
-
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
@@ -3060,12 +3083,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         queue.add(postRequest);
     }
 
+
     // Api calling functionality for E-zone module...
     private void requestEzoneSalesDetailAPI()
     {
        String url = ConstsCore.web_url +"/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level  + "&offset=" + offsetvalue + "&limit=" + limit;
        Log.e("Ezone Detail Url ",""+url);
-      //  String url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
+      //  String url £= ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
        ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -3217,7 +3241,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 }
                             }
                         }// end of for loop
-//
+
                    if (ez_sale_first_item.equals("All"))
                    {
                             offsetvalue = 0;
@@ -4058,5 +4082,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         ez_segment_val = "LD";
         this.finish();
 
+    }
+
+    public static void StartIntent(Context c)
+    {
+        c.startActivity(new Intent(c,SalesAnalysisActivity1.class));
     }
 }

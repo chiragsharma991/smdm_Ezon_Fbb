@@ -32,7 +32,6 @@ public class Reusable_Functions {
                 progressDialog.dismiss();
                 progressDialog.cancel();
                 progressDialog = null;
-                Log.e("progressDialog hDialog  ", " " + progressDialog);
             }
         }
     }

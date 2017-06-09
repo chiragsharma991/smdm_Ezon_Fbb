@@ -10,7 +10,13 @@ public class RunningPromoListDisplay  {
 
 
 
-
+    double stkOnhandQty;
+    int targetStock;
+    int saleTotQty;
+    int stkGitQty;
+    double sellThruUnits;
+    double sellthruUnits;
+    double fwdWeekCover;
     String storeCode;
     String storeDescription;
     String alphanumericPromoCode;
@@ -24,12 +30,16 @@ public class RunningPromoListDisplay  {
     int durSaleTotQty;
     String promoImage;
     String prodImageURL;
+    String prodImageUrl;
     String option;
-
     String prodAttribute4;
     String prodLevel6Desc;
     String planDepartment;
     int noOfPromotions;
+    double ros;
+    String articleDesc;
+    String prodAttribute2;
+
 
 
 
@@ -40,6 +50,8 @@ public class RunningPromoListDisplay  {
     public void setPlanDepartment(String planDepartment) {
         this.planDepartment = planDepartment;
     }
+
+
 
     public int getNoOfPromotions() {
         return noOfPromotions;
@@ -97,21 +109,17 @@ public class RunningPromoListDisplay  {
         this.fwdWeekCover = fwdWeekCover;
     }
 
-    String articleDesc;
-    String prodAttribute2;
+    public String getProdImageUrl() {
+        return this.prodImageUrl;
+    }
 
-
+    public void setProdImageUrl(String prodImageUrl) {
+        this.prodImageUrl = prodImageUrl;
+    }
     public double getStkOnhandQty() {
         return stkOnhandQty;
     }
 
-    double stkOnhandQty;
-    int targetStock;
-    int saleTotQty;
-    int stkGitQty;
-    double sellThruUnits;
-    double sellthruUnits;
-    double fwdWeekCover;
 
     public double getSellthruUnits() {
         return sellthruUnits;
@@ -121,7 +129,6 @@ public class RunningPromoListDisplay  {
         this.sellthruUnits = sellthruUnits;
     }
 
-    double ros;
 
     public double getSellthruUnitsZonal() {
         return sellthruUnitsZonal;

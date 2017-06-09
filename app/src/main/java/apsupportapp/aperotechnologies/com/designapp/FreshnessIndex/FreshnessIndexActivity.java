@@ -87,11 +87,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     int offsetvalue = 0, limit = 100;
     int count = 0;
     RequestQueue queue;
-    String FreshnessIndexValue;
+    String FreshnessIndexValue;   //set value in hierarchy
     Context context;
     String fromWhere, freshnessIndex_ClickedVal, fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand;   // selected value from list
     PieChart pieChart;
-    RecyclerView listViewFIndex;
+    public static RecyclerView listViewFIndex;
     int selFirstPositionValue;
     LinearLayout llfreshnessIndex, llfIndexhierarchy;
     SegmentedGroup segmented3;
@@ -141,6 +141,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             setContentView(R.layout.activity_ezone_freshness_index);
             getSupportActionBar().hide();
             context = this;
+            /**
+             // "fromwhere" function use in Ezon: we are using for drill down functionality.
+             */
             common_intializeUI();
             intializeUIofEzon();
             Ezon_collection();  // start method for ezon collection
@@ -149,6 +152,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             setContentView(R.layout.activity_freshness_index);
             getSupportActionBar().hide();
             context = this;
+            /**
+             // "fromwhere" function use in FBB: we are using for Adapter functionality.
+             */
             common_intializeUI();
             Fbb_collection();  // start Fbb collection.
 
@@ -318,10 +324,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);
         txtNoChart = (TextView) findViewById(R.id.noChart);
-        txtfIndexDeptName = (TextView) findViewById(R.id.txtfIndexDeptName);
         freshnessIndex_imgfilter = (RelativeLayout) findViewById(R.id.freshnessIndex_imgfilter);
         llfreshnessIndex = (LinearLayout) findViewById(R.id.llfreshnessIndex);
-        llfIndexhierarchy = (LinearLayout) findViewById(R.id.llfIndexhierarchy);
         btnFIndexNext = (RelativeLayout) findViewById(R.id.btnFIndexNext);
         segmented3 = (SegmentedGroup) findViewById(R.id.freshnessIndex_segmentedGrp);
         segmented3.setOnCheckedChangeListener(FreshnessIndexActivity.this);
@@ -1424,6 +1428,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private void intializeUIofEzon() {
         freshnessIndex_ClickedVal = "All";
         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
+        llfIndexhierarchy.setVisibility(View.GONE);
         FreshnessIndex_Ez_moreVertical = (RelativeLayout) findViewById(R.id.freshnessIndex_Ez_moreVertical);
         show_popup();
 
@@ -1442,10 +1447,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         switch (id) {
 
             case 0:
-                Reusable_Functions.hDialog();
                 freshnessIndexDetails_Ez_ArrayList.addAll(list);
                 String url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZ/" + userId + "?level=" + level;  //header api
                 //  Log.e(TAG, "Freshness_Ez: Header URL " + url);
+                Reusable_Functions.hDialog();
                 mpm_model model = new mpm_model();
                 ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);
 
@@ -1478,13 +1483,16 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         // Retail function when you drill down the list.
         for (int j = 0; j < freshnessIndexDetails_Ez_ArrayList.size(); j++) {
             if (freshnessIndexDetails_Ez_ArrayList.get(j).getLevel().contentEquals(freshnessIndex_ClickedVal)) {
+                Log.e(TAG, "contentEquals: on position " + j);
                 LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                 llm.scrollToPosition(j);
                 requestFIndex_Ez_PieChart(j);
-                Log.e(TAG, "contentEquals: on position " + j);
                 break;
             }
         }
+
+        Reusable_Functions.hDialog();
+
 
     }
 
@@ -1562,14 +1570,14 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         popupWindow = new PopupWindow(
                 popupView,
-                500,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         LinearLayout location = (LinearLayout) popupView.findViewById(R.id.lin_ez_location);
         LinearLayout product = (LinearLayout) popupView.findViewById(R.id.lin_ez_Product);
         product_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_ProductChk);
         location_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_LocatnChk);
         product_radiobtn.setChecked(true);
-        postValue = 1;
+        preValue = 1;
 
         location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1621,16 +1629,22 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     public void sortFunction() {
 
+        // post value changes according to click
+
         if (!(postValue == preValue)) {
-            Log.e(TAG, "sortFunction: ");
+            Log.e(TAG, "sortFunction: post value is" + postValue + " and prevalue" + preValue);
 
-            if (preValue == 1) {
+            if (postValue == 1) {
 
-                Log.e(TAG, "sortFunction: true..." );
+                Log.e(TAG, "sortFunction: true...");
                 if (Reusable_Functions.chkStatus(context)) {
-                    postValue = preValue;
+                    listViewFIndex.setVisibility(View.VISIBLE);
+                    llfIndexhierarchy.setVisibility(View.GONE);
+                    FreshnessIndexValue="";
+                    preValue = postValue;
                     txtFIndexClass.setText("Department");
                     freshnessIndex_ClickedVal = "All";
+                    FreshnessIndexValue = "";
                     level = 1;
                     btnFIndexPrev.setVisibility(View.INVISIBLE);
                     btnFIndexNext.setVisibility(View.VISIBLE);
@@ -1645,12 +1659,16 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 }
 
 
-            } else if (preValue == 2) {
+            } else if (postValue == 2) {
 
                 if (Reusable_Functions.chkStatus(context)) {
-                    postValue = preValue;
+                    listViewFIndex.setVisibility(View.VISIBLE);
+                    FreshnessIndexValue="";
+                    llfIndexhierarchy.setVisibility(View.GONE);
+                    preValue = postValue;
                     txtFIndexClass.setText("Region");
                     freshnessIndex_ClickedVal = "All";
+                    FreshnessIndexValue = "";
                     level = 7;
                     btnFIndexPrev.setVisibility(View.INVISIBLE);
                     btnFIndexNext.setVisibility(View.VISIBLE);
@@ -1686,7 +1704,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                 //        String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
-                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZ/" + userId + "?level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
+                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZ/" + userId + "?level=" + level + "&" + fromWhere + "=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
                 // Log.e(TAG, "Freshness_Ez: Detail URL " + url);
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);
                 break;
@@ -1717,6 +1735,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             public void onClick(View view) {
 
                 freshnessIndex_ClickedVal = "All";
+                llfIndexhierarchy.setVisibility(View.GONE);
+                FreshnessIndexValue = "";
+                listViewFIndex.setVisibility(View.VISIBLE);
 
                 switch (txtFIndexClass.getText().toString()) {
 
@@ -1732,6 +1753,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -1747,6 +1769,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -1762,6 +1785,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
 
@@ -1779,6 +1803,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
 
@@ -1796,6 +1821,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -1813,7 +1839,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             @Override
             public void onClick(View view) {
 
+                llfIndexhierarchy.setVisibility(View.GONE);
+                FreshnessIndexValue = "";
                 freshnessIndex_ClickedVal = "All";
+                listViewFIndex.setVisibility(View.VISIBLE);
+
 
                 String url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZ/" + userId + "?level=" + level;
 
@@ -1832,6 +1862,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -1848,6 +1879,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
 
@@ -1865,6 +1897,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
 
@@ -1882,6 +1915,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -1899,6 +1933,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             ApiCallBack(model, 0, "");
 
                         } else {
+                            listViewFIndex.setVisibility(View.GONE);
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -1913,23 +1948,31 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        Log.e(TAG, "addOnItemTouchListener: ");
 
-                        switch (txtFIndexClass.getText().toString()) {
+                        // this position will block on footer click .
+                        if (position < freshnessIndexDetails_Ez_ArrayList.size()) {
+                            llfIndexhierarchy.setVisibility(View.VISIBLE);
+
+                            switch (txtFIndexClass.getText().toString()) {
 
                             case "Department":
                                 btnFIndexPrev.setVisibility(View.VISIBLE);
                                 txtFIndexClass.setText("Subdept");
+                                fromWhere = "dept";
                                 freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
                                 Log.e(TAG, "onItemClick: " + freshnessIndex_ClickedVal);
-                                fromWhere = "Subdept";
                                 level = 2;
                                 freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
                                 if (Reusable_Functions.chkStatus(context)) {
 
+                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
                                     mpm_model model = new mpm_model();
                                     ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
                                 } else {
+
+                                    listViewFIndex.setVisibility(View.GONE);
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -1937,16 +1980,19 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                             case "Subdept":
                                 txtFIndexClass.setText("Class");
-                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanCategory();
-                                fromWhere = "Class";
+                                freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
                                 level = 3;
+                                fromWhere = "category";
+
                                 freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
                                 if (Reusable_Functions.chkStatus(context)) {
 
+                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
                                     mpm_model model = new mpm_model();
                                     ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
                                 } else {
+                                    listViewFIndex.setVisibility(View.GONE);
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -1954,16 +2000,18 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                             case "Class":
                                 txtFIndexClass.setText("Subclass");
-                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanClass();
-                                fromWhere = "Subclass";
+                                freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
                                 level = 4;
+                                fromWhere = "class";
                                 freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
                                 if (Reusable_Functions.chkStatus(context)) {
 
+                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
                                     mpm_model model = new mpm_model();
                                     ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
                                 } else {
+                                    listViewFIndex.setVisibility(View.GONE);
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
@@ -1971,18 +2019,44 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             case "Subclass":
                                 btnFIndexNext.setVisibility(View.INVISIBLE);
                                 txtFIndexClass.setText("MC");
-                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getBrandName();
-                                fromWhere = "MC";
+                                freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
                                 level = 5;
+                                fromWhere = "brand";
                                 freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
                                 if (Reusable_Functions.chkStatus(context)) {
 
+                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
                                     mpm_model model = new mpm_model();
                                     ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
                                 } else {
+                                    listViewFIndex.setVisibility(View.GONE);
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
+                                break;
+
+
+                            case "Region":
+                                btnFIndexPrev.setVisibility(View.VISIBLE);
+                                btnFIndexNext.setVisibility(View.INVISIBLE);
+                                txtFIndexClass.setText("Store");
+                                freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
+                                Log.e(TAG, "onItemClick: " + freshnessIndex_ClickedVal);
+                                level = 9;
+                                fromWhere = "region";
+
+                                freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
+                                if (Reusable_Functions.chkStatus(context)) {
+
+                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
+                                    mpm_model model = new mpm_model();
+                                    ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
+
+                                } else {
+                                    listViewFIndex.setVisibility(View.GONE);
+                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                }
+
                                 break;
 
                             default:
@@ -1991,11 +2065,30 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 OnItemClick = false;
                                 break;
 
-                        }
+                        }}
 
 
                     }
                 }));
+
+
+
+    }
+
+    public String hierarchy(String freshnessIndex_ClickedVal){
+
+        if(FreshnessIndexValue==null || FreshnessIndexValue.equals(""))
+        {
+
+            FreshnessIndexValue =  freshnessIndex_ClickedVal;
+
+        }else{
+
+            FreshnessIndexValue += " > " + freshnessIndex_ClickedVal;
+        }
+
+
+        return FreshnessIndexValue;
 
     }
 
@@ -2300,9 +2393,12 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             Handler h = new Handler();
                             h.postDelayed(new Runnable() {
                                 public void run() {
+
+
                                     if (position < freshnessIndexDetailsArrayList.size()) {
                                         // TestItem();
                                         switch (txtFIndexClass.getText().toString()) {
+
                                             case "Department":
                                                 btnFIndexPrev.setVisibility(View.VISIBLE);
                                                 txtFIndexClass.setText("Subdept");
@@ -2425,6 +2521,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     private void common_intializeUI() {
         processBar = (ProgressBar) findViewById(R.id.progressBar);
+        txtfIndexDeptName = (TextView) findViewById(R.id.txtfIndexDeptName);
+        llfIndexhierarchy = (LinearLayout) findViewById(R.id.llfIndexhierarchy);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);
         listViewFIndex = (RecyclerView) findViewById(R.id.listView_SalesAnalysis);
         btnFIndexPrev = (RelativeLayout) findViewById(R.id.btnFIndexPrev);
