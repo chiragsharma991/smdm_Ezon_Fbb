@@ -3,6 +3,7 @@ package apsupportapp.aperotechnologies.com.designapp.Httpcall;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -32,7 +34,7 @@ public class ApiRequest  {
 
     private final RequestQueue queue;
     private final int id;
-    private int limit=100;
+    private int limit=99;
     private int offsetvalue=0;
     private final ArrayList<mpm_model> list;
     private mpm_model mpm_modelClass;
@@ -71,8 +73,11 @@ public class ApiRequest  {
         if(!Reusable_Functions.progressDialog.isShowing())
         {
             Reusable_Functions.progressDialog.show();
+            Reusable_Functions.progressDialog.setCancelable(false);
+            Reusable_Functions.progressDialog.setMessage("Loading...");
+
+
         }
-        Reusable_Functions.progressDialog.setMessage("Loading...");
 
         String URL = "";
         if(TAG.equals("FreshnessIndex_Ez_Activity")){
@@ -95,6 +100,9 @@ public class ApiRequest  {
 
                             if (response.equals("") || response == null || response.length() == 0 ) {
                                 Reusable_Functions.hDialog();
+                                if(TAG.equals("FreshnessIndex_Ez_Activity")) {
+                                    FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
+                                }
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -124,7 +132,7 @@ public class ApiRequest  {
                                 count = 0;
                                 limit = 100;
                                 offsetvalue = 0;
-                                Reusable_Functions.hDialog();
+                              //  Reusable_Functions.hDialog();
 
 
 
@@ -133,8 +141,12 @@ public class ApiRequest  {
 
 
                         } catch (Exception e) {
+                            if(TAG.equals("FreshnessIndex_Ez_Activity")) {
+                                FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
+                            }
                             Log.e(TAG, "onResponse: "+e.getMessage() );
                             Reusable_Functions.hDialog();
+
 
 
                         }
@@ -143,6 +155,9 @@ public class ApiRequest  {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        if(TAG.equals("FreshnessIndex_Ez_Activity")) {
+                            FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
+                        }
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                         Log.e(TAG, "Server not found...: " );

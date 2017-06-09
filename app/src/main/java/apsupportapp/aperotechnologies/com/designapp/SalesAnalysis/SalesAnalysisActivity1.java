@@ -3818,9 +3818,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 ez_sale_first_item = ez_sales_detalis_array.get(0).getLevel();
                                 requestEzoneSalesPagerOnScrollAPI();
                             }
-
-
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
                             ez_progessBar.setVisibility(View.GONE);

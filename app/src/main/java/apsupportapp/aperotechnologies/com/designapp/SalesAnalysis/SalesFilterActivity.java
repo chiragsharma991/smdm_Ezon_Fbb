@@ -104,16 +104,8 @@ public class SalesFilterActivity extends Activity {
         btnS_Filterback = (RelativeLayout) findViewById(R.id.imageBtnSFilterBack);
         btnS_Done = (RelativeLayout) findViewById(R.id.imageBtnSalesFilterDone);
         processbar = (RelativeLayout) findViewById(R.id.process_filter);
-        processbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         pfilter_list = (ExpandableListView) findViewById(R.id.expandableListView_subdept);
         pfilter_list.setTextFilterEnabled(true);
-        //noinspection deprecation,deprecation
         pfilter_list.setDivider(getResources().getDrawable(R.color.grey));
         pfilter_list.setDividerHeight(2);
         prepareListData();
@@ -252,13 +244,15 @@ public class SalesFilterActivity extends Activity {
                 if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis"))
                 {
                     intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity1.class);
-                    if (build.length() != 0) {
+                    if (build.length() != 0)
+                    {
                         SalesAnalysisActivity1.SalesAnalysisActivity.finish();
                     }
                     callback(build);
 
 
-                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
+                {
                     intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
                     if (build.length() != 0) {
                         SalesPvAActivity.Sales_Pva_Activity.finish();
@@ -283,7 +277,8 @@ public class SalesFilterActivity extends Activity {
 
                 } else if (getIntent().getStringExtra("checkfrom").equals("skewedSize")) {
                     intent = new Intent(SalesFilterActivity.this, SkewedSizesActivity.class);
-                    if (build.length() != 0) {
+                    if (build.length() != 0)
+                    {
                         SkewedSizesActivity.SkewedSizes.finish();
                     }
                     callback(build);
