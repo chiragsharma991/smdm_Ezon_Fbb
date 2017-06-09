@@ -75,7 +75,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     SharedPreferences sharedPreferences;
     RequestQueue queue;
     static List<String> ez_regionList,ez_storeList,ez_deptList,ez_categryList,ez_classList,ez_brandList,ez_mcList;
-
+    // git 09-06-17
 
 
     @Override
