@@ -52,6 +52,7 @@ import java.util.HashMap;
 import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -108,6 +109,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private PopupWindow popupWindow;
     private RadioButton product_radiobtn,location_radiobtn;
     private int preValue, postValue;  //this is for radio button
+    private JsonArrayRequest postRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,6 +237,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         CheckSTD.setOnClickListener(this);
         BestQuickFilterBorder.setOnClickListener(this);
         BstInventory_salesThru_chk.setChecked(true);
+        BestInvent_imgfilter.setOnClickListener(this);
+
 
         gson = new Gson();
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -378,6 +382,12 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         if (Reusable_Functions.chkStatus(context)) {
             String url;
+            if (postRequest != null)
+            {
+                Log.e(TAG, ": cancel request>>>>>>>" );
+                postRequest.cancel();
+                bestPerformerInventoryAdapter.notifyDataSetChanged();
+            }
             if(TAG.equals("BestPerformer_Ez_Inventory")){
 
                         //https://smdm.manthan.com/v1/display/inventorybestworstperformersEZ/1234?view=WTD&top=10&offset=0&limit=5&orderby=DESC&orderbycol=10
@@ -389,7 +399,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             }
             Log.e(TAG, "requestRunningPromoApi: "+url );
 
-            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+            postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
@@ -410,6 +420,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 } else if (response.length() == limit) {
 
                                     for (int i = 0; i < response.length(); i++) {
+                                        Log.e(TAG, "onResponse:list size is "+BestInventList.size()+"response length"+response.length() );
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         BestInventList.add(BestInventSizeListDisplay);
                                     }
@@ -598,7 +609,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BestCheckPrevious = (CheckBox) findViewById(R.id.bestCheckPrevious);
         BestCheckOld = (CheckBox) findViewById(R.id.bestCheckOld);
         BestCheckUpcoming = (CheckBox) findViewById(R.id.bestCheckUpcoming);
-        BestInvent_imgfilter.setOnClickListener(this);
         BestCheckCurrent.setOnClickListener(this);
         BestCheckPrevious.setOnClickListener(this);
         BestCheckOld.setOnClickListener(this);
@@ -649,10 +659,22 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                 break;
             case R.id.bestInvent_imgfilter:
-                Intent intent = new Intent(this, SalesFilterActivity.class);
-                intent.putExtra("checkfrom", "bestPerformers");
-                startActivity(intent);
-                break;
+
+                if(TAG.equals("BestPerformer_Ez_Inventory")){
+
+                    Intent intent = new Intent(this, EzoneSalesFilter.class);
+                    intent.putExtra("checkfrom", "bestPerformers");
+                    intent.putExtra("TAG",TAG);
+                    startActivity(intent);
+                    break;
+
+                }else{
+                    Intent intent = new Intent(this, SalesFilterActivity.class);
+                    intent.putExtra("checkfrom", "bestPerformers");
+                    intent.putExtra("TAG",TAG);
+                    startActivity(intent);
+                    break;
+                }
 
 
             //Quick filter>>>
@@ -1122,6 +1144,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         Log.e(TAG, "onCheckedChanged: "+toggleClick );
         if (!toggleClick) {
 
+
             switch (checkedId) {
                 case R.id.bestInvent_core:
                     if (BestInvent_core.isChecked()) {
@@ -1204,12 +1227,12 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(this, "Loading...");
             quickFilterPopup.setVisibility(View.GONE);
             limit = 10;
             offsetvalue = 0;
             top = 10;
             BestInventList.clear();
-            Reusable_Functions.sDialog(this, "Loading...");
             requestRunningPromoApi(selectedString);
 
         } else {
@@ -1312,6 +1335,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             public void onClick(View view) {
 
                 if (Reusable_Functions.chkStatus(context)) {
+                    if (postRequest != null)
+                    {
+                        Log.e(TAG, "location: cancel request" );
+                        postRequest.cancel();
+                    }
                     postValue = 2;
                     level=9;
                     location_radiobtn.setChecked(true);
@@ -1331,6 +1359,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             public void onClick(View view) {
 
                 if (Reusable_Functions.chkStatus(context)) {
+                    if (postRequest != null)
+                    {
+                        Log.e(TAG, "product: cancel request" );
+                        postRequest.cancel();
+                    }
                     postValue = 1;
                     level=7;
                     product_radiobtn.setChecked(true);
