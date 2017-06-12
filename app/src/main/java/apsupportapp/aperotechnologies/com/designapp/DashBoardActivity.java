@@ -168,16 +168,6 @@ public class DashBoardActivity extends AppCompatActivity
             Log.e("ezone layout","");
             setContentView(R.layout.activity_ezone_dashboard);
             initialize_ezone_ui();
-//            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.linear);
-//            LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View menuLayout = inflater.inflate(R.layout.activity_ezone_dashboard, linearLayout, true);
-//            linearLayout.removeView(menuLayout);
-//            linearLayout.addView(menuLayout);
-//            LayoutInflater layoutInflater1 = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View view = (View) layoutInflater1.inflate(R.layout.activity_ezone_dashboard, null);
-//            linearLayout.addView(view);
-//            EzoneDashBoradActivity e =new EzoneDashBoradActivity();
-//            e.Ezone_DshBoard(view);
         }
         else
         {

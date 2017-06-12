@@ -98,7 +98,6 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        Log.e(TAG, "getView: "+position );
         Position = position;
         final Holder holder;
         if (convertView == null) {

@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -45,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -64,15 +66,17 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     Context context = this;
     public static ProgressBar ez_filter_progressBar;
     private String str_filter_location = "NO", str_filter_prod = "NO";
-    static EzoneFilterAdapter locatn_list_adapter,prod_list_adapter;
+    static EzoneFilterProductAdapter prod_list_adapter;
+    static EzoneFilterLocationAdapter locatn_list_adapter;
     int offset = 0, limit = 100, count = 0;
-    public static int ez_level_filter = 1,ez_prod_level = 1;
+    public int ez_level_filter = 1,ez_prod_level = 1;
     String userId, bearertoken;
+    public int ezone_filter_level = 1;
+    private Intent intent;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
-    static boolean location_flag = false ,prod_flag;
     static List<String> ez_regionList,ez_storeList,ez_deptList,ez_categryList,ez_classList,ez_brandList,ez_mcList;
-
+    // git 09-06-17
 
 
     @Override
@@ -98,10 +102,26 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         initialise_ui();
         prepareData();
 
-        locatn_list_adapter = new EzoneFilterAdapter(this, loc_listDataHeader, loc_listDataChild, explv_ez_locatn, locatn_list_adapter);
+        locatn_list_adapter = new EzoneFilterLocationAdapter(this, loc_listDataHeader, loc_listDataChild, explv_ez_locatn, locatn_list_adapter);
         explv_ez_locatn.setAdapter(locatn_list_adapter);
-        prod_list_adapter = new EzoneFilterAdapter(this, prod_listDataHeader, prod_listDataChild, explv_ez_prod, prod_list_adapter);
+        prod_list_adapter = new EzoneFilterProductAdapter(this, prod_listDataHeader, prod_listDataChild, explv_ez_prod, prod_list_adapter);
         explv_ez_prod.setAdapter(prod_list_adapter);
+        explv_ez_locatn.setNestedScrollingEnabled(true);
+        explv_ez_prod.setNestedScrollingEnabled(true);
+        explv_ez_locatn.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                setListViewHeight1(parent, groupPosition);
+                return false;
+            }
+        });
+        explv_ez_prod.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                setListViewHeight(parent, groupPosition);
+                return false;
+            }
+        });
         et_ez_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -127,26 +147,15 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(et_ez_search.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
                 s = et_ez_search.getText().toString();
                 Log.e("s :",""+s);
-
-                /*if(lin_ez_locatn.getVisibility()== View.VISIBLE)
-                {
-
-                    locatn_list_adapter.filterData(s.toString());
-                }
-
-                if(lin_ez_prod.getVisibility()==View.VISIBLE)
-                {
-
-                    prod_list_adapter.filterData(s.toString());
-                }*/
-
-            }
+                   locatn_list_adapter.filterData(s.toString());
+                   prod_list_adapter.filterData(s.toString());
+           }
 
             @Override
             public void afterTextChanged(Editable s)
@@ -154,6 +163,79 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
             }
         });
+    }
+
+    private void setListViewHeight1(ExpandableListView listView,int group)
+    {
+        EzoneFilterLocationAdapter listAdapter = (EzoneFilterLocationAdapter) listView.getExpandableListAdapter();
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
+                View.MeasureSpec.EXACTLY);
+        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
+            View groupItem = listAdapter.getGroupView(i, false, null, listView);
+            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+            totalHeight += groupItem.getMeasuredHeight();
+
+            if (((listView.isGroupExpanded(i)) && (i != group))
+                    || ((!listView.isGroupExpanded(i)) && (i == group))) {
+                for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
+                    View listItem = listAdapter.getChildView(i, j, false, null,
+                            listView);
+                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+                    totalHeight += listItem.getMeasuredHeight();
+
+                }
+            }
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        int height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
+        if (height < 10)
+            height = 200;
+        params.height = height;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+
+
+    private void setListViewHeight(ExpandableListView listView,
+                                   int group)
+    {
+        EzoneFilterProductAdapter listAdapter = (EzoneFilterProductAdapter) listView.getExpandableListAdapter();
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
+                View.MeasureSpec.EXACTLY);
+        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
+            View groupItem = listAdapter.getGroupView(i, false, null, listView);
+            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+            totalHeight += groupItem.getMeasuredHeight();
+
+            if (((listView.isGroupExpanded(i)) && (i != group))
+                    || ((!listView.isGroupExpanded(i)) && (i == group))) {
+                for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
+                    View listItem = listAdapter.getChildView(i, j, false, null,
+                            listView);
+                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+                    totalHeight += listItem.getMeasuredHeight();
+
+                }
+            }
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        int height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
+        if (height < 10)
+            height = 200;
+        params.height = height;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+
     }
 
     private void prepareData()
@@ -204,10 +286,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         rel_ez_sfilter_back = (RelativeLayout) findViewById(R.id.rel_ez_sfilter_back);
         rel_ez_sfilter_done = (RelativeLayout) findViewById(R.id.rel_ez_sfilter_done);
         ez_filter_progressBar = (ProgressBar)findViewById(R.id.ez_filter_progressBar);
-        lin_ez_locatn = (LinearLayout) findViewById(R.id.lin_filter_locatn);
-        lin_ez_prod = (LinearLayout) findViewById(R.id.lin_filter_product);
-        txt_ez_location = (TextView) findViewById(R.id.txt_ez_location);
-        txt_ez_prod = (TextView) findViewById(R.id.txt_ez_filter_product);
+//        lin_ez_locatn = (LinearLayout) findViewById(R.id.lin_filter_locatn);
+//        lin_ez_prod = (LinearLayout) findViewById(R.id.lin_filter_product);
+//        txt_ez_location = (TextView) findViewById(R.id.txt_ez_location);
+//        txt_ez_prod = (TextView) findViewById(R.id.txt_ez_filter_product);
         et_ez_search = (EditText) findViewById(R.id.et_ez_search);
         et_ez_search.setSingleLine(true);
         explv_ez_locatn = (ExpandableListView) findViewById(R.id.explv_ez_location);
@@ -218,17 +300,12 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         explv_ez_prod.setTextFilterEnabled(true);
         explv_ez_prod.setDivider(getResources().getDrawable(R.color.grey));
         explv_ez_prod.setDividerHeight(2);
-        txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
-        txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
-        txt_ez_location.setOnClickListener(this);
-        txt_ez_prod.setOnClickListener(this);
+//        txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+//        txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+//        txt_ez_location.setOnClickListener(this);
+//        txt_ez_prod.setOnClickListener(this);
         rel_ez_sfilter_done.setOnClickListener(this);
         rel_ez_sfilter_back.setOnClickListener(this);
-    }
-
-    public static void StartIntent(Context c)
-    {
-        c.startActivity(new Intent(c, EzoneSalesFilter.class));
     }
 
 
@@ -237,7 +314,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         super.onStart();
 //        if (location_flag)
 //        {
-            lin_ez_locatn.setVisibility(View.VISIBLE);
+//            lin_ez_locatn.setVisibility(View.VISIBLE);
 //        }
 //        else
 //        {
@@ -245,7 +322,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //        }
 //        if (prod_flag)
 //        {
-            lin_ez_prod.setVisibility(View.VISIBLE);
+//            lin_ez_prod.setVisibility(View.VISIBLE);
 //        }
 //        else
 //        {
@@ -260,58 +337,208 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 onBackPressed();
                 break;
             case R.id.rel_ez_sfilter_done:
-                Toast.makeText(context, "Please select value...", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.txt_ez_location:
-                if (str_filter_location.equals("NO"))
-                {
-                    lin_ez_locatn.setVisibility(View.VISIBLE);
-//                    lin_ez_prod.setVisibility(View.VISIBLE);
-                    txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
-//                    txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
-                    str_filter_location = "YES";
-//                    str_filter_prod = "NO";
-                    location_flag = true;
-//                    prod_flag = false;
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                StringBuilder build = new StringBuilder();
+                //Send selected hierarchy level to selected activity
+
+                if (EzoneFilterLocationAdapter.region_str.length() != 0) {
+                    String region = EzoneFilterLocationAdapter.region_str.replace("%", "%25");
+                    String updateRegion = region.replace(" ", "%20").replace("&", "%26");
+                    String Region;
+                    Region = "region=" + updateRegion;
+                    build.append("&");
+                    build.append(Region.replace(",$", ""));
                 }
-                else
-                {
-                    lin_ez_locatn.setVisibility(View.GONE);
-                    txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
-                    str_filter_location = "NO";
-                    location_flag = false;
+
+                if (EzoneFilterLocationAdapter.store_str.length() != 0) {
+                    String store = EzoneFilterLocationAdapter.store_str.replace("%", "%25");
+                    String updateStore = store.replace(" ", "%20").replace("&", "%26");
+                    String Store;
+                    Store = "store=" + updateStore;
+                    build.append("&");
+                    build.append(Store.replace(",$", ""));
+
                 }
-                break;
-            case R.id.txt_ez_filter_product:
-                if (str_filter_prod.equals("NO"))
+                if (EzoneFilterProductAdapter.dept_text.length() != 0)
                 {
-                    lin_ez_prod.setVisibility(View.VISIBLE);
-                  //  lin_ez_locatn.setVisibility(View.GONE);
-                    txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
-                   // txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+                    String deptmnt = EzoneFilterProductAdapter.dept_text.replace("%", "%25");
+                    String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
+                    String Department;
+
+//                    if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+                        Department = "department=" + updateDept;
+//                    } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+//                        Department = "department=" + updateDept;
+//                    } else {
+//                        Department = "dept=" + updateDept;
+//                    }
+                    build.append("&");
+                    build.append(Department.replace(",$", ""));
+
+                }
+
+                if (EzoneFilterProductAdapter.categry_text.length() != 0)
+                {
+                    String categry = EzoneFilterProductAdapter.categry_text.replace("%", "%25");
+                    String updateCategory = categry.replace(" ", "%20").replace("&", "%26");
+                    String Categary = "category=" + updateCategory;
+                    build.append("&");
+                    build.append(Categary.replace(",$", ""));
+
+                }
+
+                if (EzoneFilterProductAdapter.class_text.length() != 0) {
+                    String plancls = EzoneFilterProductAdapter.class_text.replace("%", "%25");
+                    String updatePlanClass = plancls.replace(" ", "%20").replace("&", "%26");
+                    String planclass = "class=" + updatePlanClass;
+                    build.append("&");
+                    build.append(planclass.replace(",$", ""));
+
+                }
+
+                if (EzoneFilterProductAdapter.brand_text.length() != 0) {
+                    String brand = EzoneFilterProductAdapter.brand_text.replace("%", "%25");
+                    String updateBrand = brand.replace(" ", "%20").replace("&", "%26");
+                    String Brand = "brand=" + updateBrand;
+                    build.append("&");
+                    build.append(Brand.replace(",$", ""));
+
+                }
+
+                if (EzoneFilterProductAdapter.brandcls_text.length() != 0)
+                {
+                    String brandcls = EzoneFilterProductAdapter.brandcls_text.replace("%", "%25");
+                    String updateBrandCls = brandcls.replace(" ", "%20").replace("&", "%26");
+                    String Brandclass = "brandclass=" + updateBrandCls;
+                    build.append("&");
+//                    if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex") || getIntent().getStringExtra("checkfrom").equals("optionEfficiency")) {
+//                        level_filter = 5;
+//                    }
+//                    else
+//                    {
+//                    }
+                    build.append(Brandclass.replace(",$", ""));
+
+                }
+                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
+                    intent = new Intent(EzoneSalesFilter.this, SalesAnalysisActivity1.class);
+                    if (build.length() != 0) {
+                        SalesAnalysisActivity1.SalesAnalysisActivity.finish();
+                    }
+                    callback(build);
+                }
+                else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
+                    intent = new Intent(EzoneSalesFilter.this, BestPerformerInventory.class);
+                    if (build.length() != 0) {
+                        BestPerformerInventory.bestperoformer.finish();
+                        Log.e("TAG", "bestPerformers: from filter after finish" );
+
+                    }
+                    callback(build);
+                }
+
+
+
+
+                break;
+//            case R.id.txt_ez_location:
+//                if (str_filter_location.equals("NO"))
+//                {
+//                    lin_ez_locatn.setVisibility(View.VISIBLE);
+////                    lin_ez_prod.setVisibility(View.VISIBLE);
+//                    txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+////                    txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+//                    str_filter_location = "YES";
+////                    str_filter_prod = "NO";
+//                    location_flag = true;
+////                    prod_flag = false;
+//                }
+//                else
+//                {
+//                    lin_ez_locatn.setVisibility(View.GONE);
+//                    txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
 //                    str_filter_location = "NO";
-                    str_filter_prod = "YES";
 //                    location_flag = false;
-                    prod_flag = true;
-                }
-                else
-                {
-                    lin_ez_prod.setVisibility(View.GONE);
-                    txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
-                    str_filter_prod = "NO";
-                    prod_flag = false;
-                }
-                break;
+//                }
+//                break;
+//            case R.id.txt_ez_filter_product:
+//                if (str_filter_prod.equals("NO"))
+//                {
+//                    lin_ez_prod.setVisibility(View.VISIBLE);
+//                  //  lin_ez_locatn.setVisibility(View.GONE);
+//                    txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+//                   // txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+////                    str_filter_location = "NO";
+//                    str_filter_prod = "YES";
+////                    location_flag = false;
+//                    prod_flag = true;
+//                }
+//                else
+//                {
+//                    lin_ez_prod.setVisibility(View.GONE);
+//                    txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
+//                    str_filter_prod = "NO";
+//                    prod_flag = false;
+//                }
+//                break;
 
         }
     }
+
+    private void callback(StringBuilder build)
+    {
+        if (build.length() == 0)
+        {
+            Toast.makeText(context, "Please select value...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            int filter_level = 0;
+            if(build.toString().contains("region") || build.toString().contains("store"))
+            {
+                filter_level = 9;
+            }
+            else
+            {
+                if (build.toString().contains("department"))
+                {
+                    filter_level = 2;
+                }
+                if (build.toString().contains("category"))
+                {
+                    filter_level = 3;
+                }
+                if (build.toString().contains("class"))
+                {
+                    filter_level = 4;
+                }
+                if (build.toString().contains("brand"))
+                {
+                    filter_level = 5;
+                }
+                if (build.toString().contains("brandclass"))
+                {
+                    filter_level = 6;
+                }
+            }
+            intent.putExtra("selectedStringVal", build.toString());
+            Log.e("TAG", "callback:  selectedStringVal"+build.toString() );
+            intent.putExtra("selectedlevelVal", filter_level);
+            Log.e("TAG", "callback:  selectedlevelVal"+filter_level );
+        }
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void onBackPressed()
     {
-        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         finish();
     }
+
+
      //------------------------------------API Declaration--------------------------------------//
      private void requestEzoneRegion(int offset1, int limit1)
      {
@@ -569,7 +796,8 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     ez_categryList.add(planCategory);
                                 }
                                 ez_filter_progressBar.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(2).equals("Class")) {
+                                if (prod_listDataHeader.get(2).equals("Class"))
+                                {
                                     ez_filter_progressBar.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -614,13 +842,17 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, class_url,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONArray response)
+                    {
                         Log.e("class response :",""+response);
                         try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in class", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
+                            }
+                            else if (response.length() == limit)
+                            {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++)
                                 {
@@ -641,7 +873,9 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     ez_classList.add(planClass);
                                 }
                                 ez_filter_progressBar.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(3).equals("Subclass")) {
+
+                                if (prod_listDataHeader.get(3).equals("Subclass"))
+                                {
                                     ez_filter_progressBar.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -790,10 +1024,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     String brandClass = productName1.getString("brandPlanClass");
                                     ez_mcList.add(brandClass);
                                 }
-                                txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
-                                txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
-                                lin_ez_locatn.setVisibility(View.VISIBLE);
-                                lin_ez_prod.setVisibility(View.VISIBLE);
+//                                txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+//                                txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
+//                                lin_ez_locatn.setVisibility(View.VISIBLE);
+//                                lin_ez_prod.setVisibility(View.VISIBLE);
                                 ez_filter_progressBar.setVisibility(View.GONE);
                             }
                         } catch (Exception e)
