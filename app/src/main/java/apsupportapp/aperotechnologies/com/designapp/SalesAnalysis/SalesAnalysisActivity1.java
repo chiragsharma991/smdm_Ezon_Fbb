@@ -91,7 +91,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     String userId, bearertoken,geoLeveLDesc;
     EditText etListText;
     RadioButton btnWTD, btnL4W, btnLW, btnYTD;
-    public static String selectedsegValue ;
+    public static String selectedsegValue ="WTD" ;
     String saleFirstVisibleItem , fromWhere = "Department" , val , txtSalesClickedValue;
     TextView txtStoreCode, txtStoreDesc, txtheaderplanclass, txthDeptName;;
     public static int level = 1;
@@ -102,7 +102,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     ProgressBar progressBar1;
 
     // Ezone Elements Declaration
-    public static String ez_segment_val;
+    public static String ez_segment_val = "LD";
 
     SegmentedGroup ez_segmentgrp;
     RelativeLayout rel_ez_back,rel_ez_sort,rel_ez_filter,rel_ez_next,rel_ez_prev,rel_ez_viewBy;
@@ -191,12 +191,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                        }
                        if (filterSelectedString.contains("brandclass"))
                        {
-                           filter_level = 6;
+                           filter_level = 5;
                        }
                    }
                      Log.e("welcome----","=======");
                     ez_filter_toggleClick = true;
-                    retainEzoneSegVal();
+                   retainEzoneSegVal();
                   requestEzoneFilterSelectedVal(filterSelectedString);
                 }
             } else {
@@ -657,7 +657,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     private void initialize_ez_ui()
     {
         ez_fromWhere = "Department";
-        ez_segment_val = "LD";
         ez_firstVisible_no = 0;
         ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
         ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
@@ -706,7 +705,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     {
         fromWhere = "Department";
         txtSalesClickedValue = " ";
-        selectedsegValue = "WTD";
         val = "";
         firstVisibleItem = 0;
         etListText = (EditText) findViewById(R.id.etListText);
@@ -788,7 +786,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 break;
         }
     }
-
 
     private void TimeUP()
     {
@@ -2000,7 +1997,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 }
                                 if (filterSelectedString.contains("brandclass"))
                                 {
-                                    filter_level = 6;
+                                    filter_level = 5;
                                 }
                             }
                           requestEzoneFilterSelectedVal(filterSelectedString);
@@ -2064,7 +2061,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 }
                                 if (filterSelectedString.contains("brandclass"))
                                 {
-                                    filter_level = 6;
+                                    filter_level = 5;
                                 }
                             }
 //                            Log.e("welcome----","=======");
@@ -2134,7 +2131,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 }
                                 if (filterSelectedString.contains("brandclass"))
                                 {
-                                    filter_level = 6;
+                                    filter_level = 5;
                                 }
                             }
 //                            Log.e("welcome----","=======");
@@ -2204,7 +2201,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 }
                                 if (filterSelectedString.contains("brandclass"))
                                 {
-                                    filter_level = 6;
+                                    filter_level = 5;
                                 }
                             }
 //                            Log.e("welcome----","=======");
@@ -2911,6 +2908,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 int currentItem = vwpagersales.getCurrentItem();
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
+
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
                                 if (txtheaderplanclass.getText().toString().equals("Department"))
@@ -3575,7 +3573,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     ez_sales_detalis_array.add(ez_sales_detail_model);
                                     ez_sales_adapter.addSnap(ez_sales_detail_model);
                                 }
-                                for (int i = 0; i < 3; i++)
+                                for (int i = 0; i < 2; i++)
                                 {
                                     ImageView imgdot = new ImageView(context);
                                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
@@ -3584,7 +3582,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     imgdot.setImageResource(R.mipmap.dots_unselected);
                                     ez_linear_dots.addView(imgdot);
                                 }
-                                int currentItem = vwpagersales.getCurrentItem();
+                                final int currentItem = ez_viewpager.getCurrentItem();
                                 ImageView img = (ImageView) ez_linear_dots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
 
@@ -4489,14 +4487,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         EzoneFilterProductAdapter.brandcls_text = "";
         EzoneFilterLocationAdapter.region_str = "";
         EzoneFilterLocationAdapter.store_str = "";
-//        selectedsegValue = "";
+        selectedsegValue = "";
         level = 0;
-//        selectedsegValue = "WTD";
+        selectedsegValue = "WTD";
         level = 1;
         ezone_level = 0;
-//        ez_segment_val = "";
+        ez_segment_val = "";
         ezone_level = 1;
-//        ez_segment_val = "LD";
+        ez_segment_val = "LD";
         this.finish();
 
     }

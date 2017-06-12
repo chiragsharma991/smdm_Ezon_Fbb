@@ -100,13 +100,14 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         ez_mcList = new ArrayList<String>();
         initialise_ui();
         prepareData();
-
         locatn_list_adapter = new EzoneFilterLocationAdapter(this, loc_listDataHeader, loc_listDataChild, explv_ez_locatn, locatn_list_adapter);
         explv_ez_locatn.setAdapter(locatn_list_adapter);
         prod_list_adapter = new EzoneFilterProductAdapter(this, prod_listDataHeader, prod_listDataChild, explv_ez_prod, prod_list_adapter);
         explv_ez_prod.setAdapter(prod_list_adapter);
+
         explv_ez_locatn.setNestedScrollingEnabled(true);
         explv_ez_prod.setNestedScrollingEnabled(true);
+
         explv_ez_locatn.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
@@ -277,6 +278,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         prod_listDataChild.put(prod_listDataHeader.get(2), ez_classList); // Header, Child data
         prod_listDataChild.put(prod_listDataHeader.get(3), ez_brandList);
         prod_listDataChild.put(prod_listDataHeader.get(4), ez_mcList); // Header, Child data
+
     }
 
 
@@ -496,8 +498,8 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     {
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        Intent intent = new Intent(EzoneSalesFilter.this,SalesAnalysisActivity1.class);
-        startActivity(intent);
+//        Intent intent = new Intent(EzoneSalesFilter.this,SalesAnalysisActivity1.class);
+//        startActivity(intent);
         finish();
     }
 
