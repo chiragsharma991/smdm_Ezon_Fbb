@@ -70,7 +70,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     int offset = 0, limit = 100, count = 0;
     public int ez_level_filter = 1,ez_prod_level = 1;
     String userId, bearertoken;
-    public static int ezone_level = 1;
+    public int ezone_filter_level = 1;
     private Intent intent;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
@@ -307,13 +307,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         rel_ez_sfilter_back.setOnClickListener(this);
     }
 
-    public static void StartIntent(Context c)
-    {
-        c.startActivity(new Intent(c, EzoneSalesFilter.class));
-    }
-
-
-
 
     @Override
     protected void onStart() {
@@ -343,7 +336,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 onBackPressed();
                 break;
             case R.id.rel_ez_sfilter_done:
-                Toast.makeText(context, "Please select value...", Toast.LENGTH_SHORT).show();
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 StringBuilder build = new StringBuilder();
@@ -355,9 +347,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     String Region;
                     Region = "region=" + updateRegion;
                     build.append("&");
-                    ezone_level = 9;
                     build.append(Region.replace(",$", ""));
-
                 }
 
                 if (EzoneFilterLocationAdapter.store_str.length() != 0) {
@@ -366,11 +356,11 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     String Store;
                     Store = "store=" + updateStore;
                     build.append("&");
-                    ezone_level = 9;
                     build.append(Store.replace(",$", ""));
 
                 }
-                if (EzoneFilterProductAdapter.dept_text.length() != 0) {
+                if (EzoneFilterProductAdapter.dept_text.length() != 0)
+                {
                     String deptmnt = EzoneFilterProductAdapter.dept_text.replace("%", "%25");
                     String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
                     String Department;
@@ -383,7 +373,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //                        Department = "dept=" + updateDept;
 //                    }
                     build.append("&");
-                    ezone_level = 2;
                     build.append(Department.replace(",$", ""));
 
                 }
@@ -394,7 +383,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     String updateCategory = categry.replace(" ", "%20").replace("&", "%26");
                     String Categary = "category=" + updateCategory;
                     build.append("&");
-                    ezone_level = 3;
                     build.append(Categary.replace(",$", ""));
 
                 }
@@ -404,7 +392,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     String updatePlanClass = plancls.replace(" ", "%20").replace("&", "%26");
                     String planclass = "class=" + updatePlanClass;
                     build.append("&");
-                    ezone_level = 4;
                     build.append(planclass.replace(",$", ""));
 
                 }
@@ -414,7 +401,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     String updateBrand = brand.replace(" ", "%20").replace("&", "%26");
                     String Brand = "brand=" + updateBrand;
                     build.append("&");
-                    ezone_level = 5;
                     build.append(Brand.replace(",$", ""));
 
                 }
@@ -430,18 +416,17 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //                    }
 //                    else
 //                    {
-                        ezone_level = 6;
 //                    }
                     build.append(Brandclass.replace(",$", ""));
 
                 }
-                intent = new Intent(EzoneSalesFilter.this, SalesAnalysisActivity1.class);
-                if (build.length() != 0)
-                {
-                    SalesAnalysisActivity1.SalesAnalysisActivity.finish();
+                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
+                    intent = new Intent(EzoneSalesFilter.this, SalesAnalysisActivity1.class);
+                    if (build.length() != 0) {
+                        SalesAnalysisActivity1.SalesAnalysisActivity.finish();
+                    }
+                    callback(build);
                 }
-                callback(build);
-
 
 
 
@@ -492,15 +477,18 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
     private void callback(StringBuilder build)
     {
-        if (build.length() == 0) {
-            Toast.makeText(context, "Please select value..", Toast.LENGTH_SHORT).show();
+        if (build.length() == 0)
+        {
+            Toast.makeText(context, "Please select value...", Toast.LENGTH_SHORT).show();
             return;
-        } else {
-            intent.putExtra("selectedStringVal", build.toString());
-            Log.e("build val :",""+build+ezone_level);
         }
-       // startActivity(intent);
-     //   finish();
+        else
+        {
+            intent.putExtra("selectedStringVal", build.toString());
+            Log.e("build val :",""+build.toString().contains("region"));
+        }
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -512,6 +500,8 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         startActivity(intent);
         finish();
     }
+
+
      //------------------------------------API Declaration--------------------------------------//
      private void requestEzoneRegion(int offset1, int limit1)
      {

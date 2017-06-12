@@ -213,8 +213,8 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                                    cb.setChecked(true);
                                                    ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.VISIBLE);
                                                    if (groupPosition == 1) {
-                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
-                                                       cb.setChecked(true);
+//                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
+//                                                       cb.setChecked(true);
                                                        ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.GONE);
 
                                                    }
@@ -248,14 +248,15 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
         }
         if (level == 1)
         {
-            store_List.remove(store_List.indexOf(txtClickedVal.trim()));
+            Log.e("remove in store---","");
+            store_List.remove(txtClickedVal.trim());
             String[] array = (String[]) store_List.toArray(new String[0]);
             String str1 = Arrays.toString(array);
             str1 = str1.replace("[", "");
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ", ",");
             store_str = str1;
-            Log.e("remove build up store:", "" + store_str);
+            Log.e("remove build up store:", "" + store_List.size());
         }
 
     }
@@ -305,7 +306,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                 str_brndcls = str_brndcls.replace("]", "");
                 str_brndcls = str_brndcls.replace(", ", ",");
                 store_str = str_brndcls;
-                Log.e("Build up store in if:", "" + store_str);
+                Log.e("Build up store in if:", "" + store_str+store_List.size());
 
             } else
             {
@@ -320,9 +321,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 
             }
         }
-
-
-
     }
 
     private void requestLocationHierarchy(int level ,String txtClickedVal) {

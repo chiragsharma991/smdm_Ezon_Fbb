@@ -240,6 +240,10 @@
             android:name=".StoreInspection.InspectionDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".SalesAnalysis.EzoneSalesFilter"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>`
 
         <activity android:name=".SalesAnalysis.EzoneSalesFilter"
                   android:screenOrientation="portrait"

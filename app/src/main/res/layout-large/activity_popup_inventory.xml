@@ -124,7 +124,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="5"
-                                    android:buttonTint="@android:color/black"
+                                    android:buttonTint="@color/colorPrimary"
 
 
                                     />
@@ -184,7 +184,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="5"
                                     android:checked="true"
-                                    android:buttonTint="@android:color/black"
+                                    android:buttonTint="@color/colorPrimary"
 
 
 
@@ -245,7 +245,7 @@
                                     android:layout_height="wrap_content"
                                     android:clickable="false"
                                     android:layout_weight="5"
-                                    android:buttonTint="@android:color/black"
+                                    android:buttonTint="@color/colorPrimary"
 
 
 
@@ -304,7 +304,7 @@
                                     android:id="@+id/bstInventory_coverNsellchk"
                                     android:layout_weight="5"
                                     android:clickable="false"
-                                    android:buttonTint="@android:color/black"
+                                    android:buttonTint="@color/colorPrimary"
 
 
 

@@ -54,6 +54,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+
 /**
  * Created by pamrutkar on 25/05/17.
  */
@@ -519,5 +520,13 @@ public class LoginActivity1 extends AppCompatActivity
             }
             spinnerArrayAdapter.notifyDataSetChanged();
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        Log.e("LOGIN", "onDestroy: " );
+        Reusable_Functions.hDialog();
+        super.onDestroy();
     }
 }

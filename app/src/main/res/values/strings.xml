@@ -165,12 +165,13 @@
     <string name="prod_name">Product Name : </string>
 
     <!--Ezone Module-->
-    <string name="ezone_filter_location">Location</string>
-    <string name="ezone_filter_product">Product</string>
+
     <string name="ezone_sales_header">Sales</string>
     <string name="ezone_inventory_header">Inventory</string>
     <string name="ezone_best_worst">Best/Worst Performers</string>
     <string name="ezone_assortment_analysis">Assortment Analysis</string>
+    <string name="ezone_filter_location">Location</string>
+    <string name="ezone_filter_product">Product</string>
 
 
 
