@@ -70,7 +70,7 @@
                         />
 
                     <RelativeLayout
-                        android:id="@+id/freshnessIndex_Ez_imgfilter"
+                        android:id="@+id/freshnessIndex_imgfilter"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
                         android:layout_centerVertical="true"

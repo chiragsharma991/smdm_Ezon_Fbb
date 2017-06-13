@@ -75,7 +75,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
         if (arrayList.size() != 0) {
             ez_sales_pager = arrayList.get(0);
         }
-        ez_currentPage = vwpagersales.getCurrentItem();
+        ez_currentPage = ez_vwpagersales.getCurrentItem();
     }
 
     public EzoneSalesPagerAdapter() {
@@ -214,10 +214,10 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     txt_ez_MarginPerc.setText("" + Math.round(ez_sales_pager.getMarginPct()) + "%");
 
                     // Color Condition for Wow Net Sale, Pva Achieved , Wow net sale Growth
-                    if (ez_sales_pager.getWowNetSalesGrowthPct() <= 0) {
+                    if (ez_sales_pager.getYoyNetSalesGrowthPct() <= 0) {
                         txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                         txt_ez_NetSalesVal.setTextColor(Color.parseColor("#fe0000"));
-                    } else if (ez_sales_pager.getWowNetSalesGrowthPct() > 0) {
+                    } else if (ez_sales_pager.getYoyNetSalesGrowthPct() > 0) {
                         txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
                         txt_ez_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
                     }
@@ -231,10 +231,10 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                         txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
                         txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
                     }
-                    if (ez_sales_pager.getWowNetSalesUnitsGrowthPct() <= 0) {
+                    if (ez_sales_pager.getYoyNetSalesUnitsGrowthPct() <= 0) {
                         txt_ez_NetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
                         txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
-                    } else if (ez_sales_pager.getWowNetSalesUnitsGrowthPct() > 0) {
+                    } else if (ez_sales_pager.getYoyNetSalesUnitsGrowthPct() > 0) {
                         txt_ez_NetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
                         txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#70e503"));
                     }
@@ -256,11 +256,11 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     txt_ez_MarginPerc.setText("" + Math.round(ez_sales_pager.getMarginPct()) + "%");
 
                 }
-                if (ez_sales_pager.getWowNetSalesGrowthPct() <= 0) {
+                if (ez_sales_pager.getYoyNetSalesGrowthPct() <= 0) {
                     txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                     txt_ez_NetSalesVal.setTextColor(Color.parseColor("#fe0000"));
 
-                } else if (ez_sales_pager.getWowNetSalesGrowthPct() > 0) {
+                } else if (ez_sales_pager.getYoyNetSalesGrowthPct() > 0) {
                     txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
                     txt_ez_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
                 }
@@ -278,15 +278,16 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
                 }
 
-                if (ez_sales_pager.getWowNetSalesUnitsGrowthPct() <= 0) {
+                if (ez_sales_pager.getYoyNetSalesUnitsGrowthPct() <= 0) {
                     txt_ez_NetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
                     txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
-                } else if (ez_sales_pager.getWowNetSalesUnitsGrowthPct() > 0) {
+                } else if (ez_sales_pager.getYoyNetSalesUnitsGrowthPct() > 0) {
                     txt_ez_NetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
                     txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#70e503"));
                 }
 
             }
+            // Add all values
             if (ez_sales_detail_array.size() != 0) {
                 SalesAnalysisListDisplay ez_sales_pagerListDisplay = ez_sales_detail_array.get(position);
 

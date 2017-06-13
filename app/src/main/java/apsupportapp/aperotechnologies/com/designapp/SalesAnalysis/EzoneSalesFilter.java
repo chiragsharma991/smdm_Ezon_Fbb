@@ -48,6 +48,7 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -101,13 +102,14 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         ez_mcList = new ArrayList<String>();
         initialise_ui();
         prepareData();
-
         locatn_list_adapter = new EzoneFilterLocationAdapter(this, loc_listDataHeader, loc_listDataChild, explv_ez_locatn, locatn_list_adapter);
         explv_ez_locatn.setAdapter(locatn_list_adapter);
         prod_list_adapter = new EzoneFilterProductAdapter(this, prod_listDataHeader, prod_listDataChild, explv_ez_prod, prod_list_adapter);
         explv_ez_prod.setAdapter(prod_list_adapter);
+
         explv_ez_locatn.setNestedScrollingEnabled(true);
         explv_ez_prod.setNestedScrollingEnabled(true);
+
         explv_ez_locatn.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
@@ -278,6 +280,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         prod_listDataChild.put(prod_listDataHeader.get(2), ez_classList); // Header, Child data
         prod_listDataChild.put(prod_listDataHeader.get(3), ez_brandList);
         prod_listDataChild.put(prod_listDataHeader.get(4), ez_mcList); // Header, Child data
+
     }
 
 
@@ -432,15 +435,20 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     intent = new Intent(EzoneSalesFilter.this, BestPerformerInventory.class);
                     if (build.length() != 0) {
                         BestPerformerInventory.bestperoformer.finish();
-                        Log.e("TAG", "bestPerformers: from filter after finish" );
 
                     }
                     callback(build);
                 }
+                else if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex")) {
+                    intent = new Intent(EzoneSalesFilter.this, FreshnessIndexActivity.class);
+                    if (build.length() != 0) {
+                        FreshnessIndexActivity.freshness_Index.finish();
+                        Log.e("TAG", "freshnessIndex:  call finish " );
 
 
-
-
+                    }
+                    callback(build);
+                }
                 break;
 //            case R.id.txt_ez_location:
 //                if (str_filter_location.equals("NO"))
@@ -535,6 +543,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     @Override
     public void onBackPressed()
     {
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+//        Intent intent = new Intent(EzoneSalesFilter.this,SalesAnalysisActivity1.class);
+//        startActivity(intent);
         finish();
     }
 

@@ -34,7 +34,7 @@ public class ApiRequest  {
 
     private final RequestQueue queue;
     private final int id;
-    private int limit=99;
+    private int limit=100;
     private int offsetvalue=0;
     private final ArrayList<mpm_model> list;
     private mpm_model mpm_modelClass;
