@@ -74,7 +74,6 @@
 
                 <RadioButton
                     android:clickable="false"
-                    android:checked="true"
                     android:focusable="true"
                     android:id="@+id/rb_ez_viewBy_ProductChk"
                     android:layout_width="wrap_content"

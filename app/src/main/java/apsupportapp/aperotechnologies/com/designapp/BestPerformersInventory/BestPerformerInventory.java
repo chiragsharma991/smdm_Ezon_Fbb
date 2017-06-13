@@ -113,7 +113,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private RelativeLayout FreshnessIndex_Ez_moreVertical;
     private PopupWindow popupWindow;
     private RadioButton product_radiobtn, location_radiobtn;
-    private int preValue, postValue;  //this is for radio button
+    private static int preValue = 1, postValue;  //this is for radio button
     private JsonArrayRequest postRequest;
     private int selectedlevel; //select level from filter
 
@@ -173,19 +173,22 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         if (TAG.equals("BestPerformer_Ez_Inventory")) {
 
-            if (getIntent().getStringExtra("selectedStringVal") == null ) {
+            if (getIntent().getStringExtra("selectedStringVal") == null) {
                 from_filter = false;
                 level = 7;
                 preValue = 1;
-              //  BestInvent_fashion.toggle();
+                //  BestInvent_fashion.toggle();
                 Log.e(TAG, "checkfromFilter: null");
 
             } else if (getIntent().getStringExtra("selectedStringVal") != null) {
                 selectedString = getIntent().getStringExtra("selectedStringVal");
-                selectedlevel = getIntent().getIntExtra("selectedlevelVal",0);
+                selectedlevel = getIntent().getIntExtra("selectedlevelVal", 0);
                 from_filter = true;
-                Log.e(TAG, "checkfromFilter: ok "+selectedlevel+" "+selectedString);
+                setChangeViewBy(selectedlevel);
+                Log.e(TAG, "checkfromFilter: ok " + selectedlevel + " " + selectedString);
             }
+
+            show_popup();
 
 
         } else {
@@ -1131,6 +1134,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         orderby = "DESC";
         view = "STD";
         orderbycol = "10";
+        preValue = 1;
         corefashion = "Fashion";
         seasonGroup = "Current";
         checkValueIs = null;
@@ -1249,8 +1253,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
 
         FreshnessIndex_Ez_moreVertical = (RelativeLayout) findViewById(R.id.freshnessIndex_Ez_moreVertical);
-        show_popup();
-
         FreshnessIndex_Ez_moreVertical.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1267,7 +1269,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             CheckWTD.setChecked(true);
             CheckL4W.setChecked(false);
             CheckSTD.setChecked(false);
-            view="WTD";
+            view = "WTD";
 
 
         } else {
@@ -1277,21 +1279,21 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                     CheckWTD.setChecked(true);
                     CheckL4W.setChecked(false);
                     CheckSTD.setChecked(false);
-                    view="WTD";
+                    view = "WTD";
 
                     break;
                 case "CheckL4W":
                     CheckWTD.setChecked(false);
                     CheckL4W.setChecked(true);
                     CheckSTD.setChecked(false);
-                    view="L4W";
+                    view = "L4W";
 
                     break;
                 case "CheckYTD":
                     CheckWTD.setChecked(false);
                     CheckL4W.setChecked(false);
                     CheckSTD.setChecked(true);
-                    view="YTD";
+                    view = "YTD";
 
                     break;
                 default:
@@ -1302,6 +1304,22 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         }
     }
 
+    private void setChangeViewBy(int filter_level) {
+
+        switch (filter_level) {
+
+            case 9:
+                preValue = 2;
+                break;
+
+            default:
+                preValue = 1;
+                break;
+
+        }
+
+
+    }
 
     private void Ezon_collection() {
         BestInventListview.setVisibility(View.VISIBLE);
@@ -1326,7 +1344,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         String url;
         if (from_filter) {
-            url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZ/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&view=" + view + "&level=" + selectedlevel+selectedString;
+            url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZ/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&view=" + view + "&level=" + selectedlevel + selectedString;
 
         } else {
             url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZ/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&view=" + view + "&level=" + level;
@@ -1348,20 +1366,21 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         LinearLayout product = (LinearLayout) popupView.findViewById(R.id.lin_ez_Product);
         product_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_ProductChk);
         location_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_LocatnChk);
-        product_radiobtn.setChecked(true);
-        preValue = 1;
+        if (preValue == 1) {
+            product_radiobtn.setChecked(true);
+        } else {
+            location_radiobtn.setChecked(true);
+        }
+
 
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (Reusable_Functions.chkStatus(context)) {
-                    if (postRequest != null) {
-                        Log.e(TAG, "location: cancel request");
-                        postRequest.cancel();
-                    }
                     postValue = 2;
                     level = 9;
+                    from_filter = false;
                     location_radiobtn.setChecked(true);
                     product_radiobtn.setChecked(false);
                     popupWindow.dismiss();
@@ -1379,12 +1398,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             public void onClick(View view) {
 
                 if (Reusable_Functions.chkStatus(context)) {
-                    if (postRequest != null) {
-                        Log.e(TAG, "product: cancel request");
-                        postRequest.cancel();
-                    }
                     postValue = 1;
                     level = 7;
+                    from_filter = false;
                     product_radiobtn.setChecked(true);
                     location_radiobtn.setChecked(false);
                     popupWindow.dismiss();

@@ -67,6 +67,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndex_Ez_Model;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -118,8 +119,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private int OveridePositionValue = 0;
     public static Activity freshness_Index;
     private PopupWindow popupWindow;
-    private int preValue, postValue;  //this is for radio button
+    private static int preValue=1, postValue;  //this is for radio button
     private RadioButton product_radiobtn, location_radiobtn;
+    private boolean from_filter;
+    private String selectedString;
+    private int selectedlevel;
 
 
     @Override
@@ -140,10 +144,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         if (geoLeveLDesc.equals("E ZONE")) {
             setContentView(R.layout.activity_ezone_freshness_index);
             getSupportActionBar().hide();
+            TAG = "FreshnessIndex_Ez_Activity";
             context = this;
-            /**
-             // "fromwhere" function use in Ezon: we are using for drill down functionality.
-             */
             common_intializeUI();
             intializeUIofEzon();
             Ezon_collection();  // start method for ezon collection
@@ -151,10 +153,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         } else {
             setContentView(R.layout.activity_freshness_index);
             getSupportActionBar().hide();
+            TAG = "FreshnessIndexActivity";
             context = this;
-            /**
-             // "fromwhere" function use in FBB: we are using for Adapter functionality.
-             */
             common_intializeUI();
             Fbb_collection();  // start Fbb collection.
 
@@ -324,7 +324,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);
         txtNoChart = (TextView) findViewById(R.id.noChart);
-        freshnessIndex_imgfilter = (RelativeLayout) findViewById(R.id.freshnessIndex_imgfilter);
         llfreshnessIndex = (LinearLayout) findViewById(R.id.llfreshnessIndex);
         btnFIndexNext = (RelativeLayout) findViewById(R.id.btnFIndexNext);
         segmented3 = (SegmentedGroup) findViewById(R.id.freshnessIndex_segmentedGrp);
@@ -1430,8 +1429,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
         llfIndexhierarchy.setVisibility(View.GONE);
         FreshnessIndex_Ez_moreVertical = (RelativeLayout) findViewById(R.id.freshnessIndex_Ez_moreVertical);
-        show_popup();
-
         FreshnessIndex_Ez_moreVertical.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1448,13 +1445,15 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
             case 0:
                 freshnessIndexDetails_Ez_ArrayList.addAll(list);
-                String url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZ/" + userId + "?level=" + level;  //header api
+                String url;
+                if(from_filter){ url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZ/" + userId + "?level=" + selectedlevel;   from_filter=false;  }
+                else{ url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZ/" + userId + "?level=" + level;  }//header api
                 //  Log.e(TAG, "Freshness_Ez: Header URL " + url);
                 Reusable_Functions.hDialog();
                 mpm_model model = new mpm_model();
                 ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);
-
                 break;
+
             case 1:
                 freshnessIndexDetails_Ez_ArrayList.addAll(0, list);
                 freshnessIndexDetails_Ez_ArrayList.get(0).setLevel("All");
@@ -1576,13 +1575,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         LinearLayout product = (LinearLayout) popupView.findViewById(R.id.lin_ez_Product);
         product_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_ProductChk);
         location_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_LocatnChk);
-        product_radiobtn.setChecked(true);
-        preValue = 1;
+        if(preValue==1){   product_radiobtn.setChecked(true);} else{ location_radiobtn.setChecked(true);}
 
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 postValue = 2;
+                from_filter=false;
                 location_radiobtn.setChecked(true);
                 product_radiobtn.setChecked(false);
                 popupWindow.dismiss();
@@ -1596,6 +1595,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             @Override
             public void onClick(View view) {
                 postValue = 1;
+                from_filter=false;
                 product_radiobtn.setChecked(true);
                 location_radiobtn.setChecked(false);
                 popupWindow.dismiss();
@@ -1709,23 +1709,46 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);
                 break;
 
+            case 2:
+
+
+                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZ/" + userId + "?level=" + selectedlevel + selectedString;
+                // Log.e(TAG, "Freshness_Ez: Detail URL " + url);
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);
+                break;
+
 
         }
     }
 
 
     private void Ezon_collection() {
-        TAG = "FreshnessIndex_Ez_Activity";
         Log.e(TAG, "Ezon_collection: log");
 
 
         if (Reusable_Functions.chkStatus(context)) {
             mpm_model model = new mpm_model();
-            ApiCallBack(model, 0, "");
+
+            if (getIntent().getStringExtra("selectedStringVal") == null ) {
+                from_filter = false;
+                ApiCallBack(model, 0, "");
+                Log.e(TAG, "checkfromFilter: null");
+
+            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+                selectedString = getIntent().getStringExtra("selectedStringVal");
+                selectedlevel = getIntent().getIntExtra("selectedlevelVal",0);
+                from_filter = true;
+                setText(selectedlevel);
+                ApiCallBack(model, 2, "");
+                Log.e(TAG, "checkfromFilter: ok "+selectedlevel+" "+selectedString);
+            }
+            show_popup();
+
         } else {
 
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
+
 
 
         // Next arrow button.
@@ -2075,6 +2098,62 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     }
 
+    public void setText(int filter_level){
+
+        if (filter_level == 2)
+        {
+            txtFIndexClass.setText("Subdept");
+            btnFIndexNext.setVisibility(View.VISIBLE);
+            btnFIndexPrev.setVisibility(View.VISIBLE);
+            preValue=1;
+        }
+
+        else if (filter_level == 3)
+        {
+            txtFIndexClass.setText("Class");
+            btnFIndexNext.setVisibility(View.VISIBLE);
+            btnFIndexPrev.setVisibility(View.VISIBLE);
+            preValue=1;
+
+        }
+        else if (filter_level == 4)
+        {
+            txtFIndexClass.setText("Subclass");
+            btnFIndexNext.setVisibility(View.VISIBLE);
+            btnFIndexPrev.setVisibility(View.VISIBLE);
+            preValue=1;
+
+        }
+        else if (filter_level == 5)
+        {
+            txtFIndexClass.setText("MC");
+            btnFIndexNext.setVisibility(View.INVISIBLE);
+            btnFIndexPrev.setVisibility(View.VISIBLE);
+            preValue=1;
+
+        }
+        else if (filter_level == 6)
+        {
+            txtFIndexClass.setText("MC");
+            btnFIndexNext.setVisibility(View.INVISIBLE);
+            btnFIndexPrev.setVisibility(View.VISIBLE);
+            preValue=1;
+
+
+        }
+        else if(filter_level == 9)
+        {
+            txtFIndexClass.setText("Store");
+            btnFIndexPrev.setVisibility(View.VISIBLE);
+            btnFIndexNext.setVisibility(View.INVISIBLE);
+            preValue=2;
+
+        }
+
+    }
+
+
+
     public String hierarchy(String freshnessIndex_ClickedVal){
 
         if(FreshnessIndexValue==null || FreshnessIndexValue.equals(""))
@@ -2098,13 +2177,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     private void Fbb_collection() {
 
-        TAG = "FreshnessIndexActivity";
         Log.e(TAG, "Fbb_collection: log");
         fromWhere = "Department";
         fIndexFirstVisibleItem = "";
         freshnessIndex_ClickedVal = "";
         FreshnessIndexValue = "";
-        freshness_Index = this;
         level = 1;
         selFirstPositionValue = 0;
         initializeUI();
@@ -2137,14 +2214,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         }
 
 
-        freshnessIndex_imgfilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FreshnessIndexActivity.this, SalesFilterActivity.class);
-                intent.putExtra("checkfrom", "freshnessIndex");
-                startActivity(intent);
-            }
-        });
+
 
 
         // previous
@@ -2520,6 +2590,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
 
     private void common_intializeUI() {
+
+        freshness_Index = this;
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         txtfIndexDeptName = (TextView) findViewById(R.id.txtfIndexDeptName);
         llfIndexhierarchy = (LinearLayout) findViewById(R.id.llfIndexhierarchy);
@@ -2530,6 +2602,26 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         btnFIndexNext = (RelativeLayout) findViewById(R.id.btnFIndexNext);
         txtFIndexClass = (TextView) findViewById(R.id.txtFIndexClass);
         freshnessIndex_imageBtnBack = (RelativeLayout) findViewById(R.id.freshnessIndex_imageBtnBack);
+        freshnessIndex_imgfilter = (RelativeLayout) findViewById(R.id.freshnessIndex_imgfilter);
+
+        freshnessIndex_imgfilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TAG.equals("FreshnessIndex_Ez_Activity")){
+                    Intent intent = new Intent(context, EzoneSalesFilter.class);
+                    intent.putExtra("checkfrom", "freshnessIndex");
+                    startActivity(intent);
+
+                }else{
+
+                    Intent intent = new Intent(FreshnessIndexActivity.this, SalesFilterActivity.class);
+                    intent.putExtra("checkfrom", "freshnessIndex");
+                    startActivity(intent);
+                }
+
+            }
+        });
+
 
 
     }
@@ -2541,6 +2633,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         if (TAG.equals("FreshnessIndex_Ez_Activity")) {
 
             level = 1;
+            preValue=1;
             this.finish();
 
         } else {
