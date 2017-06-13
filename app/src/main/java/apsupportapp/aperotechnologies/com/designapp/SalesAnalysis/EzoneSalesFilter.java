@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -429,6 +430,16 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     }
                     callback(build);
                 }
+                else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
+                    intent = new Intent(EzoneSalesFilter.this, BestPerformerInventory.class);
+                    if (build.length() != 0) {
+                        BestPerformerInventory.bestperoformer.finish();
+                        Log.e("TAG", "bestPerformers: from filter after finish" );
+
+                    }
+                    callback(build);
+                }
+
 
 
 
@@ -486,8 +497,38 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         }
         else
         {
+            int filter_level = 0;
+            if(build.toString().contains("region") || build.toString().contains("store"))
+            {
+                filter_level = 9;
+            }
+            else
+            {
+                if (build.toString().contains("department"))
+                {
+                    filter_level = 2;
+                }
+                if (build.toString().contains("category"))
+                {
+                    filter_level = 3;
+                }
+                if (build.toString().contains("class"))
+                {
+                    filter_level = 4;
+                }
+                if (build.toString().contains("brand"))
+                {
+                    filter_level = 5;
+                }
+                if (build.toString().contains("brandclass"))
+                {
+                    filter_level = 6;
+                }
+            }
             intent.putExtra("selectedStringVal", build.toString());
-            Log.e("build val :",""+build.toString().contains("region"));
+            Log.e("TAG", "callback:  selectedStringVal"+build.toString() );
+            intent.putExtra("selectedlevelVal", filter_level);
+            Log.e("TAG", "callback:  selectedlevelVal"+filter_level );
         }
         startActivity(intent);
         finish();
