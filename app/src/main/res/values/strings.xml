@@ -149,6 +149,11 @@
     <!--Freshness Index-->
     <string name="fi_title">Freshness Index</string>
 
+    <!--Customer Loyalty-->
+    <string name="cust_loyalty">Customer Loyalty</string>
+    <string name="cust_lookup">Customer Lookup</string>
+
+
     <string name="oe_title">Option Efficiency</string>
 
     <string-array name="colour_name">

@@ -125,7 +125,6 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             groupViewHolder.mGroupText = (TextView) convertView.findViewById(R.id.lblListHeader);
 
             convertView.setTag(groupViewHolder);
-
         }
         else
         {
@@ -219,12 +218,14 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                                        cb.setChecked(true);
                                                        ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.GONE);
                                                    }
+                                                   Log.e("salesListchecked :",""+salesList);
                                                    BuildUP(ez_level);
                                                }
                                                else if (cb.isChecked())
                                                {
                                                    salesList.remove(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(false);
+                                                   Log.e("salesListunchecked :",""+salesList);
                                                    removeBuildUP(ez_level);
                                                }
                                            }
@@ -248,10 +249,12 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             if (deptList.size() == 0) {
                 salesList.clear();
                 mListDataChild.putAll(dublicate_listDataChild2);
-                for (int k = prod_level - 1; k < mListDataGroup.size(); k++) {
+                for (int k = prod_level - 1; k < mListDataGroup.size(); k++)
+                {
                     EzoneSalesFilter.explv_ez_prod.collapseGroup(k);
                 }
-                for (int k = prod_level - 1; k < mListDataGroup.size(); k++) {
+                for (int k = prod_level - 1; k < mListDataGroup.size(); k++)
+                {
                     EzoneSalesFilter.explv_ez_prod.expandGroup(k);
                 }
             } else {
@@ -523,7 +526,8 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         } else {
 
 
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 5; j++)
+            {
                 List<String> arrayList1 = new ArrayList<String>();
 
                 for (int k = 0; k < dublicate_listDataChild2.get(mListDataGroup.get(j)).size(); k++) {
@@ -541,17 +545,18 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 EzoneSalesFilter.explv_ez_prod.expandGroup(3);
                 EzoneSalesFilter.explv_ez_prod.expandGroup(4);
 
-
             notifyDataSetChanged();
         }
     }
 
-    public final class GroupViewHolder {
+    public final class GroupViewHolder
+    {
         TextView mGroupText;
         ImageView mImage;
     }
 
-    public final class ChildViewHolder {
+    public final class ChildViewHolder
+    {
         TextView mChildText;
         CheckBox mCheckBox;
     }

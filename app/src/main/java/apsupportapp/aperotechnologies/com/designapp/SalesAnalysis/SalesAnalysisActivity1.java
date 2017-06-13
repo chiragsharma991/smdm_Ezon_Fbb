@@ -3506,12 +3506,16 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                         if (filter_level == 2)
                         {
+                            rb_ez_viewBy_ProductChk.setChecked(true);
+                            rb_ez_viewBy_LocatnChk.setChecked(false);
                             txt_ez_header.setText("Subdept");
                             ez_fromWhere = "Subdept";
                             rel_ez_prev.setVisibility(View.VISIBLE);
                         }
                         else if (filter_level == 3)
                         {
+                            rb_ez_viewBy_ProductChk.setChecked(true);
+                            rb_ez_viewBy_LocatnChk.setChecked(false);
                             txt_ez_header.setText("Class");
                             ez_fromWhere = "Class";
                             rel_ez_prev.setVisibility(View.VISIBLE);
@@ -3519,6 +3523,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         }
                         else if (filter_level == 4)
                         {
+                            rb_ez_viewBy_ProductChk.setChecked(true);
+                            rb_ez_viewBy_LocatnChk.setChecked(false);
                             txt_ez_header.setText("Subclass");
                             ez_fromWhere = "Subclass";
                             rel_ez_prev.setVisibility(View.VISIBLE);
@@ -3526,6 +3532,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         }
                         else if (filter_level == 5)
                         {
+                            rb_ez_viewBy_ProductChk.setChecked(true);
+                            rb_ez_viewBy_LocatnChk.setChecked(false);
                             txt_ez_header.setText("MC");
                             ez_fromWhere = "MC";
                             rel_ez_prev.setVisibility(View.VISIBLE);
@@ -3533,6 +3541,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         }
                         else if (filter_level == 6)
                         {
+                            rb_ez_viewBy_ProductChk.setChecked(true);
+                            rb_ez_viewBy_LocatnChk.setChecked(false);
                             txt_ez_header.setText("MC");
                             ez_fromWhere = "MC";
                             rel_ez_prev.setVisibility(View.VISIBLE);
@@ -3540,6 +3550,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         }
                         else if(filter_level == 9)
                         {
+                            rb_ez_viewBy_LocatnChk.setChecked(true);
+                            rb_ez_viewBy_ProductChk.setChecked(false);
                             txt_ez_header.setText("Store");
                             ez_fromWhere = "Store";
                             rel_ez_prev.setVisibility(View.VISIBLE);
@@ -4475,18 +4487,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     @Override
     public void onBackPressed() {
 
-        SalesFilterExpandableList.text1 = "";
-        SalesFilterExpandableList.text2 = "";
-        SalesFilterExpandableList.text3 = "";
-        SalesFilterExpandableList.text4 = "";
-        SalesFilterExpandableList.text5 = "";
-        EzoneFilterProductAdapter.dept_text = "";
-        EzoneFilterProductAdapter.categry_text = "";
-        EzoneFilterProductAdapter.class_text = "";
-        EzoneFilterProductAdapter.brand_text = "";
-        EzoneFilterProductAdapter.brandcls_text = "";
-        EzoneFilterLocationAdapter.region_str = "";
-        EzoneFilterLocationAdapter.store_str = "";
         selectedsegValue = "";
         level = 0;
         selectedsegValue = "WTD";

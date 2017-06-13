@@ -2250,7 +2250,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 Reusable_Functions.hDialog();
                             }
                         }
-                        catch (Exception e) {
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, " no data found ", Toast.LENGTH_SHORT).show();
                             OnItemClick = false;

@@ -185,7 +185,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 
             //set tag for level
             childViewHolder.mCheckBox.setTag(groupPosition);
-
             convertView.setTag(R.layout.sfilter_list_item, childViewHolder);
         } else {
             childViewHolder = (EzoneFilterLocationAdapter.ChildViewHolder) convertView
