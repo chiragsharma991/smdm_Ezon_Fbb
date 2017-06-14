@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class AboutUsActivity extends AppCompatActivity {
 
     RelativeLayout btnBack;
-    TextView txtversioncode;
+    TextView txtversioname,txtversioncode;
     Context context;
 
     @Override
@@ -23,6 +23,7 @@ public class AboutUsActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.about_us);
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
+        txtversioname = (TextView) findViewById(R.id.versioname);
         txtversioncode = (TextView) findViewById(R.id.versioncode);
         context = this;
         PackageInfo pInfo = null;
@@ -33,7 +34,9 @@ public class AboutUsActivity extends AppCompatActivity {
         }
 
         String version = pInfo.versionName;
-        txtversioncode.setText("Version "+version);
+        int versionCode = pInfo.versionCode;
+        txtversioname.setText("VersionName "+version);
+        txtversioncode.setText("VersionCode "+versionCode);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

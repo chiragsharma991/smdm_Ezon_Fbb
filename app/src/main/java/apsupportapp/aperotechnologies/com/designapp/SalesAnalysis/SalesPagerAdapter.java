@@ -212,27 +212,33 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
 
                     // Color Condition for Wow Net Sale, Pva Achieved , Wow net sale Growth
-                    if (salesAnalysis.getWowNetSalesGrowthPct() <= 0) {
+                    if (salesAnalysis.getWowNetSalesGrowthPct() <= 0)
+                    {
                         txtNetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                         txtNetSalesVal.setTextColor(Color.parseColor("#fe0000"));
                     } else if (salesAnalysis.getWowNetSalesGrowthPct() > 0) {
                         txtNetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
                         txtNetSalesVal.setTextColor(Color.parseColor("#70e503"));
                     }
-                    if (salesAnalysis.getPvaAchieved() < 70) {
+                    if (salesAnalysis.getPvaAchieved() < 70)
+                    {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                         txtPlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
-                    } else if (salesAnalysis.getPvaAchieved() > 90) {
+                    }
+                    else if (salesAnalysis.getPvaAchieved() > 90) {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
                         txtPlanSalesVal.setTextColor(Color.parseColor("#70e503"));
-                    } else {
+                    }
+                    else
+                    {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
                         txtPlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
                     }
                     if (salesAnalysis.getWowNetSalesUnitsGrowthPct() <= 0) {
                         txtNetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
                         txtNetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
-                    } else if (salesAnalysis.getWowNetSalesUnitsGrowthPct() > 0) {
+                    }
+                    else if (salesAnalysis.getWowNetSalesUnitsGrowthPct() > 0) {
                         txtNetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
                         txtNetSalesUVal.setTextColor(Color.parseColor("#70e503"));
                     }
