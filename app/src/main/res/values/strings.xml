@@ -152,6 +152,8 @@
     <!--Customer Loyalty-->
     <string name="cust_loyalty">Customer Loyalty</string>
     <string name="cust_lookup">Customer Lookup</string>
+    <string name="actual_customer">Actual Customers</string>
+    <string name="plan_customers">Plan Customers</string>
 
 
     <string name="oe_title">Option Efficiency</string>

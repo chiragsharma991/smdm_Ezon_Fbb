@@ -623,7 +623,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                                     currentVmPos = vwpagersales.getCurrentItem();
                                                     level = 5;
                                                     if (Reusable_Functions.chkStatus(context)) {
-                                                        if (postRequest != null) {
+                                                        if (postRequest != null)
+                                                        {
                                                             postRequest.cancel();
                                                         }
                                                         Reusable_Functions.hDialog();

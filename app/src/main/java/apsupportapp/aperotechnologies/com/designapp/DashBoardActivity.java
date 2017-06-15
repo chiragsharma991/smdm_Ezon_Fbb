@@ -101,10 +101,10 @@ public class DashBoardActivity extends AppCompatActivity
     TextView txt_ezone_sales,txt_ezone_inventory,txt_ezone_refresh_time,txt_ez_cust_loyalty;
     ImageButton btn_ezone_sales,btn_ezone_AssortmentAnalysis,btn_ezone_best_worst,btn_ez_cust_loyalty;
     LinearLayout linear_ezone_sales,linear_ezone_inventory,linear_ez_cust_loyalty;
-    //ExpandableHeightGridView style_grid;
+
     EventAdapter eventAdapter;
     String hrflash = "NO",pdInfo = "NO",vsAssort = "NO",sAles = "NO", pmAnalysis = "NO",inVENtory = "NO",planActual = "NO",Collab = "NO",
-    feedback_flag = "NO",store_inspection = "NO",mpm = "NO",cust_loyalty = "NO";
+    feedback_flag = "NO",store_inspection = "NO",mpm = "NO",cust_loyalty = "NO",hourly_performance = "NO";
     String TAG = "DashBoardActivity";
 
 
@@ -137,7 +137,7 @@ public class DashBoardActivity extends AppCompatActivity
     private boolean Collab_bool = false;
     private boolean feedback_bool = false;
     private boolean inspection_flag = false;
-    private boolean mpm_flag = false,custloylty_flag=false;
+    private boolean mpm_flag = false,custloylty_flag=false,hourlyperform_flag = false;
     private Gson gson;
     private EtlStatus etlStatus;
     private ArrayList<EtlStatus> etlStatusList;
@@ -387,8 +387,8 @@ public class DashBoardActivity extends AppCompatActivity
             if (HourlyFlash)
             {
                 hourlyFlash.setVisibility(View.VISIBLE);
-
-            } else
+            }
+            else
             {
                 hourlyFlash.setVisibility(View.GONE);
             }
@@ -396,7 +396,8 @@ public class DashBoardActivity extends AppCompatActivity
             {
                 productInfo.setVisibility(View.VISIBLE);
 
-            } else
+            }
+            else
             {
                 productInfo.setVisibility(View.GONE);
             }
@@ -445,7 +446,8 @@ public class DashBoardActivity extends AppCompatActivity
             {
                 Feedback_linear.setVisibility(View.VISIBLE);
 
-            } else
+            }
+            else
             {
                 Feedback_linear.setVisibility(View.GONE);
 
@@ -476,17 +478,15 @@ public class DashBoardActivity extends AppCompatActivity
             }
         }
     }
-
-
-
-
     private Boolean exit = false;
 
     @Override
     public void onBackPressed() {
         if (exit) {
             finish(); // finish activity
-        } else {
+        }
+        else
+        {
             Toast.makeText(this, "Press Back again to Exit.",
                     Toast.LENGTH_SHORT).show();
             exit = true;
@@ -538,7 +538,8 @@ public class DashBoardActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void RefreshTimeAPI() {
+    private void RefreshTimeAPI()
+    {
         String url = ConstsCore.web_url + "/v1/display/etlstatus/" + userId;
         Log.e("Refreshtime Url :",""+url);
         etlStatusList = new ArrayList<EtlStatus>();
