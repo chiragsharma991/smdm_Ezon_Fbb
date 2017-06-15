@@ -99,7 +99,7 @@
     <string name="total_avl_qty">Total Avl.Qty : </string>
     <string name="total_req_qty">Total Req.Qty : </string>
 
-     <!--Feedback Module-->
+    <!--Feedback Module-->
     <string name="feedback">Feedback</string>
     <string name="f_next">Next</string>
     <string name="f_previous">Previous</string>
@@ -172,7 +172,6 @@
     <string name="ezone_assortment_analysis">Assortment Analysis</string>
     <string name="ezone_filter_location">Location</string>
     <string name="ezone_filter_product">Product</string>
-
 
 
 </resources>
