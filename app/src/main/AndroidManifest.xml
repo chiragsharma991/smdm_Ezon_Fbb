@@ -244,10 +244,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity
-            android:name=".CustomerLoyalty.CustomerLookupActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+        <!--<activity-->
+            <!--android:name=".CustomerLoyalty.CustomerLookupActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="stateHidden" />-->
 
     </application>
 
