@@ -144,8 +144,8 @@ public class Plan_Product extends Fragment {
         txtProdGreen = (Button)view.findViewById(R.id.txtProdGreen);
         txtProdRed = (Button) view.findViewById(R.id.txtProdRed);
         txtProdAmber = (Button) view.findViewById(R.id.txtProdAmber);
-        if (Reusable_Functions.chkStatus(context)) {
-
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;

@@ -140,7 +140,6 @@ public class SearchActivity1 extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.btnSeatchList:
-
                 searchData = editSearch.getText().toString();
                 editSearch.clearFocus();
                 InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 public class CustomerViewPagerAdapter extends FragmentPagerAdapter {
     private Context _context;
-    public static int totalPage=2;
+    public  int totalPage=2;
     public CustomerViewPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         _context=context;

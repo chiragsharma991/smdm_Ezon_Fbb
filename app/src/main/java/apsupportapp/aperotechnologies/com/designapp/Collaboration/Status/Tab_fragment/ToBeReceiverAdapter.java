@@ -194,29 +194,38 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             TextView Rec_Status_docNumber = (TextView) view.findViewById(R.id.rec_status_docNumber);
             TextView Rec_Status_qty = (TextView) view.findViewById(R.id.rec_status_qty);
             TextView Rec_Status_date = (TextView) view.findViewById(R.id.rec_status_date);
-            if (receiver_trackId[position] == 1) {
-                if (receiver_initiatedStatusList.get(position).isEmpty()) {
+            if (receiver_trackId[position] == 1)
+            {
+                if (receiver_initiatedStatusList.get(position).isEmpty())
+                {
                     Rec_Status_docNumber.setText("N/A");
                     Rec_Status_qty.setText("N/A");
                     Rec_Status_date.setText("N/A");
-                } else {
+                }
+                else
+                {
                     Rec_Status_docNumber.setText("" + receiver_initiatedStatusList.get(position).get(0).getDocNo());
                     Rec_Status_qty.setText("" + Math.round(receiver_initiatedStatusList.get(position).get(0).getStkOnhandQtyRequested()));
                     Rec_Status_date.setText(receiver_initiatedStatusList.get(position).get(0).getReceiver_requested_date());
                 }
-
-            } else if (receiver_trackId[position] == 2) {
-                if (receiver_senderAcpStatusList.get(position).isEmpty()) {
+            }
+            else if (receiver_trackId[position] == 2)
+            {
+                if (receiver_senderAcpStatusList.get(position).isEmpty())
+                {
                     Rec_Status_docNumber.setText("N/A");
                     Rec_Status_qty.setText("N/A");
                     Rec_Status_date.setText("N/A");
-                } else {
+                }
+                else
+                {
                     Rec_Status_docNumber.setText("" + receiver_senderAcpStatusList.get(position).get(0).getDocNo());
                     Rec_Status_qty.setText("" + Math.round(receiver_senderAcpStatusList.get(position).get(0).getStkOnhandQtyRequested()));
                     Rec_Status_date.setText(receiver_senderAcpStatusList.get(position).get(0).getReceiver_requested_date());
                 }
-
-            } else if (receiver_trackId[position] == 3) {
+            }
+            else if (receiver_trackId[position] == 3)
+            {
                 if (receiver_stoStatusList.get(position).isEmpty()) {
                     Rec_Status_docNumber.setText("N/A");
                     Rec_Status_qty.setText("N/A");
@@ -227,7 +236,9 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Rec_Status_date.setText(receiver_stoStatusList.get(position).get(0).getStoDate());
                 }
 
-            } else if (receiver_trackId[position] == 4) {
+            }
+            else if (receiver_trackId[position] == 4)
+            {
                 if (receiver_grnStatusList.get(position).isEmpty()) {
                     Rec_Status_docNumber.setText("N/A");
                     Rec_Status_qty.setText("N/A");
@@ -239,8 +250,6 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
 
             }
-
-
             ((ToBeReceiverAdapter.Holder) holder).Rec_Status_layout.addView(view);
             ((ToBeReceiverAdapter.Holder) holder).Rec_Status_layout.setVisibility(View.VISIBLE);
         } else {
@@ -260,19 +269,23 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         switch (v.getId()) {
             case R.id.rec_status_track_position_Initiated:
                 int dublicatePosition = (int) v.getTag();
-                if (receiver_list.get(dublicatePosition).getStatusInitiated().equals("Yes")) {
+                if (receiver_list.get(dublicatePosition).getStatusInitiated().equals("Yes"))
+                {
                     receiver_trackId[dublicatePosition] = 1;
                     int caseNo = receiver_list.get(dublicatePosition).getCaseNo();
                     String senderStoreCode = receiver_list.get(dublicatePosition).getSenderStoreCode();
                     String actionStatus = "RECVR_REQ";
-                    if (receiver_initiatedStatusList.get(dublicatePosition).isEmpty()) {
-                        if (StatusActivity.StatusProcess.getVisibility() == View.GONE) {
+                    if (receiver_initiatedStatusList.get(dublicatePosition).isEmpty())
+                    {
+                        if (StatusActivity.StatusProcess.getVisibility() == View.GONE)
+                        {
                             StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
                             onclickStatus.Onclick(caseNo, actionStatus, dublicatePosition, 1, senderStoreCode);
                             Receiver_Toggle[dublicatePosition] = true;
                         }
-
-                    } else {
+                    }
+                    else
+                    {
                         Receiver_Toggle[dublicatePosition] = true;
                         notifyDataSetChanged();
                     }
@@ -281,20 +294,24 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             case R.id.rec_status_track_position_SenderAcpt:
                 dublicatePosition = (int) v.getTag();
-                if (receiver_list.get(dublicatePosition).getStatusAccept().equals("Yes")) {
+                if (receiver_list.get(dublicatePosition).getStatusAccept().equals("Yes"))
+                {
                     receiver_trackId[dublicatePosition] = 2;
                     int caseNo = receiver_list.get(dublicatePosition).getCaseNo();
                     String senderStoreCode = receiver_list.get(dublicatePosition).getSenderStoreCode();
 
                     String actionStatus = "SENDER_ACPT";
-                    if (receiver_senderAcpStatusList.get(dublicatePosition).isEmpty()) {
+                    if (receiver_senderAcpStatusList.get(dublicatePosition).isEmpty())
+                    {
                         if (StatusActivity.StatusProcess.getVisibility() == View.GONE) {
                             StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
                             onclickStatus.Onclick(caseNo, actionStatus, dublicatePosition, 2, senderStoreCode);
                             Receiver_Toggle[dublicatePosition] = true;
                         }
 
-                    } else {
+                    }
+                    else
+                    {
                         Receiver_Toggle[dublicatePosition] = true;
                         notifyDataSetChanged();
                     }
@@ -302,19 +319,22 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 break;
             case R.id.rec_status_track_position_STO:
                 dublicatePosition = (int) v.getTag();
-                if (receiver_list.get(dublicatePosition).getStatusSto().equals("Yes")) {
+                if (receiver_list.get(dublicatePosition).getStatusSto().equals("Yes"))
+                {
                     receiver_trackId[dublicatePosition] = 3;
                     int caseNo1 = receiver_list.get(dublicatePosition).getCaseNo();
                     String senderStoreCode = receiver_list.get(dublicatePosition).getSenderStoreCode();
-
-                    if (receiver_stoStatusList.get(dublicatePosition).isEmpty()) {
-                        if (StatusActivity.StatusProcess.getVisibility() == View.GONE) {
+                    if (receiver_stoStatusList.get(dublicatePosition).isEmpty())
+                    {
+                        if (StatusActivity.StatusProcess.getVisibility() == View.GONE)
+                        {
                             StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
                             onclickStatus.Onclick(caseNo1, "", dublicatePosition, 3, senderStoreCode);
                             Receiver_Toggle[dublicatePosition] = true;
                         }
-
-                    } else {
+                    }
+                    else
+                    {
                         Receiver_Toggle[dublicatePosition] = true;
                         notifyDataSetChanged();
                     }
@@ -327,14 +347,18 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     int caseNo2 = receiver_list.get(dublicatePosition).getCaseNo();
                     String senderStoreCode = receiver_list.get(dublicatePosition).getSenderStoreCode();
 
-                    if (receiver_grnStatusList.get(dublicatePosition).isEmpty()) {
-                        if (StatusActivity.StatusProcess.getVisibility() == View.GONE) {
+                    if (receiver_grnStatusList.get(dublicatePosition).isEmpty())
+                    {
+                        if (StatusActivity.StatusProcess.getVisibility() == View.GONE)
+                        {
                             StatusActivity.StatusProcess.setVisibility(View.VISIBLE);
                             onclickStatus.Onclick(caseNo2, "", dublicatePosition, 4, senderStoreCode);
                             Receiver_Toggle[dublicatePosition] = true;
                         }
 
-                    } else {
+                    }
+                    else
+                    {
                         Receiver_Toggle[dublicatePosition] = true;
                         notifyDataSetChanged();
                     }
@@ -344,17 +368,19 @@ public class ToBeReceiverAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public void onSnap(int position) {
+    public void onSnap(int position)
+    {
 
     }
 
-    private static class Holder extends RecyclerView.ViewHolder {
-
+    private static class Holder extends RecyclerView.ViewHolder
+    {
         LinearLayout Lin_ProcessStatus, Rec_Lin_trCard;
         RelativeLayout Rec_Status_layout;
         TextView Rec_Status_caseNumber, Rec_Status_case, Rec_Status_storeCode, Rec_Status_storedesc, Rec_Status_docNumber, Rec_Status_qty, Rec_Status_date;
 
-        public Holder(View itemView) {
+        public Holder(View itemView)
+        {
             super(itemView);
             Lin_ProcessStatus = (LinearLayout) itemView.findViewById(R.id.lin_progressView);
             Rec_Status_caseNumber = (TextView) itemView.findViewById(R.id.receiver_status_caseNumber);

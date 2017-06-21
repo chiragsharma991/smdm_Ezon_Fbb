@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/txt_cust_pengagementType_Val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toLeftOf="@+id/txt_cust_pCustomer_Val"
+            android:text=""
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/smdm_departmentTitle"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/txt_cust_pCustomer_Val"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="180dp"
+            android:layout_toLeftOf="@+id/txt_cust_psales_Val"
+            android:gravity="center_vertical|center"
+            android:text=""
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/smdm_departmentTitle"
+            android:textStyle="normal" />
+
+
+        <TextView
+            android:id="@+id/txt_cust_psales_Val"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="120dp"
+            android:layout_toLeftOf="@+id/txt_cust_pspc_Val"
+            android:gravity="center_vertical|center"
+            android:text=""
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/smdm_departmentTitle"
+            android:textStyle="normal" />
+
+
+        <TextView
+            android:id="@+id/txt_cust_pspc_Val"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="60dp"
+            android:layout_toLeftOf="@+id/txt_cust_psalesAch_Val"
+            android:gravity="center_vertical|center"
+            android:text=""
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/smdm_departmentTitle"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/txt_cust_psalesAch_Val"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical|center"
+            android:text=""
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/smdm_departmentTitle"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/smdm_divider_Black" />
+
+    </RelativeLayout>
+
+</LinearLayout>

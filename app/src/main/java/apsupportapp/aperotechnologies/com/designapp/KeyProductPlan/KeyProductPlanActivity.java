@@ -101,14 +101,11 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-
-
-
     }
 
-    public void communicateToFragment2(String productName, String segClick) {
 
-
+    public void communicateToFragment2(String productName, String segClick)
+    {
         KeyProductPlanActivity.productName = productName;
         Plan_Option_Fragment fragment = (Plan_Option_Fragment) adapter.getFragment(1);
         if (fragment != null) {
@@ -116,28 +113,24 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         }
     }
 
-
-
     @Override
-    public void communicateToFragment3(String level,String optsegmentclick) {
-
+    public void communicateToFragment3(String level,String optsegmentclick)
+    {
         Plan_SKU_Fragment fragment = ( Plan_SKU_Fragment) adapter.getFragment(2);
-        if (fragment != null) {
+        if (fragment != null)
+        {
             fragment.fragment_Communication(level,optsegmentclick);
         }
     }
 
-
-
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.planactual_BtnBack:
-
-
-
                onBackPressed();
-                break;
+               break;
             case R.id.planactual_BtnFilter:
                 Intent intent1 = new Intent(KeyProductPlanActivity.this,KeyProductFilterActivity.class);
                 startActivity(intent1);
@@ -146,17 +139,14 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         }
     }
 
-
-
-
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
        KeyProductPlanActivity.productName = "";
-
        KeyProdFilterAdapter.checkedValue = new ArrayList<String>();
-        Plan_Product.prodsegClick = "";
-        Plan_Product.prodsegClick = "WTD";
-        finish();
+       Plan_Product.prodsegClick = "";
+       Plan_Product.prodsegClick = "WTD";
+       finish();
     }
 }
 

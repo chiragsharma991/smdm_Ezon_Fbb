@@ -1081,7 +1081,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         if (txtheaderplanclass.getText().toString().equals("Department")) {
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?department=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-        } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+        } else if (txtheaderplanclass.getText().toString().equals("Subdept"))
+        {
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?category=" + pvaFirstVisibleItem+ "&offset=" + offsetvalue + "&limit=" + limit;
         } else if (txtheaderplanclass.getText().toString().equals("Class")) {
@@ -1112,7 +1113,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     salesPvAAnalysisWeek = gson.fromJson(response.get(i).toString(), SalesPvAAnalysisWeek.class);
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
@@ -1120,18 +1122,21 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 count++;
                                 requestPvAChartAPI();
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     salesPvAAnalysisWeek = gson.fromJson(response.get(i).toString(), SalesPvAAnalysisWeek.class);
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
                                 ArrayList<String> xVals = setXAxisValues();
                                 ArrayList<Entry> yVal_select_planSale = new ArrayList<Entry>();
-                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++) {
+                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++)
+                                {
                                      planSaleNetVal1 = (float) salesPvAAnalysisWeekArrayList.get(j).getPlanSaleNetVal();
                                     yVal_select_planSale.add(new Entry(j, planSaleNetVal1));
                                 }
                                 ArrayList<Entry> yVal_select_netSale = new ArrayList<Entry>();
-                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++) {
+                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++)
+                                {
                                     saleNetVal1 = (float) salesPvAAnalysisWeekArrayList.get(j).getSaleNetVal();
                                     yVal_select_netSale.add(new Entry(j, saleNetVal1));
                                 }
@@ -1141,17 +1146,14 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 lineDataSet2 = new LineDataSet(yVal_select_netSale, "Net Sales");
                                 lineDataSet2.setDrawValues(false);
                                 //set the line to be drawn like this "- - - - - -"
-
                                 lineDataSet1.setColor(Color.parseColor("#198c19"));
                                 lineDataSet1.setCircleColor(Color.parseColor("#99cc99"));
-
                                 lineDataSet1.setLineWidth(1f);
                                 lineDataSet1.setCircleRadius(3f);
                                 lineDataSet1.setDrawCircleHole(false);
                                 lineDataSet1.setValueTextSize(9f);
                                 lineDataSet1.setDrawFilled(false);
                                 lineDataSet1.setFormLineWidth(1f);
-
                                 lineDataSet1.setFormSize(15.f);
                                 lineDataSet2.setColor(Color.MAGENTA);
                                 lineDataSet2.setCircleColor(Color.parseColor("#ffccff"));
@@ -1333,7 +1335,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     }
 
     // drill down level API
-    private void requestSalesPvACategoryList(final String deptName) {
+    private void requestSalesPvACategoryList(final String deptName)
+    {
         String salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         postRequest = new JsonArrayRequest(Request.Method.GET, salespvacategory_listurl,
                 new Response.Listener<JSONArray>() {
@@ -1500,8 +1503,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-
+                    public void onResponse(JSONArray response)
+                    {
                         try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1539,8 +1542,10 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandName();
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 requestPvAChartAPI();
-                            }
-                        } catch (Exception e) {
+                             }
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             pva_progressBar.setVisibility(View.GONE);
                             onItemClickFlag = false;
@@ -1574,8 +1579,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue.add(postRequest);
     }
 
-    private void requestSalesPvABrandPlanListAPI(final String brandnm) {
-
+    private void requestSalesPvABrandPlanListAPI(final String brandnm)
+    {
         final String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level  + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
@@ -1641,7 +1646,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -1835,9 +1839,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             }
                         }
                         catch (Exception e)
-
-
-
                         {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -1873,11 +1874,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue.add(postRequest);
     }
 
-
     @Override
-    public void onBackPressed() {
-
-
+    public void onBackPressed()
+    {
         salesPvA_SegmentClick = null;
         level = 0;
         salesPvA_SegmentClick = "WTD";
