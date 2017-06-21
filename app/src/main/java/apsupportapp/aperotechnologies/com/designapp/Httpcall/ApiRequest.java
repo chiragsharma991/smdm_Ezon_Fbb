@@ -47,7 +47,7 @@ public class ApiRequest  {
     private Gson gson;
 
 
-    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass,int id)
+    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id)
     {
         ResposeInterface= (HttpResponse)context;
         this.context=context;
@@ -66,10 +66,10 @@ public class ApiRequest  {
 
 
 
-    private void setApi(final Context context) {
+    private  void setApi(final Context context) {
 
 
-        Reusable_Functions.progressDialog = new ProgressDialog(context);
+    /*    Reusable_Functions.progressDialog = new ProgressDialog(context);
         if(!Reusable_Functions.progressDialog.isShowing())
         {
             Reusable_Functions.progressDialog.show();
@@ -77,23 +77,29 @@ public class ApiRequest  {
             Reusable_Functions.progressDialog.setMessage("Loading...");
 
 
-        }
+        }*/
 
         String URL = "";
         if(TAG.equals("FreshnessIndex_Ez_Activity")){
 
             URL=Url+ "&offset=" + offsetvalue + "&limit=" +limit;
 
-        }else{
+        }
+        else if(TAG.equals("HourlyPerformence")){
+
+            URL=Url+ "&offset=" + offsetvalue + "&limit=" +limit;
+
+        }
+        else{
 
             URL=Url+ "?offset=" + offsetvalue + "&limit=" +limit;
 
         }
         Log.e(TAG, "final_setApi: URL "+URL );
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, URL,
+        JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, URL,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public  void onResponse(JSONArray response) {
 
 
                         try {
@@ -185,6 +191,8 @@ public class ApiRequest  {
 
 
     }
+
+
 }
 
 

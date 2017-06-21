@@ -1043,7 +1043,7 @@
             <!---->
             <TextView
                 android:id="@+id/headermarketing"
-                android:layout_below="@+id/mpm_linear"
+                android:layout_below="@+id/linear_hourly_performer_view_"
                 android:visibility="visible"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -1679,6 +1679,331 @@
             </LinearLayout>
 
             <!--MPM end-->
+
+
+            <!--Customer Loyalty start-->
+            <TextView
+                android:id="@+id/txt_cust_loyalty"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/cust_loyalty"
+                android:textColor="@color/smdm_dark_Black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/mpm_linear"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_below="@+id/txt_cust_loyalty"
+                android:id="@+id/txt_cust_loyalty_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/smdm_divider_Black"/>
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_below="@+id/txt_cust_loyalty_view"
+                android:id="@+id/linear_cust_loyalty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/btn_cust_loyalty"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/customer_lookup"/>
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_light_Black"
+                            android:text="@string/cust_loyalty"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/hourly_performance" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:textColor="@color/smdm_light_Black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/hourly_performer"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/departmenticon"/>
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_light_Black"
+                            android:text="MPM"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/skewed_size"/>
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+            <!--Customer Loyalty End-->
+
+
+           <!--start hourly Performer-->
+
+            <TextView
+                android:id="@+id/txt_hourly_performer_"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/hourly_perform"
+                android:textColor="@color/smdm_dark_Black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/linear_cust_loyalty"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_below="@+id/txt_hourly_performer_"
+                android:id="@+id/txt_hourly_performer_view_"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/smdm_divider_Black"/>
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_below="@+id/txt_hourly_performer_view_"
+                android:id="@+id/linear_hourly_performer_view_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:id="@+id/btn_hourly_performer"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/hourly_performance" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:textColor="@color/smdm_light_Black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/hourly_performer"/>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/hourly_performance" />
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="13sp"
+                            android:textColor="@color/smdm_light_Black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/hourly_performer"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/departmenticon"/>
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_light_Black"
+                            android:text="MPM"
+                            android:gravity="center_horizontal"
+                            android:textSize="13sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@color/bg_screen_color"
+                            android:src="@mipmap/skewed_size"/>
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SkewedSize"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_horizontal"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <!--end of hourly-->
+
+
+
+            </LinearLayout>
+
+
+
+
+
             <!--Feedback sub views-->
             <LinearLayout
                 android:visibility="gone"

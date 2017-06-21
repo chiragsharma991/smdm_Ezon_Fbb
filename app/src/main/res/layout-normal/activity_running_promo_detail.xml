@@ -135,9 +135,6 @@
             android:background="?attr/colorPrimary">
 
 
-
-
-
             <TextView
                 android:id="@+id/promotionName"
                 android:layout_width="match_parent"

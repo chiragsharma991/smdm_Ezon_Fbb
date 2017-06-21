@@ -537,6 +537,13 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
             Log.e("TAG", "callback:  selectedlevelVal"+filter_level );
         }
         startActivity(intent);
+        EzoneFilterProductAdapter.dept_text = "";
+        EzoneFilterProductAdapter.categry_text = "";
+        EzoneFilterProductAdapter.class_text = "";
+        EzoneFilterProductAdapter.brand_text = "";
+        EzoneFilterProductAdapter.brandcls_text = "";
+        EzoneFilterLocationAdapter.region_str = "";
+        EzoneFilterLocationAdapter.store_str = "";
         finish();
     }
 
@@ -545,8 +552,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     {
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-//        Intent intent = new Intent(EzoneSalesFilter.this,SalesAnalysisActivity1.class);
-//        startActivity(intent);
         finish();
     }
 

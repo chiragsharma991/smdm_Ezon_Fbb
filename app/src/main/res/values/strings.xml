@@ -66,6 +66,7 @@
 
     <!--Inspection Module-->
     <string name="inspection_history">Inspection History</string>
+    <string name="hourly_performer">Hourly Performance</string>
     <string name="inspection_begin">Begin Inspection</string>
     <string name="insp_criteria_1">Fashion Quotient(display looks fashionable)</string>
     <string name="insp_criteria_2">Merchandise Display(by size/ full size sets)</string>
@@ -148,6 +149,14 @@
 
     <!--Freshness Index-->
     <string name="fi_title">Freshness Index</string>
+
+    <!--Customer Loyalty-->
+    <string name="cust_loyalty">Customer Loyalty</string>
+    <string name= "hourly_perform">Hourly Performance</string>
+    <string name="cust_lookup">Customer Lookup</string>
+    <string name="actual_customer">Actual Customers</string>
+    <string name="plan_customers">Plan Customers</string>
+
 
     <string name="oe_title">Option Efficiency</string>
 

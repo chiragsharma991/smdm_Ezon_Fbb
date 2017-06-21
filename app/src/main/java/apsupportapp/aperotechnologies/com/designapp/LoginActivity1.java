@@ -138,6 +138,7 @@ public class LoginActivity1 extends AppCompatActivity
                         if(!Reusable_Functions.progressDialog.isShowing())
                         {
                             Reusable_Functions.progressDialog.show();
+                            Reusable_Functions.progressDialog.setCancelable(false);
                         }
                         Reusable_Functions.progressDialog.setMessage("Authenticating User...");
                         requestLoginAPI();

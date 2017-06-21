@@ -117,6 +117,11 @@
         <!-- android:name=".WorstPerformersPromo.WorstPerformerActivity" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- android:windowSoftInputMode="stateHidden" /> -->
+            android:windowSoftInputMode="stateHidden" />
+        <!--<activity-->
+        <!--android:name=".WorstPerformersPromo.WorstPerformerActivity"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:windowSoftInputMode="stateHidden" />-->
         <activity
             android:name=".FreshnessIndex.FreshnessIndexActivity"
             android:screenOrientation="portrait"
@@ -144,6 +149,8 @@
         <activity
             android:name=".BestPerformersInventory.BestPerformerInventory"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".FloorAvailability.FloorAvailabilityActivity"
@@ -223,6 +230,8 @@
             android:name=".StoreInspection.InspectionHistoryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".MPM.mpm_activity"
             android:screenOrientation="portrait"
@@ -235,6 +244,12 @@
         <activity
             android:name=".SalesAnalysis.EzoneSalesFilter"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".CustomerLoyalty.CustomerLookupActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
             android:windowSoftInputMode="stateHidden" />
         `
         <activity

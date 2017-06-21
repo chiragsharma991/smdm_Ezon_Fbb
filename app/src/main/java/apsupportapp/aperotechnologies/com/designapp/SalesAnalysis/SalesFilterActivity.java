@@ -177,7 +177,8 @@ public class SalesFilterActivity extends Activity {
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 StringBuilder build = new StringBuilder();
                 //Send selected hierarchy level sales activity
-                if (SalesFilterExpandableList.text1.length() != 0) {
+                if (SalesFilterExpandableList.text1.length() != 0)
+                {
                     String deptmnt = SalesFilterExpandableList.text1.replace("%", "%25");
                     String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
                     String Department;
@@ -205,7 +206,8 @@ public class SalesFilterActivity extends Activity {
 
                 }
 
-                if (SalesFilterExpandableList.text3.length() != 0) {
+                if (SalesFilterExpandableList.text3.length() != 0)
+                {
                     String plancls = SalesFilterExpandableList.text3.replace("%", "%25");
                     String updatePlanClass = plancls.replace(" ", "%20").replace("&", "%26");
                     String planclass = "class=" + updatePlanClass;
@@ -335,12 +337,17 @@ public class SalesFilterActivity extends Activity {
     {
 
         if (build.length() == 0) {
-            Toast.makeText(context, "Please select value..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please select value...", Toast.LENGTH_SHORT).show();
             return;
         } else {
             intent.putExtra("selectedDept", build.toString());
         }
         startActivity(intent);
+        SalesFilterExpandableList.text1 = "";
+        SalesFilterExpandableList.text2 = "";
+        SalesFilterExpandableList.text3 = "";
+        SalesFilterExpandableList.text4 = "";
+        SalesFilterExpandableList.text5 = "";
         finish();
     }
 

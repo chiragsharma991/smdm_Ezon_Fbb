@@ -73,7 +73,7 @@
 
 
     <TextView
-        android:id="@+id/versioncode"
+        android:id="@+id/versioname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" "
@@ -83,4 +83,14 @@
         android:textColor="@color/smdm_default_color"
         />
 
+    <TextView
+        android:id="@+id/versioncode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/smdm_default_color"
+        />
 </LinearLayout>
