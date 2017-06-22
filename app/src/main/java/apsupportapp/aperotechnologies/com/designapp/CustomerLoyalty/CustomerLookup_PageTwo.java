@@ -56,7 +56,7 @@ public class CustomerLookup_PageTwo extends Fragment {
     String e_bandnm;
     OnEngagemntBandClick onEngagemntBandClick;
     TextView txt_engagementnm_Val, txt_pending_Val,txt_color_engagemnt_nm;
-    EditText edt_cust_Search;
+    static EditText edt_cust_Search;
     RecyclerView lv_cust_details;
     CustomerDetail customerDetail;
     CustomerDetailAdapter customerDetailAdapter;

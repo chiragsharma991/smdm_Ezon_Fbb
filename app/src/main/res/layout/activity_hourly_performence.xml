@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_hourly_performence"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearToolbar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_header_height"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            segmentedgroup:contentInsetLeft="0dp"
+            segmentedgroup:contentInsetStart="0dp"
+            segmentedgroup:contentInsetRight="0dp"
+            segmentedgroup:contentInsetEnd="0dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/bestInvent_BtnBack"
+                    android:background="@drawable/button_red_effect"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/common_back_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/button" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hourly Performance"
+                    android:textSize="@dimen/smdm_header_title_normal"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/bestInvent_BtnBack"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/divider_salescard1"
+                    android:id="@+id/toolbar_title" />
+            </RelativeLayout>
+
+
+
+
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/hrl_segmented"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/linearToolbar"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="14dp"
+            segmentedgroup:sc_tint_color="@color/colorPrimary"
+            >
+
+            <RadioButton
+                style="@style/RadioButton"
+                android:id="@+id/hrl_conceptPerformance"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Concept Performance"
+                android:checked="true"
+                />
+
+            <RadioButton
+                android:id="@+id/hrl_zonePerformance"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Zone Performance" />
+
+
+
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+
+
+    </LinearLayout>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearToolbar"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:baselineAligned="false">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/border_round_edittext" />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@color/white"
+
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    >
+                    <!--net sales-->
+                    <RelativeLayout
+                        android:id="@+id/rel_ez_soh"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1.5"
+
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                >
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="35dp"
+                                    android:layout_marginTop="5dp"
+                                    android:src="@mipmap/netsale_icon"
+                                    />
+
+                            </LinearLayout>
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                >
+                                <TextView
+                                    android:id="@+id/txt_ez_SOH2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="left"
+                                    android:textColor="@color/smdm_default_color"
+                                    android:layout_marginLeft="18dp"
+                                    android:text="Net Sales"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/hrl_netSales"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_marginLeft="18dp"
+                                    android:layout_marginTop="35dp"
+                                    android:text="00"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="17sp" />
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                    <!--net sales end-->
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/rel_ez_git"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        >
+
+                        <RelativeLayout
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+
+                            >
+
+                            <TextView
+                                android:id="@+id/txt_ez_GIT"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginLeft="8dp"
+                                android:text="Ach%"
+                                android:textColor="@color/smdm_default_color"
+                                android:textSize="12sp" />
+
+
+                            <TextView
+                                android:id="@+id/hrl_arh"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="35dp"
+                                android:text="00"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="17sp"
+                                />
+
+                        </RelativeLayout>
+
+
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@color/white"
+
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    >
+                    <RelativeLayout
+                        android:id="@+id/rel_ez_ROS"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        >
+
+                        <!--spend Bill-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1.5"
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                >
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="35dp"
+                                    android:layout_marginTop="5dp"
+                                    android:src="@mipmap/spend_bill_icon"
+                                    />
+
+                            </LinearLayout>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                >
+
+                                <TextView
+                                    android:id="@+id/txt_ez_ROS2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="left"
+                                    android:layout_marginLeft="18dp"
+                                    android:text="Spend/Bill"
+                                    android:textColor="@color/smdm_default_color"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/hrl_spend"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_marginLeft="18dp"
+                                    android:layout_marginTop="35dp"
+                                    android:text="00"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="17sp"
+                                    />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--spend Bill end-->
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rel_ez_fwdwkcover"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        >
+
+                    <RelativeLayout
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/txt_ez_FwdWkCover2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginLeft="8dp"
+                            android:text="Units/Bill"
+                            android:textColor="@color/smdm_default_color"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:id="@+id/hrl_units"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="35dp"
+                            android:text="00"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="17sp"
+                            />
+
+                    </RelativeLayout>
+
+
+
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/border_round_edittext" />
+
+            <org.eazegraph.lib.charts.PieChart
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/hrl_piechart"
+                android:layout_marginTop="5dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:egValueTextColor="@color/smdm_default_color"
+                android:layout_gravity="center_horizontal"
+                app:egLegendTextSize="18sp"
+                app:egUseInnerPadding="true"
+                app:egInnerPadding="50"
+                app:egInnerPaddingOutline="50"
+                android:fitsSystemWindows="true"
+                app:egUsePieRotation="true"
+                app:egValueTextSize="22sp"
+                app:egUseCustomInnerValue="true"
+                android:nestedScrollingEnabled="true"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/border_round_edittext" />
+
+            <TextView
+                android:layout_toRightOf="@+id/btnFIndexPrev"
+                android:id="@+id/txtFIndexClass"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Net Sales"
+                android:textStyle="normal"
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/stock_textsize_Title"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/border_round_edittext" />
+
+
+
+
+            <com.github.mikephil.charting.charts.CombinedChart
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/hrl_barchart"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/border_round_edittext" />
+
+            <TextView
+                android:layout_toRightOf="@+id/btnFIndexPrev"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Geography Performance"
+                android:textStyle="normal"
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/stock_textsize_Title"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/border_round_edittext" />
+
+
+            <RelativeLayout
+                android:id="@+id/llFIndexheader"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/smdm_divider_Black_light">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingLeft="3dp"
+
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:id="@+id/txtFIndexName"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:layout_gravity="center_vertical"
+                            android:textStyle="normal"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        >
+                        <TextView
+                            android:textStyle="normal"
+                            android:id="@+id/txtFIndexSOH"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Net Sales"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        >
+                        <TextView
+                            android:id="@+id/txtFIndexSOH_U"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Plan Sales"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+
+                        >
+                        <TextView
+                            android:id="@+id/txtFIndexGIT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="Pva %"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/hrl_geoPerformance_listview"
+                android:nestedScrollingEnabled="true"
+                >
+
+            </android.support.v7.widget.RecyclerView>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</LinearLayout>

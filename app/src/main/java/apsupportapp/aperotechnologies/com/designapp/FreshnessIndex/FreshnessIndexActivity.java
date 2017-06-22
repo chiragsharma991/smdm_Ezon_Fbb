@@ -1449,7 +1449,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 if(from_filter){ url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZ/" + userId + "?level=" + selectedlevel;   from_filter=false;  }
                 else{ url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZ/" + userId + "?level=" + level;  }//header api
                 //  Log.e(TAG, "Freshness_Ez: Header URL " + url);
-                Reusable_Functions.hDialog();
+               // Reusable_Functions.hDialog();
                 mpm_model model = new mpm_model();
                 ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);
                 break;
@@ -1696,16 +1696,17 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
             case 0:
                 String url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZ/" + userId + "?level=" + level;   //Detail Api
+                Reusable_Functions.sDialog(context,"Loading...");
                 // Log.e(TAG, "Freshness_Ez: Detail URL " + url);
                 ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
                 break;
 
             case 1:
-
                 //        String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZ/" + userId + "?level=" + level + "&" + fromWhere + "=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
                 // Log.e(TAG, "Freshness_Ez: Detail URL " + url);
+                Reusable_Functions.sDialog(context,"Loading...");
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);
                 break;
 
@@ -1714,6 +1715,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZ/" + userId + "?level=" + selectedlevel + selectedString;
                 // Log.e(TAG, "Freshness_Ez: Detail URL " + url);
+                Reusable_Functions.sDialog(context,"Loading...");
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);
                 break;
 

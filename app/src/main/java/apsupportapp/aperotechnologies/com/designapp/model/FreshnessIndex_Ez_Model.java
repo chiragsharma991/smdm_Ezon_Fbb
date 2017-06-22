@@ -1,12 +1,14 @@
 package apsupportapp.aperotechnologies.com.designapp.model;
 
+import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
+import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence_Model;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 
 /**
  * Created by csuthar on 01/06/17.
  */
 
-public class FreshnessIndex_Ez_Model  {
+public class FreshnessIndex_Ez_Model extends HourlyPerformence_Model {
 
     String level;
     int stkOnhandQty;
@@ -16,6 +18,8 @@ public class FreshnessIndex_Ez_Model  {
     double sohNonAssortmentGrp;
     double nonAssortmentGrpCont;
     int stkGitQty;
+
+
 
     public String getLevel() {
         return level;
