@@ -3,6 +3,7 @@ package apsupportapp.aperotechnologies.com.designapp.HourlyPerformence;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,8 +17,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,7 @@ import org.eazegraph.lib.models.PieModel;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Random;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
@@ -61,7 +65,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class HourlyPerformence extends AppCompatActivity implements HttpResponse, RadioGroup.OnCheckedChangeListener {
 
     private SegmentedGroup segmentButton;
-    private PieChart pieChart;
+    public static PieChart pieChart;
     private CombinedChart barChart;
     private RecyclerView listView;
     private TextView netSales, archPercent, spend, units;
@@ -78,7 +82,12 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     private HourlyAdapter hourlyAdapter;
     private NumberFormat thousandSaperator;
     private SegmentedGroup Hrl_segmented;
-    private RadioButton Hrl_zonePerformance,Hrl_conceptPerformance;
+    private RadioButton Hrl_zonePerformance, Hrl_conceptPerformance;
+    private RelativeLayout hrl_btnBack;
+    private boolean concept_toggle = true, focusOnPie = false;  //concept toggle true and rotate pie focus position
+    public static ProgressBar hrl_pi_Process;
+    private String leveLDesc;  // for GeoLevel2Desc / GeoLevel3Desc.
+    private int focusPosition,dupfocusPosition=0;
 
 
     @Override
@@ -89,10 +98,14 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         context = this;
         TAG = "HourlyPerformence";
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        userId = sharedPreferences.getString("userId", "");
-        userId = userId.substring(0, userId.length() - 5);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        if (geoLeveLDesc.equals("E ZONE")) {
+            userId = sharedPreferences.getString("userId", "");  //E zone userid =username
+        } else {
+            userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
+            userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
+        }
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -117,32 +130,61 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     }
 
     private void ApiCallBack(mpm_model model, int id) {
+        String url;
+        ApiRequest api_request;
 
         switch (id) {
 
             case 0:   //total values
                 level = 5;
-                String url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level; //Detail Api
-                Reusable_Functions.sDialog(context, "Loading...");
-                ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
+                if (focusOnPie) {
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level +"&"+leveLDesc+"&recache=true"; //Detail Api
+                    hrl_pi_Process.setVisibility(View.VISIBLE);
+                    api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
+
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" +level+"&recache=true"; //Detail Api
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
+                }
+
                 break;
 
             case 1:  // pie chart values
-                level = 2;
-                url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level; //Detail Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);  // 1 is id for identification
+                level = concept_toggle == true ? 2 : 3;
+                if (focusOnPie) {
+                    ApiCallBack(model, 2);  //calling for pie chart
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level+"&recache=true"; //Detail Api
+                    api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);  // 1 is id for identification
+                }
+
+
                 break;
 
             case 2:   //Bar values
                 level = 1;
-                url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level; //Detail Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2);  // 2 is id for identification
+                if (focusOnPie) {
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level +"&"+leveLDesc+"&recache=true"; //Detail Api
+                    api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2);  // 2 is id for identification
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level+"&recache=true"; //Detail Api
+                    api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2);  // 2 is id for identification
+                }
+
                 break;
 
             case 3:   //Store values
                 level = 4;
-                url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level; //Detail Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 3);  // 3 is id for identification
+                if (focusOnPie) {
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level+"&"+leveLDesc+"&recache=true"; //Detail Api
+                    api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 3);  // 3 is id for identification
+                }else{
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level+"&recache=true"; //Detail Api
+                    api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 3);  // 3 is id for identification
+                }
+
+
                 break;
 
             default:
@@ -175,14 +217,16 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         YAxis leftAxis = barChart.getAxisLeft();
         leftAxis.setTextColor(Color.parseColor("#2277b1"));
         leftAxis.setDrawGridLines(true);
-        leftAxis.setValueFormatter(new MyvalueFormatter(1));
+
+        //    leftAxis.setValueFormatter(new MyvalueFormatter(1));
         // leftAxis.setAxisMaxValue(4f);
         //  leftAxis.setAxisMinValue(0f);
 
         YAxis rightAxis = barChart.getAxisRight();
         rightAxis.setTextColor(Color.parseColor("#2277b1"));
         rightAxis.setDrawGridLines(true);
-        rightAxis.setValueFormatter(new MyvalueFormatter(1));
+        rightAxis.setEnabled(false);
+        //  rightAxis.setValueFormatter(new MyvalueFormatter(1));
         // rightAxis.setAxisMaxValue(800f);
         //  rightAxis.setAxisMinValue(0f);
 
@@ -204,7 +248,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         data.setData(LineData());
         barChart.animateXY(2000, 2000);
         barChart.setData(data);
-        // combinedChart.setDescription("test");
+        // combinedChart.setDescription("activity_hourly_nested_sc1");
 
         Legend l = barChart.getLegend();
         // modify the legend ... by default it is on the left
@@ -214,23 +258,58 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     }
 
+    public int getRandomColor(){
+        Random rnd = new Random();
+        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
 
     private void callPiechart() {
-        pieChart.addPieSlice(new PieModel(piechart_list.get(0).getLevel(), (int) piechart_list.get(0).getSalesContr(), Color.parseColor("#56B7F1")));
-        pieChart.addPieSlice(new PieModel(piechart_list.get(1).getLevel(), (int) piechart_list.get(1).getSalesContr(), Color.parseColor("#FE6DA8"))); //CDA67F
+
+        pieChart.clearChart();//pieChart.clearAnimation();//pieChart.clearFocus();pieChart.invalidate();
+        int[]colors= {Color.parseColor("#56B7F1"),Color.parseColor("#FE6DA8")};
+        for (int i = 0; i <piechart_list.size(); i++) {
+
+            Log.e(TAG, "callPiechart: "+piechart_list.get(0).getLevel() );
+
+            if(piechart_list.size()<=2){
+                pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(),colors[i]));
+            }else{
+                pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(),getRandomColor()));
+
+            }
+        }
         // pieChart.addPieSlice(new PieModel());
         pieChart.setInnerValueString(String.format("%.1f", piechart_list.get(0).getSalesContr()));
         pieChart.animate();
         // pieChart.setInnerPadding(54);
+        pieChart.setInnerPaddingColor(Color.WHITE);
         pieChart.setDrawValueInPie(true);
         pieChart.setOnItemFocusChangedListener(new IOnItemFocusChangedListener() {
             @Override
             public void onItemFocusChanged(int _Position) {
-                Log.e(TAG, "onItemFocusChanged: " + _Position);
                 pieChart.setInnerValueString(String.format("%.1f", piechart_list.get(_Position).getSalesContr()));
+                focusPosition=_Position;
 
             }
         });
+
+        pieChart.invalidate();
+
+    }
+
+    private void changefocuscall(int _Position) {
+        focusOnPie = true;
+        Log.e(TAG, "currect position: "+_Position );
+        leveLDesc = concept_toggle == true ? "geoLevel2Desc=" + piechart_list.get(_Position).getLevel().replace(" ","%20") : "geoLevel3Desc=" + piechart_list.get(_Position).getLevel();
+        Log.e(TAG, "change focus call" + _Position);
+        if (Reusable_Functions.chkStatus(context)) {
+            mpm_model model = new mpm_model();
+            ApiCallBack(model, 0);
+
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
@@ -253,6 +332,9 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         barChart = (CombinedChart) findViewById(R.id.hrl_barchart);
         listView = (RecyclerView) findViewById(R.id.hrl_geoPerformance_listview);
         netSales = (TextView) findViewById(R.id.hrl_netSales);
+        hrl_btnBack = (RelativeLayout) findViewById(R.id.hrl_BtnBack);
+        hrl_pi_Process = (ProgressBar) findViewById(R.id.hrl_pi_process);
+        hrl_pi_Process.setVisibility(View.GONE);
         archPercent = (TextView) findViewById(R.id.hrl_arh);
         spend = (TextView) findViewById(R.id.hrl_spend);
         units = (TextView) findViewById(R.id.hrl_units);
@@ -261,6 +343,14 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         Hrl_segmented = (SegmentedGroup) findViewById(R.id.hrl_segmented);
         Hrl_segmented.setOnCheckedChangeListener(this);
         footer = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.activity_listview, null, false);
+
+
+        hrl_btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 
@@ -323,7 +413,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 units.setText(String.format("%.1f", list.get(0).getUnitsBill()));
                 spend.setText(String.format("%.1f", list.get(0).getSpendBill()));
                 salesNetValue = (int) list.get(0).getSaleNetVal();
-
                 mpm_model model = new mpm_model();
                 ApiCallBack(model, 1);  //calling for pie chart
                 //   Reusable_Functions.hDialog();
@@ -356,9 +445,14 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 for (mpm_model data : list)
                     store_list.add(data);
                 Log.e(TAG, "Store_list: " + store_list.size());
+                hrl_pi_Process.setVisibility(View.GONE);
                 setPerform();
                 Reusable_Functions.hDialog();
                 break;
+
+
+
+
 
             case 4:
                 // zone perform
@@ -366,7 +460,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 for (mpm_model data : list)
                     piechart_list.add(data);
                 Log.e(TAG, "zone pie chart list: " + piechart_list.size());
-                pieChart.notifyAll();
+                callPiechart();
                 Reusable_Functions.hDialog();
                 break;
 
@@ -376,7 +470,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 for (mpm_model data : list)
                     piechart_list.add(data);
                 Log.e(TAG, "Concept pie chart list: " + piechart_list.size());
-                pieChart.notifyAll();
+                callPiechart();
                 Reusable_Functions.hDialog();
                 break;
 
@@ -390,12 +484,28 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     private void setPerform() {
         callList();
-        callPiechart();
+        if(!focusOnPie){callPiechart();}
         callBarchart();
         pieChart.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public boolean onTouch(View v, final MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_UP){
+                    Handler h = new Handler();
+                    h.postDelayed(new Runnable() {
+                        public void run() {
+                            Log.e(TAG, "Time complete " );
+                            if (event.getAction()==MotionEvent.ACTION_UP  && focusPosition != dupfocusPosition) {
+                                dupfocusPosition=focusPosition;
+                                Log.e(TAG, "Time complete api call>>> " );
+                                changefocuscall(focusPosition);
+
+                            }
+                        }
+                    }, 1200);
+
+
+                }
                 // Disallow the touch request for parent scroll on touch of child view
                 v.getParent().requestDisallowInterceptTouchEvent(true);
                 return false;
@@ -406,32 +516,40 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     }
 
 
-
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int id) {
 
         String url;
         ApiRequest api_request;
+        focusOnPie = false;
+
         switch (id) {
 
             case R.id.hrl_conceptPerformance:
-                Log.e(TAG, "onCheckedChanged: hrl_conceptPerformance" );
-                Reusable_Functions.sDialog(context,"Loading...");
-                mpm_model model = new mpm_model();
-                level = 2;
-                url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level; //Detail Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 4);  // 1 is id for identification
+                concept_toggle = true;
+                dupfocusPosition=0;
+                Log.e(TAG, "onCheckedChanged: hrl_conceptPerformance");
+                if (Reusable_Functions.chkStatus(context)) {
+                    mpm_model model = new mpm_model();
+                    ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
+
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.hrl_zonePerformance:
-                Log.e(TAG, "onCheckedChanged: hrl_zonePerformance" );
-                Reusable_Functions.sDialog(context,"Loading...");
-                model = new mpm_model();
-                level = 3;
-                url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level; //Detail Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 5);  // 1 is id for identification
-                break;
+                concept_toggle = false;
+                dupfocusPosition=0;
+                Log.e(TAG, "onCheckedChanged: hrl_zonePerformance");
+                if (Reusable_Functions.chkStatus(context)) {
+                    mpm_model model = new mpm_model();
+                    ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
 
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+                break;
 
 
         }

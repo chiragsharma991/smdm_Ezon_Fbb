@@ -6,11 +6,14 @@ package apsupportapp.aperotechnologies.com.designapp.HourlyPerformence;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.text.NumberFormat;
@@ -78,33 +81,48 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (viewHolder instanceof HourlyViewHolder) {
             if (position < store_list.size()) {
 
-                mpm_model data = store_list.get(position);
+                final mpm_model data = store_list.get(position);
 
                 ((HourlyViewHolder) viewHolder).Hrl_root_Name.setText(data.getLevel());
                 ((HourlyViewHolder) viewHolder).Hrl_root_netsales.setText("₹" + thousandSaperator.format((int) data.getSaleNetVal()));
                 ((HourlyViewHolder) viewHolder).Hrl_root_plansales.setText("" + (int) data.getPlanSales());
-                double singlePercVal = 0.5;//50/100;// width divide by 100 perc
-                int    planVal = 100;                                    // planned value from API
-                double achieveVal = 70;                              //data.getSalesAch();// Achieved value from API
-                double calplanVal = planVal * singlePercVal;        // planned value multiplied by single perc value
-                double calachieveVal = achieveVal * singlePercVal; // Achieved value multiplied by single perc value
 
-                float density = context.getResources().getDisplayMetrics().density;
-                int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
-                int finalCalachieveVal = (int) (density * calachieveVal); //converting value from px to dp
-                Log.e("TAG", "onBindViewHolder: " + achieveVal + " " + calachieveVal);
+                //calculate screen view size and add line bar process.
 
-                ((HourlyViewHolder) viewHolder).Hrl_root_sPlan.setWidth(finalCalachieveVal);
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, 24);
-                params.setMargins(finalCalplanVal, 0, 0, 0);
-                ((HourlyViewHolder) viewHolder).Hrl_root_sAchieve.setLayoutParams(params);
+                ViewTreeObserver vto = ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getViewTreeObserver();
+                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @SuppressWarnings("deprecation")
+                    @Override
+                    public void onGlobalLayout() {
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                            ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        } else {
+                            ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                        int width = ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getMeasuredWidth();
+                        int height = ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getMeasuredHeight();
+
+                        // Calculation width acording to size of phone
+                        double x = 0;  // x is result of calculation.
+                        x = ((double) data.getSalesAch() / 100) * width;
+
+                        int percentage =(int)x;
+                        Log.e("TAG", "width "+width+"height"+height+" and percentage is"+percentage+" and int "+x+" position "+position );
+
+                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.removeAllViewsInLayout();
+                        View lp = new View(context);
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
+                        lp.setLayoutParams(layoutParams);
+                        lp.setBackgroundColor(Color.RED);
+                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.addView(lp);
 
 
-            }
-        }
+
+                    }
+                });
 
 
-        }
+            }}}
 
 
 
@@ -112,6 +130,7 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
         TextView Hrl_root_netsales,Hrl_root_plansales, Hrl_root_Name,Hrl_root_sAchieve,Hrl_root_sPlan;
+        RelativeLayout Hrl_root_innerview;
 
         public HourlyViewHolder(View itemView) {
             super(itemView);
@@ -119,8 +138,9 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Hrl_root_netsales = (TextView) itemView.findViewById(R.id.hrl_root_netsales);
             Hrl_root_plansales = (TextView) itemView.findViewById(R.id.hrl_root_plansales);
             Hrl_root_Name = (TextView) itemView.findViewById(R.id.hrl_root_Name);
-            Hrl_root_sAchieve = (TextView) itemView.findViewById(R.id.hrl_root_sAchieve);
-            Hrl_root_sPlan = (TextView) itemView.findViewById(R.id.hrl_root_sPlan);
+          //  Hrl_root_sAchieve = (TextView) itemView.findViewById(R.id.hrl_root_sAchieve);
+          //  Hrl_root_sPlan = (TextView) itemView.findViewById(R.id.hrl_root_sPlan);
+            Hrl_root_innerview = (RelativeLayout) itemView.findViewById(R.id.rel_ez_inner);
 
         }
     }

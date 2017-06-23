@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
+import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -108,6 +109,17 @@ public class ApiRequest  {
                                 Reusable_Functions.hDialog();
                                 if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                                     FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
+                                }
+                                else if(TAG.equals("HourlyPerformence")) {
+                                    Log.e(TAG, "onResponse: null in HourlyPerformence" );
+
+                                    HourlyPerformence.hrl_pi_Process.setVisibility(View.GONE);
+                                    HourlyPerformence.pieChart.clearChart();
+                                    HourlyPerformence.pieChart.clearAnimation();
+                                    HourlyPerformence.pieChart.clearFocus();
+                                    HourlyPerformence.pieChart.invalidate();
+
+
                                 }
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
