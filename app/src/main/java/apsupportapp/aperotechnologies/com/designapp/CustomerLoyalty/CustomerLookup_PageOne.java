@@ -53,13 +53,12 @@ import java.util.Locale;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.OnRowPressListener1;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.Option_Fragment.view;
+
 
 /**
  * Created by pamrutkar on 14/06/17.
@@ -188,14 +187,16 @@ public class CustomerLookup_PageOne extends Fragment  {
                         }
                     }
                     NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
-                    txt_cust_NetSalesVal.setText("₹\t" + format.format(Math.round(array_custLoyaltySummaries.get(0).getSpend())));
-                    txt_cust_PlanSalesVal.setText("₹\t" + format.format(Math.round(array_custLoyaltySummaries.get(0).getPlanSaleNetVal())));
+                    double netSalesVal = array_custLoyaltySummaries.get(0).getSpend()/100000;
+                    txt_cust_NetSalesVal.setText("₹ " + format.format(Math.round(netSalesVal))+"\tLac");
+                    double planSalesVal = array_custLoyaltySummaries.get(0).getPlanSaleNetVal()/100000;
+                    txt_cust_PlanSalesVal.setText("₹ " + format.format(Math.round(planSalesVal))+"\tLac");
                     txt_cust_ActualCustVal.setText("" + format.format(Math.round(array_custLoyaltySummaries.get(0).getCustCount())));
                     txt_cust_ActualCustName.setText("SPC");
-                    txt_cust_ActualCustPerc.setText("Rs.\t" + format.format(Math.round(array_custLoyaltySummaries.get(0).getSpc())));
+                    txt_cust_ActualCustPerc.setText("₹ " + format.format(Math.round(array_custLoyaltySummaries.get(0).getSpc())));
                     txt_cust_PlanCustVal.setText("" + format.format(Math.round(array_custLoyaltySummaries.get(0).getPlanCustCount())));
                     txt_cust_PlanCustName.setText("SPC");
-                    txt_cust_PlanCustPerc.setText("Rs.\t" + format.format(Math.round(array_custLoyaltySummaries.get(0).getPlanSpc())));
+                    txt_cust_PlanCustPerc.setText("₹ " + format.format(Math.round(array_custLoyaltySummaries.get(0).getPlanSpc())));
                     int custAch = (int) array_custLoyaltySummaries.get(0).getCustAch();
                     progressbar_customer.setProgress(custAch);
                     txt_progress_custVal.setText("" + Math.round(array_custLoyaltySummaries.get(0).getCustAch()) + "%");
@@ -394,16 +395,16 @@ public class CustomerLookup_PageOne extends Fragment  {
             NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
             layoutInflater = (LayoutInflater) context.getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
-            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_cust_engagement_band, null);
-            txt_cust_pengagementType_Val = (TextView) view.findViewById(R.id.txt_cust_pengagementType_Val);
-            txt_cust_pCustomer_Val = (TextView) view.findViewById(R.id.txt_cust_pCustomer_Val);
-            txt_cust_psales_Val = (TextView) view.findViewById(R.id.txt_cust_psales_Val);
-            txt_cust_pspc_Val = (TextView) view.findViewById(R.id.txt_cust_pspc_Val);
-            txt_cust_psalesAch_Val = (TextView) view.findViewById(R.id.txt_cust_psalesAch_Val);
+            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_cust_actaul_engagement_band, null);
+            txt_cust_pengagementType_Val = (TextView) view.findViewById(R.id.txt_cust_aengagementType_Val);
+            txt_cust_pCustomer_Val = (TextView) view.findViewById(R.id.txt_cust_aCustomer_Val);
+            txt_cust_psales_Val = (TextView) view.findViewById(R.id.txt_cust_asales_Val);
+            txt_cust_pspc_Val = (TextView) view.findViewById(R.id.txt_cust_aspc_Val);
 
             txt_cust_pengagementType_Val.setText(actualengagementArrayList.get(i).getEngagementBand());
             txt_cust_pCustomer_Val.setText("" + format.format(Math.round(actualengagementArrayList.get(i).getCustCount())));
-            txt_cust_psales_Val.setText("" + format.format(Math.round(actualengagementArrayList.get(i).getSpend())));
+            double plan_spendVal = actualengagementArrayList.get(i).getSpend()/100000;
+            txt_cust_psales_Val.setText("₹ " + format.format(Math.round(plan_spendVal)));
             txt_cust_pspc_Val.setText("" + format.format(Math.round(actualengagementArrayList.get(i).getSpc())));
             txt_cust_pengagementType_Val.setTag(position);
             txt_cust_pCustomer_Val.setTag(position);
@@ -469,10 +470,11 @@ public class CustomerLookup_PageOne extends Fragment  {
             txt_cust_pspc_Val = (TextView) view.findViewById(R.id.txt_cust_pspc_Val);
             txt_cust_psalesAch_Val = (TextView) view.findViewById(R.id.txt_cust_psalesAch_Val);
             txt_cust_pengagementType_Val.setText("");
-            txt_cust_pengagementType_Val.setText(planengagementArrayList.get(i).getEngagementBand());
+            txt_cust_pengagementType_Val.setText(planengagementArrayList.get(i).getLevel());
             txt_cust_pCustomer_Val.setText("" + format.format(Math.round(planengagementArrayList.get(i).getPlanCust())));
-            txt_cust_psales_Val.setText("" + format.format(Math.round(planengagementArrayList.get(i).getPlanSpend())));
-            txt_cust_pspc_Val.setText("" + format.format(Math.round(planengagementArrayList.get(i).getPlanSpc())));
+            double salesVal = planengagementArrayList.get(i).getPlanSpend()/100000;
+            txt_cust_psales_Val.setText("₹ " + format.format(Math.round(salesVal)));
+            txt_cust_pspc_Val.setText("₹ " + format.format(Math.round(planengagementArrayList.get(i).getPlanSpc())));
             txt_cust_psalesAch_Val.setText(""+format.format(Math.round(planengagementArrayList.get(i).getSalesAch())));
             txt_cust_pengagementType_Val.setTag(i);
             txt_cust_pCustomer_Val.setTag(i);

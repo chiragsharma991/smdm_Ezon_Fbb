@@ -11,7 +11,8 @@ import java.util.List;
  * Created by csuthar on 02/03/17.
  */
 
-public class ToDoViewPagerAdapter extends FragmentPagerAdapter {
+public class ToDoViewPagerAdapter extends FragmentPagerAdapter
+{
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 

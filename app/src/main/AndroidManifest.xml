@@ -250,13 +250,7 @@
             android:name=".CustomerLoyalty.CustomerLookupActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-            android:windowSoftInputMode="stateHidden" />
-        `
-        <activity
-            android:name=".SalesAnalysis.EzoneSalesFilter"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
+
         <activity android:name=".HourlyPerformence.HourlyPerformence"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
@@ -267,6 +261,10 @@
             android:name=".CustomerLoyalty.CustomerDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name=".CustomerLoyalty.CustDetailBarChart"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

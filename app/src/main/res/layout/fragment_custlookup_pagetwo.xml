@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="85dp"
         android:layout_below="@+id/linear_engagement_type_nm"
-        android:background="@color/divider_salescard"
+        android:background="#e3e4e5"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -78,10 +78,11 @@
                 android:hint="Search" />
 
             <ImageButton
+                android:visibility="gone"
                 android:background="@mipmap/ic_search_black_24dp"
                 android:layout_weight=".1"
                 android:id="@+id/imgBtn_Search"
-                android:layout_width="22dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
         </LinearLayout>
 
@@ -102,7 +103,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_toLeftOf="@+id/txt_cust_lastVisit"
                 android:text="Name"
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/smdm_status_pending_color"
                 android:textSize="@dimen/smdm_departmentTitleLarge"
                 android:textStyle="normal" />
 
@@ -118,7 +119,7 @@
                 android:layout_toLeftOf="@+id/txt_cust_planSales"
                 android:gravity="center_vertical|center"
                 android:text="Last Visit"
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/smdm_status_pending_color"
                 android:textSize="@dimen/smdm_departmentTitleLarge"
                 android:textStyle="normal" />
 
@@ -133,7 +134,7 @@
                 android:layout_toLeftOf="@+id/txt_cust_sales"
                 android:gravity="center_vertical|center"
                 android:text="Plan Sales"
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/smdm_status_pending_color"
                 android:textSize="@dimen/smdm_departmentTitleLarge"
                 android:textStyle="normal" />
 
@@ -148,7 +149,7 @@
                 android:layout_toLeftOf="@+id/txt_cust_ach"
                 android:gravity="center_vertical|center"
                 android:text="Sales"
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/smdm_status_pending_color"
                 android:textSize="@dimen/smdm_departmentTitleLarge"
                 android:textStyle="normal" />
 
@@ -160,7 +161,7 @@
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical|center"
                 android:text="Ach%"
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/smdm_status_pending_color"
                 android:textSize="@dimen/smdm_departmentTitleLarge"
                 android:textStyle="normal" />
 

@@ -265,9 +265,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
-                                android:layout_marginLeft="8dp"
+                                android:layout_marginLeft="4dp"
                                 android:layout_toRightOf="@+id/txt_cust_ActualCustName"
-                                android:hint="Rs. 100"
+                                android:hint=""
                                 android:textColor="@color/smdm_blue"
                                 android:textSize="11sp" />
 
@@ -333,9 +333,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
-                                android:layout_marginLeft="8dp"
+                                android:layout_marginLeft="4dp"
                                 android:layout_toRightOf="@+id/txt_cust_PlanCustName"
-                                android:hint="Rs. 100"
+                                android:hint=""
                                 android:textColor="@color/smdm_blue"
                                 android:textSize="11sp" />
 
@@ -385,11 +385,11 @@
                             android:id="@+id/txt_progress_custVal"
                             android:layout_width="250dp"
                             android:layout_height="250dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_marginBottom="9dp"
                             android:gravity="center"
-                            android:hint="10%"
+                            android:hint=""
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="14sp"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -397,6 +397,7 @@
                             android:layout_width="250dp"
                             android:layout_height="250dp"
                             android:gravity="center"
+                            android:layout_marginBottom="5dp"
                             android:text="\n\nCustomer"
                             android:textColor="@color/smdm_default_color"
                             android:textSize="10sp" />
@@ -422,11 +423,11 @@
                             android:id="@+id/txt_progress_salesVal"
                             android:layout_width="250dp"
                             android:layout_height="250dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_marginBottom="9dp"
                             android:gravity="center"
-                            android:hint="12%"
+                            android:hint=""
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="14sp"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -434,6 +435,7 @@
                             android:layout_width="250dp"
                             android:layout_height="250dp"
                             android:gravity="center"
+                            android:layout_marginBottom="5dp"
                             android:text="\n\n Sales"
                             android:textColor="@color/smdm_default_color"
                             android:textSize="10sp" />
@@ -474,6 +476,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:textStyle="bold"
                         android:text="Plan Engagement"
                         android:textColor="@color/smdm_dark_Black"
                         android:textSize="@dimen/smdm_departmentTitleLarge" />
@@ -487,7 +490,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/smdm_divider_Black">
+                        android:background="#e3e4e5">
 
                         <TextView
                             android:id="@+id/txt_cust_pengagementType"
@@ -498,7 +501,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_toLeftOf="@+id/txt_cust_pCustomer"
                             android:text="Engagement Type"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/smdm_status_pending_color"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal" />
 
@@ -514,7 +517,8 @@
                             android:layout_toLeftOf="@+id/txt_cust_psales"
                             android:gravity="center_vertical|center"
                             android:text="Customer"
-                            android:textColor="@color/bg_store_code_text"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/smdm_status_pending_color"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal" />
 
@@ -529,7 +533,7 @@
                             android:layout_toLeftOf="@+id/txt_cust_pspc"
                             android:gravity="center_vertical|center"
                             android:text="Sales\n(Lacs)"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/smdm_status_pending_color"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal" />
 
@@ -544,7 +548,7 @@
                             android:layout_toLeftOf="@+id/txt_cust_psalesAch"
                             android:gravity="center_vertical|center"
                             android:text="SPC"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/smdm_status_pending_color"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal" />
 
@@ -556,7 +560,7 @@
                             android:layout_centerVertical="true"
                             android:gravity="center_vertical|center"
                             android:text="Sales\nAch%"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/smdm_status_pending_color"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal" />
                     </RelativeLayout>
@@ -603,6 +607,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:textStyle="bold"
                         android:text="Actual Engagement"
                         android:textColor="@color/smdm_dark_Black"
                         android:textSize="@dimen/smdm_departmentTitleLarge" />
@@ -616,7 +621,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/smdm_PopUp_color">
+                        android:background="#e3e4e5">
 
                         <TextView
                             android:id="@+id/txt_cust_aengagementType"
@@ -627,65 +632,54 @@
                             android:layout_marginLeft="5dp"
                             android:layout_toLeftOf="@+id/txt_cust_aCustomer"
                             android:text="Engagement Type"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/smdm_status_pending_color"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/txt_cust_aCustomer"
-                            android:layout_width="60dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="5dp"
-                            android:layout_marginRight="180dp"
+                            android:layout_marginRight="155dp"
                             android:layout_toLeftOf="@+id/txt_cust_asales"
                             android:gravity="center_vertical|center"
                             android:text="Customer"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/smdm_status_pending_color"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/txt_cust_asales"
-                            android:layout_width="60dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="120dp"
+                            android:layout_marginRight="75dp"
                             android:layout_toLeftOf="@+id/txt_cust_aspc"
                             android:gravity="center_vertical|center"
                             android:text="Sales\n(Lacs)"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/smdm_status_pending_color"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/txt_cust_aspc"
-                            android:layout_width="60dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="60dp"
                             android:layout_toLeftOf="@+id/txt_cust_asalesAch"
                             android:gravity="center_vertical|center"
                             android:text="SPC"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/smdm_status_pending_color"
                             android:textSize="@dimen/smdm_departmentTitleLarge"
                             android:textStyle="normal" />
 
-                        <TextView
-                            android:id="@+id/txt_cust_asalesAch"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="center_vertical|center"
-                            android:text="Sales\nAch%"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textSize="@dimen/smdm_departmentTitleLarge"
-                            android:textStyle="normal" />
+
                     </RelativeLayout>
 
                     <LinearLayout

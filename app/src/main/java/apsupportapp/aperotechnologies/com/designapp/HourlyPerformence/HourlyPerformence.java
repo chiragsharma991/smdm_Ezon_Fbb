@@ -215,7 +215,8 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     }
 
 
-    private void callPiechart() {
+    private void callPiechart()
+    {
         pieChart.addPieSlice(new PieModel(piechart_list.get(0).getLevel(), (int) piechart_list.get(0).getSalesContr(), Color.parseColor("#56B7F1")));
         pieChart.addPieSlice(new PieModel(piechart_list.get(1).getLevel(), (int) piechart_list.get(1).getSalesContr(), Color.parseColor("#FE6DA8"))); //CDA67F
         // pieChart.addPieSlice(new PieModel());
@@ -223,15 +224,15 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         pieChart.animate();
         // pieChart.setInnerPadding(54);
         pieChart.setDrawValueInPie(true);
-        pieChart.setOnItemFocusChangedListener(new IOnItemFocusChangedListener() {
+        pieChart.setOnItemFocusChangedListener(new IOnItemFocusChangedListener()
+        {
             @Override
-            public void onItemFocusChanged(int _Position) {
+            public void onItemFocusChanged(int _Position)
+            {
                 Log.e(TAG, "onItemFocusChanged: " + _Position);
                 pieChart.setInnerValueString(String.format("%.1f", piechart_list.get(_Position).getSalesContr()));
-
             }
         });
-
     }
 
     private void callList() {
