@@ -111,15 +111,8 @@ public class ApiRequest  {
                                     FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
                                 }
                                 else if(TAG.equals("HourlyPerformence")) {
-                                    Log.e(TAG, "onResponse: null in HourlyPerformence" );
-
                                     HourlyPerformence.hrl_pi_Process.setVisibility(View.GONE);
-                                    HourlyPerformence.pieChart.clearChart();
-                                    HourlyPerformence.pieChart.clearAnimation();
-                                    HourlyPerformence.pieChart.clearFocus();
-                                    HourlyPerformence.pieChart.invalidate();
-
-
+                                    ResposeInterface.nodatafound();
                                 }
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
@@ -175,6 +168,10 @@ public class ApiRequest  {
                     public void onErrorResponse(VolleyError error) {
                         if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                             FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
+                        }
+                        if(TAG.equals("HourlyPerformence")) {
+                            HourlyPerformence.hrl_pi_Process.setVisibility(View.GONE);
+                            ResposeInterface.nodatafound();
                         }
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();

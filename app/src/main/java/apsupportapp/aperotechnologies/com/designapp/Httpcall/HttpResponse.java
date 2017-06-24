@@ -13,4 +13,8 @@ import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 public interface HttpResponse
 {
      void response(ArrayList<mpm_model> list,int id);
+
+     void nodatafound();
+
 }
+

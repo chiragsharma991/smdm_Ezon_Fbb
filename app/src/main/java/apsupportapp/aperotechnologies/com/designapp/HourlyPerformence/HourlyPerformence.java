@@ -14,16 +14,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Cache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
@@ -32,6 +28,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -44,16 +41,13 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.gson.Gson;
-
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.communication.IOnItemFocusChangedListener;
 import org.eazegraph.lib.models.PieModel;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
@@ -129,6 +123,38 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     }
 
+    public void nodatafound() {
+
+        Log.e(TAG, "nodatafound: in hourly" );
+        netSales.setText("₹" +"0");
+        archPercent.setText("" + "0"+ "%");
+        units.setText(String.format("%.1f",0 ));
+        spend.setText(String.format("%.1f",0));
+
+        if(piechart_list.size()!=0){
+            pieChart.clearChart();
+            pieChart.clearAnimation();
+            pieChart.clearFocus();
+            pieChart.invalidate();
+        }
+        if(barchart_list.size()!=0){
+            barChart.clear();
+            barChart.clearAnimation();
+            barChart.clearFocus();
+            barChart.invalidate();
+
+        }
+        if(store_list.size()!=0){
+            store_list.clear();
+            hourlyAdapter.notifyDataSetChanged();
+        }
+
+
+
+
+    }
+
+
     private void ApiCallBack(mpm_model model, int id) {
         String url;
         ApiRequest api_request;
@@ -139,7 +165,8 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 level = 5;
                 if (focusOnPie) {
                     url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level +"&"+leveLDesc+"&recache=true"; //Detail Api
-                    hrl_pi_Process.setVisibility(View.VISIBLE);
+                    //hrl_pi_Process.setVisibility(View.VISIBLE);
+                    Reusable_Functions.ViewVisible(hrl_pi_Process);
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
 
                 } else {
@@ -196,7 +223,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
 
     private void callBarchart() {
-
+        barChart.clear();
         ViewPortHandler handler = barChart.getViewPortHandler();
         handler.getScaleX();
         XAxis xAxis = barChart.getXAxis();
@@ -225,10 +252,10 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         YAxis rightAxis = barChart.getAxisRight();
         rightAxis.setTextColor(Color.parseColor("#2277b1"));
         rightAxis.setDrawGridLines(true);
-        rightAxis.setEnabled(false);
-        //  rightAxis.setValueFormatter(new MyvalueFormatter(1));
-        // rightAxis.setAxisMaxValue(800f);
-        //  rightAxis.setAxisMinValue(0f);
+        //rightAxis.setEnabled(false);
+          rightAxis.setValueFormatter(new MyvalueFormatter(1));
+       //   rightAxis.setAxisMaxValue(800f);
+         // rightAxis.setAxisMinValue(0f);
 
         // enable touch gestures
         barChart.setTouchEnabled(true);
@@ -243,17 +270,24 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         barChart.setDescription(null);
 
 
+        Legend l = barChart.getLegend();
+        // modify the legend ... by default it is on the left
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        ArrayList<LegendEntry>label =new ArrayList<>();
+        label.add(0,new LegendEntry("Net Sales",Legend.LegendForm.SQUARE,10,100,null,Color.parseColor("#2277b1")));
+        label.add(1,new LegendEntry("PvA%",Legend.LegendForm.SQUARE,10,100,null,Color.parseColor("#48c430")));
+        l.setCustom(label);
+        l.setForm(Legend.LegendForm.SQUARE);
+
         CombinedData data = new CombinedData();
         data.setData(Bardata());
         data.setData(LineData());
         barChart.animateXY(2000, 2000);
         barChart.setData(data);
+        barChart.invalidate();
         // combinedChart.setDescription("activity_hourly_nested_sc1");
 
-        Legend l = barChart.getLegend();
-        // modify the legend ... by default it is on the left
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        l.setForm(Legend.LegendForm.SQUARE);
+
 
 
     }
@@ -377,7 +411,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         set.setValueTextSize(10f);
         set.setDrawValues(false);
         //  set.setValueTextColor(Color.rgb(240, 238, 70));
-        set.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set.setAxisDependency(YAxis.AxisDependency.RIGHT);
         linedata.addDataSet(set);
         return linedata;
     }
@@ -445,7 +479,8 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 for (mpm_model data : list)
                     store_list.add(data);
                 Log.e(TAG, "Store_list: " + store_list.size());
-                hrl_pi_Process.setVisibility(View.GONE);
+               // hrl_pi_Process.setVisibility(View.GONE);
+                Reusable_Functions.ViewGone(hrl_pi_Process);
                 setPerform();
                 Reusable_Functions.hDialog();
                 break;
@@ -566,7 +601,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            String format = id == 1 ? value + " Cr" : value + " %";
+            String format = id == 1 ? value + " %" : value + " Cr";
             return format;
         }
     }
