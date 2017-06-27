@@ -104,7 +104,7 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                         // Calculation width acording to size of phone
                         double x = 0;  // x is result of calculation.
-                        x = ((double) data.getSalesAch() / 100) * (width/2);  // divide 2 for showing process under 100
+                        x = ((double) data.getSalesAch() / 100) * width;
 
                         int percentage =(int)x;
                         Log.e("TAG", "width "+width+"height"+height+" and percentage is"+percentage+" and int "+x+" position "+position );
@@ -115,14 +115,6 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         lp.setLayoutParams(layoutParams);
                         lp.setBackgroundColor(Color.RED);
                         ((HourlyViewHolder) viewHolder).Hrl_root_innerview.addView(lp);
-
-                        View gp =new View(context);
-                        RelativeLayout.LayoutParams threshold = new RelativeLayout.LayoutParams(
-                                width/2, RelativeLayout.LayoutParams.MATCH_PARENT);
-                        threshold.addRule(RelativeLayout.CENTER_IN_PARENT,((HourlyViewHolder) viewHolder).Hrl_root_innerview.getId());
-                        gp.setLayoutParams(threshold);
-                        gp.setBackgroundColor(android.R.color.black);
-                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.addView(gp);
 
 
 

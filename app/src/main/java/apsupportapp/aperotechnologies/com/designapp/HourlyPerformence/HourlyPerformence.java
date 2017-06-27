@@ -125,7 +125,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     public void nodatafound() {
 
-        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
         Log.e(TAG, "nodatafound: in hourly" );
         netSales.setText("₹" +"0");
         archPercent.setText("" + "0"+ "%");

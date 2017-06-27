@@ -39,6 +39,7 @@ import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.communication.IOnItemFocusChangedListener;
 import org.eazegraph.lib.models.PieModel;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 public class CustomerDetailActivity extends AppCompatActivity {
     private TextView txt_cust_name, txt_cust_mobileNo, txt_cust_email;
     private TextView txt_cd_last_visit_Val, txt_cd_tot_visit_Val, txt_cd_last_spent_Val, txt_cd_tot_spent_Val;
-    static String unique_Customer;
+    String unique_Customer;
     private Button btn_more;
     private Context context;
     JsonArrayRequest postRequest;
@@ -68,7 +69,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     CustomerRecomdtn customerRecomdtn;
     SharedPreferences sharedPreferences;
     private RelativeLayout rel_cust_detl_back;
-    private String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT", update_userId, recache = "true";
+    private String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT", update_userId, recache = "true",businessCcb;
     Gson gson;
     private int offset = 0, limit = 10, count = 0;
     static ArrayList<CustomerDetail> customerDetailsarray;
@@ -80,7 +81,8 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_detail);
         getSupportActionBar().hide();
@@ -100,14 +102,12 @@ public class CustomerDetailActivity extends AppCompatActivity {
         gson = new Gson();
         initialise_UI();
 
-        if (Reusable_Functions.chkStatus(context))
-        {
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading...");
-            customerDetailsarray = new ArrayList<CustomerDetail>();
-            requestCustomerDetailsAPI();
-        }
-        else
-        {
+            customerDetailArrayList = new ArrayList<CustomerRecomdtn>();
+            requestCustomerRecomdtn();
+
+        } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
         rel_cust_detl_back.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +192,6 @@ public class CustomerDetailActivity extends AppCompatActivity {
                     {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-
                     }
                     else
                     {
@@ -210,17 +209,9 @@ public class CustomerDetailActivity extends AppCompatActivity {
                     txt_cd_tot_spent_Val.setText("₹ " + Math.round(customerDetailsarray.get(0).getLast12MthSpend()));
                     txt_cd_tot_visit_Val.setText("" + Math.round(customerDetailsarray.get(0).getLast12MthVisit()));
                     createPieChart();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.sDialog(context, "Loading...");
-                        customerDetailArrayList = new ArrayList<CustomerRecomdtn>();
-                        requestCustomerRecomdtn();
-                        addTabs(cd_viewPager);
-                        cd_viewPager.setOffscreenPageLimit(2);
-                        cd_tab.setupWithViewPager(cd_viewPager);
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-
+                    addTabs(cd_viewPager);
+                    cd_viewPager.setOffscreenPageLimit(2);
+                    cd_tab.setupWithViewPager(cd_viewPager);
                     Reusable_Functions.hDialog();
                 }
                 catch (Exception e)
@@ -265,11 +256,12 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 Log.e("response :", "" + response);
                 try {
                     int i = 0;
-                    if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                    if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                    {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-
-                    } else
+                    }
+                    else
                     {
                         for (i = 0; i < 3; i++)
                         {
@@ -278,10 +270,19 @@ public class CustomerDetailActivity extends AppCompatActivity {
                             Log.e("cust recomdtn :",""+customerDetailArrayList.size());
                         }
                     }
-
-
-
-                } catch (Exception e) {
+                    if (Reusable_Functions.chkStatus(context))
+                    {
+                        Reusable_Functions.sDialog(context, "Loading...");
+                        customerDetailsarray = new ArrayList<CustomerDetail>();
+                        requestCustomerDetailsAPI();
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e)
+                {
                     Reusable_Functions.hDialog();
                     Toast.makeText(context, "no data found" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
@@ -311,7 +312,6 @@ public class CustomerDetailActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-
     private void createPieChart()
     {
         pieChart.addPieSlice(new PieModel("Food", (int)customerDetailsarray.get(0).getFoodContr(), Color.parseColor("#4e7aa7")));
@@ -330,19 +330,132 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 {
                     case 0 :
                         pieChart.setInnerValueString(""+Math.round(customerDetailsarray.get(0).getFoodContr())+"%");
+                        businessCcb = "Food";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(context, "Loading...");
+                            requestPieChartOnFocus();
+
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case 1 :
                         pieChart.setInnerValueString(""+Math.round(customerDetailsarray.get(0).getFashionContr())+"%");
+                        businessCcb = "Fashion";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(context, "Loading...");
+                            requestPieChartOnFocus();
+
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case 2 :
                         pieChart.setInnerValueString(""+Math.round(customerDetailsarray.get(0).getHomeContr())+"%");
+                        businessCcb = "Home";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(context, "Loading...");
+                            requestPieChartOnFocus();
+
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case 3 :
                         pieChart.setInnerValueString(""+Math.round(customerDetailsarray.get(0).getElectronicsContr())+"%");
+                        businessCcb = "Electronics";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(context, "Loading...");
+                            requestPieChartOnFocus();
+
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
             }
         });
+    }
+
+    private void requestPieChartOnFocus()
+    {
+        String url = "";
+        if(businessCcb.equals("Food"))
+        {
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;
+        }
+         else if(businessCcb.equals("Fashion"))
+        {
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;
+        }
+        else if(businessCcb.equals("Home"))
+        {
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;
+        }
+        else if(businessCcb.equals("Electronics"))
+        {
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;
+        }
+            Log.e("pie on focus ", "" + url);
+        postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.e("pie on focus response :", "" + response);
+                try {
+                    int i = 0;
+                    if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                    {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        for (i = 0; i < response.length(); i++)
+                        {
+                            JSONObject resp_obj = response.getJSONObject(i);
+                            String businessCcb = resp_obj.getString("businessCcb");
+                            String lastPurchaseDate = resp_obj.getString("lastPurchaseDate");
+                            double last12MthSpend= resp_obj.getDouble("last12MthSpend");
+                            double last12MthVisit = resp_obj.getDouble("last12MthVisit");
+                            double lastSpend =  resp_obj.getDouble("lastSpend");
+                            txt_cd_last_spent_Val.setText("₹ " + Math.round(lastSpend));
+                            txt_cd_last_visit_Val.setText(lastPurchaseDate);
+                            txt_cd_tot_spent_Val.setText("₹ " + Math.round(last12MthSpend));
+                            txt_cd_tot_visit_Val.setText("" + Math.round(last12MthVisit));
+                        }
+                    }
+
+                   Reusable_Functions.hDialog();
+                }
+                catch (Exception e)
+                {
+                    Reusable_Functions.hDialog();
+                    Toast.makeText(context, "no data found" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
     }
 
     @Override
