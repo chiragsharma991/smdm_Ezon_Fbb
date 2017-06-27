@@ -119,40 +119,10 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
-        Log.e(TAG, "functionality: call..");
 
     }
 
-    public void nodatafound() {
 
-        Log.e(TAG, "nodatafound: in hourly" );
-        netSales.setText("₹" +"0");
-        archPercent.setText("" + "0"+ "%");
-        units.setText(String.format("%.1f",0 ));
-        spend.setText(String.format("%.1f",0));
-
-        if(piechart_list.size()!=0){
-            pieChart.clearChart();
-            pieChart.clearAnimation();
-            pieChart.clearFocus();
-            pieChart.invalidate();
-        }
-        if(barchart_list.size()!=0){
-            barChart.clear();
-            barChart.clearAnimation();
-            barChart.clearFocus();
-            barChart.invalidate();
-
-        }
-        if(store_list.size()!=0){
-            store_list.clear();
-            hourlyAdapter.notifyDataSetChanged();
-        }
-
-
-
-
-    }
 
 
     private void ApiCallBack(mpm_model model, int id) {
@@ -166,7 +136,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 if (focusOnPie) {
                     url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level +"&"+leveLDesc+"&recache=true"; //Detail Api
                     //hrl_pi_Process.setVisibility(View.VISIBLE);
-                    Reusable_Functions.ViewVisible(hrl_pi_Process);
+                    Reusable_Functions.animateScaleOut(hrl_pi_Process);
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
 
                 } else {
@@ -300,12 +270,12 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     private void callPiechart() {
 
         pieChart.clearChart();//pieChart.clearAnimation();//pieChart.clearFocus();pieChart.invalidate();
-        int[]colors= {Color.parseColor("#56B7F1"),Color.parseColor("#FE6DA8")};
+        int[]colors= {Color.parseColor("#4e7aa7"),Color.parseColor("#f28e2c"),Color.parseColor("#e05a5b"),Color.parseColor("#77b7b7"),Color.parseColor("#5aa250"),Color.parseColor("#fbd043")};
         for (int i = 0; i <piechart_list.size(); i++) {
 
             Log.e(TAG, "callPiechart: "+piechart_list.get(0).getLevel() );
 
-            if(piechart_list.size()<=2){
+            if(piechart_list.size()<=5){
                 pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(),colors[i]));
             }else{
                 pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(),getRandomColor()));
@@ -333,9 +303,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     private void changefocuscall(int _Position) {
         focusOnPie = true;
-        Log.e(TAG, "currect position: "+_Position );
         leveLDesc = concept_toggle == true ? "geoLevel2Desc=" + piechart_list.get(_Position).getLevel().replace(" ","%20") : "geoLevel3Desc=" + piechart_list.get(_Position).getLevel();
-        Log.e(TAG, "change focus call" + _Position);
         if (Reusable_Functions.chkStatus(context)) {
             mpm_model model = new mpm_model();
             ApiCallBack(model, 0);
@@ -396,7 +364,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         for (int i = 0; i < barchart_list.size(); i++) {
             float x = i;
             float y = (float) barchart_list.get(i).getSalesAch();
-            Log.e(TAG, "linedata: " + x + "and" + y);
             line.add(new Entry(x, y));
         }
 
@@ -422,7 +389,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         for (int i = 0; i < barchart_list.size(); i++) {
             float x = i;
             float y = (float) barchart_list.get(i).getSaleNetVal();
-            Log.e(TAG, "Bardata: " + x + "and" + y);
             entries1.add(new BarEntry(x, y));
         }
         BarDataSet set1 = new BarDataSet(entries1, "Net Sales");
@@ -480,7 +446,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                     store_list.add(data);
                 Log.e(TAG, "Store_list: " + store_list.size());
                // hrl_pi_Process.setVisibility(View.GONE);
-                Reusable_Functions.ViewGone(hrl_pi_Process);
+                Reusable_Functions.animateScaleIn(hrl_pi_Process);
                 setPerform();
                 Reusable_Functions.hDialog();
                 break;
@@ -517,6 +483,36 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         }
     }
 
+    @Override
+    public void nodatafound() {
+
+
+        Log.e(TAG, "nodatafound: in hourly" );
+        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+        netSales.setText("₹" +"0");
+        archPercent.setText("" + "0"+ "%");
+        units.setText(String.format("%.1f",0.0 ));
+        spend.setText(String.format("%.1f",0.0));
+
+        if(piechart_list.size()!=0){
+            pieChart.clearChart();
+            pieChart.clearAnimation();
+            pieChart.clearFocus();
+            pieChart.invalidate();
+        }
+        if(barchart_list.size()!=0){
+            barChart.clear();
+            barChart.clearAnimation();
+            barChart.clearFocus();
+            barChart.invalidate();
+
+        }
+        if(store_list.size()!=0){
+            store_list.clear();
+            hourlyAdapter.notifyDataSetChanged();
+        }
+    }
+
     private void setPerform() {
         callList();
         if(!focusOnPie){callPiechart();}
@@ -529,10 +525,8 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
-                            Log.e(TAG, "Time complete " );
                             if (event.getAction()==MotionEvent.ACTION_UP  && focusPosition != dupfocusPosition) {
                                 dupfocusPosition=focusPosition;
-                                Log.e(TAG, "Time complete api call>>> " );
                                 changefocuscall(focusPosition);
 
                             }
@@ -563,7 +557,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case R.id.hrl_conceptPerformance:
                 concept_toggle = true;
                 dupfocusPosition=0;
-                Log.e(TAG, "onCheckedChanged: hrl_conceptPerformance");
                 if (Reusable_Functions.chkStatus(context)) {
                     mpm_model model = new mpm_model();
                     ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
@@ -576,7 +569,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case R.id.hrl_zonePerformance:
                 concept_toggle = false;
                 dupfocusPosition=0;
-                Log.e(TAG, "onCheckedChanged: hrl_zonePerformance");
                 if (Reusable_Functions.chkStatus(context)) {
                     mpm_model model = new mpm_model();
                     ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);

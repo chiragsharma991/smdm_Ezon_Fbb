@@ -155,7 +155,7 @@ public class ApiRequest  {
                             if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                                 FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
                             }
-                            Log.e(TAG, "onResponse: "+e.getMessage() );
+                            Log.e(TAG, "onResponse catch: "+e.getMessage() );
                             Reusable_Functions.hDialog();
 
 
@@ -166,6 +166,8 @@ public class ApiRequest  {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG, "onErrorResponse : "+error.getMessage() );
+
                         if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                             FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
                         }

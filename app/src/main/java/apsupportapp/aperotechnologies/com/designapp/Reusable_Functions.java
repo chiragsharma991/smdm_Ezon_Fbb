@@ -105,4 +105,68 @@ public class Reusable_Functions {
         Toast.makeText(context,info, Toast.LENGTH_SHORT).show();
 
     }
+
+    public static void animateScaleOut(final View view){
+        if(!view.isShown()) {
+            view.setScaleX(0.2f);
+            view.setScaleY(0.2f);
+            view.animate()
+                    .setStartDelay(200)
+                    .alpha(1)
+                    .scaleX(1)
+                    .scaleY(1).setListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    view.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+        }
+    }
+
+
+    public static void animateScaleIn(final View view){
+        view.setScaleX(1);
+        view.setScaleY(1);
+        view.animate()
+                .setStartDelay(100)
+                .alpha(1)
+                .scaleX(0.1f)
+                .scaleY(0.1f).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                view.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+
 }
