@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
+import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.PvASnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesAdapter;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
@@ -104,17 +105,33 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                         // Calculation width acording to size of phone
                         double x = 0;  // x is result of calculation.
-                        x = ((double) data.getSalesAch() / 100) * width;
+                        x = ((double) data.getSalesAch() / 100) * width/2;   // divide by 2 to show process under the threshold.
+
 
                         int percentage =(int)x;
-                        Log.e("TAG", "width "+width+"height"+height+" and percentage is"+percentage+" and int "+x+" position "+position );
-
                         ((HourlyViewHolder) viewHolder).Hrl_root_innerview.removeAllViewsInLayout();
+
+
                         View lp = new View(context);
                         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
                         lp.setLayoutParams(layoutParams);
-                        lp.setBackgroundColor(Color.RED);
+                        if (percentage < 70) {
+                            lp.setBackgroundColor(Color.RED);
+                        } else if (percentage > 90) {
+                            lp.setBackgroundColor(Color.GREEN);
+                        }
                         ((HourlyViewHolder) viewHolder).Hrl_root_innerview.addView(lp);
+
+
+                        View threshold =new View (context);
+                        RelativeLayout.LayoutParams layoutParams1=new RelativeLayout.LayoutParams(3,RelativeLayout.LayoutParams.MATCH_PARENT);
+                        layoutParams1.addRule(RelativeLayout.CENTER_IN_PARENT);
+                        threshold.setLayoutParams(layoutParams1);
+                        threshold.setBackgroundColor(Color.BLACK);
+                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.addView(threshold);
+
+
+
 
 
 
