@@ -71,7 +71,6 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/cust_rounded_edittext"
                     android:weightSum="1">
 
                     <ImageButton
@@ -82,7 +81,7 @@
                         android:background="@mipmap/ic_call_white_24dp" />
 
                     <TextView
-                        android:layout_width="2dp"
+                        android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:background="@color/white" />
@@ -103,9 +102,9 @@
                     android:id="@+id/lin_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="40dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/cust_rounded_edittext">
+              >
 
                     <ImageButton
                         android:id="@+id/imgBtn_cdb_email"
@@ -115,14 +114,14 @@
                         android:background="@mipmap/ic_email_white_24dp" />
 
                     <TextView
-                        android:layout_width="2dp"
+                        android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:background="@color/white" />
 
                     <TextView
                         android:id="@+id/txt_cdb_email"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="4dp"
@@ -167,7 +166,7 @@
                     android:layout_marginTop="15dp"
                     android:id="@+id/hbarchart_category"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp" />
+                    android:layout_height="200dp" />
 
             </LinearLayout>
 
@@ -199,7 +198,7 @@
                     android:layout_marginTop="15dp"
                     android:id="@+id/hbarchart_brands"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp" />
+                    android:layout_height="200dp" />
 
             </LinearLayout>
 
@@ -231,7 +230,33 @@
                 android:layout_marginTop="15dp"
                 android:id="@+id/hbarchart_month"
                 android:layout_width="match_parent"
-                android:layout_height="100dp" />
+                android:layout_height="150dp" />
+
+            <TextView
+                android:textSize="12sp"
+                android:gravity="right"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="2dp"
+                android:text="Month -> "
+                android:id="@+id/txt_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:layout_marginTop="10dp"
+                android:id="@+id/hbarchart_week"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+            <TextView
+                android:textSize="12sp"
+                android:gravity="right"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="5dp"
+                android:text="Week -> "
+                android:id="@+id/txt_week"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

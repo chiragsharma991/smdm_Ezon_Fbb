@@ -6,6 +6,7 @@ package apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -66,7 +67,9 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 public class CustomerLookup_PageOne extends Fragment  {
     private TextView txt_cust_NetSalesVal, txt_cust_PlanSalesVal, txt_cust_ActualCustVal, txt_cust_PlanCustVal, txt_cust_ActualCustName,
             txt_cust_ActualCustPerc, txt_cust_PlanCustName, txt_cust_PlanCustPerc, txt_progress_custVal, txt_progress_salesVal;
-    private TextView txt_cust_pengagementType_Val, txt_cust_pCustomer_Val, txt_cust_psales_Val, txt_cust_pspc_Val, txt_cust_psalesAch_Val;
+    private TextView txt_cust_pengagementType_Val, txt_cust_pCustomer_Val, txt_cust_psales_Val, txt_cust_pspc_Val, txt_cust_psalesAch_Val,txt_cust_NetSalesName,
+            txt_cust_NetSalesPerc;
+    private ImageView txt_cust_NetSalesImage;
 
     private ProgressBar progressbar_customer, progressbar_sales;
     private int offsetval = 0, limit = 100, count = 0;
@@ -161,8 +164,11 @@ public class CustomerLookup_PageOne extends Fragment  {
         txt_cust_PlanCustPerc = (TextView) root.findViewById(R.id.txt_cust_PlanCustPerc);
         txt_progress_custVal = (TextView) root.findViewById(R.id.txt_progress_custVal);
         txt_progress_salesVal = (TextView) root.findViewById(R.id.txt_progress_salesVal);
-        progressbar_customer = (ProgressBar) root.findViewById(R.id.circularProgressbar_customer);
-        progressbar_sales = (ProgressBar) root.findViewById(R.id.circularProgressbar_sales);
+//        progressbar_customer = (ProgressBar) root.findViewById(R.id.circularProgressbar_customer);
+//        progressbar_sales = (ProgressBar) root.findViewById(R.id.circularProgressbar_sales);
+        txt_cust_NetSalesImage = (ImageView)root.findViewById(R.id.txt_cust_NetSalesImage);
+        txt_cust_NetSalesName = (TextView)root.findViewById(R.id.txt_cust_NetSalesName);
+        txt_cust_NetSalesPerc = (TextView)root.findViewById(R.id.txt_cust_NetSalesPerc);
     }
 
     private void requestCustomerLoyaltySummary()
@@ -188,22 +194,25 @@ public class CustomerLookup_PageOne extends Fragment  {
                     }
                     NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
                     double netSalesVal = array_custLoyaltySummaries.get(0).getSpend()/100000;
-                    txt_cust_NetSalesVal.setText("₹ " + format.format(Math.round(netSalesVal))+"\tLac");
+                    txt_cust_NetSalesVal.setText("₹ " + format.format(Math.round(netSalesVal))+"\tlac");
+                    txt_cust_NetSalesName.setText("Sales");
+                    txt_cust_NetSalesPerc.setText(""+ Math.round(array_custLoyaltySummaries.get(0).getSalesAch())+"%");
+                    colorconditionForSales();
                     double planSalesVal = array_custLoyaltySummaries.get(0).getPlanSaleNetVal()/100000;
-                    txt_cust_PlanSalesVal.setText("₹ " + format.format(Math.round(planSalesVal))+"\tLac");
+                    txt_cust_PlanSalesVal.setText("₹ " + format.format(Math.round(planSalesVal))+"\tlac");
                     txt_cust_ActualCustVal.setText("" + format.format(Math.round(array_custLoyaltySummaries.get(0).getCustCount())));
                     txt_cust_ActualCustName.setText("SPC");
                     txt_cust_ActualCustPerc.setText("₹ " + format.format(Math.round(array_custLoyaltySummaries.get(0).getSpc())));
                     txt_cust_PlanCustVal.setText("" + format.format(Math.round(array_custLoyaltySummaries.get(0).getPlanCustCount())));
                     txt_cust_PlanCustName.setText("SPC");
                     txt_cust_PlanCustPerc.setText("₹ " + format.format(Math.round(array_custLoyaltySummaries.get(0).getPlanSpc())));
-                    int custAch = (int) array_custLoyaltySummaries.get(0).getCustAch();
-                    progressbar_customer.setProgress(custAch);
-                    txt_progress_custVal.setText("" + Math.round(array_custLoyaltySummaries.get(0).getCustAch()) + "%");
-                    int salesAch = (int) array_custLoyaltySummaries.get(0).getSalesAch();
-                    progressbar_sales.setProgress(salesAch);
-                    txt_progress_salesVal.setText("" + Math.round(array_custLoyaltySummaries.get(0).getSalesAch()) + "%");
-                   // Reusable_Functions.hDialog();
+//                    int custAch = (int) array_custLoyaltySummaries.get(0).getCustAch();
+//                    progressbar_customer.setProgress(custAch);
+//                    txt_progress_custVal.setText("" + Math.round(array_custLoyaltySummaries.get(0).getCustAch()) + "%");
+//                    int salesAch = (int) array_custLoyaltySummaries.get(0).getSalesAch();
+//                    progressbar_sales.setProgress(salesAch);
+//                    txt_progress_salesVal.setText("" + Math.round(array_custLoyaltySummaries.get(0).getSalesAch()) + "%");
+
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(context, "Loading...");
                         offsetval = 0;
@@ -242,6 +251,25 @@ public class CustomerLookup_PageOne extends Fragment  {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
+    }
+
+    private void colorconditionForSales()
+    {
+        if (array_custLoyaltySummaries.get(0).getSalesAch() < 80)
+        {
+            txt_cust_NetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
+            txt_cust_NetSalesVal.setTextColor(Color.parseColor("#fe0000"));
+
+        } else if (array_custLoyaltySummaries.get(0).getSalesAch() > 80 || array_custLoyaltySummaries.get(0).getSalesAch() < 90) {
+            txt_cust_NetSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
+            txt_cust_NetSalesVal.setTextColor(Color.parseColor("#ff7e00"));
+        }
+        else if (array_custLoyaltySummaries.get(0).getSalesAch() > 90 ) {
+            txt_cust_NetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
+            txt_cust_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
+
+        }
+
     }
 
     private void requestCustomerPlanEngagement()
@@ -481,13 +509,13 @@ public class CustomerLookup_PageOne extends Fragment  {
             txt_cust_psales_Val.setTag(i);
             txt_cust_pspc_Val.setTag(i);
             final int k = i;
-//            Log.e("k :",""+k);
+            Log.e("k :",""+k);
 //            txt_cust_pengagementType_Val.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
 //
 //                    Log.e("onClick: ",""+txt_cust_pengagementType_Val.getTag()+planengagementArrayList.size());
-//                    engagemnt_band = planengagementArrayList.get(k).getEngagementBand().toString();
+//                    engagemnt_band = planengagementArrayList.get(k).getLevel().toString();
 //                    Log.e("band name :",""+engagemnt_band);
 //                    engagemntBandClick.communicatefrag1(engagemnt_band);
 //                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
@@ -497,7 +525,7 @@ public class CustomerLookup_PageOne extends Fragment  {
 //            txt_cust_pCustomer_Val.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
-//                    engagemnt_band = planengagementArrayList.get(k).getEngagementBand().toString();
+//                    engagemnt_band = planengagementArrayList.get(k).getLevel().toString();
 //                    Log.e("band name :",""+engagemnt_band);
 //                    engagemntBandClick.communicatefrag1(engagemnt_band);
 //                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
@@ -507,7 +535,7 @@ public class CustomerLookup_PageOne extends Fragment  {
 //            txt_cust_psales_Val.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
-//                    engagemnt_band = planengagementArrayList.get(k).getEngagementBand().toString();
+//                    engagemnt_band = planengagementArrayList.get(k).getLevel().toString();
 //                    Log.e("band name :",""+engagemnt_band);
 //                    engagemntBandClick.communicatefrag1(engagemnt_band);
 //                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
@@ -517,7 +545,7 @@ public class CustomerLookup_PageOne extends Fragment  {
 //            txt_cust_pspc_Val.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
-//                    engagemnt_band = planengagementArrayList.get(k).getEngagementBand().toString();
+//                    engagemnt_band = planengagementArrayList.get(k).getLevel().toString();
 //                    Log.e("band name :",""+engagemnt_band);
 //                    engagemntBandClick.communicatefrag1(engagemnt_band);
 //                    CustomerLookupActivity.mViewPager.setCurrentItem(1);

@@ -38,6 +38,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 import org.json.JSONArray;
@@ -68,6 +69,7 @@ public class CustomerLookup_PageTwo extends Fragment {
     RequestQueue queue;
     Gson gson;
     private boolean checkNetworkFalse=false;
+    JsonArrayRequest postRequest;
     private String recache = "true";
     String updated_userId;
     int offset = 0, count = 0, limit = 100;
@@ -85,6 +87,7 @@ public class CustomerLookup_PageTwo extends Fragment {
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
+        queue = Volley.newRequestQueue(context);
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
@@ -168,7 +171,7 @@ public class CustomerLookup_PageTwo extends Fragment {
         this.context = context;
         try
         {
-            onEngagemntBandClick = (OnEngagemntBandClick) getActivity();
+            onEngagemntBandClick = (OnEngagemntBandClick) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString()
                     + " must implement IFragmentToActivity");
@@ -203,7 +206,7 @@ public class CustomerLookup_PageTwo extends Fragment {
     {
         String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor +"&engagementBrand="+ e_bandnm;//+ "&offset=" + offset + "&limit=" + limit;
         Log.e("detail url 1:",""+url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -281,7 +284,7 @@ public class CustomerLookup_PageTwo extends Fragment {
     private void requestCustomerDetail() {
         String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor +"&recache=" + recache;//+ "&offset=" + offset + "&limit=" + limit;
         Log.e("detail url :",""+url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
