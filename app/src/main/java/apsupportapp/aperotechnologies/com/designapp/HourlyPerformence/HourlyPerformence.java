@@ -303,7 +303,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     private void changefocuscall(int _Position) {
         focusOnPie = true;
-        leveLDesc = concept_toggle == true ? "geoLevel2Desc=" + piechart_list.get(_Position).getLevel().replace(" ","%20") : "geoLevel3Desc=" + piechart_list.get(_Position).getLevel();
+        leveLDesc = concept_toggle == true ? "geoLevel2Desc=" + piechart_list.get(_Position).getLevel().replace(" ","%20").replace("&","%26").replace("%","%25") : "geoLevel3Desc=" + piechart_list.get(_Position).getLevel().replace(" ","%20").replace("&","%26").replace("%","%25");
         if (Reusable_Functions.chkStatus(context)) {
             mpm_model model = new mpm_model();
             ApiCallBack(model, 0);
@@ -489,6 +489,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
         Log.e(TAG, "nodatafound: in hourly" );
         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+        Reusable_Functions.animateScaleIn(hrl_pi_Process);
         netSales.setText("₹" +"0");
         archPercent.setText("" + "0"+ "%");
         units.setText(String.format("%.1f",0.0 ));
@@ -511,6 +512,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             store_list.clear();
             hourlyAdapter.notifyDataSetChanged();
         }
+
     }
 
     private void setPerform() {
