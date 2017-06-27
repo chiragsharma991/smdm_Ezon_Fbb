@@ -156,7 +156,14 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       callPdf(0);
   }
 
-  private void callPdf(int position) {
+    @Override
+    public void nodatafound() {
+        /**
+         you can write here cause of no data found
+         */
+    }
+
+    private void callPdf(int position) {
       remotePDFViewPager = new RemotePDFViewPager(context,list.get(position).getMpmPath(), listener);
       remotePDFViewPager.setId(R.id.pdfViewPager);
       remotePDFViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

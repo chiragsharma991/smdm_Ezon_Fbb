@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
+import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -109,6 +110,10 @@ public class ApiRequest  {
                                 if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                                     FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
                                 }
+                                else if(TAG.equals("HourlyPerformence")) {
+                                    HourlyPerformence.hrl_pi_Process.setVisibility(View.GONE);
+                                    ResposeInterface.nodatafound();
+                                }
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -163,6 +168,10 @@ public class ApiRequest  {
                     public void onErrorResponse(VolleyError error) {
                         if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                             FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
+                        }
+                        if(TAG.equals("HourlyPerformence")) {
+                            HourlyPerformence.hrl_pi_Process.setVisibility(View.GONE);
+                            ResposeInterface.nodatafound();
                         }
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();

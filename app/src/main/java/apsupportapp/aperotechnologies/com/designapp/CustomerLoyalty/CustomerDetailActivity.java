@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +76,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private PieChart pieChart;
     private ViewPager cd_viewPager;
     private TabLayout cd_tab;
+    private LinearLayout phn_call,mail_call;
 
 
     @Override
@@ -141,11 +144,37 @@ public class CustomerDetailActivity extends AppCompatActivity {
         txt_cd_tot_visit_Val = (TextView) findViewById(R.id.txt_cd_tot_visit_Val);
         txt_cd_last_spent_Val = (TextView) findViewById(R.id.txt_cd_last_spent_Val);
         txt_cd_tot_spent_Val = (TextView) findViewById(R.id.txt_cd_tot_spent_Val);
+        phn_call = (LinearLayout) findViewById(R.id.lin_one);
+        mail_call = (LinearLayout) findViewById(R.id.lin_two);
         pieChart = (PieChart) findViewById(R.id.cust_piechart);
         cd_viewPager = (ViewPager)findViewById(R.id.viewpager_custDetails);
         cd_tab = (TabLayout)findViewById(R.id.tabs_custDetails);
         rel_cust_detl_back = (RelativeLayout)findViewById(R.id.rel_cust_detl_back);
         btn_more = (Button)findViewById(R.id.btn_cd_more);
+
+        phn_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(txt_cust_mobileNo.getTextSize()!=0){
+
+                    Intent callIntent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+txt_cust_mobileNo.getText().toString()));
+                    startActivity(callIntent);
+                }
+
+            }
+        });
+        mail_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(txt_cust_email.getTextSize()!=0){
+
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                    emailIntent.setData(Uri.parse("mailto:"+txt_cust_email.getText().toString()));
+                    startActivity(Intent.createChooser(emailIntent, "Send feedback"));
+                }
+
+            }
+        });
     }
 
     private void requestCustomerDetailsAPI()

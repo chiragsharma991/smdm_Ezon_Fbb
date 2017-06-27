@@ -1467,6 +1467,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     }
 
+    @Override
+    public void nodatafound() {
+/**
+        you can write here cause of no data found
+*/
+    }
+
     private void setAdapterForEz(ArrayList<mpm_model> freshnessIndexDetails_Ez_ArrayList) {
         Log.e(TAG, "setAdapterForEz: log..");
         listViewFIndex.setLayoutManager(new LinearLayoutManager(context));

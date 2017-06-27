@@ -195,17 +195,18 @@ public class DashBoardActivity extends AppCompatActivity
     {
         txt_ezone_refresh_time=(TextView)findViewById(R.id.txt_ezone_refresh_time);
         txt_ezone_sales = (TextView)findViewById(R.id.ezone_headersales);
-        hourly_performer_Title = (TextView) findViewById(R.id.txt_hourly_performer_);
+        hourly_performer_Title = (TextView) findViewById(R.id.txt_hourly_ezperformer_);
         txt_ez_cust_loyalty =(TextView)findViewById(R.id.txt_ez_cust_loyalty);
         txt_ezone_inventory = (TextView)findViewById(R.id.ezone_header_inventory);
         btn_ezone_sales = (ImageButton)findViewById(R.id.btn_ezone_Sales);
         btn_ezone_AssortmentAnalysis = (ImageButton)findViewById(R.id.btn_ezone_AssortmentAnalysis);
         btn_ezone_best_worst = (ImageButton)findViewById(R.id.btn_ezone_best_worst);
         btn_ez_cust_loyalty = (ImageButton)findViewById(R.id.btn_ez_cust_loyalty);
-        Btn_hourly_performer = (ImageButton)findViewById(R.id.btn_hourly_performer);
+        Btn_hourly_performer = (ImageButton)findViewById(R.id.btn_hourly_ezperformer);
         linear_ezone_sales = (LinearLayout)findViewById(R.id.linear_ezone_sales);
         linear_ezone_inventory = (LinearLayout)findViewById(R.id.linear_ezone_inventory);
         linear_ez_cust_loyalty = (LinearLayout)findViewById(R.id.linear_ez_cust_loyalty);
+        hourly_performance_view = (LinearLayout) findViewById(R.id.linear_hourly_ezperformer_view_);
         txt_ezone_sales.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
         txt_ezone_inventory.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
         txt_ez_cust_loyalty.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
@@ -367,6 +368,14 @@ public class DashBoardActivity extends AppCompatActivity
             else
             {
                 linear_ezone_sales.setVisibility(View.GONE);
+            }
+            if(hourly_performer_flag)
+            {
+                hourly_performance_view.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                hourly_performance_view.setVisibility(View.GONE);
             }
             if(ezone_inventory)
             {
@@ -734,15 +743,19 @@ public class DashBoardActivity extends AppCompatActivity
                         linear_ezone_sales.setVisibility(View.VISIBLE);
                         linear_ezone_inventory.setVisibility(View.GONE);
                         linear_ez_cust_loyalty.setVisibility(View.GONE);
+                        hourly_performance_view.setVisibility(View.GONE);
                         txt_ezone_sales.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
                         txt_ezone_inventory.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                         txt_ez_cust_loyalty.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                        hourly_performer_Title.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                         str_ezone_sales = "YES";
                         str_ezone_inv = "NO";
                         str_ezone_cust_loyalty = "NO";
+                        hourly_performance = "NO";
                         ezone_sales = true;
                         ezone_inventory=false;
                         ezone_cust_loyalty = false;
+                        hourlyperform_flag = false;
                     }
                     else
                     {
@@ -752,21 +765,54 @@ public class DashBoardActivity extends AppCompatActivity
                         ezone_sales = false;
                     }
                     break;
+
+                case R.id.txt_hourly_ezperformer_:
+                    if(hourly_performance.equals("NO"))
+                    {
+                        linear_ezone_sales.setVisibility(View.GONE);
+                        linear_ezone_inventory.setVisibility(View.GONE);
+                        linear_ez_cust_loyalty.setVisibility(View.GONE);
+                        hourly_performance_view.setVisibility(View.VISIBLE);
+                        txt_ezone_sales.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                        hourly_performer_Title.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
+                        txt_ezone_inventory.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                        txt_ez_cust_loyalty.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                        str_ezone_sales = "NO";
+                        hourly_performance = "YES";
+                        str_ezone_inv = "NO";
+                        str_ezone_cust_loyalty = "NO";
+                        ezone_sales = false;
+                        hourlyperform_flag = true;
+                        ezone_inventory=false;
+                        ezone_cust_loyalty = false;
+                    }
+                    else
+                    {
+                        hourly_performance_view.setVisibility(View.GONE);
+                        hourly_performer_Title.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                        hourly_performance = "NO";
+                        hourlyperform_flag = false;
+                    }
+                    break;
             case R.id.ezone_header_inventory :
                 if(str_ezone_inv.equals("NO"))
                 {
                     linear_ezone_sales.setVisibility(View.GONE);
                     linear_ezone_inventory.setVisibility(View.VISIBLE);
                     linear_ez_cust_loyalty.setVisibility(View.GONE);
+                    hourly_performance_view.setVisibility(View.GONE);
 
                     txt_ezone_sales.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_ezone_inventory.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
                     txt_ez_cust_loyalty.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    hourly_performer_Title.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
 
                     str_ezone_sales = "NO";
+                    hourly_performance = "NO";
                     str_ezone_inv = "YES";
                     str_ezone_cust_loyalty = "NO";
                     ezone_sales = false;
+                    hourlyperform_flag = false;
                     ezone_inventory=true;
                     ezone_cust_loyalty= false;
                 }
@@ -783,17 +829,21 @@ public class DashBoardActivity extends AppCompatActivity
                 {
                     linear_ezone_sales.setVisibility(View.GONE);
                     linear_ezone_inventory.setVisibility(View.GONE);
+                    hourly_performance_view.setVisibility(View.GONE);
                     linear_ez_cust_loyalty.setVisibility(View.VISIBLE);
 
                     txt_ezone_sales.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_ezone_inventory.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
+                    hourly_performer_Title.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.downlist,0);
                     txt_ez_cust_loyalty.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.uplist,0);
 
                     str_ezone_sales = "NO";
                     str_ezone_inv = "NO";
+                    hourly_performance = "NO";
                     str_ezone_cust_loyalty = "YES";
                     ezone_sales = false;
                     ezone_inventory=false;
+                    hourlyperform_flag=false;
                     ezone_cust_loyalty= true;
                 }
                 else
@@ -831,6 +881,15 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.btn_ez_cust_loyalty:
                 Intent int_cust = new Intent(DashBoardActivity.this,CustomerLookupActivity.class);
                 startActivity(int_cust);
+                if(timer!=null)
+                {
+                    timer.cancel();
+                }
+                break;
+
+            case R.id.btn_hourly_ezperformer:
+                Intent hourly = new Intent(DashBoardActivity.this,HourlyPerformence.class);
+                startActivity(hourly);
                 if(timer!=null)
                 {
                     timer.cancel();

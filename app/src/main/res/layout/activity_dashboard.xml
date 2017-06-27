@@ -1841,21 +1841,6 @@
            <!--start hourly Performer-->
 
             <TextView
-                android:id="@+id/txt_hourly_performer_"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/hourly_perform"
-                android:textColor="@color/smdm_dark_Black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_below="@+id/linear_cust_loyalty"
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_alignParentStart="true" />
-
-            <TextView
                 android:layout_below="@+id/txt_hourly_performer_"
                 android:id="@+id/txt_hourly_performer_view_"
                 android:layout_width="match_parent"
@@ -2143,6 +2128,20 @@
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/txt_hourly_performer_"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/hourly_perform"
+                android:textColor="@color/smdm_dark_Black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/linear_cust_loyalty"
                 android:layout_alignParentStart="true" />
 
         </RelativeLayout>
