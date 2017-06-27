@@ -84,7 +84,7 @@
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
-                        android:background="@color/white" />
+                        android:background="@android:color/transparent" />
 
                     <TextView
                         android:id="@+id/txt_cdb_mobileNo"
@@ -117,7 +117,7 @@
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
-                        android:background="@color/white" />
+                        android:background="@android:color/transparent" />
 
                     <TextView
                         android:id="@+id/txt_cdb_email"

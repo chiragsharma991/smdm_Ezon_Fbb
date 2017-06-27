@@ -65,16 +65,16 @@
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="17sp" />
 
-                        <ImageView
-                        android:id="@+id/txt_cust_NetSalesImage"
-                        android:layout_width="19dp"
-                        android:layout_height="16dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_toLeftOf="@+id/rel_cust_NetSalesNmPrec"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="15dp"
-                        />
+                        <!--<ImageView-->
+                        <!--android:id="@+id/txt_cust_NetSalesImage"-->
+                        <!--android:layout_width="19dp"-->
+                        <!--android:layout_height="16dp"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:layout_toLeftOf="@+id/rel_cust_NetSalesNmPrec"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_marginBottom="15dp"-->
+                        <!--/>-->
 
                         <RelativeLayout
                         android:id="@+id/rel_cust_NetSalesNmPrec"
@@ -93,7 +93,6 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="8dp"
                         android:layout_alignParentBottom="true"
-                        android:textColor="@color/smdm_blue"
                         android:hint="Sales"
                         android:textSize="11sp" />
 
@@ -105,7 +104,6 @@
                         android:layout_alignParentBottom="true"
                         android:layout_toRightOf="@+id/txt_cust_NetSalesName"
                         android:text=""
-                        android:textColor="@color/smdm_blue"
                         android:textSize="11sp" />
 
                         </RelativeLayout>

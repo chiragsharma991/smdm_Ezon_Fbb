@@ -166,7 +166,7 @@ public class CustomerLookup_PageOne extends Fragment  {
         txt_progress_salesVal = (TextView) root.findViewById(R.id.txt_progress_salesVal);
 //        progressbar_customer = (ProgressBar) root.findViewById(R.id.circularProgressbar_customer);
 //        progressbar_sales = (ProgressBar) root.findViewById(R.id.circularProgressbar_sales);
-        txt_cust_NetSalesImage = (ImageView)root.findViewById(R.id.txt_cust_NetSalesImage);
+//        txt_cust_NetSalesImage = (ImageView)root.findViewById(R.id.txt_cust_NetSalesImage);
         txt_cust_NetSalesName = (TextView)root.findViewById(R.id.txt_cust_NetSalesName);
         txt_cust_NetSalesPerc = (TextView)root.findViewById(R.id.txt_cust_NetSalesPerc);
     }
@@ -257,16 +257,16 @@ public class CustomerLookup_PageOne extends Fragment  {
     {
         if (array_custLoyaltySummaries.get(0).getSalesAch() < 80)
         {
-            txt_cust_NetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-            txt_cust_NetSalesVal.setTextColor(Color.parseColor("#fe0000"));
+            txt_cust_NetSalesName.setTextColor(Color.parseColor("#fe0000"));
+            txt_cust_NetSalesPerc.setTextColor(Color.parseColor("#fe0000"));
 
         } else if (array_custLoyaltySummaries.get(0).getSalesAch() > 80 || array_custLoyaltySummaries.get(0).getSalesAch() < 90) {
-            txt_cust_NetSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
-            txt_cust_NetSalesVal.setTextColor(Color.parseColor("#ff7e00"));
+            txt_cust_NetSalesName.setTextColor(Color.parseColor("#ff7e00"));
+            txt_cust_NetSalesPerc.setTextColor(Color.parseColor("#ff7e00"));
         }
         else if (array_custLoyaltySummaries.get(0).getSalesAch() > 90 ) {
-            txt_cust_NetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-            txt_cust_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
+            txt_cust_NetSalesName.setTextColor(Color.parseColor("#70e503"));
+            txt_cust_NetSalesPerc.setTextColor(Color.parseColor("#70e503"));
 
         }
 

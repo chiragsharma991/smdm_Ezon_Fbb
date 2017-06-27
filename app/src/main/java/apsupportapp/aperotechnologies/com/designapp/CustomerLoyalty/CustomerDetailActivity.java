@@ -133,7 +133,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private void addTabs(ViewPager viewPager)
     {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OffersOnly(), "Recommendation");
+        adapter.addFragment(new OffersOnly(), "Recommendations");
         adapter.addFragment(new LastShop(), "Last Shopped");
         viewPager.setAdapter(adapter);
     }
