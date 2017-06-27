@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+      tools:context=".CustomerLoyalty.CustDetailBarChart">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_cd_barchart"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:contentInsetEnd="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rel_one"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_clickable_height">
+
+                <RelativeLayout
+                    android:id="@+id/rel_back"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/button_red_effect">
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/common_back_icon"
+                        android:clickable="false" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/txt_cdb_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="@color/divider_salescard1"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rel_one"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/lin_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/cust_rounded_edittext"
+                    android:weightSum="1">
+
+                    <ImageButton
+                        android:id="@+id/imgBtn_cdb_mobile"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="4dp"
+                        android:background="@mipmap/ic_call_white_24dp" />
+
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2dp"
+                        android:background="@color/white" />
+
+                    <TextView
+                        android:id="@+id/txt_cdb_mobileNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:hint=""
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/cust_rounded_edittext">
+
+                    <ImageButton
+                        android:id="@+id/imgBtn_cdb_email"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="4dp"
+                        android:background="@mipmap/ic_email_white_24dp" />
+
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2dp"
+                        android:background="@color/white" />
+
+                    <TextView
+                        android:id="@+id/txt_cdb_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:hint=""
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <ScrollView
+        android:layout_below="@+id/toolbar_cd_barchart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/lin_barchart_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="19sp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Preferred Categories"
+                    android:id="@+id/txt_cd_pref_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/hbarchart_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginTop="5dp"
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/smdm_divider_Black" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/lin_barchart_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="19sp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Preferred Brands"
+                    android:id="@+id/txt_cd_pref_brands"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/hbarchart_brands"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginTop="5dp"
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/smdm_divider_Black" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/lin_barchart_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="19sp"
+                android:textColor="@color/bg_store_code_text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Visit Preferences"
+                android:id="@+id/txt_cd_visit_prefernce"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:layout_marginTop="15dp"
+                android:id="@+id/hbarchart_month"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="5dp"
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/smdm_divider_Black" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

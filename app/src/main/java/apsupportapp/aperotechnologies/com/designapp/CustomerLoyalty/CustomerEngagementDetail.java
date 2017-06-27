@@ -82,5 +82,15 @@ public class CustomerEngagementDetail
     double planCust;
    double planSpc;
 
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    String level;
+
 
 }

@@ -7,6 +7,7 @@ package apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty;
 public class CustomerDetail
 {
     String uniqueCustomer;
+    String businessCcb;
      String fullName;
      String mobileNumber;
      String emailAddress;
@@ -44,6 +45,33 @@ public class CustomerDetail
     int txnCntWeekend;
     int txnCntWeekday;
     int txnCntWed;
+
+    public double getSalesContr() {
+        return salesContr;
+    }
+
+    public void setSalesContr(double salesContr) {
+        this.salesContr = salesContr;
+    }
+
+    public double getVisitContr() {
+        return visitContr;
+    }
+
+    public void setVisitContr(double visitContr) {
+        this.visitContr = visitContr;
+    }
+
+    public String getBusinessCcb() {
+        return businessCcb;
+    }
+
+    public void setBusinessCcb(String businessCcb) {
+        this.businessCcb = businessCcb;
+    }
+
+    double salesContr;
+    double visitContr;
 
     public String getPreferredCcb() {
         return preferredCcb;

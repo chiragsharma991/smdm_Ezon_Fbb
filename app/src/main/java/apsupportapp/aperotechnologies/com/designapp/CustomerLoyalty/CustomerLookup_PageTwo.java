@@ -64,10 +64,11 @@ public class CustomerLookup_PageTwo extends Fragment {
     ViewGroup root;
     Context context;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken, geoLeveLDesc, engagementFor = "Event";
+    String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT";
     RequestQueue queue;
     Gson gson;
     private boolean checkNetworkFalse=false;
+    private String recache = "true";
     String updated_userId;
     int offset = 0, count = 0, limit = 100;
 
@@ -130,6 +131,8 @@ public class CustomerLookup_PageTwo extends Fragment {
           public void onItemClick(View view, int position)
           {
                Intent intent = new Intent(context,CustomerDetailActivity.class);
+               intent.putExtra("uniqueCustomer",detailArrayList.get(position).getUniqueCustomer());
+               Log.e("Customer Id ",""+detailArrayList.get(position).getUniqueCustomer());
                startActivity(intent);
           }
       }));
@@ -231,7 +234,6 @@ public class CustomerLookup_PageTwo extends Fragment {
                                     detailArrayList.add(customerDetail);
                                 }
                             // }
-
                             lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             lv_cust_details.setOnFlingListener(null);
                             new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
@@ -240,14 +242,14 @@ public class CustomerLookup_PageTwo extends Fragment {
                           //  txt_color_engagemnt_nm.setBackground(Color.parseColor(R.color.smdm_green));
                             txt_engagementnm_Val.setText(e_bandnm);
                             Reusable_Functions.hDialog();
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             Log.e("exception :",""+e.getMessage());
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-
                             e.printStackTrace();
-
                         }
                     }
                 },
@@ -271,16 +273,13 @@ public class CustomerLookup_PageTwo extends Fragment {
             }
         };
         int socketTimeout = 60000;//5 seconds
-
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
-
     }
 
     private void requestCustomerDetail() {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor ;//+ "&offset=" + offset + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor +"&recache=" + recache;//+ "&offset=" + offset + "&limit=" + limit;
         Log.e("detail url :",""+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
