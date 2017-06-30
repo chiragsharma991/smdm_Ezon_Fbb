@@ -139,34 +139,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return valueFilter;
     }
 
-    public void filterData(String query, ArrayList<CustomerDetail> detailArrayList, ArrayList<CustomerDetail> dublicateCustDetailList)
-    {
-        detailArrayList.clear();
-        String charText = query.toLowerCase(Locale.getDefault());
-        Log.e("char Text ",""+charText);
-        if (charText.length() == 0)
-        {
-            Log.e("size in if:",""+dublicateCustDetailList.size());
-            detailArrayList.addAll(dublicateCustDetailList);
-            InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            in.hideSoftInputFromWindow(edt_cust_Search.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-           notifyDataSetChanged();
 
-        }
-        else
-        {
-            for (int i = 0; i < dublicateCustDetailList.size(); i++)
-            {
-                if (dublicateCustDetailList.get(i).getFullName().toString().toLowerCase(Locale.getDefault()).replace(" ", "").contains(charText))
-                {
-                    detailArrayList.add(dublicateCustDetailList.get(i));
-                    Log.e("size in else:",""+detailArrayList.size());
-
-                }
-            }
-           notifyDataSetChanged();
-        }
-    }
 
 
 //

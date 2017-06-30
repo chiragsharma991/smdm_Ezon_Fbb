@@ -8,6 +8,17 @@ public class CustomerEngagementDetail
 {
     String engagementBand;
 
+    public double getCustAch() {
+        return custAch;
+    }
+
+    public void setCustAch(double custAch) {
+        this.custAch = custAch;
+    }
+
+    double custAch;
+
+
     public double getCustCount() {
         return custCount;
     }

@@ -58,6 +58,7 @@
                     android:textSize="17sp" />
 
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,7 +72,6 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/cust_rounded_edittext"
                     android:weightSum="1">
 
                     <ImageButton
@@ -82,10 +82,10 @@
                         android:background="@mipmap/ic_call_white_24dp" />
 
                     <TextView
-                        android:layout_width="2dp"
+                        android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
-                        android:background="@color/white" />
+                        android:background="@android:color/transparent" />
 
                     <TextView
                         android:id="@+id/txt_cdb_mobileNo"
@@ -103,9 +103,8 @@
                     android:id="@+id/lin_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/cust_rounded_edittext">
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1">
 
                     <ImageButton
                         android:id="@+id/imgBtn_cdb_email"
@@ -115,14 +114,14 @@
                         android:background="@mipmap/ic_email_white_24dp" />
 
                     <TextView
-                        android:layout_width="2dp"
+                        android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
-                        android:background="@color/white" />
+                        android:background="@android:color/transparent" />
 
                     <TextView
                         android:id="@+id/txt_cdb_email"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="4dp"
@@ -131,11 +130,12 @@
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
-
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
+
     <ScrollView
         android:layout_below="@+id/toolbar_cd_barchart"
         android:layout_width="match_parent"
@@ -164,10 +164,11 @@
 
 
                 <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:layout_marginLeft="3dp"
                     android:layout_marginTop="15dp"
                     android:id="@+id/hbarchart_category"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp" />
+                    android:layout_height="180dp" />
 
             </LinearLayout>
 
@@ -194,12 +195,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-
                 <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:layout_marginLeft="3dp"
                     android:layout_marginTop="15dp"
                     android:id="@+id/hbarchart_brands"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp" />
+                    android:layout_height="180dp" />
 
             </LinearLayout>
 
@@ -228,10 +229,18 @@
 
 
             <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:layout_marginLeft="3dp"
                 android:layout_marginTop="15dp"
                 android:id="@+id/hbarchart_month"
                 android:layout_width="match_parent"
-                android:layout_height="100dp" />
+                android:layout_height="180dp" />
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/hbarchart_week"
+                android:layout_width="match_parent"
+                android:layout_height="180dp" />
 
         </LinearLayout>
 
@@ -243,6 +252,5 @@
             android:background="@color/smdm_divider_Black" />
         </LinearLayout>
     </ScrollView>
-
 
 </RelativeLayout>

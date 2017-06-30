@@ -1,15 +1,19 @@
 package apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -78,6 +82,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private ViewPager cd_viewPager;
     private TabLayout cd_tab;
     private LinearLayout phn_call,mail_call;
+    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
 
 
     @Override
@@ -128,7 +133,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private void addTabs(ViewPager viewPager)
     {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OffersOnly(), "Offer Only For You");
+        adapter.addFragment(new OffersOnly(), "Recommendations");
         adapter.addFragment(new LastShop(), "Last Shopped");
         viewPager.setAdapter(adapter);
     }
@@ -155,10 +160,9 @@ public class CustomerDetailActivity extends AppCompatActivity {
         phn_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(txt_cust_mobileNo.getTextSize()!=0){
-
-                    Intent callIntent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+txt_cust_mobileNo.getText().toString()));
-                    startActivity(callIntent);
+                if(txt_cust_mobileNo.getTextSize()!=0)
+                {
+                    makePhoneCall(v);
                 }
 
             }
@@ -166,8 +170,8 @@ public class CustomerDetailActivity extends AppCompatActivity {
         mail_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(txt_cust_email.getTextSize()!=0){
-
+                if(txt_cust_email.getTextSize()!=0)
+                {
                     Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                     emailIntent.setData(Uri.parse("mailto:"+txt_cust_email.getText().toString()));
                     startActivity(Intent.createChooser(emailIntent, "Send feedback"));
@@ -175,6 +179,41 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void makePhoneCall(View v)
+    {
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, MY_PERMISSIONS_REQUEST_CALL_PHONE);
+        }
+        else
+        {
+            callPhone();
+        }
+    }
+
+    private void callPhone()
+    {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + txt_cust_mobileNo.getText().toString()));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+        {
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CALL_PHONE:
+            {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    callPhone();
+                }
+            }
+        }
     }
 
     private void requestCustomerDetailsAPI()
@@ -314,10 +353,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
     private void createPieChart()
     {
-        pieChart.addPieSlice(new PieModel("Food", (int)customerDetailsarray.get(0).getFoodContr(), Color.parseColor("#4e7aa7")));
-        pieChart.addPieSlice(new PieModel("Fashion", (int) customerDetailsarray.get(0).getFashionContr(), Color.parseColor("#f28e2c"))); //CDA67F
-        pieChart.addPieSlice(new PieModel("Home", (int) customerDetailsarray.get(0).getHomeContr(), Color.parseColor("#a6a6a6"))); //CDA67F
-        pieChart.addPieSlice(new PieModel("Electronics", (int) customerDetailsarray.get(0).getElectronicsContr(), Color.parseColor("#fbd043"))); //CDA67F
+        pieChart.addPieSlice(new PieModel("Food", (int)customerDetailsarray.get(0).getFoodContr(), Color.parseColor("#5b9cd6")));
+        pieChart.addPieSlice(new PieModel("Fashion", (int) customerDetailsarray.get(0).getFashionContr(), Color.parseColor("#ed7d31"))); //CDA67F
+        pieChart.addPieSlice(new PieModel("Home", (int) customerDetailsarray.get(0).getHomeContr(), Color.parseColor("#a5a5a5"))); //CDA67F
+        pieChart.addPieSlice(new PieModel("Electronics", (int) customerDetailsarray.get(0).getElectronicsContr(), Color.parseColor("#ffc000"))); //CDA67F
         pieChart.animate();
         pieChart.setDrawValueInPie(true);
         pieChart.setOnItemFocusChangedListener(new IOnItemFocusChangedListener()
@@ -368,7 +407,9 @@ public class CustomerDetailActivity extends AppCompatActivity {
                             Reusable_Functions.sDialog(context, "Loading...");
                             requestPieChartOnFocus();
 
-                        } else {
+                        }
+                        else
+                        {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -397,7 +438,9 @@ public class CustomerDetailActivity extends AppCompatActivity {
             url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;
         }
             Log.e("pie on focus ", "" + url);
-        postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
+
+        postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>()
+        {
             @Override
             public void onResponse(JSONArray response) {
                 Log.e("pie on focus response :", "" + response);
@@ -424,7 +467,6 @@ public class CustomerDetailActivity extends AppCompatActivity {
                             txt_cd_tot_visit_Val.setText("" + Math.round(last12MthVisit));
                         }
                     }
-
                    Reusable_Functions.hDialog();
                 }
                 catch (Exception e)
@@ -435,9 +477,11 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 }
             }
         },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
@@ -463,7 +507,6 @@ public class CustomerDetailActivity extends AppCompatActivity {
     {
         super.onBackPressed();
         customerDetailsarray.clear();
-        unique_Customer = "";
         finish();
     }
 }

@@ -8,78 +8,74 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/txt_cust_name_Val"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="8dp"
-            android:layout_toLeftOf="@+id/txt_cust_lastVisit_Val"
-            android:hint=""
-            android:textColor="@color/bg_store_code_text"
-            android:textSize="@dimen/smdm_departmentTitleLarge"
-            android:textStyle="normal" />
+    <TextView
+        android:id="@+id/txt_cust_name_Val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="8dp"
+        android:layout_toLeftOf="@+id/txt_cust_lastVisit_Val"
+        android:text=""
+        android:textColor="@color/txt_color"
+        android:textSize="@dimen/smdm_departmentTitle"
+        android:textStyle="normal" />
 
-        <TextView
-            android:id="@+id/txt_cust_lastVisit_Val"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="200dp"
-            android:layout_toLeftOf="@+id/txt_cust_planSales_Val"
-            android:gravity="center_vertical|center"
-            android:hint=""
-            android:textColor="@color/bg_store_code_text"
-            android:textSize="@dimen/smdm_departmentTitleLarge"
-            android:textStyle="normal" />
+    <TextView
+        android:id="@+id/txt_cust_lastVisit_Val"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center|center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="200dp"
+        android:layout_toLeftOf="@+id/txt_cust_ach_Val"
+        android:text=""
+        android:textColor="@color/txt_color"
+        android:textSize="@dimen/smdm_departmentTitle"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/txt_cust_ach_Val"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="140dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/txt_cust_planSales_Val"
+        android:gravity="center|center_vertical"
+        android:text=""
+        android:textColor="@color/txt_color"
+        android:textSize="@dimen/smdm_departmentTitle"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/txt_cust_planSales_Val"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="70dp"
+        android:layout_toLeftOf="@+id/txt_cust_sales"
+        android:gravity="center|center_vertical"
+        android:text=""
+        android:textColor="@color/txt_color"
+        android:textSize="@dimen/smdm_departmentTitle"
+        android:textStyle="normal" />
 
 
-        <TextView
-            android:id="@+id/txt_cust_planSales_Val"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="130dp"
-            android:layout_toLeftOf="@+id/txt_cust_sales_Val"
-            android:gravity="center_vertical|center"
-            android:hint=""
-            android:textColor="@color/bg_store_code_text"
-            android:textSize="@dimen/smdm_departmentTitleLarge"
-            android:textStyle="normal" />
-
-
-        <TextView
-            android:id="@+id/txt_cust_sales_Val"
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="65dp"
-            android:layout_toLeftOf="@+id/txt_cust_ach_Val"
-            android:gravity="center_vertical|center"
-            android:hint=""
-            android:textColor="@color/bg_store_code_text"
-            android:textSize="@dimen/smdm_departmentTitleLarge"
-            android:textStyle="normal" />
-
-        <TextView
-            android:id="@+id/txt_cust_ach_Val"
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical|center"
-            android:hint=""
-            android:textColor="@color/bg_store_code_text"
-            android:textSize="@dimen/smdm_departmentTitleLarge"
-            android:textStyle="normal" />
-
-    </RelativeLayout>
-
+    <TextView
+        android:id="@+id/txt_cust_sales_Val"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center|center_vertical"
+        android:text=""
+        android:textColor="@color/txt_color"
+        android:textSize="@dimen/smdm_departmentTitle"
+        android:textStyle="normal" />
+</RelativeLayout>
 
 </LinearLayout>
