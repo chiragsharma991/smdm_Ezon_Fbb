@@ -193,6 +193,7 @@ public class CustDetailBarChart extends AppCompatActivity {
 
         ArrayList<IBarDataSet> dataSet;
         set1 = new BarDataSet(valueSet1, "Sales");
+        set1.setColor(Color.parseColor("#ffcb00"));
         dataSet = new ArrayList<>();
         dataSet.add(set1);
 
@@ -244,6 +245,7 @@ public class CustDetailBarChart extends AppCompatActivity {
         valueSet1.add(new BarEntry(2, (float) customerDetailsarray.get(0).getPreferredBrand3Sales(), customerDetailsarray.get(0).getPreferredBrand3()));
         ArrayList<IBarDataSet> dataSet;
         set1 = new BarDataSet(valueSet1, "Sales");
+        set1.setColor(Color.parseColor("#66ff66"));
         dataSet = new ArrayList<>();
         dataSet.add(set1);
 
@@ -291,7 +293,8 @@ public class CustDetailBarChart extends AppCompatActivity {
         valueSet1.add(new BarEntry(1,(float) customerDetailsarray.get(0).getTxnCntMonthStart(),"Month Start"));
 
         ArrayList<IBarDataSet> dataSet;
-        set1 = new BarDataSet(valueSet1, "");
+        set1 = new BarDataSet(valueSet1, "Visits");
+        set1.setColor(Color.parseColor("#66ffff"));
         dataSet = new ArrayList<>();
         dataSet.add(set1);
 
@@ -303,10 +306,11 @@ public class CustDetailBarChart extends AppCompatActivity {
         barChart_Preference1.notifyDataSetChanged();
         Legend l = barChart_Preference1.getLegend();
         // modify the legend ... by default it is on the left
-        l.setEnabled(false);
-    }
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        l.setForm(Legend.LegendForm.SQUARE);    }
 
-    private void callWeekBarchart() {
+    private void callWeekBarchart()
+    {
         barChart_Preference2.setDescription(null);
         barChart_Preference2.setDrawGridBackground(false); //Do not display grid background
 
@@ -337,6 +341,7 @@ public class CustDetailBarChart extends AppCompatActivity {
         valueSet1.add(new BarEntry(0, (float) customerDetailsarray.get(0).getTxnCntWed(), "Wednesday"));
         ArrayList<IBarDataSet> dataSet;
         set1 = new BarDataSet(valueSet1, "Visits");
+        set1.setColor(Color.parseColor("#6666ff"));
         dataSet = new ArrayList<>();
         dataSet.add(set1);
         BarData data = new BarData(dataSet);

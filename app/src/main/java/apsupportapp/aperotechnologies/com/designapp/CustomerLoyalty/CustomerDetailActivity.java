@@ -353,10 +353,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
     private void createPieChart()
     {
-        pieChart.addPieSlice(new PieModel("Food", (int)customerDetailsarray.get(0).getFoodContr(), Color.parseColor("#5b9cd6")));
-        pieChart.addPieSlice(new PieModel("Fashion", (int) customerDetailsarray.get(0).getFashionContr(), Color.parseColor("#ed7d31"))); //CDA67F
-        pieChart.addPieSlice(new PieModel("Home", (int) customerDetailsarray.get(0).getHomeContr(), Color.parseColor("#a5a5a5"))); //CDA67F
-        pieChart.addPieSlice(new PieModel("Electronics", (int) customerDetailsarray.get(0).getElectronicsContr(), Color.parseColor("#ffc000"))); //CDA67F
+        pieChart.addPieSlice(new PieModel("Food", (int)customerDetailsarray.get(0).getFoodContr(), Color.parseColor("#ffcb00")));
+        pieChart.addPieSlice(new PieModel("Fashion", (int) customerDetailsarray.get(0).getFashionContr(), Color.parseColor("#66ff66"))); //CDA67F
+        pieChart.addPieSlice(new PieModel("Home", (int) customerDetailsarray.get(0).getHomeContr(), Color.parseColor("#66ffff"))); //CDA67F
+        pieChart.addPieSlice(new PieModel("Electronics", (int) customerDetailsarray.get(0).getElectronicsContr(), Color.parseColor("#6666ff"))); //CDA67F
         pieChart.animate();
         pieChart.setDrawValueInPie(true);
         pieChart.setOnItemFocusChangedListener(new IOnItemFocusChangedListener()

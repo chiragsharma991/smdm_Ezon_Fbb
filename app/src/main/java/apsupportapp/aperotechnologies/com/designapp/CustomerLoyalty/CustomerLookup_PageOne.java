@@ -244,12 +244,16 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                     }
                     NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
                     double netSalesVal = array_custLoyaltySummaries.get(0).getSpend() / 100000;
-                    txt_cust_NetSalesVal.setText("₹ " + format.format(Math.round(netSalesVal)) + "\tlac");
+                    String netSalesVal1 =  String.format("%.1f",netSalesVal);
+                    double updated_nestSaleVal = Double.parseDouble(netSalesVal1);
+                    txt_cust_NetSalesVal.setText("₹ " +format.format(updated_nestSaleVal));
                     txt_cust_NetSalesName.setText("Sales");
                     txt_cust_NetSalesPerc.setText("" + Math.round(array_custLoyaltySummaries.get(0).getSalesAch()) + "%");
                     colorconditionForSales();
                     double planSalesVal = array_custLoyaltySummaries.get(0).getPlanSaleNetVal() / 100000;
-                    txt_cust_PlanSalesVal.setText("₹ " + format.format(Math.round(planSalesVal)) + "\tlac");
+                    String planSalesVal1 = String.format("%.1f",planSalesVal);
+                    double updated_planSaleVal = Double.parseDouble(planSalesVal1);
+                    txt_cust_PlanSalesVal.setText("₹ " + format.format(updated_planSaleVal));
                     txt_cust_ActualCustVal.setText("" + format.format(Math.round(array_custLoyaltySummaries.get(0).getCustCount())));
                     txt_cust_ActualCustName.setText("SPC");
                     txt_cust_ActualCustPerc.setText("₹ " + format.format(Math.round(array_custLoyaltySummaries.get(0).getSpc())));
@@ -523,10 +527,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#5b9cd6"));
-        colors.add(Color.parseColor("#ed7d31"));
-        colors.add(Color.parseColor("#a5a5a5"));
-        colors.add(Color.parseColor("#ffc000"));
+        colors.add(Color.parseColor("#ffcb00"));
+        colors.add(Color.parseColor("#66ff66"));
+        colors.add(Color.parseColor("#66ffff"));
+        colors.add(Color.parseColor("#6666ff"));
         PieDataSet dataset = new PieDataSet(entries, "");
 //        for (int i = 0 ;i<planengagementArrayList.size();i++)
 //        {
@@ -552,7 +556,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.setDescription(null);
         pieChart_band.setTouchEnabled(true);
         pieChart_band.invalidate();
-        pieChart_band.setOnChartValueSelectedListener(this);
+      //  pieChart_band.setOnChartValueSelectedListener(this);
         Legend l = pieChart_band.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
         l.setWordWrapEnabled(true);
@@ -570,10 +574,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             entries.add(new PieEntry((float)planengagementArrayList.get(i).getCustAch() , planengagementArrayList.get(i).getLevel()));
         }
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#5b9cd6"));
-        colors.add(Color.parseColor("#ed7d31"));
-        colors.add(Color.parseColor("#a5a5a5"));
-        colors.add(Color.parseColor("#ffc000"));
+        colors.add(Color.parseColor("#ffcb00"));
+        colors.add(Color.parseColor("#66ff66"));
+        colors.add(Color.parseColor("#66ffff"));
+        colors.add(Color.parseColor("#6666ff"));
         PieDataSet dataset = new PieDataSet(entries, "");
 //        for (int i = 0; i < planengagementArrayList.size();i++)
 //        {
@@ -617,11 +621,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#5b9cd6"));
-        colors.add(Color.parseColor("#ed7d31"));
-        colors.add(Color.parseColor("#a5a5a5"));
-        colors.add(Color.parseColor("#ffc000"));
-        colors.add(Color.parseColor("#5aa250"));
+        colors.add(Color.parseColor("#ffcb00"));
+        colors.add(Color.parseColor("#66ff66"));
+        colors.add(Color.parseColor("#66ffff"));
+        colors.add(Color.parseColor("#6666ff"));
+        colors.add(Color.parseColor("#8000ff"));
         PieDataSet dataset = new PieDataSet(entries, "");
 //        for (int i = 0 ; i < actualengagementArrayList.size();i++)
 //        {
@@ -664,11 +668,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#5b9cd6"));
-        colors.add(Color.parseColor("#ed7d31"));
-        colors.add(Color.parseColor("#a5a5a5"));
-        colors.add(Color.parseColor("#ffc000"));
-        colors.add(Color.parseColor("#5aa250"));
+        colors.add(Color.parseColor("#ffcb00"));
+        colors.add(Color.parseColor("#66ff66"));
+        colors.add(Color.parseColor("#66ffff"));
+        colors.add(Color.parseColor("#6666ff"));
+        colors.add(Color.parseColor("#8000ff"));
         PieDataSet dataset = new PieDataSet(entries, "");
 //        for (int i = 0; i < actualengagementArrayList.size();i++)
 //        {
