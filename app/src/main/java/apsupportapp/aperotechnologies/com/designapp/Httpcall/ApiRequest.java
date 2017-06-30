@@ -46,6 +46,7 @@ public class ApiRequest  {
     private String TAG;
     private int count = 0;
     private Gson gson;
+    public static JsonArrayRequest postRequest;
 
 
     public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id)
@@ -97,7 +98,7 @@ public class ApiRequest  {
 
         }
         Log.e(TAG, "final_setApi: URL "+URL );
-        JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, URL,
+         postRequest = new JsonArrayRequest(Request.Method.GET, URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public  void onResponse(JSONArray response) {
@@ -177,7 +178,7 @@ public class ApiRequest  {
                         }
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "Server not found...: " );
+                        Log.e(TAG, "Server not found...: "+error.getMessage() );
                         error.printStackTrace();
                     }
 
@@ -193,7 +194,7 @@ public class ApiRequest  {
                 return params;
             }
         };
-        int socketTimeout = 60000;//5 seconds
+        int socketTimeout = 30000;//5 seconds
 
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
