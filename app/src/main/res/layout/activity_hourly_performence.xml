@@ -213,7 +213,7 @@
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/btnFIndexPrev"
-                android:text="Net Sales"
+                android:text="Sales Vs Ach% by Hour"
                 android:textColor="@color/bg_store_code_text"
                 android:textSize="@dimen/stock_textsize_Title"
                 android:textStyle="normal" />
@@ -289,7 +289,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.6">
+                        android:layout_weight="0.7">
 
                         <TextView
                             android:id="@+id/txtFIndexName"
@@ -303,6 +303,27 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="0.99"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/txtFIndexGIT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:text="PvA %"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="@dimen/smdm_departmentTitle"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -357,27 +378,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
 
-                        >
-
-                        <TextView
-                            android:id="@+id/txtFIndexGIT"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center_vertical"
-                            android:text="PvA %"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textSize="@dimen/smdm_departmentTitle"
-                            android:textStyle="normal" />
-
-                    </LinearLayout>
 
                 </LinearLayout>
 

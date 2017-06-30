@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.6"
+            android:layout_weight="0.7"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -26,6 +26,41 @@
                 android:textColor="@color/txt_color"
 
                 />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.99"
+            android:layout_marginLeft="5dp"
+
+
+            >
+            <RelativeLayout
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/rel_ez_outer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <RelativeLayout
+                    android:layout_centerVertical="true"
+                    android:id="@+id/rel_ez_inner"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="80dp"
+                    android:layout_height="10dp">
+
+
+
+
+                </RelativeLayout>
+
+
+
+
+            </RelativeLayout>
+
 
         </LinearLayout>
         <LinearLayout
@@ -61,43 +96,7 @@
                 android:textStyle="normal"/>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
 
-
-            >
-            <RelativeLayout
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:id="@+id/rel_ez_outer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <RelativeLayout
-                    android:layout_centerVertical="true"
-                    android:id="@+id/rel_ez_inner"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="80dp"
-                    android:layout_height="10dp">
-
-
-
-
-
-
-                </RelativeLayout>
-
-
-
-
-            </RelativeLayout>
-
-
-        </LinearLayout>
 
     </LinearLayout>
 
