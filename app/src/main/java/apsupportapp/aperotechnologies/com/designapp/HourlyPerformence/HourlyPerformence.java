@@ -270,14 +270,17 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     private void callPiechart() {
 
         pieChart.clearChart();//pieChart.clearAnimation();//pieChart.clearFocus();pieChart.invalidate();
-        int[]colors= {Color.parseColor("#4e7aa7"),Color.parseColor("#f28e2c"),Color.parseColor("#e05a5b"),Color.parseColor("#77b7b7"),Color.parseColor("#5aa250"),Color.parseColor("#fbd043")};
+        int[]colors= {Color.parseColor("#4e7aa7"),Color.parseColor("#f28e2c"),Color.parseColor("#e05a5b"),Color.parseColor("#77b7b7"),Color.parseColor("#5aa250"),Color.parseColor("#fbd043"),Color.parseColor("#CDDC39")};
         for (int i = 0; i <piechart_list.size(); i++) {
 
             Log.e(TAG, "callPiechart: "+piechart_list.get(0).getLevel() );
 
-            if(piechart_list.size()<=5){
+            if(piechart_list.size()<=7)
+            {
                 pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(),colors[i]));
-            }else{
+            }
+            else
+            {
                 pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(),getRandomColor()));
 
             }
@@ -495,7 +498,8 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         units.setText(String.format("%.1f",0.0 ));
         spend.setText(String.format("%.1f",0.0));
 
-        if(piechart_list.size()!=0){
+        if(piechart_list.size()!=0 && focusOnPie == false)
+        {
             pieChart.clearChart();
             pieChart.clearAnimation();
             pieChart.clearFocus();
@@ -554,16 +558,19 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         ApiRequest api_request;
         focusOnPie = false;
 
-        switch (id) {
-
+        switch (id)
+        {
             case R.id.hrl_conceptPerformance:
                 concept_toggle = true;
                 dupfocusPosition=0;
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
                     mpm_model model = new mpm_model();
                     ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
 
-                } else {
+                }
+                else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -571,11 +578,14 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case R.id.hrl_zonePerformance:
                 concept_toggle = false;
                 dupfocusPosition=0;
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
                     mpm_model model = new mpm_model();
                     ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
 
-                } else {
+                }
+                else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -584,17 +594,19 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         }
     }
 
-    private class MyvalueFormatter implements IAxisValueFormatter {
+    private class MyvalueFormatter implements IAxisValueFormatter
+    {
 
         private final int id;
 
-        public MyvalueFormatter(int id) {
+        public MyvalueFormatter(int id)
+        {
             this.id = id;
-
         }
 
         @Override
-        public String getFormattedValue(float value, AxisBase axis) {
+        public String getFormattedValue(float value, AxisBase axis)
+        {
             String format = id == 1 ? value + " %" : value + " Cr";
             return format;
         }

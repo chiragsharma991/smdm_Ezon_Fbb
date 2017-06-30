@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 
-import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
-import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.Plan_Option_Fragment;
+import java.util.ArrayList;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
@@ -92,11 +92,11 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    public void communicatefrag1(String enagagemntband) {
+    public void communicatefrag1(String enagagemntband, ArrayList<CustomerDetail> customerDetailsList) {
         CustomerLookup_PageTwo fragment = (CustomerLookup_PageTwo) adapter.getItem(1);
         if (fragment != null)
         {
-            fragment.fragmentCommunication(enagagemntband);
+            fragment.fragmentCommunication(enagagemntband,customerDetailsList);
         }
     }
 }
