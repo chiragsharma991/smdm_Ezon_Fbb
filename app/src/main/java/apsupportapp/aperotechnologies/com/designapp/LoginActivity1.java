@@ -200,6 +200,8 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("userId", userId);
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
+                                editor.putString("device_id", "");
+                                editor.putString("push_tokken", "");
                                 editor.apply();
                                 if (log_flag)
                                 {
@@ -309,6 +311,8 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("userId", userId);
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
+                                editor.putString("device_id", "");
+                                editor.putString("push_tokken", "");
                                 editor.apply();
                                 if (log_flag)
                                 {
