@@ -50,7 +50,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/rel_cust_lookup_btnBack"
-                android:text="@string/cust_lookup"
+                android:text="@string/cust_loyalty"
                 android:textColor="@color/divider_salescard1"
                 android:textSize="@dimen/smdm_header_title_normal"
                 />
@@ -92,7 +92,6 @@
             android:orientation="horizontal"></LinearLayout>
 
     </RelativeLayout>
-
     <!--<RelativeLayout-->
         <!--android:layout_below="@+id/frame_viewPager"-->
         <!--android:layout_width="match_parent"-->
@@ -101,11 +100,6 @@
         <!--android:layout_marginBottom="5dp"-->
        <!--&gt;-->
 
-
-
-
 <!--</RelativeLayout>-->
-
-
-        <!--<include layout="@layout/cust_loyalty_footer"/>-->
+<!--<include layout="@layout/cust_loyalty_footer"/>-->
 </RelativeLayout>

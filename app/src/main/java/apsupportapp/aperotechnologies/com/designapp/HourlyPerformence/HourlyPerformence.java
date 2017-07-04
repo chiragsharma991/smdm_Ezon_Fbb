@@ -89,7 +89,8 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hourly_performence);
         getSupportActionBar().hide();
@@ -113,16 +114,19 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         functionality();
     }
 
-    private void functionality() {
+    private void functionality()
+    {
 
-        if (Reusable_Functions.chkStatus(context)) {
+        if (Reusable_Functions.chkStatus(context))
+        {
             mpm_model model = new mpm_model();
             ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
 
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
@@ -243,7 +247,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         barChart.setBackgroundColor(Color.WHITE);
         barChart.setDescription(null);
 
-
         Legend l = barChart.getLegend();
         // modify the legend ... by default it is on the left
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
@@ -273,15 +276,17 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
         pieChart.clearChart();//pieChart.clearAnimation();//pieChart.clearFocus();pieChart.invalidate();
         int[] colors = {Color.parseColor("#FFCB00"), Color.parseColor("#66FF66"), Color.parseColor("#FF8000"), Color.parseColor("#0080FF"), Color.parseColor("#8000FF"), Color.parseColor("#800040"), Color.parseColor("#808000"), Color.parseColor("#66FFFF"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
-        for (int i = 0; i < piechart_list.size(); i++) {
-
+        for (int i = 0; i < piechart_list.size(); i++)
+        {
             Log.e(TAG, "callPiechart: " + piechart_list.get(0).getLevel());
 
-            if (piechart_list.size() <= 10) {
+            if (piechart_list.size() <= 10)
+            {
                 pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(), colors[i]));
-            } else {
+            }
+            else
+            {
                 pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(), getRandomColor()));
-
             }
         }
         // pieChart.addPieSlice(new PieModel());
@@ -303,18 +308,23 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     }
 
-    private void changefocuscall(int _Position) {
+    private void changefocuscall(int _Position)
+    {
         focusOnPie = true;
         leveLDesc = concept_toggle == true ? "geoLevel2Desc=" + piechart_list.get(_Position).getLevel().replace(" ", "%20").replace("&", "%26").replace("%", "%25") : "geoLevel3Desc=" + piechart_list.get(_Position).getLevel().replace(" ", "%20").replace("&", "%26").replace("%", "%25");
-        if (Reusable_Functions.chkStatus(context)) {
-            if (ApiRequest.postRequest != null) {
+        if (Reusable_Functions.chkStatus(context))
+        {
+            if (ApiRequest.postRequest != null)
+            {
                 Log.e(TAG, ": cancel request>>>>>>>");
                 ApiRequest.postRequest.cancel();
             }
             mpm_model model = new mpm_model();
             ApiCallBack(model, 0);
 
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
@@ -569,6 +579,11 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 concept_toggle = true;
                 dupfocusPosition = 0;
                 if (Reusable_Functions.chkStatus(context)) {
+                    if (ApiRequest.postRequest != null) {
+                        Log.e(TAG, ": cancel request>>>>>>>");
+                        ApiRequest.postRequest.cancel();
+                    }
+                    Reusable_Functions.animateScaleIn(hrl_pi_Process);
                     mpm_model model = new mpm_model();
                     ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
 
@@ -581,6 +596,11 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 concept_toggle = false;
                 dupfocusPosition = 0;
                 if (Reusable_Functions.chkStatus(context)) {
+                    if (ApiRequest.postRequest != null) {
+                        Log.e(TAG, ": cancel request>>>>>>>");
+                        ApiRequest.postRequest.cancel();
+                    }
+                    Reusable_Functions.animateScaleIn(hrl_pi_Process);
                     mpm_model model = new mpm_model();
                     ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
 

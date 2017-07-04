@@ -164,7 +164,7 @@
 
 
                 <com.github.mikephil.charting.charts.HorizontalBarChart
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="1dp"
                     android:layout_marginTop="15dp"
                     android:id="@+id/hbarchart_category"
                     android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                     android:layout_height="match_parent" />
 
                 <com.github.mikephil.charting.charts.HorizontalBarChart
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="1dp"
                     android:layout_marginTop="15dp"
                     android:id="@+id/hbarchart_brands"
                     android:layout_width="match_parent"
@@ -229,7 +229,7 @@
 
 
             <com.github.mikephil.charting.charts.HorizontalBarChart
-                android:layout_marginLeft="3dp"
+                android:layout_marginLeft="1dp"
                 android:layout_marginTop="15dp"
                 android:id="@+id/hbarchart_month"
                 android:layout_width="match_parent"
@@ -261,7 +261,7 @@
 
 
             <com.github.mikephil.charting.charts.HorizontalBarChart
-                android:layout_marginLeft="3dp"
+                android:layout_marginLeft="1dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/hbarchart_week"
                 android:layout_width="match_parent"

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface OnEngagemntBandClick {
 
 
-        void communicatefrag1(String enagagemntband, ArrayList<CustomerDetail> customerDetailsList);
+        void communicatefrag1(String enagagemntband);
 
 
 }
