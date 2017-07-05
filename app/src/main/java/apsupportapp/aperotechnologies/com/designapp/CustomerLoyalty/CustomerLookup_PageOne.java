@@ -74,18 +74,20 @@ import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyHeader
 
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty.CustomerLookup_PageTwo.customerDetailAdapter;
+import static apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty.CustomerLookup_PageTwo.lv_cust_details;
 
 
 /**
  * Created by pamrutkar on 14/06/17.
  */
-public class CustomerLookup_PageOne extends Fragment implements CompoundButton.OnCheckedChangeListener,OnChartValueSelectedListener{
+public class CustomerLookup_PageOne extends Fragment implements CompoundButton.OnCheckedChangeListener, OnChartValueSelectedListener {
     private TextView txt_cust_NetSalesVal, txt_cust_PlanSalesVal, txt_cust_ActualCustVal, txt_cust_PlanCustVal, txt_cust_ActualCustName,
             txt_cust_ActualCustPerc, txt_cust_PlanCustName, txt_cust_PlanCustPerc, txt_progress_custVal, txt_progress_salesVal;
     private TextView txt_cust_pengagementType_Val, txt_cust_pCustomer_Val, txt_cust_psales_Val, txt_cust_pspc_Val, txt_cust_psalesAch_Val, txt_cust_NetSalesName,
-            txt_cust_NetSalesPerc, txt_switch_name,txt_ls_switch_name;
+            txt_cust_NetSalesPerc, txt_switch_name, txt_ls_switch_name;
     private ImageView txt_cust_NetSalesImage;
-    private PieChart pieChart_band,pieChart_lifestage;
+    private PieChart pieChart_band, pieChart_lifestage;
     private ProgressBar progressbar_customer, progressbar_sales;
     private int offsetval = 0, limit = 100, count = 0;
     Context context;
@@ -95,25 +97,24 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     CustomerDetail customerDetail;
     private ArrayList<CustomerEngagementDetail> planengagementArrayList, actualengagementArrayList;
     private ArrayList<CustomerLoyaltySummary> array_custLoyaltySummaries;
-    static ArrayList<CustomerDetail> customerDetailsList;
+    ArrayList<CustomerDetail> customerDetailsList;
+    private LinearLayout linearLayout,linearLayout1;
     JsonArrayRequest postRequest;
     RequestQueue queue;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT",e_bandnm;
+    String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT", e_bandnm;
     Gson gson;
-    static boolean valSelectedFlag = false;
     String update_userId;
     private boolean checkNetworkFalse = false;
     private String recache = "true";
     OnEngagemntBandClick engagemntBandClick;
     private ArrayList<PieEntry> entries;
     private PieData pieData;
-    private Switch sales_cust_switch,sales_cust_switch_lifestage;
-    private boolean bandcustToggle = false,lifestageToggle = false;
+    private Switch sales_cust_switch;
+    private boolean bandcustToggle = false;
 
 
-    public CustomerLookup_PageOne()
-    {
+    public CustomerLookup_PageOne() {
 
     }
 
@@ -129,8 +130,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = (ViewGroup) inflater.inflate(R.layout.fragment_custlookup_pageone, null);
         context = root.getContext();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -144,7 +144,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-        Log.e("test", "onCreateView: page one" );
+        Log.e("test", "onCreateView: page one");
 
 
         initialise();
@@ -165,8 +165,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
     @Override
-    public void onAttach(Context context)
-    {
+    public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
         try {
@@ -176,8 +175,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
     }
 
-    private void initialise()
-    {
+    private void initialise() {
         customerDetailsList = new ArrayList<CustomerDetail>();
         planengagementArrayList = new ArrayList<CustomerEngagementDetail>();
         actualengagementArrayList = new ArrayList<CustomerEngagementDetail>();
@@ -192,38 +190,30 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         txt_progress_custVal = (TextView) root.findViewById(R.id.txt_progress_custVal);
         txt_progress_salesVal = (TextView) root.findViewById(R.id.txt_progress_salesVal);
         txt_switch_name = (TextView) root.findViewById(R.id.txt_switch_name);
-        txt_ls_switch_name = (TextView)root.findViewById(R.id.txt_ls_switch_name);
-        sales_cust_switch_lifestage = (Switch)root.findViewById(R.id.salescustswitch_lifestage); 
         sales_cust_switch = (Switch) root.findViewById(R.id.salescustswitch);
         sales_cust_switch.setOnCheckedChangeListener(this);
-        sales_cust_switch_lifestage.setOnCheckedChangeListener(this);
-
-//        progressbar_customer = (ProgressBar) root.findViewById(R.id.circularProgressbar_customer);
-//        progressbar_sales = (ProgressBar) root.findViewById(R.id.circularProgressbar_sales);
-//        txt_cust_NetSalesImage = (ImageView)root.findViewById(R.id.txt_cust_NetSalesImage);
         txt_cust_NetSalesName = (TextView) root.findViewById(R.id.txt_cust_NetSalesName);
         txt_cust_NetSalesPerc = (TextView) root.findViewById(R.id.txt_cust_NetSalesPerc);
         pieChart_band = (PieChart) root.findViewById(R.id.pieChart_band);
-        pieChart_lifestage = (PieChart)root.findViewById(R.id.pieChart_lifestage);
+        pieChart_lifestage = (PieChart) root.findViewById(R.id.pieChart_lifestage);
+        linearLayout = (LinearLayout) root.findViewById(R.id.linear_band_legend);
+        linearLayout1 = (LinearLayout)root.findViewById(R.id.linear_lifestage_legend);
+
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-    {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.salescustswitch:
                 SalesCustToggle();
                 break;
-            case R.id.salescustswitch_lifestage:
-                ls_SalesCustToggle();
-                break;
+
 
         }
     }
 
-   
-    private void requestCustomerLoyaltySummary()
-    {
+
+    private void requestCustomerLoyaltySummary() {
         String url = ConstsCore.web_url + "/v1/display/customerloyaltysummary/" + update_userId + "?engagementFor=" + engagementFor + "&recache=" + recache;
         Log.e("cust summary url ", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
@@ -244,25 +234,22 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                     }
                     NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
                     double netSalesVal = array_custLoyaltySummaries.get(0).getSpend() / 100000;
-                    txt_cust_NetSalesVal.setText("₹ " + format.format(Math.round(netSalesVal)) + "\tlac");
-                    txt_cust_NetSalesName.setText("Sales");
+                    String netSalesVal1 = String.format("%.1f", netSalesVal);
+                    double updated_nestSaleVal = Double.parseDouble(netSalesVal1);
+                    txt_cust_NetSalesVal.setText("₹ " + format.format(updated_nestSaleVal));
+                    txt_cust_NetSalesName.setText("Sales Ach%");
                     txt_cust_NetSalesPerc.setText("" + Math.round(array_custLoyaltySummaries.get(0).getSalesAch()) + "%");
                     colorconditionForSales();
                     double planSalesVal = array_custLoyaltySummaries.get(0).getPlanSaleNetVal() / 100000;
-                    txt_cust_PlanSalesVal.setText("₹ " + format.format(Math.round(planSalesVal)) + "\tlac");
+                    String planSalesVal1 = String.format("%.1f", planSalesVal);
+                    double updated_planSaleVal = Double.parseDouble(planSalesVal1);
+                    txt_cust_PlanSalesVal.setText("₹ " + format.format(updated_planSaleVal));
                     txt_cust_ActualCustVal.setText("" + format.format(Math.round(array_custLoyaltySummaries.get(0).getCustCount())));
                     txt_cust_ActualCustName.setText("SPC");
                     txt_cust_ActualCustPerc.setText("₹ " + format.format(Math.round(array_custLoyaltySummaries.get(0).getSpc())));
                     txt_cust_PlanCustVal.setText("" + format.format(Math.round(array_custLoyaltySummaries.get(0).getPlanCustCount())));
                     txt_cust_PlanCustName.setText("SPC");
                     txt_cust_PlanCustPerc.setText("₹ " + format.format(Math.round(array_custLoyaltySummaries.get(0).getPlanSpc())));
-//                    int custAch = (int) array_custLoyaltySummaries.get(0).getCustAch();
-//                    progressbar_customer.setProgress(custAch);
-//                    txt_progress_custVal.setText("" + Math.round(array_custLoyaltySummaries.get(0).getCustAch()) + "%");
-//                    int salesAch = (int) array_custLoyaltySummaries.get(0).getSalesAch();
-//                    progressbar_sales.setProgress(salesAch);
-//                    txt_progress_salesVal.setText("" + Math.round(array_custLoyaltySummaries.get(0).getSalesAch()) + "%");
-
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(context, "Loading...");
                         offsetval = 0;
@@ -303,27 +290,19 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         queue.add(postRequest);
     }
 
-    private void colorconditionForSales()
-    {
+    private void colorconditionForSales() {
         if (array_custLoyaltySummaries.get(0).getSalesAch() < 80) {
-            txt_cust_NetSalesName.setTextColor(Color.parseColor("#fe0000"));
             txt_cust_NetSalesPerc.setTextColor(Color.parseColor("#fe0000"));
 
-        } else if (array_custLoyaltySummaries.get(0).getSalesAch() > 80 || array_custLoyaltySummaries.get(0).getSalesAch() < 90) 
-        {
-            txt_cust_NetSalesName.setTextColor(Color.parseColor("#ff7e00"));
+        } else if (array_custLoyaltySummaries.get(0).getSalesAch() > 80 || array_custLoyaltySummaries.get(0).getSalesAch() < 90) {
             txt_cust_NetSalesPerc.setTextColor(Color.parseColor("#ff7e00"));
-        }
-        else if (array_custLoyaltySummaries.get(0).getSalesAch() > 90) 
-        {
-            txt_cust_NetSalesName.setTextColor(Color.parseColor("#70e503"));
+        } else if (array_custLoyaltySummaries.get(0).getSalesAch() > 90) {
             txt_cust_NetSalesPerc.setTextColor(Color.parseColor("#70e503"));
         }
 
     }
 
-    private void requestCustomerPlanEngagement() 
-    {
+    private void requestCustomerPlanEngagement() {
         int level = 1;
         String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + update_userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level;//+ "&offset=" + offsetval + "&limit=" + limit;
 
@@ -355,8 +334,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                         planengagementArrayList.add(customerEngagementDetail);
                     }
                     callBandSalesPieChart();
-                    // }
-                    // addPlanEngagementDatatoTable(i);
+
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.sDialog(context, "Loading...");
                         offsetval = 0;
@@ -401,22 +379,31 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         queue.add(postRequest);
     }
 
-    private void SalesCustToggle()
-    {
-        if (!bandcustToggle)
-        {
-            if (sales_cust_switch.isChecked())
-            {
+    private void SalesCustToggle() {
+        if (!bandcustToggle) {
+            if (sales_cust_switch.isChecked()) {
+                linearLayout.removeAllViewsInLayout();
                 pieChart_band.invalidate();
                 pieChart_band.notifyDataSetChanged();
+                linearLayout1.removeAllViewsInLayout();
+                pieChart_lifestage.invalidate();
+                pieChart_lifestage.notifyDataSetChanged();
                 txt_switch_name.setText("Customer");
                 callBandCustPieChart();
+                callLSCustPieChart();
 
-            } else {
+            }
+            else
+            {
+                linearLayout.removeAllViewsInLayout();
                 pieChart_band.invalidate();
                 pieChart_band.notifyDataSetChanged();
                 txt_switch_name.setText("Sales");
+                linearLayout1.removeAllViewsInLayout();
+                pieChart_lifestage.invalidate();
+                pieChart_lifestage.notifyDataSetChanged();
                 callBandSalesPieChart();
+                callLSalesPieChart();
             }
         } else {
             bandcustToggle = false;
@@ -424,33 +411,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
 
-    private void ls_SalesCustToggle()
-    {
-        if (!lifestageToggle)
-        {
-            if (sales_cust_switch_lifestage.isChecked())
-            {
-                pieChart_lifestage.invalidate();
-                pieChart_lifestage.notifyDataSetChanged();
-                txt_ls_switch_name.setText("Customer");
-                callLSCustPieChart();
-
-            }
-            else
-            {
-                pieChart_lifestage.invalidate();
-                pieChart_lifestage.notifyDataSetChanged();
-                txt_ls_switch_name.setText("Sales");
-                callLSalesPieChart();
-            }
-        } else {
-            lifestageToggle = false;
-        }
-    }
-
-
-    private void requestLifeStage()
-    {
+    private void requestLifeStage() {
         int level = 2;
         String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + update_userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level;//+ "&offset=" + offsetval + "&limit=" + limit;
 
@@ -480,8 +441,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 //                            engagementDetailArrayList.add(customerEngagementDetail);
 //                        }
 //                    }
-//                    addActualEngagementDatatoTable(i);
-                      callLSalesPieChart();
+
+                    callLSalesPieChart();
 
                 } catch (Exception e) {
                     Reusable_Functions.hDialog();
@@ -514,35 +475,27 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
     // Pie chart for Band Sales
-    private void callBandSalesPieChart()
-    {
+    private void callBandSalesPieChart() {
         entries = new ArrayList<PieEntry>();
-        for (int i = 0; i < planengagementArrayList.size(); i++)
-        {
+        for (int i = 0; i < planengagementArrayList.size(); i++) {
             entries.add(new PieEntry((float) planengagementArrayList.get(i).getSalesAch(), planengagementArrayList.get(i).getLevel()));
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#5b9cd6"));
-        colors.add(Color.parseColor("#ed7d31"));
-        colors.add(Color.parseColor("#a5a5a5"));
-        colors.add(Color.parseColor("#ffc000"));
+        colors.add(Color.parseColor("#ffcb00"));
+        colors.add(Color.parseColor("#66ff66"));
+        colors.add(Color.parseColor("#66ffff"));
+        colors.add(Color.parseColor("#6666ff"));
         PieDataSet dataset = new PieDataSet(entries, "");
-//        for (int i = 0 ;i<planengagementArrayList.size();i++)
-//        {
-//            dataset.setColors(getRandomColor());
-//        }
         dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
         dataset.setValueTextColor(Color.BLACK);
         pieData = new PieData(dataset);
-        dataset.setValueLinePart1Length(0.8f);
-        dataset.setValueLinePart2Length(0.5f);
         pieChart_band.setDrawMarkers(false);
-        pieData.setValueTextSize(10f);
         dataset.setXValuePosition(null);
-        dataset.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataset.setYValuePosition(null);
         pieChart_band.setEntryLabelColor(Color.BLACK);
+        pieChart_band.setRotationEnabled(false);
         pieChart_band.setExtraOffsets(5, 10, 5, 5);
         pieChart_band.setHoleRadius(40);
         pieChart_band.setHoleColor(Color.WHITE);
@@ -552,91 +505,101 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.setDescription(null);
         pieChart_band.setTouchEnabled(true);
         pieChart_band.invalidate();
+        pieChart_band.notifyDataSetChanged();
         pieChart_band.setOnChartValueSelectedListener(this);
-        Legend l = pieChart_band.getLegend();
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
-        l.setWordWrapEnabled(true);
-        l.setEnabled(true);
-        l.setFormSize(11f);
+        Legend legend = pieChart_band.getLegend();
+        for (int i = 0; i < planengagementArrayList.size(); i++)
+        {
+
+            LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
+                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_legend, null);
+            TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
+            TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
+            TextView txt_legend_val = (TextView) view.findViewById(R.id.txt_legend_val);
+            txt_legend_color.setBackgroundColor(colors.get(i));
+            txt_legend_name.setText(planengagementArrayList.get(i).getLevel());
+            txt_legend_val.setText("" + String.format("%.1f",planengagementArrayList.get(i).getSalesAch()));
+            linearLayout.addView(view);
+        }
+        legend.setEnabled(false);
         Reusable_Functions.hDialog();
     }
 
     // Pie Chart for Band Customer
-    private void callBandCustPieChart()
-    {
+    private void callBandCustPieChart() {
         entries = new ArrayList<PieEntry>();
-        for (int i = 0; i < planengagementArrayList.size(); i++)
-        {
-            entries.add(new PieEntry((float)planengagementArrayList.get(i).getCustAch() , planengagementArrayList.get(i).getLevel()));
+        for (int i = 0; i < planengagementArrayList.size(); i++) {
+            entries.add(new PieEntry((float) planengagementArrayList.get(i).getCustAch(), planengagementArrayList.get(i).getLevel()));
         }
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#5b9cd6"));
-        colors.add(Color.parseColor("#ed7d31"));
-        colors.add(Color.parseColor("#a5a5a5"));
-        colors.add(Color.parseColor("#ffc000"));
+        colors.add(Color.parseColor("#ffcb00"));
+        colors.add(Color.parseColor("#66ff66"));
+        colors.add(Color.parseColor("#66ffff"));
+        colors.add(Color.parseColor("#6666ff"));
         PieDataSet dataset = new PieDataSet(entries, "");
-//        for (int i = 0; i < planengagementArrayList.size();i++)
-//        {
-            dataset.setColors(colors);
-
-//        }
+        dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
         dataset.setValueTextColor(Color.BLACK);
         pieData = new PieData(dataset);
-        dataset.setValueLinePart1Length(0.8f);
-        dataset.setValueLinePart2Length(0.5f);
         pieChart_band.setDrawMarkers(false);
-        pieData.setValueTextSize(10f);
         dataset.setXValuePosition(null);
-        dataset.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataset.setYValuePosition(null);
         pieChart_band.setEntryLabelColor(Color.BLACK);
+        pieChart_band.setRotationEnabled(false);
         pieChart_band.setExtraOffsets(5, 10, 5, 5);
         pieChart_band.setHoleRadius(40);
         pieChart_band.setHoleColor(Color.WHITE);
         pieChart_band.setTransparentCircleRadius(0);
         pieChart_band.setData(pieData);
-        pieChart_band.notifyDataSetChanged();
         pieChart_band.invalidate();
+        pieChart_band.notifyDataSetChanged();
         pieChart_band.animateXY(4000, 4000);
         pieChart_band.setDescription(null);
         pieChart_band.setTouchEnabled(true);
-        Legend l = pieChart_band.getLegend();
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
-        l.setWordWrapEnabled(true);
-        l.setEnabled(true);
-        l.setFormSize(11f);
+        pieChart_band.setOnChartValueSelectedListener(this);
+        Legend legend = pieChart_band.getLegend();
+        linearLayout.removeAllViewsInLayout();
+        for (int i = 0; i < planengagementArrayList.size(); i++)
+        {
+            LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
+                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_cust_legend, null);
+            TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
+            TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
+            TextView txt_legend_val = (TextView) view.findViewById(R.id.txt_legend_val);
+            txt_legend_color.setBackgroundColor(colors.get(i));
+            txt_legend_name.setText(planengagementArrayList.get(i).getLevel());
+            txt_legend_val.setText("" + String.format("%.1f", planengagementArrayList.get(i).getCustAch()));
+            linearLayout.addView(view);
+        }
+        legend.setEnabled(false);
+        Reusable_Functions.hDialog();
     }
 
     //Pie Chart for LifeStage Sales
-    private void callLSalesPieChart()
-    {
+    private void callLSalesPieChart() {
         entries = new ArrayList<PieEntry>();
-        for (int i = 0; i < actualengagementArrayList.size(); i++)
-        {
+        for (int i = 0; i < actualengagementArrayList.size(); i++) {
             entries.add(new PieEntry((float) actualengagementArrayList.get(i).getSalesAch(), actualengagementArrayList.get(i).getLevel()));
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#5b9cd6"));
-        colors.add(Color.parseColor("#ed7d31"));
-        colors.add(Color.parseColor("#a5a5a5"));
-        colors.add(Color.parseColor("#ffc000"));
-        colors.add(Color.parseColor("#5aa250"));
+        colors.add(Color.parseColor("#ffcb00"));
+        colors.add(Color.parseColor("#66ff66"));
+        colors.add(Color.parseColor("#66ffff"));
+        colors.add(Color.parseColor("#6666ff"));
+        colors.add(Color.parseColor("#8000ff"));
         PieDataSet dataset = new PieDataSet(entries, "");
-//        for (int i = 0 ; i < actualengagementArrayList.size();i++)
-//        {
-            dataset.setColors(colors);
-//        }
+        dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
         dataset.setValueTextColor(Color.BLACK);
         pieData = new PieData(dataset);
-        dataset.setValueLinePart1Length(0.8f);
-        dataset.setValueLinePart2Length(0.5f);
         pieChart_lifestage.setDrawMarkers(false);
-        pieData.setValueTextSize(10f);
         dataset.setXValuePosition(null);
-        dataset.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataset.setYValuePosition(null);
         pieChart_lifestage.setEntryLabelColor(Color.BLACK);
+        pieChart_lifestage.setRotationEnabled(false);
         pieChart_lifestage.setExtraOffsets(5, 10, 5, 5);
         pieChart_lifestage.setHoleRadius(40);
         pieChart_lifestage.setHoleColor(Color.WHITE);
@@ -645,91 +608,98 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
-        Legend l = pieChart_lifestage.getLegend();
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
-        l.setWordWrapEnabled(true);
-        l.setEnabled(true);
-        l.setFormSize(11f);
+        pieChart_lifestage.setOnChartValueSelectedListener(this);
+        Legend legend = pieChart_lifestage.getLegend();
+        for (int i = 0; i < actualengagementArrayList.size(); i++) {
+
+
+            LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
+                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_legend, null);
+
+            TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
+            TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
+            TextView txt_legend_val = (TextView) view.findViewById(R.id.txt_legend_val);
+            txt_legend_color.setBackgroundColor(colors.get(i));
+            txt_legend_name.setText(actualengagementArrayList.get(i).getLevel());
+            txt_legend_val.setText("" + String.format("%.1f",actualengagementArrayList.get(i).getSalesAch()));
+            linearLayout1.addView(view);
+        }
+        legend.setEnabled(false);
         Reusable_Functions.hDialog();
 
     }
 
     //Pie Chart for LifeStage Customer
-    private void callLSCustPieChart()
-    {
+    private void callLSCustPieChart() {
         entries = new ArrayList<PieEntry>();
         for (int i = 0; i < actualengagementArrayList.size(); i++)
         {
-            entries.add(new PieEntry((float)actualengagementArrayList.get(i).getCustAch() , actualengagementArrayList.get(i).getLevel()));
+            entries.add(new PieEntry((float) actualengagementArrayList.get(i).getCustAch(), actualengagementArrayList.get(i).getLevel()));
         }
-
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#5b9cd6"));
-        colors.add(Color.parseColor("#ed7d31"));
-        colors.add(Color.parseColor("#a5a5a5"));
-        colors.add(Color.parseColor("#ffc000"));
-        colors.add(Color.parseColor("#5aa250"));
+        colors.add(Color.parseColor("#ffcb00"));
+        colors.add(Color.parseColor("#66ff66"));
+        colors.add(Color.parseColor("#66ffff"));
+        colors.add(Color.parseColor("#6666ff"));
+        colors.add(Color.parseColor("#8000ff"));
         PieDataSet dataset = new PieDataSet(entries, "");
-//        for (int i = 0; i < actualengagementArrayList.size();i++)
-//        {
-            dataset.setColors(colors);
-
-//        }
+        dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
         dataset.setValueTextColor(Color.BLACK);
         pieData = new PieData(dataset);
-        dataset.setValueLinePart1Length(0.8f);
-        dataset.setValueLinePart2Length(0.5f);
         pieChart_lifestage.setDrawMarkers(false);
-        pieData.setValueTextSize(10f);
         dataset.setXValuePosition(null);
-        dataset.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataset.setYValuePosition(null);
+        pieChart_lifestage.setRotationEnabled(false);
         pieChart_lifestage.setEntryLabelColor(Color.BLACK);
         pieChart_lifestage.setExtraOffsets(5, 10, 5, 5);
         pieChart_lifestage.setHoleRadius(40);
         pieChart_lifestage.setHoleColor(Color.WHITE);
         pieChart_lifestage.setTransparentCircleRadius(0);
         pieChart_lifestage.setData(pieData);
-        pieChart_lifestage.notifyDataSetChanged();
         pieChart_lifestage.invalidate();
+        pieChart_lifestage.notifyDataSetChanged();
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
-        Legend l = pieChart_lifestage.getLegend();
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
-        l.setWordWrapEnabled(true);
-        l.setEnabled(true);
-        l.setFormSize(11f);
+        pieChart_lifestage.setOnChartValueSelectedListener(this);
+        Legend legend = pieChart_lifestage.getLegend();
+        linearLayout1.removeAllViewsInLayout();
+        for (int i = 0; i < actualengagementArrayList.size(); i++)
+        {
+            LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
+                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_cust_legend, null);
+            TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
+            TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
+            TextView txt_legend_val = (TextView) view.findViewById(R.id.txt_legend_val);
+            txt_legend_color.setBackgroundColor(colors.get(i));
+            txt_legend_name.setText(actualengagementArrayList.get(i).getLevel());
+            txt_legend_val.setText("" + String.format("%.1f", actualengagementArrayList.get(i).getCustAch()));
+            linearLayout1.addView(view);
+        }
+        legend.setEnabled(false);
     }
-
-    public int getRandomColor()
-    {
-        Random rnd = new Random();
-        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-    }
-
 
     @Override
     public void onValueSelected(Entry e, Highlight h)
     {
 
-        PieEntry pe = (PieEntry)e;
-        Log.e("-----",""+  pe.getLabel());
-         e_bandnm = pe.getLabel();
-
-        //  engagemntBandClick.communicatefrag1(e_bandnm,customerDetailsList);
-               if (Reusable_Functions.chkStatus(getActivity())) {
-            Reusable_Functions.sDialog(getActivity(), "Loading...");
+        PieEntry pe = (PieEntry) e;
+        Log.e("-----", "" + pe.getLabel());
+        e_bandnm = pe.getLabel();
+                if (Reusable_Functions.chkStatus(getActivity())) {
+                    Reusable_Functions.sDialog(getActivity(), "Loading...");
         offsetval = 0;
-        limit = 10;
+        limit = 100;
         count = 0;
         requestEngagementBandDetail();
-           }
+               }
         else
         {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-//
     }
 
     @Override
@@ -737,16 +707,15 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     {
 
     }
-
     private void requestEngagementBandDetail()
     {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor +"&engagementBrand="+ e_bandnm.replace(" ","%20") + "&recache=" + recache;//+ "&offset=" + offset + "&limit=" + limit;
-        Log.e("detail url 1:",""+url);
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache+ "&offset=" + offsetval + "&limit=" + limit;
+        Log.e("detail url 1:", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response 1:",""+response);
+                        Log.e("response 1:", "" + response + "size"+response.length());
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -754,44 +723,50 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                                 return;
 
                             } else
-//                            if (response.length() == limit) {
-//
-//                                for (int i = 0; i < response.length(); i++) {
-//
-//                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-//                                    detailArrayList.add(customerDetail);
-//                                }
-//                                offset = (limit * count) + limit;
-//                                count++;
-//
-//                                requestCustomerDetail();
-//
-//                            } else if (response.length() < limit) {
+
+                            if (response.length() == limit) {
+
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+                                    customerDetailsList.add(customerDetail);
+                                }
+                                offsetval = (limit * count) + limit;
+                                count++;
+
+                                requestEngagementBandDetail();
+
+                            } else if (response.length() < limit) {
 
                                 for (int i = 0; i < response.length(); i++) {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
                                 }
-                            // }
+                            }
 
-                            CustomerLookup_PageOne.valSelectedFlag = false;
-                            engagemntBandClick.communicatefrag1(e_bandnm,customerDetailsList);
+                            lv_cust_details.removeAllViews();
+                            customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
+                            lv_cust_details.setAdapter(customerDetailAdapter);
+                            customerDetailAdapter.notifyDataSetChanged();
+                            engagemntBandClick.communicatefrag1(e_bandnm);
                             CustomerLookupActivity.mViewPager.setCurrentItem(1);
-                            Reusable_Functions.hDialog();
+
                         }
                         catch (Exception e)
                         {
                             Reusable_Functions.hDialog();
-                            Log.e("exception :",""+e.getMessage());
+                            Log.e("exception :", "" + e.getMessage());
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -814,146 +789,4 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         queue.add(postRequest);
     }
 
-
-
-//    private void addActualEngagementDatatoTable(int position)
-//    {
-//        LinearLayout linearLayout = (LinearLayout) root.findViewById(R.id.linear_actual_enagement_table);
-//        for (int i = 0; i < actualengagementArrayList.size(); i++) {
-//            NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
-//            layoutInflater = (LayoutInflater) context.getApplicationContext()
-//                    .getSystemService(LAYOUT_INFLATER_SERVICE);
-//            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_cust_actaul_engagement_band, null);
-//            txt_cust_pengagementType_Val = (TextView) view.findViewById(R.id.txt_cust_aengagementType_Val);
-//            txt_cust_pCustomer_Val = (TextView) view.findViewById(R.id.txt_cust_aCustomer_Val);
-//            txt_cust_psales_Val = (TextView) view.findViewById(R.id.txt_cust_asales_Val);
-//            txt_cust_pspc_Val = (TextView) view.findViewById(R.id.txt_cust_aspc_Val);
-//
-//            txt_cust_pengagementType_Val.setText(actualengagementArrayList.get(i).getEngagementBand());
-//            txt_cust_pCustomer_Val.setText("" + format.format(Math.round(actualengagementArrayList.get(i).getCustCount())));
-//            double plan_spendVal = actualengagementArrayList.get(i).getSpend()/100000;
-//            txt_cust_psales_Val.setText("₹ " + format.format(Math.round(plan_spendVal)));
-//            txt_cust_pspc_Val.setText("" + format.format(Math.round(actualengagementArrayList.get(i).getSpc())));
-//            txt_cust_pengagementType_Val.setTag(position);
-//            txt_cust_pCustomer_Val.setTag(position);
-//            txt_cust_psales_Val.setTag(position);
-//            txt_cust_pspc_Val.setTag(position);
-////            final int  k = i;
-////            txt_cust_pengagementType_Val.setOnClickListener(new ViewGroup.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    engagemnt_band = actualengagementArrayList.get(k).getEngagementBand().toString();
-////                    Log.e("band name :",""+engagemnt_band);
-////                    engagemntBandClick.communicatefrag1(engagemnt_band);
-////                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
-////
-////                }
-////            });
-////            txt_cust_pCustomer_Val.setOnClickListener(new ViewGroup.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    engagemnt_band = actualengagementArrayList.get(k).getEngagementBand().toString();
-////                    Log.e("band name :",""+engagemnt_band);
-////                    engagemntBandClick.communicatefrag1(engagemnt_band);
-////                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
-////
-////                }
-////            });
-////            txt_cust_psales_Val.setOnClickListener(new ViewGroup.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    engagemnt_band = actualengagementArrayList.get(k).getEngagementBand().toString();
-////                    Log.e("band name :",""+engagemnt_band);
-////                    engagemntBandClick.communicatefrag1(engagemnt_band);
-////                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
-////
-////                }
-////            });
-////            txt_cust_pspc_Val.setOnClickListener(new ViewGroup.OnClickListener() {
-////                @Override
-////                public void onClick(View v)
-////                {
-////                    engagemnt_band = actualengagementArrayList.get(k).getEngagementBand().toString();
-////                    Log.e("band name :",""+engagemnt_band);
-////                    engagemntBandClick.communicatefrag1(engagemnt_band);
-////                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
-////                }
-////            });
-//            Reusable_Functions.hDialog();
-//            linearLayout.addView(view);
-//        }
-//    }
-
-//    private void addPlanEngagementDatatoTable(int position)
-//    {
-//        LinearLayout linearLayout = (LinearLayout) root.findViewById(R.id.linear_plan_enagement_table);
-//        for ( int i = 0; i < planengagementArrayList.size(); i++) {
-//            NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
-//            layoutInflater = (LayoutInflater) getActivity().getApplicationContext()
-//                    .getSystemService(LAYOUT_INFLATER_SERVICE);
-//            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_cust_engagement_band, null);
-//            txt_cust_pengagementType_Val = (TextView) view.findViewById(R.id.txt_cust_pengagementType_Val);
-//            txt_cust_pCustomer_Val = (TextView) view.findViewById(R.id.txt_cust_pCustomer_Val);
-//            txt_cust_psales_Val = (TextView) view.findViewById(R.id.txt_cust_psales_Val);
-//            txt_cust_pspc_Val = (TextView) view.findViewById(R.id.txt_cust_pspc_Val);
-//            txt_cust_psalesAch_Val = (TextView) view.findViewById(R.id.txt_cust_psalesAch_Val);
-//            txt_cust_pengagementType_Val.setText("");
-//            txt_cust_pengagementType_Val.setText(planengagementArrayList.get(i).getLevel());
-//            txt_cust_pCustomer_Val.setText("" + format.format(Math.round(planengagementArrayList.get(i).getPlanCust())));
-//            double salesVal = planengagementArrayList.get(i).getPlanSpend()/100000;
-//            txt_cust_psales_Val.setText("₹ " + format.format(Math.round(salesVal)));
-//            txt_cust_pspc_Val.setText("₹ " + format.format(Math.round(planengagementArrayList.get(i).getPlanSpc())));
-//            txt_cust_psalesAch_Val.setText(""+format.format(Math.round(planengagementArrayList.get(i).getSalesAch())));
-//            txt_cust_pengagementType_Val.setTag(i);
-//            txt_cust_pCustomer_Val.setTag(i);
-//            txt_cust_psales_Val.setTag(i);
-//            txt_cust_pspc_Val.setTag(i);
-//            final int k = i;
-//            Log.e("k :",""+k);
-////            txt_cust_pengagementType_Val.setOnClickListener(new View.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////
-////                    Log.e("onClick: ",""+txt_cust_pengagementType_Val.getTag()+planengagementArrayList.size());
-////                    engagemnt_band = planengagementArrayList.get(k).getLevel().toString();
-////                    Log.e("band name :",""+engagemnt_band);
-////                    engagemntBandClick.communicatefrag1(engagemnt_band);
-////                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
-////
-////                }
-////            });
-////            txt_cust_pCustomer_Val.setOnClickListener(new View.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    engagemnt_band = planengagementArrayList.get(k).getLevel().toString();
-////                    Log.e("band name :",""+engagemnt_band);
-////                    engagemntBandClick.communicatefrag1(engagemnt_band);
-////                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
-////
-////                }
-////            });
-////            txt_cust_psales_Val.setOnClickListener(new View.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    engagemnt_band = planengagementArrayList.get(k).getLevel().toString();
-////                    Log.e("band name :",""+engagemnt_band);
-////                    engagemntBandClick.communicatefrag1(engagemnt_band);
-////                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
-////
-////                }
-////            });
-////            txt_cust_pspc_Val.setOnClickListener(new View.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    engagemnt_band = planengagementArrayList.get(k).getLevel().toString();
-////                    Log.e("band name :",""+engagemnt_band);
-////                    engagemntBandClick.communicatefrag1(engagemnt_band);
-////                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
-////
-////                }
-////            });
-//            Reusable_Functions.hDialog();
-//            linearLayout.addView(view);
-//        }
-//    }
 }

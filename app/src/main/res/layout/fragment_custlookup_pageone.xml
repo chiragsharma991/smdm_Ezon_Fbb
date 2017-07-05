@@ -56,7 +56,7 @@
 
                         <TextView
                             android:id="@+id/txt_cust_NetSalesVal"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:layout_marginLeft="8dp"
@@ -64,6 +64,20 @@
                             android:text=""
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="17sp" />
+
+                        <TextView
+                            android:layout_alignBaseline="@+id/txt_cust_NetSalesVal"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/txt_cust_NetSalesVal"
+                            android:id="@+id/txt_cust_NetSalesLac"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="35dp"
+                            android:text="Lacs"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="13sp" />
+
 
                         <!--<ImageView-->
                         <!--android:id="@+id/txt_cust_NetSalesImage"-->
@@ -93,8 +107,9 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="8dp"
                         android:layout_alignParentBottom="true"
-                        android:hint="Sales"
-                        android:textSize="11sp" />
+                        android:hint="Sales Ach%"
+                            android:textColor="@color/smdm_blue"
+                            android:textSize="13sp" />
 
                         <TextView
                         android:id="@+id/txt_cust_NetSalesPerc"
@@ -104,7 +119,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_toRightOf="@+id/txt_cust_NetSalesName"
                         android:text=""
-                        android:textSize="11sp" />
+                        android:textSize="13sp" />
 
                         </RelativeLayout>
                     </RelativeLayout>
@@ -134,7 +149,7 @@
 
                         <TextView
                             android:id="@+id/txt_cust_PlanSalesVal"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:layout_marginLeft="8dp"
@@ -143,48 +158,22 @@
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="17sp" />
 
-                        <!--<ImageView-->
-                        <!--android:id="@+id/txt_cust_PlanSalesImage"-->
-                        <!--android:layout_width="19dp"-->
-                        <!--android:layout_height="16dp"-->
-                        <!--android:layout_alignParentRight="true"-->
-                        <!--android:layout_toLeftOf="@+id/rel_cust_PlanSalesNmPrec"-->
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--android:layout_alignParentBottom="true"-->
-                        <!--android:layout_marginBottom="15dp"-->
-                        <!--android:background="@android:color/holo_green_dark" />-->
 
-                        <!--<RelativeLayout-->
-                        <!--android:id="@+id/rel_ez_PlanSalesNmPrec"-->
-                        <!--android:layout_marginBottom="3dp"-->
-                        <!--android:layout_marginTop="5dp"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_alignParentBottom="true"-->
-                        <!--android:layout_below="@+id/txt_cust_PlanSalesVal">-->
-                        <!--<TextView-->
-                        <!--android:id="@+id/txt_cust_PlanSalesName"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_alignParentLeft="true"-->
-                        <!--android:layout_marginLeft="8dp"-->
-                        <!--android:layout_alignParentBottom="true"-->
-                        <!--android:textColor="@color/smdm_blue"-->
-                        <!--android:text="wiw"-->
-                        <!--android:textSize="11sp" />-->
+                        <TextView
+                            android:layout_alignBaseline="@+id/txt_cust_PlanSalesVal"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/txt_cust_PlanSalesVal"
+                            android:id="@+id/txt_cust_PlanSalesLac"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="35dp"
+                            android:text="Lacs"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="13sp" />
 
-                        <!--<TextView-->
-                        <!--android:id="@+id/txt_cust_PlanSalesPerc"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="8dp"-->
-                        <!--android:layout_alignParentBottom="true"-->
-                        <!--android:layout_toRightOf="@+id/txt_cust_PlanSalesName"-->
-                        <!--android:text="10"-->
-                        <!--android:textColor="@color/smdm_blue"-->
-                        <!--android:textSize="11sp" />-->
 
-                        <!--</RelativeLayout>-->
+
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -257,7 +246,7 @@
                                 android:layout_marginLeft="8dp"
                                 android:hint="SPC"
                                 android:textColor="@color/smdm_blue"
-                                android:textSize="11sp" />
+                                android:textSize="13sp" />
 
                             <TextView
                                 android:id="@+id/txt_cust_ActualCustPerc"
@@ -268,7 +257,7 @@
                                 android:layout_toRightOf="@+id/txt_cust_ActualCustName"
                                 android:hint=""
                                 android:textColor="@color/smdm_blue"
-                                android:textSize="11sp" />
+                                android:textSize="13sp" />
 
                         </RelativeLayout>
                     </RelativeLayout>
@@ -325,7 +314,7 @@
                                 android:layout_marginLeft="8dp"
                                 android:hint="SPC"
                                 android:textColor="@color/smdm_blue"
-                                android:textSize="11sp" />
+                                android:textSize="13sp" />
 
                             <TextView
                                 android:id="@+id/txt_cust_PlanCustPerc"
@@ -336,8 +325,7 @@
                                 android:layout_toRightOf="@+id/txt_cust_PlanCustName"
                                 android:hint=""
                                 android:textColor="@color/smdm_blue"
-                                android:textSize="11sp" />
-
+                                android:textSize="13sp" />
 
                         </RelativeLayout>
                     </RelativeLayout>
@@ -452,7 +440,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="visible"
                 android:id="@+id/lin_plan_engagement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -467,7 +454,6 @@
                     android:background="@color/smdm_divider_Black" />
 
                 <RelativeLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:background="@color/white"
@@ -483,10 +469,9 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:textStyle="bold"
-                        android:text="Band"
+                        android:text="Engagement Mix PVA"
                         android:textColor="@color/smdm_dark_Black"
                         android:textSize="@dimen/smdm_departmentTitleLarge" />
-
 
                     <Switch
                         android:layout_centerVertical="true"
@@ -495,7 +480,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/salescustswitch"
                         android:layout_alignParentRight="true"
-                        android:background="@drawable/border3"
+
                         />
 
                     <TextView
@@ -508,113 +493,22 @@
                         android:layout_toLeftOf="@id/salescustswitch"
                         android:layout_alignBaseline="@id/salescustswitch"/>
 
-
-
                 </RelativeLayout>
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pieChart_band"
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"/>
+                    android:layout_height="225dp"/>
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<RelativeLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="40dp"-->
-                        <!--android:background="#e3e4e5">-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txt_cust_pengagementType"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentLeft="true"-->
-                            <!--android:layout_centerInParent="true"-->
-                            <!--android:layout_marginLeft="5dp"-->
-                            <!--android:layout_toLeftOf="@+id/txt_cust_pCustomer"-->
-                            <!--android:text="Engagement Type"-->
-                            <!--android:textColor="@color/smdm_status_pending_color"-->
-                            <!--android:textSize="@dimen/smdm_departmentTitleLarge"-->
-                            <!--android:textStyle="normal" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txt_cust_pCustomer"-->
-                            <!--android:layout_width="60dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentRight="true"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:layout_gravity="center_vertical"-->
-                            <!--android:layout_marginLeft="5dp"-->
-                            <!--android:layout_marginRight="180dp"-->
-                            <!--android:layout_toLeftOf="@+id/txt_cust_psales"-->
-                            <!--android:gravity="center_vertical|center"-->
-                            <!--android:text="Customer"-->
-                            <!--android:layout_marginBottom="5dp"-->
-                            <!--android:textColor="@color/smdm_status_pending_color"-->
-                            <!--android:textSize="@dimen/smdm_departmentTitleLarge"-->
-                            <!--android:textStyle="normal" />-->
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/linear_band_legend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+              />
 
 
-                        <!--<TextView-->
-                            <!--android:id="@+id/txt_cust_psales"-->
-                            <!--android:layout_width="60dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentRight="true"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:layout_marginRight="120dp"-->
-                            <!--android:layout_toLeftOf="@+id/txt_cust_pspc"-->
-                            <!--android:gravity="center_vertical|center"-->
-                            <!--android:text="Sales\n(Lacs)"-->
-                            <!--android:textColor="@color/smdm_status_pending_color"-->
-                            <!--android:textSize="@dimen/smdm_departmentTitleLarge"-->
-                            <!--android:textStyle="normal" />-->
-
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txt_cust_pspc"-->
-                            <!--android:layout_width="60dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentRight="true"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:layout_marginRight="60dp"-->
-                            <!--android:layout_toLeftOf="@+id/txt_cust_psalesAch"-->
-                            <!--android:gravity="center_vertical|center"-->
-                            <!--android:text="SPC"-->
-                            <!--android:textColor="@color/smdm_status_pending_color"-->
-                            <!--android:textSize="@dimen/smdm_departmentTitleLarge"-->
-                            <!--android:textStyle="normal" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txt_cust_psalesAch"-->
-                            <!--android:layout_width="60dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentRight="true"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:gravity="center_vertical|center"-->
-                            <!--android:text="Sales\nAch%"-->
-                            <!--android:textColor="@color/smdm_status_pending_color"-->
-                            <!--android:textSize="@dimen/smdm_departmentTitleLarge"-->
-                            <!--android:textStyle="normal" />-->
-                    <!--</RelativeLayout>-->
-
-                    <!--<LinearLayout-->
-                        <!--android:id="@+id/linear_plan_enagement_table"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@color/white"-->
-                        <!--android:clickable="true"-->
-                        <!--android:orientation="vertical"></LinearLayout>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/view4"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="1dp"-->
-                        <!--android:background="@color/smdm_divider_Black" />-->
-
-                <!--</LinearLayout>-->
             </LinearLayout>
 
             <LinearLayout
@@ -625,11 +519,11 @@
                 android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/view5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/smdm_divider_Black" />
+                <!--<TextView-->
+                    <!--android:id="@+id/view5"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:background="@color/smdm_divider_Black" />-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -647,124 +541,25 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:textStyle="bold"
-                        android:text="LifeStage"
+                        android:text="Lifestage Mix PVA"
                         android:textColor="@color/smdm_dark_Black"
                         android:textSize="@dimen/smdm_departmentTitleLarge" />
 
-
-                    <Switch
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/salescustswitch_lifestage"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/border3"
-                        />
-
-
-                    <TextView
-                        android:id="@+id/txt_ls_switch_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/smdm_store_title_normal"
-                        android:text="Sales"
-                        android:layout_marginRight="7dp"
-                        android:layout_toLeftOf="@id/salescustswitch_lifestage"
-                        android:layout_alignBaseline="@id/salescustswitch_lifestage"/>
 
                 </RelativeLayout>
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pieChart_lifestage"
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"/>
+                    android:layout_height="225dp"/>
 
 
-                <!--<LinearLayout-->
-                    <!--android:visibility="gone"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<RelativeLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="40dp"-->
-                        <!--android:background="#e3e4e5">-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txt_cust_aengagementType"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentLeft="true"-->
-                            <!--android:layout_centerInParent="true"-->
-                            <!--android:layout_marginLeft="5dp"-->
-                            <!--android:layout_toLeftOf="@+id/txt_cust_aCustomer"-->
-                            <!--android:text="Engagement Type"-->
-                            <!--android:textColor="@color/smdm_status_pending_color"-->
-                            <!--android:textSize="@dimen/smdm_departmentTitleLarge"-->
-                            <!--android:textStyle="normal" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txt_cust_aCustomer"-->
-                            <!--android:layout_width="70dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentRight="true"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:layout_gravity="center_vertical"-->
-                            <!--android:layout_marginLeft="5dp"-->
-                            <!--android:layout_marginRight="155dp"-->
-                            <!--android:layout_toLeftOf="@+id/txt_cust_asales"-->
-                            <!--android:gravity="center_vertical|center"-->
-                            <!--android:text="Customer"-->
-                            <!--android:textColor="@color/smdm_status_pending_color"-->
-                            <!--android:textSize="@dimen/smdm_departmentTitleLarge"-->
-                            <!--android:textStyle="normal" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txt_cust_asales"-->
-                            <!--android:layout_width="70dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentRight="true"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:layout_marginRight="75dp"-->
-                            <!--android:layout_toLeftOf="@+id/txt_cust_aspc"-->
-                            <!--android:gravity="center_vertical|center"-->
-                            <!--android:text="Sales\n(Lacs)"-->
-                            <!--android:textColor="@color/smdm_status_pending_color"-->
-                            <!--android:textSize="@dimen/smdm_departmentTitleLarge"-->
-                            <!--android:textStyle="normal" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/txt_cust_aspc"-->
-                            <!--android:layout_width="70dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentRight="true"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:layout_toLeftOf="@+id/txt_cust_asalesAch"-->
-                            <!--android:gravity="center_vertical|center"-->
-                            <!--android:text="SPC"-->
-                            <!--android:textColor="@color/smdm_status_pending_color"-->
-                            <!--android:textSize="@dimen/smdm_departmentTitleLarge"-->
-                            <!--android:textStyle="normal" />-->
-
-
-                    <!--</RelativeLayout>-->
-
-                    <!--<LinearLayout-->
-                        <!--android:id="@+id/linear_actual_enagement_table"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@color/white"-->
-                        <!--android:clickable="true"-->
-                        <!--android:orientation="vertical"></LinearLayout>-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/view6"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="1dp"-->
-                        <!--android:background="@color/smdm_divider_Black" />-->
-                <!--</LinearLayout>-->
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/linear_lifestage_legend"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"/>
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

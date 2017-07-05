@@ -170,7 +170,11 @@ public class CustomerDetailActivity extends AppCompatActivity {
         mail_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(txt_cust_email.getTextSize()!=0)
+                if(txt_cust_email.getTextSize() ==0 || txt_cust_email.getText().equals("N/A"))
+                {
+                    return ;
+                }
+                 else
                 {
                     Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                     emailIntent.setData(Uri.parse("mailto:"+txt_cust_email.getText().toString()));
@@ -240,12 +244,13 @@ public class CustomerDetailActivity extends AppCompatActivity {
                             customerDetailsarray.add(customer_Details);
                         }
                     }
+                    NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
                     txt_cust_name.setText(customerDetailsarray.get(0).getFullName());
                     txt_cust_email.setText(customerDetailsarray.get(0).getEmailAddress());
                     txt_cust_mobileNo.setText(customerDetailsarray.get(0).getMobileNumber());
                     txt_cd_last_spent_Val.setText("₹ " + Math.round(customerDetailsarray.get(0).getLastSpend()));
                     txt_cd_last_visit_Val.setText(customerDetailsarray.get(0).getLastPurchaseDate());
-                    txt_cd_tot_spent_Val.setText("₹ " + Math.round(customerDetailsarray.get(0).getLast12MthSpend()));
+                    txt_cd_tot_spent_Val.setText("₹ " + format.format(Math.round(customerDetailsarray.get(0).getLast12MthSpend())));
                     txt_cd_tot_visit_Val.setText("" + Math.round(customerDetailsarray.get(0).getLast12MthVisit()));
                     createPieChart();
                     addTabs(cd_viewPager);
@@ -353,10 +358,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
     private void createPieChart()
     {
-        pieChart.addPieSlice(new PieModel("Food", (int)customerDetailsarray.get(0).getFoodContr(), Color.parseColor("#5b9cd6")));
-        pieChart.addPieSlice(new PieModel("Fashion", (int) customerDetailsarray.get(0).getFashionContr(), Color.parseColor("#ed7d31"))); //CDA67F
-        pieChart.addPieSlice(new PieModel("Home", (int) customerDetailsarray.get(0).getHomeContr(), Color.parseColor("#a5a5a5"))); //CDA67F
-        pieChart.addPieSlice(new PieModel("Electronics", (int) customerDetailsarray.get(0).getElectronicsContr(), Color.parseColor("#ffc000"))); //CDA67F
+        pieChart.addPieSlice(new PieModel("Food", (int)customerDetailsarray.get(0).getFoodContr(), Color.parseColor("#ffcb00")));
+        pieChart.addPieSlice(new PieModel("Fashion", (int) customerDetailsarray.get(0).getFashionContr(), Color.parseColor("#66ff66"))); //CDA67F
+        pieChart.addPieSlice(new PieModel("Home", (int) customerDetailsarray.get(0).getHomeContr(), Color.parseColor("#66ffff"))); //CDA67F
+        pieChart.addPieSlice(new PieModel("Electronics", (int) customerDetailsarray.get(0).getElectronicsContr(), Color.parseColor("#6666ff"))); //CDA67F
         pieChart.animate();
         pieChart.setDrawValueInPie(true);
         pieChart.setOnItemFocusChangedListener(new IOnItemFocusChangedListener()
@@ -373,7 +378,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.sDialog(context, "Loading...");
                             requestPieChartOnFocus();
-
+                            txt_cd_last_spent_Val.setTextColor(Color.parseColor("#ffcb00"));
+                            txt_cd_last_visit_Val.setTextColor(Color.parseColor("#ffcb00"));
+                            txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#ffcb00"));
+                            txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#ffcb00"));
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -384,6 +392,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.sDialog(context, "Loading...");
                             requestPieChartOnFocus();
+                            txt_cd_last_spent_Val.setTextColor(Color.parseColor("#66ff66"));
+                            txt_cd_last_visit_Val.setTextColor(Color.parseColor("#66ff66"));
+                            txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#66ff66"));
+                            txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#66ff66"));
 
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -395,7 +407,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.sDialog(context, "Loading...");
                             requestPieChartOnFocus();
-
+                            txt_cd_last_spent_Val.setTextColor(Color.parseColor("#66ffff"));
+                            txt_cd_last_visit_Val.setTextColor(Color.parseColor("#66ffff"));
+                            txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#66ffff"));
+                            txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#66ffff"));
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -406,7 +421,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.sDialog(context, "Loading...");
                             requestPieChartOnFocus();
-
+                            txt_cd_last_spent_Val.setTextColor(Color.parseColor("#6666ff"));
+                            txt_cd_last_visit_Val.setTextColor(Color.parseColor("#6666ff"));
+                            txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#6666ff"));
+                            txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#6666ff"));
                         }
                         else
                         {

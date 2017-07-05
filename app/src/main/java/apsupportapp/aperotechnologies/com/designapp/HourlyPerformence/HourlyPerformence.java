@@ -275,7 +275,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     private void callPiechart() {
 
         pieChart.clearChart();//pieChart.clearAnimation();//pieChart.clearFocus();pieChart.invalidate();
-        int[] colors = {Color.parseColor("#FFCB00"), Color.parseColor("#66FF66"), Color.parseColor("#FF8000"), Color.parseColor("#0080FF"), Color.parseColor("#8000FF"), Color.parseColor("#800040"), Color.parseColor("#808000"), Color.parseColor("#66FFFF"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
+        int[] colors = {Color.parseColor("#20b5d3"), Color.parseColor("#21d24c"), Color.parseColor("#f5204c"), Color.parseColor("#f89a20"), Color.parseColor("#78bc2c"), Color.parseColor("#db5a81"), Color.parseColor("#955eb9"), Color.parseColor("#dcd52d"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
 
         addleggend.removeAllViewsInLayout();
         for (int i = 0; i < piechart_list.size(); i++) {

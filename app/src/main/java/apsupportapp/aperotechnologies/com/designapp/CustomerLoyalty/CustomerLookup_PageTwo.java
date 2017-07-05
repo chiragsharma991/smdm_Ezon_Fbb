@@ -63,9 +63,9 @@ public class CustomerLookup_PageTwo extends Fragment {
     OnEngagemntBandClick onEngagemntBandClick;
     TextView txt_engagementnm_Val, txt_pending_Val, txt_color_engagemnt_nm;
     static EditText edt_cust_Search;
-    RecyclerView lv_cust_details;
+    static RecyclerView lv_cust_details;
     CustomerDetail customerDetail;
-    CustomerDetailAdapter customerDetailAdapter;
+    static CustomerDetailAdapter customerDetailAdapter;
     ArrayList<CustomerDetail> detailArrayList;
     ViewGroup root;
     Context context;
@@ -77,12 +77,11 @@ public class CustomerLookup_PageTwo extends Fragment {
     JsonArrayRequest postRequest;
     private String recache = "true";
     String updated_userId;
-    int offset = 0, count = 0, limit = 100;
+    int offset = 0, count = 0, limit = 500;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getActivity();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         updated_userId = userId.substring(0, userId.length() - 5);
@@ -102,30 +101,21 @@ public class CustomerLookup_PageTwo extends Fragment {
         gson = new Gson();
         initialise();
         Log.e("test", "onCreateView: page two" );
-//        if (CustomerLookup_PageOne.valSelectedFlag)
-//        {
-//            Log.e("came here", ""+CustomerLookup_PageOne.valSelectedFlag);
 
-//        }
-//        else
-//        {
-//            Log.e("welcome", ""+CustomerLookup_PageOne.valSelectedFlag);
 
             if (Reusable_Functions.chkStatus(context))
             {
                 Reusable_Functions.sDialog(context, "Loading...");
                 offset = 0;
-                limit = 10;
+                limit = 500;
                 count = 0;
-//                txt_color_engagemnt_nm.setBackground(null);
-//                txt_engagementnm_Val.setText("");
                 requestCustomerDetail();
             }
             else
             {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             }
-//        }
+
         edt_cust_Search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -143,8 +133,6 @@ public class CustomerLookup_PageTwo extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
-
-
 
         lv_cust_details.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -167,9 +155,12 @@ public class CustomerLookup_PageTwo extends Fragment {
     {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
+
             if (checkNetworkFalse) {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
             }
+
+            Log.e("is visible","");
         }
     }
 
@@ -195,20 +186,17 @@ public class CustomerLookup_PageTwo extends Fragment {
         }
     }
 
-    public void fragmentCommunication(String enagagemntband, ArrayList<CustomerDetail> customerDetailsList) {
+    public void fragmentCommunication(String enagagemntband)
+    {
         e_bandnm = enagagemntband;
-    //    Log.e("engagement band :", "" + e_bandnm + "\tsize" + customerDetailsList.size());
-        Log.e("test", "inerface call size is"+ CustomerLookup_PageOne.customerDetailsList.size());
-        detailArrayList.clear();
-        detailArrayList.addAll(CustomerLookup_PageOne.customerDetailsList);
-        customerDetailAdapter.notifyDataSetChanged();
+        Log.e("test", "inerface call size is");
+        Reusable_Functions.hDialog();
 
     }
 
-
     private void requestCustomerDetail()
     {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&recache=" + recache;//+ "&offset=" + offset + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&recache=" + recache+ "&offset=" + offset + "&limit=" + limit;
         Log.e("detail url :", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -223,25 +211,25 @@ public class CustomerLookup_PageTwo extends Fragment {
 
                             }
                             else
-//                            if (response.length() == limit) {
-//
-//                                for (int i = 0; i < response.length(); i++) {
-//
-//                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-//                                    detailArrayList.add(customerDetail);
-//                                }
-//                                offset = (limit * count) + limit;
-//                                count++;
-//
-//                                requestCustomerDetail();
-//
-//                            } else if (response.length() < limit) {
+                            if (response.length() == limit) {
+
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+                                    detailArrayList.add(customerDetail);
+                                }
+                                offset = (limit * count) + limit;
+                                count++;
+
+                                requestCustomerDetail();
+
+                            } else if (response.length() < limit) {
 
                                 for (int i = 0; i < response.length(); i++) {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     detailArrayList.add(customerDetail);
                                 }
-                            // }
+                             }
 
                             lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             lv_cust_details.setOnFlingListener(null);

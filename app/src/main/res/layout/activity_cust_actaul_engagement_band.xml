@@ -56,7 +56,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/txt_cust_asalesAch_Val"
             android:gravity="center_vertical|center"
             android:text=""
             android:textColor="#404040"

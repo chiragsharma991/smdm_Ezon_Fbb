@@ -92,11 +92,19 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    public void communicatefrag1(String enagagemntband, ArrayList<CustomerDetail> customerDetailsList) {
+    protected void onDestroy() {
+        super.onDestroy();
+        CustomerLookup_PageTwo.customerDetailAdapter.notifyItemRemoved(0);
+        CustomerLookup_PageTwo.customerDetailAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void communicatefrag1(String enagagemntband)
+    {
         CustomerLookup_PageTwo fragment = (CustomerLookup_PageTwo) adapter.getItem(1);
         if (fragment != null)
         {
-            fragment.fragmentCommunication(enagagemntband,customerDetailsList);
+            fragment.fragmentCommunication(enagagemntband);
         }
     }
 }

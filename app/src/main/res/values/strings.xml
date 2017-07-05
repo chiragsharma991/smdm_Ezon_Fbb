@@ -151,15 +151,12 @@
     <string name="fi_title">Freshness Index</string>
 
     <!--Customer Loyalty-->
-    <string name="cust_loyalty">Customer Loyalty</string>
+    <string name="cust_loyalty">Customer Engagement</string>
     <string name= "hourly_perform">Hourly Performance</string>
-    <string name="cust_lookup">Customer Lookup</string>
-    <string name="actual_customer">Actual Customers</string>
+    <string name="cust_lookup">Customer Plan Engagement</string>
+    <string name="actual_customer">Customers</string>
     <string name="plan_customers">Plan Customers</string>
-
-
     <string name="oe_title">Option Efficiency</string>
-
     <string-array name="colour_name">
         <item>Blue</item>
         <item>Green</item>
@@ -181,6 +178,5 @@
     <string name="ezone_assortment_analysis">Assortment Analysis</string>
     <string name="ezone_filter_location">Location</string>
     <string name="ezone_filter_product">Product</string>
-
 
 </resources>
