@@ -75,7 +75,8 @@
                                         android:gravity="left"
                                         android:textColor="@color/smdm_default_color"
                                         android:text="Net Sales"
-                                        android:textSize="12sp" />
+                                        android:textSize="12sp"
+                                        />
 
                                 </LinearLayout>
                                 <LinearLayout
@@ -167,7 +168,7 @@
                                         android:id="@+id/hrl_arh"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="00"
+                                        android:text="0"
                                         android:singleLine="true"
                                         android:textColor="@color/colorPrimary"
                                         android:textSize="17sp"

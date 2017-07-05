@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -81,10 +82,11 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private int offset = 0, limit = 10, count = 0;
     static ArrayList<CustomerDetail> customerDetailsarray;
     static ArrayList<CustomerRecomdtn> customerDetailArrayList;
+    private ArrayList<CustomerDetail> detailList;
     private PieChart pieChart;
     private ViewPager cd_viewPager;
     private TabLayout cd_tab;
-    private LinearLayout phn_call, mail_call,linear_legend;
+    private LinearLayout phn_call, mail_call, linear_legend;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     private ProgressBar progressBar;
 
@@ -134,20 +136,24 @@ public class CustomerDetailActivity extends AppCompatActivity {
         btn_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pieChart.clearChart();
-                pieChart.setDrawValueInPie(false);
-
+                txt_cd_last_spent_Val.setText("");
+                txt_cd_last_visit_Val.setText("");
+                txt_cd_tot_spent_Val.setText("");
+                txt_cd_tot_visit_Val.setText("");
+                pieChart.setCurrentItem(0);
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Loading...");
-                    customerDetailArrayList = new ArrayList<CustomerRecomdtn>();
-                    requestCustomerRecomdtn();
+                    requestResetCustomerDetailAPI();
 
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
     }
+
 
     private void addTabs(ViewPager viewPager) {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
@@ -159,6 +165,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private void initialise_UI() {
         customerDetailArrayList = new ArrayList<CustomerRecomdtn>();
         customerDetailsarray = new ArrayList<CustomerDetail>();
+        detailList = new ArrayList<CustomerDetail>();
         txt_cust_name = (TextView) findViewById(R.id.txt_cust_name);
         txt_cust_mobileNo = (TextView) findViewById(R.id.txt_cust_mobileNo);
         txt_cust_email = (TextView) findViewById(R.id.txt_cust_email);
@@ -175,7 +182,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
         btn_more = (Button) findViewById(R.id.btn_cd_more);
         btn_reset = (Button) findViewById(R.id.btn_cd_reset);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        linear_legend = (LinearLayout)findViewById(R.id.linear_legend);
+        linear_legend = (LinearLayout) findViewById(R.id.linear_legend);
 
         phn_call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,25 +248,19 @@ public class CustomerDetailActivity extends AppCompatActivity {
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                    } else {
+                        return;
+                    }
+                    else
+                    {
                         for (i = 0; i < response.length(); i++) {
                             customer_Details = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                             customerDetailsarray.add(customer_Details);
                         }
                     }
-                    NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
-
                     txt_cust_name.setText(customerDetailsarray.get(0).getFullName());
                     txt_cust_email.setText(customerDetailsarray.get(0).getEmailAddress());
                     txt_cust_mobileNo.setText(customerDetailsarray.get(0).getMobileNumber());
-                    txt_cd_last_spent_Val.setText("₹ " + Math.round(customerDetailsarray.get(0).getLastSpend()));
-                    txt_cd_last_spent_Val.setTextColor(Color.parseColor("#404040"));
-                    txt_cd_last_visit_Val.setText(customerDetailsarray.get(0).getLastPurchaseDate());
-                    txt_cd_last_visit_Val.setTextColor(Color.parseColor("#404040"));
-                    txt_cd_tot_spent_Val.setText("₹ " + format.format(Math.round(customerDetailsarray.get(0).getLast12MthSpend())));
-                    txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#404040"));
-                    txt_cd_tot_visit_Val.setText("" + Math.round(customerDetailsarray.get(0).getLast12MthVisit()));
-                    txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#404040"));
+                    fillTopLayout();
                     createPieChart();
                     addTabs(cd_viewPager);
                     cd_viewPager.setOffscreenPageLimit(2);
@@ -294,6 +295,86 @@ public class CustomerDetailActivity extends AppCompatActivity {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
+    }
+
+    private void requestResetCustomerDetailAPI()
+    {
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache;
+        Log.e("cust details  url ", "" + url);
+        postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.e("response details:", "" + response);
+                try {
+                    int i = 0;
+                    if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        for (i = 0; i < response.length(); i++)
+                        {
+                            JSONObject resp_obj = response.getJSONObject(i);
+                            String lastPurchaseDate = resp_obj.getString("lastPurchaseDate");
+                            double last12MthVisit = resp_obj.getDouble("last12MthVisit");
+                            double lastSpend = resp_obj.getDouble("lastSpend");
+                            double last12MthSpend = resp_obj.getDouble("last12MthSpend");
+                            NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
+                            txt_cd_last_spent_Val.setText("₹ " + Math.round(lastSpend));
+                            txt_cd_last_spent_Val.setTextColor(Color.parseColor("#404040"));
+                            txt_cd_last_visit_Val.setText(lastPurchaseDate);
+                            txt_cd_last_visit_Val.setTextColor(Color.parseColor("#404040"));
+                            txt_cd_tot_spent_Val.setText("₹ " + format.format(Math.round( last12MthSpend)));
+                            txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#404040"));
+                            txt_cd_tot_visit_Val.setText("" + Math.round(last12MthVisit));
+                            txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#404040"));
+                        }
+                    }
+                   Reusable_Functions.hDialog();
+
+                } catch (Exception e)
+                {
+                    Reusable_Functions.hDialog();
+                    Toast.makeText(context, "no data found" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+
+
+    private void fillTopLayout() {
+        NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
+        txt_cd_last_spent_Val.setText("₹ " + Math.round(customerDetailsarray.get(0).getLastSpend()));
+        txt_cd_last_spent_Val.setTextColor(Color.parseColor("#404040"));
+        txt_cd_last_visit_Val.setText(customerDetailsarray.get(0).getLastPurchaseDate());
+        txt_cd_last_visit_Val.setTextColor(Color.parseColor("#404040"));
+        txt_cd_tot_spent_Val.setText("₹ " + format.format(Math.round(customerDetailsarray.get(0).getLast12MthSpend())));
+        txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#404040"));
+        txt_cd_tot_visit_Val.setText("" + Math.round(customerDetailsarray.get(0).getLast12MthVisit()));
+        txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#404040"));
     }
 
     private void requestCustomerRecomdtn() {
@@ -353,12 +434,14 @@ public class CustomerDetailActivity extends AppCompatActivity {
     }
 
     private void createPieChart() {
+
         pieChart.addPieSlice(new PieModel("Food", (int) customerDetailsarray.get(0).getFoodContr(), Color.parseColor("#20b5d3")));
         pieChart.addPieSlice(new PieModel("Fashion", (int) customerDetailsarray.get(0).getFashionContr(), Color.parseColor("#21d24c"))); //CDA67F
         pieChart.addPieSlice(new PieModel("Home", (int) customerDetailsarray.get(0).getHomeContr(), Color.parseColor("#f5204c"))); //CDA67F
         pieChart.addPieSlice(new PieModel("Electronics", (int) customerDetailsarray.get(0).getElectronicsContr(), Color.parseColor("#f89a20"))); //CDA67F
         pieChart.animate();
         addLegendLayout();
+        pieChart.setCurrentItem(0);
         pieChart.setDrawValueInPie(false);
         pieChart.setOnItemFocusChangedListener(new IOnItemFocusChangedListener() {
             @Override
@@ -366,56 +449,68 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 Log.e("onItemFocusChanged: ", "" + _Position);
                 switch (_Position) {
                     case 0:
-                      //  pieChart.setInnerValueString("" + Math.round(customerDetailsarray.get(0).getFoodContr()) + "%");
+                        //  pieChart.setInnerValueString("" + Math.round(customerDetailsarray.get(0).getFoodContr()) + "%");
                         businessCcb = "Food";
-                        progressBar.setVisibility(View.VISIBLE);
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(context, "Loading...");
                         requestPieChartOnFocus();
                         txt_cd_last_spent_Val.setTextColor(Color.parseColor("#20b5d3"));
                         txt_cd_last_visit_Val.setTextColor(Color.parseColor("#20b5d3"));
                         txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#20b5d3"));
                         txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#20b5d3"));
-
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case 1:
-                       // pieChart.setInnerValueString("" + Math.round(customerDetailsarray.get(0).getFashionContr()) + "%");
+                        // pieChart.setInnerValueString("" + Math.round(customerDetailsarray.get(0).getFashionContr()) + "%");
                         businessCcb = "Fashion";
-                        progressBar.setVisibility(View.VISIBLE);
-                        requestPieChartOnFocus();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(context, "Loading...");
+                            requestPieChartOnFocus();
                         txt_cd_last_spent_Val.setTextColor(Color.parseColor("#21d24c"));
                         txt_cd_last_visit_Val.setTextColor(Color.parseColor("#21d24c"));
                         txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#21d24c"));
                         txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#21d24c"));
-
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case 2:
-                       // pieChart.setInnerValueString("" + Math.round(customerDetailsarray.get(0).getHomeContr()) + "%");
+                        // pieChart.setInnerValueString("" + Math.round(customerDetailsarray.get(0).getHomeContr()) + "%");
                         businessCcb = "Home";
-                        progressBar.setVisibility(View.VISIBLE);
-                        requestPieChartOnFocus();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(context, "Loading...");
+                            requestPieChartOnFocus();
                         txt_cd_last_spent_Val.setTextColor(Color.parseColor("#f5204c"));
                         txt_cd_last_visit_Val.setTextColor(Color.parseColor("#f5204c"));
                         txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#f5204c"));
                         txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#f5204c"));
-
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case 3:
-                       // pieChart.setInnerValueString("" + Math.round(customerDetailsarray.get(0).getElectronicsContr()) + "%");
+                        // pieChart.setInnerValueString("" + Math.round(customerDetailsarray.get(0).getElectronicsContr()) + "%");
                         businessCcb = "Electronics";
-                        progressBar.setVisibility(View.VISIBLE);
-                        requestPieChartOnFocus();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.sDialog(context, "Loading...");
+                            requestPieChartOnFocus();
                         txt_cd_last_spent_Val.setTextColor(Color.parseColor("#f89a20"));
                         txt_cd_last_visit_Val.setTextColor(Color.parseColor("#f89a20"));
                         txt_cd_tot_spent_Val.setTextColor(Color.parseColor("#f89a20"));
                         txt_cd_tot_visit_Val.setTextColor(Color.parseColor("#f89a20"));
-
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
             }
         });
+
     }
 
-    private void addLegendLayout()
-    {
+    private void addLegendLayout() {
         LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
         ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_pie_legend, null);
@@ -432,7 +527,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
         TextView txt_legend_val2 = (TextView) view.findViewById(R.id.txt_legend_val2);
         txt_legend_color2.setBackgroundColor(Color.parseColor("#21d24c"));
         txt_legend_name2.setText("Fashion");
-        txt_legend_val2.setText("" +Math.round(customerDetailsarray.get(0).getFashionContr()));
+        txt_legend_val2.setText("" + Math.round(customerDetailsarray.get(0).getFashionContr()));
         //Legend 3
         TextView txt_legend_color3 = (TextView) view.findViewById(R.id.txt_legend_color3);
         TextView txt_legend_name3 = (TextView) view.findViewById(R.id.txt_legend3);
@@ -474,6 +569,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                        return;
                     } else {
                         for (i = 0; i < response.length(); i++) {
                             JSONObject resp_obj = response.getJSONObject(i);
@@ -488,7 +584,6 @@ public class CustomerDetailActivity extends AppCompatActivity {
                             txt_cd_tot_visit_Val.setText("" + Math.round(last12MthVisit));
                         }
                     }
-                    progressBar.setVisibility(View.GONE);
                     Reusable_Functions.hDialog();
                 } catch (Exception e) {
                     Reusable_Functions.hDialog();
@@ -524,6 +619,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         customerDetailsarray.clear();
+        customerDetailArrayList.clear();
         finish();
     }
 }

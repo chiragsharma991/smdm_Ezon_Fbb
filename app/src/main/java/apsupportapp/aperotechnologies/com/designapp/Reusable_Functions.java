@@ -4,9 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -167,6 +169,18 @@ public class Reusable_Functions {
 
             }
         });
+    }
+
+    protected static boolean checkPermission(String strPermission, Context context){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            int result = ContextCompat.checkSelfPermission(context, strPermission);
+            if (result == PackageManager.PERMISSION_GRANTED){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

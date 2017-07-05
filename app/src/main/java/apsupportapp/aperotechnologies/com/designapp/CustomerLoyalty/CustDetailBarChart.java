@@ -147,7 +147,8 @@ public class CustDetailBarChart extends AppCompatActivity
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
     {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_CALL_PHONE: {
+            case MY_PERMISSIONS_REQUEST_CALL_PHONE:
+            {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     callPhone();
                 }
@@ -156,7 +157,8 @@ public class CustDetailBarChart extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         super.onBackPressed();
         finish();
     }
@@ -193,7 +195,7 @@ public class CustDetailBarChart extends AppCompatActivity
         valueSet1.add(new BarEntry(2, (float) customerDetailsarray.get(0).getPreferredCcb3Sales(), customerDetailsarray.get(0).getPreferredCcb3()));
         ArrayList<IBarDataSet> dataSet;
         set1 = new BarDataSet(valueSet1, "Sales");
-        set1.setColor(Color.parseColor("#ffcb00"));
+        set1.setColor(Color.parseColor("#20b5d3"));
         dataSet = new ArrayList<>();
         dataSet.add(set1);
         BarData data = new BarData(dataSet);
@@ -243,7 +245,7 @@ public class CustDetailBarChart extends AppCompatActivity
         valueSet1.add(new BarEntry(2, (float) customerDetailsarray.get(0).getPreferredBrand3Sales(), customerDetailsarray.get(0).getPreferredBrand3()));
         ArrayList<IBarDataSet> dataSet;
         set1 = new BarDataSet(valueSet1, "Sales");
-        set1.setColor(Color.parseColor("#66ff66"));
+        set1.setColor(Color.parseColor("#21d24c"));
         dataSet = new ArrayList<>();
         dataSet.add(set1);
         BarData data = new BarData(dataSet);
@@ -288,7 +290,7 @@ public class CustDetailBarChart extends AppCompatActivity
         valueSet1.add(new BarEntry(1,(float) customerDetailsarray.get(0).getTxnCntMonthStart(),"Month Start"));
         ArrayList<IBarDataSet> dataSet;
         set1 = new BarDataSet(valueSet1, "Visits");
-        set1.setColor(Color.parseColor("#66ffff"));
+        set1.setColor(Color.parseColor("#f5204c"));
         dataSet = new ArrayList<>();
         dataSet.add(set1);
         BarData data = new BarData(dataSet);
@@ -334,7 +336,7 @@ public class CustDetailBarChart extends AppCompatActivity
         valueSet1.add(new BarEntry(0, (float) customerDetailsarray.get(0).getTxnCntWed(), "Wednesday"));
         ArrayList<IBarDataSet> dataSet;
         set1 = new BarDataSet(valueSet1, "Visits");
-        set1.setColor(Color.parseColor("#6666ff"));
+        set1.setColor(Color.parseColor("#f89a20"));
         dataSet = new ArrayList<>();
         dataSet.add(set1);
         BarData data = new BarData(dataSet);
@@ -458,7 +460,7 @@ public class CustDetailBarChart extends AppCompatActivity
 
         public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler)
         {
-            return "₹ "+ mFormat.format(value);
+            return "₹ "+ Math.round(value);
         }
     }
 
@@ -472,7 +474,7 @@ public class CustDetailBarChart extends AppCompatActivity
 
         public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler)
         {
-            return "₹ "+ mFormat.format(value);
+            return "₹ "+ Math.round(value);
         }
     }
 
@@ -486,7 +488,7 @@ public class CustDetailBarChart extends AppCompatActivity
 
         public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler)
         {
-            return  mFormat.format(value);
+            return String.valueOf(Math.round(value));
         }
     }
 
@@ -500,7 +502,7 @@ public class CustDetailBarChart extends AppCompatActivity
 
         public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler)
         {
-            return  mFormat.format(value);
+            return String.valueOf(Math.round(value));
         }
     }
 }

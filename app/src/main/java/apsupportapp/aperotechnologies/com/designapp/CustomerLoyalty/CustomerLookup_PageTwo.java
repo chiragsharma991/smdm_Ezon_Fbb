@@ -50,10 +50,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 
 /**
  * Created by pamrutkar on 14/06/17.
@@ -76,8 +78,11 @@ public class CustomerLookup_PageTwo extends Fragment {
     private boolean checkNetworkFalse = false;
     JsonArrayRequest postRequest;
     private String recache = "true";
+    private String lazyScroll = "OFF";
+    private int totalItemCount = 0;  // this is total item present in listview
+    int firstVisibleItem = 0;
     String updated_userId;
-    int offset = 0, count = 0, limit = 500;
+    int offset = 0, count = 0, limit = 100;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,16 +106,14 @@ public class CustomerLookup_PageTwo extends Fragment {
         gson = new Gson();
         initialise();
         Log.e("test", "onCreateView: page two" );
-
-
-            if (Reusable_Functions.chkStatus(context))
-            {
+        if (Reusable_Functions.chkStatus(context))
+        {
                 Reusable_Functions.sDialog(context, "Loading...");
                 offset = 0;
-                limit = 500;
+                limit = 100;
                 count = 0;
                 requestCustomerDetail();
-            }
+        }
             else
             {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -133,6 +136,31 @@ public class CustomerLookup_PageTwo extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
+
+        lv_cust_details.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+                int visibleItemCount = recyclerView.getChildCount();
+                totalItemCount = mRecyclerViewHelper.getItemCount();
+                firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
+                if (firstVisibleItem + visibleItemCount == totalItemCount &&lazyScroll.equals("OFF")) {
+
+
+                    customerDetailAdapter.getItemViewType(2);
+                    lazyScroll = "ON";
+                    requestCustomerDetail();
+                }
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
 
         lv_cust_details.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -218,10 +246,9 @@ public class CustomerLookup_PageTwo extends Fragment {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     detailArrayList.add(customerDetail);
                                 }
-                                offset = (limit * count) + limit;
-                                count++;
+                                offset = offset + limit;
 
-                                requestCustomerDetail();
+                               // requestCustomerDetail();
 
                             } else if (response.length() < limit) {
 
@@ -231,11 +258,23 @@ public class CustomerLookup_PageTwo extends Fragment {
                                 }
                              }
 
-                            lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                            lv_cust_details.setOnFlingListener(null);
-                            new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
-                            customerDetailAdapter = new CustomerDetailAdapter(detailArrayList, context);
-                            lv_cust_details.setAdapter(customerDetailAdapter);
+
+                            if (lazyScroll.equals("ON")) {
+                                customerDetailAdapter.notifyDataSetChanged();
+                                lazyScroll = "OFF";
+                                customerDetailAdapter.getItemViewType(1);
+                            }
+                            else
+                            {
+                                lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                lv_cust_details.setOnFlingListener(null);
+                                new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
+                                customerDetailAdapter = new CustomerDetailAdapter(detailArrayList, context);
+                                lv_cust_details.setAdapter(customerDetailAdapter);
+
+                            }
+
+
                             Reusable_Functions.hDialog();
 
                         }
@@ -274,5 +313,7 @@ public class CustomerLookup_PageTwo extends Fragment {
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+
+
 }
 

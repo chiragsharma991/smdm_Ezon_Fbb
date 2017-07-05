@@ -94,7 +94,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         else if (viewType == VIEW_PROG)
         {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.list_footer, parent, false);
+                    .inflate(R.layout.bestpromo_footer, parent, false);
             return new CustomerDetailAdapter.ProgressViewHolder(v);
         }
 

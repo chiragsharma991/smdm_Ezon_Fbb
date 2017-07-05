@@ -135,7 +135,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             intializeUIofEzon();
             Ezon_collection();  // start method for ezon collection
 
-        } else {
+        }
+        else
+        {
             setContentView(R.layout.activity_best_performer_inventory);
             getSupportActionBar().hide();
             context = this;
@@ -146,12 +148,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             Fbb_collection();   // start Fbb collection.
 
         }
-
-
     }
 
 
-    private void Fbb_collection() {
+    private void Fbb_collection()
+    {
         BestInventListview.setVisibility(View.VISIBLE);
 
         if (Reusable_Functions.chkStatus(context)) {
@@ -471,7 +472,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                     bestPerformerInventoryAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                     footer.setVisibility(View.GONE);
-                                } else {
+                                }
+                                else
+                                {
                                     bestPerformerInventoryAdapter = new BestPerformerInventoryAdapter(BestInventList, context, TAG);
                                     BestInventListview.setAdapter(bestPerformerInventoryAdapter);
                                     Log.e(TAG, "onResponse: list size is" + BestInventList.size());
@@ -481,8 +484,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                         BestInvent_txtStoreCode.setText(BestInventList.get(0).getStoreCode());
                                         BestInvent_txtStoreName.setText(BestInventList.get(0).getStoreDesc());
                                     }
-
-
                                 }
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {
@@ -557,7 +558,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
 //---------------seton Click list listener------------------//
 
-            BestInventListview.setOnScrollListener(new AbsListView.OnScrollListener() {
+            BestInventListview.setOnScrollListener(new AbsListView.OnScrollListener()
+            {
                 public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
 
                 @Override
@@ -590,7 +592,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             BestInventListview.removeFooterView(footer);
             BestInventListview.setTag("FOOTER_REMOVE");
             Reusable_Functions.hDialog();
-
         }
     }
 

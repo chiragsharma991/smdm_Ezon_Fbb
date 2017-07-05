@@ -14,6 +14,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -86,11 +88,11 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     public static ProgressBar hrl_pi_Process;
     private String leveLDesc;  // for GeoLevel2Desc / GeoLevel3Desc.
     private int focusPosition, dupfocusPosition = 0;
+    private LinearLayout addleggend;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hourly_performence);
         getSupportActionBar().hide();
@@ -114,19 +116,16 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         functionality();
     }
 
-    private void functionality()
-    {
+    private void functionality() {
 
-        if (Reusable_Functions.chkStatus(context))
-        {
+        if (Reusable_Functions.chkStatus(context)) {
             mpm_model model = new mpm_model();
             ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
 
-        }
-        else
-        {
+        } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
@@ -247,6 +246,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         barChart.setBackgroundColor(Color.WHITE);
         barChart.setDescription(null);
 
+
         Legend l = barChart.getLegend();
         // modify the legend ... by default it is on the left
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
@@ -276,17 +276,24 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
         pieChart.clearChart();//pieChart.clearAnimation();//pieChart.clearFocus();pieChart.invalidate();
         int[] colors = {Color.parseColor("#FFCB00"), Color.parseColor("#66FF66"), Color.parseColor("#FF8000"), Color.parseColor("#0080FF"), Color.parseColor("#8000FF"), Color.parseColor("#800040"), Color.parseColor("#808000"), Color.parseColor("#66FFFF"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
-        for (int i = 0; i < piechart_list.size(); i++)
-        {
+
+        addleggend.removeAllViewsInLayout();
+        for (int i = 0; i < piechart_list.size(); i++) {
+
             Log.e(TAG, "callPiechart: " + piechart_list.get(0).getLevel());
 
-            if (piechart_list.size() <= 10)
-            {
-                pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(), colors[i]));
-            }
-            else
-            {
-                pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(), getRandomColor()));
+            if (piechart_list.size() <= 10) {
+                int usecolor = colors[i];
+                pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(), usecolor));
+                addViewLayout(usecolor, i);
+
+            } else {
+
+                int usecolor = getRandomColor();
+                pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(), usecolor));
+                addViewLayout(usecolor, i);
+
+
             }
         }
         // pieChart.addPieSlice(new PieModel());
@@ -308,23 +315,31 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     }
 
-    private void changefocuscall(int _Position)
-    {
+    private void addViewLayout(int usecolor, int j) {
+        LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
+                .getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_legend, null);
+        TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
+        TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
+        TextView txt_legend_val = (TextView) view.findViewById(R.id.txt_legend_val);
+        txt_legend_color.setBackgroundColor(usecolor);
+        txt_legend_name.setText(piechart_list.get(j).getLevel());
+        txt_legend_val.setText("" + String.format("%.1f", piechart_list.get(j).getSalesContr()));
+        addleggend.addView(view);
+    }
+
+    private void changefocuscall(int _Position) {
         focusOnPie = true;
         leveLDesc = concept_toggle == true ? "geoLevel2Desc=" + piechart_list.get(_Position).getLevel().replace(" ", "%20").replace("&", "%26").replace("%", "%25") : "geoLevel3Desc=" + piechart_list.get(_Position).getLevel().replace(" ", "%20").replace("&", "%26").replace("%", "%25");
-        if (Reusable_Functions.chkStatus(context))
-        {
-            if (ApiRequest.postRequest != null)
-            {
+        if (Reusable_Functions.chkStatus(context)) {
+            if (ApiRequest.getRequest != null) {
                 Log.e(TAG, ": cancel request>>>>>>>");
-                ApiRequest.postRequest.cancel();
+                ApiRequest.getRequest.cancel();
             }
             mpm_model model = new mpm_model();
             ApiCallBack(model, 0);
 
-        }
-        else
-        {
+        } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
@@ -350,6 +365,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         barChart = (CombinedChart) findViewById(R.id.hrl_barchart);
         listView = (RecyclerView) findViewById(R.id.hrl_geoPerformance_listview);
         netSales = (TextView) findViewById(R.id.hrl_netSales);
+        addleggend = (LinearLayout) findViewById(R.id.hrl_addleggend);
         hrl_btnBack = (RelativeLayout) findViewById(R.id.hrl_BtnBack);
         hrl_pi_Process = (ProgressBar) findViewById(R.id.hrl_pi_process);
         hrl_pi_Process.setVisibility(View.GONE);
@@ -361,8 +377,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         Hrl_segmented = (SegmentedGroup) findViewById(R.id.hrl_segmented);
         Hrl_segmented.setOnCheckedChangeListener(this);
         footer = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.activity_listview, null, false);
-
-
         hrl_btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -425,7 +439,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case 0:
                 Log.e(TAG, "Total list: " + list.size());
                 netSales.setText("₹" + thousandSaperator.format((int) list.get(0).getSaleNetVal()));
-                archPercent.setText("" + (int) list.get(0).getSalesAch() + "%");
+                archPercent.setText(""+String.format("%.1f", list.get(0).getSalesAch()) + "%");
                 units.setText(String.format("%.1f", list.get(0).getUnitsBill()));
                 spend.setText(String.format("%.1f", list.get(0).getSpendBill()));
                 salesNetValue = (int) list.get(0).getSaleNetVal();
@@ -579,9 +593,9 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 concept_toggle = true;
                 dupfocusPosition = 0;
                 if (Reusable_Functions.chkStatus(context)) {
-                    if (ApiRequest.postRequest != null) {
+                    if (ApiRequest.getRequest != null) {
                         Log.e(TAG, ": cancel request>>>>>>>");
-                        ApiRequest.postRequest.cancel();
+                        ApiRequest.getRequest.cancel();
                     }
                     Reusable_Functions.animateScaleIn(hrl_pi_Process);
                     mpm_model model = new mpm_model();
@@ -596,9 +610,9 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 concept_toggle = false;
                 dupfocusPosition = 0;
                 if (Reusable_Functions.chkStatus(context)) {
-                    if (ApiRequest.postRequest != null) {
+                    if (ApiRequest.getRequest != null) {
                         Log.e(TAG, ": cancel request>>>>>>>");
-                        ApiRequest.postRequest.cancel();
+                        ApiRequest.getRequest.cancel();
                     }
                     Reusable_Functions.animateScaleIn(hrl_pi_Process);
                     mpm_model model = new mpm_model();

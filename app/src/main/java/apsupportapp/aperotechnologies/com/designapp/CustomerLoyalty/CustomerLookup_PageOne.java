@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
@@ -70,6 +71,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyHeader;
 
 
@@ -112,7 +114,9 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private PieData pieData;
     private Switch sales_cust_switch;
     private boolean bandcustToggle = false;
-
+    private String lazyScroll = "OFF";
+    private int totalItemCount = 0;  // this is total item present in listview
+    int firstVisibleItem = 0;
 
     public CustomerLookup_PageOne() {
 
@@ -160,6 +164,29 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
+        lv_cust_details.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+                int visibleItemCount = recyclerView.getChildCount();
+                totalItemCount = mRecyclerViewHelper.getItemCount();
+                firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
+                if (firstVisibleItem + visibleItemCount == totalItemCount &&lazyScroll.equals("OFF")) {
+
+
+                    customerDetailAdapter.getItemViewType(2);
+                    lazyScroll = "ON";
+                    requestEngagementBandDetail();
+                }
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
 
         return root;
     }
@@ -238,7 +265,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                     double updated_nestSaleVal = Double.parseDouble(netSalesVal1);
                     txt_cust_NetSalesVal.setText("₹ " + format.format(updated_nestSaleVal));
                     txt_cust_NetSalesName.setText("Sales Ach%");
-                    txt_cust_NetSalesPerc.setText("" + Math.round(array_custLoyaltySummaries.get(0).getSalesAch()) + "%");
+                    txt_cust_NetSalesPerc.setText("" + String.format("%.1f",array_custLoyaltySummaries.get(0).getSalesAch()) + "%");
                     colorconditionForSales();
                     double planSalesVal = array_custLoyaltySummaries.get(0).getPlanSaleNetVal() / 100000;
                     String planSalesVal1 = String.format("%.1f", planSalesVal);
@@ -482,10 +509,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#ffcb00"));
-        colors.add(Color.parseColor("#66ff66"));
-        colors.add(Color.parseColor("#66ffff"));
-        colors.add(Color.parseColor("#6666ff"));
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#f5204c"));
+        colors.add(Color.parseColor("#f89a20"));
         PieDataSet dataset = new PieDataSet(entries, "");
         dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
@@ -533,10 +560,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             entries.add(new PieEntry((float) planengagementArrayList.get(i).getCustAch(), planengagementArrayList.get(i).getLevel()));
         }
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#ffcb00"));
-        colors.add(Color.parseColor("#66ff66"));
-        colors.add(Color.parseColor("#66ffff"));
-        colors.add(Color.parseColor("#6666ff"));
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#f5204c"));
+        colors.add(Color.parseColor("#f89a20"));
         PieDataSet dataset = new PieDataSet(entries, "");
         dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
@@ -585,11 +612,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#ffcb00"));
-        colors.add(Color.parseColor("#66ff66"));
-        colors.add(Color.parseColor("#66ffff"));
-        colors.add(Color.parseColor("#6666ff"));
-        colors.add(Color.parseColor("#8000ff"));
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#f5204c"));
+        colors.add(Color.parseColor("#f89a20"));
+        colors.add(Color.parseColor("#78bc2c"));
         PieDataSet dataset = new PieDataSet(entries, "");
         dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
@@ -638,11 +665,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             entries.add(new PieEntry((float) actualengagementArrayList.get(i).getCustAch(), actualengagementArrayList.get(i).getLevel()));
         }
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#ffcb00"));
-        colors.add(Color.parseColor("#66ff66"));
-        colors.add(Color.parseColor("#66ffff"));
-        colors.add(Color.parseColor("#6666ff"));
-        colors.add(Color.parseColor("#8000ff"));
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#f5204c"));
+        colors.add(Color.parseColor("#f89a20"));
+        colors.add(Color.parseColor("#78bc2c"));
         PieDataSet dataset = new PieDataSet(entries, "");
         dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
@@ -731,10 +758,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
                                 }
-                                offsetval = (limit * count) + limit;
-                                count++;
+                                offsetval = offsetval + limit;
 
-                                requestEngagementBandDetail();
 
                             } else if (response.length() < limit) {
 
@@ -744,14 +769,24 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                                 }
                             }
 
-                            lv_cust_details.removeAllViews();
-                            customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
-                            lv_cust_details.setAdapter(customerDetailAdapter);
-                            customerDetailAdapter.notifyDataSetChanged();
-                            engagemntBandClick.communicatefrag1(e_bandnm);
-                            CustomerLookupActivity.mViewPager.setCurrentItem(1);
 
-                        }
+                            if (lazyScroll.equals("ON")) {
+                                customerDetailAdapter.notifyDataSetChanged();
+                                lazyScroll = "OFF";
+                                customerDetailAdapter.getItemViewType(1);
+                            }
+                            else
+                            {
+                                lv_cust_details.removeAllViews();
+                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
+                                lv_cust_details.setAdapter(customerDetailAdapter);
+                                customerDetailAdapter.notifyDataSetChanged();
+                                engagemntBandClick.communicatefrag1(e_bandnm);
+                                CustomerLookupActivity.mViewPager.setCurrentItem(1);
+
+                            }
+                            Reusable_Functions.hDialog();
+                    }
                         catch (Exception e)
                         {
                             Reusable_Functions.hDialog();

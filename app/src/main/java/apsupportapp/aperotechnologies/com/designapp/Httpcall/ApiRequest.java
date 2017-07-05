@@ -46,7 +46,7 @@ public class ApiRequest  {
     private String TAG;
     private int count = 0;
     private Gson gson;
-    public static JsonArrayRequest postRequest;
+    public static JsonArrayRequest getRequest;
 
 
     public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id)
@@ -98,7 +98,7 @@ public class ApiRequest  {
 
         }
         Log.e(TAG, "final_setApi: URL "+URL );
-         postRequest = new JsonArrayRequest(Request.Method.GET, URL,
+        getRequest = new JsonArrayRequest(Request.Method.GET, URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public  void onResponse(JSONArray response) {
@@ -197,8 +197,8 @@ public class ApiRequest  {
         int socketTimeout = 30000;//5 seconds
 
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
+        getRequest.setRetryPolicy(policy);
+        queue.add(getRequest);
 
 
 

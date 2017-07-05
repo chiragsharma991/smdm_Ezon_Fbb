@@ -1,9 +1,11 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
+import android.*;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +15,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -50,6 +53,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
@@ -149,6 +153,7 @@ public class DashBoardActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         context = this;
+        Log.e(TAG, "Oncreate: Dashboard..");
         m_config = MySingleton.getInstance(context);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
@@ -1991,6 +1996,63 @@ public class DashBoardActivity extends AppCompatActivity
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        boolean checkDeviceId= sharedPreferences.getString("device_id","").equals("") ? true :false;   //true means you not get any device id.
+        Log.e(TAG, "onResume: Dashboard.."+checkDeviceId);
+
+        if(checkDeviceId){
+            if (Reusable_Functions.checkPermission(android.Manifest.permission.READ_PHONE_STATE,this))
+            {
+                Log.e("TAG", ":check permission is okk");
+                getDeviceId();
+
+
+            }
+            else {
+                Log.e("TAG", ":check permission calling");
+                requestPermissions(new String[]{android.Manifest.permission.READ_PHONE_STATE},Constants.REQUEST_PERMISSION_WRITE_STORAGE);
+            }}
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,  String[] permissions,  int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode ==Constants.REQUEST_PERMISSION_WRITE_STORAGE){
+            Log.e("TAG", "onRequestPermissionsResult: "+grantResults[0] );
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Log.e("TAG", "onRequestPermissionsResult: Granted");
+                getDeviceId();
+
+            }
+        }
+    }
+
+    private void getDeviceId(){
+
+        final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(this.TELEPHONY_SERVICE);
+
+        final String tmDevice, tmSerial, androidId;
+        tmDevice = "" + tm.getDeviceId();
+        tmSerial = "" + tm.getSimSerialNumber();
+        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+        Log.e("TAG", "tmDevice: "+tmDevice+"tm serial"+tmSerial+"android id"+androidId );
+
+        UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
+        String deviceId = deviceUuid.toString();
+        Log.e("TAG", "deviceId: "+deviceId );
+
+        SharedPreferences.Editor edit=sharedPreferences.edit();
+        edit.putString("device_id",deviceId);
+        edit.apply();
+
+
+    }
+
     // this is an inner class...
     class RemindTask extends TimerTask {
         @Override
@@ -2013,4 +2075,6 @@ public class DashBoardActivity extends AppCompatActivity
 
         }
     }
+
+
 }
