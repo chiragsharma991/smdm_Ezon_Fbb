@@ -149,7 +149,6 @@ public class DashBoardActivity extends AppCompatActivity
     private boolean mpm_flag = false, custloylty_flag = false, hourlyperform_flag = false;
     private Gson gson;
     private EtlStatus etlStatus;
-    private boolean onRestart_toggle = false;  // toggle for not call any time ressume.
     private ArrayList<EtlStatus> etlStatusList;
     private Snackbar snackbar;
 
@@ -192,6 +191,8 @@ public class DashBoardActivity extends AppCompatActivity
             }
         }
         RefreshTimeAPI();
+        checkPermission();
+
     }
 
     private void checkPermission() {
@@ -478,10 +479,9 @@ public class DashBoardActivity extends AppCompatActivity
 
 // check  permission..
 
-        if (!onRestart_toggle) {
 
-            checkPermission();
-        }
+
+
     }
 
     private Boolean exit = false;
@@ -688,7 +688,6 @@ public class DashBoardActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        onRestart_toggle = false;
 
         switch (v.getId()) {
             // Ezone part
@@ -1967,7 +1966,6 @@ public class DashBoardActivity extends AppCompatActivity
 
 
             }
-            onRestart_toggle = true;
 
         }
     }
