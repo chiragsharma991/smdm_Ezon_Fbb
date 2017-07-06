@@ -165,13 +165,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
                 super.onScrolled(recyclerView, dx, dy);
                 RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
                 int visibleItemCount = recyclerView.getChildCount();
                 totalItemCount = mRecyclerViewHelper.getItemCount();
                 firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
-
             }
 
             @Override
@@ -182,17 +182,17 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
-                            if (!OnItemClick) {
+                            if (!OnItemClick)
+                            {
 
-                                if (TAG.equals("FreshnessIndex_Ez_Activity")) {
-
+                                if (TAG.equals("FreshnessIndex_Ez_Activity"))
+                                {
                                     TimeUpEzone();
-
-                                } else {
-
+                                }
+                                else
+                                {
                                     TimeUP();
                                 }
-
                             }
                         }
                     }, 700);

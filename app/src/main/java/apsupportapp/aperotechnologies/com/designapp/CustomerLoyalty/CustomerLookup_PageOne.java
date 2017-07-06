@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
@@ -70,6 +71,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyHeader;
 
 
@@ -85,7 +87,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private TextView txt_cust_NetSalesVal, txt_cust_PlanSalesVal, txt_cust_ActualCustVal, txt_cust_PlanCustVal, txt_cust_ActualCustName,
             txt_cust_ActualCustPerc, txt_cust_PlanCustName, txt_cust_PlanCustPerc, txt_progress_custVal, txt_progress_salesVal;
     private TextView txt_cust_pengagementType_Val, txt_cust_pCustomer_Val, txt_cust_psales_Val, txt_cust_pspc_Val, txt_cust_psalesAch_Val, txt_cust_NetSalesName,
-            txt_cust_NetSalesPerc, txt_switch_name, txt_ls_switch_name;
+            txt_cust_NetSalesPerc, txt_switch_name,txt_band_ach,txt_lifestage_ach;
     private ImageView txt_cust_NetSalesImage;
     private PieChart pieChart_band, pieChart_lifestage;
     private ProgressBar progressbar_customer, progressbar_sales;
@@ -112,7 +114,9 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private PieData pieData;
     private Switch sales_cust_switch;
     private boolean bandcustToggle = false;
-
+    private String lazyScroll = "OFF";
+    private int totalItemCount = 0;  // this is total item present in listview
+    int firstVisibleItem = 0;
 
     public CustomerLookup_PageOne() {
 
@@ -161,6 +165,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
 
 
+
         return root;
     }
 
@@ -192,12 +197,14 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         txt_switch_name = (TextView) root.findViewById(R.id.txt_switch_name);
         sales_cust_switch = (Switch) root.findViewById(R.id.salescustswitch);
         sales_cust_switch.setOnCheckedChangeListener(this);
-        txt_cust_NetSalesName = (TextView) root.findViewById(R.id.txt_cust_NetSalesName);
-        txt_cust_NetSalesPerc = (TextView) root.findViewById(R.id.txt_cust_NetSalesPerc);
+//        txt_cust_NetSalesName = (TextView) root.findViewById(R.id.txt_cust_NetSalesName);
+//        txt_cust_NetSalesPerc = (TextView) root.findViewById(R.id.txt_cust_NetSalesPerc);
         pieChart_band = (PieChart) root.findViewById(R.id.pieChart_band);
         pieChart_lifestage = (PieChart) root.findViewById(R.id.pieChart_lifestage);
         linearLayout = (LinearLayout) root.findViewById(R.id.linear_band_legend);
         linearLayout1 = (LinearLayout)root.findViewById(R.id.linear_lifestage_legend);
+        txt_band_ach = (TextView)root.findViewById(R.id.txt_band_ach);
+        txt_lifestage_ach = (TextView)root.findViewById(R.id.txt_lifestage_ach);
 
     }
 
@@ -237,9 +244,9 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                     String netSalesVal1 = String.format("%.1f", netSalesVal);
                     double updated_nestSaleVal = Double.parseDouble(netSalesVal1);
                     txt_cust_NetSalesVal.setText("₹ " + format.format(updated_nestSaleVal));
-                    txt_cust_NetSalesName.setText("Sales Ach%");
-                    txt_cust_NetSalesPerc.setText("" + Math.round(array_custLoyaltySummaries.get(0).getSalesAch()) + "%");
-                    colorconditionForSales();
+//                    txt_cust_NetSalesName.setText("Sales Ach%");
+//                    txt_cust_NetSalesPerc.setText("" + String.format("%.1f",array_custLoyaltySummaries.get(0).getSalesAch()) + "%");
+//                    colorconditionForSales();
                     double planSalesVal = array_custLoyaltySummaries.get(0).getPlanSaleNetVal() / 100000;
                     String planSalesVal1 = String.format("%.1f", planSalesVal);
                     double updated_planSaleVal = Double.parseDouble(planSalesVal1);
@@ -482,10 +489,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#ffcb00"));
-        colors.add(Color.parseColor("#66ff66"));
-        colors.add(Color.parseColor("#66ffff"));
-        colors.add(Color.parseColor("#6666ff"));
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#f5204c"));
+        colors.add(Color.parseColor("#f89a20"));
         PieDataSet dataset = new PieDataSet(entries, "");
         dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
@@ -495,6 +502,9 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         dataset.setXValuePosition(null);
         dataset.setYValuePosition(null);
         pieChart_band.setEntryLabelColor(Color.BLACK);
+        pieChart_band.setCenterText(String.format("%.1f",array_custLoyaltySummaries.get(0).getSalesAch())+"%");
+        pieChart_band.setCenterTextSize(21f);
+        pieChart_band.setCenterTextColor(Color.parseColor("#404040"));
         pieChart_band.setRotationEnabled(false);
         pieChart_band.setExtraOffsets(5, 10, 5, 5);
         pieChart_band.setHoleRadius(40);
@@ -506,7 +516,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.setTouchEnabled(true);
         pieChart_band.invalidate();
         pieChart_band.notifyDataSetChanged();
-        pieChart_band.setOnChartValueSelectedListener(this);
+    //    pieChart_band.setOnChartValueSelectedListener(this);
+        txt_band_ach.setVisibility(View.VISIBLE);
         Legend legend = pieChart_band.getLegend();
         for (int i = 0; i < planengagementArrayList.size(); i++)
         {
@@ -533,10 +544,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             entries.add(new PieEntry((float) planengagementArrayList.get(i).getCustAch(), planengagementArrayList.get(i).getLevel()));
         }
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#ffcb00"));
-        colors.add(Color.parseColor("#66ff66"));
-        colors.add(Color.parseColor("#66ffff"));
-        colors.add(Color.parseColor("#6666ff"));
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#f5204c"));
+        colors.add(Color.parseColor("#f89a20"));
         PieDataSet dataset = new PieDataSet(entries, "");
         dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
@@ -546,6 +557,9 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         dataset.setXValuePosition(null);
         dataset.setYValuePosition(null);
         pieChart_band.setEntryLabelColor(Color.BLACK);
+        pieChart_band.setCenterText(String.format("%.1f",array_custLoyaltySummaries.get(0).getCustAch())+"%");
+        pieChart_band.setCenterTextSize(21f);
+        pieChart_band.setCenterTextColor(Color.parseColor("#404040"));
         pieChart_band.setRotationEnabled(false);
         pieChart_band.setExtraOffsets(5, 10, 5, 5);
         pieChart_band.setHoleRadius(40);
@@ -557,7 +571,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.animateXY(4000, 4000);
         pieChart_band.setDescription(null);
         pieChart_band.setTouchEnabled(true);
-        pieChart_band.setOnChartValueSelectedListener(this);
+        txt_band_ach.setVisibility(View.VISIBLE);
+      //  pieChart_band.setOnChartValueSelectedListener(this);
         Legend legend = pieChart_band.getLegend();
         linearLayout.removeAllViewsInLayout();
         for (int i = 0; i < planengagementArrayList.size(); i++)
@@ -585,11 +600,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#ffcb00"));
-        colors.add(Color.parseColor("#66ff66"));
-        colors.add(Color.parseColor("#66ffff"));
-        colors.add(Color.parseColor("#6666ff"));
-        colors.add(Color.parseColor("#8000ff"));
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#f5204c"));
+        colors.add(Color.parseColor("#f89a20"));
+        colors.add(Color.parseColor("#78bc2c"));
         PieDataSet dataset = new PieDataSet(entries, "");
         dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
@@ -599,6 +614,9 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         dataset.setXValuePosition(null);
         dataset.setYValuePosition(null);
         pieChart_lifestage.setEntryLabelColor(Color.BLACK);
+        pieChart_lifestage.setCenterText(String.format("%.1f",array_custLoyaltySummaries.get(0).getSalesAch())+"%");
+        pieChart_lifestage.setCenterTextSize(21f);
+        pieChart_lifestage.setCenterTextColor(Color.parseColor("#404040"));
         pieChart_lifestage.setRotationEnabled(false);
         pieChart_lifestage.setExtraOffsets(5, 10, 5, 5);
         pieChart_lifestage.setHoleRadius(40);
@@ -608,7 +626,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
-        pieChart_lifestage.setOnChartValueSelectedListener(this);
+        txt_lifestage_ach.setVisibility(View.VISIBLE);
+    //    pieChart_lifestage.setOnChartValueSelectedListener(this);
         Legend legend = pieChart_lifestage.getLegend();
         for (int i = 0; i < actualengagementArrayList.size(); i++) {
 
@@ -638,11 +657,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             entries.add(new PieEntry((float) actualengagementArrayList.get(i).getCustAch(), actualengagementArrayList.get(i).getLevel()));
         }
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#ffcb00"));
-        colors.add(Color.parseColor("#66ff66"));
-        colors.add(Color.parseColor("#66ffff"));
-        colors.add(Color.parseColor("#6666ff"));
-        colors.add(Color.parseColor("#8000ff"));
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#f5204c"));
+        colors.add(Color.parseColor("#f89a20"));
+        colors.add(Color.parseColor("#78bc2c"));
         PieDataSet dataset = new PieDataSet(entries, "");
         dataset.setColors(colors);
         dataset.setValueLineWidth(0.5f);
@@ -652,6 +671,9 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         dataset.setXValuePosition(null);
         dataset.setYValuePosition(null);
         pieChart_lifestage.setRotationEnabled(false);
+        pieChart_lifestage.setCenterText(String.format("%.1f",array_custLoyaltySummaries.get(0).getCustAch())+"%");
+        pieChart_lifestage.setCenterTextSize(21f);
+        pieChart_lifestage.setCenterTextColor(Color.parseColor("#404040"));
         pieChart_lifestage.setEntryLabelColor(Color.BLACK);
         pieChart_lifestage.setExtraOffsets(5, 10, 5, 5);
         pieChart_lifestage.setHoleRadius(40);
@@ -663,7 +685,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
-        pieChart_lifestage.setOnChartValueSelectedListener(this);
+        txt_lifestage_ach.setVisibility(View.VISIBLE);
+      //  pieChart_lifestage.setOnChartValueSelectedListener(this);
         Legend legend = pieChart_lifestage.getLegend();
         linearLayout1.removeAllViewsInLayout();
         for (int i = 0; i < actualengagementArrayList.size(); i++)
@@ -709,7 +732,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
     private void requestEngagementBandDetail()
     {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache+ "&offset=" + offsetval + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
         Log.e("detail url 1:", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -731,27 +754,37 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
                                 }
-                                offsetval = (limit * count) + limit;
-                                count++;
-
-                                requestEngagementBandDetail();
-
-                            } else if (response.length() < limit) {
-
-                                for (int i = 0; i < response.length(); i++) {
-                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-                                    customerDetailsList.add(customerDetail);
-                                }
                             }
+                              //  offsetval = offsetval + limit;
 
-                            lv_cust_details.removeAllViews();
-                            customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
-                            lv_cust_details.setAdapter(customerDetailAdapter);
-                            customerDetailAdapter.notifyDataSetChanged();
-                            engagemntBandClick.communicatefrag1(e_bandnm);
-                            CustomerLookupActivity.mViewPager.setCurrentItem(1);
 
-                        }
+//                            } else if (response.length() < limit) {
+//
+//                                for (int i = 0; i < response.length(); i++) {
+//                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+//                                    customerDetailsList.add(customerDetail);
+//                                }
+//                            }
+
+
+//                            if (lazyScroll.equals("ON")) {
+//                                customerDetailAdapter.notifyDataSetChanged();
+//                                lazyScroll = "OFF";
+//                                customerDetailAdapter.getItemViewType(1);
+//                            }
+//                            else
+//                            {
+                                lv_cust_details.removeAllViews();
+                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
+                                lv_cust_details.setAdapter(customerDetailAdapter);
+                                customerDetailAdapter.notifyDataSetChanged();
+                                customerDetailAdapter.getItemViewType(1);
+                                engagemntBandClick.communicatefrag1(e_bandnm);
+                                CustomerLookupActivity.mViewPager.setCurrentItem(1);
+
+                          //  }
+                            Reusable_Functions.hDialog();
+                    }
                         catch (Exception e)
                         {
                             Reusable_Functions.hDialog();

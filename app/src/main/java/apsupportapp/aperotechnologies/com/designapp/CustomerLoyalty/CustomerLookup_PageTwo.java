@@ -50,10 +50,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 
 /**
  * Created by pamrutkar on 14/06/17.
@@ -66,7 +68,7 @@ public class CustomerLookup_PageTwo extends Fragment {
     static RecyclerView lv_cust_details;
     CustomerDetail customerDetail;
     static CustomerDetailAdapter customerDetailAdapter;
-    ArrayList<CustomerDetail> detailArrayList;
+    ArrayList<CustomerDetail> detailArrayList, customerDetailArrayList = new ArrayList<CustomerDetail>();
     ViewGroup root;
     Context context;
     SharedPreferences sharedPreferences;
@@ -76,8 +78,11 @@ public class CustomerLookup_PageTwo extends Fragment {
     private boolean checkNetworkFalse = false;
     JsonArrayRequest postRequest;
     private String recache = "true";
+    private String lazyScroll = "OFF";
+    private int totalItemCount = 0;  // this is total item present in listview
+    int firstVisibleItem = 0;
     String updated_userId;
-    int offset = 0, count = 0, limit = 500;
+    int offset = 0, count = 0, limit = 100;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +97,7 @@ public class CustomerLookup_PageTwo extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = (ViewGroup) inflater.inflate(R.layout.fragment_custlookup_pagetwo, container,false);
+        root = (ViewGroup) inflater.inflate(R.layout.fragment_custlookup_pagetwo, container, false);
         context = root.getContext();
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -100,21 +105,16 @@ public class CustomerLookup_PageTwo extends Fragment {
         queue.start();
         gson = new Gson();
         initialise();
-        Log.e("test", "onCreateView: page two" );
-
-
-            if (Reusable_Functions.chkStatus(context))
-            {
-                Reusable_Functions.sDialog(context, "Loading...");
-                offset = 0;
-                limit = 500;
-                count = 0;
-                requestCustomerDetail();
-            }
-            else
-            {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            }
+        Log.e("test", "onCreateView: page two");
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.sDialog(context, "Loading...");
+            offset = 0;
+            limit = 100;
+            count = 0;
+            requestCustomerDetail();
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
 
         edt_cust_Search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -123,9 +123,10 @@ public class CustomerLookup_PageTwo extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                String searchData = edt_cust_Search.getText().toString();
-                customerDetailAdapter.getFilter().filter(searchData);
+                if (lazyScroll.equals("ON")) {
+                    String searchData = edt_cust_Search.getText().toString();
+                    customerDetailAdapter.getFilter().filter(searchData);
+                }
 
             }
 
@@ -133,6 +134,40 @@ public class CustomerLookup_PageTwo extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
+
+        lv_cust_details.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+                int visibleItemCount = recyclerView.getChildCount();
+                totalItemCount = mRecyclerViewHelper.getItemCount();
+                firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
+                if (firstVisibleItem + visibleItemCount == totalItemCount && lazyScroll.equals("OFF")) {
+
+//                    if (e_bandnm.equals("")) {
+//                        Log.e("condition 1", "");
+                        customerDetailAdapter.getItemViewType(2);
+                        lazyScroll = "ON";
+                        requestCustomerDetail();
+//                    }
+//                    else
+//                    {
+//                        Log.e("condition 2", "");
+//                        customerDetailAdapter.getItemViewType(2);
+//                        lazyScroll = "ON";
+//                        requestEngagementBandDetail();
+//                    }
+                }
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
 
         lv_cust_details.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -146,13 +181,12 @@ public class CustomerLookup_PageTwo extends Fragment {
         return root;
     }
 
-    public CustomerLookup_PageTwo()
-    {
+    public CustomerLookup_PageTwo() {
 
     }
+
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser)
-    {
+    public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
 
@@ -160,7 +194,7 @@ public class CustomerLookup_PageTwo extends Fragment {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
             }
 
-            Log.e("is visible","");
+            Log.e("is visible", "");
         }
     }
 
@@ -186,17 +220,97 @@ public class CustomerLookup_PageTwo extends Fragment {
         }
     }
 
-    public void fragmentCommunication(String enagagemntband)
-    {
+    public void fragmentCommunication(String enagagemntband) {
         e_bandnm = enagagemntband;
         Log.e("test", "inerface call size is");
         Reusable_Functions.hDialog();
 
     }
 
-    private void requestCustomerDetail()
-    {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&recache=" + recache+ "&offset=" + offset + "&limit=" + limit;
+    private void requestEngagementBandDetail() {
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;
+        Log.e("detail url 1:", "" + url);
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("response 1:", "" + response + "size" + response.length());
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
+
+                            } else if (response.length() == limit) {
+
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+                                    customerDetailArrayList.add(customerDetail);
+                                }
+
+                                offset = offset + limit;
+
+
+                            } else if (response.length() < limit) {
+
+                                for (int i = 0; i < response.length(); i++) {
+                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+                                    customerDetailArrayList.add(customerDetail);
+                                }
+                            }
+
+
+                            if (lazyScroll.equals("ON")) {
+                                customerDetailAdapter.notifyDataSetChanged();
+                                lazyScroll = "OFF";
+                                customerDetailAdapter.getItemViewType(1);
+                            } else {
+
+                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailArrayList, getContext());
+                                lv_cust_details.setAdapter(customerDetailAdapter);
+                                customerDetailAdapter.notifyDataSetChanged();
+                                customerDetailAdapter.getItemViewType(1);
+
+                            }
+                            Reusable_Functions.hDialog();
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Log.e("exception :", "" + e.getMessage());
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+
+    private void requestCustomerDetail() {
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;
         Log.e("detail url :", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -209,19 +323,16 @@ public class CustomerLookup_PageTwo extends Fragment {
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
-                            }
-                            else
-                            if (response.length() == limit) {
+                            } else if (response.length() == limit) {
 
                                 for (int i = 0; i < response.length(); i++) {
 
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     detailArrayList.add(customerDetail);
                                 }
-                                offset = (limit * count) + limit;
-                                count++;
+                                offset = offset + limit;
 
-                                requestCustomerDetail();
+                                // requestCustomerDetail();
 
                             } else if (response.length() < limit) {
 
@@ -229,18 +340,26 @@ public class CustomerLookup_PageTwo extends Fragment {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     detailArrayList.add(customerDetail);
                                 }
-                             }
+                            }
 
-                            lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                            lv_cust_details.setOnFlingListener(null);
-                            new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
-                            customerDetailAdapter = new CustomerDetailAdapter(detailArrayList, context);
-                            lv_cust_details.setAdapter(customerDetailAdapter);
+
+                            if (lazyScroll.equals("ON")) {
+                                customerDetailAdapter.notifyDataSetChanged();
+                                lazyScroll = "OFF";
+                                customerDetailAdapter.getItemViewType(1);
+                            } else {
+                                lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                lv_cust_details.setOnFlingListener(null);
+                                new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
+                                customerDetailAdapter = new CustomerDetailAdapter(detailArrayList, context);
+                                lv_cust_details.setAdapter(customerDetailAdapter);
+
+                            }
+
+
                             Reusable_Functions.hDialog();
 
-                        }
-                        catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Log.e("exception :", "" + e.getMessage());
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
@@ -274,5 +393,7 @@ public class CustomerLookup_PageTwo extends Fragment {
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+
+
 }
 
