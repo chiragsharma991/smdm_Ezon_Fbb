@@ -16,9 +16,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -66,7 +68,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
  * Created by pamrutkar on 21/06/17.
  */
 public class CustomerDetailActivity extends AppCompatActivity {
-    private TextView txt_cust_name, txt_cust_mobileNo, txt_cust_email;
+    private TextView txt_cust_name, txt_cust_mobileNo, txt_cust_email,txt_pie_ach;
     private TextView txt_cd_last_visit_Val, txt_cd_tot_visit_Val, txt_cd_last_spent_Val, txt_cd_tot_spent_Val;
     String unique_Customer;
     private Button btn_more, btn_reset;
@@ -88,7 +90,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private TabLayout cd_tab;
     private LinearLayout phn_call, mail_call, linear_legend;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
-    private ProgressBar progressBar;
+    private NestedScrollView nestedScrollView;
 
 
     @Override
@@ -140,7 +142,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 txt_cd_last_visit_Val.setText("");
                 txt_cd_tot_spent_Val.setText("");
                 txt_cd_tot_visit_Val.setText("");
-                pieChart.setCurrentItem(0);
+              //  pieChart.setCurrentItem(0);
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Loading...");
                     requestResetCustomerDetailAPI();
@@ -148,10 +150,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
+
+
     }
 
 
@@ -181,7 +183,9 @@ public class CustomerDetailActivity extends AppCompatActivity {
         rel_cust_detl_back = (RelativeLayout) findViewById(R.id.rel_cust_detl_back);
         btn_more = (Button) findViewById(R.id.btn_cd_more);
         btn_reset = (Button) findViewById(R.id.btn_cd_reset);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        txt_pie_ach  = (TextView)findViewById(R.id.txt_pie_ach);
+//        nestedScrollView = (NestedScrollView)findViewById(R.id.nested_scrollView);
+//        nestedScrollView.setFillViewport(true);
         linear_legend = (LinearLayout) findViewById(R.id.linear_legend);
 
         phn_call.setOnClickListener(new View.OnClickListener() {
@@ -440,8 +444,9 @@ public class CustomerDetailActivity extends AppCompatActivity {
         pieChart.addPieSlice(new PieModel("Home", (int) customerDetailsarray.get(0).getHomeContr(), Color.parseColor("#f5204c"))); //CDA67F
         pieChart.addPieSlice(new PieModel("Electronics", (int) customerDetailsarray.get(0).getElectronicsContr(), Color.parseColor("#f89a20"))); //CDA67F
         pieChart.animate();
+        txt_pie_ach.setVisibility(View.VISIBLE);
         addLegendLayout();
-        pieChart.setCurrentItem(0);
+
         pieChart.setDrawValueInPie(false);
         pieChart.setOnItemFocusChangedListener(new IOnItemFocusChangedListener() {
             @Override

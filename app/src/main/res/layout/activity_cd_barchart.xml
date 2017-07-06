@@ -55,7 +55,7 @@
                     android:layout_height="match_parent"
                     android:text=""
                     android:textColor="@color/divider_salescard1"
-                    android:textSize="17sp" />
+                    android:textSize="19sp" />
 
             </RelativeLayout>
 

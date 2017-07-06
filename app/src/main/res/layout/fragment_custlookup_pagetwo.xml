@@ -125,7 +125,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_toLeftOf="@+id/txt_cust_lastVisit"
                 android:text="Name"
-                android:textColor="@color/smdm_status_pending_color"
+                android:textColor="@color/smdm_light_Black"
                 android:textSize="15sp"
                 android:textStyle="normal" />
 
@@ -140,7 +140,7 @@
                 android:layout_toLeftOf="@+id/txt_cust_ach"
                 android:gravity="center|center_vertical"
                 android:text="Last\nVisit"
-                android:textColor="@color/smdm_status_pending_color"
+                android:textColor="@color/smdm_light_Black"
                 android:textSize="15sp"
                 android:textStyle="normal" />
 
@@ -154,7 +154,7 @@
                 android:layout_toLeftOf="@+id/txt_cust_planSales"
                 android:gravity="center|center_vertical"
                 android:text="Ach%"
-                android:textColor="@color/smdm_status_pending_color"
+                android:textColor="@color/smdm_light_Black"
                 android:textSize="@dimen/smdm_cardValuesTitle_large"
                 android:textStyle="normal" />
 
@@ -168,7 +168,7 @@
                 android:layout_toLeftOf="@+id/txt_cust_sales"
                 android:gravity="center|center_vertical"
                 android:text="Plan\nSales"
-                android:textColor="@color/smdm_status_pending_color"
+                android:textColor="@color/smdm_light_Black"
                 android:textSize="@dimen/smdm_cardValuesTitle_large"
                 android:textStyle="normal" />
 
@@ -181,7 +181,7 @@
                 android:layout_centerVertical="true"
                 android:gravity="center|center_vertical"
                 android:text="Sales"
-                android:textColor="@color/smdm_status_pending_color"
+                android:textColor="@color/smdm_light_Black"
                 android:textSize="@dimen/smdm_cardValuesTitle_large"
                 android:textStyle="normal" />
 

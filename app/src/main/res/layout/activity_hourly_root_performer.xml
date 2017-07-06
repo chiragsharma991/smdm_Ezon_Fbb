@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="3dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
 
         >
 
@@ -106,13 +106,21 @@
 
     </LinearLayout>
 
-   <!-- <TextView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:visibility="invisible"
+        android:layout_height="1dip"
+        android:layout_marginTop="2dp"
+        android:background="@color/border_round_edittext" />
 
-        />
--->
+
+
+    <!-- <TextView
+         android:layout_width="match_parent"
+         android:layout_height="5dp"
+         android:visibility="invisible"
+
+         />
+ -->
 
 
 

@@ -14,7 +14,6 @@
         android:orientation="vertical">
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -66,14 +65,14 @@
                             android:textSize="17sp" />
 
                         <TextView
-                            android:layout_alignBaseline="@+id/txt_cust_NetSalesVal"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/txt_cust_NetSalesVal"
                             android:id="@+id/txt_cust_NetSalesLac"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/txt_cust_NetSalesVal"
+                            android:layout_centerVertical="true"
                             android:layout_marginLeft="3dp"
                             android:layout_marginTop="35dp"
+                            android:layout_toRightOf="@+id/txt_cust_NetSalesVal"
                             android:text="Lacs"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="13sp" />
@@ -91,37 +90,38 @@
                         <!--/>-->
 
                         <RelativeLayout
-                        android:id="@+id/rel_cust_NetSalesNmPrec"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/smdm_blue"
-                        android:layout_alignParentBottom="true"
-                        android:layout_below="@+id/txt_cust_NetSalesVal">
+                            android:id="@+id/rel_cust_NetSalesNmPrec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/txt_cust_NetSalesVal"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/smdm_blue">
 
-                        <TextView
-                        android:id="@+id/txt_cust_NetSalesName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="8dp"
-                        android:layout_alignParentBottom="true"
-                        android:hint="Sales Ach%"
-                            android:textColor="@color/smdm_blue"
-                            android:textSize="13sp" />
+                            <!--<TextView-->
+                            <!--android:id="@+id/txt_cust_NetSalesName"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_alignParentLeft="true"-->
+                            <!--android:layout_marginLeft="8dp"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:hint="Sales Ach%"-->
+                            <!--android:textColor="@color/smdm_blue"-->
+                            <!--android:textSize="13sp" />-->
 
-                        <TextView
-                        android:id="@+id/txt_cust_NetSalesPerc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_toRightOf="@+id/txt_cust_NetSalesName"
-                        android:text=""
-                        android:textSize="13sp" />
+                            <!--<TextView-->
+                            <!--android:id="@+id/txt_cust_NetSalesPerc"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="4dp"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:layout_toRightOf="@+id/txt_cust_NetSalesName"-->
+                            <!--android:text=""-->
+                            <!--android:textSize="13sp" />-->
 
                         </RelativeLayout>
+
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -160,18 +160,17 @@
 
 
                         <TextView
-                            android:layout_alignBaseline="@+id/txt_cust_PlanSalesVal"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/txt_cust_PlanSalesVal"
                             android:id="@+id/txt_cust_PlanSalesLac"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/txt_cust_PlanSalesVal"
+                            android:layout_centerVertical="true"
                             android:layout_marginLeft="3dp"
                             android:layout_marginTop="35dp"
+                            android:layout_toRightOf="@+id/txt_cust_PlanSalesVal"
                             android:text="Lacs"
                             android:textColor="@color/bg_store_code_text"
                             android:textSize="13sp" />
-
 
 
                     </RelativeLayout>
@@ -225,8 +224,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginBottom="15dp"
                             android:layout_marginRight="10dp"
-                            android:layout_toLeftOf="@+id/rel_cust_ActualCustNmPrec"
-                          />
+                            android:layout_toLeftOf="@+id/rel_cust_ActualCustNmPrec" />
 
                         <RelativeLayout
                             android:id="@+id/rel_cust_ActualCustNmPrec"
@@ -333,13 +331,13 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/linear_custandsales_circle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rel_box"
                 android:layout_marginTop="8dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/view1"
@@ -384,8 +382,8 @@
                             android:id="@+id/txt_progress_cust_nm"
                             android:layout_width="250dp"
                             android:layout_height="250dp"
-                            android:gravity="center"
                             android:layout_marginBottom="5dp"
+                            android:gravity="center"
                             android:text="\n\nCustomer"
                             android:textColor="@color/smdm_default_color"
                             android:textSize="10sp" />
@@ -422,8 +420,8 @@
                             android:id="@+id/txt_progress_sales_nm"
                             android:layout_width="250dp"
                             android:layout_height="250dp"
-                            android:gravity="center"
                             android:layout_marginBottom="5dp"
+                            android:gravity="center"
                             android:text="\n\n Sales"
                             android:textColor="@color/smdm_default_color"
                             android:textSize="10sp" />
@@ -460,26 +458,26 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="5dp"
                         android:id="@+id/txt_planEngagement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginBottom="5dp"
-                        android:textStyle="bold"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
                         android:text="Engagement Mix PVA"
                         android:textColor="@color/smdm_dark_Black"
-                        android:textSize="@dimen/smdm_departmentTitleLarge" />
+                        android:textSize="@dimen/smdm_departmentTitleLarge"
+                        android:textStyle="bold" />
 
                     <Switch
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="5dp"
+                        android:id="@+id/salescustswitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/salescustswitch"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
 
                         />
 
@@ -487,32 +485,44 @@
                         android:id="@+id/txt_switch_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/smdm_store_title_normal"
-                        android:text="Sales"
+                        android:layout_alignBaseline="@id/salescustswitch"
                         android:layout_marginRight="7dp"
                         android:layout_toLeftOf="@id/salescustswitch"
-                        android:layout_alignBaseline="@id/salescustswitch"/>
+                        android:text="Sales"
+                        android:textSize="@dimen/smdm_store_title_normal" />
 
                 </RelativeLayout>
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pieChart_band"
                     android:layout_width="match_parent"
-                    android:layout_height="225dp"/>
+                    android:layout_height="225dp" />
 
-                <LinearLayout
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/txt_band_ach"
+                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
- android:layout_marginBottom="5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="right"
+                    android:text="ACH%"
+                    android:textSize="14sp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
                     android:id="@+id/linear_band_legend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-              />
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical" />
 
-
-            </LinearLayout>
+           </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lin_actual_engagement"
@@ -523,10 +533,10 @@
                 android:orientation="vertical">
 
                 <!--<TextView-->
-                    <!--android:id="@+id/view5"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:background="@color/smdm_divider_Black" />-->
+                <!--android:id="@+id/view5"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/smdm_divider_Black" />-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -535,18 +545,18 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="5dp"
                         android:id="@+id/txt_actualEngagement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginBottom="5dp"
-                        android:textStyle="bold"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
                         android:text="Lifestage Mix PVA"
                         android:textColor="@color/smdm_dark_Black"
-                        android:textSize="@dimen/smdm_departmentTitleLarge" />
+                        android:textSize="@dimen/smdm_departmentTitleLarge"
+                        android:textStyle="bold" />
 
 
                 </RelativeLayout>
@@ -554,24 +564,37 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pieChart_lifestage"
                     android:layout_width="match_parent"
-                    android:layout_height="225dp"/>
+                    android:layout_height="225dp" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/txt_lifestage_ach"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="right"
+                    android:text="ACH%"
+                    android:textSize="14sp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
 
                 <LinearLayout
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="10dp"
                     android:id="@+id/linear_lifestage_legend"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"/>
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 
     <FrameLayout
-        android:layout_width="match_parent"
         android:id="@+id/container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"></FrameLayout>
 </RelativeLayout>
