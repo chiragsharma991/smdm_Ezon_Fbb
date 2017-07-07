@@ -318,6 +318,10 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     private void addViewLayout(int usecolor, int j) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
+        if(j==0){
+            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_header_legend, null);
+            addleggend.addView(view);
+        }
         ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_legend, null);
         TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
         TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);

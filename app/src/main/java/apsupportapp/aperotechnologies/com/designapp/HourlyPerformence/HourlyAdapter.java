@@ -85,8 +85,8 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 final mpm_model data = store_list.get(position);
 
                 ((HourlyViewHolder) viewHolder).Hrl_root_Name.setText(data.getLevel());
-                ((HourlyViewHolder) viewHolder).Hrl_root_netsales.setText("₹" + thousandSaperator.format((int) data.getSaleNetVal()));
-                ((HourlyViewHolder) viewHolder).Hrl_root_plansales.setText("₹" +thousandSaperator.format((int) data.getPlanSales()));
+                ((HourlyViewHolder) viewHolder).Hrl_root_netsales.setText("" + thousandSaperator.format((int) data.getSaleNetVal()));
+                ((HourlyViewHolder) viewHolder).Hrl_root_plansales.setText("" +thousandSaperator.format((int) data.getPlanSales()));
 
                 //calculate screen view size and add line bar process.
 
