@@ -543,6 +543,11 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 store_list.clear();
                 hourlyAdapter.notifyDataSetChanged();
             }
+            if( focusOnPie == false){
+
+                addleggend.removeAllViewsInLayout();
+            }
+
 
         } catch (NullPointerException e) {
             Log.e(TAG, "nodatafound: error " + e.getMessage());

@@ -27,7 +27,7 @@
             android:id="@+id/txt_legend"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.85"
             android:gravity="left"
             android:textColor="@color/smdm_default_color"
             android:textSize="12sp"
@@ -36,12 +36,12 @@
             />
 
         <TextView
-            android:layout_marginRight="13dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/txt_legend_val"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:gravity="right"
+            android:layout_weight="0.15"
+            android:gravity="center_horizontal"
             android:singleLine="true"
             android:text="122"
             android:textColor="@color/smdm_default_color"

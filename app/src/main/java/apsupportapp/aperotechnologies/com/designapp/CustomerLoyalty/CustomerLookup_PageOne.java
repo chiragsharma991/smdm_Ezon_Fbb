@@ -517,13 +517,17 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.invalidate();
         pieChart_band.notifyDataSetChanged();
     //    pieChart_band.setOnChartValueSelectedListener(this);
-        txt_band_ach.setVisibility(View.VISIBLE);
+      //  txt_band_ach.setVisibility(View.VISIBLE);
         Legend legend = pieChart_band.getLegend();
         for (int i = 0; i < planengagementArrayList.size(); i++)
         {
 
             LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
+            if(i==0){
+                ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_header_legend, null);
+                linearLayout.addView(view);
+            }
             ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_legend, null);
             TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
             TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
@@ -571,7 +575,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.animateXY(4000, 4000);
         pieChart_band.setDescription(null);
         pieChart_band.setTouchEnabled(true);
-        txt_band_ach.setVisibility(View.VISIBLE);
+       // txt_band_ach.setVisibility(View.VISIBLE);
       //  pieChart_band.setOnChartValueSelectedListener(this);
         Legend legend = pieChart_band.getLegend();
         linearLayout.removeAllViewsInLayout();
@@ -579,6 +583,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         {
             LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
+            if(i==0){
+                ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_header_legend, null);
+                linearLayout.addView(view);
+            }
             ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_cust_legend, null);
             TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
             TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
@@ -626,7 +634,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
-        txt_lifestage_ach.setVisibility(View.VISIBLE);
+       // txt_lifestage_ach.setVisibility(View.VISIBLE);
     //    pieChart_lifestage.setOnChartValueSelectedListener(this);
         Legend legend = pieChart_lifestage.getLegend();
         for (int i = 0; i < actualengagementArrayList.size(); i++) {
@@ -634,8 +642,12 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
             LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
-            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_legend, null);
 
+            if(i==0){
+                ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_header_legend, null);
+                linearLayout1.addView(view);
+            }
+            ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_legend, null);
             TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
             TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
             TextView txt_legend_val = (TextView) view.findViewById(R.id.txt_legend_val);
@@ -685,7 +697,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
-        txt_lifestage_ach.setVisibility(View.VISIBLE);
+      //  txt_lifestage_ach.setVisibility(View.VISIBLE);
       //  pieChart_lifestage.setOnChartValueSelectedListener(this);
         Legend legend = pieChart_lifestage.getLegend();
         linearLayout1.removeAllViewsInLayout();
@@ -693,6 +705,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         {
             LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
+
+            if(i==0){
+                ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_header_legend, null);
+                linearLayout1.addView(view);
+            }
             ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_cust_legend, null);
             TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
             TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
