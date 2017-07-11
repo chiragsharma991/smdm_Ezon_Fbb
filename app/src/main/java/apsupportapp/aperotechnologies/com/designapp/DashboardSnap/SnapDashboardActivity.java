@@ -2,6 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,8 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -55,14 +58,18 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.UUID;
 
+import apsupportapp.aperotechnologies.com.designapp.AboutUsActivity;
 import apsupportapp.aperotechnologies.com.designapp.Constants;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
+import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
 public class SnapDashboardActivity extends SwitchingActivity implements onclickView {
@@ -143,6 +150,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     }
 
     private void initalise() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
         RefreshTime = (TextView) findViewById(R.id.refreshTime);
         Recycler_verticalView.setNestedScrollingEnabled(false);
@@ -150,6 +159,43 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         Recycler_verticalView.setHasFixedSize(true);
         //setupAdapter();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.dash_board, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.commit();
+            SalesFilterActivity.level_filter = 1;
+            //  SalesAnalysisActivity1.selectedsegValue = null;
+            SalesAnalysisActivity1.level = 1;
+            Intent intent = new Intent(this, LoginActivity1.class);
+            startActivity(intent);
+            finish();
+            NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            notifManager.cancelAll();
+            return true;
+        } else if (id == R.id.aboutus) {
+            Intent intent = new Intent(this, AboutUsActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 

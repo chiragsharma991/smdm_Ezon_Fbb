@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
+
 
 public class AboutUsActivity extends AppCompatActivity {
 
@@ -41,7 +43,7 @@ public class AboutUsActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity.class);
+                Intent intent = new Intent(AboutUsActivity.this, SnapDashboardActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -50,7 +52,7 @@ public class AboutUsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity.class);
+        Intent intent = new Intent(AboutUsActivity.this, SnapDashboardActivity.class);
         startActivity(intent);
         finish();
 
