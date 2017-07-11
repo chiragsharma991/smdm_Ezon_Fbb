@@ -54,6 +54,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/txt_cust_NetSalesVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -148,6 +149,7 @@
 
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/txt_cust_PlanSalesVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -206,6 +208,7 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/txt_cust_ActualCustVal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -283,6 +286,7 @@
 
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/txt_cust_PlanCustVal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

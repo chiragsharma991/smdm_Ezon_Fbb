@@ -31,7 +31,7 @@
         <RelativeLayout
             android:layout_marginLeft="0dp"
             android:id="@+id/imageBtnBack"
-            android:background="@drawable/button_red_effect"
+            android:background="@drawable/button_click_effect"
             android:layout_width="40dp"
             android:layout_height="@dimen/toolbar_header_height"
             android:layout_alignParentLeft="true"

@@ -213,7 +213,10 @@ public class DashBoardActivity extends AppCompatActivity
         }
     }
 
-    private void initialize_ezone_ui() {
+    private void
+
+
+    initialize_ezone_ui() {
         txt_ezone_refresh_time = (TextView) findViewById(R.id.txt_ezone_refresh_time);
         txt_ezone_sales = (TextView) findViewById(R.id.ezone_headersales);
         hourly_performer_Title = (TextView) findViewById(R.id.txt_hourly_ezperformer_);
@@ -616,6 +619,7 @@ public class DashBoardActivity extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "onResponse: " );
                         try {
                             if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();

@@ -2,6 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -32,9 +33,10 @@ public class SwitchingTabActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_switching_tab);
+        setContentView(R.layout.activity_switch_tab);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
+        getSupportActionBar().setElevation(0);
         switchingTabActivity = this;
         backButton = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         imageBtnHomePage = (RelativeLayout) findViewById(R.id.imageBtnHomePage);
@@ -63,8 +65,11 @@ public class SwitchingTabActivity extends AppCompatActivity {
             }
         });
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Details"));
+
+        tabLayout.addTab(tabLayout.newTab().setText("Option"));
         tabLayout.addTab(tabLayout.newTab().setText("Style Size"));
+        tabLayout.setTabTextColors(Color.parseColor("#e8112d"),Color.parseColor("#e8112d"));
+
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         viewPager = (ViewPager) findViewById(R.id.pager);
         final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());

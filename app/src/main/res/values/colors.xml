@@ -55,4 +55,12 @@
     <color name="zoom_button_color">#40464646</color>
 
 
+    <!--New Color Changes-->
+
+    <color name="ezfbb_activity_background">#f8f6f6</color>
+    <color name="ezfbb_status_bar">#808080</color>
+    <color name="ezfbb_red">#e8112d</color>
+    <color name="ezfbb_black">#000000</color>
+
+
 </resources>

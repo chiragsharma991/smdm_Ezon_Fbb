@@ -49,9 +49,12 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Handler;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
+import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -65,9 +68,9 @@ public class CustomerLookup_PageTwo extends Fragment {
     OnEngagemntBandClick onEngagemntBandClick;
     TextView txt_engagementnm_Val, txt_pending_Val, txt_color_engagemnt_nm;
     static EditText edt_cust_Search;
-    static RecyclerView lv_cust_details;
+    RecyclerView lv_cust_details;
     CustomerDetail customerDetail;
-    static CustomerDetailAdapter customerDetailAdapter;
+    CustomerDetailAdapter customerDetailAdapter;
     ArrayList<CustomerDetail> detailArrayList, customerDetailArrayList = new ArrayList<CustomerDetail>();
     ViewGroup root;
     Context context;
@@ -81,30 +84,36 @@ public class CustomerLookup_PageTwo extends Fragment {
     private String lazyScroll = "OFF";
     private int totalItemCount = 0;  // this is total item present in listview
     int firstVisibleItem = 0;
+    MySingleton m_config;
     String updated_userId;
     int offset = 0, count = 0, limit = 100;
+    private int arr_count = 0;
+    int pos;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        m_config = MySingleton.getInstance(getActivity());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         updated_userId = userId.substring(0, userId.length() - 5);
         Log.e("update_userId", "" + updated_userId);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        arr_count = 0;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = (ViewGroup) inflater.inflate(R.layout.fragment_custlookup_pagetwo, container, false);
         context = root.getContext();
+        initialise();
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-        initialise();
+
         Log.e("test", "onCreateView: page two");
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading...");
@@ -116,6 +125,25 @@ public class CustomerLookup_PageTwo extends Fragment {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
+        edt_cust_Search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            Boolean handled = false;
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_NONE)) {
+                    edt_cust_Search.clearFocus();
+                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (inputManager != null) {
+                        inputManager.hideSoftInputFromWindow(edt_cust_Search.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+                    handled = true;
+                }
+                return handled;
+            }
+
+        });
+
         edt_cust_Search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -123,11 +151,8 @@ public class CustomerLookup_PageTwo extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lazyScroll.equals("ON")) {
-                    String searchData = edt_cust_Search.getText().toString();
-                    customerDetailAdapter.getFilter().filter(searchData);
-                }
-
+                String searchData = edt_cust_Search.getText().toString();
+                customerDetailAdapter.getFilter().filter(searchData);
             }
 
             @Override
@@ -143,23 +168,22 @@ public class CustomerLookup_PageTwo extends Fragment {
                 int visibleItemCount = recyclerView.getChildCount();
                 totalItemCount = mRecyclerViewHelper.getItemCount();
                 firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
-                if (firstVisibleItem + visibleItemCount == totalItemCount && lazyScroll.equals("OFF")) {
 
-//                    if (e_bandnm.equals("")) {
-//                        Log.e("condition 1", "");
-                        customerDetailAdapter.getItemViewType(2);
-                        lazyScroll = "ON";
-                        requestCustomerDetail();
-//                    }
-//                    else
-//                    {
-//                        Log.e("condition 2", "");
-//                        customerDetailAdapter.getItemViewType(2);
-//                        lazyScroll = "ON";
-//                        requestEngagementBandDetail();
-//                    }
+                Log.e(" arr_count ", "" + arr_count);
+
+                if (arr_count == 100 && lazyScroll.equals("OFF")) {
+                    detailArrayList.add(null);
+                    customerDetailAdapter.notifyItemInserted(detailArrayList.size() - 1);
+                    pos = detailArrayList.size() - 1;
+                    arr_count = 0;
+                    lazyScroll = "ON";
+                    android.os.Handler h = new android.os.Handler();
+                    h.postDelayed(new Runnable() {
+                        public void run() {
+                            requestCustomerDetail();
+                        }
+                    }, 5000);
                 }
-
             }
 
             @Override
@@ -223,89 +247,22 @@ public class CustomerLookup_PageTwo extends Fragment {
     public void fragmentCommunication(String enagagemntband) {
         e_bandnm = enagagemntband;
         Log.e("test", "inerface call size is");
-        Reusable_Functions.hDialog();
 
-    }
+//            if (Reusable_Functions.chkStatus(getActivity())) {
+//                Reusable_Functions.hDialog();
+//                Reusable_Functions.sDialog(getActivity(), "Loading data...");
 
-    private void requestEngagementBandDetail() {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;
-        Log.e("detail url 1:", "" + url);
-        postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("response 1:", "" + response + "size" + response.length());
-                        try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                return;
+                offset = 0;
+                limit = 100;
+                count = 0;
+                customerDetailArrayList = new ArrayList<CustomerDetail>();
+                requestEngagementBandDetail();
 
-                            } else if (response.length() == limit) {
-
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-                                    customerDetailArrayList.add(customerDetail);
-                                }
-
-                                offset = offset + limit;
+//            } else {
+//                Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
+//            }
 
 
-                            } else if (response.length() < limit) {
-
-                                for (int i = 0; i < response.length(); i++) {
-                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-                                    customerDetailArrayList.add(customerDetail);
-                                }
-                            }
-
-
-                            if (lazyScroll.equals("ON")) {
-                                customerDetailAdapter.notifyDataSetChanged();
-                                lazyScroll = "OFF";
-                                customerDetailAdapter.getItemViewType(1);
-                            } else {
-
-                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailArrayList, getContext());
-                                lv_cust_details.setAdapter(customerDetailAdapter);
-                                customerDetailAdapter.notifyDataSetChanged();
-                                customerDetailAdapter.getItemViewType(1);
-
-                            }
-                            Reusable_Functions.hDialog();
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                            Log.e("exception :", "" + e.getMessage());
-                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
     }
 
 
@@ -330,9 +287,8 @@ public class CustomerLookup_PageTwo extends Fragment {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     detailArrayList.add(customerDetail);
                                 }
+                                arr_count = response.length();
                                 offset = offset + limit;
-
-                                // requestCustomerDetail();
 
                             } else if (response.length() < limit) {
 
@@ -344,9 +300,10 @@ public class CustomerLookup_PageTwo extends Fragment {
 
 
                             if (lazyScroll.equals("ON")) {
+                                Log.e("pos", " " + pos);
+                                detailArrayList.remove(pos);
                                 customerDetailAdapter.notifyDataSetChanged();
                                 lazyScroll = "OFF";
-                                customerDetailAdapter.getItemViewType(1);
                             } else {
                                 lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 lv_cust_details.setOnFlingListener(null);
@@ -360,6 +317,8 @@ public class CustomerLookup_PageTwo extends Fragment {
                             Reusable_Functions.hDialog();
 
                         } catch (Exception e) {
+                            detailArrayList.remove(pos);
+                            customerDetailAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             Log.e("exception :", "" + e.getMessage());
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
@@ -371,6 +330,8 @@ public class CustomerLookup_PageTwo extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        detailArrayList.remove(pos);
+                        customerDetailAdapter.notifyDataSetChanged();
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -393,7 +354,100 @@ public class CustomerLookup_PageTwo extends Fragment {
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+    private void requestEngagementBandDetail()
+    {
+        String url = "";
+//        if(bandClick)
+//        {
+            url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache;// + "&offset=" + offset + "&limit=" + limit;
 
+//
+          Log.e("detail url 1:", "" + url);
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("response 1:", "" + response + "size"+response.length());
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
+
+                            } else
+
+                            if (response.length() == limit) {
+
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+                                    customerDetailArrayList.add(customerDetail);
+                                }
+                            }
+                              //  offsetval = offsetval + limit;
+
+
+//                            } else if (response.length() < limit) {
+//
+//                                for (int i = 0; i < response.length(); i++) {
+//                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+//                                    customerDetailsList.add(customerDetail);
+//                                }
+//                            }
+
+
+//                            if (lazyScroll.equals("ON")) {
+//                                customerDetailAdapter.notifyDataSetChanged();
+//                                lazyScroll = "OFF";
+//                                customerDetailAdapter.getItemViewType(1);
+//                            }
+//                            else
+//                            {
+                                lv_cust_details.removeAllViews();
+                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailArrayList,getContext());
+                                lv_cust_details.setAdapter(customerDetailAdapter);
+                                customerDetailAdapter.notifyDataSetChanged();
+
+
+
+                            Reusable_Functions.hDialog();
+                    }
+                        catch (Exception e)
+                        {
+                            Reusable_Functions.hDialog();
+                            Log.e("exception :", "" + e.getMessage());
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
 
 }
 

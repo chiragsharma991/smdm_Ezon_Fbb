@@ -1,6 +1,9 @@
 package apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -11,9 +14,19 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 
+import com.android.volley.Cache;
+import com.android.volley.Network;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
+import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
 /**
  * Created by pamrutkar on 13/06/17.
@@ -23,12 +36,29 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     static ViewPager mViewPager;
     private CustomerViewPagerAdapter adapter;
     static LinearLayout ez_linear_dots;
+    Context context;
+    RequestQueue queue;
+    String userId, bearertoken;
+    SharedPreferences sharedPreferences;
+    Gson gson;
+    MySingleton m_config;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_lookup);
         getSupportActionBar().hide();
+        context = this;
+        m_config = MySingleton.getInstance(context);
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+        Network network = new BasicNetwork(new HurlStack());
+        queue = new RequestQueue(cache, network);
+        queue.start();
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userId = sharedPreferences.getString("userId","");
+        bearertoken = sharedPreferences.getString("bearerToken","");
+        gson = new Gson();
         initialiseUi();
         setTab();
     }
@@ -94,8 +124,7 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        CustomerLookup_PageTwo.customerDetailAdapter.notifyItemRemoved(0);
-        CustomerLookup_PageTwo.customerDetailAdapter.notifyDataSetChanged();
+
     }
 
     @Override

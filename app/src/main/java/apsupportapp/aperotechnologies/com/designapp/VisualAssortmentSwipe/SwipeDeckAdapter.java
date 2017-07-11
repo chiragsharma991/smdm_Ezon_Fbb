@@ -288,7 +288,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                v.setBackgroundResource(R.drawable.button_red_effect);
+                v.setBackgroundResource(R.drawable.button_click_effect);
                 int position = (int) v.getTag();
 
                 VisualAssort visualAssort1 = visualassortmentlist.get(position);
@@ -380,7 +380,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                v.setBackgroundResource(R.drawable.button_red_effect);
+                v.setBackgroundResource(R.drawable.button_click_effect);
 
                 int position = (int) v.getTag();
 

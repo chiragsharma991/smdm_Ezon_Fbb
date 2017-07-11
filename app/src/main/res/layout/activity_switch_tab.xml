@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/main_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/ezfbb_activity_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductInformation.SwitchingTabActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_header_height"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:contentInsetStart="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_marginLeft="0dp"
+                android:id="@+id/imageBtnBack1"
+                android:background="@drawable/button_click"
+                android:layout_width="@dimen/header_clickable_width"
+                android:layout_height="@dimen/header_clickable_height"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true">
+
+                <Button
+                    android:clickable="false"
+                    android:background="@mipmap/ic_arrow_back_black"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_info"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageBtnBack1"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/ezfbb_black"
+                android:id="@+id/toolbar_title" />
+
+            <RelativeLayout
+                android:id="@+id/imageBtnHomePage"
+                android:background="@drawable/button_click"
+                android:layout_width="@dimen/header_clickable_width"
+                android:layout_height="@dimen/header_clickable_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+                <Button
+                    android:clickable="false"
+                    android:background="@mipmap/common_home_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/white"
+        android:elevation="0dp"
+        style="@style/MyCustomTabLayout"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <android.support.v4.view.ViewPager
+
+        android:background="@color/ezfbb_activity_background"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tab_layout"/>
+
+</RelativeLayout>

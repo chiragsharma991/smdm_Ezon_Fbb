@@ -623,8 +623,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        customerDetailsarray.clear();
-        customerDetailArrayList.clear();
+        CustomerLookup_PageTwo.edt_cust_Search.setText("");
+        CustomerLookupActivity.mViewPager.setCurrentItem(0);
+//        customerDetailsarray.clear();
+//        customerDetailArrayList.clear();
         finish();
     }
 }
