@@ -63,4 +63,12 @@
     <color name="ezfbb_black">#000000</color>
 
 
+
+    <!--New Color Changes-->
+
+    <color name="ezfb_activity_background">#f8f6f6</color>
+    <color name="ezfb_White">#ffffff</color>
+    <color name="ezfb_Red">#e8112d</color>
+
+
 </resources>

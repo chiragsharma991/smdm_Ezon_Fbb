@@ -26,6 +26,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.crashlytics.android.Crashlytics;
+
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import io.fabric.sdk.android.Fabric;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -135,7 +137,7 @@ public class SplashActivity extends AppCompatActivity {
                             editor.putString("bearerToken", bearerToken);
                             editor.putString("geoLeveLDesc",geoLeveLDesc);
                             editor.apply();
-                            Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
+                            Intent i = new Intent(SplashActivity.this, SnapDashboardActivity.class);
                             i.putExtra("from", "splash");
                             startActivity(i);
                             progressbar.setVisibility(View.GONE);

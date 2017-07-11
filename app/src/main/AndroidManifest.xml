@@ -7,9 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
 
     <application
         android:name=".MyApplication"
@@ -17,11 +16,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -120,11 +121,11 @@
         <!-- android:name=".WorstPerformersPromo.WorstPerformerActivity" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- android:windowSoftInputMode="stateHidden" /> -->
-            android:windowSoftInputMode="stateHidden" />
-        <!--<activity-->
-        <!--android:name=".WorstPerformersPromo.WorstPerformerActivity"-->
-        <!--android:screenOrientation="portrait"-->
-        <!--android:windowSoftInputMode="stateHidden" />-->
+        android:windowSoftInputMode="stateHidden" />
+        <!-- <activity -->
+        <!-- android:name=".WorstPerformersPromo.WorstPerformerActivity" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:windowSoftInputMode="stateHidden" /> -->
         <activity
             android:name=".FreshnessIndex.FreshnessIndexActivity"
             android:screenOrientation="portrait"
@@ -153,8 +154,7 @@
             android:name=".BestPerformersInventory.BestPerformerInventory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-            android:windowSoftInputMode="stateHidden" />
+        android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".FloorAvailability.FloorAvailabilityActivity"
             android:screenOrientation="portrait"
@@ -233,8 +233,7 @@
             android:name=".StoreInspection.InspectionHistoryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-            android:windowSoftInputMode="stateHidden" />
-
+        android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".MPM.mpm_activity"
             android:screenOrientation="portrait"
@@ -248,26 +247,28 @@
             android:name=".SalesAnalysis.EzoneSalesFilter"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".CustomerLoyalty.CustomerLookupActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-        <activity android:name=".HourlyPerformence.HourlyPerformence"
+        <activity
+            android:name=".HourlyPerformence.HourlyPerformence"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            >
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".CustomerLoyalty.CustomerDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-        <activity android:name=".CustomerLoyalty.CustDetailBarChart"
+        <activity
+            android:name=".CustomerLoyalty.CustDetailBarChart"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".DashboardSnap.SnapDashboardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+
+        </activity>
     </application>
 
 </manifest>

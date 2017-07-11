@@ -2,12 +2,15 @@ package apsupportapp.aperotechnologies.com.designapp;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -171,7 +174,7 @@ public class Reusable_Functions {
         });
     }
 
-    protected static boolean checkPermission(String strPermission, Context context){
+    public static boolean checkPermission(String strPermission, Context context){
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             int result = ContextCompat.checkSelfPermission(context, strPermission);
             if (result == PackageManager.PERMISSION_GRANTED){
@@ -182,5 +185,7 @@ public class Reusable_Functions {
         }
         return true;
     }
+
+
 
 }

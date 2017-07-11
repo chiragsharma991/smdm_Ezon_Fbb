@@ -54,6 +54,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
+
 
 /**
  * Created by pamrutkar on 25/05/17.
@@ -212,7 +214,7 @@ public class LoginActivity1 extends AppCompatActivity
                                     editor.apply();
 
                                 }
-                                Intent intent = new Intent(LoginActivity1.this, DashBoardActivity.class);
+                                Intent intent = new Intent(LoginActivity1.this, SnapDashboardActivity.class);
                                 intent.putExtra("from", "login");
                                 intent.putExtra("BACKTO", "login");
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -321,7 +323,7 @@ public class LoginActivity1 extends AppCompatActivity
                                     editor.apply();
                                 }
                                 Reusable_Functions.hDialog();
-                                Intent intent = new Intent(LoginActivity1.this, DashBoardActivity.class);
+                                Intent intent = new Intent(LoginActivity1.this, SnapDashboardActivity.class);
                                 intent.putExtra("from", "login");
                                 intent.putExtra("BACKTO", "login");
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
