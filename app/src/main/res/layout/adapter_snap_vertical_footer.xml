@@ -41,7 +41,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_horizentalView"
                 android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 />
