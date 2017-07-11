@@ -12,6 +12,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowDisablePreview">true</item>
 
+
     </style>
 
     <style name="Login" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -25,6 +26,10 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowDisablePreview">true</item>
 
+    </style>
+
+    <style name="Dashboard" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#995544</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
