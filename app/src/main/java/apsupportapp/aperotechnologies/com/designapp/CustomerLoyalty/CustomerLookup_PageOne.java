@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import android.support.v4.app.FragmentManager;
@@ -68,6 +69,7 @@ import java.util.Map;
 import java.util.Random;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -76,14 +78,14 @@ import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyHeader
 
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty.CustomerLookup_PageTwo.customerDetailAdapter;
-import static apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty.CustomerLookup_PageTwo.lv_cust_details;
+
+
 
 
 /**
  * Created by pamrutkar on 14/06/17.
  */
-public class CustomerLookup_PageOne extends Fragment implements CompoundButton.OnCheckedChangeListener, OnChartValueSelectedListener {
+public class CustomerLookup_PageOne extends Fragment implements CompoundButton.OnCheckedChangeListener{
     private TextView txt_cust_NetSalesVal, txt_cust_PlanSalesVal, txt_cust_ActualCustVal, txt_cust_PlanCustVal, txt_cust_ActualCustName,
             txt_cust_ActualCustPerc, txt_cust_PlanCustName, txt_cust_PlanCustPerc, txt_progress_custVal, txt_progress_salesVal;
     private TextView txt_cust_pengagementType_Val, txt_cust_pCustomer_Val, txt_cust_psales_Val, txt_cust_pspc_Val, txt_cust_psalesAch_Val, txt_cust_NetSalesName,
@@ -113,10 +115,12 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private ArrayList<PieEntry> entries;
     private PieData pieData;
     private Switch sales_cust_switch;
-    private boolean bandcustToggle = false;
+
+    private boolean bandcustToggle = false,bandClick = false;
     private String lazyScroll = "OFF";
     private int totalItemCount = 0;  // this is total item present in listview
     int firstVisibleItem = 0;
+    MySingleton m_config;
 
     public CustomerLookup_PageOne() {
 
@@ -131,6 +135,18 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
             }
         }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+        userId = sharedPreferences.getString("userId", "");
+        update_userId = userId.substring(0, userId.length() - 5);
+        Log.e("update_userId", "" + update_userId);
+        bearertoken = sharedPreferences.getString("bearerToken", "");
+        m_config = MySingleton.getInstance(context);
     }
 
     @Override
@@ -149,24 +165,21 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         queue.start();
         gson = new Gson();
         Log.e("test", "onCreateView: page one");
-
-
         initialise();
-        if (Reusable_Functions.chkStatus(context)) {
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.sDialog(context, "Loading...");
-
             offsetval = 0;
             limit = 10;
             count = 0;
             array_custLoyaltySummaries = new ArrayList<CustomerLoyaltySummary>();
             requestCustomerLoyaltySummary();
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-
-
-
-        return root;
+       return root;
     }
 
     @Override
@@ -516,8 +529,24 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.setTouchEnabled(true);
         pieChart_band.invalidate();
         pieChart_band.notifyDataSetChanged();
-    //    pieChart_band.setOnChartValueSelectedListener(this);
-      //  txt_band_ach.setVisibility(View.VISIBLE);
+//        pieChart_band.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+//            @Override
+//            public void onValueSelected(Entry e, Highlight h)
+//            {
+//                PieEntry pe = (PieEntry) e;
+//                Log.e("-----", "" + pe.getLabel());
+//                e_bandnm = pe.getLabel();
+//
+//                engagemntBandClick.communicatefrag1(e_bandnm);
+//                CustomerLookupActivity.mViewPager.setCurrentItem(1);
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected() {
+//
+//            }
+//        });
         Legend legend = pieChart_band.getLegend();
         for (int i = 0; i < planengagementArrayList.size(); i++)
         {
@@ -575,8 +604,33 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.animateXY(4000, 4000);
         pieChart_band.setDescription(null);
         pieChart_band.setTouchEnabled(true);
-       // txt_band_ach.setVisibility(View.VISIBLE);
-      //  pieChart_band.setOnChartValueSelectedListener(this);
+//        pieChart_band.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+//            @Override
+//            public void onValueSelected(Entry e, Highlight h)
+//            {
+//                PieEntry pe = (PieEntry) e;
+//                Log.e("-----", "" + pe.getLabel());
+//                e_bandnm = pe.getLabel();
+//                if (Reusable_Functions.chkStatus(getActivity())) {
+//                    Reusable_Functions.sDialog(getActivity(), "Loading...");
+//                    offsetval = 0;
+//                    limit = 100;
+//                    count = 0;
+//                    bandClick = true;
+//                    requestEngagementBandDetail();
+//                }
+//                else
+//                {
+//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected() {
+//
+//            }
+//        });
         Legend legend = pieChart_band.getLegend();
         linearLayout.removeAllViewsInLayout();
         for (int i = 0; i < planengagementArrayList.size(); i++)
@@ -634,8 +688,33 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
-       // txt_lifestage_ach.setVisibility(View.VISIBLE);
-    //    pieChart_lifestage.setOnChartValueSelectedListener(this);
+//        pieChart_lifestage.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+//            @Override
+//            public void onValueSelected(Entry e, Highlight h)
+//            {
+//                PieEntry pe = (PieEntry) e;
+//                Log.e("-----", "" + pe.getLabel());
+//                e_bandnm = pe.getLabel();
+//                if (Reusable_Functions.chkStatus(getActivity())) {
+//                    Reusable_Functions.sDialog(getActivity(), "Loading...");
+//                    offsetval = 0;
+//                    limit = 100;
+//                    count = 0;
+//                    bandClick = false;
+//                    requestEngagementBandDetail();
+//                }
+//                else
+//                {
+//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected() {
+//
+//            }
+//        });
         Legend legend = pieChart_lifestage.getLegend();
         for (int i = 0; i < actualengagementArrayList.size(); i++) {
 
@@ -698,7 +777,34 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
       //  txt_lifestage_ach.setVisibility(View.VISIBLE);
-      //  pieChart_lifestage.setOnChartValueSelectedListener(this);
+//        pieChart_lifestage.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+//            @Override
+//            public void onValueSelected(Entry e, Highlight h)
+//            {
+//                PieEntry pe = (PieEntry) e;
+//                Log.e("-----", "" + pe.getLabel());
+//                e_bandnm = pe.getLabel();
+//                if (Reusable_Functions.chkStatus(getActivity())) {
+//                    Reusable_Functions.sDialog(getActivity(), "Loading...");
+//                    offsetval = 0;
+//                    limit = 100;
+//                    count = 0;
+//                    bandClick = false;
+//                    requestEngagementBandDetail();
+//                }
+//                else
+//                {
+//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected()
+//            {
+//
+//            }
+//        });
         Legend legend = pieChart_lifestage.getLegend();
         linearLayout1.removeAllViewsInLayout();
         for (int i = 0; i < actualengagementArrayList.size(); i++)
@@ -722,121 +828,106 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         legend.setEnabled(false);
     }
 
-    @Override
-    public void onValueSelected(Entry e, Highlight h)
-    {
 
-        PieEntry pe = (PieEntry) e;
-        Log.e("-----", "" + pe.getLabel());
-        e_bandnm = pe.getLabel();
-                if (Reusable_Functions.chkStatus(getActivity())) {
-                    Reusable_Functions.sDialog(getActivity(), "Loading...");
-        offsetval = 0;
-        limit = 100;
-        count = 0;
-        requestEngagementBandDetail();
-               }
-        else
-        {
-            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onNothingSelected()
-    {
-
-    }
-    private void requestEngagementBandDetail()
-    {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
-        Log.e("detail url 1:", "" + url);
-        postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("response 1:", "" + response + "size"+response.length());
-                        try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                return;
-
-                            } else
-
-                            if (response.length() == limit) {
-
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-                                    customerDetailsList.add(customerDetail);
-                                }
-                            }
-                              //  offsetval = offsetval + limit;
-
-
-//                            } else if (response.length() < limit) {
+//    private void requestEngagementBandDetail()
+//    {
+//        String url = "";
+//        if(bandClick)
+//        {
+//            url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
+//
+//        }
+//        else
+//        {
+//            url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&lifeStage=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
+//
+//        }Log.e("detail url 1:", "" + url);
+//        postRequest = new JsonArrayRequest(Request.Method.GET, url,
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        Log.e("response 1:", "" + response + "size"+response.length());
+//                        try {
+//                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+//                                Reusable_Functions.hDialog();
+//                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+//                                return;
+//
+//                            } else
+//
+//                            if (response.length() == limit) {
 //
 //                                for (int i = 0; i < response.length(); i++) {
+//
 //                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
 //                                    customerDetailsList.add(customerDetail);
 //                                }
 //                            }
-
-
-//                            if (lazyScroll.equals("ON")) {
+//                              //  offsetval = offsetval + limit;
+//
+//
+////                            } else if (response.length() < limit) {
+////
+////                                for (int i = 0; i < response.length(); i++) {
+////                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+////                                    customerDetailsList.add(customerDetail);
+////                                }
+////                            }
+//
+//
+////                            if (lazyScroll.equals("ON")) {
+////                                customerDetailAdapter.notifyDataSetChanged();
+////                                lazyScroll = "OFF";
+////                                customerDetailAdapter.getItemViewType(1);
+////                            }
+////                            else
+////                            {
+//                                lv_cust_details.removeAllViews();
+//                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
+//                                lv_cust_details.setAdapter(customerDetailAdapter);
 //                                customerDetailAdapter.notifyDataSetChanged();
-//                                lazyScroll = "OFF";
 //                                customerDetailAdapter.getItemViewType(1);
-//                            }
-//                            else
-//                            {
-                                lv_cust_details.removeAllViews();
-                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
-                                lv_cust_details.setAdapter(customerDetailAdapter);
-                                customerDetailAdapter.notifyDataSetChanged();
-                                customerDetailAdapter.getItemViewType(1);
-                                engagemntBandClick.communicatefrag1(e_bandnm);
-                                CustomerLookupActivity.mViewPager.setCurrentItem(1);
-
-                          //  }
-                            Reusable_Functions.hDialog();
-                    }
-                        catch (Exception e)
-                        {
-                            Reusable_Functions.hDialog();
-                            Log.e("exception :", "" + e.getMessage());
-                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
+//                                engagemntBandClick.communicatefrag1(e_bandnm);
+//                                CustomerLookupActivity.mViewPager.setCurrentItem(1);
+//
+//                          //  }
+//                            Reusable_Functions.hDialog();
+//                    }
+//                        catch (Exception e)
+//                        {
+//                            Reusable_Functions.hDialog();
+//                            Log.e("exception :", "" + e.getMessage());
+//                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+//                            Reusable_Functions.hDialog();
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener()
+//                {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error)
+//                    {
+//                        Reusable_Functions.hDialog();
+//                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+//                        Reusable_Functions.hDialog();
+//                        error.printStackTrace();
+//                    }
+//                }
+//
+//        ) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("Content-Type", "application/json");
+//                params.put("Authorization", "Bearer " + bearertoken);
+//                return params;
+//            }
+//        };
+//        int socketTimeout = 60000;//5 seconds
+//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+//        postRequest.setRetryPolicy(policy);
+//        queue.add(postRequest);
+//    }
 
 }

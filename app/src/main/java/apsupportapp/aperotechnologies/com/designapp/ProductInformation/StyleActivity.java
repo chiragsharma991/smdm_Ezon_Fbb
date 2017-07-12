@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -80,7 +81,7 @@ public class StyleActivity extends AppCompatActivity
     Button btnSubmit;
     EditText edtsearchCollection, edtsearchOption, edit_barcode;
     public static String selcollectionName = null, seloptionName = null;
-    RelativeLayout stylemainlayout;
+    LinearLayout stylemainlayout;
     LinearLayout collectionLayout, optionLayout;
     private ListView listCollection, listOption;
     ListAdapter collectionAdapter;
@@ -98,7 +99,7 @@ public class StyleActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_style);
+        setContentView(R.layout.activity_product_info);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         context = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -126,7 +127,7 @@ public class StyleActivity extends AppCompatActivity
             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
-        stylemainlayout = (RelativeLayout) findViewById(R.id.stylemainlayout);
+        stylemainlayout = (LinearLayout) findViewById(R.id.stylemainlayout);
         stylemainlayout.setVisibility(View.VISIBLE);
         collectionLayout = (LinearLayout) findViewById(R.id.collectionLayout);
         optionLayout = (LinearLayout) findViewById(R.id.optionLayout);
@@ -134,6 +135,8 @@ public class StyleActivity extends AppCompatActivity
         edtsearchOption = (EditText) findViewById(R.id.searchOption);
         edit_barcode = (EditText) findViewById(R.id.editBarcode);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        String submit = "Submit";
+        btnSubmit.setText(submit);
         btnBarcode = (Button) findViewById(R.id.btnBarcode);
         imageBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         if (getIntent().getExtras() != null)
@@ -157,6 +160,18 @@ public class StyleActivity extends AppCompatActivity
         listOption.setAdapter(optionAdapter);
         listOption.setTextFilterEnabled(true);
         optionAdapter.notifyDataSetChanged();
+
+
+
+        collection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("", "onClick: " );
+                edtsearchCollection.setText("");
+                collectionLayout.setVisibility(View.VISIBLE);
+                optionLayout.setVisibility(View.GONE);
+            }
+        });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -557,14 +572,7 @@ public class StyleActivity extends AppCompatActivity
                                         collection.setText("Select Collection");
                                     }
                                 }
-                                collection.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        edtsearchCollection.setText("");
-                                        collectionLayout.setVisibility(View.VISIBLE);
-                                        optionLayout.setVisibility(View.GONE);
-                                    }
-                                });
+
                                 listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                                     @Override

@@ -42,13 +42,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     Gson gson;
 
     // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
-    private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            return false;
-        }
-    };
+
 
     public CustomerDetailAdapter(ArrayList<CustomerDetail> detailArrayList, Context context)
     {
@@ -62,11 +56,19 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public int getItemViewType(int position) {
 
-        if (isPositionItem(position)) {
-            return VIEW_ITEM;
+//        if (isPositionItem(position)) {
+//            return VIEW_ITEM;
+//
+//        } else {
+//            return VIEW_PROG;
+//        }
+
+        if(detailArrayList.get(position) == null)
+        {
+            return VIEW_PROG;
 
         } else {
-            return VIEW_PROG;
+            return VIEW_ITEM;
         }
     }
 
@@ -78,7 +80,15 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public int getItemCount()
     {
-        return detailArrayList.size()+1;
+        if(detailArrayList != null)
+        {
+            return detailArrayList.size();
+        }
+        else
+        {
+            return 0;
+        }
+
     }
 
 
@@ -191,7 +201,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         Log.e("filter list size :",""+filterList.size());
                     }
                 }
-                results.count = filterList.size();
+                results.count = filterList.size() ;
                 results.values = filterList;
             }
             else
@@ -208,7 +218,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @Override
         protected void publishResults(CharSequence constraint,FilterResults results)
         {
-            detailArrayList = (ArrayList<CustomerDetail>) results.values;
+            detailArrayList = (ArrayList<CustomerDetail>) results.values ;
             notifyDataSetChanged();
         }
     }

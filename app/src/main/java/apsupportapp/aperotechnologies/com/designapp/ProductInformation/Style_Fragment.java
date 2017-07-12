@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,13 +83,13 @@ public class Style_Fragment extends Fragment {
 
     // set the header titles
     String headers[] =
-    {
-            "             Color            ",
-            "   Size   ",
-            "    TW Sales\n\t\t\t(U)    ",
-            "  SOH\n\t\t\t(U)    ",
-            "    FWC   "
-    };
+            {
+                    "             Color            ",
+                    "   Size   ",
+                    "    TW Sales\n\t\t\t(U)    ",
+                    "  SOH\n\t\t\t(U)    ",
+                    "    FWC   "
+            };
 
     int headerCellsWidth[] = new int[headers.length];
     private String TAG="StyleActivity";
@@ -194,7 +195,7 @@ public class Style_Fragment extends Fragment {
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
-                               // createTable();
+                                // createTable();
                                 Style_loadingBar.setVisibility(View.GONE);
 
                                 // Reusable_Functions.hDialog();
@@ -271,6 +272,7 @@ public class Style_Fragment extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "onResponse: "+response );
                         try {
                             if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();
@@ -290,7 +292,7 @@ public class Style_Fragment extends Fragment {
 
                                     int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
 
-                                    txtSales.setText(": "+"\u20B9" + Sales);
+                                  //  txtSales.setText(": "+"\u20B9" + Sales);
                                     txtSalesUnit.setText(": " + twSaleTotQty);
                                     txtFwdWeekCover.setText(": " + String.format("%.1f", fwdWeekCover));
                                     txtGit.setText(": " + stkGitQty);
@@ -330,14 +332,13 @@ public class Style_Fragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.style_fragment, container, false);
+        view = inflater.inflate(R.layout.fragment_style, container, false);
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));  //dfdedf
         Style_loadingBar = (RelativeLayout) view.findViewById(R.id.style_loadingBar);
         txtarticleOption = (TextView) view.findViewById(R.id.txtarticleOption);
         //style size text
-        txtSales = (TextView) view.findViewById(R.id.txtSales);
         txtSalesUnit = (TextView) view.findViewById(R.id.txtSalesUnit);
         LinearTable = (LinearLayout) view.findViewById(R.id.linearTable);
         txtFwdWeekCover = (TextView) view.findViewById(R.id.txtFwdCover);
@@ -436,13 +437,12 @@ public class Style_Fragment extends Fragment {
     TableRow componentATableRow() {
 
         TableRow componentATableRow = new TableRow(this.context);
-        componentATableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
         TextView textView = this.headerTextView(headers[0]);
-        textView.setBackgroundColor(Color.parseColor("#2277b1"));
-        textView.setTextColor(Color.parseColor("#ffffff"));
+        textView.setBackgroundColor(Color.parseColor("#ffffff"));
+        textView.setTextColor(Color.parseColor("#000000"));
         textView.setGravity(Gravity.CENTER_HORIZONTAL);
         componentATableRow.addView(textView);
 
@@ -453,7 +453,6 @@ public class Style_Fragment extends Fragment {
     TableRow componentBTableRow() {
 
         TableRow componentBTableRow = new TableRow(this.context);
-componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         int headerFieldCount = headers.length;
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
@@ -462,8 +461,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-            textView.setBackgroundColor(Color.parseColor("#2277b1"));
-            textView.setTextColor(Color.parseColor("#ffffff"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
         }
@@ -475,10 +472,9 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
     private void generateTableC_AndTable_B() {
 
 
-       for (int k = 0; k < styleColorBeanList.size(); k++) {
+        for (int k = 0; k < styleColorBeanList.size(); k++) {
             if (k == 0 && styleColorBeanList.size() == 1) {
                 TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
                 this.tableC.addView(tableRowForTableC);
 
                 final int finalK = k;
@@ -506,15 +502,12 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
 
                 TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
-                taleRowForTableD.setBackgroundColor(Color.parseColor("#dfdedf"));
                 this.tableD.addView(taleRowForTableD);
 
                 TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-                tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
                 this.tableC.addView(tableRowForTableC1);
 
                 TableRow taleRowForTableD1 = this.taleRowForTableDtotal();
-                taleRowForTableD1.setBackgroundColor(Color.parseColor("#dfdedf"));
                 this.tableD.addView(taleRowForTableD1);
 
                 salesUnitTotal = 0;
@@ -559,7 +552,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 if (styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim()) && k == styleColorBeanList.size() - 1) {
 
                     TableRow tableRowForTableC = this.tableRowForTableC("");
-                    tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC);
 
                     TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
@@ -572,11 +564,9 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
 
 
                     TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-                    tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC1);
 
                     TableRow taleRowForTableD2 = this.taleRowForTableDtotal();
-                    taleRowForTableD2.setBackgroundColor(Color.parseColor("#2277b1"));
                     this.tableD.addView(taleRowForTableD2);
 
                     salesUnitTotal = 0;
@@ -586,11 +576,9 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 //If current color not equal to previous color & last entry in array, then add total for previous, current row & total for current row
                 else if (!styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim()) && k == styleColorBeanList.size() - 1) {
                     TableRow tableRowForTableC = this.tableRowForTableCSpace();
-                    tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC);
 
                     TableRow tableRowForTableD = this.taleRowForTableDtotal();
-                    tableRowForTableD.setBackgroundColor(Color.parseColor("#2277b1"));
                     this.tableD.addView(tableRowForTableD);
 
                     salesUnitTotal = 0;
@@ -598,7 +586,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                     fwdweekTotal = 0;
 
                     TableRow tableRowForTableC1 = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                    tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC1);
 
                     final int finalK = k;
@@ -631,11 +618,11 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
 
 
                     TableRow tableRowForTableC2 = this.tableRowForTableCSpace();
-                    tableRowForTableC2.setBackgroundColor(Color.parseColor("#dfdedf"));
+                    tableRowForTableC2.setBackgroundColor(Color.parseColor("#ffffff"));
                     this.tableC.addView(tableRowForTableC2);
 
                     TableRow tableRowForTableD2 = this.taleRowForTableDtotal();
-                    tableRowForTableD2.setBackgroundColor(Color.parseColor("#2277b1"));
+                    tableRowForTableD2.setBackgroundColor(Color.parseColor("#ffffff"));
                     this.tableD.addView(tableRowForTableD2);
 
                     salesUnitTotal = 0;
@@ -645,7 +632,7 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 //If current color equal to previous color & last entry in array, then add the row
                 else if (styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim())) {
                     TableRow tableRowForTableC = this.tableRowForTableC("");
-                    tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
+                    tableRowForTableC.setBackgroundColor(Color.parseColor("#ffffff"));
                     this.tableC.addView(tableRowForTableC);
 
                     TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
@@ -662,12 +649,10 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 else if (!styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim())) {
 
                     TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-                    tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC1);
 
 
                     TableRow taleRowForTableD = this.taleRowForTableDtotal();
-                    taleRowForTableD.setBackgroundColor(Color.parseColor("#2277b1"));
                     this.tableD.addView(taleRowForTableD);
 
                     salesUnitTotal = 0;
@@ -746,9 +731,9 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
             params.setMargins(2, 2, 0, 0);
 
             TextView textViewB = this.bodyTextView(info[x]);
-            textViewB.setBackgroundColor(Color.parseColor("#2277b1"));
+            textViewB.setBackgroundColor(Color.parseColor("#ffffff"));
             taleRowForTableD.addView(textViewB, params);
-            textViewB.setTextColor(Color.parseColor("#ffffff"));
+            textViewB.setTextColor(Color.parseColor("#000000"));
             salesUnitTotal = 0;
             sohTotal = 0;
             fwdweekTotal = 0;

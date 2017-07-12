@@ -41,7 +41,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="0dp"
-                    android:background="@drawable/button_red_effect">
+                    android:background="@drawable/button_click_effect">
 
                     <Button
                         android:layout_width="20dp"
@@ -115,58 +115,6 @@
                     android:background="@color/smdm_divider_Black" />
 
 
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Search"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--android:textSize="20dp"-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/edtSearch"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:hint="Enter Option"-->
-                <!--android:cursorVisible="false"-->
-                <!--android:layout_marginTop="10dp"/>-->
-                <!--<Button android:id="@+id/btnSearch"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Search"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textColor="#ffffff"-->
-                <!--android:background="#B73020"-->
-                <!--/>-->
-                <!--<LinearLayout-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-                <!---->
-                <!--<LinearLayout-->
-                <!--android:layout_width="120dp"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="#566573"-->
-                <!--android:layout_marginTop="30dp"-->
-                <!--&gt;</LinearLayout>-->
-
-                <!--<ImageView-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@mipmap/search_or"/>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="#566573"-->
-                <!--android:layout_marginTop="30dp" >-->
-                <!---->
-                <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
 
 
                 <Button
@@ -250,7 +198,7 @@
         android:layout_height="match_parent"
         android:background="#80000000"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@color/bg_screen_color"
+    android:background="@color/ezfbb_activity_background"
     >
 
   <TextView
@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="@dimen/activity_horizontal_margin"
-        android:textColor="@color/bg_store_code_text"
+        android:textColor="@color/ezfbb_black"
         />
 </LinearLayout>

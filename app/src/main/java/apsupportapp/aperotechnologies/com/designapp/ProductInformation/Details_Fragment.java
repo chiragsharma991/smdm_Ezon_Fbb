@@ -43,7 +43,7 @@ public class Details_Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.details_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_detail, container, false);
         txtStoreCode =(TextView)view.findViewById(R.id.txtStoreCode);
         txtStoreDesc =(TextView)view.findViewById(R.id.txtStoreName);
         txtArticleOption = (TextView) view.findViewById(R.id.txtArticle);

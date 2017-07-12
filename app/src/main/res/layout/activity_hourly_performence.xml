@@ -43,7 +43,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="0dp"
-                    android:background="@drawable/button_red_effect">
+                    android:background="@drawable/button_click_effect">
 
                     <Button
                         android:id="@+id/button"

@@ -32,7 +32,7 @@
             android:singleLine="true"
             android:text=""
             android:textColor="@color/smdm_default_color"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/txt_legend_val1"
@@ -44,7 +44,7 @@
             android:singleLine="true"
             android:text=""
             android:textColor="@color/smdm_default_color"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 

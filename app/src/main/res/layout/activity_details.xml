@@ -45,7 +45,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="0dp"
-                        android:background="@drawable/button_red_effect">
+                        android:background="@drawable/button_click_effect">
 
                         <Button
                             android:layout_width="20dp"
@@ -159,7 +159,7 @@
             android:textAllCaps="false"
             android:layout_alignParentBottom="true"
             android:layout_margin="5dp"
-            android:background="@drawable/button_red_effect"
+            android:background="@drawable/button_click_effect"
             android:text="@string/submit"
             android:textSize="@dimen/smdm_header_title_large"
             android:textColor="@android:color/white"/>
