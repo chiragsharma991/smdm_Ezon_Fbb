@@ -33,7 +33,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="60dp"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="@string/username"
                 android:textAllCaps="true"
                 android:maxLines="1"
@@ -49,7 +49,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
@@ -71,6 +71,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    android:buttonTint="@color/ezfb_Red"
                     android:text="@string/loggedin"
                     android:textColor="@color/ezfb_black" />
 

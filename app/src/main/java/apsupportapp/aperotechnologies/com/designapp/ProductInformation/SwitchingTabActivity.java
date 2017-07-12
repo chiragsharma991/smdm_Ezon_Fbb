@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 
 import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -53,7 +54,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SwitchingTabActivity.this, DashBoardActivity.class);
+                Intent intent = new Intent(SwitchingTabActivity.this, SnapDashboardActivity.class);
                 startActivity(intent);
                 finish();
                 if(getIntent().getStringExtra("checkFrom").equals("bestInventory"))

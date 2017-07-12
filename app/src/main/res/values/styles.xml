@@ -21,6 +21,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#808080</item>
         <item name="colorAccent">@color/ezfb_White</item>
         <item name="colorControlNormal">@color/ezfb_black</item>
         <item name="colorControlActivated">@color/ezfb_black</item>
