@@ -4,5 +4,5 @@
     <size
         android:width="1dip" />
     <solid
-        android:color="#ffffff" />
+        android:color="@color/ezfb_black" />
 </shape>

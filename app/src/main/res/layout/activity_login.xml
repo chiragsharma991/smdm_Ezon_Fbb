@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ezfb_activity_background"
+    android:background="@color/ezfb_White"
     android:orientation="vertical"
     tools:context="apsupportapp.aperotechnologies.com.designapp.LoginActivity1">
 
@@ -17,14 +17,36 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageView
+
+
+            <!--  <ImageView
+                  android:layout_width="match_parent"
+                  android:layout_height="70dp"
+                  android:layout_marginLeft="40dp"
+                  android:layout_marginRight="40dp"
+                  android:layout_marginTop="150dp"
+                  android:src="@mipmap/engage247_logo1"
+                  tools:ignore="ContentDescription" />-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="150dp"
+                android:orientation="vertical"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="150dp"
-                android:src="@mipmap/engage247_logo1"
-                tools:ignore="ContentDescription" />
+                android:gravity="center_vertical|center_horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:text="Engage 24x7"
+                    android:textSize="50dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/ezfb_Red"
+                    />
+
+            </LinearLayout>
+
+
 
             <EditText
                 android:id="@+id/edtUserName"
@@ -33,7 +55,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="60dp"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="@string/username"
                 android:textAllCaps="true"
                 android:maxLines="1"
@@ -49,7 +71,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
@@ -71,6 +93,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    android:buttonTint="@color/ezfb_Red"
                     android:text="@string/loggedin"
                     android:textColor="@color/ezfb_black" />
 
