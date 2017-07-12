@@ -117,7 +117,7 @@ public class Style_Fragment extends Fragment {
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
+        Log.e(TAG, "onCreate: ");
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             requestStyleSizeDetailsAPI();
