@@ -304,9 +304,9 @@ public class Style_Fragment extends Fragment {
                                     txtSoh.setText("" + Math.round(stkOnhandQty));
                                     txtGit.setText("" + Math.round(stkGitQty));
                                     txtSales.setText("" + Math.round(twSaleNetVal));
-                                    txtFwdWeekCover.setText("" + Math.round(fwdWeekCover));
-                                    txtsalesThruUnit.setText("" + Math.round(sellThruUnitsRcpt));
-                                    txtROS.setText("" + Math.round(ros));
+                                    txtFwdWeekCover.setText("" + String.format("%.1f",fwdWeekCover));
+                                    txtsalesThruUnit.setText("" +  String.format("%.1f",sellThruUnitsRcpt)+"%");
+                                    txtROS.setText("" + String.format("%.1f",ros));
                                 }
                             }
                         } catch (Exception e) {
@@ -753,6 +753,7 @@ public class Style_Fragment extends Fragment {
             textViewB.setBackgroundColor(Color.parseColor("#ffffff"));
             taleRowForTableD.addView(textViewB, params);
             textViewB.setTextColor(Color.parseColor("#000000"));
+            textViewB.setTypeface(Typeface.DEFAULT_BOLD);
             salesUnitTotal = 0;
             sohTotal = 0;
             fwdweekTotal = 0;
