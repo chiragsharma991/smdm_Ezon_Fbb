@@ -3,19 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/ezfb_White"
     tools:context="apsupportapp.aperotechnologies.com.designapp.SplashActivity">
 
-    <ImageView
+  <!--  <ImageView
         android:src="@mipmap/engage247_logo1"
         android:layout_marginTop="150dp"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:gravity="center_vertical|center_horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Engage 24x7"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/ezfb_Red"
+            />
+
+    </LinearLayout>
 
     <ProgressBar
         android:progressDrawable="@drawable/progress_bar"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:id="@+id/progressbar"
         android:layout_centerInParent="true"
         android:layout_marginTop="250dp"
