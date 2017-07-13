@@ -70,6 +70,7 @@
     <color name="ezfb_White">#ffffff</color>
     <color name="ezfb_Red">#e8112d</color>
     <color name="ezfb_black">#000000</color>
+    <color name="ezfb_statusbar">#808080</color>
 
 
 </resources>

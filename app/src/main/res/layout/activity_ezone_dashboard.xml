@@ -414,7 +414,7 @@
 
 
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:orientation="vertical"
                 android:layout_below="@+id/txt_hourly_ezperformer_view_"
                 android:id="@+id/linear_hourly_ezperformer_view_"

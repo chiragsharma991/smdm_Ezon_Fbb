@@ -2,16 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/bg_screen_color"
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+
+    >
+
+<!--    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/view"
+        android:layout_marginTop="10dp"
+        >
+
+    </View>-->
 
 
     <RelativeLayout
         android:id="@+id/stock_cardView"
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/ezfb_White"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:padding="5dp">
 
         <RelativeLayout
@@ -66,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal"
                     android:weightSum="1">
                     <!---->
@@ -76,9 +89,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
                         android:text="Buy One Get One"
-                        android:textColor="@color/bg_store_code_text"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="@dimen/smdm_inflator_title_normal"
-                        android:textStyle="bold"
 
 
                         />
@@ -96,8 +108,8 @@
 
                         <ToggleButton
                             android:id="@+id/toggle_stock_fav"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="28dp"
+                            android:layout_height="29dp"
                             android:layout_centerInParent="true"
                             android:background="@drawable/toggleswitch"
                             android:focusable="false"
@@ -114,13 +126,13 @@
                 </LinearLayout>
 
 
-                <TextView
+          <!--      <TextView
                     android:id="@+id/bst_lineOne_child"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/smdm_inflater_divider"
                     android:layout_alignStart="@+id/bst_head_child"
                     android:layout_marginTop="10dp"
-                    android:background="@color/divider_salescard" />
+                    android:background="@color/divider_salescard" />-->
 
 
                 <!--Promo sales-->
@@ -129,7 +141,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     android:weightSum="1">
@@ -150,6 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
+                        android:visibility="invisible"
                         android:textColor="@color/smdm_default_color"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
@@ -162,7 +174,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.6"
                         android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
+                        android:textStyle="bold"
+                        android:textColor="@color/ezfb_black"
                         android:text="100"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -175,8 +188,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
                     android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
                     android:weightSum="1">
 
                     <TextView
@@ -196,6 +209,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
+                        android:visibility="invisible"
                         android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -208,7 +222,8 @@
                         android:layout_weight="0.6"
                         android:singleLine="true"
                         android:text="100"
-                        android:textColor="@color/smdm_default_color"
+                        android:textStyle="bold"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -218,4 +233,9 @@
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
+
+
+
+
+
 </RelativeLayout>

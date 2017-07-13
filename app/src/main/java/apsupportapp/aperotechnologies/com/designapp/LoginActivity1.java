@@ -7,9 +7,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,15 +22,18 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -75,7 +80,7 @@ public class LoginActivity1 extends AppCompatActivity
     boolean log_flag = false;
     SharedPreferences sharedPreferences;
     private ArrayList<String> storelist_data;
-    private ArrayAdapter<String> spinnerArrayAdapter;
+    private StoreListAdapter spinnerArrayAdapter;
     private String SelectedStoreCode, userId;
     private boolean firstLogin = false;
     private AlertDialog dialog;
@@ -475,11 +480,8 @@ public class LoginActivity1 extends AppCompatActivity
 
             }
         });
-        spinnerArrayAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, storelist_data) {
+        spinnerArrayAdapter = new StoreListAdapter(context,storelist_data);
 
-
-        };
         select_storeList.setAdapter(spinnerArrayAdapter);
 
 
@@ -488,12 +490,15 @@ public class LoginActivity1 extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
             {
+
+                Log.e("TAG", "onItemClick: "+position );
+             //   view.setBackgroundColor(Color.parseColor("#e8112d"));
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 dialog.dismiss();
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Authenticating user...");
-                    String value = (String) adapterView.getItemAtPosition(position);
+                    String value =  storelist_data.get(position);
                     SelectedStoreCode = value.trim().substring(0, 4);
                     firstLogin = true;
                     requestLoginWithStoreAPI();
@@ -535,5 +540,54 @@ public class LoginActivity1 extends AppCompatActivity
         Log.e("LOGIN", "onDestroy: " );
         Reusable_Functions.hDialog();
         super.onDestroy();
+
+    }
+
+
+
+
+    // --------- Adapter-----------
+
+    private class StoreListAdapter extends BaseAdapter {
+        private final Context context;
+        private final ArrayList<String> storelist_data;
+
+
+
+        public StoreListAdapter(Context context, ArrayList<String> storelist_data) {
+            this.context=context;
+            this.storelist_data=storelist_data;
+
+
+        }
+
+        @Override
+        public int getCount() {
+            return storelist_data.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return i;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+
+
+            LayoutInflater inflater = getLayoutInflater();
+            View row;
+            row = inflater.inflate(R.layout.simple_list_item, null, false);
+            TextView title, detail;
+            title = (TextView) row.findViewById(R.id.storeList);
+            title.setText(storelist_data.get(i));
+
+            return (row);
+        }
     }
 }
