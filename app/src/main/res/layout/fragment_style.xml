@@ -420,7 +420,6 @@
                     android:layout_marginTop="5dp"
                     android:background="@color/ezfbb_black"></View>
 
-
                 <RelativeLayout
                     android:id="@+id/relativeLayout"
                     android:layout_width="match_parent"
@@ -453,7 +452,6 @@
                             </LinearLayout>
                         </ScrollView>
                     </LinearLayout>
-
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
@@ -464,7 +462,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/ezfbb_activity_background"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/progressBar"
@@ -477,8 +475,5 @@
             android:theme="@color/ezfbb_red">
 
         </ProgressBar>
-
-
     </RelativeLayout>
-
 </RelativeLayout>

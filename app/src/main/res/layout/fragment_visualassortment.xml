@@ -219,7 +219,6 @@
                     android:layout_width="30dp"
                     android:layout_height="28dp"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/like_unselected"
                     android:clickable="false"
                     tools:ignore="ContentDescription"/>
 
@@ -254,7 +253,6 @@
                     android:layout_width="20dp"
                     android:layout_height="28dp"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/order_set"
                     android:clickable="false"
                     tools:ignore="ContentDescription"/>
             </RelativeLayout>
@@ -271,7 +269,6 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/comment"
                     android:clickable="false"
                     tools:ignore="ContentDescription"/>
             </RelativeLayout>

@@ -111,7 +111,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
 
         LayoutInflater inflater = LayoutInflater.from(context);
-        layoutView = inflater.inflate(R.layout.fragment_visualassortment, parent, false);
+        layoutView = inflater.inflate(R.layout.fragment_visual_assort, parent, false);
         rellike = (RelativeLayout) layoutView.findViewById(R.id.imgrellike);
         reldislike = (RelativeLayout) layoutView.findViewById(R.id.imgreldislike);
         relbuy = (RelativeLayout) layoutView.findViewById(R.id.imgrelbuy);
@@ -153,13 +153,13 @@ public class SwipeDeckAdapter extends BaseAdapter {
                 }
             }
         });
-        txtSeason.setText("Season : " + visualAssort.getSeasonName());
-        txtColor.setText("Color : " + visualAssort.getColor());
-        txtFabric.setText("Fabric : " + visualAssort.getProductFabricDesc());
-        txtFit.setText("Fit : " + visualAssort.getProductFitDesc());
-        txtCollection.setText("Collection : " + visualAssort.getCollectionName());
+        txtSeason.setText("" + visualAssort.getSeasonName());
+        txtColor.setText(" " + visualAssort.getColor());
+        txtFabric.setText("" + visualAssort.getProductFabricDesc());
+        txtFit.setText("" + visualAssort.getProductFitDesc());
+        txtCollection.setText("" + visualAssort.getCollectionName());
         txtAmount.setText("\u20B9 " + visualAssort.getUnitGrossPrice());
-        txtSizeRatio.setText("Size Ratio : " + visualAssort.getSize());
+        txtSizeRatio.setText(" " + visualAssort.getSize());
 
         if(!visualAssort.getProdImageURL().equals(""))
         {
@@ -193,19 +193,19 @@ public class SwipeDeckAdapter extends BaseAdapter {
         }
 
         if (visualAssort.getLikeDislikeFlg() == null) {
-            btnlike.setBackgroundResource(R.mipmap.like_selected);
-            btndislike.setBackgroundResource(R.mipmap.dislike_selected);
+            btnlike.setBackgroundResource(R.mipmap.likeunselected);
+            btndislike.setBackgroundResource(R.mipmap.dislikeunselected);
         } else if (visualAssort.getLikeDislikeFlg().equals("1")) {
-            btnlike.setBackgroundResource(R.mipmap.like_unselected);
-            rellike.setBackgroundColor(Color.parseColor("#2277b1"));
-            btndislike.setBackgroundResource(R.mipmap.dislike_selected);
+            btnlike.setBackgroundResource(R.mipmap.likeunselected);
+            rellike.setBackgroundColor(Color.parseColor("#ffffff"));
+            btndislike.setBackgroundResource(R.mipmap.dislikeselected);
         } else if (visualAssort.getLikeDislikeFlg().equals("0")) {
-            btnlike.setBackgroundResource(R.mipmap.like_selected);
-            btndislike.setBackgroundResource(R.mipmap.dislike_unselected);
-            reldislike.setBackgroundColor(Color.parseColor("#2277b1"));
+            btnlike.setBackgroundResource(R.mipmap.likeselected);
+            btndislike.setBackgroundResource(R.mipmap.dislikeunselected);
+            reldislike.setBackgroundColor(Color.parseColor("#ffffff"));
         } else {
-            btnlike.setBackgroundResource(R.mipmap.like_selected);
-            btndislike.setBackgroundResource(R.mipmap.dislike_selected);
+            btnlike.setBackgroundResource(R.mipmap.likeunselected);
+            btndislike.setBackgroundResource(R.mipmap.dislikeunselected);
         }
 
 
@@ -232,11 +232,11 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     RelativeLayout rel2 = (RelativeLayout) parent.getChildAt(1);
 
                     ImageButton btn1 = (ImageButton) rel1.getChildAt(0);
-                    btn1.setBackgroundResource(R.mipmap.like_unselected);
-                    rel1.setBackgroundColor(Color.parseColor("#2277b1"));
+                    btn1.setBackgroundResource(R.mipmap.likeunselected);
+                    rel1.setBackgroundColor(Color.parseColor("#ffffff"));
                     ImageButton btn2 = (ImageButton) rel2.getChildAt(0);
-                    btn2.setBackgroundResource(R.mipmap.dislike_selected);
-                    rel2.setBackgroundColor(Color.parseColor("#2277b1"));
+                    btn2.setBackgroundResource(R.mipmap.dislikeselected);
+                    rel2.setBackgroundColor(Color.parseColor("#ffffff"));
                     cardStack.swipeTopCardRight(180);
                 }
                 else
@@ -269,11 +269,11 @@ public class SwipeDeckAdapter extends BaseAdapter {
                      RelativeLayout rel1 = (RelativeLayout) parent.getChildAt(0);
 
                      ImageButton btn1 = (ImageButton) rel1.getChildAt(0);
-                     btn1.setBackgroundResource(R.mipmap.like_selected);
-                     rel1.setBackgroundColor(Color.parseColor("#2277b1"));
+                     btn1.setBackgroundResource(R.mipmap.likeselected);
+                     rel1.setBackgroundColor(Color.parseColor("#ffffff"));
                      ImageButton btn2 = (ImageButton) rel2.getChildAt(0);
-                     btn2.setBackgroundResource(R.mipmap.dislike_unselected);
-                     rel2.setBackgroundColor(Color.parseColor("#2277b1"));
+                     btn2.setBackgroundResource(R.mipmap.dislikeunselected);
+                     rel2.setBackgroundColor(Color.parseColor("#ffffff"));
                      cardStack.swipeTopCardLeft(180);
                  }
                 else
@@ -288,7 +288,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                v.setBackgroundResource(R.drawable.button_click_effect);
+                v.setBackgroundResource(R.drawable.button_click);
                 int position = (int) v.getTag();
 
                 VisualAssort visualAssort1 = visualassortmentlist.get(position);
@@ -380,7 +380,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                v.setBackgroundResource(R.drawable.button_click_effect);
+                v.setBackgroundResource(R.drawable.button_click);
 
                 int position = (int) v.getTag();
 

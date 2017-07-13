@@ -14,7 +14,7 @@ import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerf
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty.CustomerLookupActivity;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
+
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
@@ -41,7 +41,7 @@ import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.Visual
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualReportActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
 
-import static apsupportapp.aperotechnologies.com.designapp.R.id.mpm;
+
 
 /**
  * Created by csuthar on 10/07/17.

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
@@ -60,7 +62,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (progressbar != null) {
                     progressbar.setVisibility(View.VISIBLE);
                     progressbar.setIndeterminate(true);
-                    progressbar.getIndeterminateDrawable().setColorFilter(0xFFFFFFFF, android.graphics.PorterDuff.Mode.MULTIPLY);
+                    progressbar.getIndeterminateDrawable().setColorFilter(new LightingColorFilter(Color.parseColor("#e8112d"), R.color.ezfb_Red));
                 }
             } else {
                 progressbar.setVisibility(View.GONE);
