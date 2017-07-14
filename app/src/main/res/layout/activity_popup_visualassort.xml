@@ -50,12 +50,13 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:textStyle="bold"
                                 android:id="@+id/popSort"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Sort By"
-                                android:textColor="@color/smdm_PopUptxt_color"
+                                android:textColor="@color/ezfbb_black"
                                 android:textSize="@dimen/smdm_PopUp_title_large"
 
 
@@ -72,7 +73,7 @@
                             android:layout_height="@dimen/smdm_popup_divider"
                             android:layout_alignStart="@+id/bst_head_child"
                             android:layout_marginTop="5dp"
-                            android:background="@color/divider_salescard" />
+                            android:background="@color/ezfbb_black" />
 
 
                         <!--Pending-->
@@ -99,7 +100,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Pending"
                                     android:textSize="@dimen/smdm_PopUp_title_large"
-
+                                    android:textColor="@color/ezfbb_black"
                                     />
 
 
@@ -162,7 +163,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Completed"
                                     android:textSize="@dimen/smdm_PopUp_title_large"
-
+                                    android:textColor="@color/ezfbb_black"
                                     />
 
 
@@ -183,7 +184,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="5"
                                     android:checked="false"
-                                    android:buttonTint="@android:color/black"
+                                    android:buttonTint="@color/ezfbb_black"
 
 
 

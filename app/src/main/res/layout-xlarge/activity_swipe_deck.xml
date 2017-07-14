@@ -13,7 +13,6 @@
         android:id="@+id/swipeLayout"
         android:orientation="vertical">
 
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -46,8 +45,8 @@
                     <Button
                         android:clickable="false"
                         android:background="@mipmap/ic_arrow_back_black"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>
@@ -76,12 +75,11 @@
                     <Button
                         android:clickable="false"
                         android:background="@mipmap/iconfilter"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>
-
 
                 <RelativeLayout
                     android:layout_toLeftOf="@+id/vassort_imgfilter"
@@ -95,8 +93,8 @@
                     <Button
                         android:clickable="false"
                         android:background="@mipmap/iconsort"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>
@@ -152,112 +150,11 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_marginTop="15dp"
-        android:id="@+id/layoutBuy"
-        android:visibility="gone"
-        android:layout_marginBottom="65dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:id="@+id/linlayoutBuy"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="140dp">
-
-        <View
-            android:background="@color/smdm_divider_Black"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-
-            <LinearLayout
-                android:layout_margin="5dp"
-                android:gravity="right"
-                android:layout_centerVertical="true"
-                android:id="@+id/llSize"
-                android:layout_alignParentRight="true"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:textSize="13sp"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/txtSize"
-                    android:layout_marginRight="5dp"
-                    android:text = ""
-                    android:textColor="@color/ezfbb_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-
-            </LinearLayout>
-        </RelativeLayout>
-
-
-        <TextView
-            android:textSize="12sp"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="5dp"
-            android:gravity="top"
-            android:textColor="@color/ezfbb_black"
-            android:text = "Enter Suggested Size Sets"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
-                android:background="@drawable/rounded_edittext3"
-                android:imeOptions="actionDone"
-                android:singleLine="true"
-                android:id="@+id/edtTextSets"
-                android:layout_marginLeft="5dp"
-                android:padding="5dp"
-                android:layout_alignParentTop="true"
-                android:inputType="number"
-                android:textColor="@color/ezfbb_black"
-                android:textCursorDrawable="@null"
-                android:hint = ""
-                android:layout_width="150dp"
-                android:layout_height="50dp" />
-
-            <Button
-                android:layout_marginRight="40dp"
-                android:layout_alignBaseline="@+id/edtTextSets"
-                android:layout_centerVertical="true"
-                android:background="@color/ezfb_Red"
-                android:id="@+id/btnBuyDone"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/white"
-                android:text="Ok"
-                android:textSize="14sp"
-                android:textAllCaps="false"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/reloverlay"
         android:visibility="gone"
         android:background="#80000000"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ImageView
             android:layout_marginLeft="50dp"
@@ -266,7 +163,6 @@
             android:layout_centerVertical="true"
             android:layout_width="103dp"
             android:layout_height="94dp" />
-
 
         <ImageView
             android:layout_marginRight="50dp"
@@ -288,49 +184,140 @@
         android:layout_marginBottom="65dp"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/linlayoutComment"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="140dp">
-
-        <RelativeLayout
-            android:layout_margin="10dp"
+        <LinearLayout
+            android:id="@+id/linlayoutComment"
+            android:background="@color/white"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="80dp">
+            android:layout_alignParentBottom="true"
+            android:layout_height="140dp">
 
-            <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
-                android:imeOptions="actionDone"
-                android:maxLines="4"
-                android:minHeight="60dp"
-                android:background="@drawable/rounded_edittext3"
-                android:padding="5dp"
-                android:gravity="top"
-                android:id="@+id/edtTextComment"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentTop="true"
-                android:hint = "Comments"
-                android:textColor="@color/ezfbb_black"
-                android:textCursorDrawable="@null"
+            <RelativeLayout
+                android:layout_margin="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="80dp">
 
-        </RelativeLayout>
-        <Button
-            android:layout_marginBottom="8dp"
-            android:background="@color/ezfb_Red"
-            android:id="@+id/btnCommentDone"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:text="Ok"
-            android:textSize="14sp"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp" />
-    </LinearLayout>
+                <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
+                    android:imeOptions="actionDone"
+                    android:maxLines="4"
+                    android:minHeight="60dp"
+                    android:background="@drawable/rounded_edittext3"
+                    android:padding="5dp"
+                    android:gravity="top"
+                    android:id="@+id/edtTextComment"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:hint = "Comments"
+                    android:textColor="@color/ezfbb_black"
+                    android:textCursorDrawable="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
+            </RelativeLayout>
+
+            <Button
+                android:layout_marginBottom="10dp"
+                android:background="@color/ezfb_Red"
+                android:id="@+id/btnCommentDone"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:text="Ok"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:id="@+id/layoutBuy"
+        android:visibility="gone"
+        android:layout_marginBottom="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linlayoutBuy"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="140dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:gravity="right"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/llSize"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:textSize="13sp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/txtSize"
+                        android:layout_marginRight="5dp"
+                        android:text = ""
+                        android:textColor="@color/ezfbb_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:textSize="12sp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp"
+                android:gravity="top"
+                android:textColor="@color/ezfbb_black"
+                android:text = "Enter Suggested Size Sets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.EditTextPopUpFixed
+                    android:background="@drawable/rounded_edittext3"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:id="@+id/edtTextSets"
+                    android:layout_marginLeft="5dp"
+                    android:padding="5dp"
+                    android:layout_alignParentTop="true"
+                    android:inputType="number"
+                    android:textColor="@color/ezfbb_black"
+                    android:textCursorDrawable="@null"
+                    android:hint = ""
+                    android:layout_width="150dp"
+                    android:layout_height="50dp" />
+
+                <Button
+                    android:layout_marginRight="40dp"
+                    android:layout_alignBaseline="@+id/edtTextSets"
+                    android:layout_centerVertical="true"
+                    android:background="@color/ezfb_Red"
+                    android:id="@+id/btnBuyDone"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/white"
+                    android:text="Ok"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
     </RelativeLayout>
 
 </com.daprlabs.cardstack.SwipeFrameLayout>
