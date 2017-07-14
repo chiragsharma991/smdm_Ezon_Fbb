@@ -162,11 +162,7 @@
                 app:tabIndicatorColor="@color/ezfb_Red"
                 app:tabTextColor="@color/ezfb_Red"
                 app:tabSelectedTextColor="@color/ezfb_Red"
-                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-
-
-                >
-
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
             </android.support.design.widget.TabLayout>
 
 
@@ -179,8 +175,6 @@
                 >
 
             </View>
-
-
 
 
         </LinearLayout>

@@ -50,7 +50,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/relStoreLayout"
         android:layout_marginTop="15dp"
-        android:background="@color/ezfbb_activity_background">
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -376,11 +376,14 @@
 
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/ezfb_activity_background"/>
             <!--second layout starting    -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
                 android:background="@color/white"
                 android:orientation="vertical">
 
@@ -421,6 +424,7 @@
                     android:background="@color/ezfbb_black"></View>
 
                 <RelativeLayout
+                    android:background="@color/white"
                     android:id="@+id/relativeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -462,7 +466,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/ezfbb_activity_background"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/progressBar"

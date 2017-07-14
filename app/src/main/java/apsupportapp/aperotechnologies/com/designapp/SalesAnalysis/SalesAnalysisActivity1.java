@@ -100,6 +100,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     int selFirstPositionValue = 0,currentVmPos,totalItemCount,firstVisibleItem,offsetvalue = 0,limit = 100, count = 0,currentState = RecyclerView.SCROLL_STATE_IDLE,prevState = RecyclerView.SCROLL_STATE_IDLE;
     boolean  onClickFlag = false, filter_toggleClick = false;
     ProgressBar progressBar1;
+    private TabLayout Tabview;
 
     // Ezone Elements Declaration
     public static String ez_segment_val = "LD";
@@ -721,6 +722,11 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         btnLW = (RadioButton) findViewById(R.id.btnLW);
         btnL4W = (RadioButton) findViewById(R.id.btnL4W);
         btnYTD = (RadioButton) findViewById(R.id.btnYTD);
+        Tabview = (TabLayout) findViewById(R.id.tabview_sales);
+        Tabview.addTab(Tabview.newTab().setText("WTD"));
+        Tabview.addTab(Tabview.newTab().setText("LW"));
+        Tabview.addTab(Tabview.newTab().setText("L4W"));
+        Tabview.addTab(Tabview.newTab().setText("STD"));
         llayoutSalesAnalysis = (LinearLayout) findViewById(R.id.llayoutSalesAnalysis);
         relimgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
         relimgfilter.setOnClickListener(this);

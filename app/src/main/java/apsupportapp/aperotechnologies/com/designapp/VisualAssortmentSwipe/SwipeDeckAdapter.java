@@ -59,7 +59,10 @@ public class SwipeDeckAdapter extends BaseAdapter {
     private Context context;
     SwipeDeck cardStack;
     View layoutView;
-    static RelativeLayout rellike, reldislike, relbuy, relcomment;
+    static RelativeLayout rellike, reldislike,
+
+
+    relbuy, relcomment;
     static ImageButton btnlike, btndislike, btnbuy, btncomment;
     ArrayList<VisualAssort> visualassortmentlist;
     ImageView img_VisualAssortment;

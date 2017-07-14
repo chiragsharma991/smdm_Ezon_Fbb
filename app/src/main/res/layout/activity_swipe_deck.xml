@@ -45,8 +45,8 @@
                     <Button
                         android:clickable="false"
                         android:background="@mipmap/ic_arrow_back_black"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>
@@ -62,7 +62,6 @@
                     android:textColor="@color/ezfbb_black"
                     android:id="@+id/toolbar_title" />
 
-
                 <RelativeLayout
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
@@ -75,8 +74,8 @@
                     <Button
                         android:clickable="false"
                         android:background="@mipmap/iconfilter"
-                        android:layout_width="28dp"
-                        android:layout_height="29dp"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>
@@ -93,20 +92,20 @@
                     <Button
                         android:clickable="false"
                         android:background="@mipmap/iconsort"
-                        android:layout_width="28dp"
-                        android:layout_height="29dp"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
+
         <RelativeLayout
             android:id="@+id/relStoreLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="5dp">
-
 
             <TextView
                 android:id="@+id/tstoreCode"

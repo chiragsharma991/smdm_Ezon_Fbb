@@ -89,11 +89,11 @@ public class Style_Fragment extends Fragment {
     // set the header titles
     String headers[] =
             {
-                    "            Color           ",
-                    "   Size   ",
-                    "    TW Sales    ",
+                    "Color               " ,
+                    "    Size    ",
+                    "    TW Sales   ",
                     "   SOH   ",
-                    "    FWC   "
+                    "     FWC   "
             };
 
     int headerCellsWidth[] = new int[headers.length];
@@ -457,9 +457,9 @@ public class Style_Fragment extends Fragment {
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
         TextView textView = this.headerTextView(headers[0]);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         textView.setBackgroundColor(Color.parseColor("#ffffff"));
         textView.setTextColor(Color.parseColor("#000000"));
-        textView.setGravity(Gravity.CENTER_HORIZONTAL);
         componentATableRow.addView(textView);
 
         return componentATableRow;
@@ -712,13 +712,14 @@ public class Style_Fragment extends Fragment {
         }
     }
 
-    private TableRow tableRowForTableCSpace() {
+    private TableRow tableRowForTableCSpace()
+    {
         TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
         params.setMargins(0, 2, 0, 0);
 
         TableRow tableRowForTableC = new TableRow(this.context);
         TextView textView = this.bodyTextView("     ");
-        textView.setBackgroundColor(Color.parseColor("#ffffff"));
+        textView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         tableRowForTableC.addView(textView, params);
 
         return tableRowForTableC;
@@ -735,7 +736,6 @@ public class Style_Fragment extends Fragment {
         textView.setTextColor(Color.parseColor("#000000"));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         tableRowForTableC.addView(textView, params);
-
         return tableRowForTableC;
 
     }
@@ -751,7 +751,7 @@ public class Style_Fragment extends Fragment {
             params.setMargins(2, 2, 0, 0);
 
             TextView textViewB = this.bodyTextView(info[x]);
-            textViewB.setBackgroundColor(Color.parseColor("#ffffff"));
+            textViewB.setBackgroundColor(Color.parseColor("#f8f6f6"));
             taleRowForTableD.addView(textViewB, params);
             textViewB.setTextColor(Color.parseColor("#000000"));
             textViewB.setTypeface(Typeface.DEFAULT_BOLD);
