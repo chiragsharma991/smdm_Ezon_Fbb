@@ -106,19 +106,22 @@ public class Details_Fragment extends Fragment {
                     into(imgProfile);
         }
 
-        if (styleDetailsBean.getPromoFlg().equals("N") || styleDetailsBean.getPromoFlg().equals("")) {
+        if (styleDetailsBean.getPromoFlg().equals("N") || styleDetailsBean.getPromoFlg().equals(""))
+        {
             imgPromo.setImageResource(R.mipmap.option_detail_indicator_red);
-
-        } else if(styleDetailsBean.getPromoFlg().equals("Y")) {
+        }
+        else if(styleDetailsBean.getPromoFlg().equals("Y"))
+        {
             imgPromo.setImageResource(R.mipmap.option_detail_indicator_green);
         }
 
-        if (styleDetailsBean.getKeyProductFlg().equals("N") || styleDetailsBean.getKeyProductFlg().equals("")) {
+        if (styleDetailsBean.getKeyProductFlg().equals("N") || styleDetailsBean.getKeyProductFlg().equals(""))
+        {
             imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_red);
-
-        } else if (styleDetailsBean.getKeyProductFlg().equals("Y")) {
+        }
+        else if (styleDetailsBean.getKeyProductFlg().equals("Y"))
+        {
             imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_green);
-
         }
         txtStoreCode.setText(styleDetailsBean.getStoreCode());
         txtStoreDesc.setText(styleDetailsBean.getStoreDesc());
@@ -129,15 +132,21 @@ public class Details_Fragment extends Fragment {
         txtFinish.setText(styleDetailsBean.getProductFinishDesc());
         txtSeason.setText(styleDetailsBean.getSeasonName());
 
-        if (styleDetailsBean.getFirstReceiptDate().equals("")) {
+        if (styleDetailsBean.getFirstReceiptDate().equals(""))
+        {
             txtfirstReceiteDate.setText("NA");
-        } else {
+        }
+        else
+        {
             txtfirstReceiteDate.setText(styleDetailsBean.getFirstReceiptDate());
         }
 
-        if (styleDetailsBean.getLastReceiptDate().equals("")) {
+        if (styleDetailsBean.getLastReceiptDate().equals(""))
+        {
             txtlastReceiteDate.setText("NA");
-        } else {
+        }
+        else
+        {
             txtlastReceiteDate.setText(styleDetailsBean.getLastReceiptDate());
         }
         txtFwdWeekCover.setText("" + String.format("%.1f", styleDetailsBean.getFwdWeekCover()));

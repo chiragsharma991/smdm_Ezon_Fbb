@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="10dp">
+        android:padding="5dp">
 
 
         <TextView
@@ -65,15 +65,25 @@
                 android:background="@color/white"
                 android:orientation="vertical">
 
+                <!--<TextView-->
+                    <!--android:id="@+id/txtSummary"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:text="Summary"-->
+                    <!--android:textColor="@color/ezfbb_black"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textStyle="bold" />-->
+
                 <TextView
-                    android:id="@+id/txtSummary"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/txtArticle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:text="Summary"
+                    android:hint="@string/article_option"
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="15sp" />
 
                 <View
                     android:layout_width="match_parent"
@@ -84,14 +94,6 @@
                     android:background="@color/ezfbb_black"></View>
 
 
-                <TextView
-                    android:id="@+id/txtArticle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:hint="@string/article_option"
-                    android:padding="5dp"
-                    android:textColor="@color/ezfbb_black"
-                    android:textSize="15sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

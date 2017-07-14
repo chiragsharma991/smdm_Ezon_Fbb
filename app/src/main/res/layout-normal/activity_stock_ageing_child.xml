@@ -108,8 +108,8 @@
 
                         <ToggleButton
                             android:id="@+id/toggle_stock_fav"
-                            android:layout_width="28dp"
-                            android:layout_height="29dp"
+                            android:layout_width="38dp"
+                            android:layout_height="39dp"
                             android:layout_centerInParent="true"
                             android:background="@drawable/toggleswitch"
                             android:focusable="false"
@@ -151,7 +151,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.3"
                         android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
+                        android:textColor="@color/ezfb_black"
                         android:text="Ageing"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -161,8 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
-                        android:visibility="invisible"
-                        android:textColor="@color/smdm_default_color"
+                        android:visibility="visible"
                         android:text=":"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
@@ -199,7 +198,7 @@
                         android:layout_weight="0.3"
                         android:singleLine="true"
                         android:text="SOH(U)"
-                        android:textColor="@color/smdm_default_color"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />
 
@@ -209,7 +208,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
                         android:text=":"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/smdm_inflator_subtitle_normal"
                         />

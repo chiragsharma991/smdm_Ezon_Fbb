@@ -3,8 +3,8 @@
     android:id="@+id/quickFilterPopup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:visibility="gone">
+    android:visibility="gone"
+    >
 
     <!--base layout for click anywhere-->
 
@@ -23,7 +23,7 @@
             android:layout_alignParentRight="true"
             android:visibility="visible">
 
-            <RelativeLayout
+          <!--  <RelativeLayout
                 android:id="@+id/relLayoutFilter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                         android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
                 </RelativeLayout>
 
-            </RelativeLayout>
+            </RelativeLayout>-->
 
             <!--main pop up border-->
 
@@ -66,7 +66,7 @@
                 android:layout_below="@+id/relLayoutFilter"
                 android:id="@+id/qfilter_seasonGpLayout"
                 android:layout_width="185dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="17dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/popupmenu"
                 android:orientation="vertical">
@@ -103,6 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
                     android:weightSum="10">
 
                     <LinearLayout
@@ -269,6 +270,37 @@
                     </LinearLayout>
                 </LinearLayout>
 
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/qfDoneLayout"
+
+                    >
+
+
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:background="@color/ezfb_Red"
+                            android:clickable="false"
+                            android:text="Done"
+                            android:textColor="@color/ezfb_White"
+                            android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
+
+
+
+
+
+
+                </LinearLayout>
+
                 <!--<View-->
                 <!--android:id="@+id/bst_lineTwo_child"-->
                 <!--android:layout_width="match_parent"-->
@@ -276,6 +308,10 @@
                 <!--android:background="@color/divider_salescard" />-->
 
             </LinearLayout>
+
+
+
+
             <LinearLayout
                 android:layout_below="@+id/qfilter_seasonGpLayout"
                 android:id="@+id/qfilter_Ageing"
@@ -484,12 +520,11 @@
             </LinearLayout>
             <RelativeLayout
                 android:layout_below="@+id/qfilter_Ageing"
-                android:id="@+id/qfDoneLayout"
                 android:layout_width="184dp"
                 android:layout_marginLeft="15dp"
                 android:layout_height="25dp"
                 android:background="@color/colorPrimary"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <Button
                     android:layout_width="match_parent"

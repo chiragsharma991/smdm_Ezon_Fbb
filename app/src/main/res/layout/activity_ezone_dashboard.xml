@@ -110,7 +110,6 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@color/bg_screen_color"
-                            android:src="@mipmap/sales_analysis"
                             />
 
 

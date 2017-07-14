@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -56,9 +57,10 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class StockAgeingActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener ,TabLayout.OnTabSelectedListener {
 
     TextView stock_txtStoreCode, stock_txtStoreName;
-    RelativeLayout stock_BtnBack, stock_BtnFilter, stock_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
+    RelativeLayout stock_BtnBack, stock_BtnFilter, stock_quickFilter, quickFilterPopup, quickFilter_baseLayout, quickFilter_BorderLayout;
     RunningPromoListDisplay StockAgeingListDisplay;
     private SharedPreferences sharedPreferences;
+    private LinearLayout qfDoneLayout;
     String userId, bearertoken;
     private static String seasongroup = "Current";
     private int count = 0;
@@ -338,7 +340,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
         quickFilterPopup.setVisibility(View.GONE);
         quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
-        qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
+        qfDoneLayout = (LinearLayout) findViewById(R.id.qfDoneLayout);
         quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
         StockAgListView = (ListView) findViewById(R.id.stockListView);
         stock_segmented = (SegmentedGroup) findViewById(R.id.stock_segmented);
