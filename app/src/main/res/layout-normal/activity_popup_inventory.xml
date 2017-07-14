@@ -51,7 +51,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Sort By"
-                                android:textColor="@color/smdm_PopUptxt_color"
+                                android:textStyle="bold"
+                                android:textColor="@color/ezfb_black"
                                 android:textSize="@dimen/smdm_PopUp_subtitle_normal"
                                 />
 
@@ -63,7 +64,7 @@
                             android:layout_height="@dimen/smdm_popup_divider"
                             android:layout_alignStart="@+id/bst_head_child"
                             android:layout_marginTop="5dp"
-                            android:background="@color/smdm_divider_Black" />
+                            android:background="@color/ezfb_black" />
 
 
                         <!--Sales(U) -->
@@ -90,7 +91,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Sales(U)"
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     />
 
 
@@ -114,7 +115,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="5"
-                                    android:buttonTint="@color/colorPrimary"
+                                    android:buttonTint="@color/ezfb_Red"
 
 
                                     />
@@ -150,7 +151,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="Sell Thru%(U)"
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
 
@@ -174,7 +175,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="5"
                                     android:checked="true"
-                                    android:buttonTint="@color/colorPrimary"
+                                    android:buttonTint="@color/ezfb_Red"
 
 
 
@@ -214,7 +215,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Fwd Week Cover"
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
 
                                     />
 
@@ -235,7 +236,7 @@
                                     android:layout_height="wrap_content"
                                     android:clickable="false"
                                     android:layout_weight="5"
-                                    android:buttonTint="@color/colorPrimary"
+                                    android:buttonTint="@color/ezfb_Red"
 
 
 
@@ -273,7 +274,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Cover and sell Thru%(U) "
                                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
 
                                     />
 
@@ -294,7 +295,7 @@
                                     android:id="@+id/bstInventory_coverNsellchk"
                                     android:layout_weight="5"
                                     android:clickable="false"
-                                    android:buttonTint="@color/colorPrimary"
+                                    android:buttonTint="@color/ezfb_Red"
                                     />
 
                             </LinearLayout>

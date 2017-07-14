@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="View By"
-                android:textColor="@color/smdm_PopUptxt_color"
+                android:textColor="@color/ezfb_black"
+                android:textStyle="bold"
                 android:textSize="@dimen/smdm_PopUp_subtitle_normal"
                 />
 
@@ -35,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/smdm_popup_divider"
             android:layout_marginTop="5dp"
-            android:background="@color/smdm_divider_Black" />
+            android:background="@color/ezfb_black" />
 
 
         <!--Product -->
@@ -62,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:text="Product"
                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     />
             </LinearLayout>
             <LinearLayout
@@ -79,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/ezfb_Red"
 
 
                     />
@@ -113,7 +114,7 @@
                     android:id="@+id/txt_ez_viewBy_Locatn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:text="Location"
                     android:textSize="@dimen/smdm_PopUp_subtitle_normal"
 
@@ -137,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
                     android:checked="false"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/ezfb_Red"
 
 
 
