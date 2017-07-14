@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -75,7 +77,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 public class SnapDashboardActivity extends SwitchingActivity implements onclickView {
 
     private RecyclerView Recycler_verticalView;
-    private String TAG="SnapDashboardActivity";
+    private String TAG = "SnapDashboardActivity";
     private Context context;
 
     RequestQueue queue;
@@ -98,12 +100,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private ArrayList<EtlStatus> etlStatusList;
     private Snackbar snackbar;
     private TextView RefreshTime;
+    private SnapAdapter snapAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        context=this;
+        context = this;
+        statusbar();
 
 
         Log.e(TAG, "Oncreate: SnapDashboard..");
@@ -118,21 +121,32 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
+        setContentView(R.layout.activity_snap_dashboard);
+        initalise();
+        eventUrlList = new ArrayList<>();
+
 
         if (geoLeveLDesc.equals("E ZONE")) {
-            Log.e("ezone layout", "");
-            setContentView(R.layout.activity_ezone_dashboard);
+            Log.e("TAG", "Ezone login");
+            loginFromFbb = false;
+            if (Reusable_Functions.chkStatus(context)) {
+                Reusable_Functions.hDialog();
+                Reusable_Functions.sDialog(context, "Loading events...");
+                RefreshTimeAPI();
+            } else {
+                Toast.makeText(SnapDashboardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+            }
+        }
 
-            // initialize_ezone_ui();
-        } else {
-            Log.e("fbb layout", "");
-            setContentView(R.layout.activity_snap_dashboard);
-            initalise();
+        //-------------------------------------------------------------//
+
+        else {
+            Log.e("TAG", "FBB login");
+            loginFromFbb = true;
             _collectionitems = new ArrayList();
             arrayList = new ArrayList<>();
-            eventUrlList = new ArrayList<>();
             productNameBeanArrayList = new ArrayList<>();
-          //  initialize_fbb_ui();
+            //  initialize_fbb_ui();
             //Marketing events API
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.hDialog();
@@ -147,6 +161,15 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         checkPermission();
         setupAdapter();
 
+    }
+
+    private void statusbar() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.ezfbb_status_bar));
+        }
     }
 
     private void initalise() {
@@ -201,47 +224,58 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void setupAdapter() {
 
-        Log.e(TAG, "setupAdapter: " );
-        SnapAdapter snapAdapter = new SnapAdapter(context,eventUrlList);
+        Log.e(TAG, "setupAdapter: ");
+        snapAdapter = new SnapAdapter(context, eventUrlList);
 
-        List<App> apps = getProduct(0);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
-        apps = getProduct(1);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
-        apps = getProduct(2);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
-        apps = getProduct(3);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
-        apps = getProduct(4);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-        apps = getProduct(5);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Key Product", apps));
-        apps = getProduct(6);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
-        apps = getProduct(7);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Feedback", apps));
-        apps = getProduct(8);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
-        apps = getProduct(9);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
-        apps = getProduct(10);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
-        apps = getProduct(11);
-        snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
+        if (geoLeveLDesc.equals("E ZONE")) {
+            List<App> apps = getProduct(21);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
+            apps = getProduct(22);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+            apps = getProduct(23);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
+            apps = getProduct(24);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
+
+
+        } else {
+            List<App> apps = getProduct(0);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
+            apps = getProduct(1);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
+            apps = getProduct(2);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
+            apps = getProduct(3);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+            apps = getProduct(4);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
+            apps = getProduct(5);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Key Product", apps));
+            apps = getProduct(6);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
+            apps = getProduct(7);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Feedback", apps));
+            apps = getProduct(8);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
+            apps = getProduct(9);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
+            apps = getProduct(10);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
+            apps = getProduct(11);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
+
+        }
+
 
         Recycler_verticalView.setAdapter(snapAdapter);
     }
 
 
-
-
     @Override
     public void onclickView(int group_position, int child_position) {
-        Log.e(TAG, "group_position: "+group_position+"child_position"+child_position);
-        int value=Integer.parseInt(""+group_position+""+child_position);
-         moveTo(value,context);
-
-
+        Log.e(TAG, "group_position: " + group_position + "child_position" + child_position);
+        int value = Integer.parseInt("" + group_position + "" + child_position);
+        moveTo(value, context);
 
 
     }
@@ -259,32 +293,24 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                         Log.e("refresh time response :", "" + response);
                         try {
                             if (response == null || response.equals("")) {
-                                if (geoLeveLDesc.equals("E ZONE")) {
-                                  //  txt_ezone_refresh_time.setText("N/A");
-                                } else {
-                                    RefreshTime.setText("N/A");
-                                }
+
+                                RefreshTime.setText("N/A");
+
                             } else {
                                 for (int i = 0; i < response.length(); i++) {
                                     etlStatus = gson.fromJson(response.get(i).toString(), EtlStatus.class);
                                     etlStatusList.add(etlStatus);
 
                                 }
-                                if (geoLeveLDesc.equals("E ZONE")) {
-                                  //  txt_ezone_refresh_time.setText(etlStatusList.get(0).getLastETLDate());
-                                } else {
-                                    RefreshTime.setText(etlStatusList.get(0).getLastETLDate());
-                                }
+                                RefreshTime.setText(etlStatusList.get(0).getLastETLDate());
+
                             }
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
 
-                            if (geoLeveLDesc.equals("E ZONE")) {
-                                //txt_ezone_refresh_time.setText("N/A");
-                            } else {
-                                RefreshTime.setText("N/A");
-                            }
+                            RefreshTime.setText("N/A");
+
                             e.printStackTrace();
                         }
                         Reusable_Functions.hDialog();
@@ -297,11 +323,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
 
                     {
-                        if (geoLeveLDesc.equals("E ZONE")) {
-                           // txt_ezone_refresh_time.setText("N/A");
-                        } else {
-                            RefreshTime.setText("N/A");
-                        }
+
+                        RefreshTime.setText("N/A");
+
                         error.printStackTrace();
                         Reusable_Functions.hDialog();
 
@@ -385,7 +409,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 } else {
 
                     View view = findViewById(android.R.id.content);
-                    snackbar = Snackbar.make(view, Constants.REQUEST_PERMISSION_SNACKALERT,Snackbar.LENGTH_SHORT).setAction("OK", new View.OnClickListener() {
+                    snackbar = Snackbar.make(view, Constants.REQUEST_PERMISSION_SNACKALERT, Snackbar.LENGTH_SHORT).setAction("OK", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             snackbar.dismiss();
@@ -427,24 +451,25 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private void requestMarketingEventsAPI() {
 
         String url = ConstsCore.web_url + "/v1/display/dashboard/" + userId;
-        Log.e(TAG, "requestMarketingEventsAPI: "+url );
+        Log.e(TAG, "requestMarketingEventsAPI: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "Event Response: "+response.length() );
+                        Log.e(TAG, "Event Response: " + response.length());
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {
-                                Log.e(TAG, "Event Response: null" );
+                                Log.e(TAG, "Event Response: null");
                                 Reusable_Functions.hDialog();
-                               // Toast.makeText(SnapDashboardActivity.this, "No data found", Toast.LENGTH_LONG).show();
+                                // Toast.makeText(SnapDashboardActivity.this, "No data found", Toast.LENGTH_LONG).show();
                             } else {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonOject = response.getJSONObject(i);
                                     String imageURL = jsonOject.getString("imageName");
                                     eventUrlList.add(imageURL);
-                                    setupAdapter();
+                                    // setupAdapter();
+                                    snapAdapter.notifyDataSetChanged();
                                     Reusable_Functions.hDialog();
 
 
@@ -455,7 +480,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
-                            Log.e(TAG, "Event catch: "+e.getMessage() );
+                            Log.e(TAG, "Event catch: " + e.getMessage());
                         }
                     }
                 },

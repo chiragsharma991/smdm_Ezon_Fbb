@@ -6,14 +6,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -50,12 +54,13 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  * Created by pamrutkar on 05/12/16.
  */
 
-public class StockAgeingActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class StockAgeingActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener ,TabLayout.OnTabSelectedListener {
 
     TextView stock_txtStoreCode, stock_txtStoreName;
-    RelativeLayout stock_BtnBack, stock_BtnFilter, stock_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
+    RelativeLayout stock_BtnBack, stock_BtnFilter, stock_quickFilter, quickFilterPopup, quickFilter_baseLayout, quickFilter_BorderLayout;
     RunningPromoListDisplay StockAgeingListDisplay;
     private SharedPreferences sharedPreferences;
+    private LinearLayout qfDoneLayout;
     String userId, bearertoken;
     private static String seasongroup = "Current";
     private int count = 0;
@@ -83,6 +88,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private String selectedString = "";
     public static Activity stockAgeing;
     private boolean toggleClick = false;
+    private TabLayout Tabview;
 
 
     @Override
@@ -127,14 +133,17 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void RetainFromMain_filter() {
-        toggleClick = true;
+      //  toggleClick = true;
         if (corefashion.equals("Fashion")) {
-            stock_fashion.toggle();
+         //   stock_fashion.toggle();
             coreSelection = false;
+            Tabview.getTabAt(0).select();
 
         } else {
-            stock_core.toggle();
+          //  stock_core.toggle();
             coreSelection = true;
+            Tabview.getTabAt(1).select();
+
         }
         baseclick();
     }
@@ -201,6 +210,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
                 }
             }
+            Log.e("TAG", "requestStockAgeingApi: "+url );
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -330,7 +340,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
         quickFilterPopup.setVisibility(View.GONE);
         quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
-        qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
+        qfDoneLayout = (LinearLayout) findViewById(R.id.qfDoneLayout);
         quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
         StockAgListView = (ListView) findViewById(R.id.stockListView);
         stock_segmented = (SegmentedGroup) findViewById(R.id.stock_segmented);
@@ -344,6 +354,11 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         checkAgeing1 = (CheckBox) findViewById(R.id.checkAgeing1);
         checkAgeing2 = (CheckBox) findViewById(R.id.checkAgeing2);
         checkAgeing3 = (CheckBox) findViewById(R.id.checkAgeing3);
+        Tabview = (TabLayout) findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("Fashion"));
+        Tabview.addTab(Tabview.newTab().setText("Core"));
+
+        Tabview.setOnTabSelectedListener(this);
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
@@ -611,4 +626,74 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         finish();
     }
 
+
+    //------ Tab functionality...
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        Log.e("TAG", "onTabSelected: "+ Tabview.getSelectedTabPosition()+"and toggle select"+toggleClick);
+        int checkedId= Tabview.getSelectedTabPosition();
+
+     //   if (toggleClick == false) {
+
+            switch (checkedId) {
+                case 1 :   //core selection
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Core";
+                        lazyScroll = "OFF";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            StockAgeingList.clear();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            StockAgListView.setVisibility(View.GONE);
+                            coreSelection = true;
+                            requestStockAgeingApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            StockAgListView.setVisibility(View.GONE);
+
+                        }
+
+                    break;
+                case 0 :  // fashion selection
+                        limit = 10;
+                        offsetvalue = 0;
+                        top = 10;
+                        corefashion = "Fashion";
+                        lazyScroll = "OFF";
+                        if (Reusable_Functions.chkStatus(context)) {
+                            StockAgeingList.clear();
+                            StockAgListView.setVisibility(View.GONE);
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            coreSelection = false;
+                            requestStockAgeingApi(selectedString);
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            StockAgListView.setVisibility(View.GONE);
+
+                        }
+
+                    break;
+
+            }
+        }
+
+/*    else {
+            toggleClick = false;
+
+        }*/
+
+
+    //}
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
 }

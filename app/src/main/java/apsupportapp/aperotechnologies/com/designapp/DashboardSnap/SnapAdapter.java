@@ -93,8 +93,10 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        if (position < mSnaps.size()) {
+    public void onBindViewHolder(ViewHolder holder, int position)
+    {
+        if (position < mSnaps.size())
+        {
             preposition = position;
             Snap snap = mSnaps.get(position);
             holder.snap_parentTitle.setText(snap.getText());
@@ -104,26 +106,20 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
             holder.Recycler_horizentalView.setOnFlingListener(null);
             new GravitySnapHelper(snap.getGravity(), false, this).attachToRecyclerView(holder.Recycler_horizentalView);
 
-
             holder.Recycler_horizentalView.setAdapter(new SnapChildAdapter(snap.getGravity() == Gravity.START
                     || snap.getGravity() == Gravity.END
                     || snap.getGravity() == Gravity.CENTER_HORIZONTAL,
                     snap.getGravity() == Gravity.CENTER, snap.getApps(), context, preposition));
-
-
-        }else {
-
+        }
+        else
+        {
             preposition = position;
             holder.snap_parentTitle.setText("Marketing Events");
             holder.Recycler_horizentalView.setLayoutManager(new LinearLayoutManager(holder
                     .Recycler_horizentalView.getContext(), LinearLayoutManager.HORIZONTAL, false));
             holder.Recycler_horizentalView.setOnFlingListener(null);
             new GravitySnapHelper(Gravity.START, false, this).attachToRecyclerView(holder.Recycler_horizentalView);
-
-
             holder.Recycler_horizentalView.setAdapter(new MarketEventAdapter(eventUrlList,context, preposition) );
-
-
         }
     }
 
@@ -142,12 +138,12 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         public TextView snap_parentTitle;
         public RecyclerView Recycler_horizentalView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView)
+        {
             super(itemView);
             snap_parentTitle = (TextView) itemView.findViewById(R.id.snap_parentTitle);
             Recycler_horizentalView = (RecyclerView) itemView.findViewById(R.id.recycler_horizentalView);
         }
-
     }
 }
 

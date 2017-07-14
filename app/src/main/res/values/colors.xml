@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2277b1</color>
+    <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#162e3d</color>
     <color name="colorAccent">#1e699b</color>
     <color name="grey">#f0f0f0</color>
@@ -70,6 +70,7 @@
     <color name="ezfb_White">#ffffff</color>
     <color name="ezfb_Red">#e8112d</color>
     <color name="ezfb_black">#000000</color>
+    <color name="ezfb_statusbar">#808080</color>
 
 
 </resources>

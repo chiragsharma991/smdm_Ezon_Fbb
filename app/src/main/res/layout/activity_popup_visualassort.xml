@@ -202,56 +202,56 @@
 
 
                         <!--<LinearLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="5dp"-->
-                            <!--android:id="@+id/bstInventory_Fwd"-->
-                            <!--android:orientation="horizontal"-->
-                            <!--android:layout_marginLeft="5dp"-->
-                            <!--android:layout_marginBottom="5dp"-->
-                            <!--android:weightSum="10">-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:id="@+id/bstInventory_Fwd"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:weightSum="10">-->
 
-                            <!--<LinearLayout-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:layout_weight="3"-->
-                                <!--android:orientation="vertical">-->
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="3"-->
+                        <!--android:orientation="vertical">-->
 
-                                <!--<TextView-->
-                                    <!--android:id="@+id/popPromoU"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="wrap_content"-->
-                                    <!--android:text="Fwd Week Cover"-->
-                                    <!--android:textSize="@dimen/smdm_PopUp_title_large"-->
+                        <!--<TextView-->
+                        <!--android:id="@+id/popPromoU"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Fwd Week Cover"-->
+                        <!--android:textSize="@dimen/smdm_PopUp_title_large"-->
 
-                                    <!--/>-->
-
-
-                            <!--</LinearLayout>-->
+                        <!--/>-->
 
 
-                            <!--<LinearLayout-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_weight="7"-->
-                                <!--android:gravity="end"-->
-                                <!--android:orientation="vertical">-->
-
-                                <!--<RadioButton-->
-                                    <!--android:id="@+id/bstInventory_Fwdchk"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="wrap_content"-->
-                                    <!--android:clickable="false"-->
-                                    <!--android:layout_weight="5"-->
-                                    <!--android:buttonTint="@android:color/black"-->
+                        <!--</LinearLayout>-->
 
 
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="7"-->
+                        <!--android:gravity="end"-->
+                        <!--android:orientation="vertical">-->
 
-                                    <!--/>-->
+                        <!--<RadioButton-->
+                        <!--android:id="@+id/bstInventory_Fwdchk"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:clickable="false"-->
+                        <!--android:layout_weight="5"-->
+                        <!--android:buttonTint="@android:color/black"-->
 
 
-                            <!--</LinearLayout>-->
+
+                        <!--/>-->
+
+
+                        <!--</LinearLayout>-->
 
 
                         <!--</LinearLayout>-->
@@ -261,55 +261,55 @@
 
 
                         <!--<LinearLayout-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="5dp"-->
-                            <!--android:id="@+id/bstInventory_coverNsell"-->
-                            <!--android:orientation="horizontal"-->
-                            <!--android:layout_marginLeft="5dp"-->
-                            <!--android:layout_marginBottom="5dp"-->
-                            <!--android:weightSum="10">-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:id="@+id/bstInventory_coverNsell"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:weightSum="10">-->
 
-                            <!--<LinearLayout-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:layout_weight="3"-->
-                                <!--android:orientation="vertical">-->
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="3"-->
+                        <!--android:orientation="vertical">-->
 
-                                <!--<TextView-->
-                                    <!--android:layout_width="match_parent"-->
-                                    <!--android:layout_height="wrap_content"-->
-                                    <!--android:text="Cover and sell Thru%(U) "-->
-                                    <!--android:textSize="@dimen/smdm_PopUp_title_large"-->
+                        <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Cover and sell Thru%(U) "-->
+                        <!--android:textSize="@dimen/smdm_PopUp_title_large"-->
 
-                                    <!--/>-->
-
-
-                            <!--</LinearLayout>-->
+                        <!--/>-->
 
 
-                            <!--<LinearLayout-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_weight="7"-->
-                                <!--android:gravity="end"-->
-                                <!--android:orientation="vertical">-->
-
-                                <!--<RadioButton-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="wrap_content"-->
-                                    <!--android:id="@+id/bstInventory_coverNsellchk"-->
-                                    <!--android:layout_weight="5"-->
-                                    <!--android:clickable="false"-->
-                                    <!--android:buttonTint="@android:color/black"-->
+                        <!--</LinearLayout>-->
 
 
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="7"-->
+                        <!--android:gravity="end"-->
+                        <!--android:orientation="vertical">-->
 
-                                    <!--/>-->
+                        <!--<RadioButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/bstInventory_coverNsellchk"-->
+                        <!--android:layout_weight="5"-->
+                        <!--android:clickable="false"-->
+                        <!--android:buttonTint="@android:color/black"-->
 
 
-                            <!--</LinearLayout>-->
+
+                        <!--/>-->
+
+
+                        <!--</LinearLayout>-->
 
 
                         <!--</LinearLayout>-->

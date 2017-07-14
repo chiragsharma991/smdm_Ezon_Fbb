@@ -48,126 +48,163 @@ import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
  */
 
 public class SwitchingActivity extends AppCompatActivity
+
 {
+    boolean loginFromFbb;
+
+
     public void moveTo(int value, Context context){
 
-        switch (value){
-            case 0:
-                Intent StyleActivity = new Intent(context, StyleActivity.class);
-                startActivity(StyleActivity);
-                break;
-            case 10:
-                Intent VisualAssortmentActivity = new Intent(context, VisualAssortmentActivity.class);
-                startActivity(VisualAssortmentActivity);
-                break;
-            case 11:
-                Intent VisualReportActivity = new Intent(context, VisualReportActivity.class);
-                startActivity(VisualReportActivity);
-                break;
-            case 20:
-                Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
-                startActivity(SalesAnalysisActivity1);
-                break;
-            case 21:
-                Intent SalesPvAActivity = new Intent(context, SalesPvAActivity.class);
-                startActivity(SalesPvAActivity);
-                break;
-            case 30:
-                Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);
-                startActivity(FreshnessIndexActivity);
-                break;
-            case 31:
-                Intent OptionEfficiencyActivity = new Intent(context, OptionEfficiencyActivity.class);
-                startActivity(OptionEfficiencyActivity);
-                break;
-            case 32:
-                Intent SkewedSizesActivity = new Intent(context, SkewedSizesActivity.class);
-                startActivity(SkewedSizesActivity);
-                break;
-            case 33:
-                Intent BestPerformerInventory = new Intent(context, BestPerformerInventory.class);
-                startActivity(BestPerformerInventory);
-                break;
-            case 34:
-                Intent StockAgeingActivity = new Intent(context, StockAgeingActivity.class);
-                startActivity(StockAgeingActivity);
-                break;
-            case 35:
-                Intent FloorAvailabilityActivity = new Intent(context, FloorAvailabilityActivity.class);
-                startActivity(FloorAvailabilityActivity);
-                break;
-            case 36:
-                Intent TargetStockExceptionActivity = new Intent(context, TargetStockExceptionActivity.class);
-                startActivity(TargetStockExceptionActivity);
-                break;
-            case 37:
-                Intent SaleThruInventory = new Intent(context,SaleThruInventory.class);
-                startActivity(SaleThruInventory);
-                break;
-            case 40:
-                Intent RunningPromoActivity = new Intent(context,RunningPromoActivity.class);
-                startActivity(RunningPromoActivity);
-                break;
-            case 41:
-                Intent UpcomingPromo = new Intent(context,UpcomingPromo.class);
-                startActivity(UpcomingPromo);
-                break;
-            case 42:
-                Intent ExpiringPromoActivity = new Intent(context,ExpiringPromoActivity.class);
-                startActivity(ExpiringPromoActivity);
-                break;
-            case 43:
-                Intent BestPerformerActivity = new Intent(context,BestPerformerActivity.class);
-                startActivity(BestPerformerActivity);
-                break;
-            case 50:
-                Intent KeyProductPlanActivity = new Intent(context,KeyProductPlanActivity.class);
-                startActivity(KeyProductPlanActivity);
-                break;
-            case 51:
-                Intent KeyProductActivity = new Intent(context,KeyProductActivity.class);
-                startActivity(KeyProductActivity);
-                break;
-            case 60:
-                Intent To_Do = new Intent(context,To_Do.class);
-                startActivity(To_Do);
-                break;
-            case 61:
-                Intent StatusActivity = new Intent(context,StatusActivity.class);
-                startActivity(StatusActivity);
-                break;
-            case 70:
-                Intent Feedback = new Intent(context,Feedback.class);
-                startActivity(Feedback);
-                break;
-            case 71:
-                Intent FeedbackList = new Intent(context,FeedbackList.class);
-                startActivity(FeedbackList);
-                break;
-            case 80:
-                Intent InspectionBeginActivity = new Intent(context,InspectionBeginActivity.class);
-                startActivity(InspectionBeginActivity);
-                break;
-            case 81:
-                Intent InspectionHistoryActivity = new Intent(context,InspectionHistoryActivity.class);
-                startActivity(InspectionHistoryActivity);
-                break;
-            case 90:
-                Intent mpm_activity = new Intent(context,mpm_activity.class);
-                startActivity(mpm_activity);
-                break;
-            case 100:
-                Intent CustomerLookupActivity = new Intent(context,CustomerLookupActivity.class);
-                startActivity(CustomerLookupActivity);
-                break;
-            case 110:
-                Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
-                startActivity(HourlyPerformence);
-                break;
+        if(loginFromFbb){
 
+            switch (value){
+
+                case 0:
+                    Intent StyleActivity = new Intent(context, StyleActivity.class);
+                    startActivity(StyleActivity);
+                    break;
+                case 10:
+                    Intent VisualAssortmentActivity = new Intent(context, VisualAssortmentActivity.class);
+                    startActivity(VisualAssortmentActivity);
+                    break;
+                case 11:
+                    Intent VisualReportActivity = new Intent(context, VisualReportActivity.class);
+                    startActivity(VisualReportActivity);
+                    break;
+                case 20:
+                    Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
+                    startActivity(SalesAnalysisActivity1);
+                    break;
+                case 21:
+                    Intent SalesPvAActivity = new Intent(context, SalesPvAActivity.class);
+                    startActivity(SalesPvAActivity);
+                    break;
+                case 30:
+                    Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);
+                    startActivity(FreshnessIndexActivity);
+                    break;
+                case 31:
+                    Intent OptionEfficiencyActivity = new Intent(context, OptionEfficiencyActivity.class);
+                    startActivity(OptionEfficiencyActivity);
+                    break;
+                case 32:
+                    Intent SkewedSizesActivity = new Intent(context, SkewedSizesActivity.class);
+                    startActivity(SkewedSizesActivity);
+                    break;
+                case 33:
+                    Intent BestPerformerInventory = new Intent(context, BestPerformerInventory.class);
+                    startActivity(BestPerformerInventory);
+                    break;
+                case 34:
+                    Intent StockAgeingActivity = new Intent(context, StockAgeingActivity.class);
+                    startActivity(StockAgeingActivity);
+                    break;
+                case 35:
+                    Intent FloorAvailabilityActivity = new Intent(context, FloorAvailabilityActivity.class);
+                    startActivity(FloorAvailabilityActivity);
+                    break;
+                case 36:
+                    Intent TargetStockExceptionActivity = new Intent(context, TargetStockExceptionActivity.class);
+                    startActivity(TargetStockExceptionActivity);
+                    break;
+                case 37:
+                    Intent SaleThruInventory = new Intent(context,SaleThruInventory.class);
+                    startActivity(SaleThruInventory);
+                    break;
+                case 40:
+                    Intent RunningPromoActivity = new Intent(context,RunningPromoActivity.class);
+                    startActivity(RunningPromoActivity);
+                    break;
+                case 41:
+                    Intent UpcomingPromo = new Intent(context,UpcomingPromo.class);
+                    startActivity(UpcomingPromo);
+                    break;
+                case 42:
+                    Intent ExpiringPromoActivity = new Intent(context,ExpiringPromoActivity.class);
+                    startActivity(ExpiringPromoActivity);
+                    break;
+                case 43:
+                    Intent BestPerformerActivity = new Intent(context,BestPerformerActivity.class);
+                    startActivity(BestPerformerActivity);
+                    break;
+                case 50:
+                    Intent KeyProductPlanActivity = new Intent(context,KeyProductPlanActivity.class);
+                    startActivity(KeyProductPlanActivity);
+                    break;
+                case 51:
+                    Intent KeyProductActivity = new Intent(context,KeyProductActivity.class);
+                    startActivity(KeyProductActivity);
+                    break;
+                case 60:
+                    Intent To_Do = new Intent(context,To_Do.class);
+                    startActivity(To_Do);
+                    break;
+                case 61:
+                    Intent StatusActivity = new Intent(context,StatusActivity.class);
+                    startActivity(StatusActivity);
+                    break;
+                case 70:
+                    Intent Feedback = new Intent(context,Feedback.class);
+                    startActivity(Feedback);
+                    break;
+                case 71:
+                    Intent FeedbackList = new Intent(context,FeedbackList.class);
+                    startActivity(FeedbackList);
+                    break;
+                case 80:
+                    Intent InspectionBeginActivity = new Intent(context,InspectionBeginActivity.class);
+                    startActivity(InspectionBeginActivity);
+                    break;
+                case 81:
+                    Intent InspectionHistoryActivity = new Intent(context,InspectionHistoryActivity.class);
+                    startActivity(InspectionHistoryActivity);
+                    break;
+                case 90:
+                    Intent mpm_activity = new Intent(context,mpm_activity.class);
+                    startActivity(mpm_activity);
+                    break;
+                case 100:
+                    Intent CustomerLookupActivity = new Intent(context,CustomerLookupActivity.class);
+                    startActivity(CustomerLookupActivity);
+                    break;
+                case 110:
+                    Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
+                    startActivity(HourlyPerformence);
+                    break;
+            }
+
+        }else{
+
+            switch (value){
+
+                case 0:
+                    Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
+                    startActivity(SalesAnalysisActivity1);
+                    break;
+                case 10:
+                    Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);
+                    startActivity(FreshnessIndexActivity);
+                    break;
+                case 11:
+                    Intent BestPerformerInventory = new Intent(context, BestPerformerInventory.class);
+                    startActivity(BestPerformerInventory);
+                    break;
+                case 20:
+                    Intent CustomerLookupActivity = new Intent(context,CustomerLookupActivity.class);
+                    startActivity(CustomerLookupActivity);
+                    break;
+                case 30:
+                    Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
+                    startActivity(HourlyPerformence);
+                    break;
 
 
         }
+
+
+
+
+    }
     }
 
 
@@ -227,6 +264,25 @@ public class SwitchingActivity extends AppCompatActivity
             case 11 :
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
                 break;
+
+
+            // switch for ezone user
+
+            case 21 :
+                apps.add(new App("Sales", R.mipmap.salesanalysis));
+                break;
+            case 22 :
+                apps.add(new App("Assortment Analysis", R.mipmap.freshnessindex));
+                apps.add(new App("Best/Worst Performers", R.mipmap.bestworstperformers));
+                break;
+            case 23 :
+                apps.add(new App("Customer Engagement", R.mipmap.customerengagement));
+                break;
+            case 24 :
+                apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
+                break;
+
+
             default:
                 Log.e("TAG", "not found: Activity");
                 break;
@@ -236,3 +292,4 @@ public class SwitchingActivity extends AppCompatActivity
     }
 
 }
+

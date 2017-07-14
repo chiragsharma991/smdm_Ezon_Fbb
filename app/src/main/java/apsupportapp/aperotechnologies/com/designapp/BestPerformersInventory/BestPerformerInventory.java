@@ -2,6 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory;
 
 import android.app.Activity;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -63,7 +64,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class BestPerformerInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
+public class BestPerformerInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
 
     public static TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
     private RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
@@ -116,6 +117,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private static int preValue = 1, postValue;  //this is for radio button
     private JsonArrayRequest postRequest;
     private int selectedlevel; //select level from filter
+    private TabLayout Tabview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,6 +240,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         CheckWTD = (RadioButton) findViewById(R.id.checkWTD);
         CheckL4W = (RadioButton) findViewById(R.id.checkL4W);
         CheckSTD = (RadioButton) findViewById(R.id.checkSTD);
+        Tabview = (TabLayout) findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("Fashion"));
+        Tabview.addTab(Tabview.newTab().setText("Core"));
+
 
         BaseLayoutInventory.setVisibility(View.GONE);
         quickFilterPopup.setVisibility(View.GONE);
@@ -248,6 +254,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BestInventListview.setTag("FOOTER");
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
         BestInventListview.addFooterView(footer);
+        Tabview.setOnTabSelectedListener(this);
         BstInventory_coverNsell.setOnClickListener(this);
         BstInventory_Fwd.setOnClickListener(this);
         BestInvent_quickFilter.setOnClickListener(this);
@@ -1456,6 +1463,21 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     }
 
 
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        Log.e(TAG, "onTabSelected: " );
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
 }
 
 
