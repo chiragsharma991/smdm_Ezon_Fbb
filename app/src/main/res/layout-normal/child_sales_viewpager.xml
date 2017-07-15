@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:gravity="top"
-    android:background="@color/bg_screen_color"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:gravity="left"
                 android:text="@string/net_sales"
                 android:textSize="12sp" />
@@ -38,9 +38,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
                 android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp" />
 
             <ImageView
@@ -51,14 +51,14 @@
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@+id/relNetSalesNmPrec"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="18dp"
                 android:background="@android:color/holo_green_dark" />
 
             <RelativeLayout
                 android:id="@+id/relNetSalesNmPrec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@+id/txtNetSalesVal">
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="left"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:layout_marginLeft="8dp"
                 android:text="@string/plan_sales"
                 android:textSize="12sp" />
@@ -117,9 +117,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
                 android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp" />
 
             <ImageView
@@ -130,12 +130,12 @@
                 android:layout_toLeftOf="@+id/relPlanSalesNmPrec"
                 android:layout_marginRight="10dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="18dp"
                 android:background="@android:color/holo_green_dark" />
 
             <RelativeLayout
                 android:id="@+id/relPlanSalesNmPrec"
-                android:layout_marginBottom="3dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="left"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:layout_marginLeft="8dp"
                 android:text="@string/net_sales_u"
                 android:textSize="12sp" />
@@ -203,9 +203,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
                 android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp" />
 
 
@@ -218,14 +218,14 @@
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@+id/relNetSalesUNmPrec"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="18dp"
                 android:background="@android:color/holo_green_dark" />
 
 
 
             <RelativeLayout
                 android:id="@+id/relNetSalesUNmPrec"
-                android:layout_marginBottom="3dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -274,7 +274,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="left"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:layout_marginLeft="8dp"
                 android:text="@string/soh_u"
                 android:textSize="12sp" />
@@ -286,9 +286,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
                 android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp" />
 
 

@@ -65,7 +65,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPager
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,View.OnClickListener {
+public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,View.OnClickListener,TabLayout.OnTabSelectedListener  {
 
 
     JsonArrayRequest postRequest,ez_postRequest;
@@ -727,6 +727,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         Tabview.addTab(Tabview.newTab().setText("LW"));
         Tabview.addTab(Tabview.newTab().setText("L4W"));
         Tabview.addTab(Tabview.newTab().setText("STD"));
+        Tabview.setOnTabSelectedListener(this);
         llayoutSalesAnalysis = (LinearLayout) findViewById(R.id.llayoutSalesAnalysis);
         relimgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
         relimgfilter.setOnClickListener(this);
@@ -762,16 +763,16 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         filter_toggleClick = true;
         switch (selectedsegValue) {
             case "WTD":
-                btnWTD.toggle();
+Tabview.getTabAt(0).select();
                 break;
             case "LW":
-                btnLW.toggle();
+                Tabview.getTabAt(1).select();
                 break;
             case "L4W":
-                btnL4W.toggle();
+                Tabview.getTabAt(2).select();
                 break;
             case "STD":
-                btnYTD.toggle();
+                Tabview.getTabAt(3).select();
                 break;
         }
     }
@@ -4509,5 +4510,179 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     public static void StartIntent(Context c)
     {
         c.startActivity(new Intent(c,SalesAnalysisActivity1.class));
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab)
+    {
+        Log.e("TAG", "onTabSelected: "+ Tabview.getSelectedTabPosition());
+        int checkedId= Tabview.getSelectedTabPosition();
+        if (!filter_toggleClick)
+        {
+            switch (checkedId)
+            {
+                case 0:
+                    if (selectedsegValue.equals("WTD"))
+                        break;
+                    selectedsegValue = "WTD";
+                    if (lldots != null)
+                    {
+                        lldots.removeAllViews();
+                    }
+                    llhierarchy.setVisibility(View.GONE);
+                    currentVmPos = vwpagersales.getCurrentItem();
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                    if (Reusable_Functions.chkStatus(context))
+                    {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        progressBar1.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        val = "";
+                        if (getIntent().getStringExtra("selectedDept") == null)
+                        {
+                            requestSalesListDisplayAPI();
+                        }
+                        else
+                        {
+                            String str = getIntent().getStringExtra("selectedDept");
+                            requestSalesSelectedFilterVal(str);
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
+                case 1 :
+                    if (selectedsegValue.equals("LW"))
+                        break;
+                    selectedsegValue = "LW";
+                    if (lldots != null)
+                    {
+                        lldots.removeAllViews();
+                    }
+                    currentVmPos = vwpagersales.getCurrentItem();
+                    llhierarchy.setVisibility(View.GONE);
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        progressBar1.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        val = "";
+                        if (getIntent().getStringExtra("selectedDept") == null)
+                        {
+                            requestSalesListDisplayAPI();
+
+                        } else
+                        {
+                            String str = getIntent().getStringExtra("selectedDept");
+                            requestSalesSelectedFilterVal(str);
+                        }
+
+                    } else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
+                case 2:
+                    if (selectedsegValue.equals("L4W"))
+                        break;
+                    selectedsegValue = "L4W";
+                    if (lldots != null)
+                    {
+                        lldots.removeAllViews();
+                    }
+                    currentVmPos = vwpagersales.getCurrentItem();
+                    llhierarchy.setVisibility(View.GONE);
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        progressBar1.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        val = "";
+                        if (getIntent().getStringExtra("selectedDept") == null)
+                        {
+                            requestSalesListDisplayAPI();
+                        }
+                        else
+                        {
+                            String str = getIntent().getStringExtra("selectedDept");
+                            requestSalesSelectedFilterVal(str);
+                        }
+                    } else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
+                case 3:
+                    if (selectedsegValue.equals("STD"))
+                        break;
+                    selectedsegValue = "STD";
+                    if (lldots != null)
+                    {
+                        lldots.removeAllViews();
+                    }
+                    currentVmPos = vwpagersales.getCurrentItem();
+                    llhierarchy.setVisibility(View.GONE);
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        progressBar1.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        val = "";
+                        if (getIntent().getStringExtra("selectedDept") == null)
+                        {
+                            requestSalesListDisplayAPI();
+                        }
+                        else
+                        {
+                            String str = getIntent().getStringExtra("selectedDept");
+                            requestSalesSelectedFilterVal(str);
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            filter_toggleClick = false;
+        }
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }
