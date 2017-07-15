@@ -13,14 +13,15 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/ezfb_White"
-        android:layout_marginTop="5dp"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+
+        >
 
         <RelativeLayout
             android:id="@+id/bst_Rel_image_child"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
             >
 
             <ImageView
@@ -29,7 +30,6 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
                 android:scaleType="fitXY"
-
                 />
 
             <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
@@ -59,52 +59,59 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="5dp">
+                android:paddingLeft="10dp"
+                >
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="1">
-                    <!---->
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="0.2"
+
+                        >
+
 
                     <TextView
                         android:id="@+id/bestInvent_option"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
-                        android:text="Buy One Get One"
+                        android:text="Buy One Get One "
                         android:textColor="@color/ezfb_black"
                         android:textSize="@dimen/smdm_inflator_title_normal"
                         />
 
-                    <RelativeLayout
-                        android:id="@+id/top_fav"
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8">
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal|top"
+                        android:layout_weight="0.8"
+                        >
 
                         <ToggleButton
                             android:id="@+id/toggle_bestInvent_fav"
                             android:layout_width="@dimen/icon_width"
                             android:layout_height="@dimen/icon_height"
-                            android:layout_centerInParent="true"
                             android:background="@drawable/toggleswitch"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:textOff=""
                             android:textOn="" />
 
-                    </RelativeLayout>
+
+                    </LinearLayout>
+
+
+
                 </LinearLayout>
-                <!--       <TextView
-                           android:id="@+id/bst_lineOne_child"
-                           android:layout_width="match_parent"
-                           android:layout_height="@dimen/smdm_inflater_divider"
-                           android:layout_alignStart="@+id/bst_head_child"
-                           android:layout_marginTop="5dp"
-                           android:background="@color/divider_salescard" />-->
 
 
                 <!--sales layout-->
@@ -113,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginRight="5dp"
                     >
                     <LinearLayout
@@ -315,12 +322,7 @@
 
 
 
-                <!--Table layout-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"></LinearLayout>
+
 
             </LinearLayout>
         </RelativeLayout>

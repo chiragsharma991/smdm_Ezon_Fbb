@@ -631,7 +631,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        Log.e("TAG", "onTabSelected: "+ Tabview.getSelectedTabPosition()+"and toggle select"+toggleClick);
+
         int checkedId= Tabview.getSelectedTabPosition();
 
      //   if (toggleClick == false) {
