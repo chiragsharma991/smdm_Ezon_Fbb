@@ -9,31 +9,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="94dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-        <LinearLayout
-            android:layout_width="94dp"
-            android:layout_height="94dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal|center_vertical"
-            >
-            <ImageView
-                android:id="@+id/snap_child_imageView"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_menu_gallery"
+            android:orientation="vertical">
 
-                />
+            <LinearLayout
+                android:layout_width="94dp"
+                android:layout_height="94dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/snap_child_imageView"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_menu_gallery"
+
+                    />
 
 
-
-        </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/snap_child_subtitle"
@@ -41,18 +40,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="5dp"
+                android:maxLines="3"
+                android:text="Hourly Performance"
                 android:textColor="@color/smdm_light_Black"
-                android:textSize="13sp"
-                android:maxLines="2"
-                android:text="Hourly Performance">
+                android:textSize="13sp">
 
             </TextView>
 
 
-
-
-
-</LinearLayout>
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -16,13 +16,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,11 +32,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/Login"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".DashBoardActivity"
-            android:label="@string/title_activity_dash_board"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+        <!--<activity-->
+        <!--android:name=".DashBoardActivity"-->
+        <!--android:label="@string/title_activity_dash_board"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:windowSoftInputMode="stateHidden" />-->
         <activity
             android:name=".AboutUsActivity"
             android:screenOrientation="portrait"
@@ -263,12 +261,33 @@
             android:name=".CustomerLoyalty.CustDetailBarChart"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".DashboardSnap.SnapDashboardActivity"
+        <activity
+            android:name=".DashboardSnap.SnapDashboardActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".FeedbackofCustomer.ProductAvailability_Notify"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".FeedbackofCustomer.PolicyExchangeRefund"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".FeedbackofCustomer.Price_Promotion"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".FeedbackofCustomer.ProductQualityRange"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".FeedbackofCustomer.OurStoreServices"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".FeedbackofCustomer.SupervisiorStaff"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

@@ -116,8 +116,8 @@
     <string name="sales_title">Sales</string>
     <string name="net_sales">Net Sales</string>
     <string name="plan_sales">Plan Sales</string>
-    <string name="net_sales_u">Net Sales(U)</string>
-    <string name="soh_u">SOH(U)</string>
+    <string name="net_sales_u">Sales Units</string>
+    <string name="soh_u">SOH Units</string>
     <string name="zonal">ZONAL</string>
     <string name="national">NATIONAL</string>
     <string name="yoy_sales_grw">YOY Sales Grw %</string>
@@ -126,9 +126,9 @@
     <string name="sell_thru">Sell Thru(U)%</string>
     <string name="mixsales">MixSales%</string>
     <string name="rank">Rank</string>
-    <string name="git_u">GIT(U)</string>
-    <string name="ros_u">ROS(U)</string>
-    <string name="fwd_wk_cover">Fwd Wk Cover</string>
+    <string name="git_u">GIT Units</string>
+    <string name="ros_u">ROS Units</string>
+    <string name="fwd_wk_cover">FWC</string>
     <string name="pva_sales">PvA Sales%</string>
     <string name="pva_title">Sales PvA</string>
 

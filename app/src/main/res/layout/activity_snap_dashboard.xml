@@ -25,16 +25,14 @@
                 android:id="@+id/time"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="6dp"
-                android:layout_marginBottom="2dp"
-                >
+                android:layout_marginBottom="2dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Refresh Time :"
                     android:textColor="@color/smdm_light_Black"
-                    android:textSize="@dimen/smdm_inflator_title_large"
-
-                    />
+                    android:textSize="@dimen/smdm_inflator_title_large"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -55,7 +53,6 @@
                 />
         </LinearLayout>
 
-
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.AppBarLayout
@@ -74,8 +71,7 @@
             app:contentInsetEnd="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
-            app:contentInsetStart="0dp"
-            >
+            app:contentInsetStart="0dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -111,7 +107,6 @@
                     android:textStyle="bold"
                     android:textColor="@color/smdm_dark_Black"
                     android:textSize="@dimen/smdm_header_title_large" />
-
 
                 <RelativeLayout
                     android:id="@+id/rp_imgfilter"

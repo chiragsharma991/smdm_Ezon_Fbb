@@ -18,6 +18,6 @@
     </corners>
     <stroke
         android:width="1dip"
-        android:color="@color/smdm_border" />
+        android:color="@color/ezfbb_red" />
 
 </shape>

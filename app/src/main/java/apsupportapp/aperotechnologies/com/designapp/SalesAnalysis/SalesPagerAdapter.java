@@ -129,8 +129,8 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                 txtNetSales.setText("Net Sales");
                 txtPlanSales.setText("Plan Sales");
-                txtNetSalesU.setText("Net Sales(U)");
-                txtSohU.setText("SOH(U)");
+                txtNetSalesU.setText("Sales Units");
+                txtSohU.setText("SOH Units");
 
                 txtNetSalesName.setText("WOW Gr%");
                 txtPlanSalesName.setText("PvA%");
@@ -141,8 +141,8 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                 txtNetSales.setText("Net Sales");
                 txtPlanSales.setText("Plan Sales");
-                txtNetSalesU.setText("Net Sales(U)");
-                txtSohU.setText("SOH(U)");
+                txtNetSalesU.setText("Sales Units");
+                txtSohU.setText("SOH Units");
 
                 txtNetSalesName.setText("YOY Gr%");
                 txtPlanSalesName.setText("PvA%");
@@ -207,40 +207,48 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                     txtPlanSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getPlanSaleNetVal())));
                     txtNetSalesUVal.setText("" + format.format(Math.round(salesAnalysis.getSaleTotQty())));
                     txtSohUVal.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-                    txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
-                    txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
-                    txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
+                    txtNetSalesPerc.setText("\t" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%"+"\t");
+                    txtPlanSalesPerc.setText("\t" + Math.round(salesAnalysis.getPvaAchieved()) + "%"+"\t");
+                    txtNetSalesUPerc.setText("\t" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%"+"\t");
 
                     // Color Condition for Wow Net Sale, Pva Achieved , Wow net sale Growth
                     if (salesAnalysis.getWowNetSalesGrowthPct() <= 0)
                     {
                         txtNetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                        txtNetSalesVal.setTextColor(Color.parseColor("#fe0000"));
+                        txtNetSalesPerc.setBackgroundColor(Color.parseColor("#e8112d"));
+                    //    txtNetSalesVal.setTextColor(Color.parseColor("#fe0000"));
                     } else if (salesAnalysis.getWowNetSalesGrowthPct() > 0) {
                         txtNetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                        txtNetSalesVal.setTextColor(Color.parseColor("#70e503"));
+                        txtNetSalesPerc.setBackgroundColor(Color.parseColor("#70e503"));
+
+                     //   txtNetSalesVal.setTextColor(Color.parseColor("#70e503"));
                     }
                     if (salesAnalysis.getPvaAchieved() < 70)
                     {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                        txtPlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
+                        txtPlanSalesPerc.setBackgroundColor(Color.parseColor("#e8112d"));
+                     //   txtPlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
                     }
                     else if (salesAnalysis.getPvaAchieved() > 90) {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                        txtPlanSalesVal.setTextColor(Color.parseColor("#70e503"));
+                        txtPlanSalesPerc.setBackgroundColor(Color.parseColor("#70e503"));
+                     //   txtPlanSalesVal.setTextColor(Color.parseColor("#70e503"));
                     }
                     else
                     {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
-                        txtPlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
+                        txtPlanSalesPerc.setBackgroundColor(Color.parseColor("#ff7e00"));
+                      //  txtPlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
                     }
                     if (salesAnalysis.getWowNetSalesUnitsGrowthPct() <= 0) {
                         txtNetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
-                        txtNetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
+                        txtNetSalesUPerc.setBackgroundColor(Color.parseColor("#e8112d"));
+                    //    txtNetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
                     }
                     else if (salesAnalysis.getWowNetSalesUnitsGrowthPct() > 0) {
                         txtNetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
-                        txtNetSalesUVal.setTextColor(Color.parseColor("#70e503"));
+                        txtNetSalesUPerc.setBackgroundColor(Color.parseColor("#70e503"));
+                     //   txtNetSalesUVal.setTextColor(Color.parseColor("#70e503"));
                     }
             }
 
@@ -258,34 +266,44 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
                 }
-                if (salesAnalysis.getWowNetSalesGrowthPct() <= 0) {
+                if (salesAnalysis.getWowNetSalesGrowthPct() <= 0)
+                {
                     txtNetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                    txtNetSalesVal.setTextColor(Color.parseColor("#fe0000"));
+                    txtNetSalesPerc.setBackgroundColor(Color.parseColor("#e8112d"));
+                    //    txtNetSalesVal.setTextColor(Color.parseColor("#fe0000"));
                 } else if (salesAnalysis.getWowNetSalesGrowthPct() > 0) {
                     txtNetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                    txtNetSalesVal.setTextColor(Color.parseColor("#70e503"));
-                }
+                    txtNetSalesPerc.setBackgroundColor(Color.parseColor("#70e503"));
 
-                if (salesAnalysis.getPvaAchieved() < 70) {
+                    //   txtNetSalesVal.setTextColor(Color.parseColor("#70e503"));
+                }
+                if (salesAnalysis.getPvaAchieved() < 70)
+                {
                     txtPlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                    txtPlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
-                } else if (salesAnalysis.getPvaAchieved() > 90) {
-                    txtPlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                    txtPlanSalesVal.setTextColor(Color.parseColor("#70e503"));
-                } else {
-                    txtPlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
-                    txtPlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
+                    txtPlanSalesPerc.setBackgroundColor(Color.parseColor("#e8112d"));
+                    //   txtPlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
                 }
-
+                else if (salesAnalysis.getPvaAchieved() > 90) {
+                    txtPlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
+                    txtPlanSalesPerc.setBackgroundColor(Color.parseColor("#70e503"));
+                    //   txtPlanSalesVal.setTextColor(Color.parseColor("#70e503"));
+                }
+                else
+                {
+                    txtPlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
+                    txtPlanSalesPerc.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    //  txtPlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
+                }
                 if (salesAnalysis.getWowNetSalesUnitsGrowthPct() <= 0) {
                     txtNetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
-                    txtNetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
-                } else if (salesAnalysis.getWowNetSalesUnitsGrowthPct() > 0) {
-                    txtNetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
-                    txtNetSalesUVal.setTextColor(Color.parseColor("#70e503"));
-
+                    txtNetSalesUPerc.setBackgroundColor(Color.parseColor("#e8112d"));
+                    //    txtNetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
                 }
-
+                else if (salesAnalysis.getWowNetSalesUnitsGrowthPct() > 0) {
+                    txtNetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
+                    txtNetSalesUPerc.setBackgroundColor(Color.parseColor("#70e503"));
+                    //   txtNetSalesUVal.setTextColor(Color.parseColor("#70e503"));
+                }
             }
             if(salesAnalysisClassArrayList.size()!=0){
             SalesAnalysisListDisplay salesAnalysisListDisplay = salesAnalysisClassArrayList.get(position);
@@ -677,6 +695,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
         } else if (position == 2) {
             if (salesAnalysis != null) {
+               // String ros = format.format(salesAnalysis.getRos());
                 double ros = Double.parseDouble(String.format("%.1f", salesAnalysis.getRos()));
                 double fwdwkcover = Double.parseDouble(String.format("%.1f", salesAnalysis.getFwdWeekCover()));
 

@@ -126,7 +126,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         eventUrlList = new ArrayList<>();
 
 
-        if (geoLeveLDesc.equals("E ZONE")) {
+        if (geoLeveLDesc.equals("E ZONE"))
+        {
             Log.e("TAG", "Ezone login");
             loginFromFbb = false;
             if (Reusable_Functions.chkStatus(context)) {
@@ -163,7 +164,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     }
 
-    private void statusbar() {
+    private void statusbar()
+    {
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -172,7 +174,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         }
     }
 
-    private void initalise() {
+    private void initalise()
+    {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
@@ -181,7 +184,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         Recycler_verticalView.setLayoutManager(new LinearLayoutManager(this));
         Recycler_verticalView.setHasFixedSize(true);
         //setupAdapter();
-
     }
 
     @Override
@@ -192,7 +194,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
 
         int id = item.getItemId();
 
@@ -236,6 +239,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
             apps = getProduct(24);
             snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
+            apps = getProduct(25);
+            snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
 
 
         } else {
@@ -263,11 +268,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
             apps = getProduct(11);
             snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
+            apps = getProduct(12);
+            snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
 
         }
-
-
-        Recycler_verticalView.setAdapter(snapAdapter);
+       Recycler_verticalView.setAdapter(snapAdapter);
     }
 
 
@@ -296,8 +301,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
                                 RefreshTime.setText("N/A");
 
-                            } else {
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     etlStatus = gson.fromJson(response.get(i).toString(), EtlStatus.class);
                                     etlStatusList.add(etlStatus);
 
@@ -306,7 +314,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
                             }
 
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
 
                             RefreshTime.setText("N/A");
@@ -320,12 +330,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error)
-
-
                     {
 
                         RefreshTime.setText("N/A");
-
                         error.printStackTrace();
                         Reusable_Functions.hDialog();
 
@@ -402,12 +409,12 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 Log.e("TAG", "onRequestPermissionsResult: Declined");
                 boolean should = ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, android.Manifest.permission.READ_PHONE_STATE);
                 Log.e(TAG, "oncheck permission.. " + should);
-                if (should) {
-
+                if (should)
+                {
                     showAlert();
-
-                } else {
-
+                }
+                else
+                {
                     View view = findViewById(android.R.id.content);
                     snackbar = Snackbar.make(view, Constants.REQUEST_PERMISSION_SNACKALERT, Snackbar.LENGTH_SHORT).setAction("OK", new View.OnClickListener() {
                         @Override
@@ -418,10 +425,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     snackbar.setActionTextColor(getResources().getColor(R.color.smdm_actionbar));
                     snackbar.show();
                 }
-
-
             }
-
         }
     }
 
@@ -430,7 +434,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         new android.app.AlertDialog.Builder(context)
                 .setTitle("Permission Denied")
                 .setMessage(Constants.REQUEST_PERMISSION_ALERT)
-                .setPositiveButton("RE-TRY", new DialogInterface.OnClickListener() {
+                .setPositiveButton("RE-TRY", new DialogInterface.OnClickListener()
+                {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.e("Click of I m sure", ", permission request Retry");
                         requestPermissions(new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
@@ -447,7 +452,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 .show();
     }
 
-
     private void requestMarketingEventsAPI() {
 
         String url = ConstsCore.web_url + "/v1/display/dashboard/" + userId;
@@ -463,7 +467,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                                 Log.e(TAG, "Event Response: null");
                                 Reusable_Functions.hDialog();
                                 // Toast.makeText(SnapDashboardActivity.this, "No data found", Toast.LENGTH_LONG).show();
-                            } else {
+                            }
+                            else
+                            {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonOject = response.getJSONObject(i);
                                     String imageURL = jsonOject.getString("imageName");
@@ -471,10 +477,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                                     // setupAdapter();
                                     snapAdapter.notifyDataSetChanged();
                                     Reusable_Functions.hDialog();
-
-
                                 }
-
                             }
 
                         } catch (Exception e) {

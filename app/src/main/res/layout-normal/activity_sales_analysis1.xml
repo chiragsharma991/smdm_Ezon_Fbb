@@ -75,7 +75,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="0dp"
-                        android:background="@drawable/button_click_effect">
+                        android:background="@drawable/button_click">
 
                         <Button
                             android:layout_width="@dimen/icon_width"
@@ -269,11 +269,11 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/llhierarchy"
                 android:layout_marginTop="8dp">
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/smdm_divider_Black" />
+                <!--<View-->
+                    <!--android:id="@+id/view1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dip"-->
+                    <!--android:background="@color/smdm_divider_Black" />-->
 
                 <LinearLayout
                     android:layout_below="@+id/view1"
@@ -286,7 +286,7 @@
                         android:id="@+id/llheader"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/smdm_divider_Black_light">
+                        android:background="@color/ezfb_activity_background">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -316,7 +316,7 @@
                                 android:layout_toRightOf="@+id/prevplanclass"
                                 android:gravity="center"
                                 android:text="Department"
-                                android:textColor="@color/bg_store_code_text"
+                                android:textColor="@color/ezfbb_black"
                                 android:textSize="@dimen/normallayout_textsize"
                                 android:textStyle="normal" />
 
@@ -342,8 +342,8 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:gravity="center_vertical|center"
-                            android:text="PvA Sales%"
-                            android:textColor="@color/bg_store_code_text"
+                            android:text="Ach%"
+                            android:textColor="@color/ezfbb_black"
                             android:textSize="@dimen/normallayout_textsize"
                             android:textStyle="normal" />
 
@@ -352,7 +352,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_screen_color">
+                        >
 
 
                         <EditText
@@ -362,7 +362,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="200dp"
-                            android:background="@drawable/border"
+                            android:background="@drawable/edttext_border"
                             android:editable="false"
                             android:textColor="@android:color/black"
                             />
@@ -374,7 +374,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="310dp"
                             android:layout_toLeftOf="@+id/txtVal"
-                            android:background="@drawable/border"
+                            android:background="@drawable/edttext_border"
                             android:editable="false"
                             android:gravity="center"
                             android:textColor="@android:color/black"
@@ -387,7 +387,7 @@
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:background="@drawable/border"
+                            android:background="@drawable/edttext_border"
                             android:editable="false"
                             android:textColor="@android:color/black"
                             />

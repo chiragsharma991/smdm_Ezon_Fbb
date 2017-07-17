@@ -18,6 +18,12 @@ import apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty.CustomerLook
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServices;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Price_Promotion;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisiorStaff;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
@@ -171,6 +177,32 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
                     startActivity(HourlyPerformence);
                     break;
+                case 120:
+                    Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify.class);
+                    startActivity(ProductAvailability_Notify);
+                    break;
+                case 121:
+                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund.class);
+                    startActivity(PolicyExchangeRefund);
+                    break;
+                case 122:
+                    Intent Price_Promotion = new Intent(context, Price_Promotion.class);
+                    startActivity(Price_Promotion);
+                    break;
+                case 123:
+                    Intent ProductQualityRange = new Intent(context, ProductQualityRange.class);
+                    startActivity(ProductQualityRange);
+                    break;
+                case 124:
+                    Intent OurStoreServices = new Intent(context,OurStoreServices.class);
+                    startActivity(OurStoreServices);
+                    break;
+                case 125:
+                    Intent SupervisiorStaff = new Intent(context, SupervisiorStaff.class);
+                    startActivity(SupervisiorStaff);
+                    break;
+
+
             }
 
         }else{
@@ -197,9 +229,34 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
                     startActivity(HourlyPerformence);
                     break;
+                case 40:
+                    Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify.class);
+                    startActivity(ProductAvailability_Notify);
+                    break;
+                case 41:
+                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund.class);
+                    startActivity(PolicyExchangeRefund);
+                    break;
+                case 42:
+                    Intent Price_Promotion = new Intent(context, Price_Promotion.class);
+                    startActivity(Price_Promotion);
+                    break;
+                case 43:
+                    Intent ProductQualityRange = new Intent(context, ProductQualityRange.class);
+                    startActivity(ProductQualityRange);
+                    break;
+                case 44:
+                    Intent OurStoreServices = new Intent(context,OurStoreServices.class);
+                    startActivity(OurStoreServices);
+                    break;
+                case 45:
+                    Intent SupervisiorStaff = new Intent(context, SupervisiorStaff.class);
+                    startActivity(SupervisiorStaff);
+                    break;
 
 
-        }
+
+            }
 
 
 
@@ -264,7 +321,14 @@ public class SwitchingActivity extends AppCompatActivity
             case 11 :
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
                 break;
-
+            case 12 :
+                apps.add(new App("Product Availability & Notify Me",R.mipmap.placeholder));
+                apps.add(new App("Policy - Exchange Refund",R.mipmap.placeholder));
+                apps.add(new App("Price & Promotion",R.mipmap.placeholder));
+                apps.add(new App("Product Quality & Range",R.mipmap.placeholder));
+                apps.add(new App("Our Store Services",R.mipmap.placeholder));
+                apps.add(new App("Supervisior & Staff",R.mipmap.placeholder));
+                break;
 
             // switch for ezone user
 
@@ -280,6 +344,14 @@ public class SwitchingActivity extends AppCompatActivity
                 break;
             case 24 :
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
+                break;
+            case 25 :
+                apps.add(new App("Product Availability & Notify Me",R.mipmap.placeholder));
+                apps.add(new App("Policy - Exchange Refund",R.mipmap.placeholder));
+                apps.add(new App("Price & Promotion",R.mipmap.placeholder));
+                apps.add(new App("Product Quality & Range",R.mipmap.placeholder));
+                apps.add(new App("Our Store Services",R.mipmap.placeholder));
+                apps.add(new App("Supervisior & Staff",R.mipmap.placeholder));
                 break;
 
 
