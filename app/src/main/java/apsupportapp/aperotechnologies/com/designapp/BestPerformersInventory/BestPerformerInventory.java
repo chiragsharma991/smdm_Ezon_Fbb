@@ -73,7 +73,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private SharedPreferences sharedPreferences;
     private RadioButton CheckWTD, CheckL4W, CheckSTD;
     private String userId, bearertoken, geoLeveLDesc;
-    private TextView Toolbar_title;
+    private TextView Toolbar_title,toggle_txt;
     private String TAG = "";
     private int count = 0;
     private int limit = 10;
@@ -219,6 +219,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         // toggleClick = true;  // you set toggle on segment button so you have to handle this flag.
         BestInventListview = (ListView) findViewById(R.id.bestInvent_ListView);
         Toolbar_title = (TextView) findViewById(R.id.toolbar_title);
+        toggle_txt = (TextView) findViewById(R.id.toggle_txt);
         Bst_sortInventory = (RelativeLayout) findViewById(R.id.bst_sortInventory);
         BestInvent_imgfilter = (RelativeLayout) findViewById(R.id.bestInvent_imgfilter);
         BestInvent_BtnBack = (RelativeLayout) findViewById(R.id.bestInvent_BtnBack);
@@ -274,6 +275,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BstInventory_salesThru_chk.setChecked(true);
         BestInvent_imgfilter.setOnClickListener(this);
         BestAndWorst.setOnCheckedChangeListener(this);
+
+        toggle_txt.setText("Best");
+
 
 
 
@@ -884,6 +888,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 top = 10;
                 orderby = "ASC";
                 title = "Worst";
+                toggle_txt.setText("Worst");
                 Toolbar_title.setText("Worst Performers");
                 BestInventList.clear();
                 BestInventListview.setVisibility(View.GONE);
@@ -903,6 +908,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 top = 10;
                 orderby = "DESC";
                 title = "Best";
+                toggle_txt.setText("Best");
                 Toolbar_title.setText("Best Performers");
                 BestInventList.clear();
                 BestInventListview.setVisibility(View.GONE);

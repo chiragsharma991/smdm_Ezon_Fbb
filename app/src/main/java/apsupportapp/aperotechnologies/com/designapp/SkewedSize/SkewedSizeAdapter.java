@@ -315,10 +315,11 @@ public class SkewedSizeAdapter extends BaseAdapter {
             }else
             {
                 mType.setBackgroundResource(R.drawable.cell_shape);
-                mType.setTextColor(Color.parseColor("#757575"));
+                mType.setTextColor(Color.parseColor("#000000"));
             }
             mType.setGravity(Gravity.CENTER);
             mType.setText(""+items.get(i));
+            mType.setTypeface(null, Typeface.BOLD);
             holder.SOH.addView(mType);
 
         }
@@ -353,11 +354,11 @@ public class SkewedSizeAdapter extends BaseAdapter {
             }else
             {
                 mType.setBackgroundResource(R.drawable.cell_shape);
-                mType.setTextColor(Color.parseColor("#404040"));
+                mType.setTextColor(Color.parseColor("#000000"));
             }
             mType.setGravity(Gravity.CENTER);
             mType.setText(""+product.get(i));
-            mType.setTypeface(null, Typeface.BOLD);
+          //  mType.setTypeface(null, Typeface.BOLD);
 
             holder.ProductAttribute.addView(mType);
         }

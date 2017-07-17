@@ -95,7 +95,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
-                    app:buttonTint="@color/ezfb_Red"
+                    android:buttonTint="@color/ezfb_Red"
                     android:text="@string/loggedin"
                     android:textColor="@color/ezfb_black" />
 
@@ -110,8 +110,8 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="25dp"
                 android:text="LOG IN"
-                android:textColor="@color/ezfb_White"
                 app:backgroundTint="@color/ezfb_Red"
+                android:textColor="@color/ezfb_White"
 
                 />
         </LinearLayout>
