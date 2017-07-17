@@ -763,7 +763,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         filter_toggleClick = true;
         switch (selectedsegValue) {
             case "WTD":
-Tabview.getTabAt(0).select();
+               Tabview.getTabAt(0).select();
                 break;
             case "LW":
                 Tabview.getTabAt(1).select();
