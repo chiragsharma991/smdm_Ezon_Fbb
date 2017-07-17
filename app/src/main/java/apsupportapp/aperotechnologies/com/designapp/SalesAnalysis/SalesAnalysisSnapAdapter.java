@@ -93,7 +93,8 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     @Override
-    public void onSnap(int position) {
+    public void onSnap(int position)
+    {
     }
 
     @Override

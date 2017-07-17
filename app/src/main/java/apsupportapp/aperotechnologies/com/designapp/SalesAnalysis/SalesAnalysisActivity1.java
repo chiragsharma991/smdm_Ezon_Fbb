@@ -100,8 +100,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     int selFirstPositionValue = 0,currentVmPos,totalItemCount,firstVisibleItem,offsetvalue = 0,limit = 100, count = 0,currentState = RecyclerView.SCROLL_STATE_IDLE,prevState = RecyclerView.SCROLL_STATE_IDLE;
     boolean  onClickFlag = false, filter_toggleClick = false;
     ProgressBar progressBar1;
-    private TabLayout Tabview;
-
+    TabLayout Tabview;
     // Ezone Elements Declaration
     public static String ez_segment_val = "LD";
 
@@ -142,7 +141,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             initialize_ez_ui();
             filterSelectedString = getIntent().getStringExtra("selectedStringVal");
 
-            Log.e("filterSelectedString :"," "+filterSelectedString);
+            Log.e("filterSelectedString :"," " +filterSelectedString);
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.progressDialog = new ProgressDialog(context);
                 Reusable_Functions.progressDialog.setCancelable(false);
@@ -396,6 +395,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                     }
                                                     break;
+
                                                 case "Region":
                                                     rel_ez_prev.setVisibility(View.VISIBLE);
                                                     rel_ez_next.setVisibility(View.INVISIBLE);
@@ -723,10 +723,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         btnL4W = (RadioButton) findViewById(R.id.btnL4W);
         btnYTD = (RadioButton) findViewById(R.id.btnYTD);
         Tabview = (TabLayout) findViewById(R.id.tabview_sales);
-        Tabview.addTab(Tabview.newTab().setText("WTD"));
-        Tabview.addTab(Tabview.newTab().setText("LW"));
-        Tabview.addTab(Tabview.newTab().setText("L4W"));
-        Tabview.addTab(Tabview.newTab().setText("STD"));
+        Tabview.addTab(Tabview.newTab().setText("WTD"),0);
+        Tabview.addTab(Tabview.newTab().setText("LW"),1);
+        Tabview.addTab(Tabview.newTab().setText("L4W"),2);
+        Tabview.addTab(Tabview.newTab().setText("STD"),3);
         Tabview.setOnTabSelectedListener(this);
         llayoutSalesAnalysis = (LinearLayout) findViewById(R.id.llayoutSalesAnalysis);
         relimgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
@@ -2243,6 +2243,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     private void requestSalesListDisplayAPI()
     {
         String url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e("url sales :",""+url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -4567,6 +4568,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     break;
 
                 case 1:
+                    Log.e("LW Selected","");
                     if (selectedsegValue.equals("LW"))
                         break;
                     selectedsegValue = "LW";
