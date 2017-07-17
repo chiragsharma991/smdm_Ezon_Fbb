@@ -17,7 +17,7 @@
             android:padding="5dp"
             android:singleLine="true"
             android:textSize="@dimen/normallayout_textsize"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfbb_black"
             android:layout_width="100dp"
             android:layout_height="30dp" />
 
@@ -43,7 +43,7 @@
 
                 <TextView
                     android:id= "@+id/txtAchieve"
-                    android:background="@color/txt_color"
+                    android:background="@color/ezfbb_black"
                     android:layout_width="5dp"
                     android:layout_height="29dp" />
             </RelativeLayout>
@@ -56,7 +56,7 @@
             android:padding="5dp"
             android:singleLine="true"
             android:textSize="@dimen/normallayout_textsize"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfbb_black"
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_alignBaseline="@+id/txtPvAValue"
@@ -64,4 +64,10 @@
             android:layout_alignParentStart="true" />
     </RelativeLayout>
 
+    <TextView
+        android:background="@color/smdm_divider_Black_light"
+        android:layout_marginTop="1dp"
+        android:id= "@+id/txtLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 </LinearLayout>

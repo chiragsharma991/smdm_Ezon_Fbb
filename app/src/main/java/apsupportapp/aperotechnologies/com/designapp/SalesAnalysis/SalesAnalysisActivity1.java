@@ -1050,7 +1050,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         switch(v.getId())
         {
             case R.id.prevplanclass :
@@ -1216,7 +1217,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             txtheaderplanclass.setText("Class");
                             level = 3;
                             val = " ";
-                            if (lldots != null) {
+                            if (lldots != null)
+                            {
                                 lldots.removeAllViews();
                             }
                             currentVmPos = vwpagersales.getCurrentItem();
@@ -1231,7 +1233,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 requestSalesListDisplayAPI();
-                            } else {
+                            }
+                            else
+                            {
                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             }
                             break;
@@ -1241,7 +1245,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             fromWhere = "Subclass";
                             level = 4;
                             val = " ";
-                            if (lldots != null) {
+                            if (lldots != null)
+                            {
                                 lldots.removeAllViews();
                             }
                             currentVmPos = vwpagersales.getCurrentItem();
@@ -1266,7 +1271,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             txtheaderplanclass.setText("MC");
 
                             relnextbtn.setVisibility(View.INVISIBLE);
-                            if (lldots != null) {
+                            if (lldots != null)
+                            {
                                 lldots.removeAllViews();
                             }
                             currentVmPos = vwpagersales.getCurrentItem();
@@ -1314,9 +1320,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 {
                     return;
                 }
-                else {
-                    switch (txt_ez_header.getText().toString()) {
-
+                else
+                {
+                    switch (txt_ez_header.getText().toString())
+                    {
                         case "MC":
                             rel_ez_next.setVisibility(View.VISIBLE);
                             if (ez_linear_dots != null)
@@ -1352,7 +1359,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             break;
 
                         case "Subclass":
-
                             if (ez_linear_dots != null) {
                                 ez_linear_dots.removeAllViews();
                             }
@@ -1451,6 +1457,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             }
                             break;
+
                         case "Store" :
                             rel_ez_prev.setVisibility(View.INVISIBLE);
                             rel_ez_next.setVisibility(View.VISIBLE);
@@ -1489,6 +1496,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     }
                 }
                 break;
+
             case R.id.rel_ez_next :
                 if (ez_postRequest != null)
                 {
@@ -4558,7 +4566,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     }
                     break;
 
-                case 1 :
+                case 1:
                     if (selectedsegValue.equals("LW"))
                         break;
                     selectedsegValue = "LW";
