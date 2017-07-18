@@ -1295,6 +1295,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             level = 2;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
+                Log.e(TAG, "setAdapter: findex position"+fIndexFirstVisibleItem );
                 if (freshnessIndexDetailsArrayList.get(j).getPlanCategory().contentEquals(fIndexFirstVisibleItem)) {
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                     llm.scrollToPosition(firstVisibleItem);
