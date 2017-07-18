@@ -64,10 +64,10 @@
             android:layout_alignParentStart="true" />
     </RelativeLayout>
 
-    <TextView
-        android:background="@color/smdm_divider_Black_light"
-        android:layout_marginTop="1dp"
-        android:id= "@+id/txtLine"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
+    <!--<TextView-->
+        <!--android:background="@color/smdm_divider_Black_light"-->
+        <!--android:layout_marginTop="1dp"-->
+        <!--android:id= "@+id/txtLine"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp" />-->
 </LinearLayout>

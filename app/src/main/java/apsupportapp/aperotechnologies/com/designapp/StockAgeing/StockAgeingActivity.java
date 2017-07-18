@@ -654,10 +654,11 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             StockAgListView.setVisibility(View.GONE);
                             coreSelection = true;
                             requestStockAgeingApi(selectedString);
-                        } else {
+                        }
+                        else
+                        {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             StockAgListView.setVisibility(View.GONE);
-
                         }
 
                     break;
@@ -673,12 +674,12 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                             Reusable_Functions.sDialog(context, "Loading data...");
                             coreSelection = false;
                             requestStockAgeingApi(selectedString);
-                        } else {
+                        }
+                        else
+                        {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             StockAgListView.setVisibility(View.GONE);
-
                         }
-
                     break;
 
             }

@@ -2,7 +2,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="top"
-    android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -20,7 +19,7 @@
                 android:id="@+id/sznchildRelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <RelativeLayout
                     android:id="@+id/storesales"
@@ -149,7 +148,7 @@
                 android:id="@+id/rankRelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/pvaSalesRelLayout"
