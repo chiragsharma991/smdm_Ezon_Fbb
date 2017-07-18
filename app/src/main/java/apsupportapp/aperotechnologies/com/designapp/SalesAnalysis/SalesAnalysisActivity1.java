@@ -2414,7 +2414,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
-
                         error.printStackTrace();
                     }
                 }
@@ -4516,17 +4515,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
     }
 
-    public static void StartIntent(Context c)
-    {
-        c.startActivity(new Intent(c,SalesAnalysisActivity1.class));
-    }
 
     @Override
     public void onTabSelected(TabLayout.Tab tab)
     {
-        Log.e("TAG", "onTabSelected: "+ Tabview.getSelectedTabPosition());
-        int checkedId= Tabview.getSelectedTabPosition();
-        if (!filter_toggleClick)
+        Log.e("TAG", "onTabSelected: "+ tab.getPosition()+filter_toggleClick);
+        int checkedId= tab.getPosition();
+        if (filter_toggleClick)
         {
             switch (checkedId)
             {
@@ -4551,6 +4546,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         limit = 100;
                         count = 0;
                         val = "";
+                        Log.e( "onTabSelected: WTD", ""+selectedsegValue);
                         if (getIntent().getStringExtra("selectedDept") == null)
                         {
                             requestSalesListDisplayAPI();
@@ -4588,6 +4584,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         limit = 100;
                         count = 0;
                         val = "";
+                        Log.e( "onTabSelected: LW", ""+selectedsegValue);
+
                         if (getIntent().getStringExtra("selectedDept") == null)
                         {
                             requestSalesListDisplayAPI();
