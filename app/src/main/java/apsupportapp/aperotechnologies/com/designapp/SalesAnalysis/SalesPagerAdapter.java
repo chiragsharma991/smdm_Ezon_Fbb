@@ -216,42 +216,37 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                     txtSohUVal.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
                     txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
+                    txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
+                    txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
-
+                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     // Color Condition for Wow Net Sale, Pva Achieved , Wow net sale Growth
                     if (salesAnalysis.getWowNetSalesGrowthPct() <= 0)
                     {
                         txtNetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                        txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
 
                     } else if (salesAnalysis.getWowNetSalesGrowthPct() > 0) {
                         txtNetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                        txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
 
                     }
                     if (salesAnalysis.getPvaAchieved() < 70)
                     {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                        txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
 
                     }
                     else if (salesAnalysis.getPvaAchieved() > 90) {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                        txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     }
                     else
                     {
                         txtPlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
-                        txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     }
                     if (salesAnalysis.getWowNetSalesUnitsGrowthPct() <= 0) {
                         txtNetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
-                        txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     }
                     else if (salesAnalysis.getWowNetSalesUnitsGrowthPct() > 0) {
                         txtNetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
-                        txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
 
                     }
             }
@@ -270,41 +265,37 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                     txtSohUVal.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
                     txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
+                    txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
+                    txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
+                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
                 }
                 if (salesAnalysis.getWowNetSalesGrowthPct() <= 0)
                 {
                     txtNetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
 
                 } else if (salesAnalysis.getWowNetSalesGrowthPct() > 0) {
                     txtNetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
 
                 }
                 if (salesAnalysis.getPvaAchieved() < 70)
                 {
                     txtPlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                    txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
 
                 }
                 else if (salesAnalysis.getPvaAchieved() > 90) {
                     txtPlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                    txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                 }
                 else
                 {
                     txtPlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
-                    txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                 }
                 if (salesAnalysis.getWowNetSalesUnitsGrowthPct() <= 0) {
                     txtNetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
-                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
                 }
                 else if (salesAnalysis.getWowNetSalesUnitsGrowthPct() > 0) {
                     txtNetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
-                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
 
                 }
             }
@@ -721,13 +712,13 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                // String ros = format.format(salesAnalysis.getRos());
                 double ros = Double.parseDouble(String.format("%.1f", salesAnalysis.getRos()));
                 double fwdwkcover = Double.parseDouble(String.format("%.1f", salesAnalysis.getFwdWeekCover()));
-                txtSOHVal2.setText(" " + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
+                txtSOHVal2.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
                 txtSOHVal2.setTypeface(Typeface.DEFAULT_BOLD);
-                txtGITVal.setText(" " + format.format(Math.round(salesAnalysis.getStkGitQty())));
+                txtGITVal.setText("" + format.format(Math.round(salesAnalysis.getStkGitQty())));
                 txtGITVal.setTypeface(Typeface.DEFAULT_BOLD);
-                txtROSVal2.setText(" "+ format.format(ros));
+                txtROSVal2.setText(""+ format.format(ros));
                 txtROSVal2.setTypeface(Typeface.DEFAULT_BOLD);
-                txtFwdWkCoverVal2.setText(" " + fwdwkcover);
+                txtFwdWkCoverVal2.setText("" + fwdwkcover);
                 txtFwdWkCoverVal2.setTypeface(Typeface.DEFAULT_BOLD);
             }
         }
