@@ -34,6 +34,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.android.gms.playlog.internal.LogEvent;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
+import uk.co.senab.photoview.log.LoggerDefault;
 
 
 public class SkewedSizesActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
@@ -109,13 +111,14 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         Reusable_Functions.sDialog(this, "Loading.......");
         if (getIntent().getStringExtra("selectedDept") == null) {
             from_filter = false;
-           // filter_toggleClick = false;
+            filter_toggleClick = false;
 
         } else if (getIntent().getStringExtra("selectedDept") != null) {
             selectedString = getIntent().getStringExtra("selectedDept");
             from_filter = true;
-          //  filter_toggleClick = true;
+            filter_toggleClick = true;
         }
+        Log.e("TAG", "Selected string: "+selectedString+" "+from_filter );
         retainValuesFilter();
         requestRunningPromoApi(selectedString);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
@@ -134,7 +137,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
 
         } else {
-            Skewed_fashion.toggle();
+          //  Skewed_fashion.toggle();
             coreSelection = true;
             Tabview.getTabAt(1).select();
 
@@ -148,6 +151,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
         if (Reusable_Functions.chkStatus(context)) {
 
+            Log.e("TAG", "From filter: "+from_filter );
             String url;
             if (from_filter) {
                 if (coreSelection) {
@@ -369,6 +373,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.qfDoneLayout:
 
+                from_filter = false;
+
                 if (Reusable_Functions.chkStatus(context)) {
                     if (Skewed_checkWTD.isChecked()) {
                         checkTimeValueIs = "CheckWTD";
@@ -469,6 +475,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
     private void quickFilterValCheckClick() {
 
+
         if (qfButton.equals("OFF") && checkTimeValueIs == null) {
             checkCurrent.setChecked(true);
             checkUpcoming.setChecked(false);
@@ -479,6 +486,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             Skewed_checkSTD.setChecked(true);
         } else {
             switch (qfButton) {
+
                 case "checkCurrent":
                     checkCurrent.setChecked(true);
                     checkPrevious.setChecked(false);
@@ -674,8 +682,11 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         int checkedId= Tabview.getSelectedTabPosition();
         Log.e("TAB", "onTabSelected: "+checkedId );
 
+        if (!filter_toggleClick)   // from filter is use when you retain tab button that time it will call .
+        {
+            from_filter = false;
 
-        switch (checkedId) {
+            switch (checkedId) {
 
             case 1 :   //core selection
                 limit = 10;
@@ -715,6 +726,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 break;
 
 
+        }
+        }else{  filter_toggleClick = false;
         }
 
     }

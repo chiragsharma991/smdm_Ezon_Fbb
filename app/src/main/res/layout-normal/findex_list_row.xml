@@ -21,7 +21,7 @@
             android:layout_marginRight="230dp"
             android:layout_toLeftOf="@+id/txtfindexSOH"
             android:textSize="@dimen/smdm_rowInflaterLayout_normal"
-            android:textColor="@color/txt_color"              />
+            android:textColor="@color/ezfb_black"              />
 
         <TextView
             android:padding="2dp"
@@ -36,7 +36,7 @@
             android:layout_toLeftOf="@+id/txtfindexSOH_U"
             android:text="1234567"
             android:textSize="@dimen/smdm_rowInflaterLayout_normal"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfb_black"              />
             />
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_toLeftOf="@+id/txtfindexGIT"
             android:text="1234567"
             android:textSize="@dimen/smdm_rowInflaterLayout_normal"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfb_black"              />
             />
 
 
@@ -68,7 +68,7 @@
             android:layout_centerVertical="true"
             android:text="1234567"
             android:textSize="@dimen/smdm_rowInflaterLayout_normal"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfb_black"              />
             />
 
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -76,7 +77,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  * Created by pamrutkar on 22/11/16.
  */
 
-public class FreshnessIndexActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, HttpResponse {
+public class FreshnessIndexActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, HttpResponse, TabLayout.OnTabSelectedListener {
 
     RadioButton btnCore, btnFashion;
     private static String FIndex_SegmentClick = "Fashion";
@@ -88,7 +89,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     int offsetvalue = 0, limit = 100;
     int count = 0;
     RequestQueue queue;
-    String FreshnessIndexValue;   //set value in hierarchy
+    String FreshnessIndexValue="";   //set value in hierarchy
     Context context;
     String fromWhere, freshnessIndex_ClickedVal, fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand;   // selected value from list
     PieChart pieChart;
@@ -114,7 +115,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private ProgressBar processBar;
     int prevState = RecyclerView.SCROLL_STATE_IDLE;
     int currentState = RecyclerView.SCROLL_STATE_IDLE;
-    private String fIndexFirstVisibleItem;    // This is for list name from listview
+    private String fIndexFirstVisibleItem="All";    // This is for list name from listview
     private boolean OnItemClick = false, filter_toggleClick = false;
     private int OveridePositionValue = 0;
     public static Activity freshness_Index;
@@ -124,6 +125,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private boolean from_filter;
     private String selectedString;
     private int selectedlevel;
+    private TabLayout Tabview;
 
 
     @Override
@@ -326,32 +328,49 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         txtNoChart = (TextView) findViewById(R.id.noChart);
         llfreshnessIndex = (LinearLayout) findViewById(R.id.llfreshnessIndex);
         btnFIndexNext = (RelativeLayout) findViewById(R.id.btnFIndexNext);
-        segmented3 = (SegmentedGroup) findViewById(R.id.freshnessIndex_segmentedGrp);
-        segmented3.setOnCheckedChangeListener(FreshnessIndexActivity.this);
-        btnCore = (RadioButton) findViewById(R.id.btnCore);
-        btnFashion = (RadioButton) findViewById(R.id.btnFashion);
+       // segmented3 = (SegmentedGroup) findViewById(R.id.freshnessIndex_segmentedGrp);
+       // segmented3.setOnCheckedChangeListener(FreshnessIndexActivity.this);
+       // btnCore = (RadioButton) findViewById(R.id.btnCore);
+      //  btnFashion = (RadioButton) findViewById(R.id.btnFashion);
         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
+        Tabview = (TabLayout) findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("Fashion"));
+        Tabview.addTab(Tabview.newTab().setText("Core"));
+        Tabview.setOnTabSelectedListener(FreshnessIndexActivity.this);
     }
 
     public void retainValuesFilter() {
-        filter_toggleClick = true;
+
+     //   filter_toggleClick = true;
         if (FIndex_SegmentClick.equals("All")) {
-            btnCore.toggle();
+            //btnCore.toggle();
+            Tabview.getTabAt(1).select();
+
         } else {
-            btnFashion.toggle();
+            //btnFashion.toggle();
+            Tabview.getTabAt(0).select();
+
         }
 
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+    }
+
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        Log.e(TAG,"toggle is "+filter_toggleClick);
+        int checkedId= Tabview.getSelectedTabPosition();
         OnItemClick = true;
         FreshnessIndexValue = "";
         if (!filter_toggleClick) {
             switch (checkedId) {
 
-                case R.id.btnCore:
+                case 1 :   //core selection
                     if (FIndex_SegmentClick.equals("All"))
                         break;
                     FIndex_SegmentClick = "All";
@@ -364,13 +383,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         offsetvalue = 0;
                         limit = 100;
                         count = 0;
-                        if (getIntent().getStringExtra("selectedDept") == null) {
+                     //   if (getIntent().getStringExtra("selectedDept") == null) {
                             requestFreshnessIndexDetails();
-                        } else if (getIntent().getStringExtra("selectedDept") != null) {
+                      /*  } else if (getIntent().getStringExtra("selectedDept") != null) {
                             String selectedString = getIntent().getStringExtra("selectedDept");
                             requestFreshnessIndexFilterVal(selectedString);
 
-                        }
+                        }*/
 
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -379,7 +398,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     }
                     break;
 
-                case R.id.btnFashion:
+                case 0 :  // fashion selection
+
                     if (FIndex_SegmentClick.equals("Fashion"))
                         break;
 
@@ -394,13 +414,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         offsetvalue = 0;
                         limit = 100;
                         count = 0;
-                        if (getIntent().getStringExtra("selectedDept") == null) {
+                     //   if (getIntent().getStringExtra("selectedDept") == null) {
                             requestFreshnessIndexDetails();
-                        } else if (getIntent().getStringExtra("selectedDept") != null) {
+                     /*   } else if (getIntent().getStringExtra("selectedDept") != null) {
                             String selectedString = getIntent().getStringExtra("selectedDept");
                             requestFreshnessIndexFilterVal(selectedString);
 
-                        }
+                        }*/
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         processBar.setVisibility(View.GONE);
@@ -419,6 +439,16 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         }
     }
 
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
 
     //----------------------------API Declaration---------------------------//
     // API 1.31
@@ -426,6 +456,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         String fIdetails = "";
         fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e(TAG, "URL: "+ fIdetails);
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -490,6 +521,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private void request_FreshnessIndex_CategoryList(final String deptName) {
 
         String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e(TAG, "URL: "+ freshnessindex_category_listurl);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
                 new Response.Listener<JSONArray>() {
@@ -528,9 +560,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 TestItem();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-                                FreshnessIndexValue = " ";
-                                FreshnessIndexValue = " > " + deptName;
-                                txtfIndexDeptName.setText(FreshnessIndexValue);
+                               // FreshnessIndexValue = " ";
+                                //FreshnessIndexValue = " > " + deptName;
+                               // txtfIndexDeptName.setText(FreshnessIndexValue);
+                                Log.e(TAG, "txtfIndexDeptName: "+deptName+"and FreshnessIndex"+FreshnessIndexValue );
+                                txtfIndexDeptName.setText(hierarchy(deptName));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
                                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanCategory().toString();
                                 offsetvalue = 0;
@@ -583,6 +617,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         String freshnessIndex_planclass_listurl = null;
         freshnessIndex_planclass_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e(TAG, "URL: "+ freshnessIndex_planclass_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -622,8 +657,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-                                FreshnessIndexValue += " > " + category;
-                                txtfIndexDeptName.setText(FreshnessIndexValue);
+                               // FreshnessIndexValue += " > " + category;
+                              //  txtfIndexDeptName.setText(FreshnessIndexValue);
+                                txtfIndexDeptName.setText(hierarchy(category));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
                                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanClass().toString();
                                 offsetvalue = 0;
@@ -670,6 +706,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private void request_FreshnessIndex_BrandList(String deptName, String category, final String planclass) {
         String freshnessIndex_brand_listurl;
         freshnessIndex_brand_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e(TAG, "URL: "+ freshnessIndex_brand_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -706,8 +743,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-                                FreshnessIndexValue += " > " + planclass;
-                                txtfIndexDeptName.setText(FreshnessIndexValue);
+                               // FreshnessIndexValue += " > " + planclass;
+                               // txtfIndexDeptName.setText(FreshnessIndexValue);
+                                txtfIndexDeptName.setText(hierarchy(planclass));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
                                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getBrandName().toString();
                                 offsetvalue = 0;
@@ -757,6 +795,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         String freshnessIndex_brandplan_listurl = null;
         freshnessIndex_brandplan_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e(TAG, "URL: "+ freshnessIndex_brandplan_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -798,8 +837,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-                                FreshnessIndexValue += " > " + brandnm;
-                                txtfIndexDeptName.setText(FreshnessIndexValue);
+                               // FreshnessIndexValue += " > " + brandnm;
+                              //  txtfIndexDeptName.setText(FreshnessIndexValue);
+                                txtfIndexDeptName.setText(hierarchy(brandnm));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
                                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getBrandplanClass().toString();
                                 offsetvalue = 0;
@@ -861,11 +901,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             currentgroup = (float) freshnessIndexDetail.getSohCurrentGrpCount();
             coreGroupCount = (float) freshnessIndexDetail.getCoreGrpCount();
             ArrayList<Integer> colors = new ArrayList<>();
-            colors.add(Color.parseColor("#31d6c5"));
-            colors.add(Color.parseColor("#aea9fd"));
-            colors.add(Color.parseColor("#ffc65b"));
-            colors.add(Color.parseColor("#fe8081"));
-            colors.add(Color.parseColor("#e8c0bb"));
+            colors.add(Color.parseColor("#20b5d3"));
+            colors.add(Color.parseColor("#21d24c"));
+            colors.add(Color.parseColor("#f5204c"));
+            colors.add(Color.parseColor("#f89a20"));
+            colors.add(Color.parseColor("#78bc2c"));
             ArrayList<String> labels = new ArrayList<>();
             if (currentgroup > 0.0f) {
                 entries.add(new PieEntry(currentgroup, "Current"));
@@ -946,6 +986,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         } else if (txtFIndexClass.getText().toString().equals("MC")) {
             url = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
         }
+        Log.e(TAG, "URL: "+ url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1013,11 +1054,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     }
                                 }
                                 ArrayList<Integer> colors = new ArrayList<>();
-                                colors.add(Color.parseColor("#31d6c5"));
-                                colors.add(Color.parseColor("#aea9fd"));
-                                colors.add(Color.parseColor("#ffc65b"));
-                                colors.add(Color.parseColor("#fe8081"));
-                                colors.add(Color.parseColor("#e8c0bb"));
+                                colors.add(Color.parseColor("#20b5d3"));
+                                colors.add(Color.parseColor("#21d24c"));
+                                colors.add(Color.parseColor("#f5204c"));
+                                colors.add(Color.parseColor("#f89a20"));
+                                colors.add(Color.parseColor("#78bc2c"));
                                 ArrayList<String> labels = new ArrayList<>();
                                 if (currentgroup > 0.0f) {
                                     entries.add(new PieEntry(currentgroup, "Current"));
@@ -1124,6 +1165,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     }
 
 
+
+
+
+
     public class MyValueFormatter implements IValueFormatter {
 
         private DecimalFormat mFormat;
@@ -1141,10 +1186,12 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     private void requestAll() {
         String fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexheader/" + userId + "?corefashion=" + FIndex_SegmentClick;
+        Log.e(TAG, "URL: "+ fIdetails);
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "onResponse: All"+response );
 
                         int i;
                         try {
@@ -1188,6 +1235,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG,"Data failed."+e.getMessage());
                             llfreshnessIndex.setVisibility(View.GONE);
                             OnItemClick = false;
                             e.printStackTrace();
@@ -1236,6 +1284,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         if (txtFIndexClass.getText().toString().equals("Department")) {
             level = 1;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
+            Log.e(TAG,"item was"+fIndexFirstVisibleItem);
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
                 if (freshnessIndexDetailsArrayList.get(j).getPlanDept().contentEquals(fIndexFirstVisibleItem)) {
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
@@ -1294,10 +1343,12 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     private void requestFreshnessIndexFilterVal(final String selectedString) {
         String freshnessindex_filterVal_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + SalesFilterActivity.level_filter + selectedString + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e(TAG, "URL: "+freshnessindex_filterVal_listurl );
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_filterVal_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+
                         if (SalesFilterActivity.level_filter == 2) {
                             txtFIndexClass.setText("Subdept");
                             fromWhere = "Subdept";
@@ -1327,6 +1378,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                fIndexFirstVisibleItem="All";
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
 
@@ -1536,8 +1588,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         non_assortment_count = (float) freshnessIndexDetails_Ez_ArrayList.get(position).getNonAssortmentGrpCont();
         assortment_count = (float) freshnessIndexDetails_Ez_ArrayList.get(position).getAssortmentGrpCont();
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#aea9fd"));
-        colors.add(Color.parseColor("#ffc65b"));
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
         entries.add(new PieEntry(non_assortment_count, "Non Asst"));
         entries.add(new PieEntry(assortment_count, "Asst"));
         dataSet = new PieDataSet(entries, "");
@@ -2211,6 +2263,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             } else if (getIntent().getStringExtra("selectedDept") != null) {
                 String selectedString = getIntent().getStringExtra("selectedDept");
                 filter_toggleClick = true;
+                Log.e(TAG, "Selected values: "+selectedString );
                 retainValuesFilter();
                 requestFreshnessIndexFilterVal(selectedString);
 
@@ -2612,6 +2665,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         txtFIndexClass = (TextView) findViewById(R.id.txtFIndexClass);
         freshnessIndex_imageBtnBack = (RelativeLayout) findViewById(R.id.freshnessIndex_imageBtnBack);
         freshnessIndex_imgfilter = (RelativeLayout) findViewById(R.id.freshnessIndex_imgfilter);
+
 
         freshnessIndex_imgfilter.setOnClickListener(new View.OnClickListener() {
             @Override
