@@ -208,19 +208,19 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 if (salesAnalysis != null)
                 {
                     txtNetSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getSaleNetVal())));
-                    txtNetSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getPlanSaleNetVal())));
-                    txtPlanSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtPlanSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUVal.setText("" + format.format(Math.round(salesAnalysis.getSaleTotQty())));
-                    txtNetSalesUVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtSohUVal.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-                    txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
-                    txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
-                    txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                   // txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
-                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     // Color Condition for Wow Net Sale, Pva Achieved , Wow net sale Growth
                     if (salesAnalysis.getWowNetSalesGrowthPct() <= 0)
                     {
@@ -257,19 +257,19 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 if (salesAnalysis != null) {
 
                     txtNetSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getSaleNetVal())));
-                    txtNetSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getPlanSaleNetVal())));
-                    txtPlanSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtPlanSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUVal.setText("" + format.format(Math.round(salesAnalysis.getSaleTotQty())));
-                    txtNetSalesUVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtSohUVal.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-                    txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
-                    txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
-                    txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
-                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
                 }
                 if (salesAnalysis.getWowNetSalesGrowthPct() <= 0)
                 {
@@ -530,7 +530,8 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 //Sell Thru
                 relSellThru.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View v)
+                    {
                         sznchildRelLayout.setVisibility(View.VISIBLE);
                         rankRelLayout.setVisibility(View.GONE);
 
@@ -670,12 +671,12 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         txtYoYNationalRankVal.setText("" + salesAnalysis.getNationalYOYGrowthRank());
 
                         //Sales Rank Condtion
-                        if (salesAnalysis.getZonalSalesRank() > salesAnalysis.getNationalSalesRank())
+                        if (salesAnalysis.getZonalSalesRank() < salesAnalysis.getNationalSalesRank())
                         {
                             linPvAZonalRank.setBackgroundResource(R.color.smdm_green);
                             linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
                         }
-                        else if (salesAnalysis.getNationalSalesRank() > salesAnalysis.getZonalSalesRank())
+                        else if (salesAnalysis.getNationalSalesRank() < salesAnalysis.getZonalSalesRank())
                         {
                             linPvAZonalRank.setBackgroundResource(R.color.smdm_amber);
                             linPvANationalRank.setBackgroundResource(R.color.smdm_green);
@@ -686,12 +687,12 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                             linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
                         }
                         //YoY Rank Condition
-                        if (salesAnalysis.getZonalYOYGrowthRank() > salesAnalysis.getNationalYOYGrowthRank())
+                        if (salesAnalysis.getZonalYOYGrowthRank() < salesAnalysis.getNationalYOYGrowthRank())
                         {
                             linYoYZonalRank.setBackgroundResource(R.color.smdm_green);
                             linYoYNationalRank.setBackgroundResource(R.color.smdm_amber);
                         }
-                        else if (salesAnalysis.getNationalYOYGrowthRank() > salesAnalysis.getZonalYOYGrowthRank())
+                        else if (salesAnalysis.getNationalYOYGrowthRank() < salesAnalysis.getZonalYOYGrowthRank())
                         {
                             linYoYZonalRank.setBackgroundResource(R.color.smdm_amber);
                             linYoYNationalRank.setBackgroundResource(R.color.smdm_green);
@@ -713,13 +714,13 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 double ros = Double.parseDouble(String.format("%.1f", salesAnalysis.getRos()));
                 double fwdwkcover = Double.parseDouble(String.format("%.1f", salesAnalysis.getFwdWeekCover()));
                 txtSOHVal2.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-                txtSOHVal2.setTypeface(Typeface.DEFAULT_BOLD);
+             //   txtSOHVal2.setTypeface(Typeface.DEFAULT_BOLD);
                 txtGITVal.setText("" + format.format(Math.round(salesAnalysis.getStkGitQty())));
-                txtGITVal.setTypeface(Typeface.DEFAULT_BOLD);
+            //    txtGITVal.setTypeface(Typeface.DEFAULT_BOLD);
                 txtROSVal2.setText(""+ format.format(ros));
-                txtROSVal2.setTypeface(Typeface.DEFAULT_BOLD);
+             //   txtROSVal2.setTypeface(Typeface.DEFAULT_BOLD);
                 txtFwdWkCoverVal2.setText("" + fwdwkcover);
-                txtFwdWkCoverVal2.setTypeface(Typeface.DEFAULT_BOLD);
+             //   txtFwdWkCoverVal2.setTypeface(Typeface.DEFAULT_BOLD);
             }
         }
         vwpagersales.setOnPageChangeListener(this);
@@ -737,7 +738,6 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     public void onPageSelected(int position) {
 
         ImageView img = (ImageView) lldots.getChildAt(currentPage);
-
         img.setImageResource(R.mipmap.dots_unselected);
         currentPage = position;
         ImageView img1 = (ImageView) lldots.getChildAt(currentPage);

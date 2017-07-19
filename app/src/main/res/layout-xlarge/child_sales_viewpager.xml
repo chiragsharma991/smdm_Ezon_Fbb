@@ -194,7 +194,6 @@
                 android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
 
-
             <TextView
                 android:id="@+id/txtNetSalesUVal"
                 android:layout_width="match_parent"
@@ -206,7 +205,6 @@
                 android:textColor="@color/ezfbb_black"
                 android:textSize="17sp" />
 
-
             <ImageView
                 android:id="@+id/txtNetSalesUImage"
                 android:layout_width="19dp"
@@ -216,7 +214,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_toLeftOf="@+id/txtNetSalesU"
                 android:background="@android:color/holo_green_dark" />
-
 
             <RelativeLayout
                 android:id="@+id/relNetSalesUNmPrec"
@@ -249,7 +246,6 @@
                     android:textColor="@color/ezfbb_black"
                     android:textSize="13sp" />
 
-
             </RelativeLayout>
         </RelativeLayout>
 
@@ -274,7 +270,6 @@
                 android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
 
-
             <TextView
                 android:id="@+id/txtSoHUVal"
                 android:layout_width="match_parent"
@@ -286,8 +281,6 @@
                 android:textColor="@color/ezfbb_black"
                 android:textSize="17sp" />
 
-
         </RelativeLayout>
-
     </LinearLayout>
 </LinearLayout>

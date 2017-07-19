@@ -13,7 +13,7 @@
             android:id="@+id/txtPvAValue"
             android:layout_toLeftOf="@+id/rel"
             android:gravity="center"
-            android:text=""
+            android:text="fdfdfdfdfd"
             android:padding="5dp"
             android:singleLine="true"
             android:textSize="@dimen/normallayout_textsize"

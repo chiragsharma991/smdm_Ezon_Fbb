@@ -265,7 +265,7 @@
                         android:id="@+id/ez_linear_header"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/smdm_divider_Black_light">
+                        android:background="@color/ezfb_activity_background">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -295,7 +295,7 @@
                                 android:layout_toRightOf="@+id/rel_ez_prev"
                                 android:gravity="center"
                                 android:text="Department"
-                                android:textColor="@color/bg_store_code_text"
+                                android:textColor="@color/ezfbb_black"
                                 android:textSize="@dimen/normallayout_textsize"
                                 android:textStyle="normal" />
 
@@ -321,8 +321,8 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:gravity="center_vertical|center"
-                            android:text="PvA Sales%"
-                            android:textColor="@color/bg_store_code_text"
+                            android:text="Ach%"
+                            android:textColor="@color/ezfbb_black"
                             android:textSize="@dimen/normallayout_textsize"
                             android:textStyle="normal" />
 
@@ -331,7 +331,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/bg_screen_color">
+                      >
 
 
                         <EditText
@@ -358,7 +358,6 @@
                             android:gravity="center"
                             android:textColor="@android:color/black"
                             />
-
 
                         <EditText
                             android:id="@+id/et_ez_pva"

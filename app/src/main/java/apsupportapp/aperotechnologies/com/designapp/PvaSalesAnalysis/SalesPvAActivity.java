@@ -189,7 +189,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 requestSalesViewPagerValueAPI();
                 Handler h = new Handler();
                 h.postDelayed(new Runnable() {
-                    public void run() {
+                    public void run()
+                    {
                         requestSalesListDisplayAPI();
                     }
                 }, 700);

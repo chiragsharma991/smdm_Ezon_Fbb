@@ -65,7 +65,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     private EditText et_ez_search;
     public static ExpandableListView explv_ez_locatn, explv_ez_prod;
     Context context = this;
-    public static ProgressBar ez_filter_progressBar;
+    public static RelativeLayout rel_ez_process_filter;
     private String str_filter_location = "NO", str_filter_prod = "NO";
     static EzoneFilterProductAdapter prod_list_adapter;
     static EzoneFilterLocationAdapter locatn_list_adapter;
@@ -260,7 +260,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         {
             if (loc_listDataHeader.get(0).equals("Region"))
             {
-                ez_filter_progressBar.setVisibility(View.VISIBLE);
+                rel_ez_process_filter.setVisibility(View.VISIBLE);
                 offset = 0;
                 limit = 100;
                 count = 0;
@@ -288,11 +288,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     {
         rel_ez_sfilter_back = (RelativeLayout) findViewById(R.id.rel_ez_sfilter_back);
         rel_ez_sfilter_done = (RelativeLayout) findViewById(R.id.rel_ez_sfilter_done);
-        ez_filter_progressBar = (ProgressBar)findViewById(R.id.ez_filter_progressBar);
-//        lin_ez_locatn = (LinearLayout) findViewById(R.id.lin_filter_locatn);
-//        lin_ez_prod = (LinearLayout) findViewById(R.id.lin_filter_product);
-//        txt_ez_location = (TextView) findViewById(R.id.txt_ez_location);
-//        txt_ez_prod = (TextView) findViewById(R.id.txt_ez_filter_product);
+        rel_ez_process_filter = (RelativeLayout) findViewById(R.id.rel_ez_process_filter);
         et_ez_search = (EditText) findViewById(R.id.et_ez_search);
         et_ez_search.setSingleLine(true);
         explv_ez_locatn = (ExpandableListView) findViewById(R.id.explv_ez_location);
@@ -303,10 +299,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         explv_ez_prod.setTextFilterEnabled(true);
         explv_ez_prod.setDivider(getResources().getDrawable(R.color.grey));
         explv_ez_prod.setDividerHeight(2);
-//        txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
-//        txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
-//        txt_ez_location.setOnClickListener(this);
-//        txt_ez_prod.setOnClickListener(this);
         rel_ez_sfilter_done.setOnClickListener(this);
         rel_ez_sfilter_back.setOnClickListener(this);
     }
@@ -315,22 +307,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStart() {
         super.onStart();
-//        if (location_flag)
-//        {
-//            lin_ez_locatn.setVisibility(View.VISIBLE);
-//        }
-//        else
-//        {
-//            lin_ez_locatn.setVisibility(View.GONE);
-//        }
-//        if (prod_flag)
-//        {
-//            lin_ez_prod.setVisibility(View.VISIBLE);
-//        }
-//        else
-//        {
-//            lin_ez_prod.setVisibility(View.GONE);
-//        }
+
     }
 
     @Override
@@ -590,10 +567,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                      String region = productName1.getString("descEz");
                                      ez_regionList.add(region);
                                  }
-                                 ez_filter_progressBar.setVisibility(View.GONE);
+                                 rel_ez_process_filter.setVisibility(View.GONE);
                                  if (loc_listDataHeader.get(1).equals("Store"))
                                  {
-                                     ez_filter_progressBar.setVisibility(View.VISIBLE);
+                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                      offset = 0;
                                      limit = 100;
                                      count = 0;
@@ -663,10 +640,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     String store = productName1.getString("descEz");
                                     ez_storeList.add(store);
                                 }
-                                ez_filter_progressBar.setVisibility(View.GONE);
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 if (prod_listDataHeader.get(0).equals("Department"))
                                 {
-                                    ez_filter_progressBar.setVisibility(View.VISIBLE);
+                                    rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
                                     count = 0;
@@ -739,9 +716,9 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     String plandept = productName1.getString("planDept");
                                     ez_deptList.add(plandept);
                                 }
-                                ez_filter_progressBar.setVisibility(View.GONE);
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 if (prod_listDataHeader.get(1).equals("Subdept")) {
-                                    ez_filter_progressBar.setVisibility(View.VISIBLE);
+                                    rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset= 0;
                                     limit = 100;
                                     count = 0;
@@ -812,10 +789,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     String planCategory = productName1.getString("planCategory");
                                     ez_categryList.add(planCategory);
                                 }
-                                ez_filter_progressBar.setVisibility(View.GONE);
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 if (prod_listDataHeader.get(2).equals("Class"))
                                 {
-                                    ez_filter_progressBar.setVisibility(View.VISIBLE);
+                                    rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
                                     count = 0;
@@ -889,11 +866,11 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     String planClass = productName1.getString("planClass");
                                     ez_classList.add(planClass);
                                 }
-                                ez_filter_progressBar.setVisibility(View.GONE);
+                                rel_ez_process_filter.setVisibility(View.GONE);
 
                                 if (prod_listDataHeader.get(3).equals("Subclass"))
                                 {
-                                    ez_filter_progressBar.setVisibility(View.VISIBLE);
+                                    rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
                                     count = 0;
@@ -966,10 +943,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     String brandName = productName1.getString("brandName");
                                     ez_brandList.add(brandName);
                                 }
-                                ez_filter_progressBar.setVisibility(View.GONE);
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 if (prod_listDataHeader.get(4).equals("MC"))
                                 {
-                                    ez_filter_progressBar.setVisibility(View.VISIBLE);
+                                    rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
                                     count = 0;
@@ -1045,7 +1022,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //                                txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
 //                                lin_ez_locatn.setVisibility(View.VISIBLE);
 //                                lin_ez_prod.setVisibility(View.VISIBLE);
-                                ez_filter_progressBar.setVisibility(View.GONE);
+                                rel_ez_process_filter.setVisibility(View.GONE);
                             }
                         } catch (Exception e)
                         {

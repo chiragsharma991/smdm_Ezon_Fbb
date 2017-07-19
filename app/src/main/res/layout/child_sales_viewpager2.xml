@@ -45,9 +45,7 @@
                 android:textColor="@color/ezfbb_black"
                 android:textSize="17sp" />
 
-
         </RelativeLayout>
-
 
         <RelativeLayout
             android:id="@+id/git"
@@ -59,7 +57,6 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext3">
 
-
             <TextView
                 android:id="@+id/txtGIT"
                 android:layout_width="match_parent"
@@ -70,9 +67,6 @@
                 android:text="@string/git_u"
                 android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
-
-
-
 
             <TextView
                 android:id="@+id/txtGITVal"
@@ -87,7 +81,6 @@
                  />
 
           </RelativeLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -106,7 +99,6 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext3">
 
-
             <TextView
                 android:id="@+id/txtROS2"
                 android:layout_width="match_parent"
@@ -116,7 +108,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="@string/ros_u"
                 android:textColor="@color/ezfbb_black"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
             <TextView
                 android:id="@+id/txtROSVal2"
@@ -127,10 +119,9 @@
                 android:layout_marginTop="25dp"
                 android:text=""
                 android:textColor="@color/ezfbb_black"
-                android:textSize="17sp"
-               />
-         </RelativeLayout>
+                android:textSize="17sp"/>
 
+         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/fwdwkcover"
@@ -141,7 +132,6 @@
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext3">
-
 
             <TextView
                 android:id="@+id/txtFwdWkCover2"
@@ -154,18 +144,16 @@
                 android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
 
-
              <TextView
-                android:id="@+id/txtFwdWkCoverVal2"
+                 android:id="@+id/txtFwdWkCoverVal2"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:layout_alignParentLeft="true"
                  android:layout_marginLeft="8dp"
                  android:layout_marginTop="25dp"
                  android:text=""
-                android:textColor="@color/ezfbb_black"
-                android:textSize="17sp"
-                />
+                 android:textColor="@color/ezfbb_black"
+                 android:textSize="17sp"/>
 
 
         </RelativeLayout>

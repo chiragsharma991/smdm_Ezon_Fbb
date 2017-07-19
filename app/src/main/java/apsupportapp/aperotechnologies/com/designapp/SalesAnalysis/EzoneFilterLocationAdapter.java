@@ -47,9 +47,8 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.explv_ez_locatn;
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.explv_ez_prod;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.ez_filter_progressBar;
-
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.locatn_list_adapter;
+import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.rel_ez_process_filter;
 
 /**
  * Created by pamrutkar on 08/06/17.
@@ -210,11 +209,11 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                                if (!cb.isChecked()) {
                                                    salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(true);
-                                                   ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.VISIBLE);
+                                                   ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.VISIBLE);
                                                    if (groupPosition == 1) {
 //                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
 //                                                       cb.setChecked(true);
-                                                       ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.GONE);
+                                                       ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
 
                                                    }
                                                    BuildUP(groupPosition);
@@ -345,7 +344,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(mContext, "no data found", Toast.LENGTH_LONG).show();
-                                ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.GONE);
+                                ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
 
                             } else {
                                 for (int i = mGroupPosition + 1 ; i < mListDataChild.size(); i++) {
@@ -374,13 +373,13 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                      notifyDataSetChanged();
                                     mListDataChild.put(mListDataGroup.get(1), drillDownList);
                                     ezoneSalesFilter.explv_ez_locatn.expandGroup(1);
-                                    ezoneSalesFilter.ez_filter_progressBar.setVisibility(View .GONE);
+                                    ezoneSalesFilter.rel_ez_process_filter.setVisibility(View .GONE);
                                 }
                             }
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.GONE);
+                            ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
                             Toast.makeText(mContext, "data failed..." + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -390,7 +389,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
-                        ez_filter_progressBar.setVisibility(View.GONE);
+                        rel_ez_process_filter.setVisibility(View.GONE);
                         Toast.makeText(mContext, "server not found...", Toast.LENGTH_SHORT).show();
                     }
                 }

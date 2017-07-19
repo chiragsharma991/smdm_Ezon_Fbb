@@ -46,7 +46,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.explv_ez_prod;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.ez_filter_progressBar;
+import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.rel_ez_process_filter;
 
 
 public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
@@ -211,12 +211,12 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                                if (!cb.isChecked()) {
                                                    salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(true);
-                                                   ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.VISIBLE);
+                                                   ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.VISIBLE);
                                                    if (groupPosition == 4)
                                                    {
                                                        salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                        cb.setChecked(true);
-                                                       ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.GONE);
+                                                       ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
                                                    }
                                                    Log.e("salesListchecked :",""+salesList);
                                                    BuildUP(ez_level);
@@ -599,7 +599,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(mContext, "no data found", Toast.LENGTH_LONG).show();
-                                ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.GONE);
+                                ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
 
                             }
                             else
@@ -657,12 +657,12 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                     }
                                 }
                                 notifyDataSetChanged();
-                                ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.GONE);
+                                ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
                             }
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            ezoneSalesFilter.ez_filter_progressBar.setVisibility(View.GONE);
+                            ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
                             Toast.makeText(mContext, "data failed..."+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -672,7 +672,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
-                        ez_filter_progressBar.setVisibility(View.GONE);
+                        rel_ez_process_filter.setVisibility(View.GONE);
                         Toast.makeText(mContext, "server not found...", Toast.LENGTH_SHORT).show();
                     }
                 }

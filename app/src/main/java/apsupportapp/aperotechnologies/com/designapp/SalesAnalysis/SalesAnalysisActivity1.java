@@ -748,6 +748,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             case "YTD":
                 ez_tabView.getTabAt(3).select();
                 break;
+
         }
     }
 
@@ -4027,7 +4028,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
 
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
 
                                     ez_sales_header_model = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
                                     ez_sales_header_array.add(ez_sales_header_model);
@@ -4080,7 +4082,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
 
         selectedsegValue = "";
         level = 0;
@@ -4099,140 +4102,391 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     public void onTabSelected(TabLayout.Tab tab) {
         Log.e("TAG", "onTabSelected: " + tab.getPosition() + filter_toggleClick);
         int checkedId = tab.getPosition();
-        if (filter_toggleClick) {
-            switch (checkedId) {
-                case 0:
-                    if (selectedsegValue.equals("WTD"))
-                        break;
-                    selectedsegValue = "WTD";
-                    if (lldots != null) {
-                        lldots.removeAllViews();
-                    }
-                    llhierarchy.setVisibility(View.GONE);
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        progressBar1.setVisibility(View.GONE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        val = "";
-                        Log.e("onTabSelected: WTD", "" + selectedsegValue);
-                        if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestSalesListDisplayAPI();
-                        } else {
-                            String str = getIntent().getStringExtra("selectedDept");
-                            requestSalesSelectedFilterVal(str);
+        if(geoLeveLDesc.equals("E ZONE"))
+        {
+//            if (!ez_filter_toggleClick) {
+                switch (checkedId)
+                {
+                    case 0:
+
+                        if (ez_segment_val.equals("LD"))
+                            break;
+                        ez_segment_val = "LD";
+                        if (ez_linear_dots != null) {
+                            ez_linear_dots.removeAllViews();
                         }
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-
-                case 1:
-                    Log.e("LW Selected", "");
-                    if (selectedsegValue.equals("LW"))
-                        break;
-                    selectedsegValue = "LW";
-                    if (lldots != null) {
-                        lldots.removeAllViews();
-                    }
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    llhierarchy.setVisibility(View.GONE);
-                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        progressBar1.setVisibility(View.GONE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        val = "";
-                        Log.e("onTabSelected: LW", "" + selectedsegValue);
-
-                        if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestSalesListDisplayAPI();
-
+                        ez_linear_hierarchy.setVisibility(View.GONE);
+                        ez_currentVmPos = ez_viewpager.getCurrentItem();
+                        ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            // Reusable_Functions.hDialog();
+                            // Reusable_Functions.sDialog(context, "Loading data...");
+                            Reusable_Functions.progressDialog = new ProgressDialog(context);
+                            Reusable_Functions.progressDialog.setCancelable(false);
+                            if (!Reusable_Functions.progressDialog.isShowing()) {
+                                Reusable_Functions.progressDialog.show();
+                            }
+                            Reusable_Functions.progressDialog.setMessage("Loading data...");
+                            ez_progessBar.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            val_hierarchy = "";
+                            if (filterSelectedString == null) {
+                                requestEzoneSalesDetailAPI();
+                            } else if (filterSelectedString != null) {
+                                if (filterSelectedString.contains("region") || filterSelectedString.contains("store")) {
+                                    filter_level = 9;
+                                } else {
+                                    if (filterSelectedString.contains("department")) {
+                                        filter_level = 2;
+                                    }
+                                    if (filterSelectedString.contains("category")) {
+                                        filter_level = 3;
+                                    }
+                                    if (filterSelectedString.contains("class")) {
+                                        filter_level = 4;
+                                    }
+                                    if (filterSelectedString.contains("brand")) {
+                                        filter_level = 5;
+                                    }
+                                    if (filterSelectedString.contains("brandclass")) {
+                                        filter_level = 5;
+                                    }
+                                }
+                                requestEzoneFilterSelectedVal(filterSelectedString);
+                            }
                         } else {
-                            String str = getIntent().getStringExtra("selectedDept");
-                            requestSalesSelectedFilterVal(str);
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
-
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-
-                case 2:
-                    if (selectedsegValue.equals("L4W"))
                         break;
-                    selectedsegValue = "L4W";
-                    if (lldots != null) {
-                        lldots.removeAllViews();
-                    }
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    llhierarchy.setVisibility(View.GONE);
-                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        progressBar1.setVisibility(View.GONE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        val = "";
-                        if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestSalesListDisplayAPI();
-                        } else {
-                            String str = getIntent().getStringExtra("selectedDept");
-                            requestSalesSelectedFilterVal(str);
-                        }
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
 
-                case 3:
-                    if (selectedsegValue.equals("STD"))
+                    case 1:
+                        if (ez_segment_val.equals("WTD"))
+                            break;
+                        ez_segment_val = "WTD";
+                        if (ez_linear_dots != null) {
+                            ez_linear_dots.removeAllViews();
+                        }
+                        ez_linear_hierarchy.setVisibility(View.GONE);
+                        ez_currentVmPos = ez_viewpager.getCurrentItem();
+                        ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            // Reusable_Functions.hDialog();
+                            Reusable_Functions.progressDialog = new ProgressDialog(context);
+                            Reusable_Functions.progressDialog.setCancelable(false);
+
+                            if (!Reusable_Functions.progressDialog.isShowing()) {
+                                Reusable_Functions.progressDialog.show();
+                            }
+                            Reusable_Functions.progressDialog.setMessage("Loading data...");
+                            // Reusable_Functions.sDialog(context, "Loading data...");
+                            ez_progessBar.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            val_hierarchy = "";
+                            if (filterSelectedString == null) {
+                                requestEzoneSalesDetailAPI();
+                            } else if (filterSelectedString != null) {
+                                if (filterSelectedString.contains("region") || filterSelectedString.contains("store")) {
+                                    filter_level = 9;
+                                } else {
+                                    if (filterSelectedString.contains("department")) {
+                                        filter_level = 2;
+                                    }
+                                    if (filterSelectedString.contains("category")) {
+                                        filter_level = 3;
+                                    }
+                                    if (filterSelectedString.contains("class")) {
+                                        filter_level = 4;
+                                    }
+                                    if (filterSelectedString.contains("brand")) {
+                                        filter_level = 5;
+                                    }
+                                    if (filterSelectedString.contains("brandclass")) {
+                                        filter_level = 5;
+                                    }
+                                }
+//                            Log.e("welcome----","=======");
+//                            ez_filter_toggleClick = true;
+//                            retainEzoneSegVal();
+                                requestEzoneFilterSelectedVal(filterSelectedString);
+                            }
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
                         break;
-                    selectedsegValue = "STD";
-                    if (lldots != null) {
-                        lldots.removeAllViews();
-                    }
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    llhierarchy.setVisibility(View.GONE);
-                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
 
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        progressBar1.setVisibility(View.GONE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        val = "";
-                        if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestSalesListDisplayAPI();
-                        } else {
-                            String str = getIntent().getStringExtra("selectedDept");
-                            requestSalesSelectedFilterVal(str);
+                    case 2:
+                        if (ez_segment_val.equals("MTD"))
+                            break;
+                        ez_segment_val = "MTD";
+                        if (ez_linear_dots != null) {
+                            ez_linear_dots.removeAllViews();
                         }
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            filter_toggleClick = false;
+                        ez_linear_hierarchy.setVisibility(View.GONE);
+                        ez_currentVmPos = ez_viewpager.getCurrentItem();
+                        ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            //  Reusable_Functions.hDialog();
+                            Reusable_Functions.progressDialog = new ProgressDialog(context);
+                            Reusable_Functions.progressDialog.setCancelable(false);
+
+                            if (!Reusable_Functions.progressDialog.isShowing()) {
+                                Reusable_Functions.progressDialog.show();
+                            }
+                            Reusable_Functions.progressDialog.setMessage("Loading data...");
+                            // Reusable_Functions.sDialog(context, "Loading data...");
+                            ez_progessBar.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            val_hierarchy = "";
+                            if (filterSelectedString == null) {
+//                            ez_filter_toggleClick = false;
+//                            retainEzoneSegVal();
+//                            ezone_level = 1;
+                                requestEzoneSalesDetailAPI();
+                            } else if (filterSelectedString != null)
+                            {
+                                if (filterSelectedString.contains("region") || filterSelectedString.contains("store")) {
+                                    filter_level = 9;
+                                } else {
+                                    if (filterSelectedString.contains("department")) {
+                                        filter_level = 2;
+                                    }
+                                    if (filterSelectedString.contains("category")) {
+                                        filter_level = 3;
+                                    }
+                                    if (filterSelectedString.contains("class")) {
+                                        filter_level = 4;
+                                    }
+                                    if (filterSelectedString.contains("brand")) {
+                                        filter_level = 5;
+                                    }
+                                    if (filterSelectedString.contains("brandclass")) {
+                                        filter_level = 5;
+                                    }
+                                }
+                                requestEzoneFilterSelectedVal(filterSelectedString);
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+                    case 3:
+                        if (ez_segment_val.equals("YTD"))
+                            break;
+                        ez_segment_val = "YTD";
+                        if (ez_linear_dots != null)
+                        {
+                            ez_linear_dots.removeAllViews();
+                        }
+                        ez_linear_hierarchy.setVisibility(View.GONE);
+                        ez_currentVmPos = ez_viewpager.getCurrentItem();
+                        ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            // Reusable_Functions.hDialog();
+                            Reusable_Functions.progressDialog = new ProgressDialog(context);
+                            Reusable_Functions.progressDialog.setCancelable(false);
+
+                            if (!Reusable_Functions.progressDialog.isShowing()) {
+                                Reusable_Functions.progressDialog.show();
+                            }
+                            Reusable_Functions.progressDialog.setMessage("Loading data...");
+                            // Reusable_Functions.sDialog(context, "Loading data...");
+                            ez_progessBar.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            val_hierarchy = "";
+                            if (filterSelectedString == null) {
+//                            ez_filter_toggleClick = false;
+//                            retainEzoneSegVal();
+//                            ezone_level = 1;
+                                requestEzoneSalesDetailAPI();
+                            } else if (filterSelectedString != null) {
+                                if (filterSelectedString.contains("region") || filterSelectedString.contains("store")) {
+                                    filter_level = 9;
+                                } else {
+                                    if (filterSelectedString.contains("department")) {
+                                        filter_level = 2;
+                                    }
+                                    if (filterSelectedString.contains("category")) {
+                                        filter_level = 3;
+                                    }
+                                    if (filterSelectedString.contains("class")) {
+                                        filter_level = 4;
+                                    }
+                                    if (filterSelectedString.contains("brand")) {
+                                        filter_level = 5;
+                                    }
+                                    if (filterSelectedString.contains("brandclass")) {
+                                        filter_level = 5;
+                                    }
+                                }
+                                requestEzoneFilterSelectedVal(filterSelectedString);
+                            }
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                }
+//            } else {
+//                ez_filter_toggleClick = false;
+//            }
         }
+        else {
+          //  if (!filter_toggleClick) {
+                switch (checkedId) {
+                    case 0:
+                        if (selectedsegValue.equals("WTD"))
+                            break;
+                        selectedsegValue = "WTD";
+                        if (lldots != null) {
+                            lldots.removeAllViews();
+                        }
+                        llhierarchy.setVisibility(View.GONE);
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            progressBar1.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            val = "";
+                            Log.e("onTabSelected: WTD", "" + selectedsegValue);
+                            if (getIntent().getStringExtra("selectedDept") == null) {
+                                requestSalesListDisplayAPI();
+                            } else {
+                                String str = getIntent().getStringExtra("selectedDept");
+                                requestSalesSelectedFilterVal(str);
+                            }
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+                    case 1:
+                        Log.e("LW Selected", "");
+                        if (selectedsegValue.equals("LW"))
+                            break;
+                        selectedsegValue = "LW";
+                        if (lldots != null) {
+                            lldots.removeAllViews();
+                        }
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        llhierarchy.setVisibility(View.GONE);
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                        if (Reusable_Functions.chkStatus(context))
+                        {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            progressBar1.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            val = "";
+                            Log.e("onTabSelected: LW", "" + selectedsegValue);
+
+                            if (getIntent().getStringExtra("selectedDept") == null)
+                            {
+                                requestSalesListDisplayAPI();
+                            }
+                            else
+                            {
+                                String str = getIntent().getStringExtra("selectedDept");
+                                requestSalesSelectedFilterVal(str);
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+                    case 2:
+                        if (selectedsegValue.equals("L4W"))
+                            break;
+                        selectedsegValue = "L4W";
+                        if (lldots != null) {
+                            lldots.removeAllViews();
+                        }
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        llhierarchy.setVisibility(View.GONE);
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            progressBar1.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            val = "";
+                            if (getIntent().getStringExtra("selectedDept") == null) {
+                                requestSalesListDisplayAPI();
+                            } else {
+                                String str = getIntent().getStringExtra("selectedDept");
+                                requestSalesSelectedFilterVal(str);
+                            }
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+                    case 3:
+                        if (selectedsegValue.equals("STD"))
+                            break;
+                        selectedsegValue = "STD";
+                        if (lldots != null) {
+                            lldots.removeAllViews();
+                        }
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        llhierarchy.setVisibility(View.GONE);
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            progressBar1.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            val = "";
+                            if (getIntent().getStringExtra("selectedDept") == null) {
+                                requestSalesListDisplayAPI();
+                            } else {
+                                String str = getIntent().getStringExtra("selectedDept");
+                                requestSalesSelectedFilterVal(str);
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+//            } else {
+//                filter_toggleClick = false;
+//            }
+        }
+
 
     }
 

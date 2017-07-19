@@ -233,6 +233,9 @@
                 segmentedgroup:tabBackground="@drawable/tab_selection"
                 segmentedgroup:tabGravity="center"
                 segmentedgroup:tabIndicatorHeight="0dp"
+
+
+
                 >
 
             </android.support.design.widget.TabLayout>
@@ -352,47 +355,51 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        >
-
+                       >
 
                         <EditText
                             android:id="@+id/etListText"
-                            android:layout_width="210dp"
+                            android:layout_width="270dp"
                             android:layout_height="30dp"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="200dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="190dp"
                             android:background="@drawable/edttext_border"
                             android:editable="false"
                             android:textColor="@android:color/black"
-                            />
+                            android:textSize="16sp" />
 
                         <EditText
                             android:id="@+id/etPvAValue"
-                            android:layout_width="100dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_width="150dp"
                             android:layout_height="30dp"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="310dp"
+                            android:layout_marginLeft="270dp"
                             android:layout_toLeftOf="@+id/txtVal"
                             android:background="@drawable/edttext_border"
                             android:editable="false"
                             android:gravity="center"
                             android:textColor="@android:color/black"
-                            />
+                            android:textSize="16sp" />
 
 
                         <EditText
                             android:id="@+id/txtVal"
-                            android:layout_width="100dp"
+                            android:layout_width="140dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
                             android:background="@drawable/edttext_border"
                             android:editable="false"
                             android:textColor="@android:color/black"
-                            />
+                            android:textSize="16sp" />
 
                     </RelativeLayout>
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -401,6 +408,13 @@
                     android:layout_marginTop="45dp"
                     android:orientation="vertical">
 
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dip"
+
+                        />
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/listView_SalesAnalysis"
                         android:layout_width="match_parent"
@@ -408,13 +422,6 @@
                         android:divider="@null"
                         android:dividerHeight="0dp"
                         android:smoothScrollbar="true" />
-
-                    <View
-                        android:id="@+id/view3"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dip"
-
-                        />
 
 
                 </LinearLayout>
