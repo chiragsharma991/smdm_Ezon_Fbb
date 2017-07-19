@@ -2,110 +2,135 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_top_full_cut"
     android:layout_width="match_parent"
-    android:background="@color/bg_screen_color"
+    android:background="@color/ezfb_activity_background"
     android:layout_height="match_parent"
-    tools:context=".TopOptionCutSize.TopFullCut">
+    tools:context=".TopOptionCutSize.TopFullCut"
+    xmlns:app="http://schemas.android.com/apk/res-auto"    android:id="@+id/activity_top_full_cut"
+
+    >
 
 
-    <info.hoang8f.android.segmented.SegmentedGroup
-        android:id="@+id/bestInvent_segmented"
+    <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
+        android:background="@color/ezfb_White"
+        android:id="@+id/tabview"
         android:layout_below="@+id/linearToolbar"
-        android:layout_marginTop="18dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        segmentedgroup:sc_border_width="1dp"
-        segmentedgroup:sc_corner_radius="14dp"
-        segmentedgroup:sc_tint_color="@color/colorPrimary"
+        app:tabIndicatorColor="@color/ezfb_Red"
+        app:tabTextColor="@color/ezfb_Red"
+        app:tabSelectedTextColor="@color/ezfb_Red"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+
+
         >
 
-        <RadioButton
-            style="@style/RadioButton"
-            android:id="@+id/bestInvent_fashion"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="Fashion" />
+    </android.support.design.widget.TabLayout>
 
-        <RadioButton
-            android:id="@+id/bestInvent_core"
-            style="@style/RadioButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="Core" />
+    <!--
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/bestInvent_segmented"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/linearToolbar"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="14dp"
+            segmentedgroup:sc_tint_color="@color/colorPrimary"
+            >
+
+            <RadioButton
+                style="@style/RadioButton"
+                android:id="@+id/bestInvent_fashion"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Fashion" />
+
+            <RadioButton
+                android:id="@+id/bestInvent_core"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Core" />
 
 
 
-    </info.hoang8f.android.segmented.SegmentedGroup>
+        </info.hoang8f.android.segmented.SegmentedGroup>
+    -->
+
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bestInvent_segmented"
+        android:layout_below="@+id/tabview"
         android:id="@+id/switchRelay"
-        android:padding="10dp"
+        android:background="@color/ezfb_White"
+        android:padding="10dp">
 
-
-        >
 
         <Switch
+            android:id="@+id/bestNworstswitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bestNworstswitch"
             android:layout_alignParentRight="true"
-            android:background="@drawable/border3"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/smdm_store_title_large"
-            android:text="Best/Worst"
+            android:textSize="@dimen/smdm_store_title_normal"
+            android:text="Best"
+            android:id="@+id/toggle_txt"
             android:layout_marginRight="5dp"
+            android:textColor="@color/ezfb_black"
             android:layout_toLeftOf="@id/bestNworstswitch"
-            android:layout_alignBaseline="@id/bestNworstswitch"
-
-            />
+            android:layout_alignBaseline="@id/bestNworstswitch"/>
 
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@+id/switchRelay"
+        android:layout_height="@dimen/smdm_divider"
+        android:background="@color/divider_salescard"
+        >
+
+    </View>
+
+
+
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/switchRelay"
+        android:layout_marginTop="1sp"
         >
-
-
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/bestInvent_ListView"
-            android:layout_marginTop="10dp"
-            android:dividerHeight="1dp"
+            android:divider="@null"
 
             >
 
         </ListView>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/smdm_divider"
-            android:background="@color/smdm_divider_Black"
-            android:layout_marginTop="9dp"
-            >
 
-        </View>
 
 
 
@@ -116,6 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearToolbar"
+        android:background="@color/ezfb_White"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
@@ -124,7 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_header_height"
             android:layout_alignParentTop="true"
-            android:background="?attr/colorPrimary"
+            android:background="@color/ezfb_White"
             android:contentInsetStart="0dp"
             android:contentInsetLeft="0dp"
             android:contentInsetRight="0dp"
@@ -141,7 +167,7 @@
                 <RelativeLayout
                     android:layout_marginLeft="0dp"
                     android:id="@+id/bestInvent_BtnBack"
-                    android:background="@drawable/button_click_effect"
+                    android:background="@drawable/button_click"
                     android:layout_width="@dimen/header_clickable_width"
                     android:layout_height="@dimen/header_clickable_height"
                     android:layout_alignParentLeft="true"
@@ -149,10 +175,12 @@
 
                     <Button
                         android:clickable="false"
-                        android:background="@mipmap/common_back_icon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerInParent="true"/>
+                        android:background="@mipmap/ic_arrow_back_black"
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/button" />
 
                 </RelativeLayout>
 
@@ -160,27 +188,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Best Performers"
-                    android:textSize="@dimen/smdm_header_title_large"
+                    android:textSize="@dimen/smdm_header_title_normal"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/bestInvent_BtnBack"
                     android:layout_marginLeft="20dp"
-                    android:textColor="@color/divider_salescard1"
-                    android:id="@+id/toolbar_title"
-                    />
+                    android:textColor="@color/ezfb_black"
+                    android:id="@+id/toolbar_title" />
 
                 <RelativeLayout
                     android:layout_alignParentRight="true"
                     android:id="@+id/bestInvent_imgfilter"
-                    android:background="@drawable/button_click_effect"
+                    android:background="@drawable/button_click"
                     android:layout_width="@dimen/header_clickable_width"
                     android:layout_height="@dimen/header_clickable_height"
                     android:layout_centerVertical="true">
 
                     <Button
                         android:clickable="false"
-                        android:background="@mipmap/filter_icon_nav"
-                        android:layout_width="19dp"
-                        android:layout_height="19dp"
+                        android:background="@mipmap/iconfilter"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>
@@ -190,16 +217,16 @@
                     android:layout_marginRight="0dp"
                     android:visibility="visible"
                     android:id="@+id/bst_sortInventory"
-                    android:background="@drawable/button_click_effect"
+                    android:background="@drawable/button_click"
                     android:layout_width="@dimen/header_clickable_width"
                     android:layout_height="@dimen/header_clickable_height"
                     android:layout_centerVertical="true">
 
                     <Button
                         android:clickable="false"
-                        android:background="@mipmap/sort_icon"
-                        android:layout_width="19dp"
-                        android:layout_height="19dp"
+                        android:background="@mipmap/iconsort"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>
@@ -214,8 +241,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp"
-            >
+            android:layout_marginTop="8dp">
 
 
             <TextView
@@ -223,8 +249,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/store"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/smdm_store_title_large"
+                android:textColor="@color/ezfb_black"
+                android:textSize="@dimen/smdm_store_title_normal"
                 />
 
             <TextView
@@ -232,9 +258,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
+                android:textStyle="bold"
                 android:layout_toRightOf="@+id/bestInvent_storeCode"
-                android:textColor="@color/bg_store_code_text"
-                android:textSize="@dimen/smdm_store_title_large"
+                android:textColor="@color/ezfb_black"
+                android:textSize="@dimen/smdm_store_title_normal"
                 />
 
             <TextView
@@ -242,9 +269,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
+                android:textStyle="bold"
                 android:layout_toRightOf="@id/bestInvent_txtStoreCode"
-                android:textColor="@color/bg_store_code_text"
-                android:textSize="@dimen/smdm_store_title_large"
+                android:textColor="@color/ezfb_black"
+                android:textSize="@dimen/smdm_store_title_normal"
                 />
 
             <RelativeLayout
@@ -262,7 +290,7 @@
                     android:layout_width="16dp"
                     android:layout_height="29dp"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/quick_filter"
+                    android:background="@mipmap/quickfilter"
                     android:clickable="false" />
             </RelativeLayout>
 
@@ -273,6 +301,30 @@
     </LinearLayout>
     <include layout="@layout/activity_inventory_quickfilter_child"/>
     <include layout="@layout/activity_popup_inventory"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/process_filter"
+        android:visibility="gone"
+        >
+
+        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"
+            android:background="#0000"
+            android:keepScreenOn="true"
+            android:theme="@style/ProgressBar_black"
+            >
+
+        </ProgressBar>
+
+
+    </RelativeLayout>
+
 
 
 </RelativeLayout>

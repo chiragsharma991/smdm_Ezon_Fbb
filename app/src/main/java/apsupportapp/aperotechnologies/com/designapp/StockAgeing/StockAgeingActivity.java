@@ -118,9 +118,12 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             top = 10;
             if (getIntent().getStringExtra("selectedDept") == null) {
                 from_filter = false;
+                toggleClick=false;
+
             } else if (getIntent().getStringExtra("selectedDept") != null) {
                 selectedString = getIntent().getStringExtra("selectedDept");
                 from_filter = true;
+                toggleClick=true;
             }
             RetainFromMain_filter();
             requestStockAgeingApi(selectedString);
@@ -404,6 +407,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 quickFilterPopup.setVisibility(View.GONE);
                 break;
             case R.id.qfDoneLayout:
+                from_filter=false;
 
                 if (Reusable_Functions.chkStatus(context)) {
                     if (checkCurrent.isChecked()) {
@@ -631,11 +635,12 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        Log.e("TAG", "onTabSelected: "+ Tabview.getSelectedTabPosition()+"and toggle select"+toggleClick);
+
         int checkedId= Tabview.getSelectedTabPosition();
+        Log.e("TAG", "onTabSelected: " );
 
-     //   if (toggleClick == false) {
-
+        if (toggleClick == false) {  // toggleClick is use when you retain tab button that time it will call .
+            from_filter=false;
             switch (checkedId) {
                 case 1 :   //core selection
                         limit = 10;
@@ -680,13 +685,13 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             }
         }
 
-/*    else {
+    else {
             toggleClick = false;
 
-        }*/
+        }
 
 
-    //}
+    }
 
     @Override
     public void onTabUnselected(TabLayout.Tab tab) {

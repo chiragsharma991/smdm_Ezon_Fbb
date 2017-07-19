@@ -5,6 +5,7 @@ package apsupportapp.aperotechnologies.com.designapp.FreshnessIndex;
  */
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -119,7 +120,6 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
 
         if (viewHolder instanceof FreshnessHolder && ! TAG.equals("FreshnessIndex_Ez_Activity")) {
 
-            Log.e(TAG, "onBindViewHolder: FreshnessIndex" );
             if (position < freshnessIndexDetailsArrayList.size()) {
                 FreshnessIndexDetails freshnessIndexDetails = freshnessIndexDetailsArrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
@@ -170,7 +170,6 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
         {
             if (position < freshnessIndexDetails_ez_arrayList.size()) {
 
-                Log.e(TAG, "onBindViewHolder: FreshnessEZONE" );
 
                 mpm_model model = freshnessIndexDetails_ez_arrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
@@ -184,6 +183,8 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
             }
 
         }
+
+
 
     private class FreshnessHolder extends RecyclerView.ViewHolder {
         TextView txtfindexClass, txtfindexSOH, txtfindexSOH_U, txtfindexGIT;

@@ -21,6 +21,7 @@
             android:layout_alignParentRight="true"
             android:visibility="visible">
 
+<!--
             <RelativeLayout
                 android:id="@+id/relLayoutFilter"
                 android:layout_width="match_parent"
@@ -58,6 +59,7 @@
                 </RelativeLayout>
 
             </RelativeLayout>
+-->
 
             <!--main pop up border-->
 
@@ -86,7 +88,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Time"
-                        android:textColor="@color/smdm_quickfiltertxt_color"
+                        android:textColor="@color/ezfb_black"
+                        android:textStyle="bold"
                         android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                         />
 
@@ -98,7 +101,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:background="@color/smdm_divider_Black" />
+                    android:background="@color/ezfb_black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -117,7 +120,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/smdm_default_color"
+                            android:textColor="@color/ezfb_black"
                             android:text="WTD"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />
@@ -137,7 +140,7 @@
                             android:id="@+id/checkWTD"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="@color/colorPrimary"
+                            android:buttonTint="@color/ezfb_Red"
                             android:focusable="true"
                             android:checked="true"
 
@@ -166,7 +169,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/smdm_default_color"
+                            android:textColor="@color/ezfb_black"
                             android:text="L4W"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />
@@ -185,7 +188,7 @@
                             android:id="@+id/checkL4W"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="@color/colorPrimary"
+                            android:buttonTint="@color/ezfb_Red"
                             android:focusable="true" />
 
                     </LinearLayout>
@@ -211,7 +214,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/smdm_default_color"
+                            android:textColor="@color/ezfb_black"
                             android:text="YTD"
                             android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                             />
@@ -230,7 +233,7 @@
                             android:id="@+id/checkSTD"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="@color/colorPrimary"
+                            android:buttonTint="@color/ezfb_Red"
                             android:focusable="true"
                             />
 
@@ -251,7 +254,7 @@
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:layout_marginBottom="-5dp"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/ezfb_Red"
                         android:clickable="false"
                         android:text="Done"
                         android:textColor="@color/divider_salescard1"

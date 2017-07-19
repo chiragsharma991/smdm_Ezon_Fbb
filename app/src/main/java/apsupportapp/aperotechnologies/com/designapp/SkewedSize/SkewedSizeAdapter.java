@@ -134,7 +134,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.skewedsize_child, null);
             holder.skewed_SOHU = (TextView) convertView.findViewById(R.id.skewed_SOHU);
             holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.progressPicaso);
-            holder.ProgressPicaso.setVisibility(View.VISIBLE);
+           // holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.skewed_fwc = (TextView) convertView.findViewById(R.id.skewed_fwc);
             holder.skewed_option = (TextView) convertView.findViewById(R.id.skewed_option);
             holder.skewed_image_child = (ImageView) convertView.findViewById(R.id.skewed_image_child);
@@ -145,7 +145,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
 
         } else {
             holder = (Holder) convertView.getTag();
-            holder.ProgressPicaso.setVisibility(View.VISIBLE);
+           // holder.ProgressPicaso.setVisibility(View.VISIBLE);
 
 
         }
@@ -160,14 +160,20 @@ public class SkewedSizeAdapter extends BaseAdapter {
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
-                    Log.e("select item", arrayList.get(position).getOption());
                     requestOptionDetailsAPI(arrayList.get(position).getOption());
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
             }
         });
-        holder.skewed_SOHU.setText(arrayList.get(position).getStkOnhandQtyTotal());
+       // int a=String.parseInt(arrayList.get(position).getStkOnhandQtyTotal());
+        try {
+            Double SOH = Double.parseDouble(arrayList.get(position).getStkOnhandQtyTotal().toString());
+            int value=SOH.intValue();
+            holder.skewed_SOHU.setText(""+value);
+        } catch(NumberFormatException e) {
+            Log.e("TAG","Could not parse " + e);
+        }
         int totalSOH=calculation(arrayList.get(position).getStkOnhandQty());
         product=new ArrayList<String>();
         product.clear();
@@ -180,18 +186,22 @@ public class SkewedSizeAdapter extends BaseAdapter {
         createSOH();
         if(!arrayList.get(position).getProdImageURL().equals("")) {
 
+             holder.ProgressPicaso.setVisibility(View.VISIBLE);
+
             Glide.with(this.context)
                     .load(arrayList.get(position).getProdImageURL())
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                             holder.ProgressPicaso.setVisibility(View.GONE);
+
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                             holder.ProgressPicaso.setVisibility(View.GONE);
+
                             return false;
                         }
                     })
@@ -315,10 +325,11 @@ public class SkewedSizeAdapter extends BaseAdapter {
             }else
             {
                 mType.setBackgroundResource(R.drawable.cell_shape);
-                mType.setTextColor(Color.parseColor("#757575"));
+                mType.setTextColor(Color.parseColor("#000000"));
             }
             mType.setGravity(Gravity.CENTER);
             mType.setText(""+items.get(i));
+            mType.setTypeface(null, Typeface.BOLD);
             holder.SOH.addView(mType);
 
         }
@@ -353,11 +364,11 @@ public class SkewedSizeAdapter extends BaseAdapter {
             }else
             {
                 mType.setBackgroundResource(R.drawable.cell_shape);
-                mType.setTextColor(Color.parseColor("#404040"));
+                mType.setTextColor(Color.parseColor("#000000"));
             }
             mType.setGravity(Gravity.CENTER);
             mType.setText(""+product.get(i));
-            mType.setTypeface(null, Typeface.BOLD);
+          //  mType.setTypeface(null, Typeface.BOLD);
 
             holder.ProductAttribute.addView(mType);
         }

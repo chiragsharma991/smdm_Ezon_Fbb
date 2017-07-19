@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_header_height"
         android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
+        android:background="@color/ezfb_White"
         android:contentInsetStart="0dp"
         android:contentInsetLeft="0dp"
         android:contentInsetRight="0dp"
@@ -135,13 +135,13 @@
         >
 
         <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:padding="10dp"
-                     android:id="@+id/progressBar"
-                     android:layout_centerInParent="true"
-                     android:background="#0000"
-                     android:keepScreenOn="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"
+            android:background="#0000"
+            android:keepScreenOn="true"
             >
 
         </ProgressBar>
