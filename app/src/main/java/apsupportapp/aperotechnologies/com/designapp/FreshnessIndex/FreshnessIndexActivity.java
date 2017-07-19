@@ -456,7 +456,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         String fIdetails = "";
         fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e(TAG, "URL: "+ fIdetails);
+        Log.e(TAG, "requestFreshnessIndexDetails: "+ fIdetails);
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -521,7 +521,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private void request_FreshnessIndex_CategoryList(final String deptName) {
 
         String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e(TAG, "URL: "+ freshnessindex_category_listurl);
+        Log.e(TAG, "request_FreshnessIndex_CategoryList: "+ freshnessindex_category_listurl);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
                 new Response.Listener<JSONArray>() {
@@ -617,7 +617,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         String freshnessIndex_planclass_listurl = null;
         freshnessIndex_planclass_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e(TAG, "URL: "+ freshnessIndex_planclass_listurl);
+        Log.e(TAG, "request_FreshnessIndex_PlanClassList: "+ freshnessIndex_planclass_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -706,7 +706,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private void request_FreshnessIndex_BrandList(String deptName, String category, final String planclass) {
         String freshnessIndex_brand_listurl;
         freshnessIndex_brand_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e(TAG, "URL: "+ freshnessIndex_brand_listurl);
+        Log.e(TAG, "request_FreshnessIndex_BrandList: "+ freshnessIndex_brand_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -795,7 +795,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         String freshnessIndex_brandplan_listurl = null;
         freshnessIndex_brandplan_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e(TAG, "URL: "+ freshnessIndex_brandplan_listurl);
+        Log.e(TAG, "request_FreshnessIndex_BrandPlanList: "+ freshnessIndex_brandplan_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1284,7 +1284,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         if (txtFIndexClass.getText().toString().equals("Department")) {
             level = 1;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
-            Log.e(TAG,"item was"+fIndexFirstVisibleItem);
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
                 if (freshnessIndexDetailsArrayList.get(j).getPlanDept().contentEquals(fIndexFirstVisibleItem)) {
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
@@ -1295,7 +1294,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             level = 2;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
-                Log.e(TAG, "setAdapter: findex position"+fIndexFirstVisibleItem );
                 if (freshnessIndexDetailsArrayList.get(j).getPlanCategory().contentEquals(fIndexFirstVisibleItem)) {
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                     llm.scrollToPosition(firstVisibleItem);
@@ -1344,7 +1342,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     private void requestFreshnessIndexFilterVal(final String selectedString) {
         String freshnessindex_filterVal_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + SalesFilterActivity.level_filter + selectedString + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e(TAG, "URL: "+freshnessindex_filterVal_listurl );
+        Log.e(TAG, "requestFreshnessIndexFilterVal: "+freshnessindex_filterVal_listurl );
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_filterVal_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1353,24 +1351,29 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         if (SalesFilterActivity.level_filter == 2) {
                             txtFIndexClass.setText("Subdept");
                             fromWhere = "Subdept";
+                            level=2;
                             btnFIndexPrev.setVisibility(View.VISIBLE);
 
                         } else if (SalesFilterActivity.level_filter == 3) {
                             txtFIndexClass.setText("Class");
                             fromWhere = "Class";
+                            level=3;
                             btnFIndexPrev.setVisibility(View.VISIBLE);
                         } else if (SalesFilterActivity.level_filter == 4) {
                             txtFIndexClass.setText("Subclass");
                             fromWhere = "Subclass";
+                            level=4;
                             btnFIndexPrev.setVisibility(View.VISIBLE);
                         } else if (SalesFilterActivity.level_filter == 5) {
                             txtFIndexClass.setText("MC");
                             fromWhere = "MC";
+                            level=5;
                             btnFIndexPrev.setVisibility(View.VISIBLE);
                             btnFIndexNext.setVisibility(View.INVISIBLE);
                         } else if (SalesFilterActivity.level_filter == 6) {
                             txtFIndexClass.setText("MC");
                             fromWhere = "MC";
+                            level=6;
                             btnFIndexPrev.setVisibility(View.VISIBLE);
                             btnFIndexNext.setVisibility(View.INVISIBLE);
                         }
@@ -1528,7 +1531,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     }
 
     private void setAdapterForEz(ArrayList<mpm_model> freshnessIndexDetails_Ez_ArrayList) {
-        Log.e(TAG, "setAdapterForEz: log..");
         listViewFIndex.setLayoutManager(new LinearLayoutManager(context));
         listViewFIndex.setLayoutManager(new LinearLayoutManager(
                 listViewFIndex.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
@@ -1542,7 +1544,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         // Retail function when you drill down the list.
         for (int j = 0; j < freshnessIndexDetails_Ez_ArrayList.size(); j++) {
             if (freshnessIndexDetails_Ez_ArrayList.get(j).getLevel().contentEquals(freshnessIndex_ClickedVal)) {
-                Log.e(TAG, "contentEquals: on position " + j);
                 LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                 llm.scrollToPosition(j);
                 requestFIndex_Ez_PieChart(j);
