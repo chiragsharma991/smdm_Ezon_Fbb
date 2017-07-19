@@ -173,7 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:textColor="@color/txt_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="13sp" />
 
             </LinearLayout>
@@ -233,7 +233,7 @@
                                 android:layout_centerInParent="true"
                                 android:text="Department"
                                 android:textStyle="normal"
-                                android:textColor="@color/bg_store_code_text"
+                                android:textColor="@color/ezfb_black"
                                 android:textSize="@dimen/smdm_departmentTitle"
                                 />
 
@@ -267,7 +267,7 @@
                             android:layout_toLeftOf="@+id/txtNetSales"
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/ezfb_black"
                             android:textSize="@dimen/smdm_departmentTitle"
                             />
 
@@ -282,7 +282,7 @@
                             android:layout_toLeftOf="@+id/rel"
                             android:gravity="center_vertical|center"
                             android:text="SOH(U)%"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/ezfb_black"
                             android:textSize="@dimen/smdm_departmentTitle"
                             android:textStyle="normal"/>
 
@@ -295,7 +295,7 @@
                             android:layout_centerVertical="true"
                             android:gravity="center_vertical|center"
                             android:text="GIT(U)"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/ezfb_black"
                             android:textSize="@dimen/smdm_departmentTitle"
                             android:textStyle="normal"/>
 
