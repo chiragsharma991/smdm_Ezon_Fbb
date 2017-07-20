@@ -186,7 +186,7 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(PolicyExchangeRefund);
                     break;
                 case 122:
-                    Intent Price_Promotion = new Intent(context, Price_Promotion.class);
+                    Intent Price_Promotion = new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Price_Promotion.class);
                     startActivity(Price_Promotion);
                     break;
                 case 123:

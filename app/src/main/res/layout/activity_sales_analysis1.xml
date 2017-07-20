@@ -369,7 +369,7 @@
                             android:background="@drawable/edttext_border">
 
                             <EditText
-                                android:background="@android:color/transparent"
+                                android:background="@color/white"
                                 android:id="@+id/etPvAValue"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
