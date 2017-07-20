@@ -11,9 +11,8 @@
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/white"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,10 +90,9 @@
 
             <RelativeLayout
                 android:id="@+id/relStoreLayout"
-                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               >
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/tstoreCode"
@@ -105,7 +103,6 @@
                     android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
-                    android:textStyle="bold"
                     android:id="@+id/txtStoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,10 +110,10 @@
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/normallayout_storesize" />
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:textStyle="bold"
                     android:id="@+id/txtStoreName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -124,7 +121,8 @@
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/normallayout_storesize" />
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -132,18 +130,16 @@
 
 
         <android.support.design.widget.TabLayout
+            android:id="@+id/tabview_sales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tabview_sales"
             app:tabIndicatorColor="@color/ezfb_Red"
-            app:tabTextColor="@color/ezfb_Red"
             app:tabSelectedTextColor="@color/ezfb_Red"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
-        </android.support.design.widget.TabLayout>
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabTextColor="@color/ezfb_Red"></android.support.design.widget.TabLayout>
 
 
         <info.hoang8f.android.segmented.SegmentedGroup
-            android:visibility="gone"
             android:id="@+id/segmentedGrp"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -151,6 +147,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:weightSum="4"
             segmentedgroup:sc_border_width="1dp"
             segmentedgroup:sc_corner_radius="14dp"
@@ -212,52 +209,51 @@
                 </android.support.v4.view.ViewPager>
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/progressBar1"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:padding="10dp"
-                    android:id="@+id/progressBar1"
-                    android:visibility="gone"
+                    android:layout_centerInParent="true"
                     android:background="#0000"
                     android:keepScreenOn="true"
+                    android:padding="10dp"
                     android:theme="@style/ProgressBar"
-                    android:layout_centerInParent="true">
+                    android:visibility="gone">
 
                 </ProgressBar>
 
             </RelativeLayout>
 
             <android.support.design.widget.TabLayout
+                android:id="@+id/dotTab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dotTab"
                 segmentedgroup:tabBackground="@drawable/tab_selection"
                 segmentedgroup:tabGravity="center"
-                segmentedgroup:tabIndicatorHeight="0dp"
-                >
+                segmentedgroup:tabIndicatorHeight="0dp">
 
             </android.support.design.widget.TabLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/lldots"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal"></LinearLayout>
+                android:orientation="horizontal"
+                android:visibility="gone"></LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:id="@+id/llhierarchy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_margin="10dp"
                     android:id="@+id/txthDeptName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:textColor="@color/txt_color"
                     android:textSize="@dimen/normallayout_textsize" />
 
@@ -270,16 +266,16 @@
                 android:layout_below="@+id/llhierarchy"
                 android:layout_marginTop="8dp">
                 <!--<View-->
-                    <!--android:id="@+id/view1"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dip"-->
-                    <!--android:background="@color/smdm_divider_Black" />-->
+                <!--android:id="@+id/view1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dip"-->
+                <!--android:background="@color/smdm_divider_Black" />-->
 
                 <LinearLayout
-                    android:layout_below="@+id/view1"
                     android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
+                    android:layout_below="@+id/view1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -291,8 +287,7 @@
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:layout_alignParentLeft="true"
-                            >
+                            android:layout_alignParentLeft="true">
 
                             <RelativeLayout
                                 android:id="@+id/prevplanclass"
@@ -351,8 +346,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        >
+                        android:layout_height="40dp">
 
 
                         <EditText
@@ -364,34 +358,35 @@
                             android:layout_marginRight="200dp"
                             android:background="@drawable/edttext_border"
                             android:editable="false"
-                            android:textColor="@android:color/black"
-                            />
+                            android:textColor="@android:color/black" />
 
-                        <EditText
-                            android:id="@+id/etPvAValue"
-                            android:layout_width="100dp"
-                            android:layout_height="30dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="310dp"
-                            android:layout_toLeftOf="@+id/txtVal"
-                            android:background="@drawable/edttext_border"
-                            android:editable="false"
-                            android:gravity="center"
-                            android:textColor="@android:color/black"
-                            />
-
-
-                        <EditText
-                            android:id="@+id/txtVal"
-                            android:layout_width="100dp"
+                        <RelativeLayout
+                            android:id="@+id/rel_achVal"
+                            android:layout_width="200dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:background="@drawable/edttext_border"
-                            android:editable="false"
-                            android:textColor="@android:color/black"
-                            />
+                            android:background="@drawable/edttext_border">
 
+                            <EditText
+                                android:background="@android:color/transparent"
+                                android:id="@+id/etPvAValue"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@+id/txtVal"
+                                android:editable="false"
+                                />
+
+
+                            <EditText
+                                android:id="@+id/txtVal"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:editable="false"
+                                android:textColor="@android:color/black" />
+                        </RelativeLayout>
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -427,24 +422,22 @@
     </LinearLayout>
 
 
-
     <RelativeLayout
+        android:id="@+id/style_loadingBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:background="@android:color/transparent"
-        android:id="@+id/style_loadingBar"
+        android:gravity="center"
         android:visibility="gone">
 
         <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:id="@+id/progressBar"
             android:layout_centerInParent="true"
             android:keepScreenOn="true"
-            style="?android:attr/progressBarStyle">
-        </ProgressBar>
+            android:padding="10dp"></ProgressBar>
 
     </RelativeLayout>
 

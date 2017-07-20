@@ -109,7 +109,7 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.BestInvent_Sale = (TextView) convertView.findViewById(R.id.bestInvent_Sale);
             holder.bestInvent_zonalSell = (TextView) convertView.findViewById(R.id.bestInvent_zonalSell);
-            holder.bestInvent_wks = (TextView) convertView.findViewById(R.id.bestInvent_wks);
+         //   holder.bestInvent_wks = (TextView) convertView.findViewById(R.id.bestInvent_wks);
             holder.BestInvent_option = (TextView) convertView.findViewById(R.id.bestInvent_option);
             holder.BestInvent_image_child = (ImageView) convertView.findViewById(R.id.bestInvent_image_child);
             convertView.setTag(holder);

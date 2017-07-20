@@ -6,11 +6,10 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_marginTop="15dp"
         android:id="@+id/RelLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       >
+        android:layout_marginTop="15dp">
 
         <RelativeLayout
             android:id="@+id/sznRelLayout"
@@ -31,10 +30,10 @@
                     android:weightSum="3">
 
                     <TextView
-                        android:gravity="center"
                         android:id="@+id/txt_store_nm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
                         android:layout_weight="1"
                         android:text="Store"
                         android:textColor="@color/ezfbb_black"
@@ -51,13 +50,12 @@
                         android:textSize="13sp" />
 
                     <TextView
-
                         android:id="@+id/txt_national_nm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="40dp"
                         android:layout_weight="1"
-                        android:gravity="center"
+                        android:gravity="right"
                         android:text="National"
                         android:textColor="@color/ezfbb_black"
                         android:textSize="13sp" />
@@ -83,43 +81,66 @@
                     android:orientation="horizontal"
                     android:weightSum="3">
 
-                    <TextView
-                        android:id="@+id/txtStoreVal_PvASales1"
+                    <LinearLayout
+                        android:id="@+id/linear_store"
+                        android:layout_marginRight="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:gravity="left">
 
-                    <TextView
-                        android:layout_marginLeft="10dp"
-                        android:id="@+id/txtZonalSalesVal"
+                        <TextView
+                            android:id="@+id/txtStoreVal_PvASales1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_zonal"
+                        android:layout_marginRight="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:gravity="center">
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/txtZonalSalesVal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_national"
                         android:layout_marginLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginRight="20dp"
-                        android:id="@+id/txtNationalSalesVal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="15"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:gravity="right">
 
+                        <TextView
+                            android:id="@+id/txtNationalSalesVal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
                 </LinearLayout>
-
 
             </RelativeLayout>
 
@@ -377,10 +398,10 @@
 
 
                 <TextView
-                    android:layout_marginTop="1dp"
                     android:id="@+id/txtPvASales_line"
                     android:layout_width="60dp"
                     android:layout_height="1dp"
+                    android:layout_marginTop="1dp"
                     android:layout_weight="0.5"
                     android:gravity="center" />
             </LinearLayout>
@@ -404,10 +425,10 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:layout_marginTop="1dp"
                     android:id="@+id/txtYoYSales_line"
                     android:layout_width="60dp"
                     android:layout_height="1dp"
+                    android:layout_marginTop="1dp"
                     android:layout_weight="0.5"
                     android:gravity="center_horizontal" />
 
@@ -432,10 +453,10 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:layout_marginTop="1dp"
                     android:id="@+id/txtSellThru_line"
                     android:layout_width="75dp"
                     android:layout_height="1dp"
+                    android:layout_marginTop="1dp"
                     android:layout_weight="0.5"
                     android:gravity="center" />
 
@@ -460,10 +481,10 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:layout_marginTop="1dp"
                     android:id="@+id/txtMixSales_line"
                     android:layout_width="70dp"
                     android:layout_height="1dp"
+                    android:layout_marginTop="1dp"
                     android:layout_weight="0.5"
                     android:gravity="center" />
             </LinearLayout>
@@ -488,10 +509,10 @@
 
 
                 <TextView
-                    android:layout_marginTop="1dp"
                     android:id="@+id/txtRank_line"
-                    android:layout_width="60dp"
+                    android:layout_width="68dp"
                     android:layout_height="1dp"
+                    android:layout_marginTop="1dp"
                     android:layout_weight="1"
                     android:gravity="center" />
             </LinearLayout>

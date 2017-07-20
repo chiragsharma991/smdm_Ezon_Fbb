@@ -7,67 +7,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_marginLeft="310dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/txtPvAValue"
-            android:layout_toLeftOf="@+id/rel"
-            android:gravity="center"
-            android:text="fdfdfdfdfd"
-            android:padding="5dp"
-            android:singleLine="true"
-            android:textSize="@dimen/normallayout_textsize"
-            android:textColor="@color/ezfbb_black"
-            android:layout_width="100dp"
-            android:layout_height="30dp" />
 
         <RelativeLayout
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:id="@+id/rel"
-            android:layout_width="100dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/rel_pvaVal"
+            android:layout_width="200dp"
             android:layout_height="30dp">
 
 
-            <RelativeLayout
+            <TextView
+                android:background="@android:color/transparent"
+                android:id="@+id/txtPvAValue"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
-                android:id="@+id/innerrellay"
-                android:layout_marginLeft="5dp"
-                android:layout_width="90dp"
-                android:layout_height="10dp">
+                android:layout_toLeftOf="@+id/rel"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text=""
+                android:textColor="@color/ezfbb_black"
+                android:textSize="@dimen/normallayout_textsize" />
 
-                <TextView
-                    android:id= "@+id/txtPlan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp" />
+            <RelativeLayout
+                android:id="@+id/rel"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
 
-                <TextView
-                    android:id= "@+id/txtAchieve"
-                    android:background="@color/ezfbb_black"
-                    android:layout_width="5dp"
-                    android:layout_height="29dp" />
+
+                <RelativeLayout
+                    android:id="@+id/innerrellay"
+                    android:layout_width="90dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp">
+
+                    <TextView
+                        android:id="@+id/txtPlan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="10dp" />
+
+                    <TextView
+                        android:id="@+id/txtAchieve"
+                        android:layout_width="5dp"
+                        android:layout_height="29dp"
+                        android:background="@color/ezfbb_black" />
+                </RelativeLayout>
             </RelativeLayout>
         </RelativeLayout>
 
         <TextView
-            android:layout_marginRight="210dp"
             android:id="@+id/txtVal"
-            android:text="Name"
+            android:layout_width="210dp"
+            android:layout_height="30dp"
+            android:layout_alignBaseline="@+id/rel_pvaVal"
+            android:layout_alignBottom="@+id/rel_pvaVal"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="200dp"
             android:padding="5dp"
             android:singleLine="true"
-            android:textSize="@dimen/normallayout_textsize"
+            android:text="Name"
             android:textColor="@color/ezfbb_black"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
-            android:layout_alignBaseline="@+id/txtPvAValue"
-            android:layout_alignBottom="@+id/txtPvAValue"
-            android:layout_alignParentStart="true" />
+            android:textSize="@dimen/normallayout_textsize" />
     </RelativeLayout>
 
-    <!--<TextView-->
-        <!--android:background="@color/smdm_divider_Black_light"-->
-        <!--android:layout_marginTop="1dp"-->
-        <!--android:id= "@+id/txtLine"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp" />-->
 </LinearLayout>
