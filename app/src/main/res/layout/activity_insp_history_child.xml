@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relative_insp_summary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_layout"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <!--  ListRow Left sied Thumbnail image -->
+        <LinearLayout
+            android:layout_marginBottom="0dp"
+            android:id="@+id/linear_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/card_layout">
+
+            <ImageView
+                android:padding="2dp"
+                android:id="@+id/image_insphistory_1"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/placeholder"/>
+
+        </LinearLayout>
+
+        <!-- Title Of Song-->
+        <TextView
+            android:id="@+id/txt_store_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linear_img"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="4dp"
+            android:layout_toLeftOf="@+id/image_emoji"
+            android:layout_toRightOf="@+id/linear_img"
+            android:text="Store_Code"
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/stock_textsize_normal"
+            android:textStyle="bold"/>
+
+        <!-- Artist Name -->
+
+        <RelativeLayout
+            android:layout_marginLeft="2dp"
+            android:id="@+id/rel_inspection_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rel_inspected_by"
+            android:layout_alignEnd="@+id/txt_store_code"
+            android:layout_toRightOf="@+id/linear_img"
+            android:orientation="horizontal"
+            android:textSize="@dimen/stock_store_textsize"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/txt_inspection_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/inspection_id"
+                android:textColor="@color/txt_color"
+                android:textSize="@dimen/stock_store_textsize"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txt_inspection_id_val"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/txt_inspection_id"
+                android:layout_weight="1"
+                android:hint="1"
+                android:textColor="@color/txt_color"
+                android:textSize="@dimen/stock_store_textsize"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:weightSum="2"
+            android:id="@+id/rel_inspected_by"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txt_date"
+            android:layout_alignBottom="@+id/txt_date"
+            android:layout_alignEnd="@+id/txt_store_code"
+            android:layout_toRightOf="@+id/linear_img">
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txt_inspected_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/inspected_by"
+                android:textColor="@color/txt_color"
+                android:textSize="@dimen/stock_store_textsize"/>
+
+            <TextView
+                android:layout_toRightOf="@+id/txt_inspected_by"
+                android:layout_weight="1"
+                android:id="@+id/txt_inspected_by_val"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Rohit"
+                android:textColor="@color/txt_color"
+                android:textSize="@dimen/stock_store_textsize"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/image_emoji"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/goodemojiselected"/>
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/image_emoji"
+            android:layout_marginTop="5dp"
+            android:hint="10,April 2017"
+            android:textColor="@color/txt_color"
+            android:textSize="@dimen/stock_store_textsize"/>
+
+    </RelativeLayout>
+</RelativeLayout>

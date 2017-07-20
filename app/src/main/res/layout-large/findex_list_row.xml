@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+
+        <TextView
+            android:padding="2dp"
+            android:singleLine="true"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/txtfindexClass"
+            android:text="Name"
+            android:layout_alignParentRight="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="230dp"
+            android:layout_toLeftOf="@+id/txtfindexSOH"
+            android:textSize="@dimen/smdm_rowInflaterLayout_large"
+            android:textColor="@color/txt_color"              />
+
+        <TextView
+            android:padding="2dp"
+            android:singleLine="true"
+            android:id="@+id/txtfindexSOH"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:layout_marginRight="160dp"
+            android:layout_toLeftOf="@+id/txtfindexSOH_U"
+            android:text="1234567"
+            android:textSize="@dimen/smdm_rowInflaterLayout_large"
+            android:textColor="@color/txt_color"
+            />
+
+        <TextView
+            android:padding="2dp"
+            android:singleLine="true"
+            android:id="@+id/txtfindexSOH_U"
+            android:layout_width="70dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="90dp"
+            android:layout_toLeftOf="@+id/txtfindexGIT"
+            android:text="1234567"
+            android:textSize="@dimen/smdm_rowInflaterLayout_large"
+            android:textColor="@color/txt_color"
+            />
+
+
+        <TextView
+            android:padding="2dp"
+            android:singleLine="true"
+            android:id="@+id/txtfindexGIT"
+            android:layout_marginRight="10dp"
+            android:layout_width="70dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="1234567"
+            android:textSize="@dimen/smdm_rowInflaterLayout_large"
+            android:textColor="@color/txt_color"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

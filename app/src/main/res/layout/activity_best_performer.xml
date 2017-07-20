@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
+
+    <LinearLayout
+        android:background="@color/bg_screen_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_header_height"
+                android:layout_alignParentTop="true"
+                android:background="?attr/colorPrimary"
+                android:contentInsetStart="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetEnd="0dp"
+                segmentedgroup:contentInsetLeft="0dp"
+                segmentedgroup:contentInsetStart="0dp"
+                segmentedgroup:contentInsetRight="0dp"
+                segmentedgroup:contentInsetEnd="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_marginLeft="0dp"
+                        android:id="@+id/bst_imageBtnBack"
+                        android:background="@drawable/button_click_effect"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:clickable="false"
+                            android:background="@mipmap/common_back_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Promotions"
+                        android:textSize="@dimen/smdm_header_title_normal"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/bst_imageBtnBack"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/divider_salescard1"
+                        android:id="@+id/toolbar_title" />
+
+
+
+
+                    <RelativeLayout
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="0dp"
+                        android:id="@+id/bst_imgfilter"
+                        android:background="@drawable/button_click_effect"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:clickable="false"
+                            android:background="@mipmap/filter_icon_nav"
+                            android:layout_width="19dp"
+                            android:layout_height="19dp"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_toLeftOf="@+id/bst_imgfilter"
+                        android:layout_marginRight="0dp"
+                        android:visibility="visible"
+                        android:id="@+id/bst_sort"
+                        android:background="@drawable/button_click_effect"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:clickable="false"
+                            android:background="@mipmap/sort_icon"
+                            android:layout_width="19dp"
+                            android:layout_height="19dp"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+
+            <RelativeLayout
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/storelayout"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/bst_storecode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store : "
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
+
+                <TextView
+                    android:layout_marginLeft="3dp"
+                    android:id="@+id/bst_txtStoreCode"
+                    android:layout_width="wrap_content"
+                    android:hint=""
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/bst_storecode"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
+
+                <TextView
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/bst_txtStoreCode"
+                    android:id="@+id/bst_txtStoreName"
+                    android:hint=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_normal"
+                    />
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/bestPromo_segmented"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/linearToolbar"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="14dp"
+            segmentedgroup:sc_tint_color="@color/colorPrimary"
+            >
+
+            <RadioButton
+                style="@style/RadioButton"
+                android:id="@+id/bestPromo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Best" />
+
+            <RadioButton
+                android:id="@+id/worstPromo"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Worst" />
+
+
+
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/bestPerformanceListView"
+                android:layout_marginTop="10dp"
+                android:dividerHeight="1dp"
+
+                >
+
+            </ListView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/smdm_divider"
+                android:background="@color/divider_salescard"
+                android:layout_marginTop="9dp"
+                >
+
+            </View>
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+    <!--pop up menu-->
+
+
+    <include layout="@layout/popup_menu"
+        >
+
+    </include>
+
+
+</RelativeLayout>
+

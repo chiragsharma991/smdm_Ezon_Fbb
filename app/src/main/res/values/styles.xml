@@ -6,17 +6,49 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">#808080</item>
         <item name="colorControlNormal">#c5c5c5</item>
-        <item name="colorControlActivated">#ffffff</item>
+        <item name="colorControlActivated">@color/ezfb_Red</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+
+
+    </style>
+
+    <style name="Login" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/ezfb_Red</item>
+        <item name="colorPrimaryDark">@color/ezfb_Red</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">#808080</item>
+        <item name="colorAccent">@color/ezfb_White</item>
+        <item name="colorControlNormal">@color/ezfb_Red</item>
+        <item name="colorControlActivated">@color/ezfb_Red</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowDisablePreview">true</item>
 
     </style>
 
+    <style name="Dashboard" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#995544</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">#808080</item>
+        <item name="colorPrimary">@color/ezfb_Red</item>
+        <item name="colorPrimaryDark">#808080</item>
+        <item name="colorAccent">@color/ezfb_Red</item>
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">@color/ezfb_Red</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -24,7 +56,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">#ffffff</item>
+        <item name="tabIndicatorColor">@color/ezfbb_red</item>
     </style>
 
     <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light">
@@ -59,10 +91,60 @@
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="colorAccent">#000000</item>
-    <item name="android:textColorPrimary">#ffffff</item>
-    <item name="android:background">#666666</item>
+        <item name="colorAccent">#000000</item>
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:colorBackground">@color/cardview_light_background</item>
+        <item name="colorControlNormal">#000</item>
+        <item name="colorControlActivated">#2277b1</item>
     </style>
 
+    <style name="CustomAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#000000</item>
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:colorBackground">@color/cardview_light_background</item>
+        <item name="colorControlNormal">#000</item>
+        <item name="colorControlActivated">#2277b1</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ProgressBar" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#c5c5c5</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:background">#666666</item>
+
+    </style>
+
+    <style name="ProgressBar_black" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#000</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:background">#666666</item>
+    </style>
+
+    <style name="AlertDialog.Theme" parent="@android:style/Theme.Dialog">
+        <item name="android:textColorPrimary">@color/ezfb_Red</item>
+        <item name="android:textColor">#000000</item>
+        <item name="colorAccent">#2277b1</item>
+        <item name="colorPrimary">#2277b1</item>
+        <item name="colorPrimaryDark">#2277b1</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">false</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="CustomTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/hinttextcolor</item>
+        <item name="android:gravity">top</item>
+        <item name="android:layout_marginBottom">3dp</item>
+
+    </style>
 
 </resources>

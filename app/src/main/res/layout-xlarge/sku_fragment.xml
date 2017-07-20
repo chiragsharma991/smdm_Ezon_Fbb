@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/child_option_fragment"
+    android:layout_width="match_parent"
+    android:background="@color/bg_screen_color"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp">
+
+            <RelativeLayout
+                android:id="@+id/innerrellay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/tstoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/largelayout_storesize" />
+
+                <TextView
+                    android:id="@+id/txtStoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@+id/tstoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/largelayout_storesize" />
+
+                <TextView
+                    android:id="@+id/txtStoreName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/txtStoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/largelayout_storesize" />
+
+
+                <TextView
+                    android:id="@+id/txt_Sku_article_Option_Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtStoreName"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/largelayout_storesize" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_Sku_article_Option_Name"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/largelayout_storesize"
+                    android:text="@string/number_in_units" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:background="@color/bg_screen_color"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linearLayout">
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

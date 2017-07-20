@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_screen_color"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/floor_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/floor_Rel_image_child"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+
+            <ImageView
+                android:id="@+id/floor_image_child"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
+
+                />
+
+            <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/imageLoader_floor"
+                android:layout_centerInParent="true"
+                android:background="#0000"
+                android:keepScreenOn="true"
+                android:theme="@style/ProgressBar"
+                >
+
+
+
+            </ProgressBar>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/floor_Rel_image_child"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/floor_Rel_image_child"
+            android:gravity="center_horizontal">
+
+            <!--Buy one-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+                    <!---->
+
+                    <TextView
+                        android:id="@+id/floor_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:text="Buy One Get One"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_inflator_title_normal"
+                        android:textStyle="bold"
+
+
+
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/floor_fav"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+
+                        >
+
+
+
+
+                        <ToggleButton
+                            android:id="@+id/toggle_floor_fav"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/toggleswitch"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:textOff=""
+                            android:textOn=""
+
+                            />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/bst_lineOne_child"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/smdm_inflater_divider"
+                    android:layout_alignStart="@+id/bst_head_child"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/divider_salescard" />
+
+
+                <!--SOH-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
+                        android:text="SOH(U)"
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textColor="@color/smdm_default_color"
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
+
+                    <TextView
+                        android:id="@+id/floor_SOH_U"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
+                        android:text="100"
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
+
+
+                </LinearLayout>
+
+
+                <!--No of days-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
+                        android:text="No of Days Passed"
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textColor="@color/smdm_default_color"
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
+
+                    <TextView
+                        android:id="@+id/floor_NoofDays"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="100"
+                        android:textColor="@color/smdm_default_color"
+                        android:singleLine="true"
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
+
+                </LinearLayout>
+
+                <!--First Receipt Date-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:singleLine="true"
+                        android:textColor="@color/smdm_default_color"
+                        android:text="First Receipt Date"
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textColor="@color/smdm_default_color"
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
+
+                    <TextView
+                        android:id="@+id/floor_ReceiptDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="5"
+                        android:textColor="@color/smdm_default_color"
+                        android:singleLine="true"
+                        android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,142 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/linear_receiver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/card_layout">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rel_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:id="@+id/receiver_status_caseNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="C0001"
+                        android:textStyle="bold"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/collaboration_stock_title"/>
+
+                    <TextView
+                        android:id="@+id/receiver_status_case"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="Pending"
+                        android:textSize="@dimen/collaboration_stock_text"/>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/smdm_border">
+
+                </View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="3dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/receiver_status_storeCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4814"
+                        android:textStyle="bold"
+                        android:textColor="@color/smdm_default_color"
+                        android:textSize="@dimen/collaboration_stock_text"
+                        />
+
+                    <TextView
+                        android:id="@+id/receiver_status_storedesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textStyle="bold"
+                        android:text="Store Description"
+                        android:textColor="@color/smdm_default_color"
+                        android:textSize="@dimen/collaboration_stock_text"
+                        />
+
+                </LinearLayout>
+
+
+                <!--add layout views-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="3dp"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:id="@+id/lin_progressView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--bellow layout-->
+
+                <RelativeLayout
+                    android:id="@+id/rel_status_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border2"
+                    android:padding="4dp"
+                    android:visibility="gone">
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <!--ending border of card layout-->
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</LinearLayout>

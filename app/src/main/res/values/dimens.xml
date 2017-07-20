@@ -5,9 +5,89 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
+
+
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
     <dimen name="toolbar_header_height">60dp</dimen>
+
+    <dimen name="header_clickable_width">40dp</dimen>
+    <dimen name="header_clickable_height">60dp</dimen>
+    <dimen name="largelayout_textsize">13sp</dimen>
+    <dimen name="normallayout_textsize">12sp</dimen>
+    <dimen name="largelayout_storesize">14sp</dimen>
+    <dimen name="normallayout_storesize">13sp</dimen>
+
+    //large screen
+
+    <dimen name="smdm_header_title_large">20sp</dimen>
+    <dimen name="smdm_store_title_large">14sp</dimen>
+    <dimen name="smdm_inflator_title_large">13sp</dimen>
+    <dimen name="smdm_inflator_subtitle_large">13sp</dimen>
+
+    //Quick filter
+
+    <dimen name="smdm_divider">1sp</dimen>
+    <dimen name="smdm_inflater_divider">1sp</dimen>
+    <dimen name="smdm_quickfilter_divider">2sp</dimen>
+    <dimen name="smdm_popup_divider">1sp</dimen>
+
+    //Normal device screen
+
+    <dimen name="smdm_header_title_normal">20sp</dimen>
+    <dimen name="smdm_store_title_normal">13sp</dimen>
+    <dimen name="smdm_inflator_title_normal">11sp</dimen>
+    <dimen name="smdm_inflator_subtitle_normal">11sp</dimen>
+
+
+    //Row inflater layout
+    <dimen name="smdm_rowInflaterLayout_large">13sp</dimen>
+    <dimen name="smdm_rowInflaterLayout_normal">12sp</dimen>
+
+    //>>>>>
+
+    <dimen name="smdm_quickfilter_title_large">13sp</dimen>
+    <dimen name="smdm_quickfilter_subtitle_normal">12sp</dimen>
+
+    <dimen name="smdm_PopUp_title_large">13sp</dimen>
+    <dimen name="smdm_PopUp_subtitle_normal">12sp</dimen>
+
+    <dimen name="smdm_cardValuesTitle_large">14sp</dimen>
+    <dimen name="smdm_cardValuesSubtitle_large">19sp</dimen>
+
+    <dimen name="smdm_cardValuesTitle_normal">12sp</dimen>
+    <dimen name="smdm_cardValuesSubtitle_normal">17sp</dimen>
+
+    <dimen name="smdm_departmentTitle">12sp</dimen>
+    <dimen name="smdm_departmentTitleLarge">13sp</dimen>
+
+    // Visual Assort Report
+    <dimen name="visual_report_textsize_large">18sp</dimen>
+    <dimen name="visual_report_textsize_normal">16sp</dimen>
+
+    // for the colloaboration layout
+
+    <dimen name="stock_textsize_large">13sp</dimen>
+    <dimen name="stock_store_textsize">11sp</dimen>
+    <dimen name="stock_textsize_normal">12sp</dimen>
+    <dimen name="stock_textsize_Title">14sp</dimen>
+    <dimen name="stock_status_textsize">10sp</dimen>
+
+    <dimen name="collaboration_stock_title">15sp</dimen>
+    <dimen name="collaboration_stock_title_xlarge">17sp</dimen>
+    <dimen name="collaboration_stock_text">14sp</dimen>
+    <dimen name="collaboration_stock_storecode">14sp</dimen>
+
+    // for imageView height and width to set at runtime
+    <dimen name="item_height">35dp</dimen>
+    <dimen name="item_width">35dp</dimen>
+
+    <dimen name="icon_width">36dp</dimen>
+    <dimen name="icon_height">36dp</dimen>
+    <dimen name="arrow_back_icon_width">24dp</dimen>
+    <dimen name="arrow_back_icon_height">24dp</dimen>
+
+
 
 </resources>

@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_screen_color"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollv_custOne"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_screen_color"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rel_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top">
+
+                <LinearLayout
+                    android:id="@+id/lin_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:id="@+id/rel_cust_netsales"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_edittext3">
+
+                        <TextView
+                            android:id="@+id/txt_cust_NetSales"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="2dp"
+                            android:gravity="left"
+                            android:text="@string/net_sales"
+                            android:textColor="@color/smdm_default_color"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:id="@+id/txt_cust_NetSalesVal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="35dp"
+                            android:text=""
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/txt_cust_NetSalesLac"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/txt_cust_NetSalesVal"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="35dp"
+                            android:layout_toRightOf="@+id/txt_cust_NetSalesVal"
+                            android:text="Lacs"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="13sp" />
+
+
+                        <!--<ImageView-->
+                        <!--android:id="@+id/txt_cust_NetSalesImage"-->
+                        <!--android:layout_width="19dp"-->
+                        <!--android:layout_height="16dp"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:layout_toLeftOf="@+id/rel_cust_NetSalesNmPrec"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_marginBottom="15dp"-->
+                        <!--/>-->
+
+                        <RelativeLayout
+                            android:id="@+id/rel_cust_NetSalesNmPrec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/txt_cust_NetSalesVal"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/smdm_blue">
+
+                            <!--<TextView-->
+                            <!--android:id="@+id/txt_cust_NetSalesName"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_alignParentLeft="true"-->
+                            <!--android:layout_marginLeft="8dp"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:hint="Sales Ach%"-->
+                            <!--android:textColor="@color/smdm_blue"-->
+                            <!--android:textSize="13sp" />-->
+
+                            <!--<TextView-->
+                            <!--android:id="@+id/txt_cust_NetSalesPerc"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="4dp"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:layout_toRightOf="@+id/txt_cust_NetSalesName"-->
+                            <!--android:text=""-->
+                            <!--android:textSize="13sp" />-->
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rel_cust_plansales"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_edittext3">
+
+
+                        <TextView
+                            android:id="@+id/txt_cust_PlanSales"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="2dp"
+                            android:gravity="left"
+                            android:text="@string/plan_sales"
+                            android:textColor="@color/smdm_default_color"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:id="@+id/txt_cust_PlanSalesVal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="35dp"
+                            android:text=""
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="17sp" />
+
+
+                        <TextView
+                            android:id="@+id/txt_cust_PlanSalesLac"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/txt_cust_PlanSalesVal"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="35dp"
+                            android:layout_toRightOf="@+id/txt_cust_PlanSalesVal"
+                            android:text="Lacs"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="13sp" />
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_customers"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_below="@+id/lin_sales"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:id="@+id/rel_cust_actualcustomer"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_edittext3">
+
+                        <TextView
+                            android:id="@+id/txt_cust_actualcustomer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="2dp"
+                            android:gravity="left"
+                            android:text="@string/actual_customer"
+                            android:textColor="@color/smdm_default_color"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:id="@+id/txt_cust_ActualCustVal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="35dp"
+                            android:text=""
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:id="@+id/txt_cust_ActualCustImage"
+                            android:layout_width="19dp"
+                            android:layout_height="16dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toLeftOf="@+id/rel_cust_ActualCustNmPrec" />
+
+                        <RelativeLayout
+                            android:id="@+id/rel_cust_ActualCustNmPrec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/txt_cust_ActualCustVal"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="5dp">
+
+                            <TextView
+                                android:id="@+id/txt_cust_ActualCustName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="8dp"
+                                android:hint="SPC"
+                                android:textColor="@color/smdm_blue"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/txt_cust_ActualCustPerc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="4dp"
+                                android:layout_toRightOf="@+id/txt_cust_ActualCustName"
+                                android:hint=""
+                                android:textColor="@color/smdm_blue"
+                                android:textSize="13sp" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rel_cust_plancustomers"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_edittext3">
+
+                        <TextView
+                            android:id="@+id/txt_cust_plancustomers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="2dp"
+                            android:gravity="left"
+                            android:text="@string/plan_customers"
+                            android:textColor="@color/smdm_default_color"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:id="@+id/txt_cust_PlanCustVal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="35dp"
+                            android:text=""
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="17sp" />
+
+
+                        <RelativeLayout
+                            android:id="@+id/rel_cust_planCustPerc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/txt_cust_PlanCustVal"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="5dp">
+
+                            <TextView
+                                android:id="@+id/txt_cust_PlanCustName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="8dp"
+                                android:hint="SPC"
+                                android:textColor="@color/smdm_blue"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/txt_cust_PlanCustPerc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="4dp"
+                                android:layout_toRightOf="@+id/txt_cust_PlanCustName"
+                                android:hint=""
+                                android:textColor="@color/smdm_blue"
+                                android:textSize="13sp" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_custandsales_circle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rel_box"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/smdm_divider_Black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@color/white"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/circularProgressbar_customer"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="250dp"
+                            android:layout_height="250dp"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:progressDrawable="@drawable/circular"
+                            android:secondaryProgress="100" />
+
+                        <TextView
+                            android:id="@+id/txt_progress_custVal"
+                            android:layout_width="250dp"
+                            android:layout_height="250dp"
+                            android:layout_marginBottom="9dp"
+                            android:gravity="center"
+                            android:hint=""
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="19sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_progress_cust_nm"
+                            android:layout_width="250dp"
+                            android:layout_height="250dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center"
+                            android:text="\n\nCustomer"
+                            android:textColor="@color/smdm_default_color"
+                            android:textSize="10sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/circularProgressbar_sales"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="250dp"
+                            android:layout_height="250dp"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:progressDrawable="@drawable/circular"
+                            android:secondaryProgress="100" />
+
+                        <TextView
+                            android:id="@+id/txt_progress_salesVal"
+                            android:layout_width="250dp"
+                            android:layout_height="250dp"
+                            android:layout_marginBottom="9dp"
+                            android:gravity="center"
+                            android:hint=""
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="19sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_progress_sales_nm"
+                            android:layout_width="250dp"
+                            android:layout_height="250dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center"
+                            android:text="\n\n Sales"
+                            android:textColor="@color/smdm_default_color"
+                            android:textSize="10sp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/smdm_divider_Black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_plan_engagement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rel_box"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/smdm_divider_Black" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_planEngagement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Engagement Mix PVA"
+                        android:textColor="@color/smdm_dark_Black"
+                        android:textSize="@dimen/smdm_departmentTitleLarge"
+                        android:textStyle="bold" />
+
+                    <Switch
+                        android:id="@+id/salescustswitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_switch_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/salescustswitch"
+                        android:layout_marginRight="7dp"
+                        android:layout_toLeftOf="@id/salescustswitch"
+                        android:text="Sales"
+                        android:textSize="@dimen/smdm_store_title_normal" />
+
+                </RelativeLayout>
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart_band"
+                    android:layout_width="match_parent"
+                    android:layout_height="225dp" />
+
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/txt_band_ach"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="right"
+                    android:text="ACH%"
+                    android:textSize="14sp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/linear_band_legend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical" />
+
+           </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_actual_engagement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_plan_engagement"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <!--<TextView-->
+                <!--android:id="@+id/view5"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/smdm_divider_Black" />-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_actualEngagement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Lifestage Mix PVA"
+                        android:textColor="@color/smdm_dark_Black"
+                        android:textSize="@dimen/smdm_departmentTitleLarge"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart_lifestage"
+                    android:layout_width="match_parent"
+                    android:layout_height="225dp" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/txt_lifestage_ach"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="right"
+                    android:text="ACH%"
+                    android:textSize="14sp"
+                    android:textColor="@color/bg_store_code_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <LinearLayout
+                    android:id="@+id/linear_lifestage_legend"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/bg_screen_color"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_header_height"
+                android:layout_alignParentTop="true"
+                android:background="?attr/colorPrimary"
+                android:contentInsetEnd="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetStart="0dp"
+                segmentedgroup:contentInsetEnd="0dp"
+                segmentedgroup:contentInsetLeft="0dp"
+                segmentedgroup:contentInsetRight="0dp"
+                segmentedgroup:contentInsetStart="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/rp_imageBtnBack"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="0dp"
+                        android:background="@drawable/button_click_effect">
+
+                        <Button
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/common_back_icon"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/rp_imageBtnBack"
+                        android:text="Running Promo"
+                        android:textColor="@color/divider_salescard1"
+                        android:textSize="@dimen/smdm_header_title_large" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rp_imgfilter"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_click_effect">
+
+                        <Button
+                            android:layout_width="19dp"
+                            android:layout_height="19dp"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/filter_icon_nav"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
+
+                    <!--<RelativeLayout-->
+                    <!--android:id="@+id/imageBtnSearch"-->
+                    <!--android:background="@drawable/button_click_effect"-->
+                    <!--android:layout_width="@dimen/header_clickable_width"-->
+                    <!--android:layout_height="@dimen/header_clickable_height"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true">-->
+
+                    <!--<Button-->
+                    <!--android:clickable="false"-->
+                    <!--android:background="@mipmap/key_product_search_icon1"-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_centerInParent="true"/>-->
+
+                    <!--</RelativeLayout>-->
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+        <!--current running promoActivity-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/running_promo"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp">
+
+
+                <TextView
+                    android:id="@+id/tstoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/smdm_store_title_normal" />
+
+                <TextView
+                    android:id="@+id/txtStoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@+id/tstoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_normal" />
+
+                <TextView
+                    android:id="@+id/txtStoreName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/txtStoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/smdm_store_title_normal" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <RelativeLayout
+                    android:id="@+id/promoSalesRelative"
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_edittext3"
+                    android:padding="5dp">
+
+
+                    <TextView
+                        android:id="@+id/promoSales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="2dp"
+                        android:gravity="left"
+                        android:text="Promo Sales"
+                        android:textColor="@color/smdm_default_color"
+                        android:textSize="@dimen/smdm_cardValuesTitle_normal" />
+
+
+                    <TextView
+                        android:id="@+id/txtPromoVal1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="35dp"
+                        android:maxLength="14"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/smdm_cardValuesSubtitle_normal" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/promoSalesURelative"
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_edittext3"
+                    android:padding="5dp">
+
+
+                    <TextView
+                        android:id="@+id/txtNetSales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="2dp"
+                        android:gravity="left"
+                        android:textColor="@color/smdm_default_color"
+                        android:text="Promo Sales(U)"
+                        android:textSize="@dimen/smdm_cardValuesTitle_normal" />
+
+
+                    <TextView
+                        android:id="@+id/txtPromoVal2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="35dp"
+                        android:maxLength="14"
+                        android:textSize="@dimen/smdm_cardValuesSubtitle_normal"
+                        android:textColor="@color/bg_store_code_text"
+
+                        />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llayoutSalesAnalysis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--bottom layout starting-->
+
+                <RelativeLayout
+                    android:id="@+id/relTablelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:id="@+id/llheader"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@color/bg_header">
+
+                            <TextView
+                                android:id="@+id/promotionName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="272dp"
+                                android:gravity="center_vertical|center"
+                                android:text="Promotion Name"
+                                android:textColor="@color/bg_store_code_text"
+                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textStyle="bold" />
+
+                            <!--</RelativeLayout>-->
+                            <TextView
+                                android:id="@+id/startDate"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="188dp"
+                                android:layout_toLeftOf="@+id/endDate"
+                                android:gravity="center_vertical|center"
+                                android:text="Start Date"
+                                android:textColor="@color/bg_store_code_text"
+                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/endDate"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="110dp"
+                                android:layout_toLeftOf="@+id/days"
+                                android:gravity="center_vertical|center"
+                                android:text="End Date"
+                                android:textColor="@color/bg_store_code_text"
+                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textStyle="bold"
+
+                                />
+
+
+                            <TextView
+                                android:id="@+id/days"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="62dp"
+                                android:layout_toLeftOf="@+id/vm"
+                                android:gravity="center_vertical|center"
+                                android:text="Days"
+                                android:textColor="@color/bg_store_code_text"
+                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textStyle="bold"
+
+                                />
+
+
+                            <TextView
+                                android:id="@+id/vm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="17dp"
+                                android:gravity="center_vertical|center"
+                                android:text="VM"
+                                android:textColor="@color/bg_store_code_text"
+                                android:textSize="@dimen/smdm_departmentTitle"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@color/bg_header">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="3dp"
+                                android:layout_marginRight="255dp"
+                                android:layout_toLeftOf="@+id/edt_startdate"
+                                android:background="@drawable/border"
+                                android:clickable="false"
+                                android:editable="false"
+                                android:gravity="center_vertical"
+                                android:padding="2dp"
+                                android:textColor="@android:color/black" />
+
+
+                            <EditText
+                                android:id="@+id/edt_startdate"
+                                android:layout_width="75dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="178dp"
+                                android:layout_toLeftOf="@+id/edt_Enddate"
+                                android:background="@drawable/border"
+                                android:clickable="false"
+                                android:editable="false"
+                                android:gravity="center_vertical"
+                                android:paddingRight="2dp" />
+
+
+                            <EditText
+
+                                android:id="@+id/edt_Enddate"
+                                android:layout_width="75dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="102dp"
+                                android:layout_toLeftOf="@+id/edt_days"
+                                android:background="@drawable/border"
+                                android:clickable="false"
+                                android:textColor="@android:color/black" />
+
+                            <EditText
+                                android:id="@+id/edt_days"
+                                android:layout_width="48dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="52dp"
+                                android:layout_toLeftOf="@+id/edt_vm"
+                                android:background="@drawable/border"
+                                android:clickable="false"
+                                android:editable="false"
+                                android:textColor="@android:color/black" />
+
+
+                            <EditText
+                                android:id="@+id/edt_vm"
+                                android:layout_width="48dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="3dp"
+                                android:background="@drawable/border"
+                                android:clickable="false"
+                                android:editable="false"
+                                android:textColor="@android:color/black" />
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="46dp"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp"
+
+
+                        >
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/promoListview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <!--bottom layout-->
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!--summary layout-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:id="@+id/running_summary"
+            android:layout_marginTop="5dp"
+            >
+            <include
+                layout="@layout/activity_running_promo_summary"
+                >
+
+            </include>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

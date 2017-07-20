@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/baseQuickFilterPopup"
+    android:visibility="gone">
+
+    <!--base layout for click anywhere-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:id="@+id/bestQuickFilterBorder"
+            android:layout_width="200dp"
+            android:layout_marginTop="68dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/relLayoutFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/img_quickFilter"
+                    android:layout_width="16dp"
+                    android:layout_height="29dp"
+                    android:layout_alignParentStart="true"
+                    android:background="@mipmap/quick_filter" />
+
+
+                <RelativeLayout
+                    android:id="@+id/qfilterLabelLayout"
+                    android:layout_width="200dp"
+                    android:layout_height="29dp"
+                    android:layout_toRightOf="@+id/img_quickFilter"
+                    android:background="@color/colorPrimary"
+                    android:visibility="visible">
+
+
+                    <TextView
+                        android:id="@+id/txtQuickFilterLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text="Quick Filter"
+                        android:textColor="@color/divider_salescard1"
+                        android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                        />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!--main pop up border-->
+
+            <LinearLayout
+                android:layout_below="@+id/relLayoutFilter"
+                android:id="@+id/qfilter_menuPopupLayout"
+                android:layout_width="185dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/popupmenu"
+                android:orientation="vertical">
+
+
+
+
+                <!--Time-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Time"
+                        android:textColor="@color/smdm_quickfiltertxt_color"
+                        android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/smdm_quickfilter_divider"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/smdm_divider_Black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
+                            android:text="WTD"
+                            android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:gravity="end"
+                        android:orientation="vertical"
+                        >
+
+
+                        <RadioButton
+                            android:id="@+id/checkWTD"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorPrimary"
+                            android:focusable="true"
+                            android:checked="true"
+
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
+                            android:text="L4W"
+                            android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+
+                        <RadioButton
+                            android:id="@+id/checkL4W"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorPrimary"
+                            android:focusable="true" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/smdm_default_color"
+                            android:text="YTD"
+                            android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+
+                        <RadioButton
+                            android:id="@+id/checkSTD"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorPrimary"
+                            android:focusable="true"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_below="@+id/qfilter_menuPopupLayout"
+                    android:id="@+id/bestQfDoneLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="@color/colorPrimary"
+                    android:visibility="visible">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="-5dp"
+                        android:background="@color/colorPrimary"
+                        android:clickable="false"
+                        android:text="Done"
+                        android:textColor="@color/divider_salescard1"
+                        android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                        />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/bg_screen_color"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -9,51 +10,47 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-
         <RelativeLayout
             android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp" >
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"> >
 
             <RelativeLayout
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:id="@+id/innerrellay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
 
                 <TextView
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store : "
-                    android:textColor="#920609"
-                    android:textSize="14sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
-                    android:hint="storecode"
-                    android:textColor="#000000"
-                    android:textSize="14sp"/>
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
-                    android:hint="storename"
-                    android:layout_marginRight="20dp"
-                    android:textColor="#000000"
-                    android:textSize="14sp"/>
-
-
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtArticleName"
@@ -61,45 +58,34 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/txtStoreName"
                     android:layout_width="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textColor="@color/bg_store_code_text"
                     android:layout_height="wrap_content" />
-
 
                 <TextView
                     android:id="@+id/txtnounits"
                     android:layout_marginTop="7dp"
-                    android:text="* All numbers in units"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textColor="@color/bg_store_code_text"
+                    android:text="@string/number_in_units"
                     android:layout_below="@+id/txtArticleName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
             </RelativeLayout>
-
-            <!--<Button-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:id="@+id/imageBtnFilter"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="25dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:background="@mipmap/key_product_filter" />-->
-
-
         </RelativeLayout>
 
         <RelativeLayout
 
             android:id="@+id/relativeLayout"
+            android:background="@color/bg_screen_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/linearLayout">
 
         </RelativeLayout>
+
     </RelativeLayout>
-    <FrameLayout
-        android:id="@+id/child_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+
 </RelativeLayout>
 

@@ -3,18 +3,17 @@ package apsupportapp.aperotechnologies.com.designapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -28,183 +27,155 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import apsupportapp.aperotechnologies.com.designapp.R;
-
 import com.crashlytics.android.Crashlytics;
+
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import io.fabric.sdk.android.Fabric;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class SplashActivity extends AppCompatActivity
-{
+public class SplashActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     ProgressBar progressbar;
     Context context;
+    private Snackbar snackbar;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+      //  TestFairy.begin(this, "a83cce4a55db17b7603166d893edca31f89b6427");
+
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
         context = this;
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-
-// return 0.75 if it's LDPI
-// return 1.0 if it's MDPI
-// return 1.5 if it's HDPI
-// return 2.0 if it's XHDPI
-// return 3.0 if it's XXHDPI
-// return 4.0 if it's XXXHDPI
-
-
-        if(sharedPreferences.getBoolean("log_flag",false) == true) {
+        if (sharedPreferences.getBoolean("log_flag", false) == true) {
             if (Reusable_Functions.chkStatus(context))
             {
                 if (progressbar != null) {
                     progressbar.setVisibility(View.VISIBLE);
                     progressbar.setIndeterminate(true);
-                    progressbar.getIndeterminateDrawable().setColorFilter(0xFFFFFFFF, android.graphics.PorterDuff.Mode.MULTIPLY);
+                    progressbar.getIndeterminateDrawable().setColorFilter(new LightingColorFilter(Color.parseColor("#e8112d"), R.color.ezfb_Red));
                 }
+            } else {
+                progressbar.setVisibility(View.GONE);
+                checkNetwork();
             }
-            else
-            {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-            }
-
         }
-
-        Thread background = new Thread()
-        {
-            public void run()
-            {
-                try
-                {
+        Thread background = new Thread() {
+            public void run() {
+                try {
                     // Thread will sleep for 5 seconds
-                    sleep(3*1000);
-
-                    Log.e("chk"," "+(sharedPreferences.getBoolean("log_flag",false) == true));
-                    if(sharedPreferences.getBoolean("log_flag",false) == true)
-                    {
-
-                        requestLoginAPI();
-
-                    }
-                    else if(sharedPreferences.getBoolean("log_flag",false) == false)
-                    {
-                        Intent i = new Intent(SplashActivity.this,LoginActivity.class);
+                    sleep(3 * 1000);
+                    if (sharedPreferences.getBoolean("log_flag", false) == true) {
+                        if (Reusable_Functions.chkStatus(context)) {
+                            requestLoginAPI();
+                        }
+                    } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
+                        Intent i = new Intent(SplashActivity.this, LoginActivity1.class);
                         startActivity(i);
-                        //progressbar.setVisibility(View.GONE);
                         finish();
                     }
-
-
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                 }
             }
         };
         // start thread
         background.start();
+    }
 
+    private void checkNetwork()
+    {
+        View v=findViewById(android.R.id.content);
+        snackbar = Snackbar.make(v,"Check your network ", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(Reusable_Functions.chkStatus(context))
+                    {
+                        progressbar.setVisibility(View.VISIBLE);
+                        requestLoginAPI();
+                    }else
+                    {
+                        checkNetwork();
+                    }
+                }
+            });
+            snackbar.setActionTextColor(getResources().getColor(R.color.smdm_actionbar));
+            snackbar.show();
 
     }
 
-    private void requestLoginAPI()
-    {
+    private void requestLoginAPI() {
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = ConstsCore.web_url+"/v1/login";
-        final String username = sharedPreferences.getString("username","");
-        final String password = sharedPreferences.getString("password","");
-        final String auth_code = sharedPreferences.getString("authcode","");
-
-        Log.e("auth---code "," --- "+username+" "+password+" "+auth_code);
-
+        String url = ConstsCore.web_url + "/v1/login";
+        final String username = sharedPreferences.getString("username", "");
+        final String password = sharedPreferences.getString("password", "");
+        final String auth_code = sharedPreferences.getString("authcode", "");
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        Log.i("Login   Response   ", response.toString());
+                    public void onResponse(JSONObject response) {
                         try
                         {
-                            if(response == null || response.equals(null))
+                            if (response == null || response.equals(""))
                             {
                                 Reusable_Functions.hDialog();
-
                             }
-
                             String bearerToken = response.getString("bearerToken");
+                            String geoLeveLDesc = response.getString("geoLeveLDesc");
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("bearerToken",bearerToken);
+                            editor.putString("bearerToken", bearerToken);
+                            editor.putString("geoLeveLDesc",geoLeveLDesc);
                             editor.apply();
-                            Log.i("bearerToken   ", bearerToken);
-
-                            Intent i = new Intent(SplashActivity.this,DashBoardActivity.class);
-                            i.putExtra("from","splash");
+                            Intent i = new Intent(SplashActivity.this, SnapDashboardActivity.class);
+                            i.putExtra("from", "splash");
                             startActivity(i);
                             progressbar.setVisibility(View.GONE);
                             finish();
-
-
-
                         }
-                        catch(Exception e)
+                        catch (Exception e)
                         {
-                            Log.e("Exception e",e.toString() +"");
                             e.printStackTrace();
                             Reusable_Functions.hDialog();
                         }
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
+                    public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
-
-        ){
+        ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
-                //String auth_code = "Basic " + Base64.encodeToString((uname+":"+password).getBytes(), Base64.NO_WRAP); //Base64.NO_WRAP flag
-                Log.i("Auth Code", auth_code);
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", auth_code);
                 return params;
-
-
             }
         };
         int socketTimeout = 60000;//5 seconds
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-
     }
 
-    @Override
-    protected void onDestroy()
-    {
+   @Override
+    protected void onDestroy() {
         super.onDestroy();
     }
 }

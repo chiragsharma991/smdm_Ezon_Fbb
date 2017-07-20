@@ -1,0 +1,317 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/linearToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_header_height"
+                android:layout_alignParentTop="true"
+                android:background="@color/white"
+                android:contentInsetEnd="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/visualreport_imageBtnBack"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="0dp"
+                        android:background="@drawable/button_click">
+
+                        <Button
+                            android:layout_width="@dimen/arrow_back_icon_width"
+                            android:layout_height="@dimen/arrow_back_icon_height"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/ic_arrow_back_black"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/visualreport_imageBtnBack"
+                        android:text="@string/options_report"
+                        android:textColor="@color/ezfbb_black"
+                        android:textSize="@dimen/smdm_header_title_normal" />
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_below="@+id/linearToolbar"
+            android:id="@+id/relStoreLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="5dp">
+
+
+            <TextView
+                android:id="@+id/tstoreCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/store"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="@dimen/normallayout_storesize" />
+
+            <TextView
+                android:id="@+id/txtStoreCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@+id/tstoreCode"
+                android:text="NA"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtStoreName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/txtStoreCode"
+                android:hint=""
+                android:textColor="@color/ezfbb_black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_margin"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@+id/relStoreLayout"
+            android:background="@color/ezfb_activity_background"/>
+
+
+        <RelativeLayout
+            android:id="@+id/linear_chart"
+            android:layout_width="match_parent"
+            android:layout_height="520dp"
+            android:layout_below="@+id/view_margin"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/vreport_pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/visual_report_progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="#0000"
+                android:keepScreenOn="true"
+                android:padding="10dp"
+                android:theme="@style/ProgressBar"
+                android:visibility="gone">
+
+            </ProgressBar>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_Like"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_chart"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/txt_like_color"
+                android:layout_width="20dp"
+                android:layout_height="10dp"
+                android:layout_alignBaseline="@+id/vr_likenm"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.012"
+                android:gravity="center_horizontal"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/vr_likenm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.7"
+                android:gravity="left"
+                android:singleLine="true"
+                android:text="Likes"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/vr_likesVal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="100dp"
+                android:layout_weight="0.3"
+                android:gravity="right"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/ezfbb_black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_like"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/smdm_divider"
+            android:layout_below="@+id/linear_Like"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/smdm_divider_Black">
+
+        </View>
+
+        <LinearLayout
+            android:id="@+id/linear_dislike"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_like"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/txt_dislike_color"
+                android:layout_width="20dp"
+                android:layout_height="10dp"
+                android:layout_alignBaseline="@+id/vr_dislikenm"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.012"
+                android:gravity="center_horizontal"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/vr_dislikenm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.7"
+                android:gravity="left"
+                android:singleLine="true"
+                android:text="@string/dislikes"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/vr_dislikesVal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="100dp"
+                android:layout_weight="0.3"
+                android:gravity="right"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/ezfbb_black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_dislike"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/smdm_divider"
+            android:layout_below="@+id/linear_dislike"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/smdm_divider_Black">
+
+        </View>
+
+        <LinearLayout
+            android:id="@+id/linear_pending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_dislike"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/txt_pending_color"
+                android:layout_width="20dp"
+                android:layout_height="10dp"
+                android:layout_alignBaseline="@+id/vr_pendingnm"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.012"
+                android:gravity="center_horizontal"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/vr_pendingnm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.7"
+                android:gravity="left"
+                android:singleLine="true"
+                android:text="@string/pending"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/vr_PendingVal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="100dp"
+                android:layout_weight="0.3"
+                android:gravity="right"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/ezfbb_black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

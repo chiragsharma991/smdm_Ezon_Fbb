@@ -6,19 +6,17 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by hasai on 12/09/16.
- */
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
+
+
 public class AboutUsActivity extends AppCompatActivity {
 
-
-    Button btnBack;
-    TextView txtversioncode;
+    RelativeLayout btnBack;
+    TextView txtversioname,txtversioncode;
     Context context;
 
     @Override
@@ -26,11 +24,10 @@ public class AboutUsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.about_us);
-        btnBack = (Button) findViewById(R.id.imageBtnBack);
+        btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
+        txtversioname = (TextView) findViewById(R.id.versioname);
         txtversioncode = (TextView) findViewById(R.id.versioncode);
         context = this;
-
-
         PackageInfo pInfo = null;
         try {
             pInfo = context.getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -39,23 +36,23 @@ public class AboutUsActivity extends AppCompatActivity {
         }
 
         String version = pInfo.versionName;
-        txtversioncode.setText("Version "+version);
+        int versionCode = pInfo.versionCode;
+        txtversioname.setText("VersionName "+version);
+        txtversioncode.setText("VersionCode "+versionCode);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity.class);
+                Intent intent = new Intent(AboutUsActivity.this, SnapDashboardActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
-
     @Override
     public void onBackPressed() {
 
-
-        Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity.class);
+        Intent intent = new Intent(AboutUsActivity.this, SnapDashboardActivity.class);
         startActivity(intent);
         finish();
 

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="library-1.0.1">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/es.voghdev.pdfviewpager/library/1.0.1/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/es.voghdev.pdfviewpager/library/1.0.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/es.voghdev.pdfviewpager/library/1.0.1/de172d79d96530d67344d8b62101afaf2b68b427/library-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

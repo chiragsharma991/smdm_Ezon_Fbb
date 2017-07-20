@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Doc No : "
+        android:textSize="@dimen/stock_textsize_normal"
+        android:id="@+id/txt_doc_number"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/smdm_default_color"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123"
+        android:id="@+id/rec_status_docNumber"
+        android:textSize="@dimen/stock_textsize_normal"
+        android:layout_toRightOf="@+id/txt_doc_number"
+        android:textColor="@color/smdm_default_color"
+
+        />
+    <TextView
+        android:id="@+id/txt_qty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QTY : "
+        android:textSize="@dimen/stock_textsize_normal"
+        android:layout_toLeftOf="@+id/rec_status_qty"
+        android:textColor="@color/smdm_default_color"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textSize="@dimen/stock_textsize_normal"
+        android:id="@+id/rec_status_qty"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/smdm_default_color"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date : "
+        android:textSize="@dimen/stock_textsize_normal"
+        android:id="@+id/txt_date"
+        android:layout_toLeftOf="@+id/rec_status_date"
+        android:textColor="@color/smdm_default_color"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="02/05/2017"
+        android:textSize="@dimen/stock_textsize_normal"
+        android:id="@+id/rec_status_date"
+        android:textColor="@color/smdm_default_color"
+        android:layout_alignParentRight="true"
+
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/arrow">
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>
+
+
+
+
+

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1009442812452",
+    "firebase_url": "https://sm-dm-66ff2.firebaseio.com",
+    "project_id": "sm-dm-66ff2",
+    "storage_bucket": "sm-dm-66ff2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009442812452:android:3a73ab82faf066b5",
+        "android_client_info": {
+          "package_name": "apsupportapp.aperotechnologies.com.designapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009442812452-1dd7lvg33beu2qfehardc1936mfc3ogg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "apsupportapp.aperotechnologies.com.designapp",
+            "certificate_hash": "a5342aba34a5f062a10a15d4048fb5d6f53bcf9c"
+          }
+        },
+        {
+          "client_id": "1009442812452-kteri62c3cigk1ukk7jum9f7sgvbevo8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYW1zEObNrZU-tGS08Yjt1ULUdfNhukgI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009442812452-kteri62c3cigk1ukk7jum9f7sgvbevo8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

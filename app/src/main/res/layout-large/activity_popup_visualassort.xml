@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/visualAssortSortLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <!--base layout for click anywhere-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="65dp"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/rankLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:id="@+id/relrankLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp">
+
+
+                    <!--main pop up border-->
+
+                    <LinearLayout
+                        android:id="@+id/menuPopuplayout"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/popupmenu"
+                        android:orientation="vertical"
+                        android:paddingLeft="15dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:id="@+id/popSort"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Sort By"
+                                android:textColor="@color/ezfbb_black"
+                                android:textSize="@dimen/smdm_PopUp_title_large"
+
+
+                                />
+
+
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/bst_lineOne_child"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/smdm_popup_divider"
+                            android:layout_alignStart="@+id/bst_head_child"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/ezfbb_black" />
+
+
+                        <!--Pending-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/visualAssort_Pending"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="5dp"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtPending"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pending"
+                                    android:textSize="@dimen/smdm_PopUp_title_large"
+                                    android:textColor="@color/ezfbb_black"
+                                    />
+
+
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+
+                                <RadioButton
+                                    android:focusable="true"
+                                    android:clickable="false"
+                                    android:id="@+id/visualAssort_PendingChk"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:buttonTint="@android:color/black"
+
+
+                                    />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                        <!--Completed-->
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/visualAssort_Completed"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:weightSum="10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtCompleted"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Completed"
+                                    android:textSize="@dimen/smdm_PopUp_title_large"
+                                    android:textColor="@color/ezfbb_black"
+                                    />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:id="@+id/visualAssort_CompletedChk"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:checked="false"
+                                    android:buttonTint="@color/ezfbb_black"
+
+
+
+                                    />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                        <!--Fwd week-->
+
+
+
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:id="@+id/bstInventory_Fwd"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:weightSum="10">-->
+
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="3"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                        <!--android:id="@+id/popPromoU"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Fwd Week Cover"-->
+                        <!--android:textSize="@dimen/smdm_PopUp_title_large"-->
+
+                        <!--/>-->
+
+
+                        <!--</LinearLayout>-->
+
+
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="7"-->
+                        <!--android:gravity="end"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<RadioButton-->
+                        <!--android:id="@+id/bstInventory_Fwdchk"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:clickable="false"-->
+                        <!--android:layout_weight="5"-->
+                        <!--android:buttonTint="@android:color/black"-->
+
+
+
+                        <!--/>-->
+
+
+                        <!--</LinearLayout>-->
+
+
+                        <!--</LinearLayout>-->
+
+
+                        <!--coverNsell-->
+
+
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:id="@+id/bstInventory_coverNsell"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:weightSum="10">-->
+
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="3"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Cover and sell Thru%(U) "-->
+                        <!--android:textSize="@dimen/smdm_PopUp_title_large"-->
+
+                        <!--/>-->
+
+
+                        <!--</LinearLayout>-->
+
+
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="7"-->
+                        <!--android:gravity="end"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<RadioButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/bstInventory_coverNsellchk"-->
+                        <!--android:layout_weight="5"-->
+                        <!--android:clickable="false"-->
+                        <!--android:buttonTint="@android:color/black"-->
+
+
+
+                        <!--/>-->
+
+
+                        <!--</LinearLayout>-->
+
+
+                        <!--</LinearLayout>-->
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

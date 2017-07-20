@@ -1,20 +1,190 @@
 <resources>
-    <string name="app_name">SM-DM</string>
-    <string name="title_activity_dash_board">Dashboard</string>
+    <string name="app_name">Engage 24x7</string>
+    <string name="title_activity_dash_board">Engage 24x7</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="pie_chart_val">\n 8,11,235</string>
     <string name="action_settings">Logout</string>
-    <string name="about_us">About Us</string>
     <string name="title_activity_switching_tab">Option</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="article_option">Article Option</string>
+    <string name="name">Name</string>
+    <string name="search">Search</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="loggedin">Keep me logged in</string>
+    <string name="store">Store : </string>
+    <string name="number_in_units">* All numbers in units</string>
+    <string name="s_net_sales_value">12,15,14,566</string>
+    <string name="s_net_sales">Net Sales</string>
+    <string name="s_plan_sales_value">15,15,00,000</string>
+    <string name="s_plan_sales">Plan Sales</string>
+    <string name="s_plan_sales_perc">20%</string>
+    <string name="s_net_sales_perc">20%</string>
+    <string name="s_netsales_u">12,15,14,566</string>
+    <string name="s_netsales_u_value">15,15,00,000</string>
+    <string name="s_netsales_u_perc">20%</string>
+    <string name="s_soh_u_value">12,15,14,566</string>
+    <string name="s_soh_u">S O H(U)</string>
+    <string name="s_ros_value">15,15,00,000</string>
+    <string name="s_ros">ROS</string>
+    <string name="soh">SOH</string>
+    <string name="git">GIT</string>
+    <string name="coll_options"># Options</string>
+    <string name="s_fwd_wk_value">15,15,00,000</string>
+    <string name="s_fwd_wk_cover">Fwd Wk Cover</string>
+    <string name="hourly_analysis">Hourly Info</string>
+    <string name="visual_assortment">Visual Assortment</string>
+    <string name="sales_analysis">Sales Analysis</string>
+    <string name="prod_filter">Filter</string>
+    <string name="sales_pva_filter">Filter</string>
+    <string name="product_info">Product Info</string>
+    <string name="about_us">About Us</string>
+    <string name="prod_search">Search</string>
+    <string name="aboutus_app_name">Engage 24x7</string>
+    <string name="sales_pva">Sales PvA</string>
+    <string name="product_name">Product</string>
+    <string name="product_search_enter_text">Enter Text</string>
+    <string name="scan_barcode">Scan Barcode</string>
+    <string name="submit">Submit</string>
+    <string name="Rs">\u20B9</string>
+    <string name="pvaSales">PvA Sales%</string>
+    <string name="fullSize">Option%</string>
+    <string name="xaxis_label">Weeks --></string>
+    <string name="department">Department</string>
+    <string name="category">Category</string>
+    <string name="planclass">Plan Class</string>
+    <string name="brand">Brand</string>
+    <string name="brand_plan_class">Brand Plan Class</string>
+    <string name="likes">Likes</string>
+    <string name="dislikes">Dislikes</string>
+    <string name="pending">Pending</string>
+    <string name="key_product_plan">Plan vs Actual </string>
+    <string name="plan_actual">Key Products</string>
+    <string name="store_inspection">Store Inspection</string>
+
+    <!--Inspection Module-->
+    <string name="inspection_history">Inspection History</string>
+    <string name="hourly_performer">Hourly Performance</string>
+    <string name="inspection_begin">Begin Inspection</string>
+    <string name="insp_criteria_1">Fashion Quotient(display looks fashionable)</string>
+    <string name="insp_criteria_2">Merchandise Display(by size/ full size sets)</string>
+    <string name="insp_criteria_3">Merchandise Presentation Standards</string>
+    <string name="insp_criteria_4">Suggestive Selling by staff</string>
+    <string name="insp_criteria_5">Overall Cleanliness</string>
+    <string name="insp_criteria_6">Signage(clear &amp; visible)</string>
+    <string name="insp_criteria_7">MPM Execution</string>
+    <string name="insp_criteria_8">Window &amp; cluster Mannequins Displays</string>
+    <string name="dummy_text">Inspector comments</string>
+    <string name="inspection_id">Inspection Id :</string>
+    <string name="inspected_by">Inspected By :</string>
+    <string name="new_inspection">New Inspection</string>
+    <string name="insp_date">Inspection Date :</string>
+    <string name="insp_cri_title">Inspection Item (all the fields are mandatory)</string>
+    <string name="insp_comment">Comment :</string>
+    <string name="overall_rating">Overall Rating</string>
+    <string name="insp_detls_title">Inspection Details</string>
+    <string name="insp_history_title">Inspection History</string>
+
+    <!--Collaboration Module-->
+    <string name="plan_option">Option : </string>
+    <string name="short_qty">Short Qty</string>
+    <string name="avl_qty">Avl.Qty</string>
+    <string name="req_qty">Req.Qty</string>
+    <string name="sc_qty">Scan Qty</string>
+    <string name="scan_qty">Scanned Qty</string>
+    <string name="case_nm">Case : </string>
+    <string name="status">Status</string>
+    <string name="details">Details</string>
+    <string name="total_avl_qty">Total Avl.Qty : </string>
+    <string name="total_req_qty">Total Req.Qty : </string>
+
+    <!--Feedback Module-->
+    <string name="feedback">Feedback</string>
+    <string name="f_next">Next</string>
+    <string name="f_previous">Previous</string>
+    <string name="fitting">Fitting</string>
+    <string name="pricing">Pricing</string>
+    <string name="colours">Colours</string>
+    <string name="prints">Prints</string>
+    <string name="styling">Styling</string>
+    <string name="fabric_quality">Fabric Quality</string>
+    <string name="garment_quality">Garment Quality</string>
+
+    <!--Sales -->
+    <string name="sales_title">Sales</string>
+    <string name="net_sales">Net Sales</string>
+    <string name="plan_sales">Plan Sales</string>
+    <string name="net_sales_u">Net Sales(U)</string>
+    <string name="soh_u">SOH(U)</string>
+    <string name="zonal">ZONAL</string>
+    <string name="national">NATIONAL</string>
+    <string name="yoy_sales_grw">YOY Sales Grw %</string>
+    <string name="pva">PvA%</string>
+    <string name="yoy">YoY%</string>
+    <string name="sell_thru">Sell Thru(U)%</string>
+    <string name="mixsales">MixSales%</string>
+    <string name="rank">Rank</string>
+    <string name="git_u">GIT(U)</string>
+    <string name="ros_u">ROS(U)</string>
+    <string name="fwd_wk_cover">Fwd Wk Cover</string>
+    <string name="pva_sales">PvA Sales%</string>
+    <string name="pva_title">Sales PvA</string>
+
+    <!--MPM-->
+    <string name="mpm_title">Season Catalogue</string>
+
+    <!--Visual Assortment-->
+    <string name="visual_assort_title">Visual Assortment</string>
+    <string name="done">Done</string>
+    <string name="vs_comment">Comment</string>
+    <string name="fabric">Fabric</string>
+    <string name="season">Season</string>
+    <string name="colour">Colour</string>
+    <string name="fit">Fit</string>
+    <string name="size_ratio">Size Ratio : </string>
+    <string name="collection">Collection</string>
+    <string name="options_report">Visual Assortment Report</string>
+
+    <!--Freshness Index-->
+    <string name="fi_title">Freshness Index</string>
+
+    <!--Customer Loyalty-->
+    <string name="cust_loyalty">Customer Engagement</string>
+    <string name="hourly_perform">Hourly Performance</string>
+    <string name="cust_lookup">Customer Plan Engagement</string>
+    <string name="actual_customer">Customers</string>
+    <string name="plan_customers">Plan Customers</string>
+    <string name="oe_title">Option Efficiency</string>
+    <string-array name="colour_name">
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Black</item>
+        <item>Orange</item>
+    </string-array>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="permission_camera_rationale">This App needs to access Camera to present you with the Demo.</string>
+    <string name="prod_name">Product Name : </string>
 
+    <!--Ezone Module-->
 
+    <string name="ezone_sales_header">Sales</string>
+    <string name="ezone_inventory_header">Inventory</string>
+    <string name="ezone_best_worst">Best/Worst Performers</string>
+    <string name="ezone_assortment_analysis">Assortment Analysis</string>
+    <string name="ezone_filter_location">Location</string>
+    <string name="ezone_filter_product">Product</string>
 
+    <string name="product_availability">Product Availability &amp; Notify Me. </string>
+    <string name="supervisor_staff">Supervisor &amp; Staff </string>
+    <string name="store_services">Our Store Services </string>
+    <string name="price_promotion">Price &amp; Promotion </string>
+    <string name="policy_exchange">Policy - Exchange, Refund</string>
+    <string name="product_quality_range">Product Quality &amp; Range</string>
 
 
 </resources>

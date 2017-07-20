@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_screen_color"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_header_height"
+                android:layout_alignParentTop="true"
+                android:background="?attr/colorPrimary"
+                android:contentInsetStart="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetEnd="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_marginLeft="0dp"
+                        android:id="@+id/imageBtnBack"
+                        android:background="@drawable/button_click_effect"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:clickable="false"
+                            android:background="@mipmap/common_back_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pva_title"
+                        android:textSize="20sp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/imageBtnBack"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#ffffff"
+                        android:id="@+id/toolbar_title" />
+
+                    <RelativeLayout
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/header_clickable_width"
+                        android:layout_toLeftOf="@+id/imgfilter"
+                        android:id="@+id/imgrank"
+                        android:background="@drawable/button_click_effect"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_centerVertical="true">
+
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="0dp"
+                        android:id="@+id/imgfilter"
+                        android:background="@drawable/button_click_effect"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:clickable="false"
+                            android:background="@mipmap/filter_icon_nav"
+                            android:layout_width="19dp"
+                            android:layout_height="19dp"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+
+                <TextView
+                    android:id="@+id/tstoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/store"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtStoreCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@+id/tstoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtStoreName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/txtStoreCode"
+                    android:hint=""
+                    android:textColor="@color/bg_store_code_text"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/segmented3"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="14dp"
+            segmentedgroup:sc_tint_color="@color/colorPrimary">
+
+            <RadioButton
+                android:id="@+id/btn_wtd"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="WTD" />
+
+            <RadioButton
+                android:id="@+id/btn_lw"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="LW" />
+
+
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/llayoutSalesPvA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/relChartlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pva_noChart"
+                    android:text="No Chart data available"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:textSize="@dimen/largelayout_storesize"/>
+
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/linechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
+
+
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/pva_progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:padding="10dp"
+                    android:theme="@style/ProgressBar"
+                    android:visibility="gone">
+
+                </ProgressBar>
+
+                <TextView
+                    android:layout_below="@+id/linechart"
+                    android:layout_width="match_parent"
+                    android:gravity="right"
+                    android:textSize="12sp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/txt_color"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/xaxis_label"
+                    android:layout_height="20dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llpvahierarchy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtpvahDeptName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/txt_color"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/relTablelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/smdm_divider_Black" />
+
+
+                <LinearLayout
+                    android:layout_below="@+id/view1"
+                    android:id="@+id/linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/llheader"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@color/smdm_divider_Black_light">
+
+
+                        <RelativeLayout
+                            android:layout_toLeftOf="@+id/txtPlanSales"
+                            android:layout_marginRight="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp">
+
+
+                            <RelativeLayout
+                                android:layout_centerVertical="true"
+                                android:id="@+id/btnSalesBack"
+                                android:layout_width="20dp"
+                                android:layout_height="40dp">
+
+                                <Button
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerInParent="true"
+                                    android:background="@mipmap/back_arrow"
+                                    android:clickable="false" />
+                            </RelativeLayout>
+
+
+                            <TextView
+                                android:layout_toRightOf="@+id/btnSalesBack"
+                                android:id="@+id/txtPlanClass"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="Department"
+                                android:textStyle="normal"
+                                android:textColor="@color/bg_store_code_text"
+                                android:textSize="12sp" />
+
+
+                            <RelativeLayout
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/txtPlanClass"
+                                android:id="@+id/btnSalesNext"
+                                android:layout_width="20dp"
+                                android:layout_height="40dp">
+
+                                <Button
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerInParent="true"
+                                    android:background="@mipmap/next_arrow"
+                                    android:clickable="false" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:textStyle="normal"
+                            android:id="@+id/txtPlanSales"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="190dp"
+                            android:layout_toLeftOf="@+id/txtNetSales"
+                            android:gravity="center_vertical|center"
+                            android:text="@string/plan_sales"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:id="@+id/txtNetSales"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="120dp"
+                            android:layout_toLeftOf="@+id/rel"
+                            android:gravity="center_vertical|center"
+                            android:text="@string/net_sales"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="12sp"
+                            android:textStyle="normal"/>
+
+
+                        <TextView
+                            android:id="@+id/rel"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical|center"
+                            android:text="@string/pva_sales"
+                            android:textColor="@color/bg_store_code_text"
+                            android:textSize="12sp"
+                            android:textStyle="normal"/>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@color/bg_screen_color">
+
+                        <EditText
+                            android:editable="false"
+                            android:padding="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="260dp"
+                            android:layout_toLeftOf="@+id/edt_plansales"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:textColor="@android:color/black" />
+
+
+                        <EditText
+                            android:editable="false"
+                            android:paddingRight="2dp"
+                            android:id="@+id/edt_plansales"
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="190dp"
+                            android:layout_toLeftOf="@+id/edt_netsales"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical" />
+
+
+                        <EditText
+                            android:editable="false"
+                            android:id="@+id/edt_netsales"
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="120dp"
+                            android:layout_toLeftOf="@+id/edt_pvaSales"
+                            android:background="@drawable/border"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:editable="false"
+                            android:id="@+id/edt_pvaSales"
+                            android:layout_width="120dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/border"
+                            android:textColor="@android:color/black" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:divider="@null"
+                        android:dividerHeight="0dp"
+                        android:smoothScrollbar="true" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

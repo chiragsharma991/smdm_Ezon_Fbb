@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by hasai on 15/03/16.
  */
+@SuppressWarnings("ALL")
 public class EventPagerAdapter extends PagerAdapter {
     // Declare Variables
     Context context;
@@ -66,10 +66,6 @@ public class EventPagerAdapter extends PagerAdapter {
         ((ViewPager) container).setOnPageChangeListener(pageListener);
         imgEvent = (ImageView) itemView.findViewById(R.id.imgEvent);
 
-//        Glide.with(context)
-//                .load(eventUrlList.get(position))
-//                .into(imgEvent);
-
         Picasso.with(context).load(eventUrlList.get(position)).fit().centerInside()
                     .placeholder(R.color.grey)
                     .error(R.color.grey)
@@ -78,13 +74,11 @@ public class EventPagerAdapter extends PagerAdapter {
         itemView.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //this will log the page number that was click
-                Log.i("TAG", "This page was clicked: " + position);
             }
         });
 
         // Add viewpager_item.xml to ViewPager
         ((ViewPager) container).addView(itemView);
-
         return itemView;
     }
 
@@ -93,21 +87,15 @@ public class EventPagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         // Remove viewpager_item.xml from ViewPager
         ((ViewPager) container).removeView((RelativeLayout) object);
-
     }
-
-
 
     private class PageListener extends ViewPager.SimpleOnPageChangeListener {
         public void onPageSelected(int pos) {
-            //Log.e("---", "page selected " + pos);
             ImageView img = (ImageView)  li.getChildAt(currentPage);
             img.setImageResource(R.mipmap.dots_unselected);
             currentPage = pos;
             ImageView img1 = (ImageView)  li.getChildAt(currentPage);
             img1.setImageResource(R.mipmap.dots_selected);
-
-
         }
     }
 }

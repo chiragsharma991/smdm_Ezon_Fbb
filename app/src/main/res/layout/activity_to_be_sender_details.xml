@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+                android:background="@color/bg_screen_color"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linear_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/bg_screen_color"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_header_height"
+                android:layout_alignParentTop="true"
+                android:background="?attr/colorPrimary"
+                segmentedgroup:contentInsetEnd="0dp"
+                segmentedgroup:contentInsetLeft="0dp"
+                segmentedgroup:contentInsetRight="0dp"
+                segmentedgroup:contentInsetStart="0dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/status_senderdetails_imageBtnBack"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="0dp"
+                        android:background="@drawable/button_click_effect">
+
+                        <Button
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/common_back_icon"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/status_senderdetails_imageBtnBack"
+                        android:text="Details"
+                        android:textColor="@color/divider_salescard1"
+                        android:textSize="@dimen/smdm_header_title_large" />
+
+
+
+                    <ProgressBar
+                        android:layout_width="20dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/senderDetailProcess"
+                        android:visibility="gone"
+                        android:indeterminateDrawable="@drawable/progress"
+                        />
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listviewLayout"
+        android:layout_below="@+id/linear_head"
+        android:layout_above="@+id/stock_detailSubmit"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/storeDesc"
+            android:padding="5dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="3.8"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/status_detailStoreCase"
+                        android:textColor="@color/bg_store_code_text"
+                        android:layout_alignParentLeft="true"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:textSize="@dimen/collaboration_stock_storecode"
+                        android:text="@string/case_nm"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/detailStoreDesc"
+                        android:id="@+id/status_detailStoreCode"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:textSize="@dimen/collaboration_stock_storecode"
+                        android:text="Store Code "
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailStoreDesc"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/bg_store_code_text"
+                        android:textSize="@dimen/collaboration_stock_storecode"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:text=" Store Description"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/statusDetail_list"
+            android:scrollbars="vertical"
+            android:layout_below="@+id/storeDesc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

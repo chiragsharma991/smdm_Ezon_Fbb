@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_top_full_cut"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen_color"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearToolbar"
+        >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_header_height"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            segmentedgroup:contentInsetLeft="0dp"
+            segmentedgroup:contentInsetStart="0dp"
+            segmentedgroup:contentInsetRight="0dp"
+            segmentedgroup:contentInsetEnd="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/topBest_BtnBack"
+                    android:background="@drawable/button_click_effect"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/common_back_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Top Option By Full Cut"
+                    android:textSize="@dimen/smdm_header_title_large"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/topBest_BtnBack"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/divider_salescard1"
+                    android:id="@+id/toolbar_title" />
+
+                <RelativeLayout
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/topOption_imgfilter"
+                    android:background="@drawable/button_click_effect"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/filter_icon_nav"
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <RelativeLayout
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/storelayout"
+            android:layout_marginRight="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/top_storecode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/store"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/smdm_store_title_large"
+                />
+
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:id="@+id/top_txtStoreCode"
+                android:layout_width="wrap_content"
+                android:textColor="@color/bg_store_code_text"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/top_storecode"
+                android:textSize="@dimen/smdm_store_title_large"
+                />
+
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/top_txtStoreCode"
+                android:id="@+id/top_txtStoreName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="@dimen/smdm_store_title_large"
+                />
+
+            <RelativeLayout
+                android:id="@+id/sk_quickFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="0dp"
+                >
+
+                <Button
+                    android:layout_width="16dp"
+                    android:layout_height="29dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/quick_filter"
+                    android:clickable="false" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <info.hoang8f.android.segmented.SegmentedGroup
+        android:id="@+id/top_segmented"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/linearToolbar"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="1dp"
+        segmentedgroup:sc_corner_radius="14dp"
+        segmentedgroup:sc_tint_color="@color/colorPrimary">
+
+        <RadioButton
+            android:id="@+id/top_core"
+            style="@style/RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Fashion" />
+
+        <RadioButton
+            style="@style/RadioButton"
+            android:id="@+id/top_fashion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Core"
+            android:backgroundTint="@color/colorPrimary"
+            />
+
+
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_segmented"
+        android:layout_marginTop="20dp"
+        >
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/topOptionListView"
+            android:layout_marginTop="10dp"
+            android:dividerHeight="1dp"
+
+            >
+
+        </ListView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/smdm_divider"
+            android:background="@color/smdm_divider_Black"
+            android:layout_marginTop="9dp"
+            >
+
+        </View>
+
+
+
+    </RelativeLayout>
+
+
+    <include layout="@layout/topfullcut_quick_filter_menu"/>
+
+
+
+
+</RelativeLayout>
