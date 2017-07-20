@@ -2,6 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions;
 
 import android.content.Context;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class TargetStockExcepAdapter extends BaseAdapter {
 
         final TargetStockExcepAdapter.Holder holder;
         if (convertView == null) {
+            Log.e( "getView: ","" );
             holder = new TargetStockExcepAdapter.Holder();
             convertView = mInflater.inflate(R.layout.activity_target_exception_child, null);
             holder.target_SOH_U = (TextView) convertView.findViewById(R.id.target_SOH_U);
