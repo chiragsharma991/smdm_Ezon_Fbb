@@ -20,8 +20,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="240dp"
             android:layout_toLeftOf="@+id/oe_txtOption"
-            android:textSize="@dimen/smdm_rowInflaterLayout_large"
-            android:textColor="@color/txt_color"
+            android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+            android:textColor="@color/ezfb_black"
             />
 
         <TextView
@@ -36,8 +36,8 @@
             android:layout_marginRight="180dp"
             android:layout_toLeftOf="@+id/oe_txtOption_Perc"
             android:text="1234567"
-            android:textSize="@dimen/smdm_rowInflaterLayout_large"
-            android:textColor="@color/txt_color"            />
+            android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+            android:textColor="@color/ezfb_black"            />
 
         <TextView
             android:padding="2dp"
@@ -51,8 +51,8 @@
             android:layout_marginRight="120dp"
             android:layout_toLeftOf="@+id/oe_txtSOH_U"
             android:text="1234567"
-            android:textSize="@dimen/smdm_rowInflaterLayout_large"
-            android:textColor="@color/txt_color"            />
+            android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+            android:textColor="@color/ezfb_black"            />
 
 
         <TextView
@@ -67,8 +67,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="1234567"
-            android:textSize="@dimen/smdm_rowInflaterLayout_large"
-            android:textColor="@color/txt_color"            />
+            android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+            android:textColor="@color/ezfb_black"/>
 
         <TextView
             android:padding="2dp"
@@ -80,8 +80,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="1234567"
-            android:textSize="@dimen/smdm_rowInflaterLayout_large"
-            android:textColor="@color/txt_color"            />
+            android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+            android:textColor="@color/ezfb_black"/>
 
 
     </RelativeLayout>

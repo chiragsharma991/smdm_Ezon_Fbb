@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
@@ -48,7 +50,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  */
 
 public class TargetStockExceptionActivity extends AppCompatActivity implements View.OnClickListener,
-        RadioGroup.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener {
+        RadioGroup.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener,TabLayout.OnTabSelectedListener {
 
     TextView target_txtStoreCode, target_txtStoreName;
     RelativeLayout target_BtnBack, target_BtnFilter, target_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
@@ -84,6 +86,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private TextView targetMax;
     private int setValue=7;
     private boolean coreSelection = false;
+    private TabLayout Tabview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -281,10 +284,14 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
         quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
         targetListView = (ListView) findViewById(R.id.targetListView);
-        target_segmented = (SegmentedGroup) findViewById(R.id.target_segmented);
-        target_core = (RadioButton) findViewById(R.id.target_core);
-        target_fashion = (RadioButton) findViewById(R.id.target_fashion);
-        target_fashion.toggle();
+        Tabview = (TabLayout) findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("Fashion"));
+        Tabview.addTab(Tabview.newTab().setText("Core"));
+
+      //  target_segmented = (SegmentedGroup) findViewById(R.id.target_segmented);
+        // target_core = (RadioButton) findViewById(R.id.target_core);
+        //  target_fashion = (RadioButton) findViewById(R.id.target_fashion);
+        //  target_fashion.toggle();
         Toggle_target_fav = (ToggleButton) findViewById(R.id.toggle_top_fav);
         //seasonGroup
         checkCurrent = (CheckBox) findViewById(R.id.checkCurrent);
@@ -306,6 +313,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         TargetSeek = (SeekBar) findViewById(R.id.targetSeek);
         targetMax = (TextView) findViewById(R.id.targetMax);
 
+        Tabview.setOnTabSelectedListener(this);
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
@@ -323,7 +331,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         checkMc.setOnClickListener(this);
 
         qfDoneLayout.setOnClickListener(this);
-        target_segmented.setOnCheckedChangeListener(TargetStockExceptionActivity.this);
+       // target_segmented.setOnCheckedChangeListener(TargetStockExceptionActivity.this);
         target_BtnBack.setOnClickListener(TargetStockExceptionActivity.this);
         target_BtnFilter.setOnClickListener(this);
         target_quickFilter.setOnClickListener(this);
@@ -792,45 +800,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        switch (checkedId) {
-            case R.id.target_core:
-                if (target_core.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Core";
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        targetStockList.clear();
-                        targetListView.setVisibility(View.GONE);
-                        coreSelection = true;
-                        requestTargetStockExcepApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                break;
-            case R.id.target_fashion:
-                if (target_fashion.isChecked()) {
-                    limit = 10;
-                    offsetvalue = 0;
-                    top = 10;
-                    corefashion = "Fashion";
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        targetStockList.clear();
-                        targetListView.setVisibility(View.GONE);
-                        coreSelection = false;
-                        requestTargetStockExcepApi();
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                break;
 
-        }
     }
 
 
@@ -867,6 +837,60 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        int checkedId= Tabview.getSelectedTabPosition();
+        Log.e("TAB", "onTabSelected: " );
+
+        switch (checkedId) {
+            case 1 :   //core selection
+                    limit = 10;
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Core";
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        targetStockList.clear();
+                        targetListView.setVisibility(View.GONE);
+                        coreSelection = true;
+                        requestTargetStockExcepApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                break;
+            case 0 :  // fashion selection
+                    limit = 10;
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Fashion";
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        targetStockList.clear();
+                        targetListView.setVisibility(View.GONE);
+                        coreSelection = false;
+                        requestTargetStockExcepApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+
+                break;
+
+        }
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
 
     }
 }

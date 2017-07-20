@@ -119,6 +119,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <RelativeLayout
                 android:id="@+id/relPielayout"
                 android:layout_width="match_parent"
@@ -140,7 +141,7 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/fIndex_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="210dp"
+                    android:layout_height="310dp"
                     />
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
@@ -177,7 +178,6 @@
                     android:textSize="13sp" />
 
             </LinearLayout>
-
             <RelativeLayout
                 android:id="@+id/relFIndexTablelayout"
                 android:layout_width="match_parent"
@@ -379,6 +379,8 @@
                 </LinearLayout>
 
             </RelativeLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
