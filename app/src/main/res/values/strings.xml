@@ -179,4 +179,12 @@
     <string name="ezone_filter_location">Location</string>
     <string name="ezone_filter_product">Product</string>
 
+    <string name="product_availability">Product Availability &amp; Notify Me. </string>
+    <string name="supervisor_staff">Supervisor &amp; Staff </string>
+    <string name="store_services">Our Store Services </string>
+    <string name="price_promotion">Price &amp; Promotion </string>
+    <string name="policy_exchange">Policy - Exchange, Refund</string>
+    <string name="product_quality_range">Product Quality &amp; Range</string>
+
+
 </resources>

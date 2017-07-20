@@ -22,42 +22,44 @@
             android:layout_marginTop="68dp"
             android:visibility="visible">
 
-            <RelativeLayout
-                android:id="@+id/relLayoutFilter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:visibility="visible">
+            <!--
+                        <RelativeLayout
+                            android:id="@+id/relLayoutFilter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:visibility="visible">
 
-                <ImageView
-                    android:id="@+id/img_quickFilter"
-                    android:layout_width="16dp"
-                    android:layout_height="29dp"
-                    android:layout_alignParentStart="true"
-                    android:background="@mipmap/quick_filter" />
-
-
-                <RelativeLayout
-                    android:id="@+id/qfilterLabelLayout"
-                    android:layout_width="200dp"
-                    android:layout_height="29dp"
-                    android:layout_toRightOf="@+id/img_quickFilter"
-                    android:background="@color/colorPrimary"
-                    android:visibility="visible">
+                            <ImageView
+                                android:id="@+id/img_quickFilter"
+                                android:layout_width="16dp"
+                                android:layout_height="29dp"
+                                android:layout_alignParentStart="true"
+                                android:background="@mipmap/quick_filter" />
 
 
-                    <TextView
-                        android:id="@+id/txtQuickFilterLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:text="Quick Filter"
-                        android:textColor="@color/divider_salescard1"
-                        android:textSize="@dimen/smdm_quickfilter_title_large" />
-                </RelativeLayout>
+                            <RelativeLayout
+                                android:id="@+id/qfilterLabelLayout"
+                                android:layout_width="200dp"
+                                android:layout_height="29dp"
+                                android:layout_toRightOf="@+id/img_quickFilter"
+                                android:background="@color/colorPrimary"
+                                android:visibility="visible">
 
-            </RelativeLayout>
+
+                                <TextView
+                                    android:id="@+id/txtQuickFilterLabel"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="Quick Filter"
+                                    android:textColor="@color/divider_salescard1"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+            -->
 
             <ScrollView
                 android:id="@+id/scrll_FilterLayout"
@@ -67,10 +69,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_below="@+id/relLayoutFilter"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="29dp"
                 android:fadeScrollbars="false"
-                android:background="@drawable/popupmenu"
                 android:scrollIndicators="right"
+                android:background="@drawable/popupmenu"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbarFadeDuration="0"
                 android:scrollbarSize="3dp"
@@ -99,8 +100,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Season Group"
+                                android:textStyle="bold"
                                 android:textColor="@color/smdm_quickfiltertxt_color"
-                                android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                         </LinearLayout>
 
@@ -109,10 +111,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/smdm_quickfilter_divider"
                             android:layout_marginTop="5dp"
-                            android:background="@color/divider_salescard"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            />
+                            android:background="@color/ezfb_black" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -132,9 +133,10 @@
                                     android:id="@+id/txtpopCurrent"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="Current"
-                                    android:textColor="@color/smdm_default_color"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -176,9 +178,10 @@
                                     android:id="@+id/txtpopPrevious"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="Previous"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -217,9 +220,10 @@
                                     android:id="@+id/txtpopOld"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="Old"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -259,9 +263,10 @@
                                     android:id="@+id/txtpopUpcoming"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="Upcoming"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+                                    />
 
                             </LinearLayout>
 
@@ -311,8 +316,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Time"
-                                android:textColor="@color/smdm_quickfiltertxt_color"
-                                android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                android:textStyle="bold"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                         </LinearLayout>
 
@@ -323,7 +329,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:background="@color/divider_salescard" />
+                            android:background="@color/ezfb_black" />
                         <!--WTD-->
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -343,9 +349,9 @@
                                     android:id="@+id/txtpopWTD"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="WTD"
-                                    android:textColor="@color/smdm_default_color"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                             </LinearLayout>
 
@@ -386,9 +392,9 @@
                                     android:id="@+id/txtpopL4W"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="L4W"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                             </LinearLayout>
 
@@ -430,9 +436,9 @@
                                     android:id="@+id/txtAgeing3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="STD"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                             </LinearLayout>
 
@@ -477,8 +483,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Title"
-                                android:textColor="@color/smdm_quickfiltertxt_color"
-                                android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                android:textStyle="bold"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                         </LinearLayout>
 
@@ -489,7 +496,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:background="@color/divider_salescard" />
+                            android:background="@color/ezfb_black" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -509,9 +516,9 @@
                                     android:id="@+id/txtpopDept"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="Department"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                             </LinearLayout>
 
@@ -553,9 +560,9 @@
                                     android:id="@+id/txtpopCategory"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="Subdept"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                             </LinearLayout>
 
@@ -594,9 +601,9 @@
                                     android:id="@+id/txtpopPlanClass"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="Class"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                             </LinearLayout>
 
@@ -617,6 +624,7 @@
                             </LinearLayout>
                         </LinearLayout>
 
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -635,9 +643,9 @@
                                     android:id="@+id/txtpopPlanSubClass"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="Subclass"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                             </LinearLayout>
 
@@ -676,9 +684,9 @@
                                     android:id="@+id/txtpopMc"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/smdm_default_color"
+                                    android:textColor="@color/ezfb_black"
                                     android:text="MC"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                             </LinearLayout>
 
@@ -721,8 +729,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Target Cover Req"
-                                android:textColor="@color/smdm_quickfiltertxt_color"
-                                android:textSize="@dimen/smdm_quickfilter_title_large" />
+                                android:textStyle="bold"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                         </LinearLayout>
 
@@ -730,10 +739,10 @@
                             android:id="@+id/bst_lineOne_child4"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
+                            android:layout_marginTop="5dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@color/divider_salescard" />
+                            android:background="@color/ezfb_black" />
 
 
                         <LinearLayout
@@ -759,7 +768,7 @@
                                     android:layout_marginTop="2dp"
                                     android:gravity="center"
                                     android:text="2"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
 
                                     />
 
@@ -804,9 +813,20 @@
                                     android:layout_marginTop="2dp"
                                     android:text="7"
                                     android:gravity="center"
-                                    android:textSize="@dimen/smdm_quickfilter_title_large"
+                                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
+
                                     />
+
+
                             </LinearLayout>
+
+
+
+
+
+
+
+
 
                         </LinearLayout>
 
@@ -826,20 +846,22 @@
                 android:layout_height="25dp"
                 android:layout_below="@+id/scrll_FilterLayout"
                 android:layout_marginLeft="15dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/ezfb_Red"
                 android:visibility="visible">
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/ezfb_Red"
                     android:clickable="false"
                     android:text="Done"
                     android:textColor="@color/divider_salescard1"
                     android:textSize="@dimen/smdm_quickfilter_title_large" />
 
             </RelativeLayout>
+
+
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

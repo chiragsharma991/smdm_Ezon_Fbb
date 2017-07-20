@@ -43,13 +43,13 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     TextView txtPlanSalesVal, txtPlanSales, txtPlanSalesPerc, txtPlanSalesName;
     TextView txtNetSalesUVal, txtNetSalesU, txtNetSalesUPerc, txtNetSalesUName;
     TextView txtSohUVal, txtSohU;
-
+    //view pager 1
     TextView txtStoreVal_PvASales1, txtZonalSalesVal, txtNationalSalesVal;
     TextView relPvASales, relYoYSales, relSellThru, relMixSales, relRank;
     TextView txtPvASales_line,txtYoYSales_line,txtSellThru_line,txtMixSales_line,txtRank_line;
     TextView txtPvAZonalRankVal, txtPvANationalRankVal, txtYoYZonalRankVal, txtYoYNationalRankVal;
     RelativeLayout sznchildRelLayout, rankRelLayout;
-    LinearLayout linPvAZonalRank,linPvANationalRank,linYoYZonalRank,linYoYNationalRank,pmsyrtxtRelLayout;
+    LinearLayout linPvAZonalRank,linPvANationalRank,linYoYZonalRank,linYoYNationalRank,pmsyrtxtRelLayout,linear_store,linear_zonal,linear_national;
 
     // ViewPager 2
     TextView txtSOHVal2, txtSOH2;
@@ -181,6 +181,9 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
             linPvANationalRank = (LinearLayout) itemView.findViewById(R.id.linear_sales_national);
             linYoYZonalRank = (LinearLayout) itemView.findViewById(R.id.linear_growth_zone);
             linYoYNationalRank = (LinearLayout) itemView.findViewById(R.id.linear_growth_national);
+            linear_store = (LinearLayout)itemView.findViewById(R.id.linear_store);
+            linear_zonal = (LinearLayout)itemView.findViewById(R.id.linear_zonal);
+            linear_national = (LinearLayout)itemView.findViewById(R.id.linear_national);
 
         } else if (position == 2) {
             itemView = inflater.inflate(R.layout.child_sales_viewpager2, container,
@@ -208,19 +211,19 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 if (salesAnalysis != null)
                 {
                     txtNetSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getSaleNetVal())));
-                    txtNetSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getPlanSaleNetVal())));
-                    txtPlanSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtPlanSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUVal.setText("" + format.format(Math.round(salesAnalysis.getSaleTotQty())));
-                    txtNetSalesUVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtSohUVal.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-                    txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
-                    txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
-                    txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                   // txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
-                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     // Color Condition for Wow Net Sale, Pva Achieved , Wow net sale Growth
                     if (salesAnalysis.getWowNetSalesGrowthPct() <= 0)
                     {
@@ -257,19 +260,19 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 if (salesAnalysis != null) {
 
                     txtNetSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getSaleNetVal())));
-                    txtNetSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesVal.setText("\u20B9\t" + format.format(Math.round(salesAnalysis.getPlanSaleNetVal())));
-                    txtPlanSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtPlanSalesVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUVal.setText("" + format.format(Math.round(salesAnalysis.getSaleTotQty())));
-                    txtNetSalesUVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtSohUVal.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-                    txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtSohUVal.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) + "%");
-                    txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtPlanSalesPerc.setText("" + Math.round(salesAnalysis.getPvaAchieved()) + "%");
-                    txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtPlanSalesPerc.setTypeface(Typeface.DEFAULT_BOLD);
                     txtNetSalesUPerc.setText("" + Math.round(salesAnalysis.getYoyNetSalesUnitsGrowthPct()) + "%");
-                    txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
+                  //  txtNetSalesUPerc.setTypeface(Typeface.DEFAULT_BOLD);
                 }
                 if (salesAnalysis.getWowNetSalesGrowthPct() <= 0)
                 {
@@ -366,38 +369,37 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                 if (Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
 
-                   txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                    txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                    txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                   linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                    linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                 } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
 
-                    txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                    txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                    txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                    linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                 } else if (Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchievedZonal())) {
 
-                    txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                    txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                    txtNationalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
+                    linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    linear_national.setBackgroundColor(Color.parseColor("#70e503"));
 
                 } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedNational())
                         && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchieved())
                         && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchievedZonal())) {
 
-                    txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                    txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                    txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                    linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
 
                 } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedNational())) {
 
-                    txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                    txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                    txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                    linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
                 }
-
 
                 //PvA Sales
                 relPvASales.setOnClickListener(new View.OnClickListener() {
@@ -420,50 +422,49 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
                         if (Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedZonal()) > Math.round(salesAnalysis.getPvaAchievedNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         } else if (Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) > Math.round(salesAnalysis.getPvaAchievedZonal())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#70e503"));
 
                         } else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedNational())
                                 && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchieved())
                                 && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) == Math.round(salesAnalysis.getPvaAchievedZonal())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
 
                         } else if (Math.round(salesAnalysis.getPvaAchievedZonal()) == Math.round(salesAnalysis.getPvaAchievedNational()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchieved()) < Math.round(salesAnalysis.getPvaAchievedNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
                         }
                         else if (Math.round(salesAnalysis.getPvaAchieved()) == Math.round(salesAnalysis.getPvaAchievedZonal()) && Math.round(salesAnalysis.getPvaAchievedNational()) < Math.round(salesAnalysis.getPvaAchieved()) && Math.round(salesAnalysis.getPvaAchievedNational()) < Math.round(salesAnalysis.getPvaAchievedZonal())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         }
-
-
                     }
                 });
                 //YoY Sales
-                relYoYSales.setOnClickListener(new View.OnClickListener() {
+                relYoYSales.setOnClickListener(new View.OnClickListener()
+                {
                     @Override
                     public void onClick(View v) {
                         sznchildRelLayout.setVisibility(View.VISIBLE);
@@ -482,55 +483,61 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         //YOY Sales
                         if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-
-                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
-
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-
-                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
-
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-
-                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())
-                                && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct())
-                                && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
-
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-
-
-                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
-
-
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-
-
-                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
-
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         }
+                        else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())) {
+
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
+
+                        }
+                        else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) > Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal())) {
+
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#70e503"));
+
+                        }
+                        else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational())
+                                && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct())
+                                && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()))
+                        {
+
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
 
+                        }
+                        else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()))
+                        {
+
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
+
+
+                        } else if (Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) == Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPct()) && Math.round(salesAnalysis.getYoyNetSalesGrowthPctNational()) < Math.round(salesAnalysis.getYoyNetSalesGrowthPctZonal()))
+                        {
+
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
+
+                        }
                     }
                 });
 
                 //Sell Thru
-                relSellThru.setOnClickListener(new View.OnClickListener() {
+                relSellThru.setOnClickListener(new View.OnClickListener()
+                {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View v)
+                    {
                         sznchildRelLayout.setVisibility(View.VISIBLE);
                         rankRelLayout.setVisibility(View.GONE);
 
@@ -548,42 +555,47 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         //Sell Thro
                         if (Math.round(salesAnalysis.getSellThruUnits()) > Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnits()) > Math.round(salesAnalysis.getSellThruUnitsNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
 
-                        } else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnitsNational())) {
+                        }
+                        else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsZonal()) > Math.round(salesAnalysis.getSellThruUnitsNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
-                        } else if (Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnitsZonal())) {
+                        }
+                        else if (Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) > Math.round(salesAnalysis.getSellThruUnitsZonal())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#70e503"));
 
-                        } else if (Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsZonal())
+                        }
+                        else if (Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsZonal())
                                 && Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnitsNational())
                                 && Math.round(salesAnalysis.getSellThruUnitsNational()) == Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) == Math.round(salesAnalysis.getSellThruUnitsZonal())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
-                        } else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsNational())) {
+                        }
+                        else if (Math.round(salesAnalysis.getSellThruUnitsZonal()) == Math.round(salesAnalysis.getSellThruUnitsNational()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnits()) < Math.round(salesAnalysis.getSellThruUnitsNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
-                        } else if (Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnitsNational()) < Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) < Math.round(salesAnalysis.getSellThruUnitsZonal())) {
+                        }
+                        else if (Math.round(salesAnalysis.getSellThruUnits()) == Math.round(salesAnalysis.getSellThruUnitsZonal()) && Math.round(salesAnalysis.getSellThruUnitsNational()) < Math.round(salesAnalysis.getSellThruUnits()) && Math.round(salesAnalysis.getSellThruUnitsNational()) < Math.round(salesAnalysis.getSellThruUnitsZonal())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         }
 
@@ -610,41 +622,41 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         //Mix Sales
                         if (Math.round(salesAnalysis.getMixSales()) > Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) > Math.round(salesAnalysis.getMixsalesNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         } else if (Math.round(salesAnalysis.getMixSalesZonal()) > Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixSalesZonal()) > Math.round(salesAnalysis.getMixsalesNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         } else if (Math.round(salesAnalysis.getMixsalesNational()) > Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) > Math.round(salesAnalysis.getMixSalesZonal())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#70e503"));
 
                         } else if (Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixsalesNational())
                                 && Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixsalesNational()) && Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixSales())
                                 && Math.round(salesAnalysis.getMixsalesNational()) == Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) == Math.round(salesAnalysis.getMixSalesZonal())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         } else if (Math.round(salesAnalysis.getMixSalesZonal()) == Math.round(salesAnalysis.getMixsalesNational()) && Math.round(salesAnalysis.getMixSales()) < Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixSales()) < Math.round(salesAnalysis.getMixsalesNational())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         } else if (Math.round(salesAnalysis.getMixSales()) == Math.round(salesAnalysis.getMixSalesZonal()) && Math.round(salesAnalysis.getMixsalesNational()) < Math.round(salesAnalysis.getMixSales()) && Math.round(salesAnalysis.getMixsalesNational()) < Math.round(salesAnalysis.getMixSalesZonal())) {
 
-                            txtStoreVal_PvASales1.setBackgroundColor(Color.parseColor("#70e503"));
-                            txtZonalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
-                            txtNationalSalesVal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_store.setBackgroundColor(Color.parseColor("#70e503"));
+                            linear_zonal.setBackgroundColor(Color.parseColor("#ff7e00"));
+                            linear_national.setBackgroundColor(Color.parseColor("#ff7e00"));
 
                         }
 
@@ -670,12 +682,12 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                         txtYoYNationalRankVal.setText("" + salesAnalysis.getNationalYOYGrowthRank());
 
                         //Sales Rank Condtion
-                        if (salesAnalysis.getZonalSalesRank() > salesAnalysis.getNationalSalesRank())
+                        if (salesAnalysis.getZonalSalesRank() < salesAnalysis.getNationalSalesRank())
                         {
                             linPvAZonalRank.setBackgroundResource(R.color.smdm_green);
                             linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
                         }
-                        else if (salesAnalysis.getNationalSalesRank() > salesAnalysis.getZonalSalesRank())
+                        else if (salesAnalysis.getNationalSalesRank() < salesAnalysis.getZonalSalesRank())
                         {
                             linPvAZonalRank.setBackgroundResource(R.color.smdm_amber);
                             linPvANationalRank.setBackgroundResource(R.color.smdm_green);
@@ -686,12 +698,12 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                             linPvANationalRank.setBackgroundResource(R.color.smdm_amber);
                         }
                         //YoY Rank Condition
-                        if (salesAnalysis.getZonalYOYGrowthRank() > salesAnalysis.getNationalYOYGrowthRank())
+                        if (salesAnalysis.getZonalYOYGrowthRank() < salesAnalysis.getNationalYOYGrowthRank())
                         {
                             linYoYZonalRank.setBackgroundResource(R.color.smdm_green);
                             linYoYNationalRank.setBackgroundResource(R.color.smdm_amber);
                         }
-                        else if (salesAnalysis.getNationalYOYGrowthRank() > salesAnalysis.getZonalYOYGrowthRank())
+                        else if (salesAnalysis.getNationalYOYGrowthRank() < salesAnalysis.getZonalYOYGrowthRank())
                         {
                             linYoYZonalRank.setBackgroundResource(R.color.smdm_amber);
                             linYoYNationalRank.setBackgroundResource(R.color.smdm_green);
@@ -708,18 +720,19 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
         }
         else if (position == 2)
         {
-            if (salesAnalysis != null) {
+            if (salesAnalysis != null)
+            {
                // String ros = format.format(salesAnalysis.getRos());
                 double ros = Double.parseDouble(String.format("%.1f", salesAnalysis.getRos()));
                 double fwdwkcover = Double.parseDouble(String.format("%.1f", salesAnalysis.getFwdWeekCover()));
                 txtSOHVal2.setText("" + format.format(Math.round(salesAnalysis.getStkOnhandQty())));
-                txtSOHVal2.setTypeface(Typeface.DEFAULT_BOLD);
+             //   txtSOHVal2.setTypeface(Typeface.DEFAULT_BOLD);
                 txtGITVal.setText("" + format.format(Math.round(salesAnalysis.getStkGitQty())));
-                txtGITVal.setTypeface(Typeface.DEFAULT_BOLD);
+            //    txtGITVal.setTypeface(Typeface.DEFAULT_BOLD);
                 txtROSVal2.setText(""+ format.format(ros));
-                txtROSVal2.setTypeface(Typeface.DEFAULT_BOLD);
+             //   txtROSVal2.setTypeface(Typeface.DEFAULT_BOLD);
                 txtFwdWkCoverVal2.setText("" + fwdwkcover);
-                txtFwdWkCoverVal2.setTypeface(Typeface.DEFAULT_BOLD);
+             //   txtFwdWkCoverVal2.setTypeface(Typeface.DEFAULT_BOLD);
             }
         }
         vwpagersales.setOnPageChangeListener(this);
@@ -729,15 +742,16 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+    {
 
     }
 
     @Override
-    public void onPageSelected(int position) {
+    public void onPageSelected(int position)
+    {
 
         ImageView img = (ImageView) lldots.getChildAt(currentPage);
-
         img.setImageResource(R.mipmap.dots_unselected);
         currentPage = position;
         ImageView img1 = (ImageView) lldots.getChildAt(currentPage);
@@ -746,12 +760,14 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {
+    public void onPageScrollStateChanged(int state)
+    {
 
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(ViewGroup container, int position, Object object)
+    {
         // Remove viewpager_item.xml from ViewPager
         (container).removeView((LinearLayout) object);
 

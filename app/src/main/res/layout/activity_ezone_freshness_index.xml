@@ -141,7 +141,7 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/fIndex_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="310dp"
+                    android:layout_height="270dp"
                     />
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"

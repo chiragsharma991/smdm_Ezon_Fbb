@@ -182,23 +182,21 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public class SalesViewHolder extends RecyclerView.ViewHolder {
 
-
         TextView nameTv;
         RelativeLayout rel;
         RelativeLayout innerrel, relValue;
         TextView txtPlan, txtValue, txtPvAValue;
         TextView txtAchieve;
 
-        public SalesViewHolder(View itemView) {
+        public SalesViewHolder(View itemView)
+        {
             super(itemView);
-
             nameTv = (TextView) itemView.findViewById(R.id.txtVal);
             rel = (RelativeLayout) itemView.findViewById(R.id.rel);
             innerrel = (RelativeLayout) itemView.findViewById(R.id.innerrellay);
             txtPlan = (TextView) itemView.findViewById(R.id.txtPlan);
             txtAchieve = (TextView) itemView.findViewById(R.id.txtAchieve);
             txtPvAValue = (TextView) itemView.findViewById(R.id.txtPvAValue);
-
         }
     }
 

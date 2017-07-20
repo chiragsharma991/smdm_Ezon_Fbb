@@ -1,11 +1,8 @@
-
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="top"
-    android:background="@color/bg_screen_color"
+    android:layout_marginTop="15dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -24,21 +21,16 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext3">
 
-
-
             <TextView
                 android:id="@+id/txt_ez_SOH2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:gravity="left"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:layout_marginLeft="8dp"
                 android:text="@string/soh_u"
                 android:textSize="12sp" />
-
-
-
 
             <TextView
                 android:id="@+id/txt_ez_SOHUVal2"
@@ -46,14 +38,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
-                android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:layout_marginTop="25dp"
+                android:text="123454"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp" />
 
-
         </RelativeLayout>
-
 
         <RelativeLayout
             android:id="@+id/rel_ez_git"
@@ -65,30 +55,26 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext3">
 
-
             <TextView
                 android:id="@+id/txt_ez_GIT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
                 android:text="@string/git_u"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
 
-
-
-
-            <TextView
+           <TextView
                 android:id="@+id/txt_ez_GITVal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
-                android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:layout_marginTop="25dp"
+                android:text="1234"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp"
                  />
 
@@ -112,16 +98,15 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext3">
 
-
             <TextView
                 android:id="@+id/txt_ez_ROS2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
                 android:text="@string/ros_u"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
 
             <TextView
@@ -130,13 +115,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
-                android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:layout_marginTop="25dp"
+                android:text="1234"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp"
                />
          </RelativeLayout>
-
 
         <RelativeLayout
             android:id="@+id/rel_ez_fwdwkcover"
@@ -148,18 +132,16 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext3">
 
-
             <TextView
                 android:id="@+id/txt_ez_FwdWkCover2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
                 android:text="@string/fwd_wk_cover"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
-
 
              <TextView
                 android:id="@+id/txt_ez_FwdWkCoverVal2"
@@ -167,12 +149,11 @@
                  android:layout_height="wrap_content"
                  android:layout_alignParentLeft="true"
                  android:layout_marginLeft="8dp"
-                 android:layout_marginTop="35dp"
-                 android:text=""
-                android:textColor="@color/bg_store_code_text"
+                 android:layout_marginTop="25dp"
+                 android:text="1234"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp"
                 />
-
 
         </RelativeLayout>
     </LinearLayout>

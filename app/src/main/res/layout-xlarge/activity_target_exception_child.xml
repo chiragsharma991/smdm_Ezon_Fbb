@@ -2,274 +2,335 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-                android:background="@color/bg_screen_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
+
     <RelativeLayout
-        android:id="@+id/target_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:padding="5dp">
 
-
-
-        <RelativeLayout
+        >
+        <android.support.v7.widget.CardView
+            android:id="@+id/bst_cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:gravity="center_horizontal">
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="5dp"
+            app:cardBackgroundColor="@color/ezfb_White"
+            app:cardElevation="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
 
-            <!--Buy one-->
-
-
-            <LinearLayout
+            >
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp">
 
-                <LinearLayout
+                >
+                <!--
+                                <RelativeLayout
+                                    android:id="@+id/bst_Rel_image_child"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    >
+
+                                    <ImageView
+                                        android:id="@+id/floor_image_child"
+                                        android:layout_width="100dp"
+                                        android:layout_height="100dp"
+                                        android:layout_marginTop="0dp"
+                                        android:scaleType="fitXY"
+                                        />
+
+                                    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                                        android:id="@+id/imageLoader_floor"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:background="#0000"
+                                        android:keepScreenOn="true"
+                                        android:padding="10dp"
+                                        android:theme="@style/ProgressBar"
+                                        >
+
+                                    </ProgressBar>
+
+                                </RelativeLayout>
+                -->
+
+                <RelativeLayout
+                    android:id="@+id/relativeTwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-                    <!---->
+                    android:layout_marginTop="0dp"
+                    android:gravity="center_horizontal|center_vertical">
 
-                    <TextView
-                        android:id="@+id/target_option"
+                    <!--Buy one-->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
-                        android:text="Buy One Get One"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textSize="@dimen/smdm_inflator_title_large"
-                        android:textStyle="bold"
-
-
-                        />
-
-                    <RelativeLayout
-                        android:id="@+id/target_fav"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
                         >
 
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="0.2"
+
+                                >
 
 
-                        <ToggleButton
-                            android:id="@+id/toggle_target_fav"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/toggleswitch"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:textOff=""
-                            android:textOn=""
+                                <TextView
+                                    android:id="@+id/target_option"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Buy One Get One "
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                    />
 
-                            />
+                            </LinearLayout>
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_horizontal|top"
+                                android:layout_weight="0.8"
+                                >
 
-                    </RelativeLayout>
-
-
-                </LinearLayout>
-
-
-             <!--SOH (U)-->
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.3"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="SOH(U)"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.1"
-                        android:textColor="@color/smdm_default_color"
-                        android:text=":"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:id="@+id/target_SOH_U"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="100"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                </LinearLayout>
+                                <ToggleButton
+                                    android:id="@+id/toggle_target_fav"
+                                    android:layout_width="@dimen/icon_width"
+                                    android:layout_height="@dimen/icon_height"
+                                    android:background="@drawable/toggleswitch"
+                                    android:focusable="false"
+                                    android:focusableInTouchMode="false"
+                                    android:textOff=""
+                                    android:textOn="" />
 
 
-                <!--Target ROS-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.3"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="Ideal Stock"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.1"
-                        android:textColor="@color/smdm_default_color"
-                        android:text=":"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:id="@+id/target_ROS_U"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="100"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                </LinearLayout>
-
-              <!--ROS(U)-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.3"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="ROS(U)"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.1"
-                        android:textColor="@color/smdm_default_color"
-                        android:text=":"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:id="@+id/target_ROS"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="5"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                </LinearLayout>
-
-                <!--Availability-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.3"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="Availability%"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.1"
-                        android:textColor="@color/smdm_default_color"
-                        android:text=":"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:id="@+id/target_Availability"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:singleLine="true"
-                        android:text="5"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                </LinearLayout>
+                            </LinearLayout>
 
 
-            </LinearLayout>
+
+                        </LinearLayout>
 
 
-        </RelativeLayout>
+                        <!--sales layout-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="5dp"
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/ezfb_black"
+                                    android:text="SOH(U)"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.1"
+                                    android:visibility="visible"
+                                    android:text=":"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/target_SOH_U"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.4"
+                                    android:singleLine="true"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/ezfb_black"
+                                    android:text="100"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp"
+                                android:weightSum="1">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.5"
+                                    android:singleLine="true"
+                                    android:text="Ideal Stock"
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.1"
+                                    android:text=":"
+                                    android:visibility="visible"
+                                    android:textColor="@color/smdm_default_color"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/target_ROS_U"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.4"
+                                    android:singleLine="true"
+                                    android:text="100"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp"
+                                android:weightSum="1">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.5"
+                                    android:singleLine="true"
+                                    android:text="ROS(U)"
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.1"
+                                    android:text=":"
+                                    android:visibility="visible"
+                                    android:textColor="@color/smdm_default_color"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/target_ROS"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.4"
+                                    android:singleLine="true"
+                                    android:text="100"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp"
+                                android:weightSum="1">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.5"
+                                    android:singleLine="true"
+                                    android:text="Availability%"
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.1"
+                                    android:text=":"
+                                    android:visibility="visible"
+                                    android:textColor="@color/smdm_default_color"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/target_Availability"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.4"
+                                    android:singleLine="true"
+                                    android:text="100"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
+                                    />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
 
 
     </RelativeLayout>
+
 
 
 </RelativeLayout>

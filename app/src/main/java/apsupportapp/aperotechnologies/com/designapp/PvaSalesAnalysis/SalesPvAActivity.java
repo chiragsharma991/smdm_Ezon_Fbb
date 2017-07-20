@@ -121,7 +121,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         focusposition = 0;
         context = this;
         Sales_Pva_Activity = this;
-
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         int densityDpi = (int) (metrics.density * 160f);
         // Display device width and height in pixels
@@ -189,7 +188,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 requestSalesViewPagerValueAPI();
                 Handler h = new Handler();
                 h.postDelayed(new Runnable() {
-                    public void run() {
+                    public void run()
+                    {
                         requestSalesListDisplayAPI();
                     }
                 }, 700);
@@ -201,7 +201,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 retainSegmentValuesFilter();
                 requestSalesSelectedFilterVal(selectedString);
             }
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
@@ -332,7 +334,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 }
                             }, 700);
 
-                        } else {
+                        }
+                        else
+                        {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
 
@@ -347,7 +351,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         btnSalesNext = (RelativeLayout) findViewById(R.id.btnSalesNext);
         btnSalesNext.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 if(postRequest!=null)
                 {
                     postRequest.cancel();
@@ -356,7 +361,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 {
                     return;
                 }
-                switch (txtheaderplanclass.getText().toString()) {
+                switch (txtheaderplanclass.getText().toString())
+                {
 
                     case "Department":
                         btnSalesPrev.setVisibility(View.VISIBLE);
@@ -413,8 +419,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
-
                         break;
+
                     case "Class":
                         txtheaderplanclass.setText("Subclass");
                         fromWhere = "Subclass";
@@ -424,7 +430,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
 
-                        if (Reusable_Functions.chkStatus(context)) {
+                        if (Reusable_Functions.chkStatus(context))
+                        {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.GONE);
@@ -434,20 +441,21 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             requestSalesViewPagerValueAPI();
                             Handler h = new Handler();
                             h.postDelayed(new Runnable() {
-                                public void run() {
+                                public void run()
+                                {
                                     requestSalesListDisplayAPI();
                                 }
                             }, 700);
 
-                        } else {
+                        }
+                        else
+                        {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
-
                         break;
 
                     case "Subclass":
                         btnSalesNext.setVisibility(View.INVISIBLE);
-
                         txtheaderplanclass.setText("MC");
                         fromWhere = "MC";
                         level = 5;
@@ -456,7 +464,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
 
-                        if (Reusable_Functions.chkStatus(context)) {
+                        if (Reusable_Functions.chkStatus(context))
+                        {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.GONE);
@@ -470,7 +479,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     requestSalesListDisplayAPI();
                                 }
                             }, 700);
-                        } else {
+                        }
+                        else
+                        {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -482,16 +493,16 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
         listViewSalesPvA.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
                 RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
                 totalItemCount = mRecyclerViewHelper.getItemCount();
                 focusposition = mRecyclerViewHelper.findFirstVisibleItemPosition();
             }
 
-
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+            {
                 super.onScrollStateChanged(recyclerView, newState);
                 currentState = newState;
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -505,26 +516,28 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     }, 700);
                 }
                 prevState = currentState;
-
             }
         });
 
         //Drill Down
-        listViewSalesPvA.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+        listViewSalesPvA.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
-                    public void onItemClick(View view, final int position) {
-                        if (pva_progressBar.getVisibility() == View.VISIBLE) {
+                    public void onItemClick(View view, final int position)
+                    {
+                        if (pva_progressBar.getVisibility() == View.VISIBLE)
+                        {
                             return;
-                        } else {
+                        }
+                        else
+                        {
                             onItemClickFlag = true;
                             Handler h = new Handler();
                             h.postDelayed(new Runnable() {
                                 public void run() {
-                                    if (position < salesAnalysisClassArrayList.size()) {
-
-
-                                        switch (txtheaderplanclass.getText().toString()) {
+                                    if (position < salesAnalysisClassArrayList.size())
+                                    {
+                                        switch (txtheaderplanclass.getText().toString())
+                                        {
                                             case "Department":
                                                 btnSalesPrev.setVisibility(View.VISIBLE);
                                                 txtheaderplanclass.setText("Subdept");
@@ -643,9 +656,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-             onBackPressed();
+            public void onClick(View v)
+            {
+               onBackPressed();
             }
         });
 

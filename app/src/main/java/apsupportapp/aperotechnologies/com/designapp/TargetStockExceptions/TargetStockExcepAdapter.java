@@ -73,7 +73,7 @@ public class TargetStockExcepAdapter extends BaseAdapter {
             holder.target_ROS = (TextView) convertView.findViewById(R.id.target_ROS);
             holder.target_Availability = (TextView) convertView.findViewById(R.id.target_Availability);
             holder.target_option = (TextView) convertView.findViewById(R.id.target_option);
-            holder.target_fav = (RelativeLayout) convertView.findViewById(R.id.target_fav);
+           // holder.target_fav = (RelativeLayout) convertView.findViewById(R.id.target_fav);
             convertView.setTag(holder);
 
         } else {
