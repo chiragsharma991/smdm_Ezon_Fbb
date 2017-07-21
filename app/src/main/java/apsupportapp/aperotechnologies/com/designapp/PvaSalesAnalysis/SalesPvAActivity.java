@@ -47,6 +47,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
+import com.numetriclabz.numandroidcharts.GaugeChart;
 
 import org.json.JSONArray;
 
@@ -97,6 +98,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     RelativeLayout btnBack, btnFilter;
     RelativeLayout btnSalesPrev, btnSalesNext;
     Gson gson;
+    GaugeChart gaugeChart;
     String pvaFirstVisibleItem;
     JsonArrayRequest postRequest;
     ArrayList<SalesAnalysisViewPagerValue> arrayList;
@@ -135,6 +137,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
+        gaugeChart = (GaugeChart)findViewById(R.id.gauge_chart);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         txt_pva_noChart = (TextView)findViewById(R.id.pva_noChart);

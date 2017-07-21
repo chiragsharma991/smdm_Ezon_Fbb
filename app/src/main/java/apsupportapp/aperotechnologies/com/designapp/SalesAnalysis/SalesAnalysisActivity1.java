@@ -666,7 +666,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         txtSalesClickedValue = " ";
         val = "";
         firstVisibleItem = 0;
-        etListText = (EditText) findViewById(R.id.etListText);
+//        etListText = (EditText) findViewById(R.id.etListText);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         //hierarchy header
@@ -715,9 +715,11 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     }
 
     // Retain values for segment click
-    private void retainSegmentValuesFilter() {
+    private void retainSegmentValuesFilter()
+    {
         filter_toggleClick = true;
-        switch (selectedsegValue) {
+        switch (selectedsegValue)
+        {
             case "WTD":
                 Tabview.getTabAt(0).select();
                 break;
@@ -733,9 +735,11 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         }
     }
 
-    private void retainEzoneSegVal() {
+    private void retainEzoneSegVal()
+    {
         ez_filter_toggleClick = true;
-        switch (ez_segment_val) {
+        switch (ez_segment_val)
+        {
             case "LD":
                 ez_tabView.getTabAt(0).select();
                 break;
@@ -758,28 +762,40 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 if (ez_firstVisible_no < ez_sales_detalis_array.size() && !ezone_onClickflg) {
 
                     // product is checked in viewby
-                    if (txt_ez_header.getText().toString().equals("Department")) {
+                    if (txt_ez_header.getText().toString().equals("Department"))
+                    {
                         ezone_level = 1;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
 
-                    } else if (txt_ez_header.getText().toString().equals("Subdept")) {
+                    }
+                    else if (txt_ez_header.getText().toString().equals("Subdept"))
+                    {
                         ezone_level = 2;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    } else if (txt_ez_header.getText().toString().equals("Class")) {
+                    }
+                    else if (txt_ez_header.getText().toString().equals("Class"))
+                    {
                         ezone_level = 3;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    } else if (txt_ez_header.getText().toString().equals("Subclass")) {
+                    }
+                    else if (txt_ez_header.getText().toString().equals("Subclass"))
+                    {
                         ezone_level = 4;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    } else if (txt_ez_header.getText().toString().equals("MC")) {
+                    }
+                    else if (txt_ez_header.getText().toString().equals("MC"))
+                    {
                         ezone_level = 5;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                     }
                     //location is checked in view by
-                    else if (txt_ez_header.getText().toString().equals("Region")) {
+                    else if (txt_ez_header.getText().toString().equals("Region"))
+                    {
                         ezone_level = 7;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    } else if (txt_ez_header.getText().toString().equals("Store")) {
+                    }
+                    else if (txt_ez_header.getText().toString().equals("Store"))
+                    {
                         ezone_level = 9;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                     }

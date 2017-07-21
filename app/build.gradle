@@ -15,7 +15,10 @@ apply plugin: 'io.fabric'
 
 repositories
         {
-            maven { url 'https://maven.fabric.io/public' }
+            maven {
+                url 'https://maven.fabric.io/public'
+                }
+            maven { url 'https://dl.bintray.com/sj/maven/' }
         }
 
 android {
@@ -24,7 +27,7 @@ android {
     defaultConfig
             {
                 applicationId "apsupportapp.aperotechnologies.com.designapp"
-                minSdkVersion 17
+                minSdkVersion 21
                 targetSdkVersion 25
                 versionCode 69
                 versionName "1.8"
@@ -59,6 +62,7 @@ dependencies
             compile 'com.android.support:design:25.1.1'
             compile 'com.android.support:support-v4:25.1.1'
             compile 'com.mcxiaoke.volley:library:1.0.+'
+            compile 'com.numetriclabz.numandroidcharts:numandroidcharts:1.0.12'
             compile 'com.thefinestartist:ytpa:1.2.1'
             compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
             compile 'com.google.zxing:core:3.2.1'
