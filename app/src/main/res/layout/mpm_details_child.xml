@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Fitting"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfb_black"
             android:textSize="@dimen/smdm_departmentTitleLarge"/>
         />
 
