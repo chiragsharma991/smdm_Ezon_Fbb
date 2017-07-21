@@ -137,7 +137,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-        gaugeChart = (GaugeChart)findViewById(R.id.gauge_chart);
+      //  gaugeChart = (GaugeChart)findViewById(R.id.gauge_chart);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         txt_pva_noChart = (TextView)findViewById(R.id.pva_noChart);

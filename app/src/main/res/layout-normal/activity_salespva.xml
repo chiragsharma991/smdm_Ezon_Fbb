@@ -177,27 +177,23 @@
         </info.hoang8f.android.segmented.SegmentedGroup>
 
 
-     
-
-
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
             <LinearLayout
-                android:visibility="visible"
                 android:id="@+id/llayoutSalesPvA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible">
 
-                
-                <com.numetriclabz.numandroidcharts.GaugeChart
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp" />
-                
-                
+
+                <!--<com.numetriclabz.numandroidcharts.GaugeChart-->
+                    <!--android:id="@+id/gauge_chart"-->
+                    <!--android:layout_width="200dp"-->
+                    <!--android:layout_height="180dp" />-->
 
                 <RelativeLayout
                     android:id="@+id/relChartlayout"
@@ -216,10 +212,10 @@
                         android:visibility="gone" />
 
                     <com.github.mikephil.charting.charts.LineChart
-                        android:nestedScrollingEnabled="true"
                         android:id="@+id/linechart"
                         android:layout_width="match_parent"
-                        android:layout_height="180dp" />
+                        android:layout_height="180dp"
+                        android:nestedScrollingEnabled="true" />
 
                     <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                         android:id="@+id/pva_progressBar"
