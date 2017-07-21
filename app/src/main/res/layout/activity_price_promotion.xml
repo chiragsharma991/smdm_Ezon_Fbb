@@ -61,6 +61,29 @@
                     android:layout_marginLeft="20dp"
                     android:id="@+id/toolbar_title" />
 
+                <RelativeLayout
+                    android:background="@drawable/button_click"
+                    android:id="@+id/btn_More"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp">
+
+                    <Button
+                        android:clickable="false"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/price_promotion"
+                        android:layout_alignParentBottom="true"
+                        android:id="@+id/button3" />
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
