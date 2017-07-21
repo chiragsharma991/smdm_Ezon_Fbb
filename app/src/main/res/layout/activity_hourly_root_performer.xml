@@ -28,7 +28,7 @@
                 android:layout_gravity="center_vertical"
                 android:textStyle="normal"
                 android:textSize="@dimen/normallayout_textsize"
-                android:textColor="@color/txt_color"
+                android:textColor="@color/ezfb_black"
 
                 />
 
@@ -81,7 +81,7 @@
                 android:layout_gravity="center_vertical"
                 android:text="Net Sales"
                 android:textSize="@dimen/normallayout_textsize"
-                android:textColor="@color/txt_color"
+                android:textColor="@color/ezfb_black"
                 />
 
         </LinearLayout>
@@ -97,7 +97,7 @@
                 android:text="0"
                 android:layout_gravity="center_vertical"
                 android:textSize="@dimen/normallayout_textsize"
-                android:textColor="@color/txt_color"
+                android:textColor="@color/ezfb_black"
                 android:textStyle="normal"/>
 
         </LinearLayout>

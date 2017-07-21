@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.15"
             android:gravity="center_horizontal"
-            android:textColor="@color/bg_store_code_text"
+            android:textColor="@color/ezfb_black"
             android:singleLine="true"
             android:text=" ACH%"
             android:textSize="12sp"

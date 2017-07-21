@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -62,7 +63,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class HourlyPerformence extends AppCompatActivity implements HttpResponse, RadioGroup.OnCheckedChangeListener {
+public class HourlyPerformence extends AppCompatActivity implements HttpResponse, RadioGroup.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
 
     private SegmentedGroup segmentButton;
     public static PieChart pieChart;
@@ -89,6 +90,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     private String leveLDesc;  // for GeoLevel2Desc / GeoLevel3Desc.
     private int focusPosition, dupfocusPosition = 0;
     private LinearLayout addleggend;
+    private TabLayout Tabview;
 
 
     @Override
@@ -364,7 +366,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     private void intialise() {
 
         thousandSaperator = NumberFormat.getNumberInstance(new Locale("", "in"));
-        segmentButton = (SegmentedGroup) findViewById(R.id.hrl_segmented);
+      //  segmentButton = (SegmentedGroup) findViewById(R.id.hrl_segmented);
         pieChart = (PieChart) findViewById(R.id.hrl_piechart);
         barChart = (CombinedChart) findViewById(R.id.hrl_barchart);
         listView = (RecyclerView) findViewById(R.id.hrl_geoPerformance_listview);
@@ -376,10 +378,15 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         archPercent = (TextView) findViewById(R.id.hrl_arh);
         spend = (TextView) findViewById(R.id.hrl_spend);
         units = (TextView) findViewById(R.id.hrl_units);
-        Hrl_zonePerformance = (RadioButton) findViewById(R.id.hrl_zonePerformance);
-        Hrl_conceptPerformance = (RadioButton) findViewById(R.id.hrl_conceptPerformance);
-        Hrl_segmented = (SegmentedGroup) findViewById(R.id.hrl_segmented);
-        Hrl_segmented.setOnCheckedChangeListener(this);
+       // Hrl_zonePerformance = (RadioButton) findViewById(R.id.hrl_zonePerformance);
+       // Hrl_conceptPerformance = (RadioButton) findViewById(R.id.hrl_conceptPerformance);
+       // Hrl_segmented = (SegmentedGroup) findViewById(R.id.hrl_segmented);
+        Tabview = (TabLayout) findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("Concept Performance"));
+        Tabview.addTab(Tabview.newTab().setText("Zone Performance"));
+
+        Tabview.setOnTabSelectedListener(this);
+      //  Hrl_segmented.setOnCheckedChangeListener(this);
         footer = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.activity_listview, null, false);
         hrl_btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -593,12 +600,20 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int id) {
 
+
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+        int checkedId= Tabview.getSelectedTabPosition();
+        Log.e("TAB", "onTabSelected: " );
         String url;
         ApiRequest api_request;
         focusOnPie = false;
 
-        switch (id) {
-            case R.id.hrl_conceptPerformance:
+        switch (checkedId) {
+            case 0 : // Concept Performance
                 concept_toggle = true;
                 dupfocusPosition = 0;
                 if (Reusable_Functions.chkStatus(context)) {
@@ -615,7 +630,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 }
                 break;
 
-            case R.id.hrl_zonePerformance:
+            case 1 : // Zone performance
                 concept_toggle = false;
                 dupfocusPosition = 0;
                 if (Reusable_Functions.chkStatus(context)) {
@@ -635,6 +650,18 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
         }
     }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+
 
     private class MyvalueFormatter implements IAxisValueFormatter {
 
