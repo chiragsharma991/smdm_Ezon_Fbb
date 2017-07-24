@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -176,6 +177,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
+                            Log.d(TAG, "onResponse: "+response );
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -475,7 +477,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 View lp = new View(context);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setLayoutParams(layoutParams);
-                lp.setBackgroundColor(Color.parseColor("#e3e2e3"));
+                lp.setBackgroundColor(Color.parseColor("#e8112d"));
                 if (position == 0) {
                     Fitting_relative.addView(lp);
                 } else if (position == 1) {
@@ -508,7 +510,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         final TextView textView1 = new TextView(context);
         textView1.setText("" + optionList.get(position));
-        textView1.setTextColor(Color.parseColor("#404040"));
+        textView1.setTextColor(Color.parseColor("#000000"));
 
         final RelativeLayout.LayoutParams params1 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -558,7 +560,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getGarmentQualityCntPer()) + " %");
         }
 
-        textView2.setTextColor(Color.parseColor("#404040"));
+        textView2.setTextColor(Color.parseColor("#000000"));
+        textView2.setTypeface(Typeface.DEFAULT_BOLD);
 
         final RelativeLayout.LayoutParams params2 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,

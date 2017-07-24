@@ -1862,6 +1862,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                     case "Class":
                         txtFIndexClass.setText("Subclass");
+                        btnFIndexNext.setVisibility(View.INVISIBLE);
                         fromWhere = "Subclass";
                         level = 4;
                         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
@@ -1956,6 +1957,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                     case "Subclass":
                         txtFIndexClass.setText("Class");
+                        btnFIndexNext.setVisibility(View.VISIBLE);
                         fromWhere = "Class";
                         level = 3;
                         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
@@ -2086,6 +2088,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                             case "Class":
                                 txtFIndexClass.setText("Subclass");
+                                btnFIndexNext.setVisibility(View.INVISIBLE);
                                 freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
                                 level = 4;
                                 fromWhere = "class";
@@ -2102,7 +2105,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 }
                                 break;
 
-                            case "Subclass":
+                         /*   case "Subclass":
                                 btnFIndexNext.setVisibility(View.INVISIBLE);
                                 txtFIndexClass.setText("MC");
                                 freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
@@ -2119,7 +2122,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     listViewFIndex.setVisibility(View.GONE);
                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                 }
-                                break;
+                                break;*/
 
 
                             case "Region":
