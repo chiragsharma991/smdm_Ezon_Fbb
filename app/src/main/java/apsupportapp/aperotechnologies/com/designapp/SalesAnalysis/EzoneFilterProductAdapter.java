@@ -72,13 +72,13 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
     List categryList = new ArrayList();
     List classList = new ArrayList();
     List brandList = new ArrayList();
-    List brandclsList = new ArrayList();
-    public static String dept_text = "", categry_text = "", class_text = "", brand_text = "", brandcls_text = "";
-    public static int ez_level;
+//    List brandclsList = new ArrayList();
+    public static String dept_text = "", categry_text = "", class_text = "", brand_text = "";//brandcls_text = "";
+    public static int ez_level ;
     EzoneFilterProductAdapter listAdapter;
     int mGroupPosition = 0;
     int mChildPosition = 0;
-    public static boolean dept_flg = false, cat_flg = false, class_flg = false, brand_flg = false, brandcls_flg = false;
+    public static boolean dept_flg = false, cat_flg = false, class_flg = false, brand_flg = false; // brandcls_flg = false;
 
 
     public EzoneFilterProductAdapter(Context context, ArrayList<String> listDataGroup, HashMap<String, List<String>> listDataChild, ExpandableListView expandableListView, EzoneFilterProductAdapter listAdapter) {
@@ -212,7 +212,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                                    salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(true);
                                                    ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.VISIBLE);
-                                                   if (groupPosition == 4)
+                                                   if (groupPosition == 3)
                                                    {
                                                        salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                        cb.setChecked(true);
@@ -332,36 +332,36 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ", ",");
             brand_text = str1;
-            if (brandList.size() == 0)
-            {
-                if (classList.size() == 0)
-                {
-                    mListDataChild.putAll(dublicate_listDataChild2);
-                    for (int k = prod_level - 1; k < mListDataGroup.size(); k++) {
-                        explv_ez_prod.collapseGroup(k);
-                    }
-                    for (int k = prod_level - 1; k < mListDataGroup.size(); k++) {
-                        explv_ez_prod.expandGroup(k);
-                    }
-                } else {
-                    prod_level = 4;
-                    requestProductHierarchyAPI(prod_level, class_text);
-                }
-
-            } else {
-                requestProductHierarchyAPI(prod_level, brand_text);
-            }
+//            if (brandList.size() == 0)
+//            {
+//                if (classList.size() == 0)
+//                {
+//                    mListDataChild.putAll(dublicate_listDataChild2);
+//                    for (int k = prod_level - 1; k < mListDataGroup.size(); k++) {
+//                        explv_ez_prod.collapseGroup(k);
+//                    }
+//                    for (int k = prod_level - 1; k < mListDataGroup.size(); k++) {
+//                        explv_ez_prod.expandGroup(k);
+//                    }
+//                } else {
+//                    prod_level = 4;
+//                    requestProductHierarchyAPI(prod_level, class_text);
+//                }
+//
+//            } else {
+//                requestProductHierarchyAPI(prod_level, brand_text);
+//            }
         }
-        if (prod_level == 6)
-        {
-            brandclsList.remove(brandclsList.indexOf(txtClickedVal.trim()));
-            String[] array = (String[]) brandclsList.toArray(new String[0]);
-            String str1 = Arrays.toString(array);
-            str1 = str1.replace("[", "");
-            str1 = str1.replace("]", "");
-            str1 = str1.replace(", ", ",");
-            brandcls_text = str1;
-        }
+//        if (prod_level == 6)
+//        {
+//            brandclsList.remove(brandclsList.indexOf(txtClickedVal.trim()));
+//            String[] array = (String[]) brandclsList.toArray(new String[0]);
+//            String str1 = Arrays.toString(array);
+//            str1 = str1.replace("[", "");
+//            str1 = str1.replace("]", "");
+//            str1 = str1.replace(", ", ",");
+//            brandcls_text = str1;
+//        }
     }
 
     private void BuildUP(int prod_level)
@@ -375,7 +375,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 cat_flg = false;
                 class_flg = false;
                 brand_flg = false;
-                brandcls_flg = false;
+//                brandcls_flg = false;
                 String[] array = (String[]) deptList.toArray(new String[0]);
                 String str_dept = Arrays.toString(array);
                 str_dept = str_dept.replace("[", "");
@@ -405,7 +405,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 cat_flg = true;
                 class_flg = false;
                 brand_flg = false;
-                brandcls_flg = false;
+//                brandcls_flg = false;
                 String[] array = (String[]) categryList.toArray(new String[0]);
                 String str_cate = Arrays.toString(array);
                 str_cate = str_cate.replace("[", "");
@@ -433,7 +433,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 cat_flg = false;
                 class_flg = true;
                 brand_flg = false;
-                brandcls_flg = false;
+//                brandcls_flg = false;
                 String[] array = (String[]) classList.toArray(new String[0]);
                 String str_class = Arrays.toString(array);
                 str_class = str_class.replace("[", "");
@@ -461,14 +461,14 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 cat_flg = false;
                 class_flg = false;
                 brand_flg = true;
-                brandcls_flg = false;
+//                brandcls_flg = false;
                 String[] array = (String[]) brandList.toArray(new String[0]);
                 String str_brand = Arrays.toString(array);
                 str_brand = str_brand.replace("[", "");
                 str_brand = str_brand.replace("]", "");
                 str_brand = str_brand.replace(", ", ",");
                 brand_text = str_brand;
-                requestProductHierarchyAPI(prod_level, brand_text);
+//                requestProductHierarchyAPI(prod_level, brand_text);
             } else {
                 brandList.add(txtClickedVal.trim());
                 String[] array = (String[]) brandList.toArray(new String[0]);
@@ -477,33 +477,33 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 str_brand = str_brand.replace("]", "");
                 str_brand = str_brand.replace(", ", ",");
                 brand_text = str_brand;
-                requestProductHierarchyAPI(prod_level, brand_text);
+//                requestProductHierarchyAPI(prod_level, brand_text);
             }
         }
-        if (prod_level == 6) {
-            if (!brandcls_flg) {
-                brandclsList.add(txtClickedVal.trim());
-                dept_flg = false;
-                cat_flg = false;
-                class_flg = false;
-                brand_flg = false;
-                brandcls_flg = true;
-                String[] array = (String[]) brandclsList.toArray(new String[0]);
-                String str_brndcls = Arrays.toString(array);
-                str_brndcls = str_brndcls.replace("[", "");
-                str_brndcls = str_brndcls.replace("]", "");
-                str_brndcls = str_brndcls.replace(", ", ",");
-                brandcls_text = str_brndcls;
-            } else {
-                brandclsList.add(txtClickedVal.trim());
-                String[] array = (String[]) brandclsList.toArray(new String[0]);
-                String str_brandcls = Arrays.toString(array);
-                str_brandcls = str_brandcls.replace("[", "");
-                str_brandcls = str_brandcls.replace("]", "");
-                str_brandcls = str_brandcls.replace(", ", ",");
-                brandcls_text = str_brandcls;
-            }
-        }
+//        if (prod_level == 6) {
+//            if (!brandcls_flg) {
+//                brandclsList.add(txtClickedVal.trim());
+//                dept_flg = false;
+//                cat_flg = false;
+//                class_flg = false;
+//                brand_flg = false;
+//                brandcls_flg = true;
+//                String[] array = (String[]) brandclsList.toArray(new String[0]);
+//                String str_brndcls = Arrays.toString(array);
+//                str_brndcls = str_brndcls.replace("[", "");
+//                str_brndcls = str_brndcls.replace("]", "");
+//                str_brndcls = str_brndcls.replace(", ", ",");
+//                brandcls_text = str_brndcls;
+//            } else {
+//                brandclsList.add(txtClickedVal.trim());
+//                String[] array = (String[]) brandclsList.toArray(new String[0]);
+//                String str_brandcls = Arrays.toString(array);
+//                str_brandcls = str_brandcls.replace("[", "");
+//                str_brandcls = str_brandcls.replace("]", "");
+//                str_brandcls = str_brandcls.replace(", ", ",");
+//                brandcls_text = str_brandcls;
+//            }
+//        }
     }
 
     @Override
@@ -522,11 +522,11 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             EzoneSalesFilter.explv_ez_prod.collapseGroup(1);
             EzoneSalesFilter.explv_ez_prod.collapseGroup(2);
             EzoneSalesFilter.explv_ez_prod.collapseGroup(3);
-            EzoneSalesFilter.explv_ez_prod.collapseGroup(4);
+//            EzoneSalesFilter.explv_ez_prod.collapseGroup(4);
         } else {
 
 
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < 4; j++)
             {
                 List<String> arrayList1 = new ArrayList<String>();
 
@@ -543,7 +543,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 EzoneSalesFilter.explv_ez_prod.expandGroup(1);
                 EzoneSalesFilter.explv_ez_prod.expandGroup(2);
                 EzoneSalesFilter.explv_ez_prod.expandGroup(3);
-                EzoneSalesFilter.explv_ez_prod.expandGroup(4);
+//                EzoneSalesFilter.explv_ez_prod.expandGroup(4);
 
             notifyDataSetChanged();
         }
@@ -584,10 +584,11 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
 
             search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20");
 
-        } else if (prod_level == 5)
-        {
-            search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20");
         }
+//        else if (prod_level == 5)
+//        {
+//            search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20");
+//        }
         Log.e("search url:", "" + search_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, search_url,
                 new Response.Listener<JSONArray>() {
@@ -604,9 +605,9 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                             }
                             else
                             {
-                                for (int i = prod_level - 1; i < mListDataChild.size(); i++)
+                                for (int i = prod_level - 1 ; i < mListDataChild.size(); i++)
                                 {
-                                    if (prod_level - 1 == i)
+                                    if (prod_level - 1  == i)
                                     {
                                         for (int j = i; j < mListDataChild.size(); j++)
                                         {
@@ -636,11 +637,11 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                             String listValueBrand = jsonArray.getJSONObject(j).getString("brandName");
                                             drillDownList.add(listValueBrand);
                                         }
-                                        else if (i == 4)
-                                        {
-                                            String listValueBrandClass = jsonArray.getJSONObject(j).getString("brandPlanClass");
-                                            drillDownList.add(listValueBrandClass);
-                                        }
+//                                        else if (i == 4)
+//                                        {
+//                                            String listValueBrandClass = jsonArray.getJSONObject(j).getString("brandPlanClass");
+//                                            drillDownList.add(listValueBrandClass);
+//                                        }
                                     }
                                     //this is for remove dublicate values in arraylist.
                                     Set<String> setValue = new HashSet<>();
@@ -649,9 +650,14 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                     drillDownList.addAll(setValue);
                                     Collections.sort(drillDownList);
                                     //expand group
-                                    mListDataChild.put(mListDataGroup.get(i), drillDownList);
-
-                                    for (int k = prod_level - 1; k < mListDataGroup.size(); k++)
+                                    try {
+                                        mListDataChild.put(mListDataGroup.get(i), drillDownList);
+                                    }
+                                    catch (IndexOutOfBoundsException e)
+                                    {
+                                        Log.e("onResponse: ", ""+e.getMessage());
+                                    }
+                                    for (int k = prod_level - 1 ; k < mListDataGroup.size(); k++)
                                     {
                                         explv_ez_prod.expandGroup(k);
                                     }

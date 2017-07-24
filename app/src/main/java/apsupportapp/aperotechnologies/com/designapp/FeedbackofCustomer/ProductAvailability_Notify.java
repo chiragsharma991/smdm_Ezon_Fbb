@@ -337,41 +337,5 @@ public class ProductAvailability_Notify extends AppCompatActivity{
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_product_availability, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.commit();
-            SalesFilterActivity.level_filter = 1;
-            //  SalesAnalysisActivity1.selectedsegValue = null;
-            SalesAnalysisActivity1.level = 1;
-            Intent intent = new Intent(this, LoginActivity1.class);
-            startActivity(intent);
-            finish();
-            NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notifManager.cancelAll();
-            return true;
-        } else if (id == R.id.aboutus) {
-            Intent intent = new Intent(this, AboutUsActivity.class);
-            startActivity(intent);
-            finish();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

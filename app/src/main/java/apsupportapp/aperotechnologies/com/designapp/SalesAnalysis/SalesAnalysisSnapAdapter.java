@@ -124,33 +124,30 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                     case "Department":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Subdept":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Class":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Subclass":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "MC":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
                         break;
                 }
+
+                ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                 double singlePercVal = 0.5;//50/100;// width divide by 100 perc
                 int planVal = 100; // planned value from API
@@ -169,6 +166,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
 
                 if (achieveVal < 70) {
+
                     ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.RED);
                 } else if (achieveVal > 90) {
                     ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.GREEN);//yellow

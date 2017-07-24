@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
+            android:background="@color/white"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_header_height"
@@ -32,6 +33,7 @@
                 android:layout_height="match_parent">
 
                 <RelativeLayout
+                    android:background="@drawable/button_click"
                     android:layout_marginLeft="0dp"
                     android:id="@+id/imageBtnBack1"
                     android:layout_width="@dimen/header_clickable_width"
@@ -52,30 +54,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/store_services"
-                    android:textSize="@dimen/smdm_header_title_large"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/imageBtnBack1"
-                    android:layout_marginLeft="10dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/smdm_dark_Black"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="@dimen/smdm_header_title_normal"
                     android:id="@+id/toolbar_title" />
 
                 <RelativeLayout
+                    android:background="@drawable/button_click"
                     android:id="@+id/btn_More"
                     android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
                     android:layout_marginRight="10dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_alignParentRight="true"
-                    android:layout_width="20dp"
-                    android:layout_height="25dp">
+                    android:layout_width="40dp"
+                    android:layout_height="60dp">
 
                     <Button
                         android:clickable="false"
                         android:layout_marginRight="5dp"
-                        android:layout_width="15dp"
-                        android:layout_height="25dp"
-                        android:background="@mipmap/iconmore"
-                        android:layout_alignParentBottom="true"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_centerHorizontal="true"
+                        android:background="@mipmap/our_store_services"
+                        android:layout_alignParentBottom="true"
                         android:id="@+id/button3" />
 
                 </RelativeLayout>
@@ -99,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/store"
-            android:textColor="@color/bg_store_code_text"
+            android:textColor="@color/ezfbb_black"
             android:textSize="@dimen/normallayout_storesize" />
 
         <TextView
@@ -110,7 +114,7 @@
             android:textStyle="bold"
             android:layout_toRightOf="@+id/tstoreCode"
             android:hint=""
-            android:textColor="@color/bg_store_code_text"
+            android:textColor="@color/ezfbb_black"
             android:textSize="@dimen/normallayout_storesize" />
 
         <TextView
@@ -121,7 +125,7 @@
             android:textStyle="bold"
             android:layout_toRightOf="@id/txtStoreCode"
             android:hint=""
-            android:textColor="@color/bg_store_code_text"
+            android:textColor="@color/ezfbb_black"
             android:textSize="@dimen/normallayout_storesize" />
 
     </RelativeLayout>
@@ -169,6 +173,7 @@
                         android:textSize="13sp"
                         android:textColor="#000000"
                         android:inputType="phone"
+                        android:maxLength="10"
                         android:paddingTop="8dp"
                         android:paddingBottom="2dp"
                         android:imeOptions="actionNext"
@@ -199,7 +204,7 @@
                         android:maxLines="1"
                         android:textSize="13sp"
                         android:textColor="#000000"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:paddingTop="8dp"
                         android:paddingBottom="2dp"
                         android:imeOptions="actionNext"
@@ -229,7 +234,7 @@
                         android:maxLines="1"
                         android:textSize="13sp"
                         android:textColor="#000000"
-                        android:inputType="textPersonName"
+                        android:inputType="textCapWords"
                         android:paddingTop="8dp"
                         android:paddingBottom="2dp"
                         android:imeOptions="actionNext"
@@ -259,7 +264,7 @@
                         android:maxLines="1"
                         android:textSize="13sp"
                         android:textColor="#000000"
-                        android:inputType="textPersonName"
+                        android:inputType="textCapWords"
                         android:paddingTop="8dp"
                         android:paddingBottom="2dp"
                         android:imeOptions="actionNext"
@@ -290,7 +295,7 @@
                         android:maxLines="1"
                         android:textSize="13sp"
                         android:textColor="#000000"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:paddingTop="8dp"
                         android:paddingBottom="2dp"
                         android:imeOptions="actionDone"
@@ -369,8 +374,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_weight="1"/>
-
-
 
                 </LinearLayout>
 

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:id="@+id/rel_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tstoreCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store"
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/normallayout_storesize" />
+
+        <TextView
+            android:id="@+id/txtStoreCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/tstoreCode"
+            android:hint=""
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/normallayout_storesize" />
+
+        <TextView
+            android:id="@+id/txtStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/txtStoreCode"
+            android:hint=""
+            android:textColor="@color/bg_store_code_text"
+            android:textSize="@dimen/normallayout_storesize" />
+
+    </RelativeLayout>
+
+
+
+    <ScrollView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel_store"
+        android:fillViewport="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rel_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_customer_mobile_number"
+                    android:background="@drawable/edittext_border"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:hintTextAppearance="@style/CustomTextAppearance"
+                    android:layout_width="match_parent"
+                    android:textColorHint="@color/hinttextcolor"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="bottom"
+                    android:clipToPadding="false" >
+
+                    <EditText
+                        android:id="@+id/edt_customer_mobile_number"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:maxLines="1"
+                        android:maxLength="10"
+                        android:textSize="13sp"
+                        android:textColor="#000000"
+                        android:inputType="phone"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="2dp"
+                        android:imeOptions="actionNext"
+                        android:nextFocusDown="@+id/edt_remarks"
+                        android:hint="Customer mobile number*" />
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/text_exchange_done"
+                    android:layout_below="@+id/input_customer_mobile_number"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:text="Exchange done *"/>
+
+                <LinearLayout
+                    android:id="@+id/lin_radiogroup_exchange"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/text_exchange_done"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <RadioGroup
+                        android:id="@+id/radioExchange"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <RadioButton
+                            android:id="@+id/radioExchangeYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/radioExchangeNo"
+                            android:layout_marginLeft="30dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/text_product_verified"
+                    android:layout_below="@+id/lin_radiogroup_exchange"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:text="Product Verified *"/>
+
+                <LinearLayout
+                    android:id="@+id/lin_radiogroup_product"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/text_product_verified"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <RadioGroup
+                        android:id="@+id/radioProduct"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <RadioButton
+                            android:id="@+id/radioProductYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/radioProductNo"
+                            android:layout_marginLeft="30dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_remarks"
+                    android:background="@drawable/edittext_border"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/lin_radiogroup_product"
+                    app:hintTextAppearance="@style/CustomTextAppearance"
+                    android:layout_width="match_parent"
+                    android:textColorHint="@color/hinttextcolor"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="bottom"
+                    android:clipToPadding="false" >
+
+                    <EditText
+                        android:id="@+id/edt_remarks"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:maxLines="1"
+                        android:textSize="13sp"
+                        android:textColor="#000000"
+                        android:inputType="textCapSentences"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="2dp"
+                        android:imeOptions="actionNext"
+                        android:nextFocusDown="@+id/edt_first_name"
+                        android:hint="Remarks*" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_first_name"
+                    android:background="@drawable/edittext_border"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/input_remarks"
+                    app:hintTextAppearance="@style/CustomTextAppearance"
+                    android:layout_width="match_parent"
+                    android:textColorHint="@color/hinttextcolor"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="bottom"
+                    android:clipToPadding="false" >
+
+                    <EditText
+                        android:id="@+id/edt_first_name"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:maxLines="1"
+                        android:textSize="13sp"
+                        android:textColor="#000000"
+                        android:inputType="textCapWords"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="2dp"
+                        android:imeOptions="actionNext"
+                        android:nextFocusDown="@+id/edt_last_name"
+                        android:hint="First Name" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_last_name"
+                    android:background="@drawable/edittext_border"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/input_first_name"
+                    app:hintTextAppearance="@style/CustomTextAppearance"
+                    android:layout_width="match_parent"
+                    android:textColorHint="@color/hinttextcolor"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="bottom"
+                    android:clipToPadding="false" >
+
+                    <EditText
+                        android:id="@+id/edt_last_name"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:maxLines="1"
+                        android:textSize="13sp"
+                        android:textColor="#000000"
+                        android:inputType="textCapWords"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="2dp"
+                        android:imeOptions="actionDone"
+                        android:hint="Last Name" />
+                </android.support.design.widget.TextInputLayout>
+
+
+
+                <TextView
+                    android:id="@+id/text_callbacks"
+                    android:layout_below="@+id/input_last_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:text="Customer wants Callback?"/>
+
+                <LinearLayout
+                    android:id="@+id/lin_radiogroup"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/text_callbacks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <RadioGroup
+                        android:id="@+id/radioCallbacks"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <RadioButton
+                            android:id="@+id/radioYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/radioNo"
+                            android:layout_marginLeft="30dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_below="@+id/lin_radiogroup"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/btn_submit"
+                        android:text="Submit"
+                        android:background="@color/ezfb_Red"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"/>
+
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        android:text="Cancel"
+                        android:background="#7e7e7e"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"/>
+
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

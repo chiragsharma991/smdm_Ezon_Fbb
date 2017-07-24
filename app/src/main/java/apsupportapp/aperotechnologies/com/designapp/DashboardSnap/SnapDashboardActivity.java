@@ -226,8 +226,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
 
     private void setupAdapter() {
+        Log.e(TAG, "setupAdapter: " );
 
-        Log.e(TAG, "setupAdapter: ");
         snapAdapter = new SnapAdapter(context, eventUrlList);
 
         if (geoLeveLDesc.equals("E ZONE")) {

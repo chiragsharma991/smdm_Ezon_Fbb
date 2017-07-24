@@ -20,6 +20,7 @@ import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServices;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Price_Promotion;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange;
@@ -178,11 +179,11 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(HourlyPerformence);
                     break;
                 case 120:
-                    Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify.class);
+                    Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_notify_HO.class);
                     startActivity(ProductAvailability_Notify);
                     break;
                 case 121:
-                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund.class);
+                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund_HO.class);
                     startActivity(PolicyExchangeRefund);
                     break;
                 case 122:
@@ -322,12 +323,12 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
                 break;
             case 12 :
-                apps.add(new App("Product Availability & Notify Me",R.mipmap.placeholder));
-                apps.add(new App("Policy - Exchange Refund",R.mipmap.placeholder));
-                apps.add(new App("Price & Promotion",R.mipmap.placeholder));
-                apps.add(new App("Product Quality & Range",R.mipmap.placeholder));
-                apps.add(new App("Our Store Services",R.mipmap.placeholder));
-                apps.add(new App("Supervisior & Staff",R.mipmap.placeholder));
+                apps.add(new App("Product Availability & Notify Me",R.mipmap.product_availability_notify_me));
+                apps.add(new App("Policy - Exchange Refund",R.mipmap.policy_exchange_refund));
+                apps.add(new App("Price & Promotion",R.mipmap.price_promotion));
+                apps.add(new App("Product Quality & Range",R.mipmap.product_quality_range));
+                apps.add(new App("Our Store Services",R.mipmap.our_store_services));
+                apps.add(new App("Supervisior & Staff",R.mipmap.supervisor_staff));
                 break;
 
             // switch for ezone user
@@ -346,12 +347,12 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
                 break;
             case 25 :
-                apps.add(new App("Product Availability & Notify Me",R.mipmap.placeholder));
-                apps.add(new App("Policy - Exchange Refund",R.mipmap.placeholder));
-                apps.add(new App("Price & Promotion",R.mipmap.placeholder));
-                apps.add(new App("Product Quality & Range",R.mipmap.placeholder));
-                apps.add(new App("Our Store Services",R.mipmap.placeholder));
-                apps.add(new App("Supervisior & Staff",R.mipmap.placeholder));
+                apps.add(new App("Product Availability & Notify Me",R.mipmap.product_availability_notify_me));
+                apps.add(new App("Policy - Exchange Refund",R.mipmap.policy_exchange_refund));
+                apps.add(new App("Price & Promotion",R.mipmap.price_promotion));
+                apps.add(new App("Product Quality & Range",R.mipmap.product_quality_range));
+                apps.add(new App("Our Store Services",R.mipmap.our_store_services));
+                apps.add(new App("Supervisior & Staff",R.mipmap.supervisor_staff));
                 break;
 
 
