@@ -20,6 +20,7 @@ import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServices;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Price_Promotion;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange;
@@ -178,11 +179,11 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(HourlyPerformence);
                     break;
                 case 120:
-                    Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify.class);
+                    Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_notify_HO.class);
                     startActivity(ProductAvailability_Notify);
                     break;
                 case 121:
-                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund.class);
+                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund_HO.class);
                     startActivity(PolicyExchangeRefund);
                     break;
                 case 122:
