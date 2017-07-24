@@ -99,7 +99,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         ez_categryList = new ArrayList<String>();
         ez_classList = new ArrayList<String>();
         ez_brandList = new ArrayList<String>();
-        ez_mcList = new ArrayList<String>();
+//        ez_mcList = new ArrayList<String>();
         initialise_ui();
         prepareData();
         locatn_list_adapter = new EzoneFilterLocationAdapter(this, loc_listDataHeader, loc_listDataChild, explv_ez_locatn, locatn_list_adapter);
@@ -253,7 +253,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         prod_listDataHeader.add("Subdept");
         prod_listDataHeader.add("Class");
         prod_listDataHeader.add("Subclass");
-        prod_listDataHeader.add("MC");
+//        prod_listDataHeader.add("MC");
 
 
         if (Reusable_Functions.chkStatus(EzoneSalesFilter.this))
@@ -279,7 +279,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         prod_listDataChild.put(prod_listDataHeader.get(1), ez_categryList);
         prod_listDataChild.put(prod_listDataHeader.get(2), ez_classList); // Header, Child data
         prod_listDataChild.put(prod_listDataHeader.get(3), ez_brandList);
-        prod_listDataChild.put(prod_listDataHeader.get(4), ez_mcList); // Header, Child data
+//        prod_listDataChild.put(prod_listDataHeader.get(4), ez_mcList); // Header, Child data
 
     }
 
@@ -386,21 +386,15 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
                 }
 
-                if (EzoneFilterProductAdapter.brandcls_text.length() != 0)
-                {
-                    String brandcls = EzoneFilterProductAdapter.brandcls_text.replace("%", "%25");
-                    String updateBrandCls = brandcls.replace(" ", "%20").replace("&", "%26");
-                    String Brandclass = "brandclass=" + updateBrandCls;
-                    build.append("&");
-//                    if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex") || getIntent().getStringExtra("checkfrom").equals("optionEfficiency")) {
-//                        level_filter = 5;
-//                    }
-//                    else
-//                    {
-//                    }
-                    build.append(Brandclass.replace(",$", ""));
-
-                }
+//                if (EzoneFilterProductAdapter.brandcls_text.length() != 0)
+//                {
+//                    String brandcls = EzoneFilterProductAdapter.brandcls_text.replace("%", "%25");
+//                    String updateBrandCls = brandcls.replace(" ", "%20").replace("&", "%26");
+//                    String Brandclass = "brandclass=" + updateBrandCls;
+//                    build.append("&");
+//                    build.append(Brandclass.replace(",$", ""));
+//
+//                }
                 if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
                     intent = new Intent(EzoneSalesFilter.this, SalesAnalysisActivity1.class);
                     if (build.length() != 0) {
@@ -427,46 +421,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     callback(build);
                 }
                 break;
-//            case R.id.txt_ez_location:
-//                if (str_filter_location.equals("NO"))
-//                {
-//                    lin_ez_locatn.setVisibility(View.VISIBLE);
-////                    lin_ez_prod.setVisibility(View.VISIBLE);
-//                    txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
-////                    txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
-//                    str_filter_location = "YES";
-////                    str_filter_prod = "NO";
-//                    location_flag = true;
-////                    prod_flag = false;
-//                }
-//                else
-//                {
-//                    lin_ez_locatn.setVisibility(View.GONE);
-//                    txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
-//                    str_filter_location = "NO";
-//                    location_flag = false;
-//                }
-//                break;
-//            case R.id.txt_ez_filter_product:
-//                if (str_filter_prod.equals("NO"))
-//                {
-//                    lin_ez_prod.setVisibility(View.VISIBLE);
-//                  //  lin_ez_locatn.setVisibility(View.GONE);
-//                    txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uplist, 0);
-//                   // txt_ez_location.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
-////                    str_filter_location = "NO";
-//                    str_filter_prod = "YES";
-////                    location_flag = false;
-//                    prod_flag = true;
-//                }
-//                else
-//                {
-//                    lin_ez_prod.setVisibility(View.GONE);
-//                    txt_ez_prod.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.downlist, 0);
-//                    str_filter_prod = "NO";
-//                    prod_flag = false;
-//                }
-//                break;
+
 
         }
     }
@@ -501,12 +456,12 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 }
                 if (build.toString().contains("brand"))
                 {
-                    filter_level = 5;
+                    filter_level = 4;
                 }
-                if (build.toString().contains("brandclass"))
-                {
-                    filter_level = 6;
-                }
+//                if (build.toString().contains("brandclass"))
+//                {
+//                    filter_level = 6;
+//                }
             }
             intent.putExtra("selectedStringVal", build.toString());
             Log.e("TAG", "callback:  selectedStringVal"+build.toString() );
@@ -518,7 +473,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         EzoneFilterProductAdapter.categry_text = "";
         EzoneFilterProductAdapter.class_text = "";
         EzoneFilterProductAdapter.brand_text = "";
-        EzoneFilterProductAdapter.brandcls_text = "";
+//        EzoneFilterProductAdapter.brandcls_text = "";
         EzoneFilterLocationAdapter.region_str = "";
         EzoneFilterLocationAdapter.store_str = "";
         finish();
@@ -944,15 +899,16 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     ez_brandList.add(brandName);
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(4).equals("MC"))
-                                {
-                                    rel_ez_process_filter.setVisibility(View.VISIBLE);
-                                    offset = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    ez_prod_level = 5;
-                                    requestEzoneBrandPlanClass(offset, limit);
-                                }
+
+//                                if (prod_listDataHeader.get(4).equals("MC"))
+//                                {
+//                                    rel_ez_process_filter.setVisibility(View.VISIBLE);
+//                                    offset = 0;
+//                                    limit = 100;
+//                                    count = 0;
+//                                    ez_prod_level = 5;
+//                                    requestEzoneBrandPlanClass(offset, limit);
+//                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

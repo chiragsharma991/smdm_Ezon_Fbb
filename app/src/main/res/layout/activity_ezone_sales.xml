@@ -236,7 +236,7 @@
                     android:id="@+id/ez_txt_hierarchy_nm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/txt_color"
+                    android:textColor="@color/ezfbb_black"
                     android:textSize="@dimen/normallayout_textsize" />
 
             </LinearLayout>
@@ -328,63 +328,51 @@
 
                     </RelativeLayout>
 
-                    <RelativeLayout
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:weightSum="2"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                      >
+                        android:layout_height="30dp">
 
-
-                        <EditText
-                            android:id="@+id/et_ez_dept_nm"
-                            android:layout_width="210dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="200dp"
-                            android:background="@drawable/border"
-                            android:editable="false"
-                            android:textColor="@android:color/black"
-                            />
-
-
-                        <RelativeLayout
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
-                            android:id="@+id/rel_pca_sales"
+                        <TextView
+                            android:layout_marginLeft="1dp"
                             android:background="@drawable/edttext_border"
-                            android:layout_width="200dp"
-                            android:layout_height="30dp">
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
 
-                        <EditText
-                            android:id="@+id/et_ez_pva_val"
-                            android:layout_width="100dp"
-                            android:layout_height="30dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="310dp"
-                            android:background="@color/white"
-                            android:editable="false"
-                            android:gravity="center"
-                            android:textColor="@android:color/black"
-                            />
+                        <LinearLayout
 
-                        <EditText
-                            android:background="@color/white"
-                            android:id="@+id/et_ez_pva"
-                            android:layout_width="100dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:editable="false"
-                            android:textColor="@android:color/black"
-                            />
-                        </RelativeLayout>
-                    </RelativeLayout>
+
+
+                            android:background="@drawable/edttext_border"
+                            android:weightSum="1"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_weight="0.5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:layout_marginLeft="20dp"
+                                android:layout_weight="0.5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="40dp"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView

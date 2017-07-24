@@ -132,7 +132,7 @@
 
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabview_sales"
+            android:id="@+id/tabview_salespva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@color/ezfb_Red"
@@ -190,10 +190,10 @@
               >
 
 
-                <!--<com.numetriclabz.numandroidcharts.GaugeChart-->
-                    <!--android:id="@+id/gauge_chart"-->
-                    <!--android:layout_width="200dp"-->
-                    <!--android:layout_height="180dp" />-->
+                <com.numetriclabz.numandroidcharts.GaugeChart
+                    android:id="@+id/gauge_chart"
+                    android:layout_width="200dp"
+                    android:layout_height="180dp" />
 
                 <RelativeLayout
                     android:id="@+id/relChartlayout"

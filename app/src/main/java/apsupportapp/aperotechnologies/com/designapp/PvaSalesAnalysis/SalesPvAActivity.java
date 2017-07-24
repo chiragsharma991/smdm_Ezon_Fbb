@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -47,12 +49,14 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
+import com.numetriclabz.numandroidcharts.ChartData;
 import com.numetriclabz.numandroidcharts.GaugeChart;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -69,7 +73,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, TabLayout.OnTabSelectedListener {
 
 
     RadioButton btn_WTD,btn_LW;
@@ -113,6 +117,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     ProgressBar pva_progressBar;
     public static Activity Sales_Pva_Activity;
     float planSaleNetVal1,saleNetVal1;
+    private TabLayout tabLayout;
 
 
     @Override
@@ -137,7 +142,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-      //  gaugeChart = (GaugeChart)findViewById(R.id.gauge_chart);
+        gaugeChart = (GaugeChart)findViewById(R.id.gauge_chart);
+        List values = new ArrayList<>();
+        values.add(new ChartData(40f));
+        values.add(new ChartData(115f));
+        values.add(new ChartData(25f));
+        values.add(new ChartData(45f));
+        gaugeChart.setData(values);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         txt_pva_noChart = (TextView)findViewById(R.id.pva_noChart);
@@ -147,6 +158,10 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
         salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
         arrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+        tabLayout = (TabLayout)findViewById(R.id.tabview_salespva);
+        tabLayout.addTab(tabLayout.newTab().setText("WTD"));
+        tabLayout.addTab(tabLayout.newTab().setText("LW"));
+        tabLayout.setOnTabSelectedListener(this);
         btn_WTD = (RadioButton) findViewById(R.id.btn_wtd);
         btn_LW = (RadioButton) findViewById(R.id.btn_lw);
         llayoutSalesPvA = (LinearLayout) findViewById(R.id.llayoutSalesPvA);
@@ -679,10 +694,12 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     private void retainSegmentValuesFilter() {
         filter_toggleClick = true;
         if (salesPvA_SegmentClick.equals("WTD")) {
-            btn_WTD.toggle();
+         //   btn_WTD.toggle();
+            tabLayout.getTabAt(0).select();
 
         } else if (salesPvA_SegmentClick.equals("LW")) {
-            btn_LW.toggle();
+          //  btn_LW.toggle();
+            tabLayout.getTabAt(1).select();
 
         }
 
@@ -1901,6 +1918,95 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     }
 
 
+    @Override
+    public void onTabSelected(TabLayout.Tab tab)
+    {
+        Log.e("TAG", "onTabSelected: " + tab.getPosition() + filter_toggleClick);
+        int checkedId = tab.getPosition();
+        switch (checkedId)
+        {
+            case 0:
+                if (salesPvA_SegmentClick.equals("WTD"))
+                    break;
+                salesPvA_SegmentClick = "WTD";
+                pvaVal = " ";
+                llpvahierarchy.setVisibility(View.GONE);
+                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading Data...");
+                    pva_progressBar.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    if (getIntent().getStringExtra("selectedDept") == null) {
+                        requestSalesViewPagerValueAPI();
+                        Handler h = new Handler();
+                        h.postDelayed(new Runnable() {
+                            public void run() {
+                                requestSalesListDisplayAPI();
+                            }
+                        }, 700);
+
+                    } else if (getIntent().getStringExtra("selectedDept") != null) {
+                        String selectedString = getIntent().getStringExtra("selectedDept");
+                        requestSalesSelectedFilterVal(selectedString);
+                    }
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            case 1:
+
+                if (salesPvA_SegmentClick.equals("LW"))
+                    break;
+
+                salesPvA_SegmentClick = "LW";
+                pvaVal = " ";
+                llpvahierarchy.setVisibility(View.GONE);
+                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.hDialog();
+                    Reusable_Functions.sDialog(context, "Loading Data...");
+                    pva_progressBar.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    if (getIntent().getStringExtra("selectedDept") == null) {
+                        requestSalesViewPagerValueAPI();
+                        Handler h = new Handler();
+                        h.postDelayed(new Runnable() {
+                            public void run() {
+                                requestSalesListDisplayAPI();
+                            }
+                        }, 700);
+
+                    } else if (getIntent().getStringExtra("selectedDept") != null) {
+                        String selectedString = getIntent().getStringExtra("selectedDept");
+                        requestSalesSelectedFilterVal(selectedString);
+                    }
+
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
 }
 
 
