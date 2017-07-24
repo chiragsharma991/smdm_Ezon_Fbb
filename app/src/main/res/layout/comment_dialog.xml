@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/bg_store_code_text"
+            android:textColor="@color/ezfb_black"
             android:textSize="18sp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
@@ -77,7 +77,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textColor="@color/ezfb_Red"
                     android:textSize="13dp"
                     android:text="SKIP"
                     android:textStyle="bold"
@@ -107,7 +107,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textColor="@color/ezfb_Red"
                     android:textSize="13dp"
                     android:text="OK"
                     android:textStyle="bold"

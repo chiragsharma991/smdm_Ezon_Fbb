@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -71,10 +72,11 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
     private TextView Pricing, Colours, Prints, Styling, Fabric_quality, Garment_quality;
-    private TextView Feedback_option, Fitting;
+    private TextView Feedback_option, Fitting,txtStoreCode,txtStoreName;
     private EditText feedback_comment;
     private AlertDialog dialog;
-    private LinearLayout firstView, FeedbackNext;
+    private LinearLayout firstView;
+    private Button  FeedbackNext;
     private RelativeLayout secondView;
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
@@ -126,10 +128,12 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         Feedback_BtnBack = (RelativeLayout) findViewById(R.id.feedback_BtnBack);
         Feedback_image = (ImageView) findViewById(R.id.feedback_image);
         Feedback_option = (TextView) findViewById(R.id.feedback_option);
+        txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
+        txtStoreName = (TextView) findViewById(R.id.txtStoreName);
         ImageLoader_feedback = (ProgressBar) findViewById(R.id.imageLoader_feedback);
         firstView = (LinearLayout) findViewById(R.id.replaceView_first);
         secondView = (RelativeLayout) findViewById(R.id.replaceView_two);
-        FeedbackNext = (LinearLayout) findViewById(R.id.feedbackNext);
+        FeedbackNext = (Button) findViewById(R.id.feedbackNext);
         Pricing = (TextView) findViewById(R.id.pricing);
         Fitting = (TextView) findViewById(R.id.fitting);
         Colours = (TextView) findViewById(R.id.colours);
@@ -328,6 +332,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void nextList(int position) {
         Feedback_option.setText(feedbackList.get(position).getOption());
+        txtStoreCode.setText(feedbackList.get(position).getStoreCode());
+        txtStoreName.setText(feedbackList.get(position).getStoreDesc());
         storecode = feedbackList.get(position).getStoreCode();
         storeDes = feedbackList.get(position).getStoreDesc();
         ImageLoader_feedback.setVisibility(View.VISIBLE);
@@ -477,7 +483,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 View lp = new View(context);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setLayoutParams(layoutParams);
-                lp.setBackgroundColor(Color.parseColor("#e8112d"));
+                lp.setBackgroundColor(Color.parseColor("#e3e2e3"));
                 if (position == 0) {
                     Fitting_relative.addView(lp);
                 } else if (position == 1) {
