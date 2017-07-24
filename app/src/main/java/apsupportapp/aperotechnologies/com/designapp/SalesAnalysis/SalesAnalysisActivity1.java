@@ -1609,13 +1609,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
     private void viewBy_Location() {
         if (Reusable_Functions.chkStatus(context)) {
-//            if (rb_ez_viewBy_LocatnChk.isChecked())
-//            {
-//                rb_ez_viewBy_LocatnChk.setChecked(true);
-//                rb_ez_viewBy_ProductChk.setChecked(false);
-//                rel_ez_viewBy.setVisibility(View.GONE);
-//
-//            } else if (!rb_ez_viewBy_LocatnChk.isChecked()) {
+            if (rb_ez_viewBy_LocatnChk.isChecked())
+            {
+                rb_ez_viewBy_LocatnChk.setChecked(true);
+                rb_ez_viewBy_ProductChk.setChecked(false);
+                rel_ez_viewBy.setVisibility(View.GONE);
+
+            } else if (!rb_ez_viewBy_LocatnChk.isChecked()) {
             rb_ez_viewBy_LocatnChk.setChecked(true);
             rb_ez_viewBy_ProductChk.setChecked(false);
             rel_ez_next.setVisibility(View.VISIBLE);
@@ -1639,7 +1639,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             requestEzoneSalesDetailAPI();
             rel_ez_viewBy.setVisibility(View.GONE);
 
-            // }
+             }
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
