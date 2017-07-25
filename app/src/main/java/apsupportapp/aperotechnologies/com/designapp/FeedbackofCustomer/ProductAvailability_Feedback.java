@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -30,6 +31,7 @@ public class ProductAvailability_Feedback extends Fragment {
     private RadioGroup radioCallbacks;
     private RadioButton radioYes, radioNo;
     private Button btn_submit, btn_cancel;
+    private LinearLayout linear_toolbar;
     private View v;
 
     @Override
@@ -37,7 +39,7 @@ public class ProductAvailability_Feedback extends Fragment {
 
         context = getContext();
 
-        return inflater.inflate(R.layout.fragment_productavailability_feedback, container, false);
+        return inflater.inflate(R.layout.activity_product_availability, container, false);
     }
 
     @Override
@@ -67,6 +69,8 @@ public class ProductAvailability_Feedback extends Fragment {
         radioNo = (RadioButton) v.findViewById(R.id.radioNo);
         btn_submit = (Button) v.findViewById(R.id.btn_submit);
         btn_cancel = (Button) v.findViewById(R.id.btn_cancel);
+        linear_toolbar = (LinearLayout) v.findViewById(R.id.linear_toolbar);
+        linear_toolbar.setVisibility(View.GONE);
 
         edt_customer_mobile_number.addTextChangedListener(new TextWatcher() {
             @Override

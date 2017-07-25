@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -28,6 +29,7 @@ public class PolicyExchange_Feedback extends Fragment{
     private RadioGroup radioCallbacks, radioExchange, radioProduct;
     private RadioButton radioYes, radioNo, radioExchangeYes, radioExchangeNo, radioProductYes, radioProductNo;
     private Button btn_submit, btn_cancel;
+    private LinearLayout linear_toolbar;
     SharedPreferences sharedPreferences;
     private View v;
 
@@ -36,7 +38,7 @@ public class PolicyExchange_Feedback extends Fragment{
 
         context = getContext();
 
-        return inflater.inflate(R.layout.fragment_policyexchange_feedback, container, false);
+        return inflater.inflate(R.layout.activity_policy_exchange, container, false);
     }
 
     @Override
@@ -63,6 +65,8 @@ public class PolicyExchange_Feedback extends Fragment{
         radioProductNo = (RadioButton) v.findViewById(R.id.radioProductNo);
         btn_submit = (Button) v.findViewById(R.id.btn_submit);
         btn_cancel = (Button) v.findViewById(R.id.btn_cancel);
+        linear_toolbar = (LinearLayout) v.findViewById(R.id.linear_toolbar);
+        linear_toolbar.setVisibility(View.GONE);
 
         edt_customer_mobile_number.addTextChangedListener(new TextWatcher() {
             @Override
