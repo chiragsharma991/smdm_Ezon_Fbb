@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -28,6 +29,7 @@ public class PolicyExchangeRefund extends AppCompatActivity {
     private RadioGroup radioCallbacks, radioExchange, radioProduct;
     private RadioButton radioYes, radioNo, radioExchangeYes, radioExchangeNo, radioProductYes, radioProductNo;
     private Button btn_submit, btn_cancel;
+    private LinearLayout linear_toolbar;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -63,6 +65,8 @@ public class PolicyExchangeRefund extends AppCompatActivity {
         radioProductNo = (RadioButton) findViewById(R.id.radioProductNo);
         btn_submit = (Button) findViewById(R.id.btn_submit);
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
+        linear_toolbar = (LinearLayout) findViewById(R.id.linear_toolbar);
+        linear_toolbar.setVisibility(View.VISIBLE);
 
 
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {

@@ -19,12 +19,15 @@ import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoA
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServices;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServices_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Price_Promotion;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisiorStaff;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisorStaff_HO;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
@@ -58,8 +61,6 @@ public class SwitchingActivity extends AppCompatActivity
 
 {
     boolean loginFromFbb;
-
-
     public void moveTo(int value, Context context){
 
         if(loginFromFbb){
@@ -187,19 +188,19 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(PolicyExchangeRefund);
                     break;
                 case 122:
-                    Intent Price_Promotion = new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Price_Promotion.class);
+                    Intent Price_Promotion = new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PricePromotion_HO.class);
                     startActivity(Price_Promotion);
                     break;
                 case 123:
-                    Intent ProductQualityRange = new Intent(context, ProductQualityRange.class);
+                    Intent ProductQualityRange = new Intent(context, ProductQualityRange_HO.class);
                     startActivity(ProductQualityRange);
                     break;
                 case 124:
-                    Intent OurStoreServices = new Intent(context,OurStoreServices.class);
+                    Intent OurStoreServices = new Intent(context,OurStoreServices_HO.class);
                     startActivity(OurStoreServices);
                     break;
                 case 125:
-                    Intent SupervisiorStaff = new Intent(context, SupervisiorStaff.class);
+                    Intent SupervisiorStaff = new Intent(context, SupervisorStaff_HO.class);
                     startActivity(SupervisiorStaff);
                     break;
 
@@ -323,12 +324,12 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
                 break;
             case 12 :
-                apps.add(new App("Product Availability & Notify Me",R.mipmap.product_availability_notify_me));
-                apps.add(new App("Policy - Exchange Refund",R.mipmap.policy_exchange_refund));
-                apps.add(new App("Price & Promotion",R.mipmap.price_promotion));
-                apps.add(new App("Product Quality & Range",R.mipmap.product_quality_range));
-                apps.add(new App("Our Store Services",R.mipmap.our_store_services));
-                apps.add(new App("Supervisior & Staff",R.mipmap.supervisor_staff));
+                apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability));
+                apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn));
+                apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion));
+                apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange));
+                apps.add(new App("Our Store Services",R.mipmap.ourstoreservices));
+                apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff));
                 break;
 
             // switch for ezone user
@@ -347,14 +348,13 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
                 break;
             case 25 :
-                apps.add(new App("Product Availability & Notify Me",R.mipmap.product_availability_notify_me));
-                apps.add(new App("Policy - Exchange Refund",R.mipmap.policy_exchange_refund));
-                apps.add(new App("Price & Promotion",R.mipmap.price_promotion));
-                apps.add(new App("Product Quality & Range",R.mipmap.product_quality_range));
-                apps.add(new App("Our Store Services",R.mipmap.our_store_services));
-                apps.add(new App("Supervisior & Staff",R.mipmap.supervisor_staff));
+                apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability));
+                apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn));
+                apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion));
+                apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange));
+                apps.add(new App("Our Store Services",R.mipmap.ourstoreservices));
+                apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff));
                 break;
-
 
             default:
                 Log.e("TAG", "not found: Activity");

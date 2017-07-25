@@ -170,7 +170,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                       //  txt_ez_NetSalesVal.setTextColor(Color.parseColor("#fe0000"));
                     } else if (ez_sales_pager.getYoyNetSalesGrowthPct() > 0) {
                         txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                        txt_ez_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
+//                        txt_ez_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
                     }
                     if (ez_sales_pager.getPvaAchieved() < 70) {
                         txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);

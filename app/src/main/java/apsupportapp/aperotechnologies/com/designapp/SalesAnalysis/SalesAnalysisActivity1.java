@@ -675,7 +675,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         llayoutSalesAnalysis = (LinearLayout) findViewById(R.id.llayoutSalesAnalysis);
         relimgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
         relimgfilter.setOnClickListener(this);
-        relimgrank = (RelativeLayout) findViewById(R.id.imgrank);
+     //   relimgrank = (RelativeLayout) findViewById(R.id.imgrank);
         relprevbtn = (RelativeLayout) findViewById(R.id.prevplanclass);
         relprevbtn.setVisibility(View.INVISIBLE);
         relprevbtn.setOnClickListener(this);
@@ -692,6 +692,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         pageradapter.notifyDataSetChanged();
         lldots = (LinearLayout) findViewById(R.id.lldots);
         lldots.setOrientation(LinearLayout.HORIZONTAL);
+
+
         TabLayout tab = (TabLayout) findViewById(R.id.dotTab);
         tab.setupWithViewPager(vwpagersales, true);
         llhierarchy = (LinearLayout) findViewById(R.id.llhierarchy);

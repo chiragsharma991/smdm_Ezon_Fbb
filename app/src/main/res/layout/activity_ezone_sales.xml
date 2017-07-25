@@ -8,6 +8,7 @@
                 tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/white"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:orientation="vertical"
@@ -242,17 +243,13 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:background="@color/white"
                 android:id="@+id/rel_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/ez_linear_hierarchy"
                 >
 
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/smdm_divider_Black" />
 
                 <LinearLayout
                     android:layout_below="@+id/view1"
@@ -329,6 +326,7 @@
                     </RelativeLayout>
 
                     <LinearLayout
+                        android:layout_marginTop="2dp"
                         android:orientation="horizontal"
                         android:weightSum="2"
                         android:layout_width="match_parent"
@@ -372,7 +370,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="42dp"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView

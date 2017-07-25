@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -32,6 +33,7 @@ public class OurStoreServices extends AppCompatActivity {
     private RadioButton radioYes, radioNo;
     private Button btn_submit, btn_cancel;
     private RelativeLayout btn_More;
+    private LinearLayout linear_toolbar;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -63,7 +65,8 @@ public class OurStoreServices extends AppCompatActivity {
         btn_submit = (Button) findViewById(R.id.btn_submit);
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
         btn_More = (RelativeLayout) findViewById(R.id.btn_More);
-
+        linear_toolbar = (LinearLayout) findViewById(R.id.linear_toolbar);
+        linear_toolbar.setVisibility(View.VISIBLE);
 
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override

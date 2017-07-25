@@ -222,8 +222,8 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                                                    salesFilterActivity.processbar.setVisibility(View.VISIBLE);
                                                    if (groupPosition == 4)
                                                    {
-                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
-                                                       cb.setChecked(true);
+//                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
+//                                                       cb.setChecked(true);
                                                        salesFilterActivity.processbar.setVisibility(View.GONE);
                                                    }
                                                    BuildUP(level);

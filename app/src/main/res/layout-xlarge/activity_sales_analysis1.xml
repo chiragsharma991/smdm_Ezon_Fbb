@@ -260,6 +260,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:background="@color/white"
                 android:id="@+id/relTablelayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -358,9 +359,6 @@
                             android:layout_height="match_parent" />
 
                         <LinearLayout
-
-
-
                             android:background="@drawable/edttext_border"
                             android:weightSum="1"
                             android:layout_weight="1"
@@ -399,16 +397,9 @@
                         android:dividerHeight="0dp"
                         android:smoothScrollbar="true" />
 
-
-
-
                 </LinearLayout>
             </RelativeLayout>
-
-
         </LinearLayout>
-
-
     </LinearLayout>
 
 
