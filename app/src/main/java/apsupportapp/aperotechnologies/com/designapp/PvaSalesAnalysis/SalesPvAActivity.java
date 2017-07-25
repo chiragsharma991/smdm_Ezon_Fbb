@@ -1228,7 +1228,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 values.add(new ChartData((float)pvaAchived));
                                 Log.e(TAG, "onResponse: "+pvaAchived);
                                 gaugeChart.setData(values);
-                               // gaugeChart.setAngle(((int)pvaAchived) * 2);
+                                gaugeChart.setAngle(((int)pvaAchived) * 2);
                                 pva_progressBar.setVisibility(View.GONE);
                             }
                         } catch (Exception e) {
