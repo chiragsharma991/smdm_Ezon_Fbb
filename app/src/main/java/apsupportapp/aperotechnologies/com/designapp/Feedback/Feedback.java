@@ -426,6 +426,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void feedbackDetails(final int position, final int Listposition) {
 
+        Log.e(TAG, "feedbackDetails: " );
+
         // firstView.setVisibility(View.GONE);
         // secondView.setVisibility(View.VISIBLE);
         if (Build.VERSION.SDK_INT >= 21) {
@@ -512,7 +514,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
 
         // starting title text
-
+        Log.e(TAG, "AddText: " );
 
         final TextView textView1 = new TextView(context);
         textView1.setText("" + optionList.get(position));

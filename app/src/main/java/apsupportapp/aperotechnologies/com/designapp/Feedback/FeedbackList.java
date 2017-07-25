@@ -150,6 +150,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
             //https://smdm.manthan.com/v1/display/worstperformerfeedback/displayreports/4813
             String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
 
+            Log.e(TAG, "requestFeedbackApi: "+url);
 
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
@@ -185,12 +186,13 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                                     count = 0;
                                     limit = 10;
                                     offsetvalue = 0;
-                                }
-                                Reusable_Functions.hDialog();
-                                for (int i = 0; i < optionList.size(); i++) {
+                                    Reusable_Functions.hDialog();
+                                    for (int i = 0; i < optionList.size(); i++) {
 
-                                    feedbackReport(i, 0);
+                                        feedbackReport(i, 0);
+                                    }
                                 }
+
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
