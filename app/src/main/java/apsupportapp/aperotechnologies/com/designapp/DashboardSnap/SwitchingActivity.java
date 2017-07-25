@@ -58,8 +58,6 @@ public class SwitchingActivity extends AppCompatActivity
 
 {
     boolean loginFromFbb;
-
-
     public void moveTo(int value, Context context){
 
         if(loginFromFbb){
@@ -323,12 +321,12 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
                 break;
             case 12 :
-                apps.add(new App("Product Availability & Notify Me",R.mipmap.product_availability_notify_me));
-                apps.add(new App("Policy - Exchange Refund",R.mipmap.policy_exchange_refund));
-                apps.add(new App("Price & Promotion",R.mipmap.price_promotion));
-                apps.add(new App("Product Quality & Range",R.mipmap.product_quality_range));
-                apps.add(new App("Our Store Services",R.mipmap.our_store_services));
-                apps.add(new App("Supervisior & Staff",R.mipmap.supervisor_staff));
+                apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability));
+                apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn));
+                apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion));
+                apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange));
+                apps.add(new App("Our Store Services",R.mipmap.ourstoreservices));
+                apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff));
                 break;
 
             // switch for ezone user
@@ -347,14 +345,13 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
                 break;
             case 25 :
-                apps.add(new App("Product Availability & Notify Me",R.mipmap.product_availability_notify_me));
-                apps.add(new App("Policy - Exchange Refund",R.mipmap.policy_exchange_refund));
-                apps.add(new App("Price & Promotion",R.mipmap.price_promotion));
-                apps.add(new App("Product Quality & Range",R.mipmap.product_quality_range));
-                apps.add(new App("Our Store Services",R.mipmap.our_store_services));
-                apps.add(new App("Supervisior & Staff",R.mipmap.supervisor_staff));
+                apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability));
+                apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn));
+                apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion));
+                apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange));
+                apps.add(new App("Our Store Services",R.mipmap.ourstoreservices));
+                apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff));
                 break;
-
 
             default:
                 Log.e("TAG", "not found: Activity");

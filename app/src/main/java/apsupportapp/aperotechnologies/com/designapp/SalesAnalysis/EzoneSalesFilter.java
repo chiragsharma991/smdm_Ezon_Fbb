@@ -70,13 +70,18 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     static EzoneFilterProductAdapter prod_list_adapter;
     static EzoneFilterLocationAdapter locatn_list_adapter;
     int offset = 0, limit = 100, count = 0;
-    public int ez_level_filter = 1,ez_prod_level = 1;
+    public int ez_level_filter = 1, ez_prod_level = 1;
     String userId, bearertoken;
     public int ezone_filter_level = 1;
     private Intent intent;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
-    static List<String> ez_regionList,ez_storeList,ez_deptList,ez_categryList,ez_classList,ez_brandList,ez_mcList;
+    static String str_checkFrom;
+    private int filter_level = 0;
+    private StringBuilder build = new StringBuilder();
+
+
+    static List<String> ez_regionList, ez_storeList, ez_deptList, ez_categryList, ez_classList, ez_brandList, ez_mcList;
     // git 09-06-17
 
 
@@ -99,7 +104,8 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         ez_categryList = new ArrayList<String>();
         ez_classList = new ArrayList<String>();
         ez_brandList = new ArrayList<String>();
-//        ez_mcList = new ArrayList<String>();
+        ez_mcList = new ArrayList<String>();
+        str_checkFrom = getIntent().getStringExtra("checkfrom");
         initialise_ui();
         prepareData();
         locatn_list_adapter = new EzoneFilterLocationAdapter(this, loc_listDataHeader, loc_listDataChild, explv_ez_locatn, locatn_list_adapter);
@@ -143,32 +149,28 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
         et_ez_search.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(et_ez_search.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
                 s = et_ez_search.getText().toString();
-                Log.e("s :",""+s);
-                   locatn_list_adapter.filterData(s.toString());
-                   prod_list_adapter.filterData(s.toString());
-           }
+                Log.e("s :", "" + s);
+                locatn_list_adapter.filterData(s.toString());
+                prod_list_adapter.filterData(s.toString());
+            }
 
             @Override
-            public void afterTextChanged(Editable s)
-            {
+            public void afterTextChanged(Editable s) {
 
             }
         });
     }
 
-    private void setListViewHeight1(ExpandableListView listView,int group)
-    {
+    private void setListViewHeight1(ExpandableListView listView, int group) {
         EzoneFilterLocationAdapter listAdapter = (EzoneFilterLocationAdapter) listView.getExpandableListAdapter();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
@@ -204,8 +206,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
 
     private void setListViewHeight(ExpandableListView listView,
-                                   int group)
-    {
+                                   int group) {
         EzoneFilterProductAdapter listAdapter = (EzoneFilterProductAdapter) listView.getExpandableListAdapter();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
@@ -240,8 +241,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void prepareData()
-    {
+    private void prepareData() {
         loc_listDataHeader = new ArrayList<String>();
         prod_listDataHeader = new ArrayList<String>();
         loc_listDataChild = new HashMap<String, List<String>>();
@@ -249,17 +249,21 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
         loc_listDataHeader.add("Region");
         loc_listDataHeader.add("Store");
-        prod_listDataHeader.add("Department");
-        prod_listDataHeader.add("Subdept");
-        prod_listDataHeader.add("Class");
-        prod_listDataHeader.add("Subclass");
-//        prod_listDataHeader.add("MC");
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
+            prod_listDataHeader.add("Department");
+            prod_listDataHeader.add("Subdept");
+            prod_listDataHeader.add("Class");
+            prod_listDataHeader.add("Subclass");
+        } else {
+            prod_listDataHeader.add("Department");
+            prod_listDataHeader.add("Subdept");
+            prod_listDataHeader.add("Class");
+            prod_listDataHeader.add("Subclass");
+            prod_listDataHeader.add("MC");
+        }
 
-
-        if (Reusable_Functions.chkStatus(EzoneSalesFilter.this))
-        {
-            if (loc_listDataHeader.get(0).equals("Region"))
-            {
+        if (Reusable_Functions.chkStatus(EzoneSalesFilter.this)) {
+            if (loc_listDataHeader.get(0).equals("Region")) {
                 rel_ez_process_filter.setVisibility(View.VISIBLE);
                 offset = 0;
                 limit = 100;
@@ -267,25 +271,32 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 ez_level_filter = 1;
                 requestEzoneRegion(offset, limit);
             }
-        }
-        else
-        {
+        } else {
             Toast.makeText(EzoneSalesFilter.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
+
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
+            listdataFill();
+        } else {
+            listdataFill();
+            prod_listDataChild.put(prod_listDataHeader.get(4), ez_mcList); // Header, Child data
+
+        }
+
+    }
+
+    private void listdataFill() {
         loc_listDataChild.put(loc_listDataHeader.get(0), ez_regionList); // Header, Child data
         loc_listDataChild.put(loc_listDataHeader.get(1), ez_storeList);
         prod_listDataChild.put(prod_listDataHeader.get(0), ez_deptList); // Header, Child data
         prod_listDataChild.put(prod_listDataHeader.get(1), ez_categryList);
         prod_listDataChild.put(prod_listDataHeader.get(2), ez_classList); // Header, Child data
         prod_listDataChild.put(prod_listDataHeader.get(3), ez_brandList);
-//        prod_listDataChild.put(prod_listDataHeader.get(4), ez_mcList); // Header, Child data
-
     }
 
 
-    private void initialise_ui()
-    {
+    private void initialise_ui() {
         rel_ez_sfilter_back = (RelativeLayout) findViewById(R.id.rel_ez_sfilter_back);
         rel_ez_sfilter_done = (RelativeLayout) findViewById(R.id.rel_ez_sfilter_done);
         rel_ez_process_filter = (RelativeLayout) findViewById(R.id.rel_ez_process_filter);
@@ -319,102 +330,43 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
             case R.id.rel_ez_sfilter_done:
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                StringBuilder build = new StringBuilder();
                 //Send selected hierarchy level to selected activity
-
-                if (EzoneFilterLocationAdapter.region_str.length() != 0) {
-                    String region = EzoneFilterLocationAdapter.region_str.replace("%", "%25");
-                    String updateRegion = region.replace(" ", "%20").replace("&", "%26");
-                    String Region;
-                    Region = "region=" + updateRegion;
-                    build.append("&");
-                    build.append(Region.replace(",$", ""));
-                }
-
-                if (EzoneFilterLocationAdapter.store_str.length() != 0) {
-                    String store = EzoneFilterLocationAdapter.store_str.replace("%", "%25");
-                    String updateStore = store.replace(" ", "%20").replace("&", "%26");
-                    String Store;
-                    Store = "store=" + updateStore;
-                    build.append("&");
-                    build.append(Store.replace(",$", ""));
-
-                }
-                if (EzoneFilterProductAdapter.dept_text.length() != 0)
+                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales"))
                 {
-                    String deptmnt = EzoneFilterProductAdapter.dept_text.replace("%", "%25");
-                    String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
-                    String Department;
-
-//                    if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
-                        Department = "department=" + updateDept;
-//                    } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
-//                        Department = "department=" + updateDept;
-//                    } else {
-//                        Department = "dept=" + updateDept;
-//                    }
-                    build.append("&");
-                    build.append(Department.replace(",$", ""));
+                    selectbuild();
 
                 }
-
-                if (EzoneFilterProductAdapter.categry_text.length() != 0)
+                else
                 {
-                    String categry = EzoneFilterProductAdapter.categry_text.replace("%", "%25");
-                    String updateCategory = categry.replace(" ", "%20").replace("&", "%26");
-                    String Categary = "category=" + updateCategory;
-                    build.append("&");
-                    build.append(Categary.replace(",$", ""));
+                    selectbuild();
+                    if (EzoneFilterProductAdapter.brandcls_text.length() != 0) {
+                        String brandcls = EzoneFilterProductAdapter.brandcls_text.replace("%", "%25");
+                        String updateBrandCls = brandcls.replace(" ", "%20").replace("&", "%26");
+                        String Brandclass = "brandclass=" + updateBrandCls;
+                        build.append("&");
+                        build.append(Brandclass.replace(",$", ""));
 
+                    }
                 }
 
-                if (EzoneFilterProductAdapter.class_text.length() != 0) {
-                    String plancls = EzoneFilterProductAdapter.class_text.replace("%", "%25");
-                    String updatePlanClass = plancls.replace(" ", "%20").replace("&", "%26");
-                    String planclass = "class=" + updatePlanClass;
-                    build.append("&");
-                    build.append(planclass.replace(",$", ""));
-
-                }
-
-                if (EzoneFilterProductAdapter.brand_text.length() != 0) {
-                    String brand = EzoneFilterProductAdapter.brand_text.replace("%", "%25");
-                    String updateBrand = brand.replace(" ", "%20").replace("&", "%26");
-                    String Brand = "brand=" + updateBrand;
-                    build.append("&");
-                    build.append(Brand.replace(",$", ""));
-
-                }
-
-//                if (EzoneFilterProductAdapter.brandcls_text.length() != 0)
-//                {
-//                    String brandcls = EzoneFilterProductAdapter.brandcls_text.replace("%", "%25");
-//                    String updateBrandCls = brandcls.replace(" ", "%20").replace("&", "%26");
-//                    String Brandclass = "brandclass=" + updateBrandCls;
-//                    build.append("&");
-//                    build.append(Brandclass.replace(",$", ""));
-//
-//                }
                 if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
                     intent = new Intent(EzoneSalesFilter.this, SalesAnalysisActivity1.class);
                     if (build.length() != 0) {
                         SalesAnalysisActivity1.SalesAnalysisActivity.finish();
                     }
                     callback(build);
-                }
-                else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
+                } else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
                     intent = new Intent(EzoneSalesFilter.this, BestPerformerInventory.class);
                     if (build.length() != 0) {
                         BestPerformerInventory.bestperoformer.finish();
 
                     }
                     callback(build);
-                }
-                else if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex")) {
+                } else if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex")) {
                     intent = new Intent(EzoneSalesFilter.this, FreshnessIndexActivity.class);
                     if (build.length() != 0) {
                         FreshnessIndexActivity.freshness_Index.finish();
-                        Log.e("TAG", "freshnessIndex:  call finish " );
+                        Log.e("TAG", "freshnessIndex:  call finish ");
 
 
                     }
@@ -426,178 +378,255 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void callback(StringBuilder build)
-    {
-        if (build.length() == 0)
+    private void selectbuild() {
+        if (EzoneFilterLocationAdapter.region_str.length() != 0)
+
         {
+            String region = EzoneFilterLocationAdapter.region_str.replace("%", "%25");
+            String updateRegion = region.replace(" ", "%20").replace("&", "%26");
+            String Region;
+            Region = "region=" + updateRegion;
+            build.append("&");
+            build.append(Region.replace(",$", ""));
+        }
+
+        if (EzoneFilterLocationAdapter.store_str.length() != 0)
+
+        {
+            String store = EzoneFilterLocationAdapter.store_str.replace("%", "%25");
+            String updateStore = store.replace(" ", "%20").replace("&", "%26");
+            String Store;
+            Store = "store=" + updateStore;
+            build.append("&");
+            build.append(Store.replace(",$", ""));
+
+        }
+
+        if (EzoneFilterProductAdapter.dept_text.length() != 0)
+
+        {
+            String deptmnt = EzoneFilterProductAdapter.dept_text.replace("%", "%25");
+            String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
+            String Department;
+            Department = "department=" + updateDept;
+            build.append("&");
+            build.append(Department.replace(",$", ""));
+
+        }
+
+        if (EzoneFilterProductAdapter.categry_text.length() != 0)
+
+        {
+            String categry = EzoneFilterProductAdapter.categry_text.replace("%", "%25");
+            String updateCategory = categry.replace(" ", "%20").replace("&", "%26");
+            String Categary = "category=" + updateCategory;
+            build.append("&");
+            build.append(Categary.replace(",$", ""));
+
+        }
+
+        if (EzoneFilterProductAdapter.class_text.length() != 0)
+
+        {
+            String plancls = EzoneFilterProductAdapter.class_text.replace("%", "%25");
+            String updatePlanClass = plancls.replace(" ", "%20").replace("&", "%26");
+            String planclass = "class=" + updatePlanClass;
+            build.append("&");
+            build.append(planclass.replace(",$", ""));
+
+        }
+
+        if (EzoneFilterProductAdapter.brand_text.length() != 0)
+
+        {
+            String brand = EzoneFilterProductAdapter.brand_text.replace("%", "%25");
+            String updateBrand = brand.replace(" ", "%20").replace("&", "%26");
+            String Brand = "brand=" + updateBrand;
+            build.append("&");
+            build.append(Brand.replace(",$", ""));
+
+        }
+
+    }
+
+    private void callback(StringBuilder build) {
+        if (build.length() == 0) {
             Toast.makeText(context, "Please select value...", Toast.LENGTH_SHORT).show();
             return;
-        }
-        else
-        {
-            int filter_level = 0;
-            if(build.toString().contains("region") || build.toString().contains("store"))
-            {
-                filter_level = 9;
-            }
-            else
-            {
-                if (build.toString().contains("department"))
-                {
-                    filter_level = 2;
-                }
-                if (build.toString().contains("category"))
-                {
-                    filter_level = 3;
-                }
-                if (build.toString().contains("class"))
-                {
-                    filter_level = 4;
-                }
-                if (build.toString().contains("brand"))
-                {
-                    filter_level = 4;
-                }
-//                if (build.toString().contains("brandclass"))
-//                {
-//                    filter_level = 6;
-//                }
+        } else {
+            if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
+                callFilterLevelSales();
+
+
+            } else {
+                callFilterLevelInventory();
+
             }
             intent.putExtra("selectedStringVal", build.toString());
-            Log.e("TAG", "callback:  selectedStringVal"+build.toString() );
+            Log.e("TAG", "callback:  selectedStringVal" + build.toString());
             intent.putExtra("selectedlevelVal", filter_level);
-            Log.e("TAG", "callback:  selectedlevelVal"+filter_level );
+            Log.e("TAG", "callback:  selectedlevelVal" + filter_level);
         }
         startActivity(intent);
         EzoneFilterProductAdapter.dept_text = "";
         EzoneFilterProductAdapter.categry_text = "";
         EzoneFilterProductAdapter.class_text = "";
         EzoneFilterProductAdapter.brand_text = "";
-//        EzoneFilterProductAdapter.brandcls_text = "";
+        EzoneFilterProductAdapter.brandcls_text = "";
         EzoneFilterLocationAdapter.region_str = "";
         EzoneFilterLocationAdapter.store_str = "";
+        str_checkFrom = "";
         finish();
     }
 
+    private void callFilterLevelSales() {
+        if (build.toString().contains("region") || build.toString().contains("store")) {
+            filter_level = 9;
+        } else {
+            if (build.toString().contains("department")) {
+                filter_level = 2;
+            }
+            if (build.toString().contains("category")) {
+                filter_level = 3;
+            }
+            if (build.toString().contains("class")) {
+                filter_level = 4;
+            }
+            if (build.toString().contains("brand")) {
+                filter_level = 4;
+            }
+        }
+    }
+
+    private void callFilterLevelInventory() {
+        if (build.toString().contains("region") || build.toString().contains("store")) {
+            filter_level = 9;
+        } else {
+            if (build.toString().contains("department")) {
+                filter_level = 2;
+            }
+            if (build.toString().contains("category")) {
+                filter_level = 3;
+            }
+            if (build.toString().contains("class")) {
+                filter_level = 4;
+            }
+            if (build.toString().contains("brand")) {
+                filter_level = 5;
+            }
+            if (build.toString().contains("brandclass")) {
+                filter_level = 6;
+            }
+
+        }
+    }
+
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         finish();
     }
 
 
-     //------------------------------------API Declaration--------------------------------------//
-     private void requestEzoneRegion(int offset1, int limit1)
-     {
-         String region_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
-         Log.e("region url :",""+region_url);
-         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, region_url,
-                 new Response.Listener<JSONArray>() {
-                     @Override
-                     public void onResponse(JSONArray response) {
-                         Log.e("region response :",""+response);
-                         try {
-                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                 Reusable_Functions.hDialog();
-                                 Toast.makeText(EzoneSalesFilter.this, "no data found", Toast.LENGTH_LONG).show();
-                             } else if (response.length() == limit) {
-                                 Reusable_Functions.hDialog();
-                                 for (int i = 0; i < response.length(); i++)
-                                 {
-                                     JSONObject productName1 = response.getJSONObject(i);
-                                     String region = productName1.getString("descEz");
-                                     ez_regionList.add(region);
-                                 }
-                                 offset= (limit * count) + limit;
-                                 count++;
-                                 requestEzoneRegion(offset, limit);
-                             }
-                             else if (response.length() < limit)
-                             {
-                                 for (int i = 0; i < response.length(); i++)
-                                 {
-                                     JSONObject productName1 = response.getJSONObject(i);
-                                     String region = productName1.getString("descEz");
-                                     ez_regionList.add(region);
-                                 }
-                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                 if (loc_listDataHeader.get(1).equals("Store"))
-                                 {
-                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
-                                     offset = 0;
-                                     limit = 100;
-                                     count = 0;
-                                     ez_level_filter = 3;
-                                     requestEzoneStore(offset, limit);
-                                 }
-                             }
-                         } catch (Exception e) {
-                             e.printStackTrace();
-                         }
-                     }
-                 },
-                 new Response.ErrorListener() {
-                     @Override
-                     public void onErrorResponse(VolleyError error) {
-                         Reusable_Functions.hDialog();
-                         error.printStackTrace();
-                     }
-                 }
-         )
+    //------------------------------------API Declaration--------------------------------------//
+    private void requestEzoneRegion(int offset1, int limit1) {
+        String region_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
+        Log.e("region url :", "" + region_url);
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, region_url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("region response :", "" + response);
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(EzoneSalesFilter.this, "no data found", Toast.LENGTH_LONG).show();
+                            } else if (response.length() == limit) {
+                                Reusable_Functions.hDialog();
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject productName1 = response.getJSONObject(i);
+                                    String region = productName1.getString("descEz");
+                                    ez_regionList.add(region);
+                                }
+                                offset = (limit * count) + limit;
+                                count++;
+                                requestEzoneRegion(offset, limit);
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject productName1 = response.getJSONObject(i);
+                                    String region = productName1.getString("descEz");
+                                    ez_regionList.add(region);
+                                }
+                                rel_ez_process_filter.setVisibility(View.GONE);
+                                if (loc_listDataHeader.get(1).equals("Store")) {
+                                    rel_ez_process_filter.setVisibility(View.VISIBLE);
+                                    offset = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    ez_level_filter = 3;
+                                    requestEzoneStore(offset, limit);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+        )
 
-                 {
-             @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
-                 Map<String, String> params = new HashMap<>();
-                 params.put("Content-Type", "application/json");
-                 params.put("Authorization", "Bearer " + bearertoken);
-                 return params;
-             }
-         };
-         int socketTimeout = 60000;//5 seconds
-         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-         postRequest.setRetryPolicy(policy);
-         queue.add(postRequest);
-     }
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
 
-    private void requestEzoneStore(int offsetval,int limitval)
-    {
+    private void requestEzoneStore(int offsetval, int limitval) {
         String store_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
-        Log.e("store url :",""+store_url);
+        Log.e("store url :", "" + store_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, store_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("store response :",""+response);
+                        Log.e("store response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(EzoneSalesFilter.this, "no data found ", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String store = productName1.getString("descEz");
                                     ez_storeList.add(store);
                                 }
-                                offset= (limit * count) + limit;
+                                offset = (limit * count) + limit;
                                 count++;
                                 requestEzoneStore(offset, limit);
-                            }
-                            else if (response.length() < limit)
-                            {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String store = productName1.getString("descEz");
                                     ez_storeList.add(store);
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(0).equals("Department"))
-                                {
+                                if (prod_listDataHeader.get(0).equals("Department")) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -620,8 +649,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         error.printStackTrace();
                     }
                 }
-        )
-        {
+        ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -637,25 +665,21 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     }
 
     // Department List
-    public void requestEzoneDepartment(int offsetvalue1, int limit1)
-    {
+    public void requestEzoneDepartment(int offsetvalue1, int limit1) {
         String dept_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
-        Log.e("dept_url :",""+dept_url);
+        Log.e("dept_url :", "" + dept_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, dept_url,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
-                        Log.e("dept response :",""+response);
+                    public void onResponse(JSONArray response) {
+                        Log.e("dept response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in department", Toast.LENGTH_LONG).show();
-                            }
-                            else if (response.length() == limit) {
+                            } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String plandept = productName1.getString("planDept");
                                     ez_deptList.add(plandept);
@@ -663,10 +687,8 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 offset = (limit * count) + limit;
                                 count++;
                                 requestEzoneDepartment(offset, limit);
-                            } else if (response.length() < limit)
-                            {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String plandept = productName1.getString("planDept");
                                     ez_deptList.add(plandept);
@@ -674,7 +696,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 rel_ez_process_filter.setVisibility(View.GONE);
                                 if (prod_listDataHeader.get(1).equals("Subdept")) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
-                                    offset= 0;
+                                    offset = 0;
                                     limit = 100;
                                     count = 0;
                                     ez_prod_level = 2;
@@ -709,27 +731,22 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     }
 
     //Category List
-    public void requestEzoneCategory(int offsetvalue1, int limit1)
-    {
+    public void requestEzoneCategory(int offsetvalue1, int limit1) {
         String categry_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
-        Log.e("categry_url :",""+categry_url);
+        Log.e("categry_url :", "" + categry_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, categry_url,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
-                        Log.e("categry response :",""+response);
+                    public void onResponse(JSONArray response) {
+                        Log.e("categry response :", "" + response);
                         try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
-                            {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in subdept", Toast.LENGTH_LONG).show();
-                            }
-                            else if (response.length() == limit) {
+                            } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String planCategory = productName1.getString("planCategory");
                                     ez_categryList.add(planCategory);
@@ -738,15 +755,13 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 count++;
                                 requestEzoneCategory(offset, limit);
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String planCategory = productName1.getString("planCategory");
                                     ez_categryList.add(planCategory);
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(2).equals("Class"))
-                                {
+                                if (prod_listDataHeader.get(2).equals("Class")) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -784,27 +799,21 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     }
 
     //Plan Class List
-    public void requestEzonePlanClass(int offsetvalue1, int limit1)
-    {
+    public void requestEzonePlanClass(int offsetvalue1, int limit1) {
         String class_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
-        Log.e("class_url :",""+class_url);
+        Log.e("class_url :", "" + class_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, class_url,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
-                        Log.e("class response :",""+response);
+                    public void onResponse(JSONArray response) {
+                        Log.e("class response :", "" + response);
                         try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
-                            {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in class", Toast.LENGTH_LONG).show();
-                            }
-                            else if (response.length() == limit)
-                            {
+                            } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String planClass = productName1.getString("planClass");
                                     ez_classList.add(planClass);
@@ -812,19 +821,15 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 offset = (limit * count) + limit;
                                 count++;
                                 requestEzonePlanClass(offset, limit);
-                            }
-                            else if (response.length() < limit)
-                            {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String planClass = productName1.getString("planClass");
                                     ez_classList.add(planClass);
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
 
-                                if (prod_listDataHeader.get(3).equals("Subclass"))
-                                {
+                                if (prod_listDataHeader.get(3).equals("Subclass")) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -833,9 +838,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     requestEzoneBrand(offset, limit);
                                 }
                             }
-                        }
-                        catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -864,15 +867,14 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
 
     //Brand Name List
-    public void requestEzoneBrand(int offsetvalue1, int limit1)
-    {
+    public void requestEzoneBrand(int offsetvalue1, int limit1) {
         String brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
-        Log.e("brand_url :",""+brand_url);
+        Log.e("brand_url :", "" + brand_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, brand_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("brand response :",""+response);
+                        Log.e("brand response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -880,8 +882,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String brandName = productName1.getString("brandName");
                                     ez_brandList.add(brandName);
@@ -890,25 +891,26 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 count++;
                                 requestEzoneBrand(offset, limit);
 
-                            } else if (response.length() < limit)
-                            {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String brandName = productName1.getString("brandName");
                                     ez_brandList.add(brandName);
                                 }
-                                rel_ez_process_filter.setVisibility(View.GONE);
+                                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
 
-//                                if (prod_listDataHeader.get(4).equals("MC"))
-//                                {
-//                                    rel_ez_process_filter.setVisibility(View.VISIBLE);
-//                                    offset = 0;
-//                                    limit = 100;
-//                                    count = 0;
-//                                    ez_prod_level = 5;
-//                                    requestEzoneBrandPlanClass(offset, limit);
-//                                }
+                                    rel_ez_process_filter.setVisibility(View.GONE);
+                                } else {
+                                    rel_ez_process_filter.setVisibility(View.GONE);
+                                    if (prod_listDataHeader.get(4).equals("MC")) {
+                                        rel_ez_process_filter.setVisibility(View.VISIBLE);
+                                        offset = 0;
+                                        limit = 100;
+                                        count = 0;
+                                        ez_prod_level = 5;
+                                        requestEzoneBrandPlanClass(offset, limit);
+                                    }
+                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -942,20 +944,19 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     public void requestEzoneBrandPlanClass(int offsetvalue1, int limit1) {
 
         String mc_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
-        Log.e("mc_url :",""+mc_url);
+        Log.e("mc_url :", "" + mc_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, mc_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("mc response :",""+response);
+                        Log.e("mc response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in mc", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String brandClass = productName1.getString("brandPlanClass");
                                     ez_mcList.add(brandClass);
@@ -965,11 +966,8 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 count++;
                                 requestEzoneBrandPlanClass(offset, limit);
 
-                            }
-                            else if (response.length() < limit)
-                            {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
                                     String brandClass = productName1.getString("brandPlanClass");
                                     ez_mcList.add(brandClass);
@@ -980,8 +978,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //                                lin_ez_prod.setVisibility(View.VISIBLE);
                                 rel_ez_process_filter.setVisibility(View.GONE);
                             }
-                        } catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
