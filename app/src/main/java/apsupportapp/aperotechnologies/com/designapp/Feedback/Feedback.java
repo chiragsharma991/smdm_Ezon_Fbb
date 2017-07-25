@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -70,10 +72,11 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
     private TextView Pricing, Colours, Prints, Styling, Fabric_quality, Garment_quality;
-    private TextView Feedback_option, Fitting;
+    private TextView Feedback_option, Fitting,txtStoreCode,txtStoreName;
     private EditText feedback_comment;
     private AlertDialog dialog;
-    private LinearLayout firstView, FeedbackNext;
+    private LinearLayout firstView;
+    private Button  FeedbackNext;
     private RelativeLayout secondView;
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
@@ -125,10 +128,12 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         Feedback_BtnBack = (RelativeLayout) findViewById(R.id.feedback_BtnBack);
         Feedback_image = (ImageView) findViewById(R.id.feedback_image);
         Feedback_option = (TextView) findViewById(R.id.feedback_option);
+        txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
+        txtStoreName = (TextView) findViewById(R.id.txtStoreName);
         ImageLoader_feedback = (ProgressBar) findViewById(R.id.imageLoader_feedback);
         firstView = (LinearLayout) findViewById(R.id.replaceView_first);
         secondView = (RelativeLayout) findViewById(R.id.replaceView_two);
-        FeedbackNext = (LinearLayout) findViewById(R.id.feedbackNext);
+        FeedbackNext = (Button) findViewById(R.id.feedbackNext);
         Pricing = (TextView) findViewById(R.id.pricing);
         Fitting = (TextView) findViewById(R.id.fitting);
         Colours = (TextView) findViewById(R.id.colours);
@@ -176,6 +181,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
+                            Log.d(TAG, "onResponse: "+response );
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -326,6 +332,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void nextList(int position) {
         Feedback_option.setText(feedbackList.get(position).getOption());
+        txtStoreCode.setText(feedbackList.get(position).getStoreCode());
+        txtStoreName.setText(feedbackList.get(position).getStoreDesc());
         storecode = feedbackList.get(position).getStoreCode();
         storeDes = feedbackList.get(position).getStoreDesc();
         ImageLoader_feedback.setVisibility(View.VISIBLE);
@@ -418,6 +426,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void feedbackDetails(final int position, final int Listposition) {
 
+        Log.e(TAG, "feedbackDetails: " );
+
         // firstView.setVisibility(View.GONE);
         // secondView.setVisibility(View.VISIBLE);
         if (Build.VERSION.SDK_INT >= 21) {
@@ -504,11 +514,11 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
 
         // starting title text
-
+        Log.e(TAG, "AddText: " );
 
         final TextView textView1 = new TextView(context);
         textView1.setText("" + optionList.get(position));
-        textView1.setTextColor(Color.parseColor("#404040"));
+        textView1.setTextColor(Color.parseColor("#000000"));
 
         final RelativeLayout.LayoutParams params1 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -558,7 +568,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getGarmentQualityCntPer()) + " %");
         }
 
-        textView2.setTextColor(Color.parseColor("#404040"));
+        textView2.setTextColor(Color.parseColor("#000000"));
+        textView2.setTypeface(Typeface.DEFAULT_BOLD);
 
         final RelativeLayout.LayoutParams params2 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,

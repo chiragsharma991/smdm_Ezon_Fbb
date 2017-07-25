@@ -328,10 +328,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         txtNoChart = (TextView) findViewById(R.id.noChart);
         llfreshnessIndex = (LinearLayout) findViewById(R.id.llfreshnessIndex);
         btnFIndexNext = (RelativeLayout) findViewById(R.id.btnFIndexNext);
-       // segmented3 = (SegmentedGroup) findViewById(R.id.freshnessIndex_segmentedGrp);
-       // segmented3.setOnCheckedChangeListener(FreshnessIndexActivity.this);
-       // btnCore = (RadioButton) findViewById(R.id.btnCore);
-      //  btnFashion = (RadioButton) findViewById(R.id.btnFashion);
+        // segmented3 = (SegmentedGroup) findViewById(R.id.freshnessIndex_segmentedGrp);
+        // segmented3.setOnCheckedChangeListener(FreshnessIndexActivity.this);
+        // btnCore = (RadioButton) findViewById(R.id.btnCore);
+        //  btnFashion = (RadioButton) findViewById(R.id.btnFashion);
         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
         Tabview = (TabLayout) findViewById(R.id.tabview);
@@ -342,7 +342,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     public void retainValuesFilter() {
 
-     //   filter_toggleClick = true;
+        //   filter_toggleClick = true;
         if (FIndex_SegmentClick.equals("All")) {
             //btnCore.toggle();
             Tabview.getTabAt(1).select();
@@ -383,8 +383,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         offsetvalue = 0;
                         limit = 100;
                         count = 0;
-                     //   if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestFreshnessIndexDetails();
+                        //   if (getIntent().getStringExtra("selectedDept") == null) {
+                        requestFreshnessIndexDetails();
                       /*  } else if (getIntent().getStringExtra("selectedDept") != null) {
                             String selectedString = getIntent().getStringExtra("selectedDept");
                             requestFreshnessIndexFilterVal(selectedString);
@@ -414,8 +414,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         offsetvalue = 0;
                         limit = 100;
                         count = 0;
-                     //   if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestFreshnessIndexDetails();
+                        //   if (getIntent().getStringExtra("selectedDept") == null) {
+                        requestFreshnessIndexDetails();
                      /*   } else if (getIntent().getStringExtra("selectedDept") != null) {
                             String selectedString = getIntent().getStringExtra("selectedDept");
                             requestFreshnessIndexFilterVal(selectedString);
@@ -560,9 +560,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 TestItem();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-                               // FreshnessIndexValue = " ";
+                                // FreshnessIndexValue = " ";
                                 //FreshnessIndexValue = " > " + deptName;
-                               // txtfIndexDeptName.setText(FreshnessIndexValue);
+                                // txtfIndexDeptName.setText(FreshnessIndexValue);
                                 Log.e(TAG, "txtfIndexDeptName: "+deptName+"and FreshnessIndex"+FreshnessIndexValue );
                                 txtfIndexDeptName.setText(hierarchy(deptName));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
@@ -657,8 +657,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-                               // FreshnessIndexValue += " > " + category;
-                              //  txtfIndexDeptName.setText(FreshnessIndexValue);
+                                // FreshnessIndexValue += " > " + category;
+                                //  txtfIndexDeptName.setText(FreshnessIndexValue);
                                 txtfIndexDeptName.setText(hierarchy(category));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
                                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanClass().toString();
@@ -743,8 +743,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-                               // FreshnessIndexValue += " > " + planclass;
-                               // txtfIndexDeptName.setText(FreshnessIndexValue);
+                                // FreshnessIndexValue += " > " + planclass;
+                                // txtfIndexDeptName.setText(FreshnessIndexValue);
                                 txtfIndexDeptName.setText(hierarchy(planclass));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
                                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getBrandName().toString();
@@ -837,8 +837,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
                                 txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
-                               // FreshnessIndexValue += " > " + brandnm;
-                              //  txtfIndexDeptName.setText(FreshnessIndexValue);
+                                // FreshnessIndexValue += " > " + brandnm;
+                                //  txtfIndexDeptName.setText(FreshnessIndexValue);
                                 txtfIndexDeptName.setText(hierarchy(brandnm));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
                                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getBrandplanClass().toString();
@@ -1505,7 +1505,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 if(from_filter){ url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZ/" + userId + "?level=" + selectedlevel;   from_filter=false;  }
                 else{ url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZ/" + userId + "?level=" + level;  }//header api
                 //  Log.e(TAG, "Freshness_Ez: Header URL " + url);
-               // Reusable_Functions.hDialog();
+                // Reusable_Functions.hDialog();
                 mpm_model model = new mpm_model();
                 ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);
                 break;
@@ -1526,8 +1526,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     @Override
     public void nodatafound() {
 /**
-        you can write here cause of no data found
-*/
+ you can write here cause of no data found
+ */
     }
 
     private void setAdapterForEz(ArrayList<mpm_model> freshnessIndexDetails_Ez_ArrayList) {
@@ -2042,116 +2042,116 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                             switch (txtFIndexClass.getText().toString()) {
 
-                            case "Department":
-                                btnFIndexPrev.setVisibility(View.VISIBLE);
-                                txtFIndexClass.setText("Subdept");
-                                fromWhere = "dept";
-                                freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
-                                Log.e(TAG, "onItemClick: " + freshnessIndex_ClickedVal);
-                                level = 2;
-                                freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
-                                if (Reusable_Functions.chkStatus(context)) {
+                                case "Department":
+                                    btnFIndexPrev.setVisibility(View.VISIBLE);
+                                    txtFIndexClass.setText("Subdept");
+                                    fromWhere = "dept";
+                                    freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
+                                    Log.e(TAG, "onItemClick: " + freshnessIndex_ClickedVal);
+                                    level = 2;
+                                    freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
+                                    if (Reusable_Functions.chkStatus(context)) {
 
-                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
-                                    mpm_model model = new mpm_model();
-                                    ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
+                                        txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
+                                        mpm_model model = new mpm_model();
+                                        ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
-                                } else {
+                                    } else {
 
-                                    listViewFIndex.setVisibility(View.GONE);
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
+                                        listViewFIndex.setVisibility(View.GONE);
+                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                    }
 
-                                break;
+                                    break;
 
-                            case "Subdept":
-                                txtFIndexClass.setText("Class");
-                                freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
-                                level = 3;
-                                fromWhere = "category";
+                                case "Subdept":
+                                    txtFIndexClass.setText("Class");
+                                    freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
+                                    level = 3;
+                                    fromWhere = "category";
 
-                                freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
-                                if (Reusable_Functions.chkStatus(context)) {
+                                    freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
+                                    if (Reusable_Functions.chkStatus(context)) {
 
-                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
-                                    mpm_model model = new mpm_model();
-                                    ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
+                                        txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
+                                        mpm_model model = new mpm_model();
+                                        ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
-                                } else {
-                                    listViewFIndex.setVisibility(View.GONE);
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
+                                    } else {
+                                        listViewFIndex.setVisibility(View.GONE);
+                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                    }
 
-                                break;
+                                    break;
 
-                            case "Class":
-                                txtFIndexClass.setText("Subclass");
-                                freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
-                                level = 4;
-                                fromWhere = "class";
-                                freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
-                                if (Reusable_Functions.chkStatus(context)) {
+                                case "Class":
+                                    txtFIndexClass.setText("Subclass");
+                                    freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
+                                    level = 4;
+                                    fromWhere = "class";
+                                    freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
+                                    if (Reusable_Functions.chkStatus(context)) {
 
-                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
-                                    mpm_model model = new mpm_model();
-                                    ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
+                                        txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
+                                        mpm_model model = new mpm_model();
+                                        ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
-                                } else {
-                                    listViewFIndex.setVisibility(View.GONE);
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
-                                break;
+                                    } else {
+                                        listViewFIndex.setVisibility(View.GONE);
+                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                    }
+                                    break;
 
-                            case "Subclass":
-                                btnFIndexNext.setVisibility(View.INVISIBLE);
-                                txtFIndexClass.setText("MC");
-                                freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
-                                level = 5;
-                                fromWhere = "brand";
-                                freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
-                                if (Reusable_Functions.chkStatus(context)) {
+                                case "Subclass":
+                                    btnFIndexNext.setVisibility(View.INVISIBLE);
+                                    txtFIndexClass.setText("MC");
+                                    freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
+                                    level = 5;
+                                    fromWhere = "brand";
+                                    freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
+                                    if (Reusable_Functions.chkStatus(context)) {
 
-                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
-                                    mpm_model model = new mpm_model();
-                                    ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
+                                        txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
+                                        mpm_model model = new mpm_model();
+                                        ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
-                                } else {
-                                    listViewFIndex.setVisibility(View.GONE);
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
-                                break;
+                                    } else {
+                                        listViewFIndex.setVisibility(View.GONE);
+                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                    }
+                                    break;
 
 
-                            case "Region":
-                                btnFIndexPrev.setVisibility(View.VISIBLE);
-                                btnFIndexNext.setVisibility(View.INVISIBLE);
-                                txtFIndexClass.setText("Store");
-                                freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
-                                Log.e(TAG, "onItemClick: " + freshnessIndex_ClickedVal);
-                                level = 9;
-                                fromWhere = "region";
+                                case "Region":
+                                    btnFIndexPrev.setVisibility(View.VISIBLE);
+                                    btnFIndexNext.setVisibility(View.INVISIBLE);
+                                    txtFIndexClass.setText("Store");
+                                    freshnessIndex_ClickedVal = freshnessIndexDetails_Ez_ArrayList.get(position).getLevel();
+                                    Log.e(TAG, "onItemClick: " + freshnessIndex_ClickedVal);
+                                    level = 9;
+                                    fromWhere = "region";
 
-                                freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
-                                if (Reusable_Functions.chkStatus(context)) {
+                                    freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
+                                    if (Reusable_Functions.chkStatus(context)) {
 
-                                    txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
-                                    mpm_model model = new mpm_model();
-                                    ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
+                                        txtfIndexDeptName.setText(hierarchy(freshnessIndex_ClickedVal));
+                                        mpm_model model = new mpm_model();
+                                        ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
-                                } else {
-                                    listViewFIndex.setVisibility(View.GONE);
-                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                }
+                                    } else {
+                                        listViewFIndex.setVisibility(View.GONE);
+                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                    }
 
-                                break;
+                                    break;
 
-                            default:
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
-                                OnItemClick = false;
-                                break;
+                                default:
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
+                                    OnItemClick = false;
+                                    break;
 
-                        }}
+                            }}
 
 
                     }
